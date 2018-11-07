@@ -1,10 +1,24 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "A React Hooks package for website",
+  "description": "A React Hooks Website",
   "name": "@react-hooks-org/use-website",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
-    "test": "echo \"TEST\""
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "now --team imbhargav5 && now --team imbhargav5 alias"
+  },
+  "dependencies": {
+    "bulma": "0.7.2",
+    "next": "7.0.2",
+    "react": "16.6.0",
+    "react-dom": "16.6.0",
+    "styled-components": "4.0.3"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.8.0"
   }
 }

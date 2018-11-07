@@ -4,3 +4,4 @@
 /.package.json
 package-lock.json
 /packages/*/lib
+/packages/*/.next

@@ -1,0 +1,7 @@
+{
+  "extends": ["solo-app"],
+  "rules": {
+    "no-confusing-arrow": "warn",
+    "react/prop-types": "warn"
+  }
+}

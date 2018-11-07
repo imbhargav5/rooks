@@ -1,0 +1,11 @@
+{
+  "name": "react-hooks-website",
+  "alias": ["react-hooks.org"],
+  "scale": {
+    "sfo1": {
+      "min": 1,
+      "max": 2
+    }
+  },
+  "type": "npm"
+}
