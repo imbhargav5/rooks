@@ -1,0 +1,1 @@
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for mutation-observer","name":"@react-hooks-org/use-mutation-observer","scripts":{"test":"echo \"TEST\""}}

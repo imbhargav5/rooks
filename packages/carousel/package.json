@@ -1,0 +1,9 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "A React Hooks package for carousel",
+  "name": "@react-hooks-org/use-carousel",
+  "scripts": {
+    "test": "echo \"TEST\""
+  }
+}

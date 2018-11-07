@@ -1,0 +1,1 @@
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for immutable-object","name":"@react-hooks-org/use-immutable-object","scripts":{"test":"echo \"TEST\""}}
