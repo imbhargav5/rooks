@@ -9,22 +9,24 @@
     "dev": "node .",
     "prebuild": "rimraf out .next",
     "build": "next build && next export",
+    "prestart": "npm run build",
     "start": "serve out",
-    "deploy": "now --team imbhargav5 && now --team imbhargav5 alias"
+    "deploy": "cd out && now -A ../now.json --team imbhargav5 && now -A ../now.json --team imbhargav5 alias"
   },
   "dependencies": {
+    "@mdx-js/mdx": "0.16.0",
+    "@mdx-js/runtime": "0.16.0",
+    "@mdx-js/tag": "0.16.0",
     "bulma": "0.7.2",
     "next": "7.0.2",
     "react": "16.6.0",
     "react-dom": "16.6.0",
+    "readme-filename": "1.0.0",
     "serve": "10.0.2",
-    "styled-components": "4.0.3"
+    "styled-components": "4.0.3",
+    "@zeit/next-mdx": "1.2.0"
   },
   "devDependencies": {
-    "@mdx-js/mdx": "0.16.0",
-    "@mdx-js/runtime": "0.16.0",
-    "@mdx-js/tag": "0.16.0",
-    "@zeit/next-mdx": "1.2.0",
     "babel-plugin-styled-components": "^1.8.0",
     "rimraf": "2.6.2"
   }

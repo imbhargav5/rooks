@@ -1,13 +1,28 @@
 import React, { Component } from "react";
+import MDX from "@mdx-js/runtime";
 
 class Hook extends Component {
   static async getInitialProps({ query: { hookName }, ...rest }) {
+    let readme = "";
+    if (!process.browser) {
+      try {
+        const { getReadme } = require("../utils/getHook");
+        readme = getReadme(hookName);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     return {
-      hookName
+      hookName,
+      readme
     };
   }
   render() {
-    return <div>{this.props.hookName}</div>;
+    return (
+      <div>
+        <MDX>{this.props.readme}</MDX>
+      </div>
+    );
   }
 }
 
