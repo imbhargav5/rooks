@@ -1,1 +1,6 @@
-node_modules
+/node_modules
+/packages/*/node_modules
+/packages/*/LICENSE
+/.package.json
+package-lock.json
+/packages/*/lib
