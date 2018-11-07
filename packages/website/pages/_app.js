@@ -2,6 +2,7 @@ import React from "react";
 import App, { Container } from "next/app";
 import { createGlobalStyle } from "styled-components";
 import Layout from "../components/common/Layout";
+import { HookNamesContext } from "../utils/contexts";
 
 const GlobalStyles = createGlobalStyle`
     html, body{
@@ -12,23 +13,29 @@ const GlobalStyles = createGlobalStyle`
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-
+    let hookNames = [];
+    if (!process.browser) {
+      const { getHookNames } = require("../utils/getAllHooks");
+      hookNames = getHookNames();
+    }
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps };
+    return { pageProps, hookNames };
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, hookNames } = this.props;
 
     return (
       <Container>
-        <GlobalStyles />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <HookNamesContext.Provider value={hookNames}>
+          <GlobalStyles />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </HookNamesContext.Provider>
       </Container>
     );
   }

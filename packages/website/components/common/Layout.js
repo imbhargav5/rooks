@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { HookNamesContext } from "../../utils/contexts";
 
 const StyledAside = styled.aside.attrs({
   className: "menu"
@@ -16,14 +17,22 @@ const Sidebar = () => {
   return (
     <StyledAside className="menu">
       <p className="menu-label">Hooks</p>
-      <ul className="menu-list">
-        <li>
-          <a>useVisibilitySensor</a>
-        </li>
-        <li>
-          <a>useNetworkStatus</a>
-        </li>
-      </ul>
+      <HookNamesContext.Consumer>
+        {hookNames => {
+          return (
+            <ul className="menu-list">
+              {hookNames.map(hookName => {
+                const hookDisplayName = `use-${hookName}`;
+                return (
+                  <li key={hookDisplayName}>
+                    <a href={`/hook/${hookDisplayName}`}>{hookDisplayName}</a>
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        }}
+      </HookNamesContext.Consumer>
     </StyledAside>
   );
 };
@@ -32,7 +41,7 @@ function Header(props) {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://react-hooks.org">
+        <a className="navbar-item" href="/">
           <Logo
             src="/static/logo.png"
             alt="Bulma: a modern CSS framework based on Flexbox"

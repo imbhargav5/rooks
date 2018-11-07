@@ -5,3 +5,4 @@
 package-lock.json
 /packages/*/lib
 /packages/*/.next
+/packages/*/out
