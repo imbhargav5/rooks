@@ -4,7 +4,7 @@
   "description": "A React Hooks package for counter",
   "name": "@react-hooks-org/use-counter",
   "scripts": {
-    "test": "echo \"TEST\""
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.1.5",
@@ -15,7 +15,6 @@
     "jest": "23.6.0",
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
-    "react-test-renderer": "16.6.1",
     "react-testing-library": "5.2.3"
   }
 }
