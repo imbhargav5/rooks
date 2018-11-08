@@ -30,24 +30,19 @@ const cli = meow(
     }
   }
 );
-
-if (cli.public && cli.private) {
+if (cli.flags.public && cli.flags.private) {
   throw new Error("Use either private or public flags. Not both");
 }
 
 const result = readPkgUp.sync();
 if (result && result.pkg) {
+  console.log(cli.private);
   console.log(result.pkg);
   if (cli.public) {
     result.pkg.private = false;
   }
   if (cli.private) {
-    result.pkg.public = false;
+    result.pkg.private = true;
   }
-  const { readme, ...rest } = result.pkg;
-  if (readme.includes("ERROR")) {
-    writePkg(rest);
-  } else {
-    writePkg(result.pkg);
-  }
+  writePkg(result.pkg);
 }
