@@ -8,9 +8,8 @@ npm install --save @react-hooks.org/use-counter
 
 ### Usage
 
-```jsx
+```react
 function CounterComponent() {
-  //...
   const {
     value,
     increment,
@@ -19,5 +18,8 @@ function CounterComponent() {
     decrementBy,
     reset
   } = useCounter(3);
+  return value;
 }
+
+render(<CounterComponent/>)
 ```
