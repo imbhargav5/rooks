@@ -19,5 +19,10 @@
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "5.2.3"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "readme": "ERROR: No README data found!",
+  "_id": "@react-hooks.org/use-counter@0.0.1",
+  "publishConfig": {
+    "access": "public"
+  }
 }
