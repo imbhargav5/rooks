@@ -1,5 +1,5 @@
 import LiveEdit from "../components/LiveEdit";
-import CodeBlock from "../components/LiveEdit";
+import CodeBlock from "../components/CodeBlock";
 
 const components = {
   h1: props => <h1 className="title" {...props} />,
@@ -13,7 +13,6 @@ const components = {
     } else if (language === "sh") {
       return <CodeBlock code={children} language="bash" />;
     }
-
     return <CodeBlock code={children} language={language} />;
   }
 };

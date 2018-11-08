@@ -17,10 +17,6 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
-          />
-          <link
-            rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro"
           />
           {this.props.styleTags}

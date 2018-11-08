@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 
 class Note extends Component {
   render() {
@@ -6,4 +7,4 @@ class Note extends Component {
   }
 }
 
-export default Note;
+export default styled(Note)``;

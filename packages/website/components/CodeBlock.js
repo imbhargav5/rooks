@@ -4,7 +4,7 @@ import styled from "styled-components";
 import "../utils/prismTemplateString";
 import { Editor } from "react-live";
 
-import { Note } from "./Note";
+import Note from "./Note";
 
 const CodeBlock = styled(p => {
   const language = (p.language || "clike").toLowerCase().trim();

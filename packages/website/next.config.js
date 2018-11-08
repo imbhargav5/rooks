@@ -1,8 +1,9 @@
 const { getHookNames } = require("./utils/getAllHooks");
 const withMDX = require("@zeit/next-mdx");
+const withCSS = require("@zeit/next-css");
 
 // next.config.js
-module.exports = {
+module.exports = withCSS({
   ...withMDX({}),
   exportPathMap: async function(defaultPathMap) {
     const dirs = await getHookNames();
@@ -21,4 +22,4 @@ module.exports = {
       ...hookPages
     };
   }
-};
+});

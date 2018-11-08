@@ -2,7 +2,7 @@
 
 ### Installation
 
-```bash
+```
 npm install --save @react-hooks.org/use-counter
 ```
 
