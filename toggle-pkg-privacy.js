@@ -44,5 +44,10 @@ if (result && result.pkg) {
   if (cli.private) {
     result.pkg.public = false;
   }
-  writePkg(result.pkg);
+  const { readme, ...rest } = result.pkg;
+  if (readme.includes("ERROR")) {
+    writePkg(rest);
+  } else {
+    writePkg(result.pkg);
+  }
 }
