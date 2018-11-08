@@ -23,3 +23,5 @@ function CounterComponent() {
 
 render(<CounterComponent/>)
 ```
+
+Counter hook for React
