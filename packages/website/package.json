@@ -39,5 +39,6 @@
     "jest": "^23.6.0",
     "react-testing-library": "^5.2.3",
     "rimraf": "2.6.2"
-  }
+  },
+  "_id": "@react-hooks.org/use-website@1.0.0"
 }

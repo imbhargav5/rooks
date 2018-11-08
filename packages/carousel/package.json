@@ -17,5 +17,7 @@
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "^5.2.3"
-  }
+  },
+  "version": "",
+  "_id": "@react-hooks.org/use-carousel@"
 }
