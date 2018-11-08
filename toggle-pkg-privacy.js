@@ -38,10 +38,10 @@ const result = readPkgUp.sync();
 if (result && result.pkg) {
   console.log(cli.private);
   console.log(result.pkg);
-  if (cli.public) {
+  if (cli.flags.public) {
     result.pkg.private = false;
   }
-  if (cli.private) {
+  if (cli.flags.private) {
     result.pkg.private = true;
   }
   writePkg(result.pkg);

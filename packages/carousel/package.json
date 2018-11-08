@@ -19,5 +19,7 @@
     "react-testing-library": "^5.2.3"
   },
   "version": "",
-  "_id": "@react-hooks.org/use-carousel@"
+  "_id": "@react-hooks.org/use-carousel@",
+  "readme": "ERROR: No README data found!",
+  "private": true
 }
