@@ -29,7 +29,17 @@
     "styled-components": "4.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-styled-components": "^1.8.0",
+    "jest": "^23.6.0",
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0",
+    "react-testing-library": "^5.2.3",
     "rimraf": "2.6.2"
   }
 }
