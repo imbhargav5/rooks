@@ -2,7 +2,8 @@
   "name": "react-hooks.org",
   "private": true,
   "scripts": {
-    "dev": "cd packages/website && npm run dev"
+    "dev": "cd packages/website && npm run dev",
+    "deploy": "cd packages/website && npm run deploy"
   },
   "devDependencies": {
     "babel-plugin-prismjs": "1.0.2",

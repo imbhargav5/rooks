@@ -11,12 +11,15 @@
     "build": "next build && next export",
     "prestart": "npm run build",
     "start": "serve out",
-    "deploy": "cd out && now -A ../now.json --team imbhargav5 && now -A ../now.json --team imbhargav5 alias"
+    "predeploy": "npm run build",
+    "postbuild": "cp ./now.json out/now.json",
+    "deploy": "cd out && now --team imbhargav5 && now --team imbhargav5 alias"
   },
   "dependencies": {
     "@mdx-js/mdx": "0.16.0",
     "@mdx-js/runtime": "0.16.0",
     "@mdx-js/tag": "0.16.0",
+    "@react-hooks.org/use-counter": "0.1.0",
     "@zeit/next-mdx": "1.2.0",
     "bulma": "0.7.2",
     "next": "7.0.2",
