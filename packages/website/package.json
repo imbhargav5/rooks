@@ -4,7 +4,7 @@
   "description": "A React Hooks Website",
   "name": "@react-hooks.org/use-website",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "node .",
     "prebuild": "rimraf out .next",
