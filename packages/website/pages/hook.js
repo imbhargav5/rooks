@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MDX from "@mdx-js/runtime";
+import mdxComponents from "../utils/mdx-components";
 
 class Hook extends Component {
   static async getInitialProps({ query: { hookName }, ...rest }) {
@@ -20,7 +21,11 @@ class Hook extends Component {
   render() {
     return (
       <div>
-        <MDX>{this.props.readme}</MDX>
+        <section className="section">
+          <div className="container is-fluid">
+            <MDX components={mdxComponents}>{this.props.readme}</MDX>
+          </div>
+        </section>
       </div>
     );
   }

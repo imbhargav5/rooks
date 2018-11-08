@@ -1,1 +1,1 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for pagination","name":"@react-hooks-org/use-pagination","scripts":{"test":"echo \"TEST\""}}
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for pagination","name":"@react-hooks.org/use-pagination","scripts":{"test":"echo \"TEST\""}}

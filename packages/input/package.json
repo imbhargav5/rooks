@@ -1,1 +1,1 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for input","name":"@react-hooks-org/use-input","scripts":{"test":"echo \"TEST\""}}
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for input","name":"@react-hooks.org/use-input","scripts":{"test":"echo \"TEST\""}}

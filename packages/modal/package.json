@@ -1,1 +1,1 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for modal","name":"@react-hooks-org/use-modal","scripts":{"test":"echo \"TEST\""}}
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for modal","name":"@react-hooks.org/use-modal","scripts":{"test":"echo \"TEST\""}}

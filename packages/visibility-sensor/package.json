@@ -1,1 +1,1 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for visibility-sensor","name":"@react-hooks-org/use-visibility-sensor","scripts":{"test":"echo \"TEST\""}}
+{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for visibility-sensor","name":"@react-hooks.org/use-visibility-sensor","scripts":{"test":"echo \"TEST\""}}
