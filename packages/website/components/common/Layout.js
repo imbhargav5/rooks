@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { Box, Flex } from "rebass";
 import { HookNamesContext } from "../../utils/contexts";
 
 const StyledAside = styled.aside.attrs({
@@ -83,21 +84,45 @@ const Footer = () => (
   </footer>
 );
 
+const theme = {
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  colors: {
+    blue: "#07c",
+    lightgray: "#f6f6ff",
+    red: "#ff3860"
+  },
+  space: [0, 4, 8, 16, 32, 64, 128, 256],
+  fonts: {
+    sans: "system-ui, sans-serif",
+    mono: "Menlo, monospace"
+  },
+  fontWeights: {
+    bold: 700,
+    normal: 400,
+    light: 100
+  },
+  shadows: {
+    small: "0 0 4px rgba(0, 0, 0, .125)",
+    large: "0 0 24px rgba(0, 0, 0, .125)"
+  }
+};
+
 const Layout = ({ children }) => {
   return (
-    <>
-      <Header />
-      <div class="columns is-gapless">
-        <div class="column is-2">
-          <Sidebar />
-        </div>
-
-        <div class="column">
-          {children}
-          <Footer />
-        </div>
-      </div>
-    </>
+    <ThemeProvider theme={theme}>
+      <>
+        <Header />
+        <Flex>
+          <Box width={[`16rem`]}>
+            <Sidebar />
+          </Box>
+          <Box width={[1]} mx={4}>
+            {children}
+            <Footer />
+          </Box>
+        </Flex>
+      </>
+    </ThemeProvider>
   );
 };
 

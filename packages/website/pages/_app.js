@@ -7,6 +7,7 @@ import { HookNamesContext } from "../utils/contexts";
 const GlobalStyles = createGlobalStyle`
     html, body{
         font-family: 'Source Code Pro', monospace;
+        font-size: 16px;
     }
 `;
 
