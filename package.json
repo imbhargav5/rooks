@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@zeit/next-css": "1.0.1",
+    "isomorphic-fetch": "2.2.1",
     "prismjs": "1.15.0",
+    "react-cache": "2.0.0-alpha.1",
     "webpack": "4.25.1"
   }
 }

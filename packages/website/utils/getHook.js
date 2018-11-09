@@ -1,5 +1,5 @@
-const { lstatSync, readFileSync } = require("fs");
-const { join, resolve } = require("path");
+const { readFileSync } = require("fs");
+const { join } = require("path");
 const getReadmeFilename = require("./getReadmeFileName");
 
 function getReadme(hookName) {

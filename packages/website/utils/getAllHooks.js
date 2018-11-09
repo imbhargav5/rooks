@@ -1,8 +1,10 @@
 const { lstatSync, readdirSync } = require("fs");
 const { join } = require("path");
+const publishedHooks = require("./published-hooks");
 
 const isDirectory = source => lstatSync(source).isDirectory();
-const isHookDirectoryName = directoryName => directoryName !== "website";
+const isHookDirectoryName = directoryName =>
+  publishedHooks.includes(directoryName);
 const getDirectories = source =>
   readdirSync(source).filter(isHookDirectoryName);
 

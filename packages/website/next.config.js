@@ -1,10 +1,23 @@
 const { getHookNames } = require("./utils/getAllHooks");
 const withMDX = require("@zeit/next-mdx");
 const withCSS = require("@zeit/next-css");
+const webpack = require("webpack");
 
 // next.config.js
 module.exports = withCSS({
-  ...withMDX({}),
+  ...withMDX({
+    webpack: (config = {}) => {
+      if (!Array.isArray(config.plugins)) {
+        config.plugins = [];
+      }
+      config.plugins.push(
+        new webpack.IgnorePlugin(
+          /fs|tls|net|child_process|term.js|pty.js|readline|dgram|dns|repl|\.\.\/API\/schema/
+        )
+      );
+      return config;
+    }
+  }),
   exportPathMap: async function(defaultPathMap) {
     const dirs = await getHookNames();
     const hookPages = dirs.reduce(
