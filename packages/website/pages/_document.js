@@ -19,6 +19,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro"
           />
+
           {this.props.styleTags}
         </Head>
         <body>

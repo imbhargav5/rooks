@@ -1,8 +1,13 @@
 import React from "react";
 import App, { Container } from "next/app";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { createGlobalStyle } from "styled-components";
 import Layout from "../components/common/Layout";
 import { HookNamesContext } from "../utils/contexts";
+
+library.add(faArrowRight);
 
 const GlobalStyles = createGlobalStyle`
     html, body{

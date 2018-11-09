@@ -20,7 +20,7 @@
     "react-testing-library": "5.2.3"
   },
   "version": "0.1.1",
-  "readme": "ERROR: No README data found!",
+  "readme": "https://github.com/react-hooks-org/react-hooks/blob/master/packages/counter/README.md",
   "_id": "@react-hooks.org/use-counter@0.0.1",
   "publishConfig": {
     "access": "public"

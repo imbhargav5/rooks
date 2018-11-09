@@ -1,12 +1,28 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Heading } from "rebass";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HookNamesContext } from "../../utils/contexts";
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
 
 const StyledAside = styled.aside.attrs({
   className: "menu"
 })`
   padding: 1rem;
+`;
+
+const StyledMenu = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  a {
+    color: ${props => props.theme.colors.blue};
+  }
+  ${StyledFontAwesomeIcon} {
+    height: 1em;
+    margin-right: 1em;
+  }
 `;
 
 const Logo = styled.img`
@@ -17,20 +33,23 @@ const Logo = styled.img`
 const Sidebar = () => {
   return (
     <StyledAside className="menu">
-      <p className="menu-label">Hooks</p>
+      <Heading my={2}>Hooks</Heading>
       <HookNamesContext.Consumer>
         {hookNames => {
           return (
-            <ul className="menu-list">
+            <StyledMenu>
               {hookNames.map(hookName => {
                 const hookDisplayName = `use-${hookName}`;
                 return (
                   <li key={hookDisplayName}>
-                    <a href={`/hook/${hookDisplayName}`}>{hookDisplayName}</a>
+                    <a href={`/hook/${hookDisplayName}`}>
+                      <StyledFontAwesomeIcon icon="arrow-right" />
+                      {hookDisplayName}
+                    </a>
                   </li>
                 );
               })}
-            </ul>
+            </StyledMenu>
           );
         }}
       </HookNamesContext.Consumer>
