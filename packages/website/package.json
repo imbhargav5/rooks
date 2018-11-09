@@ -4,7 +4,7 @@
   "description": "A React Hooks Website",
   "name": "website",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "dev": "node .",
     "prebuild": "rimraf out .next",
@@ -19,7 +19,7 @@
     "@mdx-js/mdx": "0.16.0",
     "@mdx-js/runtime": "0.16.0",
     "@mdx-js/tag": "0.16.0",
-    "@react-hooks.org/use-counter": "^0.1.1",
+    "@react-hooks.org/use-counter": "^0.1.2",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-mdx": "1.2.0",
     "bulma": "0.7.2",
