@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
-    "test:example": "parcel test/index.html"
+    "test:example": "parcel test/index.html",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
