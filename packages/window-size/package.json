@@ -1,1 +1,40 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for window-size","name":"@react-hooks.org/use-window-size","scripts":{"test":"echo \"TEST\""},"devDependencies":{"@babel/cli":"^7.1.5","@babel/core":"^7.1.5","@babel/preset-env":"^7.1.5","@babel/preset-react":"^7.0.0","babel-core":"^7.0.0-bridge.0","babel-jest":"^23.6.0","jest":"^23.6.0","react":"16.7.0-alpha.0","react-dom":"16.7.0-alpha.0","react-testing-library":"^5.2.3"},"version":null,"_id":"@react-hooks.org/use-window-size@","readme":"ERROR: No README data found!","private":true}
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "A React Hooks package for window-size",
+  "name": "@react-hooks.org/use-window-size",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "test:example": "parcel test/index.html"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "23.6.0",
+    "jest-puppeteer": "3.5.0",
+    "parcel-bundler": "1.10.3",
+    "puppeteer": "1.10.0",
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0"
+  },
+  "version": "",
+  "_id": "@react-hooks.org/use-window-size@",
+  "readme": "ERROR: No README data found!",
+  "private": false,
+  "jest": {
+    "globals": {
+      "__DEV__": true,
+      "__PROD__": false,
+      "__BROWSER__": true,
+      "__SERVER__": false
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

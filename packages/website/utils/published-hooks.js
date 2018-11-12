@@ -1,2 +1,2 @@
-const publishedHooks = ["counter"];
+const publishedHooks = ["counter", "window-size"];
 module.exports = publishedHooks;

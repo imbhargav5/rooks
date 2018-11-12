@@ -7,8 +7,10 @@
   },
   "devDependencies": {
     "babel-plugin-prismjs": "1.0.2",
+    "browser-env": "3.2.5",
     "lerna": "^3.4.3",
     "meow": "5.0.0",
+    "raf": "3.4.1",
     "read-pkg-up": "4.0.0",
     "write-pkg": "3.2.0"
   },

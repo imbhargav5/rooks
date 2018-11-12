@@ -7,3 +7,5 @@ package-lock.json
 /packages/*/.next
 /packages/*/out
 lerna-debug.log
+/packages/*/.cache
+/packages/*/dist
