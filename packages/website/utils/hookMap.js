@@ -1,3 +1,4 @@
 export default {
-  counter: "useCounter"
+  counter: "useCounter",
+  "window-size": "useWindowSize"
 };

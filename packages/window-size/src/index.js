@@ -7,7 +7,7 @@ const initialValue = {
   outerHeight: null
 };
 
-function windowSize() {
+function useWindowSize() {
   const [windowSize, setWindowSize] = useState(initialValue);
 
   function getWindowSize() {
@@ -36,4 +36,4 @@ function windowSize() {
   return windowSize;
 }
 
-module.exports = windowSize;
+module.exports = useWindowSize;
