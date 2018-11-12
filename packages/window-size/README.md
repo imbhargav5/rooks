@@ -10,22 +10,29 @@ npm install --save @react-hooks.org/use-window-size
 
 ```react
 function WindowComponent() {
-  const {
-    height,
-    width,
-    outerHeight,
-    innerHeight
-  } = useWindowSize();
+  const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
 
-
-  return <div>
-          <span>{height}</span>
-          <span>{width}</span>
-          <span>{outerHeight}</span>
-          <span>{outerWidth}</span>
-        </div>
+  return (
+    <div>
+      <p>
+        <span>innerHeight - </span>
+        <span>{innerHeight}</span>
+      </p>
+      <p>
+        <span>innerWidth - </span>
+        <span>{innerWidth}</span>
+      </p>
+      <p>
+        <span>outerHeight - </span>
+        <span>{outerHeight}</span>
+      </p>
+      <p>
+        <span>outerWidth - </span>
+        <span>{outerWidth}</span>
+      </p>
+    </div>
+  );
 }
-
 render(<WindowComponent/>)
 ```
 
