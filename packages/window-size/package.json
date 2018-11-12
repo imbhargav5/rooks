@@ -23,7 +23,7 @@
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "_id": "@react-hooks.org/use-window-size@",
   "readme": "ERROR: No README data found!",
   "private": false,
