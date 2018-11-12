@@ -5,7 +5,8 @@
   "name": "@react-hooks.org/use-counter",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "7.1.5",
