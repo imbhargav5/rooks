@@ -23,4 +23,4 @@ function Demo() {
 render(<Demo/>)
 ```
 
-Mutation Observer hook for React
+Mouse hook for React
