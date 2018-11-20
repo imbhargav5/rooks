@@ -7,7 +7,7 @@ var config = {
   childList: true
 };
 
-export default function(ref, callback, options = config) {
+module.exporst = function(ref, callback, options = config) {
   useEffect(
     () => {
       // Create an observer instance linked to the callback function
@@ -25,4 +25,4 @@ export default function(ref, callback, options = config) {
     },
     [ref.current, callback, options]
   );
-}
+};
