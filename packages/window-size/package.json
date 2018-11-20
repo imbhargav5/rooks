@@ -9,6 +9,14 @@
     "test:example": "parcel test/index.html",
     "prepublish": "npm run build"
   },
+  "keywords": [
+    "react-hooks.org",
+    "react",
+    "hooks",
+    "window",
+    "window size",
+    "window size hook"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",

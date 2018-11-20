@@ -8,6 +8,13 @@
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
+  "keywords": [
+    "react-hooks.org",
+    "react",
+    "hooks",
+    "timeout",
+    "timeout hook"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",

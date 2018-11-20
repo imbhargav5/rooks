@@ -6,6 +6,13 @@
   "scripts": {
     "test": "echo \"TEST\""
   },
+  "keywords": [
+    "react-hooks.org",
+    "react",
+    "hooks",
+    "bounding client",
+    "bounding client hook"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
