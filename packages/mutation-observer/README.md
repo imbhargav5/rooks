@@ -3,7 +3,7 @@
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-window-size
+npm install --save @react-hooks.org/use-mutation-observer
 ```
 
 ### Usage
