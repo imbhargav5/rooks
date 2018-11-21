@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-
-var config = {
-  attributes: true,
-  characterData: true,
-  subtree: true,
-  childList: true
-};
+import useMutationObserver from "@react-hooks.org/use-mutation-observer";
 
 export default function(ref) {
   function getBoundingClientRect() {
@@ -28,25 +22,7 @@ export default function(ref) {
     [ref.current]
   );
 
-  function mutate(mutationList) {
-    update();
-  }
-
-  useEffect(
-    () => {
-      // Create an observer instance linked to the callback function
-      if (ref.current) {
-        const observer = new MutationObserver(mutate);
-
-        // Start observing the target node for configured mutations
-        observer.observe(ref.current, config);
-        return () => {
-          observer.disconnect();
-        };
-      }
-    },
-    [ref.current]
-  );
+  useMutationObserver(ref, update);
 
   return value;
 }

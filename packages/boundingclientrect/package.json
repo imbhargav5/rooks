@@ -4,7 +4,9 @@
   "description": "A React Hooks package for boundingclientrect",
   "name": "@react-hooks.org/use-boundingclientrect",
   "scripts": {
-    "test": "echo \"TEST\""
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "react-hooks.org",
@@ -28,5 +30,10 @@
   "version": "0.0.2",
   "_id": "@react-hooks.org/use-boundingclientrect@",
   "readme": "ERROR: No README data found!",
-  "private": true
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@react-hooks.org/use-mutation-observer": "^0.1.3"
+  }
 }
