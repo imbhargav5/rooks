@@ -5,5 +5,6 @@ export default {
   mouse: "useMouse",
   "navigator-language": "useNavigatorLanguage",
   "mutation-observer": "useMutationObserver",
-  timeout: "useTimeout"
+  timeout: "useTimeout",
+  select: "useSelect"
 };

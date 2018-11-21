@@ -5,6 +5,7 @@ const publishedHooks = [
   "mouse",
   "navigator-language",
   "mutation-observer",
-  "timeout"
+  "timeout",
+  "select"
 ];
 module.exports = publishedHooks;
