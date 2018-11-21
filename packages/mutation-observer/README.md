@@ -25,7 +25,7 @@ function Demo() {
           width: 300,
           background: "lightblue",
           padding: "10px",
-          position: "fixed",
+          position: "absolute",
           left: XOffset,
           top: YOffset
         }}

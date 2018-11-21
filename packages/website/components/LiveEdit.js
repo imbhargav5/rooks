@@ -1,5 +1,5 @@
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import { useState } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { space, width, fontSize, color, fontWeight } from "styled-system";
 import { Box, Flex } from "rebass";
 import styled, { createGlobalStyle } from "styled-components";
@@ -22,6 +22,10 @@ const LiveEdit = ({ noInline, code, scope = {} }) => {
           code={code}
           noInline={noInline}
           scope={{
+            useState,
+            useRef,
+            useEffect,
+            useLayoutEffect,
             ...scope,
             ...contextScope
           }}
@@ -30,7 +34,13 @@ const LiveEdit = ({ noInline, code, scope = {} }) => {
             <Box width={[1 / 2]} mx={2}>
               <LiveEditor />
             </Box>
-            <Box width={[1 / 2]} p={2} mx={2} bg="lightgray">
+            <Box
+              width={[1 / 2]}
+              p={2}
+              mx={2}
+              bg="lightgray"
+              style={{ position: "relative" }}
+            >
               <LivePreview />
             </Box>
           </Flex>
