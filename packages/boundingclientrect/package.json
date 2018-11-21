@@ -27,7 +27,7 @@
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "^5.2.3"
   },
-  "version": "0.0.2",
+  "version": "0.1.0",
   "_id": "@react-hooks.org/use-boundingclientrect@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
