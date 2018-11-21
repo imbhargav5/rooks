@@ -1,9 +1,9 @@
-# @react-hooks.org/use-navigator-language
+# @rooks/use-navigator-language
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-navigator-language
+npm install --save @rooks/use-navigator-language
 ```
 
 ### Usage

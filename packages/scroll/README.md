@@ -1,1 +1,1 @@
-# @react-hooks.org/use-scroll
+# @rooks/use-scroll

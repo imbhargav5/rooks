@@ -1,1 +1,1 @@
-# @react-hooks.org/use-modal
+# @rooks/use-modal

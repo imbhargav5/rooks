@@ -1,1 +1,1 @@
-# @react-hooks.org/use-navigator-wifi
+# @rooks/use-navigator-wifi

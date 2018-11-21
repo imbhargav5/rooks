@@ -1,1 +1,1 @@
-# @react-hooks.org/use-visibility-sensor
+# @rooks/use-visibility-sensor

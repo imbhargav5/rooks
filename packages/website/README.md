@@ -1,1 +1,1 @@
-# @react-hooks.org/use-website
+# @rooks/use-website

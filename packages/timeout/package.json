@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for timeout",
-  "name": "@react-hooks.org/use-timeout",
+  "name": "@rooks/use-timeout",
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
@@ -28,7 +28,7 @@
     "react-testing-library": "^5.2.3"
   },
   "version": "0.1.1",
-  "_id": "@react-hooks.org/use-timeout@",
+  "_id": "@rooks/use-timeout@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"

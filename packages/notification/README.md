@@ -1,1 +1,1 @@
-# @react-hooks.org/use-notification
+# @rooks/use-notification

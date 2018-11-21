@@ -1,9 +1,9 @@
-# @react-hooks.org/use-window-size
+# @rooks/use-window-size
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-window-size
+npm install --save @rooks/use-window-size
 ```
 
 ### Usage

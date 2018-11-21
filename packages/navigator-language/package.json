@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for navigator-language",
-  "name": "@react-hooks.org/use-navigator-language",
+  "name": "@rooks/use-navigator-language",
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
@@ -28,7 +28,7 @@
     "react-testing-library": "^5.2.3"
   },
   "version": "0.1.0",
-  "_id": "@react-hooks.org/use-navigator-language@",
+  "_id": "@rooks/use-navigator-language@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"

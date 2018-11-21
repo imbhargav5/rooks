@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for counter",
-  "name": "rooks.use-counter",
+  "name": "@rooks/use-counter",
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",

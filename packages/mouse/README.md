@@ -1,9 +1,9 @@
-# @react-hooks.org/use-mouse
+# @rooks/use-mouse
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-mouse
+npm install --save @rooks/use-mouse
 ```
 
 ### Usage

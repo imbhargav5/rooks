@@ -1,1 +1,1 @@
-# @react-hooks.org/use-carousel
+# @rooks/use-carousel

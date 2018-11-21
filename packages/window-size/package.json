@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for window-size",
-  "name": "@react-hooks.org/use-window-size",
+  "name": "@rooks/use-window-size",
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
@@ -32,7 +32,7 @@
     "react-dom": "16.7.0-alpha.0"
   },
   "version": "0.2.2",
-  "_id": "@react-hooks.org/use-window-size@",
+  "_id": "@rooks/use-window-size@",
   "readme": "ERROR: No README data found!",
   "private": false,
   "jest": {

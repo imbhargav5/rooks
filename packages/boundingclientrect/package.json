@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for boundingclientrect",
-  "name": "@react-hooks.org/use-boundingclientrect",
+  "name": "@rooks/use-boundingclientrect",
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
@@ -28,12 +28,12 @@
     "react-testing-library": "^5.2.3"
   },
   "version": "0.1.1",
-  "_id": "@react-hooks.org/use-boundingclientrect@",
+  "_id": "@rooks/use-boundingclientrect@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@react-hooks.org/use-mutation-observer": "^0.1.3"
+    "@rooks/use-mutation-observer": "^0.1.3"
   }
 }

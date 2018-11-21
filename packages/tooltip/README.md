@@ -1,1 +1,1 @@
-# @react-hooks.org/use-tooltip
+# @rooks/use-tooltip

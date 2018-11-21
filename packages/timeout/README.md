@@ -1,9 +1,9 @@
-# @react-hooks.org/use-timeout
+# @rooks/use-timeout
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-timeout
+npm install --save @rooks/use-timeout
 ```
 
 ### Usage

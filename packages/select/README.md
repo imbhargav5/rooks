@@ -1,1 +1,1 @@
-# @react-hooks.org/use-select
+# @rooks/use-select

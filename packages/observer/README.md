@@ -1,1 +1,1 @@
-# @react-hooks.org/use-observer
+# @rooks/use-observer

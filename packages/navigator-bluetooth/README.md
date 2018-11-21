@@ -1,1 +1,1 @@
-# @react-hooks.org/use-navigator-bluetooth
+# @rooks/use-navigator-bluetooth

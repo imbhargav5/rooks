@@ -1,1 +1,1 @@
-# @react-hooks.org/use-worker
+# @rooks/use-worker

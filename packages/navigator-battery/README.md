@@ -1,1 +1,1 @@
-# @react-hooks.org/use-navigator-battery
+# @rooks/use-navigator-battery

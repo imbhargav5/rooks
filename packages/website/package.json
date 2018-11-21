@@ -19,12 +19,12 @@
     "@mdx-js/mdx": "0.16.0",
     "@mdx-js/runtime": "0.16.0",
     "@mdx-js/tag": "0.16.0",
-    "@react-hooks.org/use-boundingclientrect": "0.1.1",
-    "@react-hooks.org/use-counter": "^0.1.4",
-    "@react-hooks.org/use-mouse": "0.1.1",
-    "@react-hooks.org/use-mutation-observer": "0.1.3",
-    "@react-hooks.org/use-navigator-language": "0.1.0",
-    "@react-hooks.org/use-window-size": "^0.2.2",
+    "@rooks/use-boundingclientrect": "0.1.1",
+    "@rooks/use-counter": "^0.1.4",
+    "@rooks/use-mouse": "0.1.1",
+    "@rooks/use-mutation-observer": "0.1.3",
+    "@rooks/use-navigator-language": "0.1.0",
+    "@rooks/use-window-size": "^0.2.2",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-mdx": "1.2.0",
     "bulma": "0.7.2",
@@ -53,6 +53,6 @@
     "react-testing-library": "^5.2.3",
     "rimraf": "2.6.2"
   },
-  "_id": "@react-hooks.org/use-website@1.0.0",
+  "_id": "@rooks/use-website@1.0.0",
   "readme": "ERROR: No README data found!"
 }

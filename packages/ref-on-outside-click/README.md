@@ -1,1 +1,1 @@
-# @react-hooks.org/use-ref-on-outside-click
+# @rooks/use-ref-on-outside-click

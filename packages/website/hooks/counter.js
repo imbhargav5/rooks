@@ -1,3 +1,3 @@
-import useCounter from "@react-hooks.org/use-counter";
+import useCounter from "@rooks/use-counter";
 
 export default useCounter;

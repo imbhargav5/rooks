@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useMutationObserver from "@react-hooks.org/use-mutation-observer";
+import useMutationObserver from "@rooks/use-mutation-observer";
 
 export default function(ref) {
   function getBoundingClientRect() {

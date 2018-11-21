@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A React Hooks package for carousel",
-  "name": "@react-hooks.org/use-carousel",
+  "name": "@rooks/use-carousel",
   "scripts": {
     "test": "echo \"TEST\""
   },
@@ -19,7 +19,7 @@
     "react-testing-library": "^5.2.3"
   },
   "version": null,
-  "_id": "@react-hooks.org/use-carousel@",
+  "_id": "@rooks/use-carousel@",
   "readme": "ERROR: No README data found!",
   "private": true
 }

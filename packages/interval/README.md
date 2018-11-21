@@ -1,1 +1,1 @@
-# @react-hooks.org/use-interval
+# @rooks/use-interval

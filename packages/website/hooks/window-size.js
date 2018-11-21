@@ -1,3 +1,3 @@
-import useWindowSize from "@react-hooks.org/use-window-size";
+import useWindowSize from "@rooks/use-window-size";
 
 export default useWindowSize;

@@ -1,9 +1,9 @@
-# @react-hooks.org/use-boundingclientrect
+# @rooks/use-boundingclientrect
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-boundingclientrect
+npm install --save @rooks/use-boundingclientrect
 ```
 
 ### Usage

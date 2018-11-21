@@ -1,1 +1,1 @@
-# @react-hooks.org/use-tabs
+# @rooks/use-tabs

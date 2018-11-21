@@ -1,9 +1,9 @@
-# @react-hooks.org/use-counter
+# @rooks/use-counter
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-counter
+npm install --save @rooks/use-counter
 ```
 
 ### Usage

@@ -1,1 +1,1 @@
-# @react-hooks.org/use-navigator-network-status
+# @rooks/use-navigator-network-status

@@ -1,1 +1,1 @@
-# @react-hooks.org/use-pagination
+# @rooks/use-pagination

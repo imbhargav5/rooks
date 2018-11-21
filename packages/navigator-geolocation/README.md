@@ -1,1 +1,1 @@
-# @react-hooks.org/use-navigator-geolocation
+# @rooks/use-navigator-geolocation

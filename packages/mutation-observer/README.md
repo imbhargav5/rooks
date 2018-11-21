@@ -1,9 +1,9 @@
-# @react-hooks.org/use-mutation-observer
+# @rooks/use-mutation-observer
 
 ### Installation
 
 ```
-npm install --save @react-hooks.org/use-mutation-observer
+npm install --save @rooks/use-mutation-observer
 ```
 
 ### Usage
