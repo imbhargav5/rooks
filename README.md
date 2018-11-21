@@ -1,3 +1,3 @@
-# rooks ⚓
+# ⚓ rooks
 
-Awesome collection of hooks as utils for React ⚓
+Awesome collection of hooks as utils for React
