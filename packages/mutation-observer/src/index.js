@@ -7,7 +7,7 @@ var config = {
   childList: true
 };
 
-module.exporst = function(ref, callback, options = config) {
+module.exports = function(ref, callback, options = config) {
   useEffect(
     () => {
       // Create an observer instance linked to the callback function
