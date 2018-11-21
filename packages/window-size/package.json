@@ -31,7 +31,7 @@
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0"
   },
-  "version": "0.2.2",
+  "version": "0.2.3",
   "_id": "@rooks/use-window-size@",
   "readme": "ERROR: No README data found!",
   "private": false,
