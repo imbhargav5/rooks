@@ -132,7 +132,7 @@ const Layout = ({ children }) => {
       <>
         <Header />
         <Flex>
-          <Box width={[`16rem`]}>
+          <Box width={[`30rem`]}>
             <Sidebar />
           </Box>
           <Box width={[1]} mx={4}>

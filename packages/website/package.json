@@ -24,6 +24,7 @@
     "@rooks/use-mouse": "^0.1.2",
     "@rooks/use-mutation-observer": "^0.1.5",
     "@rooks/use-navigator-language": "^0.1.1",
+    "@rooks/use-select": "0.1.1",
     "@rooks/use-timeout": "0.1.2",
     "@rooks/use-window-size": "^0.2.3",
     "@zeit/next-css": "1.0.1",
