@@ -6,6 +6,8 @@ const publishedHooks = [
   "navigator-language",
   "mutation-observer",
   "timeout",
-  "select"
+  "select",
+  "online",
+  "visibility-sensor"
 ];
 module.exports = publishedHooks;

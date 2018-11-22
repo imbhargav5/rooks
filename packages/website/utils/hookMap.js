@@ -6,5 +6,7 @@ export default {
   "navigator-language": "useNavigatorLanguage",
   "mutation-observer": "useMutationObserver",
   timeout: "useTimeout",
-  select: "useSelect"
+  select: "useSelect",
+  online: "useOnline",
+  "visibility-sensor": "useVisibilitySensor"
 };
