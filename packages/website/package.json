@@ -7,6 +7,7 @@
   "version": "1.0.17",
   "scripts": {
     "deploy": "sh scripts/deploy.sh",
+    "update-deps": "node scripts/update-deps.js",
     "dev": "sh scripts/dev.sh"
   },
   "dependencies": {
