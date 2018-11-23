@@ -46,6 +46,7 @@ fetch("https://react-hooks.org/api/hooks")
           return writeToHooksFolderInWebsiteSrc(publishedPackageNames);
         })
         .then(() => {
+          process.chdir(path.join(__dirname, "../src"));
           return install(publishedPackageNames, { save: true });
         });
     });
