@@ -22,7 +22,7 @@ export default class MyApp extends App {
     let hookNames = [];
     if (!process.browser) {
       const { getHookNames } = require("../utils/getAllHooks");
-      hookNames = getHookNames();
+      hookNames = await getHookNames();
     }
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);

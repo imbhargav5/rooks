@@ -19,10 +19,10 @@ module.exports = async (req, res) => {
       );
     }
     const data = await response.text();
-    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
     res.setHeader("Cache-Control", `max-age=${SECONDS_IN_AN_HOUR} public`);
     res.statusCode = 200;
-    res.end(JSON.stringify(data));
+    res.end(data);
   } catch (err) {
     res.setHeader("Content-Type", "text/plain; charset=utf-8");
     res.statusCode = 500;
