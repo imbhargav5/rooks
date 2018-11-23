@@ -11,5 +11,9 @@
   },
   "dependencies": {
     "isomorphic-fetch": "2.2.1"
+  },
+  "devDependencies": {
+    "del": "3.0.0",
+    "write": "1.0.3"
   }
 }
