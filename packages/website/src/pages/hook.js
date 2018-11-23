@@ -2,7 +2,7 @@ import React, { Component, Suspense } from "react";
 import MDX from "@mdx-js/runtime";
 import dynamic from "next/dynamic";
 import NoSSR from "react-no-ssr";
-import ScopeWithHook from "../hooks/scope-with-hook";
+import ScopeWithHook from "../components/scope-with-hook";
 import getReadme from "../actions/getReadme";
 import mdxComponents from "../utils/mdx-components";
 

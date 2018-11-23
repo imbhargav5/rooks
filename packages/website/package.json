@@ -8,5 +8,8 @@
   "scripts": {
     "deploy": "sh scripts/deploy.sh",
     "dev": "sh scripts/dev.sh"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "2.2.1"
   }
 }

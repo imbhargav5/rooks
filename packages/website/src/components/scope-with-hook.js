@@ -5,7 +5,9 @@ import capitalize from "lodash.capitalize";
 
 const cache = createCache();
 
-const PackageResource = createResource(hookName => import(`./${hookName}`));
+const PackageResource = createResource(hookName =>
+  import(`../hooks/${hookName}`)
+);
 
 export default function({ hookName, ...rest }) {
   let hookModule = PackageResource.read(cache, hookName);
