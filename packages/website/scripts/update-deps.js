@@ -13,10 +13,7 @@ function getHookPath(hookName) {
 }
 
 function getTemplate(pkgName) {
-  return `
-        import p from ${pkgName};
-        export default p;
-    `;
+  return "import p from '" + pkgName + "';\nexport default p;";
 }
 
 function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
