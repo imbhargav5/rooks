@@ -1,11 +1,12 @@
 /node_modules
-/packages/*/node_modules
+/packages/**/*/node_modules
 /packages/*/LICENSE
 /.package.json
 package-lock.json
-/packages/*/lib
-/packages/*/.next
-/packages/*/out
+/packages/**/*/lib
+/packages/**/*/.next
+/packages/**/*/out
+/packages/**/*/dist
 lerna-debug.log
 /packages/*/.cache
 /packages/*/dist

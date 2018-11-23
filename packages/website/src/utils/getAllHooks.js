@@ -9,13 +9,13 @@ const getDirectories = source =>
   readdirSync(source).filter(isHookDirectoryName);
 
 function getHookPaths() {
-  return getDirectories(join("__dirname", "../../"))
+  return getDirectories(join("__dirname", "../../../"))
     .map(name => join(source, name))
     .filter(isDirectory);
 }
 
 function getHookNames() {
-  return getDirectories(join("__dirname", "../../"));
+  return getDirectories(join("__dirname", "../../../"));
 }
 
 module.exports = {
