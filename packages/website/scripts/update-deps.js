@@ -46,10 +46,7 @@ fetch("https://react-hooks.org/api/hooks")
           return writeToHooksFolderInWebsiteSrc(publishedPackageNames);
         })
         .then(() => {
-          return install({
-            pkgs: publishedPackageNames,
-            root: path.join(__dirname, "src")
-          });
+          return install(publishedPackageNames, { save: true });
         });
     });
   });
