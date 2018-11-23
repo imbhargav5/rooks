@@ -7,7 +7,8 @@
     {
       "src": "api/hooks/*.js",
       "use": "@now/node"
-    }
+    },
+    { "src": "api/readme/*.js", "use": "@now/node" }
   ],
   "routes": [
     {

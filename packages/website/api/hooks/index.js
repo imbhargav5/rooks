@@ -1,9 +1,25 @@
-const { send } = require("micro");
 const fetch = require("isomorphic-fetch");
+
+const SECONDS_IN_AN_HOUR = 1 * 60 * 60;
+
+const IGNORE_PACKAGES = ["website"];
+
 module.exports = async (req, res) => {
-  const response = await fetch(
-    "https://api.github.com/repos/react-hooks-org/rooks/contents/packages"
-  );
-  const data = await response.json();
-  send(res, 200, data);
+  try {
+    const response = await fetch(
+      "https://api.github.com/repos/react-hooks-org/rooks/contents/packages"
+    );
+    const data = await response.json();
+    const validPackages = data.filter(
+      package => !IGNORE_PACKAGES.includes(package.name)
+    );
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.setHeader("Cache-Control", `max-age=${SECONDS_IN_AN_HOUR} public`);
+    res.statusCode = 200;
+    res.end(JSON.stringify(validPackages));
+  } catch (err) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.statusCode = 500;
+    res.end("Error occurred. " + err.message);
+  }
 };
