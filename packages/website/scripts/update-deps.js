@@ -9,7 +9,7 @@ function deleteExistingHooks() {
 }
 
 function getHookPath(hookName) {
-  return path.resolve(__dirname, "../src/hooks/" + hookName);
+  return path.resolve(__dirname, "../src/hooks/" + hookName + ".js");
 }
 
 function getTemplate(pkgName) {
@@ -23,7 +23,7 @@ function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
   return publishedPackageNames.map(pkgName => {
     const contents = getTemplate(pkgName);
     const hookName = pkgName.split("use-")[1];
-    return write(path.join(getHookPath(hookName)));
+    return write(getHookPath(hookName), contents);
   });
 }
 
