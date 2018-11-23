@@ -1,1 +1,36 @@
-{"main":"lib/index.js","license":"MIT","description":"A React Hooks package for input","name":"@rooks/use-input","scripts":{"test":"echo \"TEST\""},"devDependencies":{"@babel/cli":"^7.1.5","@babel/core":"^7.1.5","@babel/preset-env":"^7.1.5","@babel/preset-react":"^7.0.0","babel-core":"^7.0.0-bridge.0","babel-jest":"^23.6.0","jest":"^23.6.0","react":"16.7.0-alpha.0","react-dom":"16.7.0-alpha.0","react-testing-library":"^5.2.3"},"version":null,"_id":"@rooks/use-input@","readme":"ERROR: No README data found!","private":true}
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "A React Hooks package for input",
+  "name": "@rooks/use-input",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "input",
+    "react-hooks.org",
+    "react",
+    "rooks",
+    "input hook"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0",
+    "react-testing-library": "^5.2.3"
+  },
+  "version": null,
+  "_id": "@rooks/use-input@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
