@@ -11,7 +11,7 @@ npm install --save @rooks/use-boundingclientrect
 ```react
 function Demo() {
   const myRef = useRef();
-  const getBoundingClientRect = useGetBoundingClientRect(myRef);
+  const getBoundingClientRect = useBoundingclientrect(myRef);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
   const displayString = JSON.stringify(getBoundingClientRect, null, 2);
