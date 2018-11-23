@@ -1,7 +1,9 @@
-import fetch from "isomorphic-fetch";
+const { send } = require("micro");
+const fetch = require("isomorphic-fetch");
 module.exports = async (req, res) => {
   const response = await fetch(
     "https://api.github.com/repos/react-hooks-org/rooks/contents/packages"
   );
-  res.json(await response.json());
+  const data = await response.json();
+  send(res, 200, data);
 };
