@@ -6,6 +6,7 @@
   "private": true,
   "version": "1.0.17",
   "scripts": {
+    "predeploy": "npm run update-deps",
     "deploy": "sh scripts/deploy.sh",
     "update-deps": "node scripts/update-deps.js",
     "dev": "sh scripts/dev.sh"
