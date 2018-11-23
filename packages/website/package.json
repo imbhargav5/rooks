@@ -13,8 +13,9 @@
     "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
+    "bluebird": "3.5.3",
     "del": "3.0.0",
-    "npminstall": "3.16.0",
+    "npm-install-package": "2.1.0",
     "write": "1.0.3"
   }
 }

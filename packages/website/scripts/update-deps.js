@@ -2,7 +2,8 @@ const fetch = require("isomorphic-fetch");
 const write = require("write");
 const del = require("del");
 const path = require("path");
-const install = require("npminstall");
+const bluebird = require("bluebird");
+const install = bluebird.promisify(require("npm-install-package"));
 
 function deleteExistingHooks() {
   const srcHooksPath = path.resolve(__dirname, "../src/hooks");
@@ -16,8 +17,6 @@ function getHookPath(hookName) {
 function getTemplate(pkgName) {
   return "import p from '" + pkgName + "';\nexport default p;";
 }
-
-function installPkgs() {}
 
 function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
   return publishedPackageNames.map(pkgName => {
