@@ -10,7 +10,7 @@ npm install --save @rooks/%packageName%
 
 ```react
 function Demo() {
-  $name();
+  %name%();
   return null
 }
 
