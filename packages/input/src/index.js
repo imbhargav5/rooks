@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function useInput(initialValue = "", opts = {}) {
+const defaultOptions = {
+  syncWithInitialValue: false
+};
+
+export default function useInput(initialValue = "", opts = defaultOptions) {
   const [value, setValue] = useState(initialValue);
   function onChange(e) {
     const newValue = e.target.value;
@@ -12,8 +16,25 @@ export default function useInput(initialValue = "", opts = {}) {
       setValue(newValue);
     }
   }
-  return {
-    value,
-    onChange
-  };
+  //sync with default value
+  useEffect(
+    () => {
+      if (opts.syncWithInitialValue) {
+        setValue(initialValue);
+      }
+    },
+    [initialValue]
+  );
+
+  // // run it when updates
+  // useEffect(
+  //   () => {
+  //     if (typeof opts.onChange === "function") {
+  //       opts.onChange(value);
+  //     }
+  //   },
+  //   [value]
+  // );
+
+  return { value, onChange };
 }
