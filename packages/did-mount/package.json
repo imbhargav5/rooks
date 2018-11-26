@@ -12,7 +12,10 @@
     "react-hooks.org",
     "react",
     "rooks",
-    "hooks"
+    "hooks",
+    "did mount",
+    "componentDidMount",
+    "lifecycle"
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
