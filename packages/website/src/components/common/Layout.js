@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import fetch from "isomorphic-fetch";
+import useInput from "@rooks/use-input";
+import matchSorter, { rankings, caseRankings } from "match-sorter";
+import useDidMount from "@rooks/use-did-mount";
 import { Box, Flex, Heading } from "rebass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HookNamesContext } from "../../utils/contexts";
@@ -30,29 +34,68 @@ const Logo = styled.img`
   max-height: 3.5rem !important;
 `;
 
+const useNpmBlob = () => {
+  const [searchInfo, setSearchInfo] = useState([]);
+  useDidMount(async () => {
+    try {
+      const response = await fetch("https://react-hooks.org/api/search");
+      const jsonResponse = await response.json();
+      const { results } = jsonResponse;
+      const filteredList = results
+        .filter(result => result.name[0].startsWith("@rooks/"))
+        .map(r => {
+          return {
+            ...r,
+            _name: r.name[0].slice(7)
+          };
+        });
+      setSearchInfo(filteredList);
+    } catch (err) {
+      console.warn(err);
+    }
+  });
+  return searchInfo;
+};
+
+const useFilteredNpmResults = inputValue => {
+  const [results, setResults] = useState([]);
+  const npmBlob = useNpmBlob();
+  useEffect(
+    () => {
+      const newResults = matchSorter(npmBlob, inputValue, {
+        keys: ["_name", "name", "keywords", "description"]
+      }).map(result => result._name);
+      setResults(newResults);
+    },
+    [inputValue]
+  );
+  return results;
+};
+
 const Sidebar = () => {
+  const hooks = useContext(HookNamesContext);
+  const autoCompleteInput = useInput("");
+  const filteredResults = useFilteredNpmResults(autoCompleteInput.value);
+  const hooksWithDisplayNames = hooks.map(hookName => `use-${hookName}`);
+  const listToShow = autoCompleteInput.value.length
+    ? filteredResults
+    : hooksWithDisplayNames;
   return (
     <StyledAside className="menu">
       <Heading my={2}>Hooks</Heading>
-      <HookNamesContext.Consumer>
-        {hookNames => {
+      <input {...autoCompleteInput} />
+      <StyledMenu>
+        {listToShow.map(hookDisplayName => {
           return (
-            <StyledMenu>
-              {hookNames.map(hookName => {
-                const hookDisplayName = `use-${hookName}`;
-                return (
-                  <li key={hookDisplayName}>
-                    <a href={`/hook/${hookDisplayName}`}>
-                      <StyledFontAwesomeIcon icon="arrow-right" />
-                      {hookDisplayName}
-                    </a>
-                  </li>
-                );
-              })}
-            </StyledMenu>
+            <li key={hookDisplayName}>
+              <a href={`/hook/${hookDisplayName}`}>
+                <StyledFontAwesomeIcon icon="arrow-right" />
+                {hookDisplayName}
+              </a>
+            </li>
           );
-        }}
-      </HookNamesContext.Consumer>
+        })}
+      </StyledMenu>
     </StyledAside>
   );
 };
