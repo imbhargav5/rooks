@@ -1,7 +1,7 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "A React Hooks package for $description",
+  "description": "%description%",
   "name": "@rooks/%packageName%",
   "scripts": {
     "test": "jest",
