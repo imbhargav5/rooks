@@ -11,13 +11,17 @@ const filesToRead = [
   "../template/index.template",
   "../template/index.spec.template",
   "../template/package.json",
-  "../template/README.md"
+  "../template/README.md",
+  "../template/.babelrc",
+  "../template/.npmignore"
 ];
 const filesToWrite = [
   "src/index.js",
   "test/index.spec.js",
   "package.json",
-  "README.md"
+  "README.md",
+  ".babelrc",
+  ".npmignore"
 ];
 
 function installPackages() {
