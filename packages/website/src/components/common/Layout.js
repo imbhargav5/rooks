@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import fetch from "isomorphic-fetch";
 import useInput from "@rooks/use-input";
 import matchSorter, { rankings, caseRankings } from "match-sorter";
-import useDidMount from "@rooks/use-did-mount";
 import { Box, Flex, Heading } from "rebass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { HookNamesContext } from "../../utils/contexts";
+import { HookNamesContext, NpmBlobContext } from "../../utils/contexts";
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
 
@@ -14,6 +12,15 @@ const StyledAside = styled.aside.attrs({
   className: "menu"
 })`
   padding: 1rem;
+`;
+
+const StyledInput = styled.input`
+  background-color: #fff;
+  border-color: #dbdbdb;
+  color: #363636;
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  max-width: 100%;
+  width: 100%;
 `;
 
 const StyledMenu = styled.ul`
@@ -34,32 +41,9 @@ const Logo = styled.img`
   max-height: 3.5rem !important;
 `;
 
-const useNpmBlob = () => {
-  const [searchInfo, setSearchInfo] = useState([]);
-  useDidMount(async () => {
-    try {
-      const response = await fetch("https://react-hooks.org/api/search");
-      const jsonResponse = await response.json();
-      const { results } = jsonResponse;
-      const filteredList = results
-        .filter(result => result.name[0].startsWith("@rooks/"))
-        .map(r => {
-          return {
-            ...r,
-            _name: r.name[0].slice(7)
-          };
-        });
-      setSearchInfo(filteredList);
-    } catch (err) {
-      console.warn(err);
-    }
-  });
-  return searchInfo;
-};
-
 const useFilteredNpmResults = inputValue => {
   const [results, setResults] = useState([]);
-  const npmBlob = useNpmBlob();
+  const npmBlob = useContext(NpmBlobContext);
   useEffect(
     () => {
       const newResults = matchSorter(npmBlob, inputValue, {
@@ -83,7 +67,12 @@ const Sidebar = () => {
   return (
     <StyledAside className="menu">
       <Heading my={2}>Hooks</Heading>
-      <input {...autoCompleteInput} />
+      <StyledInput
+        className="input"
+        type="text"
+        placeholder="Search packages"
+        {...autoCompleteInput}
+      />
       <StyledMenu>
         {listToShow.map(hookDisplayName => {
           return (
