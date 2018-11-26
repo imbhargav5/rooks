@@ -1,0 +1,13 @@
+/**
+ * @jest-environment jsdom
+ */
+import React from "react";
+import %name% from "../src";
+
+describe("%name%", () => {
+  it("should be defined", () => {
+    expect(%name%).toBeDefined();
+  });
+});
+
+// figure out tests

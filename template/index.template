@@ -1,0 +1,7 @@
+import { useState } from "react";
+
+function %name%() {
+  return null;
+}
+
+module.exports = %name%;

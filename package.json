@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "cd packages/website && npm run dev",
-    "deploy": "cd packages/website && npm run deploy"
+    "deploy": "cd packages/website && npm run deploy",
+    "create": "node helpers/create"
   },
   "devDependencies": {
     "babel-plugin-prismjs": "1.0.2",
@@ -19,7 +20,10 @@
     "@fortawesome/free-solid-svg-icons": "5.5.0",
     "@fortawesome/react-fontawesome": "0.1.3",
     "@rooks/use-select": "0.1.0",
-    "i": "0.3.6",
-    "npm": "6.4.1"
+    "chalk": "2.4.1",
+    "inquirer": "6.2.0",
+    "make-dir": "1.3.0",
+    "ora": "3.0.0",
+    "replace-string": "2.0.0"
   }
 }
