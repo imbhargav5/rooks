@@ -12,7 +12,9 @@
     "react-hooks.org",
     "react",
     "rooks",
-    "hooks"
+    "hooks",
+    "setInterval",
+    "interval"
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
