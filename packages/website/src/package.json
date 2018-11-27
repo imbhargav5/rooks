@@ -33,6 +33,7 @@
     "@rooks/use-timeout": "0.1.3",
     "@rooks/use-toggle": "0.1.0",
     "@rooks/use-visibility-sensor": "0.1.1",
+    "@rooks/use-will-unmount": "0.1.0",
     "@rooks/use-window-size": "0.2.3",
     "@rooks/use-worker": "0.1.0",
     "@zeit/next-css": "1.0.1",
