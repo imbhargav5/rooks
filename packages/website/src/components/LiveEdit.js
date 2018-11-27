@@ -1,5 +1,15 @@
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useMutationEffect,
+  useImperativeMethods,
+  useCallback,
+  useMemo
+} from "react";
 import { space, width, fontSize, color, fontWeight } from "styled-system";
 import { Box, Flex } from "rebass";
 import styled, { createGlobalStyle } from "styled-components";
@@ -26,6 +36,11 @@ const LiveEdit = ({ noInline, code, scope = {} }) => {
             useRef,
             useEffect,
             useLayoutEffect,
+            useReducer,
+            useMutationEffect,
+            useImperativeMethods,
+            useCallback,
+            useMemo,
             ...scope,
             ...contextScope
           }}
