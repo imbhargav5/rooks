@@ -3,4 +3,10 @@ import styled from "styled-components";
 
 const Title = styled.h1``;
 
-export default () => <Title>Coming soon</Title>;
+export default () => (
+  <>
+    <Title>react-hooks.org</Title>
+    <p>Check out the links on the side for editable previews of the hooks</p>
+    <p>More info soon! </p>
+  </>
+);
