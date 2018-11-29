@@ -3,6 +3,11 @@
   "license": "MIT",
   "description": "A react hook for using setInterval",
   "name": "@rooks/use-interval",
+  "homepage": "https://react-hooks.org/hook/use-interval",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",

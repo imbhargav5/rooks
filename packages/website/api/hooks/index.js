@@ -7,7 +7,7 @@ const IGNORE_PACKAGES = ["website"];
 module.exports = async (req, res) => {
   try {
     const response = await fetch(
-      "https://api.github.com/repos/react-hooks-org/rooks/contents/packages"
+      "https://api.github.com/repos/imbhargav5/rooks/contents/packages"
     );
     const data = await response.json();
     const validPackages = data.filter(

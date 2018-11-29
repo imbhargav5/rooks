@@ -3,6 +3,11 @@
   "license": "MIT",
   "description": "%description%",
   "name": "@rooks/%packageName%",
+  "homepage": "https://react-hooks.org/hook/%packageName%",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",

@@ -31,7 +31,7 @@ fetch("https://react-hooks.org/api/hooks")
   .then(response => {
     const promises = response.map(package => {
       return fetch(
-        `https://raw.githubusercontent.com/react-hooks-org/rooks/master/packages/${
+        `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
           package.name
         }/package.json`
       ).then(r => r.json());

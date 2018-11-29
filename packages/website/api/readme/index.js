@@ -11,11 +11,11 @@ module.exports = async (req, res) => {
       throw new Error("required 'dirName' query");
     }
     let response = await fetch(
-      `https://raw.githubusercontent.com/react-hooks-org/rooks/master/packages/${dirName}/README.md`
+      `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${dirName}/README.md`
     );
     if (!response.ok) {
       response = await fetch(
-        `https://raw.githubusercontent.com/react-hooks-org/rooks/master/packages/${dirName}/readme.md`
+        `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${dirName}/readme.md`
       );
     }
     const data = await response.text();

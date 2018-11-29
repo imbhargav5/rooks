@@ -3,6 +3,11 @@
   "license": "MIT",
   "description": "A React Hooks package for boundingclientrect",
   "name": "@rooks/use-boundingclientrect",
+  "homepage": "https://react-hooks.org/hook/use-boundingclientrect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",

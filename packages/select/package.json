@@ -3,6 +3,11 @@
   "license": "MIT",
   "description": "A React Hooks package for select",
   "name": "@rooks/use-select",
+  "homepage": "https://react-hooks.org/hook/use-select",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",

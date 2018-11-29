@@ -3,6 +3,11 @@
   "license": "MIT",
   "description": "A React Hook to get time ago for timestamp millisecond value",
   "name": "@rooks/use-time-ago",
+  "homepage": "https://react-hooks.org/hook/use-time-ago",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel src --out-dir lib",
