@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "cd packages/website && npm run dev",
     "deploy": "cd packages/website && npm run deploy",
-    "predeploy": "node helpers/update-readme",
+    "predeploy": "node helpers/update_readme",
     "create": "node helpers/create"
   },
   "devDependencies": {
