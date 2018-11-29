@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "cd packages/website && npm run dev",
     "deploy": "cd packages/website && npm run deploy",
+    "predeploy": "node helpers/update-readme",
     "create": "node helpers/create"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "inquirer": "6.2.0",
     "make-dir": "1.3.0",
     "ora": "3.0.0",
-    "replace-string": "2.0.0"
+    "replace-string": "2.0.0",
+    "shelljs": "0.8.3"
   }
 }

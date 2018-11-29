@@ -1,3 +1,4 @@
+
 # ⚓ rooks
 
 Collection of regularly used custom hooks as utils for React
@@ -71,7 +72,6 @@ render(<Demo/>)
 ```
 
 Bounding client rect hook for React
-
 # @rooks/use-counter
 
 ### Installation
@@ -117,7 +117,6 @@ render(<CounterComponent/>)
 ```
 
 Counter hook for React
-
 # @rooks/use-did-mount
 
 ### Installation
@@ -140,7 +139,6 @@ render(<Demo/>)
 ```
 
 # A React hooks package for componentDidMount
-
 # @rooks/use-input
 
 ### Installation
@@ -190,7 +188,6 @@ render(<Demo/>)
 ```
 
 Input hook for React
-
 # @rooks/use-interval
 
 ### Installation
@@ -236,7 +233,6 @@ render(<Demo/>)
 ```
 
 # A react hook for using setInterval
-
 # @rooks/use-mouse
 
 ### Installation
@@ -263,7 +259,6 @@ render(<Demo/>)
 ```
 
 Mouse hook for React
-
 # @rooks/use-mutation-observer
 
 ### Installation
@@ -332,7 +327,6 @@ render(<Demo/>)
 ```
 
 Mutation Observer hook for React
-
 # @rooks/use-navigator-language
 
 ### Installation
@@ -353,7 +347,6 @@ render(<Demo/>)
 ```
 
 Navigator Language hook for React
-
 # @rooks/use-online
 
 ### Installation
@@ -374,7 +367,6 @@ render(<Demo/>)
 ```
 
 Online Status hook for React
-
 # @rooks/use-select
 
 ### Installation
@@ -421,7 +413,6 @@ render(<Demo/>)
 ```
 
 List Selection hook for React
-
 # @rooks/use-time-ago
 
 ### Installation
@@ -451,7 +442,6 @@ render(<Demo/>)
 ```
 
 # A React Hook to get time ago for timestamp millisecond value
-
 # @rooks/use-timeout
 
 ### Installation
@@ -480,7 +470,6 @@ render(<TimeoutComponent/>)
 ```
 
 Counter hook for React
-
 # @rooks/use-toggle
 
 ### Installation
@@ -527,7 +516,6 @@ render(<Demo/>)
 ```
 
 Toggle hook for React
-
 # @rooks/use-visibility-sensor
 
 Visibility sensor hook for React
@@ -606,7 +594,6 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 - [x] Documentation of all options
 - [x] Tests _ WIP _
 - [ ] More examples _ WIP _
-
 # @rooks/use-will-unmount
 
 ### Installation
@@ -648,7 +635,6 @@ render(<Demo/>)
 ```
 
 # A React hook for componentWillUnmount lifecycle method
-
 # @rooks/use-window-size
 
 ### Installation
@@ -688,7 +674,6 @@ render(<WindowComponent/>)
 ```
 
 Counter hook for React
-
 # @rooks/use-worker
 
 ### Installation
