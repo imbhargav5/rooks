@@ -43,4 +43,11 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                                   | Default value |
+| ------------ | ------ | --------------------------------------------- | ------------- |
+| list         | Array  | List of items for which the selection is used | undefined     |
+| initialIndex | number | Initially selected index                      | 0             |
+
 List Selection hook for React

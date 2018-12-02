@@ -62,4 +62,10 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type      | Description                                       |
+| -------- | --------- | ------------------------------------------------- |
+| ref      | React ref | React ref whose boundingClientRect is to be found |
+
 Bounding client rect hook for React

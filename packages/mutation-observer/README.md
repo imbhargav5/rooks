@@ -65,4 +65,12 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type      | Description                                                                                       | Default value                                                           |
+| -------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ref      | React ref | Ref which should be observed for Mutations                                                        | undefined                                                               |
+| callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
+| config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
+
 Mutation Observer hook for React

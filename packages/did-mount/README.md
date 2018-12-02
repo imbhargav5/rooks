@@ -19,4 +19,10 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type     | Description                    |
+| -------- | -------- | ------------------------------ |
+| callback | function | function to be called on mount |
+
 # A React hooks package for componentDidMount

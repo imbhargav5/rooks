@@ -46,4 +46,19 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                 | Default value                 |
+| ------------ | ------ | --------------------------- | ----------------------------- |
+| initialValue | string | Initial value of the string | ""                            |
+| opts         | object | Options                     | {syncWithInitialValue: false} |
+
+
+### Options
+
+| Option key           | Type    | Description                                                            | Default value |
+| -------------------- | ------- | ---------------------------------------------------------------------- | ------------- |
+| syncWithInitialValue | boolean | Should input update to the initialValue if the initialValue is updated | false         |
+
+
 Input hook for React

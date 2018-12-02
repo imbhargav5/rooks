@@ -42,4 +42,14 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument         | Type     | Description                                              | Default value |
+| ---------------- | -------- | -------------------------------------------------------- | ------------- |
+| callback         | function | Function be invoked after each interval duration         | undefined     |
+| intervalDuration | number   | Duration in milliseconds after which callback is invoked | undefined     |
+| startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
+
+
+
 # A react hook for using setInterval

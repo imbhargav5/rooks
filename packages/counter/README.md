@@ -42,4 +42,10 @@ function CounterComponent() {
 render(<CounterComponent/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                  |
+| ------------ | ------ | ---------------------------- |
+| initialValue | number | Initial value of the counter |
+
 Counter hook for React

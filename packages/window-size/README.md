@@ -36,4 +36,4 @@ function WindowComponent() {
 render(<WindowComponent/>)
 ```
 
-Counter hook for React
+Window size hook for React

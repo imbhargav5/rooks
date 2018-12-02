@@ -25,4 +25,11 @@ function TimeoutComponent() {
 render(<TimeoutComponent/>)
 ```
 
-Counter hook for React
+### Arguments
+
+| Arguments | Type     | Description                                              | Default value |
+| --------- | -------- | -------------------------------------------------------- | ------------- |
+| callback  | function | Function to be executed in timeout                       | undefind      |
+| delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
+
+Timeout hook for React

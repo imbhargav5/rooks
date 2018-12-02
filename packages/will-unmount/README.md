@@ -38,4 +38,10 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Arguments | Type     | Description                                     | Default value |
+| --------- | -------- | ----------------------------------------------- | ------------- |
+| callback  | function | Callback function which needs to run on unmount | undefined     |
+
 # A React hook for componentWillUnmount lifecycle method

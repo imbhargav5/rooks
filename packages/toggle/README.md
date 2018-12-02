@@ -43,4 +43,12 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Arguments      | Type     | Description                                     | Default value |
+| -------------- | -------- | ----------------------------------------------- | ------------- |
+| initialValue   | boolean  | Initial value of the state                      | false         |
+| toggleFunction | function | Function which determines how to toggle a value | v => !v       |
+
+
 Toggle hook for React
