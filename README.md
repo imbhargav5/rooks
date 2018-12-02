@@ -71,6 +71,12 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type      | Description                                       |
+| -------- | --------- | ------------------------------------------------- |
+| ref      | React ref | React ref whose boundingClientRect is to be found |
+
 Bounding client rect hook for React
 # @rooks/use-counter
 
@@ -116,6 +122,12 @@ function CounterComponent() {
 render(<CounterComponent/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                  |
+| ------------ | ------ | ---------------------------- |
+| initialValue | number | Initial value of the counter |
+
 Counter hook for React
 # @rooks/use-did-mount
 
@@ -137,6 +149,12 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+### Arguments
+
+| Argument | Type     | Description                    |
+| -------- | -------- | ------------------------------ |
+| callback | function | function to be called on mount |
 
 # A React hooks package for componentDidMount
 # @rooks/use-input
@@ -187,6 +205,21 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                 | Default value                 |
+| ------------ | ------ | --------------------------- | ----------------------------- |
+| initialValue | string | Initial value of the string | ""                            |
+| opts         | object | Options                     | {syncWithInitialValue: false} |
+
+
+### Options
+
+| Option key           | Type    | Description                                                            | Default value |
+| -------------------- | ------- | ---------------------------------------------------------------------- | ------------- |
+| syncWithInitialValue | boolean | Should input update to the initialValue if the initialValue is updated | false         |
+
+
 Input hook for React
 # @rooks/use-interval
 
@@ -231,6 +264,16 @@ function Demo() {
 }
 render(<Demo/>)
 ```
+
+### Arguments
+
+| Argument         | Type     | Description                                              | Default value |
+| ---------------- | -------- | -------------------------------------------------------- | ------------- |
+| callback         | function | Function be invoked after each interval duration         | undefined     |
+| intervalDuration | number   | Duration in milliseconds after which callback is invoked | undefined     |
+| startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
+
+
 
 # A react hook for using setInterval
 # @rooks/use-mouse
@@ -326,6 +369,14 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type      | Description                                                                                       | Default value                                                           |
+| -------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ref      | React ref | Ref which should be observed for Mutations                                                        | undefined                                                               |
+| callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
+| config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
+
 Mutation Observer hook for React
 # @rooks/use-navigator-language
 
@@ -412,6 +463,13 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument     | Type   | Description                                   | Default value |
+| ------------ | ------ | --------------------------------------------- | ------------- |
+| list         | Array  | List of items for which the selection is used | undefined     |
+| initialIndex | number | Initially selected index                      | 0             |
+
 List Selection hook for React
 # @rooks/use-time-ago
 
@@ -441,6 +499,23 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Argument | Type   | Description    | Default value      |
+| -------- | ------ | -------------- | ------------------ |
+| input    | Date   | Timestamp      | etc                | Any input that time-ago.js supports | undefined |
+| options  | Object | Options object | {   intervalMs:0 } |
+
+#### Options
+
+| Options      | Type         | Description                                                            | Default value |
+| ------------ | ------------ | ---------------------------------------------------------------------- | ------------- |
+| intervalMs   | milliseconds | Duration after which time-ago has to be calculated                     | 1000          |
+| locale       | String       | Locale in which value is expected                                      | undefined     |
+| relativeDate | Date         | Relative date object with respect to which time-ago is to be calcuated | Current Time  |
+
+
+
 # A React Hook to get time ago for timestamp millisecond value
 # @rooks/use-timeout
 
@@ -469,7 +544,14 @@ function TimeoutComponent() {
 render(<TimeoutComponent/>)
 ```
 
-Counter hook for React
+### Arguments
+
+| Arguments | Type     | Description                                              | Default value |
+| --------- | -------- | -------------------------------------------------------- | ------------- |
+| callback  | function | Function to be executed in timeout                       | undefind      |
+| delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
+
+Timeout hook for React
 # @rooks/use-toggle
 
 ### Installation
@@ -514,6 +596,14 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+### Arguments
+
+| Arguments      | Type     | Description                                     | Default value |
+| -------------- | -------- | ----------------------------------------------- | ------------- |
+| initialValue   | boolean  | Initial value of the state                      | false         |
+| toggleFunction | function | Function which determines how to toggle a value | v => !v       |
+
 
 Toggle hook for React
 # @rooks/use-visibility-sensor
@@ -634,6 +724,12 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Arguments
+
+| Arguments | Type     | Description                                     | Default value |
+| --------- | -------- | ----------------------------------------------- | ------------- |
+| callback  | function | Callback function which needs to run on unmount | undefined     |
+
 # A React hook for componentWillUnmount lifecycle method
 # @rooks/use-window-size
 
@@ -673,7 +769,7 @@ function WindowComponent() {
 render(<WindowComponent/>)
 ```
 
-Counter hook for React
+Window size hook for React
 # @rooks/use-worker
 
 ### Installation
@@ -708,3 +804,12 @@ const rootElement = document.getElementById("root");
 
 ReactDOM.render(<Demo />, rootElement);
 ```
+
+### Arguments
+
+| Arguments  | Type   | Description                                                                                                       | Default value                                     |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| scriptPath | string | Path to the script file that a new Worker is to be created with                                                   | undefined                                         |
+| options    | Object | Options object within which `onMessage` and `onMessageError` options can be passed to communicate with the worker | `{onMessage: () => {},,onMessageError: () => {}}` |
+
+### Worker hook for React
