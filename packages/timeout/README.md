@@ -32,4 +32,11 @@ render(<TimeoutComponent/>)
 | callback  | function | Function to be executed in timeout                       | undefind      |
 | delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
 
+### Returned Object keys
+
+| Returned object attributes | Type     | Description       |
+| -------------------------- | -------- | ----------------- |
+| clear                      | function | Clear the timeout |
+| start                      | function | Start the timeout |
+
 Timeout hook for React

@@ -48,4 +48,11 @@ render(<CounterComponent/>)
 | ------------ | ------ | ---------------------------- |
 | initialValue | number | Initial value of the counter |
 
+
+### Return
+
+| Return value | Type   | Description                                                                 |
+| ------------ | ------ | --------------------------------------------------------------------------- |
+| counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
+
 Counter hook for React

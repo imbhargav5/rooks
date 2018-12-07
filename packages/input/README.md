@@ -60,5 +60,10 @@ render(<Demo/>)
 | -------------------- | ------- | ---------------------------------------------------------------------- | ------------- |
 | syncWithInitialValue | boolean | Should input update to the initialValue if the initialValue is updated | false         |
 
+### Return value
+
+| Return value      | Type   | Description                                                                                                          |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
 Input hook for React

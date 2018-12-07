@@ -42,6 +42,13 @@ It checks whether an element has scrolled into view or not. A lot of the logic i
 
 [![Image from Gyazo](https://i.gyazo.com/98634bb2a962733670d798d1e754d63e.gif)](https://gyazo.com/98634bb2a962733670d798d1e754d63e)
 
+### Returned Object keys
+
+| Returned object attributes | Type    | Description                                                 |
+| -------------------------- | ------- | ----------------------------------------------------------- |
+| isVisible                  | Boolean | Is Ref visible or not                                       |
+| visibilityRect             | Object  | VisibilityRectangle containing coordinates of the container |
+
 ## Options
 
 The first argument of the `useVisibilitySensor` hook is a ref, the second argument is an options object. The available options are as follow:

@@ -40,4 +40,8 @@ ReactDOM.render(<Demo />, rootElement);
 | scriptPath | string | Path to the script file that a new Worker is to be created with                                                   | undefined                                         |
 | options    | Object | Options object within which `onMessage` and `onMessageError` options can be passed to communicate with the worker | `{onMessage: () => {},,onMessageError: () => {}}` |
 
+### Returned Object
+
+The worker instance is returned.
+
 ### Worker hook for React

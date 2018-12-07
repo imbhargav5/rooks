@@ -50,4 +50,13 @@ render(<Demo/>)
 | list         | Array  | List of items for which the selection is used | undefined     |
 | initialIndex | number | Initially selected index                      | 0             |
 
+### Returned Object
+
+| Returned object attributes | Type     | Description                       |
+| -------------------------- | -------- | --------------------------------- |
+| index                      | int      | Index of currently selected index |
+| item                       | any      | Currently selected item           |
+| setIndex                   | function | Update selected index             |
+| setItem                    | function | Update selected item              |
+
 List Selection hook for React

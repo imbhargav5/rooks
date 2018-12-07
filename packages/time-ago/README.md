@@ -41,6 +41,8 @@ render(<Demo/>)
 | locale       | String       | Locale in which value is expected                                      | undefined     |
 | relativeDate | Date         | Relative date object with respect to which time-ago is to be calcuated | Current Time  |
 
+### Returned Value
 
+Timeago string is returned.
 
 # A React Hook to get time ago for timestamp millisecond value

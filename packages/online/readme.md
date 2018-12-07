@@ -17,4 +17,8 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Return value
+
+Offline status (boolean) is returned.
+
 Online Status hook for React

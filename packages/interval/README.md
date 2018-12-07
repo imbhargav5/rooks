@@ -50,6 +50,13 @@ render(<Demo/>)
 | intervalDuration | number   | Duration in milliseconds after which callback is invoked | undefined     |
 | startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
 
+### Returned Object
+
+| Returned object attributes | Type       | Description                |
+| -------------------------- | ---------- | -------------------------- |
+| start                      | function   | Start the interval         |
+| stop                       | function   | Stop the interval          |
+| intervalId                 | intervalId | IntervalId of the interval |
 
 
 # A react hook for using setInterval

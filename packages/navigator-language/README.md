@@ -17,4 +17,8 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Return value
+
+A language (String) is returned.
+
 Navigator Language hook for React

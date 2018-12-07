@@ -23,4 +23,11 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Returned Object 
+
+| Returned object attributes | Type | Description         |
+| -------------------------- | ---- | ------------------- |
+| x                          | int  | X position of mouse |
+| y                          | int  | Y position of mouse |
+
 Mouse hook for React

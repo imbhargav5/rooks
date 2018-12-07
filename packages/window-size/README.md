@@ -36,4 +36,13 @@ function WindowComponent() {
 render(<WindowComponent/>)
 ```
 
+### Returned Object keys
+
+| Returned object attributes | Type | Description            |
+| -------------------------- | ---- | ---------------------- |
+| width                      | int  | inner width of window  |
+| height                     | int  | inner height of window |
+| outerWidth                 | int  | outer height of window |
+| outerHeight                | int  | outer width of window  |
+
 Window size hook for React
