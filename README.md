@@ -77,6 +77,12 @@ render(<Demo/>)
 | -------- | --------- | ------------------------------------------------- |
 | ref      | React ref | React ref whose boundingClientRect is to be found |
 
+### Return
+
+| Return value | Type    | Description                                                                  | Default value |
+| ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
+| value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
+
 Bounding client rect hook for React
 # @rooks/use-counter
 
@@ -127,6 +133,13 @@ render(<CounterComponent/>)
 | Argument     | Type   | Description                  |
 | ------------ | ------ | ---------------------------- |
 | initialValue | number | Initial value of the counter |
+
+
+### Return
+
+| Return value | Type   | Description                                                                 |
+| ------------ | ------ | --------------------------------------------------------------------------- |
+| counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
 
 Counter hook for React
 # @rooks/use-did-mount
@@ -219,6 +232,11 @@ render(<Demo/>)
 | -------------------- | ------- | ---------------------------------------------------------------------- | ------------- |
 | syncWithInitialValue | boolean | Should input update to the initialValue if the initialValue is updated | false         |
 
+### Return value
+
+| Return value      | Type   | Description                                                                                                          |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
 Input hook for React
 # @rooks/use-interval
@@ -273,6 +291,13 @@ render(<Demo/>)
 | intervalDuration | number   | Duration in milliseconds after which callback is invoked | undefined     |
 | startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
 
+### Returned Object
+
+| Returned object attributes | Type       | Description                |
+| -------------------------- | ---------- | -------------------------- |
+| start                      | function   | Start the interval         |
+| stop                       | function   | Stop the interval          |
+| intervalId                 | intervalId | IntervalId of the interval |
 
 
 # A react hook for using setInterval
@@ -300,6 +325,13 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+### Returned Object 
+
+| Returned object attributes | Type | Description         |
+| -------------------------- | ---- | ------------------- |
+| x                          | int  | X position of mouse |
+| y                          | int  | Y position of mouse |
 
 Mouse hook for React
 # @rooks/use-mutation-observer
@@ -397,6 +429,10 @@ function Demo() {
 render(<Demo/>)
 ```
 
+### Return value
+
+A language (String) is returned.
+
 Navigator Language hook for React
 # @rooks/use-online
 
@@ -416,6 +452,10 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+### Return value
+
+Offline status (boolean) is returned.
 
 Online Status hook for React
 # @rooks/use-select
@@ -470,6 +510,15 @@ render(<Demo/>)
 | list         | Array  | List of items for which the selection is used | undefined     |
 | initialIndex | number | Initially selected index                      | 0             |
 
+### Returned Object
+
+| Returned object attributes | Type     | Description                       |
+| -------------------------- | -------- | --------------------------------- |
+| index                      | int      | Index of currently selected index |
+| item                       | any      | Currently selected item           |
+| setIndex                   | function | Update selected index             |
+| setItem                    | function | Update selected item              |
+
 List Selection hook for React
 # @rooks/use-time-ago
 
@@ -514,7 +563,9 @@ render(<Demo/>)
 | locale       | String       | Locale in which value is expected                                      | undefined     |
 | relativeDate | Date         | Relative date object with respect to which time-ago is to be calcuated | Current Time  |
 
+### Returned Value
 
+Timeago string is returned.
 
 # A React Hook to get time ago for timestamp millisecond value
 # @rooks/use-timeout
@@ -550,6 +601,13 @@ render(<TimeoutComponent/>)
 | --------- | -------- | -------------------------------------------------------- | ------------- |
 | callback  | function | Function to be executed in timeout                       | undefind      |
 | delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
+
+### Returned Object keys
+
+| Returned object attributes | Type     | Description       |
+| -------------------------- | -------- | ----------------- |
+| clear                      | function | Clear the timeout |
+| start                      | function | Start the timeout |
 
 Timeout hook for React
 # @rooks/use-toggle
@@ -605,6 +663,13 @@ render(<Demo/>)
 | toggleFunction | function | Function which determines how to toggle a value | v => !v       |
 
 
+### Returned object keys
+
+| Returned object attributes | Type     | Description                                                                                                           |
+| -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| value                      | Any      | Current value                                                                                                         |
+| toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
+
 Toggle hook for React
 # @rooks/use-visibility-sensor
 
@@ -649,6 +714,13 @@ It checks whether an element has scrolled into view or not. A lot of the logic i
 ## Demo
 
 [![Image from Gyazo](https://i.gyazo.com/98634bb2a962733670d798d1e754d63e.gif)](https://gyazo.com/98634bb2a962733670d798d1e754d63e)
+
+### Returned Object keys
+
+| Returned object attributes | Type    | Description                                                 |
+| -------------------------- | ------- | ----------------------------------------------------------- |
+| isVisible                  | Boolean | Is Ref visible or not                                       |
+| visibilityRect             | Object  | VisibilityRectangle containing coordinates of the container |
 
 ## Options
 
@@ -769,6 +841,15 @@ function WindowComponent() {
 render(<WindowComponent/>)
 ```
 
+### Returned Object keys
+
+| Returned object attributes | Type | Description            |
+| -------------------------- | ---- | ---------------------- |
+| width                      | int  | inner width of window  |
+| height                     | int  | inner height of window |
+| outerWidth                 | int  | outer height of window |
+| outerHeight                | int  | outer width of window  |
+
 Window size hook for React
 # @rooks/use-worker
 
@@ -811,5 +892,9 @@ ReactDOM.render(<Demo />, rootElement);
 | ---------- | ------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | scriptPath | string | Path to the script file that a new Worker is to be created with                                                   | undefined                                         |
 | options    | Object | Options object within which `onMessage` and `onMessageError` options can be passed to communicate with the worker | `{onMessage: () => {},,onMessageError: () => {}}` |
+
+### Returned Object
+
+The worker instance is returned.
 
 ### Worker hook for React
