@@ -33,7 +33,7 @@
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "^5.2.3"
   },
-  "version": "0.1.7",
+  "version": "0.1.8",
   "_id": "@rooks/use-boundingclientrect@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
