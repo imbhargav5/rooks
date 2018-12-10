@@ -33,7 +33,7 @@
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "^5.2.3"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "_id": "@rooks/use-online@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
