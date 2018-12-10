@@ -39,9 +39,19 @@ const StyledInput = styled.input`
 const StyledMenu = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 2rem 0 0;
   a {
+    transition: all 0.25s ease;
+    padding: 0.75rem 1rem;
+    margin: 0 -1rem;
+    background-color: white;
+    display: block;
+    border-bottom: 1px solid ${props => props.theme.colors.lightgray};
     color: ${props => props.theme.colors.blue};
+    &:hover {
+      color: white;
+      background-color: ${props => props.theme.colors.blue};
+    }
   }
   ${StyledFontAwesomeIcon} {
     height: 1em;
@@ -153,8 +163,11 @@ const theme = {
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   colors: {
     blue: "#07c",
+    blue2: "dodgerblue",
+    blue3: "cornflowerblue",
     lightgray: "#f6f6ff",
-    red: "#ff3860"
+    red: "#ff3860",
+    purple: "rebeccapurple"
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   fonts: {
