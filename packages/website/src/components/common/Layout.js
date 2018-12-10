@@ -12,6 +12,19 @@ const StyledAside = styled.aside.attrs({
   className: "menu"
 })`
   padding: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+`;
+
+const LeftBox = styled(Box)`
+  position: relative;
+  height: 100%;
+  box-shadow: 0 0 0.5rem #9da5ab;
+`;
+const RightBox = styled(Box)`
+  overflow: auto;
+  height: 100%;
 `;
 
 const StyledInput = styled.input`
@@ -56,7 +69,7 @@ const useFilteredNpmResults = inputValue => {
   return results;
 };
 
-const Sidebar = () => {
+const Sidebar = ({ children }) => {
   const hooks = useContext(HookNamesContext);
   const autoCompleteInput = useInput("");
   const filteredResults = useFilteredNpmResults(autoCompleteInput.value);
@@ -66,6 +79,7 @@ const Sidebar = () => {
     : hooksWithDisplayNames;
   return (
     <StyledAside className="menu">
+      {children}
       <Heading my={2}>Hooks</Heading>
       <StyledInput
         className="input"
@@ -162,15 +176,16 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <Header />
-        <Flex>
-          <Box width={[`30rem`]}>
-            <Sidebar />
-          </Box>
-          <Box width={[1]} mx={4}>
+        <Flex style={{ height: "100%" }}>
+          <LeftBox width={[`30rem`]}>
+            <Sidebar>
+              <Header />
+            </Sidebar>
+          </LeftBox>
+          <RightBox width={[1]} px={4} pb={100}>
             {children}
             <Footer />
-          </Box>
+          </RightBox>
         </Flex>
       </>
     </ThemeProvider>

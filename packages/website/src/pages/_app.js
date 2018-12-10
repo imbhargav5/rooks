@@ -12,7 +12,16 @@ library.add(faArrowRight);
 const GlobalStyles = createGlobalStyle`
     html, body{
         font-family: 'Source Code Pro', monospace;
+        height: 100%;
+        padding: 0;
+        margin: 0;
         font-size: 16px;
+        *{
+          box-sizing: border-box;
+        }
+    }
+    #__next{
+      height: 100%;
     }
     button, input, textarea{
         -webkit-appearance: none;
