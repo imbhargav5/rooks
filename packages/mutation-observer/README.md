@@ -8,7 +8,7 @@ npm install --save @rooks/use-mutation-observer
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const myRef = useRef();
   const [mutationCount, setMutationCount] = useState(0);

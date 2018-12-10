@@ -8,7 +8,7 @@ npm install --save @rooks/use-toggle
 
 ### Usage
 
-```react
+```jsx
 
 const customToggleFunction = v => (v === "start" ? "stop" : "start");
 

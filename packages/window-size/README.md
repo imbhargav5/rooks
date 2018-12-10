@@ -8,7 +8,7 @@ npm install --save @rooks/use-window-size
 
 ### Usage
 
-```react
+```jsx
 function WindowComponent() {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
 

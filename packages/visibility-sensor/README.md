@@ -10,7 +10,7 @@ npm install --save @rooks/use-visibility-sensor
 
 ### Usage
 
-```react
+```jsx
 
 function Demo() {
     const rootNode = useRef(null);

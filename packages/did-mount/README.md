@@ -8,7 +8,7 @@ npm install --save @rooks/use-did-mount
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   useDidMount(function(){
     console.log("mounted")

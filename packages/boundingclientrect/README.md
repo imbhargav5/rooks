@@ -8,7 +8,7 @@ npm install --save @rooks/use-boundingclientrect
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const myRef = useRef();
   const getBoundingClientRect = useBoundingclientrect(myRef);

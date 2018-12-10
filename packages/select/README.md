@@ -8,7 +8,7 @@ npm install --save @rooks/use-select
 
 ### Usage
 
-```react
+```jsx
 
 const list = [
   {

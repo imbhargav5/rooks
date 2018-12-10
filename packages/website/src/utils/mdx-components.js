@@ -6,7 +6,7 @@ const components = {
   h2: props => <h2 className="subtitle" {...props} />,
   code({ children, className = "" }) {
     const language = className.replace(/language-/, "");
-    if (language === "react") {
+    if (language === "jsx") {
       return <LiveEdit code={children} noInline />;
     } else if (language === "react-inline") {
       return <LiveEdit code={children} />;

@@ -8,7 +8,7 @@ npm install --save @rooks/use-mouse
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const { x, y } = useMouse();
   return (

@@ -8,7 +8,7 @@ npm install --save @rooks/use-interval
 
 ### Usage
 
-```react
+```jsx
 function reducer(state, action) {
   switch (action.type) {
     case "increment":

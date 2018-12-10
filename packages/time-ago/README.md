@@ -8,7 +8,7 @@ npm install --save @rooks/use-time-ago
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const [date, setDate] = useState(new Date());
   const timeAgo = useTimeAgo(date.getTime() - 1000 * 12, {

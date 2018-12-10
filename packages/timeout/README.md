@@ -8,7 +8,7 @@ npm install --save @rooks/use-timeout
 
 ### Usage
 
-```react
+```jsx
 function TimeoutComponent() {
   function doAlert() {
     window.alert("timeout expired!");

@@ -10,7 +10,7 @@ npm install --save @rooks/use-input
 
 **Base**
 
-```react
+```jsx
 function Demo() {
   const myInput = useInput("hello");
   return (
@@ -28,7 +28,7 @@ render(<Demo/>)
 
 **With optional validator**
 
-```react
+```jsx
 function Demo() {
   const myInput = useInput("hello", {
     validate: value => true

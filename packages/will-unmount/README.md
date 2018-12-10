@@ -8,7 +8,7 @@ npm install --save @rooks/use-will-unmount
 
 ### Usage
 
-```react
+```jsx
 
 function Message(){
 

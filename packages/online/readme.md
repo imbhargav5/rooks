@@ -8,7 +8,7 @@ npm install --save @rooks/use-online
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const isOnline = useOnline();
   return <p>Online status - {isOnline.toString()}</p>;

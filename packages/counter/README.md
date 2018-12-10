@@ -8,7 +8,7 @@ npm install --save @rooks/use-counter
 
 ### Usage
 
-```react
+```jsx
 function CounterComponent() {
   const {
     value,
