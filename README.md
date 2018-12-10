@@ -17,7 +17,7 @@ npm install --save @rooks/use-boundingclientrect
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const myRef = useRef();
   const getBoundingClientRect = useBoundingclientrect(myRef);
@@ -94,7 +94,7 @@ npm install --save @rooks/use-counter
 
 ### Usage
 
-```react
+```jsx
 function CounterComponent() {
   const {
     value,
@@ -152,7 +152,7 @@ npm install --save @rooks/use-did-mount
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   useDidMount(function(){
     console.log("mounted")
@@ -182,7 +182,7 @@ npm install --save @rooks/use-input
 
 **Base**
 
-```react
+```jsx
 function Demo() {
   const myInput = useInput("hello");
   return (
@@ -200,7 +200,7 @@ render(<Demo/>)
 
 **With optional validator**
 
-```react
+```jsx
 function Demo() {
   const myInput = useInput("hello", {
     validate: value => true
@@ -249,7 +249,7 @@ npm install --save @rooks/use-interval
 
 ### Usage
 
-```react
+```jsx
 function reducer(state, action) {
   switch (action.type) {
     case "increment":
@@ -311,7 +311,7 @@ npm install --save @rooks/use-mouse
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const { x, y } = useMouse();
   return (
@@ -344,7 +344,7 @@ npm install --save @rooks/use-mutation-observer
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const myRef = useRef();
   const [mutationCount, setMutationCount] = useState(0);
@@ -420,7 +420,7 @@ npm install --save @rooks/use-navigator-language
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
  const language = useNavigatorLanguage();
   return <p>Language is {language}</p>;
@@ -444,7 +444,7 @@ npm install --save @rooks/use-online
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const isOnline = useOnline();
   return <p>Online status - {isOnline.toString()}</p>;
@@ -468,7 +468,7 @@ npm install --save @rooks/use-select
 
 ### Usage
 
-```react
+```jsx
 
 const list = [
   {
@@ -530,7 +530,7 @@ npm install --save @rooks/use-time-ago
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const [date, setDate] = useState(new Date());
   const timeAgo = useTimeAgo(date.getTime() - 1000 * 12, {
@@ -578,7 +578,7 @@ npm install --save @rooks/use-timeout
 
 ### Usage
 
-```react
+```jsx
 function TimeoutComponent() {
   function doAlert() {
     window.alert("timeout expired!");
@@ -620,7 +620,7 @@ npm install --save @rooks/use-toggle
 
 ### Usage
 
-```react
+```jsx
 
 const customToggleFunction = v => (v === "start" ? "stop" : "start");
 
@@ -683,7 +683,7 @@ npm install --save @rooks/use-visibility-sensor
 
 ### Usage
 
-```react
+```jsx
 
 function Demo() {
     const rootNode = useRef(null);
@@ -766,7 +766,7 @@ npm install --save @rooks/use-will-unmount
 
 ### Usage
 
-```react
+```jsx
 
 function Message(){
 
@@ -813,7 +813,7 @@ npm install --save @rooks/use-window-size
 
 ### Usage
 
-```react
+```jsx
 function WindowComponent() {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
 
