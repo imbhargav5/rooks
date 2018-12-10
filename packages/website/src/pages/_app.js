@@ -32,6 +32,39 @@ const GlobalStyles = createGlobalStyle`
         position: relative;
         vertical-align: top;
     }
+    h1{
+      &:not(:first-child){
+        margin-top: 4rem;
+      }      
+    }
+    h2,h3{
+      &:not(:first-child){
+        margin-top: 2rem;
+      }      
+    }
+
+    h2,h3{
+      text-transform : uppercase;
+    }
+    button{
+      background-color: #fff;
+      border-color: #dbdbdb;
+      border-width: 1px;
+      color: #363636;
+      cursor: pointer;
+      justify-content: center;
+      padding-bottom: calc(.375em - 1px);
+      padding-left: .75em;
+      padding-right: .75em;
+      padding-top: calc(.375em - 1px);
+      text-align: center;
+      outline:none;
+      white-space: nowrap;
+      &:hover{
+        border-color: #b5b5b5;
+        color: #363636;
+      }
+    }
 `;
 
 export default class MyApp extends App {

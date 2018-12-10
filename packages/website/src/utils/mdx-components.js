@@ -1,9 +1,12 @@
 import LiveEdit from "../components/LiveEdit";
 import CodeBlock from "../components/CodeBlock";
+import Table from "../components/Table";
+import { H1, H2, H3 } from "../components/Headings";
 
 const components = {
-  h1: props => <h1 className="title" {...props} />,
-  h2: props => <h2 className="subtitle" {...props} />,
+  h1: props => <H1 {...props} />,
+  h2: props => <H2 {...props} />,
+  h3: props => <H3 {...props} />,
   code({ children, className = "" }) {
     const language = className.replace(/language-/, "");
     if (language === "jsx") {
@@ -14,7 +17,8 @@ const components = {
       return <CodeBlock code={children} language="bash" />;
     }
     return <CodeBlock code={children} language={language} />;
-  }
+  },
+  table: props => <Table {...props} />
 };
 
 export default components;
