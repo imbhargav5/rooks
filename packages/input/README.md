@@ -48,17 +48,17 @@ render(<Demo/>)
 
 ### Arguments
 
-| Argument     | Type   | Description                 | Default value                 |
-| ------------ | ------ | --------------------------- | ----------------------------- |
-| initialValue | string | Initial value of the string | ""                            |
-| opts         | object | Options                     | {syncWithInitialValue: false} |
+| Argument     | Type   | Description                 | Default value |
+| ------------ | ------ | --------------------------- | ------------- |
+| initialValue | string | Initial value of the string | ""            |
+| opts         | object | Options                     | {}            |
 
 
 ### Options
 
-| Option key           | Type    | Description                                                            | Default value |
-| -------------------- | ------- | ---------------------------------------------------------------------- | ------------- |
-| syncWithInitialValue | boolean | Should input update to the initialValue if the initialValue is updated | false         |
+| Option key | Type     | Description                                                                                    | Default value |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------- | ------------- |
+| validate   | function | Validator function which receives changed valued before update and should return true or false | undefined     |
 
 ### Return value
 

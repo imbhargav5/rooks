@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-const defaultOptions = {
-  syncWithInitialValue: false
-};
+const defaultOptions = {};
 
 export default function useInput(initialValue = "", opts = defaultOptions) {
   const [value, setValue] = useState(initialValue);
@@ -19,9 +17,7 @@ export default function useInput(initialValue = "", opts = defaultOptions) {
   //sync with default value
   useEffect(
     () => {
-      if (opts.syncWithInitialValue) {
-        setValue(initialValue);
-      }
+      setValue(initialValue);
     },
     [initialValue]
   );
