@@ -6,11 +6,7 @@
 npm install --save @rooks/use-worker
 ```
 
-```jsx
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import useWorker from "./useWorker";
-import "./styles.css";
+```react
 
 function Demo() {
   const [value, setValue] = useState(0);
