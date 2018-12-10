@@ -13,6 +13,8 @@ const components = {
       return <LiveEdit code={children} noInline />;
     } else if (language === "react-inline") {
       return <LiveEdit code={children} />;
+    } else if (language === "react") {
+      return <CodeBlock code={children} language="jsx" />;
     } else if (language === "sh") {
       return <CodeBlock code={children} language="bash" />;
     }
