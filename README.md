@@ -315,7 +315,7 @@ npm install --save @rooks/use-localstorage
 
 ```jsx
 function Demo() {
-  const { value, set, remove } = useLocalStorage("my-value", 0);
+  const { value, set, remove } = useLocalstorage("my-value", 0);
   return (
     <p>
       Value is {value}{" "}

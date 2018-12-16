@@ -1,5 +1,7 @@
 # @rooks/use-localstorage
 
+Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
+
 ### Installation
 
 ```
