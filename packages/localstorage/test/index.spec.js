@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useLocalStorage from "../src";
+import useLocalstorage from "../src";
 
-describe("useLocalStorage", () => {
+describe("useLocalstorage", () => {
   it("should be defined", () => {
-    expect(useLocalStorage).toBeDefined();
+    expect(useLocalstorage).toBeDefined();
   });
 });
 
