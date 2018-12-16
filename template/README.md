@@ -8,7 +8,7 @@ npm install --save @rooks/%packageName%
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   %name%();
   return null

@@ -26,6 +26,7 @@
     "@rooks/use-did-mount": "0.1.4",
     "@rooks/use-input": "0.2.0",
     "@rooks/use-interval": "0.1.4",
+    "@rooks/use-localstorage": "0.1.0",
     "@rooks/use-mouse": "0.1.6",
     "@rooks/use-mutation-observer": "0.1.9",
     "@rooks/use-navigator-language": "0.1.5",

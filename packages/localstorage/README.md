@@ -8,7 +8,7 @@ npm install --save @rooks/use-localstorage
 
 ### Usage
 
-```react
+```jsx
 function Demo() {
   const { value, set, remove } = useLocalStorage("my-value", 0);
   return (
@@ -22,7 +22,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 # Local Storage hook for React
