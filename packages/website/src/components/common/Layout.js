@@ -60,8 +60,8 @@ const StyledMenu = styled.ul`
 `;
 
 const Logo = styled.img`
-  height: 3.5rem !important;
-  max-height: 3.5rem !important;
+  height: 8rem !important;
+  max-height: 8rem !important;
 `;
 
 const useFilteredNpmResults = inputValue => {
@@ -94,7 +94,7 @@ const Sidebar = ({ children }) => {
       <StyledInput
         className="input"
         type="text"
-        placeholder="Search packages"
+        placeholder="Search hooks"
         {...autoCompleteInput}
       />
       <StyledMenu>
@@ -119,8 +119,8 @@ function Header(props) {
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
           <Logo
-            src="/static/logo.png"
-            alt="Bulma: a modern CSS framework based on Flexbox"
+            src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png"
+            alt="Rooks. A hooks framework for react."
           />
         </a>
 

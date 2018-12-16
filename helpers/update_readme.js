@@ -3,13 +3,19 @@ var writeFileSync = require("fs").writeFileSync;
 var path = require("path");
 
 const base = `
-# ⚓ rooks
+<br/>
+<br/>
+<p align="center">
+  <img src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png" height="300" style="margin: 200px 0" />
+</p>
+<br/>
+<br/>
 
 Collection of regularly used custom hooks as utils for React
 
-[![Image from Gyazo](https://i.gyazo.com/47865075bb61ca32551b344f059e4624.png)](https://gyazo.com/47865075bb61ca32551b344f059e4624)
-
 ## [Website](https://react-hooks.org)
+
+[![Image from Gyazo](https://i.gyazo.com/95e208eb09a97edee34eb65ef1be5367.png)](https://gyazo.com/95e208eb09a97edee34eb65ef1be5367)
 
 ## Packages
 

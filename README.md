@@ -1,9 +1,13 @@
 
-# ⚓ rooks
+<br/>
+<br/>
+<p align="center">
+  <img src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png" height="300" style="margin: 200px 0" />
+</p>
+<br/>
+<br/>
 
 Collection of regularly used custom hooks as utils for React
-
-[![Image from Gyazo](https://i.gyazo.com/47865075bb61ca32551b344f059e4624.png)](https://gyazo.com/47865075bb61ca32551b344f059e4624)
 
 ## [Website](https://react-hooks.org)
 
@@ -304,6 +308,8 @@ render(<Demo/>)
 
 # A react hook for using setInterval
 # @rooks/use-localstorage
+
+Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
 
 ### Installation
 
