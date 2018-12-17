@@ -17,7 +17,9 @@
     "react-hooks.org",
     "react",
     "rooks",
-    "hooks"
+    "hooks",
+    "keyboard event",
+    "key"
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
