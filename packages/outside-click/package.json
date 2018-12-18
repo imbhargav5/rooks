@@ -1,0 +1,42 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "React hook for tracking clicks outside a ref",
+  "name": "@rooks/use-outside-click",
+  "homepage": "https://react-hooks.org/hook/use-outside-click",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "react-hooks.org",
+    "outside click",
+    "react",
+    "rooks",
+    "hooks",
+    "ref outside click"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0",
+    "react-testing-library": "^5.2.3"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-outside-click@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
