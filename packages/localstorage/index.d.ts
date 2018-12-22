@@ -5,5 +5,5 @@ type Dictionary = {
 };
 export default function useLocalstorage(
   key: string,
-  defaultValue: any
+  defaultValue?: any
 ): Dictionary;

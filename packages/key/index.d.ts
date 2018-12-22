@@ -8,5 +8,5 @@ type Options = {
 export default function useKey(
   keyList: [string],
   handler: (a: KeyboardEvent) => void,
-  opts: Options
+  opts?: Options
 ): void;

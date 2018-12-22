@@ -5,5 +5,5 @@ type Dictionary = {
 };
 export default function useSessionstorage(
   key: string,
-  defaultValue: any
+  defaultValue?: any
 ): Dictionary;
