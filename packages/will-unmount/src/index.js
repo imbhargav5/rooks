@@ -5,7 +5,6 @@ function useWillUnmount(cb) {
   useEffect(() => {
     return cb;
   }, []);
-  return null;
 }
 
 module.exports = useWillUnmount;
