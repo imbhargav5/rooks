@@ -13,7 +13,8 @@ const filesToRead = [
   "../template/package.json",
   "../template/README.md",
   "../template/.babelrc",
-  "../template/.npmignore"
+  "../template/.npmignore",
+  "../template/index.d.ts.template"
 ];
 const filesToWrite = [
   "src/index.js",
@@ -21,7 +22,8 @@ const filesToWrite = [
   "package.json",
   "README.md",
   ".babelrc",
-  ".npmignore"
+  ".npmignore",
+  "index.d.ts"
 ];
 
 function installPackages() {

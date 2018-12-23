@@ -5,7 +5,7 @@ function getIsOnline() {
 }
 
 export default function useOnline() {
-  const [online, changeOnline] = useState(getIsOnline());
+  const [online, changeOnline] = useState(null);
 
   function setOffline() {
     changeOnline(false);
@@ -23,6 +23,10 @@ export default function useOnline() {
       window.removeEventListener("online", setOnline);
       window.removeEventListener("offline", setOffline);
     };
+  }, []);
+
+  useEffect(() => {
+    getIsOnline();
   }, []);
 
   return online;
