@@ -33,14 +33,14 @@
     "react-dom": "16.7.0-alpha.0",
     "react-testing-library": "^5.2.3"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "_id": "@rooks/use-time-ago@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-interval": "^0.1.4",
+    "@rooks/use-interval": "^0.1.5",
     "timeago.js": "4.0.0-beta.1"
   }
 }
