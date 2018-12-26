@@ -8,15 +8,15 @@ action "Install" {
   args = "install"
 }
 
-action "Bootstrap" {
+action "PrepareDeploy" {
   needs = "Install"
   uses = "docker://culturehq/actions-yarn:latest"
-  args = "bs"
+  args = "prepare:deploy"
 }
 
 
-action "Deploy" {
-  needs = "Bootstrap"
+action "PrepareDeploy" {
+  needs = "Install"
   uses = "docker://culturehq/actions-yarn:latest"
   secrets = ["ZEIT_TOKEN"]
   args = "run deploy"
