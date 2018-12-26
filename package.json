@@ -6,7 +6,8 @@
     "dev": "cd packages/website && npm run dev",
     "deploy": "cd packages/website && npm run deploy",
     "predeploy": "node helpers/update_readme",
-    "create": "node helpers/create"
+    "create": "node helpers/create",
+    "bs": "lerna bootstrap"
   },
   "devDependencies": {
     "babel-plugin-prismjs": "1.0.2",
