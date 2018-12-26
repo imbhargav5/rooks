@@ -1,6 +1,7 @@
 {
   "name": "react-hooks.org",
   "private": true,
+  "description": "React hooks.",
   "scripts": {
     "dev": "cd packages/website && npm run dev",
     "deploy": "cd packages/website && npm run deploy",
