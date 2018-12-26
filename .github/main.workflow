@@ -15,7 +15,7 @@ action "PrepareDeploy" {
 }
 
 
-action "PrepareDeploy" {
+action "Deploy" {
   needs = "PrepareDeploy"
   uses = "docker://culturehq/actions-yarn:latest"
   secrets = ["ZEIT_TOKEN"]
