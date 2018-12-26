@@ -6,7 +6,7 @@
     "dev": "cd packages/website && npm run dev",
     "deploy": "cd packages/website && npm run deploy",
     "predeploy": "node helpers/update_readme",
-    "prepare:deploy": "cd packages/website && yarn",
+    "prepare:deploy": "cd packages/website/src && yarn",
     "create": "node helpers/create",
     "bs": "lerna bootstrap"
   },
