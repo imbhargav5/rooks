@@ -4,13 +4,13 @@ workflow "New workflow" {
 }
 
 action "Install" {
-  uses = "actions/npm@e7aaefe"
+  uses = "docker://culturehq/actions-yarn:latest"
   args = "install"
 }
 
 action "Deploy" {
   needs = "Install"
-  uses = "actions/npm@e7aaefe"
+  uses = "docker://culturehq/actions-yarn:latest"
   secrets = ["ZEIT_TOKEN"]
   args = "run deploy"
 }
