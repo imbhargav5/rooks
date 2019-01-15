@@ -10,8 +10,16 @@ function deleteExistingHooks() {
   return del([srcHooksPath + "/*.js"]);
 }
 
+function deleteExistingReadmes() {
+  const srcReadmesPath = path.resolve(__dirname, "../src/_readmes");
+  return del([srcReadmesPath + "/*.js"]);
+}
+
 function getHookPath(hookName) {
   return path.resolve(__dirname, "../src/hooks/" + hookName + ".js");
+}
+function getReadmePath(hookName) {
+  return path.resolve(__dirname, "../src/_readmes/" + hookName + ".js");
 }
 
 function getTemplate(pkgName) {
@@ -26,21 +34,45 @@ function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
   });
 }
 
+function writeToReadmeFolderInWebsiteSrc(readmes, hookNames) {
+  return readmes.map(pkgName => {
+    const contents = getTemplate(pkgName);
+    const hookName = pkgName.split("use-")[1];
+    return write(getHookPath(hookName), contents);
+  });
+}
+
 fetch("https://react-hooks.org/api/hooks")
   .then(r => r.json())
   .then(response => {
-    const promises = response.map(package => {
+    const packageJsonPromises = response.map(package => {
       return fetch(
         `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
           package.name
         }/package.json`
       ).then(r => r.json());
     });
-    Promise.all(promises).then(packages => {
+
+    Promise.all(packageJsonPromises).then(packages => {
       const publishedPackages = packages.filter(
         p => p.publishConfig && p.publishConfig.access === "public"
       );
       const publishedPackageNames = publishedPackages.map(p => p.name);
+      const readmePromises = publishedPackageNames.map(package => {
+        return fetch(
+          `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
+            package.name
+          }/README.md`
+        ).then(r => r.text());
+      });
+      deleteExistingReadmes()
+        .then(() => readmePromises())
+        .then(readmes => {
+          return writeToReadmeFolderInWebsiteSrc(
+            readmes,
+            publishedPackageNames
+          );
+        });
       deleteExistingHooks()
         .then(() => {
           return writeToHooksFolderInWebsiteSrc(publishedPackageNames);

@@ -21,18 +21,6 @@
     "mouse",
     "mouse hook"
   ],
-  "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/preset-env": "^7.1.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "jest": "^23.6.0",
-    "react": "16.7.0-alpha.0",
-    "react-dom": "16.7.0-alpha.0",
-    "react-testing-library": "^5.2.3"
-  },
   "version": "1.0.0",
   "_id": "@rooks/use-mouse@",
   "readme": "ERROR: No README data found!",

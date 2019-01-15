@@ -22,20 +22,6 @@
     "window size",
     "window size hook"
   ],
-  "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/preset-env": "^7.1.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "jest": "23.6.0",
-    "jest-puppeteer": "3.5.0",
-    "parcel-bundler": "1.10.3",
-    "puppeteer": "1.10.0",
-    "react": "16.7.0-alpha.0",
-    "react-dom": "16.7.0-alpha.0"
-  },
   "version": "1.0.0",
   "_id": "@rooks/use-window-size@",
   "readme": "ERROR: No README data found!",

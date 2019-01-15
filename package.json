@@ -30,5 +30,8 @@
     "ora": "3.0.0",
     "replace-string": "2.0.0",
     "shelljs": "0.8.3"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
