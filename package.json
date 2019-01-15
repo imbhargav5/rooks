@@ -9,8 +9,8 @@
     "prepare:deploy": "cd packages/website/src && yarn",
     "create": "node helpers/create",
     "bs": "lerna bootstrap",
-    "prepublishOnly": "lerna run build",
-    "publish": "lerna publish"
+    "prerelease": "lerna run build",
+    "release": "lerna publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
