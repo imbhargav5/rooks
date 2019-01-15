@@ -4,7 +4,7 @@
   "description": "A React Hooks Website",
   "name": "website",
   "private": true,
-  "version": "1.0.34",
+  "version": "1.0.35-alpha.0",
   "scripts": {
     "predeploy": "npm run update-deps",
     "deploy": "sh scripts/deploy.sh",
