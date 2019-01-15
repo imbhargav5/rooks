@@ -1,0 +1,23 @@
+export default {
+"boundingclientrect": import("../_readmes/boundingclientrect.md"),
+"counter": import("../_readmes/counter.md"),
+"did-mount": import("../_readmes/did-mount.md"),
+"input": import("../_readmes/input.md"),
+"interval": import("../_readmes/interval.md"),
+"key": import("../_readmes/key.md"),
+"localstorage": import("../_readmes/localstorage.md"),
+"mouse": import("../_readmes/mouse.md"),
+"mutation-observer": import("../_readmes/mutation-observer.md"),
+"navigator-language": import("../_readmes/navigator-language.md"),
+"online": import("../_readmes/online.md"),
+"outside-click": import("../_readmes/outside-click.md"),
+"select": import("../_readmes/select.md"),
+"sessionstorage": import("../_readmes/sessionstorage.md"),
+"time-ago": import("../_readmes/time-ago.md"),
+"timeout": import("../_readmes/timeout.md"),
+"toggle": import("../_readmes/toggle.md"),
+"visibility-sensor": import("../_readmes/visibility-sensor.md"),
+"will-unmount": import("../_readmes/will-unmount.md"),
+"window-size": import("../_readmes/window-size.md"),
+"worker": import("../_readmes/worker.md")
+};

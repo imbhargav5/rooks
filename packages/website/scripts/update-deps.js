@@ -4,6 +4,7 @@ const del = require("del");
 const path = require("path");
 const bluebird = require("bluebird");
 const install = bluebird.promisify(require("npm-install-package"));
+const capitalize = require("lodash.capitalize");
 
 function deleteExistingHooks() {
   const srcHooksPath = path.resolve(__dirname, "../src/hooks");
@@ -19,26 +20,69 @@ function getHookPath(hookName) {
   return path.resolve(__dirname, "../src/hooks/" + hookName + ".js");
 }
 function getReadmePath(hookName) {
-  return path.resolve(__dirname, "../src/_readmes/" + hookName + ".js");
+  return path.resolve(__dirname, "../src/_readmes/" + hookName + ".md");
 }
 
 function getTemplate(pkgName) {
   return "import p from '" + pkgName + "';\nexport default p;";
 }
 
-function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
-  return publishedPackageNames.map(pkgName => {
-    const contents = getTemplate(pkgName);
-    const hookName = pkgName.split("use-")[1];
-    return write(getHookPath(hookName), contents);
+function getHookMapTemplate(hookNames) {
+  const importStrs = hookNames.map(hookName => {
+    const hookKey = `use${hookName
+      .split("-")
+      .map(capitalize)
+      .join("")}`;
+    return [
+      "import " + hookKey + " from '@rooks/use-" + hookName + "';",
+      hookKey
+    ];
   });
+  const importStr = importStrs.map(i => i[0]).join("\n") + "\n";
+  const hookKeys = importStrs.map(i => i[1]);
+  const literalStrings = hookKeys.map(
+    (hookKey, index) => '"' + hookKey + '":' + hookKey
+  );
+  return (
+    importStr + "\nexport default {\n" + literalStrings.join(",\n") + "\n};"
+  );
+}
+function getReadmeMapTemplate(hookNames) {
+  const strs = hookNames.map(
+    hookName => '"' + hookName + '": import("../_readmes/' + hookName + '.md")'
+  );
+  return "export default {\n" + strs.join(",\n") + "\n};";
 }
 
-function writeToReadmeFolderInWebsiteSrc(readmes, hookNames) {
-  return readmes.map(pkgName => {
+function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
+  let hookNames = [];
+  let hooks = publishedPackageNames.map(pkgName => {
     const contents = getTemplate(pkgName);
     const hookName = pkgName.split("use-")[1];
+    hookNames.push(hookName);
     return write(getHookPath(hookName), contents);
+  });
+  return Promise.all(hooks).then(() =>
+    write(
+      path.resolve(__dirname, "../src/utils/getHookMap.js"),
+      getHookMapTemplate(hookNames)
+    )
+  );
+}
+
+function writeToReadmeFolderInWebsiteSrc(readmes, publishedPackageNames) {
+  let hookNames = [];
+  readmes.map((readme, index) => {
+    let hookName = publishedPackageNames[index];
+    hookName = hookName.split("use-")[1];
+    hookNames.push(hookName);
+    return write(getReadmePath(hookName), readme);
+  });
+  return Promise.all(hookNames).then(() => {
+    return write(
+      path.resolve(__dirname, "../src/utils/getReadmeMap.js"),
+      getReadmeMapTemplate(hookNames)
+    );
   });
 }
 
@@ -58,7 +102,7 @@ fetch("https://react-hooks.org/api/hooks")
         p => p.publishConfig && p.publishConfig.access === "public"
       );
       const publishedPackageNames = publishedPackages.map(p => p.name);
-      const readmePromises = publishedPackageNames.map(package => {
+      const readmePromises = response.map(package => {
         return fetch(
           `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
             package.name
@@ -66,7 +110,7 @@ fetch("https://react-hooks.org/api/hooks")
         ).then(r => r.text());
       });
       deleteExistingReadmes()
-        .then(() => readmePromises())
+        .then(() => Promise.all(readmePromises))
         .then(readmes => {
           return writeToReadmeFolderInWebsiteSrc(
             readmes,

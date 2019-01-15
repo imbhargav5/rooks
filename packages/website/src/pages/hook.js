@@ -6,55 +6,30 @@ import ScopeWithHook from "../components/scope-with-hook";
 import getReadme from "../actions/getReadme";
 import mdxComponents from "../utils/mdx-components";
 import hookMap from "../utils/getHookMap";
+import readmeMap from "../utils/getReadmeMap";
 import BoundlingClientReadme from "@rooks/use-boundingclientrect/README.md";
 
-console.log(hookMap);
-
 class ReadmeComponent extends Component {
-  static propTypes = {
-    hookName: PropTypes.string,
-    components: PropTypes.object
-  };
-  state = {
-    loaded: false
-  };
-  async componentDidMount() {
-    const { hookName } = this.props;
-    try {
-      const [readmeComponent] = await Promise.all([
-        import(`@rooks/use-${hookName}/README.md`)
-      ]);
-
-      console.log(readmeComponent);
-      this.readmeComponent = readmeComponent.default || readmeComponent;
-      console.log(this.readmeComponent);
-      this.setState({
-        loaded: true
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
   render() {
-    console.log(this.readmeComponent);
-    if (this.state.loaded) {
-      return (
-        <ScopeWithHook hookName={this.props.hookName} hookMap={hookMap}>
-          <section className="section">
-            <ThemeProvider
-              theme={{
-                h3Color: "gold"
-              }}
-            >
-              {React.createElement(BoundlingClientReadme, {
-                ...this.props
-              })}
-            </ThemeProvider>
-          </section>
-        </ScopeWithHook>
-      );
+    const MyComponent = readmeMap[this.props.hookName];
+    if (!MyComponent) {
+      return null;
     }
-    return null;
+    return (
+      <ScopeWithHook hookName={this.props.hookName} hookMap={hookMap}>
+        <section className="section">
+          <ThemeProvider
+            theme={{
+              h3Color: "gold"
+            }}
+          >
+            {React.createElement(BoundlingClientReadme, {
+              ...this.props
+            })}
+          </ThemeProvider>
+        </section>
+      </ScopeWithHook>
+    );
   }
 }
 
