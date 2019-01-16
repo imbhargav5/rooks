@@ -35,12 +35,10 @@ class ReadmeComponent extends Component {
 
 class Hook extends Component {
   static async getInitialProps({ query: { hookName }, ...rest }) {
-    console.log({ hookName });
     return { hookName };
   }
   render() {
     const { hookName } = this.props;
-    console.log({ hookName });
     return (
       <div>
         <div className="container is-fluid">
