@@ -9,7 +9,8 @@
     "predeploy": "npm run update-deps",
     "deploy": "sh scripts/deploy.sh",
     "update-deps": "node scripts/update-deps.js",
-    "dev": "sh scripts/dev.sh"
+    "dev": "sh scripts/dev.sh",
+    "build": "echo \"build\" "
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.8",

@@ -18,7 +18,7 @@
     "url": "git+https://github.com/react-hooks-org/rooks.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "echo \"build\""
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"

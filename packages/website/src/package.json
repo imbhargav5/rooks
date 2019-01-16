@@ -7,6 +7,7 @@
   "version": "1.0.16",
   "scripts": {
     "dev": "node .",
+    "build": "npm run now-build",
     "prebuild": "rimraf dist .next",
     "now-build": "next build && next export -o dist",
     "prestart": "npm run now-build",
