@@ -21,7 +21,7 @@
     "setInterval",
     "interval"
   ],
-  "version": "1.0.3-alpha.0",
+  "version": "1.0.3",
   "_id": "@rooks/use-interval@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
