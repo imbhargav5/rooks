@@ -1,23 +1,44 @@
+import useBoundingclientrectReadme from "../_readmes/boundingclientrect.md"
+import useCounterReadme from "../_readmes/counter.md"
+import useDidMountReadme from "../_readmes/did-mount.md"
+import useInputReadme from "../_readmes/input.md"
+import useIntervalReadme from "../_readmes/interval.md"
+import useKeyReadme from "../_readmes/key.md"
+import useLocalstorageReadme from "../_readmes/localstorage.md"
+import useMouseReadme from "../_readmes/mouse.md"
+import useMutationObserverReadme from "../_readmes/mutation-observer.md"
+import useNavigatorLanguageReadme from "../_readmes/navigator-language.md"
+import useOnlineReadme from "../_readmes/online.md"
+import useOutsideClickReadme from "../_readmes/outside-click.md"
+import useSelectReadme from "../_readmes/select.md"
+import useSessionstorageReadme from "../_readmes/sessionstorage.md"
+import useTimeAgoReadme from "../_readmes/time-ago.md"
+import useTimeoutReadme from "../_readmes/timeout.md"
+import useToggleReadme from "../_readmes/toggle.md"
+import useVisibilitySensorReadme from "../_readmes/visibility-sensor.md"
+import useWillUnmountReadme from "../_readmes/will-unmount.md"
+import useWindowSizeReadme from "../_readmes/window-size.md"
+import useWorkerReadme from "../_readmes/worker.md"
 export default {
-"boundingclientrect": import("../_readmes/boundingclientrect.md"),
-"counter": import("../_readmes/counter.md"),
-"did-mount": import("../_readmes/did-mount.md"),
-"input": import("../_readmes/input.md"),
-"interval": import("../_readmes/interval.md"),
-"key": import("../_readmes/key.md"),
-"localstorage": import("../_readmes/localstorage.md"),
-"mouse": import("../_readmes/mouse.md"),
-"mutation-observer": import("../_readmes/mutation-observer.md"),
-"navigator-language": import("../_readmes/navigator-language.md"),
-"online": import("../_readmes/online.md"),
-"outside-click": import("../_readmes/outside-click.md"),
-"select": import("../_readmes/select.md"),
-"sessionstorage": import("../_readmes/sessionstorage.md"),
-"time-ago": import("../_readmes/time-ago.md"),
-"timeout": import("../_readmes/timeout.md"),
-"toggle": import("../_readmes/toggle.md"),
-"visibility-sensor": import("../_readmes/visibility-sensor.md"),
-"will-unmount": import("../_readmes/will-unmount.md"),
-"window-size": import("../_readmes/window-size.md"),
-"worker": import("../_readmes/worker.md")
+"boundingclientrect":useBoundingclientrectReadme,
+"counter":useCounterReadme,
+"did-mount":useDidMountReadme,
+"input":useInputReadme,
+"interval":useIntervalReadme,
+"key":useKeyReadme,
+"localstorage":useLocalstorageReadme,
+"mouse":useMouseReadme,
+"mutation-observer":useMutationObserverReadme,
+"navigator-language":useNavigatorLanguageReadme,
+"online":useOnlineReadme,
+"outside-click":useOutsideClickReadme,
+"select":useSelectReadme,
+"sessionstorage":useSessionstorageReadme,
+"time-ago":useTimeAgoReadme,
+"timeout":useTimeoutReadme,
+"toggle":useToggleReadme,
+"visibility-sensor":useVisibilitySensorReadme,
+"will-unmount":useWillUnmountReadme,
+"window-size":useWindowSizeReadme,
+"worker":useWorkerReadme
 };

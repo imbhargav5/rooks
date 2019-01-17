@@ -7,14 +7,15 @@ import getReadme from "../actions/getReadme";
 import mdxComponents from "../utils/mdx-components";
 import hookMap from "../utils/getHookMap";
 import readmeMap from "../utils/getReadmeMap";
-import BoundlingClientReadme from "@rooks/use-boundingclientrect/README.md";
 
 class ReadmeComponent extends Component {
   render() {
-    const MyComponent = readmeMap[this.props.hookName];
+    let MyComponent = readmeMap[this.props.hookName];
+    MyComponent = MyComponent.default || MyComponent;
     if (!MyComponent) {
       return null;
     }
+    console.log({ MyComponent });
     return (
       <ScopeWithHook hookName={this.props.hookName} hookMap={hookMap}>
         <section className="section">
@@ -23,7 +24,7 @@ class ReadmeComponent extends Component {
               h3Color: "gold"
             }}
           >
-            {React.createElement(BoundlingClientReadme, {
+            {React.createElement(MyComponent, {
               ...this.props
             })}
           </ThemeProvider>
@@ -42,7 +43,9 @@ class Hook extends Component {
     return (
       <div>
         <div className="container is-fluid">
-          <ReadmeComponent hookName={hookName} components={mdxComponents} />
+          <NoSSR>
+            <ReadmeComponent hookName={hookName} components={mdxComponents} />
+          </NoSSR>
         </div>
       </div>
     );

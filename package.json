@@ -9,7 +9,9 @@
     "prepare:deploy": "cd packages/website/src && yarn",
     "create": "node helpers/create",
     "bs": "lerna bootstrap",
-    "prerelease": "lerna run build",
+    "prebuild": "lerna clean -y && yarn",
+    "build": "lerna run build",
+    "prerelease": "yarn build",
     "release": "lerna publish"
   },
   "devDependencies": {

@@ -29,10 +29,7 @@ function getTemplate(pkgName) {
 
 function getHookMapTemplate(hookNames) {
   const importStrs = hookNames.map(hookName => {
-    const hookKey = `use${hookName
-      .split("-")
-      .map(capitalize)
-      .join("")}`;
+    const hookKey = getHookKeyFromHookName(hookName);
     return [
       "import " + hookKey + " from '@rooks/use-" + hookName + "';",
       hookKey
@@ -47,11 +44,27 @@ function getHookMapTemplate(hookNames) {
     importStr + "\nexport default {\n" + literalStrings.join(",\n") + "\n};"
   );
 }
+function getHookKeyFromHookName(hookName) {
+  return `use${hookName
+    .split("-")
+    .map(capitalize)
+    .join("")}`;
+}
+
 function getReadmeMapTemplate(hookNames) {
-  const strs = hookNames.map(
-    hookName => '"' + hookName + '": import("../_readmes/' + hookName + '.md")'
+  let readmeNames = [];
+  const importStrs = hookNames.map(hookName => {
+    const hookKey = getHookKeyFromHookName(hookName);
+    const readmeName = `${hookKey}Readme`;
+    readmeNames.push(readmeName);
+    return `import ${readmeName} from "../_readmes/${hookName}.md"`;
+  });
+  const strs = hookNames.map((hookName, index) => {
+    return '"' + hookName + '":' + readmeNames[index];
+  });
+  return (
+    importStrs.join("\n") + "\nexport default {\n" + strs.join(",\n") + "\n};"
   );
-  return "export default {\n" + strs.join(",\n") + "\n};";
 }
 
 function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
@@ -78,7 +91,7 @@ function writeToReadmeFolderInWebsiteSrc(readmes, publishedPackageNames) {
     hookNames.push(hookName);
     return write(getReadmePath(hookName), readme);
   });
-  return Promise.all(hookNames).then(() => {
+  return Promise.all(readmes).then(() => {
     return write(
       path.resolve(__dirname, "../src/utils/getReadmeMap.js"),
       getReadmeMapTemplate(hookNames)
