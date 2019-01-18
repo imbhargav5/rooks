@@ -44,4 +44,4 @@ render(<Demo/>)
 | --------- | -------- | ----------------------------------------------- | ------------- |
 | callback  | function | Callback function which needs to run on unmount | undefined     |
 
-# A React hook for componentWillUnmount lifecycle method
+# A React hook for componentWillUnmount lifecycle method.

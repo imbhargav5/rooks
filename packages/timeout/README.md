@@ -39,4 +39,4 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout |
 | start                      | function | Start the timeout |
 
-Timeout hook for React
+Timeout hook for React.

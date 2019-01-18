@@ -1,6 +1,6 @@
 # @rooks/use-visibility-sensor
 
-Visibility sensor hook for React
+Visibility sensor hook for React.
 
 ### Installation
 

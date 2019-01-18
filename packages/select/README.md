@@ -59,4 +59,4 @@ render(<Demo/>)
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
 
-List Selection hook for React
+List Selection hook for React.

@@ -110,4 +110,4 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Keyboard key handler hook for react
+# Keyboard key handler hook for react.

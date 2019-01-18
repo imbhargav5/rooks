@@ -27,4 +27,4 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Local Storage hook for React
+# Local Storage hook for React.

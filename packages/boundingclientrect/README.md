@@ -74,4 +74,4 @@ render(<Demo/>)
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
 
-Bounding client rect hook for React
+Bounding client rect hook for React.

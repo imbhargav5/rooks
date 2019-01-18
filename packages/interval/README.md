@@ -59,4 +59,4 @@ render(<Demo/>)
 | intervalId                 | intervalId | IntervalId of the interval |
 
 
-# A react hook for using setInterval
+# A react hook for using setInterval.

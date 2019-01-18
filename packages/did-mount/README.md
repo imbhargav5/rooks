@@ -25,4 +25,4 @@ render(<Demo/>)
 | -------- | -------- | ------------------------------ |
 | callback | function | function to be called on mount |
 
-# A React hooks package for componentDidMount
+# A React hooks package for componentDidMount.

@@ -25,4 +25,4 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Session storage react hook. Easily manage session storage values
+# Session storage react hook. Easily manage session storage values.
