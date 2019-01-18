@@ -21,7 +21,7 @@
     "counter",
     "counter hook"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "readme": "https://github.com/imbhargav5/rooks/blob/master/packages/counter/README.md",
   "publishConfig": {
     "access": "public"
