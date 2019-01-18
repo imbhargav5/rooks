@@ -21,7 +21,7 @@
     "navigator language",
     "navigator language hook"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "_id": "@rooks/use-navigator-language@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

@@ -20,7 +20,7 @@
     "hooks",
     "session storage"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "_id": "@rooks/use-sessionstorage@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

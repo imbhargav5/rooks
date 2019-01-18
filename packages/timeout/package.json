@@ -21,7 +21,7 @@
     "timeout",
     "timeout hook"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "_id": "@rooks/use-timeout@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
