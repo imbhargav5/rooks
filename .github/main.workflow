@@ -6,7 +6,7 @@ workflow "Deploy on Now" {
 # Deploy, and write deployment to file
 action "deploy" {
   uses = "actions/zeit-now@master"
-  args = "packages/website --team react-hooks"
+  args = "deploy packages/website --team react-hooks"
   secrets = ["ZEIT_TOKEN"]
 }
 
@@ -14,7 +14,7 @@ action "deploy" {
 action "alias" {
   needs = "deploy"
   uses = "actions/zeit-now@master"
-  args = "alias  `cat /github/home/deploy.txt` $GITHUB_SHA"
+  args = "alias --team react-hooks `cat /github/home/deploy.txt` $GITHUB_SHA"
   secrets = ["ZEIT_TOKEN"]
 }
 
@@ -30,5 +30,5 @@ action "release" {
   needs = "master-branch-filter"
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias --local-config=./packages/website/now.json"
+  args = "alias --team react-hooks --local-config=./packages/website/now.json"
 }
