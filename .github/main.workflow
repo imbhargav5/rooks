@@ -6,7 +6,7 @@ workflow "Deploy on Now" {
 # Deploy, and write deployment to file
 action "deploy" {
   uses = "actions/zeit-now@master"
-  args = "deploy packages/website --team react-hooks"
+  args = "deploy  --no-clipboard  packages/website --team react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
 }
 
