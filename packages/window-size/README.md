@@ -45,4 +45,4 @@ render(<WindowComponent/>)
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
 
-Window size hook for React
+Window size hook for React.

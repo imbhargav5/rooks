@@ -45,4 +45,4 @@ render(<Demo/>)
 
 Timeago string is returned.
 
-# A React Hook to get time ago for timestamp millisecond value
+# A React Hook to get time ago for timestamp millisecond value.

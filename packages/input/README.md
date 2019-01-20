@@ -66,4 +66,4 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
-Input hook for React
+Input hook for React.

@@ -14,11 +14,11 @@ function Demo() {
   return <p>Online status - {isOnline.toString()}</p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Return value
 
 Offline status (boolean) is returned.
 
-Online Status hook for React
+Online Status hook for React.

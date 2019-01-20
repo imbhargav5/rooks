@@ -25,4 +25,4 @@ function Demo() {
 render(<Demo />);
 ```
 
-# React hook for tracking clicks outside a ref
+# React hook for tracking clicks outside a ref.

@@ -878,6 +878,17 @@ render(<Demo/>)
 | toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
 
 Toggle hook for React
+# `tools`
+
+> TODO: description
+
+## Usage
+
+```
+const tools = require('tools');
+
+// TODO: DEMONSTRATE API
+```
 # @rooks/use-visibility-sensor
 
 Visibility sensor hook for React

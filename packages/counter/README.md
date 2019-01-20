@@ -55,4 +55,4 @@ render(<CounterComponent/>)
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
 
-Counter hook for React
+Counter hook for React.

@@ -1,5 +1,7 @@
 const { getHookNames } = require("./utils/getAllHooks");
-const withMDX = require("@zeit/next-mdx");
+const withMDX = require("@zeit/next-mdx")({
+  extension: /.mdx?$/
+});
 const withCSS = require("@zeit/next-css");
 const webpack = require("webpack");
 

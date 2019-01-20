@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useMutationObserver from "@rooks/use-mutation-observer";
 
-export default function(ref) {
+function useBoundingclientRect(ref) {
   function getBoundingClientRect() {
     if (ref.current) {
       return ref.current.getBoundingClientRect();
@@ -26,3 +26,5 @@ export default function(ref) {
 
   return value;
 }
+
+module.exports = useBoundingclientRect;

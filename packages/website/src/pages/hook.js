@@ -1,46 +1,50 @@
 import React, { Component, Suspense } from "react";
-import MDX from "@mdx-js/runtime";
 import { ThemeProvider } from "styled-components";
-import dynamic from "next/dynamic";
+import PropTypes from "prop-types";
 import NoSSR from "react-no-ssr";
 import ScopeWithHook from "../components/scope-with-hook";
 import getReadme from "../actions/getReadme";
 import mdxComponents from "../utils/mdx-components";
+import hookMap from "../utils/getHookMap";
+import readmeMap from "../utils/getReadmeMap";
+
+class ReadmeComponent extends Component {
+  render() {
+    let MyComponent = readmeMap[this.props.hookName];
+    MyComponent = MyComponent.default || MyComponent;
+    if (!MyComponent) {
+      return null;
+    }
+    console.log({ MyComponent });
+    return (
+      <ScopeWithHook hookName={this.props.hookName} hookMap={hookMap}>
+        <section className="section">
+          <ThemeProvider
+            theme={{
+              h3Color: "gold"
+            }}
+          >
+            {React.createElement(MyComponent, {
+              ...this.props
+            })}
+          </ThemeProvider>
+        </section>
+      </ScopeWithHook>
+    );
+  }
+}
 
 class Hook extends Component {
   static async getInitialProps({ query: { hookName }, ...rest }) {
-    let readme = "";
-    let scope = {};
-    if (typeof window === "undefined") {
-      try {
-        readme = await getReadme(hookName);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    return {
-      hookName,
-      readme
-    };
+    return { hookName };
   }
   render() {
+    const { hookName } = this.props;
     return (
       <div>
         <div className="container is-fluid">
           <NoSSR>
-            <Suspense fallback={"Loading..."}>
-              <ScopeWithHook hookName={this.props.hookName}>
-                <section className="section">
-                  <ThemeProvider
-                    theme={{
-                      h3Color: "gold"
-                    }}
-                  >
-                    <MDX components={mdxComponents}>{this.props.readme}</MDX>
-                  </ThemeProvider>
-                </section>
-              </ScopeWithHook>
-            </Suspense>
+            <ReadmeComponent hookName={hookName} components={mdxComponents} />
           </NoSSR>
         </div>
       </div>

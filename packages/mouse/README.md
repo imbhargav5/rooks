@@ -30,4 +30,4 @@ render(<Demo/>)
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
 
-Mouse hook for React
+Mouse hook for React.

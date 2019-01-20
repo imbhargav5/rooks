@@ -11,10 +11,16 @@ function useLocalStorage(key, defaultValue = null) {
   }
 
   function getValueFromLocalStorage() {
+    if (typeof localStorage === "undefined") {
+      return null;
+    }
     return localStorage.getItem(key);
   }
 
   function saveValueToLocalStorage(key, value) {
+    if (typeof localStorage === "undefined") {
+      return null;
+    }
     return localStorage.setItem(key, value);
   }
 
@@ -31,6 +37,9 @@ function useLocalStorage(key, defaultValue = null) {
 
   function remove() {
     set(null);
+    if (typeof localStorage === "undefined") {
+      return false;
+    }
     localStorage.removeItem(key);
   }
 

@@ -10,15 +10,15 @@ npm install --save @rooks/use-navigator-language
 
 ```jsx
 function Demo() {
- const language = useNavigatorLanguage();
+  const language = useNavigatorLanguage();
   return <p>Language is {language}</p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Return value
 
 A language (String) is returned.
 
-Navigator Language hook for React
+Navigator Language hook for React.

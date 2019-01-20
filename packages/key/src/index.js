@@ -14,7 +14,10 @@ function useKey(keyList = [], handler, opts) {
       handler(e);
     }
   }
-  let targetNode = window;
+  let targetNode;
+  if (typeof window !== "undefined") {
+    targetNode = window;
+  }
   if (target && target.current) {
     targetNode = target.current;
   }

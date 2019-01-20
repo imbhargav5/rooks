@@ -2,7 +2,7 @@ const fetch = require("isomorphic-fetch");
 
 const SECONDS_IN_AN_HOUR = 1 * 60 * 60;
 
-const IGNORE_PACKAGES = ["website"];
+const IGNORE_PACKAGES = ["website", "tools"];
 
 module.exports = async (req, res) => {
   try {

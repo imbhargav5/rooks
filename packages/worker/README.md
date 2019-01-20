@@ -40,4 +40,4 @@ ReactDOM.render(<Demo />, rootElement);
 
 The worker instance is returned.
 
-### Worker hook for React
+### Worker hook for React.
