@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 function useTimeout(cb, timeoutDelayMs = 0) {
   const [isTimeoutRunning, setIsTimeoutRunning] = useState(false);
@@ -10,7 +10,7 @@ function useTimeout(cb, timeoutDelayMs = 0) {
     setIsTimeoutRunning(true);
   }
 
-  useEffect(
+  useLayoutEffect(
     () => {
       if (isTimeoutRunning) {
         const timeout = window.setTimeout(cb, timeoutDelayMs);
