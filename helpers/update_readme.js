@@ -11,6 +11,10 @@ const base = `
 <br/>
 <br/>
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<br/> 
+
 Collection of regularly used custom hooks as utils for React
 
 ## [Website](https://react-hooks.org)
