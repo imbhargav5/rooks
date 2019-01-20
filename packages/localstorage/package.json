@@ -20,7 +20,7 @@
     "rooks",
     "hooks"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8-alpha.0",
   "_id": "@rooks/use-localstorage@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

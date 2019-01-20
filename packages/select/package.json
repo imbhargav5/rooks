@@ -21,7 +21,7 @@
     "mouse",
     "mouse hook"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8-alpha.0",
   "_id": "@rooks/use-select@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
