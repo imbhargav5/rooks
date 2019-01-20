@@ -21,7 +21,7 @@
     "hooks",
     "ref outside click"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "_id": "@rooks/use-outside-click@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
