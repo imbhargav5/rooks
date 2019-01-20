@@ -7,20 +7,20 @@ const install = bluebird.promisify(require("npm-install-package"));
 const capitalize = require("lodash.capitalize");
 
 function deleteExistingHooks() {
-  const srcHooksPath = path.resolve(__dirname, "../src/hooks");
+  const srcHooksPath = path.resolve(__dirname, "../hooks");
   return del([srcHooksPath + "/*.js"]);
 }
 
 function deleteExistingReadmes() {
-  const srcReadmesPath = path.resolve(__dirname, "../src/_readmes");
+  const srcReadmesPath = path.resolve(__dirname, "../_readmes");
   return del([srcReadmesPath + "/*.js"]);
 }
 
 function getHookPath(hookName) {
-  return path.resolve(__dirname, "../src/hooks/" + hookName + ".js");
+  return path.resolve(__dirname, "../hooks/" + hookName + ".js");
 }
 function getReadmePath(hookName) {
-  return path.resolve(__dirname, "../src/_readmes/" + hookName + ".md");
+  return path.resolve(__dirname, "../_readmes/" + hookName + ".md");
 }
 
 function getTemplate(pkgName) {
@@ -77,7 +77,7 @@ function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
   });
   return Promise.all(hooks).then(() =>
     write(
-      path.resolve(__dirname, "../src/utils/getHookMap.js"),
+      path.resolve(__dirname, "../utils/getHookMap.js"),
       getHookMapTemplate(hookNames)
     )
   );
@@ -93,7 +93,7 @@ function writeToReadmeFolderInWebsiteSrc(readmes, publishedPackageNames) {
   });
   return Promise.all(readmes).then(() => {
     return write(
-      path.resolve(__dirname, "../src/utils/getReadmeMap.js"),
+      path.resolve(__dirname, "../utils/getReadmeMap.js"),
       getReadmeMapTemplate(hookNames)
     );
   });
@@ -136,7 +136,7 @@ fetch("https://react-hooks.org/api/hooks")
         })
         .then(() => {
           const installPkgs = publishedPackageNames.map(m => `${m}@latest`);
-          process.chdir(path.join(__dirname, "../src"));
+          process.chdir(path.join(__dirname, ".."));
           return install(installPkgs, { save: true });
         });
     });

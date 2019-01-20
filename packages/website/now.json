@@ -3,7 +3,7 @@
   "alias": ["react-hooks.org"],
   "version": 2,
   "builds": [
-    { "src": "src/package.json", "use": "@now/static-build" },
+    { "src": "package.json", "use": "@now/static-build" },
     {
       "src": "api/hooks/*.js",
       "use": "@now/node"
@@ -18,7 +18,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/src/$1"
+      "dest": "/$1"
     }
   ]
 }

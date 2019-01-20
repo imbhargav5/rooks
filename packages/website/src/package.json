@@ -36,9 +36,7 @@
     "@rooks/use-visibility-sensor": "1.0.3-alpha.0",
     "@rooks/use-will-unmount": "1.0.3-alpha.0",
     "@rooks/use-window-size": "1.0.3-alpha.0",
-    "@rooks/use-worker": "1.0.3-alpha.0"
-  },
-  "devDependencies": {
+    "@rooks/use-worker": "1.0.3-alpha.0",
     "@fortawesome/fontawesome-svg-core": "1.2.8",
     "@fortawesome/free-solid-svg-icons": "5.5.0",
     "@fortawesome/react-fontawesome": "0.1.3",

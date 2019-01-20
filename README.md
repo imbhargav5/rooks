@@ -91,7 +91,7 @@ render(<Demo/>)
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
 
-Bounding client rect hook for React
+Bounding client rect hook for React.
 # @rooks/use-counter
 
 ### Installation
@@ -149,7 +149,7 @@ render(<CounterComponent/>)
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
 
-Counter hook for React
+Counter hook for React.
 # @rooks/use-did-mount
 
 ### Installation
@@ -177,7 +177,7 @@ render(<Demo/>)
 | -------- | -------- | ------------------------------ |
 | callback | function | function to be called on mount |
 
-# A React hooks package for componentDidMount
+# A React hooks package for componentDidMount.
 # @rooks/use-input
 
 ### Installation
@@ -246,7 +246,7 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
-Input hook for React
+Input hook for React.
 # @rooks/use-interval
 
 ### Installation
@@ -308,7 +308,7 @@ render(<Demo/>)
 | intervalId                 | intervalId | IntervalId of the interval |
 
 
-# A react hook for using setInterval
+# A react hook for using setInterval.
 # @rooks/use-key
 
 ### Installation
@@ -421,7 +421,7 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Keyboard key handler hook for react
+# Keyboard key handler hook for react.
 # @rooks/use-localstorage
 
 Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
@@ -451,7 +451,7 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Local Storage hook for React
+# Local Storage hook for React.
 # @rooks/use-mouse
 
 ### Installation
@@ -484,7 +484,7 @@ render(<Demo/>)
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
 
-Mouse hook for React
+Mouse hook for React.
 # @rooks/use-mutation-observer
 
 ### Installation
@@ -560,7 +560,7 @@ render(<Demo/>)
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
 
-Mutation Observer hook for React
+Mutation Observer hook for React.
 # @rooks/use-navigator-language
 
 ### Installation
@@ -573,18 +573,18 @@ npm install --save @rooks/use-navigator-language
 
 ```jsx
 function Demo() {
- const language = useNavigatorLanguage();
+  const language = useNavigatorLanguage();
   return <p>Language is {language}</p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Return value
 
 A language (String) is returned.
 
-Navigator Language hook for React
+Navigator Language hook for React.
 # @rooks/use-online
 
 ### Installation
@@ -601,14 +601,14 @@ function Demo() {
   return <p>Online status - {isOnline.toString()}</p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Return value
 
 Offline status (boolean) is returned.
 
-Online Status hook for React
+Online Status hook for React.
 # @rooks/use-outside-click
 
 ### Installation
@@ -636,7 +636,7 @@ function Demo() {
 render(<Demo />);
 ```
 
-# React hook for tracking clicks outside a ref
+# React hook for tracking clicks outside a ref.
 # @rooks/use-select
 
 ### Installation
@@ -698,7 +698,7 @@ render(<Demo/>)
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
 
-List Selection hook for React
+List Selection hook for React.
 # @rooks/use-sessionstorage
 
 ### Installation
@@ -726,7 +726,7 @@ function Demo() {
 render(<Demo />);
 ```
 
-# Session storage react hook. Easily manage session storage values
+# Session storage react hook. Easily manage session storage values.
 # @rooks/use-time-ago
 
 ### Installation
@@ -774,7 +774,7 @@ render(<Demo/>)
 
 Timeago string is returned.
 
-# A React Hook to get time ago for timestamp millisecond value
+# A React Hook to get time ago for timestamp millisecond value.
 # @rooks/use-timeout
 
 ### Installation
@@ -816,7 +816,7 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout |
 | start                      | function | Start the timeout |
 
-Timeout hook for React
+Timeout hook for React.
 # @rooks/use-toggle
 
 ### Installation
@@ -877,21 +877,10 @@ render(<Demo/>)
 | value                      | Any      | Current value                                                                                                         |
 | toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
 
-Toggle hook for React
-# `tools`
-
-> TODO: description
-
-## Usage
-
-```
-const tools = require('tools');
-
-// TODO: DEMONSTRATE API
-```
+Toggle hook for React.
 # @rooks/use-visibility-sensor
 
-Visibility sensor hook for React
+Visibility sensor hook for React.
 
 ### Installation
 
@@ -974,6 +963,7 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 - [x] Documentation of all options
 - [x] Tests _ WIP _
 - [ ] More examples _ WIP _
+# Rooks website
 # @rooks/use-will-unmount
 
 ### Installation
@@ -1020,7 +1010,7 @@ render(<Demo/>)
 | --------- | -------- | ----------------------------------------------- | ------------- |
 | callback  | function | Callback function which needs to run on unmount | undefined     |
 
-# A React hook for componentWillUnmount lifecycle method
+# A React hook for componentWillUnmount lifecycle method.
 # @rooks/use-window-size
 
 ### Installation
@@ -1068,7 +1058,7 @@ render(<WindowComponent/>)
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
 
-Window size hook for React
+Window size hook for React.
 # @rooks/use-worker
 
 ### Installation
@@ -1111,4 +1101,4 @@ ReactDOM.render(<Demo />, rootElement);
 
 The worker instance is returned.
 
-### Worker hook for React
+### Worker hook for React.
