@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 
-function useDidMount(cb) {
+/**
+ *
+ * @param {function} callback Callback function to be called on mount
+ */
+function useDidMount(callback) {
   useEffect(() => {
-    if (typeof cb === "function") {
-      cb();
+    if (typeof callback === "function") {
+      callback();
     }
   }, []);
 }
