@@ -25,5 +25,9 @@
   "readme": "https://github.com/imbhargav5/rooks/blob/master/packages/counter/README.md",
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1"
   }
 }
