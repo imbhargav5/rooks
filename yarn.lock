@@ -1534,6 +1534,11 @@
   resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-0.1.10.tgz#5e1469dd722a12183587c41c022dfae1bc0e3f8b"
   integrity sha512-oYzjM9KRNakKmI/cIF/jqJ1IlAO9wq2ldUHvoadHYG27d9uy5uv0Tq++OYE+P7acrSo4xEo5eBXq2jXT+IUN3g==
 
+"@rooks/use-select@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@rooks/use-select/-/use-select-0.1.0.tgz#2e40fd93a4e546bea38b228e72a8ea1af551e640"
+  integrity sha512-D6pgmzFz3K0V0pMbQcgZiMcIseRfRJDdDi6SZdn2R+Mzr3mBIpHbEncSKW5/xjtauZ6+2ivX3kVVKC5FUjbdXQ==
+
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
