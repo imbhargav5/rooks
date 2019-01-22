@@ -22,7 +22,7 @@
     "mutation observer",
     "mutation observer hook"
   ],
-  "version": "1.0.8-alpha.0",
+  "version": "1.0.8",
   "_id": "@rooks/use-mutation-observer@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

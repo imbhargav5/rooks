@@ -21,7 +21,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "1.0.9-alpha.0",
+  "version": "1.0.9",
   "_id": "@rooks/use-key@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
