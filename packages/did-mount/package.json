@@ -22,7 +22,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "1.0.8",
+  "version": "1.0.9",
   "_id": "@rooks/use-did-mount@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
