@@ -3,8 +3,14 @@ workflow "Deploy on Now" {
   resolves = ["release"]
 }
 
+action "updateDeps" {
+  uses = "actions/npm@master"
+  args = "run build"
+}
+
 # Deploy, and write deployment to file
 action "deploy" {
+  needs = "updateDeps"
   uses = "actions/zeit-now@master"
   args = "deploy  --no-clipboard  packages/website --team react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
