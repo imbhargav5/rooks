@@ -3,14 +3,32 @@ workflow "Deploy on Now" {
   resolves = ["release"]
 }
 
+action "yarn-install" {
+  uses = "borales/actions-yarn@master"
+  args = "install"
+}
+
+action "cdwebsite" {
+  needs = "yarn-install"
+  uses = "actions/sh@master"
+  args = ["cd packages/website"]
+}
+
 action "updateDeps" {
-  uses = "actions/npm@master"
-  args = "run build"
+  needs = "cdwebsite"
+  uses = "borales/actions-yarn@master"
+  args = "run update-deps"
+}
+
+action "preparewebsite"{
+  needs = "updateDeps"
+  uses = "actions/sh@master"
+  args = ["cd ../.."]
 }
 
 # Deploy, and write deployment to file
 action "deploy" {
-  needs = "updateDeps"
+  needs = "preparewebsite"
   uses = "actions/zeit-now@master"
   args = "deploy  --no-clipboard  packages/website --team react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
