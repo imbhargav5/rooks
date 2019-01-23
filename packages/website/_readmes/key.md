@@ -18,13 +18,13 @@ npm install --save @rooks/use-key
 function Demo() {
   const inputRef = useRef();
   function windowEnter(e) {
-    alert("Enter key was pressed on window");
+    console.log("Enter key was pressed on window");
   }
   function vowelsEntered(e) {
-    alert("You typed a vowel");
+    console.log("You typed a vowel");
   }
   function capitalVowelsEntered(e) {
-    alert("You typed a capital vowel");
+    console.log("You typed a capital vowel");
   }
   // window is the target
   useKey(["Enter"], windowEnter);
@@ -36,9 +36,9 @@ function Demo() {
   });
   return (
     <>
-      <p>Press enter anywhere to trigger an alert</p>
-      <p>Press a,e,i,o,u in the input to trigger an alert</p>
-      <p>Press A,E,I,O,U in the input to trigger a different alert alert</p>
+      <p>Press enter anywhere to trigger a console.log statement</p>
+      <p>Press a,e,i,o,u in the input to trigger a console.log statement</p>
+      <p>Press A,E,I,O,U in the input to trigger a different log statement</p>
       <input ref={inputRef} />
     </>
   );

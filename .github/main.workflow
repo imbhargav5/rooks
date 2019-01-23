@@ -8,27 +8,15 @@ action "yarn-install" {
   args = "install"
 }
 
-action "cdwebsite" {
+action "update-deps" {
   needs = "yarn-install"
-  uses = "actions/bin/sh@master"
-  args = ["cd packages/website"]
-}
-
-action "updateDeps" {
-  needs = "cdwebsite"
   uses = "borales/actions-yarn@master"
   args = "run update-deps"
 }
 
-action "preparewebsite"{
-  needs = "updateDeps"
-  uses = "actions/bin/sh@master"
-  args = ["cd ../.."]
-}
-
 # Deploy, and write deployment to file
 action "deploy" {
-  needs = "preparewebsite"
+  needs = "update-deps"
   uses = "actions/zeit-now@master"
   args = "deploy  --no-clipboard  packages/website --team react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
