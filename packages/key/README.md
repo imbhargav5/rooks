@@ -18,13 +18,13 @@ npm install --save @rooks/use-key
 function Demo() {
   const inputRef = useRef();
   function windowEnter(e) {
-    console.log("Enter key was pressed on window");
+    console.log("[Demo 1] Enter key was pressed on window");
   }
   function vowelsEntered(e) {
-    console.log("You typed a vowel");
+    console.log("[Demo 1] You typed a vowel");
   }
   function capitalVowelsEntered(e) {
-    console.log("You typed a capital vowel");
+    console.log("[Demo 1] You typed a capital vowel");
   }
   // window is the target
   useKey(["Enter"], windowEnter);
@@ -53,7 +53,7 @@ render(<Demo />);
 function Demo() {
   const inputRef = useRef();
   function onKeyInteraction(e) {
-    console.log("Enter key", e.type);
+    console.log("[Demo 2]Enter key", e.type);
   }
 
   useKey(["Enter"], onKeyInteraction, {
@@ -84,7 +84,7 @@ function Demo() {
     setShouldListen(!shouldListen);
   }
   function onKeyInteraction(e) {
-    console.log("Enter key", e.type);
+    console.log("[Demo 3] Enter key", e.type);
   }
 
   useKey(["Enter"], onKeyInteraction, {
