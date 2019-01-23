@@ -7,15 +7,14 @@
     "test": "lerna run test --stream --parallel",
     "dev": "cd packages/website && yarn dev",
     "deploy": "cd packages/website && yarn deploy",
-    "predeploy": "node helpers/update_readme",
-    "prepare:deploy": "cd packages/website/src && yarn",
     "create": "node helpers/create",
     "bs": "lerna bootstrap",
     "prebuild": "lerna clean -y && yarn",
     "build": "lerna run build --stream --parallel",
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
-    "release": "lerna publish"
+    "release": "lerna publish",
+    "postrelease": "node helpers/update_readme"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
