@@ -10,7 +10,7 @@ action "yarn-install" {
 
 action "cdwebsite" {
   needs = "yarn-install"
-  uses = "actions/sh@master"
+  uses = "actions/bin/sh@master"
   args = ["cd packages/website"]
 }
 
@@ -22,7 +22,7 @@ action "updateDeps" {
 
 action "preparewebsite"{
   needs = "updateDeps"
-  uses = "actions/sh@master"
+  uses = "actions/bin/sh@master"
   args = ["cd ../.."]
 }
 
