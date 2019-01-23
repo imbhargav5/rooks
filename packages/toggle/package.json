@@ -21,7 +21,7 @@
     "rooks",
     "toggle hook"
   ],
-  "version": "1.0.8",
+  "version": "1.0.9",
   "_id": "@rooks/use-toggle@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
