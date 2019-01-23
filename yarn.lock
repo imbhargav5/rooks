@@ -1524,20 +1524,105 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@rooks/use-boundingclientrect@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-boundingclientrect/-/use-boundingclientrect-1.0.7.tgz#e84d1a639435937bb53075a757c25c7f742ef133"
+  integrity sha512-n5WfrECuuBr5x2KSdY3g5BNijzKUiunG48aWXB4GcJ/5ZLdumjQsPOoZCrK3wQU6z6kHUTUJ9KTWXOHufbY27g==
+  dependencies:
+    "@rooks/use-mutation-observer" "^0.1.10"
+
+"@rooks/use-input@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-input/-/use-input-1.0.7.tgz#2424e6ee05becd0a320a40ccf722c02c0f7cb308"
+  integrity sha512-SgQir5qa67z6qdHeu3fHCqOOLGTziIdkCp3BNHcn/Iaf/Sl24/hpPhZqbowLcqT5YTSSmJjjvpmZYfUVVDKvpg==
+
+"@rooks/use-interval@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@rooks/use-interval/-/use-interval-1.1.1.tgz#80b7f0f034a00c98fd54a3b035d06dd025410a36"
+  integrity sha512-5ycgiekzxUBSW1cJ+ZLV5mHPDEdg9mOjbRcej9y1trZvQZBHpSl4mdMQJwhezNcTFrcohidDbsp2tsM4owRLDw==
+
 "@rooks/use-interval@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@rooks/use-interval/-/use-interval-0.1.5.tgz#e89dfe5f74c1fe36972603c0e343a1d3366394be"
   integrity sha512-bqP8LifNCAFJD4OLL9fKnVoktiK7nwMUArlvs/8H2LzrDazQbt930B2yZmv0vv3vnkry4fCVQXxVt0xpNnou9Q==
+
+"@rooks/use-key@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@rooks/use-key/-/use-key-1.0.8.tgz#8bb3fba6785d33a0e555c0e9701b13817b279914"
+  integrity sha512-7npeArtPyjbrosXy/zU6iHdzbVXazyq4oEDurP5vO6lF1S/pR2upplriPEi430306bcbSrjHOABkPvYnLT08qA==
+
+"@rooks/use-localstorage@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-localstorage/-/use-localstorage-1.0.7.tgz#7ab523665daad403b3e1dc678c321e65567492f1"
+  integrity sha512-GkQBfEa9+zbPSEIRHlC1iox79/6eFTHeCUuaW2oK1gu6ZXccYozkLbNZNGuPDZFy5zaMJFs9A5Iych7bgEprFQ==
+
+"@rooks/use-mouse@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-mouse/-/use-mouse-1.0.7.tgz#1bc6b5c1fe035836a0a2416d551a5e614006ec3b"
+  integrity sha512-KBA3GCpOBmzF+JyRfqlu4V4kIx/rRd/nwWCKPrWZHgmrZfxxFFsc9s8CPZfWQyPmcaAqOd9zgFuzJfRtkCuh6g==
+
+"@rooks/use-mutation-observer@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-1.0.7.tgz#9cf40f6768fa4aa5aa5ec06652e2416060ff18a1"
+  integrity sha512-bRy8Tjl2LTYfJcK0G2p1kp/7vtOScSqixgBpF/PsLWI+nHudeVL8xMacEl916UJBKAGbkV+6JzXBPE1+9j0bzw==
 
 "@rooks/use-mutation-observer@^0.1.10":
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-0.1.10.tgz#5e1469dd722a12183587c41c022dfae1bc0e3f8b"
   integrity sha512-oYzjM9KRNakKmI/cIF/jqJ1IlAO9wq2ldUHvoadHYG27d9uy5uv0Tq++OYE+P7acrSo4xEo5eBXq2jXT+IUN3g==
 
+"@rooks/use-navigator-language@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-navigator-language/-/use-navigator-language-1.0.7.tgz#b7cce6e6025e64a55b3ef25f3946f52c9de52202"
+  integrity sha512-vHx+zoQWECN55pOT5JuEwaPH8Dv8QuvH1TXSBq4054b2duXEyNIJSVYoR/JE4APAbzSUh9yKrbS9R3ZN0A4Hcw==
+
+"@rooks/use-outside-click@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-outside-click/-/use-outside-click-1.0.7.tgz#14ecd0a4efeef9b848fa10d2f31adcdf5a49b27a"
+  integrity sha512-yd7zN9Fn/XIu2HqHqOSiF49ll6NoOMlp6fosSjwWhAZi9gi+LMT0cQs6Ib3DJlr969gLqL/aOT1bHAdcfMl4JA==
+
 "@rooks/use-select@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@rooks/use-select/-/use-select-0.1.0.tgz#2e40fd93a4e546bea38b228e72a8ea1af551e640"
   integrity sha512-D6pgmzFz3K0V0pMbQcgZiMcIseRfRJDdDi6SZdn2R+Mzr3mBIpHbEncSKW5/xjtauZ6+2ivX3kVVKC5FUjbdXQ==
+
+"@rooks/use-sessionstorage@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-sessionstorage/-/use-sessionstorage-1.0.7.tgz#e96fefab2def4249566e78c7fc3cfece79a85767"
+  integrity sha512-M78q1PkMVEiMlimW4MVbfzjoUUEjtEPV7N2eRbEbPRWDShW+AX6KHH+1vhH1sGhOncc6YBoXGCHSKJ4+4lxFMg==
+
+"@rooks/use-time-ago@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-time-ago/-/use-time-ago-1.0.7.tgz#87fc7a4c8f4c533e030fc206c7a94ba417e32d02"
+  integrity sha512-2Q8TvSxvfkpE9Tj0z9PvL+9dsKjCdBZFZXEmxuifmoIzdDXQnEukY0eQF+V0G6Vs5QO3KuDFKhMk+n9N7J/g8A==
+  dependencies:
+    "@rooks/use-interval" "^0.1.5"
+    timeago.js "4.0.0-beta.1"
+
+"@rooks/use-timeout@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@rooks/use-timeout/-/use-timeout-1.1.1.tgz#570e399a2a70610f941623d25af4f76a3ae9b2ab"
+  integrity sha512-NehhaLBT/My19x/uAIllFg7sM/JUGuMH/lhF1ISrP/eMR+nSQvIS75ADlrYCi74j57Iy0V15ReF6a+QKeRo9YQ==
+
+"@rooks/use-toggle@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@rooks/use-toggle/-/use-toggle-1.0.5.tgz#491d70397711c7f91a3328e49dfbca9a3cc0965c"
+  integrity sha512-XyXpegOy3kht6bpRAN+c6NmqeDACDkGuKPlpdcIiEn93y1TeUu+EBONiIpZiJQqk1UTqsBfrbUB3YI1XuN2M9g==
+
+"@rooks/use-visibility-sensor@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-visibility-sensor/-/use-visibility-sensor-1.0.7.tgz#66dc71bd13a76ad19f3bb421db46264c82de9539"
+  integrity sha512-AXeb1mS4IpySRKNt6uepqzZjIfuWgK9nctWjYYE278hi65QQPfdn4NEseKJN5Ns8LHOWqE8/9uXwPBJe+d72hg==
+
+"@rooks/use-window-size@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-window-size/-/use-window-size-1.0.7.tgz#823f20fe67766423a7f5848666353cbc7d46b5a6"
+  integrity sha512-ZbVbEJc+zQ+MW2PbZ3zLxSXjQSXVldOwq1cAb0+1QC499DUbWdNV8aDukyoAJnKrSkERv8r4PcBfvahEucDlEA==
+
+"@rooks/use-worker@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rooks/use-worker/-/use-worker-1.0.7.tgz#4351a06a714ad2c5552bf757d5b8c7089678f15a"
+  integrity sha512-Z17l+n4FOnVi5D8o1mVuMLM6I9XnhAjjm+3jdAgj82Jb8BZ8j9jIpz/1tHilrwTlIiZh9fvbzOokh+od+SwNmw==
 
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"
