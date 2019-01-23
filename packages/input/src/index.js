@@ -29,7 +29,7 @@ function useInput(initialValue = "", opts = defaultOptions) {
     const newValue = e.target.value;
     let shouldUpdate = true;
     if (typeof opts.validate === "function") {
-      shouldUpdate = opts.validate(newValue);
+      shouldUpdate = opts.validate(newValue, value);
     }
     if (shouldUpdate) {
       setValue(newValue);

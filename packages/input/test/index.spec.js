@@ -54,9 +54,9 @@ describe("useInput", () => {
   describe("validate", () => {
     let App;
     beforeEach(() => {
-      App = function() {
+      App = function({ validate }) {
         const myInput = useInput(5, {
-          validate: newValue => newValue < 10
+          validate: validate || (newValue => newValue < 10)
         });
         return (
           <div>
@@ -86,6 +86,24 @@ describe("useInput", () => {
         }
       });
       expect(parseInt(inputElement.value)).toBe(9);
+    });
+    it("validate can be used to compare possible newvalue with current value", () => {
+      const { getByTestId, rerender } = render(
+        <App validate={(newValue, currValue) => newValue % currValue != 0} />
+      );
+      const inputElement = getByTestId("input-element");
+      fireEvent.change(inputElement, {
+        target: {
+          value: 6
+        }
+      });
+      expect(parseInt(inputElement.value)).toBe(6);
+      fireEvent.change(inputElement, {
+        target: {
+          value: 12
+        }
+      });
+      expect(parseInt(inputElement.value)).toBe(6);
     });
   });
 
