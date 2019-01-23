@@ -22,7 +22,7 @@
     "unmount",
     "unmount hook"
   ],
-  "version": "1.0.8",
+  "version": "1.0.9",
   "_id": "@rooks/use-will-unmount@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
