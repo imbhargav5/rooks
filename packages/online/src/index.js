@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 
+/**
+ *
+ * @returns {boolean} Is navigator online
+ */
 function getIsOnline() {
   return navigator.onLine;
 }
 
-export default function useOnline() {
+/**
+ * Online hook
+ * @returns {boolean} The value of navigator.onLine
+ */
+function useOnline() {
   const [online, changeOnline] = useState(null);
 
   function setOffline() {
     changeOnline(false);
   }
+
   function setOnline() {
     changeOnline(true);
   }
@@ -31,3 +40,5 @@ export default function useOnline() {
 
   return online;
 }
+
+module.exports = useOnline;

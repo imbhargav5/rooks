@@ -1,9 +1,14 @@
 import { useEffect } from "react";
 
-function useWillUnmount(cb) {
+/**
+ *
+ * Unmount hook
+ * @param {function} callback Callback to be called before unmount
+ */
+function useWillUnmount(callback) {
   // run only once
   useEffect(() => {
-    return cb;
+    return callback;
   }, []);
 }
 
