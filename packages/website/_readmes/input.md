@@ -36,10 +36,11 @@ render(<Demo/>)
 ```jsx
 function Demo() {
   const myInput = useInput("hello", {
-    validate: value => true
+    validate: (newValue) => newValue.length < 15
   });
   return (
     <div>
+      <p> Max length 15 </p>
       <input {...myInput} />
       <p>
         Value is <b>{myInput.value}</b>
@@ -61,9 +62,9 @@ render(<Demo/>)
 
 ### Options
 
-| Option key | Type     | Description                                                                                    | Default value |
-| ---------- | -------- | ---------------------------------------------------------------------------------------------- | ------------- |
-| validate   | function | Validator function which receives changed valued before update and should return true or false | undefined     |
+| Option key | Type     | Description                                                                                                             | Default value |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- |
+| validate   | function | Validator function which receives changed valued before update as well as current value and should return true or false | undefined     |
 
 ### Return value
 
