@@ -7,11 +7,9 @@
 <br/>
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
-
-<br/>
+<br/> 
 
 Collection of regularly used custom hooks as utils for React
 
@@ -22,6 +20,10 @@ Collection of regularly used custom hooks as utils for React
 ## Packages
 
 # @rooks/use-boundingclientrect
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -100,6 +102,10 @@ render(<Demo/>)
 Bounding client rect hook for React.
 # @rooks/use-counter
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -158,6 +164,10 @@ render(<CounterComponent/>)
 Counter hook for React.
 # @rooks/use-did-mount
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -185,6 +195,11 @@ render(<Demo/>)
 
 # A React hooks package for componentDidMount.
 # @rooks/use-input
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 
 ### Installation
 
@@ -255,6 +270,10 @@ render(<Demo/>)
 Input hook for React.
 # @rooks/use-interval
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -316,6 +335,10 @@ render(<Demo/>)
 
 # A react hook for using setInterval.
 # @rooks/use-key
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -430,6 +453,10 @@ render(<Demo />);
 # Keyboard key handler hook for react.
 # @rooks/use-localstorage
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
 
 ### Installation
@@ -459,6 +486,10 @@ render(<Demo />);
 
 # Local Storage hook for React.
 # @rooks/use-mouse
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -492,6 +523,10 @@ render(<Demo/>)
 
 Mouse hook for React.
 # @rooks/use-mutation-observer
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -569,6 +604,10 @@ render(<Demo/>)
 Mutation Observer hook for React.
 # @rooks/use-navigator-language
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -593,6 +632,10 @@ A language (String) is returned.
 Navigator Language hook for React.
 # @rooks/use-online
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -616,6 +659,10 @@ Offline status (boolean) is returned.
 
 Online Status hook for React.
 # @rooks/use-outside-click
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -644,6 +691,10 @@ render(<Demo />);
 
 # React hook for tracking clicks outside a ref.
 # @rooks/use-select
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -707,6 +758,10 @@ render(<Demo/>)
 List Selection hook for React.
 # @rooks/use-sessionstorage
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -734,6 +789,10 @@ render(<Demo />);
 
 # Session storage react hook. Easily manage session storage values.
 # @rooks/use-time-ago
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -783,6 +842,10 @@ Timeago string is returned.
 # A React Hook to get time ago for timestamp millisecond value.
 # @rooks/use-timeout
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -824,6 +887,10 @@ render(<TimeoutComponent/>)
 
 Timeout hook for React.
 # @rooks/use-toggle
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -885,6 +952,10 @@ render(<Demo/>)
 
 Toggle hook for React.
 # @rooks/use-visibility-sensor
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 Visibility sensor hook for React.
 
@@ -970,7 +1041,15 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 - [x] Tests _ WIP _
 - [ ] More examples _ WIP _
 # Rooks website
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 # @rooks/use-will-unmount
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
@@ -1019,6 +1098,10 @@ render(<Demo/>)
 # A React hook for componentWillUnmount lifecycle method.
 # @rooks/use-window-size
 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
+
 ### Installation
 
 ```
@@ -1066,6 +1149,10 @@ render(<WindowComponent/>)
 
 Window size hook for React.
 # @rooks/use-worker
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+
+<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
 ### Installation
 
