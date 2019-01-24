@@ -1,0 +1,32 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "Access the previous value of a variable with this React hook",
+  "name": "@rooks/use-previous",
+  "homepage": "https://react-hooks.org/hook/use-previous",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "version": "0.0.0",
+  "_id": "@rooks/use-previous@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@rooks/use-did-mount": "1.0.11"
+  }
+}
