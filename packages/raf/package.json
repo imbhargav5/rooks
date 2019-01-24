@@ -19,7 +19,7 @@
     "rooks",
     "hooks"
   ],
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "_id": "@rooks/use-raf@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
