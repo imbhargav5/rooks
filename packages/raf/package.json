@@ -1,0 +1,31 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "A continuously running requestAnimationFrame hook for React",
+  "name": "@rooks/use-raf",
+  "homepage": "https://react-hooks.org/hook/use-raf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "react-hooks.org",
+    "react",
+    "rooks",
+    "hooks"
+  ],
+  "version": "0.0.0",
+  "_id": "@rooks/use-raf@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "raf": "3.4.1"
+  }
+}
