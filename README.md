@@ -697,6 +697,8 @@ render(<Demo />);
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
+## A continuously running requestAnimationFrame hook for React
+
 ### Installation
 
 ```
@@ -756,8 +758,6 @@ function Demo() {
 
 render(<Demo />);
 ```
-
-# A continuously running requestAnimationFrame hook for React
 # @rooks/use-select
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
