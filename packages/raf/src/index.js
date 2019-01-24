@@ -1,6 +1,10 @@
 import { useState, useLayoutEffect } from "react";
 import raf from "raf";
 
+/*
+  We are using raf which is a polyfilled version of requestAnimationFrame
+*/
+
 /**
  *
  * useRaf
