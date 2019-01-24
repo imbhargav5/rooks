@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "lerna clean",
     "test": "lerna run test --stream --parallel",
+    "coverage": "lerna run test --stream --parallel -- --coverage",
     "dev": "cd packages/website && yarn dev",
     "deploy": "cd packages/website && yarn deploy",
     "create": "node helpers/create",

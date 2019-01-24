@@ -11,3 +11,4 @@ package-lock.json
 lerna-debug.log
 /packages/*/.cache
 /packages/*/dist
+/packages/*/coverage
