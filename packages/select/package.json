@@ -14,12 +14,12 @@
     "prepublish": "npm run build"
   },
   "keywords": [
+    "select",
     "react-hooks.org",
     "react",
     "rooks",
     "hooks",
-    "mouse",
-    "mouse hook"
+    "list"
   ],
   "version": "1.0.10",
   "_id": "@rooks/use-select@",

@@ -4,6 +4,8 @@
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"></a>
 
+## A continuously running requestAnimationFrame hook for React
+
 ### Installation
 
 ```
@@ -63,5 +65,3 @@ function Demo() {
 
 render(<Demo />);
 ```
-
-# A continuously running requestAnimationFrame hook for React

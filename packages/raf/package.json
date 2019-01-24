@@ -14,10 +14,12 @@
     "prepublish": "npm run build"
   },
   "keywords": [
+    "requestAnimationFrame",
     "react-hooks.org",
     "react",
     "rooks",
-    "hooks"
+    "hooks",
+    "raf"
   ],
   "version": "1.0.0",
   "_id": "@rooks/use-raf@",
