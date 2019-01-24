@@ -6,6 +6,8 @@
 
 ## A continuously running requestAnimationFrame hook for React
 
+[![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
+
 ### Installation
 
 ```
