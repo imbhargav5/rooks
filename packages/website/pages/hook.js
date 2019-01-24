@@ -15,7 +15,6 @@ class ReadmeComponent extends Component {
     if (!MyComponent) {
       return null;
     }
-    console.log({ MyComponent });
     return (
       <ScopeWithHook hookName={this.props.hookName} hookMap={hookMap}>
         <section className="section">

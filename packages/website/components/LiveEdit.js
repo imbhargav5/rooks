@@ -45,6 +45,10 @@ const StyledLivePreviewContainer = styled(Box)`
   border-radius: 2px;
 `;
 
+const StyledLivePreview = styled(LivePreview)`
+  white-space: normal;
+`;
+
 const LiveEdit = ({ noInline, code, scope = {} }) => {
   return (
     <ScopeContext.Consumer>
@@ -79,7 +83,7 @@ const LiveEdit = ({ noInline, code, scope = {} }) => {
                 bg="lightgray"
                 style={{ position: "relative" }}
               >
-                <LivePreview />
+                <StyledLivePreview />
               </StyledLivePreviewContainer>
             </Flex>
             <StyledLiveError

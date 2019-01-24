@@ -10,6 +10,7 @@ import useMutationObserverReadme from "../_readmes/mutation-observer.md"
 import useNavigatorLanguageReadme from "../_readmes/navigator-language.md"
 import useOnlineReadme from "../_readmes/online.md"
 import useOutsideClickReadme from "../_readmes/outside-click.md"
+import useRafReadme from "../_readmes/raf.md"
 import useSelectReadme from "../_readmes/select.md"
 import useSessionstorageReadme from "../_readmes/sessionstorage.md"
 import useTimeAgoReadme from "../_readmes/time-ago.md"
@@ -32,6 +33,7 @@ export default {
 "navigator-language":useNavigatorLanguageReadme,
 "online":useOnlineReadme,
 "outside-click":useOutsideClickReadme,
+"raf":useRafReadme,
 "select":useSelectReadme,
 "sessionstorage":useSessionstorageReadme,
 "time-ago":useTimeAgoReadme,
