@@ -4,7 +4,7 @@
   "description": "A React Hooks Website",
   "name": "website",
   "private": true,
-  "version": "1.0.47",
+  "version": "1.0.48",
   "scripts": {
     "dev": "node .",
     "prebuild": "rimraf dist .next",
@@ -34,7 +34,7 @@
     "@rooks/use-navigator-language": "1.0.10",
     "@rooks/use-online": "1.0.11",
     "@rooks/use-outside-click": "1.0.10",
-    "@rooks/use-raf": "1.0.3",
+    "@rooks/use-raf": "^1.0.4",
     "@rooks/use-select": "1.0.12",
     "@rooks/use-sessionstorage": "1.0.10",
     "@rooks/use-time-ago": "1.0.10",
