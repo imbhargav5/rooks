@@ -24,12 +24,10 @@ function Demo() {
         <input {...myInput} />
       </div>
       <p>
-        {" "}
-        Current value is <b>{myInput.value}</b>{" "}
+        Current value is <b>{myInput.value}</b>
       </p>
       <p>
-        {" "}
-        Previous value was <b>{previousValue || "-"}</b>{" "}
+        Previous value was <b>{previousValue || "-"}</b>
       </p>
     </div>
   );
