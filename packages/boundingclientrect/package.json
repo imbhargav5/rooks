@@ -14,12 +14,13 @@
     "prepublish": "npm run build"
   },
   "keywords": [
-    "react-hooks.org",
-    "react",
+    "use",
     "hooks",
-    "rooks",
     "bounding client",
-    "bounding client hook"
+    "bounding client hook",
+    "react",
+    "rooks",
+    "react-hooks.org"
   ],
   "version": "1.0.9",
   "_id": "@rooks/use-boundingclientrect@",

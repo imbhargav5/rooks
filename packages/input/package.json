@@ -14,6 +14,7 @@
     "prepublish": "npm run build"
   },
   "keywords": [
+    "use",
     "input",
     "react-hooks.org",
     "react",

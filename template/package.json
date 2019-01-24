@@ -14,10 +14,11 @@
     "prepublish": "npm run build"
   },
   "keywords": [
-    "react-hooks.org",
+    "use",
     "react",
+    "hooks",
     "rooks",
-    "hooks"
+    "react-hooks.org"
   ],
   "version": "0.0.0",
   "_id": "@rooks/%packageName%@",

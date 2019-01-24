@@ -15,6 +15,7 @@
     "prepublish": "npm run build"
   },
   "keywords": [
+    "use",
     "react-hooks.org",
     "react",
     "hooks",

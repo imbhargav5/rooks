@@ -14,11 +14,12 @@
     "prepublish": "npm run build"
   },
   "keywords": [
-    "react-hooks.org",
+    "use",
     "react",
     "rooks",
     "hooks",
     "counter",
+    "react-hooks.org",
     "counter hook"
   ],
   "version": "1.0.10",
