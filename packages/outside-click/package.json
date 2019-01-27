@@ -22,7 +22,7 @@
     "hooks",
     "ref outside click"
   ],
-  "version": "1.0.11",
+  "version": "1.0.12",
   "_id": "@rooks/use-outside-click@",
   "publishConfig": {
     "access": "public"
