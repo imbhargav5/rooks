@@ -22,7 +22,7 @@
     "react-hooks.org",
     "counter hook"
   ],
-  "version": "1.0.12-alpha.1",
+  "version": "1.0.12",
   "publishConfig": {
     "access": "public"
   },

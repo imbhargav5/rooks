@@ -23,7 +23,7 @@
     "unmount",
     "unmount hook"
   ],
-  "version": "1.0.12-alpha.1",
+  "version": "1.0.12",
   "_id": "@rooks/use-will-unmount@",
   "publishConfig": {
     "access": "public"

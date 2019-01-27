@@ -22,7 +22,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "1.0.14-alpha.1",
+  "version": "1.0.14",
   "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"
