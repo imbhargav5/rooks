@@ -4,7 +4,7 @@
   "description": "A React Hooks Website",
   "name": "website",
   "private": true,
-  "version": "1.0.52",
+  "version": "1.0.53",
   "scripts": {
     "dev": "node .",
     "prebuild": "rimraf dist .next",

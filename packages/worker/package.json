@@ -14,7 +14,7 @@
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
-  "version": "1.0.12",
+  "version": "1.0.13",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
