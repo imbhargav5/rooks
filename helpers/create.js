@@ -13,6 +13,7 @@ const filesToRead = [
   "../template/package.json",
   "../template/README.md",
   "../template/.babelrc",
+  "../template/.eslintrc",
   "../template/.npmignore",
   "../template/index.d.ts.template"
 ];
@@ -22,6 +23,7 @@ const filesToWrite = [
   "package.json",
   "README.md",
   ".babelrc",
+  ".eslintrc",
   ".npmignore",
   "index.d.ts"
 ];
