@@ -67,19 +67,16 @@ function getReadmeMapTemplate(hookNames) {
   );
 }
 
-function writeToHooksFolderInWebsiteSrc(publishedPackageNames) {
+function updateHookMap(publishedPackageNames) {
   let hookNames = [];
   let hooks = publishedPackageNames.map(pkgName => {
     const contents = getTemplate(pkgName);
     const hookName = pkgName.split("use-")[1];
     hookNames.push(hookName);
-    return write(getHookPath(hookName), contents);
   });
-  return Promise.all(hooks).then(() =>
-    write(
-      path.resolve(__dirname, "../utils/getHookMap.js"),
-      getHookMapTemplate(hookNames)
-    )
+  return write(
+    path.resolve(__dirname, "../utils/getHookMap.js"),
+    getHookMapTemplate(hookNames)
   );
 }
 
@@ -132,7 +129,7 @@ fetch("https://react-hooks.org/api/hooks")
         });
       deleteExistingHooks()
         .then(() => {
-          return writeToHooksFolderInWebsiteSrc(publishedPackageNames);
+          return updateHookMap(publishedPackageNames);
         })
         .then(() => {
           const installPkgs = publishedPackageNames.map(m => `${m}@latest`);
