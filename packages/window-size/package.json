@@ -24,7 +24,7 @@
     "window size",
     "window size hook"
   ],
-  "version": "1.0.13",
+  "version": "1.0.14",
   "_id": "@rooks/use-window-size@",
   "private": false,
   "jest": {
