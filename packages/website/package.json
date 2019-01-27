@@ -12,7 +12,6 @@
     "prestart": "npm run now-build",
     "start": "serve dist",
     "update-deps": "node scripts/update-deps.js",
-    "predeploy": "npm run update-deps",
     "deploy": "now --team react-hooks && now --team react-hooks alias"
   },
   "dependencies": {
