@@ -1,16 +1,26 @@
 # @rooks/use-visibility-sensor
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### Visibility sensor hook for React.
+
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-visibility-sensor/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-visibility-sensor.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-visibility-sensor.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fvisibility-sensor)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-Visibility sensor hook for React.
 
 ### Installation
 
 ```
 npm install --save @rooks/use-visibility-sensor
 ```
+
+### Importing the hook
+
+```javascript
+import useVisibilitySensor from "@rooks/use-visibility-sensor"
+```
+
 
 ### Usage
 

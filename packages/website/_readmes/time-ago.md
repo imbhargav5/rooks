@@ -1,6 +1,9 @@
 # @rooks/use-time-ago
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### A React Hook to get time ago for timestamp millisecond value.
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-time-ago/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-time-ago.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-time-ago.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftime-ago)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -9,6 +12,13 @@
 ```
 npm install --save @rooks/use-time-ago
 ```
+
+### Importing the hook
+
+```javascript
+import useTimeAgo from "@rooks/use-time-ago"
+```
+
 
 ### Usage
 
@@ -49,4 +59,3 @@ render(<Demo/>)
 
 Timeago string is returned.
 
-# A React Hook to get time ago for timestamp millisecond value.

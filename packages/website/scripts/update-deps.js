@@ -125,7 +125,9 @@ fetch("https://react-hooks.org/api/hooks")
       updateHookMap(publishedPackageNames).then(() => {
         const installPkgs = publishedPackageNames.map(m => `${m}@latest`);
         process.chdir(path.join(__dirname, ".."));
-        return install(installPkgs, { save: true });
+        if (process.env.GITHUB_ACTION) {
+          return install(installPkgs, { save: true });
+        }
       });
     });
   });

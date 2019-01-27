@@ -1,6 +1,10 @@
 # @rooks/use-mutation-observer
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### Mutation Observer hook for React.
+<br/>
+
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-mutation-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmutation-observer)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -9,6 +13,13 @@
 ```
 npm install --save @rooks/use-mutation-observer
 ```
+
+### Importing the hook
+
+```javascript
+import useMutationObserver from "@rooks/use-mutation-observer"
+```
+
 
 ### Usage
 
@@ -77,4 +88,3 @@ render(<Demo/>)
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
 
-Mutation Observer hook for React.

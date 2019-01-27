@@ -1,6 +1,10 @@
 # @rooks/use-input
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### Input hook for React.
+<br/>
+
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-input/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-input.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-input.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Finput)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -10,6 +14,13 @@
 ```
 npm install --save @rooks/use-input
 ```
+
+### Importing the hook
+
+```javascript
+import useInput from "@rooks/use-input"
+```
+
 
 ### Usage
 
@@ -72,4 +83,3 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
-Input hook for React.

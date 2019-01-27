@@ -1,6 +1,10 @@
 # @rooks/use-key
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+### keypress, keyup and keydown event handlers as hooks for react.
+
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-key/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-key.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-key.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fkey)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -8,6 +12,12 @@
 
 ```
 npm install --save @rooks/use-key
+```
+
+### Importing the hook
+
+```javascript
+import useKey from "@rooks/use-key";
 ```
 
 ### Usage
@@ -113,5 +123,3 @@ function Demo() {
 }
 render(<Demo />);
 ```
-
-# Keyboard key handler hook for react.

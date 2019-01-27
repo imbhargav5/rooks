@@ -1,6 +1,9 @@
 # @rooks/use-interval
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### setInterval hook for React.
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-interval/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-interval.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-interval.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Finterval)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -9,6 +12,13 @@
 ```
 npm install --save @rooks/use-interval
 ```
+
+### Importing the hook
+
+```javascript
+import useInterval from "@rooks/use-interval"
+```
+
 
 ### Usage
 
@@ -61,6 +71,3 @@ render(<Demo/>)
 | start                      | function   | Start the interval         |
 | stop                       | function   | Stop the interval          |
 | intervalId                 | intervalId | IntervalId of the interval |
-
-
-# A react hook for using setInterval.

@@ -1,15 +1,25 @@
 # @rooks/use-raf
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+### A continuously running requestAnimationFrame hook for React
+
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-raf/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-raf.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-raf.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fraf)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-## A continuously running requestAnimationFrame hook for React
+[![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
 
 ### Installation
 
 ```
 npm install --save @rooks/use-raf
+```
+
+### Importing the hook
+
+```javascript
+import useRaf from "@rooks/use-raf";
 ```
 
 ### Usage

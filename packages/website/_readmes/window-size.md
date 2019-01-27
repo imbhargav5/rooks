@@ -1,6 +1,9 @@
 # @rooks/use-window-size
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+### Window size hook for React.
+<br/>
+
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-window-size/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-window-size.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-window-size.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fwindow-size)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
@@ -9,6 +12,13 @@
 ```
 npm install --save @rooks/use-window-size
 ```
+### Importing the hook
+
+```javascript
+import useWindowSize from "@rooks/use-window-size"
+```
+
+
 
 ### Usage
 
@@ -49,4 +59,4 @@ render(<WindowComponent/>)
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
 
-Window size hook for React.
+
