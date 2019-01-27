@@ -28,7 +28,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-mutation-observer": "latest"
+    "@rooks/use-mutation-observer": ">=1.0.11"
   },
   "peerDependencies": {
     "react": "16.8.0-alpha.1",
