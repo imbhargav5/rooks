@@ -1,5 +1,8 @@
 # @rooks/use-counter
 
+### Counter hook for React.
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-counter/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-counter.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-counter.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -9,6 +12,13 @@
 ```
 npm install --save @rooks/use-counter
 ```
+
+### Importing the hook
+
+```javascript
+import useCounter from "@rooks/use-counter"
+```
+
 
 ### Usage
 
@@ -58,5 +68,3 @@ render(<CounterComponent/>)
 | Return value | Type   | Description                                                                 |
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
-
-Counter hook for React.

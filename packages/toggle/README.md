@@ -1,5 +1,9 @@
 # @rooks/use-toggle
 
+### Toggle (between booleans or custom data)hook for React.
+<br/>
+
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-toggle/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-toggle.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-toggle.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -9,6 +13,13 @@
 ```
 npm install --save @rooks/use-toggle
 ```
+
+### Importing the hook
+
+```javascript
+import useToggle from "@rooks/use-toggle"
+```
+
 
 ### Usage
 
@@ -61,5 +72,3 @@ render(<Demo/>)
 | -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
 | value                      | Any      | Current value                                                                                                         |
 | toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
-
-Toggle hook for React.

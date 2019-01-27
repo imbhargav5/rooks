@@ -1,15 +1,23 @@
 # @rooks/use-previous
 
+### Access the previous value of a variable with this React hook
+
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-previous/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-previous.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-previous.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
-
-## Access the previous value of a variable with this React hook
 
 ### Installation
 
 ```
 npm install --save @rooks/use-previous
+```
+
+### Importing the hook
+
+```javascript
+import usePrevious from "@rooks/use-previous";
 ```
 
 ### Usage

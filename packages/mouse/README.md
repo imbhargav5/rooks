@@ -1,5 +1,8 @@
 # @rooks/use-mouse
 
+### Mouse position hook for React.
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-mouse/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mouse.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mouse.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -9,6 +12,13 @@
 ```
 npm install --save @rooks/use-mouse
 ```
+
+### Importing the hook
+
+```javascript
+import useMouse from "@rooks/use-mouse"
+```
+
 
 ### Usage
 
@@ -33,5 +43,3 @@ render(<Demo/>)
 | -------------------------- | ---- | ------------------- |
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
-
-Mouse hook for React.
