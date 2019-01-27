@@ -22,7 +22,7 @@
     "rooks",
     "hooks"
   ],
-  "version": "1.0.12",
+  "version": "1.0.13",
   "_id": "@rooks/use-localstorage@",
   "publishConfig": {
     "access": "public"
