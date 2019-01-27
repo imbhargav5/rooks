@@ -3,7 +3,7 @@
 ### Select values from a list easily. List selection hook for react.
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-select/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-select.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-select.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-select/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-select.svg) ![](https://img.shields.io/npm/dt/@rooks/use-select.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
