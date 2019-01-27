@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "jest",
+    "lint": "eslint src test",
     "build": "babel src --out-dir lib",
     "test:example": "parcel test/index.html",
     "prepublish": "npm run build"

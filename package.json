@@ -4,6 +4,7 @@
   "description": "React hooks.",
   "scripts": {
     "clean": "lerna clean",
+    "lint": "lerna run lint --stream --parallel",
     "test": "lerna run test --stream --parallel",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "dev": "cd packages/website && yarn dev",

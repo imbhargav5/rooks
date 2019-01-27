@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "jest",
+    "lint": "eslint src test",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
