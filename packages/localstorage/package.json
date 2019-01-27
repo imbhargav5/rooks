@@ -23,7 +23,6 @@
   ],
   "version": "1.0.10",
   "_id": "@rooks/use-localstorage@",
-  "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   },

@@ -24,12 +24,11 @@
   ],
   "version": "1.0.10",
   "_id": "@rooks/use-boundingclientrect@",
-  "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-mutation-observer": "^0.1.10"
+    "@rooks/use-mutation-observer": "latest"
   },
   "peerDependencies": {
     "react": "16.8.0-alpha.1",
