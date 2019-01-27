@@ -21,14 +21,25 @@ Collection of regularly used custom hooks as utils for React
 
 # @rooks/use-boundingclientrect
 
+### getBoundingClientRect hook for React.
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-boundingclientrect/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-boundingclientrect.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-boundingclientrect.svg)
 
+
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 
 ```
 npm install --save @rooks/use-boundingclientrect
+```
+
+### Importing the hook
+
+```javascript
+import useBoundingclientrect from "@rooks/use-boundingclientrect"
 ```
 
 ### Usage
@@ -99,8 +110,10 @@ render(<Demo/>)
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
 
-Bounding client rect hook for React.
 # @rooks/use-counter
+
+### Counter hook for React.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-counter/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-counter.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-counter.svg)
 
@@ -111,6 +124,13 @@ Bounding client rect hook for React.
 ```
 npm install --save @rooks/use-counter
 ```
+
+### Importing the hook
+
+```javascript
+import useCounter from "@rooks/use-counter"
+```
+
 
 ### Usage
 
@@ -160,9 +180,10 @@ render(<CounterComponent/>)
 | Return value | Type   | Description                                                                 |
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
-
-Counter hook for React.
 # @rooks/use-did-mount
+
+### componentDidMount hook for React
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-did-mount/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-did-mount.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-did-mount.svg)
 
@@ -173,6 +194,13 @@ Counter hook for React.
 ```
 npm install --save @rooks/use-did-mount
 ```
+
+### Importing the hook
+
+```javascript
+import useDidMount from "@rooks/use-did-mount"
+```
+
 
 ### Usage
 
@@ -193,8 +221,11 @@ render(<Demo/>)
 | -------- | -------- | ------------------------------ |
 | callback | function | function to be called on mount |
 
-# A React hooks package for componentDidMount.
 # @rooks/use-input
+
+### Input hook for React.
+<br/>
+
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-input/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-input.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-input.svg)
 
@@ -206,6 +237,13 @@ render(<Demo/>)
 ```
 npm install --save @rooks/use-input
 ```
+
+### Importing the hook
+
+```javascript
+import useInput from "@rooks/use-input"
+```
+
 
 ### Usage
 
@@ -268,8 +306,10 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
-Input hook for React.
 # @rooks/use-interval
+
+### setInterval hook for React.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-interval/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-interval.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-interval.svg)
 
@@ -280,6 +320,13 @@ Input hook for React.
 ```
 npm install --save @rooks/use-interval
 ```
+
+### Importing the hook
+
+```javascript
+import useInterval from "@rooks/use-interval"
+```
+
 
 ### Usage
 
@@ -332,10 +379,11 @@ render(<Demo/>)
 | start                      | function   | Start the interval         |
 | stop                       | function   | Stop the interval          |
 | intervalId                 | intervalId | IntervalId of the interval |
-
-
-# A react hook for using setInterval.
 # @rooks/use-key
+
+### keypress, keyup and keydown event handlers as hooks for react.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-key/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-key.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-key.svg)
 
@@ -345,6 +393,12 @@ render(<Demo/>)
 
 ```
 npm install --save @rooks/use-key
+```
+
+### Importing the hook
+
+```javascript
+import useKey from "@rooks/use-key";
 ```
 
 ### Usage
@@ -450,9 +504,11 @@ function Demo() {
 }
 render(<Demo />);
 ```
-
-# Keyboard key handler hook for react.
 # @rooks/use-localstorage
+
+### Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-localstorage/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-localstorage.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-localstorage.svg)
 
@@ -464,6 +520,12 @@ Sets and retrieves a key from localStorage and subscribes to it for updates acro
 
 ```
 npm install --save @rooks/use-localstorage
+```
+
+### Importing the hook
+
+```javascript
+import useLocalstorage from "@rooks/use-localstorage";
 ```
 
 ### Usage
@@ -484,9 +546,10 @@ function Demo() {
 
 render(<Demo />);
 ```
-
-# Local Storage hook for React.
 # @rooks/use-mouse
+
+### Mouse position hook for React.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-mouse/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mouse.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mouse.svg)
 
@@ -497,6 +560,13 @@ render(<Demo />);
 ```
 npm install --save @rooks/use-mouse
 ```
+
+### Importing the hook
+
+```javascript
+import useMouse from "@rooks/use-mouse"
+```
+
 
 ### Usage
 
@@ -521,9 +591,11 @@ render(<Demo/>)
 | -------------------------- | ---- | ------------------- |
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
-
-Mouse hook for React.
 # @rooks/use-mutation-observer
+
+### Mutation Observer hook for React.
+<br/>
+
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-mutation-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mutation-observer.svg)
 
@@ -534,6 +606,13 @@ Mouse hook for React.
 ```
 npm install --save @rooks/use-mutation-observer
 ```
+
+### Importing the hook
+
+```javascript
+import useMutationObserver from "@rooks/use-mutation-observer"
+```
+
 
 ### Usage
 
@@ -602,8 +681,11 @@ render(<Demo/>)
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
 
-Mutation Observer hook for React.
 # @rooks/use-navigator-language
+
+### Navigator Language hook for React.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-navigator-language/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-navigator-language.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-navigator-language.svg)
 
@@ -613,6 +695,12 @@ Mutation Observer hook for React.
 
 ```
 npm install --save @rooks/use-navigator-language
+```
+
+### Importing the hook
+
+```javascript
+import useNavigatorLanguage from "@rooks/use-navigator-language";
 ```
 
 ### Usage
@@ -629,9 +717,11 @@ render(<Demo />);
 ### Return value
 
 A language (String) is returned.
-
-Navigator Language hook for React.
 # @rooks/use-online
+
+### Online status hook for React.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-online/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-online.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-online.svg)
 
@@ -641,6 +731,12 @@ Navigator Language hook for React.
 
 ```
 npm install --save @rooks/use-online
+```
+
+### Importing the hook
+
+```javascript
+import useOnline from "@rooks/use-online";
 ```
 
 ### Usage
@@ -657,9 +753,11 @@ render(<Demo />);
 ### Return value
 
 Offline status (boolean) is returned.
-
-Online Status hook for React.
 # @rooks/use-outside-click
+
+### Outside click(for a ref) event as hook for React.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-outside-click/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-outside-click.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-outside-click.svg)
 
@@ -669,6 +767,12 @@ Online Status hook for React.
 
 ```
 npm install --save @rooks/use-outside-click
+```
+
+### Importing the hook
+
+```javascript
+import useOutsideClick from "@rooks/use-outside-click";
 ```
 
 ### Usage
@@ -689,20 +793,26 @@ function Demo() {
 
 render(<Demo />);
 ```
-
-# React hook for tracking clicks outside a ref.
 # @rooks/use-previous
+
+### Access the previous value of a variable with this React hook
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-previous/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-previous.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-previous.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-## Access the previous value of a variable with this React hook
-
 ### Installation
 
 ```
 npm install --save @rooks/use-previous
+```
+
+### Importing the hook
+
+```javascript
+import usePrevious from "@rooks/use-previous";
 ```
 
 ### Usage
@@ -734,11 +844,13 @@ render(<Demo />);
 [![Image from Gyazo](https://i.gyazo.com/9913f58e1959ed60fb590cb280639d88.gif)](https://gyazo.com/9913f58e1959ed60fb590cb280639d88)
 # @rooks/use-raf
 
+### A continuously running requestAnimationFrame hook for React
+
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-raf/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-raf.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-raf.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
-
-## A continuously running requestAnimationFrame hook for React
 
 [![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
 
@@ -746,6 +858,12 @@ render(<Demo />);
 
 ```
 npm install --save @rooks/use-raf
+```
+
+### Importing the hook
+
+```javascript
+import useRaf from "@rooks/use-raf";
 ```
 
 ### Usage
@@ -803,6 +921,9 @@ render(<Demo />);
 ```
 # @rooks/use-select
 
+### Select values from a list easily. List selection hook for react.
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-select/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-select.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-select.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -812,6 +933,13 @@ render(<Demo />);
 ```
 npm install --save @rooks/use-select
 ```
+
+### Importing the hook
+
+```javascript
+import useSelect from "@rooks/use-select"
+```
+
 
 ### Usage
 
@@ -865,9 +993,11 @@ render(<Demo/>)
 | item                       | any      | Currently selected item           |
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
-
-List Selection hook for React.
 # @rooks/use-sessionstorage
+
+### Session storage react hook. Easily manage session storage values.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)![](https://img.shields.io/npm/v/@rooks/use-sessionstorage/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-sessionstorage.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-sessionstorage.svg)
 
@@ -877,6 +1007,12 @@ List Selection hook for React.
 
 ```
 npm install --save @rooks/use-sessionstorage
+```
+
+### Importing the hook
+
+```javascript
+import useSessionstorage from "@rooks/use-sessionstorage";
 ```
 
 ### Usage
@@ -897,9 +1033,10 @@ function Demo() {
 
 render(<Demo />);
 ```
-
-# Session storage react hook. Easily manage session storage values.
 # @rooks/use-time-ago
+
+### A React Hook to get time ago for timestamp millisecond value.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-time-ago/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-time-ago.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-time-ago.svg)
 
@@ -910,6 +1047,13 @@ render(<Demo />);
 ```
 npm install --save @rooks/use-time-ago
 ```
+
+### Importing the hook
+
+```javascript
+import useTimeAgo from "@rooks/use-time-ago"
+```
+
 
 ### Usage
 
@@ -950,8 +1094,11 @@ render(<Demo/>)
 
 Timeago string is returned.
 
-# A React Hook to get time ago for timestamp millisecond value.
 # @rooks/use-timeout
+
+### setTimeout hook for react.
+<br/>
+
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-timeout/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-timeout.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-timeout.svg)
 
@@ -962,6 +1109,13 @@ Timeago string is returned.
 ```
 npm install --save @rooks/use-timeout
 ```
+
+### Importing the hook
+
+```javascript
+import useTimeout from "@rooks/use-timeout"
+```
+
 
 ### Usage
 
@@ -996,8 +1150,11 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout |
 | start                      | function | Start the timeout |
 
-Timeout hook for React.
 # @rooks/use-toggle
+
+### Toggle (between booleans or custom data)hook for React.
+<br/>
+
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-toggle/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-toggle.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-toggle.svg)
 
@@ -1008,6 +1165,13 @@ Timeout hook for React.
 ```
 npm install --save @rooks/use-toggle
 ```
+
+### Importing the hook
+
+```javascript
+import useToggle from "@rooks/use-toggle"
+```
+
 
 ### Usage
 
@@ -1060,21 +1224,29 @@ render(<Demo/>)
 | -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
 | value                      | Any      | Current value                                                                                                         |
 | toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
-
-Toggle hook for React.
 # @rooks/use-visibility-sensor
+
+### Visibility sensor hook for React.
+
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-visibility-sensor/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-visibility-sensor.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-visibility-sensor.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-Visibility sensor hook for React.
 
 ### Installation
 
 ```
 npm install --save @rooks/use-visibility-sensor
 ```
+
+### Importing the hook
+
+```javascript
+import useVisibilitySensor from "@rooks/use-visibility-sensor"
+```
+
 
 ### Usage
 
@@ -1153,10 +1325,17 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 - [ ] More examples _ WIP _
 # Rooks website
 
+### Rooks website built with next.js.
+
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 # @rooks/use-will-unmount
+
+### componentWillUnmount lifecycle as hook for React.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-will-unmount/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-will-unmount.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-will-unmount.svg)
 
@@ -1167,6 +1346,13 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 ```
 npm install --save @rooks/use-will-unmount
 ```
+
+### Importing the hook
+
+```javascript
+import useWillUnmount from "@rooks/use-will-unmount"
+```
+
 
 ### Usage
 
@@ -1209,6 +1395,9 @@ render(<Demo/>)
 # A React hook for componentWillUnmount lifecycle method.
 # @rooks/use-window-size
 
+### Window size hook for React.
+<br/>
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-window-size/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-window-size.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-window-size.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -1218,6 +1407,13 @@ render(<Demo/>)
 ```
 npm install --save @rooks/use-window-size
 ```
+### Importing the hook
+
+```javascript
+import useWindowSize from "@rooks/use-window-size"
+```
+
+
 
 ### Usage
 
@@ -1258,8 +1454,11 @@ render(<WindowComponent/>)
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
 
-Window size hook for React.
+
 # @rooks/use-worker
+
+### Worker hook for React.
+<br/>
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-worker/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-worker.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-worker.svg)
 
@@ -1271,6 +1470,13 @@ Window size hook for React.
 npm install --save @rooks/use-worker
 ```
 
+### Importing the hook
+
+```javascript
+import useWorker from "@rooks/use-worker"
+```
+
+### Usage
 ```react
 
 function Demo() {
@@ -1304,5 +1510,3 @@ ReactDOM.render(<Demo />, rootElement);
 ### Returned Object
 
 The worker instance is returned.
-
-### Worker hook for React.
