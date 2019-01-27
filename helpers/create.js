@@ -38,9 +38,13 @@ function readFileAsString(relativeFilePath) {
   return fs.readFileSync(path.join(__dirname, relativeFilePath), "utf-8");
 }
 
-function injectValuesIntoTemplate(src, { name, packageName, description }) {
+function injectValuesIntoTemplate(
+  src,
+  { name, packageName, directoryName, description }
+) {
   let result = src;
   result = replaceString(result, "%name%", name);
+  result = replaceString(result, "%directoryName%", directoryName);
   result = replaceString(result, "%packageName%", packageName);
   result = replaceString(result, "%description%", description);
   return result;
@@ -90,7 +94,12 @@ inquirer.prompt(questions).then(answers => {
   const directoryName = packageName.substring(4);
   const transformedSources = filesToRead.map(filePath => {
     const src = readFileAsString(filePath);
-    return injectValuesIntoTemplate(src, { name, packageName, description });
+    return injectValuesIntoTemplate(src, {
+      name,
+      packageName,
+      directoryName,
+      description
+    });
   });
   const dirPath = path.join(__dirname, "../", `packages/${directoryName}`);
   // create package directory
