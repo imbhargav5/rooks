@@ -1529,10 +1529,10 @@
   resolved "https://registry.yarnpkg.com/@rooks/use-interval/-/use-interval-0.1.5.tgz#e89dfe5f74c1fe36972603c0e343a1d3366394be"
   integrity sha512-bqP8LifNCAFJD4OLL9fKnVoktiK7nwMUArlvs/8H2LzrDazQbt930B2yZmv0vv3vnkry4fCVQXxVt0xpNnou9Q==
 
-"@rooks/use-mutation-observer@^0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-0.1.10.tgz#5e1469dd722a12183587c41c022dfae1bc0e3f8b"
-  integrity sha512-oYzjM9KRNakKmI/cIF/jqJ1IlAO9wq2ldUHvoadHYG27d9uy5uv0Tq++OYE+P7acrSo4xEo5eBXq2jXT+IUN3g==
+"@rooks/use-mutation-observer@latest":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-1.0.10.tgz#294d786e5db6bf3a684bed7d51125f3366795809"
+  integrity sha512-YWIJi0KxkcSPG7tj3t0X87jERWg0k6Q6yvQ2LVtrPChqX2jakfB+tNdAj6YZzolVu2LGsCWRDR2ErWQ9p2r/zQ==
 
 "@rooks/use-select@0.1.0":
   version "0.1.0"
