@@ -1,0 +1,39 @@
+{
+  "name": "eslint-config-rooks",
+  "version": "1.0.0",
+  "description": "Eslint config for rooks",
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "config",
+    "rooks",
+    "javascript",
+    "styleguide"
+  ],
+  "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
+  "homepage": "https://github.com/react-hooks-org/rooks#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-hooks-org/rooks.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/react-hooks-org/rooks/issues"
+  },
+  "dependencies": {
+    "babel-eslint": "10.0.1",
+    "eslint": "5.12.1",
+    "eslint-plugin-react": "7.12.4"
+  }
+}

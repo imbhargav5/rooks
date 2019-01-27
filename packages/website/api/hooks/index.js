@@ -2,7 +2,7 @@ const fetch = require("isomorphic-fetch");
 
 const SECONDS_IN_AN_HOUR = 1 * 60 * 60;
 
-const IGNORE_PACKAGES = ["website", "tools"];
+const IGNORE_PACKAGES = ["website", "eslint-config"];
 
 module.exports = async (req, res) => {
   try {
