@@ -10,6 +10,7 @@ import useMutationObserver from '@rooks/use-mutation-observer';
 import useNavigatorLanguage from '@rooks/use-navigator-language';
 import useOnline from '@rooks/use-online';
 import useOutsideClick from '@rooks/use-outside-click';
+import usePrevious from '@rooks/use-previous';
 import useRaf from '@rooks/use-raf';
 import useSelect from '@rooks/use-select';
 import useSessionstorage from '@rooks/use-sessionstorage';
@@ -34,6 +35,7 @@ export default {
 "useNavigatorLanguage":useNavigatorLanguage,
 "useOnline":useOnline,
 "useOutsideClick":useOutsideClick,
+"usePrevious":usePrevious,
 "useRaf":useRaf,
 "useSelect":useSelect,
 "useSessionstorage":useSessionstorage,
