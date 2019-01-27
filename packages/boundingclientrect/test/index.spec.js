@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useBoundingClientRect from "../src";
+import useBoundingClientRect from "..";
 
 describe("useBoundingClientRect", () => {
   it("should be defined", () => {

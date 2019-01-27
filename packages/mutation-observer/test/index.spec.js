@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useMutationObserver from "../src";
+import useMutationObserver from "..";
 
 describe("useMutationObserver", () => {
   it("should be defined", () => {

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useNavigatorLanguage from "../src";
+import useNavigatorLanguage from "..";
 
 describe("useNavigatorLanguage", () => {
   it("should be defined", () => {

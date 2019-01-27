@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useKey from "../src";
+import useKey from "..";
 
 describe("useKey", () => {
   it("should be defined", () => {

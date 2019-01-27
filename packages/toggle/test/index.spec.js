@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useToggle from "../src";
+import useToggle from "..";
 
 describe("useToggle", () => {
   it("should be defined", () => {

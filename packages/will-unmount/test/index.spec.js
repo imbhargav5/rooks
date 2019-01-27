@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useWillUnmount from "../src";
+import useWillUnmount from "..";
 
 describe("useWillUnmount", () => {
   it("should be defined", () => {

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useWorker from "../src";
+import useWorker from "..";
 
 describe("useWorker", () => {
   it("should be defined", () => {

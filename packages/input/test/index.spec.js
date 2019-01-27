@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useInput from "../src";
+import useInput from "..";
 import {
   render,
   cleanup,

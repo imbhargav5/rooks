@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useWindowSize from "../src";
+import useWindowSize from "..";
 import puppeteer from "puppeteer";
 
 describe("useWindowSize", () => {

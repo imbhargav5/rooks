@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useOutsideClick from "../src";
+import useOutsideClick from "..";
 
 describe("useOutsideClick", () => {
   it("should be defined", () => {

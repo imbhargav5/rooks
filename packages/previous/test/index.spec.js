@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import usePrevious from "../src";
+import usePrevious from "..";
 
 describe("usePrevious", () => {
   it("should be defined", () => {

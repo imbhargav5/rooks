@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import useTimeout from "../src";
+import useTimeout from "..";
 import { render, cleanup, fireEvent, wait } from "react-testing-library";
 jest.useFakeTimers();
 

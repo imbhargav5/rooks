@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useTimeAgo from "../src";
+import useTimeAgo from "..";
 
 describe("useTimeAgo", () => {
   it("should be defined", () => {

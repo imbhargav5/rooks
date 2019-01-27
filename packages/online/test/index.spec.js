@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useOnline from "../src";
+import useOnline from "..";
 
 describe("useOnline", () => {
   it("should be defined", () => {

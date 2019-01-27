@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import useDidMount from "../src";
+import useDidMount from "..";
 import { render, cleanup } from "react-testing-library";
 
 describe("useDidMount", () => {

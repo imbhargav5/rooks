@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useVisibilitySensor from "../src";
+import useVisibilitySensor from "..";
 
 describe("useVisibilitySensor", () => {
   it("should be defined", () => {

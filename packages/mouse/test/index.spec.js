@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useMouse from "../src";
+import useMouse from "..";
 
 describe("useMouse", () => {
   it("should be defined", () => {

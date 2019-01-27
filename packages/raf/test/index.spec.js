@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useRaf from "../src";
+import useRaf from "..";
 
 describe("useRaf", () => {
   it("should be defined", () => {
