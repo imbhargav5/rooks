@@ -6,11 +6,6 @@ const bluebird = require("bluebird");
 const install = bluebird.promisify(require("npm-install-package"));
 const capitalize = require("lodash.capitalize");
 
-function deleteExistingHooks() {
-  const srcHooksPath = path.resolve(__dirname, "../hooks");
-  return del([srcHooksPath + "/*.js"]);
-}
-
 function deleteExistingReadmes() {
   const srcReadmesPath = path.resolve(__dirname, "../_readmes");
   return del([srcReadmesPath + "/*.js"]);
@@ -127,14 +122,10 @@ fetch("https://react-hooks.org/api/hooks")
             publishedPackageNames
           );
         });
-      deleteExistingHooks()
-        .then(() => {
-          return updateHookMap(publishedPackageNames);
-        })
-        .then(() => {
-          const installPkgs = publishedPackageNames.map(m => `${m}@latest`);
-          process.chdir(path.join(__dirname, ".."));
-          return install(installPkgs, { save: true });
-        });
+      updateHookMap(publishedPackageNames).then(() => {
+        const installPkgs = publishedPackageNames.map(m => `${m}@latest`);
+        process.chdir(path.join(__dirname, ".."));
+        return install(installPkgs, { save: true });
+      });
     });
   });
