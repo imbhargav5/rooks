@@ -1,6 +1,6 @@
 # @rooks/use-visibility-sensor
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) 
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-visibility-sensor/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-visibility-sensor.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-visibility-sensor.svg)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
