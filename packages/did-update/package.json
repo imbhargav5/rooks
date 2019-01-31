@@ -1,0 +1,29 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "componentDidUpdate hook for react",
+  "name": "@rooks/use-did-update",
+  "homepage": "https://react-hooks.org/hook/use-did-update",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "version": "0.0.0",
+  "_id": "@rooks/use-did-update@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
