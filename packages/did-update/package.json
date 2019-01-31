@@ -26,5 +26,8 @@
   "_id": "@rooks/use-did-update@",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@rooks/use-did-mount": "^1.0.16"
   }
 }
