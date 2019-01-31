@@ -22,7 +22,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "0.0.0",
+  "version": "0.1.0",
   "_id": "@rooks/use-did-update@",
   "publishConfig": {
     "access": "public"
