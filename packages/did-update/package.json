@@ -15,6 +15,8 @@
   },
   "keywords": [
     "use",
+    "did update",
+    "componentDidUpdate",
     "react",
     "hooks",
     "rooks",
@@ -22,7 +24,6 @@
   ],
   "version": "0.0.0",
   "_id": "@rooks/use-did-update@",
-  "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   }
