@@ -1,21 +1,27 @@
-import React, { Component } from "react";
+import React, { useRef } from "react";
 import "styled-components/macro";
 import Player from "./Player";
 
-class Game extends Component {
-  render() {
-    return (
-      <div
+function Game() {
+  const canvasRef = useRef();
+  return (
+    <div
+      css={`
+        background: midnightblue;
+        height: 500px;
+        position: relative;
+      `}
+    >
+      <Player canvasRef={canvasRef} />
+      <canvas
+        ref={canvasRef}
         css={`
-          background: midnightblue;
-          height: 500px;
-          position: relative;
+          height: 100%;
+          width: 100%;
         `}
-      >
-        <Player />
-      </div>
-    );
-  }
+      />
+    </div>
+  );
 }
 
 export default Game;
