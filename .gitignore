@@ -12,3 +12,4 @@ lerna-debug.log
 /packages/*/.cache
 /packages/*/dist
 /packages/*/coverage
+.DS_Store
