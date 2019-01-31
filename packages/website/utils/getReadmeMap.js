@@ -1,6 +1,7 @@
 import useBoundingclientrectReadme from "../_readmes/boundingclientrect.md"
 import useCounterReadme from "../_readmes/counter.md"
 import useDidMountReadme from "../_readmes/did-mount.md"
+import useDidUpdateReadme from "../_readmes/did-update.md"
 import useInputReadme from "../_readmes/input.md"
 import useIntervalReadme from "../_readmes/interval.md"
 import useKeyReadme from "../_readmes/key.md"
@@ -25,6 +26,7 @@ export default {
 "boundingclientrect":useBoundingclientrectReadme,
 "counter":useCounterReadme,
 "did-mount":useDidMountReadme,
+"did-update":useDidUpdateReadme,
 "input":useInputReadme,
 "interval":useIntervalReadme,
 "key":useKeyReadme,

@@ -1,6 +1,7 @@
 import useBoundingclientrect from '@rooks/use-boundingclientrect';
 import useCounter from '@rooks/use-counter';
 import useDidMount from '@rooks/use-did-mount';
+import useDidUpdate from '@rooks/use-did-update';
 import useInput from '@rooks/use-input';
 import useInterval from '@rooks/use-interval';
 import useKey from '@rooks/use-key';
@@ -26,6 +27,7 @@ export default {
 "useBoundingclientrect":useBoundingclientrect,
 "useCounter":useCounter,
 "useDidMount":useDidMount,
+"useDidUpdate":useDidUpdate,
 "useInput":useInput,
 "useInterval":useInterval,
 "useKey":useKey,
