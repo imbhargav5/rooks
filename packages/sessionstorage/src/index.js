@@ -11,10 +11,16 @@ function useSessionStorage(key, defaultValue = null) {
   }
 
   function getValueFromSessionStorage() {
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
     return sessionStorage.getItem(key);
   }
 
   function saveValueToSessionStorage(key, value) {
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
     return sessionStorage.setItem(key, value);
   }
 
