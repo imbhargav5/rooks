@@ -54,5 +54,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
   }
 }
