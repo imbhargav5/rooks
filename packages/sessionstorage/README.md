@@ -24,7 +24,7 @@ import useSessionstorage from "@rooks/use-sessionstorage";
 
 ```jsx
 function Demo() {
-  const { value, set, remove } = useSessionStorage("my-value", 0);
+  const { value, set, remove } = useSessionstorage("my-value", 0);
   return (
     <p>
       Value is {value}{" "}
