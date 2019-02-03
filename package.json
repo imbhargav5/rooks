@@ -1,7 +1,7 @@
 {
   "name": "react-hooks.org",
   "private": true,
-  "description": "React hooks.",
+  "description": "Useful React hooks for everyone.",
   "scripts": {
     "clean": "lerna clean",
     "lint": "lerna run lint --stream --parallel",
@@ -45,7 +45,6 @@
     "read-pkg-up": "4.0.0",
     "replace-string": "2.0.0",
     "shelljs": "0.8.3",
-    "terser": "3.14.1",
     "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
   },

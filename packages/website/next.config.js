@@ -22,16 +22,18 @@ module.exports = withCSS({
   }),
   exportPathMap: async function(defaultPathMap) {
     const dirs = await getHookNames();
-    const hookPages = dirs.reduce(
-      (acc, hook) =>
-        Object.assign({}, acc, {
-          [`/hook/use-${hook}`]: {
-            page: "/hook",
-            query: { hookName: hook }
-          }
-        }),
-      {}
-    );
+    const hookPages = dirs
+      .filter(d => !d.startsWith("rooks"))
+      .reduce(
+        (acc, hook) =>
+          Object.assign({}, acc, {
+            [`/hook/use-${hook}`]: {
+              page: "/hook",
+              query: { hookName: hook }
+            }
+          }),
+        {}
+      );
     return {
       "/": { page: "/" },
       ...hookPages

@@ -94,10 +94,14 @@ function writeToReadmeFolderInWebsiteSrc(readmes, publishedPackageNames) {
 fetch("https://react-hooks.org/api/hooks")
   .then(r => r.json())
   .then(response => {
-    const packageJsonPromises = response.map(package => {
+    response = response.filter(r => {
+      console.log(r.name, !r.name.startsWith("rooks"));
+      return !r.name.startsWith("rooks");
+    });
+    const packageJsonPromises = response.map(p => {
       return fetch(
         `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
-          package.name
+          p.name
         }/package.json`
       ).then(r => r.json());
     });
@@ -107,10 +111,11 @@ fetch("https://react-hooks.org/api/hooks")
         p => p.publishConfig && p.publishConfig.access === "public"
       );
       const publishedPackageNames = publishedPackages.map(p => p.name);
-      const readmePromises = response.map(package => {
+
+      const readmePromises = response.map(p => {
         return fetch(
           `https://raw.githubusercontent.com/imbhargav5/rooks/master/packages/${
-            package.name
+            p.name
           }/README.md`
         ).then(r => r.text());
       });
