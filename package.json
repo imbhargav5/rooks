@@ -46,7 +46,7 @@
     "replace-string": "2.0.0",
     "shelljs": "0.8.3",
     "terser": "3.14.1",
-    "webpack": "4.29.0",
+    "webpack": "4.2.0",
     "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
   },
