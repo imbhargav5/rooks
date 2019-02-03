@@ -5,7 +5,7 @@
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
   "license": "MIT",
-  "main": "lib/rooks.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,9 +18,38 @@
     "url": "git+https://github.com/react-hooks-org/rooks.git"
   },
   "scripts": {
-    "build": "babel src/index.js --out-file lib/rooks.js"
+    "build": "webpack",
+    "prebuild": "rimraf lib",
+    "lint": "eslint src test",
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"
+  },
+  "dependencies": {
+    "@rooks/use-boundingclientrect": "1.0.16",
+    "@rooks/use-counter": "1.0.16",
+    "@rooks/use-did-mount": "1.0.16",
+    "@rooks/use-did-update": "1.0.0",
+    "@rooks/use-input": "1.1.6",
+    "@rooks/use-interval": "1.1.9",
+    "@rooks/use-key": "1.0.18",
+    "@rooks/use-localstorage": "1.0.15",
+    "@rooks/use-mouse": "1.0.15",
+    "@rooks/use-mutation-observer": "1.0.15",
+    "@rooks/use-navigator-language": "1.0.15",
+    "@rooks/use-online": "1.0.16",
+    "@rooks/use-outside-click": "1.0.15",
+    "@rooks/use-previous": "1.0.6",
+    "@rooks/use-raf": "1.0.9",
+    "@rooks/use-select": "1.0.17",
+    "@rooks/use-sessionstorage": "1.0.15",
+    "@rooks/use-time-ago": "1.0.15",
+    "@rooks/use-timeout": "1.1.9",
+    "@rooks/use-toggle": "1.0.15",
+    "@rooks/use-visibility-sensor": "1.0.15",
+    "@rooks/use-will-unmount": "1.0.16",
+    "@rooks/use-window-size": "1.0.15",
+    "@rooks/use-worker": "1.0.13"
   }
 }

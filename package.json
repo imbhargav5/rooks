@@ -21,12 +21,14 @@
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-export-default-from": "7.2.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "@types/react": "16.7.18",
     "@types/react-dom": "16.0.11",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-loader": "8.0.5",
     "babel-plugin-prismjs": "1.0.2",
     "babel-preset-minify": "0.5.0",
     "browser-env": "3.2.5",
@@ -43,9 +45,13 @@
     "read-pkg-up": "4.0.0",
     "replace-string": "2.0.0",
     "shelljs": "0.8.3",
+    "webpack": "4.29.0",
+    "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jest-localstorage-mock": "2.4.0"
+  },
   "workspaces": [
     "packages/*"
   ]
