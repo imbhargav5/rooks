@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
@@ -30,6 +30,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "use",
+    "react-hooks.org",
+    "react",
+    "rooks",
+    "hooks"
+  ],
   "resolutions": {
     "terser": "3.14.1"
   }
