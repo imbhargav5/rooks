@@ -17,7 +17,6 @@ function useSessionStorage(key, defaultValue = null) {
 
   function init() {
     const initialValue = getValueFromSessionStorage(key);
-    console.log({ initialValue, defaultValue });
     if (initialValue === null || initialValue === "null") {
       set(defaultValue);
     }
@@ -45,12 +44,14 @@ function useSessionStorage(key, defaultValue = null) {
   }
 
   function set(newValue) {
-    console.log({ newValue });
     saveValueToSessionStorage(key, newValue);
     setValue(newValue);
   }
 
   function remove() {
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
     sessionStorage.removeItem(key);
     setValue(null);
   }
@@ -61,7 +62,6 @@ function useSessionStorage(key, defaultValue = null) {
 
   function listen(e) {
     if (e.storageArea === sessionStorage && e.key === key) {
-      console.log(e.newValue);
       set(e.newValue);
     }
   }
