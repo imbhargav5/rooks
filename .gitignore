@@ -13,3 +13,4 @@ lerna-debug.log
 /packages/*/dist
 /packages/*/coverage
 .DS_Store
+yarn-error*

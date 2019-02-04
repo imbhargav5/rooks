@@ -45,5 +45,8 @@
     "serve": "10.0.2",
     "styled-components": "4.0.3",
     "write": "1.0.3"
+  },
+  "resolutions": {
+    "terser": "3.14"
   }
 }
