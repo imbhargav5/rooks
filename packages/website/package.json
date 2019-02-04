@@ -44,6 +44,7 @@
     "replace-ext": "1.0.0",
     "serve": "10.0.2",
     "styled-components": "4.0.3",
+    "terser": "3.14",
     "write": "1.0.3"
   },
   "resolutions": {
