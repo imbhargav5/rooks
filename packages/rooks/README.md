@@ -1,6 +1,8 @@
 # `rooks`
 
-Standalone build for all rooks.
+Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
+
+**Note:** If you only need a few hooks from the rooks package, it's prefereable to install individiual hooks from npm instead of the standalone rooks build. In other words, install `@rooks/use-did-mount` instead of `rooks` if you only need the `use-did-mount` functionality.
 
 <br/>
 <br/>
@@ -10,7 +12,7 @@ Standalone build for all rooks.
 <br/>
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/rooks/latest.svg) ![](https://img.shields.io/npm/l/rooks.svg) ![](https://img.shields.io/npm/dt/rooks.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
 
 <br/>
 
@@ -57,3 +59,13 @@ function App() {
   );
 }
 ```
+
+<br/>
+
+## Hope you like it!
+
+Feel free to join as contributors!
+
+:smile:
+
+### License - MIT
