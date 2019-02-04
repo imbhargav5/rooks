@@ -55,6 +55,6 @@
     "packages/*"
   ],
   "resolutions": {
-    "terser": "3.14.*"
+    "terser": "3.14.1"
   }
 }
