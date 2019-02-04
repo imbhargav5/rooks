@@ -23,7 +23,7 @@
     "hooks",
     "raf"
   ],
-  "version": "1.0.9",
+  "version": "1.0.10",
   "_id": "@rooks/use-raf@",
   "publishConfig": {
     "access": "public"

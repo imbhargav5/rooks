@@ -23,7 +23,7 @@
     "mouse",
     "mouse hook"
   ],
-  "version": "1.0.15",
+  "version": "1.0.16",
   "_id": "@rooks/use-mouse@",
   "publishConfig": {
     "access": "public"

@@ -21,12 +21,12 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-did-mount": "^1.0.16"
+    "@rooks/use-did-mount": "^1.0.17"
   }
 }

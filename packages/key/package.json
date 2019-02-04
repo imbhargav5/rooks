@@ -23,7 +23,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "1.0.18",
+  "version": "1.0.19",
   "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"

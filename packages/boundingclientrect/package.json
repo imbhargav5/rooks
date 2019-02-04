@@ -23,13 +23,13 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "1.0.16",
+  "version": "1.0.17",
   "_id": "@rooks/use-boundingclientrect@",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-mutation-observer": "^1.0.15"
+    "@rooks/use-mutation-observer": "^1.0.16"
   },
   "peerDependencies": {
     "react": "16.8.0-alpha.1",

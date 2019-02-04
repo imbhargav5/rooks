@@ -23,7 +23,7 @@
     "hooks",
     "list"
   ],
-  "version": "1.0.17",
+  "version": "1.0.18",
   "_id": "@rooks/use-select@",
   "publishConfig": {
     "access": "public"
