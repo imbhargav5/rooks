@@ -47,7 +47,7 @@ action "release-master" {
 }
 
 # Dev workflow
-workflow "Deploy Dev on Now" {
+workflow "Deploy Dev" {
   on = "push"
   resolves = ["release-dev"]
 }
@@ -55,7 +55,7 @@ workflow "Deploy Dev on Now" {
 # Filter for master branch
 action "dev-branch-filter" {
   uses = "actions/bin/filter@master"
-  args = "branch home-page"
+  args = "branch dev"
 }
 
 # Requires now.dev.json in repository
