@@ -1,4 +1,4 @@
-workflow "Deploy on Now" {
+workflow "Deploy Dev on Now" {
   on = "push"
   resolves = ["release"]
 }
