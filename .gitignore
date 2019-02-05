@@ -12,9 +12,5 @@ lerna-debug.log
 /packages/*/.cache
 /packages/*/dist
 /packages/*/coverage
-<<<<<<< HEAD
 .DS_Store
 yarn-error*
-=======
-.DS_Store
->>>>>>> Wip
