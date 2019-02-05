@@ -11,7 +11,6 @@ action "master-branch-filter" {
 }
 
 action "yarn-install" {
-  needs = "master-branch-filter"
   uses = "borales/actions-yarn@master"
   args = "install"
 }
@@ -41,7 +40,7 @@ action "alias" {
 
 # Requires now.json in repository
 action "release" {
-  needs = "alias"
+  needs = ["master-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
   args = "alias --team react-hooks --local-config=./packages/website/now.json"
