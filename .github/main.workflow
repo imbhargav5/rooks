@@ -1,6 +1,13 @@
-workflow "Deploy on Now" {
+workflow "Deploy Master" {
   on = "push"
-  resolves = ["release"]
+  resolves = ["release-master"]
+}
+
+# Filter for master branch
+action "master-branch-filter" {
+  needs = "alias"
+  uses = "actions/bin/filter@master"
+  args = "branch master"
 }
 
 action "yarn-install" {
@@ -30,17 +37,31 @@ action "alias" {
   secrets = ["ZEIT_TOKEN"]
 }
 
-# Filter for master branch
-action "master-branch-filter" {
-  needs = "alias"
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
 
 # Requires now.json in repository
-action "release" {
-  needs = "master-branch-filter"
+action "release-master" {
+  needs = ["master-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
   args = "alias --team react-hooks --local-config=./packages/website/now.json"
+}
+
+# Dev workflow
+workflow "Deploy Dev" {
+  on = "push"
+  resolves = ["release-dev"]
+}
+
+# Filter for master branch
+action "dev-branch-filter" {
+  uses = "actions/bin/filter@master"
+  args = "branch dev"
+}
+
+# Requires now.dev.json in repository
+action "release-dev" {
+  needs = ["dev-branch-filter","alias"]
+  uses = "actions/zeit-now@master"
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias --team react-hooks --local-config=./packages/website/now-dev.json"
 }
