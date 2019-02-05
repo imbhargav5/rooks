@@ -1,6 +1,6 @@
-workflow "Deploy on Now" {
+workflow "Deploy Master" {
   on = "push"
-  resolves = ["release"]
+  resolves = ["release-master"]
 }
 
 # Filter for master branch
@@ -39,7 +39,7 @@ action "alias" {
 
 
 # Requires now.json in repository
-action "release" {
+action "release-master" {
   needs = ["master-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
@@ -63,5 +63,5 @@ action "release-dev" {
   needs = ["dev-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias --team react-hooks --local-config=./packages/website/now.dev.json"
+  args = "alias --team react-hooks --local-config=./packages/website/now-dev.json"
 }
