@@ -44,3 +44,24 @@ action "release" {
   secrets = ["ZEIT_TOKEN"]
   args = "alias --team react-hooks --local-config=./packages/website/now.json"
 }
+
+# Dev workflow
+workflow "Deploy Dev on Now" {
+  on = "push"
+  resolves = ["release-dev"]
+}
+
+# Filter for master branch
+action "dev-branch-filter" {
+  needs = "alias"
+  uses = "actions/bin/filter@master"
+  args = "branch home-page"
+}
+
+# Requires now.dev.json in repository
+action "release-dev" {
+  needs = "dev-branch-filter"
+  uses = "actions/zeit-now@master"
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias --team react-hooks --local-config=./packages/website/now.dev.json"
+}
