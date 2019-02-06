@@ -9,7 +9,7 @@
     "dev": "node .",
     "prebuild": "rimraf dist .next",
     "now-build": "next build && next export -o dist",
-    "prestart": "npm run now-build",
+    "prestart": "yarn run now-build",
     "start": "serve dist",
     "update-deps": "node scripts/update-deps.js",
     "deploy": "now --team react-hooks && now --team react-hooks alias"
