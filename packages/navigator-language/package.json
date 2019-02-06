@@ -23,7 +23,7 @@
     "navigator language",
     "navigator language hook"
   ],
-  "version": "1.0.17-alpha.5+5c5d4b1",
+  "version": "1.1.0-alpha.0",
   "_id": "@rooks/use-navigator-language@",
   "publishConfig": {
     "access": "public"

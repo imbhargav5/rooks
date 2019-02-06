@@ -23,7 +23,7 @@
     "rooks",
     "toggle hook"
   ],
-  "version": "1.0.17-alpha.5+5c5d4b1",
+  "version": "2.0.0-alpha.0",
   "_id": "@rooks/use-toggle@",
   "publishConfig": {
     "access": "public"
