@@ -22,7 +22,7 @@
     "rooks",
     "input hook"
   ],
-  "version": "1.1.7",
+  "version": "1.1.8-alpha.4+d891bd4",
   "_id": "@rooks/use-input@",
   "publishConfig": {
     "access": "public"
@@ -31,5 +31,5 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
+  "gitHead": "d891bd42d9764ded04b91e36b1493d753df312e2"
 }

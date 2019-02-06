@@ -23,7 +23,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "1.0.19",
+  "version": "1.0.20-alpha.4+d891bd4",
   "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"
@@ -32,5 +32,5 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
+  "gitHead": "d891bd42d9764ded04b91e36b1493d753df312e2"
 }
