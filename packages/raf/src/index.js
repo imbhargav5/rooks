@@ -14,20 +14,17 @@ import raf from "raf";
  */
 function useRaf(callback, isActive = true) {
   let [rafId, setRafId] = useState(null);
-  useLayoutEffect(
-    () => {
-      if (isActive) {
-        let _rafId = raf(() => {
-          callback();
-          setRafId(_rafId);
-        });
-        return () => {
-          raf.cancel(rafId);
-        };
-      }
-    },
-    [callback, isActive, rafId]
-  );
+  useLayoutEffect(() => {
+    if (isActive) {
+      let _rafId = raf(() => {
+        callback();
+        setRafId(_rafId);
+      });
+      return () => {
+        raf.cancel(rafId);
+      };
+    }
+  }, [callback, isActive, rafId]);
   return rafId;
 }
-module.exports = useRaf;
+export default useRaf;

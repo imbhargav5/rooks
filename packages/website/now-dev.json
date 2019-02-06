@@ -1,0 +1,24 @@
+{
+  "name": "react-hooks-website",
+  "alias": ["dev.react-hooks.org"],
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@now/static-build" },
+    {
+      "src": "api/hooks/*.js",
+      "use": "@now/node"
+    },
+    { "src": "api/readme/*.js", "use": "@now/node" },
+    { "src": "api/search/*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

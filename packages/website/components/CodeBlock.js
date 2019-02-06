@@ -13,8 +13,11 @@ const CodeBlock = styled(p => {
 }).attrs({
   contentEditable: false
 })`
-  font-size: 0.8rem;
+  font-size: 1rem;
+  background: #333;
+  color: white;
   font-weight: 300;
+  padding: 1rem 2rem;
   white-space: pre-wrap;
   border-radius: 3px;
   box-shadow: 1px 1px 20px rgba(20, 20, 20, 0.27);

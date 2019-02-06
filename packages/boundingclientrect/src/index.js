@@ -15,16 +15,13 @@ function useBoundingclientRect(ref) {
     setValue(getBoundingClientRect());
   }
 
-  useEffect(
-    () => {
-      update();
-    },
-    [ref.current]
-  );
+  useEffect(() => {
+    update();
+  }, [ref.current]);
 
   useMutationObserver(ref, update);
 
   return value;
 }
 
-module.exports = useBoundingclientRect;
+export default useBoundingclientRect;

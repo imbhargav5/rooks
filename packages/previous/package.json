@@ -1,6 +1,7 @@
 {
   "main": "lib/index.js",
-  "license": "MIT",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
   "description": "Access the previous value of a variable with this React hook",
   "name": "@rooks/use-previous",
   "homepage": "https://react-hooks.org/hook/use-previous",
@@ -11,8 +12,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "use",
@@ -21,13 +22,13 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "1.0.7",
+  "version": "1.1.4-alpha.0",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@rooks/use-did-mount": "^1.0.17"
+    "@rooks/use-did-mount": "^1.1.4-alpha.0"
   },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
+  "gitHead": "5c5d4b13a8199cc6fbe44e7d6b34e760c87732c8"
 }

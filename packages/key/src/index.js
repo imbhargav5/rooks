@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from "react";
 
 const defaultOptions = {
   when: true,
-  eventTypes: ["keypress"]
+  eventTypes: ["keydown"]
 };
 
 function useKey(keyList = [], handler, opts) {
@@ -21,21 +21,18 @@ function useKey(keyList = [], handler, opts) {
   if (target && target.current) {
     targetNode = target.current;
   }
-  useLayoutEffect(
-    () => {
-      if (when) {
+  useLayoutEffect(() => {
+    if (when) {
+      eventTypes.forEach(eventType => {
+        targetNode.addEventListener(eventType, handle);
+      });
+      return () => {
         eventTypes.forEach(eventType => {
-          targetNode.addEventListener(eventType, handle);
+          targetNode.removeEventListener(eventType, handle);
         });
-        return () => {
-          eventTypes.forEach(eventType => {
-            targetNode.removeEventListener(eventType, handle);
-          });
-        };
-      }
-    },
-    [when, eventTypes, keyList, targetNode, handler]
-  );
+      };
+    }
+  }, [when, eventTypes, keyList, targetNode, handler]);
 }
 
-module.exports = useKey;
+export default useKey;

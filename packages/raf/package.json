@@ -1,6 +1,7 @@
 {
   "main": "lib/index.js",
-  "license": "MIT",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
   "description": "A continuously running requestAnimationFrame hook for React",
   "name": "@rooks/use-raf",
   "homepage": "https://react-hooks.org/hook/use-raf",
@@ -11,8 +12,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "use",
@@ -23,7 +24,7 @@
     "hooks",
     "raf"
   ],
-  "version": "1.0.10",
+  "version": "1.1.4-alpha.0",
   "_id": "@rooks/use-raf@",
   "publishConfig": {
     "access": "public"

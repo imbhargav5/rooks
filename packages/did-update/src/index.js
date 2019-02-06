@@ -27,4 +27,4 @@ function useDidUpdate(callback, conditions) {
   }, conditions);
 }
 
-module.exports = useDidUpdate;
+export default useDidUpdate;

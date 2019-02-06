@@ -1,12 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-
-const Title = styled.h1``;
+import NoSSR from "react-no-ssr";
+import HomePageReadme from "../components/HomePage.md";
+import mdxComponents from "../utils/mdx-components";
 
 export default () => (
   <>
-    <Title>react-hooks.org</Title>
-    <p>Check out the links on the side for editable previews of the hooks</p>
-    <p>More info soon! </p>
+    <HomePageReadme components={mdxComponents} />
   </>
 );

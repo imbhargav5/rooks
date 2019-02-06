@@ -1,6 +1,7 @@
 {
   "main": "lib/index.js",
-  "license": "MIT",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
   "description": "A React hooks package for componentDidMount",
   "name": "@rooks/use-did-mount",
   "homepage": "https://react-hooks.org/hook/use-did-mount",
@@ -11,8 +12,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "use",
@@ -24,14 +25,14 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "1.0.17",
+  "version": "1.1.4-alpha.0",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "react": "16.8.0-alpha.1",
-    "react-dom": "16.8.0-alpha.1"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
+  "gitHead": "5c5d4b13a8199cc6fbe44e7d6b34e760c87732c8"
 }

@@ -1,8 +1,0 @@
-{
-  "presets": [
-    ["@babel/preset-env", { "modules": "umd" }],
-    "@babel/preset-react",
-    "babel-preset-minify"
-  ],
-  "plugins": ["@babel/plugin-proposal-export-default-from"]
-}

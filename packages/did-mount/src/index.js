@@ -12,4 +12,4 @@ function useDidMount(callback) {
   }, []);
 }
 
-module.exports = useDidMount;
+export default useDidMount;

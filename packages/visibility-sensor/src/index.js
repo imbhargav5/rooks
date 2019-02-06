@@ -148,19 +148,16 @@ function useVisbilitySensor(ref, opts) {
   }, []);
 
   // If interval check is needed
-  useEffect(
-    () => {
-      if (intervalCheck && intervalCheck > 0) {
-        const intervalTimer = setInterval(() => {
-          updateIsVisible();
-        }, intervalCheck);
-        return () => {
-          clearInterval(intervalTimer);
-        };
-      }
-    },
-    [intervalCheck]
-  );
+  useEffect(() => {
+    if (intervalCheck && intervalCheck > 0) {
+      const intervalTimer = setInterval(() => {
+        updateIsVisible();
+      }, intervalCheck);
+      return () => {
+        clearInterval(intervalTimer);
+      };
+    }
+  }, [intervalCheck]);
 
   function createListener(event, debounce, throttle) {
     const container = getContainer();
@@ -205,4 +202,4 @@ function useVisbilitySensor(ref, opts) {
   }, []);
   return localState;
 }
-module.exports = useVisbilitySensor;
+export default useVisbilitySensor;

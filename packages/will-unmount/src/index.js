@@ -12,4 +12,4 @@ function useWillUnmount(callback) {
   }, []);
 }
 
-module.exports = useWillUnmount;
+export default useWillUnmount;

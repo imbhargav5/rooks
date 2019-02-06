@@ -42,9 +42,7 @@ class Hook extends Component {
     return (
       <div>
         <div className="container is-fluid">
-          <NoSSR>
-            <ReadmeComponent hookName={hookName} components={mdxComponents} />
-          </NoSSR>
+          <ReadmeComponent hookName={hookName} components={mdxComponents} />
         </div>
       </div>
     );

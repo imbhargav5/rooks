@@ -6,17 +6,14 @@ function useOutsideClick(ref, handler, when = true) {
       handler(e);
     }
   }
-  useLayoutEffect(
-    () => {
-      if (when) {
-        document.addEventListener("click", handle);
-        return () => {
-          document.removeEventListener("click", handle);
-        };
-      }
-    },
-    [ref, handler, when]
-  );
+  useLayoutEffect(() => {
+    if (when) {
+      document.addEventListener("click", handle);
+      return () => {
+        document.removeEventListener("click", handle);
+      };
+    }
+  }, [ref, handler, when]);
 }
 
-module.exports = useOutsideClick;
+export default useOutsideClick;
