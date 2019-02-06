@@ -25,7 +25,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "1.1.0-alpha.0",
+  "version": "1.1.1-alpha.0",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"
