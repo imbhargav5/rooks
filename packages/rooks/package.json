@@ -8,6 +8,7 @@
   "main": "lib/rooks.js",
   "jsnext:main": "lib/rooks.esm.js",
   "module": "lib/rooks.esm.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-hooks-org/rooks.git"
