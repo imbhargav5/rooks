@@ -67,15 +67,12 @@ const Logo = styled.img`
 const useFilteredNpmResults = inputValue => {
   const [results, setResults] = useState([]);
   const npmBlob = useContext(NpmBlobContext);
-  useEffect(
-    () => {
-      const newResults = matchSorter(npmBlob, inputValue, {
-        keys: ["_name", "name", "keywords", "description"]
-      }).map(result => result._name);
-      setResults(newResults);
-    },
-    [inputValue]
-  );
+  useEffect(() => {
+    const newResults = matchSorter(npmBlob, inputValue, {
+      keys: ["_name", "name", "keywords", "description"]
+    }).map(result => result._name);
+    setResults(newResults);
+  }, [inputValue]);
   return results;
 };
 
@@ -147,13 +144,8 @@ const Footer = () => (
         <a href="https://imbhargav5.com" target="_blank">
           Bhargav Ponnapalli
         </a>
-        . The source code is licensed
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-        website content is licensed{" "}
-        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          CC BY NC SA 4.0
-        </a>
-        .
+        .The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>.
       </p>
     </div>
   </footer>
@@ -195,9 +187,11 @@ const Layout = ({ children }) => {
               <Header />
             </Sidebar>
           </LeftBox>
-          <RightBox width={[1]} px={4} pb={100}>
-            {children}
-            <Footer />
+          <RightBox width={[1]} px={4} style={{ height: `100%` }}>
+            <Flex flexDirection="column" style={{ height: `100%` }}>
+              <Box style={{ flex: 1, overflow: "auto" }}>{children}</Box>
+              <Footer />
+            </Flex>
           </RightBox>
         </Flex>
       </>

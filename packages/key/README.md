@@ -22,7 +22,7 @@ import useKey from "@rooks/use-key";
 
 ### Usage
 
-#### Basic example with keypress
+#### Basic example with keydown
 
 ```jsx
 function Demo() {
