@@ -22,7 +22,13 @@ Collection of regularly used custom hooks as utils for React
 [![Image from Gyazo](https://i.gyazo.com/95e208eb09a97edee34eb65ef1be5367.png)](https://gyazo.com/95e208eb09a97edee34eb65ef1be5367)
 
 
-## Installation
+# Features
+
+ - [x] Collection of 22+ hooks as separate modules
+ - [x] Standalone package with all the hooks at one place
+ - [x] CommonJS, UMD and ESM Support
+
+# Installation
 
 ###  For a specific hook like useDidMount
 
