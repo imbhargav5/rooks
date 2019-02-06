@@ -10,21 +10,18 @@ function useTimeout(cb, timeoutDelayMs = 0) {
     setIsTimeoutRunning(true);
   }
 
-  useLayoutEffect(
-    () => {
-      if (isTimeoutRunning) {
-        const timeout = window.setTimeout(cb, timeoutDelayMs);
-        return () => {
-          window.clearTimeout(timeout);
-        };
-      }
-    },
-    [isTimeoutRunning]
-  );
+  useLayoutEffect(() => {
+    if (isTimeoutRunning) {
+      const timeout = window.setTimeout(cb, timeoutDelayMs);
+      return () => {
+        window.clearTimeout(timeout);
+      };
+    }
+  }, [isTimeoutRunning]);
   return {
     clear,
     start
   };
 }
 
-module.exports = useTimeout;
+export default useTimeout;

@@ -64,4 +64,4 @@ function useCounter(initialValue) {
   };
 }
 
-module.exports = useCounter;
+export default useCounter;

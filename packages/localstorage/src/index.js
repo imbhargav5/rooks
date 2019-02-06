@@ -63,4 +63,4 @@ function useLocalStorage(key, defaultValue = null) {
   };
 }
 
-module.exports = useLocalStorage;
+export default useLocalStorage;

@@ -11,19 +11,16 @@ function usePrevious(currentValue) {
   const [curr, setCurr] = useState(currentValue);
   const [prev, setPrev] = useState(undefined);
   const [hasMounted, setHasMounted] = useState(false);
-  useEffect(
-    () => {
-      if (hasMounted) {
-        setPrev(curr);
-        setCurr(currentValue);
-      }
-    },
-    [currentValue]
-  );
+  useEffect(() => {
+    if (hasMounted) {
+      setPrev(curr);
+      setCurr(currentValue);
+    }
+  }, [currentValue]);
   useDidMount(() => {
     setHasMounted(true);
   });
   return prev;
 }
 
-module.exports = usePrevious;
+export default usePrevious;

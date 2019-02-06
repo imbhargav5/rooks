@@ -41,4 +41,4 @@ function useOnline() {
   return online;
 }
 
-module.exports = useOnline;
+export default useOnline;

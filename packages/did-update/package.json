@@ -1,6 +1,7 @@
 {
   "main": "lib/index.js",
-  "license": "MIT",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
   "description": "componentDidUpdate hook for react",
   "name": "@rooks/use-did-update",
   "homepage": "https://react-hooks.org/hook/use-did-update",
@@ -10,7 +11,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib",
+    "build": "rollup -c ../../scripts/rollup.config.js",
     "prepublish": "yarn run build"
   },
   "keywords": [

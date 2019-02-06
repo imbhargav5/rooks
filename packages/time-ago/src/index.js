@@ -41,15 +41,12 @@ function useTimeAgo(input, argOpts) {
     }
   }
 
-  useEffect(
-    () => {
-      dispatcher({
-        type: "update"
-      });
-    },
-    [input, argOpts]
-  );
+  useEffect(() => {
+    dispatcher({
+      type: "update"
+    });
+  }, [input, argOpts]);
 
   return state.timeAgo;
 }
-module.exports = useTimeAgo;
+export default useTimeAgo;

@@ -1,6 +1,7 @@
 {
   "main": "lib/index.js",
-  "license": "MIT",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
   "description": "A React Hooks package for input",
   "name": "@rooks/use-input",
   "homepage": "https://react-hooks.org/hook/use-input",
@@ -11,7 +12,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "babel src --out-dir lib",
+    "build": "rollup -c ../../scripts/rollup.config.js",
     "prepublish": "yarn run build"
   },
   "keywords": [

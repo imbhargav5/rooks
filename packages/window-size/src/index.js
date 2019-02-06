@@ -36,4 +36,4 @@ function useWindowSize() {
   return windowSize;
 }
 
-module.exports = useWindowSize;
+export default useWindowSize;

@@ -36,4 +36,4 @@ function useSelect(list, initialIndex = 0) {
   };
 }
 
-module.exports = useSelect;
+export default useSelect;

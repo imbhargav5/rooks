@@ -36,14 +36,11 @@ function useInput(initialValue = "", opts = defaultOptions) {
     }
   }
   //sync with default value
-  useEffect(
-    () => {
-      setValue(initialValue);
-    },
-    [initialValue]
-  );
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   return { value, onChange };
 }
 
-module.exports = useInput;
+export default useInput;

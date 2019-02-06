@@ -35,4 +35,4 @@ function useKey(keyList = [], handler, opts) {
   }, [when, eventTypes, keyList, targetNode, handler]);
 }
 
-module.exports = useKey;
+export default useKey;

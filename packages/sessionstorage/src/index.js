@@ -80,4 +80,4 @@ function useSessionStorage(key, defaultValue = null) {
   };
 }
 
-module.exports = useSessionStorage;
+export default useSessionStorage;

@@ -13,18 +13,15 @@ function useInterval(cb, intervalDuration, startImmediate = false) {
     }
   }
 
-  useEffect(
-    () => {
-      if (isRunning) {
-        const _intervalId = setInterval(cb, intervalDuration);
-        setIntervalId(_intervalId);
-        return () => {
-          clearInterval(_intervalId);
-        };
-      }
-    },
-    [isRunning]
-  );
+  useEffect(() => {
+    if (isRunning) {
+      const _intervalId = setInterval(cb, intervalDuration);
+      setIntervalId(_intervalId);
+      return () => {
+        clearInterval(_intervalId);
+      };
+    }
+  }, [isRunning]);
 
   return {
     start,
@@ -33,4 +30,4 @@ function useInterval(cb, intervalDuration, startImmediate = false) {
   };
 }
 
-module.exports = useInterval;
+export default useInterval;
