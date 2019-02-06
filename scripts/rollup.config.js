@@ -11,7 +11,6 @@ import sourceMaps from "rollup-plugin-sourcemaps";
 const propTypeIgnore = { "import PropTypes from 'prop-types';": "'';" };
 
 const cjs = {
-  exports: "named",
   format: "cjs",
   sourcemap: true
 };
@@ -33,12 +32,11 @@ const commonPlugins = [
   json(),
   nodeResolve(),
   babel({
-    exclude: ["node_modules/**", "../../node_modules/**"],
+    exclude: "node_modules/**",
     plugins: ["@babel/plugin-external-helpers"]
   }),
   commonjs({
     ignoreGlobal: true,
-    exclude: ["node_modules/**", "../../node_modules/**"],
     namedExports: {
       "react-is": ["isElement", "isValidElementType", "ForwardRef"]
     }
