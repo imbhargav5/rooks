@@ -1,3 +1,4 @@
+import path from "path";
 import nodeResolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 import commonjs from "rollup-plugin-commonjs";
@@ -6,6 +7,17 @@ import json from "rollup-plugin-json";
 import flow from "rollup-plugin-flow";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
+import capitalize from "lodash.capitalize";
+
+function getHookKeyFromPkgName(pkgName) {
+  return `use${pkgName
+    .split("-")
+    .slice(1)
+    .map(capitalize)
+    .join("")}`;
+}
+
+const pkg = require(path.resolve("./package.json"));
 
 // rollup-plugin-ignore stopped working, so we'll just remove the import lines 😐
 const propTypeIgnore = { "import PropTypes from 'prop-types';": "'';" };
@@ -71,7 +83,7 @@ const standaloneBaseConfig = {
     file: "lib/index.js",
     format: "umd",
     globals,
-    name: "styled",
+    name: getHookKeyFromPkgName(pkg.name),
     sourcemap: true
   },
   external: Object.keys(globals),
