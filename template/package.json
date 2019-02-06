@@ -10,8 +10,10 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "lint": "eslint src test",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "test:example": "parcel test/index.html",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "use",
