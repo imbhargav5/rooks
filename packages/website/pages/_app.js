@@ -53,7 +53,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h2,h3{
-      text-transform : uppercase;
+      
     }
     button{
       background-color: #fff;
