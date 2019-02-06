@@ -12,8 +12,5 @@ export default function useToggle(
   function toggleValue() {
     setValue(toggleFunction(value));
   }
-  return {
-    value,
-    toggleValue
-  };
+  return [value, toggleValue];
 }

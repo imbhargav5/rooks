@@ -30,5 +30,9 @@
   "dependencies": {
     "@rooks/use-did-mount": "^1.0.17"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
 }

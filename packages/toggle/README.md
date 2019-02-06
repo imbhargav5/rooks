@@ -28,9 +28,9 @@ import useToggle from "@rooks/use-toggle"
 const customToggleFunction = v => (v === "start" ? "stop" : "start");
 
 function Demo() {
-  const { value: value1, toggleValue: toggleValue1 } = useToggle();
-  const { value: value2, toggleValue: toggleValue2 } = useToggle(true);
-  const { value: value3, toggleValue: toggleValue3 } = useToggle(
+  const  [value1, toggleValue1] = useToggle();
+  const [value2, toggleValue2]  = useToggle(true);
+  const [value3, toggleValue3]  = useToggle(
     "start",
     customToggleFunction
   );
