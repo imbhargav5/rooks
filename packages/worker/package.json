@@ -15,7 +15,7 @@
     "build": "rollup -c ../../scripts/rollup.config.js",
     "prepublish": "yarn run build"
   },
-  "version": "1.1.4-alpha.0",
+  "version": "1.1.0",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",

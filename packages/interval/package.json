@@ -24,7 +24,7 @@
     "setInterval",
     "interval"
   ],
-  "version": "1.2.4-alpha.0",
+  "version": "1.2.0",
   "_id": "@rooks/use-interval@",
   "publishConfig": {
     "access": "public"

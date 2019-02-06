@@ -23,7 +23,7 @@
     "hooks",
     "session storage"
   ],
-  "version": "1.1.4-alpha.0",
+  "version": "1.1.0",
   "_id": "@rooks/use-sessionstorage@",
   "publishConfig": {
     "access": "public"
