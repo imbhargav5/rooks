@@ -1400,7 +1400,7 @@ function Demo() {
 render(<Demo/>)
 ```
 
-### Arguments
+## Arguments
 
 | Arguments      | Type     | Description                                     | Default value |
 | -------------- | -------- | ----------------------------------------------- | ------------- |
