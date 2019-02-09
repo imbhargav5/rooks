@@ -9,7 +9,7 @@ import useDidMount from "@rooks/use-did-mount";
  */
 function usePrevious(currentValue) {
   const [curr, setCurr] = useState(currentValue);
-  const [prev, setPrev] = useState(undefined);
+  const [prev, setPrev] = useState(null);
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     if (hasMounted) {
