@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useDidMount from "@rooks/use-did-mount";
+import useDidUpdate from "@rooks/use-did-update";
 
 /**
  *
@@ -9,17 +9,11 @@ import useDidMount from "@rooks/use-did-mount";
  */
 function usePrevious(currentValue) {
   const [curr, setCurr] = useState(currentValue);
-  const [prev, setPrev] = useState(undefined);
-  const [hasMounted, setHasMounted] = useState(false);
-  useEffect(() => {
-    if (hasMounted) {
-      setPrev(curr);
-      setCurr(currentValue);
-    }
+  const [prev, setPrev] = useState(null);
+  useDidUpdate(() => {
+    setPrev(curr);
+    setCurr(currentValue);
   }, [currentValue]);
-  useDidMount(() => {
-    setHasMounted(true);
-  });
   return prev;
 }
 

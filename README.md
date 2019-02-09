@@ -952,6 +952,12 @@ function Demo() {
 render(<Demo />);
 ```
 
+## Arguments
+
+| Argument | Type | Description                                        |
+| -------- | ---- | -------------------------------------------------- |
+| value    | any  | The variable whose previous value should be stored |
+
 ## Gif
 
 [![Image from Gyazo](https://i.gyazo.com/9913f58e1959ed60fb590cb280639d88.gif)](https://gyazo.com/9913f58e1959ed60fb590cb280639d88)
@@ -1394,7 +1400,7 @@ function Demo() {
 render(<Demo/>)
 ```
 
-### Arguments
+## Arguments
 
 | Arguments      | Type     | Description                                     | Default value |
 | -------------- | -------- | ----------------------------------------------- | ------------- |
@@ -1402,12 +1408,12 @@ render(<Demo/>)
 | toggleFunction | function | Function which determines how to toggle a value | v => !v       |
 
 
-### Returned object keys
+### Returned array items
 
-| Returned object attributes | Type     | Description                                                                                                           |
-| -------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| value                      | Any      | Current value                                                                                                         |
-| toggleValue                | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
+| Returned Array items | Type     | Description                                                                                                           |
+| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| value                | Any      | Current value                                                                                                         |
+| toggleValue          | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
 # @rooks/use-visibility-sensor
 
 ### Visibility sensor hook for React.
