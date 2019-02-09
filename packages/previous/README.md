@@ -44,6 +44,12 @@ function Demo() {
 render(<Demo />);
 ```
 
+## Arguments
+
+| Argument | Type | Description                                        |
+| -------- | ---- | -------------------------------------------------- |
+| value    | any  | The variable whose previous value should be stored |
+
 ## Gif
 
 [![Image from Gyazo](https://i.gyazo.com/9913f58e1959ed60fb590cb280639d88.gif)](https://gyazo.com/9913f58e1959ed60fb590cb280639d88)
