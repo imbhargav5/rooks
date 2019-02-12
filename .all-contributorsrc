@@ -21,6 +21,24 @@
         "doc",
         "bug"
       ]
+    },
+    {
+      "login": "fintara",
+      "name": "Tsvetan",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4290594?v=4",
+      "profile": "https://github.com/fintara",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "yesmeck",
+      "name": "Wei Zhu",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/465125?v=4",
+      "profile": "http://twitter.com/yesmeck",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

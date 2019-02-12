@@ -6,7 +6,7 @@
 <br/>
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 
 <br/>
 
@@ -115,9 +115,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/2936644?v=4" width="100px;" alt="Bhargav Ponnapalli"/><br /><sub><b>Bhargav Ponnapalli</b></sub>](https://imbhargav5.com/)<br />[💻](https://github.com/imbhargav5/rooks/commits?author=imbhargav5 "Code") [🤔](#ideas-imbhargav5 "Ideas, Planning, & Feedback") [🎨](#design-imbhargav5 "Design") [📖](https://github.com/imbhargav5/rooks/commits?author=imbhargav5 "Documentation") [🐛](https://github.com/imbhargav5/rooks/issues?q=author%3Aimbhargav5 "Bug reports") |
-| :---: |
-
+<table><tr><td align="center"><a href="https://imbhargav5.com/"><img src="https://avatars2.githubusercontent.com/u/2936644?v=4" width="100px;" alt="Bhargav Ponnapalli"/><br /><sub><b>Bhargav Ponnapalli</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Code">💻</a> <a href="#ideas-imbhargav5" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-imbhargav5" title="Design">🎨</a> <a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Documentation">📖</a> <a href="https://github.com/imbhargav5/rooks/issues?q=author%3Aimbhargav5" title="Bug reports">🐛</a></td><td align="center"><a href="https://github.com/fintara"><img src="https://avatars0.githubusercontent.com/u/4290594?v=4" width="100px;" alt="Tsvetan"/><br /><sub><b>Tsvetan</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=fintara" title="Code">💻</a></td><td align="center"><a href="http://twitter.com/yesmeck"><img src="https://avatars0.githubusercontent.com/u/465125?v=4" width="100px;" alt="Wei Zhu"/><br /><sub><b>Wei Zhu</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=yesmeck" title="Code">💻</a></td></tr></table>
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
