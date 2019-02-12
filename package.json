@@ -15,8 +15,7 @@
     "build": "lerna run build --stream --parallel",
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
-    "release": "lerna publish",
-    "postrelease": "node helpers/update_readme"
+    "release": "lerna publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
