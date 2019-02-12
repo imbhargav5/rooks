@@ -39,6 +39,7 @@
   "dependencies": {
     "@rooks/use-boundingclientrect": "1.1.0",
     "@rooks/use-counter": "1.1.0",
+    "@rooks/use-debounce": "1.1.0",
     "@rooks/use-did-mount": "1.1.0",
     "@rooks/use-did-update": "1.1.0",
     "@rooks/use-input": "1.2.0",
