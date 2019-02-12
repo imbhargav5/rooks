@@ -1,4 +1,5 @@
 <br/>
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <br/>
 <p align="center">
   <img src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png" height="300" style="margin: 200px 0" />
@@ -111,3 +112,15 @@ Package containing all the hooks is over here. - [Docs](https://github.com/imbha
 
 
 ### License - MIT
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars0.githubusercontent.com/u/465125?v=4" width="100px;" alt="Wei Zhu"/><br /><sub><b>Wei Zhu</b></sub>](http://twitter.com/yesmeck)<br />[💻](https://github.com/imbhargav5/rooks/commits?author=yesmeck "Code") |
+| :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
