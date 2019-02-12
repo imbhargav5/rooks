@@ -6,7 +6,7 @@
 <br/>
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks)
+[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 <br/>
 
@@ -105,9 +105,19 @@ Package containing all the hooks is over here. - [Docs](https://github.com/imbha
 | @rooks/use-window-size        | [Source](https://github.com/imbhargav5/rooks/tree/master/packages/window-size)        | [Docs and Demo](https://react-hooks.org/hook/use-window-size)        | [Npm install](https://npmjs.com/package/@rooks/use-window-size)        |
 | @rooks/use-worker             | [Source](https://github.com/imbhargav5/rooks/tree/master/packages/worker)             | [Docs and Demo](https://react-hooks.org/hook/use-worker)             | [Npm install](https://npmjs.com/package/@rooks/use-worker)             |
 
-
 <hr/>
 
-
-
 ### License - MIT
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars2.githubusercontent.com/u/2936644?v=4" width="100px;" alt="Bhargav Ponnapalli"/><br /><sub><b>Bhargav Ponnapalli</b></sub>](https://imbhargav5.com/)<br />[💻](https://github.com/imbhargav5/rooks/commits?author=imbhargav5 "Code") [🤔](#ideas-imbhargav5 "Ideas, Planning, & Feedback") [🎨](#design-imbhargav5 "Design") [📖](https://github.com/imbhargav5/rooks/commits?author=imbhargav5 "Documentation") [🐛](https://github.com/imbhargav5/rooks/issues?q=author%3Aimbhargav5 "Bug reports") |
+| :---: |
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
