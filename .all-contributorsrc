@@ -1,0 +1,27 @@
+{
+  "projectName": "rooks",
+  "projectOwner": "imbhargav5",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "imbhargav5",
+      "name": "Bhargav Ponnapalli",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2936644?v=4",
+      "profile": "https://imbhargav5.com/",
+      "contributions": [
+        "code",
+        "ideas",
+        "design",
+        "doc",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
