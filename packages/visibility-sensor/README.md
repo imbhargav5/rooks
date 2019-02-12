@@ -70,6 +70,7 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 `intervalCheck: false` - Accepts `int | bool`, if an `int` is supplied, that will be the interval in `ms` and it keeps checking for visibility
 
 `partialVisibility: false` - Accepts `bool | string` : Tells the hook if partial visibility should be considered as visibility or not. Accepts `false` and directions `top`, `bottom`, `left` and `right`
+
 `containment: null` - A `DOMNode` element which defaults to `window`. The element relative to which visibility is checked against
 
 `scrollCheck: true` - A `bool` to determine whether to check for scroll behavior or not
