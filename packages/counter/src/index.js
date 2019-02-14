@@ -39,7 +39,7 @@ function useCounter(initialValue) {
    * Increment counter by 1
    */
   function increment() {
-    setCounter(counter + 1);
+    incrementBy(1);
   }
   /**
    * Decrement counter by 1
