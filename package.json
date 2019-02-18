@@ -15,6 +15,7 @@
     "build": "lerna run build --stream --parallel",
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
+    "prerelease-individual": "yarn build",
     "release": "lerna publish",
     "release-individual": "lerna publish --ignore-changes=rooks"
   },
