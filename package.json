@@ -15,7 +15,8 @@
     "build": "lerna run build --stream --parallel",
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
-    "release": "lerna publish"
+    "release": "lerna publish",
+    "release-individual": "lerna publish --ignore-changes=rooks"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
