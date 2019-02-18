@@ -17,7 +17,7 @@
     "prerelease": "yarn build",
     "prerelease-individual": "yarn build",
     "release": "lerna publish",
-    "release-individual": "lerna publish --ignore-changes=rooks"
+    "release-individual": "lerna publish --scope=@rooks/*"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
