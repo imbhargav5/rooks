@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
@@ -38,7 +38,7 @@
   "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c",
   "dependencies": {
     "@rooks/use-boundingclientrect": "1.1.0",
-    "@rooks/use-counter": "1.1.0",
+    "@rooks/use-counter": "^1.1.1",
     "@rooks/use-did-mount": "1.1.0",
     "@rooks/use-did-update": "1.1.0",
     "@rooks/use-input": "1.2.0",
@@ -49,7 +49,7 @@
     "@rooks/use-mutation-observer": "1.1.0",
     "@rooks/use-navigator-language": "1.1.0",
     "@rooks/use-online": "1.1.0",
-    "@rooks/use-outside-click": "1.1.0",
+    "@rooks/use-outside-click": "^1.1.1",
     "@rooks/use-previous": "^1.2.1",
     "@rooks/use-raf": "1.1.0",
     "@rooks/use-select": "1.1.0",
@@ -57,7 +57,7 @@
     "@rooks/use-time-ago": "1.1.0",
     "@rooks/use-timeout": "1.2.0",
     "@rooks/use-toggle": "^2.0.2",
-    "@rooks/use-visibility-sensor": "1.1.0",
+    "@rooks/use-visibility-sensor": "^1.1.1",
     "@rooks/use-will-unmount": "1.1.0",
     "@rooks/use-window-size": "1.1.0",
     "@rooks/use-worker": "1.1.0"
