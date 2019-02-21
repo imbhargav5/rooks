@@ -1,27 +1,40 @@
-import { useState, useEffect } from "react";
+// See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
-function useInterval(cb, intervalDuration, startImmediate = false) {
+import React, { useState, useEffect, useRef } from 'react';
+
+function useInterval(callback, intervalDuration, startImmediate = false) {
   const [intervalId, setIntervalId] = useState(null);
   const [isRunning, setIsRunning] = useState(startImmediate);
+  const savedCallback = useRef();
 
   function start() {
-    setIsRunning(true);
+    if (!isRunning) {
+      setIsRunning(true);
+    }
   }
+
   function stop() {
     if (isRunning) {
       setIsRunning(false);
     }
   }
 
+  // Remember the latest callback.
   useEffect(() => {
-    if (isRunning) {
-      const _intervalId = setInterval(cb, intervalDuration);
-      setIntervalId(_intervalId);
-      return () => {
-        clearInterval(_intervalId);
-      };
+    savedCallback.current = callback;
+  });
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
     }
-  }, [isRunning]);
+    if (intervalDuration !== null && isRunning) {
+      let id = setInterval(tick, intervalDuration);
+      setIntervalId(id);
+      return () => clearInterval(id);
+    }
+  }, [intervalDuration, isRunning]);
 
   return {
     start,
