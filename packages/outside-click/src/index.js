@@ -12,7 +12,7 @@ function useOutsideClick(ref, handler, when = true) {
       document.addEventListener("ontouchstart", handle);
       return () => {
         document.removeEventListener("click", handle);
-        document.removeEventListener("ontouchend", handle);
+        document.removeEventListener("ontouchstart", handle);
       };
     }
   }, [ref, handler, when]);
