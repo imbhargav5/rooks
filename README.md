@@ -43,7 +43,7 @@ import useDidMount from "@rooks/use-did-mount";
 ### For standalone build with all the hooks
 
 ```
-npm i - s rooks
+npm i -s rooks
 ```
 
 Import any hook from "rooks" and start using them!
