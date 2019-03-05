@@ -24,7 +24,7 @@
     "online status",
     "online status hook"
   ],
-  "version": "1.1.0",
+  "version": "2.0.0-0",
   "_id": "@rooks/use-online@",
   "publishConfig": {
     "access": "public"
