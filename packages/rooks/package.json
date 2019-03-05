@@ -35,7 +35,6 @@
   "resolutions": {
     "terser": "3.14"
   },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c",
   "dependencies": {
     "@rooks/use-boundingclientrect": "1.1.0",
     "@rooks/use-counter": "^1.1.1",

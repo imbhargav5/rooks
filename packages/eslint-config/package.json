@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-rooks",
   "version": "3.0.0-alpha.0",
-  "description": "Eslint config for rooks",
+  "description": "Eslint config for rooks.",
   "keywords": [
     "eslint",
     "eslintconfig",
