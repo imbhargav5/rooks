@@ -3,12 +3,7 @@
  */
 import React, { useState } from "react";
 import useDidUpdate from "..";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  flushEffects
-} from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "react-testing-library";
 
 describe("useDidUpdate", () => {
   let App;
@@ -46,8 +41,6 @@ describe("useDidUpdate", () => {
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
     expect(parseInt(renderedElement.textContent)).toEqual(0);
-    flushEffects();
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
   });
 
   it("gets called if a state value changes", () => {
@@ -56,8 +49,9 @@ describe("useDidUpdate", () => {
     const valueElement = getByTestId("value");
     const triggerElement = getByTestId("trigger-btn");
     expect(parseInt(renderedElement.textContent)).toEqual(0);
-    fireEvent.click(triggerElement);
-    flushEffects();
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
     expect(parseInt(valueElement.textContent)).toEqual(1);
     expect(parseInt(renderedElement.textContent)).toEqual(1);
   });
@@ -68,12 +62,14 @@ describe("useDidUpdate", () => {
     const valueElement = getByTestId("value");
     const triggerElement = getByTestId("trigger-btn");
     expect(parseInt(renderedElement.textContent)).toEqual(0);
-    fireEvent.click(triggerElement);
-    flushEffects();
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
     expect(parseInt(valueElement.textContent)).toEqual(1);
     expect(parseInt(renderedElement.textContent)).toEqual(1);
-    fireEvent.click(triggerElement);
-    flushEffects();
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
     expect(parseInt(valueElement.textContent)).toEqual(2);
     expect(parseInt(renderedElement.textContent)).toEqual(1);
   });

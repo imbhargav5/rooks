@@ -3,12 +3,7 @@
  */
 import React from "react";
 import useToggle from "..";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  flushEffects
-} from "react-testing-library";
+import { render, cleanup, fireEvent } from "react-testing-library";
 
 describe("useToggle behaviour", () => {
   let App;
