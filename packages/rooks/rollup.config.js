@@ -66,8 +66,12 @@ const configBase = {
   input: "./src/index.js",
 
   // \0 is rollup convention for generated in memory modules
-  external: id =>
-    !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"),
+  external: id => {
+    if (id.startsWith("@rooks")) {
+      return false;
+    }
+    return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
+  },
   plugins: commonPlugins
 };
 
