@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.2",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
@@ -34,6 +34,5 @@
   ],
   "resolutions": {
     "terser": "3.14"
-  },
-  "dependencies": {}
+  }
 }
