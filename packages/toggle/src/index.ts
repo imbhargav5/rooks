@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 
 const defaultToggleFunction = v => !v;
 
@@ -8,9 +8,5 @@ export default function useToggle(
   initialValue = false,
   toggleFunction = defaultToggleFunction
 ) {
-  const [value, setValue] = useState(initialValue);
-  function toggleValue() {
-    setValue(toggleFunction(value));
-  }
-  return [value, toggleValue];
+  return useReducer(toggleFunction, initialValue);
 }
