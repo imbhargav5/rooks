@@ -1,4 +1,4 @@
-export default function useToggle(
-  initialValue: any,
-  toggleFunction: (a: any) => any
-): [any, () => void];
+export default function useToggle<TToggleValues = boolean>(
+  initialValue?: TToggleValues,
+  toggleFunction?: (a: TToggleValues) => TToggleValues,
+): [TToggleValues, () => void];
