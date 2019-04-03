@@ -1,1 +1,3 @@
-export default function useNavigatorLanguage(): string | null;
+declare module "index" {
+    export default function useNavigatorLanguage(): null;
+}

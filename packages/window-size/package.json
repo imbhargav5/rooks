@@ -14,7 +14,9 @@
     "lint": "eslint src test",
     "build": "rollup -c ../../scripts/rollup.config.js",
     "test:example": "parcel test/index.html",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",

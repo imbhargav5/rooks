@@ -1,3 +1,4 @@
-import { Ref } from "react";
-
-export default function useBoundingClientRect(ref: Ref<HTMLElement>): DOMRect;
+declare module "index" {
+    function useBoundingclientRect(ref: any): null;
+    export default useBoundingclientRect;
+}

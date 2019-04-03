@@ -1,9 +1,8 @@
-type Dictionary = {
-  value: string;
-  set: (newValue: string) => void;
-  remove: () => void;
-};
-export default function useLocalstorage(
-  key: string,
-  defaultValue?: any
-): Dictionary;
+declare module "index" {
+    function useLocalStorage(key: any, defaultValue?: null): {
+        value: any;
+        set: (newValue: any) => void;
+        remove: () => false | undefined;
+    };
+    export default useLocalStorage;
+}

@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+interface CounterHandler {
+  value: number;
+  increment: () => void;
+  decrement: () => void;
+  incrementBy: (amount: number) => void;
+  decrementBy: (amount: number) => void;
+  reset: () => void;
+}
+
 /**
  *
  * @typedef handler
@@ -17,13 +26,13 @@ import { useState } from "react";
  * @param {number} initialValue The initial value of the counter
  * @returns {handler} A handler to interact with the counter
  */
-function useCounter(initialValue) {
+function useCounter(initialValue: number): CounterHandler {
   const [counter, setCounter] = useState(initialValue);
   /**
    * Increment counter by an amount
    * @param {number} incrAmount
    */
-  function incrementBy(incrAmount) {
+  function incrementBy(incrAmount: number): void {
     setCounter(counter + incrAmount);
   }
   /**
@@ -31,26 +40,26 @@ function useCounter(initialValue) {
    * Decrement counter by an amount
    * @param {*} decrAmount
    */
-  function decrementBy(decrAmount) {
+  function decrementBy(decrAmount: number): void {
     incrementBy(-decrAmount);
   }
 
   /**
    * Increment counter by 1
    */
-  function increment() {
+  function increment(): void {
     incrementBy(1);
   }
   /**
    * Decrement counter by 1
    */
-  function decrement() {
+  function decrement(): void {
     incrementBy(-1);
   }
   /**
    * Reset counter to initial value
    */
-  function reset() {
+  function reset(): void {
     setCounter(initialValue);
   }
 

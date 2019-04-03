@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "DIRECTORY",
-    "outFile": "./src/index.d.ts"
-  },
-  "exclude": ["../../node_modules"]
+    "outFile": "./index.d.ts"
+  }
 }

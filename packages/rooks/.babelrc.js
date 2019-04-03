@@ -8,6 +8,5 @@ module.exports = {
     ["@babel/preset-env", { modules, loose }],
     "@babel/preset-react",
     "babel-preset-minify"
-  ],
-  plugins: ["@babel/plugin-proposal-export-default-from"]
+  ]
 };
