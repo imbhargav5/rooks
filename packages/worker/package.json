@@ -5,6 +5,7 @@
   "description": "A React Hooks package for worker",
   "name": "@rooks/use-worker",
   "homepage": "https://react-hooks.org/hook/use-worker",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

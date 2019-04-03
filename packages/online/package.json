@@ -13,7 +13,8 @@
     "test": "jest",
     "lint": "eslint src test",
     "build": "rollup -c ../../scripts/rollup.config.js",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",

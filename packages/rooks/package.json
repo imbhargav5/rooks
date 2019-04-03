@@ -17,7 +17,8 @@
     "build": "rollup -c rollup.config.js",
     "prebuild": "rimraf lib",
     "lint": "eslint src test",
-    "test": "jest"
+    "test": "jest",
+    "generate:types": "tsc"
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"

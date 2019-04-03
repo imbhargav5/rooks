@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "DIRECTORY",
+    "outFile": "src/index.js",
+    "emitDeclarationOnly": true
+  },
+  "exclude": ["../../node_modules"]
+}

@@ -26,8 +26,8 @@
     "@babel/plugin-proposal-export-default-from": "7.2.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
-    "@types/react": "16.7.18",
-    "@types/react-dom": "16.0.11",
+    "@types/react": "16.8.10",
+    "@types/react-dom": "16.8.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "8.0.5",
@@ -59,6 +59,7 @@
     "rollup-plugin-sourcemaps": "0.4.2",
     "rollup-plugin-terser": "4.0.4",
     "shelljs": "0.8.3",
+    "typescript": "3.4.1",
     "webpack": "4.29.1",
     "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
