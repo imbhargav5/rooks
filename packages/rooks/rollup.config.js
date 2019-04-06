@@ -138,8 +138,8 @@ const browserConfig = {
 };
 
 export default [
-  // standaloneConfig,
-  // standaloneProdConfig,
+  standaloneConfig,
+  standaloneProdConfig,
   serverConfig,
   browserConfig
 ];
