@@ -65,7 +65,7 @@ function useVisbilitySensor(ref, opts) {
     resizeThrottle,
     partialVisibility,
     minTopValue
-  } = Object.assign({}, DEFAULT_OPTIONS, opts);
+  } = (<any>Object).assign({}, DEFAULT_OPTIONS, opts);
 
   function getContainer() {
     return containment || window;

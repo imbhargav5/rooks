@@ -9,14 +9,11 @@ function reducer(state, action) {
   }
 }
 
-function useSessionStorage(key, defaultValue = null) {
-  const [value, dispatch] = useReducer(
-    reducer,
-    getValueFromSessionStorage(key)
-  );
+function useSessionStorage(key: string, defaultValue = null) {
+  const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
-    const initialValue = getValueFromSessionStorage(key);
+    const initialValue = getValueFromSessionStorage();
     if (initialValue === null || initialValue === "null") {
       set(defaultValue);
     }
@@ -29,21 +26,21 @@ function useSessionStorage(key, defaultValue = null) {
     return sessionStorage.getItem(key);
   }
 
-  function saveValueToSessionStorage(key, value) {
+  function saveValueToSessionStorage(key: string, value: string | null) {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
-    return sessionStorage.setItem(key, value);
+    return sessionStorage.setItem(key, String(value));
   }
 
-  function setValue(value) {
+  function setValue(value: string | null) {
     dispatch({
       type: "set",
       payload: value
     });
   }
 
-  function set(newValue) {
+  function set(newValue: string | null) {
     saveValueToSessionStorage(key, newValue);
     setValue(newValue);
   }
@@ -60,7 +57,7 @@ function useSessionStorage(key, defaultValue = null) {
     init();
   }, []);
 
-  function listen(e) {
+  function listen(e: StorageEvent) {
     if (e.storageArea === sessionStorage && e.key === key) {
       set(e.newValue);
     }

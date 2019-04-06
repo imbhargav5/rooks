@@ -37,7 +37,15 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  typescript(),
+  typescript({
+    // moduleResolution: "node",
+    // strictNullChecks: true, // enable strict null checks as a best practice
+    // module: "ES2015", // specify module code generation
+    // jsx: "react", // use typescript to transpile jsx to js
+    // target: "ES2016", // specify ECMAScript target version
+    include: ["../../**/src/index.ts"]
+    //exclude: ["node_modules", "./typings/**/*"]
+  }),
   sourceMaps(),
   json(),
   nodeResolve(),
@@ -67,8 +75,12 @@ const configBase = {
   input: "./src/index.ts",
 
   // \0 is rollup convention for generated in memory modules
-  external: id =>
-    !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"),
+  external: id => {
+    if (id.startsWith("@rooks")) {
+      return false;
+    }
+    return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
+  },
   plugins: commonPlugins
 };
 

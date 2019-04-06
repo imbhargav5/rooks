@@ -1632,27 +1632,10 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@rooks/use-did-mount@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@rooks/use-did-mount/-/use-did-mount-1.1.0.tgz#e91c8b0cd1232eb47fdc22c43ad08eda1351388e"
-  integrity sha512-S3FzYPKvQhyPwrxBaJJ93wr2/Rp55BjeV/qijlfBbB3y6ZUwcVdOj2ShwUZh2zBH+vqoxDxapraIV0Yq5NnwRw==
-
-"@rooks/use-did-update@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@rooks/use-did-update/-/use-did-update-1.1.0.tgz#fba14a1c9b6ecace2b3ec247837ded9dfd833461"
-  integrity sha512-TL88PuZVAFyb1MdyQuQ48L7w3SFsEkThYQPW676kPyJY+5ScbG5aD+njaeywvlhbW8LB9rnpPDlWyto0zlgo/Q==
-  dependencies:
-    "@rooks/use-did-mount" "^1.1.0"
-
 "@rooks/use-interval@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@rooks/use-interval/-/use-interval-0.1.5.tgz#e89dfe5f74c1fe36972603c0e343a1d3366394be"
   integrity sha512-bqP8LifNCAFJD4OLL9fKnVoktiK7nwMUArlvs/8H2LzrDazQbt930B2yZmv0vv3vnkry4fCVQXxVt0xpNnou9Q==
-
-"@rooks/use-mutation-observer@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-1.1.0.tgz#db5f2e9b209956f3e25a9c257c41448f8a5ad24f"
-  integrity sha512-C5n6CAxn7TnMFimqAHi3vUtcoebu1GcYrgCgFjydGRNB/+VvQ768qS7Pc3H5VvNQu194NqviyEhVv4MQyqszsg==
 
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"

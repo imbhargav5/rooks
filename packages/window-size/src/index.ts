@@ -1,16 +1,30 @@
 import { useState, useEffect } from "react";
 
-const initialValue = {
-  width: null,
-  height: null,
+interface WindowDimensions {
+  innerWidth: number | null;
+  innerHeight: number | null;
+  outerWidth: number | null;
+  outerHeight: number | null;
+}
+
+const initialValue: WindowDimensions = {
+  innerWidth: null,
+  innerHeight: null,
   outerWidth: null,
   outerHeight: null
 };
 
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState(initialValue);
+/**
+ * useWindowSize
+ *
+ * A hook that provides information of the dimensions of the window
+ *
+ * @return {WindowDimensions}  Dimensions of the window
+ */
+function useWindowSize(): WindowDimensions {
+  const [windowSize, setWindowSize] = useState<WindowDimensions>(initialValue);
 
-  function getWindowSize() {
+  function fetchWindowDimensionsAndSave() {
     setWindowSize({
       innerWidth: window.innerWidth,
       innerHeight: window.innerHeight,
@@ -22,14 +36,14 @@ function useWindowSize() {
   // run on mount
   useEffect(() => {
     // run only once
-    getWindowSize();
+    fetchWindowDimensionsAndSave();
   }, []);
 
   // set resize handler once on mount and clean before unmount
   useEffect(() => {
-    window.addEventListener("resize", getWindowSize);
+    window.addEventListener("resize", fetchWindowDimensionsAndSave);
     return () => {
-      window.removeEventListener("resize", getWindowSize);
+      window.removeEventListener("resize", fetchWindowDimensionsAndSave);
     };
   }, []);
 

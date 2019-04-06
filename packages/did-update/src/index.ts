@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import useDidMount from "@rooks/use-did-mount";
+import useDidMount from "@rooks/use-did-mount/src";
 
 /**
+ *  useDidUpdate hook
  *
+ *  Fires a callback on component update
+ *  Can take in a list of conditions to fire callback when one of the
+ *  conditions changes
  *
  * @param {function} callback The callback to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
- * @returns {undefined}
+ * @return {undefined}
  */
-function useDidUpdate(callback, conditions) {
+function useDidUpdate(callback: () => any, conditions?: Array<any>): void {
   const [hasMounted, setHasMounted] = useState(false);
   if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
     conditions = [conditions];

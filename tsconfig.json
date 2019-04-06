@@ -4,7 +4,7 @@
     "strictNullChecks": true, // enable strict null checks as a best practice
     "module": "amd", // specify module code generation
     "jsx": "react", // use typescript to transpile jsx to js
-    "target": "es5", // specify ECMAScript target version
+    "target": "ES2016", // specify ECMAScript target version
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "DIRECTORY",

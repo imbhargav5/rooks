@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A React Hook to get time ago for timestamp millisecond value",
   "name": "@rooks/use-time-ago",
   "homepage": "https://react-hooks.org/hook/use-time-ago",

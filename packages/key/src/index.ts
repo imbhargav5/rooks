@@ -1,20 +1,51 @@
-import { useState, useLayoutEffect } from "react";
+import { useLayoutEffect, Ref } from "react";
+
+interface Options {
+  /**
+   * Condition which if true, will enable the event listeners
+   */
+  when: boolean;
+  /**
+   * Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp
+   */
+  eventTypes: Array<string | number>;
+  /**
+   * target ref on which the events should be listened. If no target is specified,
+   * events are listened to on the window
+   */
+  target?: Ref<HTMLElement>;
+}
 
 const defaultOptions = {
   when: true,
   eventTypes: ["keydown"]
 };
 
-function useKey(keyList = [], handler, opts) {
-  const options = Object.assign({}, defaultOptions, opts);
+/**
+ * useKey hook
+ *
+ * Fires a callback on keyboard events like keyDown, keyPress and keyUp
+ *
+ * @param {[string|number]} keyList
+ * @param {function} callback
+ * @param {Options} options
+ */
+function useKey(
+  keyList: Array<string | number>,
+  callback: (e: KeyboardEvent) => any,
+  opts?: Options
+): void {
+  const options = (<any>Object).assign({}, defaultOptions, opts);
   const { when, eventTypes } = options;
   let { target } = options;
-  function handle(e) {
+
+  function handle(e: KeyboardEvent) {
     if (keyList.includes(e.key) || keyList.includes(e.keyCode)) {
-      handler(e);
+      callback(e);
     }
   }
-  let targetNode;
+
+  let targetNode: HTMLElement | Window | undefined;
   if (typeof window !== "undefined") {
     targetNode = window;
   }
@@ -24,15 +55,15 @@ function useKey(keyList = [], handler, opts) {
   useLayoutEffect(() => {
     if (when) {
       eventTypes.forEach(eventType => {
-        targetNode.addEventListener(eventType, handle);
+        targetNode && targetNode.addEventListener(eventType, handle);
       });
       return () => {
         eventTypes.forEach(eventType => {
-          targetNode.removeEventListener(eventType, handle);
+          targetNode && targetNode.removeEventListener(eventType, handle);
         });
       };
     }
-  }, [when, eventTypes, keyList, targetNode, handler]);
+  }, [when, eventTypes, keyList, targetNode, callback]);
 }
 
 export default useKey;

@@ -1,11 +1,26 @@
 import { useState, useEffect } from "react";
 
-function useLocalStorage(key, defaultValue = null) {
-  const [value, setValue] = useState(getValueFromLocalStorage(key));
+interface LocalStorageHandler {
+  value: string | null;
+  set: (newValue: string) => void;
+  remove: () => void;
+}
+
+/**
+ * useLocalStorage hook
+ *
+ * @param {string} key - Key of the localStorage object
+ * @param {string} defaultValue - Default initial value
+ */
+function useLocalStorage(key: string, defaultValue: any = null) {
+  const [value, setValue] = useState(getValueFromLocalStorage());
 
   function init() {
-    const initialValue = getValueFromLocalStorage(key);
-    if (initialValue === null || initialValue === "null") {
+    const valueLoadedFromLocalStorage = getValueFromLocalStorage();
+    if (
+      valueLoadedFromLocalStorage === null ||
+      valueLoadedFromLocalStorage === "null"
+    ) {
       set(defaultValue);
     }
   }
@@ -17,19 +32,19 @@ function useLocalStorage(key, defaultValue = null) {
     return localStorage.getItem(key);
   }
 
-  function saveValueToLocalStorage(key, value) {
+  function saveValueToLocalStorage(key: string, value: string | null) {
     if (typeof localStorage === "undefined") {
       return null;
     }
-    return localStorage.setItem(key, value);
+    return localStorage.setItem(key, String(value));
   }
 
-  function set(newValue) {
+  function set(newValue: any) {
     setValue(newValue);
     saveValueToLocalStorage(key, newValue);
   }
 
-  function listen(e) {
+  function listen(e: StorageEvent) {
     if (e.storageArea === localStorage && e.key === key) {
       setValue(e.newValue);
     }
@@ -56,11 +71,13 @@ function useLocalStorage(key, defaultValue = null) {
     };
   });
 
-  return {
+  const handler: LocalStorageHandler = {
     value,
     set,
     remove
   };
+
+  return handler;
 }
 
 export default useLocalStorage;

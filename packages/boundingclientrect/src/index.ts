@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react";
-import useMutationObserver from "@rooks/use-mutation-observer";
+import { useState, useEffect, MutableRefObject } from "react";
+import useMutationObserver from "@rooks/use-mutation-observer/src";
 
-function useBoundingclientRect(ref) {
-  function getBoundingClientRect() {
+/**
+ * useBoundingclientRect hook
+ *
+ * @param ref The React ref whose ClientRect is needed
+ * @return ClientRect
+ */
+function useBoundingclientRect(ref: MutableRefObject<HTMLElement>) {
+  function getBoundingClientRect(): ClientRect | DOMRect | null {
     if (ref.current) {
       return ref.current.getBoundingClientRect();
     }
     return null;
   }
 
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
 
   function update() {
     setValue(getBoundingClientRect());

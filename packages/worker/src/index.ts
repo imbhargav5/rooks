@@ -1,19 +1,29 @@
 import { useState, useEffect } from "react";
 
-const defaultOptions = {
-  onMessage: () => {},
-  onMessageError: () => {}
-};
-
-export default function useWorker(scriptPath, opts) {
-  const options = Object.assign({}, defaultOptions, opts);
-  const { onMessage, onMessageError } = options;
-  const [worker, setWorker] = useState(undefined);
+/**
+ * useWorker hook
+ *
+ * @param {string} scriptPath - Path of the worker
+ * @param {object} workerOptions - Additional options to create the worker
+ * @param {object} attributes - Event handlers to attach to the worker
+ * @return {Worker}
+ */
+export default function useWorker(
+  scriptPath: string,
+  workerOptions?: WorkerOptions,
+  attributes?: Object
+): Worker | undefined {
+  const [worker, setWorker] = useState<Worker | undefined>(undefined);
 
   useEffect(() => {
-    const _worker = new Worker(scriptPath);
-    _worker.onmessage = onMessage;
-    _worker.onmessageerror = onMessageError;
+    const _worker = new Worker(scriptPath, workerOptions);
+    // attach attributes
+    if (attributes) {
+      for (const key in attributes) {
+        _worker[key] = attributes[key];
+      }
+    }
+
     setWorker(_worker);
 
     return () => {
@@ -21,5 +31,6 @@ export default function useWorker(scriptPath, opts) {
       setWorker(undefined);
     };
   }, [scriptPath]);
+
   return worker;
 }

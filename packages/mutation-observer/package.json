@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "license": "MIT",
   "description": "A React Hooks package for mutation-observer",
   "name": "@rooks/use-mutation-observer",

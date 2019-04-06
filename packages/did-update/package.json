@@ -2,6 +2,8 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
+  "source": "src/index.ts",
   "description": "componentDidUpdate hook for react",
   "name": "@rooks/use-did-update",
   "homepage": "https://react-hooks.org/hook/use-did-update",
@@ -29,9 +31,6 @@
   "_id": "@rooks/use-did-update@",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@rooks/use-did-mount": "^1.1.0"
   },
   "peerDependencies": {
     "react": ">=16.8.0",

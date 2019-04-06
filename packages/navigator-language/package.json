@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A React Hooks package for navigator-language",
   "name": "@rooks/use-navigator-language",
   "homepage": "https://react-hooks.org/hook/use-navigator-language",

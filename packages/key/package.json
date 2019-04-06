@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "Keyboard key handler hook for react",
   "name": "@rooks/use-key",
   "homepage": "https://react-hooks.org/hook/use-key",

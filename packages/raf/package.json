@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A continuously running requestAnimationFrame hook for React",
   "name": "@rooks/use-raf",
   "homepage": "https://react-hooks.org/hook/use-raf",
