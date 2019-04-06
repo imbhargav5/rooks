@@ -6,7 +6,6 @@
   "description": "A React Hooks package for worker",
   "name": "@rooks/use-worker",
   "homepage": "https://react-hooks.org/hook/use-worker",
-  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -19,7 +18,7 @@
     "pregenerate:types": "rimraf index.d.ts",
     "generate:types": "tsc"
   },
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
