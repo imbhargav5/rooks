@@ -6,6 +6,6 @@ declare module "index" {
      *
      * @returns {boolean} The value of navigator.onLine
      */
-    function useOnline(): boolean | undefined;
+    function useOnline(): boolean;
     export default useOnline;
 }

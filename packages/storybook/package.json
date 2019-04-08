@@ -1,0 +1,16 @@
+{
+  "name": "storybook",
+  "version": "3.0.0-alpha.3",
+  "private": true,
+  "description": "Storybook for hooks",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook -s ./public"
+  },
+  "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
+  "license": "MIT",
+  "dependencies": {
+    "@storybook/cli": "5.0.6",
+    "@storybook/react": "5.0.6"
+  }
+}

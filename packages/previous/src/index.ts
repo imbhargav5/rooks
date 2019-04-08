@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import useDidUpdate from "@rooks/use-did-update/src";
+import { useRef, useEffect } from "react";
 
 /**
  *
@@ -9,14 +8,13 @@ import useDidUpdate from "@rooks/use-did-update/src";
  * @returns {*} The previous value
  */
 function usePrevious<T>(currentValue: T): T | null {
-  const [curr, setCurr] = useState<T>(currentValue);
-  const [prev, setPrev] = useState<T | null>(null);
-  useDidUpdate(() => {
-    setPrev(curr);
-    setCurr(currentValue);
+  const prevRef = useRef<T | null>(null);
+
+  useEffect(() => {
+    prevRef.current = currentValue;
   }, [currentValue]);
 
-  return prev;
+  return prevRef.current;
 }
 
 export default usePrevious;

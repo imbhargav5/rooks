@@ -1,4 +1,4 @@
-import { useLayoutEffect, Ref } from "react";
+import { useLayoutEffect, Ref, useEffect } from "react";
 
 interface Options {
   /**
@@ -38,22 +38,15 @@ function useKey(
   const options = (<any>Object).assign({}, defaultOptions, opts);
   const { when, eventTypes } = options;
   let { target } = options;
-
   function handle(e: KeyboardEvent) {
     if (keyList.includes(e.key) || keyList.includes(e.keyCode)) {
       callback(e);
     }
   }
 
-  let targetNode: HTMLElement | Window | undefined;
-  if (typeof window !== "undefined") {
-    targetNode = window;
-  }
-  if (target && target.current) {
-    targetNode = target.current;
-  }
   useLayoutEffect(() => {
-    if (when) {
+    if (when && typeof window !== "undefined") {
+      const targetNode = target ? target.current : window;
       eventTypes.forEach(eventType => {
         targetNode && targetNode.addEventListener(eventType, handle);
       });
@@ -63,7 +56,7 @@ function useKey(
         });
       };
     }
-  }, [when, eventTypes, keyList, targetNode, callback]);
+  }, [when, eventTypes, keyList, target, callback]);
 }
 
 export default useKey;
