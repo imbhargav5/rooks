@@ -1,4 +1,9 @@
 declare module "index" {
-    function useTimeAgo(input: any, argOpts: any): any;
+    interface Options {
+        intervalMs: number;
+        locale: string;
+        relativeDate: any;
+    }
+    function useTimeAgo(input: any, argOpts: Options): string;
     export default useTimeAgo;
 }

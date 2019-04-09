@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useWillUnmount from "@rooks/use-will-unmount";
 
-storiesOf("useUnmount", module).add("basic example", () => (
+storiesOf("useWillUnmount", module).add("basic example", () => (
   <UnmountComponent />
 ));
 

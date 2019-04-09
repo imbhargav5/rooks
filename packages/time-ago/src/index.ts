@@ -1,10 +1,16 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, ReducerAction } from "react";
 import useInterval from "@rooks/use-interval";
-import timeago from "timeago.js";
+import timeago, { TimeAgoInterface } from "timeago.js";
 
 const defaultOpts = {
   intervalMs: 1000
 };
+
+interface Options {
+  intervalMs: number;
+  locale: string;
+  relativeDate: any;
+}
 
 function computeTimeAgo(input, locale, relativeDate) {
   let instance;
@@ -16,37 +22,45 @@ function computeTimeAgo(input, locale, relativeDate) {
   return instance.format(input, locale);
 }
 
-function useTimeAgo(input, argOpts) {
+function reducer(state: string, action: any) {
+  switch (action.type) {
+    case "update":
+      var { input, locale, relativeDate } = action.payload;
+      return computeTimeAgo(input, locale, relativeDate);
+    default:
+      return state;
+  }
+}
+
+function useTimeAgo(input: any, argOpts: Options): string {
   const opts = Object.assign({}, argOpts, defaultOpts);
   const { intervalMs, locale, relativeDate } = opts;
-  const [state, dispatcher] = useReducer(reducer, {
-    timeAgo: computeTimeAgo(input, locale, relativeDate)
-  });
+  const [state, dispatcher] = useReducer(
+    reducer,
+    computeTimeAgo(input, locale, relativeDate)
+  );
   useInterval(
     () => {
-      dispatcher({
-        type: "update"
-      });
+      update();
     },
     intervalMs,
     true
   );
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case "update":
-        return { timeAgo: computeTimeAgo(input, locale, relativeDate) };
-      default:
-        return state;
-    }
-  }
-
   useEffect(() => {
-    dispatcher({
-      type: "update"
-    });
+    update();
   }, [input, argOpts]);
+  return state;
 
-  return state.timeAgo;
+  function update() {
+    dispatcher({
+      type: "update",
+      payload: {
+        input,
+        locale,
+        relativeDate
+      }
+    });
+  }
 }
 export default useTimeAgo;

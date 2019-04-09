@@ -1,7 +1,9 @@
 declare module "index" {
-    function useTimeout(cb: any, timeoutDelayMs?: number): {
-        clear: () => void;
-        start: () => void;
-    };
+    interface UseTimeoutHandler {
+        start: () => any;
+        clear: () => any;
+        isActive: boolean;
+    }
+    function useTimeout(cb: () => void, timeoutDelayMs?: number): UseTimeoutHandler;
     export default useTimeout;
 }
