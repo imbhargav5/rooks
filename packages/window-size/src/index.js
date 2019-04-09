@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 const initialValue = {
-  width: null,
-  height: null,
+  innerWidth: null,
+  innerHeight: null,
   outerWidth: null,
   outerHeight: null
 };

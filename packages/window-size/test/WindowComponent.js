@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import useWindowSize from "../src";
 
 function WindowComponent() {
@@ -9,22 +8,23 @@ function WindowComponent() {
     <div>
       <p>
         <span>innerHeight - </span>
-        <span>{innerHeight}</span>
+        <span data-testid="innerHeight">{innerHeight}</span>
       </p>
       <p>
         <span>innerWidth - </span>
-        <span>{innerWidth}</span>
+        <span data-testid="innerWidth">{innerWidth}</span>
       </p>
       <p>
         <span>outerHeight - </span>
-        <span>{outerHeight}</span>
+        <span data-testid="outerHeight">{outerHeight}</span>
       </p>
       <p>
         <span>outerWidth - </span>
-        <span>{outerWidth}</span>
+        <span data-testid="outerWidth">{outerWidth}</span>
       </p>
     </div>
   );
 }
 
-ReactDOM.render(<WindowComponent />, document.getElementById("app"));
+export default WindowComponent
+//ReactDOM.render(<WindowComponent />, document.getElementById("app"));
