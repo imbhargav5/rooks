@@ -5,7 +5,12 @@
   "description": "Storybook for hooks",
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -s ./public"
+    "storybook": "start-storybook -s ./public",
+    "build": "build-storybook -s ./public -c .storybook -o .out",
+    "predeploy": "yarn build",
+    "predeploy:staging": "yarn predeploy",
+    "deploy:staging": "now --scope react-hooks --target staging",
+    "deploy": "now --scope react-hooks && now --scope react-hooks alias"
   },
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "license": "MIT",
