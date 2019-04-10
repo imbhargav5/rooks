@@ -5,7 +5,7 @@
   "description": "Storybook for hooks",
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -s ./public",
+    "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
     "build": "build-storybook -s ./public -c .storybook -o .out",
     "predeploy": "yarn build",
     "predeploy:staging": "yarn predeploy",
@@ -15,6 +15,11 @@
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "license": "MIT",
   "dependencies": {
+    "@storybook/addon-actions": "5.0.6",
+    "@storybook/addon-knobs": "5.0.6",
+    "@storybook/addon-notes": "5.0.6",
+    "@storybook/addon-storysource": "5.0.6",
+    "@storybook/addons": "5.0.6",
     "@storybook/cli": "5.0.6",
     "@storybook/react": "5.0.6"
   }
