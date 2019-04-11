@@ -42,7 +42,7 @@
     "chalk": "2.4.1",
     "inquirer": "6.2.0",
     "jest": "^23.6.0",
-    "lerna": "^3.10.7",
+    "lerna": "^3.13.2",
     "lodash.capitalize": "4.2.1",
     "make-dir": "1.3.0",
     "meow": "5.0.0",
