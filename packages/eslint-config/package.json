@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-rooks",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "Eslint config for rooks.",
   "keywords": [
     "eslint",

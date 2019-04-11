@@ -30,7 +30,7 @@
     "window size",
     "window size hook"
   ],
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "_id": "@rooks/use-window-size@",
   "private": false,
   "jest": {
