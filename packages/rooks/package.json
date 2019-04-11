@@ -5,9 +5,9 @@
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
   "license": "MIT",
-  "main": "lib/rooks.js",
-  "jsnext:main": "lib/rooks.esm.js",
-  "module": "lib/rooks.esm.js",
+  "main": "lib/rooks.browser.cjs.js",
+  "jsnext:main": "lib/rooks.browser.esm.js",
+  "module": "lib/rooks.browser.esm.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",

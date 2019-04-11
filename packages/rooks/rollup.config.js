@@ -65,12 +65,7 @@ const configBase = {
   input: "./src/index.ts",
 
   // \0 is rollup convention for generated in memory modules
-  external: id => {
-    if (id.startsWith("@rooks") || id.startsWith("shared")) {
-      return false;
-    }
-    return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
-  },
+  external: Object.keys(globals),
   plugins: commonPlugins
 };
 
@@ -84,15 +79,7 @@ const standaloneBaseConfig = {
     name: "rooks",
     sourcemap: true
   },
-  external: id => {
-    if (id.startsWith("@rooks") || id.startsWith("shared")) {
-      return false;
-    }
-    return (
-      Object.keys(global).includes(id) ||
-      (!id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"))
-    );
-  },
+  external: Object.keys(globals),
   plugins: configBase.plugins.concat(
     replace({
       __SERVER__: JSON.stringify(false)
