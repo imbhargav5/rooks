@@ -27,7 +27,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "3.0.0-3.0.0-beta.2.0",
+  "version": "3.0.0-beta.2",
   "_id": "@rooks/use-did-update@",
   "publishConfig": {
     "access": "public"
