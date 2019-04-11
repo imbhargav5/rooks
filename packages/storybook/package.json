@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-3.0.0-beta.2.0",
   "private": true,
   "description": "Storybook for hooks",
   "main": "index.js",
