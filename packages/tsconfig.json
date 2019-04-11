@@ -56,6 +56,9 @@
       "path": "sessionstorage"
     },
     {
+      "path": "shared"
+    },
+    {
       "path": "time-ago"
     },
     {

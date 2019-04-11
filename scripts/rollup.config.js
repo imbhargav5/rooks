@@ -43,15 +43,15 @@ const commonPlugins = [
     // module: "ES2015", // specify module code generation
     // jsx: "react", // use typescript to transpile jsx to js
     // target: "ES2016", // specify ECMAScript target version
-    include: ["../../**/src/*.ts"],
-    exclude: ["node_modules", "./typings/**/*"]
+    include: ["../../**/src/*.ts", "../../node_modules/shared/*.ts"],
+    types: ["shared"],
+    exclude: ["node_modules"]
   }),
   sourceMaps(),
   json(),
   nodeResolve(),
   babel({
-    exclude: "node_modules/**",
-    plugins: ["@babel/plugin-external-helpers"]
+    exclude: "node_modules/**"
   }),
   commonjs({
     ignoreGlobal: true,
@@ -76,7 +76,7 @@ const configBase = {
 
   // \0 is rollup convention for generated in memory modules
   external: id => {
-    if (id.startsWith("@rooks")) {
+    if (id.startsWith("@rooks") || id.startsWith("shared")) {
       return false;
     }
     return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");

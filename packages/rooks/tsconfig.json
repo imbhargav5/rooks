@@ -1,9 +1,10 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": "../../",
     "outDir": "DIRECTORY",
-    "outFile": "./lib/index.d.ts"
+    "outFile": "./lib/index.d.ts",
+    "typeRoots": ["../../packages/*/src"]
   },
   "references": [
     {

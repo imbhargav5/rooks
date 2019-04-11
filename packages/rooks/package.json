@@ -14,8 +14,9 @@
     "url": "git+https://github.com/react-hooks-org/rooks.git"
   },
   "scripts": {
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
     "build": "rollup -c rollup.config.js",
-    "prebuild": "rimraf lib index.d.ts",
     "lint": "eslint src test",
     "test": "jest",
     "pregenerate:types": "rimraf index.d.ts",

@@ -1,7 +1,13 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib"
-  }
+    "rootDir": "../../",
+    "outDir": "lib",
+    "types": ["../../node_modules/shared/useMutationObserver"]
+  },
+  "references": [
+    {
+      "path": "../shared"
+    }
+  ]
 }

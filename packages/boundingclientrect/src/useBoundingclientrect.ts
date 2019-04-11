@@ -1,5 +1,5 @@
 import { useState, useEffect, MutableRefObject } from "react";
-import useMutationObserver from "@rooks/use-mutation-observer";
+import { useMutationObserver } from "shared/useMutationObserver";
 
 /**
  * useBoundingclientRect hook

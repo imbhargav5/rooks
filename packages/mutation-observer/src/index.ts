@@ -1,1 +1,1 @@
-export { useMutationObserver as default } from "./useMutationObserver";
+export { useMutationObserver as default } from "shared/useMutationObserver";

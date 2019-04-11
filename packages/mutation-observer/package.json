@@ -14,6 +14,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
     "build": "rollup -c ../../scripts/rollup.config.js",
     "prepublish": "yarn run build",
     "pregenerate:types": "rimraf index.d.ts",

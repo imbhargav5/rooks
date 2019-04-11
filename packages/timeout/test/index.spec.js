@@ -3,8 +3,7 @@
  */
 import React, { useState } from "react";
 import useTimeout from "..";
-import { render, cleanup, fireEvent, wait } from "react-testing-library";
-jest.useFakeTimers();
+import { render, cleanup, fireEvent, act, wait } from "react-testing-library";
 
 describe("useTimeout", () => {
   it("should be defined", () => {
@@ -12,10 +11,10 @@ describe("useTimeout", () => {
   });
 });
 
-describe("use-timeout base", () => {
+describe("use-timeout base", async () => {
   let Component;
   let mockCallback;
-  let TIMEOUT_MS = 1000;
+  const TIMEOUT_MS = 1000;
   beforeEach(() => {
     Component = function() {
       const [value, setValue] = useState(0);
@@ -36,14 +35,22 @@ describe("use-timeout base", () => {
 
   it("should initially not run timeoutcallback unless start is invoked", () => {
     render(<Component />);
+    jest.useFakeTimers();
     expect(mockCallback.mock.calls.length).toBe(0);
+    jest.useRealTimers(); //needed for wait
   });
   it("should run timeoutcallback when start is invoked", async () => {
+    jest.useFakeTimers();
     const { getByTestId } = render(<Component />);
-    fireEvent.click(getByTestId("start-button"));
     expect(mockCallback.mock.calls.length).toBe(0);
-    render(null); // This is needed because of  Some Node React Scheduler issue with flushingEffects
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenLastCalledWith(mockCallback, TIMEOUT_MS);
+    act(() => {
+      fireEvent.click(getByTestId("start-button"));
+      jest.runAllTimers();
+    });
+    jest.useRealTimers(); //needed for wait
+    //TODO: no idea why I need to wait for next tick
+    wait(() => {
+      expect(mockCallback.mock.calls.length).toBe(1);
+    });
   });
 });

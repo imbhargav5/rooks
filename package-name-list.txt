@@ -3,3 +3,5 @@ packages/counter
 packages/did-mount 
 packages/did-update
 packages/rooks
+packages/shared
+packages/mutation-observer
