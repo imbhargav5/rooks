@@ -43,8 +43,8 @@ const commonPlugins = [
     // module: "ES2015", // specify module code generation
     // jsx: "react", // use typescript to transpile jsx to js
     // target: "ES2016", // specify ECMAScript target version
-    include: ["../../**/src/index.ts"]
-    //exclude: ["node_modules", "./typings/**/*"]
+    include: ["../../**/src/*.ts"],
+    exclude: ["node_modules", "./typings/**/*"]
   }),
   sourceMaps(),
   json(),

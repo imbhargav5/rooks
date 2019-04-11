@@ -13,7 +13,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "rollup -c ../../scripts/rollup.config.js && yarn run generate:types",
+    "build": "rollup -c ../../scripts/rollup.config.js",
     "test:example": "parcel test/index.html",
     "prepublish": "yarn run build",
     "pregenerate:types": "rimraf index.d.ts",

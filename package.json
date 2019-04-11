@@ -13,13 +13,14 @@
     "bs": "lerna bootstrap",
     "prebuild": "lerna clean -y && yarn",
     "build": "lerna run build --stream --parallel",
+    "postbuild": "yarn run ts",
     "generate:types": "lerna run generate:types --stream",
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
     "prerelease-individual": "yarn build",
     "release": "lerna publish",
     "release-individual": "lerna publish --scope=@rooks/*",
-    "ts": "tsc -b packages/rooks"
+    "ts": "rimraf packages/*/tsconfig.tsbuildinfo && tsc -b @package-name-list.txt"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

@@ -3,5 +3,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib"
-  }
+  },
+  "references": [
+    {
+      "path": "../mutation-observer"
+    }
+  ]
 }

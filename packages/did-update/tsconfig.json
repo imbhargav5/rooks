@@ -3,5 +3,11 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib"
-  }
+  },
+
+  "references": [
+    {
+      "path": "../did-mount"
+    }
+  ]
 }

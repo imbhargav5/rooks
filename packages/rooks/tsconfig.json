@@ -1,7 +1,13 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "../",
-    "outDir": "lib"
-  }
+    "rootDir": "src",
+    "outDir": "DIRECTORY",
+    "outFile": "./lib/index.d.ts"
+  },
+  "references": [
+    {
+      "path": "../counter"
+    }
+  ]
 }

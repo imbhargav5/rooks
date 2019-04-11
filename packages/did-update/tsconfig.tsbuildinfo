@@ -89,13 +89,21 @@
         "version": "74720bc57e2696e5f6bf624dd1b2f1595eda558599cb1312d0ed0ea0857f9e26",
         "signature": "74720bc57e2696e5f6bf624dd1b2f1595eda558599cb1312d0ed0ea0857f9e26"
       },
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts": {
-        "version": "1152464f1a9cca56a21dad9aba72a2dd65d3742e1bce0a6c9ff825e6fa748617",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/usedidmount.d.ts": {
+        "version": "430a3f6bd22af028350b238ea63f55253832a0e3fdefee0cb2b5c2f74c4de092",
         "signature": "430a3f6bd22af028350b238ea63f55253832a0e3fdefee0cb2b5c2f74c4de092"
       },
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": {
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/index.d.ts": {
         "version": "2c2d556a14038f011375c867d5fc24e5a61c746f5692efde5726d99328576cf4",
         "signature": "2c2d556a14038f011375c867d5fc24e5a61c746f5692efde5726d99328576cf4"
+      },
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/usedidupdate.ts": {
+        "version": "e3d9d1c694f2b685fd1b361272b835c2259b846a4721b685b5c5cfd88de003b8",
+        "signature": "62b3b962921a36ef104ca3fb3ef7bd715a701ba4a936111f352bde1fbbc8a71a"
+      },
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/index.ts": {
+        "version": "dd5d528c6c2a28f2d0f05b7706c203633a22e906c22fac8812cc6e7e5da79b97",
+        "signature": "dd5d528c6c2a28f2d0f05b7706c203633a22e906c22fac8812cc6e7e5da79b97"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/estree/index.d.ts": {
         "version": "89ccbe04e737ce613f5f04990271cfa84901446350b8551b0555ddf19319723b",
@@ -300,9 +308,9 @@
       "emitDeclarationOnly": true,
       "composite": true,
       "esModuleInterop": true,
-      "rootDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src",
-      "outDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib",
-      "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/tsconfig.json"
+      "rootDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src",
+      "outDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/lib",
+      "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/tsconfig.json"
     },
     "referencedMap": {
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts": [
@@ -310,11 +318,15 @@
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/index.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/usedidmount.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/usedidupdate.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/index.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/index.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/usedidupdate.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
@@ -469,8 +481,11 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react-dom/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/index.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/usedidupdate.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/index.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/usedidmount.d.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/globals.d.ts",
@@ -636,8 +651,10 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/node_modules/csstype/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts",
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts",
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/usedidmount.d.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib/index.d.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/usedidupdate.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-update/src/index.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/estree/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/jquery/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/globals.d.ts",

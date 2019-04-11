@@ -89,13 +89,13 @@
         "version": "74720bc57e2696e5f6bf624dd1b2f1595eda558599cb1312d0ed0ea0857f9e26",
         "signature": "74720bc57e2696e5f6bf624dd1b2f1595eda558599cb1312d0ed0ea0857f9e26"
       },
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts": {
-        "version": "1152464f1a9cca56a21dad9aba72a2dd65d3742e1bce0a6c9ff825e6fa748617",
-        "signature": "430a3f6bd22af028350b238ea63f55253832a0e3fdefee0cb2b5c2f74c4de092"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts": {
+        "version": "60657f69879621d2046efb9f912474d054bab2ed6395651ef3b2f1f3ac9099c8",
+        "signature": "43ded9ab24e21b3f6d896f2fc911838f5b6b5293d61ba03751d0f0516a539514"
       },
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": {
-        "version": "2c2d556a14038f011375c867d5fc24e5a61c746f5692efde5726d99328576cf4",
-        "signature": "2c2d556a14038f011375c867d5fc24e5a61c746f5692efde5726d99328576cf4"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/index.ts": {
+        "version": "46857a690f1cc971ed9add34a32fe290b30999912ad0724b239a5e45b49205d5",
+        "signature": "46857a690f1cc971ed9add34a32fe290b30999912ad0724b239a5e45b49205d5"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/estree/index.d.ts": {
         "version": "89ccbe04e737ce613f5f04990271cfa84901446350b8551b0555ddf19319723b",
@@ -300,9 +300,9 @@
       "emitDeclarationOnly": true,
       "composite": true,
       "esModuleInterop": true,
-      "rootDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src",
-      "outDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/lib",
-      "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/tsconfig.json"
+      "rootDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src",
+      "outDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/lib",
+      "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/tsconfig.json"
     },
     "referencedMap": {
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts": [
@@ -310,11 +310,11 @@
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts": [
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/index.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
@@ -469,8 +469,11 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react-dom/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/index.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/globals.d.ts",
@@ -636,8 +639,8 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/node_modules/csstype/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts",
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/usedidmount.ts",
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/did-mount/src/index.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/usemutationobserver.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/mutation-observer/src/index.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/estree/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/jquery/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/globals.d.ts",

@@ -1,10 +1,6 @@
 {
   "program": {
     "fileInfos": {
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es6.d.ts": {
-        "version": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da",
-        "signature": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da"
-      },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es5.d.ts": {
         "version": "c8665e66018917580e71792b91022bcaf53fb946fab4aaf8dfb0738ed564db88",
         "signature": "c8665e66018917580e71792b91022bcaf53fb946fab4aaf8dfb0738ed564db88"
@@ -12,6 +8,10 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2015.d.ts": {
         "version": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96",
         "signature": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96"
+      },
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "5f217838d25704474d9ef93774f04164889169ca31475fe423a9de6758f058d1",
+        "signature": "5f217838d25704474d9ef93774f04164889169ca31475fe423a9de6758f058d1"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.dom.d.ts": {
         "version": "6994c583b66862deca24d7bbf77297d95b9d3da8160dbd9beef6b847cf7c1376",
@@ -65,9 +65,13 @@
         "version": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303",
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts": {
-        "version": "15b55b090580ad943be225e91e909aeda6baa6fee7bb5dc65616a2cdd354d1e0",
-        "signature": "15b55b090580ad943be225e91e909aeda6baa6fee7bb5dc65616a2cdd354d1e0"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "3f96f1e570aedbd97bf818c246727151e873125d0512e4ae904330286c721bc0",
+        "signature": "3f96f1e570aedbd97bf818c246727151e873125d0512e4ae904330286c721bc0"
+      },
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.full.d.ts": {
+        "version": "a1205f8b74ba57896ae4eb9ff19a5ffc7f210352b0b535abcd36d6b06225a3ac",
+        "signature": "a1205f8b74ba57896ae4eb9ff19a5ffc7f210352b0b535abcd36d6b06225a3ac"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts": {
         "version": "d5b58524cdaac378daa8228fabc96d6cf6fba4b8940512c7b06f18da47fec7ba",
@@ -291,7 +295,7 @@
       "strictNullChecks": true,
       "module": 2,
       "jsx": 2,
-      "target": 2,
+      "target": 3,
       "declaration": true,
       "emitDeclarationOnly": true,
       "composite": true,
@@ -301,9 +305,6 @@
       "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/tsconfig.json"
     },
     "referencedMap": {
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts"
-      ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/node_modules/csstype/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
@@ -460,105 +461,16 @@
       ]
     },
     "exportedModulesMap": {
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts"
-      ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/node_modules/csstype/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts"
       ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react-dom/index.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
+      ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/src/index.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/src/usecounter.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/cluster.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/crypto.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dgram.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/domain.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/fs.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http2.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/fs.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/https.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/inspector.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/perf_hooks.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/async_hooks.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/readline.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/repl.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/readline.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/vm.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/util.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/crypto.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tty.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/querystring.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/worker_threads.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
-      ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/zlib.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/globals.d.ts",
@@ -602,23 +514,109 @@
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/worker_threads.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/zlib.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react-dom/index.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/vfile/index.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/unist/index.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/vfile-message/index.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts"
       ],
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/vfile-message/index.d.ts": [
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/unist/index.d.ts",
         "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts"
       ],
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/vfile/index.d.ts": [
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/unist/index.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/vfile-message/index.d.ts",
-        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/index.d.ts"
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/perf_hooks.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/cluster.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/child_process.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/crypto.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/crypto.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/https.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http2.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/fs.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tls.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dgram.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/dns.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/tty.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/net.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/domain.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/worker_threads.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/zlib.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/readline.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/repl.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/readline.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/vm.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/util.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/fs.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/stream.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts",
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/inspector.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/events.d.ts"
+      ],
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/url.d.ts": [
+        "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/querystring.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es6.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es5.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2015.d.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.dom.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.dom.iterable.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
@@ -632,7 +630,8 @@
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/counter/index.d.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/typescript/lib/lib.es2016.full.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/node_modules/csstype/index.d.ts",
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/prop-types/index.d.ts",
