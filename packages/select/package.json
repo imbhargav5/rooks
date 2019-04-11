@@ -29,7 +29,7 @@
     "hooks",
     "list"
   ],
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "_id": "@rooks/use-select@",
   "publishConfig": {
     "access": "public"
