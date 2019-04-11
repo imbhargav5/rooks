@@ -35,8 +35,8 @@ const commonPlugins = [
     module: true
   }),
   babel({
-    exclude: ["node_modules/**", "../../node_modules/**"]
-    //plugins: ["@babel/plugin-external-helpers"]
+    exclude: ["node_modules/**", "../../node_modules/**"],
+    plugins: ["@babel/plugin-external-helpers"]
   }),
   commonjs({
     ignoreGlobal: true,
@@ -66,7 +66,7 @@ const configBase = {
 
   // \0 is rollup convention for generated in memory modules
   external: id => {
-    if (id.startsWith("@rooks")) {
+    if (id.startsWith("@rooks") || id.startsWith("shared")) {
       return false;
     }
     return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
@@ -76,7 +76,7 @@ const configBase = {
 
 const standaloneBaseConfig = {
   ...configBase,
-  input: "./src/index-standalone.js",
+  input: "./src/index-standalone.ts",
   output: {
     file: "lib/rooks.js",
     format: "umd",
@@ -84,7 +84,15 @@ const standaloneBaseConfig = {
     name: "rooks",
     sourcemap: true
   },
-  external: Object.keys(globals),
+  external: id => {
+    if (id.startsWith("@rooks") || id.startsWith("shared")) {
+      return false;
+    }
+    return (
+      Object.keys(global).includes(id) ||
+      (!id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"))
+    );
+  },
   plugins: configBase.plugins.concat(
     replace({
       __SERVER__: JSON.stringify(false)

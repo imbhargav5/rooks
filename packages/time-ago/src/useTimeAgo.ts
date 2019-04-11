@@ -1,5 +1,5 @@
 import { useEffect, useReducer, ReducerAction } from "react";
-import useInterval from "@rooks/use-interval";
+import { useInterval } from "shared/useInterval";
 import timeago, { TimeAgoInterface } from "timeago.js";
 
 const defaultOpts = {

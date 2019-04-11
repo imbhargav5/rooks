@@ -1,1 +1,1 @@
-export { useDidMount as default } from "./useDidMount";
+export { useDidMount as default } from "shared/useDidMount";

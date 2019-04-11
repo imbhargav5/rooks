@@ -19,7 +19,6 @@
     "url": "git+https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    "ts": "echo \"Error: run tests from root\" && exit 1",
     "generate:types": "tsc"
   },
   "bugs": {

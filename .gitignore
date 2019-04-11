@@ -12,7 +12,7 @@ lerna-debug.log
 /packages/*/.cache
 /packages/*/dist
 /packages/*/coverage
-/packages/*/tsconfig.buildinfo
+/packages/**/*.buildinfo
 /**/.out
 .DS_Store
 yarn-error*

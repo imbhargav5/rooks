@@ -1,1 +1,1 @@
-export { useInterval as default } from "./useInterval";
+export { useInterval as default } from "shared/useInterval";

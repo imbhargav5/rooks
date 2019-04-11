@@ -2,5 +2,6 @@
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
     "rootDir": "."
-  }
+  },
+  "files": ["useMutationObserver.ts", "useDidMount.ts"]
 }

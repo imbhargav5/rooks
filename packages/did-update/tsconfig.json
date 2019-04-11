@@ -1,10 +1,9 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": "../../",
     "outDir": "lib"
   },
-
   "references": [
     {
       "path": "../did-mount"

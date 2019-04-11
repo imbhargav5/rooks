@@ -8,7 +8,31 @@
   },
   "references": [
     {
+      "path": "../boundingclientrect"
+    },
+    {
       "path": "../counter"
+    },
+    {
+      "path": "../did-mount"
+    },
+    {
+      "path": "../did-update"
+    },
+    {
+      "path": "../input"
+    },
+    {
+      "path": "../raf"
+    },
+    {
+      "path": "../visibility-sensor"
+    },
+    {
+      "path": "../time-ago"
+    },
+    {
+      "path": "../timeout"
     }
   ]
 }
