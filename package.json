@@ -20,6 +20,7 @@
     "update-deps": "cd packages/website && yarn run update-deps",
     "prerelease": "yarn build",
     "prerelease-individual": "yarn build",
+    "version:bump": "lerna version --force-publish --no-git-tag-version",
     "release": "lerna publish",
     "release-individual": "lerna publish --scope=@rooks/*",
     "ts": "rimraf packages/*/tsconfig.tsbuildinfo && tsc -b @package-name-list.txt"
