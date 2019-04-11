@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A React Hooks package for counter",
   "name": "@rooks/use-counter",
   "homepage": "https://react-hooks.org/hook/use-counter",
@@ -12,8 +13,10 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "rollup -c ../../scripts/rollup.config.js",
-    "prepublish": "yarn run build"
+    "build": "rollup -c ../../scripts/rollup.config.js && yarn run generate:types",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",
@@ -24,13 +27,12 @@
     "react-hooks.org",
     "counter hook"
   ],
-  "version": "1.1.1",
+  "version": "3.0.0-alpha.3",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
-  },
-  "gitHead": "5c5d4b13a8199cc6fbe44e7d6b34e760c87732c8"
+  }
 }

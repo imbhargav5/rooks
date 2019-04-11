@@ -1,9 +1,8 @@
-type Dictionary = {
-  value: string;
-  set: (newValue: string) => void;
-  remove: () => void;
-};
-export default function useSessionstorage(
-  key: string,
-  defaultValue?: any
-): Dictionary;
+declare module "index" {
+    function useSessionStorage(key: string, defaultValue?: null): {
+        value: any;
+        set: (newValue: string | null) => void;
+        remove: () => null | undefined;
+    };
+    export default useSessionStorage;
+}

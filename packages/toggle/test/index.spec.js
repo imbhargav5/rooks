@@ -3,12 +3,7 @@
  */
 import React from "react";
 import useToggle from "..";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  flushEffects
-} from "react-testing-library";
+import { render, cleanup, fireEvent } from "react-testing-library";
 
 describe("useToggle behaviour", () => {
   let App;
@@ -92,6 +87,64 @@ describe("useToggle with custom toggle function", () => {
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     expect(toggleElement.innerHTML).toBe("false");
+  });
+});
+
+describe("useToggle with reducer", () => {
+  let App;
+  let toggleReducer;
+  beforeEach(() => {
+    toggleReducer = function(state, action) {
+      switch (action.type) {
+        case "yep":
+          return 1;
+        case "nope":
+          return -1;
+        case "maybe":
+          return 0;
+        default:
+          return state;
+      }
+    };
+    App = function() {
+      const [value, dispatch] = useToggle(1, toggleReducer);
+      return (
+        <>
+          <p data-testid="toggle-element">{value.toString()}</p>
+          <button
+            data-testid="yep-button"
+            onClick={() => dispatch({ type: "yep" })}
+          />
+          <button
+            data-testid="nope-button"
+            onClick={() => dispatch({ type: "nope" })}
+          />
+          <button
+            data-testid="maybe-button"
+            onClick={() => dispatch({ type: "maybe" })}
+          />
+        </>
+      );
+    };
+  });
+  afterEach(cleanup); // <-- add this
+  it("should be 1 by default", () => {
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("1");
+  });
+  it("should update with dispatched actions", () => {
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    const nopeButton = getByTestId("nope-button");
+    const maybeButton = getByTestId("maybe-button");
+    const yepButton = getByTestId("yep-button");
+    fireEvent.click(nopeButton);
+    expect(toggleElement.innerHTML).toBe("-1");
+    fireEvent.click(maybeButton);
+    expect(toggleElement.innerHTML).toBe("0");
+    fireEvent.click(yepButton);
+    expect(toggleElement.innerHTML).toBe("1");
   });
 });
 

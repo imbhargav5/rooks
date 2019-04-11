@@ -39,6 +39,42 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "deadcoder0904",
+      "name": "Akshay Kadam (A2K)",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/16436270?v=4",
+      "profile": "https://www.akshaykadam.me?ref=github",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "theskillwithin",
+      "name": "Austin Peterson",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8095506?v=4",
+      "profile": "http://www.austinpeterson.info",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fhellwig",
+      "name": "Frank Hellwig",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1703592?v=4",
+      "profile": "https://github.com/fhellwig",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "neilor",
+      "name": "Neilor Caldeira",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4008023?v=4",
+      "profile": "https://github.com/neilor",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

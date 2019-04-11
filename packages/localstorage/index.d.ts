@@ -1,9 +1,15 @@
-type Dictionary = {
-  value: string;
-  set: (newValue: string) => void;
-  remove: () => void;
-};
-export default function useLocalstorage(
-  key: string,
-  defaultValue?: any
-): Dictionary;
+declare module "index" {
+    interface LocalStorageHandler {
+        value: string | null;
+        set: (newValue: string) => void;
+        remove: () => void;
+    }
+    /**
+     * useLocalStorage hook
+     *
+     * @param {string} key - Key of the localStorage object
+     * @param {string} defaultValue - Default initial value
+     */
+    function useLocalStorage(key: string, defaultValue?: any): LocalStorageHandler;
+    export default useLocalStorage;
+}

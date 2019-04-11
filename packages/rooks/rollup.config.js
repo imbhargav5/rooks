@@ -3,7 +3,7 @@ import replace from "rollup-plugin-replace";
 import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import json from "rollup-plugin-json";
-import flow from "rollup-plugin-flow";
+import typescript from "rollup-plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
 import pkg from "./package.json";
@@ -26,18 +26,17 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  // flow({
-  //     // needed for sourcemaps to be properly generated
-  //     pretty: true,
-  // }),
+  typescript({
+    include: ["../../node_modules/@rooks/**/src/index.ts"]
+  }),
   sourceMaps(),
   json(),
   nodeResolve({
     module: true
   }),
   babel({
-    exclude: ["node_modules/**", "../../node_modules/**"],
-    plugins: ["@babel/plugin-external-helpers"]
+    exclude: ["node_modules/**", "../../node_modules/**"]
+    //plugins: ["@babel/plugin-external-helpers"]
   }),
   commonjs({
     ignoreGlobal: true,
@@ -63,11 +62,15 @@ const prodPlugins = [
 const globals = { react: "React", "react-dom": "ReactDOM" };
 
 const configBase = {
-  input: "./src/index.js",
+  input: "./src/index.ts",
 
   // \0 is rollup convention for generated in memory modules
-  external: id =>
-    !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"),
+  external: id => {
+    if (id.startsWith("@rooks")) {
+      return false;
+    }
+    return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
+  },
   plugins: commonPlugins
 };
 
@@ -126,11 +129,12 @@ const browserConfig = {
     getESM({ file: "lib/rooks.browser.esm.js" }),
     getCJS({ file: "lib/rooks.browser.cjs.js" })
   ],
-  plugins: configBase.plugins.concat(
+  plugins: [
+    ...configBase.plugins,
     replace({
       __SERVER__: JSON.stringify(false)
     })
-  )
+  ]
 };
 
 export default [
@@ -138,7 +142,4 @@ export default [
   standaloneProdConfig,
   serverConfig,
   browserConfig
-  // nativeConfig,
-  // primitivesConfig,
-  // macroConfig,
 ];

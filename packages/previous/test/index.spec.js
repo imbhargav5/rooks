@@ -3,12 +3,7 @@
  */
 import React, { useState } from "react";
 import usePrevious from "..";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  flushEffects
-} from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "react-testing-library";
 
 describe("usePrevious", () => {
   let App;
@@ -41,9 +36,10 @@ describe("usePrevious", () => {
     const previousElement = getByTestId("previous-element");
     expect(currentElement.innerHTML).toBe("0");
     expect(previousElement.innerHTML).toBe("");
-    fireEvent.click(currentElement);
+    act(() => {
+      fireEvent.click(currentElement);
+    });
     expect(currentElement.innerHTML).toBe("1");
-    flushEffects();
     expect(previousElement.innerHTML).toBe("0");
   });
 });

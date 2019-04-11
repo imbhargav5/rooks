@@ -5,6 +5,7 @@ import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import json from "rollup-plugin-json";
 import flow from "rollup-plugin-flow";
+import typescript from "rollup-plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
 import capitalize from "lodash.capitalize";
@@ -36,10 +37,15 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  // flow({
-  //     // needed for sourcemaps to be properly generated
-  //     pretty: true,
-  // }),
+  typescript({
+    // moduleResolution: "node",
+    // strictNullChecks: true, // enable strict null checks as a best practice
+    // module: "ES2015", // specify module code generation
+    // jsx: "react", // use typescript to transpile jsx to js
+    // target: "ES2016", // specify ECMAScript target version
+    include: ["../../**/src/index.ts"]
+    //exclude: ["node_modules", "./typings/**/*"]
+  }),
   sourceMaps(),
   json(),
   nodeResolve(),
@@ -66,11 +72,15 @@ const prodPlugins = [
 ];
 
 const configBase = {
-  input: "./src/index.js",
+  input: "./src/index.ts",
 
   // \0 is rollup convention for generated in memory modules
-  external: id =>
-    !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/"),
+  external: id => {
+    if (id.startsWith("@rooks")) {
+      return false;
+    }
+    return !id.startsWith("\0") && !id.startsWith(".") && !id.startsWith("/");
+  },
   plugins: commonPlugins
 };
 
@@ -78,7 +88,6 @@ const globals = { react: "React", "react-dom": "ReactDOM" };
 
 const standaloneBaseConfig = {
   ...configBase,
-  input: "./src/index.js",
   output: {
     file: "lib/index.js",
     format: "umd",

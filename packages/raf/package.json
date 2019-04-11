@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A continuously running requestAnimationFrame hook for React",
   "name": "@rooks/use-raf",
   "homepage": "https://react-hooks.org/hook/use-raf",
@@ -12,8 +13,10 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "rollup -c ../../scripts/rollup.config.js",
-    "prepublish": "yarn run build"
+    "build": "rollup -c ../../scripts/rollup.config.js && yarn run generate:types",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",
@@ -24,13 +27,12 @@
     "hooks",
     "raf"
   ],
-  "version": "1.1.0",
+  "version": "3.0.0-alpha.3",
   "_id": "@rooks/use-raf@",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "raf": "3.4.1"
-  },
-  "gitHead": "fd72a06e765d201d5ca9fea0e4b89368273fa54c"
+  }
 }

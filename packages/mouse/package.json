@@ -2,6 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
+  "types": "index.d.ts",
   "description": "A React Hooks package for mouse",
   "name": "@rooks/use-mouse",
   "homepage": "https://react-hooks.org/hook/use-mouse",
@@ -12,8 +13,10 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
-    "build": "rollup -c ../../scripts/rollup.config.js",
-    "prepublish": "yarn run build"
+    "build": "rollup -c ../../scripts/rollup.config.js && yarn run generate:types",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",
@@ -24,7 +27,7 @@
     "mouse",
     "mouse hook"
   ],
-  "version": "1.1.0",
+  "version": "3.0.0-alpha.3",
   "_id": "@rooks/use-mouse@",
   "publishConfig": {
     "access": "public"
@@ -32,6 +35,5 @@
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
-  },
-  "gitHead": "5c5d4b13a8199cc6fbe44e7d6b34e760c87732c8"
+  }
 }

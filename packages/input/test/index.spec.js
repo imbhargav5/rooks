@@ -3,12 +3,7 @@
  */
 import React from "react";
 import useInput from "..";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  flushEffects
-} from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "react-testing-library";
 
 describe("useInput", () => {
   // basic tests
@@ -31,20 +26,22 @@ describe("useInput", () => {
       expect(useInput).toBeDefined();
     });
     it("sets initial value correctly", () => {
-      const { getByTestId, rerender } = render(<App />);
+      const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element");
       expect(inputElement.value).toBe("hello");
     });
     it("updates value correctly", () => {
-      const { getByTestId, rerender } = render(<App />);
+      const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element");
       const displayElement = getByTestId("display-element");
       expect(inputElement.value).toBe("hello");
       expect(displayElement.value).toBe("hello");
-      fireEvent.change(inputElement, {
-        target: {
-          value: "world"
-        }
+      act(() => {
+        fireEvent.change(inputElement, {
+          target: {
+            value: "world"
+          }
+        });
       });
       expect(inputElement.value).toBe("world");
       expect(displayElement.value).toBe("world");
@@ -68,40 +65,48 @@ describe("useInput", () => {
     afterEach(cleanup); // <-- add this
 
     it("does not update if validate returns false", () => {
-      const { getByTestId, rerender } = render(<App />);
+      const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element");
-      fireEvent.change(inputElement, {
-        target: {
-          value: 10
-        }
+      act(() => {
+        fireEvent.change(inputElement, {
+          target: {
+            value: 10
+          }
+        });
       });
       expect(parseInt(inputElement.value)).toBe(5);
     });
     it("updates if validate returns true", () => {
-      const { getByTestId, rerender } = render(<App />);
+      const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element");
-      fireEvent.change(inputElement, {
-        target: {
-          value: 9
-        }
+      act(() => {
+        fireEvent.change(inputElement, {
+          target: {
+            value: 9
+          }
+        });
       });
       expect(parseInt(inputElement.value)).toBe(9);
     });
     it("validate can be used to compare possible newvalue with current value", () => {
-      const { getByTestId, rerender } = render(
+      const { getByTestId } = render(
         <App validate={(newValue, currValue) => newValue % currValue != 0} />
       );
       const inputElement = getByTestId("input-element");
-      fireEvent.change(inputElement, {
-        target: {
-          value: 6
-        }
+      act(() => {
+        fireEvent.change(inputElement, {
+          target: {
+            value: 6
+          }
+        });
       });
       expect(parseInt(inputElement.value)).toBe(6);
-      fireEvent.change(inputElement, {
-        target: {
-          value: 12
-        }
+      act(() => {
+        fireEvent.change(inputElement, {
+          target: {
+            value: 12
+          }
+        });
       });
       expect(parseInt(inputElement.value)).toBe(6);
     });
@@ -124,27 +129,29 @@ describe("useInput", () => {
     afterEach(cleanup); // <-- add this
 
     it("updates value of input if initial value changes ", () => {
-      const { getByTestId, rerender } = render(<App />);
+      const { getByTestId } = render(<App />);
       const inputElement1 = getByTestId("input-element1");
       const inputElement2 = getByTestId("input-element2");
       expect(parseInt(inputElement1.value)).toBe(5);
       expect(parseInt(inputElement2.value)).toBe(5);
 
-      fireEvent.change(inputElement2, {
-        target: {
-          value: 6
-        }
+      act(() => {
+        fireEvent.change(inputElement2, {
+          target: {
+            value: 6
+          }
+        });
       });
       expect(parseInt(inputElement2.value)).toBe(6);
 
-      fireEvent.change(inputElement1, {
-        target: {
-          value: 10
-        }
+      act(() => {
+        fireEvent.change(inputElement1, {
+          target: {
+            value: 10
+          }
+        });
       });
-
       expect(parseInt(inputElement1.value)).toBe(10);
-      flushEffects();
       expect(parseInt(inputElement2.value)).toBe(10);
     });
   });

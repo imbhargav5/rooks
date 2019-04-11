@@ -19,12 +19,12 @@ describe("use-counter base", () => {
   afterEach(cleanup); // <-- add this
 
   it("initializes correctly", () => {
-    const { getByTestId, rerender } = render(<Counter />);
+    const { getByTestId } = render(<Counter />);
     const renderedElement = getByTestId("element");
     expect(parseInt(renderedElement.textContent)).toEqual(3);
   });
   it("increments and decrements correctly", () => {
-    const { getByTestId, rerender } = render(<Counter />);
+    const { getByTestId } = render(<Counter />);
     const renderedElement = getByTestId("element");
     expect(parseInt(renderedElement.textContent)).toEqual(3);
     const incrementButton = getByTestId("increment-button");
@@ -67,7 +67,7 @@ describe("use-counter misc", () => {
   afterEach(cleanup); // <-- add this
 
   it("incrementsBy and decrementsBy correctly", () => {
-    const { getByTestId, rerender } = render(<Counter initialValue={8} />);
+    const { getByTestId } = render(<Counter initialValue={8} />);
     const renderedElement = getByTestId("element");
     expect(parseInt(renderedElement.textContent)).toEqual(8);
 

@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import useDidMount from "..";
-import { render, cleanup } from "react-testing-library";
+import { render, cleanup, act } from "react-testing-library";
 
 describe("useDidMount", () => {
   let App;
@@ -22,17 +22,9 @@ describe("useDidMount", () => {
   });
   afterEach(cleanup); // <-- add this
 
-  it("initializes correctly", () => {
-    const { getByTestId, rerender } = render(<App />);
-    const renderedElement = getByTestId("element");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
-  });
-
   it("gets called on mount correctly", () => {
-    const { getByTestId, rerender } = render(<App />);
+    const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
-    rerender();
     expect(parseInt(renderedElement.textContent)).toEqual(1);
   });
 

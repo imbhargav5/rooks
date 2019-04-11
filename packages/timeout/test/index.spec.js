@@ -39,7 +39,7 @@ describe("use-timeout base", () => {
     expect(mockCallback.mock.calls.length).toBe(0);
   });
   it("should run timeoutcallback when start is invoked", async () => {
-    const { getByTestId, rerender } = render(<Component />);
+    const { getByTestId } = render(<Component />);
     fireEvent.click(getByTestId("start-button"));
     expect(mockCallback.mock.calls.length).toBe(0);
     render(null); // This is needed because of  Some Node React Scheduler issue with flushingEffects
