@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "index.d.ts",
+  "types": "lib/index.d.ts",
   "description": "Access the previous value of a variable with this React hook",
   "name": "@rooks/use-previous",
   "homepage": "https://react-hooks.org/hook/use-previous",

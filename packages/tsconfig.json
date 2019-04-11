@@ -1,0 +1,80 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "boundingclientrect"
+    },
+    {
+      "path": "counter"
+    },
+    {
+      "path": "did-mount"
+    },
+    {
+      "path": "did-update"
+    },
+    {
+      "path": "input"
+    },
+    {
+      "path": "interval"
+    },
+    {
+      "path": "key"
+    },
+    {
+      "path": "localstorage"
+    },
+    {
+      "path": "mouse"
+    },
+    {
+      "path": "mutation-observer"
+    },
+    {
+      "path": "navigator-language"
+    },
+    {
+      "path": "online"
+    },
+    {
+      "path": "outside-click"
+    },
+    {
+      "path": "previous"
+    },
+    {
+      "path": "raf"
+    },
+    {
+      "path": "rooks"
+    },
+    {
+      "path": "select"
+    },
+    {
+      "path": "sessionstorage"
+    },
+    {
+      "path": "time-ago"
+    },
+    {
+      "path": "timeout"
+    },
+    {
+      "path": "toggle"
+    },
+    {
+      "path": "visibility-sensor"
+    },
+    {
+      "path": "will-unmount"
+    },
+    {
+      "path": "window-size"
+    },
+    {
+      "path": "worker"
+    }
+  ]
+}

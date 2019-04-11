@@ -27,7 +27,7 @@ const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
   typescript({
-    include: ["../../node_modules/@rooks/**/src/index.ts"]
+    include: ["../../node_modules/@rooks/**/src/*.ts"]
   }),
   sourceMaps(),
   json(),

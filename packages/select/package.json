@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "index.d.ts",
+  "types": "lib/index.d.ts",
   "description": "A React Hooks package for select",
   "name": "@rooks/use-select",
   "homepage": "https://react-hooks.org/hook/use-select",

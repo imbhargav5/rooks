@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "index.d.ts",
+  "types": "lib/index.d.ts",
   "description": "A React Hooks package for visibility-sensor",
   "name": "@rooks/use-visibility-sensor",
   "homepage": "https://react-hooks.org/hook/use-visibility-sensor",

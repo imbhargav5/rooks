@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "index.d.ts",
+  "types": "lib/index.d.ts",
   "description": "Session storage react hook. Easily manage session storage values",
   "name": "@rooks/use-sessionstorage",
   "homepage": "https://react-hooks.org/hook/use-sessionstorage",

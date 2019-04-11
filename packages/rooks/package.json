@@ -8,14 +8,14 @@
   "main": "lib/rooks.js",
   "jsnext:main": "lib/rooks.esm.js",
   "module": "lib/rooks.esm.js",
-  "types": "index.d.ts",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-hooks-org/rooks.git"
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf lib index.d.ts",
     "lint": "eslint src test",
     "test": "jest",
     "pregenerate:types": "rimraf index.d.ts",

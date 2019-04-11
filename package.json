@@ -18,7 +18,8 @@
     "prerelease": "yarn build",
     "prerelease-individual": "yarn build",
     "release": "lerna publish",
-    "release-individual": "lerna publish --scope=@rooks/*"
+    "release-individual": "lerna publish --scope=@rooks/*",
+    "ts": "tsc -b packages/rooks"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "strictNullChecks": true, // enable strict null checks as a best practice
+    "module": "amd", // specify module code generation
+    "jsx": "react", // use typescript to transpile jsx to js
+    "target": "ES2015", // specify ECMAScript target version
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "composite": true,
+    "esModuleInterop": true
+  }
+}
