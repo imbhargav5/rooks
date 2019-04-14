@@ -18,7 +18,7 @@ const filesToRead = [
   "../template/index.d.ts.template"
 ];
 const filesToWrite = [
-  "src/index.js",
+  "src/index.ts",
   "test/index.spec.js",
   "package.json",
   "README.md",
