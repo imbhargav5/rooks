@@ -3,8 +3,10 @@
   "compilerOptions": {
     "rootDir": "../../",
     "outDir": "lib",
-    "types": ["../../node_modules/shared/useMutationObserver"]
+    "skipLibCheck": true
   },
+  "include": ["**/src/*.ts", "node_modules/shared/*.ts"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "../shared"

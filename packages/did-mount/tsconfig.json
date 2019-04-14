@@ -2,6 +2,11 @@
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
     "rootDir": "../../",
-    "outDir": "lib"
-  }
+    "outFile": "./lib/index.d.ts"
+  },
+  "references": [
+    {
+      "path": "../shared"
+    }
+  ]
 }

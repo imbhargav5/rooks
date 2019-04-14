@@ -19,7 +19,7 @@
     "url": "git+https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    "generate:types": "tsc"
+    "build": "tsc"
   },
   "bugs": {
     "url": "https://github.com/imbhargav5/rooks/issues"
