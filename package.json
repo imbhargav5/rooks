@@ -23,7 +23,7 @@
     "version:bump": "lerna version --force-publish --no-git-tag-version",
     "release": "lerna publish",
     "release-individual": "lerna publish --scope=@rooks/*",
-    "ts": "rimraf packages/*/tsconfig.tsbuildinfo && tsc -b @package-name-list.txt"
+    "ts": "rimraf packages/*/*.tsbuildinfo && tsc -b @package-name-list.txt"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

@@ -2,8 +2,11 @@
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
     "rootDir": "../../",
-    "outDir": "lib"
+    "outDir": "lib",
+    "skipLibCheck": true
   },
+  "include": ["**/src/*.ts", "node_modules/shared/*.ts"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "../shared"
