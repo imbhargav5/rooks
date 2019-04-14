@@ -2,11 +2,10 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "strictNullChecks": true, // enable strict null checks as a best practice
-    "module": "ES2015", // specify module code generation
+    "module": "ESNEXT", // specify module code generation
     "jsx": "react", // use typescript to transpile jsx to js
     "target": "ES2016", // specify ECMAScript target version
     "declaration": true,
-    "emitDeclarationOnly": true,
     "composite": true,
     "esModuleInterop": true
   }

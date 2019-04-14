@@ -5,12 +5,11 @@ import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import json from "rollup-plugin-json";
 import flow from "rollup-plugin-flow";
-import typescript from "rollup-plugin-typescript";
-//import typescript from "rollup-plugin-typescript2";
+//import typescript from "rollup-plugin-typescript";
+import typescript2 from "rollup-plugin-typescript2";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
 import capitalize from "lodash.capitalize";
-import { ts, dts } from "rollup-plugin-dts";
 
 function getHookKeyFromPkgName(pkgName) {
   return `use${pkgName
@@ -39,22 +38,25 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  typescript({
-    // moduleResolution: "node",
-    // strictNullChecks: true, // enable strict null checks as a best practice
-    // module: "ES2015", // specify module code generation
-    // jsx: "react", // use typescript to transpile jsx to js
-    // target: "ES2016", // specify ECMAScript target version
-    include: ["../../**/src/*.ts", "../../node_modules/shared/*.ts"],
-    types: ["shared"],
-    exclude: ["node_modules"]
+  // typescript({
+  //   // moduleResolution: "node",
+  //   // strictNullChecks: true, // enable strict null checks as a best practice
+  //   // module: "ES2015", // specify module code generation
+  //   // jsx: "react", // use typescript to transpile jsx to js
+  //   // target: "ES2016", // specify ECMAScript target version
+  //   include: ["../../**/src/*.ts", "../../node_modules/shared/*.ts"],
+  //   types: ["shared"],
+  //   exclude: ["node_modules"]
+  // }),
+  typescript2({
+    useTsconfigDeclarationDir: true
   }),
   sourceMaps(),
   json(),
   nodeResolve(),
-  babel({
-    exclude: "node_modules/**"
-  }),
+  // babel({
+  //   exclude: "node_modules/**"
+  // }),
   commonjs({
     ignoreGlobal: true,
     namedExports: {
@@ -127,7 +129,7 @@ const serverConfig = {
   ...configBase,
   output: [
     getESM({ file: "lib/index.esm.js" }),
-    getESM({ file: "lib/index.mjs" }),
+    //getESM({ file: "lib/index.mjs" }),
     getCJS({ file: "lib/index.cjs.js" })
   ],
   plugins: configBase.plugins.concat(
@@ -141,7 +143,7 @@ const browserConfig = {
   ...configBase,
   output: [
     getESM({ file: "lib/index.browser.esm.js" }),
-    getESM({ file: "lib/index.browser.mjs" }),
+    //getESM({ file: "lib/index.browser.mjs" }),
     getCJS({ file: "lib/index.browser.cjs.js" })
   ],
   plugins: configBase.plugins.concat(
@@ -149,38 +151,6 @@ const browserConfig = {
       __SERVER__: JSON.stringify(false)
     })
   )
-};
-
-const tsPlugins = [
-  typescript({
-    // moduleResolution: "node",
-    // strictNullChecks: true, // enable strict null checks as a best practice
-    // module: "ES2015", // specify module code generation
-    // jsx: "react", // use typescript to transpile jsx to js
-    // target: "ES2016", // specify ECMAScript target version
-    include: ["../../**/src/*.ts", "../../node_modules/shared/*.ts"],
-    types: ["shared"],
-    exclude: ["node_modules"]
-  }),
-  nodeResolve(),
-  dts()
-  //sourceMaps()
-  //json()
-  // babel({
-  //   exclude: "node_modules/**"
-  // })
-  // commonjs({
-  //   ignoreGlobal: true,
-  //   namedExports: {
-  //     "react-is": ["isElement", "isValidElementType", "ForwardRef"]
-  //   }
-  // })
-];
-
-const dtsConfig = {
-  ...configBase,
-  output: [{ file: "lib/index.d.ts", format: "es" }],
-  plugins: tsPlugins
 };
 
 export default [

@@ -1,12 +1,18 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "../../",
-    "outDir": "lib"
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": "../../",
+    "declarationDir": "lib",
+    "paths": {
+      "shared/*": ["../shared/*"]
+    }
   },
+  "include": ["node_modules/shared/*.ts"],
   "references": [
     {
-      "path": "../did-mount"
+      "path": "../shared"
     }
   ]
 }

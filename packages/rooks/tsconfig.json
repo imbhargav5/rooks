@@ -1,10 +1,15 @@
 {
   "extends": "../tsconfig.settings.json",
+  "include": ["node_modules/shared/*.ts"],
   "compilerOptions": {
-    "rootDir": "../../",
-    "outDir": "DIRECTORY",
-    "outFile": "./lib/index.d.ts",
-    "typeRoots": ["../../packages/*/src"]
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": "../../",
+    "declarationDir": "lib",
+    "typeRoots": ["../../packages/*/src"],
+    "paths": {
+      "shared/*": ["../shared/*"]
+    }
   },
   "references": [
     {

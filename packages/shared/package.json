@@ -19,6 +19,7 @@
     "url": "git+https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
+    "prebuild": "rimraf *.d.ts *.tsbuildinfo",
     "build": "tsc"
   },
   "bugs": {

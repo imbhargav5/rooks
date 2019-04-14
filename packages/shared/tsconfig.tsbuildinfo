@@ -369,14 +369,14 @@
     "options": {
       "moduleResolution": 2,
       "strictNullChecks": true,
-      "module": 2,
+      "module": 6,
       "jsx": 2,
       "target": 3,
       "declaration": true,
-      "emitDeclarationOnly": true,
       "composite": true,
       "esModuleInterop": true,
       "rootDir": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/shared",
+      "emitDeclarationOnly": true,
       "configFilePath": "/Users/bhargavponnapalli/oss/react-hooks/rooks/packages/shared/tsconfig.json"
     },
     "referencedMap": {

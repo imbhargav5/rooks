@@ -1,8 +1,9 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "../../",
-    "outDir": "lib"
+    "rootDir": "src",
+    "outDir": "lib",
+    "declarationDir": "lib"
   },
-  "exclude": ["../../node_modules/**/*.ts"]
+  "exclude": ["../../node_modules/**/*.ts", "./lib/**/*.ts"]
 }

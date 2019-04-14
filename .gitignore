@@ -12,7 +12,8 @@ lerna-debug.log
 /packages/*/.cache
 /packages/*/dist
 /packages/*/coverage
-/packages/**/*.buildinfo
+/packages/**/*.tsbuildinfo
 /**/.out
 .DS_Store
 yarn-error*
+.rpt2_cache
