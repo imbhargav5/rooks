@@ -14,15 +14,15 @@ action "yarn-install" {
   args = "install"
 }
 
-action "update-deps" {
+action "build" {
   needs = "yarn-install"
   uses = "borales/actions-yarn@master"
-  args = "run update-deps"
+  args = "build"
 }
 
 # Deploy, and write deployment to file
 action "deploy" {
-  needs = "update-deps"
+  needs = "build"
   uses = "actions/zeit-now@master"
   args = "deploy  --no-clipboard  packages/storybook --scope react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
