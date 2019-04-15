@@ -20,7 +20,7 @@ install: yarn --frozen-lockfile
 script:
   - node --version
   - yarn --version
-  - yarn build
+  - yarn build:ci
   - yarn test
 notifications:
   email:
