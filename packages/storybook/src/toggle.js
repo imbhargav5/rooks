@@ -1,8 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useToggle from "@rooks/use-toggle";
+import README from "@rooks/use-toggle/README.md";
 
-storiesOf("useToggle", module).add("basic example", () => <ToggleDemo />);
+storiesOf("useToggle", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <ToggleDemo />);
 
 const customToggleFunction = v => (v === "start" ? "stop" : "start");
 

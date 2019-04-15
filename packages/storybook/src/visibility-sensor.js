@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useVisibilitySensor from "@rooks/use-visibility-sensor";
+import README from "@rooks/use-visibility-sensor/README.md";
 
-storiesOf("useVisibilitySensor", module).add("basic example", () => (
-  <VisibilitySensorDemo />
-));
+storiesOf("useVisibilitySensor", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <VisibilitySensorDemo />);
 
 function VisibilitySensorDemo() {
   const rootNode = useRef(null);

@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useKey from "@rooks/use-key";
+import README from "@rooks/use-key/README.md";
 
 storiesOf("useKey", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
   .add("basic example", () => <Basic />)
   .add("multiple events on keys", () => <MultipleEvents />)
   .add("toggling listeners using `when` ", () => (

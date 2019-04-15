@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useOutsideClick from "@rooks/use-outside-click";
+import README from "@rooks/use-outside-click/README.md";
 
-storiesOf("useOutsideClick", module).add("basic example", () => (
-  <UseOutsideClickDemo />
-));
+storiesOf("useOutsideClick", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseOutsideClickDemo />);
 
 function UseOutsideClickDemo() {
   const pRef = useRef();

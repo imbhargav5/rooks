@@ -7,7 +7,7 @@
     "lint": "lerna run lint --stream --parallel",
     "test": "lerna run test --stream --parallel",
     "coverage": "lerna run test --stream --parallel -- --coverage",
-    "dev": "cd packages/website && yarn dev",
+    "dev": "cd packages/storybook && yarn storybook",
     "deploy": "cd packages/website && yarn deploy",
     "create": "node helpers/create",
     "bs": "lerna bootstrap",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useDidUpdate from "@rooks/use-did-update";
+import README from "@rooks/use-did-update/README.md";
 
 function DidUpdateDemo() {
   const [value, setValue] = useState(0);
@@ -16,4 +17,10 @@ function DidUpdateDemo() {
     </>
   );
 }
-storiesOf("useDidUpdate", module).add("basic example", () => <DidUpdateDemo />);
+storiesOf("useDidUpdate", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <DidUpdateDemo />);

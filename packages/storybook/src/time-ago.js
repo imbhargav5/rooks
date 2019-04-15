@@ -1,8 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useTimeAgo from "@rooks/use-time-ago";
+import README from "@rooks/use-time-ago/README.md";
 
-storiesOf("useTimeAgo", module).add("basic example", () => <UseTimeAgoDemo />);
+storiesOf("useTimeAgo", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseTimeAgoDemo />);
 
 function UseTimeAgoDemo() {
   const [date, setDate] = useState(new Date());

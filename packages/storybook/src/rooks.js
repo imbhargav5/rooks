@@ -7,8 +7,15 @@ import {
   useInterval,
   useToggle
 } from "rooks";
+import README from "rooks/README.md";
 
-storiesOf("rooks", module).add("basic example", () => <RooksDemo />);
+storiesOf("rooks", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <RooksDemo />);
 
 function RooksDemo() {
   const [hasMagicStarted, setHasMagicStarted] = useToggle(false);

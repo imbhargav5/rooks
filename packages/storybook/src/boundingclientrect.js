@@ -1,10 +1,17 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useBoundingclientrect from "@rooks/use-boundingclientrect";
+import README from "@rooks/use-boundingclientrect/README.md";
 
-storiesOf("useBoundingclientrect", module).add("basic example", () => (
-  <BoundingClientRectDemo />
-));
+storiesOf("useBoundingclientrect", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <BoundingClientRectDemo />, {
+    info: README
+  });
 
 function BoundingClientRectDemo() {
   const myRef = useRef();

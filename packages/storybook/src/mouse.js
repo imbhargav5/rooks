@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useMouse from "@rooks/use-mouse";
+import README from "@rooks/use-mouse/README.md";
 
-storiesOf("useMouse", module).add("basic example", () => <MouseDemo />);
+storiesOf("useMouse", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <MouseDemo />);
 
 function MouseDemo() {
   const {

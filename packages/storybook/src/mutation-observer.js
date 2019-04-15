@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useMutationObserver from "@rooks/use-mutation-observer";
+import README from "@rooks/use-mutation-observer/README.md";
 
-storiesOf("useMutationObserver", module).add("basic example", () => (
-  <MutationObserverDemo />
-));
+storiesOf("useMutationObserver", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <MutationObserverDemo />);
 
 function MutationObserverDemo() {
   const myRef = useRef();

@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import useCounter from "@rooks/use-counter";
+import README from "@rooks/use-counter/README.md";
 
 function CounterComponent() {
   const {
@@ -32,6 +33,10 @@ function CounterComponent() {
   );
 }
 
-storiesOf("useCounter", module).add("basic example", () => (
-  <CounterComponent />
-));
+storiesOf("useCounter", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <CounterComponent />);

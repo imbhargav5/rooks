@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useLocalstorage from "@rooks/use-localstorage";
+import README from "@rooks/use-localstorage/README.md";
 
 function UseLocalstorageDemo() {
   const { value, set, remove } = useLocalstorage("my-value", 0);
@@ -18,6 +19,10 @@ function UseLocalstorageDemo() {
   );
 }
 
-storiesOf("useLocalstorage", module).add("basic example", () => (
-  <UseLocalstorageDemo />
-));
+storiesOf("useLocalstorage", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseLocalstorageDemo />);

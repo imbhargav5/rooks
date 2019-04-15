@@ -1,4 +1,5 @@
-import { addParameters, configure } from "@storybook/react";
+import { addParameters, configure, addDecorator } from "@storybook/react";
+import { addReadme } from "storybook-readme";
 import theme from "./yourTheme";
 
 // Option defaults:
@@ -77,5 +78,7 @@ function loadStories() {
   require("../src/index.js");
   // You can require as many stories as you need.
 }
+
+addDecorator(addReadme);
 
 configure(loadStories, module);

@@ -2,8 +2,15 @@ import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useRaf from "@rooks/use-raf";
 import useToggle from "@rooks/use-toggle";
+import README from "@rooks/use-raf/README.md";
 
-storiesOf("useRaf", module).add("basic example", () => <UseRafDemo />);
+storiesOf("useRaf", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseRafDemo />);
 
 let angle = 0;
 function updateAngle() {

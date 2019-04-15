@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { storiesOf } from "@storybook/react";
 import useInterval from "@rooks/use-interval";
+import README from "@rooks/use-interval/README.md";
 
-storiesOf("UseIntervalDemo", module).add("basic example", () => (
-  <UseIntervalDemo />
-));
+storiesOf("UseIntervalDemo", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseIntervalDemo />);
 
 function reducer(state, action) {
   switch (action.type) {

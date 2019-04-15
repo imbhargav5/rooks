@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useSessionstorage from "@rooks/use-sessionstorage";
+import README from "@rooks/use-sessionstorage/README.md";
 
 function UseSessionstorageDemo() {
   const { value, set, remove } = useSessionstorage("my-value", 0);
@@ -18,6 +19,10 @@ function UseSessionstorageDemo() {
   );
 }
 
-storiesOf("useSessionstorage", module).add("basic example", () => (
-  <UseSessionstorageDemo />
-));
+storiesOf("useSessionstorage", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseSessionstorageDemo />);

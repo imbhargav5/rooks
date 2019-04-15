@@ -1,3 +1,4 @@
+import "./welcome";
 import "./boundingclientrect";
 import "./counter";
 import "./did-mount";

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useWindowSize from "@rooks/use-window-size";
+import README from "@rooks/use-window-size/README.md";
 
-storiesOf("useWindowSize", module).add("basic example", () => (
-  <WindowComponent />
-));
+storiesOf("useWindowSize", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <WindowComponent />);
 
 function WindowComponent() {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();

@@ -2,10 +2,15 @@ import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import usePrevious from "@rooks/use-previous";
 import useInput from "@rooks/use-input";
+import README from "@rooks/use-previous/README.md";
 
-storiesOf("usePrevious", module).add("basic example", () => (
-  <UsePreviousDemo />
-));
+storiesOf("usePrevious", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UsePreviousDemo />);
 
 function UsePreviousDemo() {
   const myInput = useInput("hello world");

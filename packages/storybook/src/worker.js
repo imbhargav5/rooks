@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useWorker from "@rooks/use-worker";
+import README from "@rooks/use-worker/README.md";
 
 function WorkerComponent() {
   const [value, setValue] = useState(0);
@@ -27,4 +28,10 @@ function WorkerComponent() {
   );
 }
 
-storiesOf("useWorker", module).add("basic example", () => <WorkerComponent />);
+storiesOf("useWorker", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <WorkerComponent />);

@@ -1,8 +1,15 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import useTimeout from "@rooks/use-timeout";
+import README from "@rooks/use-timeout/README.md";
 
-storiesOf("useTimeout", module).add("basic example", () => <UseTimeoutDemo />);
+storiesOf("useTimeout", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseTimeoutDemo />);
 
 function UseTimeoutDemo() {
   function doAlert() {

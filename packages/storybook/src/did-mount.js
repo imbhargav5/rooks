@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useDidMount from "@rooks/use-did-mount";
+import README from "@rooks/use-did-mount/README.md";
 
 function MountedButton() {
   useDidMount(() => {
@@ -9,4 +10,10 @@ function MountedButton() {
   return null;
 }
 
-storiesOf("useDidMount", module).add("basic example", () => <MountedButton />);
+storiesOf("useDidMount", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <MountedButton />);

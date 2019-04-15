@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useWillUnmount from "@rooks/use-will-unmount";
+import README from "@rooks/use-will-unmount/README.md";
 
-storiesOf("useWillUnmount", module).add("basic example", () => (
-  <UnmountComponent />
-));
+storiesOf("useWillUnmount", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UnmountComponent />);
 
 function Message() {
   useWillUnmount(function() {

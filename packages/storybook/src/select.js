@@ -1,8 +1,15 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import useSelect from "@rooks/use-select";
+import README from "@rooks/use-select/README.md";
 
-storiesOf("useSelect", module).add("basic example", () => <UseSelectDemo />);
+storiesOf("useSelect", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("basic example", () => <UseSelectDemo />);
 
 const list = [
   {
