@@ -16,7 +16,7 @@
     "build:rooks": "lerna run --scope rooks build",
     "build:demos": "lerna run --scope storybook build",
     "build:shared": "lerna run --scope shared build",
-    "build:ci": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks && yarn run build:demos",
+    "build:ci": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks",
     "build": "yarn run build:shared --stream --parallel && yarn run build:independent  --stream --parallel && yarn run build:rooks && yarn run build:demos  --stream --parallel",
     "generate:types": "lerna run generate:types --stream",
     "update-deps": "cd packages/website && yarn run update-deps",
