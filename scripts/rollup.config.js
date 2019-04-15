@@ -152,8 +152,7 @@ const browserConfig = {
     })
   )
 };
-
-export default [
+let config = [
   standaloneConfig,
   standaloneProdConfig,
   serverConfig,
@@ -163,3 +162,8 @@ export default [
   // primitivesConfig,
   // macroConfig,
 ];
+if (process.env.NODE_ENV === "CI") {
+  config = [standaloneConfig];
+}
+
+export default config;
