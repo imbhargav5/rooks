@@ -24,7 +24,7 @@ action "update-deps" {
 action "deploy" {
   needs = "update-deps"
   uses = "actions/zeit-now@master"
-  args = "deploy  --no-clipboard  packages/website --team react-hooks > $HOME/$GITHUB_ACTION.txt"
+  args = "deploy  --no-clipboard  packages/storybook --scope react-hooks > $HOME/$GITHUB_ACTION.txt"
   secrets = ["ZEIT_TOKEN"]
 }
 
@@ -32,7 +32,7 @@ action "deploy" {
 action "alias" {
   needs = "deploy"
   uses = "actions/zeit-now@master"
-  args = "alias --team react-hooks `cat /github/home/deploy.txt` $GITHUB_SHA"
+  args = "alias --scope react-hooks `cat /github/home/deploy.txt` $GITHUB_SHA"
   secrets = ["ZEIT_TOKEN"]
 }
 
@@ -42,7 +42,7 @@ action "release-master" {
   needs = ["master-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias --team react-hooks --local-config=./packages/website/now.json"
+  args = "alias --scope react-hooks --local-config=./packages/storybook/now.json"
 }
 
 # Dev workflow
@@ -62,5 +62,5 @@ action "release-dev" {
   needs = ["dev-branch-filter","alias"]
   uses = "actions/zeit-now@master"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias --team react-hooks --local-config=./packages/website/now-dev.json"
+  args = "alias --team react-hooks --local-config=./packages/storybook/now-dev.json"
 }

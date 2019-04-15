@@ -1,6 +1,6 @@
 "use strict";
 
-const { useBoundingclientrect } = require("..");
+import { useBoundingclientrect } from "..";
 
 describe("rooks", () => {
   it("has modules", () => {
