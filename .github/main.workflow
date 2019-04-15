@@ -17,7 +17,7 @@ action "yarn-install" {
 action "build" {
   needs = "yarn-install"
   uses = "borales/actions-yarn@master"
-  args = "build:ci"
+  args = "build:demos"
 }
 
 # Deploy, and write deployment to file
