@@ -1,7 +1,0 @@
-{
-  "extends": ["rooks"],
-  "rules": {
-    "no-confusing-arrow": "warn",
-    "react/prop-types": "warn"
-  }
-}
