@@ -20,7 +20,7 @@
     "pregenerate:types": "rimraf index.d.ts",
     "generate:types": "tsc"
   },
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
