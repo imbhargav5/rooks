@@ -70,7 +70,7 @@ function App() {
 
 # Documentation
 
-[View the docs here](https://stories.react-hooks.org)
+[View the docs here](https://react-hooks.org)
 
 ## Standalone Package
 
