@@ -32,6 +32,6 @@ export default create({
   // inputBorderRadius: 4,
 
   brandTitle: "Rooks storybook",
-  brandUrl: "https://react-hooks.com",
+  brandUrl: "https://react-hooks.org",
   brandImage: "https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png"
 });
