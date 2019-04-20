@@ -19,6 +19,7 @@
     "build": "rollup -c rollup.config.js",
     "lint": "eslint src test",
     "test": "jest",
+    "prepublish": "yarn run build",
     "pregenerate:types": "rimraf index.d.ts",
     "generate:types": "tsc"
   },
