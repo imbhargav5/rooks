@@ -10,7 +10,7 @@
     "predeploy": "yarn build",
     "predeploy:staging": "yarn predeploy",
     "deploy:staging": "now --scope react-hooks --target staging",
-    "deploy": "now --scope react-hooks && now --scope react-hooks alias"
+    "deploy": "now --scope react-hooks --target production && now --scope react-hooks alias"
   },
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "license": "MIT",
