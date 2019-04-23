@@ -75,9 +75,8 @@ function useVisbilitySensor(ref, opts) {
       Check visibility
     */
   function checkVisibility() {
-    console.log("checking visibility");
     let containmentRect;
-    if (containment && ref.current) {
+    if (containment) {
       const containmentDOMRect = containment.getBoundingClientRect();
       containmentRect = {
         top: containmentDOMRect.top,
@@ -134,6 +133,9 @@ function useVisbilitySensor(ref, opts) {
   }
 
   function updateIsVisible() {
+    if (!ref.current) {
+      return;
+    }
     const { isVisible, visibilityRect } = checkVisibility();
     dispatch({
       type: "set",
@@ -147,6 +149,10 @@ function useVisbilitySensor(ref, opts) {
       updateIsVisible();
     }
   }, []);
+
+  useEffect(() => {
+    updateIsVisible();
+  }, [ref.current]);
 
   // If interval check is needed
   useEffect(() => {
