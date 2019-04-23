@@ -2,7 +2,7 @@
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
 
-let { useEffect, useReducer, useLayoutEffect } = require("react");
+import { useEffect, useReducer, useLayoutEffect } from "react";
 
 function normalizeRect(rect) {
   if (rect.width === undefined) {
@@ -75,8 +75,9 @@ function useVisbilitySensor(ref, opts) {
       Check visibility
     */
   function checkVisibility() {
+    console.log("checking visibility");
     let containmentRect;
-    if (containment) {
+    if (containment && ref.current) {
       const containmentDOMRect = containment.getBoundingClientRect();
       containmentRect = {
         top: containmentDOMRect.top,
