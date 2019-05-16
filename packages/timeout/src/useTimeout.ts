@@ -30,7 +30,7 @@ function useTimeout(
     setIsTimeoutActive(true);
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isTimeoutActive) {
       const timeout = window.setTimeout(callback, timeoutDelayMs);
       return () => {
