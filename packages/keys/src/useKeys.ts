@@ -159,4 +159,4 @@ function useKeys(
     }
   }, [when, target, keysList, callback]);
 }
-export default useKeys;
+export { useKeys };

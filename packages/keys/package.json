@@ -1,7 +1,7 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "will update later",
+  "description": "hook which allow to listen for multiple key press event",
   "name": "@rooks/use-keys",
   "homepage": "https://react-hooks.org/hook/use-keys",
   "repository": {
