@@ -16,7 +16,7 @@ describe("useKeys", () => {
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = function() {
       const documentRef = React.useRef(document);
       const inputRef = React.useRef(null);
       const [isEventActive, setIsEventActive] = React.useState(true);
