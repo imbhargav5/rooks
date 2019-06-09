@@ -3,7 +3,7 @@
  */
 import React from "react";
 import useInput from "..";
-import { render, cleanup, fireEvent, act } from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("useInput", () => {
   // basic tests

@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import useTimeout from "..";
-import { render, cleanup, fireEvent, act, wait } from "react-testing-library";
+import { render, cleanup, fireEvent, act, wait } from "@testing-library/react";
 
 describe("useTimeout", () => {
   it("should be defined", () => {
