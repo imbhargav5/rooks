@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useCounter from "..";
-import { render, cleanup } from "react-testing-library";
+import { render, cleanup } from "@testing-library/react";
 
 describe("use-counter base", () => {
   let Counter;

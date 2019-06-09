@@ -1,6 +1,7 @@
 import "./welcome";
 import "./boundingclientrect";
 import "./counter";
+import "./debounce";
 import "./did-mount";
 import "./did-update";
 import "./input";

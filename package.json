@@ -34,6 +34,7 @@
     "@babel/plugin-proposal-export-default-from": "7.2.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/react": "8.0.1",
     "@types/react": "*",
     "@types/react-dom": "*",
     "babel-core": "^7.0.0-bridge.0",
@@ -52,7 +53,6 @@
     "mini-css-extract-plugin": "0.5.0",
     "ora": "3.0.0",
     "raf": "3.4.1",
-    "react-testing-library": "6.0.0",
     "read-pkg-up": "4.0.0",
     "replace-string": "2.0.0",
     "rollup": "1.1.2",
@@ -72,6 +72,9 @@
     "webpack": "4.29.1",
     "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "1.2.9"
   },
   "dependencies": {
     "jest-localstorage-mock": "2.4.0"

@@ -3,9 +3,10 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
-  "description": "A React hooks package for componentDidMount",
-  "name": "@rooks/use-did-mount",
-  "homepage": "https://react-hooks.org/hook/use-did-mount",
+  "source": "src/index.ts",
+  "description": "Debounce hook for react",
+  "name": "@rooks/use-debounce",
+  "homepage": "https://react-hooks.org/hook/use-debounce",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -22,21 +23,22 @@
   },
   "keywords": [
     "use",
-    "react-hooks.org",
+    "debounce",
     "react",
-    "rooks",
     "hooks",
-    "did mount",
-    "componentDidMount",
-    "lifecycle"
+    "rooks",
+    "react-hooks.org"
   ],
   "version": "3.0.3-alpha.0",
-  "_id": "@rooks/use-did-mount@",
+  "_id": "@rooks/use-debounce@",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "lodash.debounce": "4.0.8"
   }
 }

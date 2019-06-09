@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import useInterval from "..";
 
-import { render, cleanup, fireEvent, act } from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("useInterval", () => {
   let App;

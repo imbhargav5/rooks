@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import useDidMount from "..";
-import { render, cleanup, act } from "react-testing-library";
+import { render, cleanup, act } from "@testing-library/react";
 
 describe("useDidMount", () => {
   let App;

@@ -2,6 +2,7 @@ export {
   default as useBoundingclientrect
 } from "@rooks/use-boundingclientrect";
 export { default as useCounter } from "@rooks/use-counter";
+export { default as useDebounce } from "@rooks/use-debounce";
 export { default as useDidMount } from "@rooks/use-did-mount";
 export { default as useDidUpdate } from "@rooks/use-did-update";
 export { default as useInput } from "@rooks/use-input";

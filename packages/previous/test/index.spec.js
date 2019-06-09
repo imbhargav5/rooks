@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import usePrevious from "..";
-import { render, cleanup, fireEvent, act } from "react-testing-library";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("usePrevious", () => {
   let App;

@@ -3,7 +3,7 @@
  */
 import React from "react";
 import useSessionstorage from "..";
-import { render, cleanup, act } from "react-testing-library";
+import { render, cleanup, act } from "@testing-library/react";
 
 describe("useSessionstorage", () => {
   let App;
