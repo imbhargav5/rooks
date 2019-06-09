@@ -1,3 +1,7 @@
+#v3.1
+
+ - New hook added `useDebounce`
+
 # v3 
  - Critical bug with useKey with refs not detected was fixed
  - `useWindowSize` now returns `innerHeight`, `innerWidth`, `outerHeight` and `outerWidth`. It no longer returns `height` and `width` which were ambiguous.
