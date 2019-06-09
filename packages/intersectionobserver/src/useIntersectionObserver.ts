@@ -201,4 +201,5 @@ function useIntersectionObserver({
 
   return [isVisible, intersectionObj, observerInState];
 }
+
 export { useIntersectionObserver };
