@@ -30,7 +30,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "3.0.3-alpha.1",
+  "version": "3.1.0",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"
