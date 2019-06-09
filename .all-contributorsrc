@@ -84,6 +84,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Dianoga",
+      "name": "Brian Steere",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1618956?v=4",
+      "profile": "http://3dgo.net",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
