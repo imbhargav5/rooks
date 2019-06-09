@@ -4,16 +4,16 @@
 import React, { useState } from "react";
 import useDebounce from "..";
 import { render, cleanup, fireEvent, act, wait } from "@testing-library/react";
+import "./setupTests";
 
 describe("useDebounce", () => {
   let App;
-  let DEBOUNCE_WAIT = 500;
+  const DEBOUNCE_WAIT = 500;
   jest.useRealTimers();
   beforeEach(() => {
     App = function() {
       const [value, setValue] = useState(0);
       function log() {
-        console.log("running callback");
         setValue(value + 1);
       }
 
@@ -58,7 +58,6 @@ describe("useDebounce", () => {
     const { getByTestId } = render(<App />);
     const logButtonElement = getByTestId("log-button");
     const valueElement = getByTestId("value");
-    console.log("first");
     act(() => {
       fireEvent.click(logButtonElement);
       fireEvent.click(logButtonElement);
@@ -76,7 +75,6 @@ describe("useDebounce", () => {
         timeout: DEBOUNCE_WAIT
       }
     );
-    console.log("second");
     act(() => {
       fireEvent.click(logButtonElement);
       fireEvent.click(logButtonElement);
@@ -93,5 +91,3 @@ describe("useDebounce", () => {
     );
   });
 });
-
-// figure out tests

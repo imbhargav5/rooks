@@ -30,7 +30,7 @@ function useDebounce(callback: Function, wait: number, options: {}): Function {
   function debouncedCallbackWithEventPersist(...args) {
     args.forEach(arg => {
       if (!(arg instanceof Event) && arg.nativeEvent instanceof Event) {
-        // this is a synthetic event
+        // Synthetic events need to be persisted
         arg.persist();
       }
     });
