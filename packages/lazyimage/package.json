@@ -1,0 +1,35 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "A custom hook allowing lazy load of images(horizontally or vertically), based on user criteria and respecting the resize of the screen also",
+  "name": "@rooks/use-lazyimage",
+  "homepage": "https://react-hooks.org/hook/use-lazyimage",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "test:example": "parcel test/index.html",
+    "prepublish": "yarn run build"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-lazyimage@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
