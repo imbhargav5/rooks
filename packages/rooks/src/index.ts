@@ -12,6 +12,7 @@ export { default as useLocalstorage } from "@rooks/use-localstorage";
 export { default as useMouse } from "@rooks/use-mouse";
 export { default as useMutationObserver } from "@rooks/use-mutation-observer";
 export { default as useNavigatorLanguage } from "@rooks/use-navigator-language";
+export { default as useOnWindowResize } from "@rooks/use-on-window-resize";
 export { default as useOnline } from "@rooks/use-online";
 export { default as useOutsideClick } from "@rooks/use-outside-click";
 export { default as usePrevious } from "@rooks/use-previous";
