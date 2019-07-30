@@ -3,9 +3,9 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
-  "description": "Keyboard key handler hook for react",
-  "name": "@rooks/use-key",
-  "homepage": "https://react-hooks.org/hook/use-key",
+  "description": "A React hook for window on scroll event",
+  "name": "@rooks/use-on-window-scroll",
+  "homepage": "https://react-hooks.org/hook/use-on-window-scroll",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -26,11 +26,10 @@
     "react",
     "rooks",
     "hooks",
-    "keyboard event",
-    "key"
+    "window",
+    "scroll"
   ],
   "version": "3.1.1-alpha.0",
-  "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"
   },

@@ -1,4 +1,4 @@
-import { useLayoutEffect, MutableRefObject } from "react";
+import { useLayoutEffect, MutableRefObject, useRef, useEffect } from "react";
 
 /**
  *  useOutsideClick hook
@@ -14,9 +14,15 @@ function useOutsideClick(
   handler: (e: MouseEvent) => any,
   when: boolean = true
 ): void {
+  const savedHandler = useRef(handler);
+
+  useEffect(()=>{
+    savedHandler.current = handler;
+  })
+
   function handle(e: MouseEvent) {
     if (ref && ref.current && !ref.current.contains(e.target as Element)) {
-      handler(e);
+      savedHandler.current(e);
     }
   }
   useLayoutEffect(() => {
