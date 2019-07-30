@@ -48,10 +48,6 @@ const alphabetAndNumberMap = (() => {
 type TPressedKeyMapping = {
   [key: string]: boolean;
 };
-/**
- * PressedKeyMapping will do the bookkeeping the pressed keys
- */
-const PressedKeyMapping: TPressedKeyMapping = {};
 
 /**
  *  checkWhetherRequiredKeyPressed
@@ -103,7 +99,12 @@ function useKeys(
 ) {
   const options = Object.assign({}, defaultOptions, opts);
   const { target, when } = options;
-  const savedCallback = useRef<(event: KeyboardEvent) => any>();
+  const savedCallback = useRef<(event: KeyboardEvent) => any>(callback);
+  /**
+   * PressedKeyMapping will do the bookkeeping the pressed keys
+   */
+  const PressedKeyMapping: TPressedKeyMapping = {};
+
   /**
    *  First useEffect is to remember the latest callback
    */
@@ -156,7 +157,7 @@ function useKeys(
     if (when && typeof window !== "undefined") {
       if (!target) return;
 
-      let targetNode = target ? target.current : document;
+      let targetNode = target && target.current ? target.current : document;
       if (targetNode) {
         targetNode.addEventListener("keydown", handleKeyDown);
         targetNode.addEventListener("keyup", handleKeyUp);
@@ -167,6 +168,6 @@ function useKeys(
         if (targetNode) targetNode.removeEventListener("keyup", handleKeyUp);
       };
     }
-  }, [when, target, keysList, callback, handleKeyDown, handleKeyUp]);
+  }, [when, target, keysList, handleKeyDown, handleKeyUp]);
 }
 export { useKeys };
