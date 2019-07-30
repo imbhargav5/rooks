@@ -1,0 +1,40 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "description": "A React hook for window on scroll event",
+  "name": "@rooks/use-on-window-scroll",
+  "homepage": "https://react-hooks.org/hook/use-on-window-scroll",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
+  },
+  "keywords": [
+    "use",
+    "react-hooks.org",
+    "react",
+    "rooks",
+    "hooks",
+    "window",
+    "scroll"
+  ],
+  "version": "3.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}
