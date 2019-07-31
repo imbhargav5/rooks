@@ -30,7 +30,7 @@ function Demo() {
   return (
     <p>
       Value is {value}{" "}
-      <button onClick={() => set(value !== null ? parseFloat(value) + 1 : 0)}>
+      <button onClick={() => set(value !== null ? value + 1 : 0)}>
         Increment
       </button>
       <button onClick={remove}>Remove </button>
