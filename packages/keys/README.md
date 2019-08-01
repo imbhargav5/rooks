@@ -1,6 +1,8 @@
 # @rooks/use-keys
 
-### A hook which allows to setup callbacks on multiple keypresses at the same time
+### A hook which allows to setup callbacks when a combination of keys are pressed at the same time. 
+
+  An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active. 
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-keys/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-keys.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-keys.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fkeys)
 
