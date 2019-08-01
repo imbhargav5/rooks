@@ -47,7 +47,37 @@ function Basic() {
   );
 }
 
-function Continuous() {
+function PressAndHoldSingle() {
+  const [left, setLeft] = useState(0);
+  useKeys(
+    ["KeyD"],
+    () => {
+      setLeft(left + 5);
+    },
+    {
+      continuous: true
+    }
+  );
+
+  return (
+    <div data-testid="container">
+      <p>Press and hold d to move the div to the right</p>
+      <div
+        style={{
+          position: "relative",
+          left,
+          height: 100,
+          width: 200,
+          background: "red"
+        }}
+      >
+        Move me
+      </div>
+    </div>
+  );
+}
+
+function PressAndHoldCombination() {
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   useKeys(
@@ -117,4 +147,7 @@ storiesOf("usekeys", module)
     }
   })
   .add("Basic example", () => <Basic />)
-  .add("Press and hold keys example", () => <Continuous />);
+  .add("Press and hold single key example", () => <PressAndHoldSingle />)
+  .add("Press and hold multiple keys example", () => (
+    <PressAndHoldCombination />
+  ));
