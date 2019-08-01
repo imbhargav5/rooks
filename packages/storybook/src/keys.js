@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import useKeys from "@rooks/use-keys";
 import README from "@rooks/use-keys/README.md";
 
-storiesOf("usekeys", module)
-  .addParameters({
-    readme: {
-      sidebar: README
-    }
-  })
-  .add("Basic example", () => <Basic />)
 // .add("multiple events on keys", () => <MultipleEvents />)
 // .add("toggling listeners using `when` ", () => (
 //   <TogglingListenersWithBoolean />
@@ -23,7 +16,7 @@ function Basic() {
   useKeys(
     ["ControlLeft", "KeyS"],
     () => {
-      alert("you presses ctrlLeft + s")
+      console.log("you presses ctrlLeft + s");
       setFirstCallbackCallCount(firstCallbackCallCount + 1);
     },
     {
@@ -31,23 +24,12 @@ function Basic() {
       when: isEventActive
     }
   );
-  // useKeys(
-  //   ["m", "r"],
-  //   event => {
-  //     // event.stopPropagation();
-  //     console.log("here you go m and r");
-  //   },
-  //   {
-  //     when: isEventActive,
-  //     target: inputRef
-  //   }
-  // );
-  // console.log("rendering ");
+
   return (
     <div data-testid="container">
       <p data-testid="first-callback">
         Callback Run Count:
-      {firstCallbackCallCount}
+        {firstCallbackCallCount}
       </p>
       <p>Is events enabled ? ==> {isEventActive ? "Yes" : "No"}</p>
       <p>Press CtrlLeft + s to see update in count</p>
@@ -57,10 +39,82 @@ function Basic() {
         }}
       >
         Toggle event enabled
-        </button>
+      </button>
       {/* <div className="grid-container">
         <input ref={inputRef} className="box1" tabIndex={1} />
       </div> */}
     </div>
   );
 }
+
+function Continuous() {
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
+  useKeys(
+    ["ControlLeft", "KeyD"],
+    () => {
+      setLeft(left + 5);
+    },
+    {
+      continuous: true
+    }
+  );
+
+  useKeys(
+    ["ControlLeft", "KeyW"],
+    () => {
+      setTop(top - 5);
+    },
+    {
+      continuous: true
+    }
+  );
+
+  useKeys(
+    ["ControlLeft", "KeyA"],
+    () => {
+      setLeft(left - 5);
+    },
+    {
+      continuous: true
+    }
+  );
+  useKeys(
+    ["ControlLeft", "KeyS"],
+    () => {
+      setTop(top + 5);
+    },
+    {
+      continuous: true
+    }
+  );
+  return (
+    <div data-testid="container">
+      <p>Press and hold ctrl + d to move the div to the right</p>
+      <p>Press and hold ctrl + w to move the div to the top</p>
+      <p>Press and hold ctrl + s to move the div to the bottom</p>
+      <p>Press and hold ctrl + a to move the div to the left</p>
+      <div
+        style={{
+          position: "relative",
+          left,
+          top,
+          height: 100,
+          width: 200,
+          background: "red"
+        }}
+      >
+        Move me
+      </div>
+    </div>
+  );
+}
+
+storiesOf("usekeys", module)
+  .addParameters({
+    readme: {
+      sidebar: README
+    }
+  })
+  .add("Basic example", () => <Basic />)
+  .add("Continuous example", () => <Continuous />);

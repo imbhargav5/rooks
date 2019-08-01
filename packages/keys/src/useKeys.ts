@@ -74,6 +74,10 @@ interface Options {
    */
   when: boolean;
   /**
+   * should the event logging be continuous
+   */
+  continuous: boolean;
+  /**
    * target ref on which the events should be listened. If no target is specified,
    * events are listened to on the document
    */
@@ -83,7 +87,8 @@ interface Options {
  * defaultOptions which will be merged with passed in options
  */
 const defaultOptions = {
-  when: true
+  when: true,
+  continuous: false
 };
 
 /**
@@ -98,12 +103,13 @@ function useKeys(
   opts?: Options
 ) {
   const options = Object.assign({}, defaultOptions, opts);
-  const { target, when } = options;
+  const { target, when, continuous } = options;
   const savedCallback = useRef<(event: KeyboardEvent) => any>(callback);
   /**
    * PressedKeyMapping will do the bookkeeping the pressed keys
    */
-  const PressedKeyMapping: TPressedKeyMapping = {};
+  const pressedKeyMappingRef = useRef<TPressedKeyMapping>({});
+  const PressedKeyMapping: TPressedKeyMapping = pressedKeyMappingRef.current;
 
   /**
    *  First useEffect is to remember the latest callback
@@ -128,14 +134,15 @@ function useKeys(
         if (savedCallback.current) {
           savedCallback.current(event);
         }
-
-        keysList.forEach((keys: string) => {
-          PressedKeyMapping[keys.toUpperCase()] = false;
-          PressedKeyMapping[alphabetAndNumberMap[keys.toUpperCase()]] = false;
-        });
+        if (!continuous) {
+          keysList.forEach((keys: string) => {
+            PressedKeyMapping[keys.toUpperCase()] = false;
+            PressedKeyMapping[alphabetAndNumberMap[keys.toUpperCase()]] = false;
+          });
+        }
       }
     },
-    [keysList]
+    [keysList, continuous]
   );
 
   /**
@@ -147,7 +154,7 @@ function useKeys(
    */
   const handleKeyUp = useCallback(function handleKeyUp(event: KeyboardEvent) {
     const { code } = event;
-    PressedKeyMapping[code.toUpperCase()] = false;
+    PressedKeyMapping[code.toUpperCase()] = undefined;
   }, []);
 
   /**
@@ -155,8 +162,6 @@ function useKeys(
    */
   useEffect((): any => {
     if (when && typeof window !== "undefined") {
-      if (!target) return;
-
       let targetNode = target && target.current ? target.current : document;
       if (targetNode) {
         targetNode.addEventListener("keydown", handleKeyDown);
