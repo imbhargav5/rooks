@@ -117,4 +117,4 @@ storiesOf("usekeys", module)
     }
   })
   .add("Basic example", () => <Basic />)
-  .add("Continuous example", () => <Continuous />);
+  .add("Press and hold keys example", () => <Continuous />);
