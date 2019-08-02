@@ -1,0 +1,4 @@
+src
+test
+__tests__
+*.log

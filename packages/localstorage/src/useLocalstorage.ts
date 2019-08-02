@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 interface LocalStorageHandler {
-  value: string | null;
-  set: (newValue: string) => void;
+  value: any;
+  set: (newValue: any) => void;
   remove: () => void;
 }
 
@@ -10,7 +10,7 @@ interface LocalStorageHandler {
  * useLocalStorage hook
  *
  * @param {string} key - Key of the localStorage object
- * @param {string} defaultValue - Default initial value
+ * @param {any} defaultValue - Default initial value
  */
 function useLocalStorage(key: string, defaultValue: any = null) {
   const [value, setValue] = useState(getValueFromLocalStorage());
@@ -29,14 +29,20 @@ function useLocalStorage(key: string, defaultValue: any = null) {
     if (typeof localStorage === "undefined") {
       return null;
     }
-    return localStorage.getItem(key);
+    const storedValue = localStorage.getItem(key) || "null";
+    try {
+      return JSON.parse(storedValue);
+    } catch (err) {
+      console.error(err);
+    }
+    return storedValue;
   }
 
-  function saveValueToLocalStorage(key: string, value: string | null) {
+  function saveValueToLocalStorage(key: string, value: any) {
     if (typeof localStorage === "undefined") {
       return null;
     }
-    return localStorage.setItem(key, String(value));
+    return localStorage.setItem(key, JSON.stringify(value));
   }
 
   function set(newValue: any) {
