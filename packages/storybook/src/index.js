@@ -7,6 +7,7 @@ import "./did-update";
 import "./input";
 import "./interval";
 import "./key";
+import "./keys";
 import "./localstorage";
 import "./mouse";
 import "./mutation-observer";
