@@ -29,7 +29,7 @@
     "window",
     "resize"
   ],
-  "version": "3.1.1-alpha.0",
+  "version": "3.1.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
