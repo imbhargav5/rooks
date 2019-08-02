@@ -1,3 +1,12 @@
+#v3.2.0
+
+- New hooks added
+  - `useOnWindowResize`
+  - `useOnWindowScroll`
+  - `useKeys`
+
+- Allow localStorage and sessionStorage to store all kinds of values.
+
 #v3.1
 
  - New hook added `useDebounce`
