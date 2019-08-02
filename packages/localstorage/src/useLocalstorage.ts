@@ -29,7 +29,13 @@ function useLocalStorage(key: string, defaultValue: any = null) {
     if (typeof localStorage === "undefined") {
       return null;
     }
-    return JSON.parse(localStorage.getItem(key) || "null");
+    const storedValue = localStorage.getItem(key) || "null";
+    try {
+      return JSON.parse(storedValue);
+    } catch (err) {
+      console.error(err);
+    }
+    return storedValue;
   }
 
   function saveValueToLocalStorage(key: string, value: any) {

@@ -23,14 +23,20 @@ function useSessionStorage(key: string, defaultValue = null) {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
-    return sessionStorage.getItem(key);
+    const storedValue = sessionStorage.getItem(key) || "null";
+    try {
+      return JSON.parse(storedValue);
+    } catch (err) {
+      console.error(err);
+    }
+    return storedValue;
   }
 
   function saveValueToSessionStorage(key: string, value: string | null) {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
-    return sessionStorage.setItem(key, String(value));
+    return sessionStorage.setItem(key, JSON.stringify(value));
   }
 
   function setValue(value: string | null) {
