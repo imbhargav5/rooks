@@ -29,7 +29,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "3.1.1-alpha.1",
+  "version": "3.2.0",
   "_id": "@rooks/use-boundingclientrect@",
   "publishConfig": {
     "access": "public"
