@@ -139,4 +139,63 @@ describe("useKeys", () => {
   });
 });
 
-// figure out tests
+describe("useKeys: continuous mode", () => {
+  let App;
+  // let firstCallback
+  beforeEach(() => {
+    // firstCallback = jest.fn()
+    App = function() {
+      const [testValue, setTestValue] = React.useState(0);
+      useKeys(
+        ["ControlLeft", "s"],
+        () => {
+          setTestValue(testValue + 1);
+        },
+        {
+          continuous: true
+        }
+      );
+      return (
+        <div data-testid="container">
+          <p id="value" data-testid="value">
+            {testValue}
+          </p>
+        </div>
+      );
+    };
+    //end
+  });
+
+  afterEach(cleanup);
+
+  it("should trigger continuously whenever 'continuous' is true", () => {
+    const { container } = render(<App />);
+
+    const testValueElement = getByTestId(container, "value");
+
+    fireEvent.keyDown(document, {
+      key: "Control",
+      code: "ControlLeft",
+      charCode: 17
+    });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+
+    expect(testValueElement.innerHTML).toBe("1");
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    expect(testValueElement.innerHTML).toBe("6");
+    // now it should no longer increment after keyup
+    fireEvent.keyUp(document, {
+      key: "Control",
+      code: "ControlLeft",
+      charCode: 17
+    });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    expect(testValueElement.innerHTML).toBe("6");
+  });
+});
