@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-interface IntervalHandler {
+interface IntervalHandlerAsObject {
   /**
    * Function to start the interval
    */
@@ -16,6 +16,15 @@ interface IntervalHandler {
    */
   intervalId: NodeJS.Timeout | null;
 }
+
+interface IntervalHandlerAsArray
+  extends Array<null | NodeJS.Timeout | (() => void)> {
+  0: () => void;
+  1: () => void;
+  2: NodeJS.Timeout | null;
+}
+
+interface IntervalHandler extends IntervalHandlerAsArray {}
 
 /**
  *
@@ -67,13 +76,13 @@ function useInterval(
     }
   }, [intervalDuration, isRunning]);
 
-  const handler: IntervalHandler = {
-    start,
-    stop,
-    intervalId
-  };
+  let handler: unknown;
+  (handler as IntervalHandlerAsArray) = [start, stop, intervalId];
+  (handler as IntervalHandlerAsObject).start = start;
+  (handler as IntervalHandlerAsObject).stop = stop;
+  (handler as IntervalHandlerAsObject).intervalId = intervalId;
 
-  return handler;
+  return handler as IntervalHandlerAsArray & IntervalHandlerAsObject;
 }
 
 export { useInterval };
