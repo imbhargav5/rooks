@@ -56,7 +56,6 @@ describe("useKey", () => {
 
   it("should trigger the calback when pressed on document or target", () => {
     const { container } = render(<App />);
-    console.log("container.innerHTML before", container.innerHTML);
     const valueElement = getByTestId(container, "value");
     const inputElement = getByTestId(container, "input");
     act(() => {
