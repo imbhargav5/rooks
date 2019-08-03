@@ -7,7 +7,7 @@ import { useMutationObserver } from "shared/useMutationObserver";
  * @param ref The React ref whose ClientRect is needed
  * @return ClientRect
  */
-function useBoundingclientrect(ref: MutableRefObject<HTMLElement>) {
+function useBoundingclientrect(ref: MutableRefObject<HTMLElement | null>) {
   function getBoundingClientRect(): ClientRect | DOMRect | null {
     if (ref.current) {
       return ref.current.getBoundingClientRect();
