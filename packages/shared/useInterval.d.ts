@@ -1,17 +1,10 @@
 /// <reference types="node" />
-interface IntervalHandler {
-    /**
-     * Function to start the interval
-     */
-    start: () => void;
-    /**
-     * Function to stop the interval
-     */
-    stop: () => void;
-    /**
-     * IntervalId of the interval
-     */
-    intervalId: NodeJS.Timeout | null;
+interface IntervalHandlerAsArray extends Array<null | NodeJS.Timeout | (() => void)> {
+    0: () => void;
+    1: () => void;
+    2: NodeJS.Timeout | null;
+}
+interface IntervalHandler extends IntervalHandlerAsArray {
 }
 /**
  *

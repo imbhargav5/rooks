@@ -146,8 +146,8 @@
         "signature": "430a3f6bd22af028350b238ea63f55253832a0e3fdefee0cb2b5c2f74c4de092"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/shared/useinterval.ts": {
-        "version": "5f356e869f9dff5cd5aaf1fda73449f7e4d919c067fad49a07389988cfc5fb91",
-        "signature": "5f8b66ade26c1924e6fed539168814e53131acc98480baae41783df861cb164e"
+        "version": "1e549f2277b6fa1a4e5ca9060df0c00111f8cd6d8f68369391339c7757c39442",
+        "signature": "aad51c911445b8ba2fb66788f5ce6f89f2eed55d13e800f06c1013b5817fbd0a"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/shared/usemutationobserver.ts": {
         "version": "c3a890513bb3d02595f27d664dc0961b93c57e11d8c39c6b6202d373b7c8947a",
