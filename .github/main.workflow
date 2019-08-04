@@ -36,8 +36,6 @@ action "build-demos"{
 
 action "build" {
   needs = ["yarn-install","build-shared","build-independent","build-rooks","build-demos"]
-  uses = "borales/actions-yarn@master"
-  args = "build:action"
 }
 
 # Deploy, and write deployment to file
