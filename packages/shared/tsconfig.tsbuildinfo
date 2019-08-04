@@ -126,8 +126,8 @@
         "signature": "a1205f8b74ba57896ae4eb9ff19a5ffc7f210352b0b535abcd36d6b06225a3ac"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/global.d.ts": {
-        "version": "68188f9f0950ca019af3f061cb494751a2798648586207cbf2089dccd68b663c",
-        "signature": "68188f9f0950ca019af3f061cb494751a2798648586207cbf2089dccd68b663c"
+        "version": "2bbdfc5ed049f38787376bb01b7bcfe5299eac853c76c16a3e21ab0279078314",
+        "signature": "2bbdfc5ed049f38787376bb01b7bcfe5299eac853c76c16a3e21ab0279078314"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/csstype/index.d.ts": {
         "version": "599c67cf56a35a8a7bee5bcd877dece4cb71553efb763ebf1050c6987acfaefc",
@@ -138,8 +138,8 @@
         "signature": "5e632216dfe01f2ff76f1c312c28632fde75364c24d659b732f2ee59e9ccf1b2"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/react/index.d.ts": {
-        "version": "ca7fd0b19265fdc74c5ffdc43c0e30d69a246b300b45da34834d7f37bc52caef",
-        "signature": "ca7fd0b19265fdc74c5ffdc43c0e30d69a246b300b45da34834d7f37bc52caef"
+        "version": "3b62b2451f021c4512691c57658e78cc72cf47bee60fddb41b17b5a492284bc5",
+        "signature": "3b62b2451f021c4512691c57658e78cc72cf47bee60fddb41b17b5a492284bc5"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/packages/shared/usedidmount.ts": {
         "version": "1152464f1a9cca56a21dad9aba72a2dd65d3742e1bce0a6c9ff825e6fa748617",
@@ -222,8 +222,8 @@
         "signature": "cc4cd9d8af7f5689b5df3c91d0fc287fafbd89e6e305183da28a6877a8aa08a8"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/http2.d.ts": {
-        "version": "ac5fc75d3dd0dd2539b78235167151f0fabfbf56801eedb03683fdf7d725380f",
-        "signature": "ac5fc75d3dd0dd2539b78235167151f0fabfbf56801eedb03683fdf7d725380f"
+        "version": "745494f14a9e133beee622ca51cdc59c8896ff77c9f3cd017a4ce735b30dac2d",
+        "signature": "745494f14a9e133beee622ca51cdc59c8896ff77c9f3cd017a4ce735b30dac2d"
       },
       "/users/bhargavponnapalli/oss/react-hooks/rooks/node_modules/@types/node/https.d.ts": {
         "version": "dacbe08610729f6343ea9880ea8e737c6d7a6efa4a318d8f6acaf85db4aceed6",

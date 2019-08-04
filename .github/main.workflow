@@ -14,10 +14,28 @@ action "yarn-install" {
   args = "install"
 }
 
-action "build" {
+action "build-shared"{
   needs = "yarn-install"
   uses = "borales/actions-yarn@master"
-  args = "build:action"
+  args = "build:shared"
+}
+
+action "build-independent"{
+  needs = "build-shared"
+  uses = "borales/actions-yarn@master"
+  args = "build:independent"
+}
+
+action "build-rooks"{
+  needs = "build-independent"
+  uses = "borales/actions-yarn@master"
+  args = "build:rooks"
+}
+
+action "build" {
+  needs = "build-rooks"
+  uses = "borales/actions-yarn@master"
+  args = "build:demos"
 }
 
 # Deploy, and write deployment to file
