@@ -19,7 +19,7 @@ action "build-shared"{
   args = "build:shared"
 }
 
-action "build-individual"{
+action "build-independent"{
   uses = "borales/actions-yarn@master"
   args = "build:independent"
 }
