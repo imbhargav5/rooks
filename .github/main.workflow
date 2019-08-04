@@ -29,13 +29,10 @@ action "build-rooks"{
   args = "build:rooks"
 }
 
-action "build-demos"{
+action "build" {
+  needs = ["yarn-install","build-shared","build-independent","build-rooks"]
   uses = "borales/actions-yarn@master"
   args = "build:demos"
-}
-
-action "build" {
-  needs = ["yarn-install","build-shared","build-independent","build-rooks","build-demos"]
 }
 
 # Deploy, and write deployment to file
