@@ -14,8 +14,28 @@ action "yarn-install" {
   args = "install"
 }
 
+action "build-shared"{
+  uses = "borales/actions-yarn@master"
+  args = "build:shared"
+}
+
+action "build-individual"{
+  uses = "borales/actions-yarn@master"
+  args = "build:independent"
+}
+
+action "build-rooks"{
+  uses = "borales/actions-yarn@master"
+  args = "build:rooks"
+}
+
+action "build-demos"{
+  uses = "borales/actions-yarn@master"
+  args = "build:demos"
+}
+
 action "build" {
-  needs = "yarn-install"
+  needs = ["yarn-install","build-shared","build-independent","build-rooks","build-demos"]
   uses = "borales/actions-yarn@master"
   args = "build:action"
 }
