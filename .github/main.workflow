@@ -15,22 +15,25 @@ action "yarn-install" {
 }
 
 action "build-shared"{
+  needs = "yarn-install"
   uses = "borales/actions-yarn@master"
   args = "build:shared"
 }
 
 action "build-independent"{
+  needs = "build-shared"
   uses = "borales/actions-yarn@master"
   args = "build:independent"
 }
 
 action "build-rooks"{
+  needs = "build-independent"
   uses = "borales/actions-yarn@master"
   args = "build:rooks"
 }
 
 action "build" {
-  needs = ["yarn-install","build-shared","build-independent","build-rooks"]
+  needs = "build-rooks"
   uses = "borales/actions-yarn@master"
   args = "build:demos"
 }
