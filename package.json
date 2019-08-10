@@ -8,6 +8,7 @@
     "test": "lerna run test --stream --parallel",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "dev": "cd packages/storybook && yarn storybook",
+    "deploy:dev": "cd packages/storybook && yarn deploy:dev",
     "deploy": "cd packages/storybook && yarn deploy",
     "create": "node helpers/create",
     "bs": "lerna bootstrap",
