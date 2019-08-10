@@ -9,6 +9,7 @@
     "build": "build-storybook --quiet -s ./public -c .storybook -o .out",
     "predeploy": "yarn build",
     "predeploy:staging": "yarn predeploy",
+    "deploy:dev": "now --scope react-hooks -A now-dev.json --target production",
     "deploy:staging": "now --scope react-hooks --target staging",
     "deploy": "now --scope react-hooks --target production"
   },
