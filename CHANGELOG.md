@@ -1,3 +1,7 @@
+#v3.2.2
+
+- Fix a minor bug in useKeys
+
 #v3.2.0
 
 - New hooks added
