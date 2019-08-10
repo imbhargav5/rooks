@@ -1,4 +1,5 @@
-import { useLayoutEffect, Ref, useEffect } from "react";
+import { Ref, useEffect, useCallback, useRef } from "react";
+import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
 
 interface Options {
   /**
@@ -37,14 +38,27 @@ function useKey(
 ): void {
   const options = (<any>Object).assign({}, defaultOptions, opts);
   const { when, eventTypes } = options;
+  const callbackRef = useRef<(e: KeyboardEvent) => any>(callback);
   let { target } = options;
-  function handle(e: KeyboardEvent) {
-    if (keyList.includes(e.key) || keyList.includes(e.keyCode)) {
-      callback(e);
-    }
-  }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+
+  const handle = useCallback(
+    (e: KeyboardEvent) => {
+      if (
+        keyList.some(identifier =>
+          doesIdentifierMatchKeyboardEvent(e, identifier)
+        )
+      ) {
+        callbackRef.current(e);
+      }
+    },
+    [keyList]
+  );
+
+  useEffect(() => {
     if (when && typeof window !== "undefined") {
       const targetNode = target ? target.current : window;
       eventTypes.forEach(eventType => {
