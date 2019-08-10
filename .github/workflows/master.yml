@@ -1,9 +1,9 @@
-name: Deploy dev To now.sh
+name: Deploy Master to now.sh
 
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   build:
@@ -28,4 +28,4 @@ jobs:
       - name: deploy
         env:
           ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        run: yarn deploy:dev --token $ZEIT_TOKEN
+        run: yarn deploy --token $ZEIT_TOKEN
