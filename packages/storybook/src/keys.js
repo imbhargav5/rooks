@@ -140,7 +140,7 @@ function PressAndHoldCombination() {
   );
 }
 
-storiesOf("usekeys", module)
+storiesOf("useKeys", module)
   .addParameters({
     readme: {
       sidebar: README
