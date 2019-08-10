@@ -28,4 +28,4 @@ jobs:
         uses: actions/zeit-now@master
         env:
           ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        args: deploy  --no-clipboard  packages/storybook --scope react-hooks > $HOME/deploy.txt
+        args: "deploy  --no-clipboard  packages/storybook --scope react-hooks > $HOME/deploy.txt"
