@@ -1,4 +1,4 @@
-name: Deploy Master to now.sh
+name: Deploy master branch to now.sh
 
 on:
   push:

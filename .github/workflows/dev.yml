@@ -1,4 +1,4 @@
-name: Deploy dev To now.sh
+name: Deploy dev branch to now.sh
 
 on:
   push:
