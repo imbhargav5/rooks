@@ -17,6 +17,8 @@ jobs:
           version: 10.x
       - name: Installs yarn
         run: npm i -g yarn
+      - name: Install now
+        run: npm i -g now
       - name: yarn install and build and test
         run: |
           yarn
@@ -25,7 +27,6 @@ jobs:
       - name: test
         run: yarn test
       - name: deploy
-        uses: actions/zeit-now@master
         env:
           ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        args: "deploy  --no-clipboard  packages/storybook --scope react-hooks > $HOME/deploy.txt"
+        run: yarn deploy:dev --token $ZEIT_TOKEN
