@@ -1,71 +1,9 @@
 import { useEffect, useRef, MutableRefObject, useCallback } from "react";
-
-/**
- *  An IIFE which assign code {event.code} to actual key values
- *  This will avoid the need to do rigorous check on the hook side
- *  avoiding checks e.g ctrl left vs ctrl right, alt left vs alt right
- *  {"0":"Digit0","1":"Digit1","2":"Digit2","3":"Digit3","4":"Digit4","5":"Digit5","6":"Digit6","7":"Digit7","8":"Digit8","9":"Digit9","A":"KeyA","B":"KeyB","C":"KeyC","D":"KeyD","E":"KeyE","F":"KeyF","G":"KeyG","H":"KeyH","I":"KeyI","J":"KeyJ","K":"KeyK","L":"KeyL","M":"KeyM","N":"KeyN","O":"KeyO","P":"KeyP","Q":"KeyQ","R":"KeyR","S":"KeyS","T":"KeyT","U":"KeyU","V":"KeyV","W":"KeyW","X":"KeyX","Y":"KeyY","Z":"KeyZ"}"
- */
-const alphabetAndNumberMap = (() => {
-  /**
-   *  startLetter: ASCII code for A
-   *  endLetter: ASCII code for Z
-   *  startNumber : ASCII code for 0
-   *  endNumber: ASCII code for 9
-   */
-
-  let startLetter = 65;
-  let endLetter = 90;
-  let startNumber = 48;
-  let endNumber = 57;
-
-  const mapletterToCodes = {};
-  /**
-   * mapping character to event.code.
-   * refer https://keycode.info/ for event.code semantic for character and number
-   */
-  while (startLetter <= endLetter) {
-    const letter = String.fromCharCode(startLetter);
-    mapletterToCodes[
-      String.fromCharCode(startLetter)
-    ] = `Key${letter}`.toUpperCase();
-    startLetter++;
-  }
-
-  /**
-   * mapping number to event.code.
-   */
-  while (startNumber <= endNumber) {
-    const number = String.fromCharCode(startNumber);
-    mapletterToCodes[
-      String.fromCharCode(startNumber)
-    ] = `Digit${number}`.toUpperCase();
-    startNumber++;
-  }
-  return mapletterToCodes;
-})();
+import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
 
 type TPressedKeyMapping = {
   [key: string]: boolean;
 };
-
-/**
- *  checkWhetherRequiredKeyPressed
- *  Helper function
- *
- *  Checks whether the keys in the keyList are all presses
- */
-function checkWhetherRequiredKeyPressed(
-  keysList: string[],
-  PressedKeyMapping: TPressedKeyMapping
-) {
-  return keysList.every((elem: string) => {
-    return (
-      PressedKeyMapping[elem.toUpperCase()] ||
-      PressedKeyMapping[alphabetAndNumberMap[elem.toUpperCase()]]
-    );
-  });
-}
 
 interface Options {
   /**
@@ -123,22 +61,33 @@ function useKeys(
    * @param   {KeyboardEvent}  event
    * KeyDown event handler which will wrap the passed in callback
    */
-  //Need to add comparison logixc for current
-  // keylist and old keylist, because here keylist always changes
-  // as it is an array or is this ok? will have to check
+
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent) {
-      const { code } = event;
-      PressedKeyMapping[code.toUpperCase()] = true;
-      if (checkWhetherRequiredKeyPressed(keysList, PressedKeyMapping)) {
+      let pressedKeyIdentifier = null;
+      let areAllKeysFromListPressed = false;
+      // First detect the key that was pressed;
+      keysList.forEach(identifier => {
+        if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
+          PressedKeyMapping[identifier] = true;
+          pressedKeyIdentifier = identifier;
+          return;
+        }
+      });
+      if (keysList.every(identifier => PressedKeyMapping[identifier])) {
+        areAllKeysFromListPressed = true;
+      }
+
+      if (areAllKeysFromListPressed) {
         if (savedCallback.current) {
           savedCallback.current(event);
         }
+        /**
+         * If not continuous
+         * disable identifier immediately
+         */
         if (!continuous) {
-          keysList.forEach((keys: string) => {
-            PressedKeyMapping[keys.toUpperCase()] = false;
-            PressedKeyMapping[alphabetAndNumberMap[keys.toUpperCase()]] = false;
-          });
+          PressedKeyMapping[pressedKeyIdentifier] = false;
         }
       }
     },
@@ -153,8 +102,11 @@ function useKeys(
    * KeyUp event handler which will update the keys pressed state in PressedKeyMapping
    */
   const handleKeyUp = useCallback(function handleKeyUp(event: KeyboardEvent) {
-    const { code } = event;
-    PressedKeyMapping[code.toUpperCase()] = undefined;
+    keysList.forEach(identifier => {
+      if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
+        PressedKeyMapping[identifier] = undefined;
+      }
+    });
   }, []);
 
   /**
