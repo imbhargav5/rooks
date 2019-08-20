@@ -25,7 +25,7 @@ function useOutsideClick(
       savedHandler.current(e);
     }
   }
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (when) {
       document.addEventListener("click", handle);
       document.addEventListener("ontouchstart", handle);
