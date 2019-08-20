@@ -1,4 +1,4 @@
-import { useLayoutEffect, MutableRefObject, useRef, useEffect } from "react";
+import { useEffect, MutableRefObject, useRef } from "react";
 
 /**
  *  useOutsideClick hook
