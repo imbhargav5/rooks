@@ -16,16 +16,13 @@ function useOutsideClick(
 ): void {
   const savedHandler = useRef(handler);
 
-  useEffect(()=>{
-    savedHandler.current = handler;
-  })
-
   function handle(e: MouseEvent) {
     if (ref && ref.current && !ref.current.contains(e.target as Element)) {
       savedHandler.current(e);
     }
   }
   useEffect(() => {
+    savedHandler.current = handler;
     if (when) {
       document.addEventListener("click", handle);
       document.addEventListener("ontouchstart", handle);
