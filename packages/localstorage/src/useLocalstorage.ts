@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
 
-interface LocalStorageHandler {
-  value: any;
-  set: (newValue: any) => void;
-  remove: () => void;
-}
-
 /**
  * useLocalStorage hook
  *
@@ -77,11 +71,7 @@ function useLocalStorage(key: string, defaultValue: any = null) {
     };
   });
 
-  const handler: LocalStorageHandler = {
-    value,
-    set,
-    remove
-  };
+  const handler = [value, set, remove];
 
   return handler;
 }
