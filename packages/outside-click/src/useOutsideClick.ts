@@ -16,6 +16,14 @@ function useOutsideClick(
 ): void {
   const savedHandler = useRef(handler);
 
+  const memoizedCallback = useCallback(
+    (e: MouseEvent) => {
+      if (ref && ref.current && !ref.current.contains(e.target as Element)) {
+        savedHandler.current(e);
+      }
+    }, []
+  );
+
   useEffect(() => {
     savedHandler.current = handler;
     if (when) {
@@ -27,14 +35,6 @@ function useOutsideClick(
       };
     }
   }, [ref, handler, when]);
-
-  const memoizedCallback = useCallback(
-    (e: MouseEvent) => {
-      if (ref && ref.current && !ref.current.contains(e.target as Element)) {
-        savedHandler.current(e);
-      }
-    }, []
-  )
 }
 
 export { useOutsideClick };
