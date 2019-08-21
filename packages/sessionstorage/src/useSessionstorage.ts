@@ -1,4 +1,4 @@
-import { useState, useReducer, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -76,11 +76,7 @@ function useSessionStorage(key: string, defaultValue = null) {
     };
   }, []);
 
-  return {
-    value,
-    set,
-    remove
-  };
+  return [value, set, remove];
 }
 
 export { useSessionStorage };
