@@ -1,12 +1,29 @@
 import { useState, useEffect } from "react";
 
+interface StorageHandlerAsObject {
+  value: any;
+  set: (newValue: any) => void;
+  remove: () => void;
+}
+
+interface StorageHandlerAsArray extends Array<any> {
+  0: any;
+  1: (newValue: any) => void;
+  2: () => void;
+}
+
+interface StorageHandler extends StorageHandlerAsArray {}
+
 /**
  * useLocalStorage hook
  *
  * @param {string} key - Key of the localStorage object
  * @param {any} defaultValue - Default initial value
  */
-function useLocalStorage(key: string, defaultValue: any = null) {
+function useLocalStorage(
+  key: string,
+  defaultValue: any = null
+): StorageHandler {
   const [value, setValue] = useState(getValueFromLocalStorage());
 
   function init() {
@@ -71,9 +88,13 @@ function useLocalStorage(key: string, defaultValue: any = null) {
     };
   });
 
-  const handler = [value, set, remove];
+  let handler: unknown;
+  (handler as StorageHandlerAsArray) = [value, set, remove];
+  (handler as StorageHandlerAsObject).value = value;
+  (handler as StorageHandlerAsObject).set = set;
+  (handler as StorageHandlerAsObject).remove = remove;
 
-  return handler;
+  return handler as StorageHandlerAsArray & StorageHandlerAsObject;
 }
 
 export { useLocalStorage };

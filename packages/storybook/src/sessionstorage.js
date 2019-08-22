@@ -7,7 +7,7 @@ function UseSessionstorageDemo() {
   const [value, set, remove] = useSessionstorage("my-value", 0);
   return (
     <>
-      <h1>Please check localstorage for changes</h1>
+      <h1>Please check sessionstorage for changes</h1>
       <p>
         Value is {value}
         <button onClick={() => set(value !== null ? parseFloat(value) + 1 : 0)}>
