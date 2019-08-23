@@ -1,4 +1,18 @@
-import { useState, useReducer, useEffect } from "react";
+import { useEffect, useReducer } from "react";
+
+interface StorageHandlerAsObject {
+  value: any;
+  set: (newValue: any) => void;
+  remove: () => void;
+}
+
+interface StorageHandlerAsArray extends Array<any> {
+  0: any;
+  1: (newValue: any) => void;
+  2: () => void;
+}
+
+interface StorageHandler extends StorageHandlerAsArray {}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -9,7 +23,7 @@ function reducer(state, action) {
   }
 }
 
-function useSessionStorage(key: string, defaultValue = null) {
+function useSessionStorage(key: string, defaultValue = null): StorageHandler {
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
@@ -76,11 +90,13 @@ function useSessionStorage(key: string, defaultValue = null) {
     };
   }, []);
 
-  return {
-    value,
-    set,
-    remove
-  };
+  let handler: unknown;
+  (handler as StorageHandlerAsArray) = [value, set, remove];
+  (handler as StorageHandlerAsObject).value = value;
+  (handler as StorageHandlerAsObject).set = set;
+  (handler as StorageHandlerAsObject).remove = remove;
+
+  return handler as StorageHandlerAsArray & StorageHandlerAsObject;
 }
 
 export { useSessionStorage };
