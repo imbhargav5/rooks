@@ -20,6 +20,7 @@ import "./rooks";
 import "./select";
 import "./sessionstorage";
 import "./time-ago";
+import "./throttle";
 import "./timeout";
 import "./toggle";
 import "./visibility-sensor";
