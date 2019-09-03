@@ -80,6 +80,8 @@ function useLocalStorage(
     init();
   }, []);
 
+  
+
   // check for changes across windows
   useEffect(() => {
     window.addEventListener("storage", listen);
