@@ -5,7 +5,7 @@
 </p>
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI%20Master/badge.svg)  [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
+![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)  [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 
 <br/>
 
