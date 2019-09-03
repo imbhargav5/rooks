@@ -1,5 +1,6 @@
-import { useState, useEffect, MutableRefObject } from "react";
+import { useState, useCallback, MutableRefObject } from "react";
 import { useMutationObserver } from "shared/useMutationObserver";
+import { useDidMount } from "shared/useDidMount";
 
 /**
  * useBoundingclientRect hook
@@ -8,22 +9,22 @@ import { useMutationObserver } from "shared/useMutationObserver";
  * @return ClientRect
  */
 function useBoundingclientrect(ref: MutableRefObject<HTMLElement | null>) {
-  function getBoundingClientRect(): ClientRect | DOMRect | null {
+  const getBoundingClientRect = useCallback(() => {
     if (ref.current) {
       return ref.current.getBoundingClientRect();
     }
     return null;
-  }
+  }, []);
 
   const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
 
-  function update() {
+  const update = useCallback(() => {
     setValue(getBoundingClientRect());
-  }
+  }, [setValue, getBoundingClientRect]);
 
-  useEffect(() => {
+  useDidMount(() => {
     update();
-  }, [ref.current]);
+  });
 
   useMutationObserver(ref, update);
 
