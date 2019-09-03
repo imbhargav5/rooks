@@ -47,5 +47,6 @@ storiesOf("useGeolocation", module)
       sidebar: README
     }
   })
-  .add("Basic Example Geolocation", () => <App />)
-  .add("Basic Example Geolocation with when condition", () => <AppWithoutWhen />);
+  .add("Basic Example Geolocation", () => <AppWithoutWhen />)
+  .add("Basic Example Geolocation (conditional)", () => <App />)
+

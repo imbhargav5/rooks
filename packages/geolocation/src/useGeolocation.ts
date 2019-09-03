@@ -11,6 +11,7 @@ interface IOptions {
   enableHighAccuracy?: boolean;
   timeout?: number;
   maximumAge?: number;
+  when?: boolean;
 }
 
 function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
@@ -41,26 +42,27 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
   });
 }
 
-interface IUseGeoLocationHook {
-  when?: boolean;
-}
+// interface IUseGeoLocationHook {
+//   when?: boolean;
+// }
 
-const defaultHookOptions = {
-  when: true
-};
+// const defaultHookOptions = {
+//   when: true
+// };
 
 const defaultGeoLocationOptions = {
   enableHighAccuracy: false,
   timeout: Infinity,
-  maximumAge: 0
+  maximumAge: 0,
+  when: true
 };
 
 function useGeolocation(
-  hooksOptions: IUseGeoLocationHook = defaultHookOptions,
+  // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
   geoLocationOptions: IOptions = defaultGeoLocationOptions
 ) {
   const [geoObj, setGeoObj] = useState(null);
-  const { when } = hooksOptions;
+  const { when } = geoLocationOptions;
 
   useEffect(() => {
     async function getGeoCode() {
