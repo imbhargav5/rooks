@@ -20,7 +20,7 @@
     "pregenerate:types": "rimraf index.d.ts",
     "generate:types": "tsc"
   },
-  "version": "3.2.3",
+  "version": "3.2.4",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
@@ -35,5 +35,6 @@
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
-  }
+  },
+  "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }
