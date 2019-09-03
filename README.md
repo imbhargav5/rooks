@@ -6,7 +6,7 @@
 <br/>
 <br/>
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fimbhargav5%2Frooks%2Fbadge&style=flat)](https://actions-badge.atrox.dev/imbhargav5/rooks/goto) [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 
 <br/>
 
