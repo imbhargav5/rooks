@@ -28,7 +28,11 @@
     "hooks",
     "session storage"
   ],
+<<<<<<< HEAD
   "version": "3.2.2",
+=======
+  "version": "3.2.2-alpha.0",
+>>>>>>> dev
   "_id": "@rooks/use-sessionstorage@",
   "publishConfig": {
     "access": "public"
