@@ -26,7 +26,7 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "version": "3.2.1",
+  "version": "3.2.2-alpha.0",
   "_id": "@rooks/use-keys@",
   "publishConfig": {
     "access": "public"
