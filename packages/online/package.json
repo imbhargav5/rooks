@@ -29,11 +29,7 @@
     "online status",
     "online status hook"
   ],
-<<<<<<< HEAD
   "version": "3.2.2",
-=======
-  "version": "3.2.2-alpha.0",
->>>>>>> dev
   "_id": "@rooks/use-online@",
   "publishConfig": {
     "access": "public"

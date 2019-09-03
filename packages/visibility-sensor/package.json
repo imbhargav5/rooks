@@ -29,11 +29,7 @@
     "rooks",
     "visibility sensor hook"
   ],
-<<<<<<< HEAD
   "version": "3.2.2",
-=======
-  "version": "3.2.2-alpha.0",
->>>>>>> dev
   "_id": "@rooks/use-visibility-sensor@",
   "publishConfig": {
     "access": "public"
