@@ -1,4 +1,4 @@
-name: Deploy master branch to now.sh
+name: Node CI Master
 
 on:
   push:
