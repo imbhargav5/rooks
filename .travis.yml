@@ -5,10 +5,10 @@ addons:
   apt:
     packages:
       - libnss3
-      - google-chrome-beta
+      - google-chrome-stable
 env:
   global:
-    - GOOGLE_CHROME_BINARY="/usr/bin/google-chrome-beta"
+    - GOOGLE_CHROME_BINARY="/usr/bin/google-chrome-stable"
     - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 node_js:
   - "8"
