@@ -1,18 +1,19 @@
 language: node_js
-dist: trusty
+dist: xenial
 sudo: required
 addons:
   apt:
     packages:
       - libnss3
-      - google-chrome-beta
+      - google-chrome-stable
 env:
   global:
-    - GOOGLE_CHROME_BINARY="/usr/bin/google-chrome-beta"
+    - GOOGLE_CHROME_BINARY="/usr/bin/google-chrome-stable"
     - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 node_js:
   - "8"
   - "10"
+  - "12"
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
