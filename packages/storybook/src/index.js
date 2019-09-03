@@ -26,3 +26,4 @@ import "./visibility-sensor";
 import "./will-unmount";
 import "./window-size";
 import "./worker";
+import "./geolocation";
