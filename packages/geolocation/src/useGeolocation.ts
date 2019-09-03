@@ -46,7 +46,7 @@ interface IUseGeoLocationHook {
 }
 
 const defaultHookOptions = {
-  when: false
+  when: true
 };
 
 const defaultGeoLocationOptions = {

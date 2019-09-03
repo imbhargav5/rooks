@@ -15,16 +15,60 @@ npm install --save @rooks/use-geolocation
 ### Importing the hook
 
 ```javascript
-import useGeolocation from "@rooks/use-geolocation"
+import useGeolocation from "@rooks/use-geolocation";
 ```
 
 ### Usage
 
-```jsx
-function Demo() {
-  useGeolocation();
-  return null
-}
+### 1. Getting geolocation in a component
 
-render(<Demo/>)
+```jsx
+function App() {
+  const geoObj = useGeolocation();
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+      }}
+    >
+      <p>{geoObj && JSON.stringify(geoObj)}</p>
+    </div>
+  );
+}
+render(<App />);
+```
+
+### 1. Getting geolocation in a component on some condition
+
+```jsx
+function App() {
+  const [when, setWhen] = React.useState(false);
+
+  const geoObj = useGeolocation({
+    when
+  });
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+      }}
+    >
+      <button
+        onClick={() => {
+          setWhen(true);
+        }}
+      >
+        Get Geolocation
+      </button>
+      <p>{geoObj && JSON.stringify(geoObj)}</p>
+    </div>
+  );
+}
+render(<App />);
 ```

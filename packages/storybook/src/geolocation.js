@@ -6,9 +6,7 @@ import README from "@rooks/use-geolocation/README.md";
 function App() {
   const [when, setWhen] = React.useState(false);
 
-  const geoObj = useGeolocation({
-    when
-  });
+  const geoObj = useGeolocation({ when });
 
   return (
     <div style={{
@@ -28,10 +26,26 @@ function App() {
   );
 }
 
+function AppWithoutWhen() {
+  const geoObj = useGeolocation();
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+      }}
+    >
+      <p>{geoObj && JSON.stringify(geoObj)}</p>
+    </div>
+  );
+}
 storiesOf("useGeolocation", module)
   .addParameters({
     readme: {
       sidebar: README
     }
   })
-  .add("Basic Example Geolocation", () => <App />);
+  .add("Basic Example Geolocation", () => <App />)
+  .add("Basic Example Geolocation with when condition", () => <AppWithoutWhen />);

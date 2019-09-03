@@ -30,9 +30,7 @@ describe("useGeolocation", () => {
     App = function () {
       const [when, setWhen] = React.useState(false);
 
-      const geoObj = useGeolocation({
-        when
-      });
+      const geoObj = useGeolocation();
 
       return (
         <div className="App">
