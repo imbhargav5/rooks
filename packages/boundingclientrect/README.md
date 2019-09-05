@@ -26,10 +26,19 @@ import useBoundingclientrect from "@rooks/use-boundingclientrect"
 ```jsx
 function Demo() {
   const myRef = useRef();
-  const getBoundingClientRect = useBoundingclientrect(myRef);
+  const [getBoundingClientRect, update] = useBoundingclientrect(myRef);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
   const displayString = JSON.stringify(getBoundingClientRect, null, 2);
+
+  // update the clientRect when window resized
+  useEffect(() => {
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
   return (
     <>
       <div
@@ -85,7 +94,8 @@ render(<Demo/>)
 
 ### Return
 
-| Return value | Type    | Description                                                                  | Default value |
-| ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
-| value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
+| Return value    | Type                  | Description                                                                                                                                                      | Default value |
+| --------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| [value, update] | [DOMRect, () => void] | `value` is a DOMRect Object containing x,y, width, height, left,right,top and bottom keys. `update` is a function which updates the DOMRect Object when invoked. | null          |
+
 

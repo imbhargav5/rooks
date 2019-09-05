@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 import useBoundingclientrect from "@rooks/use-boundingclientrect";
 import README from "@rooks/use-boundingclientrect/README.md";
@@ -6,29 +6,38 @@ import README from "@rooks/use-boundingclientrect/README.md";
 storiesOf("useBoundingclientrect", module)
   .addParameters({
     readme: {
-      sidebar: README
-    }
+      sidebar: README,
+    },
   })
   .add("basic example", () => <BoundingClientRectDemo />, {
-    info: README
+    info: README,
   });
 
 function BoundingClientRectDemo() {
   const myRef = useRef();
-  const getBoundingClientRect = useBoundingclientrect(myRef);
+  const [getBoundingClientRect, update] = useBoundingclientrect(myRef);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
   const displayString = JSON.stringify(getBoundingClientRect, null, 2);
+
+  // update the clientRect when window resized
+  useEffect(() => {
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
     <>
       <div
         style={{
-          width: 300,
+          width: "20vw",
           background: "lightblue",
           padding: "10px",
           position: "absolute",
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
         ref={myRef}
       >
@@ -38,7 +47,7 @@ function BoundingClientRectDemo() {
             overflow: "auto",
             background: "white",
             color: "blue",
-            maxWidth: "100%"
+            maxWidth: "100%",
           }}
         >
           <p>
