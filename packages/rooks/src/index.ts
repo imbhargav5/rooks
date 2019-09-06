@@ -28,3 +28,4 @@ export { default as useVisibilitySensor } from "@rooks/use-visibility-sensor";
 export { default as useWillUnmount } from "@rooks/use-will-unmount";
 export { default as useWindowSize } from "@rooks/use-window-size";
 export { default as useWorker } from "@rooks/use-worker";
+export { default as useGeolocation } from "@rooks/use-geolocation";
