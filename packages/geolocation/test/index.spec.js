@@ -27,12 +27,20 @@ describe("useGeolocation", () => {
 
     global.navigator.geolocation = mockGeolocation;
 
-    App = function () {
+    App = function (props) {
+      let { customRef } = props
+      if (!customRef) {
+        customRef = React.useRef(0)
+      }
       const [when, setWhen] = React.useState(false);
-
+      const renderCountRef = customRef
       const geoObj = useGeolocation({
         when
       });
+
+      React.useEffect(() => {
+        renderCountRef.current++
+      })
 
       return (
         <div className="App">
@@ -80,6 +88,29 @@ describe("useGeolocation", () => {
 
 
   })
+
+  it("render should not happen infinitely, when 'when' attribute changes to true ", async () => {
+    let container
+    let customRef
+    function TestComp() {
+      customRef = React.useRef(0)
+      return (
+        <App customRef={customRef} />
+      )
+
+    }
+    act(() => {
+      container = render(<TestComp />).container;
+    })
+    const getGeolocationBtn = getByTestId(container, "get-geolocation-btn");
+    act(() => {
+      fireEvent.click(getGeolocationBtn)
+    })
+    await wait()
+    expect(customRef.current).toBe(3)
+
+  })
 });
 
 // figure out tests
+
