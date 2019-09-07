@@ -23,8 +23,7 @@
     "react-hooks.org"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.8.0"
   },
   "version": "3.2.4",
   "_id": "@rooks/use-keys@",
