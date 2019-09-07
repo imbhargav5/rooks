@@ -1,3 +1,8 @@
+# Unreleased
+
+- New useGeolocation hook
+- Minor bug fixes
+
 #v3.2.2
 
 - Fix a minor bug in useKeys

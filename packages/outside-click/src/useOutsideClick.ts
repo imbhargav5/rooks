@@ -16,16 +16,17 @@ function useOutsideClick(
 ): void {
   const savedHandler = useRef(handler);
 
-  const memoizedCallback = useCallback(
-    (e: MouseEvent) => {
-      if (ref && ref.current && !ref.current.contains(e.target as Element)) {
-        savedHandler.current(e);
-      }
-    }, []
-  );
+  const memoizedCallback = useCallback((e: MouseEvent) => {
+    if (ref && ref.current && !ref.current.contains(e.target as Element)) {
+      savedHandler.current(e);
+    }
+  }, []);
 
   useEffect(() => {
     savedHandler.current = handler;
+  });
+
+  useEffect(() => {
     if (when) {
       document.addEventListener("click", memoizedCallback);
       document.addEventListener("ontouchstart", memoizedCallback);
