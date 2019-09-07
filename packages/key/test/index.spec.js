@@ -69,6 +69,64 @@ describe("useKey", () => {
   });
 });
 
+describe("non array input", () => {
+  let App;
+  // let firstCallback
+  beforeEach(() => {
+    // firstCallback = jest.fn()
+    App = function() {
+      const inputRef = React.useRef(null);
+      const [value, setValue] = React.useState(0);
+      useKey("s", () => {
+        setValue(value + 1);
+      });
+      useKey(
+        "r",
+        () => {
+          setValue(value + 1);
+        },
+        {
+          target: inputRef
+        }
+      );
+      return (
+        <div data-testid="container">
+          <p data-testid="value">{value}</p>
+          <div className="grid-container">
+            <input
+              data-testid="input"
+              ref={inputRef}
+              className="box1"
+              tabIndex={1}
+            />
+          </div>
+        </div>
+      );
+    };
+    //end
+  });
+
+  afterEach(cleanup);
+
+  it("should be defined", () => {
+    expect(useKey).toBeDefined();
+  });
+
+  it("should trigger the calback when pressed on document or target", () => {
+    const { container } = render(<App />);
+    const valueElement = getByTestId(container, "value");
+    const inputElement = getByTestId(container, "input");
+    act(() => {
+      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+    });
+    expect(valueElement.innerHTML).toBe("1");
+    act(() => {
+      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+    });
+    expect(valueElement.innerHTML).toBe("2");
+  });
+});
+
 describe("when", () => {
   let App;
   // let firstCallback
