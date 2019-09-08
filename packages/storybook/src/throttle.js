@@ -15,7 +15,7 @@ storiesOf("useThrottle", module)
 function ThrottleDemo() {
   const [number, setNumber] = useState(0);
   const addNumber = () => setNumber(number + 1);
-  const addNumberThrottled = useThrottle(addNumber, 1000);
+  const [addNumberThrottled] = useThrottle(addNumber, 1000);
   return (
     <>
       <h1>Number: {number}</h1>
@@ -30,11 +30,11 @@ function ThrottleWithArgumentsDemo() {
   const [number, setNumber] = useState(0);
   const [argumentNumber, setArgumentNumber] = useState(0);
 
-  const addNumber = (argNumber) => {
+  const addNumber = argNumber => {
     setArgumentNumber(argNumber * Math.random());
-    setNumber(number + 1)
+    setNumber(number + 1);
   };
-  const addNumberThrottled = useThrottle(() => addNumber(5), 1000);
+  const [addNumberThrottled] = useThrottle(() => addNumber(5), 1000);
   return (
     <>
       <h1>Number: {number}</h1>
