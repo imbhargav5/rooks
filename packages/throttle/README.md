@@ -20,7 +20,11 @@ import useThrottle from "@rooks/use-throttle"
 function ThrottleDemo() {
   const [number, setNumber] = useState(0);
   const addNumber = () => setNumber(number + 1);
-  const [addNumberThrottled] = useThrottle(addNumber, 1000);
+  const [addNumberThrottled, isReady] = useThrottle(addNumber, 1000);
+  // isReady is a boolean that tells you whether calling addNumberThrottled at that point
+  // will fire or not.
+  // Once the timeout of 1000ms finishes, isReady will become true to indicate that the next time 
+  // addNumberThrottled is called it will run right away.
   return (
     <>
       <h1>Number: {number}</h1>
