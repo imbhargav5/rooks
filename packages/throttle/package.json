@@ -1,0 +1,35 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "something weird here",
+  "name": "@rooks/use-throttle",
+  "homepage": "https://react-hooks.org/hook/use-throttle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "test:example": "parcel test/index.html",
+    "prepublish": "yarn run build"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-throttle@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
