@@ -87,8 +87,8 @@ function useLocalStorage(
       window.removeEventListener("storage", listen);
     };
   }, []);
-
   let handler: unknown;
+
   (handler as StorageHandlerAsArray) = [value, set, remove];
   (handler as StorageHandlerAsObject).value = value;
   (handler as StorageHandlerAsObject).set = set;
