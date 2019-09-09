@@ -39,24 +39,6 @@ describe("useLocalstorage with object destructuring", () => {
 
 describe("useLocalstorage with array destructuring", () => {
   let App;
-  // let firstCallback
-  let valueInLocalStorage = 0;
-  const mockLocalStorage = {
-    getItem: jest.fn()
-      .mockImplementationOnce(() => {
-        return valueInLocalStorage
-      }),
-    setItem: jest.fn()
-      .mockImplementationOnce((key, value) => {
-        valueInLocalStorage = value
-      }),
-    removeItem: jest.fn()
-      .mockImplementationOnce(() => {
-        valueInLocalStorage = null
-      }),
-  };
-
-  global.navigator.localStorage = mockLocalStorage;
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {

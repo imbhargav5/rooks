@@ -72,32 +72,10 @@ describe("useSessionstorage with array destructuring", () => {
 describe("useSessionstorage", () => {
   let App;
   beforeEach(() => {
-    let valueInSessionStorage = 0;
-    const mockSessionStorage = {
-      getItem: jest.fn()
-        .mockImplementationOnce(() => {
-          return valueInSessionStorage
-        }),
-      setItem: jest.fn()
-        .mockImplementationOnce((key, value) => {
-          valueInSessionStorage = value
-        }),
-      removeItem: jest.fn()
-        .mockImplementationOnce(() => {
-          valueInSessionStorage = null
-        }),
-      clear: jest.fn()
-        .mockImplementationOnce(() => {
-          valueInSessionStorage = null
-        }),
-    };
-
-    global.navigator.sessionStorage = mockSessionStorage;
     sessionStorage.clear();
     function SubApp1() {
 
       const { value: titan, set, remove } = useSessionstorage("titan", "eren");
-
       return (
         <div>
           <button data-testid="new-value" onClick={() => set("mikasa")}>Add</button>
@@ -116,6 +94,7 @@ describe("useSessionstorage", () => {
       );
     }
     App = function () {
+
       return (
         <>
           <SubApp1 />
