@@ -23,10 +23,9 @@
     "react-hooks.org"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.8.0"
   },
-  "version": "0.0.0",
+  "version": "3.3.0-alpha.0",
   "_id": "@rooks/use-geolocation@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

@@ -1,9 +1,9 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "%description%",
-  "name": "@rooks/%packageName%",
-  "homepage": "https://react-hooks.org/hook/%packageName%",
+  "description": "something weird here",
+  "name": "@rooks/use-throttle",
+  "homepage": "https://react-hooks.org/hook/use-throttle",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -23,10 +23,11 @@
     "react-hooks.org"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "version": "0.0.0",
-  "_id": "@rooks/%packageName%@",
+  "_id": "@rooks/use-throttle@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"

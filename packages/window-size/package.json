@@ -30,7 +30,7 @@
     "window size",
     "window size hook"
   ],
-  "version": "3.2.4",
+  "version": "3.3.0-alpha.0",
   "_id": "@rooks/use-window-size@",
   "private": false,
   "jest": {
@@ -45,8 +45,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.8.0"
   },
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }
