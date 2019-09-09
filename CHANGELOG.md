@@ -1,5 +1,7 @@
 # Unreleased
 
+# v3.3.0 
+
 - New useGeolocation hook
 - New useThrottle hook
 - Minor bug fixes
