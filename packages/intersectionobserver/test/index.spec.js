@@ -5,7 +5,7 @@ import React from "react";
 import useIntersectionObserver from "..";
 
 describe("useIntersectionObserver", () => {
-  it("should be defined", () => {
+  it("useIntersectionObserver should be defined", () => {
     expect(useIntersectionObserver).toBeDefined();
   });
 });

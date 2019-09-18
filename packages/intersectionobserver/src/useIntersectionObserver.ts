@@ -10,9 +10,8 @@ interface Iaction {
   type: string;
   data: any;
 }
-interface Window {
-  IntersectionObserver: Function;
-}
+
+
 function IntersectionObserverReducer(state: any, action: Iaction) {
   switch (action.type) {
     case "SETINTERSECTIONOBJ": {
@@ -37,8 +36,7 @@ function IntersectionObserverReducer(state: any, action: Iaction) {
 }
 
 const checkFeasibility = () => {
-  // let windowMY: IWindow = window;
-  let MyWindow: Window;
+  let MyWindow = window as any;
   if (!MyWindow || !MyWindow.IntersectionObserver) {
     console.warn(
       "Intersection Observer is not supported in the current browser / environment"
@@ -48,8 +46,8 @@ const checkFeasibility = () => {
   return true;
 };
 interface IOptions {
-  elementRef: React.MutableRefObject<any>;
-  rootRef: React.MutableRefObject<any>;
+  elementRef: React.MutableRefObject<HTMLElement>;
+  rootRef?: React.MutableRefObject<HTMLElement>;
   rootMargin?: string;
   threshold?: string;
   when?: boolean;
@@ -86,15 +84,17 @@ const defaultVisibilityCondition = (entry: IntersectionObserverEntry) => {
   return false;
 };
 
-const defaultOptions = {
-  rootMargin: "0px 0px 0px 0px",
-  threshold: "0, 1",
-  when: true,
-  visibilityCondition: defaultVisibilityCondition
-};
 function useIntersectionObserver(
   options: IOptions
 ): useIntersectionObserverReturn {
+  const defaultOptions = {
+    rootMargin: "0px 0px 0px 0px",
+    threshold: "0, 1",
+    when: true,
+    visibilityCondition: defaultVisibilityCondition,
+    rootRef: React.useRef(null)
+  };
+
   const {
     elementRef,
     rootRef,
@@ -112,17 +112,16 @@ function useIntersectionObserver(
   const { intersectionObj, observerInState, isVisible } = state;
   const observerRef = React.useRef(null);
   const callbackRef = React.useRef(null);
-
   /**
    * Setting callback Ref
    */
 
   React.useEffect(() => {
-    if (!checkFeasibility) {
+    if (!checkFeasibility()) {
       return;
     }
     if (!callback) {
-      const callbackDefault = function(
+      let callbackDefault = function(
         entries: IntersectionObserverEntry[],
         observer: IntersectionObserver
       ) {
@@ -169,7 +168,7 @@ function useIntersectionObserver(
    * unobserving intersectionobserver when "when" key is false
    */
   React.useEffect(() => {
-    if (!checkFeasibility) {
+    if (!checkFeasibility()) {
       return;
     }
     if (!when) {
@@ -184,21 +183,20 @@ function useIntersectionObserver(
    * registering the observer for specific element
    */
   React.useEffect(() => {
-    if (!checkFeasibility) {
+    if (!checkFeasibility()) {
       return;
     }
     const currentELem = elementRef.current;
     const currentRootElem = rootRef.current;
     if (when) {
-      const observer = new IntersectionObserver(callbackRef.current, {
-        root: currentRootElem || null,
+      let observer = new IntersectionObserver(callbackRef.current, {
+        root: currentRootElem,
         threshold: threshold.split(",").map(elem => parseFloat(elem)),
         rootMargin
       });
       observerRef.current = observer;
 
       if (currentELem && observerRef.current) {
-        // console.log("currentELem  ===>", currentELem,  observerRef.current.observe);
         observerRef.current.observe(currentELem);
       }
     }
