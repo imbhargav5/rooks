@@ -22,15 +22,13 @@ import useIntersectionObserver from "@rooks/use-intersectionobserver"
 
 ```jsx
 function IntersectionObserverApp() {
-  
-  const boxRef = React.useRef(null);
-  const documentRef = React.useRef(null);
+
   /**
    * Optional arguments:
    **/
 
   /**
-   * rootRef: ref to the parent dom element with which respect to, the visibility will be checked,
+   * root: element with respect to which the visibility needs to be checked,
    * By default document is considered
    */
 
@@ -68,10 +66,9 @@ function IntersectionObserverApp() {
    * which will tell hook to observe the list item relative to ul container.
    */
   const option = {
-    elementRef: boxRef
-    /* rootRef: documentRef, */
+    /* root: viewport, */
     /* rootMargin: "0px 0px 0px 0px", */
-    /* threshold: "0, 0.5, 1", */
+    /* threshold: [0, 0.5, 1], */
     /* when: true, */
     /* callback can also be passed
       callback: () => {
@@ -80,7 +77,7 @@ function IntersectionObserverApp() {
     /* visibilityCondition */
   };
   // const option = useOptionCreator(boxRef, documentRef);
-  const [isVisible, intersectionObj, observerInState] = useIntersectionObserver(option);
+  const [boxRef, isVisible, intersectionObj, observerInState] = useIntersectionObserver(option);
   return (
     <div className="App" style={
       { "display": "flex", "flexDirection": "column", "alignItems": "center" }
