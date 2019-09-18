@@ -36,7 +36,7 @@ function IntersectionObserverReducer(state: any, action: Iaction) {
 }
 
 const checkFeasibility = () => {
-  let MyWindow = window as any;
+  const MyWindow = window as any;
   if (!MyWindow || !MyWindow.IntersectionObserver) {
     console.warn(
       "Intersection Observer is not supported in the current browser / environment"
@@ -84,12 +84,14 @@ const defaultVisibilityCondition = (entry: IntersectionObserverEntry) => {
   return false;
 };
 
+const defaultThreshold = [0, 1];
+
 function useIntersectionObserver(
   options: IOptions
 ): useIntersectionObserverReturn {
   const defaultOptions = {
     rootMargin: "0px 0px 0px 0px",
-    threshold: [0, 1],
+    threshold: defaultThreshold,
     when: true,
     visibilityCondition: defaultVisibilityCondition
   };
@@ -117,6 +119,7 @@ function useIntersectionObserver(
   React.useEffect(() => {
     visibilityConditionRef.current = visibilityCondition;
   });
+
   React.useEffect(() => {
     savedCallbackRef.current = callback;
   });
@@ -187,7 +190,15 @@ function useIntersectionObserver(
         };
       }
     }
-  }, [rootMargin, when, savedCallbackRef, threshold]);
+  }, [
+    rootMargin,
+    when,
+    savedCallbackRef,
+    threshold,
+    element,
+    handleIntersectionObserve,
+    root
+  ]);
 
   const callbackRef = React.useCallback((node: HTMLElement) => {
     setElement(node);
