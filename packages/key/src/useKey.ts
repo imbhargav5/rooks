@@ -1,4 +1,4 @@
-import { Ref, useEffect, useCallback, useRef } from "react";
+import { Ref, useEffect, useCallback, useRef, useMemo } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
 
 interface Options {
@@ -32,10 +32,17 @@ const defaultOptions = {
  * @param {Options} options
  */
 function useKey(
-  keyList: Array<string | number>,
+  input: string | number | Array<string | number>,
   callback: (e: KeyboardEvent) => any,
   opts?: Options
 ): void {
+  const keyList: Array<string | number> = useMemo(() => {
+    if (Array.isArray(input)) {
+      return input;
+    } else {
+      return [input];
+    }
+  }, [input]);
   const options = (<any>Object).assign({}, defaultOptions, opts);
   const { when, eventTypes } = options;
   const callbackRef = useRef<(e: KeyboardEvent) => any>(callback);

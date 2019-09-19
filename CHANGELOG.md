@@ -1,3 +1,11 @@
+# Unreleased
+
+# v3.3.0 
+
+- New useGeolocation hook
+- New useThrottle hook
+- Minor bug fixes
+
 #v3.2.2
 
 - Fix a minor bug in useKeys

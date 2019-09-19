@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-rooks",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "description": "Eslint config for rooks.",
   "keywords": [
     "eslint",
@@ -30,7 +30,7 @@
     "url": "https://github.com/react-hooks-org/rooks/issues"
   },
   "dependencies": {
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.3",
     "eslint": "5.12.1",
     "eslint-plugin-react": "7.12.4"
   }
