@@ -75,7 +75,7 @@
     "write-pkg": "3.2.0"
   },
   "optionalDependencies": {
-    "fsevents": "1.2.9"
+    "fsevents": "2.1.0"
   },
   "dependencies": {
     "jest-localstorage-mock": "2.4.0"
