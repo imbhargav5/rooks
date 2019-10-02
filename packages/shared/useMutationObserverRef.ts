@@ -1,4 +1,5 @@
-import { useEffect, Ref, MutableRefObject } from "react";
+import { useEffect, Ref, MutableRefObject, useCallback, useState } from "react";
+import { HTMLElementOrNull } from "./utils";
 
 var config: MutationObserverInit = {
   attributes: true,
@@ -9,31 +10,37 @@ var config: MutationObserverInit = {
 
 /**
  *
- * useMutationObserver hook
+ * useMutationObserverRef hook
  *
  * Returns a mutation observer for a React Ref and fires a callback
  *
- * @param {MutableRefObject<HTMLElement | null>} ref React ref on which mutations are to be observed
  * @param {MutationCallback} callback Function that needs to be fired on mutation
  * @param {MutationObserverInit} options
  */
-function useMutationObserver(
-  ref: MutableRefObject<HTMLElement | null>,
+function useMutationObserverRef(
   callback: MutationCallback,
   options: MutationObserverInit = config
 ) {
+  const [node, setNode] = useState<HTMLElementOrNull>(null);
+
   useEffect(() => {
     // Create an observer instance linked to the callback function
-    if (ref.current) {
+    if (node) {
       const observer = new MutationObserver(callback);
 
       // Start observing the target node for configured mutations
-      observer.observe(ref.current, options);
+      observer.observe(node, options);
       return () => {
         observer.disconnect();
       };
     }
-  }, [callback, options]);
+  }, [node, callback, options]);
+
+  const ref = useCallback((node: HTMLElementOrNull) => {
+    setNode(node);
+  }, []);
+
+  return [ref];
 }
 
-export { useMutationObserver };
+export { useMutationObserverRef };
