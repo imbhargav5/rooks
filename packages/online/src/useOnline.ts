@@ -29,12 +29,16 @@ function useOnline(): boolean {
   // we only needs this to be set on mount
   // hence []
   useEffect(() => {
-    window.addEventListener("online", setOnline);
-    window.addEventListener("offline", setOffline);
-    return () => {
-      window.removeEventListener("online", setOnline);
-      window.removeEventListener("offline", setOffline);
-    };
+    if (typeof window === 'undefined') {
+      changeOnline(null);
+    } else {
+      window.addEventListener("online", setOnline);
+      window.addEventListener("offline", setOffline);
+      return () => {
+        window.removeEventListener("online", setOnline);
+        window.removeEventListener("offline", setOffline);
+      };
+    }
   }, []);
 
   useEffect(() => {
