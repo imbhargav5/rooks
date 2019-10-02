@@ -1,9 +1,9 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "A hook which tells you the amount of overlap a DOM element relative to another DOM element",
-  "name": "@rooks/use-intersectionobserver",
-  "homepage": "https://react-hooks.org/hook/use-intersectionobserver",
+  "description": "A hook to register an intersection observer listener",
+  "name": "@rooks/use-intersection-observer-ref",
+  "homepage": "https://react-hooks.org/hook/use-intersection-observer-ref",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -26,7 +26,7 @@
     "react": ">=16.8.0"
   },
   "version": "0.0.0",
-  "_id": "@rooks/use-intersectionobserver@",
+  "_id": "@rooks/use-intersection-observer-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"

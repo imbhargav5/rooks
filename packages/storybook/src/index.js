@@ -5,7 +5,6 @@ import "./debounce";
 import "./did-mount";
 import "./did-update";
 import "./geolocation";
-import "./intersectionobserver";
 import "./input";
 import "./interval";
 import "./key";
