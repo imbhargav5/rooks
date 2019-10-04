@@ -1,63 +1,48 @@
 import { useEffect, useState } from "react";
 
 interface MouseData {
-  x: number | null;
-  y: number | null;
-  screenX: number | null;
-  screenY: number | null;
-  pageX: number | null;
-  pageY: number | null;
-  clientX: number | null;
-  clientY: number | null;
-  movementX: number | null;
-  movementY: number | null;
-  offsetX: number | null;
-  offsetY: number | null;
+  target: EventTarget | null;
+  position: {
+    client: { x: number | null; y: number | null };
+    page: { x: number | null; y: number | null };
+    screen: { x: number | null; y: number | null };
+    offset: { x: number | null; y: number | null };
+  };
+  movement: { x: number | null; y: number | null };
+  buttons: {
+    left: boolean;
+    right: boolean;
+    middle: boolean;
+  };
+  keyboard: {
+    alt: boolean;
+    ctrl: boolean;
+    meta: boolean;
+    shift: boolean;
+  };
 }
 
 const initialMouseState: MouseData = {
-  x: null,
-  y: null,
-  screenX: null,
-  screenY: null,
-  pageX: null,
-  pageY: null,
-  clientX: null,
-  clientY: null,
-  movementX: null,
-  movementY: null,
-  offsetX: null,
-  offsetY: null
+  target: null,
+  position: {
+    client: { x: null, y: null },
+    page: { x: null, y: null },
+    screen: { x: null, y: null },
+    offset: { x: null, y: null }
+  },
+  movement: { x: null, y: null },
+  buttons: {
+    left: false,
+    right: false,
+    middle: false
+  },
+  keyboard: {
+    alt: false,
+    ctrl: false,
+    meta: false,
+    shift: false
+  }
 };
-
-function getMousePositionFromEvent(e: MouseEvent): MouseData {
-  const {
-    screenX,
-    screenY,
-    movementX,
-    movementY,
-    pageX,
-    pageY,
-    clientX,
-    clientY,
-    offsetX,
-    offsetY
-  } = e;
-  return {
-    screenX,
-    screenY,
-    movementX,
-    movementY,
-    pageX,
-    pageY,
-    clientX,
-    clientY,
-    offsetX,
-    offsetY,
-    x: screenX,
-    y: screenY
-  };
-}
 
 /**
  * useMouse hook
@@ -66,19 +51,59 @@ function getMousePositionFromEvent(e: MouseEvent): MouseData {
  * screenX, pageX, clientX, movementX, offsetX
  */
 export function useMouse(): MouseData {
-  const [mousePosition, setMousePostition] = useState<MouseData>(
-    initialMouseState
-  );
-
-  function updateMousePosition(e: MouseEvent) {
-    setMousePostition(getMousePositionFromEvent(e));
-  }
-
+  const [mouse, setMouse] = useState<MouseData>(initialMouseState);
   useEffect(() => {
-    document.addEventListener("mousemove", updateMousePosition);
+    const events = ["mousedown", "mousemove", "mouseup"];
+    const handleMouseEvent = (event: MouseEvent) => {
+      const {
+        target,
+        altKey,
+        clientX,
+        clientY,
+        ctrlKey,
+        metaKey,
+        movementX,
+        movementY,
+        screenX,
+        screenY,
+        pageX,
+        pageY,
+        offsetX,
+        offsetY,
+        shiftKey,
+        buttons
+      } = event;
+      setMouse({
+        target,
+        position: {
+          client: { x: clientX, y: clientY },
+          page: { x: pageX, y: pageY },
+          screen: { x: screenX, y: screenY },
+          offset: { x: offsetX, y: offsetY }
+        },
+        movement: { x: movementX, y: movementY },
+        buttons: {
+          left: [1, 3, 5, 7].includes(buttons),
+          right: [2, 3, 6, 7].includes(buttons),
+          middle: [4, 5, 6, 7].includes(buttons)
+        },
+        keyboard: {
+          alt: altKey,
+          ctrl: ctrlKey,
+          meta: metaKey,
+          shift: shiftKey
+        }
+      });
+    };
+    events.forEach(eventType => {
+      document.addEventListener(eventType, handleMouseEvent);
+    });
     return () => {
-      document.removeEventListener("mousemove", updateMousePosition);
+      events.forEach(eventType => {
+        document.removeEventListener(eventType, handleMouseEvent);
+      });
     };
   }, []);
-  return mousePosition;
+
+  return mouse;
 }

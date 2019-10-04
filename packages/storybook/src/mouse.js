@@ -13,16 +13,16 @@ storiesOf("useMouse", module)
 
 function MouseDemo() {
   const {
-    screenX,
-    screenY,
-    movementX,
-    movementY,
-    pageX,
-    pageY,
-    clientX,
-    clientY,
-    offsetX,
-    offsetY
+    target,
+    position: {
+      screen: { x: screenX, y: screenY },
+      client: { x: clientX, y: clientY },
+      page: { x: pageX, y: pageY },
+      offset: { x: offsetX, y: offsetY }
+    },
+    movement: { x: movementX, y: movementY },
+    buttons: { left, right, middle },
+    keyboard: { alt, ctrl, meta, shift }
   } = useMouse();
   return (
     <>
@@ -37,6 +37,20 @@ function MouseDemo() {
       <p>clientY position is {clientY || "null"}</p>
       <p>offsetX position is {offsetX || "null"}</p>
       <p>offsetY position is {offsetY || "null"}</p>
+
+      <h1> Use mouse buttons to see how they register </h1>
+      <p>left is {left ? "true" : "false"}</p>
+      <p>right is {right ? "true" : "false"}</p>
+      <p>middle is {middle ? "true" : "false"}</p>
+
+      <h1> Modifier keys </h1>
+      <p>alt is {alt ? "true" : "false"}</p>
+      <p>ctrl is {ctrl ? "true" : "false"}</p>
+      <p>meta is {meta ? "true" : "false"}</p>
+      <p>shift is {shift ? "true" : "false"}</p>
+
+      <h1> Target </h1>
+      <p>target innerHTML is {target && target.innerHTML}</p>
     </>
   );
 }
