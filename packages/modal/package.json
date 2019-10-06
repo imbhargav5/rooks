@@ -1,0 +1,33 @@
+{
+  "main": "lib/index.js",
+  "license": "MIT",
+  "description": "Exposes modal logic through react context, also provides useToggle hook for controlling modal from other components",
+  "name": "@rooks/use-modal",
+  "homepage": "https://react-hooks.org/hook/use-modal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "test:example": "parcel test/index.html",
+    "prepublish": "yarn run build"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-modal@",
+  "publishConfig": {
+    "access": "public"
+  }
+}
