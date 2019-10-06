@@ -14,17 +14,72 @@ npm install --save @rooks/use-modal
 
 ### Importing the hook
 
-```javascript
-import useModal from "@rooks/use-modal"
+```js
+import useModal, { ModalProvider, useToggle } from "@rooks/use-modal"
 ```
 
 ### Usage
 
 ```jsx
-function Demo() {
-  useModal();
-  return null
+import useModal, { ModalProvider } from "@rooks/use-modal"
+
+const DemoBasic = () => {
+  const [opened, toggle] = useModal();
+
+  return (
+    <>
+      <button onClick={toggle}>Toggle modal</button>
+      {opened && (
+        <div style={modalStyle}>
+          <button onClick={() => toggle(false)}>Close</button>
+        </div>
+      )}
+    </>
+  );
 }
 
-render(<Demo/>)
+// make sure to wrap your app inside ModalProvider
+render(
+  <ModalProvider>
+    <DemoBasic />
+  </ModalProvider>
+)
+```
+
+### Toggle from other component
+
+```jsx
+import useModal, { ModalProvider, useToggle } from "@rooks/use-modal"
+
+const DemoNested = () => {
+  // register modal with id 'main'
+  const [opened, toggle] = useModal('main');
+
+  return (
+    <>
+      {opened && (
+        <div style={modalStyle}>
+          <button onClick={toggle}>Close</button>
+        </div>
+      )}
+    </>
+  );
+}
+
+const ToggleButton = () => {
+  // not we reference the same modal here
+  // useToggle returns the toggle method for 'main' modal
+  // we can now use it to toggle modal from this component
+  const toggleMain = useToggle('main');
+
+  return <button onClick={toggleMain}>Toggle nested modal</button>;
+}
+
+// make sure to wrap your app inside ModalProvider
+render(
+  <ModalProvider>
+    <ToggleButton />
+    <DemoNested />
+  </ModalProvider>
+)
 ```

@@ -3,7 +3,7 @@
   "license": "MIT",
   "description": "Exposes modal logic through react context, also provides useToggle hook for controlling modal from other components",
   "name": "@rooks/use-modal",
-  "homepage": "https://react-hooks.org/hook/use-modal",
+  "homepage": "https://react-hooks.org/?path=/story/usemodal--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
@@ -32,5 +32,6 @@
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^2.0.3"
-  }
+  },
+  "author": "capJavert"
 }
