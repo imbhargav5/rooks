@@ -14,6 +14,7 @@ import "./isomorphic-effect";
 import "./key";
 import "./keys";
 import "./localstorage";
+import "./modal";
 import "./mouse";
 import "./mutation-observer";
 import "./mutation-observer-ref";
