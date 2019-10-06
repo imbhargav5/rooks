@@ -1,3 +1,14 @@
 {
-  "extends": ["rooks"]
+  "extends": ["rooks"],
+  "rules": {
+    "react/prop-types": [
+      "error",
+      {
+        "ignore": [
+          "children",
+          "style"
+        ]
+      }
+    ]
+  }
 }

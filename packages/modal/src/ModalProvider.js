@@ -30,7 +30,7 @@ const ModalProvider = ({ children }) => {
       registerModal,
       unregisterModal
     }
-  }, ...children);
+  }, children);
 };
 
 export default ModalProvider;

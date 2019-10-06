@@ -16,8 +16,11 @@ const useModal = (id, initial = false) => {
   }, []);
 
   useEffect(() => {
-    registerModal(id, toggle);
-    return () => unregisterModal(id);
+    const modalId = id || Date.now()
+
+    registerModal(modalId, toggle);
+
+    return () => unregisterModal(modalId);
   }, [id]);
 
   return [opened, toggle];

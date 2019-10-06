@@ -29,5 +29,8 @@
   "_id": "@rooks/use-modal@",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^2.0.3"
   }
 }
