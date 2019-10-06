@@ -1,19 +1,20 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
-import { render, fireEvent } from '@testing-library/react'
+import React, { useEffect, useState } from "react";
+import { render, fireEvent } from '@testing-library/react';
 import useModal, { ModalProvider, useToggle } from "..";
 
-const ModalComponent = () => {
-  const [opened, toggle] = useModal('main')
+const ModalComponent = ({ children }) => {
+  const [opened, toggle] = useModal('main');
 
   return (
     <div>
       <button onClick={toggle}>Open</button>
       {opened && <div>Modal</div>}
+      {children}
     </div>
-  )
+  );
 };
 
 describe("useModal", () => {
@@ -34,8 +35,8 @@ describe("useModal", () => {
 
     expect(queryByText('Modal')).toBeTruthy();
 
-    unmount()
-  })
+    unmount();
+  });
 
   it('should hide modal when toggle is called twice', () => {
     const { getByText, queryByText, unmount } = render(
@@ -43,7 +44,6 @@ describe("useModal", () => {
         <ModalComponent />
       </ModalProvider>
     );
-
     const button = getByText('Open');
 
     fireEvent.click(button);
@@ -51,8 +51,8 @@ describe("useModal", () => {
 
     expect(queryByText('Modal')).toBeNull();
 
-    unmount()
-  })
+    unmount();
+  });
 
   test('respects initial prop', () => {
     const Component = () => {
@@ -62,7 +62,7 @@ describe("useModal", () => {
         <div>
           {opened && <div>Modal</div>}
         </div>
-      )
+      );
     };
     const { queryByText, unmount } = render(
       <ModalProvider>
@@ -72,8 +72,8 @@ describe("useModal", () => {
 
     expect(queryByText('Modal')).toBeTruthy();
 
-    unmount()
-  })
+    unmount();
+  });
 
   test('toggles correctly with shouldOpen argument', () => {
     const Component = () => {
@@ -84,28 +84,71 @@ describe("useModal", () => {
           <button onClick={() => toggle(true)}>Open</button>
           {opened && <div>Modal</div>}
         </div>
-      )
+      );
     };
     const { getByText, queryByText, unmount } = render(
       <ModalProvider>
         <Component />
       </ModalProvider>
     );
-
     const button = getByText('Open');
 
     fireEvent.click(button);
 
     expect(queryByText('Modal')).toBeTruthy();
 
-    unmount()
-  })
+    unmount();
+  });
 
   test('toggle modal from other component', () => {
-    // TODO
+    const Component = () => {
+      const toggle = useToggle('main')
+
+      useEffect(() => {
+        if (typeof toggle === 'function') {
+          toggle()
+        }
+      }, [toggle]);
+
+      return null;
+    };
+    const { queryByText, unmount } = render(
+      <ModalProvider>
+        <ModalComponent>
+          <Component />
+        </ModalComponent>
+      </ModalProvider>
+    );
+
+    expect(queryByText('Modal')).toBeTruthy();
+
+    unmount();
   })
 
   it('should unregister modal when component unmounts', () => {
-    // TODO
-  })
+    let registration
+    const Component = () => {
+      const [mount, setMount] = useState(true)
+      const toggle = useToggle('main')
+
+      useEffect(() => {
+        setMount(false)
+      }, []);
+
+      useEffect(() => {
+        registration = toggle
+      }, [toggle]);
+
+      return mount ? <ModalComponent /> : null;
+    };
+    const { unmount } = render(
+      <ModalProvider>
+        <Component />
+      </ModalProvider>
+    );
+
+    expect(registration).toBeUndefined();
+
+    unmount();
+  });
 });
