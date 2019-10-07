@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect, useCallback } from "react";
-import { ModalContext } from "./ModalProvider";
+import { ModalContext, ToggleFunctionType } from "./ModalProvider";
 
-const useModal = (id, initial = false) => {
+const useModal = (id: string = '', initial: boolean = false): [boolean, ToggleFunctionType] => {
   const { registerModal, unregisterModal } = useContext(ModalContext);
   const [opened, setOpened] = useState(initial);
-  const toggle = useCallback(shouldOpen => {
+  const toggle: ToggleFunctionType = useCallback(shouldOpen => {
     setOpened(current => {
       if (typeof shouldOpen === "boolean") {
         return shouldOpen

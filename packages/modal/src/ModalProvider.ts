@@ -1,18 +1,20 @@
-import { createElement, createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, createElement } from "react";
+
+export type ToggleFunctionType = (shouldOpen: boolean) => void
 
 export const ModalContext = createContext(null);
 
 const ModalProvider = ({ children }) => {
   const [store, setStore] = useState({});
 
-  const registerModal = useCallback((id, setOpened) => {
+  const registerModal = useCallback((id: string, setOpened: ToggleFunctionType): void => {
     setStore(currentStore => ({
       ...currentStore,
       [id]: setOpened
     }));
   }, []);
 
-  const unregisterModal = useCallback(id => {
+  const unregisterModal = useCallback((id: string): void => {
     setStore(currentStore => {
       const newStore = {
         ...currentStore
@@ -26,9 +28,9 @@ const ModalProvider = ({ children }) => {
 
   return createElement(ModalContext.Provider, {
     value: {
-      ...store,
       registerModal,
-      unregisterModal
+      unregisterModal,
+      ...store
     }
   }, children);
 };

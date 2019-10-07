@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint src test",
+    "lint": "eslint test",
     "build": "rollup -c ../../scripts/rollup.config.js",
     "test:example": "parcel test/index.html",
     "prepublish": "yarn run build"
