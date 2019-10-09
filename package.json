@@ -45,7 +45,7 @@
     "babel-preset-minify": "0.5.1",
     "browser-env": "3.2.5",
     "chalk": "2.4.2",
-    "inquirer": "6.2.0",
+    "inquirer": "7.0.0",
     "jest": "^23.6.0",
     "lerna": "^3.13.2",
     "lodash.capitalize": "4.2.1",
