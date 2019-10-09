@@ -120,6 +120,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wuct",
+      "name": "CT Wu",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1695958?v=4",
+      "profile": "https://twitter.com/wu_ct",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
