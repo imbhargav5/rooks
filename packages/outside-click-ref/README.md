@@ -22,8 +22,15 @@ import useOutsideClickRef from "@rooks/use-outside-click-ref"
 
 ```jsx
 function Demo() {
-  useOutsideClickRef();
-  return null
+  function outsidePClick() {
+    alert("Clicked outside p");
+  }
+  const [ref] = useOutsideClickRef(outsidePClick);
+  return (
+    <div>
+      <p ref={ref}>Click outside me</p>
+    </div>
+  );
 }
 
 render(<Demo/>)

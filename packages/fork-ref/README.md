@@ -22,9 +22,53 @@ import useForkRef from "@rooks/use-fork-ref"
 
 ```jsx
 function Demo() {
-  useForkRef();
-  return null
+  const [isVisible, setIsVisible] = useState(false);
+  const callback = entries => {
+    if (entries && entries[0]) {
+      setIsVisible(entries[0].isIntersecting);
+    }
+  };
+  const [myIntersectionObserverRef] = useIntersectionObserverRef(callback);
+  const [
+    myBoundingclientrectRef,
+    boundingclientrect
+  ] = useBoundingclientrectRef();
+  const myRef = useForkRef(myIntersectionObserverRef, myBoundingclientrectRef);
+  const displayString = JSON.stringify(boundingclientrect, null, 2);
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0
+        }}
+      >
+        <h1>Is rectangle visible - {String(isVisible)}</h1>
+      </div>
+      <div style={{ height: 2000 }}></div>
+      <div ref={myRef} style={{ height: 300, background: "lightblue" }}>
+        <p>Boundingclientrect</p>
+        <pre>{displayString}</pre>
+      </div>
+      <div style={{ height: 2000 }}></div>
+    </>
+  );
 }
 
 render(<Demo/>)
 ```
+
+
+### Arguments
+
+| Argument value | Type                 | Description |
+| -------------- | -------------------- | ----------- |
+| ref2           | Callback/Mutable ref | First ref   |
+| ref1           | Callback/Mutable ref | Second ref  |
+
+### Returns
+
+| Return value | Type         | Description                                                                           | Default value |
+| ------------ | ------------ | ------------------------------------------------------------------------------------- | ------------- |
+| ref          | Callback ref | A callback ref function that can internally combines both the refs from the arguments | () => null    |

@@ -22,9 +22,46 @@ import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
 
 ```jsx
 function Demo() {
-  useIntersectionObserverRef();
+  const [isVisible, setIsVisible] = useState(false);
+  const callback = entries => {
+    if (entries && entries[0]) {
+      setIsVisible(entries[0].isIntersecting);
+    }
+  };
+  const [myRef] = useIntersectionObserverRef(callback);
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0
+        }}
+      >
+        <h1>Is rectangle visible - {String(isVisible)}</h1>
+      </div>
+      <div style={{ height: 2000 }}></div>
+      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
+      <div style={{ height: 2000 }}></div>
+    </>
+  );
   return null
 }
 
 render(<Demo/>)
 ```
+
+### Arguments
+
+| Argument | Type                         | Description                                       | Default Value                                                        |
+| -------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| callback | IntersectionObserverCallback | React ref whose boundingClientRect is to be found | undefined                                                            |
+| options  | IntersectionObserverInit     | React ref whose boundingClientRect is to be found | ```{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}``` |
+
+### Return
+
+Returns an array with the first element in the array being the callback ref for the React component/element that needs to be observed.
+
+| Return value | Type        | Description                                                    | Default value |
+| ------------ | ----------- | -------------------------------------------------------------- | ------------- |
+| ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |

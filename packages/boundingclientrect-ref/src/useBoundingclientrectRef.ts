@@ -1,6 +1,4 @@
-import { useState, useEffect, MutableRefObject, useCallback } from "react";
-import { useMutationObserver } from "shared/useMutationObserver";
-import { useDidMount } from "shared/useDidMount";
+import { useState, useEffect, useCallback } from "react";
 import { useMutationObserverRef } from "shared/useMutationObserverRef";
 import { HTMLElementOrNull } from "shared/utils";
 import { useForkRef } from "shared/useForkRef";
@@ -26,9 +24,9 @@ function useBoundingclientrectRef() {
     setValue(node ? getBoundingClientRect(node) : null);
   }, [node]);
 
-  useDidMount(() => {
+  useEffect(() => {
     update();
-  });
+  }, [node]);
 
   const ref = useCallback((node: HTMLElement | null) => {
     setNode(node);

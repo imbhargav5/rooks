@@ -22,9 +22,12 @@ import useIsomorphicEffect from "@rooks/use-isomorphic-effect"
 
 ```jsx
 function Demo() {
-  useIsomorphicEffect();
+  useIsomorphicEffect( () => {
+    console.log("Effect")
+  } ,[]);
   return null
 }
 
 render(<Demo/>)
 ```
+

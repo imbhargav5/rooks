@@ -50,7 +50,7 @@ function useOutsideClickRef(
         document.removeEventListener("ontouchstart", memoizedCallback);
       };
     }
-  }, [ref, handler, when]);
+  }, [when, memoizedCallback]);
 
   return [ref];
 }
