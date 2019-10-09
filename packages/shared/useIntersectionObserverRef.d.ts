@@ -1,4 +1,4 @@
-import { HTMLElementOrNull } from "./utils";
+import { CallbackRef } from "./utils";
 /**
  *
  * useIntersectionObserverRef hook
@@ -8,5 +8,5 @@ import { HTMLElementOrNull } from "./utils";
  * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
  * @param {IntersectionObserverInit} options
  */
-declare function useIntersectionObserverRef(callback: IntersectionObserverCallback, options?: IntersectionObserverInit): ((node: HTMLElementOrNull) => void)[];
+declare function useIntersectionObserverRef(callback: IntersectionObserverCallback, options?: IntersectionObserverInit): [CallbackRef];
 export { useIntersectionObserverRef };
