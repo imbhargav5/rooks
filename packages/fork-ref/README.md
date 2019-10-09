@@ -2,6 +2,8 @@
 
 ### A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 
+*Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
+
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-fork-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-fork-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-fork-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ffork-ref)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
@@ -72,3 +74,7 @@ render(<Demo/>)
 | Return value | Type         | Description                                                                           | Default value |
 | ------------ | ------------ | ------------------------------------------------------------------------------------- | ------------- |
 | ref          | Callback ref | A callback ref function that can internally combines both the refs from the arguments | () => null    |
+
+#### Original source
+
+[Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
