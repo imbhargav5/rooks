@@ -1,5 +1,8 @@
 {
   "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "description": "A hook that resolves to useEffect on the server and useLayoutEffect on the client.",
   "name": "@rooks/use-isomorphic-effect",
@@ -11,9 +14,12 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
     "build": "rollup -c ../../scripts/rollup.config.js",
-    "test:example": "parcel test/index.html",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",

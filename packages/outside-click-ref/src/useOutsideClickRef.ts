@@ -8,7 +8,7 @@ import {
 import { HTMLElementOrNull, CallbackRef } from "shared/utils";
 
 /**
- *  useOutsideClick hook
+ *  useOutsideClickRef hook
  *
  * Checks if a click happened outside a Ref. Handy for dropdowns, modals and popups etc.
  *
@@ -16,7 +16,7 @@ import { HTMLElementOrNull, CallbackRef } from "shared/utils";
  * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
  * @returns ref
  */
-function useOutsideClick(
+function useOutsideClickRef(
   handler: (e: MouseEvent) => any,
   when: boolean = true
 ): [CallbackRef] {
@@ -55,4 +55,4 @@ function useOutsideClick(
   return [ref];
 }
 
-export { useOutsideClick };
+export { useOutsideClickRef };

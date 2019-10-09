@@ -6,7 +6,7 @@ import { HTMLElementOrNull } from "shared/utils";
 import { useForkRef } from "shared/useForkRef";
 
 /**
- * useBoundingclientRect hook
+ * useBoundingclientrectRef hook
  *
  * @param ref The React ref whose ClientRect is needed
  * @return ClientRect

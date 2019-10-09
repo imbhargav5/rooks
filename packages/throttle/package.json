@@ -1,7 +1,10 @@
 {
   "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
-  "description": "something weird here",
+  "description": "A throttle hook for react",
   "name": "@rooks/use-throttle",
   "homepage": "https://react-hooks.org/hook/use-throttle",
   "repository": {
@@ -11,9 +14,12 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
     "build": "rollup -c ../../scripts/rollup.config.js",
-    "test:example": "parcel test/index.html",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
   },
   "keywords": [
     "use",

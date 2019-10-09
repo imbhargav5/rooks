@@ -1,7 +1,1 @@
-import { useState } from "react";
-
-function useOutsideClickRef() {
-  return null;
-}
-
-module.exports = useOutsideClickRef;
+export { useOutsideClickRef as default } from "./useOutsideClickRef";
