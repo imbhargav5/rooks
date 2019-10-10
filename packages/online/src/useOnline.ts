@@ -19,7 +19,7 @@ function getIsOnline(): boolean {
  * @returns {boolean} The value of navigator.onLine
  */
 function useOnline(): boolean {
-  const [online, changeOnline] = useState<boolean>(getIsOnline());
+  const [online, changeOnline] = useState<boolean>(() => getIsOnline());
 
   function setOffline() {
     changeOnline(false);
