@@ -1,4 +1,12 @@
-# Unreleased
+# v3.4.0
+
+- New useBoundingclientrectRef hook
+- New useForkRef hook
+- New useOutsideClickRef hook
+- New useIsomorphicEffect hook
+- New useMutationObserverRef hook
+- New useIntersectionObserverRef hook
+- Minor bug fixes
 
 # v3.3.0 
 

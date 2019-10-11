@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useCallback } from "react";
 
 interface StorageHandlerAsObject {
   value: any;
@@ -77,11 +77,11 @@ function useSessionStorage(key: string, defaultValue = null): StorageHandler {
     init();
   }, []);
 
-  function listen(e: StorageEvent) {
+  const listen = useCallback((e: StorageEvent) => {
     if (e.storageArea === sessionStorage && e.key === key) {
       set(e.newValue);
     }
-  }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("storage", listen);

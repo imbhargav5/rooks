@@ -1,0 +1,40 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "description": "A hook that resolves to useEffect on the server and useLayoutEffect on the client.",
+  "name": "@rooks/use-isomorphic-effect",
+  "homepage": "https://react-hooks.org/hook/use-isomorphic-effect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "3.4.0",
+  "_id": "@rooks/use-isomorphic-effect@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface StorageHandlerAsObject {
   value: any;
@@ -61,11 +61,11 @@ function useLocalStorage(
     saveValueToLocalStorage(key, newValue);
   }
 
-  function listen(e: StorageEvent) {
+  const listen = useCallback((e: StorageEvent) => {
     if (e.storageArea === localStorage && e.key === key) {
       setValue(e.newValue);
     }
-  }
+  }, []);
 
   function remove() {
     set(null);
@@ -80,17 +80,15 @@ function useLocalStorage(
     init();
   }, []);
 
-  
-
   // check for changes across windows
   useEffect(() => {
     window.addEventListener("storage", listen);
     return () => {
       window.removeEventListener("storage", listen);
     };
-  });
-
+  }, []);
   let handler: unknown;
+
   (handler as StorageHandlerAsArray) = [value, set, remove];
   (handler as StorageHandlerAsObject).value = value;
   (handler as StorageHandlerAsObject).set = set;

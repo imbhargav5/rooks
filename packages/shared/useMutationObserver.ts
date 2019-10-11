@@ -33,7 +33,7 @@ function useMutationObserver(
         observer.disconnect();
       };
     }
-  }, [ref.current, callback, options]);
+  }, [callback, options]);
 }
 
 export { useMutationObserver };

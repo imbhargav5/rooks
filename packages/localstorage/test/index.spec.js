@@ -3,7 +3,7 @@
  */
 import React from "react";
 import useLocalstorage from "..";
-import { render, cleanup, getByTestId } from "@testing-library/react";
+import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
 describe("useLocalStorage defined", () => {
   it("should be defined", () => {
@@ -16,7 +16,7 @@ describe("useLocalstorage with object destructuring", () => {
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function() {
+    App = function () {
       const { value } = useLocalstorage("test-value", "hello");
 
       return (
@@ -39,15 +39,22 @@ describe("useLocalstorage with object destructuring", () => {
 
 describe("useLocalstorage with array destructuring", () => {
   let App;
-  // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function() {
-      const [currentValue] = useLocalstorage("test-value", "hello");
+    App = function () {
+      const [currentValue, set, remove] = useLocalstorage("test-value", "hello");
 
       return (
         <div data-testid="container">
           <p data-testid="value">{currentValue}</p>
+          <button data-testid="new-value"
+            onClick={() => {
+              set("new value")
+            }}
+          >Set to new value</button>
+          <button data-testid="unset-value"
+            onClick={remove}
+          >Unset the value</button>
         </div>
       );
     };
@@ -61,6 +68,26 @@ describe("useLocalstorage with array destructuring", () => {
     const valueElement = getByTestId(container, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
+
+  it("setting the new value ", () => {
+    const { container } = render(<App />);
+    const setToNewValueBtn = getByTestId(container, "new-value");
+    act(() => {
+      fireEvent.click(setToNewValueBtn)
+    })
+    const valueElement = getByTestId(container, "value");
+    expect(valueElement.innerHTML).toBe("new value");
+  })
+
+  it("unsetting the value", () => {
+    const { container } = render(<App />);
+    const unsetValueBtn = getByTestId(container, "unset-value");
+    act(() => {
+      fireEvent.click(unsetValueBtn)
+    })
+    const valueElement = getByTestId(container, "value");
+    expect(valueElement.innerHTML).toBe("");
+  })
 });
 
 // figure out tests
