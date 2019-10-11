@@ -4,6 +4,7 @@ import "./counter";
 import "./debounce";
 import "./did-mount";
 import "./did-update";
+import "./fullscreen";
 import "./geolocation";
 import "./input";
 import "./interval";
