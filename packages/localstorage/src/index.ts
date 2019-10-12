@@ -1,1 +1,1 @@
-export { useLocalStorage as default } from "./useLocalstorage";
+export { useLocalstorage as default } from "./useLocalstorage";
