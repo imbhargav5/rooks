@@ -5,7 +5,7 @@ import React from "react";
 import useLocalstorage from "..";
 import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
-describe("useLocalStorage defined", () => {
+describe("useLocalstorage defined", () => {
   it("should be defined", () => {
     expect(useLocalstorage).toBeDefined();
   });
