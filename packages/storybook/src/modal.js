@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import useModal, { ModalProvider, useToggle } from "@rooks/use-modal";
+import useModal from "@rooks/use-modal";
 import README from "@rooks/use-modal/README.md";
 
 const modalStyle = {
@@ -13,6 +13,8 @@ const modalStyle = {
   justifyContent: 'center',
   alignItems: 'center'
 }
+
+const ModalProvider = useModal.Provider
 
 const DemoBasic = () => {
   const [toggle, opened] = useModal();
@@ -47,13 +49,13 @@ const DemoNested = () => {
 }
 
 const ToggleButton = () => {
-  const toggleMain = useToggle('main');
+  const [toggleMain] = useModal('main');
 
   return (
     <>
       <p>Click on the button to toggle modal located anywhere in component tree.</p>
-      <p>useToggle hook returns toggle method for specified modal registered with useModal hook.</p>
-      <p><strong>Make sure to pass the id to useModal hook so you can reference modal.</strong></p>
+      <p>when we call useModal for the second time it loads existing modal registered through first useModal call.</p>
+      <p><strong>Make sure to pass the same id to each useModal hook call so you can reference modal.</strong></p>
       <button onClick={toggleMain}>Toggle nested modal</button>
     </>
   )
