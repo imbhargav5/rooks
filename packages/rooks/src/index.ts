@@ -19,6 +19,7 @@ export { default as useIsomorphicEffect } from "@rooks/use-isomorphic-effect";
 export { default as useKey } from "@rooks/use-key";
 export { default as useKeys } from "@rooks/use-keys";
 export { default as useLocalstorage } from "@rooks/use-localstorage";
+export { default as useModal } from "@rooks/use-modal";
 export { default as useMouse } from "@rooks/use-mouse";
 export { default as useMutationObserver } from "@rooks/use-mutation-observer";
 export {
