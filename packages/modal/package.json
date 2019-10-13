@@ -1,7 +1,7 @@
 {
   "main": "lib/index.js",
   "license": "MIT",
-  "description": "Exposes modal logic through react context, also provides useToggle hook for controlling modal from other components",
+  "description": "Exposes modal logic through react context",
   "name": "@rooks/use-modal",
   "homepage": "https://react-hooks.org/?path=/story/usemodal--basic-example",
   "repository": {

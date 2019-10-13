@@ -1,29 +1,42 @@
-import { useContext, useState, useEffect, useCallback } from "react";
-import { ModalContext, ToggleFunctionType } from "./ModalProvider";
+import { useContext, useState, useEffect, useCallback, useMemo } from "react";
+import ModalProvider, { ModalContext, ToggleFunctionType } from "./ModalProvider";
 
-const useModal = (id: string = '', initial: boolean = false): [boolean, ToggleFunctionType] => {
-  const { registerModal, unregisterModal } = useContext(ModalContext);
-  const [opened, setOpened] = useState(initial);
+const noop = () => {}
+
+const useModal = (id: string = '', initial: boolean = false): [ToggleFunctionType, boolean] => {
+  const { registerModal, unregisterModal, ...modalContext } = useContext(ModalContext);
+  const modalId = useMemo(() => id || Date.now(), [id]);
+  const modal = modalContext[modalId];
+  const isRegistered = !!modal;
+  const { opened = initial, setOpened = noop } = modal || {};
   const toggle: ToggleFunctionType = useCallback(shouldOpen => {
-    setOpened(current => {
+    setOpened(() => {
       if (typeof shouldOpen === "boolean") {
-        return shouldOpen
+        return shouldOpen;
       }
 
-      return !current
-    }
-    );
-  }, []);
+      return !opened;
+    });
+  }, [opened, setOpened]);
 
   useEffect(() => {
-    const modalId = id || Date.now()
+    let didRegister = false;
 
-    registerModal(modalId, toggle);
+    if (!isRegistered) {
+      registerModal(modalId, initial);
+      didRegister = true;
+    }
 
-    return () => unregisterModal(modalId);
-  }, [id]);
+    return () => {
+      if (didRegister) {
+        unregisterModal(modalId);
+      }
+    }
+  }, [modalId]);
 
-  return [opened, toggle];
+  return isRegistered ? [toggle, opened] : [undefined, false];
 };
+
+useModal.Provider = ModalProvider
 
 export default useModal;

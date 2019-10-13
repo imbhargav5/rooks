@@ -15,7 +15,7 @@ const modalStyle = {
 }
 
 const DemoBasic = () => {
-  const [opened, toggle] = useModal();
+  const [toggle, opened] = useModal();
 
   return (
     <>
@@ -33,7 +33,7 @@ const DemoBasic = () => {
 }
 
 const DemoNested = () => {
-  const [opened, toggle] = useModal('main');
+  const [toggle, opened] = useModal('main');
 
   return (
     <>

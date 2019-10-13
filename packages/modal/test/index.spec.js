@@ -3,10 +3,12 @@
  */
 import React, { useEffect, useState } from "react";
 import { render, fireEvent } from '@testing-library/react';
-import useModal, { ModalProvider, useToggle } from "..";
+import useModal from "..";
+
+const { Provider: ModalProvider } = useModal
 
 const ModalComponent = ({ children }) => {
-  const [opened, toggle] = useModal('main');
+  const [toggle, opened] = useModal('main');
 
   return (
     <div>
@@ -21,7 +23,6 @@ describe("useModal", () => {
   it("should be defined", () => {
     expect(useModal).toBeDefined();
     expect(ModalProvider).toBeDefined();
-    expect(useToggle).toBeDefined();
   });
 
   it('should show modal when toggle is called', () => {
@@ -56,7 +57,7 @@ describe("useModal", () => {
 
   test('respects initial prop', () => {
     const Component = () => {
-      const [opened] = useModal('main', true)
+      const [opened] = useModal('main', true);
 
       return (
         <div>
@@ -77,7 +78,7 @@ describe("useModal", () => {
 
   test('toggles correctly with shouldOpen argument', () => {
     const Component = () => {
-      const [opened, toggle] = useModal('main', true)
+      const [toggle, opened] = useModal('main', true);
 
       return (
         <div>
@@ -102,11 +103,11 @@ describe("useModal", () => {
 
   test('toggle modal from other component', () => {
     const Component = () => {
-      const toggle = useToggle('main')
+      const [toggle] = useModal('main');
 
       useEffect(() => {
         if (typeof toggle === 'function') {
-          toggle()
+          toggle();
         }
       }, [toggle]);
 
@@ -128,8 +129,8 @@ describe("useModal", () => {
   it('should unregister modal when component unmounts', () => {
     let registration
     const Component = () => {
-      const [mount, setMount] = useState(true)
-      const toggle = useToggle('main')
+      const [mount, setMount] = useState(true);
+      const toggle = useModal('main');
 
       useEffect(() => {
         setMount(false)
@@ -147,7 +148,8 @@ describe("useModal", () => {
       </ModalProvider>
     );
 
-    expect(registration).toBeUndefined();
+    expect(registration[0]).toBeUndefined();
+    expect(registration[1]).toBeFalsy();
 
     unmount();
   });

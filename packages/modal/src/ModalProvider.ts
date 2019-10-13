@@ -7,10 +7,23 @@ export const ModalContext = createContext(null);
 const ModalProvider = ({ children }) => {
   const [store, setStore] = useState({});
 
-  const registerModal = useCallback((id: string, setOpened: ToggleFunctionType): void => {
+  const registerModal = useCallback((id: string, initial: boolean): void => {
     setStore(currentStore => ({
       ...currentStore,
-      [id]: setOpened
+      [id]: {
+        opened: initial,
+        setOpened: setterMethod => {
+          const newValue = setterMethod();
+
+          setStore(modalContext => ({
+            ...modalContext,
+            [id]: {
+              ...modalContext[id],
+              opened: newValue
+            }
+          }));
+        }
+      }
     }));
   }, []);
 
