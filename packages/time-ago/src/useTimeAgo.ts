@@ -1,6 +1,6 @@
 import { useEffect, useReducer, ReducerAction } from "react";
 import { useInterval } from "shared/useInterval";
-import timeago, { TimeAgoInterface } from "timeago.js";
+import { format } from "timeago.js";
 
 const defaultOpts = {
   intervalMs: 1000
@@ -13,13 +13,7 @@ interface Options {
 }
 
 function computeTimeAgo(input, locale, relativeDate) {
-  let instance;
-  if (relativeDate) {
-    instance = timeago(relativeDate);
-  } else {
-    instance = timeago();
-  }
-  return instance.format(input, locale);
+  return format(input, locale, { relativeDate });
 }
 
 function reducer(state: string, action: any) {

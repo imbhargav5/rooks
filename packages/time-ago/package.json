@@ -35,7 +35,7 @@
     "access": "public"
   },
   "dependencies": {
-    "timeago.js": "4.0.0-beta.1"
+    "timeago.js": "4.0.0"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
