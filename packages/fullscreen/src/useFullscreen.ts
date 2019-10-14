@@ -69,9 +69,11 @@ const getBrowserFunctions = (): NormalizedFullscreenApi => {
 };
 
 export const useFullscreen = () => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [element, setElement] = useState(null);
   const fn = getBrowserFunctions();
+  const [isFullscreen, setIsFullscreen] = useState(
+    Boolean(document[fn.fullscreenElement])
+  );
+  const [element, setElement] = useState(document[fn.fullscreenElement]);
 
   const eventNameMap = {
     change: fn.fullscreenchange,
