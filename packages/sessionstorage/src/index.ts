@@ -1,1 +1,1 @@
-export { useSessionstorage as default } from "./useSessionstorage";
+export { useSessionStorage as default } from "./useSessionStorage";

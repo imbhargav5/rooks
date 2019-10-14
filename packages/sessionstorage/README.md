@@ -17,14 +17,14 @@ npm install --save @rooks/use-sessionstorage
 ### Importing the hook
 
 ```javascript
-import useSessionstorage from "@rooks/use-sessionstorage";
+import useSessionStorage from "@rooks/use-sessionstorage";
 ```
 
 ### Usage
 
 ```jsx
 function Demo() {
-  const [value, set, remove] = useSessionstorage("my-value", 0);
+  const [value, set, remove] = useSessionStorage("my-value", 0);
   // Can also be used as {value, set, remove}
 
   return (

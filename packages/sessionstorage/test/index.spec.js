@@ -2,26 +2,26 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useSessionstorage from "..";
+import useSessionStorage from "..";
 import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
 /**
  * @jest-environment jsdom
  */
 
-describe("useSessionstorage defined", () => {
+describe("useSessionStorage defined", () => {
   it("should be defined", () => {
-    expect(useSessionstorage).toBeDefined();
+    expect(useSessionStorage).toBeDefined();
   });
 });
 
-describe("useSessionstorage with object destructuring", () => {
+describe("useSessionStorage with object destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const { value } = useSessionstorage("test-value", "hello");
+      const { value } = useSessionStorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -41,13 +41,13 @@ describe("useSessionstorage with object destructuring", () => {
   });
 });
 
-describe("useSessionstorage with array destructuring", () => {
+describe("useSessionStorage with array destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const [currentValue] = useSessionstorage("test-value", "hello");
+      const [currentValue] = useSessionStorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -69,13 +69,13 @@ describe("useSessionstorage with array destructuring", () => {
 
 // figure out tests
 
-describe("useSessionstorage", () => {
+describe("useSessionStorage", () => {
   let App;
   beforeEach(() => {
     sessionStorage.clear();
     function SubApp1() {
 
-      const { value: titan, set, remove } = useSessionstorage("titan", "eren");
+      const { value: titan, set, remove } = useSessionStorage("titan", "eren");
       return (
         <div>
           <button data-testid="new-value" onClick={() => set("mikasa")}>Add</button>
@@ -86,7 +86,7 @@ describe("useSessionstorage", () => {
     }
 
     function SubApp2() {
-      const { value: titan } = useSessionstorage("titan");
+      const { value: titan } = useSessionStorage("titan");
       return (
         <div>
           <p data-testid="element2">{titan}</p>

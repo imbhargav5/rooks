@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
-import useLocalstorage from "@rooks/use-localstorage";
+import useLocalStorage from "@rooks/use-localstorage";
 import README from "@rooks/use-localstorage/README.md";
 
 /**
  * Array Destructuring
  */
 function UseLocalstorageDemo() {
-  const [myValue, setMyValue, removeMyValue] = useLocalstorage("my-value", 0);
+  const [myValue, setMyValue, removeMyValue] = useLocalStorage("my-value", 0);
   return (
     <>
       <h1>Please check localstorage for changes</h1>
@@ -26,7 +26,7 @@ function UseLocalstorageDemo() {
  * Object Destructuring
  */
 function UseLocalstorageDemoObject() {
-  const { value, set, remove } = useLocalstorage("my-value", 0);
+  const { value, set, remove } = useLocalStorage("my-value", 0);
   return (
     <>
       <h1>Please check localstorage for changes</h1>
@@ -41,7 +41,7 @@ function UseLocalstorageDemoObject() {
   );
 }
 
-storiesOf("useLocalstorage", module)
+storiesOf("useLocalStorage", module)
   .addParameters({
     readme: {
       sidebar: README

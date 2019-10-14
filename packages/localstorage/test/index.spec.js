@@ -2,22 +2,22 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useLocalstorage from "..";
+import useLocalStorage from "..";
 import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
-describe("useLocalstorage defined", () => {
+describe("useLocalStorage defined", () => {
   it("should be defined", () => {
-    expect(useLocalstorage).toBeDefined();
+    expect(useLocalStorage).toBeDefined();
   });
 });
 
-describe("useLocalstorage with object destructuring", () => {
+describe("useLocalStorage with object destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const { value } = useLocalstorage("test-value", "hello");
+      const { value } = useLocalStorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -37,12 +37,12 @@ describe("useLocalstorage with object destructuring", () => {
   });
 });
 
-describe("useLocalstorage with array destructuring", () => {
+describe("useLocalStorage with array destructuring", () => {
   let App;
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const [currentValue, set, remove] = useLocalstorage("test-value", "hello");
+      const [currentValue, set, remove] = useLocalStorage("test-value", "hello");
 
       return (
         <div data-testid="container">

@@ -18,7 +18,7 @@ export {
 export { default as useIsomorphicEffect } from "@rooks/use-isomorphic-effect";
 export { default as useKey } from "@rooks/use-key";
 export { default as useKeys } from "@rooks/use-keys";
-export { default as useLocalstorage } from "@rooks/use-localstorage";
+export { default as useLocalStorage } from "@rooks/use-localstorage";
 export { default as useMouse } from "@rooks/use-mouse";
 export { default as useMutationObserver } from "@rooks/use-mutation-observer";
 export {
@@ -33,7 +33,7 @@ export { default as useOutsideClickRef } from "@rooks/use-outside-click-ref";
 export { default as usePrevious } from "@rooks/use-previous";
 export { default as useRaf } from "@rooks/use-raf";
 export { default as useSelect } from "@rooks/use-select";
-export { default as useSessionstorage } from "@rooks/use-sessionstorage";
+export { default as useSessionStorage } from "@rooks/use-sessionstorage";
 export { default as useThrottle } from "@rooks/use-throttle";
 export { default as useTimeAgo } from "@rooks/use-time-ago";
 export { default as useTimeout } from "@rooks/use-timeout";

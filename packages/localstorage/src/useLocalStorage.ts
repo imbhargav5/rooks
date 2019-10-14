@@ -15,12 +15,12 @@ interface StorageHandlerAsArray extends Array<any> {
 interface StorageHandler extends StorageHandlerAsArray {}
 
 /**
- * useLocalstorage hook
+ * useLocalStorage hook
  *
  * @param {string} key - Key of the localStorage object
  * @param {any} defaultValue - Default initial value
  */
-function useLocalstorage(
+function useLocalStorage(
   key: string,
   defaultValue: any = null
 ): StorageHandler {
@@ -97,4 +97,4 @@ function useLocalstorage(
   return handler as StorageHandlerAsArray & StorageHandlerAsObject;
 }
 
-export { useLocalstorage };
+export { useLocalStorage };

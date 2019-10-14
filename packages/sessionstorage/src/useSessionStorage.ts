@@ -23,7 +23,7 @@ function reducer(state, action) {
   }
 }
 
-function useSessionstorage(key: string, defaultValue = null): StorageHandler {
+function useSessionStorage(key: string, defaultValue = null): StorageHandler {
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
@@ -99,4 +99,4 @@ function useSessionstorage(key: string, defaultValue = null): StorageHandler {
   return handler as StorageHandlerAsArray & StorageHandlerAsObject;
 }
 
-export { useSessionstorage };
+export { useSessionStorage };

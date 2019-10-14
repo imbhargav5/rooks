@@ -1,13 +1,13 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import useSessionstorage from "@rooks/use-sessionstorage";
+import useSessionStorage from "@rooks/use-sessionstorage";
 import README from "@rooks/use-sessionstorage/README.md";
 
 /**
  * Array Destructuring
  */
 function UseSessionstorageDemo() {
-  const [myValue, setMyValue, removeMyValye] = useSessionstorage("my-value", 0);
+  const [myValue, setMyValue, removeMyValye] = useSessionStorage("my-value", 0);
   return (
     <>
       <h1>Please check sessionstorage for changes</h1>
@@ -30,7 +30,7 @@ function UseSessionstorageDemo() {
  * Object Destructuring
  */
 function UseSessionstorageDemoObject() {
-  const { value, set, remove } = useSessionstorage("my-value", 0);
+  const { value, set, remove } = useSessionStorage("my-value", 0);
   return (
     <>
       <h1>Please check sessionstorage for changes</h1>
@@ -45,7 +45,7 @@ function UseSessionstorageDemoObject() {
   );
 }
 
-storiesOf("useSessionstorage", module)
+storiesOf("useSessionStorage", module)
   .addParameters({
     readme: {
       sidebar: README
