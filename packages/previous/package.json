@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "Access the previous value of a variable with this React hook",
   "name": "@rooks/use-previous",
-  "homepage": "https://react-hooks.org/hook/use-previous",
+  "homepage": "https://react-hooks.org/?path=/story/useprevious--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React hook for componentWillUnmount lifecycle method",
   "name": "@rooks/use-will-unmount",
-  "homepage": "https://react-hooks.org/hook/use-will-unmount",
+  "homepage": "https://react-hooks.org/?path=/story/usewillunmount--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
