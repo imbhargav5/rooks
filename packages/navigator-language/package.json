@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for navigator-language",
   "name": "@rooks/use-navigator-language",
-  "homepage": "https://react-hooks.org/hook/use-navigator-language",
+  "homepage": "https://react-hooks.org/?path=/story/usenavigatorlanguage--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

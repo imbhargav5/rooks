@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A continuously running requestAnimationFrame hook for React",
   "name": "@rooks/use-raf",
-  "homepage": "https://react-hooks.org/hook/use-raf",
+  "homepage": "https://react-hooks.org/?path=/story/useraf--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
