@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
  *
  * @returns {boolean} Is navigator online
  */
-function getIsOnline(): boolean {
+function getIsOnline(): boolean | null {
   if (typeof window === 'undefined') {
     return null;
   }
