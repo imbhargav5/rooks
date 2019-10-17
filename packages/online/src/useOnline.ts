@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
  *
  * @returns {boolean} Is navigator online
  */
-function getIsOnline(): boolean {
+function getIsOnline(): boolean | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return navigator.onLine;
 }
 
@@ -15,8 +18,8 @@ function getIsOnline(): boolean {
  *
  * @returns {boolean} The value of navigator.onLine
  */
-function useOnline(): boolean {
-  const [online, changeOnline] = useState<boolean>(false);
+function useOnline(): boolean | null {
+  const [online, changeOnline] = useState<boolean | null>(() => getIsOnline());
 
   function setOffline() {
     changeOnline(false);
@@ -36,11 +39,6 @@ function useOnline(): boolean {
       window.removeEventListener("offline", setOffline);
     };
   }, []);
-
-  useEffect(() => {
-    changeOnline(getIsOnline());
-  }, []);
-
   return online;
 }
 
