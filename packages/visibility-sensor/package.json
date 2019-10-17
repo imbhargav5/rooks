@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for visibility-sensor",
   "name": "@rooks/use-visibility-sensor",
-  "homepage": "https://react-hooks.org/hook/use-visibility-sensor",
+  "homepage": "https://react-hooks.org/?path=/story/usevisibilitysensor--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

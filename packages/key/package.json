@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "Keyboard key handler hook for react",
   "name": "@rooks/use-key",
-  "homepage": "https://react-hooks.org/hook/use-key",
+  "homepage": "https://react-hooks.org/?path=/story/usekey--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
