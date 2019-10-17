@@ -130,6 +130,24 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "braxtonchristensen",
+      "name": "Braxton Christensen",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11494223?v=4",
+      "profile": "https://github.com/braxtonchristensen",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "elrumordelaluz",
+      "name": "Lionel",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/784056?v=4",
+      "profile": "https://elrumordelaluz.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
