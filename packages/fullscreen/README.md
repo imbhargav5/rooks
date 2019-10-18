@@ -22,8 +22,17 @@ import useFullscreen from "@rooks/use-fullscreen"
 
 ```jsx
 function Demo() {
-  const {toggle} = useFullscreen();
-  return <img src="" onClick={(e) => {toggle(e.target)}} />
+  const [isEnabled, toggle] = useFullscreen();
+  return (    
+    <img
+      src=""
+      onClick={(e) => {
+        if(isEnabled) {          
+          toggle(e.target)}
+        }
+      } 
+    />
+  )
 }
 
 render(<Demo/>)
