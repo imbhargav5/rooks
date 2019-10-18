@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { storiesOf } from "@storybook/react";
 import useFullscreen from "@rooks/use-fullscreen";
 import README from "@rooks/use-mouse/README.md";
@@ -64,14 +64,25 @@ storiesOf("useFullscreen", module)
 
 function FullscreenDemo() {
   const container = useRef();
-  const {
+  const [
+    isEnabled,
     toggle,
+    onChange,
+    onError,
     request,
     exit,
-    isEnabled,
     isFullscreen,
     element
-  } = useFullscreen();
+  ] = useFullscreen();
+  const [changeCount, setChangeCount] = useState(0);
+  const [errorCount, setErrorCount] = useState(0);
+
+  onChange(() => {
+    setChangeCount(changeCount + 1);
+  });
+  onError(() => {
+    setErrorCount(errorCount + 1);
+  });
 
   return (
     <div id="document" style={styles.html}>
@@ -128,6 +139,12 @@ function FullscreenDemo() {
               Supported/allowed: {JSON.stringify(isEnabled)}
             </li>
             <li id="status">Is fullscreen: {JSON.stringify(isFullscreen)}</li>
+            <li>
+              Changed {changeCount} {changeCount !== 1 ? "times" : "time"}
+            </li>
+            <li>
+              {errorCount} {errorCount !== 1 ? "errors" : "error"}
+            </li>
             <li id="element">
               Element:{" "}
               {element
