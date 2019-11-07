@@ -9,7 +9,7 @@
 
 <br/>
 
-Collection of regularly used custom hooks as utils for React
+Collection of regularly used custom hooks as utils for React.
 
 ## [Website](https://react-hooks.org)
 ### [Docs](https://book.react-hooks.org/)
