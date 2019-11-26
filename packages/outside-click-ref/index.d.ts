@@ -1,1 +1,1 @@
-export default function useOutsideClickRef():void
+export default function useOutsideClickRef<T>(cb: Function): [React.Ref<T>]
