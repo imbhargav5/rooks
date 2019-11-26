@@ -49,8 +49,9 @@ render(<TimeoutComponent/>)
 
 ### Returned Object keys
 
-| Returned object attributes | Type     | Description       |
-| -------------------------- | -------- | ----------------- |
-| clear                      | function | Clear the timeout |
-| start                      | function | Start the timeout |
+| Returned object attributes | Type     | Description           |
+| -------------------------- | -------- | --------------------- |
+| clear                      | function | Clear the timeout     |
+| start                      | function | Start the timeout     |
+| isActive                   | boolean  | Is the timeout active |
 
