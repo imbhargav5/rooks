@@ -26,6 +26,7 @@ import "./raf";
 import "./rooks";
 import "./select";
 import "./sessionstorage";
+import "./time";
 import "./time-ago";
 import "./throttle";
 import "./timeout";

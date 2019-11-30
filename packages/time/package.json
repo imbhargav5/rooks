@@ -1,0 +1,40 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "description": "get current time second by second",
+  "name": "@rooks/use-time",
+  "homepage": "https://react-hooks.org/hook/use-time",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "lint": "eslint src test",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
+    "build": "rollup -c ../../scripts/rollup.config.js",
+    "prepublish": "yarn run build",
+    "pregenerate:types": "rimraf index.d.ts",
+    "generate:types": "tsc"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-time@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
