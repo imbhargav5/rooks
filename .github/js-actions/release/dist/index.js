@@ -2561,7 +2561,6 @@ const gitRev = Object(child_process__WEBPACK_IMPORTED_MODULE_5__.execSync)("git 
 async function setPrereleaseVersion() {
   const packageFile = "./package.json";
   const lernaFile = "./lerna.json";
-  console.log(await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readdir(process.cwd()));
   const pkg = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(packageFile)).toString());
   const lernaJson = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(lernaFile)).toString());
 
@@ -2636,9 +2635,9 @@ async function run() {
     await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)("yarn install");
   }
 
+  await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)("lerna bootstrap");
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
-    console.log(process.cwd());
     await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)(
       `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
     );

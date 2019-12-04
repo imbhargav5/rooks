@@ -10,7 +10,6 @@ const gitRev = execSync("git rev-parse HEAD").toString();
 async function setPrereleaseVersion() {
   const packageFile = "./package.json";
   const lernaFile = "./lerna.json";
-  console.log(await fs.readdir(process.cwd()));
   const pkg = JSON.parse((await fs.readFile(packageFile)).toString());
   const lernaJson = JSON.parse((await fs.readFile(lernaFile)).toString());
 
@@ -85,9 +84,9 @@ async function run() {
     await exec("yarn install");
   }
 
+  await exec("lerna bootstrap");
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
-    console.log(process.cwd());
     await exec(
       `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
     );
