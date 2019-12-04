@@ -17,6 +17,8 @@ jobs:
           version: 12.x
       - name: Installs yarn
         run: npm i -g yarn
+      - name: Install lerna
+        run: npm i -g lerna
       - name: Yarn install
         run: yarn
       - name: npm prerelease step
