@@ -2637,6 +2637,7 @@ async function run() {
 
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
+    console.log(process.cwd());
     await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)(
       `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
     );
