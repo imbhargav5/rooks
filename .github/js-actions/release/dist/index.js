@@ -2562,7 +2562,6 @@ async function setPrereleaseVersion() {
   const packageFile = "./package.json";
   const lernaFile = "./lerna.json";
   const pkg = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(packageFile)).toString());
-  const lernaJson = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(lernaFile)).toString());
 
   fs__WEBPACK_IMPORTED_MODULE_0__.promises.readdir(process.cwd(), function(err, files) {
     //handling error
@@ -2575,6 +2574,7 @@ async function setPrereleaseVersion() {
       console.log(file);
     });
   });
+  const lernaJson = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(lernaFile)).toString());
 
   if (lernaJson.version.includes("-dev.")) {
     console.log("Prerelease version already set");
