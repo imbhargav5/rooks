@@ -23,7 +23,7 @@ async function setPrereleaseVersion() {
     "patch"
   )}-dev.${gitRev.slice(0, 9)}`;
 
-  await fs.writeFile(lernaJson, JSON.stringify(pkg, null, "    "));
+  await fs.writeFile(lernaFile, JSON.stringify(pkg, null, "    "));
   console.log("Prerelease version: " + lernaJson.version);
   return lernaJson.version;
 }

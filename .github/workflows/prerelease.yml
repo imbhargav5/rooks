@@ -17,6 +17,8 @@ jobs:
           version: 12.x
       - name: Installs yarn
         run: npm i -g yarn
+      - name: Yarn install
+        run: yarn
       - name: npm prerelease step
         uses: ./.github/js-actions/release
         with:
@@ -24,7 +26,5 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
       - name: Install now
         run: now --version || npm i -g now
-      - name: yarn install and build
-        run: |
-          yarn
-          yarn build:action
+      - name: yarn build
+        run: yarn build:action

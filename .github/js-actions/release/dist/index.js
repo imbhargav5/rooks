@@ -2574,7 +2574,7 @@ async function setPrereleaseVersion() {
     "patch"
   )}-dev.${gitRev.slice(0, 9)}`;
 
-  await fs__WEBPACK_IMPORTED_MODULE_0__.promises.writeFile(lernaJson, JSON.stringify(pkg, null, "    "));
+  await fs__WEBPACK_IMPORTED_MODULE_0__.promises.writeFile(lernaFile, JSON.stringify(pkg, null, "    "));
   console.log("Prerelease version: " + lernaJson.version);
   return lernaJson.version;
 }
