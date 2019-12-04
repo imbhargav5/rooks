@@ -1,0 +1,34 @@
+name: Prerelease
+
+on:
+  push:
+    branches:
+      - test-prerelease
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          version: 10.x
+      - name: Installs yarn
+        run: npm i -g yarn
+      - name: Install now
+        run: now --version || npm i -g now
+      - name: yarn install and build
+        run: |
+          yarn
+          yarn build:action
+      - name: npm prerelease step
+        uses: ./.github/js-actions/release
+        with:
+          type: prerelease
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: deploy
+        env:
+          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
+        run: yarn deploy --token $ZEIT_TOKEN
