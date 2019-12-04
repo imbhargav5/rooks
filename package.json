@@ -26,6 +26,7 @@
     "version:bump": "lerna version --force-publish --no-git-tag-version",
     "release": "lerna publish",
     "release-individual": "lerna publish --scope=@rooks/*",
+    "npm-prerelease-version": "lerna version prerelease --force-publish=* --no-commit-hooks --no-git-tag-version --no-push --preid dev --yes",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "devDependencies": {

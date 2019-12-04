@@ -21,11 +21,8 @@ jobs:
         run: npm i -g lerna
       - name: Yarn install
         run: yarn
-      - name: npm prerelease step
-        uses: ./.github/js-actions/release
-        with:
-          type: prerelease
-          token: ${{ secrets.NPM_TOKEN }}
+      - name: Prelease
+        run: yarn run npm-prerelease-version
       - name: Install now
         run: now --version || npm i -g now
       - name: yarn build
