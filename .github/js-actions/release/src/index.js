@@ -86,9 +86,9 @@ async function run() {
 
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
-    // await exec(
-    //   `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
-    // );
+    await exec(
+      `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
+    );
     //await exec(`lerna publish --dist-tag ${tag} --dry-run`);
   } else {
     //await exec("npm publish");
