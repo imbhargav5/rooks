@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "3.4.1",
+  "version": "3.4.2-dev.0",
   "_id": "@rooks/use-geolocation@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

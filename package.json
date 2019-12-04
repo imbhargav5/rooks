@@ -1,5 +1,5 @@
 {
-  "name": "rooks",
+  "name": "root",
   "private": true,
   "description": "Useful React hooks for everyone.",
   "scripts": {
@@ -21,11 +21,10 @@
     "build:action": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks && yarn run build:demos",
     "build": "yarn run build:shared --stream --parallel && yarn run build:independent  --stream --parallel && yarn run build:rooks && yarn run build:demos  --stream --parallel",
     "generate:types": "lerna run generate:types --stream",
-    "prerelease": "yarn build",
-    "prerelease-individual": "yarn build",
-    "version:bump": "lerna version --force-publish --no-git-tag-version",
-    "release": "lerna publish",
-    "release-individual": "lerna publish --scope=@rooks/*",
+    "ga-prerelease-version": "lerna version prerelease --force-publish=* --no-commit-hooks --no-push --yes",
+    "ga-prerelease-publish": "lerna publish from-git --force-publish=* --yes",
+    "release-version-bump": "lerna version --force-publish=*",
+    "ga-release-publish": "lerna publish from-git  --force-publish=* --yes",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "devDependencies": {
