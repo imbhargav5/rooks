@@ -25,6 +25,8 @@ jobs:
           yarn build:action
       - name: test
         run: yarn test
+      - name: Add npm token
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Create prerelease version
         run: yarn run ga-prerelease-version --preid next
       - name: Publish prerelease version
