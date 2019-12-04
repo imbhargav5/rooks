@@ -1,3 +1,8 @@
+# 3.4.2
+
+- Fix types for useOutsideClickRef hook
+- Internal bug fixes
+
 # v3.4.0
 
 - New useBoundingclientrectRef hook
