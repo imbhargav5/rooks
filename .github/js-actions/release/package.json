@@ -1,0 +1,26 @@
+{
+  "name": "rooks-prerelease-action",
+  "version": "1.2.0",
+  "private": true,
+  "description": "JavaScript template action",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js -o dist",
+    "commit-build": "npm run build && git commit -m 'commit dist' dist",
+    "release": "tools/release",
+    "test": "jest"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.1.1",
+    "@actions/exec": "^1.0.1",
+    "semver": "^6.3.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5"
+  }
+}
