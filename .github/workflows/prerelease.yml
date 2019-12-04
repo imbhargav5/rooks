@@ -1,4 +1,4 @@
-name: Node CI Master
+name: Pre release script
 
 on:
   push:
