@@ -34,7 +34,7 @@
     "@babel/plugin-proposal-export-default-from": "7.5.2",
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
-    "@testing-library/react": "8.0.1",
+    "@testing-library/react": "9.3.2",
     "@types/react": "*",
     "@types/react-dom": "*",
     "babel-core": "^7.0.0-bridge.0",
