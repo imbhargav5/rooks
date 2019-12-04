@@ -1,5 +1,5 @@
 {
-  "name": "rooks",
+  "name": "root",
   "private": true,
   "description": "Useful React hooks for everyone.",
   "scripts": {
