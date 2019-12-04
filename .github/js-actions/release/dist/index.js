@@ -2564,6 +2564,18 @@ async function setPrereleaseVersion() {
   const pkg = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(packageFile)).toString());
   const lernaJson = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(lernaFile)).toString());
 
+  fs__WEBPACK_IMPORTED_MODULE_0__.promises.readdir(process.cwd(), function(err, files) {
+    //handling error
+    if (err) {
+      return console.log("Unable to scan directory: " + err);
+    }
+    //listing all files using forEach
+    files.forEach(function(file) {
+      // Do whatever you want to do with the file
+      console.log(file);
+    });
+  });
+
   if (lernaJson.version.includes("-dev.")) {
     console.log("Prerelease version already set");
     process.exit(1);
