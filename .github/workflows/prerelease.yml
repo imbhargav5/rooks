@@ -28,7 +28,3 @@ jobs:
         with:
           type: prerelease
           token: ${{ secrets.NPM_TOKEN }}
-      - name: deploy
-        env:
-          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        run: yarn deploy --token $ZEIT_TOKEN
