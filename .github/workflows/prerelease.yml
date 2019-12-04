@@ -1,9 +1,9 @@
-name: Prerelease
+name: Node CI Master
 
 on:
   push:
     branches:
-      - test-prerelease
+      - master
 
 jobs:
   build:
@@ -11,19 +11,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1.1.0
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
         with:
-          version: 12.x
+          version: 10.x
       - name: Installs yarn
         run: npm i -g yarn
-      - name: Install lerna
-        run: npm i -g lerna
-      - name: Yarn install
-        run: yarn
-      - name: Prelease
-        run: yarn run npm-prerelease-version
       - name: Install now
         run: now --version || npm i -g now
-      - name: yarn build
-        run: yarn build:action
+      - name: yarn install and build
+        run: |
+          yarn
+          yarn build:action
+      - name: test
+        run: yarn test
+      - name: Create prerelease version
+        run: yarn run ga-prerelease-version --pre-id dev
+      - name: Publish prerelease version
+        run: yarn run ga-prerelease-publish --dist-tag dev
+      - name: deploy
+        env:
+          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
+        run: yarn deploy --token $ZEIT_TOKEN
