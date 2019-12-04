@@ -2561,19 +2561,8 @@ const gitRev = Object(child_process__WEBPACK_IMPORTED_MODULE_5__.execSync)("git 
 async function setPrereleaseVersion() {
   const packageFile = "./package.json";
   const lernaFile = "./lerna.json";
+  console.log(await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readdir(process.cwd()));
   const pkg = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(packageFile)).toString());
-
-  fs__WEBPACK_IMPORTED_MODULE_0__.promises.readdir(process.cwd(), function(err, files) {
-    //handling error
-    if (err) {
-      return console.log("Unable to scan directory: " + err);
-    }
-    //listing all files using forEach
-    files.forEach(function(file) {
-      // Do whatever you want to do with the file
-      console.log(file);
-    });
-  });
   const lernaJson = JSON.parse((await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(lernaFile)).toString());
 
   if (lernaJson.version.includes("-dev.")) {
