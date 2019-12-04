@@ -2626,7 +2626,7 @@ async function run() {
     `//registry.npmjs.org/:_authToken=${npmToken}`
   );
 
-  await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)("yarn npm whoami");
+  await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)("npm whoami");
 
   /* check if the deps where installed in a previous step */
   const isInstalled = await isDir("node_modules");
@@ -2637,9 +2637,9 @@ async function run() {
 
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
-    await Object(_actions_exec__WEBPACK_IMPORTED_MODULE_4__.exec)(
-      `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
-    );
+    // await exec(
+    //   `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
+    // );
     //await exec(`lerna publish --dist-tag ${tag} --dry-run`);
   } else {
     //await exec("npm publish");
