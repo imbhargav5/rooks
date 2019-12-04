@@ -15,6 +15,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           version: 10.x
+      - run: git config --global user.email "imbhargav5@gmail.com"
+      - run: git config --global user.name "Bhargav Ponnapalli"
       - name: Installs yarn
         run: npm i -g yarn
       - name: Install now
