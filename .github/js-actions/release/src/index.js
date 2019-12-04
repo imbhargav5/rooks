@@ -86,7 +86,7 @@ async function run() {
 
   if (type === "prerelease") {
     const version = await setPrereleaseVersion();
-    await exec("pwd");
+    console.log(process.cwd());
     await exec(
       `lerna version ${version} --force-publish=* --no-commit-hooks --no-git-tag-version --yes --no-push`
     );
