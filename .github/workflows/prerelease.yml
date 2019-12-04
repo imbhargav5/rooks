@@ -11,11 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1.1.0
         with:
-          version: 10.x
-      - run: git config --global user.email "imbhargav5@gmail.com"
+          version: 12.x
+        run: git config --global user.email "imbhargav5@gmail.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
       - name: Installs yarn
         run: npm i -g yarn
@@ -33,7 +33,3 @@ jobs:
         run: yarn run ga-prerelease-version --pre-id dev
       - name: Publish prerelease version
         run: yarn run ga-prerelease-publish --dist-tag dev
-      - name: deploy
-        env:
-          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        run: yarn deploy --token $ZEIT_TOKEN
