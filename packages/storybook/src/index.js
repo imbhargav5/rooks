@@ -1,6 +1,7 @@
 import "./welcome";
 import "./boundingclientrect";
 import "./boundingclientrect-ref";
+import "./countdown";
 import "./counter";
 import "./debounce";
 import "./did-mount";
