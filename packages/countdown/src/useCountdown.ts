@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useInterval } from 'shared/useInterval';
+import { useState } from "react";
+import { useInterval } from "shared/useInterval";
 
 type CountdownOptions = {
-  interval?: number,
-  onDown?: Function,
-  onEnd?: Function,
+  interval?: number;
+  onDown?: Function;
+  onEnd?: Function;
 };
 
 const useCountdown = (
-  endTime: Date, 
+  endTime: Date,
   { interval = 1000, onDown, onEnd }: CountdownOptions = {}
 ): number => {
   const [time, setTime] = useState<Date>(() => new Date());
@@ -24,16 +24,16 @@ const useCountdown = (
     if (newTime > endTime) {
       if (onEnd) {
         onEnd(newTime);
-      } 
+      }
       setTime(endTime);
       return;
-    } 
-    
+    }
+
     if (onDown) {
-      onDown(newTime);
+      onDown(restTime, newTime);
     }
     setTime(newTime);
   }
-}
+};
 
 export default useCountdown;
