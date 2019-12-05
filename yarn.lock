@@ -963,17 +963,10 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.6.0", "@babel/runtime@^7.6.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.4", "@babel/runtime@^7.6.0", "@babel/runtime@^7.6.2":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
   integrity sha512-r24eVUUr0QqNZa+qrImUk8fn5SPhHq+IfYvIoIMg0do3GdK9sMdiLKP3GYVVaxpPKORgm8KRKaNTEhAjgIpLMw==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.5.4":
-  version "7.7.4"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.7.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
-  integrity sha1-sjqFZ1HkvwmSYvhndniJwOP+F1s=
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -2538,7 +2531,6 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-
 "@testing-library/dom@^6.3.0":
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-6.10.1.tgz#da5bf5065d3f9e484aef4cc495f4e1a5bea6df2e"
@@ -2664,6 +2656,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/testing-library__dom@*", "@types/testing-library__dom@^6.0.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@types/testing-library__dom/-/testing-library__dom-6.10.0.tgz#590d76e3875a7c536dc744eb530cbf51b6483404"
+  integrity sha512-mL/GMlyQxiZplbUuFNwA0vAI3k3uJNSf6slr5AVve9TXmfLfyefNT0uHHnxwdYuPMxYD5gI/+dgAvc/5opW9JQ==
+  dependencies:
+    pretty-format "^24.3.0"
+
 "@types/testing-library__react-hooks@^3.0.0":
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/@types/testing-library__react-hooks/download/@types/testing-library__react-hooks-3.1.0.tgz#04d174ce767fbcce3ccb5021d7f156e1b06008a9"
@@ -2671,13 +2670,6 @@
   dependencies:
     "@types/react" "*"
     "@types/react-test-renderer" "*"
-
-"@types/testing-library__dom@*", "@types/testing-library__dom@^6.0.0":
-  version "6.10.0"
-  resolved "https://registry.yarnpkg.com/@types/testing-library__dom/-/testing-library__dom-6.10.0.tgz#590d76e3875a7c536dc744eb530cbf51b6483404"
-  integrity sha512-mL/GMlyQxiZplbUuFNwA0vAI3k3uJNSf6slr5AVve9TXmfLfyefNT0uHHnxwdYuPMxYD5gI/+dgAvc/5opW9JQ==
-  dependencies:
-    pretty-format "^24.3.0"
 
 "@types/testing-library__react@^9.1.0":
   version "9.1.2"
