@@ -1,6 +1,8 @@
 name: Changelog
 
-on: [push]
+on:
+  push:
+    tags: ["*"]
 
 jobs:
   build:
