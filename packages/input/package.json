@@ -28,7 +28,7 @@
     "rooks",
     "input hook"
   ],
-  "version": "3.4.2",
+  "version": "3.4.3",
   "_id": "@rooks/use-input@",
   "publishConfig": {
     "access": "public"
