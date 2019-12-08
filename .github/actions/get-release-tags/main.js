@@ -13,6 +13,6 @@ const currentTag = exec(
   `git describe --abbrev=0 --tags ${process.env.GITHUB_SHA}`
 );
 const lastTag = exec(`git describe --abbrev=0 --tags ${currentTag}^`);
-
+// set outputs
 core.setOutput("old", lastTag);
 core.setOutput("new", currentTag);
