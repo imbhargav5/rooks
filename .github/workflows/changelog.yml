@@ -2,7 +2,7 @@ name: Changelog
 
 on:
   push:
-    tags: ["*"]
+    tags: ["v*"]
 
 jobs:
   build:
