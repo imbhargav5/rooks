@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "get-release-tags",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.1.0"
+  }
+}

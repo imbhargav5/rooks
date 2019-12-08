@@ -1,0 +1,21 @@
+name: Changelog
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Get tag info
+        id: tags
+        uses: ./.github/actions/get-release-tags
+      - name: Generate the changelog
+        id: changelog
+        uses: ./.github/actions/generate-lerna-changelog
+        with:
+          from: ${{ steps.tags.outputs.old }}
+          to: ${{ steps.tags.outputs.new }}

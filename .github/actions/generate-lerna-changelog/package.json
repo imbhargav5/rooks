@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "update-changelog",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "lerna-changelog": "^0.8.2"
+  }
+}

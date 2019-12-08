@@ -16,3 +16,5 @@ lerna-debug.log
 .DS_Store
 yarn-error*
 .rpt2_cache
+.github/actions/**/node_modules
+!.github/actions/**/package-lock.json
