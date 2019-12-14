@@ -1,8 +1,10 @@
 {
   "npmClient": "yarn",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "useWorkspaces": true,
-  "version": "3.4.3",
+  "version": "3.4.4-6d7bf229.0",
   "changelog": {
     "repo": "imbhargav5/rooks",
     "cacheDir": ".changelog",

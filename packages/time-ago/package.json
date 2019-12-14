@@ -29,7 +29,7 @@
     "timeago.js",
     "timeago hook"
   ],
-  "version": "3.4.3",
+  "version": "3.4.4-6d7bf229.0",
   "_id": "@rooks/use-time-ago@",
   "publishConfig": {
     "access": "public"

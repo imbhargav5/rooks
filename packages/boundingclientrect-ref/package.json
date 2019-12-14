@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "3.4.3",
+  "version": "3.4.4-6d7bf229.0",
   "_id": "@rooks/use-boundingclientrect-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
