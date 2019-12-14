@@ -1,0 +1,39 @@
+name: Pull Request
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1.1.0
+        with:
+          version: 12.x
+      - run: git config --global user.email "me@imbhargav5.com"
+      - run: git config --global user.name "Bhargav Ponnapalli"
+      - name: Installs yarn
+        run: npm i -g yarn
+      - name: Install now
+        run: now --version || npm i -g now
+      - name: yarn install and build
+        run: |
+          yarn
+          yarn build:action
+      - name: test
+        run: yarn test
+      # - name: Add npm token
+      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      # - name: Create prerelease version
+      #   run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
+      # - name: Publish prerelease version
+      #   run: yarn run ga-prerelease-publish --dist-tag next
+      # - name: deploy
+      #   env:
+      #     ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
+      #   run: yarn deploy --token $ZEIT_TOKEN
