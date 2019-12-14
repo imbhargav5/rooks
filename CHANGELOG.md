@@ -1,3 +1,6 @@
+<!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
+<!-- insert-new-changelog-here -->
+
 # 3.4.2
 
 - Fix types for useOutsideClickRef hook

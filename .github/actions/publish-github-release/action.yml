@@ -1,0 +1,20 @@
+name: Publish GitHub release
+description: Publishes a new release on GitHub, with the given changelog and tag
+
+inputs:
+  tag:
+    description: The tag name
+    required: true
+  changelog:
+    description: The new changelog
+    required: true
+  token:
+    description: A GitHub access token
+    required: true
+
+runs:
+  using: node12
+  main: main.js
+
+branding:
+  icon: github

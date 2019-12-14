@@ -19,3 +19,29 @@ jobs:
         with:
           from: ${{ steps.tags.outputs.old }}
           to: ${{ steps.tags.outputs.new }}
+        env:
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a draft GitHub release
+        uses: ./.github/actions/publish-github-release
+        with:
+          tag: ${{ steps.tags.outputs.new }}
+          changelog: ${{ steps.changelog.outputs.changelog }}
+          token: ${{ secrets.BOT_TOKEN }}
+      - name: Check if releasing from master
+        id: is_master
+        uses: ./.github/actions/ref-matches-branch
+        with:
+          name: master
+      - name: Update CHANGELOG.md
+        if: steps.is_master.outputs.result == 1
+        uses: ./.github/actions/update-changelog
+        with:
+          changelog: ${{ steps.changelog.outputs.changelog }}
+
+      - name: Commit CHANGELOG.md
+        if: steps.is_master.outputs.result == 1
+        run: |
+          git add CHANGELOG.md
+          git -c user.name="imbhargav5 bot" -c user.email="imbhargav5-bot@users.noreply.github.com" \
+            commit -m "Add ${{ steps.tags.outputs.new }} to CHANGELOG.md [skip ci]" --no-verify --quiet
+          git push "https://imbhargav5-bot:${{ secrets.BOT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
