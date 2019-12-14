@@ -2,12 +2,12 @@ name: Canary
 
 on:
   release:
-    types: [prereleased]
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    if: github.event.release.prerelease === false
     steps:
       - uses: actions/checkout@master
       - name: Use Node.js 12.x
