@@ -2,6 +2,7 @@
 <!-- insert-new-changelog-here -->
 
 
+
 # 3.4.2
 
 - Fix types for useOutsideClickRef hook
