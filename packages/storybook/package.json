@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "3.5.0-canary.8",
+  "version": "3.5.0-canary.9",
   "private": true,
   "description": "Storybook for hooks",
   "main": "index.js",
