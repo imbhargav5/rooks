@@ -1,4 +1,4 @@
-name: Prerelease
+name: Canary
 
 on:
   release:
@@ -31,4 +31,4 @@ jobs:
     #   - name: Create prerelease version
     #     run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
       - name: Publish prerelease version
-        run: yarn run ga-prerelease-publish --dist-tag next
+        run: yarn run ga-prerelease-publish --dist-tag canary
