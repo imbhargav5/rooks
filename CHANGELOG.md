@@ -6,7 +6,7 @@
 
 # 3.4.3
 
-- Added new useCountDown hook
+- Added new useCountdown hook
 
 # 3.4.2
 
