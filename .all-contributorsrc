@@ -148,6 +148,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mxstbr",
+      "name": "Max Stoiber",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7525670?v=4",
+      "profile": "https://mxstbr.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Stupidism",
+      "name": "Stupid",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5801015?v=4",
+      "profile": "https://stupidism.github.io/resume",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mscottmoore",
+      "name": "Michael Moore",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5983927?v=4",
+      "profile": "http://mscottmoore.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
