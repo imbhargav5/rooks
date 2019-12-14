@@ -14,9 +14,7 @@ exec(`git fetch origin`);
 const currentTag = exec(
   `git describe --abbrev=0 --tags ${process.env.GITHUB_SHA}`
 );
-const lastTag = exec(
-  `git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1)`
-);
+const lastTag = exec(`git describe --abbrev=0 --tags ${currentTag}^`);
 // set outputs
 core.setOutput("old", lastTag);
 core.setOutput("new", currentTag);

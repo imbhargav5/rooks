@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout the tag
+        uses: actions/checkout@v1.0.0
       - name: Get tag info
         id: tags
         uses: ./.github/actions/get-release-tags
