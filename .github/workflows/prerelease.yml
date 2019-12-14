@@ -1,9 +1,8 @@
-name: Node CI Dev
+name: Prerelease
 
 on:
-  push:
-    branches:
-      - dev
+  release:
+    types: [prereleased]
 
 jobs:
   build:
@@ -29,11 +28,7 @@ jobs:
         run: yarn test
       - name: Add npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Create prerelease version
-        run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
+    #   - name: Create prerelease version
+    #     run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
       - name: Publish prerelease version
-        run: yarn run ga-prerelease-publish --dist-tag dev
-      - name: deploy
-        env:
-          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        run: yarn deploy:dev --token $ZEIT_TOKEN
+        run: yarn run ga-prerelease-publish --dist-tag next

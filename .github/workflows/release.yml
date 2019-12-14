@@ -30,3 +30,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Publish release version
         run: yarn run ga-release-publish
+      - name: deploy
+        env:
+          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
+        run: yarn deploy --token $ZEIT_TOKEN
