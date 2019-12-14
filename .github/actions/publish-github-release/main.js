@@ -17,4 +17,5 @@ octokit.repos.createRelease({
     tag_name: tag,
     body: JSON.parse(changelog),
     draft: true,
+    name: tag
 });

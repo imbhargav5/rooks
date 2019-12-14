@@ -26,7 +26,7 @@
     "bump-canary": "yarn run new-canary-version prerelease",
     "new-canary-version": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid canary",
     "new-release-version": "lerna version --force-publish=*",
-    "ga-release-publish": "lerna publish from-git  --force-publish=* --yes",
+    "ga-npm-publish": "lerna publish from-git  --force-publish=* --yes",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "devDependencies": {
