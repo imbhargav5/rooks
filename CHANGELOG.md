@@ -3,7 +3,9 @@
 
 
 
+# 3.4.3
 
+- Added new useCountDown hook
 
 # 3.4.2
 
