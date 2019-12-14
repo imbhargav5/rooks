@@ -31,7 +31,7 @@ async function main() {
 
   newChangelog = changelog.replace(
     INSERTION_POINT,
-    newChangelog.length ? INSERTION_POINT + "\n" + newChangelog : INSERTION_POINT
+    INSERTION_POINT + "\n" + newChangelog
   );
 
   await fs.writeFile(CHANGELOG_PATH, newChangelog);
