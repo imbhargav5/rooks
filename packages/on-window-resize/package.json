@@ -29,7 +29,7 @@
     "window",
     "resize"
   ],
-  "version": "3.5.0-canary.12",
+  "version": "3.5.0",
   "publishConfig": {
     "access": "public"
   },
