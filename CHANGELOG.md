@@ -1,5 +1,9 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+## v3.5.1-canary.0 (2019-12-16)
+
+#### :house: Internal
+* [#182](https://github.com/imbhargav5/rooks/pull/182) Bump rollup-plugin-typescript2 from 0.24.0 to 0.24.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 
 
