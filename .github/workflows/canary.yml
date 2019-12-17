@@ -16,9 +16,6 @@ jobs:
           version: 12.x
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
-      - name: Get tag info
-        id: tags
-        uses: ./.github/actions/get-release-tags
       - name: Installs yarn
         run: npm i -g yarn
       - name: Install now
@@ -36,7 +33,7 @@ jobs:
       - name: Build docusaurus
         run:  cd packages/docusaurus && yarn build
       - name: Version docusaurus
-        run:  cd packages/docusaurus && yarn run docs-version ${{ steps.tags.outputs.new }}
+        run:  cd packages/docusaurus && yarn run docs-version $GITHUB_REF
       - name: Commit docusaurus
         run: |
           git add packages/docusaurus
