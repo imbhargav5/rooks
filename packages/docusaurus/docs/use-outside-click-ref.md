@@ -1,3 +1,9 @@
+---
+id: use-outside-click-ref
+title: use-outside-click-ref
+sidebar_label: use-outside-click-ref
+---
+
 # @rooks/use-outside-click-ref
 
 ### A hook that can track a click event outside a ref. Returns a callbackRef.
@@ -35,3 +41,5 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+    

@@ -1,3 +1,9 @@
+---
+id: use-did-update
+title: use-did-update
+sidebar_label: use-did-update
+---
+
 # @rooks/use-did-update
 
 ### componentDidUpdate hook for react
@@ -39,3 +45,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    

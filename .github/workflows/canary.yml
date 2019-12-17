@@ -1,4 +1,4 @@
-name: Canary
+name: Canary Publish
 
 on:
   release:

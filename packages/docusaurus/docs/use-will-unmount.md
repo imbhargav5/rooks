@@ -1,3 +1,9 @@
+---
+id: use-will-unmount
+title: use-will-unmount
+sidebar_label: use-will-unmount
+---
+
 # @rooks/use-will-unmount
 
 ### componentWillUnmount lifecycle as hook for React.
@@ -59,3 +65,5 @@ render(<Demo/>)
 | callback  | function | Callback function which needs to run on unmount | undefined     |
 
 # A React hook for componentWillUnmount lifecycle method.
+
+    

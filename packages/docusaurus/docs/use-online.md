@@ -1,3 +1,9 @@
+---
+id: use-online
+title: use-online
+sidebar_label: use-online
+---
+
 # @rooks/use-online
 
 ### Online status hook for React.
@@ -34,3 +40,5 @@ render(<Demo />);
 ### Return value
 
 Offline status (boolean) is returned.
+
+    

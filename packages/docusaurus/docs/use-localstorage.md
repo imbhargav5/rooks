@@ -1,3 +1,9 @@
+---
+id: use-localstorage
+title: use-localstorage
+sidebar_label: use-localstorage
+---
+
 # @rooks/use-localstorage
 
 ### Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically.
@@ -42,3 +48,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    

@@ -1,3 +1,9 @@
+---
+id: use-timeout
+title: use-timeout
+sidebar_label: use-timeout
+---
+
 # @rooks/use-timeout
 
 ### setTimeout hook for react.
@@ -55,3 +61,5 @@ render(<TimeoutComponent/>)
 | start                      | function | Start the timeout     |
 | isActive                   | boolean  | Is the timeout active |
 
+
+    

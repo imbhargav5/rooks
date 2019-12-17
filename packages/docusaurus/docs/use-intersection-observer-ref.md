@@ -1,3 +1,9 @@
+---
+id: use-intersection-observer-ref
+title: use-intersection-observer-ref
+sidebar_label: use-intersection-observer-ref
+---
+
 # @rooks/use-intersection-observer-ref
 
 ### A hook to register an intersection observer listener
@@ -65,3 +71,5 @@ Returns an array with the first element in the array being the callback ref for 
 | Return value | Type        | Description                                                    | Default value |
 | ------------ | ----------- | -------------------------------------------------------------- | ------------- |
 | ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
+
+    

@@ -1,3 +1,9 @@
+---
+id: use-on-window-scroll
+title: use-on-window-scroll
+sidebar_label: use-on-window-scroll
+---
+
 # @rooks/use-on-window-scroll
 
 ### A React hook for adding an event listener for window scroll
@@ -40,3 +46,5 @@ render(<Demo/>)
 | when      | boolean  | When the event handler should be active         | true          |
 
 ### A React hook for adding an event listener for window scroll
+
+    

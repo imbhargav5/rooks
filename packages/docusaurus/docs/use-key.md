@@ -1,3 +1,9 @@
+---
+id: use-key
+title: use-key
+sidebar_label: use-key
+---
+
 # @rooks/use-key
 
 ### keypress, keyup and keydown event handlers as hooks for react.
@@ -123,3 +129,5 @@ function Demo() {
 }
 render(<Demo />);
 ```
+
+    

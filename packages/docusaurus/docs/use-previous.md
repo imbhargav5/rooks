@@ -1,3 +1,9 @@
+---
+id: use-previous
+title: use-previous
+sidebar_label: use-previous
+---
+
 # @rooks/use-previous
 
 ### Access the previous value of a variable with this React hook
@@ -53,3 +59,5 @@ render(<Demo />);
 ## Gif
 
 [![Image from Gyazo](https://i.gyazo.com/9913f58e1959ed60fb590cb280639d88.gif)](https://gyazo.com/9913f58e1959ed60fb590cb280639d88)
+
+    

@@ -1,3 +1,9 @@
+---
+id: use-throttle
+title: use-throttle
+sidebar_label: use-throttle
+---
+
 # @rooks/use-throttle
 
 ### Throttle custom hook for React
@@ -44,3 +50,5 @@ function ThrottleDemo() {
 | callback (required) | function | Function that needs to be throttle  | undefined     |
 | timeout (optional)  | number   | Time to throttle the callback in ms | 300           |
 
+
+    

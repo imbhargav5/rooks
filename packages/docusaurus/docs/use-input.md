@@ -1,3 +1,9 @@
+---
+id: use-input
+title: use-input
+sidebar_label: use-input
+---
+
 # @rooks/use-input
 
 ### Input hook for React.
@@ -83,3 +89,5 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
+
+    

@@ -1,3 +1,9 @@
+---
+id: use-boundingclientrect
+title: use-boundingclientrect
+sidebar_label: use-boundingclientrect
+---
+
 # @rooks/use-boundingclientrect
 
 ### getBoundingClientRect hook for React.
@@ -89,3 +95,5 @@ render(<Demo/>)
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
 
+
+    

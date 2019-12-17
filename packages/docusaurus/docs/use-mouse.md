@@ -1,3 +1,9 @@
+---
+id: use-mouse
+title: use-mouse
+sidebar_label: use-mouse
+---
+
 # @rooks/use-mouse
 
 ### Mouse position hook for React.
@@ -43,3 +49,5 @@ render(<Demo/>)
 | -------------------------- | ---- | ------------------- |
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
+
+    

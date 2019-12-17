@@ -1,3 +1,9 @@
+---
+id: use-did-mount
+title: use-did-mount
+sidebar_label: use-did-mount
+---
+
 # @rooks/use-did-mount
 
 ### componentDidMount hook for React
@@ -39,3 +45,5 @@ render(<Demo/>)
 | -------- | -------- | ------------------------------ |
 | callback | function | function to be called on mount |
 
+
+    

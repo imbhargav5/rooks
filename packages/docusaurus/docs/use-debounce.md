@@ -1,3 +1,9 @@
+---
+id: use-debounce
+title: use-debounce
+sidebar_label: use-debounce
+---
+
 # @rooks/use-debounce
 
 ### Debounce hook for react
@@ -28,3 +34,5 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+    

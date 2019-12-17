@@ -1,3 +1,9 @@
+---
+id: use-boundingclientrect-ref
+title: use-boundingclientrect-ref
+sidebar_label: use-boundingclientrect-ref
+---
+
 # @rooks/use-boundingclientrect-ref
 
 ### A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked. 
@@ -83,3 +89,5 @@ N/A
 | value        | DOMRect      | DOMRect Object containing x,y, width, height, left,right,top and bottom keys       | null          |
 | update       | Function     | Function that can be called at any time to force a recalculation of the clientrect | null          |
 
+
+    

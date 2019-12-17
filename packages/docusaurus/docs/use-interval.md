@@ -1,3 +1,9 @@
+---
+id: use-interval
+title: use-interval
+sidebar_label: use-interval
+---
+
 # @rooks/use-interval
 
 ### setInterval hook for React.
@@ -71,3 +77,5 @@ render(<Demo/>)
 | start                      | function   | Start the interval         |
 | stop                       | function   | Stop the interval          |
 | intervalId                 | intervalId | IntervalId of the interval |
+
+    

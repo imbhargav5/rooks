@@ -1,3 +1,9 @@
+---
+id: use-geolocation
+title: use-geolocation
+sidebar_label: use-geolocation
+---
+
 # @rooks/use-geolocation
 
 ### A hook to provide the geolocation info on client side.
@@ -72,3 +78,5 @@ function App() {
 }
 render(<App />);
 ```
+
+    

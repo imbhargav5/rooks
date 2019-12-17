@@ -1,3 +1,9 @@
+---
+id: use-select
+title: use-select
+sidebar_label: use-select
+---
+
 # @rooks/use-select
 
 ### Select values from a list easily. List selection hook for react.
@@ -72,3 +78,5 @@ render(<Demo/>)
 | item                       | any      | Currently selected item           |
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
+
+    

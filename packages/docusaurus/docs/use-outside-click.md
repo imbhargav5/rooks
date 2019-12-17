@@ -1,3 +1,9 @@
+---
+id: use-outside-click
+title: use-outside-click
+sidebar_label: use-outside-click
+---
+
 # @rooks/use-outside-click
 
 ### Outside click(for a ref) event as hook for React.
@@ -38,3 +44,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    

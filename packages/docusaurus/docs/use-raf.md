@@ -1,3 +1,9 @@
+---
+id: use-raf
+title: use-raf
+sidebar_label: use-raf
+---
+
 # @rooks/use-raf
 
 ### A continuously running requestAnimationFrame hook for React
@@ -75,3 +81,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    

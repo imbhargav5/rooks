@@ -1,3 +1,9 @@
+---
+id: use-fork-ref
+title: use-fork-ref
+sidebar_label: use-fork-ref
+---
+
 # @rooks/use-fork-ref
 
 ### A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
@@ -78,3 +84,4 @@ render(<Demo/>)
 #### Original source
 
 [Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
+    

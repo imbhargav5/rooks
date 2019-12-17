@@ -1,3 +1,9 @@
+---
+id: use-mutation-observer-ref
+title: use-mutation-observer-ref
+sidebar_label: use-mutation-observer-ref
+---
+
 # @rooks/use-mutation-observer-ref
 
 ### A hook that tracks mutations of an element. It returns a callbackRef.
@@ -91,3 +97,5 @@ Returns an array with one element
 | ref      | React ref | Ref which should be observed for Mutations |
 
 
+
+    

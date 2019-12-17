@@ -1,3 +1,9 @@
+---
+id: use-isomorphic-effect
+title: use-isomorphic-effect
+sidebar_label: use-isomorphic-effect
+---
+
 # @rooks/use-isomorphic-effect
 
 ### A hook that resolves to useEffect on the server and useLayoutEffect on the client.
@@ -31,3 +37,5 @@ function Demo() {
 render(<Demo/>)
 ```
 
+
+    

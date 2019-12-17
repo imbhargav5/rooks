@@ -1,3 +1,9 @@
+---
+id: use-worker
+title: use-worker
+sidebar_label: use-worker
+---
+
 # @rooks/use-worker
 
 ### Worker hook for React.
@@ -53,3 +59,5 @@ ReactDOM.render(<Demo />, rootElement);
 ### Returned Object
 
 The worker instance is returned.
+
+    

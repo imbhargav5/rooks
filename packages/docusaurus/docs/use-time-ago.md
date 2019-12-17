@@ -1,3 +1,9 @@
+---
+id: use-time-ago
+title: use-time-ago
+sidebar_label: use-time-ago
+---
+
 # @rooks/use-time-ago
 
 ### A React Hook to get time ago for timestamp millisecond value.
@@ -59,3 +65,5 @@ render(<Demo/>)
 
 Timeago string is returned.
 
+
+    

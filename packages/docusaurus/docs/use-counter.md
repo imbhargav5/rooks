@@ -1,3 +1,9 @@
+---
+id: use-counter
+title: use-counter
+sidebar_label: use-counter
+---
+
 # @rooks/use-counter
 
 ### Counter hook for React.
@@ -68,3 +74,5 @@ render(<CounterComponent/>)
 | Return value | Type   | Description                                                                 |
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
+
+    

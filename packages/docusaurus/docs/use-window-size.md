@@ -1,3 +1,9 @@
+---
+id: use-window-size
+title: use-window-size
+sidebar_label: use-window-size
+---
+
 # @rooks/use-window-size
 
 ### Window size hook for React.
@@ -60,3 +66,5 @@ render(<WindowComponent/>)
 | outerHeight                | int  | outer width of window  |
 
 
+
+    

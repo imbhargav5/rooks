@@ -1,3 +1,9 @@
+---
+id: rooks
+title: rooks
+sidebar_label: rooks
+---
+
 # `rooks`
 
 Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
@@ -69,3 +75,5 @@ Feel free to join as contributors!
 :smile:
 
 ### License - MIT
+
+    

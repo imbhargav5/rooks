@@ -1,3 +1,9 @@
+---
+id: use-visibility-sensor
+title: use-visibility-sensor
+sidebar_label: use-visibility-sensor
+---
+
 # @rooks/use-visibility-sensor
 
 ### Visibility sensor hook for React.
@@ -98,3 +104,5 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 - [x] Documentation of all options
 - [x] Tests _ WIP _
 - [ ] More examples _ WIP _
+
+    

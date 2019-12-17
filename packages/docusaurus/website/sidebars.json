@@ -1,19 +1,29 @@
 {
   "docs": {
-    "Docusaurus": [
-      "doc1"
+    "Main": [
+      "rooks"
     ],
-    "First Category": [
-      "doc2"
-    ],
-    "Second Category": [
-      "doc3"
-    ],
-  },
-  "docs-other": {
-    "First Category": [
-      "doc4",
-      "doc5"
+    "Independent Packages": [
+      "use-boundingclientrect",
+      "use-boundingclientrect-ref",
+      "use-countdown",
+      "use-debounce",
+      "use-did-mount",
+      "use-did-mount",
+      "use-fork-ref",
+      "use-input",
+      "use-interval",
+      "use-interval",
+      "use-keys",
+      "use-mutation-observer-ref",
+      "use-on-window-resize",
+      "use-online",
+      "use-previous",
+      "use-select",
+      "use-sessionstorage",
+      "use-time-ago",
+      "use-visibility-sensor",
+      "use-worker"
     ]
   }
 }

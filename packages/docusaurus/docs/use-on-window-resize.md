@@ -1,3 +1,9 @@
+---
+id: use-on-window-resize
+title: use-on-window-resize
+sidebar_label: use-on-window-resize
+---
+
 # @rooks/use-on-window-resize
 
 ### A React hook for adding an event listener for window resize
@@ -40,3 +46,5 @@ render(<Demo/>)
 | when      | boolean  | When the event handler should be active         | true          |
 
 ### A React hook for adding an event listener for window resize
+
+    

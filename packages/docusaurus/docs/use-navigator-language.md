@@ -1,3 +1,9 @@
+---
+id: use-navigator-language
+title: use-navigator-language
+sidebar_label: use-navigator-language
+---
+
 # @rooks/use-navigator-language
 
 ### Navigator Language hook for React.
@@ -34,3 +40,5 @@ render(<Demo />);
 ### Return value
 
 A language (String) is returned.
+
+    

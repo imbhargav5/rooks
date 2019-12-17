@@ -1,3 +1,9 @@
+---
+id: use-countdown
+title: use-countdown
+sidebar_label: use-countdown
+---
+
 # @rooks/use-countdown
 
 ### Count down to a target timestamp and call callbacks every second (or provided peried)
@@ -51,3 +57,4 @@ render(<Demo/>)
 | Type     | Description                         |
 | -------- | ----------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime | 
+    

@@ -1,3 +1,9 @@
+---
+id: use-mutation-observer
+title: use-mutation-observer
+sidebar_label: use-mutation-observer
+---
+
 # @rooks/use-mutation-observer
 
 ### Mutation Observer hook for React.
@@ -88,3 +94,5 @@ render(<Demo/>)
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
 
+
+    

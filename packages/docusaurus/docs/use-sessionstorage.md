@@ -1,3 +1,9 @@
+---
+id: use-sessionstorage
+title: use-sessionstorage
+sidebar_label: use-sessionstorage
+---
+
 # @rooks/use-sessionstorage
 
 ### Session storage react hook. Easily manage session storage values.
@@ -40,3 +46,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    

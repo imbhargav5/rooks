@@ -1,3 +1,9 @@
+---
+id: use-keys
+title: use-keys
+sidebar_label: use-keys
+---
+
 # @rooks/use-keys
 
 ### A hook which allows to setup callbacks when a combination of keys are pressed at the same time. 
@@ -74,3 +80,5 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+    
