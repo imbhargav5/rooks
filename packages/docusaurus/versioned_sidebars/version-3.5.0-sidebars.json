@@ -1,0 +1,46 @@
+{
+  "version-3.5.0-docs": {
+    "Main": [
+      "version-3.5.0-rooks"
+    ],
+    "Independent Packages": [
+      "version-3.5.0-use-boundingclientrect",
+      "version-3.5.0-use-boundingclientrect-ref",
+      "version-3.5.0-use-countdown",
+      "version-3.5.0-use-counter",
+      "version-3.5.0-use-debounce",
+      "version-3.5.0-use-did-mount",
+      "version-3.5.0-use-did-update",
+      "version-3.5.0-use-fork-ref",
+      "version-3.5.0-use-geolocation",
+      "version-3.5.0-use-input",
+      "version-3.5.0-use-intersection-observer-ref",
+      "version-3.5.0-use-interval",
+      "version-3.5.0-use-isomorphic-effect",
+      "version-3.5.0-use-key",
+      "version-3.5.0-use-keys",
+      "version-3.5.0-use-localstorage",
+      "version-3.5.0-use-mouse",
+      "version-3.5.0-use-mutation-observer",
+      "version-3.5.0-use-mutation-observer-ref",
+      "version-3.5.0-use-navigator-language",
+      "version-3.5.0-use-on-window-resize",
+      "version-3.5.0-use-on-window-scroll",
+      "version-3.5.0-use-online",
+      "version-3.5.0-use-outside-click",
+      "version-3.5.0-use-outside-click-ref",
+      "version-3.5.0-use-previous",
+      "version-3.5.0-use-raf",
+      "version-3.5.0-use-select",
+      "version-3.5.0-use-sessionstorage",
+      "version-3.5.0-use-throttle",
+      "version-3.5.0-use-time-ago",
+      "version-3.5.0-use-timeout",
+      "version-3.5.0-use-toggle",
+      "version-3.5.0-use-visibility-sensor",
+      "version-3.5.0-use-will-unmount",
+      "version-3.5.0-use-window-size",
+      "version-3.5.0-use-worker"
+    ]
+  }
+}
