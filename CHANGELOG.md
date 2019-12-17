@@ -1,5 +1,6 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+
 ## v3.5.1-canary.1 (2019-12-18)
 
 #### :memo: Documentation
