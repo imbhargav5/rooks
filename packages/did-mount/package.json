@@ -30,7 +30,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "3.5.1-canary.2",
+  "version": "3.5.1-canary.3",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"

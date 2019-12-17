@@ -29,7 +29,7 @@
     "mouse",
     "mouse hook"
   ],
-  "version": "3.5.1-canary.2",
+  "version": "3.5.1-canary.3",
   "_id": "@rooks/use-mouse@",
   "publishConfig": {
     "access": "public"
