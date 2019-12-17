@@ -1,0 +1,46 @@
+{
+  "docs": {
+    "Main": [
+      "rooks"
+    ],
+    "Independent Packages": [
+      "use-boundingclientrect",
+      "use-boundingclientrect-ref",
+      "use-countdown",
+      "use-counter",
+      "use-debounce",
+      "use-did-mount",
+      "use-did-update",
+      "use-fork-ref",
+      "use-geolocation",
+      "use-input",
+      "use-intersection-observer-ref",
+      "use-interval",
+      "use-isomorphic-effect",
+      "use-key",
+      "use-keys",
+      "use-localstorage",
+      "use-mouse",
+      "use-mutation-observer",
+      "use-mutation-observer-ref",
+      "use-navigator-language",
+      "use-on-window-resize",
+      "use-on-window-scroll",
+      "use-online",
+      "use-outside-click",
+      "use-outside-click-ref",
+      "use-previous",
+      "use-raf",
+      "use-select",
+      "use-sessionstorage",
+      "use-throttle",
+      "use-time-ago",
+      "use-timeout",
+      "use-toggle",
+      "use-visibility-sensor",
+      "use-will-unmount",
+      "use-window-size",
+      "use-worker"
+    ]
+  }
+}

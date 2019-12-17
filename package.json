@@ -11,6 +11,7 @@
     "deploy:dev": "cd packages/storybook && yarn deploy:dev",
     "deploy": "cd packages/storybook && yarn deploy",
     "create": "node helpers/create",
+    "readme-to-docs": "lerna exec --scope=@rooks/* --scope=rooks --concurrency 1 --stream -- 'node ../../helpers/docs.js'",
     "bs": "lerna bootstrap",
     "prebuild": "lerna clean -y && yarn",
     "build:independent": "lerna run --ignore rooks --ignore storybook --ignore shared build",

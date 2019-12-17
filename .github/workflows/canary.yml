@@ -1,4 +1,4 @@
-name: Canary
+name: Canary Publish
 
 on:
   release:
@@ -16,6 +16,9 @@ jobs:
           version: 12.x
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
+      - name: Get tag info
+        id: tags
+        uses: ./.github/actions/get-release-tags
       - name: Installs yarn
         run: npm i -g yarn
       - name: Install now
@@ -28,6 +31,22 @@ jobs:
         run: yarn test
       - name: Add npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Generate docusaurus
+        run: yarn run readme-to-docs
+      - name: Build docusaurus
+        run:  cd packages/docusaurus && yarn build
+      - name: Version docusaurus
+        run:  cd packages/docusaurus && yarn run version ${{ steps.tags.outputs.new }}
+      - name: Commit docusaurus
+        run: |
+          git add packages/docusaurus
+          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
+            commit -m "Update ${{ steps.tags.outputs.new }} docusaurus [skip ci]" --no-verify --quiet
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
+      - name: Deploy docusaurus
+        if: steps.is_master.outputs.result == 1
+        run: cd packages/docusaurus && yarn run deploy --token $ZEIT_TOKEN      
+      
     #   - name: Create prerelease version
     #     run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
       - name: Publish prerelease version
