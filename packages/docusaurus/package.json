@@ -1,4 +1,7 @@
 {
+  "name": "docusaurus",
+  "version": "3.5.0"
+  "private": true,
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
