@@ -36,7 +36,7 @@ jobs:
       - name: Build docusaurus
         run:  cd packages/docusaurus && yarn build
       - name: Version docusaurus
-        run:  cd packages/docusaurus && yarn run version ${{ steps.tags.outputs.new }}
+        run:  cd packages/docusaurus && yarn run docs-version ${{ steps.tags.outputs.new }}
       - name: Commit docusaurus
         run: |
           git add packages/docusaurus
