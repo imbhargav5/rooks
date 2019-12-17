@@ -42,7 +42,7 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.9.0",
     "babel-loader": "8.0.5",
     "babel-plugin-prismjs": "1.0.2",
     "babel-preset-minify": "0.5.1",
