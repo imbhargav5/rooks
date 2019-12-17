@@ -1,5 +1,10 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+## v3.5.1-canary.1 (2019-12-18)
+
+#### :memo: Documentation
+* `docusaurus`
+  * [#186](https://github.com/imbhargav5/rooks/pull/186) Switch site to docusaurus ([@imbhargav5](https://github.com/imbhargav5))
 ## v3.5.1-canary.0 (2019-12-16)
 
 #### :house: Internal
