@@ -53,7 +53,7 @@ jobs:
         run:  cd packages/docusaurus && yarn build
       - name: Version docusaurus
         if: steps.is_master.outputs.result == 1
-        run:  cd packages/docusaurus && yarn run docs-version ${{steps.latestTag.outputs.latest}}
+        run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
       - name: Commit docusaurus
         if: steps.is_master.outputs.result == 1
         run: |
