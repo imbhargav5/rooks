@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "3.5.1-canary.8",
+  "version": "3.5.1-canary.9",
   "_id": "@rooks/use-fork-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
