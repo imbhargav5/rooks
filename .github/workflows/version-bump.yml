@@ -63,6 +63,8 @@ jobs:
           git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
       - name: Deploy docusaurus
         if: steps.is_master.outputs.result == 1
+        env:
+          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
         run: cd packages/docusaurus && yarn run deploy --token $ZEIT_TOKEN      
       - name: Update CHANGELOG.md
         if: steps.is_master.outputs.result == 1
