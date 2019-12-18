@@ -14,6 +14,9 @@ jobs:
         uses: actions/setup-node@v1.1.0
         with:
           version: 12.x
+      - name: Get latest tag info
+        id: latestTag
+        uses: ./.github/actions/get-latest-tag     
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
       - name: Installs yarn
@@ -37,10 +40,6 @@ jobs:
         uses: ./.github/actions/ref-matches-branch
         with:
           name: master
-      - name: Get latest tag info
-        id: latestTag
-        if: steps.is_master.outputs.result == 1
-        uses: ./.github/actions/get-latest-tag
       - name: Version docusaurus
         if: steps.is_master.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.latestTag.outputs.latest}}
