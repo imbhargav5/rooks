@@ -1,0 +1,13 @@
+name: Get latest tag
+description: Gets the latest tag
+
+outputs:
+  latest:
+    description: The latest tag
+
+runs:
+  using: node12
+  main: main.js
+
+branding:
+  icon: label

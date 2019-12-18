@@ -32,8 +32,11 @@ jobs:
         run: yarn run readme-to-docs
       - name: Build docusaurus
         run:  cd packages/docusaurus && yarn build
+      - name: Get latest tag info
+        id: latestTag
+        uses: ./.github/actions/get-latest-tag
       - name: Version docusaurus
-        run:  cd packages/docusaurus && yarn run docs-version $GITHUB_REF
+        run:  cd packages/docusaurus && yarn run docs-version ${{steps.latestTag.outputs.latest}}
       - name: Commit docusaurus
         run: |
           git add packages/docusaurus
