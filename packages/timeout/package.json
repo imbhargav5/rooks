@@ -29,7 +29,7 @@
     "timeout",
     "timeout hook"
   ],
-  "version": "3.5.1-canary.5",
+  "version": "3.5.1-canary.6",
   "_id": "@rooks/use-timeout@",
   "publishConfig": {
     "access": "public"
