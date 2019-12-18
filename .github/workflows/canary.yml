@@ -19,27 +19,33 @@ jobs:
         uses: ./.github/actions/get-latest-tag     
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
-      - name: Installs yarn
-        run: npm i -g yarn
-      - name: Install now
-        run: now --version || npm i -g now
-      - name: yarn install and build
-        run: |
-          yarn
-          yarn build:action
-      - name: test
-        run: yarn test
-      - name: Add npm token
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Generate docusaurus
-        run: yarn run readme-to-docs
-      - name: Build docusaurus
-        run:  cd packages/docusaurus && yarn build
       - name: Check if releasing from master
         id: is_master
         uses: ./.github/actions/ref-matches-branch
         with:
-          name: master
+          name: master      
+      - name: Installs yarn
+        if: steps.is_master.outputs.result == 1
+        run: npm i -g yarn
+      - name: Install now
+        run: now --version || npm i -g now
+      - name: yarn install and build
+        if: steps.is_master.outputs.result == 1
+        run: |
+          yarn
+          yarn build:action
+      - name: test
+        if: steps.is_master.outputs.result == 1
+        run: yarn test
+      - name: Add npm token
+        if: steps.is_master.outputs.result == 1
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Generate docusaurus
+        if: steps.is_master.outputs.result == 1
+        run: yarn run readme-to-docs
+      - name: Build docusaurus
+        if: steps.is_master.outputs.result == 1
+        run:  cd packages/docusaurus && yarn build
       - name: Version docusaurus
         if: steps.is_master.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.latestTag.outputs.latest}}
