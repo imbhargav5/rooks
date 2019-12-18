@@ -9,8 +9,6 @@ const exec = cmd =>
     .toString()
     .trim();
 
-exec(`git fetch --tags`);
-
 const latesetTag = exec(
   `git describe --abbrev=0 --tags ${process.env.GITHUB_SHA}`
 );

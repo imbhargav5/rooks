@@ -9,7 +9,7 @@ const exec = cmd =>
     .toString()
     .trim();
 
-exec(`git fetch --tags`);
+exec(`git fetch origin`);
 
 const currentTag = exec(
   `git describe --abbrev=0 --tags ${process.env.GITHUB_SHA}`
