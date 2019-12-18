@@ -27,7 +27,7 @@ function addToSidebarJson() {
     let currentSidebarJson
     let fileContent
     try {
-        fileContent = readFileSync(`../docusaurus/website/sidebars.json`, 'utf8');
+        fileContent = readFileSync(`../docusaurus/sidebars.json`, 'utf8');
         if (!fileContent || fileContent === '') {
             console.log({ newReadmeFileName })
         }
@@ -43,7 +43,7 @@ function addToSidebarJson() {
                 ["Independent Packages"]: independentPackages
             }
         }
-        writeFileSync(`../docusaurus/website/sidebars.json`, JSON.stringify(newSidebarJson, null, 2), 'utf-8');
+        writeFileSync(`../docusaurus/sidebars.json`, JSON.stringify(newSidebarJson, null, 2), 'utf-8');
     } catch (err) {
         console.log("----")
         console.log(err);
