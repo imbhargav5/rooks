@@ -29,7 +29,7 @@
     "rooks",
     "visibility sensor hook"
   ],
-  "version": "3.5.1-canary.6",
+  "version": "3.5.1-canary.7",
   "_id": "@rooks/use-visibility-sensor@",
   "publishConfig": {
     "access": "public"
