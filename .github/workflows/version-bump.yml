@@ -33,19 +33,6 @@ jobs:
         uses: ./.github/actions/ref-matches-branch
         with:
           name: master
-      - name: Update CHANGELOG.md
-        if: steps.is_master.outputs.result == 1
-        uses: ./.github/actions/update-changelog
-        with:
-          changelog: ${{ steps.changelog.outputs.changelog }}
-
-      - name: Commit CHANGELOG.md
-        if: steps.is_master.outputs.result == 1
-        run: |
-          git add CHANGELOG.md
-          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Add ${{ steps.tags.outputs.new }} to CHANGELOG.md [skip ci]" --no-verify --quiet
-          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
       - name: Generate docusaurus
         if: steps.is_master.outputs.result == 1
         run: yarn run readme-to-docs
@@ -65,3 +52,15 @@ jobs:
       - name: Deploy docusaurus
         if: steps.is_master.outputs.result == 1
         run: cd packages/docusaurus && yarn run deploy --token $ZEIT_TOKEN      
+      - name: Update CHANGELOG.md
+        if: steps.is_master.outputs.result == 1
+        uses: ./.github/actions/update-changelog
+        with:
+          changelog: ${{ steps.changelog.outputs.changelog }}
+      - name: Commit CHANGELOG.md
+        if: steps.is_master.outputs.result == 1
+        run: |
+          git add CHANGELOG.md
+          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
+            commit -m "Add ${{ steps.tags.outputs.new }} to CHANGELOG.md [skip ci]" --no-verify --quiet
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
