@@ -32,7 +32,7 @@ jobs:
         run: yarn run readme-to-docs
       - name: Build docusaurus
         run:  cd packages/docusaurus && yarn build
-            - name: Check if releasing from master
+      - name: Check if releasing from master
         id: is_master
         uses: ./.github/actions/ref-matches-branch
         with:
