@@ -30,7 +30,7 @@
     "unmount",
     "unmount hook"
   ],
-  "version": "3.5.1-canary.4",
+  "version": "3.5.1-canary.5",
   "_id": "@rooks/use-will-unmount@",
   "publishConfig": {
     "access": "public"
