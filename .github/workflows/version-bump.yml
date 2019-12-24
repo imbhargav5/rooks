@@ -34,7 +34,7 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
       - name: Check if tag is stable
         id: tag_is_stable
-        uses: ./github/actions/tag-is-stable
+        uses: ./.github/actions/tag-is-stable
         with:
           tag: ${{steps.tags.outputs.new}}
       - name: Check if releasing from master
