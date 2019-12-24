@@ -6,7 +6,7 @@
   "source": "src/index.ts",
   "description": "componentDidUpdate hook for react",
   "name": "@rooks/use-did-update",
-  "homepage": "https://react-hooks.org/?path=/story/usedidupdate--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usedidupdate--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

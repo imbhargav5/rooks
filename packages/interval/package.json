@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A react hook for using setInterval",
   "name": "@rooks/use-interval",
-  "homepage": "https://react-hooks.org/?path=/story/useintervaldemo--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/useintervaldemo--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

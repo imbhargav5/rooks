@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for online",
   "name": "@rooks/use-online",
-  "homepage": "https://react-hooks.org/?path=/story/useonline--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/useonline--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

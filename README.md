@@ -11,8 +11,8 @@
 
 Collection of regularly used custom hooks as utils for React.
 
-## [Website](https://react-hooks.org)
-### [Docs](https://book.react-hooks.org/)
+## [Stories](https://stories.react-hooks.org)
+### [Docs](https://react-hooks.org/)
 
 [![Image from Gyazo](https://i.gyazo.com/9d31687617a5ae080bc423cd8b747f51.gif)](https://gyazo.com/9d31687617a5ae080bc423cd8b747f51)
 

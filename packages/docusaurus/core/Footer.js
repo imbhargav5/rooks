@@ -40,7 +40,7 @@ class Footer extends React.Component {
             <a href={this.docUrl('rooks.html', this.props.language)}>
               All in one package
             </a>
-            <a href={`https://react-hooks.org`}>
+            <a href={`https://stories.react-hooks.org`}>
               Storybook
             </a>
             <a href={this.docUrl('use-counter.html', this.props.language)}>

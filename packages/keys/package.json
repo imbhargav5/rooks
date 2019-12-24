@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook which allows to setup callbacks on multiple keypresses at the same time",
   "name": "@rooks/use-keys",
-  "homepage": "https://react-hooks.org/?path=/story/usekeys--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usekeys--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

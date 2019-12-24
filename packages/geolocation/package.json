@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook to provide the geolocation info on client side.",
   "name": "@rooks/use-geolocation",
-  "homepage": "https://react-hooks.org/?path=/story/usegeolocation--basic-example-geolocation",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usegeolocation--basic-example-geolocation",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

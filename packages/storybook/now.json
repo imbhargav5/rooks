@@ -1,6 +1,8 @@
 {
   "name": "react-hooks-storybook",
-  "alias": ["react-hooks.org"],
+  "alias": [
+    "stories.react-hooks.org"
+  ],
   "version": 2,
   "builds": [
     {

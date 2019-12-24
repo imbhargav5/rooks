@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for window-size",
   "name": "@rooks/use-window-size",
-  "homepage": "https://react-hooks.org/?path=/story/usewindowsize--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usewindowsize--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

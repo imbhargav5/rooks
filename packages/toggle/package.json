@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for toggle",
   "name": "@rooks/use-toggle",
-  "homepage": "https://react-hooks.org/?path=/story/usetoggle--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usetoggle--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

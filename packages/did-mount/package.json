@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React hooks package for componentDidMount",
   "name": "@rooks/use-did-mount",
-  "homepage": "https://react-hooks.org/?path=/story/usedidmount--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usedidmount--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

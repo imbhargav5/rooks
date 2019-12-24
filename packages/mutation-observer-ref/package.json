@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook that tracks mutations of an element. It returns a callbackRef.",
   "name": "@rooks/use-mutation-observer-ref",
-  "homepage": "https://react-hooks.org/?path=/story/usemutationobserverref--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usemutationobserverref--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

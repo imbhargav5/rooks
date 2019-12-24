@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hook to get time ago for timestamp millisecond value",
   "name": "@rooks/use-time-ago",
-  "homepage": "https://react-hooks.org/?path=/story/usetimeago--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/usetimeago--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

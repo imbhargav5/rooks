@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "React hook for tracking clicks outside a ref",
   "name": "@rooks/use-outside-click",
-  "homepage": "https://react-hooks.org/?path=/story/useoutsideclick--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/useoutsideclick--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook that resolves to useEffect on the server and useLayoutEffect on the client.",
   "name": "@rooks/use-isomorphic-effect",
-  "homepage": "https://react-hooks.org/?path=/story/useisomorphiceffect--basic-example",
+  "homepage": "https://stories.react-hooks.org/?path=/story/useisomorphiceffect--basic-example",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
