@@ -29,7 +29,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "3.5.1-canary.18",
+  "version": "3.5.1-canary.19",
   "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"
