@@ -1,9 +1,9 @@
 {
   "docs": {
-    "Main": [
+    "All In One": [
       "rooks"
     ],
-    "Independent Packages": [
+    "Independent Package": [
       "use-boundingclientrect",
       "use-boundingclientrect-ref",
       "use-countdown",
