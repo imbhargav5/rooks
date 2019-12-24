@@ -42,10 +42,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'use-mouse', label: 'Docs' },
+    { doc: 'rooks', label: 'All in one package' },
+    { href: 'https://github.com/imbhargav5/rooks', label: 'Github' },
     { href: 'https://stories.react-hooks.org', label: 'Storybook' },
     { page: 'help', label: 'Help' },
-    { blog: true, label: 'Blog' },
+    //{ blog: true, label: 'Blog' },
     { search: true },
     { languages: true }
   ],
@@ -54,14 +55,14 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
-  footerIcon: 'img/favicon.ico',
-  favicon: 'img/favicon.ico',
+  // headerIcon: 'img/rooks-logo.png',
+  // footerIcon: 'img/rooks-logo.png',
+  // favicon: 'img/rooks-logo.png',
 
   /* Colors for website */
   colors: {
-    primaryColor: '#231133',
-    secondaryColor: '#180b23',
+    primaryColor: 'royalblue',
+    secondaryColor: 'black',
   },
 
   /* Custom fonts for website */
@@ -110,7 +111,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: 'https://github.com/imbhargav5/rooks',
 };
 
 module.exports = siteConfig;

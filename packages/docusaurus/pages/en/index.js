@@ -15,8 +15,8 @@ const GridBlock = CompLibrary.GridBlock;
 
 class HomeSplash extends React.Component {
   render() {
-    const {siteConfig, language = ''} = this.props;
-    const {baseUrl, docsUrl} = siteConfig;
+    const { siteConfig, language = '' } = this.props;
+    const { baseUrl, docsUrl } = siteConfig;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
     const langPart = `${language ? `${language}/` : ''}`;
     const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
@@ -52,21 +52,21 @@ class HomeSplash extends React.Component {
 
     const Button = props => (
       <div className="pluginWrapper buttonWrapper">
-        <a className="button" href={props.href} target={props.target}>
+        <a className="button" style={{ textTransform: "none" }} href={props.href} target={props.target}>
           {props.children}
         </a>
       </div>
     );
 
     return (
-      <SplashContainer>
+      <SplashContainer >
         <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
-        <div className="inner">
+        <div className="inner" >
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href="https://codesandbox.io/s/empty-waterfall-o5pvc">Example Sandbox</Button>
+            <Button href={docUrl('use-mouse.html')}>use-mouse</Button>
+            <Button href={docUrl('use-online.html')}>use-online</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -76,8 +76,8 @@ class HomeSplash extends React.Component {
 
 class Index extends React.Component {
   render() {
-    const {config: siteConfig, language = ''} = this.props;
-    const {baseUrl} = siteConfig;
+    const { config: siteConfig, language = '' } = this.props;
+    const { baseUrl } = siteConfig;
 
     const Block = props => (
       <Container
@@ -95,9 +95,9 @@ class Index extends React.Component {
     const FeatureCallout = () => (
       <div
         className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
+        style={{ textAlign: 'center' }}>
+        <h2>Want to install the whole collection or just a few in the set?</h2>
+        <MarkdownBlock>Rooks can be downloaded in just the way you want. If you want just a few hooks in the collectoin or if you want all the hooks in a single package, you can do so very easily.</MarkdownBlock>
       </div>
     );
 
@@ -149,16 +149,16 @@ class Index extends React.Component {
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
+            content: 'Standalone package with all the hooks at one place',
             image: `${baseUrl}img/undraw_react.svg`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Collection of hooks',
           },
           {
-            content: 'The content of my second feature',
+            content: 'CommonJS, UMD and ESM Support',
             image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'Super light',
           },
         ]}
       </Block>
@@ -196,13 +196,13 @@ class Index extends React.Component {
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
-        <div className="mainContainer">
+        <div className="mainContainer" >
           <Features />
           <FeatureCallout />
-          <LearnHow />
+          {/* <LearnHow />
           <TryOut />
           <Description />
-          <Showcase />
+          <Showcase /> */}
         </div>
       </div>
     );
