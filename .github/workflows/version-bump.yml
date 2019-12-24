@@ -32,6 +32,11 @@ jobs:
           tag: ${{ steps.tags.outputs.new }}
           changelog: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.BOT_TOKEN }}
+      - name: Check if tag is stable
+        id: tag_is_stable
+        uses: ./github/actions/tag-is-stable
+        with:
+          tag: ${{steps.tags.outputs.new}}
       - name: Check if releasing from master
         id: is_master
         uses: ./.github/actions/ref-matches-branch
@@ -46,23 +51,23 @@ jobs:
           yarn
           yarn build:action
       - name: Generate docusaurus
-        if: steps.is_master.outputs.result == 1
+        if: steps.is_master.outputs.result == 1 && steps.tag_is_stable.outputs.result == 1
         run: yarn run readme-to-docs
       - name: Build docusaurus
-        if: steps.is_master.outputs.result == 1
+        if: steps.is_master.outputs.result == 1 && steps.tag_is_stable.outputs.result == 1
         run:  cd packages/docusaurus && yarn build
       - name: Version docusaurus
-        if: steps.is_master.outputs.result == 1
+        if: steps.is_master.outputs.result == 1 && steps.tag_is_stable.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
       - name: Commit docusaurus
-        if: steps.is_master.outputs.result == 1
+        if: steps.is_master.outputs.result == 1 && steps.tag_is_stable.outputs.result == 1
         run: |
           git add packages/docusaurus
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
             commit -m "Update ${{ steps.tags.outputs.new }} docusaurus [skip ci]" --no-verify --quiet
           git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
       - name: Deploy docusaurus
-        if: steps.is_master.outputs.result == 1
+        if: steps.is_master.outputs.result == 1 && steps.tag_is_stable.outputs.result == 1
         env:
           ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
         run: cd packages/docusaurus && yarn run deploy --token $ZEIT_TOKEN      

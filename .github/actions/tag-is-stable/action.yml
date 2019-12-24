@@ -1,0 +1,18 @@
+name: Check if tag is stable
+description: Checks if given tag is stable
+
+inputs:
+  tag:
+    description: The tag to check for stability
+    required: true
+
+outputs:
+  result:
+    descriptions: 1 or 0
+
+runs:
+  using: node12
+  main: main.js
+
+branding:
+  icon: label
