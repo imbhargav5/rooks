@@ -20,13 +20,12 @@
 
 
 
-## v3.5.1-canary.1 (2019-12-18)
+## v3.5.1 (2019-12-18)
 
 #### :memo: Documentation
 * `docusaurus`
   * [#186](https://github.com/imbhargav5/rooks/pull/186) Switch site to docusaurus ([@imbhargav5](https://github.com/imbhargav5))
-## v3.5.1-canary.0 (2019-12-16)
-
+  
 #### :house: Internal
 * [#182](https://github.com/imbhargav5/rooks/pull/182) Bump rollup-plugin-typescript2 from 0.24.0 to 0.24.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
