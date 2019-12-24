@@ -97,7 +97,7 @@ class Index extends React.Component {
         className="productShowcaseSection paddingBottom"
         style={{ textAlign: 'center' }}>
         <h2>Want to install the whole collection or just a few in the set?</h2>
-        <MarkdownBlock>Rooks can be downloaded in just the way you want. If you want just a few hooks in the collectoin or if you want all the hooks in a single package, you can do so very easily.</MarkdownBlock>
+        <MarkdownBlock>Rooks can be downloaded in just the way you want. If you want just a few hooks in the collection or if you want all the hooks in a single package, you can do so very easily.</MarkdownBlock>
       </div>
     );
 
