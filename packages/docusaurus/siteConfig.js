@@ -35,14 +35,14 @@ const siteConfig = {
 
   // Used for publishing and more
   projectName: 'rooks',
-  organizationName: 'rooks',
+  organizationName: 'imbhargav5',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'rooks', label: 'All in one package' },
+    { doc: 'rooks', label: 'Documentation' },
     { href: 'https://github.com/imbhargav5/rooks', label: 'Github' },
     { href: 'https://stories.react-hooks.org', label: 'Storybook' },
     { page: 'help', label: 'Help' },
