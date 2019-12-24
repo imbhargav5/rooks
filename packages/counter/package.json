@@ -29,7 +29,7 @@
     "react-hooks.org",
     "counter hook"
   ],
-  "version": "3.5.1-canary.16",
+  "version": "3.5.1-canary.17",
   "publishConfig": {
     "access": "public"
   },

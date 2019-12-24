@@ -1,6 +1,6 @@
 {
   "name": "docusaurus",
-  "version": "3.5.1-canary.16",
+  "version": "3.5.1-canary.17",
   "private": true,
   "scripts": {
     "examples": "docusaurus-examples",
