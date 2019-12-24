@@ -1,5 +1,11 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+## v3.5.2-canary.0 (2019-12-24)
+
+#### :memo: Documentation
+* `docusaurus`
+  * [#191](https://github.com/imbhargav5/rooks/pull/191) Improvements to docusaurus website ([@imbhargav5](https://github.com/imbhargav5))
+  * [#190](https://github.com/imbhargav5/rooks/pull/190) Fix typo on website ([@1337MARCEL](https://github.com/1337MARCEL))
 
 
 
