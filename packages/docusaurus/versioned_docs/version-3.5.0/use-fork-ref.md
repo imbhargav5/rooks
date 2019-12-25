@@ -11,7 +11,7 @@ original_id: use-fork-ref
 
 *Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
 
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-fork-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-fork-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-fork-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ffork-ref)
+![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-fork-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-fork-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-fork-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ffork-ref)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
