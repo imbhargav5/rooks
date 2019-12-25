@@ -68,16 +68,17 @@ const getBrowserFunctions = (): NormalizedFullscreenApi => {
   return ret;
 };
 
-type FullscreenApi = [
-  boolean, // isEnabled
-  (element?: HTMLElement) => Promise<unknown>, // toggle
-  (callback: EventCallback) => void, // onchange
-  (callback: EventCallback) => void, // onerror
-  (element?: HTMLElement) => Promise<unknown>, // request
-  () => Promise<unknown>, // exit
-  boolean, // isFullscreen
-  HTMLElement // element
-];
+type FullscreenApi = {
+  isEnabled: boolean,
+  toggle: (element?: HTMLElement) => Promise<unknown>, // toggle
+  onChange: (callback: EventCallback) => void, // onchange
+  onError: (callback: EventCallback) => void, // onerror
+  request: (element?: HTMLElement) => Promise<unknown>, // request
+  exit: () => Promise<unknown>, // exit
+  isFullscreen: boolean, // isFullscreen
+  element: HTMLElement
+}
+
 
 export const useFullscreen = (): FullscreenApi => {
   const fn = getBrowserFunctions();
@@ -141,18 +142,34 @@ export const useFullscreen = (): FullscreenApi => {
   const toggle = (element?: HTMLElement) =>
     Boolean(document[fn.fullscreenElement]) ? exit() : request(element);
 
-  return [
-    Boolean(document[fn.fullscreenEnabled]),
+
+  return {
+    isEnabled: Boolean(document[fn.fullscreenEnabled]),
     toggle,
-    (callback: EventCallback) => {
+    onChange: (callback: EventCallback) => {
       on("change", callback);
-    }, // onchange
-    (callback: EventCallback) => {
+    },
+    onError: (callback: EventCallback) => {
       on("error", callback);
-    }, // onerror
+    },
     request,
     exit,
     isFullscreen,
     element
-  ];
+  }
+
+  // return [
+  //   Boolean(document[fn.fullscreenEnabled]),
+  //   toggle,
+  //   (callback: EventCallback) => {
+  //     on("change", callback);
+  //   }, // onchange
+  //   (callback: EventCallback) => {
+  //     on("error", callback);
+  //   }, // onerror
+  //   request,
+  //   exit,
+  //   isFullscreen,
+  //   element
+  // ];
 };

@@ -22,7 +22,7 @@ import useFullscreen from "@rooks/use-fullscreen"
 
 ```jsx
 function Demo() {
-  const [isEnabled, toggle] = useFullscreen();
+  const {isEnabled, toggle} = useFullscreen();
   return (    
     <img
       src=""
