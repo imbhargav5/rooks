@@ -12,7 +12,6 @@
 * Other
   * [#193](https://github.com/imbhargav5/rooks/pull/193) Fix rebase action ([@imbhargav5](https://github.com/imbhargav5))
   * [#192](https://github.com/imbhargav5/rooks/pull/192) Add rebase github action ([@imbhargav5](https://github.com/imbhargav5))
-## v3.5.2-canary.0 (2019-12-24)
 
 #### :memo: Documentation
 * `docusaurus`
