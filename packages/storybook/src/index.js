@@ -6,6 +6,7 @@ import "./counter";
 import "./debounce";
 import "./did-mount";
 import "./did-update";
+import "./fullscreen";
 import "./fork-ref";
 import "./geolocation";
 import "./input";
