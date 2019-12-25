@@ -11,3 +11,9 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: 'Hi! Thanks for taking the time out to create an issue!'
         pr-message: 'Hi! Thank you so much for creating a PR. Will review this and get back to you shortly! 🎉🎉'
+  always_job:
+    name: Aways run job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Always run
+        run: echo "This job is used to prevent the workflow to fail when all other jobs are skipped."
