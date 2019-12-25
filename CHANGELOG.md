@@ -1,5 +1,17 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+## v3.6.0-canary.0 (2019-12-25)
+
+#### :rocket: New Feature
+* `fullscreen`, `storybook`
+  * [#194](https://github.com/imbhargav5/rooks/pull/194) Feat/144/add use fullscreen (#150) ([@imbhargav5](https://github.com/imbhargav5))
+
+#### :house: Internal
+* `boundingclientrect-ref`, `countdown`, `docusaurus`, `fork-ref`, `geolocation`, `intersection-observer-ref`, `isomorphic-effect`, `mutation-observer-ref`, `outside-click-ref`
+  * [#195](https://github.com/imbhargav5/rooks/pull/195) Remove travis integration ([@imbhargav5](https://github.com/imbhargav5))
+* Other
+  * [#193](https://github.com/imbhargav5/rooks/pull/193) Fix rebase action ([@imbhargav5](https://github.com/imbhargav5))
+  * [#192](https://github.com/imbhargav5/rooks/pull/192) Add rebase github action ([@imbhargav5](https://github.com/imbhargav5))
 ## v3.5.2-canary.0 (2019-12-24)
 
 #### :memo: Documentation
