@@ -64,7 +64,7 @@ storiesOf("useFullscreen", module)
 
 function FullscreenDemo() {
   const container = useRef();
-  const [
+  const {
     isEnabled,
     toggle,
     onChange,
@@ -73,7 +73,7 @@ function FullscreenDemo() {
     exit,
     isFullscreen,
     element
-  ] = useFullscreen();
+  } = useFullscreen();
   const [changeCount, setChangeCount] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
 
