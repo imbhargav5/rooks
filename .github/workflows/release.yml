@@ -35,3 +35,9 @@ jobs:
         env:
           ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
         run: yarn deploy --token $ZEIT_TOKEN
+  always_job:
+    name: Aways run job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Always run
+        run: echo "This job is used to prevent the workflow to fail when all other jobs are skipped."
