@@ -5,6 +5,7 @@ export { default as useCounter } from "@rooks/use-counter";
 export { default as useDebounce } from "@rooks/use-debounce";
 export { default as useDidMount } from "@rooks/use-did-mount";
 export { default as useDidUpdate } from "@rooks/use-did-update";
+export { default as useFullscreen } from "@rooks/use-fullscreen";
 export { default as useForkRef } from "@rooks/use-fork-ref";
 export { default as useGeolocation } from "@rooks/use-geolocation";
 export { default as useInput } from "@rooks/use-input";
