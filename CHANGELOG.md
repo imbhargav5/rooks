@@ -1,5 +1,6 @@
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
+
 ## v3.6.0-canary.0 (2019-12-25)
 
 #### :rocket: New Feature
