@@ -8,17 +8,19 @@ import {
 import { HTMLElementOrNull, CallbackRef } from "shared/utils";
 
 /**
- *  useOutsideClickRef hook
+ * useOutsideClickRef hook
  *
  * Checks if a click happened outside a Ref. Handy for dropdowns, modals and popups etc.
  *
  * @param handler Callback to fire on outside click
- * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
+ * @param when A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click
+ * @param listenMouseDown A boolean which switches the hook to listen to `mousedown` event instead of `click`. Useful when user might start drag instead of regular clicks
  * @returns ref
  */
 function useOutsideClickRef(
   handler: (e: MouseEvent) => any,
-  when: boolean = true
+  when: boolean = true,
+  listenMouseDown: boolean = false
 ): [CallbackRef] {
   const savedHandler = useRef(handler);
 
@@ -33,6 +35,8 @@ function useOutsideClickRef(
     [node]
   );
 
+  const mouseEvent = listenMouseDown ? "mousedown" : "click";
+
   useEffect(() => {
     savedHandler.current = handler;
   });
@@ -43,14 +47,14 @@ function useOutsideClickRef(
 
   useEffect(() => {
     if (when) {
-      document.addEventListener("click", memoizedCallback);
+      document.addEventListener(mouseEvent, memoizedCallback);
       document.addEventListener("ontouchstart", memoizedCallback);
       return () => {
-        document.removeEventListener("click", memoizedCallback);
+        document.removeEventListener(mouseEvent, memoizedCallback);
         document.removeEventListener("ontouchstart", memoizedCallback);
       };
     }
-  }, [when, memoizedCallback]);
+  }, [when, memoizedCallback, mouseEvent]);
 
   return [ref];
 }
