@@ -38,3 +38,13 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+### Arguments
+
+| Arguments       | Type      | Description                                                                                                                                      | Default value |
+| --------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| ref             | React ref | Ref whose outside click needs to be listened to                                                                                                  | N/A           |
+| handler         | function  | Callback to fire on outside click                                                                                                                | N/A           |
+| when            | boolean   | A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click                                       | true          |
+| listenMouseDown | boolean   | A boolean which switches the hook to listen to `mousedown` event instead of `click`. Useful when user might start drag instead of regular clicks | false         |
