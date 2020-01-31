@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useInterval } from "shared/useInterval";
 
 type CountdownOptions = {
@@ -14,6 +14,10 @@ const useCountdown = (
   const [time, setTime] = useState<Date>(() => new Date());
   const restTime = endTime.getTime() - time.getTime();
   const count = restTime > 0 ? Math.ceil(restTime / interval) : 0;
+
+  useEffect(() => {
+    setTime(() => new Date());
+  }, [endTime]);
 
   useInterval(onTick, count ? interval : null, true);
 
