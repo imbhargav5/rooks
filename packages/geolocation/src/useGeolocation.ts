@@ -66,13 +66,17 @@ function useGeolocation(
 
   useEffect(() => {
     async function getGeoCode() {
-      const value = await getGeoLocation({
-        when,
-        enableHighAccuracy,
-        timeout,
-        maximumAge
-      });
-      setGeoObj(value);
+      try {
+        const value = await getGeoLocation({
+          when,
+          enableHighAccuracy,
+          timeout,
+          maximumAge
+        });
+        setGeoObj(value);
+      } catch (e) {
+        setGeoObj(e);
+      }
     }
     if (when) {
       getGeoCode();
