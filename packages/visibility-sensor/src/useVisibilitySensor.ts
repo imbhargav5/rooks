@@ -1,10 +1,9 @@
 // Massive respect for Josh Johnston
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
+import { useEffect, useReducer, useLayoutEffect, MutableRefObject } from "react";
 
-import { useEffect, useReducer, useLayoutEffect } from "react";
-
-function normalizeRect(rect) {
+function normalizeRect(rect: DOMRect) {
   if (rect.width === undefined) {
     rect.width = rect.right - rect.left;
   }
@@ -16,9 +15,13 @@ function normalizeRect(rect) {
   return rect;
 }
 
-const initialState = { isVisible: null, visibilityRect: {} };
+interface State {
+  isVisible?: boolean;
+  visibilityRect?: DOMRect;
+}
+const initialState = {};
 
-function reducer(state, action) {
+function reducer(state: State, action) {
   switch (action.type) {
     case "set":
       if (state.isVisible === action.payload.isVisible) {
@@ -28,6 +31,20 @@ function reducer(state, action) {
     default:
       return state;
   }
+}
+
+interface Options {
+  intervalCheck?: number | boolean;
+  partialVisibility?: boolean | string;
+  containment?: HTMLElement;
+  scrollCheck?: boolean;
+  scrollDebounce?: number;
+  scrollThrottle?: number;
+  resizeCheck?: boolean;
+  resizeDebounce?: number;
+  resizeThrottle?: number;
+  shouldCheckOnMount?: boolean;
+  minTopValue?: number;
 }
 
 const DEFAULT_OPTIONS = {
@@ -44,7 +61,7 @@ const DEFAULT_OPTIONS = {
   minTopValue: 0
 };
 
-function useVisbilitySensor(ref, opts) {
+function useVisibilitySensor<T extends HTMLElement>(ref: MutableRefObject<T | null>, opts: Options): State {
   /*
       Create local state
     */
@@ -74,7 +91,7 @@ function useVisbilitySensor(ref, opts) {
   /*
       Check visibility
     */
-  function checkVisibility() {
+  function checkVisibility({ node }: { node: HTMLElement }) {
     let containmentRect;
     if (containment) {
       const containmentDOMRect = containment.getBoundingClientRect();
@@ -93,7 +110,7 @@ function useVisbilitySensor(ref, opts) {
       };
     }
 
-    const rect = normalizeRect(ref.current.getBoundingClientRect());
+    const rect = normalizeRect(node.getBoundingClientRect() as DOMRect);
     const hasSize = rect.height > 0 && rect.width > 0;
 
     const visibilityRect = {
@@ -136,7 +153,7 @@ function useVisbilitySensor(ref, opts) {
     if (!ref.current) {
       return;
     }
-    const { isVisible, visibilityRect } = checkVisibility();
+    const { isVisible, visibilityRect } = checkVisibility({ node: ref.current });
     dispatch({
       type: "set",
       payload: { isVisible, visibilityRect }
@@ -209,4 +226,4 @@ function useVisbilitySensor(ref, opts) {
   }, []);
   return localState;
 }
-export { useVisbilitySensor };
+export { useVisibilitySensor };
