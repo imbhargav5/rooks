@@ -6,5 +6,5 @@
  * @return {string|null}
  */
 export function useNavigatorLanguage(): string | null {
-  return navigator.language
+  return navigator.language;
 }
