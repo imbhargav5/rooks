@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 /**
  * useNavigatorLanguage hook
  *
@@ -8,9 +6,5 @@ import { useState, useEffect } from "react";
  * @return {string|null}
  */
 export function useNavigatorLanguage(): string | null {
-  const [language, setLanguage] = useState(null);
-  useEffect(() => {
-    setLanguage(navigator.language || navigator["userLanguage"]);
-  }, []);
-  return language;
+  return navigator.language;
 }
