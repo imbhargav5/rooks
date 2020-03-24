@@ -6,7 +6,7 @@ import {useMemo} from 'react'
  *
  * @return {string|null}
  */
-const getLanguage(){
+function getLanguage(): string | null{
   if(typeof navigator !== "undefined"){
     return navigator.language || navigator["userLanguage"]
   }else{
@@ -14,5 +14,5 @@ const getLanguage(){
   }
 }
 export function useNavigatorLanguage(): string | null {
-  return getLanguage();
+  return useMemo(() => getLanguage(),[]);
 }
