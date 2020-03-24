@@ -9,9 +9,9 @@
     "build": "build-storybook --quiet -s ./public -c .storybook -o .out",
     "predeploy": "yarn build",
     "predeploy:staging": "yarn predeploy",
-    "deploy:dev": "now --scope react-hooks -A now-dev.json --target production",
-    "deploy:staging": "now --scope react-hooks --target staging",
-    "deploy": "now --scope react-hooks --target production"
+    "deploy:dev": "now deploy -c --scope react-hooks -A now-dev.json --prod",
+    "deploy:staging": "now deploy -c --scope react-hooks --target staging",
+    "deploy": "now deploy -c --scope react-hooks --prod"
   },
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "license": "MIT",
