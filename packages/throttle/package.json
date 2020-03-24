@@ -32,7 +32,7 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "version": "3.6.0",
+  "version": "3.6.1-canary.0",
   "_id": "@rooks/use-throttle@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

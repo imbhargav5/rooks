@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "useWorkspaces": true,
-  "version": "3.6.0",
+  "version": "3.6.1-canary.0",
   "changelog": {
     "repo": "imbhargav5/rooks",
     "cacheDir": ".changelog",

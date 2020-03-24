@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "3.6.0",
+  "version": "3.6.1-canary.0",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",

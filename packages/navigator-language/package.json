@@ -29,7 +29,7 @@
     "navigator language",
     "navigator language hook"
   ],
-  "version": "3.6.0",
+  "version": "3.6.1-canary.0",
   "_id": "@rooks/use-navigator-language@",
   "publishConfig": {
     "access": "public"

@@ -29,7 +29,7 @@
     "hooks",
     "ref outside click"
   ],
-  "version": "3.6.0",
+  "version": "3.6.1-canary.0",
   "_id": "@rooks/use-outside-click@",
   "publishConfig": {
     "access": "public"
