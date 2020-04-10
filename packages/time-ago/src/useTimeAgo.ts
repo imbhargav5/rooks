@@ -7,9 +7,9 @@ const defaultOpts = {
 };
 
 interface Options {
-  intervalMs: number;
-  locale: string;
-  relativeDate: any;
+  intervalMs?: number;
+  locale?: string;
+  relativeDate?: any;
 }
 
 function computeTimeAgo(input, locale, relativeDate) {
