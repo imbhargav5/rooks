@@ -32,7 +32,7 @@ function reducer(state: string, action: any) {
   }
 }
 
-function useTimeAgo(input: any, argOpts: Options): string {
+function useTimeAgo(input: any, argOpts?: Options): string {
   const opts = Object.assign({}, argOpts, defaultOpts);
   const { intervalMs, locale, relativeDate } = opts;
   const [state, dispatcher] = useReducer(
