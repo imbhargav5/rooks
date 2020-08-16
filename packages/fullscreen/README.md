@@ -1,6 +1,6 @@
 # @rooks/use-fullscreen
 
-### Use full screen api for making beautiful and emersive experinces.
+### Use full screen api for making beautiful and immersive experinces.
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-fullscreen/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-fullscreen.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-fullscreen.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ffullscreen)
 
