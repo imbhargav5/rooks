@@ -13,7 +13,10 @@ function useOnWindowScroll(callback, when = true) {
   const savedHandler = useRef(callback);
 
   useEffect(() => {
-    savedHandler.current = callback;
+    savedHandler.current = callback;    
+  })
+
+  useEffect(() => {
     if (when) {
       function passedCb(...args) {
         savedHandler.current(...args);
