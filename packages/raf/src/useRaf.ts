@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import raf from "raf";
 
 /*
@@ -16,11 +16,11 @@ export function useRaf(
 ): void {
   const savedCallback = useRef<(timeElapsed: number) => void>();
   // Remember the latest function.
-  useLayoutEffect(() => {
+  useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let startTime, animationFrame;
 
     function tick() {
