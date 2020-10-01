@@ -15,6 +15,3 @@ inputs:
 runs:
   using: node12
   main: main.js
-
-branding:
-  icon: github
