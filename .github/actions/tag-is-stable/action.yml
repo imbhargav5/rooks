@@ -8,7 +8,7 @@ inputs:
 
 outputs:
   result:
-    descriptions: 1 or 0
+    description: 1 or 0
 
 runs:
   using: node12
