@@ -12,11 +12,14 @@ import { useEffect, useRef } from "react";
 function useOnWindowScroll(callback, when = true) {
   const savedHandler = useRef(callback);
 
-  useEffect(() => (savedHandler.current = callback));
   useEffect(() => {
+    savedHandler.current = callback;
     if (when) {
-      window.addEventListener("scroll", savedHandler.current);
-      return () => window.removeEventListener("scroll", savedHandler.current);
+      function passedCb(...args) {
+        savedHandler.current(...args);
+      }
+      window.addEventListener("scroll", passedCb);
+      return () => window.removeEventListener("scroll", passedCb);
     }
   }, [when]);
 }

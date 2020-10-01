@@ -12,11 +12,14 @@ import { useEffect, useRef } from "react";
 function useOnWindowResize(callback, when = true) {
   const savedHandler = useRef(callback);
 
-  useEffect(() => (savedHandler.current = callback));
   useEffect(() => {
+    savedHandler.current = callback;
     if (when) {
-      window.addEventListener("resize", savedHandler.current);
-      return () => window.removeEventListener("resize", savedHandler.current);
+      function passedCb(...args: any[]) {
+        savedHandler.current(...args);
+      }
+      window.addEventListener("resize", passedCb);
+      return () => window.removeEventListener("resize", passedCb);
     }
   }, [when]);
 }
