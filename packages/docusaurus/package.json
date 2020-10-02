@@ -10,7 +10,7 @@
     "write-translations": "docusaurus-write-translations",
     "docs-version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
-    "deploy": "now --scope react-hooks --target production"
+    "deploy": "now deploy -c --scope react-hooks --prod"
   },
   "devDependencies": {
     "docusaurus": "1.14.3"
