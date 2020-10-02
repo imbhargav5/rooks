@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-rooks",
-  "version": "3.7.0-canary.2",
+  "version": "3.7.0",
   "description": "Eslint config for rooks.",
   "keywords": [
     "eslint",
