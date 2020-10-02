@@ -11,19 +11,28 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Use Node.js 12.x
-        uses: actions/setup-node@v1.1.0
+        uses: actions/setup-node@v1
         with:
           version: 12.x
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
-      - name: Installs yarn
-        run: npm i -g yarn
       - name: Install now
         run: now --version || npm i -g now
-      - name: yarn install and build
-        run: |
-          yarn
-          yarn build:action
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-  
+      - name: Install project dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
+        run: yarn
+      - name: yarn build
+        run: yarn build:action
       - name: test
         run: yarn test
       - name: Add npm token
