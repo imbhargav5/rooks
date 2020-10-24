@@ -21,10 +21,79 @@ import useUndoState from "@rooks/use-undo-state"
 ### Usage
 
 ```jsx
-function Demo() {
-  useUndoState();
-  return null
+const Demo = () => {
+  const [value, setValue, undo] = useUndoState(0)
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <button onClick={() => setValue(value + 1)}>
+        Increment
+      </button>
+      <button onClick={undo} data-testid="undo">
+        Undo
+      </button>
+    </div>
+  )
 }
 
 render(<Demo/>)
+```
+
+You can pass any kind of value to hook just like React's own useState.
+
+```jsx
+const Demo = () => {
+  const [value, setValue, undo] = useUndoState({ data: 42 })
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <button onClick={() => setValue({ data: value.data + 1 })}>
+        Increment object data
+      </button>
+      <button onClick={undo} data-testid="undo">
+        Undo
+      </button>
+    </div>
+  )
+}
+
+render(<Demo/>)
+```
+
+Setter function can also be used with callback just like React's own useState.
+
+```javascript
+const [value, setValue, undo] = useUndoState({ data: 42 })
+
+() => setValue(current => current + 1)
+```
+
+```jsx
+const Demo = () => {
+  const [value, setValue, undo] = useUndoState(0)
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <button onClick={() => setValue(current => current + 1)}>
+        Increment
+      </button>
+      <button onClick={undo} data-testid="undo">
+        Undo
+      </button>
+    </div>
+  )
+}
+
+render(<Demo/>)
+```
+
+To preserve memory you can limit number of steps that will be preserved in undo history.
+
+```javascript
+const [value, setValue, undo] = useUndoState(0, { maxSize: 30 })
+
+// now when calling undo only last 30 changes to the value will be preserved
 ```
