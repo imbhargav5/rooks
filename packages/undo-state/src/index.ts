@@ -1,1 +1,3 @@
-export { default as useUndoState } from "./useUndoState";
+import useUndoState from './useUndoState'
+
+export default useUndoState
