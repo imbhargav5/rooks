@@ -15,7 +15,7 @@ npm install --save @rooks/use-undo-state
 ### Importing the hook
 
 ```javascript
-import useUndoState from "@rooks/use-undo-state"
+import useUndoState from '@rooks/use-undo-state'
 ```
 
 ### Usage
@@ -30,7 +30,7 @@ const Demo = () => {
       <button onClick={() => setValue(value + 1)}>
         Increment
       </button>
-      <button onClick={undo} data-testid="undo">
+      <button onClick={undo}>
         Undo
       </button>
     </div>
@@ -52,7 +52,7 @@ const Demo = () => {
       <button onClick={() => setValue({ data: value.data + 1 })}>
         Increment object data
       </button>
-      <button onClick={undo} data-testid="undo">
+      <button onClick={undo}>
         Undo
       </button>
     </div>
@@ -80,7 +80,7 @@ const Demo = () => {
       <button onClick={() => setValue(current => current + 1)}>
         Increment
       </button>
-      <button onClick={undo} data-testid="undo">
+      <button onClick={undo}>
         Undo
       </button>
     </div>

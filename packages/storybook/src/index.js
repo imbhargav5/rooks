@@ -32,6 +32,7 @@ import "./time-ago";
 import "./throttle";
 import "./timeout";
 import "./toggle";
+import "./undo-state";
 import "./visibility-sensor";
 import "./will-unmount";
 import "./window-size";
