@@ -32,6 +32,7 @@ export { default as useThrottle } from "@rooks/use-throttle";
 export { default as useTimeAgo } from "@rooks/use-time-ago";
 export { default as useTimeout } from "@rooks/use-timeout";
 export { default as useToggle } from "@rooks/use-toggle";
+export { default as useUndoState } from "@rooks/use-undo-state";
 export { default as useVisibilitySensor } from "@rooks/use-visibility-sensor";
 export { default as useWillUnmount } from "@rooks/use-will-unmount";
 export { default as useWindowSize } from "@rooks/use-window-size";

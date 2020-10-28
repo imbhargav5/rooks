@@ -23,6 +23,7 @@
   },
   "keywords": [
     "use",
+    "undo-state",
     "react",
     "hooks",
     "rooks",
@@ -33,7 +34,6 @@
   },
   "version": "4.0.0-canary.0",
   "_id": "@rooks/use-undo-state@",
-  "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
   }
