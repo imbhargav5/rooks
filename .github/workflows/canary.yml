@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-yarn-  
       - name: Install project dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
-        run: yarn
+        run: yarn 
       - name: yarn build
         run: yarn build:action
       - name: test
