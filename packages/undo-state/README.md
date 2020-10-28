@@ -98,7 +98,6 @@ const [value, setValue, undo] = useUndoState(0, { maxSize: 30 })
 // now when calling undo only last 30 changes to the value will be preserved
 ```
 
-
 ## Arguments
 
 | Arguments      | Type     | Description                                     | Default value |
