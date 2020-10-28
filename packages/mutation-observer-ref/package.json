@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "3.7.0",
+  "version": "4.0.0-canary.0",
   "_id": "@rooks/use-mutation-observer-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
