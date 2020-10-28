@@ -3,7 +3,7 @@
     "All In One": [
       "rooks"
     ],
-    "Independent Package": [
+    "Independent Packages": [
       "use-boundingclientrect",
       "use-boundingclientrect-ref",
       "use-countdown",
@@ -12,6 +12,7 @@
       "use-did-mount",
       "use-did-update",
       "use-fork-ref",
+      "use-fullscreen",
       "use-geolocation",
       "use-input",
       "use-intersection-observer-ref",
@@ -37,6 +38,7 @@
       "use-time-ago",
       "use-timeout",
       "use-toggle",
+      "use-undo-state",
       "use-visibility-sensor",
       "use-will-unmount",
       "use-window-size",

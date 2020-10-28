@@ -32,6 +32,7 @@ function addToSidebarJson() {
             console.log({ newReadmeFileName })
         }
         currentSidebarJson = JSON.parse(fileContent);
+        console.log(currentSidebarJson)
         if (Object.keys(currentSidebarJson.docs['Independent Packages']).includes('newReadmeFileName')) {
             return;
         }
