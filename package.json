@@ -30,7 +30,10 @@
     "ga-npm-publish": "lerna publish from-git  --force-publish=* --yes",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
-  "devDependencies": {
+  "optionalDependencies": {
+    "fsevents": "1.2.9"
+  },
+  "dependencies": {
     "@babel/cli": "7.5.5",
     "@babel/core": "7.7.5",
     "@babel/plugin-external-helpers": "7.2.0",
@@ -50,6 +53,7 @@
     "chalk": "2.4.2",
     "inquirer": "7.0.0",
     "jest": "^23.6.0",
+    "jest-localstorage-mock": "2.4.0",
     "lerna": "^3.13.2",
     "lodash.capitalize": "4.2.1",
     "make-dir": "1.3.0",
@@ -79,12 +83,6 @@
     "webpack": "4.29.1",
     "webpack-cli": "3.2.1",
     "write-pkg": "3.2.0"
-  },
-  "optionalDependencies": {
-    "fsevents": "1.2.9"
-  },
-  "dependencies": {
-    "jest-localstorage-mock": "2.4.0"
   },
   "workspaces": [
     "packages/*"
