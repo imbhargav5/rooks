@@ -3,6 +3,9 @@
   "name": "tag-is-stable",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "build": "npm install && ncc build main.js"
+  },
   "dependencies": {
     "@actions/core": "^1.1.0",
     "semver-stable": "3.0.0"

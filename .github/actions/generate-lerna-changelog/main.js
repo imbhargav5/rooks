@@ -3,7 +3,10 @@ cp.execSync(`cd ${__dirname}; npm ci`);
 
 const path = require("path");
 const core = require("@actions/core");
-const lernaChangelog = require("lerna-changelog");
+const lernaChangelog = path.resolve(
+   __dirname,		
+   "node_modules/.bin/lerna-changelog"		
+ );
 
 const exec = cmd =>
   cp

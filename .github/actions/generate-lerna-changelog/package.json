@@ -3,6 +3,9 @@
   "name": "update-changelog",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "build": "echo \"ok\""
+  },
   "dependencies": {
     "@actions/core": "^1.0.0",
     "lerna-changelog": "^0.8.2"

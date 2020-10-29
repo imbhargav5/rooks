@@ -20,7 +20,7 @@
     "build:shared": "lerna run --scope shared build",
     "build:ci": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks",
     "build:action": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks && yarn run build:demos",
-    "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && ncc build main.js); done",
+    "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build": "yarn run build:shared --stream --parallel && yarn run build:independent  --stream --parallel && yarn run build:rooks && yarn run build:demos  --stream --parallel",
     "generate:types": "lerna run generate:types --stream",
     "prerelease-version-bump": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version prerelease --force-publish=* --preid ${GITHUB_SHA}",

@@ -3,6 +3,9 @@
     "name": "publish-github-release",
     "version": "1.0.0",
     "license": "MIT",
+    "scripts": {
+        "build": "npm install && ncc build main.js"
+    },
     "dependencies": {
         "@actions/core": "^1.1.0",
         "@actions/github": "^1.1.0"

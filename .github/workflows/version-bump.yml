@@ -17,7 +17,7 @@ jobs:
           version: 12.x
       - name: Get tag info
         id: tags
-        uses: ./.github/actions/get-release-tags
+        uses: ./.github/actions/get-release-tags      
       - name: Generate the changelog
         id: changelog
         uses: ./.github/actions/generate-lerna-changelog
