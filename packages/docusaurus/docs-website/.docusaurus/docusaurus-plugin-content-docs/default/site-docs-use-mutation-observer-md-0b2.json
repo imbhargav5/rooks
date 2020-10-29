@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-mutation-observer",
+  "id": "use-mutation-observer",
+  "isDocsHomePage": false,
+  "title": "use-mutation-observer",
+  "description": "@rooks/use-mutation-observer",
+  "source": "@site/../docs/use-mutation-observer.md",
+  "slug": "/use-mutation-observer",
+  "permalink": "/docs/next/use-mutation-observer",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-mutation-observer",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-mouse",
+    "permalink": "/docs/next/use-mouse"
+  },
+  "next": {
+    "title": "use-mutation-observer-ref",
+    "permalink": "/docs/next/use-mutation-observer-ref"
+  }
+}

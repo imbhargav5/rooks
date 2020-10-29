@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-timeout",
+  "id": "use-timeout",
+  "isDocsHomePage": false,
+  "title": "use-timeout",
+  "description": "@rooks/use-timeout",
+  "source": "@site/../docs/use-timeout.md",
+  "slug": "/use-timeout",
+  "permalink": "/docs/use-timeout",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-timeout",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-time-ago",
+    "permalink": "/docs/use-time-ago"
+  },
+  "next": {
+    "title": "use-toggle",
+    "permalink": "/docs/use-toggle"
+  }
+}

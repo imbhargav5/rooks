@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-select",
+  "id": "version-v3.5.1/use-select",
+  "isDocsHomePage": false,
+  "title": "use-select",
+  "description": "@rooks/use-select",
+  "source": "@site/versioned_docs/version-v3.5.1/use-select.md",
+  "slug": "/use-select",
+  "permalink": "/docs/v3.5.1/use-select",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-select",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-raf",
+    "permalink": "/docs/v3.5.1/use-raf"
+  },
+  "next": {
+    "title": "use-sessionstorage",
+    "permalink": "/docs/v3.5.1/use-sessionstorage"
+  }
+}

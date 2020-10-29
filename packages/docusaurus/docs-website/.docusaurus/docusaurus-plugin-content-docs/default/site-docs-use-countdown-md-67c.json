@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-countdown",
+  "id": "use-countdown",
+  "isDocsHomePage": false,
+  "title": "use-countdown",
+  "description": "@rooks/use-countdown",
+  "source": "@site/../docs/use-countdown.md",
+  "slug": "/use-countdown",
+  "permalink": "/docs/next/use-countdown",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-countdown",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-boundingclientrect-ref",
+    "permalink": "/docs/next/use-boundingclientrect-ref"
+  },
+  "next": {
+    "title": "use-counter",
+    "permalink": "/docs/next/use-counter"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-toggle",
+  "id": "use-toggle",
+  "isDocsHomePage": false,
+  "title": "use-toggle",
+  "description": "@rooks/use-toggle",
+  "source": "@site/../docs/use-toggle.md",
+  "slug": "/use-toggle",
+  "permalink": "/docs/next/use-toggle",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-toggle",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-timeout",
+    "permalink": "/docs/next/use-timeout"
+  },
+  "next": {
+    "title": "use-undo-state",
+    "permalink": "/docs/next/use-undo-state"
+  }
+}

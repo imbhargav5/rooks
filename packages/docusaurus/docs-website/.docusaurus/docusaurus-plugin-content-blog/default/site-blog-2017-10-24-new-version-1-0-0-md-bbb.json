@@ -1,0 +1,14 @@
+{
+  "permalink": "/blog/2017/10/24/new-version-1.0.0",
+  "source": "@site/blog/2017-10-24-new-version-1.0.0.md",
+  "description": "This blog post will test file name parsing issues when periods are present.",
+  "date": "2017-10-24T00:00:00.000Z",
+  "tags": [],
+  "title": "New Version 1.0.0",
+  "readingTime": 0.065,
+  "truncated": false,
+  "nextItem": {
+    "title": "Adding RSS Support",
+    "permalink": "/blog/2017/09/26/adding-rss"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-raf",
+  "id": "version-v3.5.1/use-raf",
+  "isDocsHomePage": false,
+  "title": "use-raf",
+  "description": "@rooks/use-raf",
+  "source": "@site/versioned_docs/version-v3.5.1/use-raf.md",
+  "slug": "/use-raf",
+  "permalink": "/docs/v3.5.1/use-raf",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-raf",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-previous",
+    "permalink": "/docs/v3.5.1/use-previous"
+  },
+  "next": {
+    "title": "use-select",
+    "permalink": "/docs/v3.5.1/use-select"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "permalink": "/blog/2017/09/25/testing-rss",
+  "source": "@site/blog/2017-09-25-testing-rss.md",
+  "description": "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
+  "date": "2017-09-25T00:00:00.000Z",
+  "tags": [],
+  "title": "Adding RSS Support - RSS Truncation Test",
+  "readingTime": 0.065,
+  "truncated": true,
+  "prevItem": {
+    "title": "Adding RSS Support",
+    "permalink": "/blog/2017/09/26/adding-rss"
+  },
+  "nextItem": {
+    "title": "New Blog Post",
+    "permalink": "/blog/2017/04/10/blog-post-two"
+  }
+}

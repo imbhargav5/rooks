@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-fork-ref",
+  "id": "version-v3.5.1/use-fork-ref",
+  "isDocsHomePage": false,
+  "title": "use-fork-ref",
+  "description": "@rooks/use-fork-ref",
+  "source": "@site/versioned_docs/version-v3.5.1/use-fork-ref.md",
+  "slug": "/use-fork-ref",
+  "permalink": "/docs/v3.5.1/use-fork-ref",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-fork-ref",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-did-update",
+    "permalink": "/docs/v3.5.1/use-did-update"
+  },
+  "next": {
+    "title": "use-geolocation",
+    "permalink": "/docs/v3.5.1/use-geolocation"
+  }
+}

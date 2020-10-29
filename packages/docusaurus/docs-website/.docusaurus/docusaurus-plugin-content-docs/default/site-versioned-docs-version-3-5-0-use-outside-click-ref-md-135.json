@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-outside-click-ref",
+  "id": "version-3.5.0/use-outside-click-ref",
+  "isDocsHomePage": false,
+  "title": "use-outside-click-ref",
+  "description": "@rooks/use-outside-click-ref",
+  "source": "@site/versioned_docs/version-3.5.0/use-outside-click-ref.md",
+  "slug": "/use-outside-click-ref",
+  "permalink": "/docs/3.5.0/use-outside-click-ref",
+  "version": "3.5.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-outside-click-ref",
+  "sidebar": "version-3.5.0/docs",
+  "previous": {
+    "title": "use-outside-click",
+    "permalink": "/docs/3.5.0/use-outside-click"
+  },
+  "next": {
+    "title": "use-previous",
+    "permalink": "/docs/3.5.0/use-previous"
+  }
+}

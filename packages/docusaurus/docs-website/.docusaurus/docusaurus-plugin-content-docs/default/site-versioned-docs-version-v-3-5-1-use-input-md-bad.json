@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-input",
+  "id": "version-v3.5.1/use-input",
+  "isDocsHomePage": false,
+  "title": "use-input",
+  "description": "@rooks/use-input",
+  "source": "@site/versioned_docs/version-v3.5.1/use-input.md",
+  "slug": "/use-input",
+  "permalink": "/docs/v3.5.1/use-input",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-input",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-geolocation",
+    "permalink": "/docs/v3.5.1/use-geolocation"
+  },
+  "next": {
+    "title": "use-intersection-observer-ref",
+    "permalink": "/docs/v3.5.1/use-intersection-observer-ref"
+  }
+}

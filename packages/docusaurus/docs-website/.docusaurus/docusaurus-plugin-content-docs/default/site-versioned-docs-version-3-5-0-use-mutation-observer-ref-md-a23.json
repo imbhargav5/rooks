@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-mutation-observer-ref",
+  "id": "version-3.5.0/use-mutation-observer-ref",
+  "isDocsHomePage": false,
+  "title": "use-mutation-observer-ref",
+  "description": "@rooks/use-mutation-observer-ref",
+  "source": "@site/versioned_docs/version-3.5.0/use-mutation-observer-ref.md",
+  "slug": "/use-mutation-observer-ref",
+  "permalink": "/docs/3.5.0/use-mutation-observer-ref",
+  "version": "3.5.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-mutation-observer-ref",
+  "sidebar": "version-3.5.0/docs",
+  "previous": {
+    "title": "use-mutation-observer",
+    "permalink": "/docs/3.5.0/use-mutation-observer"
+  },
+  "next": {
+    "title": "use-navigator-language",
+    "permalink": "/docs/3.5.0/use-navigator-language"
+  }
+}

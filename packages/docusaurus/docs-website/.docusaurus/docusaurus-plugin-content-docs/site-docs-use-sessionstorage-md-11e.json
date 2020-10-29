@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-sessionstorage",
+  "id": "use-sessionstorage",
+  "isDocsHomePage": false,
+  "title": "use-sessionstorage",
+  "description": "@rooks/use-sessionstorage",
+  "source": "@site/../docs/use-sessionstorage.md",
+  "slug": "/use-sessionstorage",
+  "permalink": "/docs/use-sessionstorage",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-sessionstorage",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-select",
+    "permalink": "/docs/use-select"
+  },
+  "next": {
+    "title": "use-throttle",
+    "permalink": "/docs/use-throttle"
+  }
+}

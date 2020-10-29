@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-counter",
+  "id": "use-counter",
+  "isDocsHomePage": false,
+  "title": "use-counter",
+  "description": "@rooks/use-counter",
+  "source": "@site/../docs/use-counter.md",
+  "slug": "/use-counter",
+  "permalink": "/docs/next/use-counter",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-counter",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-countdown",
+    "permalink": "/docs/next/use-countdown"
+  },
+  "next": {
+    "title": "use-debounce",
+    "permalink": "/docs/next/use-debounce"
+  }
+}

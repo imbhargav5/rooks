@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-localstorage",
+  "id": "use-localstorage",
+  "isDocsHomePage": false,
+  "title": "use-localstorage",
+  "description": "@rooks/use-localstorage",
+  "source": "@site/../docs/use-localstorage.md",
+  "slug": "/use-localstorage",
+  "permalink": "/docs/use-localstorage",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-localstorage",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-keys",
+    "permalink": "/docs/use-keys"
+  },
+  "next": {
+    "title": "use-mouse",
+    "permalink": "/docs/use-mouse"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-toggle",
+  "id": "version-v3.5.1/use-toggle",
+  "isDocsHomePage": false,
+  "title": "use-toggle",
+  "description": "@rooks/use-toggle",
+  "source": "@site/versioned_docs/version-v3.5.1/use-toggle.md",
+  "slug": "/use-toggle",
+  "permalink": "/docs/v3.5.1/use-toggle",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-toggle",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-timeout",
+    "permalink": "/docs/v3.5.1/use-timeout"
+  },
+  "next": {
+    "title": "use-visibility-sensor",
+    "permalink": "/docs/v3.5.1/use-visibility-sensor"
+  }
+}

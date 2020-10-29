@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-debounce",
+  "id": "version-v3.5.1/use-debounce",
+  "isDocsHomePage": false,
+  "title": "use-debounce",
+  "description": "@rooks/use-debounce",
+  "source": "@site/versioned_docs/version-v3.5.1/use-debounce.md",
+  "slug": "/use-debounce",
+  "permalink": "/docs/v3.5.1/use-debounce",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-debounce",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-counter",
+    "permalink": "/docs/v3.5.1/use-counter"
+  },
+  "next": {
+    "title": "use-did-mount",
+    "permalink": "/docs/v3.5.1/use-did-mount"
+  }
+}

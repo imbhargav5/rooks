@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-key",
+  "id": "version-v3.5.1/use-key",
+  "isDocsHomePage": false,
+  "title": "use-key",
+  "description": "@rooks/use-key",
+  "source": "@site/versioned_docs/version-v3.5.1/use-key.md",
+  "slug": "/use-key",
+  "permalink": "/docs/v3.5.1/use-key",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-key",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-isomorphic-effect",
+    "permalink": "/docs/v3.5.1/use-isomorphic-effect"
+  },
+  "next": {
+    "title": "use-keys",
+    "permalink": "/docs/v3.5.1/use-keys"
+  }
+}

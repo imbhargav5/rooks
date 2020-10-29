@@ -1,0 +1,14 @@
+{
+  "unversionedId": "use-fullscreen",
+  "id": "version-v3.5.1/use-fullscreen",
+  "isDocsHomePage": false,
+  "title": "use-fullscreen",
+  "description": "@rooks/use-fullscreen",
+  "source": "@site/versioned_docs/version-v3.5.1/use-fullscreen.md",
+  "slug": "/use-fullscreen",
+  "permalink": "/docs/v3.5.1/use-fullscreen",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-fullscreen"
+}

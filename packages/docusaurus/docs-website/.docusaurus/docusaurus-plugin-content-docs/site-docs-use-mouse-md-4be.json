@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-mouse",
+  "id": "use-mouse",
+  "isDocsHomePage": false,
+  "title": "use-mouse",
+  "description": "@rooks/use-mouse",
+  "source": "@site/../docs/use-mouse.md",
+  "slug": "/use-mouse",
+  "permalink": "/docs/use-mouse",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-mouse",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-localstorage",
+    "permalink": "/docs/use-localstorage"
+  },
+  "next": {
+    "title": "use-mutation-observer",
+    "permalink": "/docs/use-mutation-observer"
+  }
+}

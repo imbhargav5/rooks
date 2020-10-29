@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-previous",
+  "id": "version-v3.6.0/use-previous",
+  "isDocsHomePage": false,
+  "title": "use-previous",
+  "description": "@rooks/use-previous",
+  "source": "@site/versioned_docs/version-v3.6.0/use-previous.md",
+  "slug": "/use-previous",
+  "permalink": "/docs/v3.6.0/use-previous",
+  "version": "v3.6.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-previous",
+  "sidebar": "version-v3.6.0/docs",
+  "previous": {
+    "title": "use-outside-click-ref",
+    "permalink": "/docs/v3.6.0/use-outside-click-ref"
+  },
+  "next": {
+    "title": "use-raf",
+    "permalink": "/docs/v3.6.0/use-raf"
+  }
+}

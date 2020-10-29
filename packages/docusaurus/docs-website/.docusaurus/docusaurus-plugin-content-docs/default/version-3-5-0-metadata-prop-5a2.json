@@ -1,0 +1,254 @@
+{
+  "pluginId": "default",
+  "version": "3.5.0",
+  "label": "3.5.0",
+  "isLast": false,
+  "docsSidebars": {
+    "version-3.5.0/docs": [
+      {
+        "collapsed": true,
+        "type": "category",
+        "label": "All In One",
+        "items": [
+          {
+            "type": "link",
+            "label": "rooks",
+            "href": "/docs/3.5.0/rooks"
+          }
+        ]
+      },
+      {
+        "collapsed": true,
+        "type": "category",
+        "label": "Independent Packages",
+        "items": [
+          {
+            "type": "link",
+            "label": "use-boundingclientrect",
+            "href": "/docs/3.5.0/use-boundingclientrect"
+          },
+          {
+            "type": "link",
+            "label": "use-boundingclientrect-ref",
+            "href": "/docs/3.5.0/use-boundingclientrect-ref"
+          },
+          {
+            "type": "link",
+            "label": "use-countdown",
+            "href": "/docs/3.5.0/use-countdown"
+          },
+          {
+            "type": "link",
+            "label": "use-counter",
+            "href": "/docs/3.5.0/use-counter"
+          },
+          {
+            "type": "link",
+            "label": "use-debounce",
+            "href": "/docs/3.5.0/use-debounce"
+          },
+          {
+            "type": "link",
+            "label": "use-did-mount",
+            "href": "/docs/3.5.0/use-did-mount"
+          },
+          {
+            "type": "link",
+            "label": "use-did-update",
+            "href": "/docs/3.5.0/use-did-update"
+          },
+          {
+            "type": "link",
+            "label": "use-fork-ref",
+            "href": "/docs/3.5.0/use-fork-ref"
+          },
+          {
+            "type": "link",
+            "label": "use-geolocation",
+            "href": "/docs/3.5.0/use-geolocation"
+          },
+          {
+            "type": "link",
+            "label": "use-input",
+            "href": "/docs/3.5.0/use-input"
+          },
+          {
+            "type": "link",
+            "label": "use-intersection-observer-ref",
+            "href": "/docs/3.5.0/use-intersection-observer-ref"
+          },
+          {
+            "type": "link",
+            "label": "use-interval",
+            "href": "/docs/3.5.0/use-interval"
+          },
+          {
+            "type": "link",
+            "label": "use-isomorphic-effect",
+            "href": "/docs/3.5.0/use-isomorphic-effect"
+          },
+          {
+            "type": "link",
+            "label": "use-key",
+            "href": "/docs/3.5.0/use-key"
+          },
+          {
+            "type": "link",
+            "label": "use-keys",
+            "href": "/docs/3.5.0/use-keys"
+          },
+          {
+            "type": "link",
+            "label": "use-localstorage",
+            "href": "/docs/3.5.0/use-localstorage"
+          },
+          {
+            "type": "link",
+            "label": "use-mouse",
+            "href": "/docs/3.5.0/use-mouse"
+          },
+          {
+            "type": "link",
+            "label": "use-mutation-observer",
+            "href": "/docs/3.5.0/use-mutation-observer"
+          },
+          {
+            "type": "link",
+            "label": "use-mutation-observer-ref",
+            "href": "/docs/3.5.0/use-mutation-observer-ref"
+          },
+          {
+            "type": "link",
+            "label": "use-navigator-language",
+            "href": "/docs/3.5.0/use-navigator-language"
+          },
+          {
+            "type": "link",
+            "label": "use-on-window-resize",
+            "href": "/docs/3.5.0/use-on-window-resize"
+          },
+          {
+            "type": "link",
+            "label": "use-on-window-scroll",
+            "href": "/docs/3.5.0/use-on-window-scroll"
+          },
+          {
+            "type": "link",
+            "label": "use-online",
+            "href": "/docs/3.5.0/use-online"
+          },
+          {
+            "type": "link",
+            "label": "use-outside-click",
+            "href": "/docs/3.5.0/use-outside-click"
+          },
+          {
+            "type": "link",
+            "label": "use-outside-click-ref",
+            "href": "/docs/3.5.0/use-outside-click-ref"
+          },
+          {
+            "type": "link",
+            "label": "use-previous",
+            "href": "/docs/3.5.0/use-previous"
+          },
+          {
+            "type": "link",
+            "label": "use-raf",
+            "href": "/docs/3.5.0/use-raf"
+          },
+          {
+            "type": "link",
+            "label": "use-select",
+            "href": "/docs/3.5.0/use-select"
+          },
+          {
+            "type": "link",
+            "label": "use-sessionstorage",
+            "href": "/docs/3.5.0/use-sessionstorage"
+          },
+          {
+            "type": "link",
+            "label": "use-throttle",
+            "href": "/docs/3.5.0/use-throttle"
+          },
+          {
+            "type": "link",
+            "label": "use-time-ago",
+            "href": "/docs/3.5.0/use-time-ago"
+          },
+          {
+            "type": "link",
+            "label": "use-timeout",
+            "href": "/docs/3.5.0/use-timeout"
+          },
+          {
+            "type": "link",
+            "label": "use-toggle",
+            "href": "/docs/3.5.0/use-toggle"
+          },
+          {
+            "type": "link",
+            "label": "use-visibility-sensor",
+            "href": "/docs/3.5.0/use-visibility-sensor"
+          },
+          {
+            "type": "link",
+            "label": "use-will-unmount",
+            "href": "/docs/3.5.0/use-will-unmount"
+          },
+          {
+            "type": "link",
+            "label": "use-window-size",
+            "href": "/docs/3.5.0/use-window-size"
+          },
+          {
+            "type": "link",
+            "label": "use-worker",
+            "href": "/docs/3.5.0/use-worker"
+          }
+        ]
+      }
+    ]
+  },
+  "permalinkToSidebar": {
+    "/docs/3.5.0/rooks": "version-3.5.0/docs",
+    "/docs/3.5.0/use-boundingclientrect": "version-3.5.0/docs",
+    "/docs/3.5.0/use-boundingclientrect-ref": "version-3.5.0/docs",
+    "/docs/3.5.0/use-countdown": "version-3.5.0/docs",
+    "/docs/3.5.0/use-counter": "version-3.5.0/docs",
+    "/docs/3.5.0/use-debounce": "version-3.5.0/docs",
+    "/docs/3.5.0/use-did-mount": "version-3.5.0/docs",
+    "/docs/3.5.0/use-did-update": "version-3.5.0/docs",
+    "/docs/3.5.0/use-fork-ref": "version-3.5.0/docs",
+    "/docs/3.5.0/use-geolocation": "version-3.5.0/docs",
+    "/docs/3.5.0/use-input": "version-3.5.0/docs",
+    "/docs/3.5.0/use-intersection-observer-ref": "version-3.5.0/docs",
+    "/docs/3.5.0/use-interval": "version-3.5.0/docs",
+    "/docs/3.5.0/use-isomorphic-effect": "version-3.5.0/docs",
+    "/docs/3.5.0/use-key": "version-3.5.0/docs",
+    "/docs/3.5.0/use-keys": "version-3.5.0/docs",
+    "/docs/3.5.0/use-localstorage": "version-3.5.0/docs",
+    "/docs/3.5.0/use-mouse": "version-3.5.0/docs",
+    "/docs/3.5.0/use-mutation-observer": "version-3.5.0/docs",
+    "/docs/3.5.0/use-mutation-observer-ref": "version-3.5.0/docs",
+    "/docs/3.5.0/use-navigator-language": "version-3.5.0/docs",
+    "/docs/3.5.0/use-on-window-resize": "version-3.5.0/docs",
+    "/docs/3.5.0/use-on-window-scroll": "version-3.5.0/docs",
+    "/docs/3.5.0/use-online": "version-3.5.0/docs",
+    "/docs/3.5.0/use-outside-click": "version-3.5.0/docs",
+    "/docs/3.5.0/use-outside-click-ref": "version-3.5.0/docs",
+    "/docs/3.5.0/use-previous": "version-3.5.0/docs",
+    "/docs/3.5.0/use-raf": "version-3.5.0/docs",
+    "/docs/3.5.0/use-select": "version-3.5.0/docs",
+    "/docs/3.5.0/use-sessionstorage": "version-3.5.0/docs",
+    "/docs/3.5.0/use-throttle": "version-3.5.0/docs",
+    "/docs/3.5.0/use-time-ago": "version-3.5.0/docs",
+    "/docs/3.5.0/use-timeout": "version-3.5.0/docs",
+    "/docs/3.5.0/use-toggle": "version-3.5.0/docs",
+    "/docs/3.5.0/use-visibility-sensor": "version-3.5.0/docs",
+    "/docs/3.5.0/use-will-unmount": "version-3.5.0/docs",
+    "/docs/3.5.0/use-window-size": "version-3.5.0/docs",
+    "/docs/3.5.0/use-worker": "version-3.5.0/docs"
+  }
+}

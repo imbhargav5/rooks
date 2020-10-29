@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-throttle",
+  "id": "use-throttle",
+  "isDocsHomePage": false,
+  "title": "use-throttle",
+  "description": "@rooks/use-throttle",
+  "source": "@site/../docs/use-throttle.md",
+  "slug": "/use-throttle",
+  "permalink": "/docs/next/use-throttle",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-throttle",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-sessionstorage",
+    "permalink": "/docs/next/use-sessionstorage"
+  },
+  "next": {
+    "title": "use-time-ago",
+    "permalink": "/docs/next/use-time-ago"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-on-window-scroll",
+  "id": "version-v3.6.0/use-on-window-scroll",
+  "isDocsHomePage": false,
+  "title": "use-on-window-scroll",
+  "description": "@rooks/use-on-window-scroll",
+  "source": "@site/versioned_docs/version-v3.6.0/use-on-window-scroll.md",
+  "slug": "/use-on-window-scroll",
+  "permalink": "/docs/v3.6.0/use-on-window-scroll",
+  "version": "v3.6.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-on-window-scroll",
+  "sidebar": "version-v3.6.0/docs",
+  "previous": {
+    "title": "use-on-window-resize",
+    "permalink": "/docs/v3.6.0/use-on-window-resize"
+  },
+  "next": {
+    "title": "use-online",
+    "permalink": "/docs/v3.6.0/use-online"
+  }
+}

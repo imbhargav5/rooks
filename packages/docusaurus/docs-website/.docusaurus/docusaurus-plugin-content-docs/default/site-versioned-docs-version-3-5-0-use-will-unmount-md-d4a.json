@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-will-unmount",
+  "id": "version-3.5.0/use-will-unmount",
+  "isDocsHomePage": false,
+  "title": "use-will-unmount",
+  "description": "@rooks/use-will-unmount",
+  "source": "@site/versioned_docs/version-3.5.0/use-will-unmount.md",
+  "slug": "/use-will-unmount",
+  "permalink": "/docs/3.5.0/use-will-unmount",
+  "version": "3.5.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-will-unmount",
+  "sidebar": "version-3.5.0/docs",
+  "previous": {
+    "title": "use-visibility-sensor",
+    "permalink": "/docs/3.5.0/use-visibility-sensor"
+  },
+  "next": {
+    "title": "use-window-size",
+    "permalink": "/docs/3.5.0/use-window-size"
+  }
+}

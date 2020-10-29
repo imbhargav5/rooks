@@ -1,0 +1,19 @@
+{
+  "unversionedId": "rooks",
+  "id": "version-v3.5.1/rooks",
+  "isDocsHomePage": false,
+  "title": "rooks",
+  "description": "rooks",
+  "source": "@site/versioned_docs/version-v3.5.1/rooks.md",
+  "slug": "/rooks",
+  "permalink": "/docs/v3.5.1/rooks",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "rooks",
+  "sidebar": "version-v3.5.1/docs",
+  "next": {
+    "title": "use-boundingclientrect",
+    "permalink": "/docs/v3.5.1/use-boundingclientrect"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "unversionedId": "rooks",
+  "id": "rooks",
+  "isDocsHomePage": false,
+  "title": "rooks",
+  "description": "rooks",
+  "source": "@site/../docs/rooks.md",
+  "slug": "/rooks",
+  "permalink": "/docs/next/rooks",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "rooks",
+  "sidebar": "docs",
+  "next": {
+    "title": "use-boundingclientrect",
+    "permalink": "/docs/next/use-boundingclientrect"
+  }
+}

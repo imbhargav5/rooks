@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-did-update",
+  "id": "version-v3.5.1/use-did-update",
+  "isDocsHomePage": false,
+  "title": "use-did-update",
+  "description": "@rooks/use-did-update",
+  "source": "@site/versioned_docs/version-v3.5.1/use-did-update.md",
+  "slug": "/use-did-update",
+  "permalink": "/docs/v3.5.1/use-did-update",
+  "version": "v3.5.1",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-did-update",
+  "sidebar": "version-v3.5.1/docs",
+  "previous": {
+    "title": "use-did-mount",
+    "permalink": "/docs/v3.5.1/use-did-mount"
+  },
+  "next": {
+    "title": "use-fork-ref",
+    "permalink": "/docs/v3.5.1/use-fork-ref"
+  }
+}

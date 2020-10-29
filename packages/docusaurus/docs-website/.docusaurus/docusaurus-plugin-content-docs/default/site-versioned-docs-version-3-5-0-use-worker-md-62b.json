@@ -1,0 +1,19 @@
+{
+  "unversionedId": "use-worker",
+  "id": "version-3.5.0/use-worker",
+  "isDocsHomePage": false,
+  "title": "use-worker",
+  "description": "@rooks/use-worker",
+  "source": "@site/versioned_docs/version-3.5.0/use-worker.md",
+  "slug": "/use-worker",
+  "permalink": "/docs/3.5.0/use-worker",
+  "version": "3.5.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-worker",
+  "sidebar": "version-3.5.0/docs",
+  "previous": {
+    "title": "use-window-size",
+    "permalink": "/docs/3.5.0/use-window-size"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-boundingclientrect-ref",
+  "id": "version-3.5.0/use-boundingclientrect-ref",
+  "isDocsHomePage": false,
+  "title": "use-boundingclientrect-ref",
+  "description": "@rooks/use-boundingclientrect-ref",
+  "source": "@site/versioned_docs/version-3.5.0/use-boundingclientrect-ref.md",
+  "slug": "/use-boundingclientrect-ref",
+  "permalink": "/docs/3.5.0/use-boundingclientrect-ref",
+  "version": "3.5.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-boundingclientrect-ref",
+  "sidebar": "version-3.5.0/docs",
+  "previous": {
+    "title": "use-boundingclientrect",
+    "permalink": "/docs/3.5.0/use-boundingclientrect"
+  },
+  "next": {
+    "title": "use-countdown",
+    "permalink": "/docs/3.5.0/use-countdown"
+  }
+}
