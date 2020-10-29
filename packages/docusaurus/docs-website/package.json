@@ -13,7 +13,8 @@
     "rename-version": "docusaurus-rename-version",
     "deploy": "docusaurus deploy",
     "swizzle": "docusaurus swizzle",
-    "docusaurus": "docusaurus"
+    "docusaurus": "docusaurus",
+    "serve": "docusaurus serve"
   },
   "devDependencies": {},
   "dependencies": {

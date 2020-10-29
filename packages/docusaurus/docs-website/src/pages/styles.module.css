@@ -12,9 +12,11 @@
   }
   
   .buttons {
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
+    grid-column-gap: 8px;
+    grid-template-columns: repeat(3, auto);
   }
   
   .features {
