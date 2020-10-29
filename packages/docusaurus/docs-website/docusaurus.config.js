@@ -77,23 +77,6 @@ module.exports={
           "position": "right",
           "items": [
             {
-              "label": "v3.7.0",
-              "to": "docs/",
-              "activeBaseRegex": "docs/(?!3.5.0|v3.5.1|v3.6.0|v3.7.0|next)"
-            },
-            {
-              "label": "v3.6.0",
-              "to": "docs/v3.6.0/"
-            },
-            {
-              "label": "v3.5.1",
-              "to": "docs/v3.5.1/"
-            },
-            {
-              "label": "3.5.0",
-              "to": "docs/3.5.0/"
-            },
-            {
               "label": "Master/Unreleased",
               "to": "docs/next/",
               "activeBaseRegex": "docs/next/(?!support|team|resources)"
