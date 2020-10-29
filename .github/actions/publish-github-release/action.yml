@@ -11,7 +11,11 @@ inputs:
   token:
     description: A GitHub access token
     required: true
+  is-prerelease:
+    description: Specifies whether release is a prerelease or not
+    required: true
+    default: 'false'
 
 runs:
   using: node12
-  main: main.js
+  main: dist/index.js
