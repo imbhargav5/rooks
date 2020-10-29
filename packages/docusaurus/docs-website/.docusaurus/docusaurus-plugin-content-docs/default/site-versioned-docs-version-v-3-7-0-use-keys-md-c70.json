@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-keys",
+  "id": "version-v3.7.0/use-keys",
+  "isDocsHomePage": false,
+  "title": "use-keys",
+  "description": "@rooks/use-keys",
+  "source": "@site/versioned_docs/version-v3.7.0/use-keys.md",
+  "slug": "/use-keys",
+  "permalink": "/docs/use-keys",
+  "version": "v3.7.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-keys",
+  "sidebar": "version-v3.7.0/docs",
+  "previous": {
+    "title": "use-key",
+    "permalink": "/docs/use-key"
+  },
+  "next": {
+    "title": "use-localstorage",
+    "permalink": "/docs/use-localstorage"
+  }
+}

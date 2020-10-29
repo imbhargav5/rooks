@@ -1,4 +1,4 @@
-module.exports={
+export default {
   "title": "Rooks",
   "tagline": "Collection of React hooks ⚓ for everyone. ",
   "url": "https://react-hooks.org",
@@ -29,13 +29,13 @@ module.exports={
           "showLastUpdateAuthor": true,
           "showLastUpdateTime": true,
           "path": "../docs",
-          "sidebarPath": require.resolve("./sidebars.json")
+          "sidebarPath": "/Users/bhargavponnapalli/opensource/rooks/packages/docusaurus/docs-website/sidebars.json"
         },
         "blog": {
           "path": "blog"
         },
         "theme": {
-          "customCss": require.resolve("./src/css/customTheme.css")
+          "customCss": "/Users/bhargavponnapalli/opensource/rooks/packages/docusaurus/docs-website/src/css/customTheme.css"
         }
       }
     ]
@@ -44,11 +44,11 @@ module.exports={
   "themeConfig": {
     "navbar": {
       "title": "Rooks",
-      logo: {
-        alt: 'Site Logo',
-        src: '/img/rooks-logo.png',
-        href: 'https://react-hooks.org/', // Default to `siteConfig.baseUrl`.
-        target: '_self', // By default, this value is calculated based on the `href` attribute (the external link will open in a new tab, all others in the current one).
+      "logo": {
+        "alt": "Site Logo",
+        "src": "/img/rooks-logo.png",
+        "href": "https://react-hooks.org/",
+        "target": "_self"
       },
       "items": [
         {
@@ -72,18 +72,47 @@ module.exports={
           "position": "left"
         },
         {
-          type: 'docsVersionDropdown',
+          "type": "docsVersionDropdown",
           "position": "right",
-          dropdownItemsBefore: [],
-          dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
+          "dropdownItemsBefore": [],
+          "dropdownItemsAfter": [
+            {
+              "to": "/versions",
+              "label": "All versions"
+            }
+          ]
         }
-      ]
+      ],
+      "hideOnScroll": false
     },
     "image": "img/undraw_online.svg",
     "footer": {
       "links": [],
       "copyright": "MIT© 2020 Bhargav Ponnapalli",
-      "logo": {}
+      "logo": {},
+      "style": "light"
+    },
+    "colorMode": {
+      "defaultMode": "light",
+      "disableSwitch": false,
+      "respectPrefersColorScheme": false,
+      "switchConfig": {
+        "darkIcon": "🌜",
+        "darkIconStyle": {},
+        "lightIcon": "🌞",
+        "lightIconStyle": {}
+      }
+    },
+    "docs": {
+      "versionPersistence": "localStorage"
+    },
+    "metadatas": [],
+    "prism": {
+      "additionalLanguages": []
     }
-  }
-}
+  },
+  "onDuplicateRoutes": "warn",
+  "themes": [],
+  "titleDelimiter": "|",
+  "noIndex": false
+};

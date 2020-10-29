@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-isomorphic-effect",
+  "id": "version-v3.7.0/use-isomorphic-effect",
+  "isDocsHomePage": false,
+  "title": "use-isomorphic-effect",
+  "description": "@rooks/use-isomorphic-effect",
+  "source": "@site/versioned_docs/version-v3.7.0/use-isomorphic-effect.md",
+  "slug": "/use-isomorphic-effect",
+  "permalink": "/docs/use-isomorphic-effect",
+  "version": "v3.7.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-isomorphic-effect",
+  "sidebar": "version-v3.7.0/docs",
+  "previous": {
+    "title": "use-interval",
+    "permalink": "/docs/use-interval"
+  },
+  "next": {
+    "title": "use-key",
+    "permalink": "/docs/use-key"
+  }
+}

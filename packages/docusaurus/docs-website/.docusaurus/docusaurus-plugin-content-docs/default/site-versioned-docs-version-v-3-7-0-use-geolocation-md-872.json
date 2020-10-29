@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-geolocation",
+  "id": "version-v3.7.0/use-geolocation",
+  "isDocsHomePage": false,
+  "title": "use-geolocation",
+  "description": "@rooks/use-geolocation",
+  "source": "@site/versioned_docs/version-v3.7.0/use-geolocation.md",
+  "slug": "/use-geolocation",
+  "permalink": "/docs/use-geolocation",
+  "version": "v3.7.0",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-geolocation",
+  "sidebar": "version-v3.7.0/docs",
+  "previous": {
+    "title": "use-fullscreen",
+    "permalink": "/docs/use-fullscreen"
+  },
+  "next": {
+    "title": "use-input",
+    "permalink": "/docs/use-input"
+  }
+}

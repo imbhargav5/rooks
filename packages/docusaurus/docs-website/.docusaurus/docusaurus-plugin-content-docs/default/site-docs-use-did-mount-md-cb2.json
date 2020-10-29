@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-did-mount",
+  "id": "use-did-mount",
+  "isDocsHomePage": false,
+  "title": "use-did-mount",
+  "description": "@rooks/use-did-mount",
+  "source": "@site/../docs/use-did-mount.md",
+  "slug": "/use-did-mount",
+  "permalink": "/docs/next/use-did-mount",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-did-mount",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-debounce",
+    "permalink": "/docs/next/use-debounce"
+  },
+  "next": {
+    "title": "use-did-update",
+    "permalink": "/docs/next/use-did-update"
+  }
+}

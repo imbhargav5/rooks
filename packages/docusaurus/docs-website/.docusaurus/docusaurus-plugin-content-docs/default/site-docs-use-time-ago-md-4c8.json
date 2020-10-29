@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-time-ago",
+  "id": "use-time-ago",
+  "isDocsHomePage": false,
+  "title": "use-time-ago",
+  "description": "@rooks/use-time-ago",
+  "source": "@site/../docs/use-time-ago.md",
+  "slug": "/use-time-ago",
+  "permalink": "/docs/next/use-time-ago",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-time-ago",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-throttle",
+    "permalink": "/docs/next/use-throttle"
+  },
+  "next": {
+    "title": "use-timeout",
+    "permalink": "/docs/next/use-timeout"
+  }
+}

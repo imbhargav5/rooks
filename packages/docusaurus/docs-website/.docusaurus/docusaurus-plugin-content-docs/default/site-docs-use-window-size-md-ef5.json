@@ -1,0 +1,23 @@
+{
+  "unversionedId": "use-window-size",
+  "id": "use-window-size",
+  "isDocsHomePage": false,
+  "title": "use-window-size",
+  "description": "@rooks/use-window-size",
+  "source": "@site/../docs/use-window-size.md",
+  "slug": "/use-window-size",
+  "permalink": "/docs/next/use-window-size",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "use-window-size",
+  "sidebar": "docs",
+  "previous": {
+    "title": "use-will-unmount",
+    "permalink": "/docs/next/use-will-unmount"
+  },
+  "next": {
+    "title": "use-worker",
+    "permalink": "/docs/next/use-worker"
+  }
+}
