@@ -4,8 +4,10 @@ description: Uses lerna-changelog to generate the changelog from a tag to anothe
 inputs:
   from:
     description: Old tag
+    required: true
   to:
     description: New tag
+    required: true
 
 outputs:
   changelog:
