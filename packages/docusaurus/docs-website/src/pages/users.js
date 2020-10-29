@@ -1,23 +1,15 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-const React = require('react');
-
+import React from 'react'
 import Layout from '@theme/Layout';
 
 function Users(props){
-    console.log(props);
     const {config: siteConfig} = props;
-    if ((siteConfig.users || []).length === 0) {
+    const {users = [], repoUrl} = siteConfig.customFields;
+    if ((users || []).length === 0) {
       return null;
     }
 
     const editUrl = `${siteConfig.repoUrl}/edit/master/website/siteConfig.js`;
-    const showcase = siteConfig.users.map(user => (
+    const showcase = users.map(user => (
       <a href={user.infoLink} key={user.infoLink}>
         <img src={user.image} alt={user.caption} title={user.caption} />
       </a>
