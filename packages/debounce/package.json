@@ -29,7 +29,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.0.0-canary.5",
+  "version": "4.0.0-canary.6",
   "_id": "@rooks/use-debounce@",
   "publishConfig": {
     "access": "public"
