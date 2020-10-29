@@ -5,14 +5,31 @@ const writeFileSync = require('fs').writeFileSync;
 const readFileSync = require('fs').readFileSync;
 
 function ls() {
-    const fileContent = readFileSync(`./README.md`, 'utf8');
+    const readmeFileContent = readFileSync(`./README.md`, 'utf8');
+    let examplesFileContent = null;
+    try{
+        examplesFileContent = readFileSync(`./Examples.md`, 'utf8')
+    }catch(err){
+        console.log("Error reading examples " + newReadmeFileName);
+    }
+    const fileBody = examplesFileContent ? `
+${readmeFileContent}
+    
+---
+
+${examplesFileContent}
+
+
+
+    ` : readmeFileContent;
+
     const updatedFileContent = `---
 id: ${newReadmeFileName}
 title: ${newReadmeFileName}
 sidebar_label: ${newReadmeFileName}
 ---
 
-${fileContent}
+${fileBody}
     `;
     writeFileSync(`../docusaurus/docs/${newReadmeFileName}.md`, updatedFileContent, 'utf8');
 }
