@@ -24,7 +24,6 @@ const users = [
 const siteConfig = {
   // We need to keep the docs folder in the same folder
   // as the package.json file for now
-  customDocsPath: path.basename(__dirname) + '/docs',
   title: 'Rooks', // Title for your website.
   tagline: 'Collection of React hooks ⚓ for everyone. ',
   url: 'https://react-hooks.org', // Your website URL
