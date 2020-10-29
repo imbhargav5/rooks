@@ -26,17 +26,18 @@ jobs:
           to: ${{ steps.tags.outputs.new }}
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if tag is stable
+        id: tag_is_stable
+        uses: ./.github/actions/tag-is-stable
+        with:
+          tag: ${{steps.tags.outputs.new}}
       - name: Create a draft GitHub release
         uses: ./.github/actions/publish-github-release
         with:
           tag: ${{ steps.tags.outputs.new }}
           changelog: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.BOT_TOKEN }}
-      - name: Check if tag is stable
-        id: tag_is_stable
-        uses: ./.github/actions/tag-is-stable
-        with:
-          tag: ${{steps.tags.outputs.new}}
+          is-tag-stable: ${{steps.tag_is_stable.outputs.result}}
       - name: Check if releasing from master
         id: is_master
         uses: ./.github/actions/ref-matches-branch
