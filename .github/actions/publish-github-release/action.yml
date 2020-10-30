@@ -11,7 +11,7 @@ inputs:
   token:
     description: A GitHub access token
     required: true
-  is-prerelease:
+  is-tag-stable:
     description: Specifies whether release is a prerelease or not
     required: true
     default: 'false'
