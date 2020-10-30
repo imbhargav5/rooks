@@ -4,15 +4,25 @@
   "private": true,
   "scripts": {
     "examples": "docusaurus-examples",
-    "start": "docusaurus-start",
-    "build": "docusaurus-build",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "clear": "docusaurus clear",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",
     "docs-version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
-    "deploy": "now deploy -c --scope react-hooks --prod"
+    "deploy": "docusaurus deploy",
+    "swizzle": "docusaurus swizzle",
+    "docusaurus": "docusaurus",
+    "serve": "docusaurus serve"
   },
-  "devDependencies": {
-    "docusaurus": "1.14.3"
+  "devDependencies": {},
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.66",
+    "@docusaurus/preset-classic": "2.0.0-alpha.66",
+    "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   }
 }

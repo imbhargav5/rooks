@@ -1,46 +1,174 @@
 {
-  "version-v3.7.0-docs": {
-    "All In One": [
-      "version-v3.7.0-rooks"
-    ],
-    "Independent Packages": [
-      "version-v3.7.0-use-boundingclientrect",
-      "version-v3.7.0-use-boundingclientrect-ref",
-      "version-v3.7.0-use-countdown",
-      "version-v3.7.0-use-counter",
-      "version-v3.7.0-use-debounce",
-      "version-v3.7.0-use-did-mount",
-      "version-v3.7.0-use-did-update",
-      "version-v3.7.0-use-fork-ref",
-      "version-v3.7.0-use-geolocation",
-      "version-v3.7.0-use-input",
-      "version-v3.7.0-use-intersection-observer-ref",
-      "version-v3.7.0-use-interval",
-      "version-v3.7.0-use-isomorphic-effect",
-      "version-v3.7.0-use-key",
-      "version-v3.7.0-use-keys",
-      "version-v3.7.0-use-localstorage",
-      "version-v3.7.0-use-mouse",
-      "version-v3.7.0-use-mutation-observer",
-      "version-v3.7.0-use-mutation-observer-ref",
-      "version-v3.7.0-use-navigator-language",
-      "version-v3.7.0-use-on-window-resize",
-      "version-v3.7.0-use-on-window-scroll",
-      "version-v3.7.0-use-online",
-      "version-v3.7.0-use-outside-click",
-      "version-v3.7.0-use-outside-click-ref",
-      "version-v3.7.0-use-previous",
-      "version-v3.7.0-use-raf",
-      "version-v3.7.0-use-select",
-      "version-v3.7.0-use-sessionstorage",
-      "version-v3.7.0-use-throttle",
-      "version-v3.7.0-use-time-ago",
-      "version-v3.7.0-use-timeout",
-      "version-v3.7.0-use-toggle",
-      "version-v3.7.0-use-visibility-sensor",
-      "version-v3.7.0-use-will-unmount",
-      "version-v3.7.0-use-window-size",
-      "version-v3.7.0-use-worker"
-    ]
-  }
+  "version-v3.7.0/docs": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "All In One",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/rooks"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Independent Packages",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-boundingclientrect"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-boundingclientrect-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-countdown"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-counter"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-debounce"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-did-mount"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-did-update"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-fork-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-fullscreen"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-geolocation"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-input"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-intersection-observer-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-interval"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-isomorphic-effect"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-key"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-keys"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-localstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-mouse"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-mutation-observer"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-mutation-observer-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-navigator-language"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-on-window-resize"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-on-window-scroll"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-online"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-outside-click"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-outside-click-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-previous"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-raf"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-select"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-sessionstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-throttle"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-time-ago"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-timeout"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-toggle"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-visibility-sensor"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-will-unmount"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-window-size"
+        },
+        {
+          "type": "doc",
+          "id": "version-v3.7.0/use-worker"
+        }
+      ]
+    }
+  ]
 }
