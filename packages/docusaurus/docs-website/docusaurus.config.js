@@ -1,7 +1,7 @@
 module.exports={
   "title": "Rooks",
   "tagline": "Collection of React hooks ⚓ for everyone. ",
-  "url": "/",
+  "url": "https://react-hooks.org",
   "baseUrl": "/",
   "organizationName": "imbhargav5",
   "projectName": "rooks",
