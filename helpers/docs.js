@@ -12,7 +12,7 @@ function ls() {
   try {
     examplesFileContent = readFileSync(`./Examples.md`, "utf8");
   } catch (err) {
-    console.log("Error reading examples " + newReadmeFileName);
+    console.log("Could not read examples in package: " + newReadmeFileName);
   }
   let frontMatter = `id: ${newReadmeFileName}
 title: ${newReadmeFileName}
@@ -55,11 +55,7 @@ function addToSidebarJson() {
   let fileContent;
   try {
     fileContent = readFileSync(`../docusaurus/sidebars.json`, "utf8");
-    if (!fileContent || fileContent === "") {
-      console.log({ newReadmeFileName });
-    }
     currentSidebarJson = JSON.parse(fileContent);
-    console.log(currentSidebarJson);
     if (
       Object.keys(currentSidebarJson.docs["Independent Packages"]).includes(
         "newReadmeFileName"
