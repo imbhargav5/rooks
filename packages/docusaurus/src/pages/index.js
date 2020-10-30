@@ -98,8 +98,8 @@ function Home() {
   const { siteConfig = {} } = context
   return (
     <Layout
-      title={`${siteConfig.title} - A predictable state container for JavaScript apps.`}
-      description="A predictable state container for JavaScript apps."
+      title={`${siteConfig.title} - A super awesome collection of hooks for your React apps.`}
+      description="A super awesome collection of hooks for your React apps."
     >
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
