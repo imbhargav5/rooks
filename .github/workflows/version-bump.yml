@@ -89,7 +89,7 @@ jobs:
           git add CHANGELOG.md
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
             commit -m "Add ${{ steps.tags.outputs.new }} to CHANGELOG.md [skip ci]" --no-verify --quiet
-          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD
   always_job:
     name: Aways run job
     runs-on: ubuntu-latest
