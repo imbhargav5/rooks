@@ -29,7 +29,7 @@
     "setInterval",
     "interval"
   ],
-  "version": "4.0.0-canary.6",
+  "version": "3.7.0",
   "_id": "@rooks/use-interval@",
   "publishConfig": {
     "access": "public"
