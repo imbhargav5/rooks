@@ -53,6 +53,7 @@ ${fileBody}
 }
 
 function addToSidebarJson() {
+  const INDEPENDENT_PACKAGES_SIDEBAR_INDEX = 1
   if (newReadmeFileName === "rooks") {
     return;
   }
@@ -62,26 +63,30 @@ function addToSidebarJson() {
     fileContent = readFileSync(`../docusaurus/sidebars.json`, "utf8");
     currentSidebarJson = JSON.parse(fileContent);
     if (
-      Object.keys(currentSidebarJson.docs["Independent Packages"]).includes(
+      Object.keys(currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX].items).includes(
         "newReadmeFileName"
       )
     ) {
       return;
     }
-    const independentPackages = Array.from(
-      new Set(
-        [
-          ...currentSidebarJson.docs["Independent Packages"],
-          newReadmeFileName,
-        ].sort()
+    const independentPackages = {
+      ...currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX],
+      items: Array.from(
+        new Set(
+          [
+            ...currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX].items,
+            newReadmeFileName,
+          ].sort()
+        )
       )
-    );
+    };
     const newSidebarJson = {
       ...currentSidebarJson,
-      docs: {
-        ...currentSidebarJson.docs,
-        ["Independent Packages"]: independentPackages,
-      },
+      docs: [
+        ...currentSidebarJson.docs.slice(0, INDEPENDENT_PACKAGES_SIDEBAR_INDEX),
+        independentPackages,
+        ...currentSidebarJson.docs.slice(INDEPENDENT_PACKAGES_SIDEBAR_INDEX+1)
+      ],
     };
     writeFileSync(
       `../docusaurus/sidebars.json`,

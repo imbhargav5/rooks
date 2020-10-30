@@ -1,7 +1,7 @@
 {
   "version-v3.6.0/docs": [
     {
-      "collapsed": true,
+      "collapsed": false,
       "type": "category",
       "label": "All In One",
       "items": [
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "type": "category",
       "label": "Independent Packages",
       "items": [
