@@ -1,7 +1,8 @@
 ---
 id: rooks
 title: rooks
-sidebar_label: rooks        
+hide_title: true
+sidebar_label: rooks      
 slug: /
 ---
 
@@ -23,27 +24,23 @@ Standalone build for all rooks. This package contains all the hooks built as par
 
 <br/>
 
-## Installation
+### Installation
 
-### For a specific hook like useDidMount
+#### For a specific hook like useDidMount
 
-```
-npm i -s @rooks/use-did-mount
-```
+    npm i -s @rooks/use-did-mount
 
-```
-npm i -s @rooks/use-interval
-```
+<!---->
+
+    npm i -s @rooks/use-interval
 
 ```jsx
 import useDidMount from "@rooks/use-did-mount";
 ```
 
-### For standalone build with all the hooks
+#### For standalone build with all the hooks
 
-```
-npm i - s rooks
-```
+    npm i - s rooks
 
 Import any hook from "rooks" and start using them!
 
@@ -51,7 +48,7 @@ Import any hook from "rooks" and start using them!
 import { useDidMount } from "rooks";
 ```
 
-# Usage
+## Usage
 
 ```jsx
 function App() {
@@ -69,12 +66,12 @@ function App() {
 
 <br/>
 
-## Hope you like it!
+### Hope you like it!
 
 Feel free to join as contributors!
 
 :smile:
 
-### License - MIT
+#### License - MIT
 
     

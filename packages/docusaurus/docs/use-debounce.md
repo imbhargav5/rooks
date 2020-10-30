@@ -1,6 +1,7 @@
 ---
 id: use-debounce
 title: use-debounce
+hide_title: true
 sidebar_label: use-debounce
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-debounce
 
 ### Installation
 
-```
-npm install --save @rooks/use-debounce
-```
+    npm install --save @rooks/use-debounce
 
 ### Importing the hook
 

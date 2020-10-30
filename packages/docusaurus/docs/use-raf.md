@@ -1,6 +1,7 @@
 ---
 id: use-raf
 title: use-raf
+hide_title: true
 sidebar_label: use-raf
 ---
 
@@ -18,9 +19,7 @@ sidebar_label: use-raf
 
 ### Installation
 
-```
-npm install --save @rooks/use-raf
-```
+    npm install --save @rooks/use-raf
 
 ### Importing the hook
 

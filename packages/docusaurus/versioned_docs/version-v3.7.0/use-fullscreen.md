@@ -1,6 +1,7 @@
 ---
 id: use-fullscreen
 title: use-fullscreen
+hide_title: true
 sidebar_label: use-fullscreen
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-fullscreen
 
 ### Installation
 
-```
-npm install --save @rooks/use-fullscreen
-```
+    npm install --save @rooks/use-fullscreen
 
 ### Importing the hook
 

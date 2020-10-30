@@ -1,6 +1,7 @@
 ---
 id: use-throttle
 title: use-throttle
+hide_title: true
 sidebar_label: use-throttle
 ---
 
@@ -10,9 +11,7 @@ sidebar_label: use-throttle
 
 ### Installation
 
-```
-npm install --save @rooks/use-throttle
-```
+    npm install --save @rooks/use-throttle
 
 ### Importing the hook
 
@@ -42,13 +41,11 @@ function ThrottleDemo() {
 }
 ```
 
-
 ### Arguments
 
 | Argument            | Type     | Description                         | Default value |
 | ------------------- | -------- | ----------------------------------- | ------------- |
 | callback (required) | function | Function that needs to be throttle  | undefined     |
 | timeout (optional)  | number   | Time to throttle the callback in ms | 300           |
-
 
     

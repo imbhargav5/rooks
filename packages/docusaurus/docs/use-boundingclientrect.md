@@ -1,25 +1,23 @@
 ---
 id: use-boundingclientrect
 title: use-boundingclientrect
+hide_title: true
 sidebar_label: use-boundingclientrect
 ---
 
 # @rooks/use-boundingclientrect
 
 ### getBoundingClientRect hook for React.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-boundingclientrect/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-boundingclientrect.svg) ![](https://img.shields.io/npm/dt/@rooks/use-boundingclientrect.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fboundingclientrect)
 
-
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
-
 
 ### Installation
 
-```
-npm install --save @rooks/use-boundingclientrect
-```
+    npm install --save @rooks/use-boundingclientrect
 
 ### Importing the hook
 
@@ -94,6 +92,5 @@ render(<Demo/>)
 | Return value | Type    | Description                                                                  | Default value |
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
-
 
     

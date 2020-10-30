@@ -1,6 +1,7 @@
 ---
 id: use-key
 title: use-key
+hide_title: true
 sidebar_label: use-key
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-key
 
 ### Installation
 
-```
-npm install --save @rooks/use-key
-```
+    npm install --save @rooks/use-key
 
 ### Importing the hook
 

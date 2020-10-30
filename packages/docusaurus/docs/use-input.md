@@ -1,32 +1,29 @@
 ---
 id: use-input
 title: use-input
+hide_title: true
 sidebar_label: use-input
 ---
 
 # @rooks/use-input
 
 ### Input hook for React.
-<br/>
 
+<br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-input/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-input.svg) ![](https://img.shields.io/npm/dt/@rooks/use-input.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Finput)
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-
 ### Installation
 
-```
-npm install --save @rooks/use-input
-```
+    npm install --save @rooks/use-input
 
 ### Importing the hook
 
 ```javascript
 import useInput from "@rooks/use-input"
 ```
-
 
 ### Usage
 
@@ -76,7 +73,6 @@ render(<Demo/>)
 | initialValue | string | Initial value of the string | ""            |
 | opts         | object | Options                     | {}            |
 
-
 ### Options
 
 | Option key | Type     | Description                                                                                                             | Default value |
@@ -88,6 +84,5 @@ render(<Demo/>)
 | Return value      | Type   | Description                                                                                                          |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
-
 
     

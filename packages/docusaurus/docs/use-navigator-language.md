@@ -1,6 +1,7 @@
 ---
 id: use-navigator-language
 title: use-navigator-language
+hide_title: true
 sidebar_label: use-navigator-language
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-navigator-language
 
 ### Installation
 
-```
-npm install --save @rooks/use-navigator-language
-```
+    npm install --save @rooks/use-navigator-language
 
 ### Importing the hook
 

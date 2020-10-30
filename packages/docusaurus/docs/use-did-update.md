@@ -1,6 +1,7 @@
 ---
 id: use-did-update
 title: use-did-update
+hide_title: true
 sidebar_label: use-did-update
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-did-update
 
 ### Installation
 
-```
-npm install --save @rooks/use-did-update
-```
+    npm install --save @rooks/use-did-update
 
 ### Importing the hook
 

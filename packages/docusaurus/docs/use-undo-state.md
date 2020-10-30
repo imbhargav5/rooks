@@ -1,6 +1,7 @@
 ---
 id: use-undo-state
 title: use-undo-state
+hide_title: true
 sidebar_label: use-undo-state
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-undo-state
 
 ### Installation
 
-```
-npm install --save @rooks/use-undo-state
-```
+    npm install --save @rooks/use-undo-state
 
 ### Importing the hook
 
@@ -112,7 +111,6 @@ const [value, setValue, undo] = useUndoState(0, { maxSize: 30 })
 | Options | Object | An options object for the hook | {maxSize: undefined}       |
 
 Note: The second argument is an options object which currently accepts a maxSize which governs the maximum number of previous states to keep track of.
-
 
 ### Returned array items
 

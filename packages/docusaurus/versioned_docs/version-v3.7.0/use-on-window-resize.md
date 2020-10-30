@@ -1,12 +1,14 @@
 ---
 id: use-on-window-resize
 title: use-on-window-resize
+hide_title: true
 sidebar_label: use-on-window-resize
 ---
 
 # @rooks/use-on-window-resize
 
 ### A React hook for adding an event listener for window resize
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-on-window-resize/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-on-window-resize.svg) ![](https://img.shields.io/npm/dt/@rooks/use-on-window-resize.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fon-window-resize)
@@ -15,16 +17,13 @@ sidebar_label: use-on-window-resize
 
 ### Installation
 
-```
-npm install --save @rooks/use-on-window-resize
-```
+    npm install --save @rooks/use-on-window-resize
 
 ### Importing the hook
 
 ```javascript
 import useOnWindowResize from "@rooks/use-on-window-resize"
 ```
-
 
 ### Usage
 

@@ -1,12 +1,13 @@
 ---
 id: use-boundingclientrect-ref
 title: use-boundingclientrect-ref
+hide_title: true
 sidebar_label: use-boundingclientrect-ref
 ---
 
 # @rooks/use-boundingclientrect-ref
 
-### A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked. 
+### A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-boundingclientrect-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-boundingclientrect-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-boundingclientrect-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fboundingclientrect-ref)
 
@@ -14,9 +15,7 @@ sidebar_label: use-boundingclientrect-ref
 
 ### Installation
 
-```
-npm install --save @rooks/use-boundingclientrect-ref
-```
+    npm install --save @rooks/use-boundingclientrect-ref
 
 ### Importing the hook
 
@@ -78,7 +77,9 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
 ### Arguments
+
 N/A
 
 ### Returns an array of 3 values
@@ -88,6 +89,5 @@ N/A
 | ref          | Callback ref | A callback ref function to use as a ref for the component that needs to be tracked | () => null    |
 | value        | DOMRect      | DOMRect Object containing x,y, width, height, left,right,top and bottom keys       | null          |
 | update       | Function     | Function that can be called at any time to force a recalculation of the clientrect | null          |
-
 
     

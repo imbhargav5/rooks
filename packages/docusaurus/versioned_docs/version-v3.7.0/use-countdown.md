@@ -1,6 +1,7 @@
 ---
 id: use-countdown
 title: use-countdown
+hide_title: true
 sidebar_label: use-countdown
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-countdown
 
 ### Installation
 
-```
-npm install --save @rooks/use-countdown
-```
+    npm install --save @rooks/use-countdown
 
 ### Importing the hook
 
@@ -41,7 +40,6 @@ function Demo() {
 render(<Demo/>)
 ```
 
-
 ### Arguments
 
 | Argument         | Type     | Description                                                         | Default value |
@@ -51,10 +49,10 @@ render(<Demo/>)
 | options.onDown   | function | (time) => {}, callback that would be called every interval          | undefined     |
 | options.onEnd    | function | (time) => {}, callback that would be called when the countdown ends | undefined     |
 
-
 ### Return Value
 
 | Type   | Description                                                    |
 | ------ | -------------------------------------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime |
+
     

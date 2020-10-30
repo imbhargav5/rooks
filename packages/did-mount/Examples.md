@@ -1,4 +1,4 @@
-# Examples
+### Basic Usage
 
 <iframe
   src="https://codesandbox.io/embed/quizzical-glitter-emrtj?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark"

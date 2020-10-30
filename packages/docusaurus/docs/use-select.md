@@ -1,12 +1,14 @@
 ---
 id: use-select
 title: use-select
+hide_title: true
 sidebar_label: use-select
 ---
 
 # @rooks/use-select
 
 ### Select values from a list easily. List selection hook for react.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-select/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-select.svg) ![](https://img.shields.io/npm/dt/@rooks/use-select.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
@@ -15,16 +17,13 @@ sidebar_label: use-select
 
 ### Installation
 
-```
-npm install --save @rooks/use-select
-```
+    npm install --save @rooks/use-select
 
 ### Importing the hook
 
 ```javascript
 import useSelect from "@rooks/use-select"
 ```
-
 
 ### Usage
 

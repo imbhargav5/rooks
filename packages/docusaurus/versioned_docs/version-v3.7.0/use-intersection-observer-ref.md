@@ -1,6 +1,7 @@
 ---
 id: use-intersection-observer-ref
 title: use-intersection-observer-ref
+hide_title: true
 sidebar_label: use-intersection-observer-ref
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-intersection-observer-ref
 
 ### Installation
 
-```
-npm install --save @rooks/use-intersection-observer-ref
-```
+    npm install --save @rooks/use-intersection-observer-ref
 
 ### Importing the hook
 
@@ -62,7 +61,7 @@ render(<Demo/>)
 | Argument | Type                         | Description                                       | Default Value                                                        |
 | -------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
 | callback | IntersectionObserverCallback | React ref whose boundingClientRect is to be found | undefined                                                            |
-| options  | IntersectionObserverInit     | React ref whose boundingClientRect is to be found | ```{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}``` |
+| options  | IntersectionObserverInit     | React ref whose boundingClientRect is to be found | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` |
 
 ### Return
 

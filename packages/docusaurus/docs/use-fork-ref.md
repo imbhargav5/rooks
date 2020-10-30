@@ -1,6 +1,7 @@
 ---
 id: use-fork-ref
 title: use-fork-ref
+hide_title: true
 sidebar_label: use-fork-ref
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-fork-ref
 
 ### Installation
 
-```
-npm install --save @rooks/use-fork-ref
-```
+    npm install --save @rooks/use-fork-ref
 
 ### Importing the hook
 
@@ -67,7 +66,6 @@ function Demo() {
 render(<Demo/>)
 ```
 
-
 ### Arguments
 
 | Argument value | Type                 | Description |
@@ -84,4 +82,5 @@ render(<Demo/>)
 #### Original source
 
 [Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
+
     

@@ -1,6 +1,7 @@
 ---
 id: use-sessionstorage
 title: use-sessionstorage
+hide_title: true
 sidebar_label: use-sessionstorage
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-sessionstorage
 
 ### Installation
 
-```
-npm install --save @rooks/use-sessionstorage
-```
+    npm install --save @rooks/use-sessionstorage
 
 ### Importing the hook
 

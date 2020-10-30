@@ -1,14 +1,15 @@
 ---
 id: use-timeout
 title: use-timeout
+hide_title: true
 sidebar_label: use-timeout
 ---
 
 # @rooks/use-timeout
 
 ### setTimeout hook for react.
-<br/>
 
+<br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-timeout/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-timeout.svg) ![](https://img.shields.io/npm/dt/@rooks/use-timeout.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftimeout)
 
@@ -16,16 +17,13 @@ sidebar_label: use-timeout
 
 ### Installation
 
-```
-npm install --save @rooks/use-timeout
-```
+    npm install --save @rooks/use-timeout
 
 ### Importing the hook
 
 ```javascript
 import useTimeout from "@rooks/use-timeout"
 ```
-
 
 ### Usage
 
@@ -60,6 +58,5 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout     |
 | start                      | function | Start the timeout     |
 | isActive                   | boolean  | Is the timeout active |
-
 
     

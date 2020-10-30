@@ -1,12 +1,14 @@
 ---
 id: use-interval
 title: use-interval
+hide_title: true
 sidebar_label: use-interval
 ---
 
 # @rooks/use-interval
 
 ### setInterval hook for React.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-interval/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-interval.svg) ![](https://img.shields.io/npm/dt/@rooks/use-interval.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Finterval)
@@ -15,16 +17,13 @@ sidebar_label: use-interval
 
 ### Installation
 
-```
-npm install --save @rooks/use-interval
-```
+    npm install --save @rooks/use-interval
 
 ### Importing the hook
 
 ```javascript
 import useInterval from "@rooks/use-interval"
 ```
-
 
 ### Usage
 

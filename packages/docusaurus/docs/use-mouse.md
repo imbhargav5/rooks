@@ -1,12 +1,14 @@
 ---
 id: use-mouse
 title: use-mouse
+hide_title: true
 sidebar_label: use-mouse
 ---
 
 # @rooks/use-mouse
 
 ### Mouse position hook for React.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-mouse/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mouse.svg) ![](https://img.shields.io/npm/dt/@rooks/use-mouse.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmouse)
@@ -15,16 +17,13 @@ sidebar_label: use-mouse
 
 ### Installation
 
-```
-npm install --save @rooks/use-mouse
-```
+    npm install --save @rooks/use-mouse
 
 ### Importing the hook
 
 ```javascript
 import useMouse from "@rooks/use-mouse"
 ```
-
 
 ### Usage
 
@@ -43,7 +42,7 @@ function Demo() {
 render(<Demo/>)
 ```
 
-### Returned Object 
+### Returned Object
 
 | Returned object attributes | Type | Description         |
 | -------------------------- | ---- | ------------------- |

@@ -1,6 +1,7 @@
 ---
 id: use-localstorage
 title: use-localstorage
+hide_title: true
 sidebar_label: use-localstorage
 ---
 
@@ -18,9 +19,7 @@ Sets and retrieves a key from localStorage and subscribes to it for updates acro
 
 ### Installation
 
-```
-npm install --save @rooks/use-localstorage
-```
+    npm install --save @rooks/use-localstorage
 
 ### Importing the hook
 

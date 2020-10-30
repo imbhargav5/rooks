@@ -1,6 +1,7 @@
 ---
 id: use-outside-click
 title: use-outside-click
+hide_title: true
 sidebar_label: use-outside-click
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-outside-click
 
 ### Installation
 
-```
-npm install --save @rooks/use-outside-click
-```
+    npm install --save @rooks/use-outside-click
 
 ### Importing the hook
 

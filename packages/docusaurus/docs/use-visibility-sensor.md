@@ -1,6 +1,7 @@
 ---
 id: use-visibility-sensor
 title: use-visibility-sensor
+hide_title: true
 sidebar_label: use-visibility-sensor
 ---
 
@@ -14,19 +15,15 @@ sidebar_label: use-visibility-sensor
 
 <a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-
 ### Installation
 
-```
-npm install --save @rooks/use-visibility-sensor
-```
+    npm install --save @rooks/use-visibility-sensor
 
 ### Importing the hook
 
 ```javascript
 import useVisibilitySensor from "@rooks/use-visibility-sensor"
 ```
-
 
 ### Usage
 
@@ -97,12 +94,12 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 
 ## Todo
 
-- [x] Init
-- [x] Scroll and Resize support
-- [x] Debounce and throttling
-- [x] Option to opt-out of initial check on mount
-- [x] Documentation of all options
-- [x] Tests _ WIP _
-- [ ] More examples _ WIP _
+*   \[x] Init
+*   \[x] Scroll and Resize support
+*   \[x] Debounce and throttling
+*   \[x] Option to opt-out of initial check on mount
+*   \[x] Documentation of all options
+*   \[x] Tests \_ WIP \_
+*   \[ ] More examples \_ WIP \_
 
     

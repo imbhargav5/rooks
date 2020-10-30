@@ -5,9 +5,11 @@ const newReadmeFileName = packageName.startsWith("@rooks")
 
 const writeFileSync = require("fs").writeFileSync;
 const readFileSync = require("fs").readFileSync;
+const parseReadme = require("./parse-readme");
 
 function ls() {
-  const readmeFileContent = readFileSync(`./README.md`, "utf8");
+  let readmeFileContent = readFileSync(`./README.md`, "utf8");
+  readmeFileContent = parseReadme(readmeFileContent);
   let examplesFileContent = null;
   try {
     examplesFileContent = readFileSync(`./Examples.md`, "utf8");
@@ -16,22 +18,25 @@ function ls() {
   }
   let frontMatter = `id: ${newReadmeFileName}
 title: ${newReadmeFileName}
+hide_title: true
 sidebar_label: ${newReadmeFileName}`;
   if (newReadmeFileName === "rooks") {
-    frontMatter = `${frontMatter}        
+    frontMatter = `${frontMatter}      
 slug: /`;
   }
   const fileBody = examplesFileContent
     ? `
 ${readmeFileContent}
-    
+
 ---
 
-${examplesFileContent}
+## Codesandbox Examples
+
+${examplesFileContent}    
 
 
 
-    `
+`
     : readmeFileContent;
 
   const updatedFileContent = `---

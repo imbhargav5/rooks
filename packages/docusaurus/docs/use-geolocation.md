@@ -1,6 +1,7 @@
 ---
 id: use-geolocation
 title: use-geolocation
+hide_title: true
 sidebar_label: use-geolocation
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-geolocation
 
 ### Installation
 
-```
-npm install --save @rooks/use-geolocation
-```
+    npm install --save @rooks/use-geolocation
 
 ### Importing the hook
 

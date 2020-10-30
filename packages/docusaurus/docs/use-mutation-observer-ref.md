@@ -1,6 +1,7 @@
 ---
 id: use-mutation-observer-ref
 title: use-mutation-observer-ref
+hide_title: true
 sidebar_label: use-mutation-observer-ref
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-mutation-observer-ref
 
 ### Installation
 
-```
-npm install --save @rooks/use-mutation-observer-ref
-```
+    npm install --save @rooks/use-mutation-observer-ref
 
 ### Importing the hook
 
@@ -88,6 +87,7 @@ render(<Demo/>)
 | -------- | -------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | callback | function | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object   | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
+
 ### Return value
 
 Returns an array with one element
@@ -95,7 +95,5 @@ Returns an array with one element
 | Argument | Type      | Description                                |
 | -------- | --------- | ------------------------------------------ |
 | ref      | React ref | Ref which should be observed for Mutations |
-
-
 
     

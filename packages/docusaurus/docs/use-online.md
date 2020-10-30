@@ -1,6 +1,7 @@
 ---
 id: use-online
 title: use-online
+hide_title: true
 sidebar_label: use-online
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-online
 
 ### Installation
 
-```
-npm install --save @rooks/use-online
-```
+    npm install --save @rooks/use-online
 
 ### Importing the hook
 

@@ -1,6 +1,7 @@
 ---
 id: use-previous
 title: use-previous
+hide_title: true
 sidebar_label: use-previous
 ---
 
@@ -16,9 +17,7 @@ sidebar_label: use-previous
 
 ### Installation
 
-```
-npm install --save @rooks/use-previous
-```
+    npm install --save @rooks/use-previous
 
 ### Importing the hook
 

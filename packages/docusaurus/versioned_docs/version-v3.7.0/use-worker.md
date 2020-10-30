@@ -1,12 +1,14 @@
 ---
 id: use-worker
 title: use-worker
+hide_title: true
 sidebar_label: use-worker
 ---
 
 # @rooks/use-worker
 
 ### Worker hook for React.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-worker/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-worker.svg) ![](https://img.shields.io/npm/dt/@rooks/use-worker.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fworker)
@@ -15,9 +17,7 @@ sidebar_label: use-worker
 
 ### Installation
 
-```
-npm install --save @rooks/use-worker
-```
+    npm install --save @rooks/use-worker
 
 ### Importing the hook
 
@@ -26,6 +26,7 @@ import useWorker from "@rooks/use-worker"
 ```
 
 ### Usage
+
 ```react
 
 function Demo() {

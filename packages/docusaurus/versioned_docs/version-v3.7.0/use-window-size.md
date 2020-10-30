@@ -1,12 +1,14 @@
 ---
 id: use-window-size
 title: use-window-size
+hide_title: true
 sidebar_label: use-window-size
 ---
 
 # @rooks/use-window-size
 
 ### Window size hook for React.
+
 <br/>
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-window-size/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-window-size.svg) ![](https://img.shields.io/npm/dt/@rooks/use-window-size.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fwindow-size)
@@ -15,16 +17,13 @@ sidebar_label: use-window-size
 
 ### Installation
 
-```
-npm install --save @rooks/use-window-size
-```
+    npm install --save @rooks/use-window-size
+
 ### Importing the hook
 
 ```javascript
 import useWindowSize from "@rooks/use-window-size"
 ```
-
-
 
 ### Usage
 
@@ -64,7 +63,5 @@ render(<WindowComponent/>)
 | height                     | int  | inner height of window |
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
-
-
 
     

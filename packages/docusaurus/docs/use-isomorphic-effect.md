@@ -1,6 +1,7 @@
 ---
 id: use-isomorphic-effect
 title: use-isomorphic-effect
+hide_title: true
 sidebar_label: use-isomorphic-effect
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-isomorphic-effect
 
 ### Installation
 
-```
-npm install --save @rooks/use-isomorphic-effect
-```
+    npm install --save @rooks/use-isomorphic-effect
 
 ### Importing the hook
 
@@ -36,6 +35,5 @@ function Demo() {
 
 render(<Demo/>)
 ```
-
 
     

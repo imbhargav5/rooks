@@ -1,6 +1,7 @@
 ---
 id: use-outside-click-ref
 title: use-outside-click-ref
+hide_title: true
 sidebar_label: use-outside-click-ref
 ---
 
@@ -14,9 +15,7 @@ sidebar_label: use-outside-click-ref
 
 ### Installation
 
-```
-npm install --save @rooks/use-outside-click-ref
-```
+    npm install --save @rooks/use-outside-click-ref
 
 ### Importing the hook
 
