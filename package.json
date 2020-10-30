@@ -17,6 +17,7 @@
     "build:independent": "lerna run --ignore rooks --ignore storybook --ignore shared build",
     "build:rooks": "lerna run --scope rooks build",
     "build:demos": "lerna run --scope storybook build",
+    "build:docs": "lerna run --scope docusaurus build",
     "build:shared": "lerna run --scope shared build",
     "build:ci": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks",
     "build:action": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks && yarn run build:demos",
