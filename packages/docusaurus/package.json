@@ -9,7 +9,7 @@
     "clear": "docusaurus clear",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",
-    "docs-version": "docusaurus-version",
+    "docs-version": "docusaurus docs:version",
     "rename-version": "docusaurus-rename-version",
     "deploy": "docusaurus deploy",
     "swizzle": "docusaurus swizzle",
