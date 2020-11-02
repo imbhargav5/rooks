@@ -132,16 +132,22 @@ module.exports={
             label: 'Github',
             to: 'https://github.com/imbhargav5/rooks',
           },
+//           {
+//             html: `
+//             <!-- Place this tag where you want the button to render. -->
+// <a class="github-button" href="https://github.com/imbhargav5/rooks" data-icon="octicon-star" aria-label="Star imbhargav5/rooks on GitHub">Star</a>
+//           `
+//           },
           {
-            html: `
-            <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/imbhargav5/rooks" data-icon="octicon-star" aria-label="Star imbhargav5/rooks on GitHub">Star</a>
-          `
+            html : `
+            <a href="https://www.netlify.com">
+              <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+            </a>`
           }
         ]
       }],
       "copyright": "MIT© 2020 Bhargav Ponnapalli",
-      "logo": {}
+      "logo": { }
     }
   }
 }
