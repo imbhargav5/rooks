@@ -33,7 +33,7 @@
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "optionalDependencies": {
-    "fsevents": "1.2.9"
+    "fsevents": "2.1.3"
   },
   "dependencies": {
     "@babel/cli": "7.5.5",
