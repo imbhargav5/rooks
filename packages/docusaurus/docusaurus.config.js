@@ -148,6 +148,18 @@ module.exports={
       }],
       "copyright": "MIT© 2020 Bhargav Ponnapalli",
       "logo": { }
-    }
+    },
+    algolia: {
+      apiKey: '99e4ef9e75a28361e5081e0ca9c7cf5a',
+      indexName: 'react-hooks',
+
+      // Optional: see doc section bellow
+      contextualSearch: true,
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+
+      //... other Algolia params
+    },
   }
 }
