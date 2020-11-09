@@ -42,7 +42,7 @@ jobs:
       - name: Generate docusaurus        
         run: yarn run readme-to-docs
       - name: Build docusaurus        
-        run:  cd packages/docusaurus && yarn build
+        run:  yarn build:docs
       - name: Commit docusaurus
         continue-on-error: true        
         run: |

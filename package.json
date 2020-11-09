@@ -14,7 +14,7 @@
     "readme-to-docs": "lerna exec --scope=@rooks/* --scope=rooks --concurrency 1 --stream -- 'node ../../helpers/docs/index.js'",
     "bs": "lerna bootstrap",
     "prebuild": "lerna clean -y && yarn",
-    "build:independent": "lerna run --ignore rooks --ignore storybook --ignore shared build",
+    "build:independent": "lerna run --ignore rooks --ignore storybook --ignore shared --ignore docusaurus build",
     "build:rooks": "lerna run --scope rooks build",
     "build:demos": "lerna run --scope storybook build",
     "build:docs": "lerna run --scope docusaurus build",

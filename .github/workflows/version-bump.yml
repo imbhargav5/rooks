@@ -72,7 +72,7 @@ jobs:
         run: yarn run readme-to-docs
       - name: Build docusaurus
         if: steps.tag_is_stable.outputs.result == 1
-        run:  cd packages/docusaurus && yarn build
+        run: yarn build:docs
       - name: Version docusaurus
         if: steps.tag_is_stable.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
