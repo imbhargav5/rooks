@@ -150,7 +150,7 @@ module.exports={
       "logo": { }
     },
     algolia: {
-      apiKey: '99e4ef9e75a28361e5081e0ca9c7cf5a',
+      apiKey: process.env.ALGOLIA_API_KEY,
       indexName: 'react-hooks',
 
       // Optional: see doc section bellow
