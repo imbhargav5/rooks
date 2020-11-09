@@ -1,7 +1,7 @@
 <br/>
 <br/>
 <p align="center">
-  <img src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png" height="300" />
+  <img src="https://cdn.discordapp.com/attachments/761126463457460234/775262278026788885/Final_Copy_8.png" height="auto" width="100%" />
 </p>
 <br/>
 
