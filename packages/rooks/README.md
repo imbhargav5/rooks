@@ -6,7 +6,7 @@ Standalone build for all rooks. This package contains all the hooks built as par
 
 <br/>
 <br/>
-<img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100% />
+<img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100%" />
 
 <br/>
 <br/>
