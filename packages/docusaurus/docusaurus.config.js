@@ -152,12 +152,8 @@ module.exports={
     algolia: {
       apiKey: process.env.ALGOLIA_API_KEY,
       indexName: 'react-hooks',
-
       // Optional: see doc section bellow
       contextualSearch: true,
-
-      // Optional: Algolia search parameters
-      searchParameters: {},
 
       //... other Algolia params
     },
