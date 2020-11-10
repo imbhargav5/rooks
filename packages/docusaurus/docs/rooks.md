@@ -14,9 +14,9 @@ Standalone build for all rooks. This package contains all the hooks built as par
 
 <br/>
 <br/>
-<p align="center">
-  <img src="https://i.gyazo.com/67b004be5aa811e9ccd8375b9ce274e1.png" height="150" />
-</p>
+<img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100%" />
+
+<br/>
 <br/>
 <br/>
 
