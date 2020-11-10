@@ -12,7 +12,7 @@ module.exports={
       defer: true
     }
   ],
-  "favicon": "/img/rooks-logo.png",
+  "favicon": "https://github.com/imbhargav5/rooks/raw/master/.github/assets/favicon-24x24.png",
   "customFields": {
     "users": [
       {
@@ -50,7 +50,7 @@ module.exports={
       "title": "Rooks",
       logo: {
         alt: 'Site Logo',
-        src: '/img/rooks-logo.png',
+        src: 'https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png',
         href: '/', // Default to `siteConfig.baseUrl`.
         target: '_self', // By default, this value is calculated based on the `href` attribute (the external link will open in a new tab, all others in the current one).
       },
