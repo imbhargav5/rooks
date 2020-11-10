@@ -10,6 +10,9 @@ module.exports={
       src: "https://buttons.github.io/buttons.js",
       async: true,
       defer: true
+    },{
+      src:"https://cdn.splitbee.io/sb.js",
+      async: true
     }
   ],
   "favicon": "https://github.com/imbhargav5/rooks/raw/master/.github/assets/favicon-24x24.png",
