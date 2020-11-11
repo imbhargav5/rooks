@@ -1,18 +1,20 @@
 # @rooks/use-window-size
 
-### Window size hook for React.
-<br/>
-
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-window-size/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-window-size.svg) ![](https://img.shields.io/npm/dt/@rooks/use-window-size.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fwindow-size)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About 
+Window size hook for React.
+<br/>
+
+## Installation
 
 ```
 npm install --save @rooks/use-window-size
 ```
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useWindowSize from "@rooks/use-window-size"
@@ -20,7 +22,7 @@ import useWindowSize from "@rooks/use-window-size"
 
 
 
-### Usage
+## Usage
 
 ```jsx
 function WindowComponent() {

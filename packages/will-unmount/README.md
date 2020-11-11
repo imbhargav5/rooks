@@ -1,26 +1,28 @@
 # @rooks/use-will-unmount
 
-### componentWillUnmount lifecycle as hook for React.
-<br/>
-
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-will-unmount/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-will-unmount.svg) ![](https://img.shields.io/npm/dt/@rooks/use-will-unmount.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fwill-unmount)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About 
+componentWillUnmount lifecycle as hook for React.
+<br/>
+
+## Installation
 
 ```
 npm install --save @rooks/use-will-unmount
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useWillUnmount from "@rooks/use-will-unmount"
 ```
 
 
-### Usage
+## Usage
 
 ```jsx
 

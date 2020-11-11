@@ -1,24 +1,26 @@
 # @rooks/use-countdown
 
-### Count down to a target timestamp and call callbacks every second (or provided peried)
-
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-countdown/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-countdown.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-countdown.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fcountdown)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About
+Count down to a target timestamp and call callbacks every second (or provided peried)
+
+## Installation
 
 ```
 npm install --save @rooks/use-countdown
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useCountdown from "@rooks/use-countdown"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 const endTime = new Date(Date.now() + 10000);

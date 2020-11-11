@@ -1,26 +1,28 @@
 # @rooks/use-select
 
-### Select values from a list easily. List selection hook for react.
-<br/>
-
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-select/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-select.svg) ![](https://img.shields.io/npm/dt/@rooks/use-select.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About 
+Select values from a list easily. List selection hook for react.
+<br/>
+
+## Installation
 
 ```
 npm install --save @rooks/use-select
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useSelect from "@rooks/use-select"
 ```
 
 
-### Usage
+## Usage
 
 ```jsx
 

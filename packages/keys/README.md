@@ -1,26 +1,28 @@
-# @rooks/use-keys
-
-### A hook which allows to setup callbacks when a combination of keys are pressed at the same time. 
-
-  An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active. 
+# @rooks/use-keys 
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-keys/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-keys.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-keys.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fkeys)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About 
+A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
+
+An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active. 
+
+## Installation
 
 ```
 npm install --save @rooks/use-keys
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useKeys from "@rooks/use-keys";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {

@@ -1,20 +1,26 @@
 # @rooks/use-throttle
 
-### Throttle custom hook for React
+![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-throttle/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-throttle.svg) ![](https://img.shields.io/npm/dt/@rooks/use-throttle.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fthrottle)
 
-### Installation
+
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+## About 
+Throttle custom hook for React
+
+## Installation
 
 ```
 npm install --save @rooks/use-throttle
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useThrottle from "@rooks/use-throttle"
 ```
 
-### Usage
+## Usage
 
 ```jss
 function ThrottleDemo() {

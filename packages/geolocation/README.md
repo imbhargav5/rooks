@@ -1,24 +1,27 @@
 # @rooks/use-geolocation
 
-### A hook to provide the geolocation info on client side.
-
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-geolocation/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-geolocation.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-geolocation.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fgeolocation)
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
 
-### Installation
+![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
+
+## About
+A hook to provide the geolocation info on client side.
+
+## Installation
 
 ```
 npm install --save @rooks/use-geolocation
 ```
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useGeolocation from "@rooks/use-geolocation";
 ```
 
-### Usage
+## Usage
 
 ### 1. Getting geolocation in a component
 
