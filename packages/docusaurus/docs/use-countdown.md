@@ -4,25 +4,23 @@ title: use-countdown
 sidebar_label: use-countdown
 ---
 
-## @rooks/use-countdown
-
-#### Count down to a target timestamp and call callbacks every second (or provided peried)
-
     
 
+## About
 
+Count down to a target timestamp and call callbacks every second (or provided peried)
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-countdown
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useCountdown from "@rooks/use-countdown"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 const endTime = new Date(Date.now() + 10000);
@@ -53,5 +51,9 @@ render(<Demo/>)
 | Type   | Description                                                    |
 | ------ | -------------------------------------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

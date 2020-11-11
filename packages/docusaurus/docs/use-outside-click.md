@@ -4,27 +4,24 @@ title: use-outside-click
 sidebar_label: use-outside-click
 ---
 
-## @rooks/use-outside-click
-
-#### Outside click(for a ref) event as hook for React.
-
-<br/>
-
    
 
+## About
 
+Outside click(for a ref) event as hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-outside-click
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useOutsideClick from "@rooks/use-outside-click";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -42,5 +39,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

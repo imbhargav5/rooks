@@ -4,29 +4,26 @@ title: use-raf
 sidebar_label: use-raf
 ---
 
-## @rooks/use-raf
-
-#### A continuously running requestAnimationFrame hook for React
-
-<br/>
-
    
 
+## About
 
+A continuously running requestAnimationFrame hook for React
+<br/>
 
 [![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-raf
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useRaf from "@rooks/use-raf";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 let angle = 0;
@@ -79,5 +76,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

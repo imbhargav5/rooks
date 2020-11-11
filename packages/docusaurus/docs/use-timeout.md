@@ -4,27 +4,24 @@ title: use-timeout
 sidebar_label: use-timeout
 ---
 
-## @rooks/use-timeout
-
-#### setTimeout hook for react.
-
-<br/>
-
    
 
+## About
 
+setTimeout hook for react.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-timeout
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useTimeout from "@rooks/use-timeout"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function TimeoutComponent() {
@@ -57,5 +54,9 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout     |
 | start                      | function | Start the timeout     |
 | isActive                   | boolean  | Is the timeout active |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

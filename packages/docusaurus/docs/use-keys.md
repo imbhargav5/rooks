@@ -4,27 +4,25 @@ title: use-keys
 sidebar_label: use-keys
 ---
 
-## @rooks/use-keys
+   
 
-#### A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
+## About
+
+A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
 
 An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active.
 
-   
-
-
-
-### Installation
+## Installation
 
     npm install --save @rooks/use-keys
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useKeys from "@rooks/use-keys";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -78,5 +76,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

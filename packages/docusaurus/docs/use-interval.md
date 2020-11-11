@@ -4,27 +4,24 @@ title: use-interval
 sidebar_label: use-interval
 ---
 
-## @rooks/use-interval
-
-#### setInterval hook for React.
-
-<br/>
-
    
 
+## About
 
+setInterval hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-interval
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useInterval from "@rooks/use-interval"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function reducer(state, action) {
@@ -75,5 +72,9 @@ render(<Demo/>)
 | start                      | function   | Start the interval         |
 | stop                       | function   | Stop the interval          |
 | intervalId                 | intervalId | IntervalId of the interval |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

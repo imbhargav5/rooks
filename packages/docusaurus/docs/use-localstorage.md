@@ -4,29 +4,25 @@ title: use-localstorage
 sidebar_label: use-localstorage
 ---
 
-## @rooks/use-localstorage
-
-#### Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically.
-
-<br/>
-
    
 
+## About
 
+Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically.
 
 Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-localstorage
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useLocalstorage from "@rooks/use-localstorage";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -46,5 +42,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

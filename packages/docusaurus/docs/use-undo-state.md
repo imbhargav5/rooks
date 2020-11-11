@@ -4,25 +4,23 @@ title: use-undo-state
 sidebar_label: use-undo-state
 ---
 
-## @rooks/use-undo-state
-
-#### Drop in replacement for useState hook but with undo functionality.
-
     
 
+## About
 
+Drop in replacement for useState hook but with undo functionality.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-undo-state
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useUndoState from '@rooks/use-undo-state'
 ```
 
-### Usage
+## Usage
 
 ```jsx
 const Demo = () => {
@@ -118,5 +116,9 @@ Note: The second argument is an options object which currently accepts a maxSize
 | value                | Any      | Current value                                                                                                         |
 | setValue          | function | Setter function to update value |
 | undo          | function | Undo state value |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

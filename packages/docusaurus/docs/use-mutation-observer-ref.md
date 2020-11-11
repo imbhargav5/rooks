@@ -4,25 +4,23 @@ title: use-mutation-observer-ref
 sidebar_label: use-mutation-observer-ref
 ---
 
-## @rooks/use-mutation-observer-ref
-
-#### A hook that tracks mutations of an element. It returns a callbackRef.
-
     
 
+## About
 
+A hook that tracks mutations of an element. It returns a callbackRef.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-mutation-observer-ref
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useMutationObserverRef from "@rooks/use-mutation-observer-ref"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -94,5 +92,9 @@ Returns an array with one element
 | Argument | Type      | Description                                |
 | -------- | --------- | ------------------------------------------ |
 | ref      | React ref | Ref which should be observed for Mutations |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

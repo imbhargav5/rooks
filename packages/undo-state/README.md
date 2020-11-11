@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-undo-state/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-undo-state.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-undo-state.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fundo-state)
 
 
-![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
 
 ## About 
 Drop in replacement for useState hook but with undo functionality.

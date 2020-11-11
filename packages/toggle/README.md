@@ -3,7 +3,7 @@
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-toggle/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-toggle.svg) ![](https://img.shields.io/npm/dt/@rooks/use-toggle.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftoggle)
 
 
-![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
 
 ## About 
 Toggle (between booleans or custom data)hook for React.

@@ -4,25 +4,23 @@ title: use-boundingclientrect-ref
 sidebar_label: use-boundingclientrect-ref
 ---
 
-## @rooks/use-boundingclientrect-ref
-
-#### A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
-
     
 
+## About
 
+A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-boundingclientrect-ref
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useBoundingclientrectRef from "@rooks/use-boundingclientrect-ref"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -88,5 +86,9 @@ N/A
 | ref          | Callback ref | A callback ref function to use as a ref for the component that needs to be tracked | () => null    |
 | value        | DOMRect      | DOMRect Object containing x,y, width, height, left,right,top and bottom keys       | null          |
 | update       | Function     | Function that can be called at any time to force a recalculation of the clientrect | null          |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -4,15 +4,12 @@ title: use-online
 sidebar_label: use-online
 ---
 
-## @rooks/use-online
-
-#### Online status hook for React.
-
-<br/>
-
    
 
+## About
 
+Online status hook for React.
+<br/>
 
 ### Installation
 
@@ -38,5 +35,9 @@ render(<Demo />);
 ### Return value
 
 Offline status (boolean) is returned.
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

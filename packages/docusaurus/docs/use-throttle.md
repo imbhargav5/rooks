@@ -4,21 +4,23 @@ title: use-throttle
 sidebar_label: use-throttle
 ---
 
-## @rooks/use-throttle
+   
 
-#### Throttle custom hook for React
+## About
 
-### Installation
+Throttle custom hook for React
+
+## Installation
 
     npm install --save @rooks/use-throttle
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useThrottle from "@rooks/use-throttle"
 ```
 
-### Usage
+## Usage
 
 ```jss
 function ThrottleDemo() {
@@ -46,5 +48,9 @@ function ThrottleDemo() {
 | ------------------- | -------- | ----------------------------------- | ------------- |
 | callback (required) | function | Function that needs to be throttle  | undefined     |
 | timeout (optional)  | number   | Time to throttle the callback in ms | 300           |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -4,25 +4,24 @@ title: use-intersection-observer-ref
 sidebar_label: use-intersection-observer-ref
 ---
 
-## @rooks/use-intersection-observer-ref
-
-#### A hook to register an intersection observer listener
-
     
 
+## About
 
+A hook to register an intersection observer listener
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-intersection-observer-ref
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -69,5 +68,9 @@ Returns an array with the first element in the array being the callback ref for 
 | Return value | Type        | Description                                                    | Default value |
 | ------------ | ----------- | -------------------------------------------------------------- | ------------- |
 | ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -5,27 +5,24 @@ sidebar_label: use-did-mount
 ---
 
 
-## @rooks/use-did-mount
-
-#### componentDidMount hook for React
-
-<br/>
-
    
 
+## About
 
+componentDidMount hook for React
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-did-mount
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useDidMount from "@rooks/use-did-mount"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -67,5 +64,7 @@ render(<Demo/>)
 
 
 
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

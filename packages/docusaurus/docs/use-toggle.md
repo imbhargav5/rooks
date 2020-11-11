@@ -4,27 +4,24 @@ title: use-toggle
 sidebar_label: use-toggle
 ---
 
-## @rooks/use-toggle
-
-#### Toggle (between booleans or custom data)hook for React.
-
-<br/>
-
    
 
+## About
 
+Toggle (between booleans or custom data)hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-toggle
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useToggle from "@rooks/use-toggle"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 
@@ -74,5 +71,9 @@ render(<Demo/>)
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
 | value                | Any      | Current value                                                                                                         |
 | toggleValue          | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

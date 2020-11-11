@@ -5,17 +5,10 @@ sidebar_label: rooks
 slug: /
 ---
 
-## `rooks`
-
-Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
-
-**Note:** If you only need a few hooks from the rooks package, it's prefereable to install individiual hooks from npm instead of the standalone rooks build. In other words, install `@rooks/use-did-mount` instead of `rooks` if you only need the `use-did-mount` functionality.
-
 <br/>
 <br/>
 <img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100%" />
 
-<br/>
 <br/>
 <br/>
 
@@ -23,9 +16,15 @@ Standalone build for all rooks. This package contains all the hooks built as par
 
 <br/>
 
-### Installation
+## About
 
-#### For a specific hook like useDidMount
+Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
+
+**Note:** If you only need a few hooks from the rooks package, it's prefereable to install individiual hooks from npm instead of the standalone rooks build. In other words, install `@rooks/use-did-mount` instead of `rooks` if you only need the `use-did-mount` functionality.
+
+## Installation
+
+### For a specific hook like useDidMount
 
     npm i -s @rooks/use-did-mount
 
@@ -37,7 +36,7 @@ Standalone build for all rooks. This package contains all the hooks built as par
 import useDidMount from "@rooks/use-did-mount";
 ```
 
-#### For standalone build with all the hooks
+### For standalone build with all the hooks
 
     npm i - s rooks
 
@@ -65,12 +64,12 @@ function App() {
 
 <br/>
 
-### Hope you like it!
+## License
 
-Feel free to join as contributors!
+MIT
 
-:smile:
 
-#### License - MIT
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

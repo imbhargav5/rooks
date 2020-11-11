@@ -4,27 +4,24 @@ title: use-select
 sidebar_label: use-select
 ---
 
-## @rooks/use-select
-
-#### Select values from a list easily. List selection hook for react.
-
-<br/>
-
    
 
+## About
 
+Select values from a list easily. List selection hook for react.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-select
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useSelect from "@rooks/use-select"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 
@@ -76,5 +73,9 @@ render(<Demo/>)
 | item                       | any      | Currently selected item           |
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -4,27 +4,24 @@ title: use-on-window-resize
 sidebar_label: use-on-window-resize
 ---
 
-## @rooks/use-on-window-resize
-
-#### A React hook for adding an event listener for window resize
-
-<br/>
-
    
 
+## About
 
+A React hook for adding an event listener for window resize
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-on-window-resize
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useOnWindowResize from "@rooks/use-on-window-resize"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 
@@ -44,5 +41,9 @@ render(<Demo/>)
 | when      | boolean  | When the event handler should be active         | true          |
 
 ### A React hook for adding an event listener for window resize
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -3,7 +3,7 @@
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-outside-click-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-outside-click-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-outside-click-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Foutside-click-ref)
 
 
-![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
 
 ## About 
 A hook that can track a click event outside a ref. Returns a callbackRef.

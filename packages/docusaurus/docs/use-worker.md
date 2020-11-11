@@ -4,27 +4,24 @@ title: use-worker
 sidebar_label: use-worker
 ---
 
-## @rooks/use-worker
-
-#### Worker hook for React.
-
-<br/>
-
    
 
+## About
 
+Worker hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-worker
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useWorker from "@rooks/use-worker"
 ```
 
-### Usage
+## Usage
 
 ```react
 
@@ -59,5 +56,9 @@ ReactDOM.render(<Demo />, rootElement);
 ### Returned Object
 
 The worker instance is returned.
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

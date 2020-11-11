@@ -4,25 +4,23 @@ title: use-did-update
 sidebar_label: use-did-update
 ---
 
-## @rooks/use-did-update
-
-#### componentDidUpdate hook for react
-
    
 
+## About
 
+componentDidUpdate hook for react
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-did-update
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useDidUpdate from "@rooks/use-did-update";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -43,5 +41,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

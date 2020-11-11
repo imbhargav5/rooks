@@ -13,6 +13,10 @@ module.exports={
     },{
       src:"https://cdn.splitbee.io/sb.js",
       async: true
+    }, {
+      src: "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3",
+      async: true,
+      defer: true,      
     }
   ],
   "favicon": "https://github.com/imbhargav5/rooks/raw/master/.github/assets/favicon-24x24.png",
@@ -118,10 +122,6 @@ module.exports={
             // Client-side routing, used for navigating within the website.
             // The baseUrl will be automatically prepended to this value.
             to: 'https://stackoverflow.com/questions/tagged/rooks',
-          },
-          {
-            label: 'Project Chat',
-            to: 'http://spectrum.chat/rooks',
           },
           {
             label: 'Twitter',

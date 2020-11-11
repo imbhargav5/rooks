@@ -4,25 +4,23 @@ title: use-isomorphic-effect
 sidebar_label: use-isomorphic-effect
 ---
 
-## @rooks/use-isomorphic-effect
-
-#### A hook that resolves to useEffect on the server and useLayoutEffect on the client.
-
     
 
+## About
 
+A hook that resolves to useEffect on the server and useLayoutEffect on the client.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-isomorphic-effect
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useIsomorphicEffect from "@rooks/use-isomorphic-effect"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -34,5 +32,9 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

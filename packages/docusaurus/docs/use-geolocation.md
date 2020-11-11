@@ -4,25 +4,23 @@ title: use-geolocation
 sidebar_label: use-geolocation
 ---
 
-## @rooks/use-geolocation
-
-#### A hook to provide the geolocation info on client side.
-
     
 
+## About
 
+A hook to provide the geolocation info on client side.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-geolocation
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useGeolocation from "@rooks/use-geolocation";
 ```
 
-### Usage
+## Usage
 
 ### 1. Getting geolocation in a component
 
@@ -45,7 +43,7 @@ function App() {
 render(<App />);
 ```
 
-### 1. Getting geolocation in a component on some condition
+### 2. Getting geolocation in a component on some condition
 
 ```jsx
 function App() {
@@ -76,5 +74,9 @@ function App() {
 }
 render(<App />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

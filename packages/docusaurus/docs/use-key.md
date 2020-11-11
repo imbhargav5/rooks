@@ -4,27 +4,23 @@ title: use-key
 sidebar_label: use-key
 ---
 
-## @rooks/use-key
-
-#### keypress, keyup and keydown event handlers as hooks for react.
-
-<br/>
-
    
 
+## About
 
+keypress, keyup and keydown event handlers as hooks for react.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-key
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useKey from "@rooks/use-key";
 ```
 
-### Usage
+## Usage
 
 #### Basic example with keydown
 
@@ -127,5 +123,9 @@ function Demo() {
 }
 render(<Demo />);
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

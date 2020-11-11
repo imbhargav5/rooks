@@ -4,27 +4,24 @@ title: use-navigator-language
 sidebar_label: use-navigator-language
 ---
 
-## @rooks/use-navigator-language
-
-#### Navigator Language hook for React.
-
-<br/>
-
    
 
+## About
 
+Navigator Language hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-navigator-language
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useNavigatorLanguage from "@rooks/use-navigator-language";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -38,5 +35,9 @@ render(<Demo />);
 ### Return value
 
 A language (String) is returned.
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

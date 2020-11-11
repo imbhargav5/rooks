@@ -4,27 +4,24 @@ title: use-previous
 sidebar_label: use-previous
 ---
 
-## @rooks/use-previous
-
-#### Access the previous value of a variable with this React hook
-
-<br/>
-
    
 
+## About
 
+Access the previous value of a variable with this React hook
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-previous
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import usePrevious from "@rooks/use-previous";
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -57,5 +54,9 @@ render(<Demo />);
 ## Gif
 
 [![Image from Gyazo](https://i.gyazo.com/9913f58e1959ed60fb590cb280639d88.gif)](https://gyazo.com/9913f58e1959ed60fb590cb280639d88)
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

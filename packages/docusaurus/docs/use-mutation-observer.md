@@ -4,27 +4,24 @@ title: use-mutation-observer
 sidebar_label: use-mutation-observer
 ---
 
-## @rooks/use-mutation-observer
-
-#### Mutation Observer hook for React.
-
-<br/>
-
    
 
+## About
 
+Mutation Observer hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-mutation-observer
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useMutationObserver from "@rooks/use-mutation-observer"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -90,5 +87,9 @@ render(<Demo/>)
 | ref      | React ref | Ref which should be observed for Mutations                                                        | undefined                                                               |
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
 | config   | object    | Mutation Observer configuration                                                                   | {attributes: true,,characterData: true,,subtree: true,,childList: true} |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

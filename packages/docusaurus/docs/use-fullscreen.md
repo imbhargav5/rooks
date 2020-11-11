@@ -4,25 +4,23 @@ title: use-fullscreen
 sidebar_label: use-fullscreen
 ---
 
-## @rooks/use-fullscreen
-
-#### Use full screen api for making beautiful and emersive experinces.
-
     
 
+## About
 
+Use full screen api for making beautiful and emersive experinces.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-fullscreen
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useFullscreen from "@rooks/use-fullscreen"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 import React, { useState, useRef } from "react";
@@ -193,5 +191,9 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

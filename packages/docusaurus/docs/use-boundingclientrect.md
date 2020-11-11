@@ -4,27 +4,24 @@ title: use-boundingclientrect
 sidebar_label: use-boundingclientrect
 ---
 
-## @rooks/use-boundingclientrect
-
-#### getBoundingClientRect hook for React.
-
-<br/>
-
    
 
+## About
 
+getBoundingClientRect hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-boundingclientrect
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useBoundingclientrect from "@rooks/use-boundingclientrect"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -91,5 +88,9 @@ render(<Demo/>)
 | Return value | Type    | Description                                                                  | Default value |
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -4,25 +4,23 @@ title: use-debounce
 sidebar_label: use-debounce
 ---
 
-## @rooks/use-debounce
-
-#### Debounce hook for react
-
    
 
+## About
 
+Debounce hook for react
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-debounce
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useDebounce from "@rooks/use-debounce"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -32,5 +30,9 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

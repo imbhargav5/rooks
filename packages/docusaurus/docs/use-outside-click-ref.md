@@ -4,25 +4,23 @@ title: use-outside-click-ref
 sidebar_label: use-outside-click-ref
 ---
 
-## @rooks/use-outside-click-ref
-
-#### A hook that can track a click event outside a ref. Returns a callbackRef.
-
     
 
+## About
 
+A hook that can track a click event outside a ref. Returns a callbackRef.
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-outside-click-ref
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useOutsideClickRef from "@rooks/use-outside-click-ref"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -39,5 +37,9 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

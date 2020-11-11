@@ -4,27 +4,24 @@ title: use-window-size
 sidebar_label: use-window-size
 ---
 
-## @rooks/use-window-size
-
-#### Window size hook for React.
-
-<br/>
-
    
 
+## About
 
+Window size hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-window-size
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useWindowSize from "@rooks/use-window-size"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function WindowComponent() {
@@ -62,5 +59,9 @@ render(<WindowComponent/>)
 | height                     | int  | inner height of window |
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

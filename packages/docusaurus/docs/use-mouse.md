@@ -4,27 +4,24 @@ title: use-mouse
 sidebar_label: use-mouse
 ---
 
-## @rooks/use-mouse
-
-#### Mouse position hook for React.
-
-<br/>
-
    
 
+## About
 
+Mouse position hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-mouse
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useMouse from "@rooks/use-mouse"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -47,5 +44,9 @@ render(<Demo/>)
 | -------------------------- | ---- | ------------------- |
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -3,7 +3,7 @@
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-mutation-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/npm/dt/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmutation-observer)
 
 
-![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
 
 ## About 
 Mutation Observer hook for React.

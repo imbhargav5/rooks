@@ -4,27 +4,23 @@ title: use-fork-ref
 sidebar_label: use-fork-ref
 ---
 
-## @rooks/use-fork-ref
-
-#### A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
-
-*Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
-
     
 
+## About
 
+A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-fork-ref
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useForkRef from "@rooks/use-fork-ref"
 ```
 
-### Usage
+## Usage
 
 ```jsx
 function Demo() {
@@ -78,8 +74,14 @@ render(<Demo/>)
 | ------------ | ------------ | ------------------------------------------------------------------------------------- | ------------- |
 | ref          | Callback ref | A callback ref function that can internally combines both the refs from the arguments | () => null    |
 
-#### Original source
+## Original source
+
+*Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
 
 [Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     

@@ -3,7 +3,7 @@
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-online/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-online.svg) ![](https://img.shields.io/npm/dt/@rooks/use-online.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fonline)
 
 
-![Discord Shield](https://discordapp.com/api/guilds/768471216834478131/widget.png?style=banner2)
+
 
 ## About
 Online status hook for React.

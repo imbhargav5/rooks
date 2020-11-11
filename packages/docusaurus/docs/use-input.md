@@ -4,27 +4,24 @@ title: use-input
 sidebar_label: use-input
 ---
 
-## @rooks/use-input
-
-#### Input hook for React.
-
-<br/>
-
    
 
+## About
 
+Input hook for React.
+<br/>
 
-### Installation
+## Installation
 
     npm install --save @rooks/use-input
 
-### Importing the hook
+## Importing the hook
 
 ```javascript
 import useInput from "@rooks/use-input"
 ```
 
-### Usage
+## Usage
 
 **Base**
 
@@ -83,5 +80,9 @@ render(<Demo/>)
 | Return value      | Type   | Description                                                                                                          |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
     
