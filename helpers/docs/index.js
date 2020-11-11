@@ -18,7 +18,6 @@ function ls() {
   }
   let frontMatter = `id: ${newReadmeFileName}
 title: ${newReadmeFileName}
-hide_title: true
 sidebar_label: ${newReadmeFileName}`;
   if (newReadmeFileName === "rooks") {
     frontMatter = `${frontMatter}      
