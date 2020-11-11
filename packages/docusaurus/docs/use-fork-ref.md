@@ -1,19 +1,18 @@
 ---
 id: use-fork-ref
 title: use-fork-ref
-hide_title: true
 sidebar_label: use-fork-ref
 ---
 
-# @rooks/use-fork-ref
+## @rooks/use-fork-ref
 
-### A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+#### A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 
 *Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-fork-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-fork-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-fork-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ffork-ref)
+    
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

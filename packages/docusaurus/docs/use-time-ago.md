@@ -1,19 +1,18 @@
 ---
 id: use-time-ago
 title: use-time-ago
-hide_title: true
 sidebar_label: use-time-ago
 ---
 
-# @rooks/use-time-ago
+## @rooks/use-time-ago
 
-### A React Hook to get time ago for timestamp millisecond value.
+#### A React Hook to get time ago for timestamp millisecond value.
 
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-time-ago/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-time-ago.svg) ![](https://img.shields.io/npm/dt/@rooks/use-time-ago.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftime-ago)
+   
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

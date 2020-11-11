@@ -1,17 +1,16 @@
 ---
 id: use-countdown
 title: use-countdown
-hide_title: true
 sidebar_label: use-countdown
 ---
 
-# @rooks/use-countdown
+## @rooks/use-countdown
 
-### Count down to a target timestamp and call callbacks every second (or provided peried)
+#### Count down to a target timestamp and call callbacks every second (or provided peried)
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-countdown/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-countdown.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-countdown.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fcountdown)
+    
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

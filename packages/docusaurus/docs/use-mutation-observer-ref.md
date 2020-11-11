@@ -1,17 +1,16 @@
 ---
 id: use-mutation-observer-ref
 title: use-mutation-observer-ref
-hide_title: true
 sidebar_label: use-mutation-observer-ref
 ---
 
-# @rooks/use-mutation-observer-ref
+## @rooks/use-mutation-observer-ref
 
-### A hook that tracks mutations of an element. It returns a callbackRef.
+#### A hook that tracks mutations of an element. It returns a callbackRef.
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-mutation-observer-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mutation-observer-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmutation-observer-ref)
+    
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

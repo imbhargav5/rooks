@@ -1,19 +1,18 @@
 ---
 id: use-toggle
 title: use-toggle
-hide_title: true
 sidebar_label: use-toggle
 ---
 
-# @rooks/use-toggle
+## @rooks/use-toggle
 
-### Toggle (between booleans or custom data)hook for React.
+#### Toggle (between booleans or custom data)hook for React.
 
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-toggle/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-toggle.svg) ![](https://img.shields.io/npm/dt/@rooks/use-toggle.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftoggle)
+   
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

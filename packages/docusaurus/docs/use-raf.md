@@ -1,19 +1,18 @@
 ---
 id: use-raf
 title: use-raf
-hide_title: true
 sidebar_label: use-raf
 ---
 
-# @rooks/use-raf
+## @rooks/use-raf
 
-### A continuously running requestAnimationFrame hook for React
+#### A continuously running requestAnimationFrame hook for React
 
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-raf/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-raf.svg) ![](https://img.shields.io/npm/dt/@rooks/use-raf.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fraf)
+   
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 [![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
 

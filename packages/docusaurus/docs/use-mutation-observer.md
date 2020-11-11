@@ -1,19 +1,18 @@
 ---
 id: use-mutation-observer
 title: use-mutation-observer
-hide_title: true
 sidebar_label: use-mutation-observer
 ---
 
-# @rooks/use-mutation-observer
+## @rooks/use-mutation-observer
 
-### Mutation Observer hook for React.
+#### Mutation Observer hook for React.
 
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-mutation-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/npm/dt/@rooks/use-mutation-observer.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmutation-observer)
+   
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

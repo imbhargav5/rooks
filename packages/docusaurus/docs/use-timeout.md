@@ -1,19 +1,18 @@
 ---
 id: use-timeout
 title: use-timeout
-hide_title: true
 sidebar_label: use-timeout
 ---
 
-# @rooks/use-timeout
+## @rooks/use-timeout
 
-### setTimeout hook for react.
+#### setTimeout hook for react.
 
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-timeout/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-timeout.svg) ![](https://img.shields.io/npm/dt/@rooks/use-timeout.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Ftimeout)
+   
 
-<a href="https://spectrum.chat/rooks"><img src="https://withspectrum.github.io/badge/badge.svg" alt="Join the community on Spectrum"/></a>
+
 
 ### Installation
 

@@ -1,13 +1,12 @@
 ---
 id: use-throttle
 title: use-throttle
-hide_title: true
 sidebar_label: use-throttle
 ---
 
-# @rooks/use-throttle
+## @rooks/use-throttle
 
-### Throttle custom hook for React
+#### Throttle custom hook for React
 
 ### Installation
 

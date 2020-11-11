@@ -1,12 +1,11 @@
 ---
 id: rooks
 title: rooks
-hide_title: true
 sidebar_label: rooks      
 slug: /
 ---
 
-# `rooks`
+## `rooks`
 
 Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
 
@@ -20,7 +19,7 @@ Standalone build for all rooks. This package contains all the hooks built as par
 <br/>
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/rooks/latest.svg) ![](https://img.shields.io/npm/l/rooks.svg) ![](https://img.shields.io/npm/dt/rooks.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselect)
+   
 
 <br/>
 
