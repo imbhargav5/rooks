@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A React Hooks package for fullscreen.",
   "name": "@rooks/use-fullscreen",
-  "homepage": "https://react-hooks.org/hook/use-fullscreen",
+  "homepage": "https://react-hooks.org/docs/use-fullscreen",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
