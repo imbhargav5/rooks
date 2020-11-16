@@ -44,7 +44,7 @@ const DEFAULT_OPTIONS = {
   minTopValue: 0
 };
 
-function useVisbilitySensor(ref, opts) {
+function useVisibilitySensor(ref, opts) {
   /*
       Create local state
     */
@@ -209,4 +209,4 @@ function useVisbilitySensor(ref, opts) {
   }, []);
   return localState;
 }
-export { useVisbilitySensor };
+export { useVisibilitySensor };

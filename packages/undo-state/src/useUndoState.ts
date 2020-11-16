@@ -44,4 +44,4 @@ const useUndoState = (defaultValue: any, { maxSize }: UndoStateOptions = default
     return [value[0], push, undo]
 }
 
-export default useUndoState
+export {useUndoState}

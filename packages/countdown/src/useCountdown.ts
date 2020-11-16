@@ -36,4 +36,4 @@ const useCountdown = (
   }
 };
 
-export default useCountdown;
+export {useCountdown};
