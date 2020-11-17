@@ -1,2 +1,2 @@
-declare function useBoundingclientrectRef(): (ClientRect | import("shared/utils").CallbackRef | null)[];
+declare function useBoundingclientrectRef(): (import("./utils").CallbackRef | ClientRect | null)[];
 export { useBoundingclientrectRef };
