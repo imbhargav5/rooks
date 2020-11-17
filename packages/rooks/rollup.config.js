@@ -26,9 +26,7 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  typescript2({
-    useTsconfigDeclarationDir: true
-  }),
+  typescript2(),
   sourceMaps(),
   json(),
   nodeResolve({

@@ -4,16 +4,44 @@
     "node_modules/shared/*.ts"
   ],
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib",
+    "rootDir": "./src",
+    "outDir": "./lib",
     "baseUrl": "../../",
-    "declarationDir": "lib",
-    "typeRoots": [
-      "../../packages/*/src"
-    ]
+    "declarationDir": "./lib",
+    "paths": {
+      "shared/*": ["../shared/*"]
+    }
   },
-  "references": [{
-    "path" : "../*"
-  }]
+  "references": [
+    {
+      "path": "../boundingclientrect"
+    },{
+      "path": "../boundingclientrect-ref"
+    },
+    {
+      "path": "../counter"
+    },
+    {
+      "path": "../did-mount"
+    },
+    {
+      "path": "../did-update"
+    },
+    {
+      "path": "../input"
+    },
+    {
+      "path": "../raf"
+    },
+    {
+      "path": "../visibility-sensor"
+    },
+    {
+      "path": "../time-ago"
+    },
+    {
+      "path": "../timeout"
+    }
+  ]
 }
   
