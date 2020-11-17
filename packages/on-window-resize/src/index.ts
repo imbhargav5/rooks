@@ -1,1 +1,1 @@
-export { useOnWindowResize as default } from "./useOnWindowResize";
+export { useOnWindowResize as default } from "shared/useOnWindowResize";

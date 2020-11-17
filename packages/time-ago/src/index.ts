@@ -1,1 +1,1 @@
-export { useTimeAgo as default } from "./useTimeAgo";
+export { useTimeAgo as default } from "shared/useTimeAgo";

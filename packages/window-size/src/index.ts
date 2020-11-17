@@ -1,1 +1,1 @@
-export { useWindowSize as default } from "./useWindowSize";
+export { useWindowSize as default } from "shared/useWindowSize";

@@ -1,1 +1,1 @@
-export { useGeolocation as default } from "./useGeolocation";
+export { useGeolocation as default } from "shared/useGeolocation";

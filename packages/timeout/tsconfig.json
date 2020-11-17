@@ -4,6 +4,9 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "declarationDir": "./lib"
-  }
+  },
+  "references": [{
+    "path": "../shared"
+  }]
 }
   

@@ -13,6 +13,9 @@
         "../shared/*"
       ]
     }
-  }
+  },
+  "references": [{
+    "path": "../shared"
+  }]
 }
   

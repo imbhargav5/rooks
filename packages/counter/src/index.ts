@@ -1,1 +1,1 @@
-export { useCounter as default } from "./useCounter";
+export { useCounter as default } from "shared/useCounter";

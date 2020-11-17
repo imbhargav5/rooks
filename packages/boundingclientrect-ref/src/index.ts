@@ -1,3 +1,3 @@
 export {
   useBoundingclientrectRef as default
-} from "./useBoundingclientrectRef";
+} from "shared/useBoundingclientrectRef";

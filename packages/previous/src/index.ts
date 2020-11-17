@@ -1,1 +1,1 @@
-export { usePrevious as default } from "./usePrevious";
+export { usePrevious as default } from "shared/usePrevious";

@@ -1,1 +1,1 @@
-export { useWorker as default } from "./useWorker";
+export { useWorker as default } from "shared/useWorker";

@@ -1,1 +1,1 @@
-export {useUndoState as default} from './useUndoState'
+export {useUndoState as default} from 'shared/useUndoState'

@@ -1,1 +1,1 @@
-export { useCountdown as default } from "./useCountdown";
+export { useCountdown as default } from "shared/useCountdown";

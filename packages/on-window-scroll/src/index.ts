@@ -1,1 +1,1 @@
-export { useOnWindowScroll as default } from "./useOnWindowScroll";
+export { useOnWindowScroll as default } from "shared/useOnWindowScroll";
