@@ -1,5 +1,5 @@
 import { useEffect, useRef, MutableRefObject, useCallback } from "react";
-import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
+import { doesIdentifierMatchKeyboardEvent } from "./utils/doesIdentifierMatchKeyboardEvent";
 
 type TPressedKeyMapping = {
   [key: string]: boolean|undefined;

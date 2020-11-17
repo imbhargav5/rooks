@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useInterval } from "shared/useInterval";
+import { useInterval } from "./useInterval";
 
 type CountdownOptions = {
   interval?: number;

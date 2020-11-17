@@ -1,5 +1,5 @@
 import { useEffect, Ref, MutableRefObject, useCallback, useState } from "react";
-import { HTMLElementOrNull } from "./utils";
+import { HTMLElementOrNull } from "./utils/utils";
 
 var config: MutationObserverInit = {
   attributes: true,

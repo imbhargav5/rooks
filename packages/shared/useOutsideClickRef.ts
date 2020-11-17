@@ -5,7 +5,7 @@ import {
   useCallback,
   useState
 } from "react";
-import { HTMLElementOrNull, CallbackRef } from "shared/utils";
+import { HTMLElementOrNull, CallbackRef } from "./utils/utils";
 
 /**
  *  useOutsideClickRef hook

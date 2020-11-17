@@ -1,4 +1,4 @@
-import { CallbackRef } from "shared/utils";
+import { CallbackRef } from "./utils/utils";
 /**
  *  useOutsideClickRef hook
  *

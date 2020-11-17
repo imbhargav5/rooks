@@ -1,3 +1,4 @@
+import { HTMLElementOrNull } from "./utils/utils";
 /**
  *
  * useMutationObserverRef hook
@@ -7,5 +8,5 @@
  * @param {MutationCallback} callback Function that needs to be fired on mutation
  * @param {MutationObserverInit} options
  */
-declare function useMutationObserverRef(callback: MutationCallback, options?: MutationObserverInit): ((node: HTMLElement | null) => void)[];
+declare function useMutationObserverRef(callback: MutationCallback, options?: MutationObserverInit): ((node: HTMLElementOrNull) => void)[];
 export { useMutationObserverRef };

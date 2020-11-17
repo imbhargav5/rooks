@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDidMount } from "shared/useDidMount";
+import { useDidMount } from "./useDidMount";
 
 /**
  *  useDidUpdate hook

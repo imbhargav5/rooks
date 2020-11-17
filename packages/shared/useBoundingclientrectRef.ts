@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { useMutationObserverRef } from "shared/useMutationObserverRef";
-import { HTMLElementOrNull } from "shared/utils";
-import { useForkRef } from "shared/useForkRef";
+import { useMutationObserverRef } from "./useMutationObserverRef";
+import { HTMLElementOrNull } from "./utils/utils";
+import { useForkRef } from "./useForkRef";
 
 /**
  * useBoundingclientrectRef hook

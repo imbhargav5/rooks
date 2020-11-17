@@ -1,6 +1,6 @@
 import { useState, useEffect, MutableRefObject, useCallback } from "react";
-import { useMutationObserver } from "shared/useMutationObserver";
-import { useDidMount } from "shared/useDidMount";
+import { useMutationObserver } from "./useMutationObserver";
+import { useDidMount } from "./useDidMount";
 
 /**
  * @param element HTML element whose boundingclientrect is needed

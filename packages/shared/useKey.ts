@@ -1,5 +1,5 @@
 import { Ref, useEffect, useCallback, useRef, useMemo } from "react";
-import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
+import { doesIdentifierMatchKeyboardEvent } from "./utils/doesIdentifierMatchKeyboardEvent";
 
 interface Options {
   /**
