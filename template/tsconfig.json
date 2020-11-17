@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig_independent.settings.json",
+  "compilerOptions":{
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declarationDir": "./lib"
+  },
+  "references": [{
+    "path" : "../shared"
+  }]
+}
+  

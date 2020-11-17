@@ -1,1 +1,1 @@
-export { useKeys as default } from "./useKeys";
+export { useKeys as default } from "shared/useKeys";

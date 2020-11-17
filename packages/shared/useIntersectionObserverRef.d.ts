@@ -1,4 +1,4 @@
-import { CallbackRef } from "./utils";
+import { CallbackRef } from "./utils/utils";
 /**
  *
  * useIntersectionObserverRef hook

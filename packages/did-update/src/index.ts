@@ -1,1 +1,1 @@
-export { useDidUpdate as default } from "./useDidUpdate";
+export { useDidUpdate as default } from "shared/useDidUpdate";

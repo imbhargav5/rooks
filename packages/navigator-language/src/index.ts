@@ -1,1 +1,1 @@
-export { useNavigatorLanguage as default } from "./useNavigatorLanguage";
+export { useNavigatorLanguage as default } from "shared/useNavigatorLanguage";

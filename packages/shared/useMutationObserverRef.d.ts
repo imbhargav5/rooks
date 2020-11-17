@@ -1,4 +1,4 @@
-import { HTMLElementOrNull } from "./utils";
+import { HTMLElementOrNull } from "./utils/utils";
 /**
  *
  * useMutationObserverRef hook

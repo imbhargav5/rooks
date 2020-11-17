@@ -1,5 +1,5 @@
 import { useMemo, MutableRefObject } from "react";
-import { HTMLElementOrNull, CallbackRef, AnyRef } from "./utils";
+import { HTMLElementOrNull, CallbackRef, AnyRef } from "./utils/utils";
 /**
  * Credit to material-ui for this snippet
  */

@@ -1,43 +1,21 @@
 {
-  "extends": "../tsconfig.settings.json",
-  "include": ["node_modules/shared/*.ts"],
+  "extends": "../tsconfig_independent.settings.json",
+  "include": [
+    "node_modules/shared/*.ts"
+  ],
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib",
+    "rootDir": "./src",
+    "outDir": "./lib",
     "baseUrl": "../../",
-    "declarationDir": "lib",
-    "typeRoots": ["../../packages/*/src"],
+    "declarationDir": "./lib",
     "paths": {
-      "shared/*": ["../shared/*"]
+      "shared/*": [
+        "../shared/*"
+      ]
     }
   },
-  "references": [
-    {
-      "path": "../boundingclientrect"
-    },
-    {
-      "path": "../counter"
-    },
-    {
-      "path": "../did-mount"
-    },
-    {
-      "path": "../did-update"
-    },
-    {
-      "path": "../input"
-    },
-    {
-      "path": "../raf"
-    },
-    {
-      "path": "../visibility-sensor"
-    },
-    {
-      "path": "../time-ago"
-    },
-    {
-      "path": "../timeout"
-    }
-  ]
+  "references": [{
+    "path": "../shared"
+  }]
 }
+  

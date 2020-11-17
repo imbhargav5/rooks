@@ -48,7 +48,7 @@ const commonPlugins = [
   //   types: ["shared"],
   //   exclude: ["node_modules"]
   // }),
-  typescript2({
+  typescript2({    
     useTsconfigDeclarationDir: true
   }),
   sourceMaps(),

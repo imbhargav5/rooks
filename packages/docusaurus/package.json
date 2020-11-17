@@ -16,7 +16,6 @@
     "docusaurus": "docusaurus",
     "serve": "docusaurus serve"
   },
-  "devDependencies": {},
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.66",
     "@docusaurus/preset-classic": "2.0.0-alpha.66",

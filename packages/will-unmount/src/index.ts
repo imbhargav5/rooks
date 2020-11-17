@@ -1,1 +1,1 @@
-export { useWillUnmount as default } from "./useWillUnmount";
+export { useWillUnmount as default } from "shared/useWillUnmount";

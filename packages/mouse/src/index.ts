@@ -1,1 +1,1 @@
-export { useMouse as default } from "./useMouse";
+export { useMouse as default } from "shared/useMouse";

@@ -32,7 +32,6 @@
   ],
   "version": "4.0.0-canary.6",
   "_id": "@rooks/use-window-size@",
-  "private": false,
   "jest": {
     "globals": {
       "__DEV__": true,
@@ -47,5 +46,6 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
+  
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }

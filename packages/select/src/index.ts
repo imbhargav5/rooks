@@ -1,1 +1,1 @@
-export { useSelect as default } from "./useSelect";
+export { useSelect as default } from "shared/useSelect";

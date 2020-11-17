@@ -22,7 +22,8 @@
     "build:ci": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks",
     "build:action": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:rooks && yarn run build:demos",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
-    "build": "yarn run build:shared --stream --parallel && yarn run build:independent  --stream --parallel && yarn run build:rooks && yarn run build:demos  --stream --parallel",
+    "build:only":"yarn run build:shared --stream --parallel && yarn run build:independent  --stream --parallel && yarn run build:rooks && yarn run build:demos  --stream --parallel",
+    "build": "yarn run build:only",
     "generate:types": "lerna run generate:types --stream",
     "prerelease-version-bump": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version prerelease --force-publish=* --preid ${GITHUB_SHA}",
     "ga-prerelease-version": "lerna version prerelease --force-publish=* --no-commit-hooks --no-push --yes",
@@ -46,6 +47,7 @@
     "@testing-library/react-hooks": "3.2.1",
     "@types/react": "*",
     "@types/react-dom": "*",
+    "assert": "^2.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "8.0.5",
@@ -53,6 +55,7 @@
     "babel-preset-minify": "0.5.1",
     "browser-env": "3.2.5",
     "chalk": "2.4.2",
+    "glob": "^7.1.6",
     "inquirer": "7.0.0",
     "jest": "^23.6.0",
     "jest-localstorage-mock": "2.4.0",
@@ -71,6 +74,7 @@
     "react-dom": "16.9.0",
     "react-test-renderer": "16.9.0",
     "read-pkg-up": "7.0.0",
+    "readline-sync": "^1.4.10",
     "remark": "^13.0.0",
     "remark-behead": "^2.3.3",
     "remark-preset-lint-markdown-style-guide": "^4.0.0",
@@ -105,5 +109,6 @@
   ],
   "resolutions": {
     "terser": "3.14"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,1 +1,1 @@
-export { useFullscreen as default } from "./useFullscreen";
+export { useFullscreen as default } from "shared/useFullscreen";

@@ -1,1 +1,1 @@
-export { useInput as default } from "./useInput";
+export { useInput as default } from "shared/useInput";

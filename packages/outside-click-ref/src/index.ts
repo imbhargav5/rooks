@@ -1,1 +1,1 @@
-export { useOutsideClickRef as default } from "./useOutsideClickRef";
+export { useOutsideClickRef as default } from "shared/useOutsideClickRef";

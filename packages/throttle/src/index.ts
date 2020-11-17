@@ -1,1 +1,1 @@
-export { useThrottle as default } from "./useThrottle";
+export { useThrottle as default } from "shared/useThrottle";

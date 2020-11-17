@@ -1,1 +1,1 @@
-export { useBoundingclientrect as default } from "./useBoundingclientrect";
+export { useBoundingclientrect as default } from "shared/useBoundingclientrect";

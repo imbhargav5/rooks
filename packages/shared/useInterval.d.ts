@@ -1,8 +1,7 @@
-/// <reference types="node" />
-interface IntervalHandlerAsArray extends Array<null | NodeJS.Timeout | (() => void)> {
+interface IntervalHandlerAsArray extends Array<null | ReturnType<typeof setTimeout> | (() => void)> {
     0: () => void;
     1: () => void;
-    2: NodeJS.Timeout | null;
+    2: ReturnType<typeof setTimeout> | null;
 }
 interface IntervalHandler extends IntervalHandlerAsArray {
 }
@@ -18,5 +17,5 @@ interface IntervalHandler extends IntervalHandlerAsArray {
  *@param {boolean} startImmediate - Whether the interval should start immediately on initialise
  *@return {IntervalHandler}
  */
-declare function useInterval(callback: () => any, intervalDuration: number, startImmediate?: boolean): IntervalHandler;
+declare function useInterval(callback: () => any, intervalDuration: number | null, startImmediate?: boolean): IntervalHandler;
 export { useInterval };

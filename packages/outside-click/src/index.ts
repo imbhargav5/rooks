@@ -1,1 +1,1 @@
-export { useOutsideClick as default } from "./useOutsideClick";
+export { useOutsideClick as default } from "shared/useOutsideClick";
