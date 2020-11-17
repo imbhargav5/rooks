@@ -16,7 +16,8 @@ const filesToRead = [
   "../template/.babelrc",
   "../template/.eslintrc",
   "../template/.npmignore",
-  "../template/index.d.ts.template"
+  "../template/index.d.ts.template",
+  "../template/tsconfig.json",
 ];
 const filesToWrite = [
   "src/index.ts",
@@ -27,7 +28,8 @@ const filesToWrite = [
   ".babelrc",
   ".eslintrc",
   ".npmignore",
-  "index.d.ts"
+  "index.d.ts",
+  "tsconfig.json"
 ];
 
 function installPackages() {

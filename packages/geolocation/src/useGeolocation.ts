@@ -61,7 +61,7 @@ function useGeolocation(
   // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
   geoLocationOptions: IOptions = defaultGeoLocationOptions
 ) {
-  const [geoObj, setGeoObj] = useState(null);
+  const [geoObj, setGeoObj] = useState<IGetGeoLocation|null>(null);
   const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
 
   useEffect(() => {

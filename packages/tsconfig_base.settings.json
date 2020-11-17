@@ -7,6 +7,6 @@
     "target": "ES2016", // specify ECMAScript target version
     "declaration": true,
     "composite": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+  }  
 }

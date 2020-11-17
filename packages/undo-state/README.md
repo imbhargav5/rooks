@@ -105,7 +105,7 @@ const [value, setValue, undo] = useUndoState(0, { maxSize: 30 })
 | Arguments      | Type     | Description                                     | Default value |
 | -------------- | -------- | ----------------------------------------------- | ------------- |
 | initialValue   | boolean  | Initial value of the state                      | false         |
-| Options | Object | An options object for the hook | {maxSize: undefined}       |
+| Options | Object | An options object for the hook | {maxSize: 100}       |
 
 Note: The second argument is an options object which currently accepts a maxSize which governs the maximum number of previous states to keep track of.
 

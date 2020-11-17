@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 
 function useThrottle(fn: Function, timeout: number = 300) {
   const [ready, setReady] = useState(true);
-  const timerRef = useRef(null);
+  const timerRef = useRef<number | undefined>(undefined);
 
   if (!fn || typeof fn !== "function") {
     throw new Error(
@@ -24,10 +24,10 @@ function useThrottle(fn: Function, timeout: number = 300) {
 
   useEffect(() => {
     if (!ready) {
-      timerRef.current = setTimeout(() => {
+      timerRef.current = window.setTimeout(() => {
         setReady(true);
       }, timeout);
-      return () => clearTimeout(timerRef.current);
+      return () => window.clearTimeout(timerRef.current);
     }
   }, [ready, timeout]);
   return [throttledFn, ready];

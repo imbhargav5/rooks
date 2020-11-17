@@ -2,7 +2,7 @@ import { useEffect, useRef, MutableRefObject, useCallback } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "shared/doesIdentifierMatchKeyboardEvent";
 
 type TPressedKeyMapping = {
-  [key: string]: boolean;
+  [key: string]: boolean|undefined;
 };
 
 interface Options {
@@ -64,7 +64,7 @@ function useKeys(
 
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent) {
-      let pressedKeyIdentifier = null;
+      let pressedKeyIdentifier:string|null = null;
       let areAllKeysFromListPressed = false;
       // First detect the key that was pressed;
       keysList.forEach(identifier => {
@@ -74,7 +74,7 @@ function useKeys(
           return;
         }
       });
-      if (keysList.every(identifier => PressedKeyMapping[identifier])) {
+      if (keysList.every(identifier => Boolean(PressedKeyMapping[identifier]))) {
         areAllKeysFromListPressed = true;
       }
 
@@ -87,7 +87,9 @@ function useKeys(
          * disable identifier immediately
          */
         if (!continuous) {
-          PressedKeyMapping[pressedKeyIdentifier] = false;
+          if(pressedKeyIdentifier !== null){
+            PressedKeyMapping[pressedKeyIdentifier] = false;
+          }
         }
       }
     },

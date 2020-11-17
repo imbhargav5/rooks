@@ -1,7 +1,11 @@
 import { useCallback, useState } from 'react'
-import { UndoStateOptions } from './index.d'
 
-const defaultOptions: UndoStateOptions = { maxSize: undefined }
+interface UndoStateOptions {
+    maxSize: number
+}
+  
+
+const defaultOptions: UndoStateOptions = { maxSize: 100 }
 
 /**
  * Drop in replacement for useState hook but with undo functionality.
@@ -10,7 +14,8 @@ const defaultOptions: UndoStateOptions = { maxSize: undefined }
  * @param {UndoStateOptions} [{ maxSize }=defaultOptions]
  * @returns {[any, Function, Function]}
  */
-const useUndoState = (defaultValue: any, { maxSize }: UndoStateOptions = defaultOptions): [any, (prevState: any) => any, Function] => {
+const useUndoState = (defaultValue: any, options: UndoStateOptions): [any, (prevState: any) => any, Function] => {
+    const {maxSize} = Object.assign({}, defaultOptions, options)
     const [value, setValue] = useState([defaultValue])
 
     const push = useCallback(

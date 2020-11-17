@@ -14,14 +14,14 @@ interface IntervalHandlerAsObject {
   /**
    * IntervalId of the interval
    */
-  intervalId: NodeJS.Timeout | null;
+  intervalId: ReturnType<typeof setTimeout>  | null;
 }
 
 interface IntervalHandlerAsArray
-  extends Array<null | NodeJS.Timeout | (() => void)> {
+  extends Array<null | ReturnType<typeof setTimeout>  | (() => void)> {
   0: () => void;
   1: () => void;
-  2: NodeJS.Timeout | null;
+  2: ReturnType<typeof setTimeout>  | null;
 }
 
 interface IntervalHandler extends IntervalHandlerAsArray {}
@@ -40,10 +40,10 @@ interface IntervalHandler extends IntervalHandlerAsArray {}
  */
 function useInterval(
   callback: () => any,
-  intervalDuration: number,
+  intervalDuration: number | null,
   startImmediate: boolean = false
 ): IntervalHandler {
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [intervalId, setIntervalId] = useState<ReturnType<typeof setTimeout>  | null>(null);
   const [isRunning, setIsRunning] = useState(startImmediate);
   const savedCallback = useRef<() => any>();
 
