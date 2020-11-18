@@ -29,7 +29,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.0.0-canary.6",
+  "version": "4.0.0-canary.7",
   "_id": "@rooks/use-debounce@",
   "publishConfig": {
     "access": "public"
@@ -40,6 +40,5 @@
   "dependencies": {
     "lodash.debounce": "4.0.8"
   },
-  
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }

@@ -20,7 +20,7 @@
     "pregenerate:types": "rimraf index.d.ts",
     "generate:types": "tsc"
   },
-  "version": "4.0.0-canary.6",
+  "version": "4.0.0-canary.7",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
@@ -35,6 +35,5 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }

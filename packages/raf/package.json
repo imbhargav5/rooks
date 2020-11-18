@@ -29,7 +29,7 @@
     "hooks",
     "raf"
   ],
-  "version": "4.0.0-canary.6",
+  "version": "4.0.0-canary.7",
   "_id": "@rooks/use-raf@",
   "publishConfig": {
     "access": "public"
@@ -37,6 +37,5 @@
   "dependencies": {
     "raf": "3.4.1"
   },
-  
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }

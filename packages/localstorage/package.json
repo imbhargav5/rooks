@@ -28,7 +28,7 @@
     "rooks",
     "hooks"
   ],
-  "version": "4.0.0-canary.6",
+  "version": "4.0.0-canary.7",
   "_id": "@rooks/use-localstorage@",
   "publishConfig": {
     "access": "public"
@@ -36,6 +36,5 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
 }
