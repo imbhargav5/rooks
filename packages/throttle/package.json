@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A throttle hook for react",
   "name": "@rooks/use-throttle",
-  "homepage": "https://stories.react-hooks.org/?path=/story/usethrottle--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-throttle",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

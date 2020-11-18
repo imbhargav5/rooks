@@ -6,7 +6,7 @@
   "source": "src/index.ts",
   "description": "Debounce hook for react",
   "name": "@rooks/use-debounce",
-  "homepage": "https://stories.react-hooks.org/?path=/story/usedebounce--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-debounce",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

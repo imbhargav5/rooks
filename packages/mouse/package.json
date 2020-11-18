@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for mouse",
   "name": "@rooks/use-mouse",
-  "homepage": "https://stories.react-hooks.org/?path=/story/usemouse--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-mouse",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

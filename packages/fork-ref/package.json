@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
   "name": "@rooks/use-fork-ref",
-  "homepage": "https://stories.react-hooks.org/?path=/story/useforkref--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-fork-ref",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

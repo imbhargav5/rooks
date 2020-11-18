@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "Local Storage hook for React",
   "name": "@rooks/use-localstorage",
-  "homepage": "https://stories.react-hooks.org/?path=/story/uselocalstorage--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-localstorage",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

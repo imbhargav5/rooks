@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "A React Hooks package for select",
   "name": "@rooks/use-select",
-  "homepage": "https://stories.react-hooks.org/?path=/story/useselect--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-select",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

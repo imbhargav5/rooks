@@ -5,7 +5,7 @@
   "types": "lib/index.d.ts",
   "description": "Session storage react hook. Easily manage session storage values",
   "name": "@rooks/use-sessionstorage",
-  "homepage": "https://stories.react-hooks.org/?path=/story/usesessionstorage--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-sessionstorage",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
