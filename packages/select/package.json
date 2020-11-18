@@ -29,7 +29,7 @@
     "hooks",
     "list"
   ],
-  "version": "4.0.0-canary.8",
+  "version": "4.0.0-canary.9",
   "_id": "@rooks/use-select@",
   "publishConfig": {
     "access": "public"

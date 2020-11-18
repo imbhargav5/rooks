@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.0.0-canary.8",
+  "version": "4.0.0-canary.9",
   "_id": "@rooks/use-boundingclientrect-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
