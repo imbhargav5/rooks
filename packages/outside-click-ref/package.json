@@ -6,7 +6,7 @@
   "license": "MIT",
   "description": "A hook that can track a click event outside a ref. Returns a callbackRef.",
   "name": "@rooks/use-outside-click-ref",
-  "homepage": "https://stories.react-hooks.org/?path=/story/useoutsideclickref--basic-example",
+  "homepage": "https://react-hooks.org/docs/use-outside-click-ref",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
