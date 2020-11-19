@@ -7,10 +7,6 @@
   "compilerOptions": {
     "rootDir": "../",
     "outDir": "./lib",
-    "declarationDir": "./lib",
-  },
-  "references": [{
-    "path": "../shared"
-  }]
+  }
 }
   
