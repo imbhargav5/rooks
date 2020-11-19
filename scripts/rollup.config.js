@@ -37,10 +37,8 @@ const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
   nodeResolve(),
-  typescript(),
-  // typescript2({    
-  //   useTsconfigDeclarationDir: true
-  // }),
+  //typescript(),
+  typescript2(),
   sourceMaps(),
   json(),
   // babel({
@@ -64,7 +62,6 @@ const configBase = {
 
   // \0 is rollup convention for generated in memory modules
   external: id => {
-    console.log(id);
     if (id.startsWith("@rooks") || id.startsWith("shared")) {
       return false;
     }

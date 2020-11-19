@@ -12,7 +12,6 @@ import pkg from "./package.json";
 const propTypeIgnore = { "import PropTypes from 'prop-types';": "'';" };
 
 const cjs = {
-  exports: "named",
   format: "cjs",
   sourcemap: true
 };
@@ -54,9 +53,7 @@ const prodPlugins = [
     ...propTypeIgnore,
     "process.env.NODE_ENV": JSON.stringify("production")
   }),
-  terser({
-    sourcemap: true
-  })
+  terser()
 ];
 
 const globals = { react: "React", "react-dom": "ReactDOM" };

@@ -5,8 +5,7 @@
     "module": "ESNEXT", // specify module code generation
     "jsx": "react", // use typescript to transpile jsx to js
     "target": "ES2016", // specify ECMAScript target version
-    "declaration": true,
     "composite": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }  
 }
