@@ -29,7 +29,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.0.0-canary.9",
+  "version": "4.0.0-canary.10",
   "_id": "@rooks/use-countdown@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

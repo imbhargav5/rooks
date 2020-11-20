@@ -26,7 +26,7 @@
     "rooks",
     "input hook"
   ],
-  "version": "4.0.0-canary.9",
+  "version": "4.0.0-canary.10",
   "_id": "@rooks/use-input@",
   "publishConfig": {
     "access": "public"
