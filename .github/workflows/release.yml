@@ -45,11 +45,6 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc      
       - name: Publish release version
         run: yarn run ga-npm-publish
-      - name: deploy
-        if: steps.is_master.outputs.result == 1
-        env:
-          ZEIT_TOKEN: ${{secrets.ZEIT_TOKEN}}
-        run: yarn deploy --token $ZEIT_TOKEN
   always_job:
     name: Aways run job
     runs-on: ubuntu-latest
