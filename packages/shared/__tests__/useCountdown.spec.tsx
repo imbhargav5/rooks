@@ -2,7 +2,6 @@
  * @jest-environment jsdom
  */
 import { renderHook, act } from '@testing-library/react-hooks';
-
 import {useCountdown} from '../useCountdown';
 
 jest.useFakeTimers();
@@ -13,19 +12,22 @@ describe('useCountdown', () => {
   })
   // it('works', () => {
   //   const OriginalDate = global.Date;
-  // const now = Date.now();
+  //   const now = Date.now();
 
-  // let advancedTime;
+  //   let advancedTime;
 
-  // const advanceTimersInsideAct = time => {
-  //   advancedTime += time;
-  //   act(() => jest.advanceTimersByTime(time));
-  // };
+  //   const advanceTimersInsideAct = time => {
+  //     advancedTime += time;
+  //     act(() => {
+  //       jest.advanceTimersByTime(time)
+  //     });
+  //   };
 
   // beforeEach(() => {
   //   advancedTime = 0;
   //   global.Date = class extends Date {
   //     constructor(time) {
+  //       super(time);
   //       return new OriginalDate(time || now + advancedTime);
   //     }
   //   };

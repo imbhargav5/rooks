@@ -1,7 +1,5 @@
-import React from 'react'
 import { renderHook } from "@testing-library/react-hooks";
 import { useCounter } from "../useCounter";
-//import {act} from 'react-dom/test-utils'
 import TestRenderer from 'react-test-renderer';
 const {act} = TestRenderer;
 

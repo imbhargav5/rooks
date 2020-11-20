@@ -2,15 +2,56 @@
 /**
  * @jest-environment jsdom
  */
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useDebounce } from "../../useDebounce";
-import { render, cleanup, fireEvent, act, wait } from "@testing-library/react";
 import "./setupTests";
+import { renderHook } from "@testing-library/react-hooks";
+import TestRenderer from 'react-test-renderer';
+const {act} = TestRenderer;
 
 describe("useDebounce", () => {
   it("should be defined", () => {
     expect(useDebounce).toBeDefined()
   })
+})
+
+describe("useDebounce behavior", () =>{
+    const DEBOUNCE_WAIT = 500;
+    let useCustomDebounce
+    beforeEach(() => {
+       useCustomDebounce = function() {
+        const [value, setValue] = useState(0);
+        function log() {
+          setValue(value + 1);
+        }
+        const cb = useDebounce(log, DEBOUNCE_WAIT)
+        return {value, cb};
+      }      
+    })
+    it('runs only once if cb is called repeatedly in wait period', async() =>{
+      const {result} = renderHook(() => useCustomDebounce());
+      act(()=>{
+        result.current.cb();
+        result.current.cb();
+        result.current.cb();
+      });
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      expect(result.current.value).toBe(1)
+    })  
+    it('works properly if waited', async() =>{
+      const {result} = renderHook(() => useCustomDebounce());
+      act(()=>{
+        result.current.cb();
+        result.current.cb();
+        result.current.cb();
+      });
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      act(()=>{
+        result.current.cb();        
+      });
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      expect(result.current.value).toBe(2)
+    })    
 })
 
 
