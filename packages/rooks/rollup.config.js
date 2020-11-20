@@ -25,12 +25,8 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  nodeResolve({
-    module: true
-  }),
-  typescript2({
-    useTsconfigDeclarationDir: true
-  }),
+  nodeResolve(),
+  typescript2(),
   sourceMaps(),
   json(),
   babel({
@@ -39,9 +35,6 @@ const commonPlugins = [
   }),
   commonjs({
     ignoreGlobal: true,
-    namedExports: {
-      "react-is": ["isElement", "isValidElementType", "ForwardRef"]
-    }
   }),
   replace({
     __VERSION__: JSON.stringify(pkg.version)
