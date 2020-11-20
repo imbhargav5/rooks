@@ -1,15 +1,13 @@
 import path from "path";
-import nodeResolve from "rollup-plugin-node-resolve";
-import replace from "rollup-plugin-replace";
-import commonjs from "rollup-plugin-commonjs";
-import babel from "rollup-plugin-babel";
-import json from "rollup-plugin-json";
-import flow from "rollup-plugin-flow";
-//import typescript from "rollup-plugin-typescript";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
+import capitalize from "lodash.capitalize";
+import typescript from "@rollup/plugin-typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
-import capitalize from "lodash.capitalize";
 
 function getHookKeyFromPkgName(pkgName) {
   return `use${pkgName
@@ -38,30 +36,16 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
-  // typescript({
-  //   // moduleResolution: "node",
-  //   // strictNullChecks: true, // enable strict null checks as a best practice
-  //   // module: "ES2015", // specify module code generation
-  //   // jsx: "react", // use typescript to transpile jsx to js
-  //   // target: "ES2016", // specify ECMAScript target version
-  //   include: ["../../**/src/*.ts", "../../node_modules/shared/*.ts"],
-  //   types: ["shared"],
-  //   exclude: ["node_modules"]
-  // }),
-  typescript2({    
-    useTsconfigDeclarationDir: true
-  }),
+  nodeResolve(),
+  //typescript(),
+  typescript2(),
   sourceMaps(),
   json(),
-  nodeResolve(),
   // babel({
   //   exclude: "node_modules/**"
   // }),
   commonjs({
-    ignoreGlobal: true,
-    namedExports: {
-      "react-is": ["isElement", "isValidElementType", "ForwardRef"]
-    }
+    ignoreGlobal: true,    
   })
 ];
 
@@ -70,9 +54,7 @@ const prodPlugins = [
     ...propTypeIgnore,
     "process.env.NODE_ENV": JSON.stringify("production")
   }),
-  terser({
-    sourcemap: true
-  })
+  terser()
 ];
 
 const configBase = {

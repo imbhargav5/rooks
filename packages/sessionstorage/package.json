@@ -11,14 +11,12 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    "test": "jest -c jest.config.js",
-    "lint": "eslint src test",
-    "clean": "rimraf lib",
+    "test": "sh ../../scripts/test.sh",
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
-    "build": "rollup -c ../../scripts/rollup.config.js",
-    "prepublish": "yarn run build",
-    "pregenerate:types": "rimraf index.d.ts",
-    "generate:types": "tsc"
+    "build": "sh ../../scripts/build.sh",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "use",

@@ -1,7 +1,3 @@
 {
-  "extends": "./tsconfig_base.settings.json",
-  "include": [
-    "node_modules/shared/*.ts",
-    "node_modules/@rooks/**/*.ts"
-  ]
+  "extends": "./tsconfig_base.settings.json"
 }

@@ -1,8 +1,8 @@
-import nodeResolve from "rollup-plugin-node-resolve";
-import replace from "rollup-plugin-replace";
-import commonjs from "rollup-plugin-commonjs";
-import babel from "rollup-plugin-babel";
-import json from "rollup-plugin-json";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
+import commonjs from "@rollup/plugin-commonjs";
+import babel from "@rollup/plugin-babel";
+import json from "@rollup/plugin-json";
 import typescript2 from "rollup-plugin-typescript2";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
@@ -12,7 +12,6 @@ import pkg from "./package.json";
 const propTypeIgnore = { "import PropTypes from 'prop-types';": "'';" };
 
 const cjs = {
-  exports: "named",
   format: "cjs",
   sourcemap: true
 };
@@ -26,14 +25,14 @@ const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
+  nodeResolve({
+    module: true
+  }),
   typescript2({
     useTsconfigDeclarationDir: true
   }),
   sourceMaps(),
   json(),
-  nodeResolve({
-    module: true
-  }),
   babel({
     exclude: ["node_modules/**", "../../node_modules/**"],
     plugins: ["@babel/plugin-external-helpers"]
@@ -54,9 +53,7 @@ const prodPlugins = [
     ...propTypeIgnore,
     "process.env.NODE_ENV": JSON.stringify("production")
   }),
-  terser({
-    sourcemap: true
-  })
+  terser()
 ];
 
 const globals = { react: "React", "react-dom": "ReactDOM" };

@@ -1,0 +1,1 @@
+tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c ../../scripts/rollup.config.js

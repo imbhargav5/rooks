@@ -14,14 +14,12 @@
     "url": "git+https://github.com/react-hooks-org/rooks.git"
   },
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c rollup.config.js",
+    "build": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c rollup.config.js",
     "lint": "eslint src test",
     "test": "jest",
-    "prepublish": "yarn run build",
-    "pregenerate:types": "rimraf index.d.ts",
-    "generate:types": "tsc"
+    "prepublish": "yarn run build"
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"

@@ -1,21 +1,12 @@
 {
   "extends": "../tsconfig_independent.settings.json",
   "include": [
-    "node_modules/shared/*.ts"
+    "./src/index.ts",
+    "../shared/**/*.ts",
   ],
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "../",
     "outDir": "./lib",
-    "baseUrl": "../../",
-    "declarationDir": "./lib",
-    "paths": {
-      "shared/*": [
-        "../shared/*"
-      ]
-    }
-  },
-  "references": [{
-    "path": "../shared"
-  }]
+  }
 }
   
