@@ -6,7 +6,7 @@ interface InputHandler {
   /**
    * The current value of the input
    */
-  value: string;
+  value: any;
 
   /**
    * Function to handle onChange of an input element
@@ -21,12 +21,12 @@ interface Options {
    *
    * Validator function which can be used to prevent updates
    *
-   * @param {string} New value
-   * @param {string} Current value
+   * @param {any} New value
+   * @param {any} Current value
    * @return {boolean} Whether an update should happen or not
    *
    * */
-  validate?: (newValue: string, currentValue: string) => boolean;
+  validate?: (newValue: any, currentValue: any) => boolean;
 }
 
 const defaultOptions: Options = {};
@@ -38,12 +38,12 @@ const defaultOptions: Options = {};
  * Handles an input's value and onChange props internally to
  * make text input creation process easier
  *
- * @param {string} [initialValue=""] Initial value of the input
+ * @param {any} [initialValue=""] Initial value of the input
  * @param {Options} [opts={}] Options object
  * @returns {InputHandler} Input handler with value and onChange
  */
 function useInput(
-  initialValue: string = "",
+  initialValue: any = "",
   opts: Options = defaultOptions
 ): InputHandler {
   const [value, setValue] = useState(initialValue);

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import useDidUpdate from "..";
+import {useDidUpdate} from "../useDidUpdate";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("useDidUpdate", () => {
@@ -34,13 +34,13 @@ describe("useDidUpdate", () => {
   it("initializes correctly", () => {
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(0);
   });
 
   it("does not get called on mount", () => {
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(0);
   });
 
   it("gets called if a state value changes", () => {
@@ -48,12 +48,12 @@ describe("useDidUpdate", () => {
     const renderedElement = getByTestId("element");
     const valueElement = getByTestId("value");
     const triggerElement = getByTestId("trigger-btn");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(0);
     act(() => {
       fireEvent.click(triggerElement);
     });
-    expect(parseInt(valueElement.textContent)).toEqual(1);
-    expect(parseInt(renderedElement.textContent)).toEqual(1);
+    expect(parseInt(String(valueElement.textContent))).toEqual(1);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(1);
   });
 
   it("does not get called if state value has not updated", () => {
@@ -61,17 +61,17 @@ describe("useDidUpdate", () => {
     const renderedElement = getByTestId("element");
     const valueElement = getByTestId("value");
     const triggerElement = getByTestId("trigger-btn");
-    expect(parseInt(renderedElement.textContent)).toEqual(0);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(0);
     act(() => {
       fireEvent.click(triggerElement);
     });
-    expect(parseInt(valueElement.textContent)).toEqual(1);
-    expect(parseInt(renderedElement.textContent)).toEqual(1);
+    expect(parseInt(String(valueElement.textContent))).toEqual(1);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(1);
     act(() => {
       fireEvent.click(triggerElement);
     });
-    expect(parseInt(valueElement.textContent)).toEqual(2);
-    expect(parseInt(renderedElement.textContent)).toEqual(1);
+    expect(parseInt(String(valueElement.textContent))).toEqual(2);
+    expect(parseInt(String(renderedElement.textContent))).toEqual(1);
   });
 });
 

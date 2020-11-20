@@ -2,11 +2,9 @@
 
 import { useBoundingclientrect } from "../useBoundingclientrect";
 import { useBoundingclientrectRef } from "../useBoundingclientrectRef";
-import { useDidMount } from "../useDidMount";
 import { useDidUpdate } from "../useDidUpdate";
 import { useForkRef } from "../useForkRef";
 import { useFullscreen } from "../useFullscreen";
-import { useGeolocation } from "../useGeolocation";
 import { useInput } from "../useInput";
 import { useIntersectionObserverRef } from "../useIntersectionObserverRef";
 import { useInterval } from "../useInterval";
@@ -48,12 +46,6 @@ describe("useBoundingclientrectRef", () => {
     });
 });
 
-describe('useDidMount', () => {
-    it("is defined", () => {
-        expect(useDidMount).toBeDefined()
-    })
-});
-
 describe('useDidUpdate', () => {
     it("is defined", () => {
         expect(useDidUpdate).toBeDefined()
@@ -73,14 +65,6 @@ describe('useFullscreen', () => {
         expect(useFullscreen).toBeDefined()
     })
 });
-
-
-describe('useGeolocation', () => {
-    it("is defined", () => {
-        expect(useGeolocation).toBeDefined()
-    })
-});
-
 
 
 describe('useInput', () => {
