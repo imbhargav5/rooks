@@ -9,7 +9,6 @@ const chalk = require("chalk");
 
 const filesToRead = [
   "../template/index.template",
-  "../template/index.spec.template",
   "../template/package.json",
   "../template/README.md",
   "../template/Examples.md",
@@ -21,7 +20,6 @@ const filesToRead = [
 ];
 const filesToWrite = [
   "src/index.ts",
-  "test/index.spec.js",
   "package.json",
   "README.md",
   "Examples.md",
@@ -110,7 +108,6 @@ inquirer.prompt(questions).then(answers => {
   const dirPath = path.join(__dirname, "../", `packages/${directoryName}`);
   // create package directory
   makeDir.sync(path.join(dirPath, "/src"));
-  makeDir.sync(path.join(dirPath, "/test"));
 
   filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
     const srcToWrite = transformedSources[index];
