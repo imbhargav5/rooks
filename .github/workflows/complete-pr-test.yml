@@ -1,0 +1,43 @@
+name: Complte Pull Request Test
+
+on: 
+  issue_comment:
+    types: [created]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Rebase
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/pr-test')
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          version: 12.x
+      - run: git config --global user.email "me@imbhargav5.com"
+      - run: git config --global user.name "Bhargav Ponnapalli"
+      - name: Install now
+        run: now --version || npm i -g now
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install project dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
+        run: yarn
+      - name: build
+        run: yarn build
+      - name: test
+        run: yarn test
+  always_job:
+    name: Aways run job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Always run
+        run: echo "This job is used to prevent the workflow to fail when all other jobs are skipped."
