@@ -12,7 +12,7 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    "test": "sh ../../scripts/test.sh",
+    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
