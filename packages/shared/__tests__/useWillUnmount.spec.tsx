@@ -9,7 +9,7 @@ import {
   act,
   getByTestId
 } from "@testing-library/react";
-import useWillUnmount from "..";
+import {useWillUnmount} from "../useWillUnmount";
 
 describe("useWillUnmount", () => {
   let App;
@@ -50,8 +50,8 @@ describe("useWillUnmount", () => {
 
   it("should only call the unmount function only when unmount", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container, "value");
-    const toggleChildElement = getByTestId(container, "toggle-child");
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    const toggleChildElement = getByTestId(container as HTMLElement, "toggle-child");
     expect(mockCallback.mock.calls.length).toBe(0);
     act(() => {
       fireEvent.click(valueElement);
