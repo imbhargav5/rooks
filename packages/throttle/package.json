@@ -17,8 +17,6 @@
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"
-    
-
   },
   "keywords": [
     "use",
@@ -31,7 +29,7 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "version": "4.0.0-canary.12",
+  "version": "4.0.0-canary.13",
   "_id": "@rooks/use-throttle@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

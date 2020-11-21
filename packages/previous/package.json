@@ -16,8 +16,6 @@
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"
-    
-
   },
   "keywords": [
     "use",
@@ -26,7 +24,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.0.0-canary.12",
+  "version": "4.0.0-canary.13",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"

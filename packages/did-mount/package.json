@@ -16,8 +16,6 @@
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"
-    
-
   },
   "keywords": [
     "use",
@@ -29,7 +27,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "4.0.0-canary.12",
+  "version": "4.0.0-canary.13",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"

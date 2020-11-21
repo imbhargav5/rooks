@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "4.0.0-canary.12",
+  "version": "4.0.0-canary.13",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
   "homepage": "https://github.com/react-hooks-org/rooks#readme",
@@ -17,7 +17,7 @@
     "clean": "rimraf lib dist",
     "prebuild": "yarn clean",
     "build": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c rollup.config.js && rollup -c dts.rollup.config.js && rm -rf dist",
-    "lint": "eslint src test" 
+    "lint": "eslint src test"
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"
