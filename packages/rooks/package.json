@@ -18,7 +18,8 @@
     "prebuild": "yarn clean",
     "build": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c rollup.config.js && rollup -c dts.rollup.config.js && rm -rf dist",
     "lint": "eslint src test",
-    "prepublish": "yarn run build"
+    
+
   },
   "bugs": {
     "url": "https://github.com/react-hooks-org/rooks/issues"

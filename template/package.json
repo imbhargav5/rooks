@@ -19,7 +19,8 @@
     "build": "sh ../../scripts/build.sh",
 "dts-build": "sh ../../scripts/dts-build.sh",
 
-    "prepublish": "yarn run build"
+    
+
   },
   "keywords": [
     "use",
