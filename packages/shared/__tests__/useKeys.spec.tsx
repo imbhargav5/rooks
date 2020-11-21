@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useKeys from "..";
+import {useKeys} from "../useKeys";
 import {
   render,
   cleanup,
@@ -79,9 +79,8 @@ describe("useKeys", () => {
 
   it("should trigger the calback when pressed m + r", () => {
     const { container } = render(<App />);
-    console.log("container.innerHTML before", container.innerHTML);
-    const firstcallbackP = getByTestId(container, "first-callback");
-    const InputDom = getByTestId(container, "input-dom");
+    const firstcallbackP = getByTestId(container as HTMLElement, "first-callback");
+    const InputDom = getByTestId(container as HTMLElement, "input-dom");
     act(() => {
       fireEvent.keyDown(InputDom, { key: "m", code: "keyM", charCode: 77 });
     });
@@ -89,14 +88,13 @@ describe("useKeys", () => {
       fireEvent.keyDown(InputDom, { key: "r", code: "keyR", charCode: 82 });
     });
 
-    console.log("TCL: container.innerHTML after", container.innerHTML);
     expect(firstcallbackP.innerHTML).toBe("1");
   });
 
   it("should trigger the callback when pressed ctrlLeft + s", () => {
     const { container } = render(<App />);
 
-    const firstcallbackP = getByTestId(container, "first-callback");
+    const firstcallbackP = getByTestId(container  as HTMLElement, "first-callback");
     // let InputDom = getByTestId(container, "input-dom");
     fireEvent.keyDown(document, {
       key: "Control",
@@ -111,8 +109,8 @@ describe("useKeys", () => {
   it("should not trigger whenever 'when ' value is false and trigger whenever'when' value is true", () => {
     const { container } = render(<App />);
 
-    const firstcallbackP = getByTestId(container, "first-callback");
-    const ToggleBtn = getByTestId(container, "toggle");
+    const firstcallbackP = getByTestId(container  as HTMLElement, "first-callback");
+    const ToggleBtn = getByTestId(container  as HTMLElement, "toggle");
     fireEvent.click(ToggleBtn);
 
     fireEvent.keyDown(document, {
@@ -171,7 +169,7 @@ describe("useKeys: continuous mode", () => {
   it("should trigger continuously whenever 'continuous' is true", () => {
     const { container } = render(<App />);
 
-    const testValueElement = getByTestId(container, "value");
+    const testValueElement = getByTestId(container  as HTMLElement, "value");
 
     fireEvent.keyDown(document, {
       key: "Control",

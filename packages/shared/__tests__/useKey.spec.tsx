@@ -2,7 +2,8 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useKey from "..";
+import {useKey} from "../useKey";
+
 import {
   render,
   cleanup,
@@ -56,8 +57,8 @@ describe("useKey", () => {
 
   it("should trigger the calback when pressed on document or target", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container, "value");
-    const inputElement = getByTestId(container, "input");
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    const inputElement = getByTestId(container as HTMLElement, "input");
     act(() => {
       fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
     });
@@ -114,8 +115,8 @@ describe("non array input", () => {
 
   it("should trigger the calback when pressed on document or target", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container, "value");
-    const inputElement = getByTestId(container, "input");
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    const inputElement = getByTestId(container as HTMLElement, "input");
     act(() => {
       fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
     });
@@ -189,9 +190,9 @@ describe("when", () => {
   it("should not trigger whenever 'when ' value is false and trigger when 'when' is true", () => {
     const { container } = render(<App />);
     console.log("container.innerHTML before", container.innerHTML);
-    const valueElement = getByTestId(container, "value");
-    const inputElement = getByTestId(container, "input");
-    const toggleWhenElement = getByTestId(container, "toggle-when");
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    const inputElement = getByTestId(container as HTMLElement, "input");
+    const toggleWhenElement = getByTestId(container as HTMLElement, "toggle-when");
     act(() => {
       fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
     });

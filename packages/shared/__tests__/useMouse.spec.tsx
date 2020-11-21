@@ -3,11 +3,11 @@
  */
 import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
-import useMouse from "..";
+import {useMouse} from "../useMouse";
 
-const TestMouse = () => {
+function TestMouse(){
   const mouse = useMouse();
-  return JSON.stringify(mouse);
+  return <>{JSON.stringify(mouse)}</>;
 };
 
 describe("useMouse", () => {

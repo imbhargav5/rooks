@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useLocalstorage from "..";
+import {useLocalstorage} from "../useLocalstorage";
 import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
 describe("useLocalstorage defined", () => {
@@ -32,7 +32,7 @@ describe("useLocalstorage with object destructuring", () => {
 
   it("it initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container, "value");
+    const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 });
@@ -65,27 +65,27 @@ describe("useLocalstorage with array destructuring", () => {
 
   it("it initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container, "value");
+    const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
   it("setting the new value ", () => {
     const { container } = render(<App />);
-    const setToNewValueBtn = getByTestId(container, "new-value");
+    const setToNewValueBtn = getByTestId(container as HTMLElement, "new-value");
     act(() => {
       fireEvent.click(setToNewValueBtn)
     })
-    const valueElement = getByTestId(container, "value");
+    const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("new value");
   })
 
   it("unsetting the value", () => {
     const { container } = render(<App />);
-    const unsetValueBtn = getByTestId(container, "unset-value");
+    const unsetValueBtn = getByTestId(container as HTMLElement, "unset-value");
     act(() => {
       fireEvent.click(unsetValueBtn)
     })
-    const valueElement = getByTestId(container, "value");
+    const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("");
   })
 });

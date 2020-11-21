@@ -1,15 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
-import useOnWindowResize from "..";
-import {
-  render,
-  cleanup,
+import {useOnWindowResize} from "../useOnWindowResize";
+import {  
   fireEvent,
-  act,
-  getByTestId
 } from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
 
 describe("useOnWindowResize", () => {
   it("should be defined", () => {
@@ -17,17 +13,9 @@ describe("useOnWindowResize", () => {
   });
 
   describe("basic", () => {
-    let App;
     const mockCallback = jest.fn(() => {});
-    beforeEach(() => {
-      App = function() {
-        useOnWindowResize(mockCallback);
-        return null;
-      };
-    });
-    afterEach(cleanup); // <-- add this
     it("should call callback after resize", () => {
-      render(<App />);
+      renderHook(()=>useOnWindowResize(mockCallback))
       fireEvent(window, new Event("resize"));
       expect(mockCallback.mock.calls.length).toBe(1);
       fireEvent(window, new Event("resize"));
