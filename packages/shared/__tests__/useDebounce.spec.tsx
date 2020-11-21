@@ -3,28 +3,10 @@
  * @jest-environment jsdom
  */
 import  { useState } from "react";
-import { useDebounce } from "../../useDebounce";
+import { useDebounce } from "../useDebounce";
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from 'react-test-renderer';
 const {act} = TestRenderer;
-
-// this is just a little hack to silence a warning that we'll get until react
-// fixes this: https://github.com/facebook/react/pull/14853
-const originalError = console.error;
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return;
-    }
-    originalError.call(console, ...args);
-  };
-});
-
-afterAll(() => {
-  console.error = originalError;
-});
-
-
 
 describe("useDebounce", () => {
   it("should be defined", () => {
@@ -52,7 +34,8 @@ describe("useDebounce behavior", () =>{
         result.current.cb();
         result.current.cb();
       });
-      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT))          
+      act(() => {})
       expect(result.current.value).toBe(1)
     })  
     it('works properly if waited', async() =>{
@@ -62,11 +45,11 @@ describe("useDebounce behavior", () =>{
         result.current.cb();
         result.current.cb();
       });
-      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT))          
       act(()=>{
         result.current.cb();        
       });
-      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+      await new Promise(resolve => setTimeout(() => resolve(), DEBOUNCE_WAIT))                
       expect(result.current.value).toBe(2)
     })    
 })
