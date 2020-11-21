@@ -2,7 +2,8 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
+
   "description": "A react hook for using setInterval",
   "name": "@rooks/use-interval",
   "homepage": "https://react-hooks.org/docs/use-interval",

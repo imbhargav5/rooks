@@ -2,7 +2,8 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
+
   "license": "MIT",
   "description": "A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked. ",
   "name": "@rooks/use-boundingclientrect-ref",

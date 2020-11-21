@@ -2,7 +2,8 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
+
   "license": "MIT",
   "description": "A hook to provide the geolocation info on client side.",
   "name": "@rooks/use-geolocation",
