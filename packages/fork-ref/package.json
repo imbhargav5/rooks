@@ -2,7 +2,8 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
+
   "license": "MIT",
   "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
   "name": "@rooks/use-fork-ref",
