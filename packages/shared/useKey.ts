@@ -5,11 +5,11 @@ interface Options {
   /**
    * Condition which if true, will enable the event listeners
    */
-  when: boolean;
+  when?: boolean;
   /**
    * Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp
    */
-  eventTypes: Array<string | number>;
+  eventTypes?: Array<string | number>;
   /**
    * target ref on which the events should be listened. If no target is specified,
    * events are listened to on the window

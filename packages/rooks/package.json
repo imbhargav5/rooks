@@ -18,7 +18,6 @@
     "prebuild": "yarn clean",
     "build": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c rollup.config.js",
     "lint": "eslint src test",
-    "test": "jest",
     "prepublish": "yarn run build"
   },
   "bugs": {

@@ -7,7 +7,7 @@ import debounce from "lodash.debounce";
  * @param {number} wait The duration to debounce
  * @returns {function} The debounced callback
  */
-function useDebounce(callback: Function, wait: number, options: {}): Function {
+function useDebounce(callback: Function, wait: number, options?: {}): Function {
   function createDebouncedCallback(fn: Function): Function {
     return debounce(fn, wait, options);
   }

@@ -14,7 +14,7 @@ const defaultOptions: UndoStateOptions = { maxSize: 100 }
  * @param {UndoStateOptions} [{ maxSize }=defaultOptions]
  * @returns {[any, Function, Function]}
  */
-const useUndoState = (defaultValue: any, options: UndoStateOptions): [any, (prevState: any) => any, Function] => {
+const useUndoState = (defaultValue: any, options?: UndoStateOptions): [any, (prevState: any) => any, () => void] => {
     const {maxSize} = Object.assign({}, defaultOptions, options)
     const [value, setValue] = useState([defaultValue])
 
@@ -35,7 +35,7 @@ const useUndoState = (defaultValue: any, options: UndoStateOptions): [any, (prev
     )
 
     const undo = useCallback(() => {
-        return setValue((current) => {
+        setValue((current) => {
             if (current.length === 1) {
                 return current
             }

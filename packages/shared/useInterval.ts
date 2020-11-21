@@ -43,7 +43,7 @@ function useInterval(
   intervalDuration: number | null,
   startImmediate: boolean = false
 ): IntervalHandler {
-  const [intervalId, setIntervalId] = useState<ReturnType<typeof setTimeout>  | null>(null);
+  const internalIdRef = useRef<ReturnType<typeof setTimeout>  | null>(null);
   const [isRunning, setIsRunning] = useState(startImmediate);
   const savedCallback = useRef<() => any>();
 
@@ -71,16 +71,19 @@ function useInterval(
     }
     if (intervalDuration !== null && isRunning) {
       let id = setInterval(tick, intervalDuration);
-      setIntervalId(id);
-      return () => clearInterval(id);
+      internalIdRef.current = id;
+      return () => {
+        internalIdRef.current = null;
+        clearInterval(id)
+      };
     }
   }, [intervalDuration, isRunning]);
 
   let handler: unknown;
-  (handler as IntervalHandlerAsArray) = [start, stop, intervalId];
+  (handler as IntervalHandlerAsArray) = [start, stop, internalIdRef.current];
   (handler as IntervalHandlerAsObject).start = start;
   (handler as IntervalHandlerAsObject).stop = stop;
-  (handler as IntervalHandlerAsObject).intervalId = intervalId;
+  (handler as IntervalHandlerAsObject).intervalId = internalIdRef.current;
 
   return handler as IntervalHandlerAsArray & IntervalHandlerAsObject;
 }

@@ -20,7 +20,8 @@
   },
   "scripts": {
     "prebuild": "rimraf **/*.d.ts *.d.ts *.tsbuildinfo",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/imbhargav5/rooks/issues"

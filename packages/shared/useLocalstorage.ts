@@ -13,6 +13,7 @@ interface StorageHandlerAsArray extends Array<any> {
 }
 
 interface StorageHandler extends StorageHandlerAsArray {}
+interface StorageHandler extends StorageHandlerAsObject {}
 
 /**
  * useLocalstorage hook

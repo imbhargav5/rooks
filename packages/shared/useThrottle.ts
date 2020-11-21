@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
-function useThrottle(fn: Function, timeout: number = 300) {
+function useThrottle(fn: Function, timeout: number = 300): [(...args: any) => any , boolean] {
   const [ready, setReady] = useState(true);
   const timerRef = useRef<number | undefined>(undefined);
 
