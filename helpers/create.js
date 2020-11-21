@@ -9,6 +9,7 @@ const chalk = require("chalk");
 
 const filesToRead = [
   "../template/index.template",
+  "../template/shared.template",
   "../template/package.json",
   "../template/README.md",
   "../template/Examples.md",
@@ -20,6 +21,7 @@ const filesToRead = [
 ];
 const filesToWrite = [
   "src/index.ts",
+  ({name}) => `../shared/${name}.ts`,
   "package.json",
   "README.md",
   "Examples.md",
@@ -111,6 +113,9 @@ inquirer.prompt(questions).then(answers => {
 
   filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
     const srcToWrite = transformedSources[index];
+    if(typeof relativeFilePathFromRootOfModule === "function"){
+      relativeFilePathFromRootOfModule = relativeFilePathFromRootOfModule(answers)
+    }
     fs.writeFileSync(
       path.join(
         __dirname,
