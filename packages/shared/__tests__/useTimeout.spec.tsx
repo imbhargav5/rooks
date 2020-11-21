@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import useTimeout from "..";
-import { render, cleanup, fireEvent, act, wait } from "@testing-library/react";
+import {useTimeout} from "../useTimeout";
+import { render, cleanup, fireEvent, act, waitFor } from "@testing-library/react";
 
 describe("useTimeout", () => {
   it("should be defined", () => {
@@ -49,7 +49,7 @@ describe("use-timeout base", async () => {
     });
     jest.useRealTimers(); //needed for wait
     //TODO: no idea why I need to wait for next tick
-    wait(() => {
+    waitFor(() => {
       expect(mockCallback.mock.calls.length).toBe(1);
     });
   });

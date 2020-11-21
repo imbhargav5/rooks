@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useThrottle from "..";
+import {useThrottle} from "../useThrottle";
 import { cleanup, render, act, fireEvent, wait } from "@testing-library/react";
 
 describe("useThrottle hook", () => {

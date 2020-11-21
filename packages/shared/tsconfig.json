@@ -3,6 +3,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "emitDeclarationOnly": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "./__tests__"
+  ]
 }
   

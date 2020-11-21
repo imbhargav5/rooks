@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import useToggle from "..";
+import {useToggle} from "../useToggle";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
 describe("useToggle behaviour", () => {

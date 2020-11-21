@@ -13,6 +13,7 @@ interface StorageHandlerAsArray extends Array<any> {
 }
 
 interface StorageHandler extends StorageHandlerAsArray {}
+interface StorageHandler extends StorageHandlerAsObject {}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -23,7 +24,7 @@ function reducer(state, action) {
   }
 }
 
-function useSessionstorage(key: string, defaultValue = null): StorageHandler {
+function useSessionstorage(key: string, defaultValue : any = null): StorageHandler {
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {

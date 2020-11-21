@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import usePrevious from "..";
+import {usePrevious} from "../usePrevious";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("usePrevious", () => {

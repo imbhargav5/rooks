@@ -1,9 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
-import useOnWindowScroll from "..";
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import {useOnWindowScroll} from "../useOnWindowScroll";
+import {  
+  fireEvent,
+} from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
 
 describe("useOnWindowScroll", () => {
   it("should be defined", () => {
@@ -11,17 +13,9 @@ describe("useOnWindowScroll", () => {
   });
 
   describe("basic", () => {
-    let App;
     const mockCallback = jest.fn(() => {});
-    beforeEach(() => {
-      App = function() {
-        useOnWindowScroll(mockCallback);
-        return null;
-      };
-    });
-    afterEach(cleanup); // <-- add this
-    it("should call callback after scroll", () => {
-      render(<App />);
+    it("should call callback after resize", () => {
+      renderHook(()=>useOnWindowScroll(mockCallback))
       fireEvent(window, new Event("scroll"));
       expect(mockCallback.mock.calls.length).toBe(1);
       fireEvent(window, new Event("scroll"));
