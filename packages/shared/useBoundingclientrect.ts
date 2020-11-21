@@ -17,7 +17,7 @@ function getBoundingClientRect(
  * @param ref The React ref whose ClientRect is needed
  * @return ClientRect
  */
-function useBoundingclientrect(ref: MutableRefObject<HTMLElement | null>) {
+function useBoundingclientrect(ref: MutableRefObject<HTMLElement | null>): ClientRect | DOMRect | null {
   const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
 
   const update = useCallback(() => {
