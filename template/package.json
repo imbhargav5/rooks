@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/@types/%directoryName%/index.d.ts",
+  "types": "dist/types/%directoryName%/index.d.ts",
   "license": "MIT",
   "description": "%description%",
   "name": "@rooks/%packageName%",
