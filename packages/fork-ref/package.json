@@ -16,8 +16,7 @@
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
-"dts-build": "sh ../../scripts/dts-build.sh",
-
+    "dts-build": "sh ../../scripts/dts-build.sh",
     "prepublish": "yarn run build"
   },
   "keywords": [
@@ -30,7 +29,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.0.0-canary.11",
+  "version": "4.0.0-canary.12",
   "_id": "@rooks/use-fork-ref@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
