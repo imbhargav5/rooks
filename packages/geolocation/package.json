@@ -3,7 +3,6 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
-
   "license": "MIT",
   "description": "A hook to provide the geolocation info on client side.",
   "name": "@rooks/use-geolocation",
@@ -13,7 +12,6 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
@@ -30,7 +28,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.0.0-canary.10",
+  "version": "4.0.0-canary.11",
   "_id": "@rooks/use-geolocation@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {

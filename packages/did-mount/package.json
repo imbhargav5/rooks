@@ -3,7 +3,6 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
-
   "description": "A React hooks package for componentDidMount",
   "name": "@rooks/use-did-mount",
   "homepage": "https://react-hooks.org/docs/use-did-mount",
@@ -12,7 +11,6 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
@@ -29,7 +27,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "4.0.0-canary.10",
+  "version": "4.0.0-canary.11",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"

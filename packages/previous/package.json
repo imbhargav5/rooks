@@ -3,7 +3,6 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
-
   "description": "Access the previous value of a variable with this React hook",
   "name": "@rooks/use-previous",
   "homepage": "https://react-hooks.org/docs/use-previous",
@@ -12,7 +11,6 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
@@ -26,7 +24,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.0.0-canary.10",
+  "version": "4.0.0-canary.11",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"

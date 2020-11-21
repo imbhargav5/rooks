@@ -3,7 +3,6 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
-
   "description": "Session storage react hook. Easily manage session storage values",
   "name": "@rooks/use-sessionstorage",
   "homepage": "https://react-hooks.org/docs/use-sessionstorage",
@@ -12,7 +11,6 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
@@ -27,7 +25,7 @@
     "hooks",
     "session storage"
   ],
-  "version": "4.0.0-canary.10",
+  "version": "4.0.0-canary.11",
   "_id": "@rooks/use-sessionstorage@",
   "publishConfig": {
     "access": "public"

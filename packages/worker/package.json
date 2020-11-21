@@ -3,7 +3,6 @@
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
-
   "description": "A React Hooks package for worker",
   "name": "@rooks/use-worker",
   "homepage": "https://react-hooks.org/docs/use-worker",
@@ -12,14 +11,13 @@
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
     "prepublish": "yarn run build"
   },
-  "version": "4.0.0-canary.10",
+  "version": "4.0.0-canary.11",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
