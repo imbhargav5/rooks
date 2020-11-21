@@ -1,22 +1,24 @@
 import { useState, useEffect, useCallback } from "react";
 import { useMutationObserverRef } from "./useMutationObserverRef";
-import { HTMLElementOrNull } from "./utils/utils";
+import { CallbackRef, HTMLElementOrNull } from "./utils/utils";
 import { useForkRef } from "./useForkRef";
 
+
 /**
- * useBoundingclientrectRef hook
- *
- * @param ref The React ref whose ClientRect is needed
+ * @param element HTML element whose boundingclientrect is needed
  * @return ClientRect
  */
-
 function getBoundingClientRect(
   element: HTMLElement
-): ClientRect | DOMRect | null {
+): ClientRect | DOMRect {
   return element.getBoundingClientRect();
 }
 
-function useBoundingclientrectRef() {
+/**
+ * useBoundingclientrectRef hook
+ * @return [CallbackRef | null, ClientRect | DOMRect | null, () => void]
+ */
+function useBoundingclientrectRef(): [CallbackRef | null, ClientRect | DOMRect | null, () => void] {
   const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 

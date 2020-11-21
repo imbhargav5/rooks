@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 
 /**
- *
+ * useDidMount hook
+ * Calls a function on mount
+ * 
  * @param {function} callback Callback function to be called on mount
  */
 function useDidMount(callback: () => any): void {
