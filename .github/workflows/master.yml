@@ -36,7 +36,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn
       - name: yarn build
-        run: yarn build:action
+        run: yarn build:ci
       - name: test
         run: yarn test
       - name: Generate docusaurus        
