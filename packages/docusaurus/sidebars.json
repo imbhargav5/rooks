@@ -30,6 +30,7 @@
         "use-key",
         "use-keys",
         "use-localstorage",
+        "use-merge-refs",
         "use-mouse",
         "use-mutation-observer",
         "use-mutation-observer-ref",
