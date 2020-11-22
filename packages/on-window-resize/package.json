@@ -26,7 +26,7 @@
     "window",
     "resize"
   ],
-  "version": "4.0.0-canary.15",
+  "version": "4.0.0-canary.16",
   "publishConfig": {
     "access": "public"
   },

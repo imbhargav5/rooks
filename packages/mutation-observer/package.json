@@ -28,7 +28,7 @@
     "mutation observer",
     "mutation observer hook"
   ],
-  "version": "4.0.0-canary.15",
+  "version": "4.0.0-canary.16",
   "_id": "@rooks/use-mutation-observer@",
   "publishConfig": {
     "access": "public"
