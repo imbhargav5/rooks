@@ -32,6 +32,13 @@ function reducer(state: string, action: any) {
   }
 }
 
+/**
+ * useTimeAgo hook
+ * A hook that gives a human readable format of how much time has passed since a time
+ * @deprecated
+ * @param input 
+ * @param argOpts 
+ */
 function useTimeAgo(input: any, argOpts: Options): string {
   const opts = Object.assign({}, argOpts, defaultOpts);
   const { intervalMs, locale, relativeDate } = opts;

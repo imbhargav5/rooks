@@ -17,7 +17,7 @@ interface StorageHandler extends StorageHandlerAsObject {}
 
 /**
  * useLocalstorage hook
- *
+ * Tracks a value within localStorage and updates it
  * @param {string} key - Key of the localStorage object
  * @param {any} defaultValue - Default initial value
  */

@@ -57,10 +57,15 @@ const defaultGeoLocationOptions = {
   when: true
 };
 
+/**
+ * useGeolocation
+ * Gets the geolocation data as a hook
+ * @param geoLocationOptions Geolocation options
+ */
 function useGeolocation(
   // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
   geoLocationOptions: IOptions = defaultGeoLocationOptions
-) {
+): IGetGeoLocation | null {
   const [geoObj, setGeoObj] = useState<IGetGeoLocation|null>(null);
   const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
 

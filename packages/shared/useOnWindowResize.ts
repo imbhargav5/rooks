@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
  * @param {function} callback Callback to be called before unmount
  * @param {boolean} when When the handler should be applied
  */
-function useOnWindowResize(callback, when = true) {
+function useOnWindowResize(callback: (event : any)=>void, when : boolean = true) {
   const savedHandler = useRef(callback);
 
   useEffect(() => {
@@ -18,8 +18,8 @@ function useOnWindowResize(callback, when = true) {
 
   useEffect(() => {
     if (when) {
-      function passedCb(...args: any[]) {
-        savedHandler.current(...args);
+      function passedCb(event) {
+        savedHandler.current(event);
       }
       window.addEventListener("resize", passedCb);
       return () => window.removeEventListener("resize", passedCb);

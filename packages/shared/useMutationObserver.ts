@@ -21,7 +21,7 @@ function useMutationObserver(
   ref: MutableRefObject<HTMLElement | null>,
   callback: MutationCallback,
   options: MutationObserverInit = config
-) {
+): void {
   useEffect(() => {
     // Create an observer instance linked to the callback function
     if (ref.current) {

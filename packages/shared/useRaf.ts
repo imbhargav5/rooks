@@ -1,12 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import raf from "raf";
 
-/*
-  We are using raf which is a polyfilled version of requestAnimationFrame
-*/
 /**
  *
  * useRaf
+ * Uses a polyfilled version of requestAnimationFrame
  * @param {function} callback The callback function to be executed
  * @param {boolean} [isActive=true] The value which while true, keeps the raf running infinitely
  */

@@ -39,7 +39,7 @@ function useKeys(
   keysList: string[],
   callback: (e: KeyboardEvent) => any,
   opts?: Options
-) {
+): void {
   const options = Object.assign({}, defaultOptions, opts);
   const { target, when, continuous } = options;
   const savedCallback = useRef<(event: KeyboardEvent) => any>(callback);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 /**
  * useWorker hook
- *
+ * Helps you run a worker from within React
  * @param {string} scriptPath - Path of the worker
  * @param {object} workerOptions - Additional options to create the worker
  * @param {object} attributes - Event handlers to attach to the worker

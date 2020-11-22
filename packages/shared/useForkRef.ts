@@ -12,6 +12,12 @@ function setRef(ref: AnyRef, value: HTMLElementOrNull) {
   }
 }
 
+/**
+ * useForkRef 
+ * Joins refs together and returns a combination of the two as a new ref
+ * @param refA 
+ * @param refB 
+ */
 function useForkRef(refA: AnyRef, refB: AnyRef): (CallbackRef) | null {
   /**
    * This will create a new function if the ref props change and are defined.

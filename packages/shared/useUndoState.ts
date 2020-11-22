@@ -8,6 +8,7 @@ interface UndoStateOptions {
 const defaultOptions: UndoStateOptions = { maxSize: 100 }
 
 /**
+ * useUndoState hook
  * Drop in replacement for useState hook but with undo functionality.
  *
  * @param {any} defaultValue

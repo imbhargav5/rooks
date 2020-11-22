@@ -15,11 +15,9 @@ const initialValue: WindowDimensions = {
 };
 
 /**
- * useWindowSize
- *
+ * useWindowSize hook
  * A hook that provides information of the dimensions of the window
- *
- * @return {WindowDimensions}  Dimensions of the window
+ * @return Dimensions of the window
  */
 export function useWindowSize(): WindowDimensions {
   const [windowSize, setWindowSize] = useState<WindowDimensions>(initialValue);

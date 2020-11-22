@@ -7,10 +7,18 @@ type CountdownOptions = {
   onEnd?: Function;
 };
 
-const useCountdown = (
+/**
+ * 
+ * useCountdown
+ * Easy way to countdown until a given endtime in intervals
+ * @param endTime Time to countdown
+ * @param options  Countdown options
+ */
+function useCountdown(
   endTime: Date,
-  { interval = 1000, onDown, onEnd }: CountdownOptions = {}
-): number => {
+  options: CountdownOptions = {}
+): number {
+  const { interval = 1000, onDown, onEnd } = options;
   const [time, setTime] = useState<Date>(() => new Date());
   const restTime = endTime.getTime() - time.getTime();
   const count = restTime > 0 ? Math.ceil(restTime / interval) : 0;

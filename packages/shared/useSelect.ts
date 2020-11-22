@@ -1,30 +1,23 @@
 import { useState } from "react";
 
-/**
- *
- * @typedef handler
- * @type {Object}
- * @property {number} index The index of the selected item in the list
- * @property {function}  item The selected item in the list
- * @property {function} setIndex Set value at index
- * @property {function} setItem Set value
- */
+interface SelectHandler<T> {
+  index : number,
+  item : T,
+  setIndex : (newIndex: number)=>void,
+  setItem : (newItem: T) => void,
+}
 
 /**
- *
- *
- * @param {Array} list List of values to select a value from
- * @param {number} [initialIndex=0] Initial index which is selected
- * @returns {handler}
+ * useSelect hook
+ * Helps easily select a value from a list of values
+ * @param list List of values to select a value from
+ * @param [initialIndex=0] Initial index which is selected
+ * @returns handler
  */
-function useSelect(list, initialIndex = 0) {
+function useSelect<T>(list: T[], initialIndex:number = 0) : SelectHandler<T> {
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  /**
-   *
-   * @param {*} item The item to select as
-   */
-  function setItem(item) {
+  function setItem(item:T):void {
     setSelectedIndex(list.indexOf(item));
   }
 

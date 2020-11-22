@@ -24,6 +24,12 @@ function reducer(state, action) {
   }
 }
 
+/**
+ * useSessionstorage
+ * Tracks a value within sessionStorage and updates it
+ * @param key Key of the value to be stored
+ * @param defaultValue Default value of the stored item
+ */
 function useSessionstorage(key: string, defaultValue : any = null): StorageHandler {
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 

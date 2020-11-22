@@ -8,7 +8,7 @@ import { render, cleanup, fireEvent, act, waitFor } from "@testing-library/react
 describe("useTimeout", () => {
   it("should be defined", () => {
     expect(useTimeout).toBeDefined();
-  });
+  });  
 });
 
 describe.skip("use-timeout base", async () => {

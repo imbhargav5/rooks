@@ -44,6 +44,13 @@ const DEFAULT_OPTIONS = {
   minTopValue: 0
 };
 
+/**
+ * useVisibilitySensor hook
+ * Tracks the visibility of a ref
+ * 
+ * @param ref The ref to track visibility of
+ * @param opts Options
+ */
 function useVisibilitySensor(ref, opts) {
   /*
       Create local state

@@ -79,8 +79,11 @@ type FullscreenApi = {
   element: HTMLElement
 }
 
-
-export const useFullscreen = (): FullscreenApi => {
+/**
+ * useFullscreen
+ * A hook that helps make the document fullscreen
+ */
+function useFullscreen():FullscreenApi{
   const fn = getBrowserFunctions();
   const [isFullscreen, setIsFullscreen] = useState(
     Boolean(document[fn.fullscreenElement])
@@ -173,3 +176,5 @@ export const useFullscreen = (): FullscreenApi => {
   //   element
   // ];
 };
+
+export {useFullscreen}
