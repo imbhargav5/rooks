@@ -1,23 +1,71 @@
 import { useState } from "react";
 
-function warnIfBothValueAndIndexAreProvided(functionName, { index, value }) {
-  if (typeof index !== "undefined" && typeof value !== "undefined") {
+function warnIfBothValueAndIndexAreProvided(functionName, obj) {
+  if (Object.values(obj).every((v) => typeof v !== "undefined")) {
     console.warn(
-      `${functionName} .Expected either index or value to be provided. However both index and value were provided`
+      `${functionName} .Expected either ${Object.keys(obj).join(" or ")} to be provided. However all were provided`
     );
+  } else if (Object.values(obj).every((v) => typeof v === "undefined")) {
+    console.warn(`${functionName} . ${Object.keys(obj).join(" , ")} are all undefined.`);
   }
 }
 
-
-function useSelectableList<T>(list:T[]=[], initialIndex:number=0):[(number|T)[],({index:number, value: T})=>()=>void,({index:number, value: T})=>void] {
+function useSelectableList<T>(list:T[]=[], initialIndex:number=0, allowUnselected = false):[(number|T)[],{
+  updateSelection : ({index:number, value: T})=>()=>void,
+  toggleSelection: ({index:number, value: T})=>()=>void,
+  matchSelection: ({index:number, value: T})=>void
+}] {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const currentValue = list[currentIndex];
   const selection = [currentIndex, currentValue];
 
   function updateSelection({ index, value }) {
-    warnIfBothValueAndIndexAreProvided("updateSelection", { index, value });
-    return () => setCurrentIndex(index);
+    return () => {
+      warnIfBothValueAndIndexAreProvided("updateSelection", { index, value });
+      if(typeof index!=="undefined"){
+        setCurrentIndex(index);
+      }else{
+        const valueIndex = list.indexOf(value);
+        if(valueIndex > -1){
+          setCurrentIndex(valueIndex);  
+        }else{
+          console.warn(`updateSelection failed. Does the value ${value} exist in the list?`)
+        }
+      }
+    }
+  }
+
+  function toggleSelection({ index, value }) {
+    return () => {
+      warnIfBothValueAndIndexAreProvided("toggleSelection", { index, value });
+      if(typeof index!=="undefined"){
+        if(currentIndex === index){
+          if(allowUnselected){
+            setCurrentIndex(-1);
+          }else{
+            console.log("allowUnselected is false. Cannot unselect item")
+          }
+        }else{
+          setCurrentIndex(index);
+        }
+      }else{
+        const valueIndex = list.indexOf(value);
+        if(valueIndex > -1){
+          if(currentIndex === valueIndex){
+            if(allowUnselected){
+              setCurrentIndex(-1);
+            }else{
+              console.log("allowUnselected is false. Cannot unselect item")
+            }
+          }else{
+            setCurrentIndex(valueIndex);
+          }
+        }else{
+          console.warn(`toggleSelection failed. Does the value ${value} exist in the list?`)
+        }
+      }
+    }
   }
   function matchSelection({ index, value }) {
     warnIfBothValueAndIndexAreProvided("matchSelection", { index, value });
@@ -27,7 +75,10 @@ function useSelectableList<T>(list:T[]=[], initialIndex:number=0):[(number|T)[],
       return value === currentValue;
     }
   }
-  return [selection, updateSelection, matchSelection];
+  const controls = {
+    updateSelection, matchSelection,toggleSelection
+  }
+  return [selection, controls];
 }
 
 export {useSelectableList};
