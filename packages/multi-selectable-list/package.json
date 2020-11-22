@@ -19,6 +19,9 @@
     "dts-build": "sh ../../scripts/dts-build.sh"
   },
   "keywords": [
+    "multi selectable list",
+    "selectable list",
+    "list",
     "use",
     "react",
     "hooks",
