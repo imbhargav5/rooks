@@ -19,7 +19,7 @@
     "build:docs": "lerna run --scope docusaurus build",
     "build:shared": "lerna run --scope shared build",
     "build:ci": "NODE_ENV=CI yarn run build:shared && NODE_ENV=CI yarn run build:independent:ci && NODE_ENV=CI yarn run build:independent-dts:ci && NODE_ENV=CI yarn run build:rooks",
-    "build:action": "NODE_ENV=CI yarn run build:shared && yarn run build:independent && yarn run build:independent-dts && yarn run build:rooks",
+    "build:action": "yarn run build:shared && yarn run build:independent:ci && yarn run build:independent-dts:ci && yarn run build:rooks",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:only": "yarn run build:shared --stream --parallel && yarn run build:independent --stream --parallel && yarn run build:independent-dts --stream --parallel && yarn run build:rooks  --stream --parallel",
     "build": "yarn run build:only",
