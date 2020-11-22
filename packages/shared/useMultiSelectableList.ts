@@ -13,6 +13,13 @@ function warnIfBothValueAndIndexAreProvided(functionName, obj) {
     );
   }
 }
+/**
+ * useMultiSelectableList
+ * A custom hook to easily select multiple values from a list
+ * @param list 
+ * @param initialSelectIndices 
+ * @param allowUnselected 
+ */
 function useMultiSelectableList<T>(
   list:T[]=[],
   initialSelectIndices: number[] = [0],

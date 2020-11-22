@@ -10,6 +10,13 @@ function warnIfBothValueAndIndexAreProvided(functionName, obj) {
   }
 }
 
+/**
+ * useSelectableList
+ * Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc. 
+ * @param list 
+ * @param initialIndex 
+ * @param allowUnselected 
+ */
 function useSelectableList<T>(list:T[]=[], initialIndex:number=0, allowUnselected = false):[(number|T)[],{
   updateSelection : ({index:number, value: T})=>()=>void,
   toggleSelection: ({index:number, value: T})=>()=>void,
