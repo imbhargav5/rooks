@@ -23,6 +23,7 @@ import { useOutsideClickRef } from "../useOutsideClickRef";
 import { usePrevious } from "../usePrevious";
 import { useRaf } from "../useRaf";
 import { useSelect } from "../useSelect";
+import { useSelectableList } from "../useSelectableList";
 import { useSessionstorage } from "../useSessionstorage";
 import { useThrottle } from "../useThrottle";
 import { useTimeAgo } from "../useTimeAgo";
@@ -167,6 +168,11 @@ describe("useRaf", () => {
 describe("useSelect", () => {
     it("is defined", () =>{
         expect(useSelect).toBeDefined()
+    })
+})
+describe("useSelectableList", () => {
+    it("is defined", () =>{
+        expect(useSelectableList).toBeDefined()
     })
 })
 describe("useSessionstorage", () => {

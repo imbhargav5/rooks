@@ -1,0 +1,40 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "dist/types/multi-selectable-list/index.d.ts",
+  "license": "MIT",
+  "description": "A custom hook to easily select multiple values from a list",
+  "name": "@rooks/use-multi-selectable-list",
+  "homepage": "https://react-hooks.org/docs/use-multi-selectable-list",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "multi selectable list",
+    "selectable list",
+    "list",
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-multi-selectable-list@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
