@@ -5,9 +5,13 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
-    jest: true
+    jest: true,
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+  ],
   parser: "babel-eslint",
   rules: {
     semi: [0],
@@ -33,7 +37,7 @@ module.exports = {
     "no-console": [0],
     "no-mixed-spaces-and-tabs": [0],
     "react/react-in-jsx-scope": [0],
-    "react/display-name": [0]
+    "react/display-name": [0],
   },
-  plugins: ["react"]
+  plugins: ["react"],
 };

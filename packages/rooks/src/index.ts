@@ -15,6 +15,7 @@ export { useIsomorphicEffect } from "shared/useIsomorphicEffect";
 export { useKey } from "shared/useKey";
 export { useKeys } from "shared/useKeys";
 export { useLocalstorage } from "shared/useLocalstorage";
+export { useMergeRefs } from "shared/useMergeRefs";
 export { useMouse } from "shared/useMouse";
 export { useMutationObserver } from "shared/useMutationObserver";
 export { useMutationObserverRef } from "shared/useMutationObserverRef";

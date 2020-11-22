@@ -2,27 +2,25 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/%directoryName%/index.d.ts",
+  "types": "dist/types/merge-refs/index.d.ts",
   "license": "MIT",
-  "description": "%description%",
-  "name": "@rooks/%packageName%",
-  "homepage": "https://react-hooks.org/docs/%packageName%",
+  "description": "Merges any number of refs into a single ref",
+  "name": "@rooks/use-merge-refs",
+  "homepage": "https://react-hooks.org/docs/use-merge-refs",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
-"dts-build": "sh ../../scripts/dts-build.sh"
-
-    
-
+    "dts-build": "sh ../../scripts/dts-build.sh"
   },
   "keywords": [
+    "merge",
+    "refs",
     "use",
     "react",
     "hooks",
@@ -32,9 +30,8 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  
   "version": "0.0.0",
-  "_id": "@rooks/%packageName%@",
+  "_id": "@rooks/use-merge-refs@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
