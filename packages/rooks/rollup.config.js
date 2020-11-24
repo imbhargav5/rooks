@@ -11,17 +11,11 @@ import pkg from "./package.json";
 // rollup-plugin-ignore stopped working, so we'll just remove the import lines 😐
 const propTypeIgnore = { "import PropTypes from 'prop-types';": "'';" };
 
-const cjs = {
-  format: "cjs",
-  sourcemap: true
-};
-
 const esm = {
   format: "esm",
   sourcemap: true
 };
 
-const getCJS = override => ({ ...cjs, ...override });
 const getESM = override => ({ ...esm, ...override });
 
 const commonPlugins = [
@@ -42,10 +36,6 @@ const commonPlugins = [
 ];
 
 const prodPlugins = [
-  replace({
-    ...propTypeIgnore,
-    "process.env.NODE_ENV": JSON.stringify("production")
-  }),
   terser()
 ];
 
@@ -59,72 +49,33 @@ const configBase = {
   plugins: commonPlugins
 };
 
-const standaloneBaseConfig = {
+const ciConfig = {
   ...configBase,
-  input: "./src/index-standalone.ts",
-  output: {
+  output: [getESM({ file: "lib/rooks.esm.js", sourcemap: false })],
+};
+const standaloneConfig = {
+  ...configBase,
+  output: [{
     file: "lib/rooks.js",
     format: "umd",
-    globals,
+    globals,    
     name: "rooks",
     sourcemap: true
-  },
-  external: Object.keys(globals),
-  plugins: configBase.plugins.concat(
-    replace({
-      __SERVER__: JSON.stringify(false)
-    })
-  )
+  }, {
+    file: "lib/rooks.min.js",
+    format: "umd",
+    globals,    
+    name: "rooks",
+    sourcemap: true,
+    plugins: prodPlugins
+  }, getESM({ file: "lib/rooks.esm.js" })],
 };
 
-const standaloneConfig = {
-  ...standaloneBaseConfig,
-  plugins: standaloneBaseConfig.plugins.concat(
-    replace({
-      "process.env.NODE_ENV": JSON.stringify("development")
-    })
-  )
-};
+let config
+if (process.env.NODE_ENV === "CI") {
+  config = ciConfig;
+}else{
+  config = standaloneConfig
+}
 
-const standaloneProdConfig = {
-  ...standaloneBaseConfig,
-  output: {
-    ...standaloneBaseConfig.output,
-    file: "lib/rooks.min.js"
-  },
-  plugins: standaloneBaseConfig.plugins.concat(prodPlugins)
-};
-
-const serverConfig = {
-  ...configBase,
-  output: [
-    getESM({ file: "lib/rooks.esm.js" }),
-    getCJS({ file: "lib/rooks.cjs.js" })
-  ],
-  plugins: configBase.plugins.concat(
-    replace({
-      __SERVER__: JSON.stringify(true)
-    })
-  )
-};
-
-const browserConfig = {
-  ...configBase,
-  output: [
-    getESM({ file: "lib/rooks.browser.esm.js" }),
-    getCJS({ file: "lib/rooks.browser.cjs.js" })
-  ],
-  plugins: [
-    ...configBase.plugins,
-    replace({
-      __SERVER__: JSON.stringify(false)
-    })
-  ]
-};
-
-export default [
-  standaloneConfig,
-  standaloneProdConfig,
-  serverConfig,
-  browserConfig
-];
+export default config;
