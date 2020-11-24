@@ -6,9 +6,11 @@ const newReadmeFileName = packageName.startsWith("@rooks")
 const writeFileSync = require("fs").writeFileSync;
 const readFileSync = require("fs").readFileSync;
 const parseReadme = require("./parse-readme");
-
+const replaceString = require("replace-string");
+  
 function ls() {
   let readmeFileContent = readFileSync(`./README.md`, "utf8");
+  readmeFileContent = replaceString(readmeFileContent, "![TitleCard](./title-card.svg)","");
   readmeFileContent = parseReadme(readmeFileContent);
   let examplesFileContent = null;
   try {
