@@ -35,7 +35,7 @@ const filesToWrite = [
 function installPackages() {
   const spinner = ora("Installing  packages").start();
   return execa
-    .shell("npm install")
+    .shell("yarn install")
     .then(() => spinner.succeed("Installation successful"))
     .catch(err => spinner.fail(err.message));
 }
