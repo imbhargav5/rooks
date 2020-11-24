@@ -1,0 +1,39 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "dist/types/sessionstorage-state/index.d.ts",
+  "license": "MIT",
+  "description": "useState but syncs with sessionstorage",
+  "name": "@rooks/use-sessionstorage-state",
+  "homepage": "https://react-hooks.org/docs/use-sessionstorage-state",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "session storage",
+    "session storage state",
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-sessionstorage-state@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}

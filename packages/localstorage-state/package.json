@@ -1,0 +1,39 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "dist/types/localstorage-state/index.d.ts",
+  "license": "MIT",
+  "description": "UseState but auto updates values to localStorage",
+  "name": "@rooks/use-localstorage-state",
+  "homepage": "https://react-hooks.org/docs/use-localstorage-state",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "use",
+    "localstorage",
+    "localstorage-state",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-localstorage-state@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
