@@ -18,6 +18,7 @@ const filesToRead = [
   "../template/.npmignore",
   "../template/index.d.ts.template",
   "../template/tsconfig.json",
+  "../template/title-card.svg",
 ];
 const filesToWrite = [
   "src/index.ts",
@@ -29,7 +30,8 @@ const filesToWrite = [
   ".eslintrc",
   ".npmignore",
   "index.d.ts",
-  "tsconfig.json"
+  "tsconfig.json",
+  "title-card.svg"
 ];
 
 function installPackages() {
@@ -48,11 +50,30 @@ function injectValuesIntoTemplate(
   src,
   { name, packageName, directoryName, description }
 ) {
+  const trimmedDescription = description.substring(0,130);
+  const descriptionWords = trimmedDescription.split(/\s+/);
+  const descriptionArray = ["","",""];  
+  let index = 0;
+  descriptionWords.forEach(descriptionWord => {
+    let currentItem = descriptionArray[index] || "";
+    if(currentItem.length + descriptionWord.length < 50){
+      currentItem = `${currentItem} ${descriptionWord}`
+    }else{
+      index = 1;
+      let currentItem = descriptionArray[index] || "";
+      currentItem = `${currentItem} ${descriptionWord}`
+    }
+    descriptionArray[index] = currentItem
+  });
+
   let result = src;
   result = replaceString(result, "%name%", name);
   result = replaceString(result, "%directoryName%", directoryName);
   result = replaceString(result, "%packageName%", packageName);
   result = replaceString(result, "%description%", description);
+  result = replaceString(result, "%description0%", descriptionArray[0]);
+  result = replaceString(result, "%description1%", descriptionArray[1]);
+  result = replaceString(result, "%description2%", descriptionArray[2]);
   return result;
 }
 
