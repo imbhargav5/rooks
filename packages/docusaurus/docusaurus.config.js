@@ -167,6 +167,9 @@ module.exports={
       indexName: 'react-hooks',
       // Optional: see doc section bellow
       contextualSearch: true,
+      searchParameters: {
+        'facetFilters': ["type:$TYPE"]
+      }
 
       //... other Algolia params
     },
