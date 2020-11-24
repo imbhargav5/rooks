@@ -25,8 +25,6 @@ import useKeyRef from "@rooks/use-key-ref"
 
 ## Usage
 
-## Usage
-
 #### Basic example with keydown
 
 ```jsx
