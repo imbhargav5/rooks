@@ -41,6 +41,7 @@
         "use-navigator-language",
         "use-on-window-resize",
         "use-on-window-scroll",
+        "use-online",
         "use-outside-click",
         "use-outside-click-ref",
         "use-previous",
