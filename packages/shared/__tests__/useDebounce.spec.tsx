@@ -14,7 +14,7 @@ describe("useDebounce", () => {
   })
 })
 
-describe("useDebounce behavior", () =>{
+describe.skip("useDebounce behavior", () =>{
     const DEBOUNCE_WAIT = 500;
     let useCustomDebounce
     beforeEach(() => {
