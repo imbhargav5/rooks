@@ -28,7 +28,7 @@
     "componentDidMount",
     "lifecycle"
   ],
-  "version": "4.0.0-canary.18",
+  "version": "4.0.0-canary.19",
   "_id": "@rooks/use-did-mount@",
   "publishConfig": {
     "access": "public"
