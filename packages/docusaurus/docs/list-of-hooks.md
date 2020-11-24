@@ -1,4 +1,8 @@
-# List of Hooks
+---
+id: hooks-list
+title: List of Hooks
+sidebar_label: Hooks List
+---
 
 <!--hookslist start-->
 

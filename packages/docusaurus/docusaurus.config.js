@@ -63,6 +63,11 @@ module.exports={
       },
       "items": [
         {
+          "to": "/docs/getting-started/",
+          "label": "Getting Started",
+          "position": "left"
+        },
+        {
           "to": "/docs/",
           "label": "Documentation",
           "position": "left"
@@ -70,17 +75,17 @@ module.exports={
         {
           "href": "https://github.com/imbhargav5/rooks",
           "label": "Github",
-          "position": "left"
+          "position": "right"
         },
         {
-          "href": "/hooks-list/",
+          "href": "/docs/hooks-list/",
           "label": "Hooks List",
           "position": "left"
         },
         {
-          "href": "/motivation/",
+          "href": "/docs/motivation/",
           "label": "Motivation",
-          "position": "left"
+          "position": "right"
         },
         // {
         //   "to": "/help",

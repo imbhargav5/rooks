@@ -1,5 +1,8 @@
-
-# Motivation
+---
+id: motivation
+title: Motivation
+sidebar_label: Motivation
+---
 
 When custom hooks were released by the **React.js** team, I was overwhelmed with excitement watching them show the amount of customization that can now be done with custom hooks. 
 
