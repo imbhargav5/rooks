@@ -24,7 +24,7 @@ const features = [
   {
     content: (
       <p>
-        Rooks comes with <strong>over 25 hooks</strong> that can help you scaffold an app very quickly. You can select cherry-pick the hooks you want or grab the whole library. It's really upto you.
+        Rooks comes with a plethora of hooks that can help you scaffold an app very quickly. You can select cherry-pick the hooks you want or grab the whole library. It's really upto you.
       </p>
     ),
     image: (
