@@ -4,7 +4,6 @@
   <img src="https://cdn.discordapp.com/attachments/761126463457460234/775262278026788885/Final_Copy_8.png" height="auto" width="100%" />
 </p>
 <br/>
-![TitleCard](./title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) [![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
 
@@ -14,20 +13,18 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 ## [Complete Documentation](https://react-hooks.org/)
 
-[![Image from Gyazo](https://i.gyazo.com/9d31687617a5ae080bc423cd8b747f51.gif)](https://gyazo.com/9d31687617a5ae080bc423cd8b747f51)
-
-https://react-hooks.org
+[![Image from Gyazo](https://i.gyazo.com/742dc22ec370af0a96322427b6a32a9b.gif)](https://gyazo.com/742dc22ec370af0a96322427b6a32a9b)
 
 ## List of all hooks
 
 <!--hookslist start-->
 
-*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
+*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
-*   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
+*   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
@@ -57,12 +54,12 @@ https://react-hooks.org
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
-*   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
-*   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
+*   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
-*   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
+*   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
+*   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-size](https://react-hooks.org/docs/use-window-size) - A React Hooks package for window-size
 *   [use-worker](https://react-hooks.org/docs/use-worker) - A React Hooks package for worker

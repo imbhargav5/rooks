@@ -77,5 +77,6 @@ var frontmatter = require('remark-frontmatter')
     }
     updateMarkdownFile("./README.md")
     updateMarkdownFile("./packages/docusaurus/docs/list-of-hooks.md")
+    updateMarkdownFile("./packages/rooks/README.md")
     
 })();
