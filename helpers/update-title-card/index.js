@@ -11,7 +11,7 @@ if(!Array.isArray(pkg.keywords)){
 const svgContent = fs.readFileSync("../../template/title-card.svg","utf-8")
 
 const {name, description} = pkg;
-const hookExportedName = camelCase( name.split("@rooks/")[1], {delimiter: "-"})
+const hookExportedName = camelCase( name.split("@rooks/")[1])
 const trimmedDescription = truncate(description,{
     length: 130
 });

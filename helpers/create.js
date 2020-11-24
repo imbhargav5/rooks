@@ -5,9 +5,7 @@ const replaceString = require("replace-string");
 const makeDir = require("make-dir");
 const ora = require("ora");
 const execa = require("execa");
-const chalk = require("chalk");
 const truncate = require('lodash.truncate')
-const {camelCase}  = require("camel-case")
 
 const filesToRead = [
   "../template/index.template",
