@@ -18,12 +18,12 @@
     "dts-build": "sh ../../scripts/dts-build.sh"
   },
   "keywords": [
+    "session storage",
     "use",
     "react-hooks.org",
     "react",
     "rooks",
-    "hooks",
-    "session storage"
+    "hooks"
   ],
   "version": "4.0.0-canary.17",
   "_id": "@rooks/use-sessionstorage@",
