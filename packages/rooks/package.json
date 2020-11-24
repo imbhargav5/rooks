@@ -3,7 +3,7 @@
   "version": "4.0.0-canary.18",
   "description": "Useful React hooks for everyone.",
   "author": "Bhargav Ponnapalli <bhargavponnapalli.5@gmail.com> (https://github.com/imbhargav5)",
-  "homepage": "https://github.com/react-hooks-org/rooks#readme",
+  "homepage": "https://github.com/imbhargav5/rooks#readme",
   "license": "MIT",
   "main": "lib/rooks.browser.cjs.js",
   "jsnext:main": "lib/rooks.browser.esm.js",
@@ -11,7 +11,8 @@
   "types": "lib/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-hooks-org/rooks.git"
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/rooks"
   },
   "scripts": {
     "clean": "rimraf lib dist",
@@ -20,7 +21,7 @@
     "lint": "eslint src test"
   },
   "bugs": {
-    "url": "https://github.com/react-hooks-org/rooks/issues"
+    "url": "https://github.com/imbhargav5/rooks/issues"
   },
   "publishConfig": {
     "access": "public"

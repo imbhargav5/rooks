@@ -8,7 +8,8 @@
   "homepage": "https://react-hooks.org/docs/use-localstorage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/localstorage"
   },
   "scripts": {
     "lint": "sh ../../scripts/lint.sh",

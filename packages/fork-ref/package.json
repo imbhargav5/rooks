@@ -9,7 +9,8 @@
   "homepage": "https://react-hooks.org/docs/use-fork-ref",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/fork-ref"
   },
   "scripts": {
     "lint": "sh ../../scripts/lint.sh",

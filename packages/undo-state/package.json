@@ -9,7 +9,8 @@
   "homepage": "https://react-hooks.org/hook/use-undo-state",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/undo-state"
   },
   "scripts": {
     "lint": "sh ../../scripts/lint.sh",
