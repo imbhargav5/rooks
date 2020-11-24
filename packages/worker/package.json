@@ -18,7 +18,7 @@
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"
   },
-  "version": "4.0.0-canary.19",
+  "version": "4.0.0-canary.20",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
