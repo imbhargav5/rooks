@@ -25,18 +25,9 @@ function useDebounce(callback: Function, wait: number, options?: {}): Function {
     debouncedCallbackRef.current = createDebouncedCallback((...args) => {
       callbackRef.current(...args);
     });
-  }, [wait, options]);
-
-  function debouncedCallbackWithEventPersist(...args) {
-    args.forEach(arg => {
-      if (!(arg instanceof Event) && arg.nativeEvent instanceof Event) {
-        // Synthetic events need to be persisted
-        arg.persist();
-      }
-    });
-    return debouncedCallbackRef.current(...args);
-  }
-  return debouncedCallbackWithEventPersist;
+  }, [wait, options]);  
+  
+  return debouncedCallbackRef.current;
 }
 
 export { useDebounce };
