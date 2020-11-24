@@ -4,6 +4,7 @@
   <img src="https://cdn.discordapp.com/attachments/761126463457460234/775262278026788885/Final_Copy_8.png" height="auto" width="100%" />
 </p>
 <br/>
+![TitleCard](./title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) [![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
 
