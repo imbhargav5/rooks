@@ -22,8 +22,6 @@ jobs:
           version: 12.x
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
-      - name: Install now
-        run: now --version || npm i -g now
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
