@@ -1,5 +1,5 @@
 # @rooks/use-window-size
-![TitleCard](./title-card.svg)
+![TitleCard](/packages/window-size/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-window-size/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-window-size.svg) ![](https://img.shields.io/npm/dt/@rooks/use-window-size.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fwindow-size)
 

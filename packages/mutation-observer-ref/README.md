@@ -1,6 +1,6 @@
 # @rooks/use-mutation-observer-ref
 
-![TitleCard](./title-card.svg)
+![TitleCard](/packages/mutation-observer-ref/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-mutation-observer-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mutation-observer-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-mutation-observer-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmutation-observer-ref)
 

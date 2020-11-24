@@ -1,5 +1,5 @@
 # @rooks/use-previous
-![TitleCard](./title-card.svg)
+![TitleCard](/packages/previous/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-previous/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-previous.svg) ![](https://img.shields.io/npm/dt/@rooks/use-previous.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fprevious)
 

@@ -1,5 +1,5 @@
 # @rooks/use-selectable-list
-![TitleCard](./title-card.svg)
+![TitleCard](/packages/selectable-list/title-card.svg)
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-selectable-list/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-selectable-list.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-selectable-list.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fselectable-list)
 
