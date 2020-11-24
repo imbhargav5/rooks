@@ -31,6 +31,7 @@ export { useOutsideClickRef } from "shared/useOutsideClickRef";
 export { usePrevious } from "shared/usePrevious";
 export { useRaf } from "shared/useRaf";
 export { useSelect } from "shared/useSelect";
+export { useSelectableList } from "shared/useSelectableList";
 export { useSessionstorage } from "shared/useSessionstorage";
 export { useSessionstorageState } from "shared/useSessionstorageState";
 export { useThrottle } from "shared/useThrottle";
