@@ -76,6 +76,6 @@ var frontmatter = require('remark-frontmatter')
       fs.writeFileSync(filePath, readmeContent, "utf8");
     }
     updateMarkdownFile("./README.md")
-    updateMarkdownFile("./packages/docusaurus/src/pages/hooks-list.md")
+    updateMarkdownFile("./packages/docusaurus/docs/list-of-hooks.md")
     
 })();
