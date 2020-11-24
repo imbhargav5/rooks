@@ -9,7 +9,8 @@
   "homepage": "https://react-hooks.org/docs/use-key-ref",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/key-ref"
   },
   "scripts": {
     "lint": "sh ../../scripts/lint.sh",
