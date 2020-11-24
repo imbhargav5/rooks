@@ -59,7 +59,7 @@ function injectValuesIntoTemplate(
     if(currentItem.length + descriptionWord.length < 50){
       currentItem = `${currentItem} ${descriptionWord}`
     }else{
-      index = 1;
+      index++;
       let currentItem = descriptionArray[index] || "";
       currentItem = `${currentItem} ${descriptionWord}`
     }
