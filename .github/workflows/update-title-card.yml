@@ -2,7 +2,7 @@ name: Update title card
 
 on:
   schedule:
-    - cron: "0 0 */1 * *"
+    - cron: "0 0 */2 * *"
 jobs:
   build:
     runs-on: ubuntu-latest
