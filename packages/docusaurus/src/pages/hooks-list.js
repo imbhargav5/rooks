@@ -4,7 +4,7 @@ import Layout from '@theme/Layout'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import styles from './hookslist.module.css'
+import styles from './page.module.css'
 import List from '../../docs/list-of-hooks.md'
 
 function HooksList() {

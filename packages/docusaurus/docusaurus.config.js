@@ -74,7 +74,12 @@ module.exports={
         },
         {
           "href": "/hooks-list/",
-          "label": "Hooks list",
+          "label": "Hooks List",
+          "position": "left"
+        },
+        {
+          "href": "/motivation/",
+          "label": "Motivation",
           "position": "left"
         },
         // {
