@@ -25,7 +25,7 @@
     "hooks",
     "session storage"
   ],
-  "version": "4.0.0-canary.16",
+  "version": "4.0.0-canary.17",
   "_id": "@rooks/use-sessionstorage@",
   "publishConfig": {
     "access": "public"

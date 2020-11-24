@@ -24,7 +24,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.0.0-canary.16",
+  "version": "4.0.0-canary.17",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"

@@ -26,7 +26,7 @@
     "rooks",
     "toggle hook"
   ],
-  "version": "4.0.0-canary.16",
+  "version": "4.0.0-canary.17",
   "_id": "@rooks/use-toggle@",
   "publishConfig": {
     "access": "public"
