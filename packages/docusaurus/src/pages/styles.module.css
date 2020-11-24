@@ -43,3 +43,6 @@
     max-height: 16px;
     fill: var(--ifm-color-primary);
   }
+  .hooks-list ul{
+    margin-left: 0;
+  }

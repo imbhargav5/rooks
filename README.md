@@ -9,34 +9,86 @@
 
 <br/>
 
-Collection of regularly used custom hooks as utils for React.
+A super awesome collection of regularly used custom hooks as utils for React.
 
-## [Stories](https://stories.react-hooks.org)
-### [Docs](https://react-hooks.org/)
+## [Complete Documentation](https://react-hooks.org/)
 
 [![Image from Gyazo](https://i.gyazo.com/9d31687617a5ae080bc423cd8b747f51.gif)](https://gyazo.com/9d31687617a5ae080bc423cd8b747f51)
 
 https://react-hooks.org
 
-# Features
+## List of all hooks
 
-✅ Collection of 22+ hooks as separate modules
+<!--hookslist start-->
+
+*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
+*   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
+*   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
+*   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
+*   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
+*   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
+*   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
+*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+*   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
+*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
+*   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
+*   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
+*   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
+*   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
+*   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
+*   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
+*   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
+*   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
+*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
+*   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
+*   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
+*   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
+*   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
+*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
+*   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
+*   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
+*   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
+*   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
+*   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
+*   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
+*   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
+*   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
+*   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
+*   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
+*   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
+*   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
+*   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
+*   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
+*   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
+*   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
+*   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
+*   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
+*   [use-window-size](https://react-hooks.org/docs/use-window-size) - A React Hooks package for window-size
+*   [use-worker](https://react-hooks.org/docs/use-worker) - A React Hooks package for worker
+
+<!--hookslist end-->
+
+## Features
+
+<!--hookscount start--> 
+
+✅ Collection of 44 hooks as standalone modules.
+
+<!--hookscount end--> 
 
 ✅ Standalone package with all the hooks at one place
 
 ✅ CommonJS, UMD and ESM Support
 
-# Installation
+## Installation
 
 ### For a specific hook like useDidMount
 
-```
-npm i -s @rooks/use-did-mount
-```
+    npm i -s @rooks/use-did-mount
 
-```
-npm i -s @rooks/use-interval
-```
+<!---->
+
+    npm i -s @rooks/use-interval
 
 ```jsx
 import useDidMount from "@rooks/use-did-mount";
@@ -44,9 +96,7 @@ import useDidMount from "@rooks/use-did-mount";
 
 ### For standalone build with all the hooks
 
-```
-npm i -s rooks
-```
+    npm i -s rooks
 
 Import any hook from "rooks" and start using them!
 
@@ -54,7 +104,7 @@ Import any hook from "rooks" and start using them!
 import { useDidMount } from "rooks";
 ```
 
-# Usage
+## Usage
 
 ```jsx
 function App() {
@@ -70,25 +120,26 @@ function App() {
 }
 ```
 
-# Documentation
-
-[View the docs here](https://react-hooks.org)
-
 ## Standalone Package
 
 Package containing all the hooks is over here. - [Docs](https://github.com/imbhargav5/rooks/tree/master/packages/rooks) and [Npm Install](https://npmjs.com/package/rooks)
 
 <br/>
 
-### License - MIT
+## License
+
+MIT
 
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
+
 <table>
   <tr>
     <td align="center"><a href="https://imbhargav5.com/"><img src="https://avatars2.githubusercontent.com/u/2936644?v=4" width="100px;" alt=""/><br /><sub><b>Bhargav Ponnapalli</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Code">💻</a> <a href="#ideas-imbhargav5" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-imbhargav5" title="Design">🎨</a> <a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Documentation">📖</a> <a href="https://github.com/imbhargav5/rooks/issues?q=author%3Aimbhargav5" title="Bug reports">🐛</a></td>
@@ -117,7 +168,9 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 </table>
 
 <!-- markdownlint-enable -->
+
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

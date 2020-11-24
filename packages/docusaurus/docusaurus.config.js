@@ -63,7 +63,7 @@ module.exports={
       },
       "items": [
         {
-          "to": "docs/",
+          "to": "/docs/",
           "label": "Documentation",
           "position": "left"
         },
@@ -73,15 +73,15 @@ module.exports={
           "position": "left"
         },
         {
-          "href": "https://stories.react-hooks.org",
-          "label": "Storybook",
+          "href": "/hooks-list/",
+          "label": "Hooks list",
           "position": "left"
         },
-        {
-          "to": "/help",
-          "label": "Help",
-          "position": "left"
-        },
+        // {
+        //   "to": "/help",
+        //   "label": "Help",
+        //   "position": "left"
+        // },
         {
           type: 'docsVersionDropdown',
           "position": "right",
