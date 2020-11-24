@@ -38,20 +38,11 @@ jobs:
         uses: ./.github/actions/tag-is-stable
         with:
           tag: ${{steps.tags.outputs.new}}
-      - name: Create a draft GitHub release
-        uses: ./.github/actions/publish-github-release
-        with:
-          tag: ${{ steps.tags.outputs.new }}
-          changelog: ${{ steps.changelog.outputs.changelog }}
-          token: ${{ secrets.BOT_TOKEN }}
-          is-tag-stable: ${{steps.tag_is_stable.outputs.result}}
       # - name: Check if releasing from master
       #   id: is_master
       #   uses: ./.github/actions/ref-matches-branch
       #   with:
       #     name: master
-      - name: Install now
-        run: now --version || npm i -g now
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -65,6 +56,15 @@ jobs:
       - name: Install project dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn
+      - name: test
+        run: yarn test      
+      - name: Create a draft GitHub release
+        uses: ./.github/actions/publish-github-release
+        with:
+          tag: ${{ steps.tags.outputs.new }}
+          changelog: ${{ steps.changelog.outputs.changelog }}
+          token: ${{ secrets.BOT_TOKEN }}
+          is-tag-stable: ${{steps.tag_is_stable.outputs.result}}      
       - name: yarn build
         run: yarn build:ci
       - name: Generate docusaurus
