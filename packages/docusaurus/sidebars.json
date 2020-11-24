@@ -28,6 +28,7 @@
         "use-interval",
         "use-isomorphic-effect",
         "use-key",
+        "use-key-ref",
         "use-keys",
         "use-localstorage",
         "use-merge-refs",
