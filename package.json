@@ -8,6 +8,7 @@
     "test": "lerna run test --scope shared",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "create": "node helpers/create",
+    "add-license-to-pkg": "lerna exec --scope=@rooks/* --concurrency 1 --stream -- 'node ../../helpers/add-license-to-pkg.js'",
     "compute-package-list": "node helpers/compute-package-list",
     "update-title-card": "lerna exec --scope=@rooks/* --concurrency 1 --stream -- 'node ../../helpers/update-title-card/index.js'",
     "readme-to-docs": "lerna exec --scope=@rooks/* --scope=rooks --concurrency 1 --stream -- 'node ../../helpers/docs/index.js'",

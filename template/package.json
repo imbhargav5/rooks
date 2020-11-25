@@ -13,15 +13,11 @@
     "directory": "packages/%directoryName%"
   },
   "scripts": {
-    
     "lint": "sh ../../scripts/lint.sh",
     "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
-"dts-build": "sh ../../scripts/dts-build.sh"
-
-    
-
+    "dts-build": "sh ../../scripts/dts-build.sh"
   },
   "keywords": [
     "use",
@@ -33,7 +29,6 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  
   "version": "0.0.0",
   "_id": "@rooks/%packageName%@",
   "readme": "ERROR: No README data found!",
