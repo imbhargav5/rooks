@@ -18,7 +18,7 @@
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"
   },
-  "version": "4.0.1",
+  "version": "4.0.2",
   "_id": "@rooks/use-worker@",
   "keywords": [
     "react-hooks.org",
