@@ -59,8 +59,15 @@ function useSessionstorageState<S>(key: string, initialState?: S | (() => S)): [
 
   const listen = useCallback((e: StorageEvent) => {
     if (e.storageArea === sessionStorage && e.key === key) {
-      isUpdateFromListener.current = true;
-      __setValue(e.newValue);
+      try {
+        isUpdateFromListener.current = true;
+        const newValue = JSON.parse(e.newValue || "null");
+        if (value !== newValue) {
+          __setValue(newValue);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, []);
   
