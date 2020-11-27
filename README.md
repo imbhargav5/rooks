@@ -25,8 +25,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
-*   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+*   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
@@ -37,16 +37,16 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
 *   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
-*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
+*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
-*   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
+*   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
