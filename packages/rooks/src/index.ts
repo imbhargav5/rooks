@@ -37,6 +37,7 @@ export { useSessionstorageState } from "shared/useSessionstorageState";
 export { useThrottle } from "shared/useThrottle";
 export { useTimeAgo } from "shared/useTimeAgo";
 export { useTimeout } from "shared/useTimeout";
+export { useTimeoutWhen } from "shared/useTimeoutWhen";
 export { useToggle } from "shared/useToggle";
 export { useUndoState } from "shared/useUndoState";
 export { useVisibilitySensor } from "shared/useVisibilitySensor";
