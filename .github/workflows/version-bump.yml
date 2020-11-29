@@ -68,24 +68,19 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           is-tag-stable: ${{steps.tag_is_stable.outputs.result}}      
       - name: Generate docusaurus
-        if: steps.tag_is_stable.outputs.result == 1
         run: yarn run readme-to-docs
       - name: Build docusaurus
-        if: steps.tag_is_stable.outputs.result == 1
         run: yarn build:docs
       - name: Version docusaurus
         if: steps.tag_is_stable.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
       - name: Add docusaurus
-        if: steps.tag_is_stable.outputs.result == 1
         run: git add .          
       - name: Update CHANGELOG.md
-        if: steps.tag_is_stable.outputs.result == 1
         uses: ./.github/actions/update-changelog
         with:
           changelog: ${{ steps.changelog.outputs.changelog }}
       - name: Add CHANGELOG.md
-        if: steps.tag_is_stable.outputs.result == 1
         run: git add CHANGELOG.md
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
