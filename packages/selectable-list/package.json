@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/selectable-list/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc. ",
   "name": "@rooks/use-selectable-list",

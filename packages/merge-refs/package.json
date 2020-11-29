@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/merge-refs/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "Merges any number of refs into a single ref",
   "name": "@rooks/use-merge-refs",

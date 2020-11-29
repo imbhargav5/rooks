@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/interval-when/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "Sets an interval immediately when a condition is true",
   "name": "@rooks/use-interval-when",

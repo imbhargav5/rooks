@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/multi-selectable-list/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "A custom hook to easily select multiple values from a list",
   "name": "@rooks/use-multi-selectable-list",

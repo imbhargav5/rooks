@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/localstorage-state/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "UseState but auto updates values to localStorage",
   "name": "@rooks/use-localstorage-state",

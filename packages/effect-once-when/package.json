@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
-  "types": "dist/types/effect-once-when/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "license": "MIT",
   "description": "Runs a callback effect atmost one time when a condition becomes true",
   "name": "@rooks/use-effect-once-when",
