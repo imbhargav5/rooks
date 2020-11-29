@@ -16,7 +16,7 @@
     "prebuild": "lerna clean -y && yarn",
     "build:independent": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/build.sh",
     "build:independent-dts": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/dts-build.sh",
-    "build:independent:ci": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks --concurrency 4 -- sh ../../scripts/build.sh",
+    "build:independent:ci": "lerna exec --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/build.sh",
     "build:independent-dts:ci": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks --concurrency 4 -- sh ../../scripts/dts-build.sh",
     "build:rooks": "lerna run --scope rooks build",
     "build:docs": "lerna run --scope docusaurus build",
