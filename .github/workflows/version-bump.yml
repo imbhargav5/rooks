@@ -76,28 +76,21 @@ jobs:
       - name: Version docusaurus
         if: steps.tag_is_stable.outputs.result == 1
         run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
-      - name: Commit docusaurus
+      - name: Add docusaurus
         if: steps.tag_is_stable.outputs.result == 1
-        run: |
-          git add .
-          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Update ${{ steps.tags.outputs.new }} docusaurus [skip ci]" --no-verify --quiet
+        run: git add .          
       - name: Update CHANGELOG.md
         if: steps.tag_is_stable.outputs.result == 1
         uses: ./.github/actions/update-changelog
         with:
           changelog: ${{ steps.changelog.outputs.changelog }}
-      - name: Commit CHANGELOG.md
+      - name: Add CHANGELOG.md
         if: steps.tag_is_stable.outputs.result == 1
-        run: |
-          git add CHANGELOG.md
-          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Add ${{ steps.tags.outputs.new }} to CHANGELOG.md [skip ci]" --no-verify --quiet
+        run: git add CHANGELOG.md
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           title: "Update docusaurus and changelog"
-          base: master
   always_job:
     name: Aways run job
     runs-on: ubuntu-latest
