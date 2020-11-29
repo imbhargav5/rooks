@@ -5,6 +5,7 @@ export { useCounter } from "shared/useCounter";
 export { useDebounce } from "shared/useDebounce";
 export { useDidMount } from "shared/useDidMount";
 export { useDidUpdate } from "shared/useDidUpdate";
+export { useEffectOnceWhen } from "shared/useEffectOnceWhen";
 export { useFullscreen } from "shared/useFullscreen";
 export { useForkRef } from "shared/useForkRef";
 export { useGeolocation } from "shared/useGeolocation";
