@@ -18,6 +18,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout the tag
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
