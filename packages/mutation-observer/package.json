@@ -29,7 +29,7 @@
     "mutation observer",
     "mutation observer hook"
   ],
-  "version": "4.0.2",
+  "version": "4.1.0",
   "_id": "@rooks/use-mutation-observer@",
   "publishConfig": {
     "access": "public"
