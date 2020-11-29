@@ -67,8 +67,6 @@ jobs:
           changelog: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.BOT_TOKEN }}
           is-tag-stable: ${{steps.tag_is_stable.outputs.result}}      
-      - name: yarn build
-        run: yarn build:ci
       - name: Generate docusaurus
         if: steps.tag_is_stable.outputs.result == 1
         run: yarn run readme-to-docs
