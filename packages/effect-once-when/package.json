@@ -29,7 +29,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.1.0-canary.1",
+  "version": "4.1.0-canary.2",
   "_id": "@rooks/use-effect-once-when@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
