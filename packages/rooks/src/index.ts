@@ -10,6 +10,7 @@ export { useForkRef } from "shared/useForkRef";
 export { useGeolocation } from "shared/useGeolocation";
 export { useInput } from "shared/useInput";
 export { useInterval } from "shared/useInterval";
+export { useIntervalWhen } from "shared/useIntervalWhen";
 export { useIntersectionObserverRef } from "shared/useIntersectionObserverRef";
 export { useIsomorphicEffect } from "shared/useIsomorphicEffect";
 export { useKeyRef } from "shared/useKeyRef";
