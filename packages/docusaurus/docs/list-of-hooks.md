@@ -13,11 +13,13 @@ sidebar_label: Hooks List
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
+*   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
+*   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
 *   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
@@ -43,6 +45,7 @@ sidebar_label: Hooks List
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
+*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
