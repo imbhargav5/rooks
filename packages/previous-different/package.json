@@ -1,0 +1,38 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "license": "MIT",
+  "description": "usePreviousDifferent hooks returns the last different value of a variable",
+  "name": "@rooks/use-previous-different",
+  "homepage": "https://react-hooks.org/docs/use-previous-different",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/previous-different"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-previous-different@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
