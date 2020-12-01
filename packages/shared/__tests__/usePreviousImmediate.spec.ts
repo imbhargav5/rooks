@@ -2,15 +2,15 @@
  * @jest-environment jsdom
  */
 import React, { useState } from "react";
-import {usePreviousDifferent} from "../usePreviousDifferent";
+import {usePreviousImmediate} from "../usePreviousImmediate";
 import { act, renderHook } from "@testing-library/react-hooks";
 
-describe("usePreviousDifferent", () => {
+describe("usePreviousImmediate", () => {
   let useHook;
   beforeEach(() => {
       useHook = function (){
           const [value, setValue] = useState(0)
-          const previousValue = usePreviousDifferent(value)
+          const previousValue = usePreviousImmediate(value)
           function increment(){
             setValue(value + 1)
           }
@@ -18,7 +18,7 @@ describe("usePreviousDifferent", () => {
       }
   })
   it('isDefined', async() => {        
-      expect(usePreviousDifferent).toBeDefined()
+      expect(usePreviousImmediate).toBeDefined()
   })
   it(' initially returns null', async() => {    
     const {result} = renderHook(()=> useHook())
