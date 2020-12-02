@@ -47,6 +47,8 @@
         "use-outside-click",
         "use-outside-click-ref",
         "use-previous",
+        "use-previous-different",
+        "use-previous-immediate",
         "use-raf",
         "use-select",
         "use-selectable-list",
