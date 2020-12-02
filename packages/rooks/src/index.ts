@@ -31,6 +31,8 @@ export { useOnline } from "shared/useOnline";
 export { useOutsideClick } from "shared/useOutsideClick";
 export { useOutsideClickRef } from "shared/useOutsideClickRef";
 export { usePrevious } from "shared/usePrevious";
+export { usePreviousDifferent } from "shared/usePreviousDifferent"
+export { usePreviousImmediate } from "shared/usePreviousImmediate"
 export { useRaf } from "shared/useRaf";
 export { useSelect } from "shared/useSelect";
 export { useSelectableList } from "shared/useSelectableList";
