@@ -31,8 +31,8 @@
             <tspan x="320" y="128">usePreviousDifferent</tspan>
         </text>
         <text id="description" font-family="AvenirNext-Regular, Avenir Next" font-size="27" font-weight="normal" letter-spacing="0.27" fill="#97999A">
-            <tspan x="320" y="195"> usePreviousDifferent returns the last different</tspan>
-            <tspan x="320" y="232"> value of a value</tspan>
+            <tspan x="320" y="195"> usePreviousDifferent hooks returns the last</tspan>
+            <tspan x="320" y="232"> different value of a variable</tspan>
             <tspan x="320" y="269"></tspan>
         </text>
     </g>
