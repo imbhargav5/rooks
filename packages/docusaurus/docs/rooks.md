@@ -54,7 +54,9 @@ slug: /
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
+*   [use-previous-different](https://react-hooks.org/docs/use-previous-different) - usePreviousDifferent hooks returns the last different value of a variable
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
+*   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
