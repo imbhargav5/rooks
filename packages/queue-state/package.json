@@ -4,13 +4,13 @@
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
   "license": "MIT",
-  "description": "A React hook that manages state in the form of a stack",
-  "name": "@rooks/use-stack-state",
-  "homepage": "https://react-hooks.org/docs/use-stack-state",
+  "description": "A React hook that manages state in the form of a queue",
+  "name": "@rooks/use-queue-state",
+  "homepage": "https://react-hooks.org/docs/use-queue-state",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git",
-    "directory": "packages/stack-state"
+    "directory": "packages/queue-state"
   },
   "scripts": {
     "lint": "sh ../../scripts/lint.sh",
@@ -20,7 +20,7 @@
     "dts-build": "sh ../../scripts/dts-build.sh"
   },
   "keywords": [
-    "stack",
+    "queue",
     "state",
     "use",
     "react",
@@ -32,7 +32,7 @@
     "react": ">=16.8.0"
   },
   "version": "0.0.0",
-  "_id": "@rooks/use-stack-state@",
+  "_id": "@rooks/use-queue-state@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
