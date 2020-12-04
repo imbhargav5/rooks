@@ -27,7 +27,7 @@
     "window size",
     "window size hook"
   ],
-  "version": "4.2.1-canary.0",
+  "version": "4.2.1-canary.1",
   "_id": "@rooks/use-window-size@",
   "jest": {
     "globals": {

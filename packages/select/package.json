@@ -27,7 +27,7 @@
     "hooks",
     "list"
   ],
-  "version": "4.2.1-canary.0",
+  "version": "4.2.1-canary.1",
   "_id": "@rooks/use-select@",
   "publishConfig": {
     "access": "public"
