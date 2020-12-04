@@ -1,17 +1,17 @@
 import { useState } from "react";
 
 
-function useQueueState<T>(initialList: T[]): [T[],
+function useQueueState(initialList: any[]): [any[],
 {
-  enqueue: (item: T) => number,
-  dequeue: () => T | undefined,
-  peek: () => T | undefined,
+  enqueue: (item: any) => number,
+  dequeue: () => any | undefined,
+  peek: () => any | undefined,
   length: number
 }] {
   const [list, setList] = useState([...initialList]);
   const length = list.length
 
-  function enqueue(item: T){
+  function enqueue(item: any){
     const newList = [...list,item];
     setList(newList)
     return newList.length;
