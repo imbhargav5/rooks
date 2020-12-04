@@ -56,7 +56,7 @@ You can click on the floating discord icon at the bottom right of the screen and
 }
 
 function addToSidebarJson() {
-  const INDEPENDENT_PACKAGES_SIDEBAR_INDEX = 1
+  let INDEPENDENT_PACKAGES_SIDEBAR_INDEX = 2
   if (newReadmeFileName === "rooks") {
     return;
   }
