@@ -68,9 +68,7 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           is-tag-stable: ${{steps.tag_is_stable.outputs.result}}
       - name: Checkout master
-        uses: actions/checkout@master
-        with:      
-          ref: master    
+        run: git clean -fd && git checkout master
       - name: Generate docusaurus
         run: yarn run readme-to-docs
       - name: Build docusaurus
