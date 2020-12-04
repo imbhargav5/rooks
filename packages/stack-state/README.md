@@ -28,8 +28,22 @@ import useStackState from "@rooks/use-stack-state"
 
 ```jsx
 function Demo() {
-  useStackState();
-  return null
+  // here list is still 1,2,3
+  // listInReverse is basically list in stack order. 
+  // which is last-in first-out
+  // so basically listInReverse = 3,2,1
+  // controls contains utils to change the stack;
+  const [list, controls, listInReverse] =  useStackState([1,2,3]);
+  const {push, peek, pop, length} = controls;
+
+  // push(1)
+  // pop()
+  // peek()
+  
+  // This will render items in LIFO order
+  return <div>
+    {listInStackOrder.map(item => <span>{item}</span>)}
+  </div>
 }
 
 render(<Demo/>)
