@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "0.0.0",
+  "version": "4.2.1-canary.0",
   "_id": "@rooks/use-stack-state@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
