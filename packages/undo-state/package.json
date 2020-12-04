@@ -30,7 +30,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.2.1-canary.3",
+  "version": "4.3.0",
   "_id": "@rooks/use-undo-state@",
   "publishConfig": {
     "access": "public"

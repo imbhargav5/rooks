@@ -27,7 +27,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.2.1-canary.3",
+  "version": "4.3.0",
   "_id": "@rooks/use-boundingclientrect@",
   "publishConfig": {
     "access": "public"

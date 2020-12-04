@@ -26,7 +26,7 @@
     "rooks",
     "hooks"
   ],
-  "version": "4.2.1-canary.3",
+  "version": "4.3.0",
   "_id": "@rooks/use-localstorage@",
   "publishConfig": {
     "access": "public"
