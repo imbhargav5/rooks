@@ -33,11 +33,13 @@ export { useOutsideClickRef } from "shared/useOutsideClickRef";
 export { usePrevious } from "shared/usePrevious";
 export { usePreviousDifferent } from "shared/usePreviousDifferent"
 export { usePreviousImmediate } from "shared/usePreviousImmediate"
+export { useQueueState } from "shared/useQueueState"
 export { useRaf } from "shared/useRaf";
 export { useSelect } from "shared/useSelect";
 export { useSelectableList } from "shared/useSelectableList";
 export { useSessionstorage } from "shared/useSessionstorage";
 export { useSessionstorageState } from "shared/useSessionstorageState";
+export { useStackState } from "shared/useStackState";
 export { useThrottle } from "shared/useThrottle";
 export { useTimeAgo } from "shared/useTimeAgo";
 export { useTimeout } from "shared/useTimeout";
