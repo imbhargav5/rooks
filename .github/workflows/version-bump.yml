@@ -84,18 +84,16 @@ jobs:
           changelog: ${{ steps.changelog.outputs.changelog }}
       - name: Add CHANGELOG.md
         run: git add CHANGELOG.md
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-env name=SHORT_SHA::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: Set branch env
-        run: echo "::set-env name=PR_BRANCH_NAME::docs-${{github.ref}}-${{env.SHORT_SHA}}"
+      - name: Set outputs
+        id: gen_sha_short
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Create Pull Request
         if: steps.tag_is_stable.outputs.result == 1
         uses: peter-evans/create-pull-request@v3
         with:
-          title: "Update docusaurus and changelog"
+          title: Update docusaurus and changelog
           base: master
-          branch: ${{env.PR_BRANCH_NAME}}
+          branch: docs-${{github.ref}}-${{ steps.gen_sha_short.outputs.sha_short }}
   always_job:
     name: Aways run job
     runs-on: ubuntu-latest
