@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent } from "react";
 
-type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+type InputChangeEvent = ChangeEvent<HTMLInputElement>;
 
 interface InputHandler {
   /**
