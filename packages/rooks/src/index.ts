@@ -19,6 +19,7 @@ export { useKey } from "shared/useKey";
 export { useKeys } from "shared/useKeys";
 export { useLocalstorage } from "shared/useLocalstorage";
 export { useLocalstorageState } from "shared/useLocalstorageState";
+export { useMapState } from "shared/useMapState";
 export { useMergeRefs } from "shared/useMergeRefs";
 export { useMouse } from "shared/useMouse";
 export { useMultiSelectableList } from "shared/useMultiSelectableList";
