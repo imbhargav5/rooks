@@ -4,7 +4,8 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "README.md",
+    "./packages/docusaurus/docs/contributors.md"
   ],
   "imageSize": 100,
   "commit": false,

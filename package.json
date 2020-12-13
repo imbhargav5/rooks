@@ -14,6 +14,7 @@
     "readme-to-docs": "lerna exec --scope=@rooks/* --scope=rooks --concurrency 1 --stream -- 'node ../../helpers/docs/index.js'",
     "bs": "lerna bootstrap",
     "prebuild": "lerna clean -y && yarn",
+    "contributors:generate": "all-contributors generate",
     "build:independent": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/build.sh",
     "build:independent-dts": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/dts-build.sh",
     "build:independent:ci": "lerna exec --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/build.sh",
@@ -122,5 +123,7 @@
       "**/html-minifier-terser"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "all-contributors-cli": "^6.19.0"
+  }
 }
