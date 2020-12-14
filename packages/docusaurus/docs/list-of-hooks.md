@@ -16,8 +16,8 @@ sidebar_label: Hooks List
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
+*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
@@ -26,6 +26,7 @@ sidebar_label: Hooks List
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
 *   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
+*   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
 *   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
