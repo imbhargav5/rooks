@@ -1,1 +1,1 @@
-export { useFresh as default } from "shared/useFresh";
+export { useFreshRef as default } from "shared/useFreshRef";
