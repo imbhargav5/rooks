@@ -1,4 +1,4 @@
-import {useEffect, useRef, Ref} from 'react'
+import {useEffect, useRef, RefObject} from 'react'
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 /**
@@ -9,7 +9,7 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * or a passive effect. Defaults to false.
  * @returns A ref containing the fresh value
  */
-function useFreshRef<T>(value: T, preferLayoutEffect: boolean = false):Ref<T> {
+function useFreshRef<T>(value: T, preferLayoutEffect: boolean = false):RefObject<T> {
   const useEffectToUse = preferLayoutEffect ? useIsomorphicEffect : useEffect
   const ref = useRef(value)
   useEffectToUse(() => {

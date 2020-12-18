@@ -7,6 +7,7 @@ export { useDidMount } from "shared/useDidMount";
 export { useDidUpdate } from "shared/useDidUpdate";
 export { useEffectOnceWhen } from "shared/useEffectOnceWhen";
 export { useFreshRef } from "shared/useFreshRef";
+export { useFreshTick } from "shared/useFreshTick";
 export { useFullscreen } from "shared/useFullscreen";
 export { useForkRef } from "shared/useForkRef";
 export { useGeolocation } from "shared/useGeolocation";

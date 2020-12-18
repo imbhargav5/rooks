@@ -1,0 +1,38 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "license": "MIT",
+  "description": "Like use-fresh-ref but specifically for functions ",
+  "name": "@rooks/use-fresh-tick",
+  "homepage": "https://react-hooks.org/docs/use-fresh-tick",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/fresh-tick"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "0.0.0",
+  "_id": "@rooks/use-fresh-tick@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
