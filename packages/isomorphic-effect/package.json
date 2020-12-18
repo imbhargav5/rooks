@@ -1,0 +1,40 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "license": "MIT",
+  "description": "Resolves to useEffect when window is not in scope and useLayout effect in the browser",
+  "name": "@rooks/use-isomorphic-effect",
+  "homepage": "https://react-hooks.org/docs/use-isomorphic-effect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/isomorphic-effect"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "isomorphic-effect",
+    "effect",
+    "use",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "version": "4.4.0",
+  "_id": "@rooks/use-isomorphic-effect-when@",
+  "readme": "ERROR: No README data found!",
+  "publishConfig": {
+    "access": "public"
+  }
+}
