@@ -4,11 +4,14 @@ title: use-isomorphic-effect
 sidebar_label: use-isomorphic-effect
 ---
 
+
     
 
 ## About
 
 A hook that resolves to useEffect on the server and useLayoutEffect on the client.
+
+[//]: # "Main"
 
 ## Installation
 
@@ -32,6 +35,14 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+
+---
+
+## Codesandbox Examples
+
+### Basic Usage    
+
 
 
 ## Join Bhargav's discord server
