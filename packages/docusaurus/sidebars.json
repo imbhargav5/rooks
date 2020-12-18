@@ -32,6 +32,8 @@
         "use-did-update",
         "use-effect-once-when",
         "use-fork-ref",
+        "use-fresh-ref",
+        "use-fresh-tick",
         "use-fullscreen",
         "use-geolocation",
         "use-input",
