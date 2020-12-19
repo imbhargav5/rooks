@@ -31,8 +31,8 @@
             <tspan x="320" y="128">useIsomorphicEffect</tspan>
         </text>
         <text id="description" font-family="AvenirNext-Regular, Avenir Next" font-size="27" font-weight="normal" letter-spacing="0.27" fill="#97999A">
-            <tspan x="320" y="195">A hook that resolves to useEffect on the </tspan>
-            <tspan x="320" y="232"> server and useLayoutEffect on the client.</tspan>
+            <tspan x="320" y="195"> Resolves to useEffect when window is not in scope</tspan>
+            <tspan x="320" y="232"> and useLayout effect in the browser</tspan>
             <tspan x="320" y="269"></tspan>
         </text>
     </g>
