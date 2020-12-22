@@ -23,18 +23,18 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
-*   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
+*   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
-*   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+*   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
-*   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
+*   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
+*   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-isomorphic-effect](https://react-hooks.org/docs/use-isomorphic-effect) - Resolves to useEffect when window is not in scope and useLayout effect in the browser
 *   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
@@ -49,20 +49,20 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
-*   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
+*   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous-different](https://react-hooks.org/docs/use-previous-different) - usePreviousDifferent hooks returns the last different value of a variable
-*   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
+*   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
-*   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
+*   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
