@@ -42,7 +42,7 @@
     "@babel/core": "7.7.5",
     "@babel/plugin-external-helpers": "7.2.0",
     "@babel/plugin-proposal-export-default-from": "7.5.2",
-    "@babel/preset-env": "7.5.5",
+    "@babel/preset-env": "7.12.11",
     "@babel/preset-react": "7.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^16.0.0",
