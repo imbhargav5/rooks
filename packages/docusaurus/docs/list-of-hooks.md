@@ -25,8 +25,8 @@ sidebar_label: Hooks List
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-isomorphic-effect](https://react-hooks.org/docs/use-isomorphic-effect) - Resolves to useEffect when window is not in scope and useLayout effect in the browser
 *   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
-*   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
+*   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
 *   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
