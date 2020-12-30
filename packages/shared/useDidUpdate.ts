@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
  *  Fires a callback on component update
  *  Can take in a list of conditions to fire callback when one of the
  *  conditions changes
+ *  Will fire callback's return function on update
  *
  * @param {function} callback The callback to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
@@ -22,7 +23,7 @@ function useDidUpdate(callback: () => any, conditions?: Array<any>): void {
   }
   useEffect(() => {
     if (hasMountedRef.current) {
-      callback();
+      return callback();
     }else{
       hasMountedRef.current = true
     }
