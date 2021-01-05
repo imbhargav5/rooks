@@ -60,14 +60,14 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
-*   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
+*   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
-*   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
-*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
+*   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
+*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
