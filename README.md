@@ -35,8 +35,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
-*   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-isomorphic-effect](https://react-hooks.org/docs/use-isomorphic-effect) - Resolves to useEffect when window is not in scope and useLayout effect in the browser
+*   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
 *   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
