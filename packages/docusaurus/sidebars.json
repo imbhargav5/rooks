@@ -74,6 +74,7 @@
         "use-timeout-when",
         "use-toggle",
         "use-undo-state",
+        "use-update-effect",
         "use-visibility-sensor",
         "use-will-unmount",
         "use-window-size",

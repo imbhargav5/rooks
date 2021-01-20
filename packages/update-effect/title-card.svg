@@ -31,7 +31,7 @@
             <tspan x="320" y="128">useUpdateEffect</tspan>
         </text>
         <text id="description" font-family="AvenirNext-Regular, Avenir Next" font-size="27" font-weight="normal" letter-spacing="0.27" fill="#97999A">
-            <tspan x="320" y="195"> componentDidUpdate hook with cleanup function support for react</tspan>
+            <tspan x="320" y="195"> An useEffect that does not run on first render</tspan>
             <tspan x="320" y="232"></tspan>
             <tspan x="320" y="269"></tspan>
         </text>

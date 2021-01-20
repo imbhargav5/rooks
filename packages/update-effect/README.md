@@ -6,7 +6,7 @@
 
 ## About
 
-componentDidUpdate hook with cleanup function support for react
+An useEffect that does not run on first render
 
 ## Installation
 

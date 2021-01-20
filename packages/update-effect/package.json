@@ -4,7 +4,7 @@
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
   "source": "src/index.ts",
-  "description": "componentDidUpdate hook with cleanup function support for react",
+  "description": "An useEffect that does not run on first render",
   "name": "@rooks/use-update-effect",
   "homepage": "https://react-hooks.org/docs/use-update-effect",
   "repository": {
