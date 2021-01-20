@@ -49,6 +49,7 @@ export { useTimeout } from "shared/useTimeout";
 export { useTimeoutWhen } from "shared/useTimeoutWhen";
 export { useToggle } from "shared/useToggle";
 export { useUndoState } from "shared/useUndoState";
+export { useUpdateEffect } from "shared/useUpdateEffect"
 export { useVisibilitySensor } from "shared/useVisibilitySensor";
 export { useWillUnmount } from "shared/useWillUnmount";
 export { useWindowSize } from "shared/useWindowSize";
