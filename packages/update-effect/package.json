@@ -1,0 +1,42 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "source": "src/index.ts",
+  "description": "An useEffect that does not run on first render",
+  "name": "@rooks/use-update-effect",
+  "homepage": "https://react-hooks.org/docs/use-update-effect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/update-effect"
+  },
+  "scripts": {
+    "lint": "sh ../../scripts/lint.sh",
+    "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "use",
+    "did update",
+    "componentDidUpdate",
+    "update effect",
+    "react",
+    "hooks",
+    "rooks",
+    "react-hooks.org"
+  ],
+  "version": "4.5.0",
+  "_id": "@rooks/use-update-effect@",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
+  "license": "MIT"
+}

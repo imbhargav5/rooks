@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig_independent.settings.json",
+  "include": [
+    "./src/index.ts",
+    "../shared/**/*.ts",
+  ],
+  "compilerOptions": {
+    "rootDir": "../",
+    "outDir": "./lib",
+  }
+}
+  
+  
