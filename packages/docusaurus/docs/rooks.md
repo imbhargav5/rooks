@@ -34,8 +34,8 @@ slug: /
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
-*   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
+*   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
@@ -73,8 +73,9 @@ slug: /
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
 *   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
-*   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
+*   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
+*   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
 *   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-size](https://react-hooks.org/docs/use-window-size) - A React Hooks package for window-size
