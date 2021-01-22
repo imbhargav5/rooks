@@ -3,6 +3,7 @@
 // And is rewritten for hooks api
 
 import { useEffect, useReducer, useLayoutEffect } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 function normalizeRect(rect) {
   if (rect.width === undefined) {
@@ -201,7 +202,7 @@ function useVisibilitySensor(ref, opts) {
   }
 
   // If scroll check is needed
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (scrollCheck) {
       return createListener("scroll", scrollDebounce, scrollThrottle);
     }
@@ -209,7 +210,7 @@ function useVisibilitySensor(ref, opts) {
 
   // if resize check is needed
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (resizeCheck) {
       return createListener("resize", resizeDebounce, resizeThrottle);
     }
