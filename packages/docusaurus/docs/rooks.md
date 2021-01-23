@@ -54,8 +54,8 @@ slug: /
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
-*   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
+*   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
