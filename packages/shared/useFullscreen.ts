@@ -83,7 +83,11 @@ type FullscreenApi = {
  * useFullscreen
  * A hook that helps make the document fullscreen
  */
-function useFullscreen():FullscreenApi{
+function useFullscreen(): FullscreenApi | undefined {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   const fn = getBrowserFunctions();
   const [isFullscreen, setIsFullscreen] = useState(
     Boolean(document[fn.fullscreenElement])
@@ -96,7 +100,7 @@ function useFullscreen():FullscreenApi{
   };
 
   const request = (element?: HTMLElement) =>
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       const onFullScreenEntered = () => {
         setIsFullscreen(true);
         off("change", onFullScreenEntered);
@@ -124,7 +128,7 @@ function useFullscreen():FullscreenApi{
     }
   };
   const exit = () =>
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       if (!Boolean(document[fn.fullscreenElement])) {
         resolve();
         return;
@@ -160,21 +164,6 @@ function useFullscreen():FullscreenApi{
     isFullscreen,
     element
   }
-
-  // return [
-  //   Boolean(document[fn.fullscreenEnabled]),
-  //   toggle,
-  //   (callback: EventCallback) => {
-  //     on("change", callback);
-  //   }, // onchange
-  //   (callback: EventCallback) => {
-  //     on("error", callback);
-  //   }, // onerror
-  //   request,
-  //   exit,
-  //   isFullscreen,
-  //   element
-  // ];
 };
 
 export {useFullscreen}
