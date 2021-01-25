@@ -140,10 +140,10 @@ function useFullscreen():FullscreenApi{
       setElement(null);
 
       Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
-    }));
+    }), []);
 
   const toggle = useCallback((element?: HTMLElement) =>
-    Boolean(document[fn.fullscreenElement]) ? exit() : request(element));
+    Boolean(document[fn.fullscreenElement]) ? exit() : request(element), []);
 
   const onChange = useCallback((callback: EventCallback) => on("change", callback), []);
   const onError =  useCallback((callback: EventCallback) => on("error", callback), []);
