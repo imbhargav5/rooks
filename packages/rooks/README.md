@@ -31,8 +31,8 @@
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
+*   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
