@@ -175,8 +175,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "danielholmes",
+      "name": "Daniel Holmes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/349833?v=4",
+      "profile": "http://danielholmes.org",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "commitConvention": "none"
+  "commitConvention": "none",
+  "skipCi": true
 }
