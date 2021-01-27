@@ -28,7 +28,9 @@ import useWindowEventListener from "@rooks/use-window-event-listener"
 
 ```jsx
 function Demo() {
-  useWindowEventListener();
+  useWindowEventListener("click", function(){
+    console.log("clicked")
+  });
   return null
 }
 
