@@ -193,6 +193,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "calthejuggler",
+      "name": "Cal Courtney",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30095183?v=4",
+      "profile": "https://www.calcourtney.net",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
