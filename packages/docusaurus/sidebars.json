@@ -31,6 +31,7 @@
         "use-did-mount",
         "use-did-update",
         "use-effect-once-when",
+        "use-event-listener-ref",
         "use-fork-ref",
         "use-fresh-ref",
         "use-fresh-tick",
@@ -77,6 +78,7 @@
         "use-update-effect",
         "use-visibility-sensor",
         "use-will-unmount",
+        "use-window-event-listener",
         "use-window-size",
         "use-worker"
       ]
