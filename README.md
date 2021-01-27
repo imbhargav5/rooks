@@ -172,6 +172,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
     <td align="center"><a href="https://stupidism.github.io/resume"><img src="https://avatars2.githubusercontent.com/u/5801015?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stupid</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Stupidism" title="Code">💻</a></td>
     <td align="center"><a href="http://mscottmoore.dev"><img src="https://avatars0.githubusercontent.com/u/5983927?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Moore</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mscottmoore" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/zeritte"><img src="https://avatars.githubusercontent.com/u/35241861?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zeritte</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=zeritte" title="Code">💻</a></td>
+    <td align="center"><a href="http://arman.io"><img src="https://avatars.githubusercontent.com/u/3195714?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Arman</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Armanio" title="Code">💻</a></td>
   </tr>
 </table>
 
