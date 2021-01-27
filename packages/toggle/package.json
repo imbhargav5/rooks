@@ -27,7 +27,7 @@
     "rooks",
     "toggle hook"
   ],
-  "version": "4.6.1",
+  "version": "4.7.0",
   "_id": "@rooks/use-toggle@",
   "publishConfig": {
     "access": "public"
