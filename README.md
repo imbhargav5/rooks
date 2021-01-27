@@ -175,6 +175,9 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
     <td align="center"><a href="https://github.com/zeritte"><img src="https://avatars.githubusercontent.com/u/35241861?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zeritte</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=zeritte" title="Code">💻</a></td>
     <td align="center"><a href="https://www.calcourtney.net"><img src="https://avatars.githubusercontent.com/u/30095183?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cal Courtney</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=calthejuggler" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/weschristiansen"><img src="https://avatars.githubusercontent.com/u/5215218?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wes christiansen</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=weschristiansen" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
