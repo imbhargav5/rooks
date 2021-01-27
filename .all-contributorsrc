@@ -175,8 +175,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Armanio",
+      "name": "Arman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3195714?v=4",
+      "profile": "http://arman.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "commitConvention": "none"
+  "commitConvention": "none",
+  "skipCi": true
 }
