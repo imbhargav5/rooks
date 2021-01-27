@@ -6,6 +6,7 @@ export { useDebounce } from "shared/useDebounce";
 export { useDidMount } from "shared/useDidMount";
 export { useDidUpdate } from "shared/useDidUpdate";
 export { useEffectOnceWhen } from "shared/useEffectOnceWhen";
+export {useEventListenerRef} from "shared/useEventListenerRef"
 export { useFreshRef } from "shared/useFreshRef";
 export { useFreshTick } from "shared/useFreshTick";
 export { useFullscreen } from "shared/useFullscreen";
