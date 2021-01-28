@@ -10,7 +10,7 @@ interface NormalizedFullscreenApi {
   fullscreenerror: string;
 }
 
-const getBrowserFunctions = (): NormalizedFullscreenApi => {
+const getFullscreenControls = (): NormalizedFullscreenApi => {
   const fnMap = [
     [
       "requestFullscreen",
@@ -103,15 +103,15 @@ function useFullscreen(): FullscreenApi | undefined {
     return defaultValue;
   }
 
-  const fn = getBrowserFunctions();
+  const fullscreenControls = getFullscreenControls();
   const [isFullscreen, setIsFullscreen] = useState(
-    Boolean(document[fn.fullscreenElement])
+    Boolean(document[fullscreenControls.fullscreenElement])
   );
-  const [element, setElement] = useState(document[fn.fullscreenElement]);
+  const [element, setElement] = useState(document[fullscreenControls.fullscreenElement]);
 
   const eventNameMap = {
-    change: fn.fullscreenchange,
-    error: fn.fullscreenerror
+    change: fullscreenControls.fullscreenchange,
+    error: fullscreenControls.fullscreenerror
   };
 
   const request = (element?: HTMLElement) =>
@@ -127,7 +127,7 @@ function useFullscreen(): FullscreenApi | undefined {
       element = element || document.documentElement;
       setElement(element);
 
-      Promise.resolve(element[fn.requestFullscreen]()).catch(reject);
+      Promise.resolve(element[fullscreenControls.requestFullscreen]()).catch(reject);
     });
 
   const on = (event: string, callback: EventCallback) => {
@@ -144,7 +144,7 @@ function useFullscreen(): FullscreenApi | undefined {
   };
   const exit = () =>
     new Promise<void>((resolve, reject) => {
-      if (!Boolean(document[fn.fullscreenElement])) {
+      if (!Boolean(document[fullscreenControls.fullscreenElement])) {
         resolve();
         return;
       }
@@ -158,15 +158,15 @@ function useFullscreen(): FullscreenApi | undefined {
       on("change", onFullScreenExit);
       setElement(null);
 
-      Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
+      Promise.resolve(document[fullscreenControls.exitFullscreen]()).catch(reject);
     });
 
   const toggle = (element?: HTMLElement) =>
-    Boolean(document[fn.fullscreenElement]) ? exit() : request(element);
+    Boolean(document[fullscreenControls.fullscreenElement]) ? exit() : request(element);
 
 
   return {
-    isEnabled: Boolean(document[fn.fullscreenEnabled]),
+    isEnabled: Boolean(document[fullscreenControls.fullscreenEnabled]),
     toggle,
     onChange: (callback: EventCallback) => {
       on("change", callback);
