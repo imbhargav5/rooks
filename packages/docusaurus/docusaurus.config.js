@@ -156,6 +156,12 @@ module.exports={
             <a href="https://www.netlify.com">
               <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
             </a>`
+          },
+          {
+            html : `
+            <a href="https://splitbee.io/?ref=reacthooks">
+              <img src="https://splitbee.io/splitbee-badge.svg" alt="Analytics by Splitbee.io" /> 
+            </a>`
           }
         ]
       }],

@@ -175,8 +175,54 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Armanio",
+      "name": "Arman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3195714?v=4",
+      "profile": "http://arman.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "zeritte",
+      "name": "zeritte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35241861?v=4",
+      "profile": "https://github.com/zeritte",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "calthejuggler",
+      "name": "Cal Courtney",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30095183?v=4",
+      "profile": "https://www.calcourtney.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "weschristiansen",
+      "name": "wes christiansen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5215218?v=4",
+      "profile": "https://github.com/weschristiansen",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "danielholmes",
+      "name": "Daniel Holmes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/349833?v=4",
+      "profile": "http://danielholmes.org",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "commitConvention": "none"
+  "commitConvention": "none",
+  "skipCi": true
 }
