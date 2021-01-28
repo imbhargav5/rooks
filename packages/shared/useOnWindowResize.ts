@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 /**
  *
@@ -8,15 +9,17 @@ import { useEffect, useRef } from "react";
  *
  * @param {function} callback Callback to be called before unmount
  * @param {boolean} when When the handler should be applied
+ * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  */
-function useOnWindowResize(callback: (event : any)=>void, when : boolean = true) {
+function useOnWindowResize(callback: (event : any)=>void, when : boolean = true, isLayoutEffect: boolean = false) {
   const savedHandler = useRef(callback);
-
-  useEffect(() => {
+  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect
+  
+  useEffectToRun(() => {
     savedHandler.current = callback;    
   })
 
-  useEffect(() => {
+  useEffectToRun(() => {
     if (when) {
       function passedCb(event) {
         savedHandler.current(event);
