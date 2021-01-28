@@ -5,6 +5,7 @@ export { useCounter } from "shared/useCounter";
 export { useDebounce } from "shared/useDebounce";
 export { useDidMount } from "shared/useDidMount";
 export { useDidUpdate } from "shared/useDidUpdate";
+export { useDocumentEventListener } from "shared/useDocumentEventListener"
 export { useEffectOnceWhen } from "shared/useEffectOnceWhen";
 export { useEventListenerRef } from "shared/useEventListenerRef"
 export { useFreshRef } from "shared/useFreshRef";
