@@ -25,7 +25,7 @@
     "rooks",
     "react-hooks.org"
   ],
-  "version": "4.7.0",
+  "version": "4.7.1",
   "_id": "@rooks/use-previous@",
   "publishConfig": {
     "access": "public"
