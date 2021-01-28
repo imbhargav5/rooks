@@ -1,8 +1,4 @@
-import { useEffect, useRef } from "react";
-import { useFreshTick } from "./useFreshTick";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
-import { useRefElement } from "./useRefElement";
-import { RefElementOrNull } from "./utils/utils";
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
 
 /**
  *  useWindowEventListener hook
@@ -16,19 +12,11 @@ import { RefElementOrNull } from "./utils/utils";
  * @return {undefined}
  */
 function useWindowEventListener(eventName: string, callback: (...args: any)=> void, listenerOptions: any = {}, isLayoutEffect : boolean = false ) : void{
-  const freshCallback = useFreshTick(callback);
-  const {capture, passive, once} = listenerOptions;
-  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect
-  
-  useEffectToRun(() => {
-    if(typeof window !=="undefined"){
-      window.addEventListener(eventName, freshCallback, listenerOptions)
-      return () => {
-        window.removeEventListener(eventName, freshCallback, listenerOptions)
-      }
+    if(typeof window!=="undefined"){
+      useGlobalObjectEventListener(window, eventName, callback, listenerOptions, isLayoutEffect);
+    }else{
+      console.warn("useWindowEventListener can't attach an event listener as window is undefined.")
     }
-  }, [eventName, capture, passive, once])
-
 }
 
 export {useWindowEventListener};
