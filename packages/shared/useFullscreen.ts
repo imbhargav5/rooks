@@ -67,17 +67,32 @@ const getBrowserFunctions = (): NormalizedFullscreenApi => {
   });
   return ret;
 };
+type NoopFunction = () => void
 
 type FullscreenApi = {
   isEnabled: boolean,
-  toggle: (element?: HTMLElement) => Promise<unknown>, // toggle
-  onChange: (callback: EventCallback) => void, // onchange
-  onError: (callback: EventCallback) => void, // onerror
-  request: (element?: HTMLElement) => Promise<unknown>, // request
-  exit: () => Promise<unknown>, // exit
+  toggle: NoopFunction | ((element?: HTMLElement) => Promise<unknown>), // toggle
+  onChange: NoopFunction | ((callback: EventCallback) => void), // onchange
+  onError: NoopFunction | ((callback: EventCallback) => void), // onerror
+  request: NoopFunction | ((element?: HTMLElement) => Promise<unknown>), // request
+  exit: NoopFunction | (() => Promise<unknown>), // exit
   isFullscreen: boolean, // isFullscreen
-  element: HTMLElement
+  element: HTMLElement | null
 }
+
+const noop: NoopFunction = () => {}
+
+const defaultValue: FullscreenApi = {
+  isEnabled: false,
+  toggle: noop, // toggle
+  onChange: noop, // onchange
+  onError: noop, // onerror
+  request: noop, // request
+  exit: noop, // exit
+  isFullscreen: false, // isFullscreen
+  element: null
+}
+
 
 /**
  * useFullscreen
@@ -85,7 +100,7 @@ type FullscreenApi = {
  */
 function useFullscreen(): FullscreenApi | undefined {
   if (typeof window === 'undefined') {
-    return;
+    return defaultValue;
   }
 
   const fn = getBrowserFunctions();
