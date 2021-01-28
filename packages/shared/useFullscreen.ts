@@ -1,6 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
+import { useDocumentEventListener } from "./useDocumentEventListener";
+import { warning } from "./warning";
 
 type EventCallback = (this: Document, ev: any) => any;
+type OnChangeEventCallback = (this: Document, ev: any, isOpen: boolean) => any;
+
 interface NormalizedFullscreenApi {
   requestFullscreen: string;
   exitFullscreen: string;
@@ -72,12 +76,16 @@ type NoopFunction = () => void
 type FullscreenApi = {
   isEnabled: boolean,
   toggle: NoopFunction | ((element?: HTMLElement) => Promise<unknown>), // toggle
-  onChange: NoopFunction | ((callback: EventCallback) => void), // onchange
+  
+  /** @deprecated Please use useFullScreen({onChange : function() {}}) instead. */
+  onChange: NoopFunction | ((callback: OnChangeEventCallback) => void), // onchange
+  
+  /** @deprecated Please use useFullScreen({onError : function() {}}) instead. */
   onError: NoopFunction | ((callback: EventCallback) => void), // onerror
   request: NoopFunction | ((element?: HTMLElement) => Promise<unknown>), // request
   exit: NoopFunction | (() => Promise<unknown>), // exit
   isFullscreen: boolean, // isFullscreen
-  element: HTMLElement | null
+  element: HTMLElement | null | undefined
 }
 
 const noop: NoopFunction = () => {}
@@ -90,88 +98,105 @@ const defaultValue: FullscreenApi = {
   request: noop, // request
   exit: noop, // exit
   isFullscreen: false, // isFullscreen
-  element: null
+  element: undefined
 }
 
+type FullScreenOptions = {
+  onChange?: OnChangeEventCallback,
+  onError?: EventCallback
+}
+
+function warnDeprecatedOnChangeAndOnErrorUsage(){
+  warning(
+    false,
+    `Using onChange and onError from the return value is deprecated and 
+    will be removed in the next major version. 
+    Please use it with arguments instead. 
+    For eg: useFullscreen({onChange: function() {}, onError: function(){}})
+  `
+  );
+}
 
 /**
  * useFullscreen
  * A hook that helps make the document fullscreen
  */
-function useFullscreen(): FullscreenApi | undefined {
+function useFullscreen(options: FullScreenOptions = {}): FullscreenApi | undefined {
   if (typeof window === 'undefined') {
     return defaultValue;
   }
-
+  const {onChange: onChangeArg, onError: onErrorArg} = options
+  
   const fullscreenControls = getFullscreenControls();
   const [isFullscreen, setIsFullscreen] = useState(
     Boolean(document[fullscreenControls.fullscreenElement])
   );
   const [element, setElement] = useState(document[fullscreenControls.fullscreenElement]);
 
-  const eventNameMap = {
-    change: fullscreenControls.fullscreenchange,
-    error: fullscreenControls.fullscreenerror
-  };
 
-  const request = useCallback((element?: HTMLElement) =>
-    new Promise<void>((resolve, reject) => {
-      const onFullScreenEntered = () => {
-        setIsFullscreen(true);
-        off("change", onFullScreenEntered);
-        resolve();
-      };
-
-      on("change", onFullScreenEntered);
-
-      element = element || document.documentElement;
-      setElement(element);
-
-      Promise.resolve(element[fullscreenControls.requestFullscreen]()).catch(reject);
-    }), []);
-
-  const on = (event: string, callback: EventCallback) => {
-    const eventName = eventNameMap[event];
-    if (eventName) {
-      document.addEventListener(eventName, callback, false);
+  const request = useCallback(async (element: HTMLElement) =>{
+    try{
+      return await element[fullscreenControls.requestFullscreen]()
+    }catch(err){
+      console.log(err);
     }
-  };
-  const off = (event: string, callback: EventCallback) => {
-    const eventName = eventNameMap[event];
-    if (eventName) {
-      document.removeEventListener(eventName, callback, false);
-    }
-  };
-  const exit = useCallback(() =>
-    new Promise<void>((resolve, reject) => {
-      if (!Boolean(document[fullscreenControls.fullscreenElement])) {
-        resolve();
-        return;
+  }, []);
+
+  const exit = useCallback(async () => {
+    if(element){
+      try{
+        return await document[fullscreenControls.exitFullscreen]()
+      }catch(err){
+        console.warn(err);
       }
-
-      const onFullScreenExit = () => {
-        setIsFullscreen(false);
-        off("change", onFullScreenExit);
-        resolve();
-      };
-
-      on("change", onFullScreenExit);
-      setElement(null);
-
-      Promise.resolve(document[fullscreenControls.exitFullscreen]()).catch(reject);
-    }), []);
+    }
+  }, [element]);
 
   const toggle = useCallback((element?: HTMLElement) =>
-    Boolean(document[fullscreenControls.fullscreenElement]) ? exit() : request(element), []);
+    Boolean(document[fullscreenControls.fullscreenElement]) ? exit() : (element ? request(element) : null), []);
 
-  const onChange = useCallback((callback: EventCallback) => on("change", callback), []);
-  const onError =  useCallback((callback: EventCallback) => on("error", callback), []);
+
+  const onChangeDeprecatedHandlerRef = useRef<Function>(noop);
+  const onErrorDeprecatedHandlerRef = useRef<Function>(noop);
+
+  // Hack to not break it for everyone
+  // Honestly these two functions are tragedy and must be removed in v5
+  const onChangeDeprecated = useCallback((callback: OnChangeEventCallback) => {
+    warnDeprecatedOnChangeAndOnErrorUsage();
+    return onChangeDeprecatedHandlerRef.current = callback;
+  },[]);
+
+  const onErrorDeprecated = useCallback((callback: EventCallback) => {
+    warnDeprecatedOnChangeAndOnErrorUsage();
+    return onErrorDeprecatedHandlerRef.current = callback;
+  },[]);
+  
+  
+  useDocumentEventListener(fullscreenControls.fullscreenchange, function(event){
+    const isOpen = Boolean(document[fullscreenControls.fullscreenElement]);
+    if(isOpen){
+      //fullscreen was enabled
+      setIsFullscreen(true);
+      setElement(document[fullscreenControls.fullscreenElement]);
+    }else{
+      //fullscreen was disabled
+      setIsFullscreen(false);
+      setElement(null)
+    }
+    onChangeArg?.call(document, event, isOpen)
+    onChangeDeprecatedHandlerRef.current?.call(document, event, isOpen)
+  })
+
+  useDocumentEventListener(fullscreenControls.fullscreenerror, function(event){
+    onErrorArg?.call(document, event)
+    onErrorDeprecatedHandlerRef.current?.call(document, event)
+  })
 
   return {
     isEnabled: Boolean(document[fullscreenControls.fullscreenEnabled]),
     toggle,
-    onChange,
-    onError,
+    onChange: onChangeDeprecated,
+    onError: onErrorDeprecated,
     request,
     exit,
     isFullscreen,
