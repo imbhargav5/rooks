@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 type EventCallback = (this: Document, ev: any) => any;
 interface NormalizedFullscreenApi {
@@ -114,7 +114,7 @@ function useFullscreen(): FullscreenApi | undefined {
     error: fn.fullscreenerror
   };
 
-  const request = (element?: HTMLElement) =>
+  const request = useCallback((element?: HTMLElement) =>
     new Promise<void>((resolve, reject) => {
       const onFullScreenEntered = () => {
         setIsFullscreen(true);
@@ -128,7 +128,7 @@ function useFullscreen(): FullscreenApi | undefined {
       setElement(element);
 
       Promise.resolve(element[fn.requestFullscreen]()).catch(reject);
-    });
+    }), []);
 
   const on = (event: string, callback: EventCallback) => {
     const eventName = eventNameMap[event];
@@ -142,7 +142,7 @@ function useFullscreen(): FullscreenApi | undefined {
       document.removeEventListener(eventName, callback, false);
     }
   };
-  const exit = () =>
+  const exit = useCallback(() =>
     new Promise<void>((resolve, reject) => {
       if (!Boolean(document[fn.fullscreenElement])) {
         resolve();
@@ -159,21 +159,19 @@ function useFullscreen(): FullscreenApi | undefined {
       setElement(null);
 
       Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
-    });
+    }), []);
 
-  const toggle = (element?: HTMLElement) =>
-    Boolean(document[fn.fullscreenElement]) ? exit() : request(element);
+  const toggle = useCallback((element?: HTMLElement) =>
+    Boolean(document[fn.fullscreenElement]) ? exit() : request(element), []);
 
+  const onChange = useCallback((callback: EventCallback) => on("change", callback), []);
+  const onError =  useCallback((callback: EventCallback) => on("error", callback), []);
 
   return {
     isEnabled: Boolean(document[fn.fullscreenEnabled]),
     toggle,
-    onChange: (callback: EventCallback) => {
-      on("change", callback);
-    },
-    onError: (callback: EventCallback) => {
-      on("error", callback);
-    },
+    onChange,
+    onError,
     request,
     exit,
     isFullscreen,
