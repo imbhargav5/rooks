@@ -29,7 +29,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.7.1",
+  "version": "4.8.0",
   "_id": "@rooks/use-interval-when@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
