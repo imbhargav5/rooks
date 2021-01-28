@@ -4,7 +4,6 @@ import { useBoundingclientrect } from "../useBoundingclientrect";
 import { useBoundingclientrectRef } from "../useBoundingclientrectRef";
 import { useDidUpdate } from "../useDidUpdate";
 import { useForkRef } from "../useForkRef";
-import { useFullscreen } from "../useFullscreen";
 import { useInput } from "../useInput";
 import { useIntersectionObserverRef } from "../useIntersectionObserverRef";
 import { useInterval } from "../useInterval";
@@ -60,12 +59,6 @@ describe('useForkRef', () => {
     })
 });
 
-
-describe('useFullscreen', () => {
-    it("is defined", () => {
-        expect(useFullscreen).toBeDefined()
-    })
-});
 
 
 describe('useInput', () => {
