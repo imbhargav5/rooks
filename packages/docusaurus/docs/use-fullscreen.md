@@ -22,8 +22,6 @@ import useFullscreen from "@rooks/use-fullscreen"
 
 ## Usage
 
-### TIP: Notice that with SSR projects (i.e. Next.js) the hook will return undefined on initial load (FullScreen API is a browser-only API). Only when a browser it detected, it will return the actual hook functionality. That's why, we are doing the check for it.
-
 ```jsx
 import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
@@ -82,15 +80,6 @@ const styles = {
 
 function Demo() {
   const container = useRef();
-  const fullscreen = useFullScreen();
-
-  const [changeCount, setChangeCount] = useState(0);
-  const [errorCount, setErrorCount] = useState(0);
-
-  if(!fullscreen) {
-    return null;
-  }
-
   const {
     isEnabled,
     toggle,
@@ -100,7 +89,9 @@ function Demo() {
     exit,
     isFullscreen,
     element
-  } = fullscreen;
+  } = useFullscreen();
+  const [changeCount, setChangeCount] = useState(0);
+  const [errorCount, setErrorCount] = useState(0);
 
   onChange(() => {
     setChangeCount(changeCount + 1);

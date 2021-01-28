@@ -30,6 +30,7 @@
         "use-debounce",
         "use-did-mount",
         "use-did-update",
+        "use-document-event-listener",
         "use-effect-once-when",
         "use-event-listener-ref",
         "use-fork-ref",
