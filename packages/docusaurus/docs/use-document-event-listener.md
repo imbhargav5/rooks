@@ -27,7 +27,9 @@ import useDocumentEventListener from "@rooks/use-document-event-listener"
 
 ```jsx
 function Demo() {
-  useDocumentEventListener();
+  useDocumentEventListener("click", function(){
+    console.log("clicked")
+  });
   return null
 }
 
