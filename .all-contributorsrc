@@ -220,6 +220,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AdrienLemaire",
+      "name": "Adrien Lemaire",
+      "avatar_url": "https://avatars.githubusercontent.com/u/260983?v=4",
+      "profile": "https://www.linkedin.com/in/adrienlemaire/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
