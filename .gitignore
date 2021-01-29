@@ -20,3 +20,5 @@ yarn-error*
 !.github/actions/**/package-lock.json
 *.d.ts
 .changelog
+.vscode/settings.json
+build-state.yml

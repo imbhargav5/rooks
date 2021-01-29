@@ -121,6 +121,5 @@
     "nohoist": [
       "**/html-minifier-terser"
     ]
-  },
-  "devDependencies": {}
+  }
 }
