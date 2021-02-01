@@ -29,8 +29,8 @@
 *   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-event-listener-ref](https://react-hooks.org/docs/use-event-listener-ref) - A react hook to add an event listener to a ref
-*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
+*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
@@ -49,8 +49,8 @@
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
-*   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
+*   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
@@ -61,8 +61,8 @@
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
-*   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
+*   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
