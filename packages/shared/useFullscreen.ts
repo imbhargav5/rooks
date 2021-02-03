@@ -152,8 +152,8 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi | undefin
     }
   }, [element]);
 
-  const toggle = useCallback((element?: HTMLElement) =>
-    Boolean(document[fullscreenControls.fullscreenElement]) ? exit() : (element ? request(element) : null), []);
+  const toggle = useCallback((newElement?: HTMLElement) =>
+    Boolean(element) ? exit() : (newElement ? request(newElement) : null), [element]);
 
 
   const onChangeDeprecatedHandlerRef = useRef<Function>(noop);
@@ -173,11 +173,12 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi | undefin
   
   
   useDocumentEventListener(fullscreenControls.fullscreenchange, function(event){
-    const isOpen = Boolean(document[fullscreenControls.fullscreenElement]);
+    const currentFullscreenElement = document[fullscreenControls.fullscreenElement]
+    const isOpen = Boolean(currentFullscreenElement);
     if(isOpen){
       //fullscreen was enabled
       setIsFullscreen(true);
-      setElement(document[fullscreenControls.fullscreenElement]);
+      setElement(currentFullscreenElement);
     }else{
       //fullscreen was disabled
       setIsFullscreen(false);
@@ -193,7 +194,7 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi | undefin
   })
 
   return {
-    isEnabled: Boolean(document[fullscreenControls.fullscreenEnabled]),
+    isEnabled: Boolean(element),
     toggle,
     onChange: onChangeDeprecated,
     onError: onErrorDeprecated,
