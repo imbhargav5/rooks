@@ -6,8 +6,8 @@ sidebar_label: Hooks List
 
 <!--hookslist start-->
 
-*   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
 *   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
+*   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
@@ -31,14 +31,14 @@ sidebar_label: Hooks List
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
 *   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
-*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
+*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
+*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
-*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
