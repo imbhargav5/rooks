@@ -49,8 +49,8 @@
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
-*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
+*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
@@ -68,8 +68,8 @@
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
-*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
+*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
