@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "lerna clean",
     "lint": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/lint.sh",
+    "format" : "yarn run prettier --write \"./packages/shared/*.+(js|jsx|ts|tsx)\"",
     "test": "lerna run test --scope shared",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "create": "node helpers/create",
@@ -122,5 +123,7 @@
       "**/html-minifier-terser"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "2.2.1"
+  }
 }
