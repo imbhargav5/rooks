@@ -13,7 +13,7 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  */
 function useDocumentEventListener(eventName: string, callback: (...args: any)=> void, listenerOptions: any = {}, isLayoutEffect : boolean = false ) : void{
   if(typeof document!=="undefined"){
-    useGlobalObjectEventListener(document, eventName, callback, listenerOptions, isLayoutEffect);
+    useGlobalObjectEventListener(document, eventName, callback, listenerOptions, true, isLayoutEffect);
   }else{
     console.warn("useDocumentEventListener can't attach an event listener as document is undefined.")
   }
