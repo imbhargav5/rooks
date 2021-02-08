@@ -55,5 +55,6 @@ export { useUpdateEffect } from "shared/useUpdateEffect"
 export { useVisibilitySensor } from "shared/useVisibilitySensor";
 export { useWillUnmount } from "shared/useWillUnmount";
 export { useWindowEventListener } from "shared/useWindowEventListener";
+export { useWindowScrollPosition } from "shared/useWindowScrollPosition";
 export { useWindowSize } from "shared/useWindowSize";
 export { useWorker } from "shared/useWorker";
