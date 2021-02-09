@@ -1,7 +1,7 @@
-import { useEffect, Ref, MutableRefObject, useCallback, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { HTMLElementOrNull, CallbackRef } from "./utils/utils";
 
-var config: IntersectionObserverInit = {
+const config: IntersectionObserverInit = {
   root: null,
   rootMargin: "0px 0px 0px 0px",
   threshold: [0, 1]
@@ -20,9 +20,7 @@ function useIntersectionObserverRef(
   callback: IntersectionObserverCallback,
   options: IntersectionObserverInit = config
 ) : [CallbackRef] {
-  const { root = null, rootMargin, threshold } = {
-    ...options
-  };
+  const { root = null, rootMargin, threshold } = options;
 
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 
