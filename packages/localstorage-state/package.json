@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.9.0-canary.0",
+  "version": "4.9.0",
   "_id": "@rooks/use-localstorage-state@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
