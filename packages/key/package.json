@@ -27,7 +27,7 @@
     "keyboard event",
     "key"
   ],
-  "version": "4.8.1",
+  "version": "4.9.0-canary.0",
   "_id": "@rooks/use-key@",
   "publishConfig": {
     "access": "public"
