@@ -60,7 +60,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "8.0.5",
-    "babel-plugin-prismjs": "1.0.2",
+    "babel-plugin-prismjs": "2.0.1",
     "babel-preset-minify": "0.5.1",
     "browser-env": "3.2.5",
     "camel-case": "^4.1.1",
