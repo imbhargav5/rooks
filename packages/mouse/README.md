@@ -1,6 +1,6 @@
 # @rooks/use-mouse
 
-![TitleCard](/packages/mouse/title-card.svg)
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/mouse/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-mouse/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-mouse.svg) ![](https://img.shields.io/npm/dt/@rooks/use-mouse.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmouse)
 

@@ -1,6 +1,6 @@
 # @rooks/use-document-event-listener
 
-![TitleCard](/packages/document-event-listener/title-card.svg)
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/document-event-listener/title-card.svg)
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-document-event-listener/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-document-event-listener.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-document-event-listener.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fdocument-event-listener)
 
