@@ -5,8 +5,6 @@ sidebar_label: use-fresh-tick
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/fresh-tick/title-card.svg)
-
     
 
 ## About

@@ -4,8 +4,6 @@ title: use-fullscreen
 sidebar_label: use-fullscreen
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/fullscreen/title-card.svg)
-
     
 
 ## About

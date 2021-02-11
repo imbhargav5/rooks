@@ -5,8 +5,6 @@ sidebar_label: use-merge-refs
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/merge-refs/title-card.svg)
-
     
 
 ## About

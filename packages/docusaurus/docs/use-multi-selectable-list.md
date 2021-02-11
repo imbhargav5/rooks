@@ -5,8 +5,6 @@ sidebar_label: use-multi-selectable-list
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/multi-selectable-list/title-card.svg)
-
     
 
 ## About

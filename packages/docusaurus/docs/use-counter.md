@@ -5,8 +5,6 @@ sidebar_label: use-counter
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/counter/title-card.svg)
-
    
 
 ## About

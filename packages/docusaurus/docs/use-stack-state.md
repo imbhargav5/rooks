@@ -5,8 +5,6 @@ sidebar_label: use-stack-state
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/stack-state/title-card.svg)
-
     
 
 ## About

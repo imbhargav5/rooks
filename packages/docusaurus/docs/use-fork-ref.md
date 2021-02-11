@@ -4,8 +4,6 @@ title: use-fork-ref
 sidebar_label: use-fork-ref
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/fork-ref/title-card.svg)
-
     
 
 ## About

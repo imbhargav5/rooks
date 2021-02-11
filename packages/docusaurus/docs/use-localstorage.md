@@ -4,8 +4,6 @@ title: use-localstorage
 sidebar_label: use-localstorage
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/localstorage/title-card.svg)
-
    
 
 ## About

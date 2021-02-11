@@ -4,8 +4,6 @@ title: use-will-unmount
 sidebar_label: use-will-unmount
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/will-unmount/title-card.svg)
-
    
 
 ### About

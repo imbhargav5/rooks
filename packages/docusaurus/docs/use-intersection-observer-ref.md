@@ -4,8 +4,6 @@ title: use-intersection-observer-ref
 sidebar_label: use-intersection-observer-ref
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/intersection-observer-ref/title-card.svg)
-
     
 
 ## About

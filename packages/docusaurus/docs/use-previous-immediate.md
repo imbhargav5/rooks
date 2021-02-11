@@ -5,8 +5,6 @@ sidebar_label: use-previous-immediate
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/previous-immediate/title-card.svg)
-
     
 
 ## About

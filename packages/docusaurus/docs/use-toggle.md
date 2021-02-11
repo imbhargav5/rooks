@@ -4,8 +4,6 @@ title: use-toggle
 sidebar_label: use-toggle
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/toggle/title-card.svg)
-
    
 
 ## About

@@ -4,8 +4,6 @@ title: use-countdown
 sidebar_label: use-countdown
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/countdown/title-card.svg)
-
     
 
 ## About

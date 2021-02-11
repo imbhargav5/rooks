@@ -4,8 +4,6 @@ title: use-keys
 sidebar_label: use-keys
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/keys/title-card.svg)
-
    
 
 ## About

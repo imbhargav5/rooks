@@ -5,8 +5,6 @@ sidebar_label: use-did-update
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/did-update/title-card.svg)
-
    
 
 ## About

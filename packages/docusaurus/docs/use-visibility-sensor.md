@@ -4,8 +4,6 @@ title: use-visibility-sensor
 sidebar_label: use-visibility-sensor
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/visibility-sensor/title-card.svg)
-
    
 
 ## About

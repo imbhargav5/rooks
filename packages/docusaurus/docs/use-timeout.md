@@ -4,8 +4,6 @@ title: use-timeout
 sidebar_label: use-timeout
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/timeout/title-card.svg)
-
    
 
 ## About

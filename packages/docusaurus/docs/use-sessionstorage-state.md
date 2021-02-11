@@ -5,8 +5,6 @@ sidebar_label: use-sessionstorage-state
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/sessionstorage-state/title-card.svg)
-
     
 
 ## About

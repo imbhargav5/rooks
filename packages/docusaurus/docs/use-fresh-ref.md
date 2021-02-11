@@ -5,8 +5,6 @@ sidebar_label: use-fresh-ref
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/fresh-ref/title-card.svg)
-
     
 
 ## About

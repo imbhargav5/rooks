@@ -5,8 +5,6 @@ sidebar_label: use-key-ref
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/key-ref/title-card.svg)
-
     
 
 ## About

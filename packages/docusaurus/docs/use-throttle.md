@@ -4,8 +4,6 @@ title: use-throttle
 sidebar_label: use-throttle
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/throttle/title-card.svg)
-
    
 
 ## About

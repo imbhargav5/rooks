@@ -4,8 +4,6 @@ title: use-on-window-scroll
 sidebar_label: use-on-window-scroll
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/on-window-scroll/title-card.svg)
-
    
 
 ## About

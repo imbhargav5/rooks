@@ -4,8 +4,6 @@ title: use-geolocation
 sidebar_label: use-geolocation
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/geolocation/title-card.svg)
-
     
 
 ## About

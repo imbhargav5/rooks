@@ -4,8 +4,6 @@ title: use-update-effect
 sidebar_label: use-update-effect
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/update-effect/title-card.svg)
-
    
 
 ## About

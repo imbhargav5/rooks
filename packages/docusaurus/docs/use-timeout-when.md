@@ -5,8 +5,6 @@ sidebar_label: use-timeout-when
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/timeout-when/title-card.svg)
-
     
 
 ## About

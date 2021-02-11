@@ -5,8 +5,6 @@ sidebar_label: use-queue-state
 ---
 
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/queue-state/title-card.svg)
-
     
 
 ## About

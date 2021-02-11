@@ -4,8 +4,6 @@ title: use-on-window-resize
 sidebar_label: use-on-window-resize
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/on-window-resize/title-card.svg)
-
    
 
 ## About

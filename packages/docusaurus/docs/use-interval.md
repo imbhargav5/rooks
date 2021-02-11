@@ -4,8 +4,6 @@ title: use-interval
 sidebar_label: use-interval
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/interval/title-card.svg)
-
    
 
 ## About

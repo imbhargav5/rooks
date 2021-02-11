@@ -4,8 +4,6 @@ title: use-previous
 sidebar_label: use-previous
 ---
 
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/previous/title-card.svg)
-
    
 
 ## About
