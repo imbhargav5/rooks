@@ -1,5 +1,5 @@
 # @rooks/use-merge-refs
-![TitleCard](/packages/merge-refs/title-card.svg)
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/merge-refs/title-card.svg)
 
 [![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/@rooks/use-merge-refs/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-merge-refs.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-merge-refs.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fmerge-refs)
 

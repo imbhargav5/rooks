@@ -1,6 +1,6 @@
 # @rooks/use-boundingclientrect
 
-![TitleCard](/packages/boundingclientrect/title-card.svg)
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/boundingclientrect/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-boundingclientrect/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-boundingclientrect.svg) ![](https://img.shields.io/npm/dt/@rooks/use-boundingclientrect.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fboundingclientrect)
 

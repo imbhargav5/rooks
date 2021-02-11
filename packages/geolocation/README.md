@@ -1,5 +1,5 @@
 # @rooks/use-geolocation
-![TitleCard](/packages/geolocation/title-card.svg)
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/geolocation/title-card.svg)
 
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-geolocation/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-geolocation.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-geolocation.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fgeolocation)
 
