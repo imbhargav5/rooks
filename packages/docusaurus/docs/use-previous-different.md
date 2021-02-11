@@ -5,6 +5,8 @@ sidebar_label: use-previous-different
 ---
 
 
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/previous-different/title-card.svg)
+
     
 
 ## About

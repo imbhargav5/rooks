@@ -4,6 +4,8 @@ title: use-outside-click-ref
 sidebar_label: use-outside-click-ref
 ---
 
+![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/outside-click-ref/title-card.svg)
+
     
 
 ## About
