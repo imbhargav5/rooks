@@ -1,6 +1,6 @@
 {
   "name": "docusaurus",
-  "version": "4.9.0",
+  "version": "4.9.1",
   "private": true,
   "scripts": {
     "examples": "docusaurus-examples",
