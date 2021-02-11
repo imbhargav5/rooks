@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
 
 /**
  *
@@ -10,22 +10,7 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  */
 function useOnWindowScroll(callback: (event: any)=>void, when:boolean = true, isLayoutEffect: boolean = false): void {
-  const savedHandler = useRef(callback);
-  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect
-
-  useEffectToRun(() => {
-    savedHandler.current = callback;    
-  })
-
-  useEffectToRun(() => {
-    if (when) {
-      function passedCb(event) {
-        savedHandler.current(event);
-      }
-      window.addEventListener("scroll", passedCb);
-      return () => window.removeEventListener("scroll", passedCb);
-    }
-  }, [when]);
+  useGlobalObjectEventListener(window,"scroll", callback, {passive: true}, when, isLayoutEffect)
 }
 
 export { useOnWindowScroll };

@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
 
 /**
  *
@@ -12,22 +11,7 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  */
 function useOnWindowResize(callback: (event : any)=>void, when : boolean = true, isLayoutEffect: boolean = false) {
-  const savedHandler = useRef(callback);
-  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect
-  
-  useEffectToRun(() => {
-    savedHandler.current = callback;    
-  })
-
-  useEffectToRun(() => {
-    if (when) {
-      function passedCb(event) {
-        savedHandler.current(event);
-      }
-      window.addEventListener("resize", passedCb);
-      return () => window.removeEventListener("resize", passedCb);
-    }
-  }, [when]);
+  useGlobalObjectEventListener(window,"resize", callback, {passive: true}, when, isLayoutEffect)
 }
 
 export { useOnWindowResize };

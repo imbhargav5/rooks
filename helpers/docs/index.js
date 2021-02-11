@@ -10,7 +10,7 @@ const replaceString = require("replace-string");
   
 function ls() {
   let readmeFileContent = readFileSync(`./README.md`, "utf8");
-  readmeFileContent = readmeFileContent.replace(/!\[TitleCard\]\([\.\w/-]+.svg\)/,"");
+  readmeFileContent = readmeFileContent.replace(/!\[TitleCard\]\([:\.\w/-]+.svg\)/,"");
   readmeFileContent = parseReadme(readmeFileContent);
   let examplesFileContent = null;
   try {

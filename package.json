@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "lerna clean",
     "lint": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/lint.sh",
+    "format": "yarn run prettier --write \"./packages/shared/*.+(js|jsx|ts|tsx)\"",
     "test": "lerna run test --scope shared",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "create": "node helpers/create",
@@ -82,6 +83,7 @@
     "meow": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
     "ora": "4.0.3",
+    "prettier": "^2.2.1",
     "raf": "3.4.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",

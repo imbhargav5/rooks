@@ -13,16 +13,17 @@ import { RefElementOrNull } from "./utils/utils";
  * @param {string} eventName The event to track
  * @param {function} callback The callback to be called on event
  * @param {object} conditions The options to be passed to the event listener
+ * @param {boolean} when Should the event listener be active
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @return {undefined}
  */
-function useGlobalObjectEventListener(globalObject: Window | Document, eventName: string, callback: (...args: any)=> void, listenerOptions: any = {}, isLayoutEffect : boolean = false ) : void{
+function useGlobalObjectEventListener(globalObject: Window | Document, eventName: string, callback: (...args: any)=> void, listenerOptions: any = {}, when: boolean= true, isLayoutEffect : boolean = false ) : void{
   const freshCallback = useFreshTick(callback);
   const {capture, passive, once} = listenerOptions;
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect
   
   useEffectToRun(() => {
-    if(typeof globalObject !=="undefined"){
+    if(typeof globalObject !=="undefined" && globalObject.addEventListener && when){
       globalObject.addEventListener(eventName, freshCallback, listenerOptions)
       return () => {
         globalObject.removeEventListener(eventName, freshCallback, listenerOptions)

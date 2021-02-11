@@ -80,6 +80,7 @@
         "use-visibility-sensor",
         "use-will-unmount",
         "use-window-event-listener",
+        "use-window-scroll-position",
         "use-window-size",
         "use-worker"
       ]
