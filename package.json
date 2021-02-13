@@ -83,7 +83,6 @@
     "meow": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
     "ora": "4.0.3",
-    "prettier": "^2.2.1",
     "raf": "3.4.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -124,5 +123,17 @@
       "**/html-minifier-terser"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
+  }
 }
