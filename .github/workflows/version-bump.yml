@@ -2,18 +2,19 @@ name: Version bump
 
 on:
   push:
-    tags: ["v*"]
+    tags: ['v*']
 
 jobs:
   build:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     env:
-      ALGOLIA_API_KEY:   ${{ secrets.ALGOLIA_API_KEY }}
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      IS_GH_ACTION: 1
     steps:
-      - name: "Check if user has write access"
-        uses: "lannonbr/repo-permission-check-action@2.0.0"
+      - name: 'Check if user has write access'
+        uses: 'lannonbr/repo-permission-check-action@2.0.0'
         with:
-          permission: "write"
+          permission: 'write'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout the tag
@@ -26,7 +27,7 @@ jobs:
           version: 12.x
       - name: Get tag info
         id: tags
-        uses: ./.github/actions/get-release-tags      
+        uses: ./.github/actions/get-release-tags
       - name: Generate the changelog
         id: changelog
         uses: ./.github/actions/generate-lerna-changelog
@@ -54,12 +55,12 @@ jobs:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}          
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install project dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn
       - name: test
-        run: yarn test     
+        run: yarn test
       - name: Create a draft GitHub release
         uses: ./.github/actions/publish-github-release
         with:
@@ -75,9 +76,9 @@ jobs:
         run: yarn build:docs
       - name: Version docusaurus
         if: steps.tag_is_stable.outputs.result == 1
-        run:  cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
+        run: cd packages/docusaurus && yarn run docs-version ${{steps.tags.outputs.new}}
       - name: Add docusaurus
-        run: git add .          
+        run: git add .
       - name: Update CHANGELOG.md
         uses: ./.github/actions/update-changelog
         with:

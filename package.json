@@ -129,7 +129,7 @@
   "devDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
     }
   },
   "lint-staged": {
