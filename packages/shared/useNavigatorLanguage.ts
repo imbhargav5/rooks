@@ -1,6 +1,9 @@
-import {useMemo} from 'react'
+import {useState} from 'react'
+import { useWindowEventListener } from './useWindowEventListener';
 
-function getLanguage(): string | null{
+type Language = string | null
+
+function getLanguage(): Language{
   if(typeof navigator !== "undefined"){
     return navigator.language || navigator["userLanguage"]
   }else{
@@ -11,8 +14,14 @@ function getLanguage(): string | null{
 /**
  * useNavigatorLanguage hook
  * Returns the language of the navigator
- * @return {string|null}
+ * @return {Language}
  */
-export function useNavigatorLanguage(): string | null {
-  return useMemo(() => getLanguage(),[]);
+export function useNavigatorLanguage(): Language {
+  const [language, setLanguage] = useState<Language>(getLanguage);
+
+  useWindowEventListener("languagechange", ()=>{
+    setLanguage(getLanguage)
+  })
+  
+  return language;
 }
