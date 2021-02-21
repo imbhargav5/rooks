@@ -1,0 +1,281 @@
+{
+  "version-v4.9.2/docs": [
+    {
+      "collapsed": false,
+      "label": "Quick Start",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/getting-started"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/hooks-list"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "collapsed": false,
+      "label": "All In One",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/rooks"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "collapsed": false,
+      "type": "category",
+      "label": "Independent Packages",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-boundingclientrect"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-boundingclientrect-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-countdown"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-counter"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-debounce"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-did-mount"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-did-update"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-document-event-listener"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-effect-once-when"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-event-listener-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-fork-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-fresh-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-fresh-tick"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-fullscreen"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-geolocation"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-input"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-intersection-observer-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-interval"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-interval-when"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-isomorphic-effect"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-key"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-key-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-keys"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-localstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-localstorage-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-map-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-merge-refs"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-mouse"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-multi-selectable-list"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-mutation-observer"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-mutation-observer-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-navigator-language"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-on-window-resize"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-on-window-scroll"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-online"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-outside-click"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-outside-click-ref"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-previous"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-previous-different"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-previous-immediate"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-queue-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-raf"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-select"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-selectable-list"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-sessionstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-sessionstorage-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-stack-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-throttle"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-time-ago"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-timeout"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-timeout-when"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-toggle"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-undo-state"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-update-effect"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-visibility-sensor"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-will-unmount"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-window-event-listener"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-window-scroll-position"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-window-size"
+        },
+        {
+          "type": "doc",
+          "id": "version-v4.9.2/use-worker"
+        }
+      ]
+    }
+  ]
+}
