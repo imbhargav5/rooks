@@ -10,10 +10,10 @@ sidebar_label: Hooks List
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
-*   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
-*   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
+*   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
+*   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-event-listener-ref](https://react-hooks.org/docs/use-event-listener-ref) - A react hook to add an event listener to a ref
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
@@ -34,16 +34,16 @@ sidebar_label: Hooks List
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
 *   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
-*   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
+*   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
-*   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous-different](https://react-hooks.org/docs/use-previous-different) - usePreviousDifferent hooks returns the last different value of a variable
+*   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
