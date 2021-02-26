@@ -25,16 +25,16 @@
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
-*   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
+*   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-event-listener-ref](https://react-hooks.org/docs/use-event-listener-ref) - A react hook to add an event listener to a ref
-*   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+*   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
+*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
@@ -63,8 +63,8 @@
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
-*   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
+*   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
