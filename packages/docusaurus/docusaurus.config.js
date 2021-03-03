@@ -159,9 +159,9 @@ module.exports={
           },
           {
             html : `
-            <a href="https://splitbee.io/?ref=reacthooks">
-              <img src="https://splitbee.io/splitbee-badge.svg" alt="Analytics by Splitbee.io" /> 
-            </a>`
+           <a href="https://splitbee.io?ref=badge">
+             <img src="https://splitbee-cdn.fra1.cdn.digitaloceanspaces.com/static/badge/splitbee-badge.svg" alt="Analytics by Splitbee.io" /> 
+           </a>`
           }
         ]
       }],
