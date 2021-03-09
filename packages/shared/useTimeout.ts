@@ -42,7 +42,7 @@ function useTimeout(
         window.clearTimeout(timeout);
       };
     }
-  }, [isTimeoutActive]);
+  }, [isTimeoutActive, timeoutDelayMs]);
   return {
     clear,
     start,
