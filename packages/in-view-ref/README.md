@@ -44,7 +44,6 @@ function Demo() {
       <div style={{ height: 2000 }}></div>
     </>
   );
-  return null;
 }
 
 render(<Demo />);
