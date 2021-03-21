@@ -18,7 +18,7 @@ A hook to register an intersection observer listener
 ## Importing the hook
 
 ```javascript
-import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
+import useIntersectionObserverRef from '@rooks/use-intersection-observer-ref';
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
 ```jsx
 function Demo() {
   const [isVisible, setIsVisible] = useState(false);
-  const callback = entries => {
+  const callback = (entries) => {
     if (entries && entries[0]) {
       setIsVisible(entries[0].isIntersecting);
     }
@@ -36,30 +36,30 @@ function Demo() {
     <>
       <div
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
-          right: 0
+          right: 0,
         }}
       >
         <h1>Is rectangle visible - {String(isVisible)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
+      <div ref={myRef} style={{ height: 300, background: 'red' }}></div>
       <div style={{ height: 2000 }}></div>
     </>
   );
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
 
-| Argument | Type                         | Description                                       | Default Value                                                        |
-| -------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
-| callback | IntersectionObserverCallback | React ref whose boundingClientRect is to be found | undefined                                                            |
-| options  | IntersectionObserverInit     | React ref whose boundingClientRect is to be found | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` |
+| Argument | Type                         | Description                                                                                                                  | Default Value                                                    |
+| -------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        |
+| options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` |
 
 ### Return
 

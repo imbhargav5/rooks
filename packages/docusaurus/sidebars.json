@@ -38,6 +38,7 @@
         "use-fresh-tick",
         "use-fullscreen",
         "use-geolocation",
+        "use-in-view-ref",
         "use-input",
         "use-intersection-observer-ref",
         "use-interval",
