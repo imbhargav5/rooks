@@ -17,6 +17,7 @@ export { useInput } from "shared/useInput";
 export { useInterval } from "shared/useInterval";
 export { useIntervalWhen } from "shared/useIntervalWhen";
 export { useIntersectionObserverRef } from "shared/useIntersectionObserverRef";
+export {useInViewRef} from "shared/useInViewRef"
 export { useIsomorphicEffect } from "shared/useIsomorphicEffect";
 export { useKeyRef } from "shared/useKeyRef";
 export { useKey } from "shared/useKey";
