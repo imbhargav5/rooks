@@ -1,13 +1,11 @@
 # @rooks/use-intersection-observer-ref
 ![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/intersection-observer-ref/title-card.svg)
 
+
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![](https://img.shields.io/npm/v/@rooks/use-intersection-observer-ref/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-intersection-observer-ref.svg) ![](https://img.shields.io/bundlephobia/min/@rooks/use-intersection-observer-ref.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fintersection-observer-ref)
 
+## About
 
-
-
-
-## About 
 A hook to register an intersection observer listener
 <br/>
 
@@ -20,7 +18,7 @@ npm install --save @rooks/use-intersection-observer-ref
 ## Importing the hook
 
 ```javascript
-import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
+import useIntersectionObserverRef from '@rooks/use-intersection-observer-ref';
 ```
 
 ## Usage
@@ -28,7 +26,7 @@ import useIntersectionObserverRef from "@rooks/use-intersection-observer-ref"
 ```jsx
 function Demo() {
   const [isVisible, setIsVisible] = useState(false);
-  const callback = entries => {
+  const callback = (entries) => {
     if (entries && entries[0]) {
       setIsVisible(entries[0].isIntersecting);
     }
@@ -38,30 +36,30 @@ function Demo() {
     <>
       <div
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
-          right: 0
+          right: 0,
         }}
       >
         <h1>Is rectangle visible - {String(isVisible)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
+      <div ref={myRef} style={{ height: 300, background: 'red' }}></div>
       <div style={{ height: 2000 }}></div>
     </>
   );
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
 
-| Argument | Type                         | Description                                       | Default Value                                                        |
-| -------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
-| callback | IntersectionObserverCallback | React ref whose boundingClientRect is to be found | undefined                                                            |
-| options  | IntersectionObserverInit     | React ref whose boundingClientRect is to be found | ```{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}``` |
+| Argument | Type                         | Description                                                                                                                  | Default Value                                                    |
+| -------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        |
+| options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` |
 
 ### Return
 
