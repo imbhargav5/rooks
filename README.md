@@ -34,6 +34,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
+*   [use-in-view-ref](https://react-hooks.org/docs/use-in-view-ref) - Simple hook that monitors element enters or leave the viewport.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
@@ -86,7 +87,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start--> 
 
-✅ Collection of 60 hooks as standalone modules.
+✅ Collection of 61 hooks as standalone modules.
 
 <!--hookscount end--> 
 
