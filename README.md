@@ -49,8 +49,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
-*   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
+*   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
@@ -73,8 +73,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
-*   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
+*   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-event-listener](https://react-hooks.org/docs/use-window-event-listener) - Adds an event listener to window
 *   [use-window-scroll-position](https://react-hooks.org/docs/use-window-scroll-position) - A React hook to get the scroll position of the window
