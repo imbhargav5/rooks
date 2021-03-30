@@ -20,18 +20,18 @@ sidebar_label: Hooks List
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-in-view-ref](https://react-hooks.org/docs/use-in-view-ref) - Simple hook that monitors element enters or leave the viewport.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
-*   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
+*   [use-in-view-ref](https://react-hooks.org/docs/use-in-view-ref) - Simple hook that monitors element enters or leave the viewport.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
+*   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
 *   [use-interval](https://react-hooks.org/docs/use-interval) - A react hook for using setInterval
 *   [use-isomorphic-effect](https://react-hooks.org/docs/use-isomorphic-effect) - Resolves to useEffect when window is not in scope and useLayout effect in the browser
 *   [use-key-ref](https://react-hooks.org/docs/use-key-ref) - Very similar to useKey but it returns a ref
 *   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
-*   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
+*   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
 *   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
@@ -46,8 +46,8 @@ sidebar_label: Hooks List
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous-different](https://react-hooks.org/docs/use-previous-different) - usePreviousDifferent hooks returns the last different value of a variable
 *   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
-*   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
+*   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
