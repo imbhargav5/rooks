@@ -15,8 +15,10 @@ function useMediaMatch(query: string): boolean {
     return false;
   }
 
-  const [matchMedia, setMatchMedia] = useState(() => window.matchMedia(query));
-  const [matches, setMatches] = useState(() => matchMedia.matches);
+  const [matchMedia, setMatchMedia] = useState<MediaQueryList>(() =>
+    window.matchMedia(query)
+  );
+  const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
 
   useEffect(() => {
     const mm = window.matchMedia(query);
