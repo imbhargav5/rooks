@@ -126,7 +126,9 @@
       "**/html-minifier-terser"
     ]
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.11.2"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
