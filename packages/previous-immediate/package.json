@@ -29,7 +29,7 @@
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "version": "4.10.0",
+  "version": "4.10.1",
   "_id": "@rooks/use-previous-immediate@",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
