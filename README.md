@@ -44,14 +44,14 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-key](https://react-hooks.org/docs/use-key) - Keyboard key handler hook for react
 *   [use-keys](https://react-hooks.org/docs/use-keys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 *   [use-localstorage-state](https://react-hooks.org/docs/use-localstorage-state) - UseState but auto updates values to localStorage
-*   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
-*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
+*   [use-localstorage](https://react-hooks.org/docs/use-localstorage) - Local Storage hook for React
 *   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
+*   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
-*   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
+*   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
@@ -61,8 +61,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
 *   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
-*   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
+*   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
@@ -75,10 +75,10 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
 *   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
-*   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-event-listener](https://react-hooks.org/docs/use-window-event-listener) - Adds an event listener to window
-*   [use-window-scroll-position](https://react-hooks.org/docs/use-window-scroll-position) - A React hook to get the scroll position of the window
+*   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-size](https://react-hooks.org/docs/use-window-size) - A React Hooks package for window-size
+*   [use-window-scroll-position](https://react-hooks.org/docs/use-window-scroll-position) - A React hook to get the scroll position of the window
 *   [use-worker](https://react-hooks.org/docs/use-worker) - A React Hooks package for worker
 
 <!--hookslist end-->
