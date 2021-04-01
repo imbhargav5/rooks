@@ -31,7 +31,7 @@ function useIntervalWhen(
         window.clearInterval(interval);
       };
     }
-  }, [when]);
+  }, [when, intervalDurationMs]);
 
 }
 
