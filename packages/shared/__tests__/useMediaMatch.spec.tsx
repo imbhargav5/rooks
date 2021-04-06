@@ -36,11 +36,8 @@ describe('useMediaMatch', () => {
       }
     );
 
-    // We call once for the initial value render which gives us the initial matches value, and one
-    // more for the initial effect to bind the listener
-    expect(matchMedia).toHaveBeenCalledTimes(2);
+    expect(matchMedia).toHaveBeenCalledTimes(1);
     expect(matchMedia.mock.calls[0][0]).toBe('print');
-    expect(matchMedia.mock.calls[1][0]).toBe('print');
     expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
       'change',
@@ -52,7 +49,7 @@ describe('useMediaMatch', () => {
     const l = expectDefined<(ev: MediaQueryListEventMap['change']) => void>(
       listener
     );
-    await act(() => l({ matches: false } as any));
+    act(() => l({ matches: false } as any));
     expect(result.current).toBe(false);
 
     // Unmount, ensuring we unbind the listener

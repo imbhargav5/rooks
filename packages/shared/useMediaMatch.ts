@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 /**
  * useMediaMatch
@@ -15,16 +15,15 @@ function useMediaMatch(query: string): boolean {
     return false;
   }
 
-  const [matchMedia, setMatchMedia] = useState<MediaQueryList>(() =>
-    window.matchMedia(query)
-  );
+  const matchMedia = useMemo<MediaQueryList>(() => window.matchMedia(query), [
+    query,
+  ]);
+
   const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
 
   useEffect(() => {
-    const mm = window.matchMedia(query);
-    setMatchMedia(mm);
-    setMatches(mm.matches);
-  }, [query]);
+    setMatches(matchMedia.matches);
+  }, [matchMedia]);
 
   useEffect(() => {
     const listener = (ev: MediaQueryListEventMap['change']) =>
