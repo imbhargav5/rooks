@@ -33,8 +33,8 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
-*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-in-view-ref](https://react-hooks.org/docs/use-in-view-ref) - Simple hook that monitors element enters or leave the viewport.
+*   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
 *   [use-input](https://react-hooks.org/docs/use-input) - A React Hooks package for input
 *   [use-intersection-observer-ref](https://react-hooks.org/docs/use-intersection-observer-ref) - A hook to register an intersection observer listener
 *   [use-interval-when](https://react-hooks.org/docs/use-interval-when) - Sets an interval immediately when a condition is true
@@ -59,10 +59,10 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [use-outside-click](https://react-hooks.org/docs/use-outside-click) - React hook for tracking clicks outside a ref
 *   [use-previous-different](https://react-hooks.org/docs/use-previous-different) - usePreviousDifferent hooks returns the last different value of a variable
 *   [use-previous-immediate](https://react-hooks.org/docs/use-previous-immediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
-*   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
 *   [use-previous](https://react-hooks.org/docs/use-previous) - Access the previous value of a variable with this React hook
-*   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
+*   [use-queue-state](https://react-hooks.org/docs/use-queue-state) - A React hook that manages state in the form of a queue
 *   [use-raf](https://react-hooks.org/docs/use-raf) - A continuously running requestAnimationFrame hook for React
+*   [use-select](https://react-hooks.org/docs/use-select) - A React Hooks package for select
 *   [use-selectable-list](https://react-hooks.org/docs/use-selectable-list) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [use-sessionstorage-state](https://react-hooks.org/docs/use-sessionstorage-state) - useState but syncs with sessionstorage
 *   [use-sessionstorage](https://react-hooks.org/docs/use-sessionstorage) - Session storage react hook. Easily manage session storage values
