@@ -21,6 +21,7 @@ function useMediaMatch(query: string): boolean {
   const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
 
   useEffect(() => {
+    setMatches(matchMedia.matches);
     const listener = (ev: MediaQueryListEventMap['change']) =>
       setMatches(ev.matches);
     matchMedia.addEventListener('change', listener);

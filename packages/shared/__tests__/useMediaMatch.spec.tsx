@@ -11,7 +11,7 @@ describe('useMediaMatch', () => {
     delete (window as any).matchMedia;
   });
 
-  it('should return a boolean', async () => {
+  it('should track a boolean', async () => {
     const matchMedia = jest.fn<MediaQueryList, [string]>();
     const addEventListener = jest.fn<
       void,
@@ -29,7 +29,7 @@ describe('useMediaMatch', () => {
 
     window.matchMedia = matchMedia;
 
-    const { result, unmount } = renderHook(
+    const { rerender, result, unmount } = renderHook(
       ({ query }) => useMediaMatch(query),
       {
         initialProps: { query: 'print' },
@@ -50,13 +50,27 @@ describe('useMediaMatch', () => {
     const l = expectDefined<(ev: MediaQueryListEventMap['change']) => void>(
       listener
     );
-    await act(() => l({ matches: false } as any));
+    act(() => l({ matches: false } as any));
     expect(result.current).toBe(false);
 
-    // Unmount, ensuring we unbind the listener
+    // Changing the query instantiates a new matchMedia and resets the match value to true
     expect(removeEventListener).not.toHaveBeenCalled();
-    unmount();
+    matchMedia.mockReturnValue({
+      addEventListener,
+      removeEventListener,
+      matches: true,
+    } as any);
+    rerender({ query: '(max-width: 640px)' });
+    expect(matchMedia).toHaveBeenCalledTimes(2);
+    expect(matchMedia.mock.calls[1][0]).toBe('(max-width: 640px)');
+    expect(result.current).toBe(true);
+    // We should have also cleaned up the old event listener and bound a new one
     expect(removeEventListener).toHaveBeenCalledTimes(1);
+    expect(addEventListener).toHaveBeenCalledTimes(2);
+
+    // Unmount, ensuring we unbind the listener
+    unmount();
+    expect(removeEventListener).toHaveBeenCalledTimes(2);
   });
 });
 
