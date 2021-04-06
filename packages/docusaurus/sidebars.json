@@ -50,6 +50,7 @@
         "use-localstorage",
         "use-localstorage-state",
         "use-map-state",
+        "use-media-match",
         "use-merge-refs",
         "use-mouse",
         "use-multi-selectable-list",
