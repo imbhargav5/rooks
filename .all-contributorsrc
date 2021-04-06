@@ -247,6 +247,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mrvisser",
+      "name": "Branden Visser",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102265?v=4",
+      "profile": "http://mrvisser.ca",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
