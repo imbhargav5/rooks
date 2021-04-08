@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useDocumentEventListener } from './useDocumentEventListener';
 import { warning } from './warning';
 
@@ -206,7 +206,7 @@ function useFullscreen(
   );
 
   return {
-    isEnabled: Boolean(element),
+    isEnabled: Boolean(document[fullscreenControls.fullscreenEnabled]),
     toggle,
     onChange: onChangeDeprecated,
     onError: onErrorDeprecated,
