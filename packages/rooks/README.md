@@ -21,8 +21,8 @@
 
 *   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
-*   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
+*   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
@@ -48,12 +48,12 @@
 *   [use-map-state](https://react-hooks.org/docs/use-map-state) - A react hook to manage state in a key value pair map.
 *   [use-media-match](https://react-hooks.org/docs/use-media-match) - Signal whether or not a media query is currently matched.
 *   [use-merge-refs](https://react-hooks.org/docs/use-merge-refs) - Merges any number of refs into a single ref
-*   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-multi-selectable-list](https://react-hooks.org/docs/use-multi-selectable-list) - A custom hook to easily select multiple values from a list
+*   [use-mouse](https://react-hooks.org/docs/use-mouse) - A React Hooks package for mouse
 *   [use-mutation-observer-ref](https://react-hooks.org/docs/use-mutation-observer-ref) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [use-mutation-observer](https://react-hooks.org/docs/use-mutation-observer) - A React Hooks package for mutation-observer
-*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-resize](https://react-hooks.org/docs/use-on-window-resize) - A React hook for window on resize event
+*   [use-navigator-language](https://react-hooks.org/docs/use-navigator-language) - A React Hooks package for navigator-language
 *   [use-on-window-scroll](https://react-hooks.org/docs/use-on-window-scroll) - A React hook for window on scroll event
 *   [use-online](https://react-hooks.org/docs/use-online) - A React Hooks package for online
 *   [use-outside-click-ref](https://react-hooks.org/docs/use-outside-click-ref) - A hook that can track a click event outside a ref. Returns a callbackRef.
@@ -70,8 +70,8 @@
 *   [use-stack-state](https://react-hooks.org/docs/use-stack-state) - A React hook that manages state in the form of a stack
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
-*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
+*   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
