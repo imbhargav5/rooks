@@ -73,8 +73,8 @@
 *   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
 *   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
-*   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
+*   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
 *   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
 *   [use-window-event-listener](https://react-hooks.org/docs/use-window-event-listener) - Adds an event listener to window
