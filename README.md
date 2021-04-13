@@ -19,18 +19,18 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookslist start-->
 
-*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
+*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
 *   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
-*   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
+*   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-event-listener-ref](https://react-hooks.org/docs/use-event-listener-ref) - A react hook to add an event listener to a ref
-*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
+*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
