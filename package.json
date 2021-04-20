@@ -133,8 +133,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+      "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
     }
   },
   "lint-staged": {
