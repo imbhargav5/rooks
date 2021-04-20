@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-mutation-observer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/mutation-observer"
   },
   "scripts": {
@@ -30,12 +30,17 @@
     "mutation observer hook"
   ],
   "version": "4.11.0",
-  "_id": "@rooks/use-mutation-observer@",
+  "_id": "@rooks/use-mutation-observer@4.11.0",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
   },
-  "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213"
+  "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "private": true
 }

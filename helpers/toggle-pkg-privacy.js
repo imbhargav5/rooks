@@ -1,6 +1,6 @@
-const meow = require("meow");
-const readPkgUp = require("read-pkg-up");
-const writePkg = require("write-pkg");
+const meow = require('meow');
+const readPkgUp = require('read-pkg-up');
+const writePkg = require('write-pkg');
 
 const cli = meow(
   `
@@ -20,29 +20,30 @@ const cli = meow(
   {
     flags: {
       public: {
-        type: "boolean",
-        alias: "p"
+        type: 'boolean',
+        alias: 'p',
       },
       private: {
-        type: "boolean",
-        alias: "pr"
-      }
-    }
+        type: 'boolean',
+        alias: 'pr',
+      },
+    },
   }
 );
+console.log(cli.flags);
 if (cli.flags.public && cli.flags.private) {
-  throw new Error("Use either private or public flags. Not both");
+  throw new Error('Use either private or public flags. Not both');
 }
 
 const result = readPkgUp.sync();
-if (result && result.pkg) {
+if (result && result.packageJson) {
   console.log(cli.private);
-  console.log(result.pkg);
+  console.log(result.packageJson);
   if (cli.flags.public) {
-    result.pkg.private = false;
+    result.packageJson.private = false;
   }
   if (cli.flags.private) {
-    result.pkg.private = true;
+    result.packageJson.private = true;
   }
-  writePkg(result.pkg);
+  writePkg(result.packageJson);
 }

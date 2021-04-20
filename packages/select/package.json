@@ -8,7 +8,7 @@
   "homepage": "https://react-hooks.org/docs/use-select",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/select"
   },
   "scripts": {
@@ -28,7 +28,7 @@
     "list"
   ],
   "version": "4.11.0",
-  "_id": "@rooks/use-select@",
+  "_id": "@rooks/use-select@4.11.0",
   "publishConfig": {
     "access": "public"
   },
@@ -36,5 +36,10 @@
     "react": ">=16.8.0"
   },
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "private": true
 }

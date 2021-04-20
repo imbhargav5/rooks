@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-queue-state",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/queue-state"
   },
   "scripts": {
@@ -32,9 +32,13 @@
     "react": ">=16.8.0"
   },
   "version": "4.11.0",
-  "_id": "@rooks/use-queue-state@",
+  "_id": "@rooks/use-queue-state@4.11.0",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "private": true
 }
