@@ -4,12 +4,14 @@
   "description": "Useful React hooks for everyone.",
   "scripts": {
     "clean": "lerna clean",
+    "commit": "cz",
     "lint": "lerna exec --stream --parallel --ignore rooks --ignore shared --ignore docusaurus --ignore eslint-config-rooks -- sh ../../scripts/lint.sh",
     "format": "yarn run prettier --write \"./packages/shared/*.+(js|jsx|ts|tsx)\"",
     "test": "lerna run test --scope shared",
     "coverage": "lerna run test --stream --parallel -- --coverage",
     "create": "node helpers/create",
     "add-license-to-pkg": "lerna exec --scope=@rooks/* --concurrency 1 --stream -- 'node ../../helpers/add-license-to-pkg.js'",
+    "toggle-pkg-privacy": "lerna exec --scope=@rooks/* --concurrency 1 --stream -- 'node ../../helpers/toggle-pkg-privacy.js'",
     "compute-package-list": "node helpers/compute-package-list",
     "update-title-card": "lerna exec --scope=@rooks/* --concurrency 1 --stream -- 'node ../../helpers/update-title-card/index.js'",
     "readme-to-docs": "lerna exec --scope=@rooks/* --scope=rooks --concurrency 1 --stream -- 'node ../../helpers/docs/index.js'",
@@ -126,13 +128,21 @@
       "**/html-minifier-terser"
     ]
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
+      "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "lint-staged": {
     "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

@@ -8,7 +8,7 @@
   "homepage": "https://react-hooks.org/docs/use-input",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/input"
   },
   "scripts": {
@@ -27,7 +27,7 @@
     "input hook"
   ],
   "version": "4.11.0",
-  "_id": "@rooks/use-input@",
+  "_id": "@rooks/use-input@4.11.0",
   "publishConfig": {
     "access": "public"
   },
@@ -35,5 +35,10 @@
     "react": ">=16.8.0"
   },
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "private": true
 }

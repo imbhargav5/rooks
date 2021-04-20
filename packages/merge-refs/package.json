@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-merge-refs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/merge-refs"
   },
   "scripts": {
@@ -32,9 +32,13 @@
     "react": ">=16.8.0"
   },
   "version": "4.11.0",
-  "_id": "@rooks/use-merge-refs@",
+  "_id": "@rooks/use-merge-refs@4.11.0",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "private": true
 }

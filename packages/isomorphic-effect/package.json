@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-isomorphic-effect",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/isomorphic-effect"
   },
   "scripts": {
@@ -32,9 +32,13 @@
     "react": ">=16.8.0"
   },
   "version": "4.11.0",
-  "_id": "@rooks/use-isomorphic-effect-when@",
+  "_id": "@rooks/use-isomorphic-effect@4.11.0",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "private": true
 }

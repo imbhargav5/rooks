@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-throttle",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/throttle"
   },
   "scripts": {
@@ -31,9 +31,13 @@
     "react-dom": ">=16.8.0"
   },
   "version": "4.11.0",
-  "_id": "@rooks/use-throttle@",
+  "_id": "@rooks/use-throttle@4.11.0",
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "private": true
 }

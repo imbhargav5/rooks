@@ -9,7 +9,7 @@
   "homepage": "https://react-hooks.org/docs/use-debounce",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
     "directory": "packages/debounce"
   },
   "scripts": {
@@ -28,7 +28,7 @@
     "react-hooks.org"
   ],
   "version": "4.11.0",
-  "_id": "@rooks/use-debounce@",
+  "_id": "@rooks/use-debounce@4.11.0",
   "publishConfig": {
     "access": "public"
   },
@@ -39,5 +39,10 @@
     "lodash.debounce": "4.0.8"
   },
   "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "private": true
 }
