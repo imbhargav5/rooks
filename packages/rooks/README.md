@@ -19,8 +19,8 @@
 
 <!--hookslist start-->
 
-*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
+*   [use-boundingclientrect-ref](https://react-hooks.org/docs/use-boundingclientrect-ref) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
@@ -29,8 +29,8 @@
 *   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
 *   [use-event-listener-ref](https://react-hooks.org/docs/use-event-listener-ref) - A react hook to add an event listener to a ref
-*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-ref](https://react-hooks.org/docs/use-fresh-ref) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
+*   [use-fork-ref](https://react-hooks.org/docs/use-fork-ref) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 *   [use-fresh-tick](https://react-hooks.org/docs/use-fresh-tick) - Like use-fresh-ref but specifically for functions
 *   [use-fullscreen](https://react-hooks.org/docs/use-fullscreen) - A React Hooks package for fullscreen.
 *   [use-geolocation](https://react-hooks.org/docs/use-geolocation) - A hook to provide the geolocation info on client side.
@@ -71,14 +71,14 @@
 *   [use-throttle](https://react-hooks.org/docs/use-throttle) - A throttle hook for react
 *   [use-time-ago](https://react-hooks.org/docs/use-time-ago) - A React Hook to get time ago for timestamp millisecond value
 *   [use-timeout-when](https://react-hooks.org/docs/use-timeout-when) - Takes a callback and fires it when a condition is true
-*   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-timeout](https://react-hooks.org/docs/use-timeout) - A React Hooks package for timeout
+*   [use-toggle](https://react-hooks.org/docs/use-toggle) - A React Hooks package for toggle
 *   [use-undo-state](https://react-hooks.org/docs/use-undo-state) - Drop in replacement for useState hook but with undo functionality.
 *   [use-update-effect](https://react-hooks.org/docs/use-update-effect) - An useEffect that does not run on first render
 *   [use-visibility-sensor](https://react-hooks.org/docs/use-visibility-sensor) - A React Hooks package for visibility-sensor
 *   [use-will-unmount](https://react-hooks.org/docs/use-will-unmount) - A React hook for componentWillUnmount lifecycle method
-*   [use-window-event-listener](https://react-hooks.org/docs/use-window-event-listener) - Adds an event listener to window
 *   [use-window-scroll-position](https://react-hooks.org/docs/use-window-scroll-position) - A React hook to get the scroll position of the window
+*   [use-window-event-listener](https://react-hooks.org/docs/use-window-event-listener) - Adds an event listener to window
 *   [use-window-size](https://react-hooks.org/docs/use-window-size) - A React Hooks package for window-size
 *   [use-worker](https://react-hooks.org/docs/use-worker) - A React Hooks package for worker
 
