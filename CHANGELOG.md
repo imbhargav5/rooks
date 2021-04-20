@@ -1,8 +1,14 @@
 ##  (2021-04-20)
 
+* fix(fix syntax in gulpfile): fix syntax in gulpfile ([81ccf94](https://github.com/imbhargav5/rooks/commit/81ccf94))
+* fix(fix typo in changelog.yml): fix typo in changelog.yml 'ref' ([ea6efaf](https://github.com/imbhargav5/rooks/commit/ea6efaf))
+* fix(remove leftover pieces of usetimeago): remove leftover pieces of usetimeago ([07e6d69](https://github.com/imbhargav5/rooks/commit/07e6d69))
+* fix(remove useworker missing pieces): remove useWorker missing pieces ([20f5fa8](https://github.com/imbhargav5/rooks/commit/20f5fa8))
+* fix(usefullscreen): change isenabled fullsrceen property to match mdn documentation (#415) ([b553b63](https://github.com/imbhargav5/rooks/commit/b553b63)), closes [#415](https://github.com/imbhargav5/rooks/issues/415)
+* feat(run changelog on main push): run changelog on main push ([d8d4608](https://github.com/imbhargav5/rooks/commit/d8d4608))
+* chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([63bda08](https://github.com/imbhargav5/rooks/commit/63bda08)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
 * chore(prep for v5): make package private and remove unused ([8689f9a](https://github.com/imbhargav5/rooks/commit/8689f9a))
 * chore(update package json): update package json and remove prepare message hook ([977ff9f](https://github.com/imbhargav5/rooks/commit/977ff9f))
-* fix(usefullscreen): change isenabled fullsrceen property to match mdn documentation (#415) ([b553b63](https://github.com/imbhargav5/rooks/commit/b553b63)), closes [#415](https://github.com/imbhargav5/rooks/issues/415)
 * docs: add thodubois as a contributor (#419) ([136d43f](https://github.com/imbhargav5/rooks/commit/136d43f)), closes [#419](https://github.com/imbhargav5/rooks/issues/419)
 
 
