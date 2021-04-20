@@ -32,8 +32,10 @@ gulp.task('changelog', function () {
                 ...context.commitGroups.map(({ commits, ...rest }) => ({
                   ...rest,
                   commits: commits.filter((commit) => {
-                    return !IGNORE_COMMIT_PATTERS.some(
-                      (pattern) => commit.header?.includes(pattern) || false
+                    return !IGNORE_COMMIT_PATTERS.some((pattern) =>
+                      typeof commit.header === 'string'
+                        ? commit.header.includes(pattern)
+                        : false
                     );
                   }),
                 })),
