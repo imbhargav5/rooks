@@ -16,7 +16,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@master
-        ref: main
+        with:
+          ref: main
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
