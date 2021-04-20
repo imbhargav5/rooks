@@ -31,7 +31,6 @@ import { useUndoState } from '../useUndoState';
 import { useVisibilitySensor } from '../useVisibilitySensor';
 import { useWillUnmount } from '../useWillUnmount';
 import { useWindowSize } from '../useWindowSize';
-import { useWorker } from '../useWorker';
 
 describe('useBoundingClientRect', () => {
   test('should be defined', () => {
@@ -200,10 +199,5 @@ describe('useWillUnmount', () => {
 describe('useWindowSize', () => {
   it('is defined', () => {
     expect(useWindowSize).toBeDefined();
-  });
-});
-describe('useWorker', () => {
-  it('is defined', () => {
-    expect(useWorker).toBeDefined();
   });
 });
