@@ -29,6 +29,7 @@
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:only": "yarn run build:shared --stream --parallel && yarn run build:independent --stream --parallel && yarn run build:independent-dts --stream --parallel && yarn run build:rooks  --stream --parallel",
     "build": "yarn run build:only",
+    "generate:changelog": "gulp changelog",
     "prerelease-version-bump": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version prerelease --force-publish=* --preid ${GITHUB_SHA}",
     "ga-prerelease-version": "lerna version prerelease --force-publish=* --no-commit-hooks --no-push --yes",
     "bump-canary": "yarn run new-canary-version prerelease",
@@ -67,8 +68,12 @@
     "browser-env": "3.2.5",
     "camel-case": "^4.1.1",
     "chalk": "2.4.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "cz-conventional-changelog": "3.3.0",
     "execa": "^4.1.0",
     "glob": "^7.1.6",
+    "gulp": "^4.0.2",
+    "gulp-conventional-changelog": "^2.0.35",
     "husky": "^4.2.5",
     "inquirer": "7.0.0",
     "jest": "^26.6.3",
@@ -127,10 +132,7 @@
     "nohoist": [
       "**/html-minifier-terser"
     ]
-  },
-  "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
-  },
+  }, 
   "husky": {
     "hooks": {
       "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
