@@ -20,8 +20,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           version: 15.x
-      - run: git config --global user.email "me@imbhargav5.com"
-      - run: git config --global user.name "Bhargav Ponnapalli"
+      - run: git config user.email "me@imbhargav5.com"
+      - run: git config user.name "Bhargav Ponnapalli"
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

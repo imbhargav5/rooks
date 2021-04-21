@@ -23,8 +23,8 @@ jobs:
       - name: Get latest tag info
         id: latestTag
         uses: ./.github/actions/get-latest-tag     
-      - run: git config --global user.email "me@imbhargav5.com"
-      - run: git config --global user.name "Bhargav Ponnapalli"
+      - run: git config user.email "me@imbhargav5.com"
+      - run: git config user.name "Bhargav Ponnapalli"
       - name: Install now
         run: now --version || npm i -g now
       - name: Get yarn cache directory path
