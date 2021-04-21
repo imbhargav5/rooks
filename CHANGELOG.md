@@ -2,6 +2,7 @@
 
 * chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([63bda08](https://github.com/imbhargav5/rooks/commit/63bda08)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
 * chore(improvements to dx): move node to 15.x & fix rooks build ([ee0fab2](https://github.com/imbhargav5/rooks/commit/ee0fab2))
+* chore(more internal improvements): lint, prettier, ts improvements ([94c7709](https://github.com/imbhargav5/rooks/commit/94c7709))
 * chore(prep for v5): make package private and remove unused ([8689f9a](https://github.com/imbhargav5/rooks/commit/8689f9a))
 * chore(rebase while pulling): rebase while pulling ([b766186](https://github.com/imbhargav5/rooks/commit/b766186))
 * chore(update package json): update package json and remove prepare message hook ([977ff9f](https://github.com/imbhargav5/rooks/commit/977ff9f))
