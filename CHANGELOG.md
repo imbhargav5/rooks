@@ -1,5 +1,10 @@
 ##  (2021-04-21)
 
+* refactor(rename github action): rename github action ([c4802ee](https://github.com/imbhargav5/rooks/commit/c4802ee))
+* chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([63bda08](https://github.com/imbhargav5/rooks/commit/63bda08)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
+* chore(improvements to dx): move node to 15.x & fix rooks build ([ee0fab2](https://github.com/imbhargav5/rooks/commit/ee0fab2))
+* chore(prep for v5): make package private and remove unused ([8689f9a](https://github.com/imbhargav5/rooks/commit/8689f9a))
+* chore(update package json): update package json and remove prepare message hook ([977ff9f](https://github.com/imbhargav5/rooks/commit/977ff9f))
 * fix(add arg releasecount to changelog script): for eg: yarn generate:changelog --releaseCount 1 ([cb0cff3](https://github.com/imbhargav5/rooks/commit/cb0cff3))
 * fix(fix syntax in gulpfile): fix syntax in gulpfile ([81ccf94](https://github.com/imbhargav5/rooks/commit/81ccf94))
 * fix(fix typo in changelog.yml): fix typo in changelog.yml 'ref' ([ea6efaf](https://github.com/imbhargav5/rooks/commit/ea6efaf))
@@ -9,9 +14,6 @@
 * fix(usefullscreen): change isenabled fullsrceen property to match mdn documentation (#415) ([b553b63](https://github.com/imbhargav5/rooks/commit/b553b63)), closes [#415](https://github.com/imbhargav5/rooks/issues/415)
 * feat(add fetch-depth 0 for changelog): changelog requires more git history ([618b2f6](https://github.com/imbhargav5/rooks/commit/618b2f6))
 * feat(run changelog on main push): run changelog on main push ([d8d4608](https://github.com/imbhargav5/rooks/commit/d8d4608))
-* chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([63bda08](https://github.com/imbhargav5/rooks/commit/63bda08)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
-* chore(prep for v5): make package private and remove unused ([8689f9a](https://github.com/imbhargav5/rooks/commit/8689f9a))
-* chore(update package json): update package json and remove prepare message hook ([977ff9f](https://github.com/imbhargav5/rooks/commit/977ff9f))
 * docs: add thodubois as a contributor (#419) ([136d43f](https://github.com/imbhargav5/rooks/commit/136d43f)), closes [#419](https://github.com/imbhargav5/rooks/issues/419)
 
 
