@@ -3,7 +3,7 @@ name: Node CI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -18,6 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@master
+        with:
+          ref: main
       - name: Use Node.js 15.x
         uses: actions/setup-node@v1
         with:
@@ -47,5 +49,6 @@ jobs:
           git add packages/docusaurus
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
             commit -m "Update ${{ steps.tags.outputs.new }} docusaurus [skip ci]" --no-verify --quiet
-          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master      
+          git pull "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main --rebase
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main      
 
