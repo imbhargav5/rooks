@@ -30,6 +30,7 @@
     "new-canary-version": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid canary",
     "new-release-version": "lerna version --force-publish=*",
     "ga-npm-publish": "lerna publish from-git  --force-publish=* --yes",
+    "new-dev-canary-version":"GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid dev",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "optionalDependencies": {
