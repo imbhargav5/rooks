@@ -19,7 +19,7 @@ jobs:
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          version: 12.x
+          version: 15.x
       - run: git config --global user.email "me@imbhargav5.com"
       - run: git config --global user.name "Bhargav Ponnapalli"
       - name: Get yarn cache directory path

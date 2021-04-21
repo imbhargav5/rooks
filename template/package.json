@@ -34,5 +34,6 @@
   "readme": "ERROR: No README data found!",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "private": true
 }

@@ -17,8 +17,9 @@
   "scripts": {
     "clean": "rimraf lib dist",
     "prebuild": "yarn clean",
-    "build": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c rollup.config.js && rollup -c dts.rollup.config.js && rm -rf dist",
-    "lint": "eslint src test"
+    "build:types":"tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c dts.rollup.config.js && rm -rf dist",
+    "build": "node esbuild.mjs && yarn build:types",
+    "lint": "eslint src test"    
   },
   "bugs": {
     "url": "https://github.com/imbhargav5/rooks/issues"

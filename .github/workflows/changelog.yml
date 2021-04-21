@@ -19,10 +19,10 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Use Node.js 12.x
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v1
         with:
-          version: 12.x
+          version: 15.x
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

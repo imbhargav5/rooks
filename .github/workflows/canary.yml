@@ -19,7 +19,7 @@ jobs:
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          version: 12.x
+          version: 15.x
       - name: Get latest tag info
         id: latestTag
         uses: ./.github/actions/get-latest-tag     
