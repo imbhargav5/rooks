@@ -46,4 +46,5 @@ jobs:
           git add .
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
             commit -m "Update changelog [skip ci]" --no-verify --quiet
+          git pull origin main --rebase
           git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main
