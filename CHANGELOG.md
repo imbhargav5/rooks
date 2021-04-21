@@ -1,4 +1,4 @@
-##  (2021-04-20)
+##  (2021-04-21)
 
 * feat(add fetch-depth 0 for changelog): changelog requires more git history ([618b2f6](https://github.com/imbhargav5/rooks/commit/618b2f6))
 * feat(run changelog on main push): run changelog on main push ([d8d4608](https://github.com/imbhargav5/rooks/commit/d8d4608))

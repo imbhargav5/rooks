@@ -4,6 +4,8 @@ var conventionalChangelog = require('gulp-conventional-changelog');
 const IGNORE_COMMIT_PATTERS = [`[skip ci]`, `[create-pull-request]`];
 
 gulp.task('changelog', function () {
+  var argv = require('yargs').argv;
+  const { releaseCount = 0 } = argv;
   return gulp
     .src('CHANGELOG.md')
     .pipe(
@@ -11,7 +13,7 @@ gulp.task('changelog', function () {
         {
           // conventional-changelog options go here
           //preset: 'angular'
-          releaseCount: 0,
+          releaseCount: releaseCount,
           sameFile: true,
         },
         {
