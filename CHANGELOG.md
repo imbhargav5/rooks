@@ -6,6 +6,7 @@
 * fix(main master mixup): fix main master mixup ([57f9c52](https://github.com/imbhargav5/rooks/commit/57f9c52))
 * fix(remove leftover pieces of usetimeago): remove leftover pieces of usetimeago ([07e6d69](https://github.com/imbhargav5/rooks/commit/07e6d69))
 * fix(remove useworker missing pieces): remove useWorker missing pieces ([20f5fa8](https://github.com/imbhargav5/rooks/commit/20f5fa8))
+* fix(stuff): stuff ([9552134](https://github.com/imbhargav5/rooks/commit/9552134))
 * fix(testing something): testing something ([3d8c251](https://github.com/imbhargav5/rooks/commit/3d8c251))
 * fix(usefullscreen): change isenabled fullsrceen property to match mdn documentation (#415) ([b553b63](https://github.com/imbhargav5/rooks/commit/b553b63)), closes [#415](https://github.com/imbhargav5/rooks/issues/415)
 * chore(fix typo): fix typo ([f324a47](https://github.com/imbhargav5/rooks/commit/f324a47))
