@@ -29,8 +29,8 @@
     "bump-canary": "yarn run new-canary-version prerelease",
     "new-canary-version": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid canary",
     "new-release-version": "lerna version --force-publish=*",
+    "new-dev-canary-version": "GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid dev",
     "ga-npm-publish": "lerna publish from-git  --force-publish=* --yes",
-    "new-dev-canary-version":"GITHUB_SHA=$(git rev-parse HEAD | cut -c1-8);lerna version --force-publish=* --preid dev",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "optionalDependencies": {
@@ -91,6 +91,7 @@
     "mdast-zone": "^4.0.1",
     "meow": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
+    "np": "^7.4.0",
     "ora": "4.0.3",
     "prettier": "^2.2.1",
     "raf": "3.4.1",
