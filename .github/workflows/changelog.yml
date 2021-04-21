@@ -1,4 +1,4 @@
-name: Node CI
+name: Internal Generate Changelog Action
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  gen-changelog:
     runs-on: ubuntu-latest
     steps:
       - name: 'Check if user has write access'
