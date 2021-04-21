@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import React, { useState } from "react";
-import {usePreviousDifferent} from "../usePreviousDifferent";
 import { act, renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import {usePreviousDifferent} from "../usePreviousDifferent";
 
 describe("usePreviousDifferent", () => {
   let useHook;
@@ -12,19 +12,20 @@ describe("usePreviousDifferent", () => {
           const [value, setValue] = useState(0)
           const [value2, setValue2] = useState(0)
           const previousValue = usePreviousDifferent(value)
-          function increment(){
+          const increment = () =>{
             setValue(value + 1)
           }
-          function increment2(){
+          const increment2 = () =>{
             setValue2(value2 + 1)
           }
-          return {value, value2, increment,increment2, previousValue};
+          
+return {increment, increment2, previousValue,value, value2};
       }
   })
   it('isDefined', async() => {        
       expect(usePreviousDifferent).toBeDefined()
   })
-  it(' initially returns null', async() => {    
+  it('initially returns null', async() => {    
     const {result} = renderHook(()=> useHook())
     expect(result.current.previousValue).toBeNull()
   })

@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import {useOnWindowScroll} from "../useOnWindowScroll";
 import {  
   fireEvent,
 } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
+import {useOnWindowScroll} from "../useOnWindowScroll";
 
 describe("useOnWindowScroll", () => {
   it("should be defined", () => {

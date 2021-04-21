@@ -1,10 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { useState } from "react";
-import {useInterval} from "../useInterval";
 import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useState } from "react";
 import TestRenderer from 'react-test-renderer';
+import {useInterval} from "../useInterval";
+
 const {act} = TestRenderer;
 
 describe("useInterval", () => {
@@ -18,8 +19,9 @@ describe("useInterval", () => {
         }
         const intervalHandler = useInterval(() => {
           increment();
-        }, 1000);
-        return {intervalHandler, currentValue}
+        }, 1_000);
+        
+return {currentValue, intervalHandler}
       }
     });
 
@@ -35,7 +37,7 @@ describe("useInterval", () => {
         result.current.intervalHandler.start();
       });
       act(() => {
-        jest.advanceTimersByTime(1000);
+        jest.advanceTimersByTime(1_000);
       });
       expect(setInterval).toHaveBeenCalledTimes(1);
       expect(result.current.currentValue).toBe(1);
@@ -50,7 +52,7 @@ describe("useInterval", () => {
             start();
         });
         act(() => {
-          jest.advanceTimersByTime(1000);
+          jest.advanceTimersByTime(1_000);
         });
         expect(setInterval).toHaveBeenCalledTimes(1);
         expect(result.current.currentValue).toBe(1);

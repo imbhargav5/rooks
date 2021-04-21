@@ -1,16 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import { useGeolocation } from "../useGeolocation";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  act,
-  getByTestId,
-  wait
-} from "@testing-library/react";
 
 // describe("useGeolocation", () => {
 //   let App;

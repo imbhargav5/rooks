@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import React, { useState } from "react";
-import {usePreviousImmediate} from "../usePreviousImmediate";
 import { act, renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import {usePreviousImmediate} from "../usePreviousImmediate";
 
 describe("usePreviousImmediate", () => {
   let useHook;
@@ -11,16 +11,17 @@ describe("usePreviousImmediate", () => {
       useHook = function (){
           const [value, setValue] = useState(0)
           const previousValue = usePreviousImmediate(value)
-          function increment(){
+          const increment = () => {
             setValue(value + 1)
           }
-          return {value, increment, previousValue};
+          
+return {increment, previousValue, value};
       }
   })
   it('isDefined', async() => {        
       expect(usePreviousImmediate).toBeDefined()
   })
-  it(' initially returns null', async() => {    
+  it('initially returns null', async() => {    
     const {result} = renderHook(()=> useHook())
     expect(result.current.previousValue).toBeNull()
   })

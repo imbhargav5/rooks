@@ -1,9 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
-import {useKey} from "../useKey";
-
 import {
   render,
   cleanup,
@@ -11,6 +8,9 @@ import {
   act,
   getByTestId
 } from "@testing-library/react";
+import React from "react";
+import {useKey} from "../useKey";
+
 
 describe("useKey", () => {
   let App;
@@ -32,21 +32,22 @@ describe("useKey", () => {
           target: inputRef
         }
       );
-      return (
+      
+return (
         <div data-testid="container">
           <p data-testid="value">{value}</p>
           <div className="grid-container">
             <input
+              className="box1"
               data-testid="input"
               ref={inputRef}
-              className="box1"
               tabIndex={1}
             />
           </div>
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
@@ -60,11 +61,11 @@ describe("useKey", () => {
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");
     act(() => {
-      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
     expect(valueElement.innerHTML).toBe("1");
     act(() => {
-      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
     expect(valueElement.innerHTML).toBe("2");
   });
@@ -90,21 +91,22 @@ describe("non array input", () => {
           target: inputRef
         }
       );
-      return (
+      
+return (
         <div data-testid="container">
           <p data-testid="value">{value}</p>
           <div className="grid-container">
             <input
+              className="box1"
               data-testid="input"
               ref={inputRef}
-              className="box1"
               tabIndex={1}
             />
           </div>
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
@@ -118,11 +120,11 @@ describe("non array input", () => {
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");
     act(() => {
-      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
     expect(valueElement.innerHTML).toBe("1");
     act(() => {
-      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
     expect(valueElement.innerHTML).toBe("2");
   });
@@ -160,7 +162,8 @@ describe("when", () => {
           when
         }
       );
-      return (
+      
+return (
         <div data-testid="container">
           <p data-testid="value">{value}</p>
           <button data-testid="toggle-when" onClick={toggleWhen}>
@@ -169,16 +172,16 @@ describe("when", () => {
           </button>
           <div className="grid-container">
             <input
+              className="box1"
               data-testid="input"
               ref={inputRef}
-              className="box1"
               tabIndex={1}
             />
           </div>
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
@@ -194,11 +197,11 @@ describe("when", () => {
     const inputElement = getByTestId(container as HTMLElement, "input");
     const toggleWhenElement = getByTestId(container as HTMLElement, "toggle-when");
     act(() => {
-      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
     expect(valueElement.innerHTML).toBe("1");
     act(() => {
-      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
     expect(valueElement.innerHTML).toBe("2");
     // disable when
@@ -206,11 +209,11 @@ describe("when", () => {
       fireEvent.click(toggleWhenElement);
     });
     act(() => {
-      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
     expect(valueElement.innerHTML).toBe("2");
     act(() => {
-      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
     expect(valueElement.innerHTML).toBe("2");
     // enable when
@@ -218,11 +221,11 @@ describe("when", () => {
       fireEvent.click(toggleWhenElement);
     });
     act(() => {
-      fireEvent.keyDown(window, { key: "s", code: "keyS", charCode: 83 });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
     expect(valueElement.innerHTML).toBe("3");
     act(() => {
-      fireEvent.keyDown(inputElement, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
     expect(valueElement.innerHTML).toBe("4");
   });

@@ -1,10 +1,10 @@
-import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { useMediaMatch } from '../useMediaMatch';
 import TestRenderer from 'react-test-renderer';
+import { useMediaMatch } from '../useMediaMatch';
+
 const { act } = TestRenderer;
 
-type MediaQueryListListener = (ev: MediaQueryListEventMap['change']) => void;
+type MediaQueryListListener = (event_: MediaQueryListEventMap['change']) => void;
 
 describe('useMediaMatch', () => {
   afterEach(() => {
@@ -15,15 +15,15 @@ describe('useMediaMatch', () => {
     const matchMedia = jest.fn<MediaQueryList, [string]>();
     const addEventListener = jest.fn<
       void,
-      [string, (ev: MediaQueryListEventMap['change']) => void]
+      [string, (event_: MediaQueryListEventMap['change']) => void]
     >();
     const removeEventListener = jest.fn<void, [string, () => void]>();
-    let listener: MediaQueryListListener | undefined = undefined;
+    let listener: MediaQueryListListener | undefined;
 
     matchMedia.mockReturnValue({
       addEventListener,
-      removeEventListener,
       matches: true,
+      removeEventListener,
     } as any);
     addEventListener.mockImplementationOnce((_, l) => (listener = l));
 
@@ -47,7 +47,7 @@ describe('useMediaMatch', () => {
     expect(result.current).toBe(true);
 
     // Invoking the listener changes the value
-    const l = expectDefined<(ev: MediaQueryListEventMap['change']) => void>(
+    const l = expectDefined<(event_: MediaQueryListEventMap['change']) => void>(
       listener
     );
     act(() => l({ matches: false } as any));
@@ -57,8 +57,8 @@ describe('useMediaMatch', () => {
     expect(removeEventListener).not.toHaveBeenCalled();
     matchMedia.mockReturnValue({
       addEventListener,
-      removeEventListener,
       matches: true,
+      removeEventListener,
     } as any);
     rerender({ query: '(max-width: 640px)' });
     expect(matchMedia).toHaveBeenCalledTimes(2);
@@ -76,5 +76,6 @@ describe('useMediaMatch', () => {
 
 function expectDefined<T>(t: T | undefined): T {
   expect(t).toBeDefined();
-  return t as T;
+  
+return t as T;
 }

@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import {useSessionstorage} from "../useSessionstorage";
-import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
 /**
  * @jest-environment jsdom
@@ -29,12 +29,12 @@ describe("useSessionstorage with object destructuring", () => {
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
 
-  it("it initializes correctly", () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
@@ -55,12 +55,12 @@ describe("useSessionstorage with array destructuring", () => {
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
 
-  it("it initializes correctly", () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
@@ -76,7 +76,8 @@ describe("useSessionstorage", () => {
     function SubApp1() {
 
       const { value: titan, set, remove } = useSessionstorage("titan", "eren");
-      return (
+      
+return (
         <div>
           <button data-testid="new-value" onClick={() => set("mikasa")}>Add</button>
           <button data-testid="unset-value" onClick={() => remove()}>Remove</button>
@@ -87,7 +88,8 @@ describe("useSessionstorage", () => {
 
     function SubApp2() {
       const { value: titan } = useSessionstorage("titan");
-      return (
+      
+return (
         <div>
           <p data-testid="element2">{titan}</p>
         </div>
@@ -113,14 +115,14 @@ describe("useSessionstorage", () => {
     expect(renderedElement1.textContent).toEqual("");
     expect(renderedElement2.textContent).toEqual("");
     expect(renderedElement1.textContent).toEqual("eren");
-    //expect(renderedElement2.textContent).toEqual("eren");
+    // expect(renderedElement2.textContent).toEqual("eren");
   });
 
-  it("setting the new value ", () => {
+  it("setting the new value", () => {
     const { container } = render(<App />);
-    const setToNewValueBtn = getByTestId(container as HTMLElement, "new-value");
+    const setToNewValueButton = getByTestId(container as HTMLElement, "new-value");
     act(() => {
-      fireEvent.click(setToNewValueBtn)
+      fireEvent.click(setToNewValueButton)
     })
     const valueElement = getByTestId(container as HTMLElement, "element1");
     expect(valueElement.innerHTML).toBe("mikasa");
@@ -128,9 +130,9 @@ describe("useSessionstorage", () => {
 
   it("unsetting the value", () => {
     const { container } = render(<App />);
-    const unsetValueBtn = getByTestId(container as HTMLElement, "unset-value");
+    const unsetValueButton = getByTestId(container as HTMLElement, "unset-value");
     act(() => {
-      fireEvent.click(unsetValueBtn)
+      fireEvent.click(unsetValueButton)
     })
     const valueElement = getByTestId(container as HTMLElement, "element1");
     expect(valueElement.innerHTML).toBe("");

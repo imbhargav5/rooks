@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import {useSessionstorageState} from "../useSessionstorageState";
-import { render, cleanup, getByTestId, fireEvent, act } from "@testing-library/react";
 
 describe("useSessionstorageState defined", () => {
   it("should be defined", () => {
@@ -33,22 +33,22 @@ describe("useSessionstorageState basic", () => {
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
 
-  it("it initializes correctly", () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
-  it("setting the new value ", () => {
+  it("setting the new value", () => {
     const { container } = render(<App />);
-    const setToNewValueBtn = getByTestId(container as HTMLElement, "new-value");
+    const setToNewValueButton = getByTestId(container as HTMLElement, "new-value");
     act(() => {
-      fireEvent.click(setToNewValueBtn)
+      fireEvent.click(setToNewValueButton)
     })
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("new value");
@@ -56,9 +56,9 @@ describe("useSessionstorageState basic", () => {
 
   it.skip("unsetting the value", () => {
     const { container } = render(<App />);
-    const unsetValueBtn = getByTestId(container as HTMLElement, "unset-value");
+    const unsetValueButton = getByTestId(container as HTMLElement, "unset-value");
     act(() => {
-      fireEvent.click(unsetValueBtn)
+      fireEvent.click(unsetValueButton)
     })
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("");

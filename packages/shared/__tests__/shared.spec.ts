@@ -1,4 +1,4 @@
-'use strict';
+
 
 import { useBoundingclientrect } from '../useBoundingclientrect';
 import { useBoundingclientrectRef } from '../useBoundingclientrectRef';
@@ -14,9 +14,9 @@ import { useMouse } from '../useMouse';
 import { useMutationObserver } from '../useMutationObserver';
 import { useMutationObserverRef } from '../useMutationObserverRef';
 import { useNavigatorLanguage } from '../useNavigatorLanguage';
-import { useOnline } from '../useOnline';
 import { useOnWindowResize } from '../useOnWindowResize';
 import { useOnWindowScroll } from '../useOnWindowScroll';
+import { useOnline } from '../useOnline';
 import { useOutsideClick } from '../useOutsideClick';
 import { useOutsideClickRef } from '../useOutsideClickRef';
 import { usePrevious } from '../usePrevious';

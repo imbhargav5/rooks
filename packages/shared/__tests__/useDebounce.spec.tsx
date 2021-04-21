@@ -2,10 +2,11 @@
 /**
  * @jest-environment jsdom
  */
-import  { useState } from "react";
-import { useDebounce } from "../useDebounce";
 import { renderHook } from "@testing-library/react-hooks";
+import  { useState } from "react";
 import TestRenderer from 'react-test-renderer';
+import { useDebounce } from "../useDebounce";
+
 const {act} = TestRenderer;
 
 describe("useDebounce", () => {
@@ -23,8 +24,9 @@ describe.skip("useDebounce behavior", () =>{
         function log() {
           setValue(value + 1);
         }
-        const cb = useDebounce(log, DEBOUNCE_WAIT)
-        return {value, cb};
+        const callback = useDebounce(log, DEBOUNCE_WAIT)
+        
+return {cb: callback, value};
       }      
     })
     it('runs only once if cb is called repeatedly in wait period', async() =>{

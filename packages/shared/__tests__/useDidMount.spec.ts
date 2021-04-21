@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
 import { useDidMount } from "../useDidMount";
 
@@ -12,14 +12,15 @@ describe('useDidMount', () => {
             useHook = function (){
                 const [value, setValue] = useState(0)
                 useDidMount(()=>{
-                    setValue(9000)
+                    setValue(9_000)
                 })
-                return {value};
+                
+return {value};
             }
         })
         it('runs immediately after mount', async() => {        
             const {result} = renderHook(()=> useHook())    
-            expect(result.current.value).toBe(9000)
+            expect(result.current.value).toBe(9_000)
      
         })
     })

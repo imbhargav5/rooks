@@ -1,8 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
-import {useKeys} from "../useKeys";
 import {
   render,
   cleanup,
@@ -10,6 +8,8 @@ import {
   act,
   getByTestId
 } from "@testing-library/react";
+import React from "react";
+import {useKeys} from "../useKeys";
 
 describe("useKeys", () => {
   let App;
@@ -20,7 +20,7 @@ describe("useKeys", () => {
       const documentRef = React.useRef(document);
       const inputRef = React.useRef(null);
       const [isEventActive, setIsEventActive] = React.useState(true);
-      const [testValue, setTestValue] = React.useState(0);
+      const [testValue] = React.useState(0);
       const [
         firstCallbackCallCount,
         setFirstCallbackCallCount
@@ -41,11 +41,12 @@ describe("useKeys", () => {
           setFirstCallbackCallCount(firstCallbackCallCount + 1);
         },
         {
-          when: isEventActive,
-          target: inputRef
+          target: inputRef,
+          when: isEventActive
         }
       );
-      return (
+      
+return (
         <div data-testid="container">
           <p id="test-id">{testValue}</p>
           <p data-testid="first-callback">{firstCallbackCallCount}</p>
@@ -59,16 +60,16 @@ describe("useKeys", () => {
           </button>
           <div className="grid-container">
             <input
+              className="box1"
               data-testid="input-dom"
               ref={inputRef}
-              className="box1"
               tabIndex={1}
             />
           </div>
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
@@ -82,10 +83,10 @@ describe("useKeys", () => {
     const firstcallbackP = getByTestId(container as HTMLElement, "first-callback");
     const InputDom = getByTestId(container as HTMLElement, "input-dom");
     act(() => {
-      fireEvent.keyDown(InputDom, { key: "m", code: "keyM", charCode: 77 });
+      fireEvent.keyDown(InputDom, { charCode: 77, code: "keyM", key: "m" });
     });
     act(() => {
-      fireEvent.keyDown(InputDom, { key: "r", code: "keyR", charCode: 82 });
+      fireEvent.keyDown(InputDom, { charCode: 82, code: "keyR", key: "r" });
     });
 
     expect(firstcallbackP.innerHTML).toBe("1");
@@ -97,11 +98,11 @@ describe("useKeys", () => {
     const firstcallbackP = getByTestId(container  as HTMLElement, "first-callback");
     // let InputDom = getByTestId(container, "input-dom");
     fireEvent.keyDown(document, {
-      key: "Control",
+      charCode: 17,
       code: "ControlLeft",
-      charCode: 17
+      key: "Control"
     });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
 
     expect(firstcallbackP.innerHTML).toBe("1");
   });
@@ -110,28 +111,28 @@ describe("useKeys", () => {
     const { container } = render(<App />);
 
     const firstcallbackP = getByTestId(container  as HTMLElement, "first-callback");
-    const ToggleBtn = getByTestId(container  as HTMLElement, "toggle");
-    fireEvent.click(ToggleBtn);
+    const ToggleButton = getByTestId(container  as HTMLElement, "toggle");
+    fireEvent.click(ToggleButton);
 
     fireEvent.keyDown(document, {
-      key: "Control",
+      charCode: 17,
       code: "ControlLeft",
-      charCode: 17
+      key: "Control"
     });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
 
     expect(firstcallbackP.innerHTML).toBe("0");
 
-    fireEvent.click(ToggleBtn);
+    fireEvent.click(ToggleButton);
 
-    //now the callback should run
+    // now the callback should run
     fireEvent.keyDown(document, {
-      key: "Control",
+      charCode: 17,
       code: "ControlLeft",
-      charCode: 17
+      key: "Control"
     });
 
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
 
     expect(firstcallbackP.innerHTML).toBe("1");
   });
@@ -153,15 +154,16 @@ describe("useKeys: continuous mode", () => {
           continuous: true
         }
       );
-      return (
+      
+return (
         <div data-testid="container">
-          <p id="value" data-testid="value">
+          <p data-testid="value" id="value">
             {testValue}
           </p>
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);
@@ -172,28 +174,28 @@ describe("useKeys: continuous mode", () => {
     const testValueElement = getByTestId(container  as HTMLElement, "value");
 
     fireEvent.keyDown(document, {
-      key: "Control",
+      charCode: 17,
       code: "ControlLeft",
-      charCode: 17
+      key: "Control"
     });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
 
     expect(testValueElement.innerHTML).toBe("1");
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
     expect(testValueElement.innerHTML).toBe("6");
     // now it should no longer increment after keyup
     fireEvent.keyUp(document, {
-      key: "Control",
+      charCode: 17,
       code: "ControlLeft",
-      charCode: 17
+      key: "Control"
     });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
-    fireEvent.keyDown(document, { key: "s", code: "keyS", charCode: 83 });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
+    fireEvent.keyDown(document, { charCode: 83, code: "keyS", key: "s" });
     expect(testValueElement.innerHTML).toBe("6");
   });
 });

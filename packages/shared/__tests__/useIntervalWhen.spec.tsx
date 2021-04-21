@@ -1,10 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { useState } from "react";
-import {useIntervalWhen} from "../useIntervalWhen";
 import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useState } from "react";
 import TestRenderer from 'react-test-renderer';
+import {useIntervalWhen} from "../useIntervalWhen";
+
 const {act} = TestRenderer;
 
 describe("useIntervalWhen", () => {
@@ -18,8 +19,9 @@ describe("useIntervalWhen", () => {
         }
          useIntervalWhen(() => {
           increment();
-        }, 1000);
-        return {currentValue}
+        }, 1_000);
+        
+return {currentValue}
       }
     });
 
@@ -35,7 +37,7 @@ describe("useIntervalWhen", () => {
       jest.useFakeTimers();
       const { result } = renderHook(() => useHook());
       act(() => {
-        jest.advanceTimersByTime(1000);
+        jest.advanceTimersByTime(1_000);
       });
       expect(setInterval).toHaveBeenCalledTimes(1);
       expect(result.current.currentValue).toBe(1);
@@ -46,7 +48,7 @@ describe("useIntervalWhen", () => {
         jest.useFakeTimers();
         const { result } = renderHook(() => useHook());
         act(() => {
-          jest.advanceTimersByTime(1000);
+          jest.advanceTimersByTime(1_000);
         });
         expect(setInterval).toHaveBeenCalledTimes(1);
         expect(result.current.currentValue).toBe(1);

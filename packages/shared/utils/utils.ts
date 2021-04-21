@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+import type { MutableRefObject } from "react";
 
 export type HTMLElementOrNull = HTMLElement | null;
 export type RefElementOrNull<T> = T | null

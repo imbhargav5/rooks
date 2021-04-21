@@ -1,16 +1,17 @@
 /**
  * @jest-environment jsdom
  */
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import React from "react";
 import {useToggle} from "../useToggle";
-import { render, cleanup, fireEvent } from "@testing-library/react";
 
 describe("useToggle behaviour", () => {
   let App;
   beforeEach(() => {
     App = function() {
       const [value, toggleValue] = useToggle(true);
-      return (
+      
+return (
         <p data-testid="toggle-element" onClick={toggleValue}>
           {value.toString()}
         </p>
@@ -41,9 +42,10 @@ describe("useToggle with custom toggle function", () => {
   beforeEach(() => {
     App = function() {
       const [value, toggleValue] = useToggle("regina", v =>
-        v === "regina" ? "phalange" : "regina"
+        (v === "regina" ? "phalange" : "regina")
       );
-      return (
+      
+return (
         <p data-testid="toggle-element" onClick={toggleValue}>
           {value}
         </p>
@@ -75,7 +77,8 @@ describe("useToggle with custom toggle function", () => {
   beforeEach(() => {
     App = function() {
       const [value, toggleValue] = useToggle();
-      return (
+      
+return (
         <p data-testid="toggle-element" onClick={toggleValue}>
           {value.toString()}
         </p>
@@ -108,7 +111,8 @@ describe("useToggle with reducer", () => {
     };
     App = function() {
       const [value, dispatch] = useToggle(1, toggleReducer);
-      return (
+      
+return (
         <>
           <p data-testid="toggle-element">{value.toString()}</p>
           <button

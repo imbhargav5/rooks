@@ -1,0 +1,10 @@
+{
+    "eslint.workingDirectories": [
+      "./packages/shared",
+      "./packages/rooks",
+      "./packages/eslint-config",
+      "./packages/docusaurus",
+      "./",
+    ],
+  }
+  

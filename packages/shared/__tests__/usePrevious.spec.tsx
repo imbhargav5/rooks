@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import React, { useState } from "react";
 import {usePrevious} from "../usePrevious";
-import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("usePrevious", () => {
   let App;
@@ -15,9 +15,10 @@ describe("usePrevious", () => {
       function increment() {
         setCurrentValue(currentValue + 1);
       }
-      return (
+      
+return (
         <div>
-          <p onClick={increment} data-testid="current-element">
+          <p data-testid="current-element" onClick={increment}>
             {currentValue}
           </p>
           <p data-testid="previous-element">{previousValue}</p>

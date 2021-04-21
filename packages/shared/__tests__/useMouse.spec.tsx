@@ -1,13 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
+import React from "react";
 import {useMouse} from "../useMouse";
 
 function TestMouse(){
   const mouse = useMouse();
-  return <>{JSON.stringify(mouse)}</>;
+  
+return <>{JSON.stringify(mouse)}</>;
 };
 
 describe("useMouse", () => {
@@ -26,7 +27,7 @@ describe("useMouse", () => {
 
   it("should update client position when mouse is moved", () => {
     const { queryByText } = render(
-      <div style={{ width: 100, height: 100 }}>
+      <div style={{ height: 100, width: 100 }}>
         <TestMouse />
       </div>
     );
@@ -38,7 +39,7 @@ describe("useMouse", () => {
 
   it("should update screen position when mouse is moved", () => {
     const { queryByText } = render(
-      <div style={{ width: 100, height: 100 }}>
+      <div style={{ height: 100, width: 100 }}>
         <TestMouse />
       </div>
     );

@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import {useWindowScrollPosition} from "../useWindowScrollPosition";
 import {  
   fireEvent,
 } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
+import {useWindowScrollPosition} from "../useWindowScrollPosition";
 
 describe("useWindowScrollPosition", () => {
   it("should be defined", () => {

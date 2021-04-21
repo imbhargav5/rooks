@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useStackState } from "../useStackState";
 import TestRenderer from 'react-test-renderer';
+import { useStackState } from "../useStackState";
+
 const {act} = TestRenderer;
 
 describe("useStackState", () => {
@@ -13,7 +14,7 @@ describe("useStackState", () => {
   })
   it('should return length correctly', () =>{
     const { result } = renderHook(() => useStackState([1,2,3]))    
-    const [list, controls] = result.current;
+    const [, controls] = result.current;
     expect(controls.length).toBe(3)
   })
   it('should push correctly', () =>{
@@ -35,7 +36,7 @@ describe("useStackState", () => {
     act(() => {
         result.current[1].push(11);
     })
-    const [list, controls] = result.current;
+    const [, controls] = result.current;
     expect(controls.peek()).toEqual(11)
     act(() => {
         result.current[1].pop();
@@ -56,7 +57,7 @@ describe("useStackState", () => {
         
         result.current[1].pop();
     })
-    let [list, controls] = result.current;
+    const [, controls] = result.current;
     expect(controls.peek()).toEqual(undefined)
     expect(controls.length).toEqual(0)
     act(() => {

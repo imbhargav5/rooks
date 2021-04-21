@@ -1,10 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { useEffect, useState } from "react";
-import {useFreshTick} from "../useFreshTick";
 import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useEffect, useState } from "react";
 import TestRenderer from 'react-test-renderer';
+import {useFreshTick} from "../useFreshTick";
+
 const {act} = TestRenderer;
 
 describe("useFreshTick", () => {
@@ -20,10 +21,12 @@ describe("useFreshTick", () => {
         useEffect(() => {
             const intervalId = setInterval(() => {
                 freshTick();
-            },1000);
-            return () => clearInterval(intervalId);
+            },1_000);
+            
+return () => clearInterval(intervalId);
         }, [])
-        return {currentValue}
+        
+return {currentValue}
       }
     });
 
@@ -36,7 +39,7 @@ describe("useFreshTick", () => {
       jest.useFakeTimers();
       const { result } = renderHook(() => useHook());
       act(() => {
-        jest.advanceTimersByTime(5000);
+        jest.advanceTimersByTime(5_000);
       });
       expect(setInterval).toHaveBeenCalledTimes(1);
       expect(result.current.currentValue).toBe(5);

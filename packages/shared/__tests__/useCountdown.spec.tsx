@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook, act } from '@testing-library/react-hooks';
 import {useCountdown} from '../useCountdown';
 
 jest.useFakeTimers();

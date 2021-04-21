@@ -1,6 +1,6 @@
+import { cleanup, render, act, fireEvent, wait } from "@testing-library/react";
 import React, { useState } from "react";
 import {useThrottle} from "../useThrottle";
-import { cleanup, render, act, fireEvent, wait } from "@testing-library/react";
 
 describe("useThrottle hook", () => {
   let App;
@@ -29,15 +29,16 @@ describe("useThrottle hook", () => {
       const addNumber = () => setNumber(number + 1);
       const [addNumberThrottled] = useThrottle(addNumber, TIMEOUT);
 
-      const addNumberWithParam = argNumber => {
-        setArgumentNumber(argNumber + 2);
+      const addNumberWithParameter = argumentNumber_ => {
+        setArgumentNumber(argumentNumber_ + 2);
         setNumber(number + 1);
       };
-      const [addNumberThrottledWithParam] = useThrottle(
-        () => addNumberWithParam(5),
-        1000
+      const [addNumberThrottledWithParameter] = useThrottle(
+        () => addNumberWithParameter(5),
+        1_000
       );
-      return (
+      
+return (
         <div>
           <span data-testid="throttle-value">{number}</span>
           <span data-testid="throttle-value-with-param">{argumentNumber}</span>
@@ -46,7 +47,7 @@ describe("useThrottle hook", () => {
           </button>
           <button
             data-testid="throttle-button-with-param"
-            onClick={addNumberThrottledWithParam}
+            onClick={addNumberThrottledWithParameter}
           >
             Add number throttled
           </button>
@@ -70,7 +71,7 @@ describe("useThrottle hook", () => {
       fireEvent.click(throttleButton);
     });
 
-    expect(parseInt(throttleValue.innerHTML)).toBe(1);
+    expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
   });
 
   it("should update value once when clicked multiple times, one after another", () => {
@@ -87,7 +88,7 @@ describe("useThrottle hook", () => {
     act(() => {
       fireEvent.click(throttleButton);
     });
-    expect(parseInt(throttleValue.innerHTML)).toBe(1);
+    expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
   });
 
   it("should update value twice when clicked twice, with 300ms break between them", async () => {
@@ -110,7 +111,7 @@ describe("useThrottle hook", () => {
 
     await wait(
       () => {
-        expect(parseInt(throttleValue.innerHTML)).toBe(2);
+        expect(Number.parseInt(throttleValue.innerHTML)).toBe(2);
       },
       {
         timeout: TIMEOUT
@@ -119,15 +120,15 @@ describe("useThrottle hook", () => {
   });
   it("should update value of state acording to argument passed in callback", async () => {
     const { getByTestId } = render(<App />);
-    const throttleButtonWithParam = getByTestId("throttle-button-with-param");
-    const throttleValueWithParam = getByTestId("throttle-value-with-param");
+    const throttleButtonWithParameter = getByTestId("throttle-button-with-param");
+    const throttleValueWithParameter = getByTestId("throttle-value-with-param");
     const throttleValue = getByTestId("throttle-value");
 
     act(() => {
-      fireEvent.click(throttleButtonWithParam);
+      fireEvent.click(throttleButtonWithParameter);
     });
 
-    expect(parseInt(throttleValue.innerHTML)).toBe(1);
-    expect(parseInt(throttleValueWithParam.innerHTML)).toBe(7);
+    expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
+    expect(Number.parseInt(throttleValueWithParameter.innerHTML)).toBe(7);
   });
 });

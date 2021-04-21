@@ -6,6 +6,14 @@
     "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
+    },
+    "project": [
+      "./tsconfig.lint.json"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   }
 }

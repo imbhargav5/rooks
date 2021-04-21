@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useMapState } from "../useMapState";
 import TestRenderer from 'react-test-renderer';
+import { useMapState } from "../useMapState";
+
 const {act} = TestRenderer;
 
 describe("useMapState", () => {
@@ -54,7 +55,7 @@ describe("useMapState", () => {
     })    
     expect(result.current[0]).toEqual({b: 3})
   })
-  it('should work when value to remove doesnot exist ', () =>{
+  it('should work when value to remove doesnot exist', () =>{
     const { result } = renderHook(() => useMapState({a : 1,b:2, c:3}))    
     act(() => {
         result.current[1].remove("d");
@@ -68,21 +69,21 @@ describe("useMapState", () => {
     })    
     expect(result.current[0]).toEqual({b: 3})
   })
-  it('should work when value to removeMultiple doesnot exist ', () =>{
+  it('should work when value to removeMultiple doesnot exist', () =>{
     const { result } = renderHook(() => useMapState({a : 1,b:2, c:3}))    
     act(() => {
         result.current[1].removeMultiple("d","e");
     })    
     expect(result.current[0]).toEqual({a : 1,b:2, c:3})    
   })
-  it('should work when some values to removeMultiple doesnot exist ', () =>{
+  it('should work when some values to removeMultiple doesnot exist', () =>{
     const { result } = renderHook(() => useMapState({a : 1,b:2, c:3}))    
     act(() => {
         result.current[1].removeMultiple("a","e");
     })    
     expect(result.current[0]).toEqual({b:2, c:3})    
   })
-  it('should removeAll values  ', () =>{
+  it('should removeAll values', () =>{
     const { result } = renderHook(() => useMapState({a : 1,b:2, c:3}))    
     act(() => {
         result.current[1].removeAll();

@@ -1,12 +1,15 @@
 {
-  "extends": "../tsconfig_base.settings.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": ".",
     "emitDeclarationOnly": true
   },
   "exclude": [
     "node_modules",
-    "./__tests__"
+    "__tests__/**"
+  ],
+  "include": [
+    "./**/*"
   ]
 }
   

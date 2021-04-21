@@ -13,8 +13,7 @@
     "directory": "packages/queue-state"
   },
   "scripts": {
-    "lint": "sh ../../scripts/lint.sh",
-    "clean": "sh ../../scripts/clean.sh",
+        "clean": "sh ../../scripts/clean.sh",
     "prebuild": "yarn clean",
     "build": "sh ../../scripts/build.sh",
     "dts-build": "sh ../../scripts/dts-build.sh"

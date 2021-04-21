@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useQueueState } from "../useQueueState";
 import TestRenderer from 'react-test-renderer';
+import { useQueueState } from "../useQueueState";
+
 const {act} = TestRenderer;
 
 describe("useQueueState", () => {
@@ -13,7 +14,7 @@ describe("useQueueState", () => {
   })
   it('should return length correctly', () =>{
     const { result } = renderHook(() => useQueueState([1,2,3]))    
-    const [list, controls] = result.current;
+    const [, controls] = result.current;
     expect(controls.length).toBe(3)
   })
   it('should enqueue correctly', () =>{
@@ -54,7 +55,7 @@ describe("useQueueState", () => {
         
         result.current[1].dequeue();
     })
-    let [list, controls] = result.current;
+    const [, controls] = result.current;
     expect(controls.peek()).toEqual(undefined)
     expect(controls.length).toEqual(0)
     act(() => {

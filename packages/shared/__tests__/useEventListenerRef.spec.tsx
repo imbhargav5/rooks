@@ -1,9 +1,10 @@
-import React from 'react'
+import { render, getByTestId, fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import { render, getByTestId, fireEvent, cleanup } from "@testing-library/react";
-import { useEventListenerRef } from "../useEventListenerRef";
-import {useCounter} from '../useCounter'
+import React from 'react'
 import TestRenderer from 'react-test-renderer';
+import {useCounter} from '../useCounter'
+import { useEventListenerRef } from "../useEventListenerRef";
+
 const {act} = TestRenderer;
 
 
@@ -12,7 +13,7 @@ describe("useEventListenerRef", () => {
     expect(useEventListenerRef).toBeDefined()
   })
   it('should return a callback ref', () =>{
-    const { result } = renderHook(() => useEventListenerRef("click", function(){
+    const { result } = renderHook(() => useEventListenerRef("click", ()=> {
         console.log("clicked")
     }))
      
@@ -27,15 +28,15 @@ describe("useEventListenerRef jsx", () => {
          mockCallback = jest.fn(() => {});
          TestJSX = function(){
             const ref =  useEventListenerRef("click", mockCallback);
-            return <div data-testid="element" ref={ref}>Click me</div>;
+            
+return <div data-testid="element" ref={ref}>Click me</div>;
          }
      })
      
     
     it('should not call callback by default', () =>{
-        const { container } = render(<TestJSX />);
-        const displayElement = getByTestId(container as HTMLElement, "element");
-        expect(mockCallback).toBeCalledTimes(0);
+        render(<TestJSX />);        
+        expect(mockCallback).toHaveBeenCalledTimes(0);
       })
 
          
@@ -45,13 +46,13 @@ describe("useEventListenerRef jsx", () => {
         act(() => {
             fireEvent.click(displayElement)
         })
-        expect(mockCallback).toBeCalledTimes(1);
+        expect(mockCallback).toHaveBeenCalledTimes(1);
         act(() => {
             fireEvent.click(displayElement)
             fireEvent.click(displayElement)
             fireEvent.click(displayElement)
         })
-        expect(mockCallback).toBeCalledTimes(4);
+        expect(mockCallback).toHaveBeenCalledTimes(4);
       })
 })
 
@@ -64,7 +65,8 @@ describe("useEventListenerRef state variables", () => {
          TestJSX = function(){
             const {increment, value} = useCounter(0);
             const ref =  useEventListenerRef("click", increment);
-            return <>
+            
+return <>
                 <div data-testid="element" ref={ref}>Click me</div>
                 <div data-testid="value">{value}</div>
             </>;
@@ -76,7 +78,7 @@ describe("useEventListenerRef state variables", () => {
         const { container } = render(<TestJSX />);
         const displayElement = getByTestId(container as HTMLElement, "element");
         const valueElement = getByTestId(container as HTMLElement, "value");
-        expect(parseInt(valueElement.innerHTML)).toBe(0);
+        expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
       })
 
          
@@ -84,12 +86,12 @@ describe("useEventListenerRef state variables", () => {
         const { container } = render(<TestJSX />);
         const displayElement = getByTestId(container as HTMLElement, "element");
         const valueElement = getByTestId(container as HTMLElement, "value");
-        expect(parseInt(valueElement.innerHTML)).toBe(0);
+        expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
         act(() => {
             fireEvent.click(displayElement)
             fireEvent.click(displayElement)
             fireEvent.click(displayElement)
         })
-        expect(parseInt(valueElement.innerHTML)).toBe(3);
+        expect(Number.parseInt(valueElement.innerHTML)).toBe(3);
       })
 })

@@ -1,12 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import {useWindowSize} from "../useWindowSize";
-import {  
-    act,
-  fireEvent,  
-} from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
+import {useWindowSize} from "../useWindowSize";
 
 describe("useWindowSize", () => {
   it("should be defined", () => {

@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import {
   render,
   cleanup,
@@ -9,6 +8,7 @@ import {
   act,
   getByTestId
 } from "@testing-library/react";
+import React from "react";
 import {useWillUnmount} from "../useWillUnmount";
 
 describe("useWillUnmount", () => {
@@ -18,7 +18,8 @@ describe("useWillUnmount", () => {
   beforeEach(() => {
     function Child() {
       useWillUnmount(mockCallback);
-      return null;
+      
+return null;
     }
     // firstCallback = jest.fn()
     App = function() {
@@ -27,7 +28,8 @@ describe("useWillUnmount", () => {
       function toggleIsChildVisible() {
         setIsChildVisible(!isChildVisible);
       }
-      return (
+      
+return (
         <div>
           <p data-testid="value" onClick={() => setValue(value + 1)}>
             {value}
@@ -39,7 +41,7 @@ describe("useWillUnmount", () => {
         </div>
       );
     };
-    //end
+    // end
   });
 
   afterEach(cleanup);

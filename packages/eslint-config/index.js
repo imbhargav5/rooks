@@ -8,10 +8,17 @@ module.exports = {
     jest: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
+    "canonical",
+    "canonical/react",
+    "canonical/typescript",
+    "canonical/jest",
+    "prettier"
   ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ],
+  },
   parser: "@typescript-eslint/parser",
   rules: {
     semi: [0],
@@ -38,6 +45,26 @@ module.exports = {
     "no-mixed-spaces-and-tabs": [0],
     "react/react-in-jsx-scope": [0],
     "react/display-name": [0],
+    "jest/prefer-expect-assertions": 1,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-confusing-void-expression": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-redeclare": 0,
+    "@typescript-eslint/unbound-method": 0,
+    "arrow-body-style": 0,
+    "filenames/match-regex": 0,
+    "import/extensions": 0,
+    "import/no-namespace": 0,
+    "import/no-unassigned-import": 0,
+    "import/no-unresolved": 0,
+    "max-nested-callbacks": 0,
+    "unicorn/no-reduce": 0,
+    "import/no-extraneous-dependencies": 0,
+    "radix": 0
   },
-  plugins: ["@typescript-eslint", "react"],  
+  "settings":{
+    "react": {
+      "version": "detect"
+    }
+  }
 };

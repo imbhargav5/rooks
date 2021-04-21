@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import {useOnWindowResize} from "../useOnWindowResize";
 import {  
   fireEvent,
 } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
+import {useOnWindowResize} from "../useOnWindowResize";
 
 describe("useOnWindowResize", () => {
   it("should be defined", () => {

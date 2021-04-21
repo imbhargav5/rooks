@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { act, renderHook, cleanup } from "@testing-library/react-hooks";
 import { useState } from "react";
 import { useEffectOnceWhen } from "../useEffectOnceWhen";
-import { act, renderHook, cleanup } from "@testing-library/react-hooks";
 
 describe("useEffectOnceWhen", () => {
     let useHook;
@@ -14,7 +14,8 @@ describe("useEffectOnceWhen", () => {
             useEffectOnceWhen(() => {
                 setValue(value + 1);
             }, isEnabled)
-            return { value, setIsEnabled };
+            
+return { setIsEnabled, value };
         }
     })
     afterEach(cleanup); // <-- add this

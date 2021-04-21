@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useCounter } from "../useCounter";
 import TestRenderer from 'react-test-renderer';
+import { useCounter } from "../useCounter";
+
 const {act} = TestRenderer;
 
 describe("useCounter", () => {

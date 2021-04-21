@@ -1,6 +1,6 @@
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import {useInput} from "../useInput";
-import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 describe("useInput", () => {
   // basic tests
@@ -9,7 +9,8 @@ describe("useInput", () => {
     beforeEach(() => {
       App = function() {
         const myInput = useInput("hello");
-        return (
+        
+return (
           <div>
             <input data-testid="input-element" {...myInput} />
             <input data-testid="display-element" {...myInput} />
@@ -48,13 +49,14 @@ describe("useInput", () => {
   describe("validate", () => {
     let App;
     beforeEach(() => {
-      App = function({ validate }) {
+      App = function({validate}) {
         const myInput = useInput(5, {
           validate: validate || (newValue => newValue < 10)
         });
-        return (
+        
+return (
           <div>
-            <input type="number" data-testid="input-element" {...myInput} />
+            <input data-testid="input-element" type="number" {...myInput} />
           </div>
         );
       };
@@ -71,7 +73,7 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement.value)).toBe(5);
+      expect(Number.parseInt(inputElement.value)).toBe(5);
     });
     it("updates if validate returns true", () => {
       const { getByTestId } = render(<App />);
@@ -83,11 +85,11 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement.value)).toBe(9);
+      expect(Number.parseInt(inputElement.value)).toBe(9);
     });
     it("validate can be used to compare possible newvalue with current value", () => {
       const { getByTestId } = render(
-        <App validate={(newValue, currValue) => newValue % currValue != 0} />
+        <App validate={(newValue, currentValue) => newValue % currentValue != 0} />
       );
       const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
@@ -97,7 +99,7 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement.value)).toBe(6);
+      expect(Number.parseInt(inputElement.value)).toBe(6);
       act(() => {
         fireEvent.change(inputElement, {
           target: {
@@ -105,7 +107,7 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement.value)).toBe(6);
+      expect(Number.parseInt(inputElement.value)).toBe(6);
     });
   });
 
@@ -115,22 +117,23 @@ describe("useInput", () => {
       App = function() {
         const myInput = useInput(5);
         const myInput2 = useInput(myInput.value);
-        return (
+        
+return (
           <div>
-            <input type="number" data-testid="input-element1" {...myInput} />
-            <input type="number" data-testid="input-element2" {...myInput2} />
+            <input data-testid="input-element1" type="number" {...myInput} />
+            <input data-testid="input-element2" type="number" {...myInput2} />
           </div>
         );
       };
     });
     afterEach(cleanup); // <-- add this
 
-    it("updates value of input if initial value changes ", () => {
+    it("updates value of input if initial value changes", () => {
       const { getByTestId } = render(<App />);
       const inputElement1 = getByTestId("input-element1") as HTMLInputElement;
       const inputElement2 = getByTestId("input-element2") as HTMLInputElement;
-      expect(parseInt(inputElement1.value)).toBe(5);
-      expect(parseInt(inputElement2.value)).toBe(5);
+      expect(Number.parseInt(inputElement1.value)).toBe(5);
+      expect(Number.parseInt(inputElement2.value)).toBe(5);
 
       act(() => {
         fireEvent.change(inputElement2, {
@@ -139,7 +142,7 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement2.value)).toBe(6);
+      expect(Number.parseInt(inputElement2.value)).toBe(6);
 
       act(() => {
         fireEvent.change(inputElement1, {
@@ -148,8 +151,8 @@ describe("useInput", () => {
           }
         });
       });
-      expect(parseInt(inputElement1.value)).toBe(10);
-      expect(parseInt(inputElement2.value)).toBe(10);
+      expect(Number.parseInt(inputElement1.value)).toBe(10);
+      expect(Number.parseInt(inputElement2.value)).toBe(10);
     });
   });
 });

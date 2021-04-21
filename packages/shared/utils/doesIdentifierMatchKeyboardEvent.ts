@@ -1,17 +1,18 @@
-function doesIdentifierMatchKeyboardEvent(
-  e: KeyboardEvent,
+const doesIdentifierMatchKeyboardEvent = (
+  error: KeyboardEvent,
   identifier
-): boolean {
+): boolean => {
   if (
-    e.key === identifier ||
-    e.code === identifier ||
-    e.keyCode === identifier ||
-    e.which === identifier ||
-    e.charCode === identifier
+    error.key === identifier ||
+    error.code === identifier ||
+    error.keyCode === identifier ||
+    error.which === identifier ||
+    error.charCode === identifier
   ) {
     return true;
   }
-  return false;
+  
+return false;
 }
 
 export { doesIdentifierMatchKeyboardEvent };

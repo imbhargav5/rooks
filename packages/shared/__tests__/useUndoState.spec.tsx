@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react"
-import {useUndoState} from "../useUndoState"
-import { render, cleanup, fireEvent } from "@testing-library/react"
+import { cleanup } from "@testing-library/react"
 import { renderHook } from "@testing-library/react-hooks"
 import TestRenderer from 'react-test-renderer';
+import {useUndoState} from "../useUndoState"
+
 const {act} = TestRenderer;
 
 describe('useUndoState', () => {
@@ -17,7 +17,8 @@ describe('useUndoState', () => {
             function increment(){
                 setValue(current => (current || 0) + 1)
             }
-            return {value, increment, undo}
+            
+return {increment, undo, value}
         }
     })
 

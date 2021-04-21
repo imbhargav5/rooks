@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { render, cleanup, fireEvent, act, waitFor } from "@testing-library/react";
 import React, { useState } from "react";
 import {useTimeout} from "../useTimeout";
-import { render, cleanup, fireEvent, act, waitFor } from "@testing-library/react";
 
 describe("useTimeout", () => {
   it("should be defined", () => {
@@ -14,7 +14,7 @@ describe("useTimeout", () => {
 describe.skip("use-timeout base", async () => {
   let Component;
   let mockCallback;
-  const TIMEOUT_MS = 1000;
+  const TIMEOUT_MS = 1_000;
   beforeEach(() => {
     Component = function() {
       const [value, setValue] = useState(0);
@@ -22,7 +22,8 @@ describe.skip("use-timeout base", async () => {
       mockCallback = jest.fn(() => setValue(3));
 
       const { start, clear } = useTimeout(mockCallback, TIMEOUT_MS);
-      return (
+      
+return (
         <div>
           <button data-testid="start-button" onClick={start} />
           <button data-testid="clear-button" onClick={clear} />
@@ -37,7 +38,7 @@ describe.skip("use-timeout base", async () => {
     render(<Component />);
     jest.useFakeTimers();
     expect(mockCallback.mock.calls.length).toBe(0);
-    jest.useRealTimers(); //needed for wait
+    jest.useRealTimers(); // needed for wait
   });
   it("should run timeoutcallback when start is invoked", async () => {
     jest.useFakeTimers();
@@ -47,8 +48,8 @@ describe.skip("use-timeout base", async () => {
       fireEvent.click(getByTestId("start-button"));
       jest.runAllTimers();
     });
-    jest.useRealTimers(); //needed for wait
-    //TODO: no idea why I need to wait for next tick
+    jest.useRealTimers(); // needed for wait
+    // TODO: no idea why I need to wait for next tick
     waitFor(() => {
       expect(mockCallback.mock.calls.length).toBe(1);
     });

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "strictNullChecks": true, // enable strict null checks as a best practice
+    "module": "ESNEXT", // specify module code generation
+    "jsx": "react", // use typescript to transpile jsx to js
+    "target": "ES2016", // specify ECMAScript target version
+    "composite": true,
+    "esModuleInterop": true,
+    "rootDir": "."
+  },
+
+  "include": ["./packages/**/*.tsx?"]
+}
