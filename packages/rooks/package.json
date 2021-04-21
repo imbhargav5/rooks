@@ -18,7 +18,7 @@
     "clean": "rimraf lib dist",
     "prebuild": "yarn clean",
     "generate:types":"tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c dts.rollup.config.js && rm -rf dist",
-    "build": "node esbuild.mjs && yarn build:generate",
+    "build": "node esbuild.mjs && yarn generate:types",
     "lint": "sh ../../scripts/lint.sh"    
   },
   "bugs": {
