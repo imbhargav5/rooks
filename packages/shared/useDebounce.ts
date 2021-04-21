@@ -1,5 +1,5 @@
-import { useRef, useEffect, useCallback, SyntheticEvent } from "react";
-import debounce from "lodash.debounce";
+import { useRef, useEffect, useCallback, SyntheticEvent } from 'react';
+import debounce from 'lodash.debounce';
 
 /**
  * Debounce hook
@@ -25,8 +25,8 @@ function useDebounce(callback: Function, wait: number, options?: {}): Function {
     debouncedCallbackRef.current = createDebouncedCallback((...args) => {
       callbackRef.current(...args);
     });
-  }, [wait, options]);  
-  
+  }, [wait, options]);
+
   return debouncedCallbackRef.current;
 }
 

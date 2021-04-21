@@ -1,1 +1,1 @@
-eslint src test
+eslint src/**/*.ts

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useInterval } from "./useInterval";
+import { useState } from 'react';
+import { useInterval } from './useInterval';
 
 type CountdownOptions = {
   interval?: number;
@@ -8,16 +8,13 @@ type CountdownOptions = {
 };
 
 /**
- * 
+ *
  * useCountdown
  * Easy way to countdown until a given endtime in intervals
  * @param endTime Time to countdown
  * @param options  Countdown options
  */
-function useCountdown(
-  endTime: Date,
-  options: CountdownOptions = {}
-): number {
+function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const { interval = 1000, onDown, onEnd } = options;
   const [time, setTime] = useState<Date>(() => new Date());
   const restTime = endTime.getTime() - time.getTime();
@@ -42,6 +39,6 @@ function useCountdown(
     }
     setTime(newTime);
   }
-};
+}
 
-export {useCountdown};
+export { useCountdown };

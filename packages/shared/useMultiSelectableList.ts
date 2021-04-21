@@ -1,56 +1,71 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function warnIfBothValueAndIndexAreProvided(functionName, obj) {
-  if (Object.values(obj).every((v) => typeof v !== "undefined")) {
+  if (Object.values(obj).every((v) => typeof v !== 'undefined')) {
     console.warn(
       `${functionName} .Expected either ${Object.keys(obj).join(
-        " or "
+        ' or '
       )} to be provided. However all were provided`
     );
-  } else if (Object.values(obj).every((v) => typeof v === "undefined")) {
+  } else if (Object.values(obj).every((v) => typeof v === 'undefined')) {
     console.warn(
-      `${functionName} . ${Object.keys(obj).join(" , ")} are all undefined.`
+      `${functionName} . ${Object.keys(obj).join(' , ')} are all undefined.`
     );
   }
 }
 /**
  * useMultiSelectableList
  * A custom hook to easily select multiple values from a list
- * @param list 
- * @param initialSelectIndices 
- * @param allowUnselected 
+ * @param list
+ * @param initialSelectIndices
+ * @param allowUnselected
  */
 function useMultiSelectableList<T>(
-  list:T[]=[],
+  list: T[] = [],
   initialSelectIndices: number[] = [0],
   allowUnselected: boolean = false
-) : [(number[]|T[])[], {
-  toggleSelection: ({index:number, value: T})=>()=>void,
-  matchSelection: ({index:number, value: T})=>void,
-  updateSelections:({indices, values}: {indices: number[], values: T[]})=>()=>void,
-}] {
+): [
+  (number[] | T[])[],
+  {
+    toggleSelection: ({ index: number, value: T }) => () => void;
+    matchSelection: ({ index: number, value: T }) => void;
+    updateSelections: ({
+      indices,
+      values,
+    }: {
+      indices: number[];
+      values: T[];
+    }) => () => void;
+  }
+] {
   const [currentIndices, setCurrentIndices] = useState(initialSelectIndices);
 
   const currentValues = currentIndices.map((index) => list[index]);
   const selection = [currentIndices, currentValues];
 
-  function updateSelections({ indices, values } : {indices: number[], values: T[]}) {
+  function updateSelections({
+    indices,
+    values,
+  }: {
+    indices: number[];
+    values: T[];
+  }) {
     return () => {
-      warnIfBothValueAndIndexAreProvided("updateSelection", {
+      warnIfBothValueAndIndexAreProvided('updateSelection', {
         indices,
-        values
+        values,
       });
-      if (typeof indices !== "undefined") {
+      if (typeof indices !== 'undefined') {
         if (!allowUnselected && indices.length === 0) {
           console.warn(`updateSelection failed. indices is an empty list.`);
           return;
         }
         setCurrentIndices(indices);
       } else {
-        const valueIndices = list.reduce((acc, curr, index) => {          
+        const valueIndices = list.reduce((acc, curr, index) => {
           if (values.includes(curr)) {
-            const arr = [...acc, index]
-            return arr
+            const arr = [...acc, index];
+            return arr;
           }
           return acc;
         }, []);
@@ -89,11 +104,11 @@ function useMultiSelectableList<T>(
 
   function toggleSelection({ index, value }) {
     return () => {
-      warnIfBothValueAndIndexAreProvided("toggleSelection", {
+      warnIfBothValueAndIndexAreProvided('toggleSelection', {
         index,
-        value
+        value,
       });
-      if (typeof index !== "undefined") {
+      if (typeof index !== 'undefined') {
         toggleSelectionByIndex(index);
       } else {
         const valueIndex = list.indexOf(value);
@@ -104,8 +119,8 @@ function useMultiSelectableList<T>(
     };
   }
   function matchSelection({ index, value }) {
-    warnIfBothValueAndIndexAreProvided("matchSelection", { index, value });
-    if (typeof index !== "undefined") {
+    warnIfBothValueAndIndexAreProvided('matchSelection', { index, value });
+    if (typeof index !== 'undefined') {
       return currentIndices.includes(index);
     } else {
       return currentValues.includes(value);
@@ -114,9 +129,9 @@ function useMultiSelectableList<T>(
   const controls = {
     updateSelections,
     matchSelection,
-    toggleSelection
+    toggleSelection,
   };
   return [selection, controls];
 }
 
-export {useMultiSelectableList};
+export { useMultiSelectableList };

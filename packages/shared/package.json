@@ -21,7 +21,8 @@
   "scripts": {
     "prebuild": "rimraf **/*.d.ts *.d.ts *.tsbuildinfo",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint */*.ts __tests__/**/*.ts utils/**/*.ts __tests__/**/*.tsx"
   },
   "bugs": {
     "url": "https://github.com/imbhargav5/rooks/issues"

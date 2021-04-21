@@ -1,8 +1,8 @@
-import { useMemo, MutableRefObject } from "react";
-import { HTMLElementOrNull, CallbackRef, AnyRef } from "./utils/utils";
+import { useMemo, MutableRefObject } from 'react';
+import { HTMLElementOrNull, CallbackRef, AnyRef } from './utils/utils';
 
 function setRef(ref: AnyRef, value: HTMLElementOrNull) {
-  if (typeof ref === "function") {
+  if (typeof ref === 'function') {
     ref(value);
   } else if (ref) {
     ref.current = value;
@@ -11,12 +11,11 @@ function setRef(ref: AnyRef, value: HTMLElementOrNull) {
 /**
  * useMergeRefs
  * Merges multiple refs into a single function ref.
- * Takes any number of refs. 
+ * Takes any number of refs.
  * Refs can be mutable refs or function refs.
- * @param refs 
+ * @param refs
  */
-function useMergeRefs(...refs: AnyRef[]): (CallbackRef) | null {
-  
+function useMergeRefs(...refs: AnyRef[]): CallbackRef | null {
   return useMemo(() => {
     if (refs.every((ref) => ref === null)) {
       return null;
@@ -29,4 +28,4 @@ function useMergeRefs(...refs: AnyRef[]): (CallbackRef) | null {
   }, [...refs]);
 }
 
-export {useMergeRefs}
+export { useMergeRefs };

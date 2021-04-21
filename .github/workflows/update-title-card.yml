@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 12.x
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v1
         with:
           version: 15.x

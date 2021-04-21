@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from "react";
-import { doesIdentifierMatchKeyboardEvent } from "./utils/doesIdentifierMatchKeyboardEvent";
-import { CallbackRef, HTMLElementOrNull } from "./utils/utils";
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
+import { doesIdentifierMatchKeyboardEvent } from './utils/doesIdentifierMatchKeyboardEvent';
+import { CallbackRef, HTMLElementOrNull } from './utils/utils';
 
 interface Options {
   /**
@@ -15,7 +15,7 @@ interface Options {
 
 const defaultOptions = {
   when: true,
-  eventTypes: ["keydown"]
+  eventTypes: ['keydown'],
 };
 
 /**
@@ -33,13 +33,11 @@ function useKeyRef(
   callback: (e: KeyboardEvent) => any,
   opts?: Options
 ): CallbackRef {
-
   const [targetNode, setTargetNode] = useState<HTMLElementOrNull>(null);
 
   const ref = useCallback((targetNode: HTMLElement | null) => {
     setTargetNode(targetNode);
   }, []);
-
 
   const keyList: Array<string | number> = useMemo(() => {
     if (Array.isArray(input)) {
@@ -59,7 +57,7 @@ function useKeyRef(
   const handle = useCallback(
     (e: KeyboardEvent) => {
       if (
-        keyList.some(identifier =>
+        keyList.some((identifier) =>
           doesIdentifierMatchKeyboardEvent(e, identifier)
         )
       ) {
@@ -71,19 +69,18 @@ function useKeyRef(
 
   useEffect(() => {
     if (when && targetNode) {
-      eventTypes.forEach(eventType => {
+      eventTypes.forEach((eventType) => {
         targetNode && targetNode.addEventListener(eventType, handle);
       });
       return () => {
-        eventTypes.forEach(eventType => {
+        eventTypes.forEach((eventType) => {
           targetNode && targetNode.removeEventListener(eventType, handle);
         });
       };
     }
   }, [targetNode, when, eventTypes, keyList, handle]);
 
-  return ref
+  return ref;
 }
 
-
-export {useKeyRef};
+export { useKeyRef };

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface SelectHandler<T> {
-  index : number,
-  item : T,
-  setIndex : (newIndex: number)=>void,
-  setItem : (newItem: T) => void,
+  index: number;
+  item: T;
+  setIndex: (newIndex: number) => void;
+  setItem: (newItem: T) => void;
 }
 
 /**
@@ -14,10 +14,10 @@ interface SelectHandler<T> {
  * @param [initialIndex=0] Initial index which is selected
  * @returns handler
  */
-function useSelect<T>(list: T[], initialIndex:number = 0) : SelectHandler<T> {
+function useSelect<T>(list: T[], initialIndex: number = 0): SelectHandler<T> {
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  function setItem(item:T):void {
+  function setItem(item: T): void {
     setSelectedIndex(list.indexOf(item));
   }
 
@@ -25,7 +25,7 @@ function useSelect<T>(list: T[], initialIndex:number = 0) : SelectHandler<T> {
     index: selectedIndex,
     item: list[selectedIndex],
     setIndex: setSelectedIndex,
-    setItem
+    setItem,
   };
 }
 

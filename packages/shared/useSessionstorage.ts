@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useCallback } from "react";
+import { useEffect, useReducer, useCallback } from 'react';
 
 interface StorageHandlerAsObject {
   value: any;
@@ -17,7 +17,7 @@ interface StorageHandler extends StorageHandlerAsObject {}
 
 function reducer(state, action) {
   switch (action.type) {
-    case "set":
+    case 'set':
       return (state = action.payload);
     default:
       return state;
@@ -30,21 +30,24 @@ function reducer(state, action) {
  * @param key Key of the value to be stored
  * @param defaultValue Default value of the stored item
  */
-function useSessionstorage(key: string, defaultValue : any = null): StorageHandler {
+function useSessionstorage(
+  key: string,
+  defaultValue: any = null
+): StorageHandler {
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
     const initialValue = getValueFromSessionStorage();
-    if (initialValue === null || initialValue === "null") {
+    if (initialValue === null || initialValue === 'null') {
       set(defaultValue);
     }
   }
 
   function getValueFromSessionStorage() {
-    if (typeof sessionStorage === "undefined") {
+    if (typeof sessionStorage === 'undefined') {
       return null;
     }
-    const storedValue = sessionStorage.getItem(key) || "null";
+    const storedValue = sessionStorage.getItem(key) || 'null';
     try {
       return JSON.parse(storedValue);
     } catch (err) {
@@ -54,7 +57,7 @@ function useSessionstorage(key: string, defaultValue : any = null): StorageHandl
   }
 
   function saveValueToSessionStorage(key: string, value: string | null) {
-    if (typeof sessionStorage === "undefined") {
+    if (typeof sessionStorage === 'undefined') {
       return null;
     }
     return sessionStorage.setItem(key, JSON.stringify(value));
@@ -62,8 +65,8 @@ function useSessionstorage(key: string, defaultValue : any = null): StorageHandl
 
   function setValue(value: string | null) {
     dispatch({
-      type: "set",
-      payload: value
+      type: 'set',
+      payload: value,
     });
   }
 
@@ -73,7 +76,7 @@ function useSessionstorage(key: string, defaultValue : any = null): StorageHandl
   }
 
   function remove() {
-    if (typeof sessionStorage === "undefined") {
+    if (typeof sessionStorage === 'undefined') {
       return null;
     }
     sessionStorage.removeItem(key);
@@ -91,9 +94,9 @@ function useSessionstorage(key: string, defaultValue : any = null): StorageHandl
   }, []);
 
   useEffect(() => {
-    window.addEventListener("storage", listen);
+    window.addEventListener('storage', listen);
     return () => {
-      window.removeEventListener("storage", listen);
+      window.removeEventListener('storage', listen);
     };
   }, []);
 

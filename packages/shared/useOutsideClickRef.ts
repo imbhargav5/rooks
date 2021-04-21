@@ -3,9 +3,9 @@ import {
   MutableRefObject,
   useRef,
   useCallback,
-  useState
-} from "react";
-import { HTMLElementOrNull, CallbackRef } from "./utils/utils";
+  useState,
+} from 'react';
+import { HTMLElementOrNull, CallbackRef } from './utils/utils';
 
 /**
  * useOutsideClickRef hook
@@ -41,11 +41,11 @@ function useOutsideClickRef(
 
   useEffect(() => {
     if (when) {
-      document.addEventListener("click", memoizedCallback);
-      document.addEventListener("ontouchstart", memoizedCallback);
+      document.addEventListener('click', memoizedCallback);
+      document.addEventListener('ontouchstart', memoizedCallback);
       return () => {
-        document.removeEventListener("click", memoizedCallback);
-        document.removeEventListener("ontouchstart", memoizedCallback);
+        document.removeEventListener('click', memoizedCallback);
+        document.removeEventListener('ontouchstart', memoizedCallback);
       };
     }
   }, [when, memoizedCallback]);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface IGetGeoLocation {
   lat?: number;
@@ -18,17 +18,17 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        res => {
+        (res) => {
           const { coords } = res;
           const { latitude, longitude } = coords;
           resolve({
             lat: latitude,
             lng: longitude,
             isError: false,
-            message: ""
+            message: '',
           });
         },
-        err => {
+        (err) => {
           reject({ message: err.message, isError: true });
         },
         options
@@ -36,7 +36,7 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
     } else {
       reject({
         isError: true,
-        message: "Geolocation is not supported for this Browser/OS."
+        message: 'Geolocation is not supported for this Browser/OS.',
       });
     }
   });
@@ -54,7 +54,7 @@ const defaultGeoLocationOptions = {
   enableHighAccuracy: false,
   timeout: Infinity,
   maximumAge: 0,
-  when: true
+  when: true,
 };
 
 /**
@@ -66,7 +66,7 @@ function useGeolocation(
   // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
   geoLocationOptions: IOptions = defaultGeoLocationOptions
 ): IGetGeoLocation | null {
-  const [geoObj, setGeoObj] = useState<IGetGeoLocation|null>(null);
+  const [geoObj, setGeoObj] = useState<IGetGeoLocation | null>(null);
   const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function useGeolocation(
           when,
           enableHighAccuracy,
           timeout,
-          maximumAge
+          maximumAge,
         });
         setGeoObj(value);
       } catch (e) {

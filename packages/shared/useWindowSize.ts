@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useState, useEffect } from 'react';
+import { useIsomorphicEffect } from './useIsomorphicEffect';
 
 interface WindowDimensions {
   innerWidth: number | null;
@@ -12,16 +12,16 @@ const nullDimensions: WindowDimensions = {
   innerWidth: null,
   innerHeight: null,
   outerWidth: null,
-  outerHeight: null
+  outerHeight: null,
 };
 
-function getDimensions():WindowDimensions{
+function getDimensions(): WindowDimensions {
   return {
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight,
     outerWidth: window.outerWidth,
-    outerHeight: window.outerHeight
-  }
+    outerHeight: window.outerHeight,
+  };
 }
 
 /**
@@ -31,21 +31,21 @@ function getDimensions():WindowDimensions{
  */
 export function useWindowSize(): WindowDimensions {
   const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if(typeof window !=="undefined"){
-      return getDimensions()
-    }else{
-      return nullDimensions
+    if (typeof window !== 'undefined') {
+      return getDimensions();
+    } else {
+      return nullDimensions;
     }
   });
 
   // set resize handler once on mount and clean before unmount
   useIsomorphicEffect(() => {
-    function onResize(){
+    function onResize() {
       setWindowSize(getDimensions());
     }
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
     return () => {
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 

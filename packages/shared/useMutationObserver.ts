@@ -1,10 +1,10 @@
-import { useEffect, Ref, MutableRefObject } from "react";
+import { useEffect, Ref, MutableRefObject } from 'react';
 
 var config: MutationObserverInit = {
   attributes: true,
   characterData: true,
   subtree: true,
-  childList: true
+  childList: true,
 };
 
 /**

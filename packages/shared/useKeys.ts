@@ -1,8 +1,8 @@
-import { useEffect, useRef, MutableRefObject, useCallback } from "react";
-import { doesIdentifierMatchKeyboardEvent } from "./utils/doesIdentifierMatchKeyboardEvent";
+import { useEffect, useRef, MutableRefObject, useCallback } from 'react';
+import { doesIdentifierMatchKeyboardEvent } from './utils/doesIdentifierMatchKeyboardEvent';
 
 type TPressedKeyMapping = {
-  [key: string]: boolean|undefined;
+  [key: string]: boolean | undefined;
 };
 
 interface Options {
@@ -26,7 +26,7 @@ interface Options {
  */
 const defaultOptions = {
   when: true,
-  continuous: false
+  continuous: false,
 };
 
 /**
@@ -64,17 +64,19 @@ function useKeys(
 
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent) {
-      let pressedKeyIdentifier:string|null = null;
+      let pressedKeyIdentifier: string | null = null;
       let areAllKeysFromListPressed = false;
       // First detect the key that was pressed;
-      keysList.forEach(identifier => {
+      keysList.forEach((identifier) => {
         if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
           PressedKeyMapping[identifier] = true;
           pressedKeyIdentifier = identifier;
           return;
         }
       });
-      if (keysList.every(identifier => Boolean(PressedKeyMapping[identifier]))) {
+      if (
+        keysList.every((identifier) => Boolean(PressedKeyMapping[identifier]))
+      ) {
         areAllKeysFromListPressed = true;
       }
 
@@ -87,7 +89,7 @@ function useKeys(
          * disable identifier immediately
          */
         if (!continuous) {
-          if(pressedKeyIdentifier !== null){
+          if (pressedKeyIdentifier !== null) {
             PressedKeyMapping[pressedKeyIdentifier] = false;
           }
         }
@@ -104,7 +106,7 @@ function useKeys(
    * KeyUp event handler which will update the keys pressed state in PressedKeyMapping
    */
   const handleKeyUp = useCallback(function handleKeyUp(event: KeyboardEvent) {
-    keysList.forEach(identifier => {
+    keysList.forEach((identifier) => {
       if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
         PressedKeyMapping[identifier] = undefined;
       }
@@ -115,16 +117,16 @@ function useKeys(
    * Responsible for setting up the event listener and removing event listeners
    */
   useEffect((): any => {
-    if (when && typeof window !== "undefined") {
+    if (when && typeof window !== 'undefined') {
       let targetNode = target && target.current ? target.current : document;
       if (targetNode) {
-        targetNode.addEventListener("keydown", handleKeyDown);
-        targetNode.addEventListener("keyup", handleKeyUp);
+        targetNode.addEventListener('keydown', handleKeyDown);
+        targetNode.addEventListener('keyup', handleKeyUp);
       }
       return () => {
         if (targetNode)
-          targetNode.removeEventListener("keydown", handleKeyDown);
-        if (targetNode) targetNode.removeEventListener("keyup", handleKeyUp);
+          targetNode.removeEventListener('keydown', handleKeyDown);
+        if (targetNode) targetNode.removeEventListener('keyup', handleKeyUp);
       };
     }
   }, [when, target, keysList, handleKeyDown, handleKeyUp]);

@@ -1,4 +1,4 @@
-import { useEffect, MutableRefObject, useRef, useCallback } from "react";
+import { useEffect, MutableRefObject, useRef, useCallback } from 'react';
 
 /**
  *  useOutsideClick hook
@@ -26,11 +26,11 @@ function useOutsideClick(
 
   useEffect(() => {
     if (when) {
-      document.addEventListener("click", memoizedCallback);
-      document.addEventListener("ontouchstart", memoizedCallback);
+      document.addEventListener('click', memoizedCallback);
+      document.addEventListener('ontouchstart', memoizedCallback);
       return () => {
-        document.removeEventListener("click", memoizedCallback);
-        document.removeEventListener("ontouchstart", memoizedCallback);
+        document.removeEventListener('click', memoizedCallback);
+        document.removeEventListener('ontouchstart', memoizedCallback);
       };
     }
   }, [ref, handler, when]);

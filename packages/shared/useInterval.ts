@@ -1,6 +1,6 @@
 // See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 interface IntervalHandlerAsObject {
   /**
@@ -14,14 +14,14 @@ interface IntervalHandlerAsObject {
   /**
    * IntervalId of the interval
    */
-  intervalId: ReturnType<typeof setTimeout>  | null;
+  intervalId: ReturnType<typeof setTimeout> | null;
 }
 
 interface IntervalHandlerAsArray
-  extends Array<null | ReturnType<typeof setTimeout>  | (() => void)> {
+  extends Array<null | ReturnType<typeof setTimeout> | (() => void)> {
   0: () => void;
   1: () => void;
-  2: ReturnType<typeof setTimeout>  | null;
+  2: ReturnType<typeof setTimeout> | null;
 }
 
 interface IntervalHandler extends IntervalHandlerAsArray {}
@@ -43,7 +43,7 @@ function useInterval(
   intervalDuration: number | null,
   startImmediate: boolean = false
 ): IntervalHandler {
-  const internalIdRef = useRef<ReturnType<typeof setTimeout>  | null>(null);
+  const internalIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isRunning, setIsRunning] = useState(startImmediate);
   const savedCallback = useRef<() => any>();
 
@@ -74,7 +74,7 @@ function useInterval(
       internalIdRef.current = id;
       return () => {
         internalIdRef.current = null;
-        clearInterval(id)
+        clearInterval(id);
       };
     }
   }, [intervalDuration, isRunning]);

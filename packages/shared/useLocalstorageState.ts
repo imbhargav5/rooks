@@ -1,10 +1,17 @@
-import { useState, useEffect, useCallback, useRef, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 
 function getValueFromLocalStorage(key) {
-  if (typeof localStorage === "undefined") {
+  if (typeof localStorage === 'undefined') {
     return null;
   }
-  const storedValue = localStorage.getItem(key) || "null";
+  const storedValue = localStorage.getItem(key) || 'null';
   try {
     return JSON.parse(storedValue);
   } catch (err) {
@@ -14,23 +21,22 @@ function getValueFromLocalStorage(key) {
 }
 
 function saveValueToLocalStorage(key: string, value: any) {
-  if (typeof localStorage === "undefined") {
+  if (typeof localStorage === 'undefined') {
     return null;
   }
   return localStorage.setItem(key, JSON.stringify(value));
 }
 
-
 /**
  * @param key Key of the localStorage object
  * @param initialState Default initial value
  */
-function initialize(key, initialState){
-  const valueLoadedFromLocalStorage  = getValueFromLocalStorage(key)
-  if(valueLoadedFromLocalStorage === null){
-    return initialState
-  }else{
-    return valueLoadedFromLocalStorage
+function initialize(key, initialState) {
+  const valueLoadedFromLocalStorage = getValueFromLocalStorage(key);
+  if (valueLoadedFromLocalStorage === null) {
+    return initialState;
+  } else {
+    return valueLoadedFromLocalStorage;
   }
 }
 
@@ -40,28 +46,30 @@ function initialize(key, initialState){
  * @param {string} key - Key of the localStorage object
  * @param {any} initialState - Default initial value
  */
-function useLocalstorageState<S>(key: string, initialState?: S | (() => S)): [S, Dispatch<SetStateAction<S>>, () => void] {
+function useLocalstorageState<S>(
+  key: string,
+  initialState?: S | (() => S)
+): [S, Dispatch<SetStateAction<S>>, () => void] {
   const [value, __setValue] = useState(() => initialize(key, initialState));
   const isUpdateFromListener = useRef(false);
-  
+
   useEffect(() => {
-    /** 
-     * We need to ensure there is no loop of 
-     * storage events fired. Hence we are using a ref 
-     * to keep track of whether setValue is from another 
+    /**
+     * We need to ensure there is no loop of
+     * storage events fired. Hence we are using a ref
+     * to keep track of whether setValue is from another
      * storage event
-    */
-    if(!isUpdateFromListener.current){
+     */
+    if (!isUpdateFromListener.current) {
       saveValueToLocalStorage(key, value);
     }
-  }, [value])
-
+  }, [value]);
 
   const listen = useCallback((e: StorageEvent) => {
     if (e.storageArea === localStorage && e.key === key) {
       try {
         isUpdateFromListener.current = true;
-        const newValue = JSON.parse(e.newValue || "null");
+        const newValue = JSON.parse(e.newValue || 'null');
         if (value !== newValue) {
           __setValue(newValue);
         }
@@ -70,26 +78,25 @@ function useLocalstorageState<S>(key: string, initialState?: S | (() => S)): [S,
       }
     }
   }, []);
-  
+
   // check for changes across windows
   useEffect(() => {
-    window.addEventListener("storage", listen);
+    window.addEventListener('storage', listen);
     return () => {
-      window.removeEventListener("storage", listen);
+      window.removeEventListener('storage', listen);
     };
   }, []);
 
-  
-  function setValue(newValue:S):void{
+  function setValue(newValue: S): void {
     isUpdateFromListener.current = false;
-    __setValue(newValue)
+    __setValue(newValue);
   }
 
-  function remove() {    
+  function remove() {
     localStorage.removeItem(key);
   }
-  
+
   return [value, setValue, remove];
 }
 
-export {useLocalstorageState};
+export { useLocalstorageState };

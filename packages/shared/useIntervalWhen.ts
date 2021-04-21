@@ -1,5 +1,4 @@
-import { useRef, useEffect } from "react";
-
+import { useRef, useEffect } from 'react';
 
 /**
  * A setInterval hook that calls a callback after a interval duration
@@ -23,7 +22,6 @@ function useIntervalWhen(
     savedRefCallback.current && savedRefCallback.current();
   }
 
-
   useEffect(() => {
     if (when) {
       const interval = window.setInterval(callback, intervalDurationMs);
@@ -32,7 +30,6 @@ function useIntervalWhen(
       };
     }
   }, [when, intervalDurationMs]);
-
 }
 
 export { useIntervalWhen };

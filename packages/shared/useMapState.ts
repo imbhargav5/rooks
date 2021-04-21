@@ -5,29 +5,34 @@ import { useState } from 'react';
  * A hook to manage state in the form of a map or object.
  * @param initialValue Initial value of the map
  */
-function useMapState(initialValue: any): [any, {
-  set: (key: any, value: any) => void,
-  has: (key: any) => boolean,
-  setMultiple: (...keys: any[]) => void,
-  remove: (key: any) => void,
-  removeMultiple: (...keys: any[]) => void,
-  removeAll: () => void
-}] {
+function useMapState(
+  initialValue: any
+): [
+  any,
+  {
+    set: (key: any, value: any) => void;
+    has: (key: any) => boolean;
+    setMultiple: (...keys: any[]) => void;
+    remove: (key: any) => void;
+    removeMultiple: (...keys: any[]) => void;
+    removeAll: () => void;
+  }
+] {
   const [map, setMap] = useState(initialValue);
 
   function set(key: any, value: any) {
     setMap({
       ...map,
-      [key]: value
+      [key]: value,
     });
   }
   function has(key: any) {
-    return typeof map[key] !== "undefined";
+    return typeof map[key] !== 'undefined';
   }
   function setMultiple(obj: { any: any }) {
     setMap({
       ...map,
-      ...obj
+      ...obj,
     });
   }
   function removeMultiple(...keys) {
@@ -58,7 +63,7 @@ function useMapState(initialValue: any): [any, {
     setMultiple,
     remove,
     removeMultiple,
-    removeAll
+    removeAll,
   };
   return [map, controls];
 }

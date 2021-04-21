@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface CounterHandler {
   value: number;
@@ -69,7 +69,7 @@ function useCounter(initialValue: number): CounterHandler {
     decrement,
     incrementBy,
     decrementBy,
-    reset
+    reset,
   };
 }
 

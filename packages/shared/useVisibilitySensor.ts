@@ -2,8 +2,8 @@
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
 
-import { useEffect, useReducer, useLayoutEffect } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useEffect, useReducer, useLayoutEffect } from 'react';
+import { useIsomorphicEffect } from './useIsomorphicEffect';
 
 function normalizeRect(rect) {
   if (rect.width === undefined) {
@@ -21,7 +21,7 @@ const initialState = { isVisible: null, visibilityRect: {} };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "set":
+    case 'set':
       if (state.isVisible === action.payload.isVisible) {
         return state;
       }
@@ -42,13 +42,13 @@ const DEFAULT_OPTIONS = {
   resizeDebounce: 250,
   resizeThrottle: -1,
   shouldCheckOnMount: true,
-  minTopValue: 0
+  minTopValue: 0,
 };
 
 /**
  * useVisibilitySensor hook
  * Tracks the visibility of a ref
- * 
+ *
  * @param ref The ref to track visibility of
  * @param opts Options
  */
@@ -72,7 +72,7 @@ function useVisibilitySensor(ref, opts) {
     resizeDebounce,
     resizeThrottle,
     partialVisibility,
-    minTopValue
+    minTopValue,
   } = (<any>Object).assign({}, DEFAULT_OPTIONS, opts);
 
   function getContainer() {
@@ -90,14 +90,14 @@ function useVisibilitySensor(ref, opts) {
         top: containmentDOMRect.top,
         left: containmentDOMRect.left,
         bottom: containmentDOMRect.bottom,
-        right: containmentDOMRect.right
+        right: containmentDOMRect.right,
       };
     } else {
       containmentRect = {
         top: 0,
         left: 0,
         bottom: window.innerHeight || document.documentElement.clientHeight,
-        right: window.innerWidth || document.documentElement.clientWidth
+        right: window.innerWidth || document.documentElement.clientWidth,
       };
     }
 
@@ -108,7 +108,7 @@ function useVisibilitySensor(ref, opts) {
       top: rect.top >= containmentRect.top,
       left: rect.left >= containmentRect.left,
       bottom: rect.bottom <= containmentRect.bottom,
-      right: rect.right <= containmentRect.right
+      right: rect.right <= containmentRect.right,
     };
 
     let isVisible =
@@ -127,7 +127,7 @@ function useVisibilitySensor(ref, opts) {
         rect.right >= containmentRect.left;
 
       // account for partial visibility on a single edge
-      if (typeof partialVisibility === "string") {
+      if (typeof partialVisibility === 'string') {
         partialVisible = visibilityRect[partialVisibility];
       }
 
@@ -146,8 +146,8 @@ function useVisibilitySensor(ref, opts) {
     }
     const { isVisible, visibilityRect } = checkVisibility();
     dispatch({
-      type: "set",
-      payload: { isVisible, visibilityRect }
+      type: 'set',
+      payload: { isVisible, visibilityRect },
     });
   }
 
@@ -204,7 +204,7 @@ function useVisibilitySensor(ref, opts) {
   // If scroll check is needed
   useIsomorphicEffect(() => {
     if (scrollCheck) {
-      return createListener("scroll", scrollDebounce, scrollThrottle);
+      return createListener('scroll', scrollDebounce, scrollThrottle);
     }
   }, []);
 
@@ -212,7 +212,7 @@ function useVisibilitySensor(ref, opts) {
 
   useIsomorphicEffect(() => {
     if (resizeCheck) {
-      return createListener("resize", resizeDebounce, resizeThrottle);
+      return createListener('resize', resizeDebounce, resizeThrottle);
     }
   }, []);
   return localState;

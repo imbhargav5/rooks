@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@master
-      - name: Use Node.js 12.x
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v1
         with:
           version: 15.x
@@ -38,7 +38,7 @@ jobs:
       - name: test
         run: yarn test
       - name: yarn build
-        run: yarn build:action
+        run: yarn build:only
       - name: Add npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc      
       - name: Publish release version

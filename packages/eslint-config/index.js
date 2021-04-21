@@ -12,7 +12,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
   ],
-  parser: "babel-eslint",
+  parser: "@typescript-eslint/parser",
   rules: {
     semi: [0],
     "no-constant-condition": [2],
@@ -39,5 +39,5 @@ module.exports = {
     "react/react-in-jsx-scope": [0],
     "react/display-name": [0],
   },
-  plugins: ["react"],
+  plugins: ["@typescript-eslint", "react"],  
 };

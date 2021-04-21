@@ -1,11 +1,11 @@
-import { useEffect, Ref, MutableRefObject, useCallback, useState } from "react";
-import { CallbackRef, HTMLElementOrNull } from "./utils/utils";
+import { useEffect, Ref, MutableRefObject, useCallback, useState } from 'react';
+import { CallbackRef, HTMLElementOrNull } from './utils/utils';
 
 var config: MutationObserverInit = {
   attributes: true,
   characterData: true,
   subtree: true,
-  childList: true
+  childList: true,
 };
 
 /**

@@ -1,11 +1,11 @@
-import { useMemo, MutableRefObject } from "react";
-import { HTMLElementOrNull, CallbackRef, AnyRef } from "./utils/utils";
+import { useMemo, MutableRefObject } from 'react';
+import { HTMLElementOrNull, CallbackRef, AnyRef } from './utils/utils';
 /**
  * Credit to material-ui for this snippet
  */
 
 function setRef(ref: AnyRef, value: HTMLElementOrNull) {
-  if (typeof ref === "function") {
+  if (typeof ref === 'function') {
     ref(value);
   } else if (ref) {
     ref.current = value;
@@ -13,12 +13,12 @@ function setRef(ref: AnyRef, value: HTMLElementOrNull) {
 }
 
 /**
- * useForkRef 
+ * useForkRef
  * Joins refs together and returns a combination of the two as a new ref
- * @param refA 
- * @param refB 
+ * @param refA
+ * @param refB
  */
-function useForkRef(refA: AnyRef, refB: AnyRef): (CallbackRef) | null {
+function useForkRef(refA: AnyRef, refB: AnyRef): CallbackRef | null {
   /**
    * This will create a new function if the ref props change and are defined.
    * This means react will call the old forkRef with `null` and the new forkRef

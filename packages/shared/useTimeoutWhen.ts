@@ -1,5 +1,4 @@
-import { useRef, useEffect } from "react";
-
+import { useRef, useEffect } from 'react';
 
 /**
  * A setTimeout hook that calls a callback after a timeout duration
@@ -23,7 +22,6 @@ function useTimeoutWhen(
     savedRefCallback.current && savedRefCallback.current();
   }
 
-
   useEffect(() => {
     if (when) {
       const timeout = window.setTimeout(callback, timeoutDelayMs);
@@ -32,7 +30,6 @@ function useTimeoutWhen(
       };
     }
   }, [when]);
-
 }
 
 export { useTimeoutWhen };

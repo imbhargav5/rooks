@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface MouseData {
   x: number | null;
@@ -27,7 +27,7 @@ const initialMouseState: MouseData = {
   movementX: null,
   movementY: null,
   offsetX: null,
-  offsetY: null
+  offsetY: null,
 };
 
 function getMousePositionFromEvent(e: MouseEvent): MouseData {
@@ -41,7 +41,7 @@ function getMousePositionFromEvent(e: MouseEvent): MouseData {
     clientX,
     clientY,
     offsetX,
-    offsetY
+    offsetY,
   } = e;
   return {
     screenX,
@@ -55,7 +55,7 @@ function getMousePositionFromEvent(e: MouseEvent): MouseData {
     offsetX,
     offsetY,
     x: screenX,
-    y: screenY
+    y: screenY,
   };
 }
 
@@ -75,9 +75,9 @@ export function useMouse(): MouseData {
   }
 
   useEffect(() => {
-    document.addEventListener("mousemove", updateMousePosition);
+    document.addEventListener('mousemove', updateMousePosition);
     return () => {
-      document.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener('mousemove', updateMousePosition);
     };
   }, []);
   return mousePosition;

@@ -1,12 +1,12 @@
-import {useState} from 'react'
+import { useState } from 'react';
 import { useWindowEventListener } from './useWindowEventListener';
 
-type Language = string | null
+type Language = string | null;
 
-function getLanguage(): Language{
-  if(typeof navigator !== "undefined"){
-    return navigator.language || navigator["userLanguage"]
-  }else{
+function getLanguage(): Language {
+  if (typeof navigator !== 'undefined') {
+    return navigator.language || navigator['userLanguage'];
+  } else {
     return null;
   }
 }
@@ -19,9 +19,9 @@ function getLanguage(): Language{
 export function useNavigatorLanguage(): Language {
   const [language, setLanguage] = useState<Language>(getLanguage);
 
-  useWindowEventListener("languagechange", ()=>{
-    setLanguage(getLanguage)
-  })
-  
+  useWindowEventListener('languagechange', () => {
+    setLanguage(getLanguage);
+  });
+
   return language;
 }

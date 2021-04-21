@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import { useEffect, useRef } from 'react';
+import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
 
 /**
  *
@@ -9,8 +9,19 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  * @param {boolean} when When the handler should be applied
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  */
-function useOnWindowScroll(callback: (event: any)=>void, when:boolean = true, isLayoutEffect: boolean = false): void {
-  useGlobalObjectEventListener(window,"scroll", callback, {passive: true}, when, isLayoutEffect)
+function useOnWindowScroll(
+  callback: (event: any) => void,
+  when: boolean = true,
+  isLayoutEffect: boolean = false
+): void {
+  useGlobalObjectEventListener(
+    window,
+    'scroll',
+    callback,
+    { passive: true },
+    when,
+    isLayoutEffect
+  );
 }
 
 export { useOnWindowScroll };

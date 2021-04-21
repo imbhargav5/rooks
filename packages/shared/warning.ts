@@ -1,6 +1,6 @@
 const __DEV__ = process.env.NODE_ENV !== 'production';
 
-let warning:Function = function() {};
+let warning: Function = function () {};
 
 if (__DEV__) {
   const printWarning = function printWarning(...actualMessage) {
@@ -14,13 +14,13 @@ if (__DEV__) {
       // to find the callsite that caused this warning to fire.
       throw new Error(message);
     } catch (x) {}
-  }
+  };
 
-  warning = function(condition:boolean, actualMessage) {    
+  warning = function (condition: boolean, actualMessage) {
     if (!condition) {
       printWarning(actualMessage);
     }
   };
 }
 
-export {warning}
+export { warning };

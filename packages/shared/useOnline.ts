@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  *
@@ -32,11 +32,11 @@ function useOnline(): boolean | null {
   // we only needs this to be set on mount
   // hence []
   useEffect(() => {
-    window.addEventListener("online", setOnline);
-    window.addEventListener("offline", setOffline);
+    window.addEventListener('online', setOnline);
+    window.addEventListener('offline', setOffline);
     return () => {
-      window.removeEventListener("online", setOnline);
-      window.removeEventListener("offline", setOffline);
+      window.removeEventListener('online', setOnline);
+      window.removeEventListener('offline', setOffline);
     };
   }, []);
   return online;

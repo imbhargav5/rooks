@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 /**
  * usePreviousDifferent hook for React
@@ -15,7 +15,7 @@ function usePreviousDifferent<T>(currentValue: T): T | null {
     prevRef.current = currentValue;
   }, [currentValue]);
 
-  return currentValue === prevRef.current ? prevRef2.current: prevRef.current;
+  return currentValue === prevRef.current ? prevRef2.current : prevRef.current;
 }
 
 export { usePreviousDifferent };

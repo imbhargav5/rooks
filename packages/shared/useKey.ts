@@ -1,5 +1,5 @@
-import { Ref, useEffect, useCallback, useRef, useMemo } from "react";
-import { doesIdentifierMatchKeyboardEvent } from "./utils/doesIdentifierMatchKeyboardEvent";
+import { Ref, useEffect, useCallback, useRef, useMemo } from 'react';
+import { doesIdentifierMatchKeyboardEvent } from './utils/doesIdentifierMatchKeyboardEvent';
 
 interface Options {
   /**
@@ -19,7 +19,7 @@ interface Options {
 
 const defaultOptions = {
   when: true,
-  eventTypes: ["keydown"]
+  eventTypes: ['keydown'],
 };
 
 /**
@@ -55,7 +55,7 @@ function useKey(
   const handle = useCallback(
     (e: KeyboardEvent) => {
       if (
-        keyList.some(identifier =>
+        keyList.some((identifier) =>
           doesIdentifierMatchKeyboardEvent(e, identifier)
         )
       ) {
@@ -66,13 +66,13 @@ function useKey(
   );
 
   useEffect(() => {
-    if (when && typeof window !== "undefined") {
+    if (when && typeof window !== 'undefined') {
       const targetNode = target ? target.current : window;
-      eventTypes.forEach(eventType => {
+      eventTypes.forEach((eventType) => {
         targetNode && targetNode.addEventListener(eventType, handle);
       });
       return () => {
-        eventTypes.forEach(eventType => {
+        eventTypes.forEach((eventType) => {
           targetNode && targetNode.removeEventListener(eventType, handle);
         });
       };
