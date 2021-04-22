@@ -11,6 +11,7 @@ const build = async ({ outfile, format, minify = false, globalName, ...rest }) =
       bundle: true,
       minify,
       write: false,
+      external: ['react','react-dom'],
       ...rest,
       format: format === "umd" ? "esm" : format,
       globalName: format === "umd" ? undefined : globalName,
@@ -35,9 +36,9 @@ const build = async ({ outfile, format, minify = false, globalName, ...rest }) =
       code = `(()=>{${code};typeof module!=='undefined'?module.exports=${varName}:self.${globalName}=${varName}})()`;
     }
   
-    if (minify) {
-      code = (await terser.minify(code)).code;
-    }
+    // if (minify) {
+    //   code = (await terser.minify(code)).code;
+    // }
   
     await fs.writeFile(outfile, code);
   };
