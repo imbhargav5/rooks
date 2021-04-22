@@ -1,4 +1,5 @@
 {
   "2fa": false,
-  "preview": true
+  "preview": true,
+  "tag": "dev"
 }
