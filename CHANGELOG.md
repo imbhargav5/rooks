@@ -1,5 +1,6 @@
 ##  (2021-04-22)
 
+* chore(add ci publish): add ci publish ([cc579b2](https://github.com/imbhargav5/rooks/commit/cc579b2))
 * chore(add np): add np ([b7141be](https://github.com/imbhargav5/rooks/commit/b7141be))
 * chore(add npconfig): add npconfig ([42d1d25](https://github.com/imbhargav5/rooks/commit/42d1d25))
 * chore(add release-dev script): add release-dev script ([3a969ac](https://github.com/imbhargav5/rooks/commit/3a969ac))
@@ -16,6 +17,7 @@
 * chore(prep for v5): make package private and remove unused ([4da63a1](https://github.com/imbhargav5/rooks/commit/4da63a1))
 * chore(rebase while pulling): rebase while pulling ([c0efd49](https://github.com/imbhargav5/rooks/commit/c0efd49))
 * chore(release-dev script): release-dev script ([6d4adb0](https://github.com/imbhargav5/rooks/commit/6d4adb0))
+* chore(remove terser and add external): emove terser and add external ([7be1753](https://github.com/imbhargav5/rooks/commit/7be1753))
 * chore(set a git config): set git config ([066787b](https://github.com/imbhargav5/rooks/commit/066787b))
 * chore(set registry manually): set registry manually ([a533cb5](https://github.com/imbhargav5/rooks/commit/a533cb5))
 * chore(test): test ([3ad5f60](https://github.com/imbhargav5/rooks/commit/3ad5f60))
