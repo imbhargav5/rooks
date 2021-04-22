@@ -23,7 +23,7 @@
     "build:only": "yarn run build:rooks",
     "build": "yarn run build:only",
     "generate:changelog": "gulp changelog",
-    "release-dev": "wsrun -p 'rooks' -s --report",
+    "release-dev": "wsrun -p 'rooks' -s --report release-dev",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "optionalDependencies": {
