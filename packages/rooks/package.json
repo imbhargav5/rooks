@@ -26,7 +26,8 @@
     "url": "https://github.com/imbhargav5/rooks/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "use",
