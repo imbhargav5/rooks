@@ -9,12 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ALGOLIA_API_KEY:   ${{ secrets.ALGOLIA_API_KEY }}
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     steps:
-      - name: "Check if user has write access"
-        uses: "lannonbr/repo-permission-check-action@2.0.0"
+      - name: 'Check if user has write access'
+        uses: 'lannonbr/repo-permission-check-action@2.0.0'
         with:
-          permission: "write"
+          permission: 'write'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@master
@@ -44,21 +44,16 @@ jobs:
       - name: yarn build
         run: yarn build:only
       - name: Add npm token
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc      
-    #   - name: Create prerelease version
-    #     run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      #   - name: Create prerelease version
+      #     run: yarn run ga-prerelease-version --preid ${GITHUB_SHA::8}
       - name: Publish prerelease version
-        run: yarn run ga-npm-publish --dist-tag dev
-      - name: Generate docusaurus        
-        run: yarn run readme-to-docs
-      - name: Build docusaurus        
-        run:  yarn build:docs
-      - name: Commit docusaurus
-        continue-on-error: true        
+        run: yarn run release-dev
+      - name: Commit
+        continue-on-error: true
         run: |
-          git add packages/docusaurus
+          git add .
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Update ${{ steps.tags.outputs.new }} docusaurus [skip ci]" --no-verify --quiet
+            commit -m "Update ${{ steps.tags.outputs.new }} CI publish [skip ci]" --no-verify --quiet
           git pull "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main --rebase
-          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main      
-
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main
