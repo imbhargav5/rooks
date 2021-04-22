@@ -1,6 +1,7 @@
 ##  (2021-04-22)
 
 * chore(add np): add np ([b7141be](https://github.com/imbhargav5/rooks/commit/b7141be))
+* chore(build without wsrun): build without wsrun ([ef1658e](https://github.com/imbhargav5/rooks/commit/ef1658e))
 * chore(fix typo): fix typo ([8793257](https://github.com/imbhargav5/rooks/commit/8793257))
 * chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([c7a35c9](https://github.com/imbhargav5/rooks/commit/c7a35c9)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
 * chore(get lint to work): get lint to work ([e31541f](https://github.com/imbhargav5/rooks/commit/e31541f))
