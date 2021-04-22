@@ -1,5 +1,6 @@
 {
   "2fa": false,
   "preview": true,
-  "tag": "dev"
+  "tag": "dev",
+  "yolo": true
 }
