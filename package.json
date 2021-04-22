@@ -24,6 +24,7 @@
     "build": "yarn run build:only",
     "generate:changelog": "gulp changelog",
     "release-dev": "wsrun -p 'rooks' -s --report release-dev",
+    "test-who": "npm whoami",
     "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
   },
   "optionalDependencies": {
