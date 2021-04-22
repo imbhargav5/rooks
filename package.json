@@ -84,7 +84,7 @@
     "mdast-zone": "^4.0.1",
     "meow": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
-    "ora": "4.0.3",
+    "ora": "5.4.0",
     "prettier": "^2.2.1",
     "raf": "3.4.1",
     "react": "16.9.0",
