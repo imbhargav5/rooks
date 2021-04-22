@@ -1,6 +1,5 @@
 {
   "2fa": false,
-  "preview": true,
-  "tag": "dev",
-  "yolo": true
+  "yolo": true,
+  "releaseDraft": false
 }
