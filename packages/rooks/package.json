@@ -20,7 +20,7 @@
     "generate:types":"tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c dts.rollup.config.js && rm -rf dist",
     "build": "node esbuild.mjs && yarn generate:types",
     "lint": "sh ../../scripts/lint.sh",
-    "release-dev": "np prepatch --preview"
+    "release-dev": "np prepatch"
   },
   "bugs": {
     "url": "https://github.com/imbhargav5/rooks/issues"
