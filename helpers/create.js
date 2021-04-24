@@ -17,8 +17,8 @@ const filesToRead = [
 ];
 const filesToWrite = [
   'src/index.ts',
-  ({ name }) => `./__tests__/${name}.spec.ts`,
-  ({ name }) => `./hooks/${name}.ts`,
+  ({ name }) => `./src/__tests__/${name}.spec.ts`,
+  ({ name }) => `./src/hooks/${name}.ts`,
   ({ name }) => `./docs/${name}/README.md`,
   ({ name }) => `./docs/${name}/Examples.md`,
   ({ name }) => `./docs/${name}/title-card.svg`,
