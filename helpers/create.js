@@ -9,38 +9,20 @@ const truncate = require('lodash.truncate');
 
 const filesToRead = [
   '../template/index.template',
+  '../template/index.spec.template',
   '../template/shared.template',
-  '../template/package.json',
   '../template/README.md',
   '../template/Examples.md',
-  '../template/.babelrc',
-  '../template/.eslintrc',
-  '../template/.npmignore',
-  '../template/index.d.ts.template',
-  '../template/tsconfig.json',
   '../template/title-card.svg',
 ];
 const filesToWrite = [
   'src/index.ts',
-  ({ name }) => `../shared/${name}.ts`,
-  'package.json',
-  'README.md',
-  'Examples.md',
-  '.babelrc',
-  '.eslintrc',
-  '.npmignore',
-  'index.d.ts',
-  'tsconfig.json',
-  'title-card.svg',
+  ({ name }) => `./__tests__/${name}.spec.ts`,
+  ({ name }) => `./hooks/${name}.ts`,
+  ({ name }) => `./docs/${name}/README.md`,
+  ({ name }) => `./docs/${name}/Examples.md`,
+  ({ name }) => `./docs/${name}/title-card.svg`,
 ];
-
-function installPackages() {
-  const spinner = ora('Installing  packages').start();
-  return execa
-    .command('yarn install')
-    .then(() => spinner.succeed('Installation successful'))
-    .catch((err) => spinner.fail(err.message));
-}
 
 function readFileAsString(relativeFilePath) {
   return fs.readFileSync(path.join(__dirname, relativeFilePath), 'utf-8');
@@ -162,8 +144,4 @@ inquirer.prompt(questions).then((answers) => {
       srcToWrite
     );
   });
-  // go to the newly created project directory
-  process.chdir(dirPath);
-  installPackages();
-  // run scripts
 });
