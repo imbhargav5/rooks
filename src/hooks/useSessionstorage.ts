@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useReducer, useCallback } from 'react';
 
 type StorageHandlerAsObject = {
@@ -6,19 +7,14 @@ type StorageHandlerAsObject = {
   remove: () => void;
 };
 
-type StorageHandlerAsArray = any[] & {
-  0: any;
-  1: (newValue: any) => void;
-  2: () => void;
-};
+type StorageHandlerAsArray = [any, (newValue: any) => void, () => void];
 
-type StorageHandler = StorageHandlerAsArray & {};
-type StorageHandler = StorageHandlerAsObject & {};
+type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
 
 function reducer(state, action) {
   switch (action.type) {
     case 'set':
-      return (state = action.payload);
+      return action.payload;
     default:
       return state;
   }
@@ -58,26 +54,27 @@ function useSessionstorage(
     return storedValue;
   }
 
-  function saveValueToSessionStorage(key: string, value: string | null) {
+  function saveValueToSessionStorage(valueToSet: string | null) {
     if (typeof sessionStorage === 'undefined') {
       return null;
     }
 
-    return sessionStorage.setItem(key, JSON.stringify(value));
+    return sessionStorage.setItem(key, JSON.stringify(valueToSet));
   }
 
-  function setValue(value: string | null) {
+  function setValue(valueToSet: string | null) {
     dispatch({
-      payload: value,
+      payload: valueToSet,
       type: 'set',
     });
   }
 
   function set(newValue: string | null) {
-    saveValueToSessionStorage(key, newValue);
+    saveValueToSessionStorage(newValue);
     setValue(newValue);
   }
 
+  // eslint-disable-next-line consistent-return
   function remove() {
     if (typeof sessionStorage === 'undefined') {
       return null;
@@ -90,9 +87,9 @@ function useSessionstorage(
     init();
   }, []);
 
-  const listen = useCallback((e: StorageEvent) => {
-    if (e.storageArea === sessionStorage && e.key === key) {
-      set(e.newValue);
+  const listen = useCallback((event: StorageEvent) => {
+    if (event.storageArea === sessionStorage && event.key === key) {
+      set(event.newValue);
     }
   }, []);
 
@@ -104,13 +101,13 @@ function useSessionstorage(
     };
   }, []);
 
-  let handler: unknown;
-  (handler as StorageHandlerAsArray) = [value, set, remove];
-  (handler as StorageHandlerAsObject).value = value;
-  (handler as StorageHandlerAsObject).set = set;
-  (handler as StorageHandlerAsObject).remove = remove;
+  const handler = Object.assign([value, set, remove], {
+    remove,
+    set,
+    value,
+  });
 
-  return handler as StorageHandlerAsArray & StorageHandlerAsObject;
+  return handler as StorageHandler;
 }
 
 export { useSessionstorage };

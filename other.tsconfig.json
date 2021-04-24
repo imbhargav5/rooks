@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": ".",
-    "emitDeclarationOnly": true
-  },
-  "exclude": ["node_modules", "../__tests__/**"],
-  "include": ["./**/*", "../__tests__"]
-}

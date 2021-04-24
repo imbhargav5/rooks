@@ -4,8 +4,10 @@ import { useWindowEventListener } from './useWindowEventListener';
 type Language = string | null;
 
 function getLanguage(): Language {
+  // eslint-disable-next-line no-negated-condition
   if (typeof navigator !== 'undefined') {
-    return navigator.language || navigator.userLanguage;
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    return navigator.language || navigator['userLanguage'];
   } else {
     return null;
   }

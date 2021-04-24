@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 
 type StorageHandlerAsObject = {
@@ -6,14 +8,9 @@ type StorageHandlerAsObject = {
   remove: () => void;
 };
 
-type StorageHandlerAsArray = any[] & {
-  0: any;
-  1: (newValue: any) => void;
-  2: () => void;
-};
+type StorageHandlerAsArray = [any, (newValue: any) => void, () => void];
 
-type StorageHandler = StorageHandlerAsArray & {};
-type StorageHandler = {} & StorageHandlerAsObject;
+type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
 
 /**
  * useLocalstorage hook
@@ -52,25 +49,26 @@ function useLocalstorage(
     return storedValue;
   }
 
-  function saveValueToLocalStorage(key: string, value: any) {
+  function saveValueToLocalStorage(valueToSet: any) {
     if (typeof localStorage === 'undefined') {
       return null;
     }
 
-    return localStorage.setItem(key, JSON.stringify(value));
+    return localStorage.setItem(key, JSON.stringify(valueToSet));
   }
 
   function set(newValue: any) {
     setValue(newValue);
-    saveValueToLocalStorage(key, newValue);
+    saveValueToLocalStorage(newValue);
   }
 
-  const listen = useCallback((e: StorageEvent) => {
-    if (e.storageArea === localStorage && e.key === key) {
-      setValue(e.newValue);
+  const listen = useCallback((event: StorageEvent) => {
+    if (event.storageArea === localStorage && event.key === key) {
+      setValue(event.newValue);
     }
   }, []);
 
+  // eslint-disable-next-line consistent-return
   function remove() {
     set(null);
     if (typeof localStorage === 'undefined') {
@@ -92,14 +90,13 @@ function useLocalstorage(
       window.removeEventListener('storage', listen);
     };
   }, []);
-  let handler: unknown;
+  const handler = Object.assign([value, set, remove], {
+    value,
+    remove,
+    set,
+  });
 
-  (handler as StorageHandlerAsArray) = [value, set, remove];
-  (handler as StorageHandlerAsObject).value = value;
-  (handler as StorageHandlerAsObject).set = set;
-  (handler as StorageHandlerAsObject).remove = remove;
-
-  return handler as StorageHandlerAsArray & StorageHandlerAsObject;
+  return handler as StorageHandler;
 }
 
 export { useLocalstorage };
