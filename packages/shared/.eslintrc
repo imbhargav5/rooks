@@ -1,8 +1,0 @@
-{
-  "extends": ["rooks"],
-  "parserOptions": {
-    "project": [
-      "./tsconfig.lint.json"
-    ]
-  }
-}

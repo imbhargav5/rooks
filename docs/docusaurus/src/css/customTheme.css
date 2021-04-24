@@ -1,0 +1,11 @@
+@import 'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css';
+
+:root {
+  --ifm-color-primary-lightest: #8ca4ed;
+  --ifm-color-primary-lighter: #6787e7;
+  --ifm-color-primary-light: #5a7de5;
+  --ifm-color-primary: royalblue;
+  --ifm-color-primary-dark: #2855dd;
+  --ifm-color-primary-darker: #224ed5;
+  --ifm-color-primary-darkest: #1c41af;
+}

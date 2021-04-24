@@ -1,12 +1,16 @@
 {
   "name": "root",
-  "private": true,
+  "version": "4.11.0-0",
   "description": "Useful React hooks for everyone.",
+  "main": "lib/rooks.js",
+  "jsnext:main": "lib/rooks.esm.js",
+  "module": "lib/rooks.esm.js",
+  "types": "lib/types/index.d.ts",
   "scripts": {
     "clean": "wsrun  --exclude-missing clean",
     "cleanup": "wsrun -p '@rooks/*' -s --report --exclude-missing clean rimraf lib dist",
     "commit": "cz",
-    "lint": "wsrun  --exclude-missing lint",
+    "lint": "eslint src/**/*.ts",
     "format": "yarn run prettier --write \"./packages/shared/*.+(js|jsx|ts|tsx)\"",
     "test": "wsrun --exclude-missing -p 'shared' --report -s test",
     "coverage": "yarn test --coverage",
@@ -25,12 +29,17 @@
     "generate:changelog": "gulp changelog",
     "release-dev": "wsrun -p 'rooks' -s --report release-dev",
     "test-who": "npm whoami",
-    "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt"
+    "ts": "rimraf packages/*/*.tsbuildinfo && rimraf packages/*/lib/*.d.ts && tsc -b @package-name-list.txt",
+    "build-rooks": "node esbuild.mjs",
+    "generate-types": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c dts.rollup.config.js"
   },
   "optionalDependencies": {
     "fsevents": "1.2.9"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  },
+  "devDependencies": {
     "@babel/cli": "7.5.5",
     "@babel/core": "7.13.15",
     "@babel/plugin-external-helpers": "7.2.0",
@@ -121,14 +130,6 @@
     "write-pkg": "3.2.0",
     "wsrun": "^5.2.4",
     "yargs": "^16.2.0"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": [
-      "**/html-minifier-terser"
-    ]
   },
   "husky": {
     "hooks": {

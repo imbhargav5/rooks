@@ -7,8 +7,23 @@
     "target": "ES2016", // specify ECMAScript target version
     "composite": true,
     "esModuleInterop": true,
-    "rootDir": "."
+    "baseUrl": "src",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    //"forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // "noImplicitAny": true,
+    // "noImplicitReturns": true,
+    // "noImplicitThis": true,
+    // "noUnusedLocals": true,
+    "paths": {
+      "@/*": ["*"]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+    //"strict": true,
   },
-
-  "include": ["./packages/**/*.tsx?"]
+  "exclude": ["node_modules"],
+  "include": ["src"]
 }
