@@ -123,7 +123,7 @@ inquirer.prompt(questions).then((answers) => {
       description,
     });
   });
-  const dirPath = path.join(__dirname, '../', `packages/${directoryName}`);
+  const dirPath = path.join(__dirname, '../');
   // create package directory
   makeDir.sync(path.join(dirPath, '/src'));
 
@@ -135,12 +135,7 @@ inquirer.prompt(questions).then((answers) => {
       );
     }
     fs.writeFileSync(
-      path.join(
-        __dirname,
-        '../',
-        `packages/${directoryName}`,
-        relativeFilePathFromRootOfModule
-      ),
+      path.join(__dirname, '../', relativeFilePathFromRootOfModule),
       srcToWrite
     );
   });
