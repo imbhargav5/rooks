@@ -8,7 +8,6 @@ const execa = require('execa');
 const truncate = require('lodash.truncate');
 
 const filesToRead = [
-  '../template/index.template',
   '../template/index.spec.template',
   '../template/shared.template',
   '../template/README.md',
@@ -16,7 +15,6 @@ const filesToRead = [
   '../template/title-card.svg',
 ];
 const filesToWrite = [
-  'src/index.ts',
   ({ name }) => `./src/__tests__/${name}.spec.ts`,
   ({ name }) => `./src/hooks/${name}.ts`,
   ({ name }) => `./docs/${name}/README.md`,
