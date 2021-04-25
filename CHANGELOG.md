@@ -9,6 +9,7 @@
 * chore(docusaurus): rearrange ([5df1794](https://github.com/imbhargav5/rooks/commit/5df1794))
 * chore(fix typo in npconfig file name): fix typo ([77ff16b](https://github.com/imbhargav5/rooks/commit/77ff16b))
 * chore(fix typo): fix typo ([8793257](https://github.com/imbhargav5/rooks/commit/8793257))
+* chore(general): minor fixes ([6bf0165](https://github.com/imbhargav5/rooks/commit/6bf0165))
 * chore(generate changelog automatically): yarn generate:changelog can now generate changelog ([c7a35c9](https://github.com/imbhargav5/rooks/commit/c7a35c9)), closes [#437](https://github.com/imbhargav5/rooks/issues/437)
 * chore(get lint to work): get lint to work ([e31541f](https://github.com/imbhargav5/rooks/commit/e31541f))
 * chore(github action to publish to dev tag): publish to dev dist-tag on main branch ([de229fc](https://github.com/imbhargav5/rooks/commit/de229fc))
