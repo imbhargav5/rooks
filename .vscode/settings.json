@@ -1,10 +1,17 @@
 {
-    "eslint.workingDirectories": [
-      "./packages/shared",
-      "./packages/rooks",
-      "./packages/eslint-config",
-      "./packages/docusaurus",
-      "./",
-    ],
+  "eslint.workingDirectories": [
+    "./packages/shared",
+    "./packages/rooks",
+    "./packages/eslint-config",
+    "./packages/docusaurus",
+    "./"
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
   }
-  
+}

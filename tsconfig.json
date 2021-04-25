@@ -24,6 +24,6 @@
     "skipLibCheck": true
     //"strict": true,
   },
-  "exclude": ["node_modules", "./dist/**/*", "./lib/**/*", "./docs/**/*"],
+  "exclude": ["node_modules", "./dist/**/*", "./lib/**/*", "meta/**/*"],
   "include": ["./src/**/*.ts", "jest.config.ts", "./helpers/**/*.ts"]
 }

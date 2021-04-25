@@ -42,7 +42,7 @@ jobs:
       - name: test
         run: yarn test
       - name: yarn build
-        run: yarn build:only
+        run: yarn build
       - name: Add npm token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       #   - name: Create prerelease version
