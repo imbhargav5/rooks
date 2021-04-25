@@ -1,4 +1,4 @@
-##  (2021-04-22)
+## 4.11.0-0 (2021-04-24)
 
 * chore(add ci publish): add ci publish ([cc579b2](https://github.com/imbhargav5/rooks/commit/cc579b2))
 * chore(add np): add np ([b7141be](https://github.com/imbhargav5/rooks/commit/b7141be))
@@ -15,6 +15,7 @@
 * chore(not sure): not sue ([63c72f0](https://github.com/imbhargav5/rooks/commit/63c72f0))
 * chore(np yolo): np yolo ([e6f598e](https://github.com/imbhargav5/rooks/commit/e6f598e))
 * chore(prep for v5): make package private and remove unused ([4da63a1](https://github.com/imbhargav5/rooks/commit/4da63a1))
+* chore(rearrange dirs): remove lerna ([92800db](https://github.com/imbhargav5/rooks/commit/92800db))
 * chore(rebase while pulling): rebase while pulling ([c0efd49](https://github.com/imbhargav5/rooks/commit/c0efd49))
 * chore(release-dev script): release-dev script ([6d4adb0](https://github.com/imbhargav5/rooks/commit/6d4adb0))
 * chore(remove terser and add external): emove terser and add external ([7be1753](https://github.com/imbhargav5/rooks/commit/7be1753))
