@@ -21,7 +21,7 @@
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build": "yarn build:rooks && yarn generate-types",
     "generate:changelog": "gulp changelog",
-    "release-dev": "wsrun -p 'rooks' -s --report release-dev",
+    "release-dev": "np prerelease --tag=dev",
     "build:rooks": "node esbuild.mjs",
     "generate-types": "tsc --outDir dist/lib --emitDeclarationOnly --declarationDir dist/types --declaration true && rollup -c dts.rollup.config.js"
   },
