@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const path = require('path');
 const replaceString = require('replace-string');
 const makeDir = require('make-dir');
@@ -132,9 +133,12 @@ inquirer.prompt(questions).then((answers) => {
         answers
       );
     }
-    fs.writeFileSync(
-      path.join(__dirname, '../', relativeFilePathFromRootOfModule),
-      srcToWrite
+    const pathToWriteTo = path.join(
+      __dirname,
+      '../',
+      relativeFilePathFromRootOfModule
     );
+    fsExtra.ensureFileSync(pathToWriteTo);
+    fs.writeFileSync(pathToWriteTo, srcToWrite);
   });
 });
