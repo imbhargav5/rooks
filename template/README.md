@@ -15,13 +15,13 @@
 ## Installation
 
 ```
-npm install --save @rooks/%packageName%
+npm install rooks
 ```
 
 ## Importing the hook
 
 ```javascript
-import %name% from "@rooks/%packageName%"
+import {%name%} from "rooks"
 ```
 
 ## Usage
