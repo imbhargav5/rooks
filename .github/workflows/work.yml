@@ -1,0 +1,99 @@
+name: Node CI main
+on:
+  push:
+    branches:
+      [
+        '+([0-9])?(.{+([0-9]),x}).x',
+        'main',
+        'next',
+        'next-major',
+        'beta',
+        'alpha',
+        '!all-contributors/**',
+      ]
+  pull_request:
+    branches-ignore: ['all-contributors/**']
+jobs:
+  main:
+    strategy:
+      matrix:
+        node: [14, 15]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check if user has write access'
+        uses: 'lannonbr/repo-permission-check-action@2.0.0'
+        with:
+          permission: 'write'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install project dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
+        run: yarn
+      - name: test
+        run: yarn test
+
+  release:
+    needs: main
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'imbhargav5/rooks' &&
+      contains('refs/heads/main,refs/heads/beta,refs/heads/next,refs/heads/next-major,refs/heads/alpha',
+      github.ref) && github.event_name == 'push' }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install project dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
+        run: yarn
+
+      - name: 🏗 Run build script
+        run: npm run build
+
+      - name: 🚀 Release
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          semantic_version: 17
+          branches: |
+            [
+              '+([0-9])?(.{+([0-9]),x}).x',
+              'main',
+              'next',
+              'next-major',
+              {name: 'beta', prerelease: true},
+              {name: 'alpha', prerelease: true}
+            ]
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
