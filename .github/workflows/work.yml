@@ -97,3 +97,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  changelog:
+    needs: release
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'imbhargav5/rooks' &&
+      contains('refs/heads/main,refs/heads/beta,refs/heads/next,refs/heads/next-major,refs/heads/alpha',
+      github.ref) && github.event_name == 'push' }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install project dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
+        run: yarn
+      - name: generate changelog
+        run: yarn generate:changelog
+      - name: Commit changelog
+        continue-on-error: true
+        run: |
+          git add .
+          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
+            commit -m "Update changelog [skip ci]" --no-verify --quiet
+          git pull "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main --rebase
+          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" main
