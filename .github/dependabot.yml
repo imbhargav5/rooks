@@ -1,0 +1,43 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:30"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.10
+    - 7.12.13
+    - 7.12.16
+    - 7.12.17
+    - 7.13.0
+    - 7.13.1
+    - 7.13.10
+    - 7.13.13
+    - 7.13.14
+    - 7.13.8
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: "@types/react-dom"
+    versions:
+    - 17.0.0
+    - 17.0.1
+    - 17.0.2
+  - dependency-name: "@types/react"
+    versions:
+    - 17.0.0
+    - 17.0.1
+    - 17.0.2
+  - dependency-name: fsevents
+    versions:
+    - 2.3.1
+  - dependency-name: node-notifier
+    versions:
+    - 8.0.1
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
