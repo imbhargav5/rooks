@@ -76,7 +76,7 @@
     "lodash.capitalize": "4.2.1",
     "lodash.truncate": "^4.4.2",
     "make-dir": "1.3.0",
-    "mdast-normalize-headings": "^2.0.0",
+    "mdast-normalize-headings": "^3.0.0",
     "mdast-util-compact": "^3.0.0",
     "mdast-util-from-markdown": "^0.8.1",
     "mdast-util-heading-range": "^2.1.5",
