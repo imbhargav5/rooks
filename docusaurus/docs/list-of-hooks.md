@@ -1,12 +1,12 @@
 ---
-id: hooks-liste: List of Hooks
+id: hooks-list: List of Hooks
 sidebar_label: Hooks List
 ---
 
 <!--hookslist start-->
 
-*   [useBoundingclientrectRef](https://react-hooks.org/docs/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
-*   [useBoundingclientrect](https://react-hooks.org/docs/useBoundingclientrect) - A React Hooks package for boundingclientrect
+*   [useBoundingclientreactRef](https://react-hooks.org/docs/useBoundingclientreactRef) - A hook that tracks the boundingclientreact of an element. It returns a callbackRef so that the element node if changed is easily tracked.
+*   [useBoundingclientreact](https://react-hooks.org/docs/useBoundingclientreact) - A React Hooks package for boundingclientreact
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - A React Hooks package for counter
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
