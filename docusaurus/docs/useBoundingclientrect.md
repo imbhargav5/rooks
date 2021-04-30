@@ -1,7 +1,7 @@
 ---
-id: use-boundingclientrect
-title: use-boundingclientrect
-sidebar_label: use-boundingclientrect
+id: useBoundingclientrect
+title: useBoundingclientrect
+sidebar_label: useBoundingclientrect
 ---
 
    
@@ -13,12 +13,12 @@ getBoundingClientRect hook for React.
 
 ## Installation
 
-    npm install --save @rooks/use-boundingclientrect
+    npm install --save @rooks/useBoundingclientrect
 
 ## Importing the hook
 
 ```javascript
-import useBoundingclientrect from "@rooks/use-boundingclientrect"
+import useBoundingclientrect from "@rooks/useBoundingclientrect"
 ```
 
 ## Usage
@@ -93,4 +93,3 @@ render(<Demo/>)
 ## Join Bhargav's discord server
 You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
-    

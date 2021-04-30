@@ -6,7 +6,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 import HomeSandbox from '../../docs/home-sandbox.md';
-import GettingStarted from '../../docs/getting-started.md';
+import GettingStarted from '../../docs/gettingStarted.md';
 
 const features = [
   {

@@ -1,7 +1,7 @@
 ---
-id: use-boundingclientrect-ref
-title: use-boundingclientrect-ref
-sidebar_label: use-boundingclientrect-ref
+id: useBoundingclientrectRef
+title: useBoundingclientrectRef
+sidebar_label: useBoundingclientrectRef
 ---
 
     
@@ -12,7 +12,7 @@ A hook that tracks the boundingclientrect of an element. It returns a callbackRe
 
 ## Installation
 
-    npm install --save @rooks/use-boundingclientrect-ref
+    npm install --save @rooks/useBoundingclientrectRef
 
 ## Importing the hook
 
@@ -91,4 +91,3 @@ N/A
 ## Join Bhargav's discord server
 You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
-    

@@ -1,5 +1,5 @@
 import React from 'react';
-import GettingStartedContent from '../../docs/getting-started.md';
+import GettingStartedContent from '../../docs/gettingStarted.md';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './page.module.css';
