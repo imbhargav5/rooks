@@ -1,7 +1,7 @@
 ---
-id: use-debounce
-title: use-debounce
-sidebar_label: use-debounce
+id: useDebounce
+title: useDebounce
+sidebar_label: useDebounce
 ---
 
    

@@ -9,7 +9,7 @@ sidebar_label: useFreshTick
 
 ## About
 
-Like use-fresh-ref but specifically for functions
+Like useFreshRef but specifically for functions
 
 [//]: # "Main"
 
