@@ -182,18 +182,18 @@ function Home() {
                 'button button--secondary button--lg',
                 styles.getStarted
               )}
-              to={useBaseUrl('docs/use-mouse')}
+              to={useBaseUrl('docs/useMouse')}
             >
-              Checkout use-mouse
+              Checkout useMouse
             </Link>
             <Link
               className={classnames(
                 'button button--secondary button--lg',
                 styles.getStarted
               )}
-              to={useBaseUrl('docs/use-did-mount')}
+              to={useBaseUrl('docs/useDidMount')}
             >
-              Checkout use-did-mount
+              Checkout useDidMount
             </Link>
           </div>
           <div className={styles.homeSandbox}>

@@ -1,20 +1,20 @@
 {
-  "version-5.0.0/docs": [
+  "version-v5.0.0/docs": [
     {
       "collapsed": false,
       "label": "Quick Start",
       "items": [
         {
           "type": "doc",
-          "id": "version-5.0.0/getting-started"
+          "id": "version-v5.0.0/getting-started"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/motivation"
+          "id": "version-v5.0.0/motivation"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/hooks-list"
+          "id": "version-v5.0.0/hooks-list"
         }
       ],
       "type": "category"
@@ -25,7 +25,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-5.0.0/rooks"
+          "id": "version-v5.0.0/rooks"
         }
       ],
       "type": "category"
@@ -37,251 +37,251 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-5.0.0/use-boundingclientrect"
+          "id": "version-v5.0.0/useBoundingclientrect"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-boundingclientrect-ref"
+          "id": "version-v5.0.0/useBoundingclientrectRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-countdown"
+          "id": "version-v5.0.0/useCountdown"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-counter"
+          "id": "version-v5.0.0/useCounter"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-debounce"
+          "id": "version-v5.0.0/useDebounce"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-did-mount"
+          "id": "version-v5.0.0/useDidMount"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-did-update"
+          "id": "version-v5.0.0/useDidUpdate"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-document-event-listener"
+          "id": "version-v5.0.0/useDocumentEventListener"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-effect-once-when"
+          "id": "version-v5.0.0/useEffectOnceWhen"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-event-listener-ref"
+          "id": "version-v5.0.0/useEventListenerRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-fork-ref"
+          "id": "version-v5.0.0/useForkRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-fresh-ref"
+          "id": "version-v5.0.0/useFreshRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-fresh-tick"
+          "id": "version-v5.0.0/useFreshTick"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-fullscreen"
+          "id": "version-v5.0.0/useFullscreen"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-geolocation"
+          "id": "version-v5.0.0/useGeolocation"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-in-view-ref"
+          "id": "version-v5.0.0/useInViewRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-input"
+          "id": "version-v5.0.0/useInput"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-intersection-observer-ref"
+          "id": "version-v5.0.0/useIntersectionObserverRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-interval"
+          "id": "version-v5.0.0/useInterval"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-interval-when"
+          "id": "version-v5.0.0/useIntervalWhen"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-isomorphic-effect"
+          "id": "version-v5.0.0/useIsomorphicEffect"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-key"
+          "id": "version-v5.0.0/useKey"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-key-ref"
+          "id": "version-v5.0.0/useKeyRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-keys"
+          "id": "version-v5.0.0/useKeys"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-localstorage"
+          "id": "version-v5.0.0/useLocalstorage"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-localstorage-state"
+          "id": "version-v5.0.0/useLocalstorageState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-map-state"
+          "id": "version-v5.0.0/useMapState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-media-match"
+          "id": "version-v5.0.0/useMediaMatch"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-merge-refs"
+          "id": "version-v5.0.0/useMergeRefs"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-mouse"
+          "id": "version-v5.0.0/useMouse"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-multi-selectable-list"
+          "id": "version-v5.0.0/useMultiSelectableList"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-mutation-observer"
+          "id": "version-v5.0.0/useMutationObserver"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-mutation-observer-ref"
+          "id": "version-v5.0.0/useMutationObserverRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-navigator-language"
+          "id": "version-v5.0.0/useNavigatorLanguage"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-on-window-resize"
+          "id": "version-v5.0.0/useOnWindowResize"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-on-window-scroll"
+          "id": "version-v5.0.0/useOnWindowScroll"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-online"
+          "id": "version-v5.0.0/useOnline"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-outside-click"
+          "id": "version-v5.0.0/useOutsideClick"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-outside-click-ref"
+          "id": "version-v5.0.0/useOutsideClickRef"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-previous"
+          "id": "version-v5.0.0/usePrevious"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-previous-different"
+          "id": "version-v5.0.0/usePreviousDifferent"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-previous-immediate"
+          "id": "version-v5.0.0/usePreviousImmediate"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-queue-state"
+          "id": "version-v5.0.0/useQueueState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-raf"
+          "id": "version-v5.0.0/useRaf"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-select"
+          "id": "version-v5.0.0/useSelect"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-selectable-list"
+          "id": "version-v5.0.0/useSelectableList"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-sessionstorage"
+          "id": "version-v5.0.0/useSessionstorage"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-sessionstorage-state"
+          "id": "version-v5.0.0/useSessionstorageState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-stack-state"
+          "id": "version-v5.0.0/useStackState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-throttle"
+          "id": "version-v5.0.0/useThrottle"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-time-ago"
+          "id": "version-v5.0.0/useTimeAgo"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-timeout"
+          "id": "version-v5.0.0/useTimeout"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-timeout-when"
+          "id": "version-v5.0.0/useTimeoutWhen"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-toggle"
+          "id": "version-v5.0.0/useToggle"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-undo-state"
+          "id": "version-v5.0.0/useUndoState"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-update-effect"
+          "id": "version-v5.0.0/useUpdateEffect"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-visibility-sensor"
+          "id": "version-v5.0.0/useVisibilitySensor"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-will-unmount"
+          "id": "version-v5.0.0/useWillUnmount"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-window-event-listener"
+          "id": "version-v5.0.0/useWindowEventListener"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-window-scroll-position"
+          "id": "version-v5.0.0/useWindowScrollPosition"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-window-size"
+          "id": "version-v5.0.0/useWindowSize"
         },
         {
           "type": "doc",
-          "id": "version-5.0.0/use-worker"
+          "id": "version-v5.0.0/useWorker"
         }
       ]
     }
