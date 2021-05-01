@@ -15,12 +15,12 @@ Merges any number of refs into a single ref
 
 ## Installation
 
-    npm install --save @rooks/useMergeRefs
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMergeRefs from "@rooks/useMergeRefs"
+import {useMergeRefs} from "rooks"
 ```
 
 ## Usage

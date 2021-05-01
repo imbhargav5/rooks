@@ -13,12 +13,12 @@ getBoundingClientRect hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useBoundingclientrect
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useBoundingclientrect from "@rooks/useBoundingclientrect"
+import {useBoundingclientrect} from "rooks"
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ A react hook to an event listener to the document object
 
 ## Installation
 
-    npm install --save @rooks/useDocumentEventListener
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useDocumentEventListener from "@rooks/useDocumentEventListener"
+import {useDocumentEventListener} from "rooks"
 ```
 
 ## Usage

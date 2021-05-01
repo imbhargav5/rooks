@@ -12,12 +12,12 @@ A hook that tracks the boundingclientrect of an element. It returns a callbackRe
 
 ## Installation
 
-    npm install --save @rooks/useBoundingclientrectRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useBoundingclientrectRef from "@rooks/useBoundingclientrectRef"
+import {useBoundingclientrectRef} from "rooks"
 ```
 
 ## Usage

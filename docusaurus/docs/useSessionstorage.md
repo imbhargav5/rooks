@@ -13,12 +13,12 @@ Session storage react hook. Easily manage session storage values.
 
 ## Installation
 
-    npm install --save @rooks/useSessionstorage
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useSessionstorage from "@rooks/useSessionstorage";
+import {useSessionstorage} from "rooks";
 ```
 
 ## Usage

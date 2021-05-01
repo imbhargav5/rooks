@@ -13,12 +13,12 @@ A React hook for adding an event listener for window scroll
 
 ## Installation
 
-    npm install --save @rooks/useOnWindowScroll
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useOnWindowScroll from "@rooks/useOnWindowScroll"
+import {useOnWindowScroll} from "rooks"
 ```
 
 ## Usage

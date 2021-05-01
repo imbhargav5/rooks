@@ -15,12 +15,12 @@ Adds an event listener to window
 
 ## Installation
 
-    npm install --save @rooks/useWindowEventListener
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useWindowEventListener from "@rooks/useWindowEventListener"
+import {useWindowEventListener} from "rooks"
 ```
 
 ## Usage

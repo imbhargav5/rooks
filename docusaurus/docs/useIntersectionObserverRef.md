@@ -13,12 +13,12 @@ A hook to register an intersection observer listener
 
 ## Installation
 
-    npm install --save @rooks/useIntersectionObserverRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useIntersectionObserverRef from '@rooks/useIntersectionObserverRef';
+import {useIntersectionObserverRef} from 'rooks';
 ```
 
 ## Usage

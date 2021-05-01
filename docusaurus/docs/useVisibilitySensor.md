@@ -13,12 +13,12 @@ Visibility sensor hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useVisibilitySensor
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useVisibilitySensor from "@rooks/useVisibilitySensor"
+import {useVisibilitySensor} from "rooks"
 ```
 
 ## Usage

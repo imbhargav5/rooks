@@ -13,12 +13,12 @@ Access the previous value of a variable with this React hook
 
 ## Installation
 
-    npm install --save @rooks/usePrevious
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import usePrevious from "@rooks/usePrevious";
+import {usePrevious} from "rooks";
 ```
 
 ## Usage

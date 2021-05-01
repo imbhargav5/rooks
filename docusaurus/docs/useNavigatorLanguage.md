@@ -13,12 +13,12 @@ Navigator Language hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useNavigatorLanguage
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useNavigatorLanguage from "@rooks/useNavigatorLanguage";
+import {useNavigatorLanguage} from "rooks";
 ```
 
 ## Usage

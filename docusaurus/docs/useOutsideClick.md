@@ -13,12 +13,12 @@ Outside click(for a ref) event as hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useOutsideClick
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useOutsideClick from "@rooks/useOutsideClick";
+import {useOutsideClick} from "rooks";
 ```
 
 ## Usage

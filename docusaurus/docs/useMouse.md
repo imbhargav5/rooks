@@ -14,12 +14,12 @@ Mouse position hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useMouse
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMouse from "@rooks/useMouse"
+import {useMouse} from "rooks"
 ```
 
 ## Usage

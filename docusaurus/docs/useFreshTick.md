@@ -15,12 +15,12 @@ Like use-fresh-ref but specifically for functions
 
 ## Installation
 
-    npm install --save @rooks/useFreshTick
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useFreshTick from "@rooks/useFreshTick";
+import {useFreshTick} from "rooks";
 ```
 
 ## Usage

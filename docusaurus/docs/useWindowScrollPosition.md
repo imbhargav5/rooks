@@ -15,12 +15,12 @@ A React hook to get the scroll position of the window
 
 ## Installation
 
-    npm install --save @rooks/useWindowScrollPosition
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useWindowScrollPosition from "@rooks/useWindowScrollPosition"
+import {useWindowScrollPosition} from "rooks"
 ```
 
 ## Usage

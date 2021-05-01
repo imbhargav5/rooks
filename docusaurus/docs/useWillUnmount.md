@@ -13,12 +13,12 @@ componentWillUnmount lifecycle as hook for React.
 
 ### Installation
 
-    npm install --save @rooks/useWillUnmount
+    npm install --save rooks
 
 ### Importing the hook
 
 ```javascript
-import useWillUnmount from "@rooks/useWillUnmount"
+import {useWillUnmount} from "@rooks"
 ```
 
 ### Usage

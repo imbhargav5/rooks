@@ -12,12 +12,12 @@ A hook that can track a click event outside a ref. Returns a callbackRef.
 
 ## Installation
 
-    npm install --save @rooks/useOutsideClickRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useOutsideClickRef from "@rooks/useOutsideClickRef"
+import {useOutsideClickRef} from "rooks"
 ```
 
 ## Usage

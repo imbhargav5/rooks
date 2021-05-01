@@ -15,12 +15,12 @@ usePreviousImmediate returns the previous value of a variable even if it was the
 
 ## Installation
 
-    npm install --save @rooks/usePreviousImmediate
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import usePreviousImmediate from "@rooks/usePreviousImmediate"
+import usePreviousImmediate from "rooks"
 ```
 
 ## Usage

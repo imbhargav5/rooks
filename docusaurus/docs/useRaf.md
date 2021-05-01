@@ -15,12 +15,12 @@ A continuously running requestAnimationFrame hook for React
 
 ## Installation
 
-    npm install --save @rooks/useRaf
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useRaf from "@rooks/useRaf";
+import {useRaf} from "rooks";
 ```
 
 ## Usage

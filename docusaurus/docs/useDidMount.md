@@ -14,12 +14,12 @@ componentDidMount hook for React
 
 ## Installation
 
-    npm install --save @rooks/useDidMount
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useDidMount from "@rooks/useDidMount"
+import {useDidMount} from "rooks"
 ```
 
 ## Usage

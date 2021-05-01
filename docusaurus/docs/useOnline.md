@@ -13,12 +13,12 @@ Online status hook for React.
 
 ### Installation
 
-    npm install --save @rooks/useOnline
+    npm install --save rooks
 
 ### Importing the hook
 
 ```javascript
-import useOnline from "@rooks/useOnline";
+import {useOnline} from "rooks";
 ```
 
 ### Usage

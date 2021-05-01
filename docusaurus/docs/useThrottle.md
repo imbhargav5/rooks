@@ -12,12 +12,12 @@ Throttle custom hook for React
 
 ## Installation
 
-    npm install --save @rooks/useThrottle
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useThrottle from "@rooks/useThrottle"
+import {useThrottle} from "rooks"
 ```
 
 ## Usage

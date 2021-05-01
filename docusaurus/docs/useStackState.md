@@ -15,12 +15,12 @@ A React hook that manages state in the form of a stack
 
 ## Installation
 
-    npm install --save @rooks/useStackState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useStackState from "@rooks/useStackState"
+import {useStackState} from "rooks"
 ```
 
 ## Usage

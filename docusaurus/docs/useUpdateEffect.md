@@ -12,12 +12,12 @@ An useEffect that does not run on first render
 
 ## Installation
 
-    npm install --save @rooks/useUpdateEffect
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useUpdateEffect from "@rooks/useUpdateEffect";
+import {useUpdateEffect} from "srooks";
 ```
 
 ## Usage

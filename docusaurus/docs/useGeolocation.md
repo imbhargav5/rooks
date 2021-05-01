@@ -12,12 +12,12 @@ A hook to provide the geolocation info on client side.
 
 ## Installation
 
-    npm install --save @rooks/useGeolocation
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useGeolocation from "@rooks/useGeolocation";
+import {useGeolocation} from "rooks";
 ```
 
 ## Usage

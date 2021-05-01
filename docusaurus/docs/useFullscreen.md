@@ -12,12 +12,12 @@ Use full screen api for making beautiful and emersive experinces.
 
 ## Installation
 
-    npm install --save @rooks/useFullscreen
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useFullscreen from "@rooks/useFullscreen"
+import {useFullscreen} from "rooks"
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ Sets an interval immediately when a condition is true
 
 ## Installation
 
-    npm install --save @rooks/useIntervalWhen
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useIntervalWhen from "@rooks/useIntervalWhen"
+import {useIntervalWhen} from "rooks"
 ```
 
 ## Usage

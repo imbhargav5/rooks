@@ -15,12 +15,12 @@ Signal whether or not a media query is currently matched.
 
 ## Installation
 
-    npm install --save @rooks/useMediaMatch
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMediaMatch from '@rooks/useMediaMatch';
+import {useMediaMatch} from 'rooks';
 ```
 
 ## Usage

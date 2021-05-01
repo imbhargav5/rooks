@@ -12,12 +12,12 @@ Drop in replacement for useState hook but with undo functionality.
 
 ## Installation
 
-    npm install --save @rooks/useUndoState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useUndoState from '@rooks/useUndoState'
+import {useUndoState} from 'rooks'
 ```
 
 ## Usage

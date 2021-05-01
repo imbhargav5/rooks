@@ -14,12 +14,12 @@ Sets and retrieves a key from localStorage and subscribes to it for updates acro
 
 ## Installation
 
-    npm install --save @rooks/useLocalstorage
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useLocalstorage from "@rooks/useLocalstorage";
+import {useLocalstorage} from "rooks";
 ```
 
 ## Usage

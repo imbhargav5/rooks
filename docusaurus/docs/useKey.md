@@ -13,12 +13,12 @@ keypress, keyup and keydown event handlers as hooks for react.
 
 ## Installation
 
-    npm install --save @rooks/useKey
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useKey from "@rooks/useKey";
+import {useKey} from "rooks";
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ Very similar useKey but it returns a ref
 
 ## Installation
 
-    npm install --save @rooks/useKeyRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useKeyRef from "@rooks/useKeyRef"
+import {useKeyRef} from "rooks"
 ```
 
 ## Usage

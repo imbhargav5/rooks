@@ -15,12 +15,12 @@ A react hook to manage state in a key value pair map.
 
 ## Installation
 
-    npm install --save @rooks/useMapState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMapState from "@rooks/useMapState"
+import {useMapState} from "rooks"
 ```
 
 ## Usage

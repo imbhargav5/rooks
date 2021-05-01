@@ -13,12 +13,12 @@ Toggle (between booleans or custom data)hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useToggle
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useToggle from "@rooks/useToggle"
+import {useToggle} from "rooks"
 ```
 
 ## Usage

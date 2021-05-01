@@ -15,12 +15,12 @@ useState but syncs with sessionstorage
 
 ## Installation
 
-    npm install --save @rooks/useSessionstorageState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useSessionstorageState from "@rooks/useSessionstorageState"
+import {useSessionstorageState} from "rooks"
 ```
 
 ## Usage

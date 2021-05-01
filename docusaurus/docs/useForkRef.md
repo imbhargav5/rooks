@@ -12,12 +12,12 @@ A hook that can combine two refs(mutable or callbackRefs) into a single callback
 
 ## Installation
 
-    npm install --save @rooks/useForkRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useForkRef from "@rooks/useForkRef"
+import {useForkRef} from "rooks"
 ```
 
 ## Usage

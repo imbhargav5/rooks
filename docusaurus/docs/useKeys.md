@@ -14,12 +14,12 @@ An important difference between `useKey` and `useKeys` is that `useKey` checks i
 
 ## Installation
 
-    npm install --save @rooks/useKeys
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useKeys from "@rooks/useKeys";
+import {useKeys} from "rooks";
 ```
 
 ## Usage

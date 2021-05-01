@@ -15,12 +15,12 @@ A custom hook to easily select multiple values from a list
 
 ## Installation
 
-    npm install --save @rooks/useMultiSelectableList
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMultiSelectableList from "@rooks/useMultiSelectableList"
+import {useMultiSelectableList} from "rooks"
 ```
 
 ## Usage

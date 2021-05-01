@@ -13,12 +13,12 @@ Window size hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useWindowSize
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useWindowSize from "@rooks/useWindowSize"
+import {useWindowSize} from "rooks
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ Simple hook that monitors element enters or leave the viewport that's using Inte
 
 ## Installation
 
-    npm install --save @rooks/useInViewRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useInViewRef from '@rooks/useInViewRef';
+import {useInViewRef} from 'rooks';
 ```
 
 ## Usage

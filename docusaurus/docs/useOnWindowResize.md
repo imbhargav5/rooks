@@ -13,12 +13,12 @@ A React hook for adding an event listener for window resize
 
 ## Installation
 
-    npm install --save @rooks/useOnWindowResize
+    npm install --save @rooks
 
 ## Importing the hook
 
 ```javascript
-import useOnWindowResize from "@rooks/useOnWindowResize"
+import {useOnWindowResize} from "@rooks"
 `s``
 
 ## Usage

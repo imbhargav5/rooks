@@ -13,12 +13,12 @@ setInterval hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useInterval
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useInterval from "@rooks/useInterval"
+import {useInterval} from "rooks"
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 
 ## Installation
 
-    npm install --save @rooks/useFreshRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useFreshRef from "@rooks/useFreshRef"
+import {useFreshRef} from "rooks"
 ```
 
 ## Usage

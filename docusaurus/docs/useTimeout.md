@@ -13,12 +13,12 @@ setTimeout hook for react.
 
 ## Installation
 
-    npm install --save @rooks/useTimeout
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useTimeout from "@rooks/useTimeout"
+import {useTimeout} from "rooks"
 ```
 
 ## Usage

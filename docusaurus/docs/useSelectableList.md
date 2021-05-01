@@ -15,12 +15,12 @@ Easily select a single value from a list of values. very useful for radio button
 
 ## Installation
 
-    npm install --save @rooks/useSelectableList
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useSelectableList from "@rooks/useSelectableList"
+import {useSelectableList} from "rooks"
 ```
 
 ## Usage

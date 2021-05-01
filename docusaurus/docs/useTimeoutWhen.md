@@ -15,12 +15,12 @@ Takes a callback and fires it when a condition is true
 
 ## Installation
 
-    npm install --save @rooks/useTimeoutWhen
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useTimeoutWhen from "@rooks/useTimeoutWhen"
+import {useTimeoutWhen} from "rooks"
 ```
 
 ## Usage

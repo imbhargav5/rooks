@@ -13,12 +13,12 @@ Mutation Observer hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useMutationObserver
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMutationObserver from "@rooks/useMutationObserver"
+import {useMutationObserver} from "rooks"
 ```
 
 ## Usage

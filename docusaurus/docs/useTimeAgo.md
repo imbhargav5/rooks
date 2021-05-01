@@ -13,12 +13,12 @@ A React Hook to get time ago for timestamp millisecond value.
 
 ## Installation
 
-    npm install --save @rooks/useTimeAgo
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useTimeAgo from "@rooks/useTimeAgo"
+import {useTimeAgo} from "rooks"
 ```
 
 ## Usage

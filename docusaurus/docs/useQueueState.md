@@ -15,12 +15,12 @@ A React hook that manages state in the form of a queue
 
 ## Installation
 
-    npm install --save @rooks/useQueueState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useQueueState from "@rooks/useQueueState"
+import {useQueueState} from "rooks"
 ```
 
 ## Usage

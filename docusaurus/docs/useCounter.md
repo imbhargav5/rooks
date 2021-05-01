@@ -14,12 +14,12 @@ Counter hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useCounter
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useCounter from "@rooks/useCounter"
+import {useCounter} from "rooks"
 ```
 
 ## Usage

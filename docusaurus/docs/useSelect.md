@@ -13,12 +13,12 @@ Select values from a list easily. List selection hook for react.
 
 ## Installation
 
-    npm install --save @rooks/useSelect
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useSelect from "@rooks/useSelect"
+import {useSelect} from "rooks"
 ```
 
 ## Usage

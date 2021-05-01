@@ -13,12 +13,12 @@ Worker hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useWorker
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useWorker from "@rooks/useWorker"
+import {useWorker} from "rooks"
 ```
 
 ## Usage

@@ -13,12 +13,12 @@ Input hook for React.
 
 ## Installation
 
-    npm install --save @rooks/useInput
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useInput from "@rooks/useInput"
+import {useInput} from "rooks"
 ```
 
 ## Usage

@@ -15,12 +15,12 @@ Runs a callback effect atmost one time when a condition becomes true
 
 ## Installation
 
-    npm install --save @rooks/useEffectOnceWhen
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useEffectOnceWhen from "@rooks/useEffectOnceWhen"
+import {useEffectOnceWhen} from "rooks"
 ```
 
 ## Usage

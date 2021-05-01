@@ -15,12 +15,12 @@ A react hook to add an event listener to a ref
 
 ## Installation
 
-    npm install --save @rooks/useEventListenerRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useEventListenerRef from "@rooks/useEventListenerRef"
+import {useEventListenerRef} from "rooks"
 ```
 
 ## Usage

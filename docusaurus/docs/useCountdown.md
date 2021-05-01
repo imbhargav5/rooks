@@ -12,12 +12,12 @@ Count down to a target timestamp and call callbacks every second (or provided pe
 
 ## Installation
 
-    npm install --save @rooks/useCountdown
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useCountdown from "@rooks/useCountdown"
+import {useCountdown} from "rooks"
 ```
 
 ## Usage

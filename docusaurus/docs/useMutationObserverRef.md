@@ -12,12 +12,12 @@ A hook that tracks mutations of an element. It returns a callbackRef.
 
 ## Installation
 
-    npm install --save @rooks/useMutationObserverRef
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useMutationObserverRef from "@rooks/useMutationObserverRef"
+import {useMutationObserverRef} from "rooks"
 ```
 
 ## Usage

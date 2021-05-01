@@ -15,12 +15,12 @@ usePreviousDifferent returns the last different value of a variable
 
 ## Installation
 
-    npm install --save @rooks/usePreviousDifferent
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import usePreviousDifferent from "@rooks/usePreviousDifferent"
+import {usePreviousDifferent} from "rooks"
 ```
 
 ## Usage

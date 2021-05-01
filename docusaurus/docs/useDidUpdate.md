@@ -13,12 +13,12 @@ componentDidUpdate hook for react
 
 ## Installation
 
-    npm install --save @rooks/useDidUpdate
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useDidUpdate from "@rooks/useDidUpdate";
+import {useDidUpdate} from "rooks";
 ```
 
 ## Usage

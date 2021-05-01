@@ -15,12 +15,12 @@ UseState but auto updates values to localStorage
 
 ## Installation
 
-    npm install --save @rooks/useLocalstorageState
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useLocalstorageState from "@rooks/useLocalstorageState"
+import {useLocalstorageState} from "rooks"
 ```
 
 ## Usage

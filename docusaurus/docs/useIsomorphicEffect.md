@@ -15,12 +15,12 @@ A hook that resolves to useEffect on the server and useLayoutEffect on the clien
 
 ## Installation
 
-    npm install --save @rooks/useIsomorphicEffect
+    npm install --save rooks
 
 ## Importing the hook
 
 ```javascript
-import useIsomorphicEffect from "@rooks/useIsomorphicEffect"
+import {useIsomorphicEffect} from "rooks"
 ```
 
 ## Usage
