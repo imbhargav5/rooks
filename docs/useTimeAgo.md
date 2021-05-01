@@ -9,7 +9,6 @@ sidebar_label: useTimeAgo
 ## About
 
 A React Hook to get time ago for timestamp millisecond value.
-<br/>
 
 ## Installation
 

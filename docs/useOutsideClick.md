@@ -9,7 +9,6 @@ sidebar_label: useOutsideClick
 ## About
 
 Outside click(for a ref) event as hook for React.
-<br/>
 
 ## Installation
 

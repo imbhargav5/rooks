@@ -9,7 +9,6 @@ sidebar_label: useMutationObserver
 ## About
 
 Mutation Observer hook for React.
-<br/>
 
 ## Installation
 

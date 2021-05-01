@@ -9,7 +9,6 @@ sidebar_label: useToggle
 ## About
 
 Toggle (between booleans or custom data)hook for React.
-<br/>
 
 ## Installation
 

@@ -9,7 +9,6 @@ sidebar_label: useSessionstorage
 ## About
 
 Session storage react hook. Easily manage session storage values.
-<br/>
 
 ## Installation
 

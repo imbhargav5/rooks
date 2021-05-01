@@ -9,7 +9,6 @@ sidebar_label: useTimeout
 ## About
 
 setTimeout hook for react.
-<br/>
 
 ## Installation
 

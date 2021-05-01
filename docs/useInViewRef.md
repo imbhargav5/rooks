@@ -9,7 +9,14 @@ sidebar_label: useInViewRef
 
 ## About
 
-Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. It returns a ref to observed element, as well as boolean flag - `inView` that will tell if the element is inside of the viewport / parent element or not. You can also pass a callback that will be fired everytime the Observer will be triggered. To understand the Intersection Observer API better, please check its [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. 
+
+
+### Details 
+
+It returns a ref to observed element, as well as boolean flag - `inView` that will tell if the element is inside of the viewport / parent element or not. You can also pass a callback that will be fired everytime the Observer will be triggered. To understand the Intersection Observer API better, please check its [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+
+
 
 [//]: # "Main"
 
@@ -57,7 +64,10 @@ render(<Demo />);
 | callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        | no       |
 | options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` | no       |
 
+
+
 ### Return
+
 
 Returns an array with the first element in the array being the callback ref for the React component/element that needs to be observed and a second being the boolean flag that indicates if the element is in viewport.
 

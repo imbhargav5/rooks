@@ -8,9 +8,7 @@ sidebar_label: useLocalstorage
 
 ## About
 
-Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically.
-
-Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
+Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
 
 ## Installation
 

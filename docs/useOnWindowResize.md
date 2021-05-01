@@ -9,7 +9,6 @@ sidebar_label: useOnWindowResize
 ## About
 
 A React hook for adding an event listener for window resize
-<br/>
 
 ## Installation
 

@@ -10,7 +10,6 @@ sidebar_label: useMouse
 ## About
 
 Mouse position hook for React.
-<br/>
 
 ## Installation
 

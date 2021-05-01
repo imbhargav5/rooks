@@ -9,7 +9,6 @@ sidebar_label: useNavigatorLanguage
 ## About
 
 Navigator Language hook for React.
-<br/>
 
 ## Installation
 

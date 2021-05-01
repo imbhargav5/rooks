@@ -9,7 +9,6 @@ sidebar_label: useInterval
 ## About
 
 setInterval hook for React.
-<br/>
 
 ## Installation
 

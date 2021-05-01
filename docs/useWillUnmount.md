@@ -9,7 +9,6 @@ sidebar_label: useWillUnmount
 ### About
 
 componentWillUnmount lifecycle as hook for React.
-<br/>
 
 ### Installation
 

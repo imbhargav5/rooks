@@ -8,8 +8,7 @@ sidebar_label: useIntersectionObserverRef
 
 ## About
 
-A hook to register an intersection observer listener
-<br/>
+A hook to register an intersection observer listener.
 
 ## Installation
 

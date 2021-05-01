@@ -9,7 +9,6 @@ sidebar_label: useVisibilitySensor
 ## About
 
 Visibility sensor hook for React.
-<br/>
 
 ## Installation
 

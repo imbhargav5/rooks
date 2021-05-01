@@ -9,7 +9,6 @@ sidebar_label: useInput
 ## About
 
 Input hook for React.
-<br/>
 
 ## Installation
 

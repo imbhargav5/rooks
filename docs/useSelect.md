@@ -9,7 +9,6 @@ sidebar_label: useSelect
 ## About
 
 Select values from a list easily. List selection hook for react.
-<br/>
 
 ## Installation
 

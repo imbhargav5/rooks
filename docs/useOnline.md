@@ -9,7 +9,6 @@ sidebar_label: useOnline
 ## About
 
 Online status hook for React.
-<br/>
 
 ### Installation
 

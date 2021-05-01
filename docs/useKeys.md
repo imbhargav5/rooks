@@ -10,6 +10,8 @@ sidebar_label: useKeys
 
 A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
 
+## Note
+
 An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active.
 
 ## Installation
