@@ -2,7 +2,7 @@ name: Update title card
 
 on:
   schedule:
-    - cron: "0 0 */2 * *"
+    - cron: '0 0 */2 * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,12 +25,12 @@ jobs:
       - name: Install project dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn
-      - name: Update title card
-        run: yarn run update-title-card
-      - name: Commit package list
-        continue-on-error: true        
-        run: |
-          git add .
-          git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Update ${{ steps.tags.outputs.new }} title card list [skip ci]" --no-verify --quiet
-          git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master      
+      # - name: Update title card
+      #   run: yarn run update-title-card
+      # - name: Commit package list
+      #   continue-on-error: true
+      #   run: |
+      #     git add .
+      #     git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
+      #       commit -m "Update ${{ steps.tags.outputs.new }} title card list [skip ci]" --no-verify --quiet
+      #     git push "https://imbhargav5:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" master
