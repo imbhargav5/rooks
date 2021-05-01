@@ -98,20 +98,6 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 ## Installation
 
-### For a specific hook like useDidMount
-
-    npm i -s @rooks/use-did-mount
-
-<!---->
-
-    npm i -s @rooks/use-interval
-
-```jsx
-import useDidMount from "@rooks/use-did-mount";
-```
-
-### For standalone build with all the hooks
-
     npm i -s rooks
 
 Import any hook from "rooks" and start using them!

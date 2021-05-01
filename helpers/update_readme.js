@@ -1,6 +1,6 @@
-var shelljs = require("shelljs");
-var writeFileSync = require("fs").writeFileSync;
-var path = require("path");
+var shelljs = require('shelljs');
+var writeFileSync = require('fs').writeFileSync;
+var path = require('path');
 
 const base = `
 <br/>
@@ -29,25 +29,6 @@ Collection of regularly used custom hooks as utils for React
  - [x] CommonJS, UMD and ESM Support
 
 # Installation
-
-###  For a specific hook like useDidMount
-
-\`\`\`
-npm i -s @rooks/use-did-mount
-\`\`\`
-
-\`\`\`
-npm i -s @rooks/use-interval
-\`\`\`
-
-
-\`\`\`jsx
-import useDidMount from "@rooks/use-did-mount";
-\`\`\`
-
-
-### For standalone build with all the hooks
-
 
 \`\`\`
 npm i - s rooks
@@ -85,7 +66,7 @@ function App() {
 ## Packages
 
 `;
-const destReadme = path.join(__dirname, "../README.md");
-writeFileSync(destReadme, base, "utf-8");
-const readmesGlob = path.join(__dirname, "../packages/*/README.md");
+const destReadme = path.join(__dirname, '../README.md');
+writeFileSync(destReadme, base, 'utf-8');
+const readmesGlob = path.join(__dirname, '../packages/*/README.md');
 shelljs.cat(readmesGlob).toEnd(destReadme);
