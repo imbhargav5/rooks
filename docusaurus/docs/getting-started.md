@@ -12,9 +12,11 @@ sidebar_label: Getting Started
 
 
 
-### Installation all the hooks in a single package
+### Installation 
 
     npm i - s rooks
+
+### Importing the hooks
 
 Import any hook from "rooks" and start using them!
 
