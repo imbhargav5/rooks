@@ -1,4 +1,4 @@
-name: Node CI main
+name: CI and Semantic Release
 on:
   push:
     branches:
