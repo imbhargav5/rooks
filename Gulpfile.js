@@ -14,6 +14,7 @@ gulp.task('changelog', function () {
           // conventional-changelog options go here
           //preset: 'angular'
           releaseCount: releaseCount,
+          skipUnstable: true,
           sameFile: true,
         },
         {
