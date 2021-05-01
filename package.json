@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.0.0-alpha.9",
+  "version": "5.0.0",
   "description": "Useful React hooks for everyone.",
   "main": "lib/rooks.js",
   "jsnext:main": "lib/rooks.esm.js",

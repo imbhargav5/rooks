@@ -1,6 +1,32 @@
-## 5.0.0-alpha.9 (2021-05-01)
+## 5.0.0 (2021-05-01)
 
+* chore(contributing): update file ([e0f14e7](https://github.com/imbhargav5/rooks/commit/e0f14e7))
+* chore(create): modify create script ([603e1ed](https://github.com/imbhargav5/rooks/commit/603e1ed))
+* chore(create): update create scirpt ([0595dd1](https://github.com/imbhargav5/rooks/commit/0595dd1))
+* chore(hooks-list): chore to update hooks list on create ([d3c491b](https://github.com/imbhargav5/rooks/commit/d3c491b))
+* chore(hooks-list): update hooks list array ([535f788](https://github.com/imbhargav5/rooks/commit/535f788))
+* chore(update): create ([072a7d4](https://github.com/imbhargav5/rooks/commit/072a7d4))
+
+
+
+## 5.0.0-beta.2 (2021-05-01)
+
+* chore(create): fix typo ([263dbcd](https://github.com/imbhargav5/rooks/commit/263dbcd))
+* chore(create): modify create script ([bd1d31d](https://github.com/imbhargav5/rooks/commit/bd1d31d))
+* chore(workflow): rename workflow ([249c7f4](https://github.com/imbhargav5/rooks/commit/249c7f4))
+* fix(internal): update create script ([857a506](https://github.com/imbhargav5/rooks/commit/857a506))
+* Refactored rook names to camel case ([c19edd1](https://github.com/imbhargav5/rooks/commit/c19edd1))
+* Removed and modified single rook installation to whole package installation ([c33dbc7](https://github.com/imbhargav5/rooks/commit/c33dbc7))
+* Removed and modified single rook installation to whole package installation ([afc6236](https://github.com/imbhargav5/rooks/commit/afc6236))
+
+
+
+## 5.0.0-beta.1 (2021-05-01)
+
+* fix: internal ([a9234aa](https://github.com/imbhargav5/rooks/commit/a9234aa))
 * fix(docusaurus): build add missing key ([334f556](https://github.com/imbhargav5/rooks/commit/334f556))
+* fix(docusaurus): run only on main branch ([7bf84ea](https://github.com/imbhargav5/rooks/commit/7bf84ea))
+* fix(internal): fix typo ([11a1a62](https://github.com/imbhargav5/rooks/commit/11a1a62))
 
 
 
