@@ -1,3 +1,17 @@
+## 5.0.0-alpha.8 (2021-05-01)
+
+
+
+
+## 5.0.0-alpha.8 (2021-05-01)
+
+* fix(internal): github actions refactored to run changelog and docusaurus on publish ([905cc88](https://github.com/imbhargav5/rooks/commit/905cc88))
+* fix(workflow): version docs with semantic release version ([7fa5a11](https://github.com/imbhargav5/rooks/commit/7fa5a11))
+* chore(internal): run changelog only if new version is published ([7924e2c](https://github.com/imbhargav5/rooks/commit/7924e2c))
+* chore(internal): update gulp and settings ([6958506](https://github.com/imbhargav5/rooks/commit/6958506))
+
+
+
 ## 5.0.0-alpha.7 (2021-04-27)
 
 * feat(workflow): update ([90ab0f7](https://github.com/imbhargav5/rooks/commit/90ab0f7))
