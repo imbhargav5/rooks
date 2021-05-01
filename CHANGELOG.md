@@ -1,8 +1,3 @@
-## 5.0.0-alpha.6 (2021-04-27)
-
-
-
-
 ## 5.0.0-alpha.7 (2021-04-27)
 
 * feat(workflow): update ([90ab0f7](https://github.com/imbhargav5/rooks/commit/90ab0f7))
@@ -1116,39 +1111,11 @@
 
 ## 3.3.0 (2019-09-09)
 
+* Bump ([94b93c8](https://github.com/imbhargav5/rooks/commit/94b93c8))
 * Fix case sensitive readme file (#102) ([cc42106](https://github.com/imbhargav5/rooks/commit/cc42106)), closes [#102](https://github.com/imbhargav5/rooks/issues/102) [#100](https://github.com/imbhargav5/rooks/issues/100) [#105](https://github.com/imbhargav5/rooks/issues/105) [#106](https://github.com/imbhargav5/rooks/issues/106) [#107](https://github.com/imbhargav5/rooks/issues/107) [#108](https://github.com/imbhargav5/rooks/issues/108) [#109](https://github.com/imbhargav5/rooks/issues/109) [#111](https://github.com/imbhargav5/rooks/issues/111)
+* Update online.js storybook readme ([fe078ec](https://github.com/imbhargav5/rooks/commit/fe078ec))
 * Updates (#127) ([60124fc](https://github.com/imbhargav5/rooks/commit/60124fc)), closes [#127](https://github.com/imbhargav5/rooks/issues/127) [#100](https://github.com/imbhargav5/rooks/issues/100) [#105](https://github.com/imbhargav5/rooks/issues/105) [#106](https://github.com/imbhargav5/rooks/issues/106) [#107](https://github.com/imbhargav5/rooks/issues/107) [#108](https://github.com/imbhargav5/rooks/issues/108) [#109](https://github.com/imbhargav5/rooks/issues/109) [#111](https://github.com/imbhargav5/rooks/issues/111) [#116](https://github.com/imbhargav5/rooks/issues/116) [#94](https://github.com/imbhargav5/rooks/issues/94) [#126](https://github.com/imbhargav5/rooks/issues/126) [#94](https://github.com/imbhargav5/rooks/issues/94) [#125](https://github.com/imbhargav5/rooks/issues/125)
 * v3.3.0 ([d5fdf28](https://github.com/imbhargav5/rooks/commit/d5fdf28))
-
-
-
-## 3.3.0-alpha.1 (2019-09-07)
-
-* Support non array input ([22b14b4](https://github.com/imbhargav5/rooks/commit/22b14b4))
-* v3.3.0-alpha.1 ([e49313e](https://github.com/imbhargav5/rooks/commit/e49313e))
-
-
-
-## 3.3.0-alpha.0 (2019-09-07)
-
-* [Security] Bump eslint-utils from 1.4.0 to 1.4.2 (#106) ([364fc04](https://github.com/imbhargav5/rooks/commit/364fc04)), closes [#106](https://github.com/imbhargav5/rooks/issues/106)
-* Bump ([94b93c8](https://github.com/imbhargav5/rooks/commit/94b93c8))
-* Bump babel-eslint from 10.0.1 to 10.0.3 (#107) ([1c4f23c](https://github.com/imbhargav5/rooks/commit/1c4f23c)), closes [#107](https://github.com/imbhargav5/rooks/issues/107)
-* Bump babel-preset-minify from 0.5.0 to 0.5.1 (#108) ([c0d3709](https://github.com/imbhargav5/rooks/commit/c0d3709)), closes [#108](https://github.com/imbhargav5/rooks/issues/108)
-* Bump chalk from 2.4.1 to 2.4.2 (#105) ([dcf6248](https://github.com/imbhargav5/rooks/commit/dcf6248)), closes [#105](https://github.com/imbhargav5/rooks/issues/105)
-* Bump rollup from 1.1.2 to 1.20.3 (#116) ([f05f8c8](https://github.com/imbhargav5/rooks/commit/f05f8c8)), closes [#116](https://github.com/imbhargav5/rooks/issues/116)
-* Bump rollup-plugin-typescript2 from 0.20.1 to 0.24.0 (#109) ([c8ec1f8](https://github.com/imbhargav5/rooks/commit/c8ec1f8)), closes [#109](https://github.com/imbhargav5/rooks/issues/109)
-* fix infinite loop issue and add test case for it (#111) ([e5963cc](https://github.com/imbhargav5/rooks/commit/e5963cc)), closes [#111](https://github.com/imbhargav5/rooks/issues/111)
-* MInor updates ([b521df9](https://github.com/imbhargav5/rooks/commit/b521df9))
-* Remove react-dom from peer deps ([e0cdf32](https://github.com/imbhargav5/rooks/commit/e0cdf32))
-* Test commit ([8aae390](https://github.com/imbhargav5/rooks/commit/8aae390))
-* Update online.js storybook readme ([fe078ec](https://github.com/imbhargav5/rooks/commit/fe078ec))
-* Update readme ([326f9f2](https://github.com/imbhargav5/rooks/commit/326f9f2))
-* Update readme ([b28d021](https://github.com/imbhargav5/rooks/commit/b28d021))
-* Update readmes ([3a26aad](https://github.com/imbhargav5/rooks/commit/3a26aad))
-* Update workflow names ([e942933](https://github.com/imbhargav5/rooks/commit/e942933))
-* useGeolocationhook (#100) ([ff0052e](https://github.com/imbhargav5/rooks/commit/ff0052e)), closes [#100](https://github.com/imbhargav5/rooks/issues/100)
-* v3.3.0-alpha.0 ([e918391](https://github.com/imbhargav5/rooks/commit/e918391))
 
 
 
@@ -1164,16 +1131,7 @@
 
 * Fix typo ([2defa14](https://github.com/imbhargav5/rooks/commit/2defa14))
 * Typo ([b4d15b8](https://github.com/imbhargav5/rooks/commit/b4d15b8))
-* Update changelog ([e469606](https://github.com/imbhargav5/rooks/commit/e469606))
 * v3.2.3 ([3e4f021](https://github.com/imbhargav5/rooks/commit/3e4f021))
-
-
-
-## <small>3.2.2 (2019-08-10)</small>
-
-* Generate definitions ([a65bf20](https://github.com/imbhargav5/rooks/commit/a65bf20))
-* Updates to workflows (#85) ([888a825](https://github.com/imbhargav5/rooks/commit/888a825)), closes [#85](https://github.com/imbhargav5/rooks/issues/85)
-* v3.2.2 ([85a2c79](https://github.com/imbhargav5/rooks/commit/85a2c79))
 
 
 
@@ -1188,6 +1146,7 @@
 * Feature/outside click hook update (#87) ([71fc08a](https://github.com/imbhargav5/rooks/commit/71fc08a)), closes [#87](https://github.com/imbhargav5/rooks/issues/87)
 * Rename ([35dd6c7](https://github.com/imbhargav5/rooks/commit/35dd6c7))
 * Spell fix ([764a1cc](https://github.com/imbhargav5/rooks/commit/764a1cc))
+* Update changelog ([e469606](https://github.com/imbhargav5/rooks/commit/e469606))
 * Update dev.yml ([2fcc939](https://github.com/imbhargav5/rooks/commit/2fcc939))
 * Update production script ([bc847ac](https://github.com/imbhargav5/rooks/commit/bc847ac))
 * Update script names ([0f9b8cb](https://github.com/imbhargav5/rooks/commit/0f9b8cb))
@@ -1251,11 +1210,9 @@
 * Add test for continuous mode ([ea98f32](https://github.com/imbhargav5/rooks/commit/ea98f32))
 * Add tests for resize and scroll hooks ([ce1d921](https://github.com/imbhargav5/rooks/commit/ce1d921))
 * Add use on window scroll ([0adb5b9](https://github.com/imbhargav5/rooks/commit/0adb5b9))
-* Add useKeys entry in rooks folder in package ([d5f830a](https://github.com/imbhargav5/rooks/commit/d5f830a))
 * Adding commit form usekeyshook ([4f09669](https://github.com/imbhargav5/rooks/commit/4f09669))
 * Edit ordering ([fe601bb](https://github.com/imbhargav5/rooks/commit/fe601bb))
 * Make object internal ([5fd2fa9](https://github.com/imbhargav5/rooks/commit/5fd2fa9))
-* rebase with dev ([fe41c02](https://github.com/imbhargav5/rooks/commit/fe41c02))
 * Update changelog ([7d2c588](https://github.com/imbhargav5/rooks/commit/7d2c588))
 * Update example name ([6101003](https://github.com/imbhargav5/rooks/commit/6101003))
 * Update file ([0b92a32](https://github.com/imbhargav5/rooks/commit/0b92a32))
@@ -1264,7 +1221,6 @@
 * useLocalStorage and useSessionStorage with JSON parse ([449e56b](https://github.com/imbhargav5/rooks/commit/449e56b))
 * v3.1.1-alpha.0 ([77a7179](https://github.com/imbhargav5/rooks/commit/77a7179))
 * v3.1.1-alpha.1 ([03514ba](https://github.com/imbhargav5/rooks/commit/03514ba))
-* refactor: store object and arrays ([ef6d5b2](https://github.com/imbhargav5/rooks/commit/ef6d5b2))
 
 
 
@@ -1272,10 +1228,13 @@
 
 * Add onwindowresize ([a1fff99](https://github.com/imbhargav5/rooks/commit/a1fff99))
 * Add use on window scroll ([9410b15](https://github.com/imbhargav5/rooks/commit/9410b15))
+* Add useKeys entry in rooks folder in package ([d5f830a](https://github.com/imbhargav5/rooks/commit/d5f830a))
+* rebase with dev ([fe41c02](https://github.com/imbhargav5/rooks/commit/fe41c02))
 * Update changelog ([862e3dc](https://github.com/imbhargav5/rooks/commit/862e3dc))
 * Update storybook example ([a171103](https://github.com/imbhargav5/rooks/commit/a171103))
 * Update version ([47d7219](https://github.com/imbhargav5/rooks/commit/47d7219))
 * v3.1.1-alpha.0 ([aeaabf1](https://github.com/imbhargav5/rooks/commit/aeaabf1))
+* refactor: store object and arrays ([ef6d5b2](https://github.com/imbhargav5/rooks/commit/ef6d5b2))
 
 
 
@@ -1396,7 +1355,6 @@
 * v3.0.0-alpha.4 ([6620ab1](https://github.com/imbhargav5/rooks/commit/6620ab1))
 * wip ([c559efd](https://github.com/imbhargav5/rooks/commit/c559efd))
 * Yarn ([dd54cb6](https://github.com/imbhargav5/rooks/commit/dd54cb6))
-* docs: update README ([0b02dfd](https://github.com/imbhargav5/rooks/commit/0b02dfd))
 
 
 
@@ -1478,6 +1436,7 @@
 * v3.0.0-0 ([0eb3c76](https://github.com/imbhargav5/rooks/commit/0eb3c76))
 * v3.0.0-0 ([a63cea7](https://github.com/imbhargav5/rooks/commit/a63cea7))
 * v3.0.0-alpha.0 ([426c775](https://github.com/imbhargav5/rooks/commit/426c775))
+* docs: update README ([0b02dfd](https://github.com/imbhargav5/rooks/commit/0b02dfd))
 
 
 
