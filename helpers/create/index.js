@@ -10,10 +10,12 @@ const truncate = require('lodash.truncate');
 const getExistingListOfHooksAsJSON = require('./addHookToListAndUpdate');
 const addHookToListAndUpdate = require('./addHookToListAndUpdate');
 
+const PROJECT_ROOT = process.cwd();
+
 const filesToRead = [
-  '../../template/index.spec.template',
-  '../../template/shared.template',
-  '../../template/README.md',
+  './template/index.spec.template',
+  './template/shared.template',
+  './template/README.md',
 ];
 const filesToWrite = [
   ({ name }) => `./src/__tests__/${name}.spec.ts`,
@@ -22,7 +24,7 @@ const filesToWrite = [
 ];
 
 function readFileAsString(relativeFilePath) {
-  return fs.readFileSync(path.join(__dirname, relativeFilePath), 'utf-8');
+  return fs.readFileSync(path.join(PROJECT_ROOT, relativeFilePath), 'utf-8');
 }
 
 function injectValuesIntoTemplate(
@@ -120,9 +122,6 @@ inquirer.prompt(questions).then((answers) => {
       description,
     });
   });
-  const dirPath = path.join(__dirname, '../');
-  // create package directory
-  makeDir.sync(path.join(dirPath, '/src'));
 
   filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
     const srcToWrite = transformedSources[index];
@@ -132,7 +131,7 @@ inquirer.prompt(questions).then((answers) => {
       );
     }
     const pathToWriteTo = path.join(
-      __dirname,
+      PROJECT_ROOT,
       '../',
       relativeFilePathFromRootOfModule
     );
