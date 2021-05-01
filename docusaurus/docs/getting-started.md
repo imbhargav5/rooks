@@ -6,14 +6,14 @@ sidebar_label: Getting Started
 
 ### Installation a specific hook like useDidMount
 
-    npm i -s @rooks/use-did-mount
+    npm i -s @rooks/useDidMount
 
 <!---->
 
-    npm i -s @rooks/use-interval
+    npm i -s @rooks/useInterval
 
 ```jsx
-import useDidMount from "@rooks/use-did-mount";
+import useDidMount from "@rooks/useDidMount";
 ```
 
 ### Installation all the hooks in a single package
