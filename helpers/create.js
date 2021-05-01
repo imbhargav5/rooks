@@ -12,15 +12,11 @@ const filesToRead = [
   '../template/index.spec.template',
   '../template/shared.template',
   '../template/README.md',
-  '../template/Examples.md',
-  '../template/title-card.svg',
 ];
 const filesToWrite = [
   ({ name }) => `./src/__tests__/${name}.spec.ts`,
   ({ name }) => `./src/hooks/${name}.ts`,
-  ({ name }) => `./docs/${name}/README.md`,
-  ({ name }) => `./docs/${name}/Examples.md`,
-  ({ name }) => `./docs/${name}/title-card.svg`,
+  ({ name }) => `./docs/${name}.md`,
 ];
 
 function readFileAsString(relativeFilePath) {
