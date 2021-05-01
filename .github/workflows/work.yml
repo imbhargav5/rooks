@@ -101,13 +101,16 @@ jobs:
       - name: generate changelog
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: yarn generate:changelog
-      - name: Commit changelog
+      - name: create docusaurus version
+        if: steps.semantic-release.outputs.new_release_published == 'true'
+        run: yarn docs:version
+      - name: Commit changelog and docs
         continue-on-error: true
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
           git add .
           git config push.default current
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Update changelog [skip ci]" --no-verify --quiet
+            commit -m "Update changelog and docs [skip ci]" --no-verify --quiet
           git pull --rebase
           git push

@@ -20,3 +20,10 @@ yarn-error*
 .changelog
 src/dist
 src/declarations
+
+
+.docusaurus/*
+translated_docs
+build/
+yarn.lock
+i18n/*
