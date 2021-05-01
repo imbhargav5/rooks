@@ -132,7 +132,6 @@ inquirer.prompt(questions).then((answers) => {
     }
     const pathToWriteTo = path.join(
       PROJECT_ROOT,
-      '../',
       relativeFilePathFromRootOfModule
     );
     fsExtra.ensureFileSync(pathToWriteTo);
