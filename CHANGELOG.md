@@ -1,5 +1,6 @@
-## 5.0.0-alpha.8 (2021-05-01)
+## 5.0.0-alpha.9 (2021-05-01)
 
+* fix(docusaurus): build add missing key ([334f556](https://github.com/imbhargav5/rooks/commit/334f556))
 
 
 
