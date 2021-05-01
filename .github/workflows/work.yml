@@ -103,7 +103,7 @@ jobs:
         run: yarn generate:changelog
       - name: create docusaurus version
         if: steps.semantic-release.outputs.new_release_published == 'true'
-        run: yarn docs:version
+        run: yarn run docs:version ${{steps.semantic-release.outputs.new_release_version}}
       - name: Commit changelog and docs
         continue-on-error: true
         if: steps.semantic-release.outputs.new_release_published == 'true'
