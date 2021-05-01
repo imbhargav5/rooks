@@ -14,6 +14,7 @@
     "test": "jest src/__tests__",
     "coverage": "yarn test --coverage",
     "create": "node helpers/create",
+    "new": "yarn run create",
     "compute-package-list": "node helpers/compute-package-list",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build": "yarn build:rooks && yarn generate-types",

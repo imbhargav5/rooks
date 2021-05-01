@@ -9,9 +9,9 @@ const execa = require('execa');
 const truncate = require('lodash.truncate');
 
 const filesToRead = [
-  '../template/index.spec.template',
-  '../template/shared.template',
-  '../template/README.md',
+  '../../template/index.spec.template',
+  '../../template/shared.template',
+  '../../template/README.md',
 ];
 const filesToWrite = [
   ({ name }) => `./src/__tests__/${name}.spec.ts`,
@@ -22,6 +22,8 @@ const filesToWrite = [
 function readFileAsString(relativeFilePath) {
   return fs.readFileSync(path.join(__dirname, relativeFilePath), 'utf-8');
 }
+
+function getExistingListOfHooksAsJson() {}
 
 function injectValuesIntoTemplate(
   src,
