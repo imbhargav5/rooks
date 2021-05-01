@@ -7,6 +7,8 @@ const makeDir = require('make-dir');
 const ora = require('ora');
 const execa = require('execa');
 const truncate = require('lodash.truncate');
+const getExistingListOfHooksAsJSON = require('./addHookToListAndUpdate');
+const addHookToListAndUpdate = require('./addHookToListAndUpdate');
 
 const filesToRead = [
   '../../template/index.spec.template',
@@ -22,8 +24,6 @@ const filesToWrite = [
 function readFileAsString(relativeFilePath) {
   return fs.readFileSync(path.join(__dirname, relativeFilePath), 'utf-8');
 }
-
-function getExistingListOfHooksAsJson() {}
 
 function injectValuesIntoTemplate(
   src,
@@ -139,4 +139,5 @@ inquirer.prompt(questions).then((answers) => {
     fsExtra.ensureFileSync(pathToWriteTo);
     fs.writeFileSync(pathToWriteTo, srcToWrite);
   });
+  addHookToListAndUpdate({ name, description });
 });
