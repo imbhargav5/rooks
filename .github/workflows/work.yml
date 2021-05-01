@@ -51,6 +51,8 @@ jobs:
         run: yarn test
 
   release:
+    env:
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     needs: main
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'imbhargav5/rooks' &&
