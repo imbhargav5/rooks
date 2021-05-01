@@ -1,9 +1,8 @@
-# %name%
-
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/%directoryName%/title-card.svg)
-
-[![Build Status](https://travis-ci.org/imbhargav5/rooks.svg?branch=master)](https://travis-ci.org/imbhargav5/rooks) ![](https://img.shields.io/npm/v/rooks/latest.svg) ![](https://img.shields.io/npm/l/rooks.svg) ![](https://img.shields.io/bundlephobia/min/rooks.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2F%directoryName%)
-
+---
+id: %name%
+title: %name%
+sidebar_label: %name%
+---
 
 
 ## About
@@ -34,3 +33,14 @@ function Demo() {
 
 render(<Demo/>)
 ```
+
+---
+
+## Codesandbox Examples
+
+### Basic Usage
+
+
+---
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
