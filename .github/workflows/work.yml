@@ -102,18 +102,18 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: generate changelog
         if:
-          steps.semantic-release.outputs.new_release_published == 'true' && ${{ github.repository == 'imbhargav5/rooks' &&
+          ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
           contains('refs/heads/main',github.ref) github.event_name == 'push' }}
         run: yarn generate:changelog
       - name: create docusaurus version
         if:
-          steps.semantic-release.outputs.new_release_published == 'true' && ${{ github.repository == 'imbhargav5/rooks' &&
+          ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
           contains('refs/heads/main',github.ref) github.event_name == 'push' }}
         run: yarn run docs:version ${{steps.semantic-release.outputs.new_release_version}}
       - name: Commit changelog and docs
         continue-on-error: true
         if:
-          steps.semantic-release.outputs.new_release_published == 'true' && ${{ github.repository == 'imbhargav5/rooks' &&
+          ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
           contains('refs/heads/main',github.ref) github.event_name == 'push' }}
         run: |
           git add .
