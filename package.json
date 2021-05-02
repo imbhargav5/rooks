@@ -5,8 +5,8 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
-  "types": "dist/cjs/types/index.d.ts",
-  "typings": "dist/cjs/types/index.d.ts",
+  "types": "dist/esm/index.d.ts",
+  "typings": "dist/esm/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist lib",
