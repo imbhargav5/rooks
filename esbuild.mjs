@@ -58,15 +58,30 @@ const build = async ({ outfile, format, minify = false, globalName, ...rest }) =
 
   build({
     entryPoints: [new URL("src/index.ts", import.meta.url).pathname],
-    outfile: new URL("rooks.js", lib),
+    outfile: new URL("rooks.umd.js", lib),
     format: "umd",
     globalName: "Rooks",    
   });
 
   build({
     entryPoints: [new URL("src/index.ts", import.meta.url).pathname],
-    outfile: new URL("rooks.min.js", lib),
+    outfile: new URL("rooks.umd.min.js", lib),
     format: "umd",
+    minify: true,
+    globalName: "Rooks",    
+  });
+
+  build({
+    entryPoints: [new URL("src/index.ts", import.meta.url).pathname],
+    outfile: new URL("rooks.js", lib),
+    format: "cjs",
+    globalName: "Rooks",    
+  });
+
+  build({
+    entryPoints: [new URL("src/index.ts", import.meta.url).pathname],
+    outfile: new URL("rooks.min.js", lib),
+    format: "cjs",
     minify: true,
     globalName: "Rooks",    
   });
