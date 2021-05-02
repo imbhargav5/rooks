@@ -6,13 +6,7 @@ export default async (): Promise<Config.InitialOptions> => {
   return {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
-    testPathIgnorePatterns: [
-      './node_modules',
-      './coverage',
-      './dist',
-      './lib',
-      './docs',
-    ],
+    testMatch: ['<rootDir>/src/__tests__/**/*.(spec|test).(ts|tsx)'],
     verbose: true,
   };
 };
