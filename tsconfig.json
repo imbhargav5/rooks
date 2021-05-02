@@ -2,11 +2,10 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "strictNullChecks": true, // enable strict null checks as a best practice
-    "module": "ES2015", // specify module code generation
+    "module": "ESNEXT", // specify module code generation
     "jsx": "react", // use typescript to transpile jsx to js
-    "target": "ES5", // specify ECMAScript target version
+    "target": "ES2016", // specify ECMAScript target version
     "composite": true,
-    "pretty": true,
     "esModuleInterop": true,
     "baseUrl": "src",
     "allowJs": true,
@@ -22,22 +21,9 @@
       "@/*": ["*"]
     },
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "rootDir": "src"
+    "skipLibCheck": true
     //"strict": true,
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    "scripts",
-    "helpers",
-    "docs",
-    "versioned_docs",
-    "versioned_sidebars",
-    "src/pages",
-    "src/css",
-    "src/theme"
-  ],
-  "include": ["./src/**/*.ts"]
+  "exclude": ["node_modules", "./dist/**/*", "./lib/**/*", "meta/**/*"],
+  "include": ["./src/**/*.ts", "jest.config.ts", "./helpers/**/*.ts"]
 }
