@@ -3,8 +3,8 @@ import dts from 'rollup-plugin-dts';
 const globals = { react: 'React', 'react-dom': 'ReactDOM' };
 
 const dtsBundleConfig = {
-  input: `./dist/esm/index.d.ts`,
-  output: [{ file: './dist/types/index.d.ts', format: 'es' }],
+  input: `./dist/types/src/index.d.ts`,
+  output: [{ file: './lib/types/index.d.ts', format: 'es' }],
   plugins: [
     dts({
       respectExternal: true,
