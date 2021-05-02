@@ -6,6 +6,8 @@
   "module": "lib/rooks.esm.js",
   "unpkg": "lib/rooks.umd.js",
   "types": "lib/types/index.d.ts",
+  "typings": "lib/types/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist lib",
     "commit": "cz",
