@@ -3,8 +3,8 @@
   "version": "5.0.0",
   "description": "Useful React hooks for everyone.",
   "main": "lib/rooks.js",
-  "jsnext:main": "lib/rooks.esm.js",
   "module": "lib/rooks.esm.js",
+  "unpkg": "lib/rooks.umd.js",
   "types": "lib/types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist lib",
