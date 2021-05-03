@@ -8,6 +8,7 @@
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
+  "license":"MIT",
   "scripts": {
     "clean": "rimraf dist lib",
     "commit": "cz",
