@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.0.0",
+  "version": "5.0.2",
   "description": "Useful React hooks for everyone.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -8,7 +8,7 @@
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
-  "license":"MIT",
+  "license": "MIT",
   "files": [
     "dist/"
   ],
@@ -21,13 +21,13 @@
     "coverage": "yarn test --coverage",
     "create": "node helpers/create",
     "new": "yarn run create",
-    "prebuild":"rimraf dist",
+    "prebuild": "rimraf dist",
     "compute-package-list": "node helpers/compute-package-list",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:esm": "tsc -m esNext --outDir dist/esm",
     "build:cjs": "tsc -m commonjs --outDir dist/cjs",
     "build:umd": "rollup -c rollup.config.js",
-    "build:types":"rollup -c dts.rollup.config.js",
+    "build:types": "rollup -c dts.rollup.config.js",
     "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types",
     "generate:changelog": "gulp changelog",
     "release-dev": "np prerelease --tag=dev",

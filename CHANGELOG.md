@@ -1,3 +1,27 @@
+## <small>5.0.2 (2021-05-04)</small>
+
+* fix(bundlesize): improve bundlesize ([d5ae1c0](https://github.com/imbhargav5/rooks/commit/d5ae1c0))
+* Update package.json ([3b61f94](https://github.com/imbhargav5/rooks/commit/3b61f94))
+
+
+
+## <small>5.0.1 (2021-05-02)</small>
+
+* fix(dependencies): update dependencies of react and docusaurus ([7450f32](https://github.com/imbhargav5/rooks/commit/7450f32))
+* fix(esbuild): fix emitted formats ([e06ee0d](https://github.com/imbhargav5/rooks/commit/e06ee0d))
+* fix(maintypes): fix maintypes for package.json ([d3b6867](https://github.com/imbhargav5/rooks/commit/d3b6867))
+* fix(typings): build typings with rollup ([8f0e5a3](https://github.com/imbhargav5/rooks/commit/8f0e5a3))
+* fix(typings): fix types and typings path in package.json ([3ada877](https://github.com/imbhargav5/rooks/commit/3ada877))
+* chore(docs): internal updates to docs ([4248033](https://github.com/imbhargav5/rooks/commit/4248033))
+* chore(helpers): update compute package list helper ([cbd1229](https://github.com/imbhargav5/rooks/commit/cbd1229))
+* chore(helpers): update helpers to compute packages automatically ([88d42a8](https://github.com/imbhargav5/rooks/commit/88d42a8))
+* chore(package): modify packagejson details with sideeffects and typings ([eb70e9d](https://github.com/imbhargav5/rooks/commit/eb70e9d))
+* chore(workflows): refactor workflows and remove unused ([d3fb43c](https://github.com/imbhargav5/rooks/commit/d3fb43c))
+* Revert "Updates to builds (#468)" (#469) ([9178667](https://github.com/imbhargav5/rooks/commit/9178667)), closes [#468](https://github.com/imbhargav5/rooks/issues/468) [#469](https://github.com/imbhargav5/rooks/issues/469)
+* Updates to builds (#468) ([a84d706](https://github.com/imbhargav5/rooks/commit/a84d706)), closes [#468](https://github.com/imbhargav5/rooks/issues/468)
+
+
+
 ## 5.0.0 (2021-05-01)
 
 * chore(contributing): update file ([e0f14e7](https://github.com/imbhargav5/rooks/commit/e0f14e7))
