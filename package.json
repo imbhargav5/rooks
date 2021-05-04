@@ -9,6 +9,9 @@
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
   "license":"MIT",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "clean": "rimraf dist lib",
     "commit": "cz",
@@ -40,9 +43,6 @@
     "docs:swizzle": "docusaurus swizzle",
     "docs:docusaurus": "docusaurus",
     "docs:serve": "docusaurus serve"
-  },
-  "optionalDependencies": {
-    "fsevents": "1.2.9"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
@@ -91,6 +91,7 @@
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-testing-library": "^4.1.0",
     "execa": "^4.1.0",
+    "fsevents": "1.2.9",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
