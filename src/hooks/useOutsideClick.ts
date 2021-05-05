@@ -9,9 +9,9 @@ import { useEffect, useRef, useCallback } from 'react';
  * @param handler Callback to fire on outside click
  * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
  */
-function useOutsideClick(
-  ref: MutableRefObject<HTMLElement>,
-  handler: (e: MouseEvent) => any,
+function useOutsideClick<T extends HTMLElement = HTMLElement>(
+  ref: MutableRefObject<T | null>, // initially html element refs will be null
+  handler: (e: MouseEvent | TouchEvent) => any, // click | ontouchstart
   when: boolean = true
 ): void {
   const savedHandler = useRef(handler);
