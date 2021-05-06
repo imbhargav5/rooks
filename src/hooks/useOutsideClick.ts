@@ -11,12 +11,12 @@ import { useEffect, useRef, useCallback } from 'react';
  */
 function useOutsideClick<T extends HTMLElement = HTMLElement>(
   ref: MutableRefObject<T | null>, // initially html element refs will be null
-  handler: (e: MouseEvent | TouchEvent) => any, // click | ontouchstart
+  handler: (e: MouseEvent) => any,
   when: boolean = true
 ): void {
   const savedHandler = useRef(handler);
 
-  const memoizedCallback = useCallback((e: MouseEvent) => {
+  const memoizedCallback = useCallback((e: MouseEvent | TouchEvent) => {
     if (ref && ref.current && !ref.current.contains(e.target as Element)) {
       savedHandler.current(e);
     }
