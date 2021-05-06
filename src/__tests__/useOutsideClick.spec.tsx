@@ -29,13 +29,6 @@ const App = ({ condition }: { condition?: boolean }) => {
   );
 };
 
-const touchByTestId = (testId: string) => {
-  const target = screen.getByTestId(testId);
-  act(() => {
-    fireEvent.touchStart(target);
-  });
-};
-
 /*
  * This just runs each test using a touch event and a click event,
  * replacing "click" in the name with "touch"
@@ -50,6 +43,13 @@ const itClickAndTouch = (
       fireEvent.click(target);
     });
   };
+  const touchByTestId = (testId: string) => {
+    const target = screen.getByTestId(testId);
+    act(() => {
+      fireEvent.touchStart(target);
+    });
+  };
+
   it(name, () => {
     fn(clickByTestId);
   });
