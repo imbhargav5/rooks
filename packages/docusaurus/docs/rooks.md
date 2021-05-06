@@ -1,8 +1,26 @@
 ---
-id: hooks-list
-title: List of Hooks
-sidebar_label: Hooks List
+id: rooks
+title: rooks
+sidebar_label: rooks      
+slug: /
 ---
+
+<br/>
+<br/>
+<img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100%" />
+
+<br/>
+<br/>
+
+   
+
+<br/>
+
+## [Complete Documentation](https://react-hooks.org/)
+
+[![Image from Gyazo](https://i.gyazo.com/742dc22ec370af0a96322427b6a32a9b.gif)](https://gyazo.com/742dc22ec370af0a96322427b6a32a9b)
+
+## List of all hooks
 
 <!--hookslist start-->
 
@@ -10,8 +28,8 @@ sidebar_label: Hooks List
 *   [use-boundingclientrect](https://react-hooks.org/docs/use-boundingclientrect) - A React Hooks package for boundingclientrect
 *   [use-counter](https://react-hooks.org/docs/use-counter) - A React Hooks package for counter
 *   [use-countdown](https://react-hooks.org/docs/use-countdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
-*   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-debounce](https://react-hooks.org/docs/use-debounce) - Debounce hook for react
+*   [use-did-mount](https://react-hooks.org/docs/use-did-mount) - A React hooks package for componentDidMount
 *   [use-did-update](https://react-hooks.org/docs/use-did-update) - componentDidUpdate hook for react
 *   [use-document-event-listener](https://react-hooks.org/docs/use-document-event-listener) - A react hook to an event listener to the document object
 *   [use-effect-once-when](https://react-hooks.org/docs/use-effect-once-when) - Runs a callback effect atmost one time when a condition becomes true
@@ -70,3 +88,60 @@ sidebar_label: Hooks List
 *   [use-worker](https://react-hooks.org/docs/use-worker) - A React Hooks package for worker
 
 <!--hookslist end-->
+
+## About
+
+Standalone build for all rooks. This package contains all the hooks built as part of the rooks project.
+
+**Note:** If you only need a few hooks from the rooks package, it's prefereable to install individiual hooks from npm instead of the standalone rooks build. In other words, install `@rooks/use-did-mount` instead of `rooks` if you only need the `use-did-mount` functionality.
+
+## Installation
+
+### For a specific hook like useDidMount
+
+    npm i -s @rooks/use-did-mount
+
+<!---->
+
+    npm i -s @rooks/use-interval
+
+```jsx
+import useDidMount from "@rooks/use-did-mount";
+```
+
+### For standalone build with all the hooks
+
+    npm i - s rooks
+
+Import any hook from "rooks" and start using them!
+
+```jsx
+import { useDidMount } from "rooks";
+```
+
+## Usage
+
+```jsx
+function App() {
+  useDidMount(() => {
+    alert("mounted");
+  });
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+    </div>
+  );
+}
+```
+
+<br/>
+
+## License
+
+MIT
+
+
+## Join Bhargav's discord server
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
+
