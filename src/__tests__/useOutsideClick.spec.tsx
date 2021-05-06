@@ -29,10 +29,33 @@ const App = ({ condition }: { condition?: boolean }) => {
   );
 };
 
-const clickByTestId = (testId: string) => {
+const touchByTestId = (testId: string) => {
   const target = screen.getByTestId(testId);
   act(() => {
-    fireEvent.click(target);
+    fireEvent.touchStart(target);
+  });
+};
+
+/*
+ * This just runs each test using a touch event and a click event,
+ * replacing "click" in the name with "touch"
+ */
+const itClickAndTouch = (
+  name: string,
+  fn: (clickOrTouch: (testId: string) => void) => void
+) => {
+  const clickByTestId = (testId: string) => {
+    const target = screen.getByTestId(testId);
+    act(() => {
+      fireEvent.click(target);
+    });
+  };
+  it(name, () => {
+    fn(clickByTestId);
+  });
+
+  it(name.replace('click', 'touch'), () => {
+    fn(touchByTestId);
   });
 };
 
@@ -46,55 +69,73 @@ describe('useOutsideClick', () => {
     expect(useOutsideClick).toBeDefined();
   });
 
-  it('should not fire event when clicking inside container', () => {
-    render(<App />);
-    clickByTestId('container');
-    expect(cb).not.toHaveBeenCalled();
-  });
+  itClickAndTouch(
+    'should not fire event when clicking inside container',
+    (clickOrTouch) => {
+      render(<App />);
+      clickOrTouch('container');
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
 
-  it('should not fire event when clicking child inside container', () => {
-    render(<App />);
-    clickByTestId('child');
-    expect(cb).not.toHaveBeenCalled();
-  });
+  itClickAndTouch(
+    'should not fire event when clicking child inside container',
+    (clickOrTouch) => {
+      render(<App />);
+      clickOrTouch('child');
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
 
-  it('should fire event when clicking parent of container', () => {
-    render(<App />);
-    clickByTestId('parent');
-    expect(cb).toHaveBeenCalledTimes(1);
-    clickByTestId('child');
-    clickByTestId('container');
-    expect(cb).toHaveBeenCalledTimes(1);
-  });
+  itClickAndTouch(
+    'should fire event when clicking parent of container',
+    (clickOrTouch) => {
+      render(<App />);
+      clickOrTouch('parent');
+      expect(cb).toHaveBeenCalledTimes(1);
+      clickOrTouch('child');
+      clickOrTouch('container');
+      expect(cb).toHaveBeenCalledTimes(1);
+    }
+  );
 
-  it('should fire event when clicking sibling of container', () => {
-    render(<App />);
-    clickByTestId('outside');
-    expect(cb).toHaveBeenCalledTimes(1);
-    clickByTestId('child');
-    clickByTestId('container');
-    expect(cb).toHaveBeenCalledTimes(1);
-  });
+  itClickAndTouch(
+    'should fire event when clicking sibling of container',
+    (clickOrTouch) => {
+      render(<App />);
+      clickOrTouch('outside');
+      expect(cb).toHaveBeenCalledTimes(1);
+      clickOrTouch('child');
+      clickOrTouch('container');
+      expect(cb).toHaveBeenCalledTimes(1);
+    }
+  );
 
-  it('should not fire event if condition disabled', () => {
-    render(<App condition={false} />);
-    ['parent', 'child', 'outside', 'container'].forEach((id) =>
-      clickByTestId(id)
-    );
-    expect(cb).not.toHaveBeenCalled();
-  });
+  itClickAndTouch(
+    'should not fire event when clicking if condition disabled',
+    (clickOrTouch) => {
+      render(<App condition={false} />);
+      ['parent', 'child', 'outside', 'container'].forEach((id) =>
+        clickOrTouch(id)
+      );
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
 
-  it('should change whether firing when updating `when`', () => {
-    const { rerender } = render(<App condition={false} />);
-    clickByTestId('container');
-    clickByTestId('parent');
-    expect(cb).toHaveBeenCalledTimes(0);
-    rerender(<App condition={true} />);
-    clickByTestId('container');
-    clickByTestId('parent');
-    expect(cb).toHaveBeenCalledTimes(1);
-    rerender(<App condition={false} />);
-    clickByTestId('container');
-    clickByTestId('parent');
-  });
+  itClickAndTouch(
+    'should change whether firing when updating `when` on click',
+    (clickOrTouch) => {
+      const { rerender } = render(<App condition={false} />);
+      clickOrTouch('container');
+      clickOrTouch('parent');
+      expect(cb).toHaveBeenCalledTimes(0);
+      rerender(<App condition={true} />);
+      clickOrTouch('container');
+      clickOrTouch('parent');
+      expect(cb).toHaveBeenCalledTimes(1);
+      rerender(<App condition={false} />);
+      clickOrTouch('container');
+      clickOrTouch('parent');
+    }
+  );
 });

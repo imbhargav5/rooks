@@ -29,11 +29,11 @@ function useOutsideClick<T extends HTMLElement = HTMLElement>(
   useEffect(() => {
     if (when) {
       document.addEventListener('click', memoizedCallback);
-      document.addEventListener('ontouchstart', memoizedCallback);
+      document.addEventListener('touchstart', memoizedCallback);
 
       return () => {
         document.removeEventListener('click', memoizedCallback);
-        document.removeEventListener('ontouchstart', memoizedCallback);
+        document.removeEventListener('touchstart', memoizedCallback);
       };
     }
   }, [ref, handler, when]);
