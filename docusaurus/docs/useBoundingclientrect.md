@@ -1,4 +1,4 @@
-s---
+---
 id: useBoundingclientrect
 title: useBoundingclientrect
 sidebar_label: useBoundingclientrect
