@@ -6,7 +6,7 @@ sidebar_label: usePreventBodyScroll
 
 ## About
 
-Prevent Body Scroll
+A react hook to prevent body scroll. Optionally takes a condition when which disables body scroll only when the condition is true.
 
 [//]: # 'Main'
 
