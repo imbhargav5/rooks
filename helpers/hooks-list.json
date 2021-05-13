@@ -157,6 +157,10 @@
       "description": "A hook that can track a click event outside a ref. Returns a callbackRef."
     },
     {
+      "name": "usePreventBodyScroll",
+      "description": "Prevent Body Scroll"
+    },
+    {
       "name": "usePrevious",
       "description": "Access the previous value of a variable with this React hook"
     },

@@ -58,6 +58,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useOnline](https://react-hooks.org/docs/useOnline) - Online status hook for React.
 *   [useOutsideClick](https://react-hooks.org/docs/useOutsideClick) - Outside click(for a ref) event as hook for React.
 *   [useOutsideClickRef](https://react-hooks.org/docs/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
+*   [usePreventBodyScroll](https://react-hooks.org/docs/usePreventBodyScroll) -
 *   [usePrevious](https://react-hooks.org/docs/usePrevious) - Access the previous value of a variable with this React hook
 *   [usePreviousDifferent](https://react-hooks.org/docs/usePreviousDifferent) - usePreviousDifferent returns the last different value of a variable
 *   [usePreviousImmediate](https://react-hooks.org/docs/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
@@ -88,7 +89,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start--> 
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end--> 
 
