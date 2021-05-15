@@ -9,6 +9,10 @@
       "description": "A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked."
     },
     {
+      "name": "useCookieState",
+      "description": "React hook that returns the current value of a cookie, a callback to update the cookie and a callback to delete the cookie."
+    },
+    {
       "name": "useCountdown",
       "description": "Count down to a target timestamp and call callbacks every second (or provided peried)"
     },

@@ -45,6 +45,7 @@
     "docs:serve": "docusaurus serve"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "lodash.debounce": "^4.0.8",
     "raf": "^3.4.1"
   },

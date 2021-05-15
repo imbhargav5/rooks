@@ -8,6 +8,7 @@ sidebar_label: Hooks List
 
 *   [useBoundingclientrect](https://react-hooks.org/docs/useBoundingclientrect) - getBoundingClientRect hook for React.
 *   [useBoundingclientrectRef](https://react-hooks.org/docs/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
+*   [useCookieState](https://react-hooks.org/docs/useCookieState) - React hook that returns the current value of a cookie, a callback to update the cookie and a callback to delete the cookie.
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - Counter hook for React.
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
