@@ -43,6 +43,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useKey](https://react-hooks.org/docs/useKey) - keypress, keyup and keydown event handlers as hooks for react.
 *   [useKeyRef](https://react-hooks.org/docs/useKeyRef) - Very similar useKey but it returns a ref
 *   [useKeys](https://react-hooks.org/docs/useKeys) - A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
+*   [useLifecycleLogger](https://react-hooks.org/docs/useLifecycleLogger) - A react hook that console logs parameters as component transitions through lifecycles.
 *   [useLocalstorage](https://react-hooks.org/docs/useLocalstorage) - Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
 *   [useLocalstorageState](https://react-hooks.org/docs/useLocalstorageState) - UseState but auto updates values to localStorage
 *   [useMapState](https://react-hooks.org/docs/useMapState) - A react hook to manage state in a key value pair map.
@@ -88,7 +89,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start--> 
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end--> 
 

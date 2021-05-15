@@ -97,6 +97,10 @@
       "description": "A hook which allows to setup callbacks when a combination of keys are pressed at the same time."
     },
     {
+      "name": "useLifecycleLogger",
+      "description": "A react hook that console logs parameters as component transitions through lifecycles."
+    },
+    {
       "name": "useLocalstorage",
       "description": "Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows."
     },
