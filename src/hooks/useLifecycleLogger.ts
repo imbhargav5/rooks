@@ -1,34 +1,15 @@
-import type { EffectCallback } from 'react';
-import { useRef, useEffect } from 'react';
+import { useEffectOnceWhen } from './useEffectOnceWhen';
+import { useUpdateEffect } from './useUpdateEffect';
+import { useWillUnmount } from './useWillUnmount';
 
-const useEffectOnce = (effect: EffectCallback) => {
-  useEffect(effect, []);
-};
-
-export function useFirstMountState(): boolean {
-  const isFirst = useRef(true);
-
-  if (isFirst.current) {
-    isFirst.current = false;
-
-    return true;
-  }
-
-  return isFirst.current;
-}
-
-const useUpdateEffect: typeof useEffect = (effect, deps) => {
-  const isFirstMount = useFirstMountState();
-
-  useEffect(() => {
-    if (!isFirstMount) {
-      return effect();
-    }
-  }, deps);
-};
-
+/**
+ * useLifecycleLogger hook
+ *
+ * @param componentName Name of the component
+ * @param rest
+ */
 const useLifecycleLogger = (componentName: string = 'Component', ...rest) => {
-  useEffectOnce(() => {
+  useEffectOnceWhen(() => {
     console.log(`${componentName} mounted`, ...rest);
 
     return () => console.log(`${componentName} unmounted`);
@@ -36,6 +17,10 @@ const useLifecycleLogger = (componentName: string = 'Component', ...rest) => {
 
   useUpdateEffect(() => {
     console.log(`${componentName} updated`, ...rest);
+  });
+
+  useWillUnmount(() => {
+    console.log(`${componentName} will unmount`, ...rest);
   });
 };
 
