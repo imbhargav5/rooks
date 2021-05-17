@@ -91,7 +91,7 @@ Returns an array with the first element in the array being the callback ref for 
         borderRadius: 4,
         overflow: "hidden"
     }}
-     title="use-counter"
+     title="useInViewRef"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
