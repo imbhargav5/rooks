@@ -1,6 +1,12 @@
 import Cookies from 'js-cookie';
 import { useCallback, useState } from 'react';
 
+type UseCookieStateType = {
+  value: string | null;
+  updateCookie: (newValue: string) => void;
+  deleteCookie: () => void;
+} | null;
+
 /**
  *
  * @param cookieName Name of the cookie
@@ -8,10 +14,11 @@ import { useCallback, useState } from 'react';
  */
 const useCookieState = (
   cookieName: string,
+  cookieValue: string | null = null,
   options?: Cookies.CookieAttributes
-): [string | null, (newValue: string) => void, () => void] | null => {
+): UseCookieStateType => {
   const [value, setValue] = useState<string | null>(
-    () => Cookies.get(cookieName, options) || null
+    () => Cookies.get(cookieName, options) || cookieValue
   );
 
   const updateCookie = useCallback(
@@ -29,7 +36,7 @@ const useCookieState = (
 
   if (!window) return null;
 
-  return [value, updateCookie, deleteCookie];
+  return { deleteCookie, updateCookie, value };
 };
 
 export { useCookieState };
