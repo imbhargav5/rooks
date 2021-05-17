@@ -20,7 +20,7 @@ const useLifecycleLogger = (componentName: string = 'Component', ...rest) => {
   });
 
   useWillUnmount(() => {
-    console.log(`${componentName} will unmount`, ...rest);
+    console.log(`${componentName} unmounted`);
   });
 };
 
