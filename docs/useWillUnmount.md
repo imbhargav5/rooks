@@ -4,8 +4,6 @@ title: useWillUnmount
 sidebar_label: useWillUnmount
 ---
 
-   
-
 ### About
 
 componentWillUnmount lifecycle as hook for React.
@@ -17,39 +15,37 @@ componentWillUnmount lifecycle as hook for React.
 ### Importing the hook
 
 ```javascript
-import {useWillUnmount} from "@rooks"
+import { useWillUnmount } from '@rooks';
 ```
 
 ### Usage
 
 ```jsx
-
-function Message(){
-
+function Message() {
   useWillUnmount(function () {
-    alert("unmounted")
-  })
-  return <p> Message </p>
+    alert('unmounted');
+  });
+  return <p> Message </p>;
 }
-
 
 function Demo() {
-  const [
-    value,
-    changeValue
-   ] = useState(true);
+  const [value, changeValue] = useState(true);
 
-  function toggleValue(){
-    changeValue(!value)
+  function toggleValue() {
+    changeValue(!value);
   }
 
-  return <>
-    <p><button onClick={toggleValue}>Toggle show </button></p>
-    {value && <Message/>}
-  </>;
+  return (
+    <>
+      <p>
+        <button onClick={toggleValue}>Toggle show </button>
+      </p>
+      {value && <Message />}
+    </>
+  );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 #### Arguments
@@ -59,7 +55,6 @@ render(<Demo/>)
 | callback  | function | Callback function which needs to run on unmount | undefined     |
 
 ## A React hook for componentWillUnmount lifecycle method.
-
 
 ## Codesandbox Example
 
@@ -79,5 +74,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

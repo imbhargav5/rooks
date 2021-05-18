@@ -4,8 +4,6 @@ title: useOutsideClickRef
 sidebar_label: useOutsideClickRef
 ---
 
-    
-
 ## About
 
 A hook that can track a click event outside a ref. Returns a callbackRef.
@@ -17,7 +15,7 @@ A hook that can track a click event outside a ref. Returns a callbackRef.
 ## Importing the hook
 
 ```javascript
-import {useOutsideClickRef} from "rooks"
+import { useOutsideClickRef } from 'rooks';
 ```
 
 ## Usage
@@ -25,7 +23,7 @@ import {useOutsideClickRef} from "rooks"
 ```jsx
 function Demo() {
   function outsidePClick() {
-    alert("Clicked outside p");
+    alert('Clicked outside p');
   }
   const [ref] = useOutsideClickRef(outsidePClick);
   return (
@@ -35,7 +33,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ## Codesandbox Examples
@@ -56,5 +54,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

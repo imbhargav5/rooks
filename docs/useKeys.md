@@ -4,8 +4,6 @@ title: useKeys
 sidebar_label: useKeys
 ---
 
-   
-
 ## About
 
 A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
@@ -21,7 +19,7 @@ An important difference between `useKey` and `useKeys` is that `useKey` checks i
 ## Importing the hook
 
 ```javascript
-import {useKeys} from "rooks";
+import { useKeys } from 'rooks';
 ```
 
 ## Usage
@@ -33,25 +31,25 @@ function Demo() {
   const [isEventActive, setIsEventActive] = React.useState(true);
   const [firstCallbackCallCount, setFirstCallbackCallCount] = React.useState(0);
   useKeys(
-    ["ControlLeft", "KeyS"],
+    ['ControlLeft', 'KeyS'],
     () => {
-      alert("you presses ctrlLeft + s");
+      alert('you presses ctrlLeft + s');
       setFirstCallbackCallCount(firstCallbackCallCount + 1);
     },
     {
       target: containerRef,
-      when: isEventActive
+      when: isEventActive,
     }
   );
   useKeys(
-    ["m", "r"],
-    event => {
+    ['m', 'r'],
+    (event) => {
       // event.stopPropagation();
-      console.log("here you go m and r");
+      console.log('here you go m and r');
     },
     {
       when: isEventActive,
-      target: inputRef
+      target: inputRef,
     }
   );
   return (
@@ -60,7 +58,7 @@ function Demo() {
         Callback Run Count:
         {firstCallbackCallCount}
       </p>
-      <p>Is events enabled ? ==> {isEventActive ? "Yes" : "No"}</p>
+      <p>Is events enabled ? ==> {isEventActive ? 'Yes' : 'No'}</p>
       <p>Press CtrlLeft + s to see update in count</p>
       <button
         onClick={() => {
@@ -79,7 +77,6 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,8 +4,6 @@ title: useGeolocation
 sidebar_label: useGeolocation
 ---
 
-    
-
 ## About
 
 A hook to provide the geolocation info on client side.
@@ -17,7 +15,7 @@ A hook to provide the geolocation info on client side.
 ## Importing the hook
 
 ```javascript
-import {useGeolocation} from "rooks";
+import { useGeolocation } from 'rooks';
 ```
 
 ## Usage
@@ -31,9 +29,9 @@ function App() {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column"
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
       }}
     >
       <p>{geoObj && JSON.stringify(geoObj)}</p>
@@ -50,15 +48,15 @@ function App() {
   const [when, setWhen] = React.useState(false);
 
   const geoObj = useGeolocation({
-    when
+    when,
   });
 
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column"
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
       }}
     >
       <button
@@ -74,7 +72,6 @@ function App() {
 }
 render(<App />);
 ```
-
 
 ## Codesandbox Example
 
@@ -94,5 +91,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

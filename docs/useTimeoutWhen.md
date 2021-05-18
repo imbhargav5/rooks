@@ -4,14 +4,11 @@ title: useTimeoutWhen
 sidebar_label: useTimeoutWhen
 ---
 
-
-    
-
 ## About
 
 Takes a callback and fires it when a condition is true
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ Takes a callback and fires it when a condition is true
 ## Importing the hook
 
 ```javascript
-import {useTimeoutWhen} from "rooks"
+import { useTimeoutWhen } from 'rooks';
 ```
 
 ## Usage
@@ -28,21 +25,18 @@ import {useTimeoutWhen} from "rooks"
 ```jsx
 function Demo() {
   useTimeoutWhen(cb, 1000);
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
-
-
+### Basic Usage
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

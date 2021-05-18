@@ -4,8 +4,6 @@ title: useMutationObserver
 sidebar_label: useMutationObserver
 ---
 
-   
-
 ## About
 
 Mutation Observer hook for React.
@@ -17,7 +15,7 @@ Mutation Observer hook for React.
 ## Importing the hook
 
 ```javascript
-import {useMutationObserver} from "rooks"
+import { useMutationObserver } from 'rooks';
 ```
 
 ## Usage
@@ -37,21 +35,21 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
+          background: 'lightblue',
+          padding: '10px',
+          position: 'absolute',
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
         ref={myRef}
       >
         <div
           style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%"
+            resize: 'both',
+            overflow: 'auto',
+            background: 'white',
+            color: 'blue',
+            maxWidth: '100%',
           }}
         >
           <p>
@@ -76,7 +74,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -104,7 +102,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

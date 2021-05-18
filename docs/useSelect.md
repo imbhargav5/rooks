@@ -4,8 +4,6 @@ title: useSelect
 sidebar_label: useSelect
 ---
 
-   
-
 ## About
 
 Select values from a list easily. List selection hook for react.
@@ -17,22 +15,21 @@ Select values from a list easily. List selection hook for react.
 ## Importing the hook
 
 ```javascript
-import {useSelect} from "rooks"
+import { useSelect } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
-
 const list = [
   {
-    heading: "Tab 1",
-    content: "Tab 1 Content"
+    heading: 'Tab 1',
+    content: 'Tab 1 Content',
   },
   {
-    heading: "Tab 2",
-    content: "Tab 2 Content"
-  }
+    heading: 'Tab 2',
+    content: 'Tab 2 Content',
+  },
 ];
 
 function Demo() {
@@ -43,7 +40,7 @@ function Demo() {
         <button
           key={listItemIndex}
           style={{
-            background: index === listItemIndex ? "dodgerblue" : "inherit"
+            background: index === listItemIndex ? 'dodgerblue' : 'inherit',
           }}
           onClick={() => setIndex(listItemIndex)}
         >
@@ -54,7 +51,7 @@ function Demo() {
     </div>
   );
 }
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -91,5 +88,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

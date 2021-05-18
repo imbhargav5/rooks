@@ -4,14 +4,11 @@ title: useFreshTick
 sidebar_label: useFreshTick
 ---
 
-
-    
-
 ## About
 
 Like useFreshRef but specifically for functions
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ Like useFreshRef but specifically for functions
 ## Importing the hook
 
 ```javascript
-import {useFreshTick} from "rooks";
+import { useFreshTick } from 'rooks';
 ```
 
 ## Usage
@@ -46,12 +43,11 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usefreshtick-vi4d5?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -67,5 +63,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

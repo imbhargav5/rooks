@@ -4,14 +4,11 @@ title: useMediaMatch
 sidebar_label: useMediaMatch
 ---
 
-
-    
-
 ## About
 
 Signal whether or not a media query is currently matched.
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ Signal whether or not a media query is currently matched.
 ## Importing the hook
 
 ```javascript
-import {useMediaMatch} from 'rooks';
+import { useMediaMatch } from 'rooks';
 ```
 
 ## Usage
@@ -34,12 +31,11 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usemediamatch-f616x?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -54,7 +50,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

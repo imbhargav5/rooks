@@ -4,8 +4,6 @@ title: useDebounce
 sidebar_label: useDebounce
 ---
 
-   
-
 ## About
 
 Debounce hook for react
@@ -17,7 +15,7 @@ Debounce hook for react
 ## Importing the hook
 
 ```javascript
-import {useDebounce} from "rooks"
+import { useDebounce } from 'rooks';
 ```
 
 ## Usage
@@ -25,13 +23,12 @@ import {useDebounce} from "rooks"
 ```jsx
 function Demo() {
   useDebounce();
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

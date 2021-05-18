@@ -4,8 +4,6 @@ title: useTimeout
 sidebar_label: useTimeout
 ---
 
-   
-
 ## About
 
 setTimeout hook for react.
@@ -17,7 +15,7 @@ setTimeout hook for react.
 ## Importing the hook
 
 ```javascript
-import {useTimeout} from "rooks"
+import { useTimeout } from 'rooks';
 ```
 
 ## Usage
@@ -25,7 +23,7 @@ import {useTimeout} from "rooks"
 ```jsx
 function TimeoutComponent() {
   function doAlert() {
-    window.alert("timeout expired!");
+    window.alert('timeout expired!');
   }
   const { start, clear } = useTimeout(doAlert, 2000);
   return (
@@ -36,7 +34,7 @@ function TimeoutComponent() {
   );
 }
 
-render(<TimeoutComponent/>)
+render(<TimeoutComponent />);
 ```
 
 ### Arguments
@@ -53,7 +51,6 @@ render(<TimeoutComponent/>)
 | clear                      | function | Clear the timeout     |
 | start                      | function | Start the timeout     |
 | isActive                   | boolean  | Is the timeout active |
-
 
 ## Codesandbox Example
 
@@ -73,5 +70,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

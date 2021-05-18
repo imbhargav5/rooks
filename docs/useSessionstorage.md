@@ -4,7 +4,6 @@ title: useSessionstorage
 sidebar_label: useSessionstorage
 ---
 
-
 ## About
 
 Session storage react hook. Easily manage session storage values.
@@ -16,19 +15,19 @@ Session storage react hook. Easily manage session storage values.
 ## Importing the hook
 
 ```javascript
-import {useSessionstorage} from "rooks";
+import { useSessionstorage } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const [value, set, remove] = useSessionstorage("my-value", 0);
+  const [value, set, remove] = useSessionstorage('my-value', 0);
   // Can also be used as {value, set, remove}
 
   return (
     <p>
-      Value is {value}{" "}
+      Value is {value}{' '}
       <button onClick={() => set(value !== null ? parseFloat(value) + 1 : 0)}>
         Increment
       </button>
@@ -58,5 +57,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

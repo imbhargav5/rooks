@@ -4,8 +4,6 @@ title: useVisibilitySensor
 sidebar_label: useVisibilitySensor
 ---
 
-   
-
 ## About
 
 Visibility sensor hook for React.
@@ -17,30 +15,29 @@ Visibility sensor hook for React.
 ## Importing the hook
 
 ```javascript
-import {useVisibilitySensor} from "rooks"
+import { useVisibilitySensor } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
-
 function Demo() {
-    const rootNode = useRef(null);
-    const { isVisible, visibilityRect } = useVisibilitySensor(rootNode, {
-        intervalCheck: false,
-        scrollCheck: true,
-        resizeCheck: true
-    });
-    return (
-        <div ref={rootNode}>
-        <p>
-            {isVisible ? "Visible" : isVisible === null ? "Null" : "Not Visible"}
-        </p>
-        </div>
-    );
+  const rootNode = useRef(null);
+  const { isVisible, visibilityRect } = useVisibilitySensor(rootNode, {
+    intervalCheck: false,
+    scrollCheck: true,
+    resizeCheck: true,
+  });
+  return (
+    <div ref={rootNode}>
+      <p>
+        {isVisible ? 'Visible' : isVisible === null ? 'Null' : 'Not Visible'}
+      </p>
+    </div>
+  );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 It checks whether an element has scrolled into view or not. A lot of the logic is taken from [react-visibility-sensor](https://github.com/joshwnj/react-visibility-sensor) and is rewritten for the hooks proposal.
@@ -89,13 +86,13 @@ The first argument of the `useVisibilitySensor` hook is a ref, the second argume
 
 ## Todo
 
-*   \[x] Init
-*   \[x] Scroll and Resize support
-*   \[x] Debounce and throttling
-*   \[x] Option to opt-out of initial check on mount
-*   \[x] Documentation of all options
-*   \[x] Tests \_ WIP \_
-*   \[ ] More examples \_ WIP \_
+- \[x] Init
+- \[x] Scroll and Resize support
+- \[x] Debounce and throttling
+- \[x] Option to opt-out of initial check on mount
+- \[x] Documentation of all options
+- \[x] Tests \_ WIP \_
+- \[ ] More examples \_ WIP \_
 
 ## Codesandbox Example
 
@@ -115,5 +112,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

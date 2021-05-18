@@ -4,8 +4,6 @@ title: useLocalstorage
 sidebar_label: useLocalstorage
 ---
 
-   
-
 ## About
 
 Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
@@ -17,14 +15,14 @@ Localstorage hook for React. Syncs with localstorage values across components an
 ## Importing the hook
 
 ```javascript
-import {useLocalstorage} from "rooks";
+import { useLocalstorage } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const [value, set, remove] = useLocalstorage("my-value", 0);
+  const [value, set, remove] = useLocalstorage('my-value', 0);
   // Can also be used as {value, set, remove}
 
   return (
@@ -40,7 +38,9 @@ function Demo() {
 
 render(<Demo />);
 ```
+
 ## Codesandbox Example
+
 ### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usevisibilitysensor-ej29y?fontsize=14&hidenavigation=1&theme=dark"
@@ -57,5 +57,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

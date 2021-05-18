@@ -4,8 +4,6 @@ title: useInput
 sidebar_label: useInput
 ---
 
-   
-
 ## About
 
 Input hook for React.
@@ -17,7 +15,7 @@ Input hook for React.
 ## Importing the hook
 
 ```javascript
-import {useInput} from "rooks"
+import { useInput } from 'rooks';
 ```
 
 ## Usage
@@ -26,7 +24,7 @@ import {useInput} from "rooks"
 
 ```jsx
 function Demo() {
-  const myInput = useInput("hello");
+  const myInput = useInput('hello');
   return (
     <div>
       <input {...myInput} />
@@ -37,15 +35,15 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 **With optional validator**
 
 ```jsx
 function Demo() {
-  const myInput = useInput("hello", {
-    validate: (newValue) => newValue.length < 15
+  const myInput = useInput('hello', {
+    validate: (newValue) => newValue.length < 15,
   });
   return (
     <div>
@@ -58,7 +56,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -99,5 +97,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

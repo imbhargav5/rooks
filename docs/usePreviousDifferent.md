@@ -4,14 +4,11 @@ title: usePreviousDifferent
 sidebar_label: usePreviousDifferent
 ---
 
-
-    
-
 ## About
 
 usePreviousDifferent returns the last different value of a variable
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,27 +17,26 @@ usePreviousDifferent returns the last different value of a variable
 ## Importing the hook
 
 ```javascript
-import {usePreviousDifferent} from "rooks"
+import { usePreviousDifferent } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const [value, setValue] = useState(0)
-  const previousValue = usePreviousDifferent(value) 
-  return null
+  const [value, setValue] = useState(0);
+  const previousValue = usePreviousDifferent(value);
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usepreviousdifferent-cvnhh?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -56,5 +52,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

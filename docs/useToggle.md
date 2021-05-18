@@ -4,8 +4,6 @@ title: useToggle
 sidebar_label: useToggle
 ---
 
-   
-
 ## About
 
 Toggle (between booleans or custom data)hook for React.
@@ -17,22 +15,18 @@ Toggle (between booleans or custom data)hook for React.
 ## Importing the hook
 
 ```javascript
-import {useToggle} from "rooks"
+import { useToggle } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
-
-const customToggleFunction = v => (v === "start" ? "stop" : "start");
+const customToggleFunction = (v) => (v === 'start' ? 'stop' : 'start');
 
 function Demo() {
-  const  [value1, toggleValue1] = useToggle();
-  const [value2, toggleValue2]  = useToggle(true);
-  const [value3, toggleValue3]  = useToggle(
-    "start",
-    customToggleFunction
-  );
+  const [value1, toggleValue1] = useToggle();
+  const [value2, toggleValue2] = useToggle(true);
+  const [value3, toggleValue3] = useToggle('start', customToggleFunction);
 
   return (
     <>
@@ -54,7 +48,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ## Arguments
@@ -70,7 +64,6 @@ render(<Demo/>)
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
 | value                | Any      | Current value                                                                                                         |
 | toggleValue          | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
-
 
 ## Codesandbox Example
 
@@ -90,5 +83,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

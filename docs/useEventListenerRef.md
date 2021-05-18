@@ -4,14 +4,11 @@ title: useEventListenerRef
 sidebar_label: useEventListenerRef
 ---
 
-
-    
-
 ## About
 
 A react hook to add an event listener to a ref
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,24 +17,21 @@ A react hook to add an event listener to a ref
 ## Importing the hook
 
 ```javascript
-import {useEventListenerRef} from "rooks"
+import { useEventListenerRef } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const ref = useEventListenerRef("click", function(){
-    console.log("clicked")
+  const ref = useEventListenerRef('click', function () {
+    console.log('clicked');
   });
-  return <div ref={ref}>
-    Click me
-  </div>
+  return <div ref={ref}>Click me</div>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
@@ -57,10 +51,8 @@ render(<Demo/>)
   title="red-sunset-1ph98"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>    
-
-
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
