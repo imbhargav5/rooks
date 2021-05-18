@@ -4,14 +4,10 @@ title: useKeyRef
 sidebar_label: useKeyRef
 ---
 
-
-    
-
 ## About
 
 Very similar useKey but it returns a ref
 
-[//]: # "Main"
 
 ## Installation
 
@@ -141,7 +137,7 @@ render(<Demo />);
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 
 
