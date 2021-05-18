@@ -17,9 +17,13 @@ const useCookieState = (
   cookieValue: string | null = null,
   options?: Cookies.CookieAttributes
 ): UseCookieStateType => {
-  const [value, setValue] = useState<string | null>(
-    () => Cookies.get(cookieName, options) || cookieValue
-  );
+  const [value, setValue] = useState<string | null>(() => {
+    if (typeof window !== undefined) {
+      return Cookies.get(cookieName, options) || cookieValue;
+    }
+
+    return null;
+  });
 
   const updateCookie = useCallback(
     (newValue: string) => {
@@ -33,8 +37,6 @@ const useCookieState = (
     Cookies.remove(cookieName);
     setValue(null);
   }, [cookieName]);
-
-  if (!window) return null;
 
   return { deleteCookie, updateCookie, value };
 };
