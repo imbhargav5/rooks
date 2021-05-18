@@ -4,8 +4,6 @@ title: useFullscreen
 sidebar_label: useFullscreen
 ---
 
-    
-
 ## About
 
 Use full screen api for making beautiful and emersive experinces.
@@ -17,65 +15,65 @@ Use full screen api for making beautiful and emersive experinces.
 ## Importing the hook
 
 ```javascript
-import {useFullscreen} from "rooks"
+import { useFullscreen } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
-import React, { useState, useRef } from "react";
-import ReactDOM from "react-dom";
-import { useFullscreen } from "rooks";
+import React, { useState, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import { useFullscreen } from 'rooks';
 
 const styles = {
   html: {
     fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-    padding: "30px 10px 0 0",
-    fontSize: "20px",
-    lineHeight: "1.4",
-    color: "#737373",
-    background: "#f0f0f0",
-    WebkitFontSmoothing: "antialiased"
+    padding: '30px 10px 0 0',
+    fontSize: '20px',
+    lineHeight: '1.4',
+    color: '#737373',
+    background: '#f0f0f0',
+    WebkitFontSmoothing: 'antialiased',
   },
   hr: {
-    border: "none",
-    borderTop: "1px solid #e6e6e6",
-    margin: "20px 0"
+    border: 'none',
+    borderTop: '1px solid #e6e6e6',
+    margin: '20px 0',
   },
   a: {
-    color: "#666"
+    color: '#666',
   },
   h1: {
-    margin: "0",
-    fontSize: "40px",
-    textAlign: "center"
+    margin: '0',
+    fontSize: '40px',
+    textAlign: 'center',
   },
   ul: {
-    padding: "0 0 0 40px",
-    margin: "1em 0",
-    padding: "0",
-    margin: "40px 0 0 0",
-    listStyle: "none"
+    padding: '0 0 0 40px',
+    margin: '1em 0',
+    padding: '0',
+    margin: '40px 0 0 0',
+    listStyle: 'none',
   },
   button: {
-    fontSize: "13px"
+    fontSize: '13px',
   },
   container: {
-    width: "500px",
-    padding: "30px 20px",
-    margin: "0 auto 50px auto",
-    background: "#fcfcfc",
-    textAlign: "center",
-    border: "1px solid #b3b3b3",
-    borderRadius: "4px",
-    boxShadow: "0 1px 10px #a7a7a7, inset 0 1px 0 #fff"
+    width: '500px',
+    padding: '30px 20px',
+    margin: '0 auto 50px auto',
+    background: '#fcfcfc',
+    textAlign: 'center',
+    border: '1px solid #b3b3b3',
+    borderRadius: '4px',
+    boxShadow: '0 1px 10px #a7a7a7, inset 0 1px 0 #fff',
   },
   demo_img: {
-    cursor: "pointer"
+    cursor: 'pointer',
   },
   header_p: {
-    fontSize: "17px"
-  }
+    fontSize: '17px',
+  },
 };
 
 function Demo() {
@@ -88,7 +86,7 @@ function Demo() {
     request,
     exit,
     isFullscreen,
-    element
+    element,
   } = useFullscreen();
   const [changeCount, setChangeCount] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
@@ -106,16 +104,15 @@ function Demo() {
         <header>
           <h1 styles={styles.h1}>useFullscreen</h1>
           <p style={styles.header_p}>
-            Simple react hook for cross-browser usage of the JavaScript{" "}
+            Simple react hook for cross-browser usage of the JavaScript{' '}
             <a
               style={styles.a}
               href="https://developer.mozilla.org/en/DOM/Using_full-screen_mode"
             >
               Fullscreen API
             </a>
-            , which lets you bring the page or any element into fullscreen.
-            Smoothens out the browser implementation differences, so you don't
-            have too.
+            , which lets you bring the page or any element into fullscreen. Smoothens
+            out the browser implementation differences, so you don't have too.
           </p>
         </header>
         <hr style={styles.hr} />
@@ -156,16 +153,16 @@ function Demo() {
             </li>
             <li id="status">Is fullscreen: {JSON.stringify(isFullscreen)}</li>
             <li>
-              Changed {changeCount} {changeCount !== 1 ? "times" : "time"}
+              Changed {changeCount} {changeCount !== 1 ? 'times' : 'time'}
             </li>
             <li>
-              {errorCount} {errorCount !== 1 ? "errors" : "error"}
+              {errorCount} {errorCount !== 1 ? 'errors' : 'error'}
             </li>
             <li id="element">
-              Element:{" "}
+              Element:{' '}
               {element
                 ? `${element.tagName.toLowerCase()} ${element.id}`
-                : "null"}
+                : 'null'}
             </li>
           </ul>
         </section>
@@ -178,7 +175,7 @@ function Demo() {
             src="https://sindresorhus.com/unicorn"
             width="500"
             style={styles.demo_img}
-            onClick={e => {
+            onClick={(e) => {
               toggle(e.target);
             }}
           />
@@ -188,11 +185,26 @@ function Demo() {
   );
 }
 
-
-render(<Demo/>)
+render(<Demo />);
 ```
 
+## Codesandbox Example
+
+### Basic usage
+
+<iframe src="https://codesandbox.io/embed/usefullscreen-jqnzu?fontsize=14&hidenavigation=1&theme=dark"
+   style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+title="useFullscreen"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

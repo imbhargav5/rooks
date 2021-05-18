@@ -4,8 +4,6 @@ title: useInput
 sidebar_label: useInput
 ---
 
-   
-
 ## About
 
 Input hook for React.
@@ -17,7 +15,7 @@ Input hook for React.
 ## Importing the hook
 
 ```javascript
-import {useInput} from "rooks"
+import { useInput } from 'rooks';
 ```
 
 ## Usage
@@ -26,7 +24,7 @@ import {useInput} from "rooks"
 
 ```jsx
 function Demo() {
-  const myInput = useInput("hello");
+  const myInput = useInput('hello');
   return (
     <div>
       <input {...myInput} />
@@ -37,15 +35,15 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 **With optional validator**
 
 ```jsx
 function Demo() {
-  const myInput = useInput("hello", {
-    validate: (newValue) => newValue.length < 15
+  const myInput = useInput('hello', {
+    validate: (newValue) => newValue.length < 15,
   });
   return (
     <div>
@@ -58,7 +56,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -80,7 +78,24 @@ render(<Demo/>)
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
 
+## Codesandbox Examples
+
+### Basic Usage
+
+<iframe 
+    src="https://codesandbox.io/embed/useinput-forked-oxzxj?fontsize=14&hidenavigation=1&theme=dark"
+       style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+    title="useInput"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
