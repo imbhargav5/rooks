@@ -4,8 +4,6 @@ title: useWindowSize
 sidebar_label: useWindowSize
 ---
 
-   
-
 ## About
 
 Window size hook for React.
@@ -48,7 +46,7 @@ function WindowComponent() {
     </div>
   );
 }
-render(<WindowComponent/>)
+render(<WindowComponent />);
 ```
 
 ### Returned Object keys
@@ -59,7 +57,6 @@ render(<WindowComponent/>)
 | height                     | int  | inner height of window |
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
-
 
 ## Codesandbox Example
 
@@ -79,5 +76,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

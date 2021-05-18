@@ -4,8 +4,6 @@ title: useUpdateEffect
 sidebar_label: useUpdateEffect
 ---
 
-   
-
 ## About
 
 An useEffect that does not run on first render
@@ -17,7 +15,7 @@ An useEffect that does not run on first render
 ## Importing the hook
 
 ```javascript
-import {useUpdateEffect} from "srooks";
+import { useUpdateEffect } from 'srooks';
 ```
 
 ## Usage
@@ -36,7 +34,9 @@ function Demo() {
   }, [value]);
   return (
     <>
-      <button onClick={() => setUserID(Math.random())}>user ID is {userID}</button>
+      <button onClick={() => setUserID(Math.random())}>
+        user ID is {userID}
+      </button>
       <p>Has updated for userID - {hasUpdated.toString()}</p>
     </>
   );
@@ -63,5 +63,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

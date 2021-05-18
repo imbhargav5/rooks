@@ -4,8 +4,6 @@ title: useNavigatorLanguage
 sidebar_label: useNavigatorLanguage
 ---
 
-   
-
 ## About
 
 Navigator Language hook for React.
@@ -17,7 +15,7 @@ Navigator Language hook for React.
 ## Importing the hook
 
 ```javascript
-import {useNavigatorLanguage} from "rooks";
+import { useNavigatorLanguage } from 'rooks';
 ```
 
 ## Usage
@@ -34,7 +32,6 @@ render(<Demo />);
 ### Return value
 
 A language (String) is returned.
-
 
 ### Codesandbox Example
 
@@ -54,5 +51,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

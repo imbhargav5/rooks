@@ -4,8 +4,6 @@ title: useTimeAgo
 sidebar_label: useTimeAgo
 ---
 
-   
-
 ## About
 
 A React Hook to get time ago for timestamp millisecond value.
@@ -17,7 +15,7 @@ A React Hook to get time ago for timestamp millisecond value.
 ## Importing the hook
 
 ```javascript
-import {useTimeAgo} from "rooks"
+import { useTimeAgo } from 'rooks';
 ```
 
 ## Usage
@@ -26,7 +24,7 @@ import {useTimeAgo} from "rooks"
 function Demo() {
   const [date, setDate] = useState(new Date());
   const timeAgo = useTimeAgo(date.getTime() - 1000 * 12, {
-    locale: "zh_CN"
+    locale: 'zh_CN',
   });
   const timeAgo2 = useTimeAgo(date.getTime() - 1000 * 12);
   return (
@@ -37,15 +35,15 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
 
-| Argument | Type   | Description    | Default value      |
-| -------- | ------ | -------------- | ------------------ |
-| input    | Date   | Timestamp      | etc                | Any input that time-ago.js supports | undefined |
-| options  | Object | Options object | {   intervalMs:0 } |
+| Argument | Type   | Description    | Default value    |
+| -------- | ------ | -------------- | ---------------- | ----------------------------------- | --------- |
+| input    | Date   | Timestamp      | etc              | Any input that time-ago.js supports | undefined |
+| options  | Object | Options object | { intervalMs:0 } |
 
 #### Options
 
@@ -59,7 +57,6 @@ render(<Demo/>)
 
 Timeago string is returned.
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,14 +4,11 @@ title: useMergeRefs
 sidebar_label: useMergeRefs
 ---
 
-
-    
-
 ## About
 
 Merges any number of refs into a single ref
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ Merges any number of refs into a single ref
 ## Importing the hook
 
 ```javascript
-import {useMergeRefs} from "rooks"
+import { useMergeRefs } from 'rooks';
 ```
 
 ## Usage
@@ -28,18 +25,17 @@ import {useMergeRefs} from "rooks"
 ```jsx
 function Demo() {
   useMergeRefs();
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usemergerefs-rk7m1?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -54,8 +50,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

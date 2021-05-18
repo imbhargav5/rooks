@@ -4,8 +4,6 @@ title: useIntersectionObserverRef
 sidebar_label: useIntersectionObserverRef
 ---
 
-    
-
 ## About
 
 A hook to register an intersection observer listener.
@@ -17,7 +15,7 @@ A hook to register an intersection observer listener.
 ## Importing the hook
 
 ```javascript
-import {useIntersectionObserverRef} from 'rooks';
+import { useIntersectionObserverRef } from 'rooks';
 ```
 
 ## Usage
@@ -68,7 +66,6 @@ Returns an array with the first element in the array being the callback ref for 
 | ------------ | ----------- | -------------------------------------------------------------- | ------------- |
 | ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
 
-
 ## Codesandbox Example
 
 ### Basic usage
@@ -86,7 +83,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

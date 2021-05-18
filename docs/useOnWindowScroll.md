@@ -4,8 +4,6 @@ title: useOnWindowScroll
 sidebar_label: useOnWindowScroll
 ---
 
-   
-
 ## About
 
 A React hook for adding an event listener for window scroll
@@ -18,19 +16,18 @@ A React hook for adding an event listener for window scroll
 ## Importing the hook
 
 ```javascript
-import {useOnWindowScroll} from "rooks"
+import { useOnWindowScroll } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
-
 function Demo() {
-  useOnWindowScroll(() => console.log("window scrolled"))
-  return <p> Hello world </p>
+  useOnWindowScroll(() => console.log('window scrolled'));
+  return <p> Hello world </p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -44,7 +41,7 @@ render(<Demo/>)
 
 ## Codesandbox Example
 
-### Basic Usage 
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/useonwindowscroll-58uiy?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -60,5 +57,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

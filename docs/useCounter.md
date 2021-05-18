@@ -4,9 +4,6 @@ title: useCounter
 sidebar_label: useCounter
 ---
 
-
-   
-
 ## About
 
 Counter hook for React.
@@ -19,7 +16,7 @@ Counter hook for React.
 ## Importing the hook
 
 ```javascript
-import {useCounter} from "rooks"
+import { useCounter } from 'rooks';
 ```
 
 ## Usage
@@ -32,30 +29,31 @@ function CounterComponent() {
     decrement,
     incrementBy,
     decrementBy,
-    reset
+    reset,
   } = useCounter(3);
 
-
-  function incrementBy5(){
-     incrementBy(5)
+  function incrementBy5() {
+    incrementBy(5);
   }
-  function decrementBy7(){
-     decrementBy(7)
+  function decrementBy7() {
+    decrementBy(7);
   }
 
-  return <>
+  return (
+    <>
       Current value is {value}
-      <hr/>
+      <hr />
       <button onClick={increment}>increment</button>
       <button onClick={decrement}>decrement</button>
-      <button onClick={incrementBy5} >incrementBy5</button>
-      <button onClick={decrementBy7} >decrementBy7</button>
-      <hr/>
+      <button onClick={incrementBy5}>incrementBy5</button>
+      <button onClick={decrementBy7}>decrementBy7</button>
+      <hr />
       <button onClick={reset}>reset</button>
-  </>;
+    </>
+  );
 }
 
-render(<CounterComponent/>)
+render(<CounterComponent />);
 ```
 
 ### Arguments
@@ -69,7 +67,6 @@ render(<CounterComponent/>)
 | Return value | Type   | Description                                                                 |
 | ------------ | ------ | --------------------------------------------------------------------------- |
 | counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
-
 
 ---
 
@@ -88,10 +85,8 @@ render(<CounterComponent/>)
      title="useCounter"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>    
-
-
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

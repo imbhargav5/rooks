@@ -4,8 +4,6 @@ title: useOnline
 sidebar_label: useOnline
 ---
 
-   
-
 ## About
 
 Online status hook for React.
@@ -17,7 +15,7 @@ Online status hook for React.
 ### Importing the hook
 
 ```javascript
-import {useOnline} from "rooks";
+import { useOnline } from 'rooks';
 ```
 
 ### Usage
@@ -53,5 +51,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

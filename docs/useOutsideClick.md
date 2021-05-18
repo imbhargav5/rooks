@@ -4,8 +4,6 @@ title: useOutsideClick
 sidebar_label: useOutsideClick
 ---
 
-   
-
 ## About
 
 Outside click(for a ref) event as hook for React.
@@ -17,7 +15,7 @@ Outside click(for a ref) event as hook for React.
 ## Importing the hook
 
 ```javascript
-import {useOutsideClick} from "rooks";
+import { useOutsideClick } from 'rooks';
 ```
 
 ## Usage
@@ -26,7 +24,7 @@ import {useOutsideClick} from "rooks";
 function Demo() {
   const pRef = useRef();
   function outsidePClick() {
-    alert("Clicked outside p");
+    alert('Clicked outside p');
   }
   useOutsideClick(pRef, outsidePClick);
   return (
@@ -56,7 +54,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 / >
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

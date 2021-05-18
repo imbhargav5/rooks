@@ -4,14 +4,11 @@ title: useIntervalWhen
 sidebar_label: useIntervalWhen
 ---
 
-
-    
-
 ## About
 
 Sets an interval immediately when a condition is true
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,28 +17,27 @@ Sets an interval immediately when a condition is true
 ## Importing the hook
 
 ```javascript
-import {useIntervalWhen} from "rooks"
+import { useIntervalWhen } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  useIntervalWhen(()=>{
-    console.log("runs every 2 seconds")
+  useIntervalWhen(() => {
+    console.log('runs every 2 seconds');
   }, 2000);
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/useintervalwhen-lej6t?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -56,8 +52,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,8 +4,6 @@ title: usePrevious
 sidebar_label: usePrevious
 ---
 
-   
-
 ## About
 
 Access the previous value of a variable with this React hook
@@ -18,14 +16,14 @@ Access the previous value of a variable with this React hook
 ## Importing the hook
 
 ```javascript
-import {usePrevious} from "rooks";
+import { usePrevious } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const myInput = useInput("hello world");
+  const myInput = useInput('hello world');
   const previousValue = usePrevious(myInput.value);
   return (
     <div>
@@ -36,7 +34,7 @@ function Demo() {
         Current value is <b>{myInput.value}</b>
       </p>
       <p>
-        Previous value was <b>{previousValue || "-"}</b>
+        Previous value was <b>{previousValue || '-'}</b>
       </p>
     </div>
   );
@@ -72,7 +70,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,8 +4,6 @@ title: useForkRef
 sidebar_label: useForkRef
 ---
 
-    
-
 ## About
 
 A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
@@ -17,7 +15,7 @@ A hook that can combine two refs(mutable or callbackRefs) into a single callback
 ## Importing the hook
 
 ```javascript
-import {useForkRef} from "rooks"
+import { useForkRef } from 'rooks';
 ```
 
 ## Usage
@@ -25,7 +23,7 @@ import {useForkRef} from "rooks"
 ```jsx
 function Demo() {
   const [isVisible, setIsVisible] = useState(false);
-  const callback = entries => {
+  const callback = (entries) => {
     if (entries && entries[0]) {
       setIsVisible(entries[0].isIntersecting);
     }
@@ -33,7 +31,7 @@ function Demo() {
   const [myIntersectionObserverRef] = useIntersectionObserverRef(callback);
   const [
     myBoundingclientrectRef,
-    boundingclientrect
+    boundingclientrect,
   ] = useBoundingclientrectRef();
   const myRef = useForkRef(myIntersectionObserverRef, myBoundingclientrectRef);
   const displayString = JSON.stringify(boundingclientrect, null, 2);
@@ -41,15 +39,15 @@ function Demo() {
     <>
       <div
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
-          right: 0
+          right: 0,
         }}
       >
         <h1>Is rectangle visible - {String(isVisible)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "lightblue" }}>
+      <div ref={myRef} style={{ height: 300, background: 'lightblue' }}>
         <p>Boundingclientrect</p>
         <pre>{displayString}</pre>
       </div>
@@ -58,7 +56,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -76,7 +74,7 @@ render(<Demo/>)
 
 ## Original source
 
-*Note*: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
+_Note_: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
 
 [Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
 
@@ -98,5 +96,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

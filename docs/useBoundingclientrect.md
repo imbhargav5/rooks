@@ -4,8 +4,6 @@ title: useBoundingclientrect
 sidebar_label: useBoundingclientrect
 ---
 
-   
-
 ## About
 
 getBoundingClientRect hook for React.
@@ -18,7 +16,7 @@ getBoundingClientRect hook for React.
 ## Importing the hook
 
 ```javascript
-import {useBoundingclientrect} from "rooks"
+import { useBoundingclientrect } from 'rooks';
 ```
 
 ## Usage
@@ -35,21 +33,21 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
+          background: 'lightblue',
+          padding: '10px',
+          position: 'absolute',
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
         ref={myRef}
       >
         <div
           style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%"
+            resize: 'both',
+            overflow: 'auto',
+            background: 'white',
+            color: 'blue',
+            maxWidth: '100%',
           }}
         >
           <p>
@@ -74,7 +72,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -88,7 +86,6 @@ render(<Demo/>)
 | Return value | Type    | Description                                                                  | Default value |
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
-
 
 ## Codesandbox Example
 
@@ -108,5 +105,5 @@ sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-ori
 />
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,8 +4,6 @@ title: useInterval
 sidebar_label: useInterval
 ---
 
-   
-
 ## About
 
 setInterval hook for React.
@@ -17,7 +15,7 @@ setInterval hook for React.
 ## Importing the hook
 
 ```javascript
-import {useInterval} from "rooks"
+import { useInterval } from 'rooks';
 ```
 
 ## Usage
@@ -25,7 +23,7 @@ import {useInterval} from "rooks"
 ```jsx
 function reducer(state, action) {
   switch (action.type) {
-    case "increment":
+    case 'increment':
       return { count: state.count + 1 };
     default:
       return state;
@@ -37,7 +35,7 @@ function Demo() {
 
   function increment() {
     dispatcher({
-      type: "increment"
+      type: 'increment',
     });
   }
 
@@ -53,7 +51,7 @@ function Demo() {
     </>
   );
 }
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -89,7 +87,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

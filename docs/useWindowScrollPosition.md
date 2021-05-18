@@ -4,14 +4,11 @@ title: useWindowScrollPosition
 sidebar_label: useWindowScrollPosition
 ---
 
-
-    
-
 ## About
 
 A React hook to get the scroll position of the window
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,29 +17,30 @@ A React hook to get the scroll position of the window
 ## Importing the hook
 
 ```javascript
-import {useWindowScrollPosition} from "rooks"
+import { useWindowScrollPosition } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const {scrollX, scrollY} = useWindowScrollPosition();  
-  return <div>
-    <p> Window X position is {scrollX}</p>
-    <p> Window Y position is {scrollY}</p>
-  </div>
+  const { scrollX, scrollY } = useWindowScrollPosition();
+  return (
+    <div>
+      <p> Window X position is {scrollX}</p>
+      <p> Window Y position is {scrollY}</p>
+    </div>
+  );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usewindowscrollposition-qspkk?fontsize=14&hidenavigation=1&theme=dark"
    style={{
@@ -57,7 +55,6 @@ allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
