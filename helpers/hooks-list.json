@@ -193,6 +193,10 @@
       "description": "useState but syncs with sessionstorage"
     },
     {
+      "name": "useSet",
+      "description": "React state hook that tracks a Set."
+    },
+    {
       "name": "useStackState",
       "description": "A React hook that manages state in the form of a stack"
     },
