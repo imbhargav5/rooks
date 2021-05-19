@@ -1,4 +1,4 @@
-import { useEffectOnceWhen } from './useEffectOnceWhen';
+import { useDidMount } from './useDidMount';
 import { useUpdateEffect } from './useUpdateEffect';
 import { useWillUnmount } from './useWillUnmount';
 
@@ -9,7 +9,7 @@ import { useWillUnmount } from './useWillUnmount';
  * @param rest
  */
 const useLifecycleLogger = (componentName: string = 'Component', ...rest) => {
-  useEffectOnceWhen(() => {
+  useDidMount(() => {
     console.log(`${componentName} mounted`, ...rest);
 
     return () => console.log(`${componentName} unmounted`);
