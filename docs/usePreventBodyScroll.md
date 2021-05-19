@@ -26,8 +26,46 @@ import { usePreventBodyScroll } from 'rooks';
 
 ```jsx
 function Demo() {
-  usePreventBodyScroll();
-  return null;
+  const [scroll, toggleScroll] = useState(false);
+  usePreventBodyScroll({ when: scroll });
+  return (
+    <div>
+      <button onClick={() => toggleScroll((prev) => !prev)}>
+        Toggle Scroll
+      </button>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+      <div>Hello</div>
+    </div>
+  );
 }
 
 render(<Demo />);

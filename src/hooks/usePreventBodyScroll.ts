@@ -19,11 +19,12 @@ const usePreventBodyScroll = (options: Options = defaultOptions) => {
   const { when } = options;
 
   useIsomorphicEffect(() => {
-    if (when && typeof document !== 'undefined')
-      document.body.style = 'overflow: hidden';
+    if (when && typeof document !== 'undefined' && document?.body?.style)
+      document.body.setAttribute('style', 'overflow: hidden');
 
     return () => {
-      document.body.style = 'overflow: scroll';
+      if (document?.body?.style)
+        document.body.setAttribute('style', 'overflow: scroll');
     };
   }, [when]);
 
