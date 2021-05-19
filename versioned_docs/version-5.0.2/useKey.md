@@ -4,9 +4,6 @@ title: useKey
 sidebar_label: useKey
 ---
 
-
-   
-
 ## About
 
 keypress, keyup and keydown event handlers as hooks for react.
@@ -18,7 +15,7 @@ keypress, keyup and keydown event handlers as hooks for react.
 ## Importing the hook
 
 ```javascript
-import {useKey} from "rooks";
+import { useKey } from 'rooks';
 ```
 
 ## Usage
@@ -29,21 +26,21 @@ import {useKey} from "rooks";
 function Demo() {
   const inputRef = useRef();
   function windowEnter(e) {
-    console.log("[Demo 1] Enter key was pressed on window");
+    console.log('[Demo 1] Enter key was pressed on window');
   }
   function vowelsEntered(e) {
-    console.log("[Demo 1] You typed a vowel");
+    console.log('[Demo 1] You typed a vowel');
   }
   function capitalVowelsEntered(e) {
-    console.log("[Demo 1] You typed a capital vowel");
+    console.log('[Demo 1] You typed a capital vowel');
   }
   // window is the target
-  useKey(["Enter"], windowEnter);
-  useKey(["a", "e", "i", "o", "u"], vowelsEntered, {
-    target: inputRef
+  useKey(['Enter'], windowEnter);
+  useKey(['a', 'e', 'i', 'o', 'u'], vowelsEntered, {
+    target: inputRef,
   });
-  useKey(["A", "E", "I", "O", "U"], capitalVowelsEntered, {
-    target: inputRef
+  useKey(['A', 'E', 'I', 'O', 'U'], capitalVowelsEntered, {
+    target: inputRef,
   });
   return (
     <>
@@ -64,12 +61,12 @@ render(<Demo />);
 function Demo() {
   const inputRef = useRef();
   function onKeyInteraction(e) {
-    console.log("[Demo 2]Enter key", e.type);
+    console.log('[Demo 2]Enter key', e.type);
   }
 
-  useKey(["Enter"], onKeyInteraction, {
+  useKey(['Enter'], onKeyInteraction, {
     target: inputRef,
-    eventTypes: ["keypress", "keydown", "keyup"]
+    eventTypes: ['keypress', 'keydown', 'keyup'],
   });
   return (
     <>
@@ -95,20 +92,20 @@ function Demo() {
     setShouldListen(!shouldListen);
   }
   function onKeyInteraction(e) {
-    console.log("[Demo 3] Enter key", e.type);
+    console.log('[Demo 3] Enter key', e.type);
   }
 
-  useKey(["Enter"], onKeyInteraction, {
+  useKey(['Enter'], onKeyInteraction, {
     target: inputRef,
-    eventTypes: ["keypress", "keydown", "keyup"],
-    when: shouldListen
+    eventTypes: ['keypress', 'keydown', 'keyup'],
+    when: shouldListen,
   });
   return (
     <>
       <p>
         Enter key events will only be logged when the listening state is true.
         Click on the button to toggle between listening and not listening
-        states.{" "}
+        states.{' '}
       </p>
       <p>
         Handy for adding and removing event handlers only when certain
@@ -117,14 +114,13 @@ function Demo() {
       <input ref={inputRef} />
       <br />
       <button onClick={toggleShouldListen}>
-        <b>{shouldListen ? "Listening" : "Not listening"}</b> - Toggle{" "}
+        <b>{shouldListen ? 'Listening' : 'Not listening'}</b> - Toggle{' '}
       </button>
     </>
   );
 }
 render(<Demo />);
 ```
-
 
 ---
 
@@ -145,10 +141,8 @@ render(<Demo />);
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-    
-
 
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

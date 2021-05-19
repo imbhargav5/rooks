@@ -4,8 +4,6 @@ title: useRaf
 sidebar_label: useRaf
 ---
 
-   
-
 ## About
 
 A continuously running requestAnimationFrame hook for React
@@ -19,7 +17,7 @@ A continuously running requestAnimationFrame hook for React
 ## Importing the hook
 
 ```javascript
-import {useRaf} from "rooks";
+import { useRaf } from 'rooks';
 ```
 
 ## Usage
@@ -40,14 +38,14 @@ function Demo() {
       const screenRatio = window.devicePixelRatio || 1;
       let angle = updateAngle();
       const canvas = canvasRef.current;
-      var ctx = canvas.getContext("2d");
+      var ctx = canvas.getContext('2d');
       ctx.save();
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       ctx.scale(screenRatio, screenRatio);
-      ctx.fillStyle = "midnightblue";
+      ctx.fillStyle = 'midnightblue';
       ctx.globalAlpha = 1;
       ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      ctx.fillStyle = "yellow";
+      ctx.fillStyle = 'yellow';
       ctx.lineWidth = 2;
       ctx.translate(50, 50);
       ctx.rotate(angle);
@@ -59,15 +57,15 @@ function Demo() {
   return (
     <>
       <h2>
-        Request animation frame is now {shouldRun ? "" : "in"}active. Click to
+        Request animation frame is now {shouldRun ? '' : 'in'}active. Click to
         toggle.
       </h2>
       <p>
-        <button onClick={toggleShouldRun}>Toggle Raf</button>{" "}
+        <button onClick={toggleShouldRun}>Toggle Raf</button>{' '}
       </p>
       <canvas
         ref={canvasRef}
-        style={{ height: `100px`, width: `100%`, background: "grey" }}
+        style={{ height: `100px`, width: `100%`, background: 'grey' }}
       />
     </>
   );
@@ -76,7 +74,6 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

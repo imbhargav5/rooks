@@ -4,14 +4,11 @@ title: useStackState
 sidebar_label: useStackState
 ---
 
-
-    
-
 ## About
 
 A React hook that manages state in the form of a stack
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ A React hook that manages state in the form of a stack
 ## Importing the hook
 
 ```javascript
-import {useStackState} from "rooks"
+import { useStackState } from 'rooks';
 ```
 
 ## Usage
@@ -28,26 +25,29 @@ import {useStackState} from "rooks"
 ```jsx
 function Demo() {
   // here list is still 1,2,3
-  // listInReverse is basically list in stack order. 
+  // listInReverse is basically list in stack order.
   // which is last-in first-out
   // so basically listInReverse = 3,2,1
   // controls contains utils to change the stack;
-  const [list, controls, listInReverse] =  useStackState([1,2,3]);
-  const {push, peek, pop, length} = controls;
+  const [list, controls, listInReverse] = useStackState([1, 2, 3]);
+  const { push, peek, pop, length } = controls;
 
   // push(1)
   // pop()
   // peek()
-  
+
   // This will render items in LIFO order
-  return <div>
-    {listInStackOrder.map(item => <span>{item}</span>)}
-  </div>
+  return (
+    <div>
+      {listInStackOrder.map((item) => (
+        <span>{item}</span>
+      ))}
+    </div>
+  );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
@@ -67,10 +67,8 @@ render(<Demo/>)
     title="useStackState"
     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" 
-/>    
-
-
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

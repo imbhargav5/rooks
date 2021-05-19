@@ -4,8 +4,6 @@ title: useCountdown
 sidebar_label: useCountdown
 ---
 
-    
-
 ## About
 
 Count down to a target timestamp and call callbacks every second (or provided peried)
@@ -17,7 +15,7 @@ Count down to a target timestamp and call callbacks every second (or provided pe
 ## Importing the hook
 
 ```javascript
-import {useCountdown} from "rooks"
+import { useCountdown } from 'rooks';
 ```
 
 ## Usage
@@ -28,13 +26,13 @@ const endTime = new Date(Date.now() + 10000);
 function Demo() {
   const count = useCountdown(endTime, {
     interval: 1000,
-    onDown: time => console.log('onDown', time),
-    onEnd: time => console.log('onEnd', time),
+    onDown: (time) => console.log('onDown', time),
+    onEnd: (time) => console.log('onEnd', time),
   });
   return count;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -52,7 +50,6 @@ render(<Demo/>)
 | ------ | -------------------------------------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime |
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -4,9 +4,6 @@ title: useMouse
 sidebar_label: useMouse
 ---
 
-
-   
-
 ## About
 
 Mouse position hook for React.
@@ -18,7 +15,7 @@ Mouse position hook for React.
 ## Importing the hook
 
 ```javascript
-import {useMouse} from "rooks"
+import { useMouse } from 'rooks';
 ```
 
 ## Usage
@@ -29,13 +26,13 @@ function Demo() {
   return (
     <>
       <p> Move mouse here to see changes to position </p>
-      <p>X position is {x || "null"}</p>
-      <p>X position is {y || "null"}</p>
+      <p>X position is {x || 'null'}</p>
+      <p>X position is {y || 'null'}</p>
     </>
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Returned Object
@@ -44,7 +41,6 @@ render(<Demo/>)
 | -------------------------- | ---- | ------------------- |
 | x                          | int  | X position of mouse |
 | y                          | int  | Y position of mouse |
-
 
 ---
 
@@ -64,10 +60,8 @@ render(<Demo/>)
     title="useMouse"
     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" 
-/>    
-
-
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
