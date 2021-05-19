@@ -4,14 +4,11 @@ title: useSessionstorageState
 sidebar_label: useSessionstorageState
 ---
 
-
-    
-
 ## About
 
 useState but syncs with sessionstorage
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ useState but syncs with sessionstorage
 ## Importing the hook
 
 ```javascript
-import {useSessionstorageState} from "rooks"
+import { useSessionstorageState } from 'rooks';
 ```
 
 ## Usage
@@ -28,21 +25,18 @@ import {useSessionstorageState} from "rooks"
 ```jsx
 function Demo() {
   useSessionstorageState();
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
-
-
+### Basic Usage
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

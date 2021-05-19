@@ -4,8 +4,6 @@ title: useBoundingclientrectRef
 sidebar_label: useBoundingclientrectRef
 ---
 
-    
-
 ## About
 
 A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
@@ -17,7 +15,7 @@ A hook that tracks the boundingclientrect of an element. It returns a callbackRe
 ## Importing the hook
 
 ```javascript
-import {useBoundingclientrectRef} from "rooks"
+import { useBoundingclientrectRef } from 'rooks';
 ```
 
 ## Usage
@@ -33,21 +31,21 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
+          background: 'lightblue',
+          padding: '10px',
+          position: 'absolute',
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
         ref={myRef}
       >
         <div
           style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%"
+            resize: 'both',
+            overflow: 'auto',
+            background: 'white',
+            color: 'blue',
+            maxWidth: '100%',
           }}
         >
           <p>
@@ -72,7 +70,7 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -87,7 +85,23 @@ N/A
 | value        | DOMRect      | DOMRect Object containing x,y, width, height, left,right,top and bottom keys       | null          |
 | update       | Function     | Function that can be called at any time to force a recalculation of the clientrect | null          |
 
+## Codesandbox Example
+
+### Basic Usage
+
+<iframe src="https://codesandbox.io/embed/useboundingclientrectref-kqc8y?fontsize=14&hidenavigation=1&theme=dark"
+   style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+title="useBoundingclientrectRef"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

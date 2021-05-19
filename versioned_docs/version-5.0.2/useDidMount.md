@@ -4,9 +4,6 @@ title: useDidMount
 sidebar_label: useDidMount
 ---
 
-
-   
-
 ## About
 
 componentDidMount hook for React
@@ -19,20 +16,20 @@ componentDidMount hook for React
 ## Importing the hook
 
 ```javascript
-import {useDidMount} from "rooks"
+import { useDidMount } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  useDidMount(function(){
-    console.log("mounted")
+  useDidMount(function () {
+    console.log('mounted');
   });
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
@@ -40,7 +37,6 @@ render(<Demo/>)
 | Argument | Type     | Description                    |
 | -------- | -------- | ------------------------------ |
 | callback | function | function to be called on mount |
-
 
 ---
 
@@ -60,10 +56,8 @@ render(<Demo/>)
   title="quizzical-glitter-emrtj"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>    
-
-
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

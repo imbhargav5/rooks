@@ -4,14 +4,11 @@ title: useEffectOnceWhen
 sidebar_label: useEffectOnceWhen
 ---
 
-
-    
-
 ## About
 
 Runs a callback effect atmost one time when a condition becomes true
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,32 +17,42 @@ Runs a callback effect atmost one time when a condition becomes true
 ## Importing the hook
 
 ```javascript
-import {useEffectOnceWhen} from "rooks"
+import { useEffectOnceWhen } from 'rooks';
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const hasOpenedPage = true
+  const hasOpenedPage = true;
   useEffectOnceWhen(() => {
-    console.log("user has opened page")
-  },hasOpenedPage);
-  return null
+    console.log('user has opened page');
+  }, hasOpenedPage);
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
-
+<iframe src="https://codesandbox.io/embed/useeffectoncewhen-io8wo?fontsize=14&hidenavigation=1&theme=dark"
+   style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+title="useEffectOnceWhen"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

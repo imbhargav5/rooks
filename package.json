@@ -16,7 +16,7 @@
     "clean": "rimraf dist lib",
     "commit": "cz",
     "lint": "eslint src/**/*.ts",
-    "format": "yarn run prettier --write \"./packages/shared/*.+(js|jsx|ts|tsx)\"",
+    "format": "yarn run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
     "test": "jest",
     "coverage": "yarn test --coverage",
     "create": "node helpers/create",

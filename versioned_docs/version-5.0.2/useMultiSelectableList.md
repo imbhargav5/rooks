@@ -4,14 +4,11 @@ title: useMultiSelectableList
 sidebar_label: useMultiSelectableList
 ---
 
-
-    
-
 ## About
 
 A custom hook to easily select multiple values from a list
 
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -20,7 +17,7 @@ A custom hook to easily select multiple values from a list
 ## Importing the hook
 
 ```javascript
-import {useMultiSelectableList} from "rooks"
+import { useMultiSelectableList } from 'rooks';
 ```
 
 ## Usage
@@ -28,21 +25,18 @@ import {useMultiSelectableList} from "rooks"
 ```jsx
 function Demo() {
   useMultiSelectableList();
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
-
 
 ---
 
 ## Codesandbox Examples
 
-### Basic Usage    
-
-
+### Basic Usage
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
