@@ -8,25 +8,25 @@ describe('useCookieState', () => {
   it('should initialize correctly', () => {
     const { result } = renderHook(() => useCookieState('my-cookie', 'awesome'));
 
-    expect(result.current.value).toBe('awesome');
+    expect(result?.current?.value).toBe('awesome');
   });
   it('should update cookie', () => {
     const { result } = renderHook(() => useCookieState('my-cookie', 'cool'));
 
     act(() => {
-      result.current.updateCookie('cool');
+      result?.current?.updateCookie('cool');
     });
 
-    expect(result.current.value).toBe('cool');
+    expect(result?.current?.value).toBe('cool');
   });
   it('should delete cookie', () => {
     const { result } = renderHook(() => useCookieState('my-cookie'));
 
     act(() => {
-      result.current.deleteCookie();
+      result?.current?.deleteCookie();
     });
 
-    expect(result.current.value).toBe(null);
+    expect(result?.current?.value).toBe(null);
   });
 });
 
