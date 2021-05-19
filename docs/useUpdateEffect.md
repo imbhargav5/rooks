@@ -4,8 +4,6 @@ title: useUpdateEffect
 sidebar_label: useUpdateEffect
 ---
 
-   
-
 ## About
 
 An useEffect that does not run on first render
@@ -17,7 +15,7 @@ An useEffect that does not run on first render
 ## Importing the hook
 
 ```javascript
-import {useUpdateEffect} from "srooks";
+import { useUpdateEffect } from 'srooks';
 ```
 
 ## Usage
@@ -36,7 +34,9 @@ function Demo() {
   }, [value]);
   return (
     <>
-      <button onClick={() => setUserID(Math.random())}>user ID is {userID}</button>
+      <button onClick={() => setUserID(Math.random())}>
+        user ID is {userID}
+      </button>
       <p>Has updated for userID - {hasUpdated.toString()}</p>
     </>
   );
@@ -45,7 +45,23 @@ function Demo() {
 render(<Demo />);
 ```
 
+## Codesandbox Example
+
+### Basic Usage
+
+<iframe src="https://codesandbox.io/embed/useupdateeffect-zyopx?fontsize=14&hidenavigation=1&theme=dark"
+   style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+title="useUpdateEffect"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

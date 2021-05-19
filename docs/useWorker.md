@@ -4,8 +4,6 @@ title: useWorker
 sidebar_label: useWorker
 ---
 
-   
-
 ## About
 
 Worker hook for React.
@@ -18,7 +16,7 @@ Worker hook for React.
 ## Importing the hook
 
 ```javascript
-import {useWorker} from "rooks"
+import { useWorker } from 'rooks';
 ```
 
 ## Usage
@@ -57,7 +55,6 @@ ReactDOM.render(<Demo />, rootElement);
 
 The worker instance is returned.
 
-
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

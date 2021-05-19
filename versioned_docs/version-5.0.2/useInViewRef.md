@@ -4,21 +4,15 @@ title: useInViewRef
 sidebar_label: useInViewRef
 ---
 
-
-    
-
 ## About
 
-Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. 
+Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.
 
-
-### Details 
+### Details
 
 It returns a ref to observed element, as well as boolean flag - `inView` that will tell if the element is inside of the viewport / parent element or not. You can also pass a callback that will be fired everytime the Observer will be triggered. To understand the Intersection Observer API better, please check its [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
-
-
-[//]: # "Main"
+[//]: # 'Main'
 
 ## Installation
 
@@ -27,7 +21,7 @@ It returns a ref to observed element, as well as boolean flag - `inView` that wi
 ## Importing the hook
 
 ```javascript
-import {useInViewRef} from 'rooks';
+import { useInViewRef } from 'rooks';
 ```
 
 ## Usage
@@ -64,10 +58,7 @@ render(<Demo />);
 | callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        | no       |
 | options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` | no       |
 
-
-
 ### Return
-
 
 Returns an array with the first element in the array being the callback ref for the React component/element that needs to be observed and a second being the boolean flag that indicates if the element is in viewport.
 
@@ -75,7 +66,6 @@ Returns an array with the first element in the array being the callback ref for 
 | ------------ | ----------- | -------------------------------------------------------------- | ------------- |
 | ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
 | inView       | boolean     | flag that will indicate if the element is in viewport          | false         |
-
 
 ---
 
@@ -91,14 +81,12 @@ Returns an array with the first element in the array being the callback ref for 
         borderRadius: 4,
         overflow: "hidden"
     }}
-     title="use-counter"
+     title="useInViewRef"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-    
-
 
 
 ## Join Bhargav's discord server
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
 
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
