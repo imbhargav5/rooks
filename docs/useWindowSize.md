@@ -16,7 +16,7 @@ Window size hook for React.
 ## Importing the hook
 
 ```javascript
-import {useWindowSize} from "rooks
+import {useWindowSize} from "rooks"
 ```
 
 ## Usage
@@ -53,8 +53,8 @@ render(<WindowComponent />);
 
 | Returned object attributes | Type | Description            |
 | -------------------------- | ---- | ---------------------- |
-| width                      | int  | inner width of window  |
-| height                     | int  | inner height of window |
+| innerWidth                 | int  | inner width of window  |
+| innerHeight                     | int  | inner height of window |
 | outerWidth                 | int  | outer height of window |
 | outerHeight                | int  | outer width of window  |
 

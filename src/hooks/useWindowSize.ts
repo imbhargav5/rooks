@@ -31,13 +31,7 @@ function getDimensions(): WindowDimensions {
  * @returns Dimensions of the window
  */
 export function useWindowSize(): WindowDimensions {
-  const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if (typeof window !== 'undefined') {
-      return getDimensions();
-    } else {
-      return nullDimensions;
-    }
-  });
+  const [windowSize, setWindowSize] = useState<WindowDimensions>(nullDimensions);
 
   // set resize handler once on mount and clean before unmount
   useIsomorphicEffect(() => {
