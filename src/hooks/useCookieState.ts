@@ -1,44 +1,100 @@
 import Cookies from 'js-cookie';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-type UseCookieStateType = {
-  value: string | null;
-  updateCookie: (newValue: string) => void;
-  deleteCookie: () => void;
-} | null;
+type CookieHandlerAsObject = {
+  value: any;
+  set: (newValue: any) => void;
+  remove: () => void;
+};
+
+type CookieHandlerAsArray = [any, (newValue: any) => void, () => void];
+
+type CookieHandler = CookieHandlerAsArray & CookieHandlerAsObject;
 
 /**
+ * useCookieState hook
+ * React hook that returns the current value of a cookie, a callback to update the cookie and a callback to delete the cookie.
  *
- * @param cookieName Name of the cookie
- * @returns {handler} A handler to interact with the cookie
+ * @param key
+ * @param defaultValue
+ * @param options
+ * @param param3
+ * @returns
  */
 const useCookieState = (
-  cookieName: string,
-  cookieValue: string | null = null,
-  options?: Cookies.CookieAttributes
-): UseCookieStateType => {
-  const [value, setValue] = useState<string | null>(() => {
-    if (typeof window !== undefined) {
-      return Cookies.get(cookieName, options) || cookieValue;
+  key: string,
+  defaultValue: any = null,
+  { serialize = JSON.stringify, deserialize = JSON.parse } = {},
+  options: Cookies.CookieAttributes = {}
+): CookieHandler => {
+  const getValueFromCookie = useCallback(() => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+    // Note: Don't pass options while reading the cookie bcz
+    // Cookies.get('foo', { domain: 'sub.example.com' }) // `domain` won't have any effect...! and so on
+    const valueInCookie = Cookies.get(key);
+    if (valueInCookie) {
+      // the try/catch is here in case the cookie value was set before
+      try {
+        return deserialize(valueInCookie);
+      } catch {
+        Cookies.remove(key, options);
+      }
     }
 
-    return null;
-  });
+    return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
+  }, [defaultValue, deserialize, key, options]);
 
-  const updateCookie = useCallback(
-    (newValue: string) => {
-      Cookies.set(cookieName, newValue, options);
-      setValue(newValue);
+  const [value, setValue] = useState(getValueFromCookie());
+
+  const saveValueToCookie = useCallback(
+    (valueToSet) => {
+      if (typeof window === 'undefined') {
+        return null;
+      }
+
+      return Cookies.set(key, serialize(valueToSet));
     },
-    [cookieName, options]
+    [key, serialize]
   );
 
-  const deleteCookie = useCallback(() => {
-    Cookies.remove(cookieName);
-    setValue(null);
-  }, [cookieName]);
+  const set = useCallback(
+    (newValue) => {
+      setValue(newValue);
+      saveValueToCookie(newValue);
+    },
+    [saveValueToCookie]
+  );
 
-  return { deleteCookie, updateCookie, value };
+  const init = useCallback(() => {
+    const valueLoadedFromCookie = getValueFromCookie();
+    if (valueLoadedFromCookie === null || valueLoadedFromCookie === 'null') {
+      set(defaultValue);
+    }
+  }, [defaultValue, getValueFromCookie, set]);
+
+  // eslint-disable-next-line consistent-return
+  function remove() {
+    set(null);
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    Cookies.remove(key, options);
+  }
+
+  // initialize
+  useEffect(() => {
+    init();
+  }, [init]);
+
+  const handler = Object.assign([value, set, remove], {
+    remove,
+    set,
+    value,
+  });
+
+  return handler as CookieHandler;
 };
 
 export { useCookieState };

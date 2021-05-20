@@ -14,7 +14,7 @@ describe('useCookieState', () => {
     const { result } = renderHook(() => useCookieState('my-cookie', 'cool'));
 
     act(() => {
-      result?.current?.updateCookie('cool');
+      result?.current?.set('cool');
     });
 
     expect(result?.current?.value).toBe('cool');
@@ -23,7 +23,7 @@ describe('useCookieState', () => {
     const { result } = renderHook(() => useCookieState('my-cookie'));
 
     act(() => {
-      result?.current?.deleteCookie();
+      result?.current?.remove();
     });
 
     expect(result?.current?.value).toBe(null);
