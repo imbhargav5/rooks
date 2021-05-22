@@ -5,7 +5,7 @@ sidebar_label: use-key-ref
 ---
 
 
-    
+
 
 ## About
 
@@ -141,7 +141,7 @@ render(<Demo />);
 
 ## Codesandbox Examples
 
-### Basic Usage    
+### Basic Usage
 
 
 
