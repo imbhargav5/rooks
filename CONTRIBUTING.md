@@ -16,6 +16,8 @@ From the root of the project:
 
 ### Contributing Guidelines
 
+When adding a new hook, please make sure that
+
 - All hooks must contain example sandboxes and test cases
 
 - Readmes must contain usage snippets, codesandbox JSX embeds, arguments in a table format and must contain return values
