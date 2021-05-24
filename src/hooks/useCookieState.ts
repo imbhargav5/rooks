@@ -18,35 +18,81 @@ type CookieHandler = CookieHandlerAsArray & CookieHandlerAsObject;
  * @param key
  * @param defaultValue
  * @param options
- * @param param3
+ * @param converter
  * @returns
  */
 const useCookieState = (
   key: string,
-  defaultValue: any = null,
-  { serialize = JSON.stringify, deserialize = JSON.parse } = {},
-  options: Cookies.CookieAttributes = {}
+  defaultValue: any = '',
+  options: Cookies.CookieAttributes = {},
+  converter: {} = {}
 ): CookieHandler => {
   const getValueFromCookie = useCallback(() => {
     if (typeof window === 'undefined') {
-      return null;
+      return 'null';
     }
+
     // Note: Don't pass options while reading the cookie bcz
     // Cookies.get('foo', { domain: 'sub.example.com' }) // `domain` won't have any effect...! and so on
     const valueInCookie = Cookies.get(key);
+
     if (valueInCookie) {
       // the try/catch is here in case the cookie value was set before
       try {
-        return deserialize(valueInCookie);
+        return valueInCookie;
       } catch {
         Cookies.remove(key, options);
       }
     }
 
     return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
-  }, [defaultValue, deserialize, key, options]);
+  }, [defaultValue, key, options]);
 
   const [value, setValue] = useState(getValueFromCookie());
+
+  const checkCookie = (function () {
+    let lastCookies = document.cookie
+      .split(';')
+      .map((x) => x.trim().split(/(=)/))
+      .reduce((a, b) => {
+        a[b[0]] = a[b[0]]
+          ? `${a[b[0]]}, ` + b.slice(2).join('')
+          : b.slice(2).join('');
+
+        return a;
+      }, {});
+
+    return function () {
+      const currentCookies = document.cookie
+        .split(';')
+        .map((x) => {
+          return x.trim().split(/(=)/);
+        })
+        .reduce((a, b) => {
+          a[b[0]] = a[b[0]]
+            ? `${a[b[0]]}, ` + b.slice(2).join('')
+            : b.slice(2).join('');
+
+          return a;
+        }, {});
+
+      for (const cookie in currentCookies) {
+        if (
+          currentCookies[cookie] !== lastCookies[cookie] &&
+          currentCookies[cookie] !== null
+        ) {
+          setValue(currentCookies[cookie]);
+        }
+      }
+      lastCookies = currentCookies;
+    };
+  })();
+
+  useEffect(() => {
+    window.setInterval(checkCookie, 100);
+
+    return () => window.clearInterval(checkCookie);
+  }, [checkCookie]);
 
   const saveValueToCookie = useCallback(
     (valueToSet) => {
@@ -54,9 +100,9 @@ const useCookieState = (
         return null;
       }
 
-      return Cookies.set(key, serialize(valueToSet));
+      return Cookies.set(key, valueToSet);
     },
-    [key, serialize]
+    [key]
   );
 
   const set = useCallback(
@@ -69,14 +115,17 @@ const useCookieState = (
 
   const init = useCallback(() => {
     const valueLoadedFromCookie = getValueFromCookie();
-    if (valueLoadedFromCookie === null || valueLoadedFromCookie === 'null') {
+    if (valueLoadedFromCookie) set(valueLoadedFromCookie);
+    else if (
+      valueLoadedFromCookie === null ||
+      valueLoadedFromCookie === 'null'
+    ) {
       set(defaultValue);
     }
   }, [defaultValue, getValueFromCookie, set]);
 
   // eslint-disable-next-line consistent-return
   function remove() {
-    set(null);
     if (typeof window === 'undefined') {
       return false;
     }
@@ -87,6 +136,8 @@ const useCookieState = (
   useEffect(() => {
     init();
   }, [init]);
+
+  Cookies.withConverter(converter);
 
   const handler = Object.assign([value, set, remove], {
     remove,
