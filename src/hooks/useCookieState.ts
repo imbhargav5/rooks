@@ -50,7 +50,7 @@ const useCookieState = (
 
   const [value, setValue] = useState(getValueFromCookie());
 
-  const checkCookie = (function () {
+  const listen = (function () {
     let lastCookies = document.cookie
       .split(';')
       .map((x) => x.trim().split(/(=)/))
@@ -87,12 +87,14 @@ const useCookieState = (
       lastCookies = currentCookies;
     };
   })();
-
+  // check for changes across windows
   useEffect(() => {
-    window.setInterval(checkCookie, 100);
+    (window as any).cookieStore.addEventListener('change', listen);
 
-    return () => window.clearInterval(checkCookie);
-  }, [checkCookie]);
+    return () => {
+      (window as any).cookieStore.removeEventListener('change', listen);
+    };
+  }, [listen]);
 
   const saveValueToCookie = useCallback(
     (valueToSet) => {
