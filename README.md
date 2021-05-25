@@ -67,6 +67,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useSelectableList](https://react-hooks.org/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [useSessionstorage](https://react-hooks.org/docs/useSessionstorage) - Session storage react hook. Easily manage session storage values.
 *   [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
+*   [useSet](https://react-hooks.org/docs/useSet) - React state hook that tracks a Set.
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useThrottle](https://react-hooks.org/docs/useThrottle) - Throttle custom hook for React
 *   [useTimeAgo](https://react-hooks.org/docs/useTimeAgo) - A React Hook to get time ago for timestamp millisecond value.
@@ -88,7 +89,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start--> 
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end--> 
 
