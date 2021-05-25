@@ -26,6 +26,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
 *   [useDidMount](https://react-hooks.org/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://react-hooks.org/docs/useDidUpdate) - componentDidUpdate hook for react
+*   [useDimensionsRef](https://react-hooks.org/docs/useDimensionsRef) - A React Hook to measure DOM nodes
 *   [useDocumentEventListener](https://react-hooks.org/docs/useDocumentEventListener) - A react hook to an event listener to the document object
 *   [useEffectOnceWhen](https://react-hooks.org/docs/useEffectOnceWhen) - Runs a callback effect atmost one time when a condition becomes true
 *   [useEventListenerRef](https://react-hooks.org/docs/useEventListenerRef) - A react hook to add an event listener to a ref
@@ -88,7 +89,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start--> 
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end--> 
 
