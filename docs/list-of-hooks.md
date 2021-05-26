@@ -28,6 +28,7 @@ sidebar_label: Hooks List
 - [useIntervalWhen](https://react-hooks.org/docs/useIntervalWhen) - Sets an interval immediately when a condition is true
 - [useIsomorphicEffect](https://react-hooks.org/docs/useIsomorphicEffect) - A hook that resolves to useEffect on the server and useLayoutEffect on the client.
 - [useKey](https://react-hooks.org/docs/useKey) - keypress, keyup and keydown event handlers as hooks for react.
+- [useKeyBindings](https://react-hooks.org/docs/useKeyBindings) - useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.
 - [useKeyRef](https://react-hooks.org/docs/useKeyRef) - Very similar useKey but it returns a ref
 - [useKeys](https://react-hooks.org/docs/useKeys) - A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
 - [useLocalstorage](https://react-hooks.org/docs/useLocalstorage) - Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows.

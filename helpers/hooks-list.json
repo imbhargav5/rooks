@@ -89,6 +89,10 @@
       "description": "keypress, keyup and keydown event handlers as hooks for react."
     },
     {
+      "name": "useKeyBindings",
+      "description": "useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press."
+    },
+    {
       "name": "useKeyRef",
       "description": "Very similar useKey but it returns a ref"
     },

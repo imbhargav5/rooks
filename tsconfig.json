@@ -39,5 +39,5 @@
     "src/css",
     "src/theme"
   ],
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*.ts", "src/__tests__/useKeyBindings.spec.tsx"]
 }
