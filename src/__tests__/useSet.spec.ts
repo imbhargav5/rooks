@@ -13,16 +13,15 @@ describe('useSet', () => {
 });
 
 it('should init set and utils', () => {
-  const { result } = setUp(new Set([1, 2]));
+  const { result } = setUp(new Set(['hello']));
   const [set, utils] = result.current;
 
-  expect(set).toEqual(new Set([1, 2]));
+  expect(set).toEqual(new Set(['hello']));
   expect(utils).toStrictEqual({
     add: expect.any(Function),
     has: expect.any(Function),
     remove: expect.any(Function),
-    reset: expect.any(Function),
-    toggle: expect.any(Function),
+    removeAll: expect.any(Function),
   });
 });
 
@@ -33,12 +32,12 @@ it('should init empty set if no initial set provided', () => {
 });
 
 it('should have an initially provided key', () => {
-  const { result } = setUp(new Set(['a']));
+  const { result } = setUp(new Set(['hello']));
   const [, utils] = result.current;
 
   let value;
   act(() => {
-    value = utils.has('a');
+    value = utils.has('hello');
   });
 
   expect(value).toBe(true);
@@ -48,26 +47,26 @@ it('should have an added key', () => {
   const { result } = setUp(new Set());
 
   act(() => {
-    result.current[1].add('newKey');
+    result.current[1].add('a');
   });
 
   let value;
   act(() => {
-    value = result.current[1].has('newKey');
+    value = result.current[1].has('a');
   });
 
   expect(value).toBe(true);
 });
 
 it('should remove existing key', () => {
-  const { result } = setUp(new Set([1, 2]));
+  const { result } = setUp(new Set(['a', 'b']));
   const [, utils] = result.current;
 
   act(() => {
-    utils.remove(2);
+    utils.remove('b');
   });
 
-  expect(result.current[0]).toEqual(new Set([1]));
+  expect(result.current[0]).toEqual(new Set(['a']));
 });
 
 it('should get false for non-existing key', () => {
@@ -83,79 +82,42 @@ it('should get false for non-existing key', () => {
 });
 
 it('should add a new key', () => {
-  const { result } = setUp(new Set(['oldKey']));
+  const { result } = setUp(new Set(['b']));
   const [, utils] = result.current;
 
   act(() => {
-    utils.add('newKey');
+    utils.add('a');
   });
 
-  expect(result.current[0]).toEqual(new Set(['oldKey', 'newKey']));
+  expect(result.current[0]).toEqual(new Set(['b', 'a']));
 });
 
 it('should work if setting existing key', () => {
-  const { result } = setUp(new Set(['oldKey']));
+  const { result } = setUp(new Set(['b']));
   const [, utils] = result.current;
 
   act(() => {
-    utils.add('oldKey');
+    utils.add('b');
   });
 
-  expect(result.current[0]).toEqual(new Set(['oldKey']));
+  expect(result.current[0]).toEqual(new Set(['b']));
 });
 
-it('should reset to initial set provided', () => {
-  const { result } = setUp(new Set([1]));
+it('should remove all to initial set provided', () => {
+  const { result } = setUp(new Set(['a']));
   const [, utils] = result.current;
 
   act(() => {
-    utils.add(2);
+    utils.add('b');
   });
 
-  expect(result.current[0]).toEqual(new Set([1, 2]));
+  expect(result.current[0]).toEqual(new Set(['a', 'b']));
 
   act(() => {
-    utils.reset();
+    utils.removeAll();
   });
 
-  expect(result.current[0]).toEqual(new Set([1]));
-});
-
-it('should memoized its utils methods', () => {
-  const { result } = setUp(new Set(['a', 'b']));
-  const [, utils] = result.current;
-  const { add, remove, reset, toggle } = utils;
-
-  act(() => {
-    add('foo');
-  });
-
-  expect(result.current[1].add).toBe(add);
-  expect(result.current[1].remove).toBe(remove);
-  expect(result.current[1].toggle).toBe(toggle);
-  expect(result.current[1].reset).toBe(reset);
-});
-
-it('should remove an existing key on toggle', () => {
-  const { result } = setUp(new Set([1, 2]));
-  const [, utils] = result.current;
-
-  act(() => {
-    utils.toggle(2);
-  });
-
-  expect(result.current[0]).toEqual(new Set([1]));
-});
-
-it('should add a new key on toggle', () => {
-  const { result } = setUp(new Set([1]));
-  const [, utils] = result.current;
-
-  act(() => {
-    utils.toggle(2);
-  });
-
-  expect(result.current[0]).toEqual(new Set([1, 2]));
+  expect(result.current[0]).toEqual(new Set(['a']));
 });
 
 it('should do nothing if removing non-existing key', () => {

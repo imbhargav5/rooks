@@ -194,7 +194,7 @@
     },
     {
       "name": "useSet",
-      "description": "React state hook that tracks a Set."
+      "description": "A React hook that tracks state in the form of a Set data structure."
     },
     {
       "name": "useStackState",

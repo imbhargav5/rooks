@@ -6,7 +6,7 @@ sidebar_label: useSet
 
 ## About
 
-React state hook that tracks a Set.
+A React hook that tracks state in the form of a Set data structure.
 
 [//]: # 'Main'
 
@@ -26,16 +26,17 @@ import { useSet } from 'rooks';
 
 ```jsx
 function Demo() {
-  const [set, { add, has, remove, toggle, reset }] = useSet(new Set(['hello']));
+  const [set, { add, has, remove, removeAll }] = useSet(
+    new Set(['hello', 1, 2])
+  );
 
   return (
     <div>
       <button onClick={() => add(String(Date.now()))}>Add</button>
-      <button onClick={() => reset()}>Reset</button>
-      <button onClick={() => remove('hello')} disabled={!has('hello')}>
+      <button onClick={() => removeAll()}>Reset</button>
+      <button onClick={() => remove(1, 2)} disabled={!has(1) || !has(2)}>
         Remove 'hello'
       </button>
-      <button onClick={() => toggle('hello')}>Toggle hello</button>
       <pre>{JSON.stringify(Array.from(set), null, 2)}</pre>
     </div>
   );
