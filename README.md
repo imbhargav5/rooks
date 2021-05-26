@@ -88,7 +88,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start-->
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end-->
 
@@ -103,7 +103,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 Import any hook from "rooks" and start using them!
 
 ```jsx
-import { useDidMount } from "rooks";
+import { useDidMount } from 'rooks';
 ```
 
 ## Usage
@@ -111,7 +111,7 @@ import { useDidMount } from "rooks";
 ```jsx
 function App() {
   useDidMount(() => {
-    alert("mounted");
+    alert('mounted');
   });
   return (
     <div className="App">
