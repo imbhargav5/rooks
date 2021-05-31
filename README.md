@@ -67,7 +67,6 @@ A super awesome collection of regularly used custom hooks as utils for React.
 - [useSelectableList](https://react-hooks.org/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs etc.
 - [useSessionstorage](https://react-hooks.org/docs/useSessionstorage) - Session storage react hook. Easily manage session storage values.
 - [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
-- [useSet](https://react-hooks.org/docs/useSet) - A React hook that tracks state in the form of a Set data structure.
 - [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 - [useThrottle](https://react-hooks.org/docs/useThrottle) - Throttle custom hook for React
 - [useTimeAgo](https://react-hooks.org/docs/useTimeAgo) - A React Hook to get time ago for timestamp millisecond value.
@@ -104,7 +103,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 Import any hook from "rooks" and start using them!
 
 ```jsx
-import { useDidMount } from 'rooks';
+import { useDidMount } from "rooks";
 ```
 
 ## Usage
@@ -135,57 +134,203 @@ MIT
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+Thanks goes to these wonderful people
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
-<!-- prettier-ignore-start -->
-
-<!-- markdownlint-disable -->
-
+<!-- readme: contributors -start -->
 <table>
-  <tr>
-    <td align="center"><a href="https://imbhargav5.com/"><img src="https://avatars2.githubusercontent.com/u/2936644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bhargav Ponnapalli</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Code">💻</a> <a href="#ideas-imbhargav5" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-imbhargav5" title="Design">🎨</a> <a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Documentation">📖</a> <a href="https://github.com/imbhargav5/rooks/issues?q=author%3Aimbhargav5" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/fintara"><img src="https://avatars0.githubusercontent.com/u/4290594?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tsvetan</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=fintara" title="Code">💻</a></td>
-    <td align="center"><a href="http://twitter.com/yesmeck"><img src="https://avatars0.githubusercontent.com/u/465125?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wei Zhu</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=yesmeck" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.akshaykadam.me?ref=github"><img src="https://avatars1.githubusercontent.com/u/16436270?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Akshay Kadam (A2K)</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=deadcoder0904" title="Code">💻</a></td>
-    <td align="center"><a href="http://www.austinpeterson.info"><img src="https://avatars2.githubusercontent.com/u/8095506?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Austin Peterson</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=theskillwithin" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/fhellwig"><img src="https://avatars2.githubusercontent.com/u/1703592?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Frank Hellwig</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=fhellwig" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/neilor"><img src="https://avatars3.githubusercontent.com/u/4008023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Neilor Caldeira</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=neilor" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="http://zhihu.com/people/dancerphil"><img src="https://avatars0.githubusercontent.com/u/7264444?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cong Zhang</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=dancerphil" title="Code">💻</a></td>
-    <td align="center"><a href="http://3dgo.net"><img src="https://avatars2.githubusercontent.com/u/1618956?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Brian Steere</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Dianoga" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/simbathesailor"><img src="https://avatars2.githubusercontent.com/u/5938110?v=4?s=100" width="100px;" alt=""/><br /><sub><b>anil kumar chaudhary</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=simbathesailor" title="Code">💻</a></td>
-    <td align="center"><a href="https://foobars.in"><img src="https://avatars3.githubusercontent.com/u/5774849?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harsh Zalavadiya</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=harshzalavadiya" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/maciekgrzybek"><img src="https://avatars2.githubusercontent.com/u/16546428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>maciek_grzybek</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=maciekgrzybek" title="Code">💻</a></td>
-    <td align="center"><a href="https://twitter.com/wu_ct"><img src="https://avatars2.githubusercontent.com/u/1695958?v=4?s=100" width="100px;" alt=""/><br /><sub><b>CT Wu</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=wuct" title="Code">💻</a> <a href="#ideas-wuct" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/braxtonchristensen"><img src="https://avatars2.githubusercontent.com/u/11494223?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Braxton Christensen</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=braxtonchristensen" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://elrumordelaluz.com"><img src="https://avatars3.githubusercontent.com/u/784056?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lionel</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=elrumordelaluz" title="Code">💻</a></td>
-    <td align="center"><a href="https://mxstbr.com"><img src="https://avatars0.githubusercontent.com/u/7525670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Stoiber</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mxstbr" title="Code">💻</a></td>
-    <td align="center"><a href="https://stupidism.github.io/resume"><img src="https://avatars2.githubusercontent.com/u/5801015?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stupid</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Stupidism" title="Code">💻</a></td>
-    <td align="center"><a href="http://mscottmoore.dev"><img src="https://avatars0.githubusercontent.com/u/5983927?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Moore</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mscottmoore" title="Code">💻</a></td>
-    <td align="center"><a href="http://arman.io"><img src="https://avatars.githubusercontent.com/u/3195714?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Arman</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Armanio" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/zeritte"><img src="https://avatars.githubusercontent.com/u/35241861?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zeritte</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=zeritte" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.calcourtney.net"><img src="https://avatars.githubusercontent.com/u/30095183?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cal Courtney</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=calthejuggler" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://github.com/weschristiansen"><img src="https://avatars.githubusercontent.com/u/5215218?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wes christiansen</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=weschristiansen" title="Code">💻</a></td>
-    <td align="center"><a href="http://danielholmes.org"><img src="https://avatars.githubusercontent.com/u/349833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Holmes</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=danielholmes" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/adrienlemaire/"><img src="https://avatars.githubusercontent.com/u/260983?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adrien Lemaire</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=AdrienLemaire" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/harshilparmar"><img src="https://avatars.githubusercontent.com/u/45915468?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harshil Parmar</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=harshilparmar" title="Code">💻</a></td>
-    <td align="center"><a href="http://yakko.tech"><img src="https://avatars.githubusercontent.com/u/38760734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yakko Majuri</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=yakkomajuri" title="Code">💻</a></td>
-    <td align="center"><a href="http://mrvisser.ca"><img src="https://avatars.githubusercontent.com/u/102265?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Branden Visser</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mrvisser" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/thodubois"><img src="https://avatars.githubusercontent.com/u/37809039?v=4?s=100" width="100px;" alt=""/><br /><sub><b>thodubois</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=thodubois" title="Code">💻</a></td>
-  </tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/imbhargav5">
+            <img src="https://avatars.githubusercontent.com/u/2936644?v=4" width="100;" alt="imbhargav5"/>
+            <br />
+            <sub><b>Bhargav Ponnapalli</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/simbathesailor">
+            <img src="https://avatars.githubusercontent.com/u/5938110?v=4" width="100;" alt="simbathesailor"/>
+            <br />
+            <sub><b>Anil Kumar Chaudhary</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/maciekgrzybek">
+            <img src="https://avatars.githubusercontent.com/u/16546428?v=4" width="100;" alt="maciekgrzybek"/>
+            <br />
+            <sub><b>Maciek_grzybek</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/harshzalavadiya">
+            <img src="https://avatars.githubusercontent.com/u/5774849?v=4" width="100;" alt="harshzalavadiya"/>
+            <br />
+            <sub><b>Harsh Zalavadiya</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/mahijendra">
+            <img src="https://avatars.githubusercontent.com/u/39908767?v=4" width="100;" alt="mahijendra"/>
+            <br />
+            <sub><b>B V K MAHIJENDRA </b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/braxtonchristensen">
+            <img src="https://avatars.githubusercontent.com/u/11494223?v=4" width="100;" alt="braxtonchristensen"/>
+            <br />
+            <sub><b>Braxton Christensen</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/hanselabreu">
+            <img src="https://avatars.githubusercontent.com/u/27902567?v=4" width="100;" alt="hanselabreu"/>
+            <br />
+            <sub><b>Hansel</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/harshilparmar">
+            <img src="https://avatars.githubusercontent.com/u/45915468?v=4" width="100;" alt="harshilparmar"/>
+            <br />
+            <sub><b>Harshil Parmar</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/elrumordelaluz">
+            <img src="https://avatars.githubusercontent.com/u/784056?v=4" width="100;" alt="elrumordelaluz"/>
+            <br />
+            <sub><b>Lionel</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/mxstbr">
+            <img src="https://avatars.githubusercontent.com/u/7525670?v=4" width="100;" alt="mxstbr"/>
+            <br />
+            <sub><b>Max Stoiber</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/mscottmoore">
+            <img src="https://avatars.githubusercontent.com/u/5983927?v=4" width="100;" alt="mscottmoore"/>
+            <br />
+            <sub><b>Michael Moore</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/deadcoder0904">
+            <img src="https://avatars.githubusercontent.com/u/16436270?v=4" width="100;" alt="deadcoder0904"/>
+            <br />
+            <sub><b>Akshay Kadam (A2K)</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/alex-golubtsov">
+            <img src="https://avatars.githubusercontent.com/u/1982853?v=4" width="100;" alt="alex-golubtsov"/>
+            <br />
+            <sub><b>Alex Golubtsov</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Armanio">
+            <img src="https://avatars.githubusercontent.com/u/3195714?v=4" width="100;" alt="Armanio"/>
+            <br />
+            <sub><b>Arman</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/mrvisser">
+            <img src="https://avatars.githubusercontent.com/u/102265?v=4" width="100;" alt="mrvisser"/>
+            <br />
+            <sub><b>Branden Visser</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Dianoga">
+            <img src="https://avatars.githubusercontent.com/u/1618956?v=4" width="100;" alt="Dianoga"/>
+            <br />
+            <sub><b>Brian Steere</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/calthejuggler">
+            <img src="https://avatars.githubusercontent.com/u/30095183?v=4" width="100;" alt="calthejuggler"/>
+            <br />
+            <sub><b>Cal Courtney</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/chrismilson">
+            <img src="https://avatars.githubusercontent.com/u/13655076?v=4" width="100;" alt="chrismilson"/>
+            <br />
+            <sub><b>Chris Milson</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/dancerphil">
+            <img src="https://avatars.githubusercontent.com/u/7264444?v=4" width="100;" alt="dancerphil"/>
+            <br />
+            <sub><b>Cong Zhang</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/danielholmes">
+            <img src="https://avatars.githubusercontent.com/u/349833?v=4" width="100;" alt="danielholmes"/>
+            <br />
+            <sub><b>Daniel Holmes</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/febeck">
+            <img src="https://avatars.githubusercontent.com/u/12020091?v=4" width="100;" alt="febeck"/>
+            <br />
+            <sub><b>Fernando Beck</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/joshdavenport">
+            <img src="https://avatars.githubusercontent.com/u/757828?v=4" width="100;" alt="joshdavenport"/>
+            <br />
+            <sub><b>Josh Davenport</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/iampika">
+            <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
+            <br />
+            <sub><b>Mahendra Choudhary</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/1337MARCEL">
+            <img src="https://avatars.githubusercontent.com/u/16888873?v=4" width="100;" alt="1337MARCEL"/>
+            <br />
+            <sub><b>MARCEL</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/neilor">
+            <img src="https://avatars.githubusercontent.com/u/4008023?v=4" width="100;" alt="neilor"/>
+            <br />
+            <sub><b>Neilor Caldeira</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/tobiaslins">
+            <img src="https://avatars.githubusercontent.com/u/2978876?v=4" width="100;" alt="tobiaslins"/>
+            <br />
+            <sub><b>Tobias Lins</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/fintara">
+            <img src="https://avatars.githubusercontent.com/u/4290594?v=4" width="100;" alt="fintara"/>
+            <br />
+            <sub><b>Tsvetan</b></sub>
+        </a>
+    </td></tr>
 </table>
-
-<!-- markdownlint-restore -->
-
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+<!-- readme: contributors -end -->
