@@ -112,7 +112,7 @@ import { useDidMount } from 'rooks';
 ```jsx
 function App() {
   useDidMount(() => {
-    alert('mounted');
+    alert("mounted");
   });
   return (
     <div className="App">

@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
 type Actions<T> = {
   has: (key: T) => boolean;
-  add: (key: T) => void;
-  remove: (key: T) => void;
+  add: (keys: T) => void;
+  remove: (keys: T) => void;
   removeAll: () => void;
 };
 
