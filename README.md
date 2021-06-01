@@ -218,13 +218,20 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/iampika">
+            <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
+            <br />
+            <sub><b>Mahendra Choudhary</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/deadcoder0904">
             <img src="https://avatars.githubusercontent.com/u/16436270?v=4" width="100;" alt="deadcoder0904"/>
             <br />
             <sub><b>Akshay Kadam (A2K)</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/alex-golubtsov">
             <img src="https://avatars.githubusercontent.com/u/1982853?v=4" width="100;" alt="alex-golubtsov"/>
@@ -259,15 +266,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Cal Courtney</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/chrismilson">
             <img src="https://avatars.githubusercontent.com/u/13655076?v=4" width="100;" alt="chrismilson"/>
             <br />
             <sub><b>Chris Milson</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/dancerphil">
             <img src="https://avatars.githubusercontent.com/u/7264444?v=4" width="100;" alt="dancerphil"/>
@@ -294,13 +301,6 @@ Thanks goes to these wonderful people
             <img src="https://avatars.githubusercontent.com/u/757828?v=4" width="100;" alt="joshdavenport"/>
             <br />
             <sub><b>Josh Davenport</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/iampika">
-            <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
-            <br />
-            <sub><b>Mahendra Choudhary</b></sub>
         </a>
     </td>
     <td align="center">
