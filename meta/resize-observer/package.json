@@ -1,0 +1,45 @@
+{
+  "main": "lib/index.js",
+  "jsnext:main": "lib/index.esm.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types/index.d.ts",
+  "license": "MIT",
+  "description": "A React Hooks package for resize-observer",
+  "name": "@rooks/use-resize-observer",
+  "homepage": "https://react-hooks.org/docs/use-resize-observer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imbhargav5/rooks.git",
+    "directory": "packages/resize-observer"
+  },
+  "scripts": {
+        "clean": "sh ../../scripts/clean.sh",
+    "prebuild": "yarn clean",
+    "build": "sh ../../scripts/build.sh",
+    "dts-build": "sh ../../scripts/dts-build.sh"
+  },
+  "keywords": [
+    "use",
+    "react-hooks.org",
+    "react",
+    "hooks",
+    "rooks",
+    "resize",
+    "resize observer",
+    "resize observer hook"
+  ],
+  "version": "4.11.0",
+  "_id": "@rooks/use-resize-observer@4.11.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "gitHead": "f43acc975b37606ed1a7a1438ca33b896fcd1213",
+  "bugs": {
+    "url": "https://github.com/imbhargav5/rooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "private": true
+}

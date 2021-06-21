@@ -1,3 +1,7 @@
+## <small>5.0.3 (2021-)</small>
+
+* Add useResizeObserver hook ()
+
 ## <small>5.0.2 (2021-05-04)</small>
 
 * fix(bundlesize): improve bundlesize ([d5ae1c0](https://github.com/imbhargav5/rooks/commit/d5ae1c0))

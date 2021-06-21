@@ -177,6 +177,10 @@
       "description": "A continuously running requestAnimationFrame hook for React"
     },
     {
+      "name": "useResizeObserver",
+      "description": "Resize Observer hook for React."
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react."
     },
