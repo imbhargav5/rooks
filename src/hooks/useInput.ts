@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent, useCallback, useMemo } from "react";
 
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -44,21 +44,24 @@ const defaultOptions: Options = {};
  * @returns {InputHandler} Input handler with value and onChange
  */
 function useInput(
-  initialValue: any = '',
+  initialValue: any = "",
   options: Options = defaultOptions
 ): InputHandler {
   const [value, setValue] = useState(initialValue);
 
-  function onChange(e: InputChangeEvent) {
-    const newValue = e.target.value;
-    let shouldUpdate = true;
-    if (typeof options.validate === 'function') {
-      shouldUpdate = options.validate(newValue, value);
-    }
-    if (shouldUpdate) {
-      setValue(newValue);
-    }
-  }
+  const onChange = useCallback(
+    (e: InputChangeEvent) => {
+      const newValue = e.target.value;
+      let shouldUpdate = true;
+      if (typeof options.validate === "function") {
+        shouldUpdate = options.validate(newValue, value);
+      }
+      if (shouldUpdate) {
+        setValue(newValue);
+      }
+    },
+    [value]
+  );
 
   // sync with default value
   useEffect(() => {

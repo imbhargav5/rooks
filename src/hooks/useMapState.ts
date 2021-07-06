@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
 /**
  * useMapState hook
@@ -21,42 +21,59 @@ function useMapState(
 ] {
   const [map, setMap] = useState(initialValue);
 
-  function set(key: any, value: any) {
-    setMap({
-      ...map,
+  const set = useCallback((key: any, value: any) => {
+    setMap((currentMap) => ({
+      ...currentMap,
       [key]: value,
-    });
-  }
-  function has(key: any) {
-    return typeof map[key] !== 'undefined';
-  }
-  function setMultiple(object: { any: any }) {
-    setMap({
-      ...map,
-      ...object,
-    });
-  }
-  function removeMultiple(...keys) {
-    const newMap = {};
-    Object.keys(map).forEach((key) => {
-      if (!keys.includes(key)) {
-        newMap[key] = map[key];
-      }
-    });
-    setMap(newMap);
-  }
-  function remove(key: any) {
-    const newMap = {};
-    Object.keys(map).forEach((mapKey) => {
-      if (mapKey !== key) {
-        newMap[mapKey] = map[mapKey];
-      }
-    });
-    setMap(newMap);
-  }
-  function removeAll() {
+    }));
+  }, []);
+
+  const has = useCallback(
+    (key: any) => {
+      return typeof map[key] !== "undefined";
+    },
+    [map]
+  );
+
+  const setMultiple = useCallback(
+    (object: { any: any }) => {
+      setMap({
+        ...map,
+        ...object,
+      });
+    },
+    [map]
+  );
+
+  const removeMultiple = useCallback(
+    (...keys) => {
+      const newMap = {};
+      Object.keys(map).forEach((key) => {
+        if (!keys.includes(key)) {
+          newMap[key] = map[key];
+        }
+      });
+      setMap(newMap);
+    },
+    [map]
+  );
+
+  const remove = useCallback(
+    (key: any) => {
+      const newMap = {};
+      Object.keys(map).forEach((mapKey) => {
+        if (mapKey !== key) {
+          newMap[mapKey] = map[mapKey];
+        }
+      });
+      setMap(newMap);
+    },
+    [map]
+  );
+
+  const removeAll = useCallback(() => {
     setMap({});
-  }
+  }, []);
 
   const controls = {
     has,
