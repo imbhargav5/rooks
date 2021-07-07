@@ -34,12 +34,9 @@ function useCounter(initialValue: number): CounterHandler {
    *
    * @param {number} incrAmount
    */
-  const incrementBy = useCallback(
-    (incrAmount: number) => {
-      setCounter(counter + incrAmount);
-    },
-    [counter]
-  );
+  const incrementBy = useCallback((incrAmount: number) => {
+    setCounter((currentCounter) => currentCounter + incrAmount);
+  }, []);
   /**
    *
    * Decrement counter by an amount

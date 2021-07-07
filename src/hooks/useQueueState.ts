@@ -17,6 +17,7 @@ function useQueueState(
   const enqueue = useCallback(
     (item: any) => {
       const newList = [...list, item];
+
       setList(newList);
 
       return newList.length;

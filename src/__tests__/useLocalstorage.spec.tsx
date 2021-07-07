@@ -7,23 +7,24 @@ import {
   getByTestId,
   fireEvent,
   act,
-} from '@testing-library/react';
-import React from 'react';
-import { useLocalstorage } from '../hooks/useLocalstorage';
+} from "@testing-library/react";
+import { renderHook, act as actHook } from "@testing-library/react-hooks";
+import React from "react";
+import { useLocalstorage } from "../hooks/useLocalstorage";
 
-describe('useLocalstorage defined', () => {
-  it('should be defined', () => {
+describe("useLocalstorage defined", () => {
+  it("should be defined", () => {
     expect(useLocalstorage).toBeDefined();
   });
 });
 
-describe('useLocalstorage with object destructuring', () => {
+describe("useLocalstorage with object destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const { value } = useLocalstorage('test-value', 'hello');
+      const { value } = useLocalstorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -36,21 +37,21 @@ describe('useLocalstorage with object destructuring', () => {
 
   afterEach(cleanup);
 
-  it('initializes correctly', () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('hello');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("hello");
   });
 });
 
-describe('useLocalstorage with array destructuring', () => {
+describe("useLocalstorage with array destructuring", () => {
   let App;
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
       const [currentValue, set, remove] = useLocalstorage(
-        'test-value',
-        'hello'
+        "test-value",
+        "hello"
       );
 
       return (
@@ -59,7 +60,7 @@ describe('useLocalstorage with array destructuring', () => {
           <button
             data-testid="new-value"
             onClick={() => {
-              set('new value');
+              set("new value");
             }}
           >
             Set to new value
@@ -75,36 +76,54 @@ describe('useLocalstorage with array destructuring', () => {
 
   afterEach(cleanup);
 
-  it('initializes correctly', () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('hello');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("hello");
   });
 
-  it('setting the new value', () => {
+  test("set ", () => {
+    const { result, rerender } = renderHook(() =>
+      useLocalstorage("test-value", "hello")
+    );
+
+    // tests equality after emo
+    const setBeforeRerender = result.current.set;
+    rerender();
+    const setAfterRerender = result.current.set;
+    expect(setBeforeRerender).toBe(setAfterRerender);
+
+    // work after rerender
+    actHook(() => {
+      setAfterRerender("value");
+    });
+    expect(result.current.value).toBe("value");
+  });
+
+  it("setting the new value", () => {
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
       container as HTMLElement,
-      'new-value'
+      "new-value"
     );
     act(() => {
       fireEvent.click(setToNewValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('new value');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("new value");
   });
 
-  it('unsetting the value', () => {
+  it("unsetting the value", () => {
     const { container } = render(<App />);
     const unsetValueButton = getByTestId(
       container as HTMLElement,
-      'unset-value'
+      "unset-value"
     );
     act(() => {
       fireEvent.click(unsetValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("");
   });
 });
 

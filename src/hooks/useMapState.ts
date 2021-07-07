@@ -35,41 +35,38 @@ function useMapState(
     [map]
   );
 
-  const setMultiple = useCallback(
-    (object: { any: any }) => {
-      setMap({
-        ...map,
-        ...object,
-      });
-    },
-    [map]
-  );
+  const setMultiple = useCallback((object: { any: any }) => {
+    setMap((currentMap) => ({
+      ...currentMap,
+      ...object,
+    }));
+  }, []);
 
-  const removeMultiple = useCallback(
-    (...keys) => {
+  const removeMultiple = useCallback((...keys) => {
+    setMap((currentMap) => {
       const newMap = {};
-      Object.keys(map).forEach((key) => {
+      Object.keys(currentMap).forEach((key) => {
         if (!keys.includes(key)) {
-          newMap[key] = map[key];
+          newMap[key] = currentMap[key];
         }
       });
-      setMap(newMap);
-    },
-    [map]
-  );
 
-  const remove = useCallback(
-    (key: any) => {
+      return newMap;
+    });
+  }, []);
+
+  const remove = useCallback((key: any) => {
+    setMap((currentMap) => {
       const newMap = {};
-      Object.keys(map).forEach((mapKey) => {
+      Object.keys(currentMap).forEach((mapKey) => {
         if (mapKey !== key) {
-          newMap[mapKey] = map[mapKey];
+          newMap[mapKey] = currentMap[mapKey];
         }
       });
-      setMap(newMap);
-    },
-    [map]
-  );
+
+      return newMap;
+    });
+  }, []);
 
   const removeAll = useCallback(() => {
     setMap({});

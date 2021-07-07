@@ -62,19 +62,22 @@ function useSessionstorageState<S>(
     }
   }, [value]);
 
-  const listen = useCallback((e: StorageEvent) => {
-    if (e.storageArea === sessionStorage && e.key === key) {
-      try {
-        isUpdateFromListener.current = true;
-        const newValue = JSON.parse(e.newValue || "null");
-        if (value !== newValue) {
-          __setValue(newValue);
+  const listen = useCallback(
+    (e: StorageEvent) => {
+      if (e.storageArea === sessionStorage && e.key === key) {
+        try {
+          isUpdateFromListener.current = true;
+          const newValue = JSON.parse(e.newValue || "null");
+          if (value !== newValue) {
+            __setValue(newValue);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    }
-  }, []);
+    },
+    [value]
+  );
 
   // check for changes across windows
   useEffect(() => {
