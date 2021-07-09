@@ -4,12 +4,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import { useTimeout } from "../hooks/useTimeout";
 
-describe("useTimeout", () => {
-  it("should be defined", () => {
-    expect(useTimeout).toBeDefined();
-  });
-});
-
 describe("use-timeout base", () => {
   let mockCallback = jest.fn();
   const TIMEOUT_MS = 1_000;
