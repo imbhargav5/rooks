@@ -16,7 +16,7 @@ describe("useSelect", () => {
     expect(result.current.index).toBe(0);
     expect(result.current.item).toBe(1);
 
-    // should reactive to the latest memo list
+    // should be reactive to the latest memo list
     act(() => {
       array = [1, 2, 5];
       rerender();

@@ -130,7 +130,7 @@ describe("useMapState", () => {
     });
     expect(result.current[0]).toEqual({ a: 1, b: 3, c: 5, e: 6 });
 
-    // should reactive against new value
+    // should be reactive against new value
     act(() => {
       result.current[1].removeMultiple("a", "c");
     });
