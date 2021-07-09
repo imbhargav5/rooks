@@ -1,15 +1,20 @@
-import { useState } from 'react';
+/* eslint-disable no-negated-condition */
+import type {
+  OptionalIndexValue,
+  OptionalIndicesValues,
+} from "@/types/index-value";
+import { useCallback, useState } from "react";
 
 function warnIfBothValueAndIndexAreProvided(functionName, object) {
-  if (Object.values(object).every((v) => typeof v !== 'undefined')) {
+  if (Object.values(object).every((v) => typeof v !== "undefined")) {
     console.warn(
-      `${functionName} .Expected either ${Object.keys(object).join(
-        ' or '
+      `${functionName}. Expected either ${Object.keys(object).join(
+        " or "
       )} to be provided. However all were provided`
     );
-  } else if (Object.values(object).every((v) => typeof v === 'undefined')) {
+  } else if (Object.values(object).every((v) => typeof v === "undefined")) {
     console.warn(
-      `${functionName} . ${Object.keys(object).join(' , ')} are all undefined.`
+      `${functionName}. ${Object.keys(object).join(" , ")} are all undefined.`
     );
   }
 }
@@ -28,15 +33,12 @@ function useMultiSelectableList<T>(
 ): [
   Array<number[] | T[]>,
   {
-    toggleSelection: ({ index: number, value: T }) => () => void;
-    matchSelection: ({ index: number, value: T }) => void;
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    matchSelection: (parameters: OptionalIndexValue<T>) => void;
     updateSelections: ({
       indices,
       values,
-    }: {
-      indices: number[];
-      values: T[];
-    }) => () => void;
+    }: OptionalIndicesValues<T>) => () => void;
   }
 ] {
   const [currentIndices, setCurrentIndices] = useState(initialSelectIndices);
@@ -44,26 +46,20 @@ function useMultiSelectableList<T>(
   const currentValues = currentIndices.map((index) => list[index]);
   const selection = [currentIndices, currentValues];
 
-  function updateSelections({
-    indices,
-    values,
-  }: {
-    indices: number[];
-    values: T[];
-  }) {
+  const updateSelections = ({ indices, values }: OptionalIndicesValues<T>) => {
     return () => {
-      warnIfBothValueAndIndexAreProvided('updateSelection', {
+      warnIfBothValueAndIndexAreProvided("updateSelections", {
         indices,
         values,
       });
-      if (typeof indices !== 'undefined') {
+      if (typeof indices !== "undefined") {
         if (!allowUnselected && indices.length === 0) {
-          console.warn(`updateSelection failed. indices is an empty list.`);
+          console.warn(`updateSelections failed. indices is an empty list.`);
 
           return;
         }
         setCurrentIndices(indices);
-      } else {
+      } else if (typeof values !== "undefined") {
         const valueIndices = list.reduce((accumulator, current, index) => {
           if (values.includes(current)) {
             const array = [...accumulator, index];
@@ -79,57 +75,70 @@ function useMultiSelectableList<T>(
           setCurrentIndices(valueIndices);
         } else {
           console.warn(
-            `updateSelection failed. Do the values exist in the list?`
+            `updateSelections failed. Do the values exist in the list?`
           );
         }
       }
     };
-  }
+  };
 
-  function toggleSelectionByIndex(index) {
-    let newIndices;
-    if (!currentIndices.includes(index)) {
-      newIndices = [...currentIndices, index];
-    } else {
-      newIndices = [...currentIndices];
-      const indexOfIndex = currentIndices.indexOf(index);
-      if (indexOfIndex !== -1) {
-        newIndices.splice(indexOfIndex, 1);
-      }
-    }
-    if (newIndices.length > 0) {
-      setCurrentIndices(newIndices);
-    } else if (allowUnselected) {
-      setCurrentIndices(newIndices);
-    } else {
-      console.warn(`toggleSelection failed. Do the values exist in the list?`);
-    }
-  }
-
-  function toggleSelection({ index, value }) {
-    return () => {
-      warnIfBothValueAndIndexAreProvided('toggleSelection', {
-        index,
-        value,
-      });
-      if (typeof index !== 'undefined') {
-        toggleSelectionByIndex(index);
+  const toggleSelectionByIndex = useCallback(
+    (index) => {
+      let newIndices;
+      if (!currentIndices.includes(index)) {
+        newIndices = [...currentIndices, index];
       } else {
-        const valueIndex = list.indexOf(value);
-        if (valueIndex > -1) {
-          toggleSelectionByIndex(valueIndex);
+        newIndices = [...currentIndices];
+        const indexOfIndex = currentIndices.indexOf(index);
+        if (indexOfIndex !== -1) {
+          newIndices.splice(indexOfIndex, 1);
         }
       }
-    };
-  }
-  function matchSelection({ index, value }) {
-    warnIfBothValueAndIndexAreProvided('matchSelection', { index, value });
-    if (typeof index !== 'undefined') {
-      return currentIndices.includes(index);
-    } else {
-      return currentValues.includes(value);
-    }
-  }
+      if (newIndices.length > 0) {
+        setCurrentIndices(newIndices);
+      } else if (allowUnselected) {
+        setCurrentIndices(newIndices);
+      } else {
+        console.warn(
+          `toggleSelection failed. Do the values exist in the list?`
+        );
+      }
+    },
+    [allowUnselected, currentIndices]
+  );
+
+  const toggleSelection = useCallback(
+    ({ index, value }: OptionalIndexValue<T>) => {
+      return () => {
+        warnIfBothValueAndIndexAreProvided("toggleSelection", {
+          index,
+          value,
+        });
+        if (typeof index !== "undefined") {
+          toggleSelectionByIndex(index);
+        } else if (typeof value !== "undefined") {
+          const valueIndex = list.indexOf(value);
+          if (valueIndex > -1) {
+            toggleSelectionByIndex(valueIndex);
+          }
+        }
+      };
+    },
+    [list, toggleSelectionByIndex]
+  );
+
+  const matchSelection = useCallback(
+    ({ index, value }: OptionalIndexValue<T>) => {
+      warnIfBothValueAndIndexAreProvided("matchSelection", { index, value });
+      if (typeof index !== "undefined") {
+        return currentIndices.includes(index);
+      } else if (typeof value !== "undefined") {
+        return currentValues.includes(value);
+      }
+    },
+    [currentIndices, currentValues]
+  );
+
   const controls = {
     matchSelection,
     toggleSelection,
