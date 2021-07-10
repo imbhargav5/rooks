@@ -319,17 +319,17 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/phmngocnghia">
+            <img src="https://avatars.githubusercontent.com/u/36730355?v=4" width="100;" alt="phmngocnghia"/>
+            <br />
+            <sub><b>Nghia Pham</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/tobiaslins">
             <img src="https://avatars.githubusercontent.com/u/2978876?v=4" width="100;" alt="tobiaslins"/>
             <br />
             <sub><b>Tobias Lins</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/fintara">
-            <img src="https://avatars.githubusercontent.com/u/4290594?v=4" width="100;" alt="fintara"/>
-            <br />
-            <sub><b>Tsvetan</b></sub>
         </a>
     </td></tr>
 </table>
