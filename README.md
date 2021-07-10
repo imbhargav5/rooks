@@ -324,13 +324,6 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Nghia Pham</b></sub>
         </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/tobiaslins">
-            <img src="https://avatars.githubusercontent.com/u/2978876?v=4" width="100;" alt="tobiaslins"/>
-            <br />
-            <sub><b>Tobias Lins</b></sub>
-        </a>
     </td></tr>
 </table>
 <!-- readme: contributors -end -->
