@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
 function useQueueState(
   initialList: any[]
@@ -14,13 +14,18 @@ function useQueueState(
   const [list, setList] = useState([...initialList]);
   const length = list.length;
 
-  function enqueue(item: any) {
-    const newList = [...list, item];
-    setList(newList);
+  const enqueue = useCallback(
+    (item: any) => {
+      const newList = [...list, item];
 
-    return newList.length;
-  }
-  function dequeue() {
+      setList(newList);
+
+      return newList.length;
+    },
+    [list]
+  );
+
+  const dequeue = useCallback(() => {
     if (list.length > 0) {
       const firstItem = list[0];
       setList([...list.slice(1)]);
@@ -29,15 +34,16 @@ function useQueueState(
     }
 
     return undefined;
-  }
+  }, [list]);
 
-  function peek() {
+  const peek = useCallback(() => {
     if (length > 0) {
       return list[0];
     }
 
     return undefined;
-  }
+  }, [list]);
+
   const controls = {
     dequeue,
     enqueue,

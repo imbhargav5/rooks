@@ -1,14 +1,15 @@
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
-import React from 'react';
-import { useInput } from '../hooks/useInput';
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
+import { renderHook, act as actHook } from "@testing-library/react-hooks";
+import React from "react";
+import { useInput } from "../hooks/useInput";
 
-describe('useInput', () => {
+describe("useInput", () => {
   // basic tests
-  describe('basic', () => {
+  describe("basic", () => {
     let App;
     beforeEach(() => {
       App = function () {
-        const myInput = useInput('hello');
+        const myInput = useInput("hello");
 
         return (
           <div>
@@ -20,33 +21,52 @@ describe('useInput', () => {
     });
     afterEach(cleanup); // <-- add this
 
-    it('should be defined', () => {
+    test("memo", () => {
+      const { result, rerender } = renderHook(() => useInput("hello"));
+      const onChangeBeforeRerender = result.current.onChange;
+      rerender();
+      const onChangeAfterRerender = result.current.onChange;
+      // fn is memo
+      expect(onChangeBeforeRerender).toBe(onChangeAfterRerender);
+      actHook(() => {
+        onChangeAfterRerender({ target: { value: "string" } } as any);
+      });
+      // memo fn is still able to set data
+      expect(result.current.value).toBe("string");
+      // memo fn is reactive
+      actHook(() => {
+        onChangeAfterRerender({ target: { value: "string2" } } as any);
+      });
+      expect(result.current.value).toBe("string2");
+    });
+
+    it("should be defined", () => {
       expect(useInput).toBeDefined();
     });
-    it('sets initial value correctly', () => {
+    it("sets initial value correctly", () => {
       const { getByTestId } = render(<App />);
-      const inputElement = getByTestId('input-element') as HTMLInputElement;
-      expect(inputElement.value).toBe('hello');
+      const inputElement = getByTestId("input-element") as HTMLInputElement;
+      expect(inputElement.value).toBe("hello");
     });
-    it('updates value correctly', () => {
+    it("updates value correctly", () => {
       const { getByTestId } = render(<App />);
-      const inputElement = getByTestId('input-element') as HTMLInputElement;
-      const displayElement = getByTestId('display-element') as HTMLInputElement;
-      expect(inputElement.value).toBe('hello');
-      expect(displayElement.value).toBe('hello');
+      const inputElement = getByTestId("input-element") as HTMLInputElement;
+      const displayElement = getByTestId("display-element") as HTMLInputElement;
+      expect(inputElement.value).toBe("hello");
+      expect(displayElement.value).toBe("hello");
       act(() => {
         fireEvent.change(inputElement, {
           target: {
-            value: 'world',
+            value: "world",
           },
         });
       });
-      expect(inputElement.value).toBe('world');
-      expect(displayElement.value).toBe('world');
+      expect(inputElement.value).toBe("world");
+      expect(displayElement.value).toBe("world");
     });
   });
   // validate
-  describe('validate', () => {
+  describe("validate", () => {
     let App;
     beforeEach(() => {
       App = function ({ validate }) {
@@ -63,9 +83,9 @@ describe('useInput', () => {
     });
     afterEach(cleanup); // <-- add this
 
-    it('does not update if validate returns false', () => {
+    it("does not update if validate returns false", () => {
       const { getByTestId } = render(<App />);
-      const inputElement = getByTestId('input-element') as HTMLInputElement;
+      const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
         fireEvent.change(inputElement, {
           target: {
@@ -75,9 +95,9 @@ describe('useInput', () => {
       });
       expect(Number.parseInt(inputElement.value)).toBe(5);
     });
-    it('updates if validate returns true', () => {
+    it("updates if validate returns true", () => {
       const { getByTestId } = render(<App />);
-      const inputElement = getByTestId('input-element') as HTMLInputElement;
+      const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
         fireEvent.change(inputElement, {
           target: {
@@ -87,13 +107,13 @@ describe('useInput', () => {
       });
       expect(Number.parseInt(inputElement.value)).toBe(9);
     });
-    it('validate can be used to compare possible newvalue with current value', () => {
+    it("validate can be used to compare possible newvalue with current value", () => {
       const { getByTestId } = render(
         <App
           validate={(newValue, currentValue) => newValue % currentValue != 0}
         />
       );
-      const inputElement = getByTestId('input-element') as HTMLInputElement;
+      const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
         fireEvent.change(inputElement, {
           target: {
@@ -113,7 +133,7 @@ describe('useInput', () => {
     });
   });
 
-  describe('multiple', () => {
+  describe("multiple", () => {
     let App;
     beforeEach(() => {
       App = function () {
@@ -130,10 +150,10 @@ describe('useInput', () => {
     });
     afterEach(cleanup); // <-- add this
 
-    it('updates value of input if initial value changes', () => {
+    it("updates value of input if initial value changes", () => {
       const { getByTestId } = render(<App />);
-      const inputElement1 = getByTestId('input-element1') as HTMLInputElement;
-      const inputElement2 = getByTestId('input-element2') as HTMLInputElement;
+      const inputElement1 = getByTestId("input-element1") as HTMLInputElement;
+      const inputElement2 = getByTestId("input-element2") as HTMLInputElement;
       expect(Number.parseInt(inputElement1.value)).toBe(5);
       expect(Number.parseInt(inputElement2.value)).toBe(5);
 

@@ -1,11 +1,11 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import type { Dispatch, SetStateAction } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 function getValueFromLocalStorage(key) {
-  if (typeof localStorage === 'undefined') {
+  if (typeof localStorage === "undefined") {
     return null;
   }
-  const storedValue = localStorage.getItem(key) || 'null';
+  const storedValue = localStorage.getItem(key) || "null";
   try {
     return JSON.parse(storedValue);
   } catch (error) {
@@ -16,7 +16,7 @@ function getValueFromLocalStorage(key) {
 }
 
 function saveValueToLocalStorage(key: string, value: any) {
-  if (typeof localStorage === 'undefined') {
+  if (typeof localStorage === "undefined") {
     return null;
   }
 
@@ -66,7 +66,7 @@ function useLocalstorageState<S>(
     if (e.storageArea === localStorage && e.key === key) {
       try {
         isUpdateFromListener.current = true;
-        const newValue = JSON.parse(e.newValue || 'null');
+        const newValue = JSON.parse(e.newValue || "null");
         if (value !== newValue) {
           __setValue(newValue);
         }
@@ -78,21 +78,21 @@ function useLocalstorageState<S>(
 
   // check for changes across windows
   useEffect(() => {
-    window.addEventListener('storage', listen);
+    window.addEventListener("storage", listen);
 
     return () => {
-      window.removeEventListener('storage', listen);
+      window.removeEventListener("storage", listen);
     };
   }, []);
 
-  function setValue(newValue: S): void {
+  const setValue = useCallback((newValue: S) => {
     isUpdateFromListener.current = false;
     __setValue(newValue);
-  }
+  }, []);
 
-  function remove() {
+  const remove = useCallback(() => {
     localStorage.removeItem(key);
-  }
+  }, []);
 
   return [value, setValue, remove];
 }

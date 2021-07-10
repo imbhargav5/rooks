@@ -7,22 +7,23 @@ import {
   getByTestId,
   fireEvent,
   act,
-} from '@testing-library/react';
-import React from 'react';
-import { useLocalstorageState } from '../hooks/useLocalstorageState';
+} from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
+import React from "react";
+import { useLocalstorageState } from "../hooks/useLocalstorageState";
 
-describe('useLocalstorageState defined', () => {
-  it('should be defined', () => {
+describe("useLocalstorageState defined", () => {
+  it("should be defined", () => {
     expect(useLocalstorageState).toBeDefined();
   });
 });
 
-describe('useLocalstorageState basic', () => {
+describe("useLocalstorageState basic", () => {
   let App;
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const [value, set, remove] = useLocalstorageState('test-value', 'hello');
+      const [value, set, remove] = useLocalstorageState("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -30,7 +31,7 @@ describe('useLocalstorageState basic', () => {
           <button
             data-testid="new-value"
             onClick={() => {
-              set('new value');
+              set("new value");
             }}
           >
             Set to new value
@@ -46,35 +47,49 @@ describe('useLocalstorageState basic', () => {
 
   afterEach(cleanup);
 
-  it('initializes correctly', () => {
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('hello');
+  test("memo", () => {
+    const { result, rerender } = renderHook(() =>
+      useLocalstorageState("key1", "value")
+    );
+    // test memo
+    const setBeforeRerender = result.current[1];
+    const removeBeforeRerender = result.current[2];
+    rerender();
+    const setAfterRerender = result.current[1];
+    const removeAfterRerender = result.current[2];
+    expect(setBeforeRerender).toBe(setAfterRerender);
+    expect(removeBeforeRerender).toBe(removeAfterRerender);
   });
 
-  it('setting the new value', () => {
+  it("initializes correctly", () => {
+    const { container } = render(<App />);
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("hello");
+  });
+
+  it("setting the new value", () => {
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
       container as HTMLElement,
-      'new-value'
+      "new-value"
     );
     act(() => {
       fireEvent.click(setToNewValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('new value');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("new value");
   });
 
-  it.skip('unsetting the value', () => {
+  it.skip("unsetting the value", () => {
     const { container } = render(<App />);
     const unsetValueButton = getByTestId(
       container as HTMLElement,
-      'unset-value'
+      "unset-value"
     );
     act(() => {
       fireEvent.click(unsetValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("");
   });
 });
