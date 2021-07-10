@@ -1,3 +1,25 @@
+## <small>5.0.3 (2021-07-10)</small>
+
+* Add Contributors cron workflow ([8aa9a96](https://github.com/imbhargav5/rooks/commit/8aa9a96))
+* Changes related to Installation in readme ([a367cd3](https://github.com/imbhargav5/rooks/commit/a367cd3)), closes [#472](https://github.com/imbhargav5/rooks/issues/472)
+* contrib-readme-action has updated readme ([78fa70b](https://github.com/imbhargav5/rooks/commit/78fa70b))
+* contrib-readme-action has updated readme ([22de271](https://github.com/imbhargav5/rooks/commit/22de271))
+* contrib-readme-action has updated readme ([b6f93a8](https://github.com/imbhargav5/rooks/commit/b6f93a8))
+* contrib-readme-action has updated readme ([1df477b](https://github.com/imbhargav5/rooks/commit/1df477b))
+* Update contributors.yml ([31fd9d5](https://github.com/imbhargav5/rooks/commit/31fd9d5))
+* chore(deps): bump prismjs from 1.23.0 to 1.24.0 (#504) ([f8dce9c](https://github.com/imbhargav5/rooks/commit/f8dce9c)), closes [#504](https://github.com/imbhargav5/rooks/issues/504)
+* chore(devdependency): remove fsevents from devdependencies (#480) (#481) ([3276a2b](https://github.com/imbhargav5/rooks/commit/3276a2b)), closes [#480](https://github.com/imbhargav5/rooks/issues/480) [#481](https://github.com/imbhargav5/rooks/issues/481)
+* chore(workflow): allow members or owners to rebase (#483) ([5576272](https://github.com/imbhargav5/rooks/commit/5576272)), closes [#483](https://github.com/imbhargav5/rooks/issues/483)
+* fix: memo hooks (#506) ([8200087](https://github.com/imbhargav5/rooks/commit/8200087)), closes [#506](https://github.com/imbhargav5/rooks/issues/506)
+* docs: add contributing guidelines (#495) ([63dd945](https://github.com/imbhargav5/rooks/commit/63dd945)), closes [#495](https://github.com/imbhargav5/rooks/issues/495)
+* docs(examples): Updated codesandbox examples for hooks (#488) ([74d85be](https://github.com/imbhargav5/rooks/commit/74d85be)), closes [#488](https://github.com/imbhargav5/rooks/issues/488)
+* docs(readme): fix docs md issues ([648c2ee](https://github.com/imbhargav5/rooks/commit/648c2ee))
+* docs(readme): fix typos in usage.  ([48d512f](https://github.com/imbhargav5/rooks/commit/48d512f))
+* docs(readme): update docs ([0114317](https://github.com/imbhargav5/rooks/commit/0114317))
+* style(formatting): prettier format ([32cc4dc](https://github.com/imbhargav5/rooks/commit/32cc4dc))
+
+
+
 ## <small>5.0.2 (2021-05-04)</small>
 
 * fix(bundlesize): improve bundlesize ([d5ae1c0](https://github.com/imbhargav5/rooks/commit/d5ae1c0))
