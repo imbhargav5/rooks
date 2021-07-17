@@ -1,3 +1,9 @@
+## 5.2.0 (2021-07-17)
+
+* feat(usedimensionsref): new hook to find dimensions of an element (#509) ([be2d162](https://github.com/imbhargav5/rooks/commit/be2d162)), closes [#509](https://github.com/imbhargav5/rooks/issues/509) [#508](https://github.com/imbhargav5/rooks/issues/508)
+
+
+
 ## 5.1.0 (2021-07-17)
 
 * feat(usefullscreen): pass requestFullscreenOptions (#507) ([e8cc529](https://github.com/imbhargav5/rooks/commit/e8cc529)), closes [#507](https://github.com/imbhargav5/rooks/issues/507)
