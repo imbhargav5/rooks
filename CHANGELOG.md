@@ -1,3 +1,9 @@
+## 5.1.0 (2021-07-17)
+
+* feat(usefullscreen): pass requestFullscreenOptions (#507) ([e8cc529](https://github.com/imbhargav5/rooks/commit/e8cc529)), closes [#507](https://github.com/imbhargav5/rooks/issues/507)
+
+
+
 ## <small>5.0.3 (2021-07-10)</small>
 
 * Add Contributors cron workflow ([8aa9a96](https://github.com/imbhargav5/rooks/commit/8aa9a96))
