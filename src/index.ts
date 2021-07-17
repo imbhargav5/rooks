@@ -5,6 +5,7 @@ export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";
 export { useDidMount } from "./hooks/useDidMount";
 export { useDidUpdate } from "./hooks/useDidUpdate";
+export { useDimensionsRef } from "./hooks/useDimensionsRef";
 export { useDocumentEventListener } from "./hooks/useDocumentEventListener";
 export { useEffectOnceWhen } from "./hooks/useEffectOnceWhen";
 export { useEventListenerRef } from "./hooks/useEventListenerRef";
