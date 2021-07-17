@@ -1,8 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { RefElementOrNull } from '../utils/utils';
-import { useFreshTick } from './useFreshTick';
-import { useIsomorphicEffect } from './useIsomorphicEffect';
-import { useRefElement } from './useRefElement';
+import { useEffect } from "react";
+import { useFreshTick } from "./useFreshTick";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 /**
  *  useGlobalObjectEventListener hook
@@ -31,7 +29,7 @@ function useGlobalObjectEventListener(
 
   useEffectToRun(() => {
     if (
-      typeof globalObject !== 'undefined' &&
+      typeof globalObject !== "undefined" &&
       globalObject.addEventListener &&
       when
     ) {

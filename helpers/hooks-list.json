@@ -29,6 +29,10 @@
       "description": "componentDidUpdate hook for react"
     },
     {
+      "name": "useDimensionsRef",
+      "description": "Easily grab dimensions of an element with a ref using this hook"
+    },
+    {
       "name": "useDocumentEventListener",
       "description": "A react hook to an event listener to the document object"
     },
