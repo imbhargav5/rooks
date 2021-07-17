@@ -35,12 +35,12 @@ const getDimensionObject = (node: HTMLElement): UseDimensionsRefReturn => {
   return {
     bottom: rect.bottom,
     height: rect.height,
-    left: "y" in rect ? rect.y : rect.left,
+    left: rect.left,
     right: rect.right,
-    top: "x" in rect ? rect.x : rect.top,
+    top: rect.top,
     width: rect.width,
-    x: "x" in rect ? rect.x : rect.left,
-    y: "y" in rect ? rect.y : rect.top,
+    x: rect.left,
+    y: rect.top,
   };
 };
 
