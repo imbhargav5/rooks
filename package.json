@@ -22,7 +22,7 @@
     "create": "node helpers/create",
     "new": "yarn run create",
     "prebuild": "rimraf dist",
-    "compute-package-list": "node helpers/compute-package-list",
+    "update-package-list-to-markdown": "node helpers/update-package-list-to-markdown",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:esm": "tsc -m esNext --outDir dist/esm",
     "build:cjs": "tsc -m commonjs --outDir dist/cjs",

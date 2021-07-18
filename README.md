@@ -70,7 +70,6 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useThrottle](https://react-hooks.org/docs/useThrottle) - Throttle custom hook for React
-*   [useTimeAgo](https://react-hooks.org/docs/useTimeAgo) - A React Hook to get time ago for timestamp millisecond value.
 *   [useTimeout](https://react-hooks.org/docs/useTimeout) - setTimeout hook for react.
 *   [useTimeoutWhen](https://react-hooks.org/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://react-hooks.org/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
@@ -81,7 +80,6 @@ A super awesome collection of regularly used custom hooks as utils for React.
 *   [useWindowEventListener](https://react-hooks.org/docs/useWindowEventListener) - Adds an event listener to window
 *   [useWindowScrollPosition](https://react-hooks.org/docs/useWindowScrollPosition) - A React hook to get the scroll position of the window
 *   [useWindowSize](https://react-hooks.org/docs/useWindowSize) - Window size hook for React.
-*   [useWorker](https://react-hooks.org/docs/useWorker) - Worker hook for React.
 
 <!--hookslist end-->
 
@@ -89,7 +87,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start-->
 
-✅ Collection of 63 hooks as standalone modules.
+✅ Collection of 61 hooks as standalone modules.
 
 <!--hookscount end-->
 
@@ -138,6 +136,7 @@ MIT
 Thanks goes to these wonderful people
 
 <!-- readme: contributors -start -->
+
 <table>
 <tr>
     <td align="center">
