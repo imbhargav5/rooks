@@ -1,0 +1,60 @@
+{
+  "name": "react-textarea-autosize",
+  "description": "textarea component for React which grows with content",
+  "version": "6.1.0",
+  "keywords": "autosize, grow, react, react-component, textarea",
+  "repository": "andreypopp/react-textarea-autosize",
+  "license": "MIT",
+  "main": "dist/react-textarea-autosize.cjs.js",
+  "module": "dist/react-textarea-autosize.es.js",
+  "jsnext:main": "dist/react-textarea-autosize.es.js",
+  "unpkg": "dist/react-textarea-autosize.min.js",
+  "sideEffects": false,
+  "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "rollup -c",
+    "docs:build": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c example/rollup.config.js",
+    "docs:publish": "npm run docs:build && cd example && rimraf .git && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
+    "clean": "rimraf dist",
+    "lint": "eslint src",
+    "prepare": "npm run build",
+    "precommit": "lint-staged",
+    "prerelease": "npm run lint",
+    "release:patch": "npm run prerelease && npm version patch && npm publish && git push --follow-tags",
+    "release:minor": "npm run prerelease && npm version minor && npm publish && git push --follow-tags",
+    "release:major": "npm run prerelease && npm version major && npm publish && git push --follow-tags"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.0 <17.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.40",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.40",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.40",
+    "@babel/preset-env": "7.0.0-beta.40",
+    "@babel/preset-react": "7.0.0-beta.40",
+    "cross-env": "^5.0.1",
+    "eslint": "^4.12.0",
+    "eslint-config-prometheusresearch": "^0.4.0",
+    "eslint-plugin-react": "^7.5.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.52.0",
+    "rollup-plugin-babel": "4.0.0-beta.2",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
+}
