@@ -138,7 +138,6 @@ MIT
 Thanks goes to these wonderful people
 
 <!-- readme: contributors -start -->
-
 <table>
 <tr>
     <td align="center">
@@ -228,6 +227,13 @@ Thanks goes to these wonderful people
     </td></tr>
 <tr>
     <td align="center">
+        <a href="https://github.com/phmngocnghia">
+            <img src="https://avatars.githubusercontent.com/u/36730355?v=4" width="100;" alt="phmngocnghia"/>
+            <br />
+            <sub><b>Nghia Pham</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/deadcoder0904">
             <img src="https://avatars.githubusercontent.com/u/16436270?v=4" width="100;" alt="deadcoder0904"/>
             <br />
@@ -261,15 +267,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Brian Steere</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/calthejuggler">
             <img src="https://avatars.githubusercontent.com/u/30095183?v=4" width="100;" alt="calthejuggler"/>
             <br />
             <sub><b>Cal Courtney</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/chrismilson">
             <img src="https://avatars.githubusercontent.com/u/13655076?v=4" width="100;" alt="chrismilson"/>
@@ -304,27 +310,20 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Josh Davenport</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/1337MARCEL">
             <img src="https://avatars.githubusercontent.com/u/16888873?v=4" width="100;" alt="1337MARCEL"/>
             <br />
             <sub><b>MARCEL</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/neilor">
             <img src="https://avatars.githubusercontent.com/u/4008023?v=4" width="100;" alt="neilor"/>
             <br />
             <sub><b>Neilor Caldeira</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/phmngocnghia">
-            <img src="https://avatars.githubusercontent.com/u/36730355?v=4" width="100;" alt="phmngocnghia"/>
-            <br />
-            <sub><b>Nghia Pham</b></sub>
         </a>
     </td></tr>
 </table>
