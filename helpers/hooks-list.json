@@ -205,10 +205,6 @@
       "description": "Throttle custom hook for React"
     },
     {
-      "name": "useTimeAgo",
-      "description": "A React Hook to get time ago for timestamp millisecond value."
-    },
-    {
       "name": "useTimeout",
       "description": "setTimeout hook for react."
     },
@@ -247,10 +243,6 @@
     {
       "name": "useWindowSize",
       "description": "Window size hook for React."
-    },
-    {
-      "name": "useWorker",
-      "description": "Worker hook for React."
     }
   ]
 }
