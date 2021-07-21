@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "moduleResolution": "node",
     "strictNullChecks": true, // enable strict null checks as a best practice
     "module": "ES2015", // specify module code generation
@@ -39,5 +40,5 @@
     "src/css",
     "src/theme"
   ],
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*.ts", "src/__tests__/useDimensionsRef.spec.tsx"]
 }

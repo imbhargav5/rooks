@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
 type CounterHandler = {
   value: number;
@@ -34,37 +34,37 @@ function useCounter(initialValue: number): CounterHandler {
    *
    * @param {number} incrAmount
    */
-  function incrementBy(incrAmount: number): void {
-    setCounter(counter + incrAmount);
-  }
+  const incrementBy = useCallback((incrAmount: number) => {
+    setCounter((currentCounter) => currentCounter + incrAmount);
+  }, []);
   /**
    *
    * Decrement counter by an amount
    *
    * @param {*} decrAmount
    */
-  function decrementBy(decrAmount: number): void {
+  const decrementBy = useCallback((decrAmount: number) => {
     incrementBy(-decrAmount);
-  }
+  }, []);
 
   /**
    * Increment counter by 1
    */
-  function increment(): void {
+  const increment = useCallback(() => {
     incrementBy(1);
-  }
+  }, []);
   /**
    * Decrement counter by 1
    */
-  function decrement(): void {
+  const decrement = useCallback(() => {
     incrementBy(-1);
-  }
+  }, []);
   /**
    * Reset counter to initial value
    */
-  function reset(): void {
+  const reset = useCallback(() => {
     setCounter(initialValue);
-  }
+  }, []);
 
   return {
     decrement,

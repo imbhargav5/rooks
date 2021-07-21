@@ -28,7 +28,6 @@
     "no-dupe-keys": [1],
     "prefer-const": [1],
     "no-const-assign": [2],
-    "no-duplicate-imports": [2],
     "no-useless-constructor": [1],
     "no-class-assign": [2],
     "no-confusing-arrow": [2],

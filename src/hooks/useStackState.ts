@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from "react";
 
 function useStackState(
   initialList: any[]
@@ -22,13 +22,17 @@ function useStackState(
     return reverseList;
   }, [list]);
 
-  function push(item: any) {
-    const newList = [...list, item];
-    setList(newList);
+  const push = useCallback(
+    (item: any) => {
+      const newList = [...list, item];
+      setList(newList);
 
-    return newList.length;
-  }
-  function pop() {
+      return newList.length;
+    },
+    [list]
+  );
+
+  const pop = useCallback(() => {
     if (list.length > 0) {
       const lastItem = list[list.length - 1];
       setList([...list.slice(0, list.length - 1)]);
@@ -37,15 +41,16 @@ function useStackState(
     }
 
     return undefined;
-  }
+  }, [list]);
 
-  function peek() {
+  const peek = useCallback(() => {
     if (length > 0) {
       return list[length - 1];
     }
 
     return undefined;
-  }
+  }, [list]);
+
   const controls = {
     length,
     peek,

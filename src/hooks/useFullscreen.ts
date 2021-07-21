@@ -1,6 +1,6 @@
-import { useState, useCallback, useRef } from 'react';
-import { useDocumentEventListener } from './useDocumentEventListener';
-import { warning } from './warning';
+import { useState, useCallback, useRef } from "react";
+import { useDocumentEventListener } from "./useDocumentEventListener";
+import { warning } from "./warning";
 
 type EventCallback = (this: Document, event_: any) => any;
 type OnChangeEventCallback = (
@@ -21,46 +21,46 @@ type NormalizedFullscreenApi = {
 const getFullscreenControls = (): NormalizedFullscreenApi => {
   const functionMap = [
     [
-      'requestFullscreen',
-      'exitFullscreen',
-      'fullscreenElement',
-      'fullscreenEnabled',
-      'fullscreenchange',
-      'fullscreenerror',
+      "requestFullscreen",
+      "exitFullscreen",
+      "fullscreenElement",
+      "fullscreenEnabled",
+      "fullscreenchange",
+      "fullscreenerror",
     ],
     // New WebKit
     [
-      'webkitRequestFullscreen',
-      'webkitExitFullscreen',
-      'webkitFullscreenElement',
-      'webkitFullscreenEnabled',
-      'webkitfullscreenchange',
-      'webkitfullscreenerror',
+      "webkitRequestFullscreen",
+      "webkitExitFullscreen",
+      "webkitFullscreenElement",
+      "webkitFullscreenEnabled",
+      "webkitfullscreenchange",
+      "webkitfullscreenerror",
     ],
     // Old WebKit
     [
-      'webkitRequestFullScreen',
-      'webkitCancelFullScreen',
-      'webkitCurrentFullScreenElement',
-      'webkitCancelFullScreen',
-      'webkitfullscreenchange',
-      'webkitfullscreenerror',
+      "webkitRequestFullScreen",
+      "webkitCancelFullScreen",
+      "webkitCurrentFullScreenElement",
+      "webkitCancelFullScreen",
+      "webkitfullscreenchange",
+      "webkitfullscreenerror",
     ],
     [
-      'mozRequestFullScreen',
-      'mozCancelFullScreen',
-      'mozFullScreenElement',
-      'mozFullScreenEnabled',
-      'mozfullscreenchange',
-      'mozfullscreenerror',
+      "mozRequestFullScreen",
+      "mozCancelFullScreen",
+      "mozFullScreenElement",
+      "mozFullScreenEnabled",
+      "mozfullscreenchange",
+      "mozfullscreenerror",
     ],
     [
-      'msRequestFullscreen',
-      'msExitFullscreen',
-      'msFullscreenElement',
-      'msFullscreenEnabled',
-      'MSFullscreenChange',
-      'MSFullscreenError',
+      "msRequestFullscreen",
+      "msExitFullscreen",
+      "msFullscreenElement",
+      "msFullscreenEnabled",
+      "MSFullscreenChange",
+      "MSFullscreenError",
     ],
   ];
 
@@ -119,9 +119,15 @@ const defaultValue: FullscreenApi = {
   toggle: noop,
 };
 
+type RequestFullscreenOptions = {
+  // string will help to ease type casting
+  navigationUI?: string | "auto" | "hide" | "show";
+};
+
 type FullScreenOptions = {
   onChange?: OnChangeEventCallback;
   onError?: EventCallback;
+  requestFullscreenOptions?: RequestFullscreenOptions;
 };
 
 function warnDeprecatedOnChangeAndOnErrorUsage() {
@@ -142,10 +148,14 @@ function warnDeprecatedOnChangeAndOnErrorUsage() {
 function useFullscreen(
   options: FullScreenOptions = {}
 ): FullscreenApi | undefined {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return defaultValue;
   }
-  const { onChange: onChangeArgument, onError: onErrorArgument } = options;
+  const {
+    onChange: onChangeArgument,
+    onError: onErrorArgument,
+    requestFullscreenOptions = {},
+  } = options;
 
   const fullscreenControls = getFullscreenControls();
   const [isFullscreen, setIsFullscreen] = useState(
@@ -159,7 +169,9 @@ function useFullscreen(
     try {
       const finalElement = element || document.documentElement;
 
-      return await finalElement[fullscreenControls.requestFullscreen]();
+      return await finalElement[fullscreenControls.requestFullscreen](
+        requestFullscreenOptions
+      );
     } catch (error) {
       console.log(error);
     }
