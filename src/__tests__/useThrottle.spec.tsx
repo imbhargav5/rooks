@@ -1,8 +1,15 @@
-import { cleanup, render, act, fireEvent, wait } from '@testing-library/react';
-import React, { useState } from 'react';
-import { useThrottle } from '../hooks/useThrottle';
+import {
+  cleanup,
+  render,
+  act,
+  fireEvent,
+  wait,
+  waitFor,
+} from "@testing-library/react";
+import React, { useState } from "react";
+import { useThrottle } from "../hooks/useThrottle";
 
-describe('useThrottle hook', () => {
+describe("useThrottle hook", () => {
   let App;
   const TIMEOUT = 300;
   const consoleError = console.error;
@@ -11,10 +18,10 @@ describe('useThrottle hook', () => {
   // There's a ticket here - https://github.com/facebook/react/issues/14769
   // Tests are passing correctly, so that's just for clean console.
   beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation((...args) => {
+    jest.spyOn(console, "error").mockImplementation((...args) => {
       if (
         !args[0].includes(
-          'Warning: An update to %s inside a test was not wrapped in act'
+          "Warning: An update to %s inside a test was not wrapped in act"
         )
       ) {
         consoleError(...args);
@@ -58,14 +65,14 @@ describe('useThrottle hook', () => {
 
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useThrottle).toBeDefined();
   });
 
-  it('should update value when used once', () => {
+  it("should update value when used once", () => {
     const { getByTestId } = render(<App />);
-    const throttleButton = getByTestId('throttle-button');
-    const throttleValue = getByTestId('throttle-value');
+    const throttleButton = getByTestId("throttle-button");
+    const throttleValue = getByTestId("throttle-value");
 
     act(() => {
       fireEvent.click(throttleButton);
@@ -74,10 +81,10 @@ describe('useThrottle hook', () => {
     expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
   });
 
-  it('should update value once when clicked multiple times, one after another', () => {
+  it("should update value once when clicked multiple times, one after another", () => {
     const { getByTestId } = render(<App />);
-    const throttleButton = getByTestId('throttle-button');
-    const throttleValue = getByTestId('throttle-value');
+    const throttleButton = getByTestId("throttle-button");
+    const throttleValue = getByTestId("throttle-value");
 
     act(() => {
       fireEvent.click(throttleButton);
@@ -91,10 +98,10 @@ describe('useThrottle hook', () => {
     expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
   });
 
-  it('should update value twice when clicked twice, with 300ms break between them', async () => {
+  it("should update value twice when clicked twice, with 300ms break between them", async () => {
     const { getByTestId } = render(<App />);
-    const throttleButton = getByTestId('throttle-button');
-    const throttleValue = getByTestId('throttle-value');
+    const throttleButton = getByTestId("throttle-button");
+    const throttleValue = getByTestId("throttle-value");
 
     act(() => {
       fireEvent.click(throttleButton);
@@ -104,12 +111,12 @@ describe('useThrottle hook', () => {
       setTimeout(() => {
         act(() => {
           fireEvent.click(throttleButton);
-          resolve();
+          resolve(0);
         });
       }, TIMEOUT);
     });
 
-    await wait(
+    await waitFor(
       () => {
         expect(Number.parseInt(throttleValue.innerHTML)).toBe(2);
       },
@@ -118,13 +125,13 @@ describe('useThrottle hook', () => {
       }
     );
   });
-  it('should update value of state acording to argument passed in callback', async () => {
+  it("should update value of state acording to argument passed in callback", async () => {
     const { getByTestId } = render(<App />);
     const throttleButtonWithParameter = getByTestId(
-      'throttle-button-with-param'
+      "throttle-button-with-param"
     );
-    const throttleValueWithParameter = getByTestId('throttle-value-with-param');
-    const throttleValue = getByTestId('throttle-value');
+    const throttleValueWithParameter = getByTestId("throttle-value-with-param");
+    const throttleValue = getByTestId("throttle-value");
 
     act(() => {
       fireEvent.click(throttleButtonWithParameter);

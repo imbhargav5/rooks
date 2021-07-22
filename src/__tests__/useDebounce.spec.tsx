@@ -1,20 +1,20 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import TestRenderer from 'react-test-renderer';
-import { useDebounce } from '../hooks/useDebounce';
+import { renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import TestRenderer from "react-test-renderer";
+import { useDebounce } from "../hooks/useDebounce";
 
 const { act } = TestRenderer;
 
-describe('useDebounce', () => {
-  it('should be defined', () => {
+describe("useDebounce", () => {
+  it("should be defined", () => {
     expect(useDebounce).toBeDefined();
   });
 });
 
-describe.skip('useDebounce behavior', () => {
+describe.skip("useDebounce behavior", () => {
   const DEBOUNCE_WAIT = 500;
   let useCustomDebounce;
   beforeEach(() => {
@@ -28,29 +28,29 @@ describe.skip('useDebounce behavior', () => {
       return { cb: callback, value };
     };
   });
-  it('runs only once if cb is called repeatedly in wait period', async () => {
+  it("runs only once if cb is called repeatedly in wait period", async () => {
     const { result } = renderHook(() => useCustomDebounce());
     act(() => {
       result.current.cb();
       result.current.cb();
       result.current.cb();
     });
-    await new Promise((resolve) => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
     act(() => {});
     expect(result.current.value).toBe(1);
   });
-  it('works properly if waited', async () => {
+  it("works properly if waited", async () => {
     const { result } = renderHook(() => useCustomDebounce());
     act(() => {
       result.current.cb();
       result.current.cb();
       result.current.cb();
     });
-    await new Promise((resolve) => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
     act(() => {
       result.current.cb();
     });
-    await new Promise((resolve) => setTimeout(() => resolve(), DEBOUNCE_WAIT));
+    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
     expect(result.current.value).toBe(2);
   });
 });
