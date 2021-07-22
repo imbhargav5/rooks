@@ -3,6 +3,7 @@ import { useRef, useEffect, useCallback } from "react";
 
 /**
  * Debounce hook
+ * Debounces a function
  *
  * @param {Function} callback The callback to debounce
  * @param {number} wait The duration to debounce
