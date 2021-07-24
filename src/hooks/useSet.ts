@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
 type Actions<T> = {
-  has: (key: T) => boolean;
-  add: (keys: T) => void;
-  remove: (keys: T) => void;
+  has: (item: T) => boolean;
+  add: (...items: T[]) => void;
+  remove: (...items: T[]) => void;
   removeAll: () => void;
 };
 
