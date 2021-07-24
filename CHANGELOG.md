@@ -1,3 +1,13 @@
+## 5.3.0 (2021-07-24)
+
+* feat(useLifecycleLogger): add new hook to log lifecycle events (#517) ([e1b19a5](https://github.com/imbhargav5/rooks/commit/e1b19a5)), closes [#517](https://github.com/imbhargav5/rooks/issues/517)
+* chore(deps): update typescript to 4.3.5 (#511) ([cc6d5bf](https://github.com/imbhargav5/rooks/commit/cc6d5bf)), closes [#511](https://github.com/imbhargav5/rooks/issues/511)
+* contrib-readme-action has updated readme ([3bde3c6](https://github.com/imbhargav5/rooks/commit/3bde3c6))
+* contrib-readme-action has updated readme ([5d970ea](https://github.com/imbhargav5/rooks/commit/5d970ea))
+* Hooks list chore (#510) ([b59b2b7](https://github.com/imbhargav5/rooks/commit/b59b2b7)), closes [#510](https://github.com/imbhargav5/rooks/issues/510)
+
+
+
 ## 5.2.0 (2021-07-17)
 
 * feat(usedimensionsref): new hook to find dimensions of an element (#509) ([be2d162](https://github.com/imbhargav5/rooks/commit/be2d162)), closes [#509](https://github.com/imbhargav5/rooks/issues/509) [#508](https://github.com/imbhargav5/rooks/issues/508)
