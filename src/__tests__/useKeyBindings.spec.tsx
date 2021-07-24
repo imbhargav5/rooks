@@ -27,9 +27,12 @@ describe('useKeyBindings', () => {
           r: () => {
             setValue(value + 1);
           },
+          v: () => {
+            setValue(value + 1);
+          },
         },
         {
-          target: inputRef,
+          when: true,
         }
       );
 
@@ -67,5 +70,9 @@ describe('useKeyBindings', () => {
       fireEvent.keyDown(inputElement, { charCode: 82, code: 'keyR', key: 'r' });
     });
     expect(valueElement.innerHTML).toBe('2');
+    act(() => {
+      fireEvent.keyDown(inputElement, { charCode: 86, code: 'keyV', key: 'v' });
+    });
+    expect(valueElement.innerHTML).toBe('3');
   });
 });
