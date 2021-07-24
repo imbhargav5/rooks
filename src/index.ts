@@ -47,6 +47,7 @@ export { useSelect } from "./hooks/useSelect";
 export { useSelectableList } from "./hooks/useSelectableList";
 export { useSessionstorage } from "./hooks/useSessionstorage";
 export { useSessionstorageState } from "./hooks/useSessionstorageState";
+export { useSet } from "./hooks/useSet";
 export { useStackState } from "./hooks/useStackState";
 export { useThrottle } from "./hooks/useThrottle";
 export { useTimeout } from "./hooks/useTimeout";
