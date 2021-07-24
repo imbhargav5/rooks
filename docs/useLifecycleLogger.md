@@ -26,8 +26,9 @@ import {useLifecycleLogger} from "rooks"
 ## Usage
 
 ```jsx
-function Demo() {
-  useLifecycleLogger();
+function Demo(props) {
+  useLifecycleLogger('Demo',props);
+  // it will log on mount, update and unmount
   return null
 }
 
