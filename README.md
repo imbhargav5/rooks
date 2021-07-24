@@ -89,7 +89,7 @@ A super awesome collection of regularly used custom hooks as utils for React.
 
 <!--hookscount start-->
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end-->
 
