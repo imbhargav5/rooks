@@ -1,7 +1,7 @@
 /* eslint-disable filenames/match-exported */
 /* eslint-disable import/namespace */
 /* eslint-disable guard-for-in */
-import * as secondary from '.';
+import * as secondary from ".";
 
 const rooks = {};
 

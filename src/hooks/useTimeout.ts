@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from "react";
 
 type UseTimeoutHandler = {
   start: () => any;
@@ -29,12 +29,13 @@ function useTimeout(
     clear();
   }
 
-  function clear() {
+  const clear = useCallback(() => {
     setIsTimeoutActive(false);
-  }
-  function start() {
+  }, []);
+
+  const start = useCallback(() => {
     setIsTimeoutActive(true);
-  }
+  }, []);
 
   useEffect(() => {
     if (isTimeoutActive) {

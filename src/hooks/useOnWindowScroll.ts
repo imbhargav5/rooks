@@ -1,5 +1,4 @@
-import { useEffect, useRef } from 'react';
-import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
 
 /**
  *
@@ -17,7 +16,7 @@ function useOnWindowScroll(
 ): void {
   useGlobalObjectEventListener(
     window,
-    'scroll',
+    "scroll",
     callback,
     { passive: true },
     when,

@@ -1,0 +1,289 @@
+{
+  "version-5.2.0/docs": [
+    {
+      "collapsed": false,
+      "label": "Quick Start",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-5.2.0/getting-started"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/hooks-list"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "collapsed": false,
+      "label": "All In One",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-5.2.0/rooks"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "collapsed": false,
+      "type": "category",
+      "label": "Independent Packages",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useBoundingclientrect"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useBoundingclientrectRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useCountdown"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useCounter"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useDebounce"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useDidMount"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useDidUpdate"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useDocumentEventListener"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useEffectOnceWhen"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useEventListenerRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useForkRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useFreshRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useFreshTick"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useFullscreen"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useGeolocation"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useInViewRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useInput"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useIntersectionObserverRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useInterval"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useIntervalWhen"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useIsomorphicEffect"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useKey"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useKeyRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useKeys"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useLocalstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useLocalstorageState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMapState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMediaMatch"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMergeRefs"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMouse"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMultiSelectableList"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMutationObserver"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useMutationObserverRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useNavigatorLanguage"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useOnWindowResize"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useOnWindowScroll"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useOnline"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useOutsideClick"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useOutsideClickRef"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/usePrevious"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/usePreviousDifferent"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/usePreviousImmediate"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useQueueState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useRaf"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useSelect"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useSelectableList"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useSessionstorage"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useSessionstorageState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useStackState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useThrottle"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useTimeAgo"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useTimeout"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useTimeoutWhen"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useToggle"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useUndoState"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useUpdateEffect"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useVisibilitySensor"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useWillUnmount"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useWindowEventListener"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useWindowScrollPosition"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useWindowSize"
+        },
+        {
+          "type": "doc",
+          "id": "version-5.2.0/useWorker"
+        }
+      ]
+    }
+  ]
+}
