@@ -6,7 +6,7 @@ sidebar_label: useKeyBindings
 
 ## About
 
-useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.
+useKeyBindings can bind pairs of keyboard events and handlers.
 
 [//]: # 'Main'
 
@@ -41,6 +41,13 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+### Arguments
+
+| Argument     | Type    | Description                            | Default value |
+| ------------ | ------- | -------------------------------------- | ------------- |
+| keyBindings  | Object  | pairs of keyboard events and handlers  | {}            |
+| options      | Options | refer to useKey                        | {}            |
 
 ---
 

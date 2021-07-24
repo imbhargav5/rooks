@@ -32,7 +32,7 @@ describe('useKeyBindings', () => {
           },
         },
         {
-          when: true,
+          target: inputRef,
         }
       );
 

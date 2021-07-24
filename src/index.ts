@@ -19,6 +19,7 @@ export { useIntervalWhen } from './hooks/useIntervalWhen';
 export { useIntersectionObserverRef } from './hooks/useIntersectionObserverRef';
 export { useInViewRef } from './hooks/useInViewRef';
 export { useIsomorphicEffect } from './hooks/useIsomorphicEffect';
+export { useKeyBindings } from './hooks/useKeyBindings';
 export { useKeyRef } from './hooks/useKeyRef';
 export { useKey } from './hooks/useKey';
 export { useKeys } from './hooks/useKeys';
