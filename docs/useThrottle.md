@@ -78,9 +78,9 @@ render(<Demo />);
   src="https://codesandbox.io/embed/usethrottle-forked-0nf94?fontsize=14&hidenavigation=1&theme=dark"
   style={{
     width: "100%",
-    height: "500px",
+    height: 500,
     border: 0,
-    border-radius: "4px",
+    borderRadius: 4,
     overflow: "hidden"
   }}
   title="useThrottle"
