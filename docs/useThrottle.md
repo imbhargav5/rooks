@@ -24,25 +24,19 @@ import { useThrottle } from 'rooks';
 function Demo() {
   const [text, setText] = useState("");
   const [throttleValue, setThrottleValue] = useState("");
-  const [throttledFn, isReady] = useThrottle(changeThrottleValue, 1000);
+  const [throttledFunction, isReady] = useThrottle(setThrottleValue, 1000);
   // isReady is a boolean that tells you whether calling throttledFn at that point
   // will fire or not.
   // Once the timeout of 1000ms finishes, isReady will become true to indicate that the next time
   // throttledFn is called it will run right away.
-  const ref = useRef(null);
-
-  function changeThrottleValue() {
-    setThrottleValue(ref.current.value);
-  }
 
   return (
     <div>
       <h1>Rooks : useThrottle example</h1>
       <input
-        ref={ref}
         onChange={(e) => {
           setText(e.target.value);
-          if (isReady) throttledFn();
+          throttledFunction(e.target.value);
         }}
       />
       <p>Actual value: {text}</p>
@@ -75,7 +69,7 @@ render(<Demo />);
 ### Basic usage
 
 <iframe 
-  src="https://codesandbox.io/embed/usethrottle-forked-0nf94?fontsize=14&hidenavigation=1&theme=dark"
+  src="https://codesandbox.io/embed/usethrottle-forked-lbshy?fontsize=14&hidenavigation=1&theme=dark"
   style={{
     width: "100%",
     height: 500,
