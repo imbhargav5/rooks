@@ -23,6 +23,7 @@ export { useIsomorphicEffect } from "./hooks/useIsomorphicEffect";
 export { useKeyRef } from "./hooks/useKeyRef";
 export { useKey } from "./hooks/useKey";
 export { useKeys } from "./hooks/useKeys";
+export { useLifecycleLogger } from "./hooks/useLifecycleLogger";
 export { useLocalstorage } from "./hooks/useLocalstorage";
 export { useLocalstorageState } from "./hooks/useLocalstorageState";
 export { useMapState } from "./hooks/useMapState";
