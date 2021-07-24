@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
 /**
  * useMapState hook
@@ -21,42 +21,56 @@ function useMapState(
 ] {
   const [map, setMap] = useState(initialValue);
 
-  function set(key: any, value: any) {
-    setMap({
-      ...map,
+  const set = useCallback((key: any, value: any) => {
+    setMap((currentMap) => ({
+      ...currentMap,
       [key]: value,
-    });
-  }
-  function has(key: any) {
-    return typeof map[key] !== 'undefined';
-  }
-  function setMultiple(object: { any: any }) {
-    setMap({
-      ...map,
+    }));
+  }, []);
+
+  const has = useCallback(
+    (key: any) => {
+      return typeof map[key] !== "undefined";
+    },
+    [map]
+  );
+
+  const setMultiple = useCallback((object: { any: any }) => {
+    setMap((currentMap) => ({
+      ...currentMap,
       ...object,
+    }));
+  }, []);
+
+  const removeMultiple = useCallback((...keys) => {
+    setMap((currentMap) => {
+      const newMap = {};
+      Object.keys(currentMap).forEach((key) => {
+        if (!keys.includes(key)) {
+          newMap[key] = currentMap[key];
+        }
+      });
+
+      return newMap;
     });
-  }
-  function removeMultiple(...keys) {
-    const newMap = {};
-    Object.keys(map).forEach((key) => {
-      if (!keys.includes(key)) {
-        newMap[key] = map[key];
-      }
+  }, []);
+
+  const remove = useCallback((key: any) => {
+    setMap((currentMap) => {
+      const newMap = {};
+      Object.keys(currentMap).forEach((mapKey) => {
+        if (mapKey !== key) {
+          newMap[mapKey] = currentMap[mapKey];
+        }
+      });
+
+      return newMap;
     });
-    setMap(newMap);
-  }
-  function remove(key: any) {
-    const newMap = {};
-    Object.keys(map).forEach((mapKey) => {
-      if (mapKey !== key) {
-        newMap[mapKey] = map[mapKey];
-      }
-    });
-    setMap(newMap);
-  }
-  function removeAll() {
+  }, []);
+
+  const removeAll = useCallback(() => {
     setMap({});
-  }
+  }, []);
 
   const controls = {
     has,

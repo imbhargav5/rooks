@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
 type SelectHandler<T> = {
   index: number;
@@ -18,9 +18,12 @@ type SelectHandler<T> = {
 function useSelect<T>(list: T[], initialIndex: number = 0): SelectHandler<T> {
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  function setItem(item: T): void {
-    setSelectedIndex(list.indexOf(item));
-  }
+  const setItem = useCallback(
+    (item: T) => {
+      setSelectedIndex(list.indexOf(item));
+    },
+    [list]
+  );
 
   return {
     index: selectedIndex,

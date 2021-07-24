@@ -1,11 +1,11 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import type { Dispatch, SetStateAction } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 function getValueFromSessionStorage(key) {
-  if (typeof sessionStorage === 'undefined') {
+  if (typeof sessionStorage === "undefined") {
     return null;
   }
-  const storedValue = sessionStorage.getItem(key) || 'null';
+  const storedValue = sessionStorage.getItem(key) || "null";
   try {
     return JSON.parse(storedValue);
   } catch (error) {
@@ -16,7 +16,7 @@ function getValueFromSessionStorage(key) {
 }
 
 function saveValueToSessionStorage(key: string, value: any) {
-  if (typeof sessionStorage === 'undefined') {
+  if (typeof sessionStorage === "undefined") {
     return null;
   }
 
@@ -62,37 +62,40 @@ function useSessionstorageState<S>(
     }
   }, [value]);
 
-  const listen = useCallback((e: StorageEvent) => {
-    if (e.storageArea === sessionStorage && e.key === key) {
-      try {
-        isUpdateFromListener.current = true;
-        const newValue = JSON.parse(e.newValue || 'null');
-        if (value !== newValue) {
-          __setValue(newValue);
+  const listen = useCallback(
+    (e: StorageEvent) => {
+      if (e.storageArea === sessionStorage && e.key === key) {
+        try {
+          isUpdateFromListener.current = true;
+          const newValue = JSON.parse(e.newValue || "null");
+          if (value !== newValue) {
+            __setValue(newValue);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    }
-  }, []);
+    },
+    [value]
+  );
 
   // check for changes across windows
   useEffect(() => {
-    window.addEventListener('storage', listen);
+    window.addEventListener("storage", listen);
 
     return () => {
-      window.removeEventListener('storage', listen);
+      window.removeEventListener("storage", listen);
     };
   }, []);
 
-  function setValue(newValue: S): void {
+  const setValue = useCallback((newValue: S) => {
     isUpdateFromListener.current = false;
     __setValue(newValue);
-  }
+  }, []);
 
-  function remove() {
+  const remove = useCallback(() => {
     sessionStorage.removeItem(key);
-  }
+  }, []);
 
   return [value, setValue, remove];
 }
