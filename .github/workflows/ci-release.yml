@@ -3,16 +3,16 @@ on:
   push:
     branches:
       [
-        '+([0-9])?(.{+([0-9]),x}).x',
-        'main',
-        'next',
-        'next-major',
-        'beta',
-        'alpha',
-        '!all-contributors/**',
+        "+([0-9])?(.{+([0-9]),x}).x",
+        "main",
+        "next",
+        "next-major",
+        "beta",
+        "alpha",
+        "!all-contributors/**",
       ]
   pull_request:
-    branches-ignore: ['all-contributors/**']
+    branches-ignore: ["all-contributors/**"]
 jobs:
   main:
     strategy:
@@ -20,10 +20,10 @@ jobs:
         node: [14, 15]
     runs-on: ubuntu-latest
     steps:
-      - name: 'Check if user has write access'
-        uses: 'lannonbr/repo-permission-check-action@2.0.0'
+      - name: "Check if user has write access"
+        uses: "lannonbr/repo-permission-check-action@2.0.0"
         with:
-          permission: 'write'
+          permission: "write"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: ⬇️ Checkout repo
@@ -100,25 +100,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: generate docs and sidebars
+        run: yarn update-docusaurus-sidebars
       - name: generate changelog
         if:
           ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
-          contains('refs/heads/main',github.ref) && github.event_name == 'push' }}
+          contains('refs/heads/main',github.ref)}}
         run: yarn generate:changelog
       - name: create docusaurus version
         if:
           ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
-          contains('refs/heads/main',github.ref) && github.event_name == 'push' }}
+          contains('refs/heads/main',github.ref)}}
         run: yarn run docs:version ${{steps.semantic-release.outputs.new_release_version}}
-      - name: Commit changelog and docs
+      - name: Commit sidebars, changelog and docs
         continue-on-error: true
         if:
           ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
-          contains('refs/heads/main',github.ref) && github.event_name == 'push' }}
+          contains('refs/heads/main',github.ref)}}
         run: |
           git add .
           git config push.default current
           git -c user.name="imbhargav5" -c user.email="imbhargav5@users.noreply.github.com" \
-            commit -m "Update changelog and docs [skip ci]" --no-verify --quiet
+            commit -m "chore(docs): Update changelog and docs" --no-verify --quiet
           git pull --rebase
           git push

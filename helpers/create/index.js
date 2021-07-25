@@ -9,7 +9,6 @@ const execa = require("execa");
 const truncate = require("lodash.truncate");
 const getExistingListOfHooksAsJSON = require("./addHookToListAndUpdate");
 const addHookToListAndUpdate = require("./addHookToListAndUpdate");
-const updatePackageListToMarkdown = require("../update-package-list-to-markdown");
 
 const PROJECT_ROOT = process.cwd();
 
@@ -139,5 +138,4 @@ inquirer.prompt(questions).then((answers) => {
     fs.writeFileSync(pathToWriteTo, srcToWrite);
   });
   addHookToListAndUpdate({ name, description });
-  updatePackageListToMarkdown();
 });
