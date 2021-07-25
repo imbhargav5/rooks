@@ -1,3 +1,11 @@
+## 5.4.0 (2021-07-25)
+
+* feat(usekeybindings): a new hook to manage multiple keyboard events ([b8f91a3](https://github.com/imbhargav5/rooks/commit/b8f91a3))
+* Fix usekeybindings (#520) ([65d9772](https://github.com/imbhargav5/rooks/commit/65d9772)), closes [#520](https://github.com/imbhargav5/rooks/issues/520)
+* chore(helpers): update helpers to automate sidebars generation (#519) ([6e42bbe](https://github.com/imbhargav5/rooks/commit/6e42bbe)), closes [#519](https://github.com/imbhargav5/rooks/issues/519)
+
+
+
 ## 5.3.0 (2021-07-24)
 
 * feat(useLifecycleLogger): add new hook to log lifecycle events (#517) ([e1b19a5](https://github.com/imbhargav5/rooks/commit/e1b19a5)), closes [#517](https://github.com/imbhargav5/rooks/issues/517)

@@ -3,13 +3,19 @@
     {
       "label": "Quick Start",
       "collapsed": false,
-      "items": ["getting-started", "motivation", "hooks-list"],
+      "items": [
+        "getting-started",
+        "motivation",
+        "hooks-list"
+      ],
       "type": "category"
     },
     {
       "label": "All In One",
       "collapsed": false,
-      "items": ["rooks"],
+      "items": [
+        "rooks"
+      ],
       "type": "category"
     },
     {
@@ -40,6 +46,7 @@
         "useIntervalWhen",
         "useIsomorphicEffect",
         "useKey",
+        "useKeyBindings",
         "useKeyRef",
         "useKeys",
         "useLifecycleLogger",
