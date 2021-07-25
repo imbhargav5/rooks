@@ -1,3 +1,10 @@
+## <small>5.4.2 (2021-07-25)</small>
+
+* fix(pkg): add more details to package.json (#522) ([440519f](https://github.com/imbhargav5/rooks/commit/440519f)), closes [#522](https://github.com/imbhargav5/rooks/issues/522)
+* chore(docs): Update changelog and docs ([24158a6](https://github.com/imbhargav5/rooks/commit/24158a6))
+
+
+
 ## <small>5.4.1 (2021-07-25)</small>
 
 * fix(keywords): add keywords to package.json (#521) ([0438223](https://github.com/imbhargav5/rooks/commit/0438223)), closes [#521](https://github.com/imbhargav5/rooks/issues/521)

@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.4.1",
+  "version": "5.4.2",
   "description": "Useful React hooks for everyone.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -12,10 +12,10 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "homepage":"https://react-hooks.org",
+  "homepage": "https://react-hooks.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"    
+    "url": "https://github.com/imbhargav5/rooks.git"
   },
   "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
