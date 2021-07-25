@@ -1,3 +1,10 @@
+## <small>5.4.1 (2021-07-25)</small>
+
+* fix(keywords): add keywords to package.json (#521) ([0438223](https://github.com/imbhargav5/rooks/commit/0438223)), closes [#521](https://github.com/imbhargav5/rooks/issues/521)
+* chore(docs): Update changelog and docs ([9b858ab](https://github.com/imbhargav5/rooks/commit/9b858ab))
+
+
+
 ## 5.4.0 (2021-07-25)
 
 * feat(usekeybindings): a new hook to manage multiple keyboard events ([b8f91a3](https://github.com/imbhargav5/rooks/commit/b8f91a3))
