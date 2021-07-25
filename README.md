@@ -137,6 +137,7 @@ MIT
 Thanks goes to these wonderful people
 
 <!-- readme: contributors -start -->
+
 <table>
 <tr>
     <td align="center">
