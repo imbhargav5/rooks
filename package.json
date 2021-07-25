@@ -166,5 +166,13 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "custom",
+    "custom-hooks",
+    "typescript",
+    "react-hooks"
+  ]
 }
