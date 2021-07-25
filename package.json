@@ -9,6 +9,15 @@
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage":"https://react-hooks.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"    
+  },
+  "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
     "clean": "rimraf dist lib",
     "commit": "cz",
