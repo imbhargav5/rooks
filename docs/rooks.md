@@ -43,8 +43,9 @@ slug: /
 - [useIntervalWhen](https://react-hooks.org/docs/useIntervalWhen) - Sets an interval immediately when a condition is true
 - [useInterval](https://react-hooks.org/docs/useInterval) - A react hook for using setInterval
 - [useIsomorphicEffect](https://react-hooks.org/docs/useIsomorphicEffect) - Resolves to useEffect when window is not in scope and useLayout effect in the browser
-- [useKeyRef](https://react-hooks.org/docs/useKeyRef) - Very similar to useKey but it returns a ref
 - [useKey](https://react-hooks.org/docs/useKey) - Keyboard key handler hook for react
+- [useKeyBindings](https://react-hooks.org/docs/useKeyBindings) - useKeyBindings binds pairs of keyboard events and handlers.
+- [useKeyRef](https://react-hooks.org/docs/useKeyRef) - Very similar to useKey but it returns a ref
 - [useKeys](https://react-hooks.org/docs/useKeys) - A hook which allows to setup callbacks on multiple keypresses at the same time
 - [useLocalstorageState](https://react-hooks.org/docs/useLocalstorageState) - UseState but auto updates values to localStorage
 - [useLocalstorage](https://react-hooks.org/docs/useLocalstorage) - Local Storage hook for React
