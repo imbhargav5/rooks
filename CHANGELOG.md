@@ -1,6 +1,34 @@
-## Unreleased
+## <small>5.4.2 (2021-07-25)</small>
 
-* Add useResizeObserver hook ()
+* fix(pkg): add more details to package.json (#522) ([440519f](https://github.com/imbhargav5/rooks/commit/440519f)), closes [#522](https://github.com/imbhargav5/rooks/issues/522)
+* chore(docs): Update changelog and docs ([24158a6](https://github.com/imbhargav5/rooks/commit/24158a6))
+
+
+
+## <small>5.4.1 (2021-07-25)</small>
+
+* fix(keywords): add keywords to package.json (#521) ([0438223](https://github.com/imbhargav5/rooks/commit/0438223)), closes [#521](https://github.com/imbhargav5/rooks/issues/521)
+* chore(docs): Update changelog and docs ([9b858ab](https://github.com/imbhargav5/rooks/commit/9b858ab))
+
+
+
+## 5.4.0 (2021-07-25)
+
+* feat(usekeybindings): a new hook to manage multiple keyboard events ([b8f91a3](https://github.com/imbhargav5/rooks/commit/b8f91a3))
+* Fix usekeybindings (#520) ([65d9772](https://github.com/imbhargav5/rooks/commit/65d9772)), closes [#520](https://github.com/imbhargav5/rooks/issues/520)
+* chore(helpers): update helpers to automate sidebars generation (#519) ([6e42bbe](https://github.com/imbhargav5/rooks/commit/6e42bbe)), closes [#519](https://github.com/imbhargav5/rooks/issues/519)
+
+
+
+## 5.3.0 (2021-07-24)
+
+* feat(useLifecycleLogger): add new hook to log lifecycle events (#517) ([e1b19a5](https://github.com/imbhargav5/rooks/commit/e1b19a5)), closes [#517](https://github.com/imbhargav5/rooks/issues/517)
+* chore(deps): update typescript to 4.3.5 (#511) ([cc6d5bf](https://github.com/imbhargav5/rooks/commit/cc6d5bf)), closes [#511](https://github.com/imbhargav5/rooks/issues/511)
+* contrib-readme-action has updated readme ([3bde3c6](https://github.com/imbhargav5/rooks/commit/3bde3c6))
+* contrib-readme-action has updated readme ([5d970ea](https://github.com/imbhargav5/rooks/commit/5d970ea))
+* Hooks list chore (#510) ([b59b2b7](https://github.com/imbhargav5/rooks/commit/b59b2b7)), closes [#510](https://github.com/imbhargav5/rooks/issues/510)
+
+
 
 ## 5.2.0 (2021-07-17)
 

@@ -24,6 +24,7 @@
         "useDebounce",
         "useDidMount",
         "useDidUpdate",
+        "useDimensionsRef",
         "useDocumentEventListener",
         "useEffectOnceWhen",
         "useEventListenerRef",
@@ -39,8 +40,10 @@
         "useIntervalWhen",
         "useIsomorphicEffect",
         "useKey",
+        "useKeyBindings",
         "useKeyRef",
         "useKeys",
+        "useLifecycleLogger",
         "useLocalstorage",
         "useLocalstorageState",
         "useMapState",
@@ -67,7 +70,6 @@
         "useSessionstorageState",
         "useStackState",
         "useThrottle",
-        "useTimeAgo",
         "useTimeout",
         "useTimeoutWhen",
         "useToggle",
@@ -77,8 +79,7 @@
         "useWillUnmount",
         "useWindowEventListener",
         "useWindowScrollPosition",
-        "useWindowSize",
-        "useWorker"
+        "useWindowSize"
       ]
     }
   ]

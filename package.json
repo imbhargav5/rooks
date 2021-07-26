@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.2.0",
+  "version": "5.4.2",
   "description": "Useful React hooks for everyone.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -9,9 +9,15 @@
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
-  "files": [
-    "dist/"
-  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://react-hooks.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
     "clean": "rimraf dist lib",
     "commit": "cz",
@@ -23,6 +29,8 @@
     "new": "yarn run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "node helpers/update-package-list-to-markdown",
+    "update-docusaurus-sidebars": "node helpers/update-docusaurus-sidebars",
+    "update-docs-and-sidebars": "yarn update-package-list-to-markdown && yarn update-docusaurus-sidebars",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:esm": "tsc -m esNext --outDir dist/esm",
     "build:cjs": "tsc -m commonjs --outDir dist/cjs",
@@ -85,7 +93,7 @@
     "clsx": "^1.1.1",
     "conventional-changelog-cli": "^2.1.1",
     "cz-conventional-changelog": "3.3.0",
-    "esbuild": "^0.11.12",
+    "esbuild": "^0.12.15",
     "eslint": "^7.24.0",
     "eslint-config-canonical": "^25.9.1",
     "eslint-config-prettier": "^8.2.0",
@@ -119,7 +127,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "16.13.0",
-    "read-pkg-up": "7.0.0",
+    "read-pkg-up": "8.0.0",
     "readline-sync": "^1.4.10",
     "remark": "^13.0.0",
     "remark-behead": "^2.3.3",
@@ -137,8 +145,8 @@
     "terser": "^5.6.1",
     "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.5",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5",
     "unist-util-find": "^1.0.2",
     "unist-util-find-all-after": "^3.0.2",
     "unist-util-find-all-before": "^3.0.1",
@@ -150,6 +158,10 @@
     "write-pkg": "3.2.0",
     "wsrun": "^5.2.4",
     "yargs": "^16.2.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0  || ^17.0.0",
+    "react-dom": "^16.8.0  || ^17.0.0"
   },
   "husky": {
     "hooks": {
@@ -163,5 +175,13 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "custom",
+    "custom-hooks",
+    "typescript",
+    "react-hooks"
+  ]
 }

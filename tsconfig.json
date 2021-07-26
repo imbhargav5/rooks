@@ -40,5 +40,5 @@
     "src/css",
     "src/theme"
   ],
-  "include": ["./src/**/*.ts", "src/__tests__/useDimensionsRef.spec.tsx"]
+  "include": ["./src/**/*.ts"]
 }

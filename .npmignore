@@ -1,0 +1,7 @@
+*
+!dist/**/*
+dist/esm/__tests__/**/*
+dist/cjs/__tests__/**/*
+!CHANGELOG.md
+!README.md
+!LICENSE
