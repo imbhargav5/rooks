@@ -1,8 +1,7 @@
 import { RefObject, useEffect, useState } from "react";
 
-interface ISize {
-  width: number;
-  height: number;
+interface Options {
+  box: "content-box" | "border-box" | "device-pixel-content-box";
 }
 
 /**
@@ -13,31 +12,26 @@ interface ISize {
  * https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
  *
  * @param {RefObject<HTMLElement | null>} ref React ref on which resizes are to be observed
- * @param {() => void} callback Function that needs to be fired on resize
+ * @param {ResizeObserverCallback} callback Function that needs to be fired on resize
+ * @param {Options} options An options object allowing you to set options for the observation
  */
-function useResizeObserver(ref: RefObject<HTMLElement | null>): ISize {
-  const [size, setSize] = useState<ISize>({ height: 0, width: 0 });
-
+function useResizeObserver(
+  ref: RefObject<HTMLElement | null>,
+  callback: ResizeObserverCallback,
+  options?: Options
+) {
   useEffect(() => {
-    // Create an observer instance that will update the state on size change
+    if (!ref.current) return;
+
     // Start observing the target node for resizes
-    const observer = new ResizeObserver(() => {
-      if (!ref.current) return;
+    const observer = new ResizeObserver(callback);
 
-      const height = ref.current.clientHeight;
-      const width = ref.current.clientWidth;
-      if (size.height !== height || size.width !== width)
-        setSize(() => ({ height, width }));
-    });
-
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(ref.current);
 
     return () => {
       observer.disconnect();
     };
-  }, [ref.current]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  return size;
+  }, [callback, options]);
 }
 
 export { useResizeObserver };

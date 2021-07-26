@@ -1,10 +1,8 @@
-# @rooks/use-resize-observer
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/resize-observer/title-card.svg)
-
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-resize-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-resize-observer.svg) ![](https://img.shields.io/npm/dt/@rooks/use-resize-observer.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fresize-observer)
-
-
-
+---
+id: useResizeObserver
+title: useResizeObserver
+sidebar_label: useResizeObserver
+---
 
 ## About 
 Resize Observer hook for React.
@@ -95,3 +93,10 @@ render(<Demo/>)
 | callback   | ResizeObserverCallback  | Function that needs to be fired on resize                          | undefined                      |
 | options    | Object                  | An options object allowing you to set options for the observation  | {}                             |
 
+## Codesandbox Example
+
+### Basic Usage
+
+## Join Bhargav's discord server
+
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
