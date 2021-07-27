@@ -7,11 +7,12 @@ import { useEffect, useMemo, useState } from 'react';
  *
  * @param query The media query to signal on. Example, `"print"` will signal
  * `true` when previewing in print mode, and `false` otherwise.
+ * @param warn Whether or not to log warning when used in node
  * @returns Whether or not the media query is currently matched.
  */
-function useMediaMatch(query: string): boolean {
+function useMediaMatch(query: string, warn?: boolean): boolean {
   if (typeof window === 'undefined') {
-    console.warn('useMediaMatch cannot function as window is undefined.');
+    if (warn) console.warn('useMediaMatch cannot function as window is undefined.');
 
     return false;
   }
