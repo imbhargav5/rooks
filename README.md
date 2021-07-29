@@ -218,13 +218,20 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/qiweiii">
+            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
+            <br />
+            <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/iampika">
             <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
             <br />
             <sub><b>Mahendra Choudhary</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/phmngocnghia">
             <img src="https://avatars.githubusercontent.com/u/36730355?v=4" width="100;" alt="phmngocnghia"/>
@@ -259,15 +266,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Branden Visser</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/Dianoga">
             <img src="https://avatars.githubusercontent.com/u/1618956?v=4" width="100;" alt="Dianoga"/>
             <br />
             <sub><b>Brian Steere</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/calthejuggler">
             <img src="https://avatars.githubusercontent.com/u/30095183?v=4" width="100;" alt="calthejuggler"/>
@@ -302,27 +309,20 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Fernando Beck</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/joshdavenport">
             <img src="https://avatars.githubusercontent.com/u/757828?v=4" width="100;" alt="joshdavenport"/>
             <br />
             <sub><b>Josh Davenport</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/1337MARCEL">
             <img src="https://avatars.githubusercontent.com/u/16888873?v=4" width="100;" alt="1337MARCEL"/>
             <br />
             <sub><b>MARCEL</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/neilor">
-            <img src="https://avatars.githubusercontent.com/u/4008023?v=4" width="100;" alt="neilor"/>
-            <br />
-            <sub><b>Neilor Caldeira</b></sub>
         </a>
     </td></tr>
 </table>
