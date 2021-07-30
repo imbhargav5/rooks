@@ -10,7 +10,7 @@ describe("useMapState", () => {
   });
   it("should initialize correctly", () => {
     const { result } = renderHook(() => useMapState(new Map([["a", 1]])));
-    expect(result.current[0]).toEqual(new Map([["a", 1]]));
+    expect([...result.current]).toEqual([["a", 1]]);
   });
   it("should set a new value correctly", () => {
     const { result, rerender } = renderHook(() =>
@@ -18,55 +18,51 @@ describe("useMapState", () => {
     );
 
     // test memo
-    const setBeforeRerender = result.current[1].set;
+    const setBeforeRerender = result.current.set;
     rerender();
-    const setAfterRerender = result.current[1].set;
+    const setAfterRerender = result.current.set;
     expect(setBeforeRerender).toBe(setAfterRerender);
 
     act(() => {
-      result.current[1].set("b", 2);
+      result.current.set("b", 2);
     });
 
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 2],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["b", 2],
+    ]);
 
     // test memo after rerender
     act(() => {
-      result.current[1].set("c", 2);
+      result.current.set("c", 2);
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 2],
-        ["c", 2],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["b", 2],
+      ["c", 2],
+    ]);
   });
   it("should update old value correctly", () => {
     const { result } = renderHook(() => useMapState(new Map([["a", 1]])));
     act(() => {
-      result.current[1].set("a", 2);
+      result.current.set("a", 2);
     });
-    expect(result.current[0]).toEqual(new Map([["a", 2]]));
+    expect([...result.current]).toEqual([["a", 2]]);
   });
   it("should set multiple new values correctly", () => {
     const { result, rerender } = renderHook(() =>
       useMapState(new Map([["a", 1]]))
     );
     // test memo
-    const setMultipleBeforeRerender = result.current[1].setMultiple;
+    const setMultipleBeforeRerender = result.current.setMultiple;
     rerender();
-    const setMultipleAfterRerender = result.current[1].setMultiple;
+    const setMultipleAfterRerender = result.current.setMultiple;
     expect(setMultipleBeforeRerender).toBe(setMultipleAfterRerender);
 
     // should reflect to new value
     act(() => {
-      result.current[1].set("d", 4);
-      result.current[1].setMultiple(
+      result.current.set("d", 4);
+      result.current.setMultiple(
         new Map([
           ["b", 2],
           ["c", 3],
@@ -74,21 +70,19 @@ describe("useMapState", () => {
       );
     });
 
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 2],
-        ["c", 3],
-        ["d", 4],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["d", 4],
+      ["b", 2],
+      ["c", 3],
+    ]);
   });
   it("should update old value correctly", () => {
     const { result, rerender } = renderHook(() =>
       useMapState(new Map([["a", 1]]))
     );
     act(() => {
-      result.current[1].setMultiple(
+      result.current.setMultiple(
         new Map([
           ["a", 2],
           ["b", 3],
@@ -96,19 +90,17 @@ describe("useMapState", () => {
       );
     });
 
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 2],
-        ["b", 3],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 2],
+      ["b", 3],
+    ]);
 
     // test recreate fn usecallback
 
     act(() => {
-      result.current[1].set("c", 4);
+      result.current.set("c", 4);
     });
-    expect(result.current[0].has("c")).toBe(true);
+    expect(result.current.has("c")).toBe(true);
   });
   it("should remove existing values correctly", () => {
     const { result, rerender } = renderHook(() =>
@@ -121,23 +113,21 @@ describe("useMapState", () => {
     );
 
     act(() => {
-      result.current[1].set("c", 2);
+      result.current.set("c", 2);
     });
 
     act(() => {
-      result.current[1].remove("a");
+      result.current.delete("a");
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["b", 3],
-        ["c", 2],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["b", 3],
+      ["c", 2],
+    ]);
 
     act(() => {
-      result.current[1].remove("c");
+      result.current.delete("c");
     });
-    expect(result.current[0]).toEqual(new Map([["b", 3]]));
+    expect([...result.current]).toEqual([["b", 3]]);
   });
   it("should work when value to remove does not exist", () => {
     const { result } = renderHook(() =>
@@ -150,17 +140,15 @@ describe("useMapState", () => {
       )
     );
     act(() => {
-      result.current[1].remove("d");
+      result.current.delete("d");
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 2],
-        ["c", 3],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["b", 2],
+      ["c", 3],
+    ]);
   });
-  it("should remove multiple existing values correctly", () => {
+  it("should delete multiple existing values correctly", () => {
     const { result, rerender } = renderHook(() =>
       useMapState(
         new Map([
@@ -171,34 +159,30 @@ describe("useMapState", () => {
       )
     );
     // test memo
-    const removeMultipleBeforeRerender = result.current[1].removeMultiple;
+    const deleteMultipleBeforeRerender = result.current.deleteMultiple;
     rerender();
-    const removeMultipleAfterRerender = result.current[1].removeMultiple;
-    expect(removeMultipleBeforeRerender).toBe(removeMultipleAfterRerender);
+    const removeMultipleAfterRerender = result.current.deleteMultiple;
+    expect(deleteMultipleBeforeRerender).toBe(removeMultipleAfterRerender);
 
     // load new items
     act(() => {
-      result.current[1].set("e", 6);
+      result.current.set("e", 6);
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 3],
-        ["c", 5],
-        ["e", 6],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["b", 3],
+      ["c", 5],
+      ["e", 6],
+    ]);
 
     // should be reactive against new value
     act(() => {
-      result.current[1].removeMultiple("a", "c");
+      result.current.deleteMultiple("a", "c");
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["b", 3],
-        ["e", 6],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["b", 3],
+      ["e", 6],
+    ]);
   });
   it("should work when value to removeMultiple does not exist", () => {
     const { result } = renderHook(() =>
@@ -211,15 +195,13 @@ describe("useMapState", () => {
       )
     );
     act(() => {
-      result.current[1].removeMultiple("d", "e");
+      result.current.deleteMultiple("d", "e");
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["a", 1],
-        ["b", 2],
-        ["c", 3],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["a", 1],
+      ["b", 2],
+      ["c", 3],
+    ]);
   });
   it("should work when some values to removeMultiple does not exist", () => {
     const { result } = renderHook(() =>
@@ -232,16 +214,14 @@ describe("useMapState", () => {
       )
     );
     act(() => {
-      result.current[1].removeMultiple("a", "e");
+      result.current.deleteMultiple("a", "e");
     });
-    expect(result.current[0]).toEqual(
-      new Map([
-        ["b", 2],
-        ["c", 3],
-      ])
-    );
+    expect([...result.current]).toEqual([
+      ["b", 2],
+      ["c", 3],
+    ]);
   });
-  it("should removeAll values", () => {
+  it("should clear values", () => {
     const { result, rerender } = renderHook(() =>
       useMapState(
         new Map([
@@ -252,14 +232,14 @@ describe("useMapState", () => {
       )
     );
     // test memo
-    const removeAllBeforeRerender = result.current[1].removeAll;
+    const removeAllBeforeRerender = result.current.clear;
     rerender();
-    const removeAllAfterRerender = result.current[1].removeAll;
-    expect(removeAllBeforeRerender).toBe(removeAllAfterRerender);
+    const clearAfterRerender = result.current.clear;
+    expect(removeAllBeforeRerender).toBe(clearAfterRerender);
 
     act(() => {
-      result.current[1].removeAll();
+      result.current.clear();
     });
-    expect(result.current[0]).toEqual(new Map());
+    expect([...result.current]).toEqual([]);
   });
 });

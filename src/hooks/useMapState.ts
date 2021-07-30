@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
-export type MapControls<K, V> = {
+export type MapControls<K, V> = Omit<Omit<Map<K, V>, "delete">, "set"> & {
+  setMultiple: (additionalMap: Map<K, V>) => void;
+  delete: (key: K) => void;
+  deleteMultiple: (...keys: K[]) => void;
   set: (key: K, value: V) => void;
-  setMultiple: (map: Map<K, V>) => void;
-  remove: (key: K) => void;
-  removeMultiple: (...keys: K[]) => void;
-  removeAll: () => void;
 };
 
 /**
@@ -14,31 +13,41 @@ export type MapControls<K, V> = {
  *
  * @param initialValue Initial value of the map
  */
-function useMapState<K, V>(
-  initialValue: Map<K, V>
-): [Map<K, V>, MapControls<K, V>] {
+function useMapState<K, V>(initialValue: Map<K, V>): MapControls<K, V> {
   const [map, setMap] = useState(initialValue);
 
-  // Value of controls stays same every render
-  const [controls] = useState<MapControls<K, V>>(() => ({
-    remove: (keyToRemove) =>
-      setMap(
-        (currentMap) =>
-          new Map([...currentMap].filter(([key]) => key !== keyToRemove))
-      ),
-    removeAll: () => setMap(new Map()),
-    removeMultiple: (...keys) =>
-      setMap(
-        (currentMap) =>
-          new Map([...currentMap].filter(([key]) => !keys.includes(key)))
-      ),
-    set: (key, value) =>
-      setMap((currentMap) => new Map([...currentMap, [key, value]])),
-    setMultiple: (additionalMap) =>
-      setMap((currentMap) => new Map([...currentMap, ...additionalMap])),
-  }));
-
-  return [map, controls];
+  return useMemo<MapControls<K, V>>(
+    () => ({
+      clear: () => setMap(new Map()),
+      delete: (keyToRemove) =>
+        setMap(
+          (currentMap) =>
+            new Map([...currentMap].filter(([key]) => key !== keyToRemove))
+        ),
+      deleteMultiple: (...keys) =>
+        setMap(
+          (currentMap) =>
+            new Map([...currentMap].filter(([key]) => !keys.includes(key)))
+        ),
+      entries: () => map.entries(),
+      forEach: (...args) => map.forEach(...args),
+      get: (...args) => map.get(...args),
+      has: (...args) => map.has(...args),
+      keys: () => map.keys(),
+      set: (key, value) =>
+        setMap((currentMap) => new Map([...currentMap, [key, value]])),
+      setMultiple: (additionalMap) =>
+        setMap((currentMap) => new Map([...currentMap, ...additionalMap])),
+      // eslint-disable-next-line fp/no-get-set
+      get size() {
+        return map.size;
+      },
+      values: () => map.values(),
+      [Symbol.iterator]: () => map[Symbol.iterator](),
+      [Symbol.toStringTag]: map[Symbol.toStringTag],
+    }),
+    [map]
+  );
 }
 
 export { useMapState };
