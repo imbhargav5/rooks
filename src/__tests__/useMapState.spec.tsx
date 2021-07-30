@@ -9,11 +9,13 @@ describe("useMapState", () => {
     expect(useMapState).toBeDefined();
   });
   it("should initialize correctly", () => {
-    const { result } = renderHook(() => useMapState({ a: 1 }));
-    expect(result.current[0]).toEqual({ a: 1 });
+    const { result } = renderHook(() => useMapState(new Map([["a", 1]])));
+    expect(result.current[0]).toEqual(new Map([["a", 1]]));
   });
   it("should set a new value correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState(new Map([["a", 1]]))
+    );
 
     // test memo
     const setBeforeRerender = result.current[1].set;
@@ -25,23 +27,36 @@ describe("useMapState", () => {
       result.current[1].set("b", 2);
     });
 
-    expect(result.current[0]).toEqual({ a: 1, b: 2 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 2],
+      ])
+    );
 
     // test memo after rerender
     act(() => {
       result.current[1].set("c", 2);
     });
-    expect(result.current[0]).toEqual({ a: 1, b: 2, c: 2 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 2],
+      ])
+    );
   });
   it("should update old value correctly", () => {
-    const { result } = renderHook(() => useMapState({ a: 1 }));
+    const { result } = renderHook(() => useMapState(new Map([["a", 1]])));
     act(() => {
       result.current[1].set("a", 2);
     });
-    expect(result.current[0]).toEqual({ a: 2 });
+    expect(result.current[0]).toEqual(new Map([["a", 2]]));
   });
   it("should set multiple new values correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState(new Map([["a", 1]]))
+    );
     // test memo
     const setMultipleBeforeRerender = result.current[1].setMultiple;
     rerender();
@@ -51,48 +66,60 @@ describe("useMapState", () => {
     // should reflect to new value
     act(() => {
       result.current[1].set("d", 4);
-      result.current[1].setMultiple({
-        b: 2,
-        c: 3,
-      });
+      result.current[1].setMultiple(
+        new Map([
+          ["b", 2],
+          ["c", 3],
+        ])
+      );
     });
 
-    expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3, d: 4 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+        ["d", 4],
+      ])
+    );
   });
   it("should update old value correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState(new Map([["a", 1]]))
+    );
     act(() => {
-      result.current[1].setMultiple({
-        a: 2,
-        b: 3,
-      });
+      result.current[1].setMultiple(
+        new Map([
+          ["a", 2],
+          ["b", 3],
+        ])
+      );
     });
 
-    // test memo
-    const hasBeforeRerender = result.current[1].has;
-    rerender();
-    const hasAfterRerender = result.current[1].has;
-    expect(hasBeforeRerender).toBe(hasAfterRerender);
-
-    expect(result.current[0]).toEqual({ a: 2, b: 3 });
-    expect(result.current[1].has("a")).toBeTruthy();
-    expect(result.current[1].has("b")).toBeTruthy();
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 2],
+        ["b", 3],
+      ])
+    );
 
     // test recreate fn usecallback
 
     act(() => {
       result.current[1].set("c", 4);
     });
-    expect(result.current[1].has("c")).toBeTruthy();
+    expect(result.current[0].has("c")).toBe(true);
   });
   it("should remove existing values correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState({ a: 1, b: 3 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 3],
+        ])
+      )
+    );
 
-    // test memo
-    const hasBeforeRerender = result.current[1].has;
-    rerender();
-    const hasAfterRerender = result.current[1].has;
-    expect(hasBeforeRerender).toBe(hasAfterRerender);
     act(() => {
       result.current[1].set("c", 2);
     });
@@ -100,23 +127,48 @@ describe("useMapState", () => {
     act(() => {
       result.current[1].remove("a");
     });
-    expect(result.current[0]).toEqual({ b: 3, c: 2 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["b", 3],
+        ["c", 2],
+      ])
+    );
 
     act(() => {
       result.current[1].remove("c");
     });
-    expect(result.current[0]).toEqual({ b: 3 });
+    expect(result.current[0]).toEqual(new Map([["b", 3]]));
   });
   it("should work when value to remove does not exist", () => {
-    const { result } = renderHook(() => useMapState({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 2],
+          ["c", 3],
+        ])
+      )
+    );
     act(() => {
       result.current[1].remove("d");
     });
-    expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ])
+    );
   });
   it("should remove multiple existing values correctly", () => {
     const { result, rerender } = renderHook(() =>
-      useMapState({ a: 1, b: 3, c: 5 })
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 3],
+          ["c", 5],
+        ])
+      )
     );
     // test memo
     const removeMultipleBeforeRerender = result.current[1].removeMultiple;
@@ -128,31 +180,76 @@ describe("useMapState", () => {
     act(() => {
       result.current[1].set("e", 6);
     });
-    expect(result.current[0]).toEqual({ a: 1, b: 3, c: 5, e: 6 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 3],
+        ["c", 5],
+        ["e", 6],
+      ])
+    );
 
     // should be reactive against new value
     act(() => {
       result.current[1].removeMultiple("a", "c");
     });
-    expect(result.current[0]).toEqual({ b: 3, e: 6 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["b", 3],
+        ["e", 6],
+      ])
+    );
   });
   it("should work when value to removeMultiple does not exist", () => {
-    const { result } = renderHook(() => useMapState({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 2],
+          ["c", 3],
+        ])
+      )
+    );
     act(() => {
       result.current[1].removeMultiple("d", "e");
     });
-    expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ])
+    );
   });
   it("should work when some values to removeMultiple does not exist", () => {
-    const { result } = renderHook(() => useMapState({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 2],
+          ["c", 3],
+        ])
+      )
+    );
     act(() => {
       result.current[1].removeMultiple("a", "e");
     });
-    expect(result.current[0]).toEqual({ b: 2, c: 3 });
+    expect(result.current[0]).toEqual(
+      new Map([
+        ["b", 2],
+        ["c", 3],
+      ])
+    );
   });
   it("should removeAll values", () => {
     const { result, rerender } = renderHook(() =>
-      useMapState({ a: 1, b: 2, c: 3 })
+      useMapState(
+        new Map([
+          ["a", 1],
+          ["b", 2],
+          ["c", 3],
+        ])
+      )
     );
     // test memo
     const removeAllBeforeRerender = result.current[1].removeAll;
@@ -163,6 +260,6 @@ describe("useMapState", () => {
     act(() => {
       result.current[1].removeAll();
     });
-    expect(result.current[0]).toEqual({});
+    expect(result.current[0]).toEqual(new Map());
   });
 });

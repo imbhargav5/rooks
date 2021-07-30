@@ -1,4 +1,12 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
+
+export type MapControls<K, V> = {
+  set: (key: K, value: V) => void;
+  setMultiple: (map: Map<K, V>) => void;
+  remove: (key: K) => void;
+  removeMultiple: (...keys: K[]) => void;
+  removeAll: () => void;
+};
 
 /**
  * useMapState hook
@@ -6,80 +14,29 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState(
-  initialValue: any
-): [
-  any,
-  {
-    set: (key: any, value: any) => void;
-    has: (key: any) => boolean;
-    setMultiple: (...keys: any[]) => void;
-    remove: (key: any) => void;
-    removeMultiple: (...keys: any[]) => void;
-    removeAll: () => void;
-  }
-] {
+function useMapState<K, V>(
+  initialValue: Map<K, V>
+): [Map<K, V>, MapControls<K, V>] {
   const [map, setMap] = useState(initialValue);
 
-  const set = useCallback((key: any, value: any) => {
-    setMap((currentMap) => ({
-      ...currentMap,
-      [key]: value,
-    }));
-  }, []);
-
-  const has = useCallback(
-    (key: any) => {
-      return typeof map[key] !== "undefined";
-    },
-    [map]
-  );
-
-  const setMultiple = useCallback((object: { any: any }) => {
-    setMap((currentMap) => ({
-      ...currentMap,
-      ...object,
-    }));
-  }, []);
-
-  const removeMultiple = useCallback((...keys) => {
-    setMap((currentMap) => {
-      const newMap = {};
-      Object.keys(currentMap).forEach((key) => {
-        if (!keys.includes(key)) {
-          newMap[key] = currentMap[key];
-        }
-      });
-
-      return newMap;
-    });
-  }, []);
-
-  const remove = useCallback((key: any) => {
-    setMap((currentMap) => {
-      const newMap = {};
-      Object.keys(currentMap).forEach((mapKey) => {
-        if (mapKey !== key) {
-          newMap[mapKey] = currentMap[mapKey];
-        }
-      });
-
-      return newMap;
-    });
-  }, []);
-
-  const removeAll = useCallback(() => {
-    setMap({});
-  }, []);
-
-  const controls = {
-    has,
-    remove,
-    removeAll,
-    removeMultiple,
-    set,
-    setMultiple,
-  };
+  // Value of controls stays same every render
+  const [controls] = useState<MapControls<K, V>>(() => ({
+    remove: (keyToRemove) =>
+      setMap(
+        (currentMap) =>
+          new Map([...currentMap].filter(([key]) => key !== keyToRemove))
+      ),
+    removeAll: () => setMap(new Map()),
+    removeMultiple: (...keys) =>
+      setMap(
+        (currentMap) =>
+          new Map([...currentMap].filter(([key]) => !keys.includes(key)))
+      ),
+    set: (key, value) =>
+      setMap((currentMap) => new Map([...currentMap, [key, value]])),
+    setMultiple: (additionalMap) =>
+      setMap((currentMap) => new Map([...currentMap, ...additionalMap])),
+  }));
 
   return [map, controls];
 }

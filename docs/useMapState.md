@@ -26,8 +26,8 @@ import { useMapState } from 'rooks';
 function Demo() {
   const [
     map,
-    { set, setMultiple, has, remove, removeMultiple, removeAll },
-  ] = useMapState({ a: 1, b: 2 });
+    { set, setMultiple, remove, removeMultiple, removeAll },
+  ] = useMapState(new Map([['a', 1], ['b', 2]]));
   return null;
 }
 
