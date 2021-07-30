@@ -8,23 +8,24 @@ import {
 } from "@testing-library/react";
 import React, { useState } from "react";
 import { useThrottle } from "../hooks/useThrottle";
+import logger from "../utils/logger";
 
 describe("useThrottle hook", () => {
   let App;
   const TIMEOUT = 300;
-  const consoleError = console.error;
+  const loggerError = logger.error;
 
   // This is a temporary fix for weird error in testing library. It has something to do with react-dom.
   // There's a ticket here - https://github.com/facebook/react/issues/14769
-  // Tests are passing correctly, so that's just for clean console.
+  // Tests are passing correctly, so that's just for clean logger.
   beforeAll(() => {
-    jest.spyOn(console, "error").mockImplementation((...args) => {
+    jest.spyOn(logger, "error").mockImplementation((...args) => {
       if (
         !args[0].includes(
           "Warning: An update to %s inside a test was not wrapped in act"
         )
       ) {
-        consoleError(...args);
+        loggerError(...args);
       }
     });
   });

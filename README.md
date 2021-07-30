@@ -122,6 +122,12 @@ function App() {
 }
 ```
 
+Aside from `useLifecycleLogger`, logging must be enabled by setting an
+environment variable `LOG_LEVEL=debug`. This does not enable logging in
+production environments (when `NODE_ENV=production`). If you wish to also
+enable logging in production, set `LOG_LEVEL=production`.
+
+
 ## Standalone Package
 
 Package containing all the hooks is over here. - [Docs](https://github.com/imbhargav5/rooks/tree/master/packages/rooks) and [Npm Install](https://npmjs.com/package/rooks)

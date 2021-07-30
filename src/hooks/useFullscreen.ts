@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { useDocumentEventListener } from "./useDocumentEventListener";
-import { warning } from "./warning";
+import logger from "../utils/logger";
 
 type EventCallback = (this: Document, event_: any) => any;
 type OnChangeEventCallback = (
@@ -131,14 +131,11 @@ type FullScreenOptions = {
 };
 
 function warnDeprecatedOnChangeAndOnErrorUsage() {
-  warning(
-    false,
-    `Using onChange and onError from the return value is deprecated and 
+  logger.error(`Using onChange and onError from the return value is deprecated and 
     will be removed in the next major version. 
     Please use it with arguments instead. 
     For eg: useFullscreen({onChange: function() {}, onError: function(){}})
-  `
-  );
+  `);
 }
 
 /**
@@ -173,7 +170,7 @@ function useFullscreen(
         requestFullscreenOptions
       );
     } catch (error) {
-      console.log(error);
+      logger.log(error);
     }
   }, []);
 
@@ -182,7 +179,7 @@ function useFullscreen(
       try {
         return await document[fullscreenControls.exitFullscreen]();
       } catch (error) {
-        console.warn(error);
+        logger.warn(error);
       }
     }
   }, [element]);

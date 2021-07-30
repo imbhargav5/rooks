@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
+import logger from "../utils/logger";
 
 function getValueFromSessionStorage(key) {
   if (typeof sessionStorage === "undefined") {
@@ -9,7 +10,7 @@ function getValueFromSessionStorage(key) {
   try {
     return JSON.parse(storedValue);
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 
   return storedValue;
@@ -72,7 +73,7 @@ function useSessionstorageState<S>(
             __setValue(newValue);
           }
         } catch (error) {
-          console.log(error);
+          logger.log(error);
         }
       }
     },

@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
+import logger from "../utils/logger";
 
 function getValueFromLocalStorage(key) {
   if (typeof localStorage === "undefined") {
@@ -9,7 +10,7 @@ function getValueFromLocalStorage(key) {
   try {
     return JSON.parse(storedValue);
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 
   return storedValue;
@@ -71,7 +72,7 @@ function useLocalstorageState<S>(
           __setValue(newValue);
         }
       } catch (error) {
-        console.log(error);
+        logger.log(error);
       }
     }
   }, []);

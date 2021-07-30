@@ -1,4 +1,5 @@
-import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import logger from "../utils/logger";
 
 /**
  *  useDocumentEventListener hook
@@ -17,7 +18,7 @@ function useDocumentEventListener(
   listenerOptions: any = {},
   isLayoutEffect: boolean = false
 ): void {
-  if (typeof document !== 'undefined') {
+  if (typeof document !== "undefined") {
     useGlobalObjectEventListener(
       document,
       eventName,
@@ -27,7 +28,7 @@ function useDocumentEventListener(
       isLayoutEffect
     );
   } else {
-    console.warn(
+    logger.warn(
       "useDocumentEventListener can't attach an event listener as document is undefined."
     );
   }

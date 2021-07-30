@@ -1,16 +1,17 @@
 /* eslint-disable no-negated-condition */
 import type { OptionalIndexValue } from "@/types/index-value";
 import { useCallback, useState } from "react";
+import logger from "../utils/logger";
 
 function warnIfBothValueAndIndexAreProvided(functionName, object) {
   if (Object.values(object).every((v) => typeof v !== "undefined")) {
-    console.warn(
+    logger.warn(
       `${functionName}. Expected either ${Object.keys(object).join(
         " or "
       )} to be provided. However all were provided`
     );
   } else if (Object.values(object).every((v) => typeof v === "undefined")) {
-    console.warn(
+    logger.warn(
       `${functionName}. ${Object.keys(object).join(" , ")} are all undefined.`
     );
   }
@@ -51,7 +52,7 @@ function useSelectableList<T>(
           if (valueIndex > -1) {
             setCurrentIndex(valueIndex);
           } else {
-            console.warn(
+            logger.warn(
               `updateSelection failed. Does the value ${value} exist in the list?`
             );
           }
@@ -70,7 +71,7 @@ function useSelectableList<T>(
             if (allowUnselected) {
               setCurrentIndex(-1);
             } else {
-              console.warn("allowUnselected is false. Cannot unselect item");
+              logger.warn("allowUnselected is false. Cannot unselect item");
             }
           } else {
             setCurrentIndex(index);
@@ -83,15 +84,15 @@ function useSelectableList<T>(
               if (allowUnselected) {
                 setCurrentIndex(-1);
               } else {
-                console.warn("allowUnselected is false. Cannot unselect item");
+                logger.warn("allowUnselected is false. Cannot unselect item");
               }
             } else {
               setCurrentIndex(valueIndex);
             }
           } else {
-            console.log("as");
+            logger.log("as");
 
-            console.warn(
+            logger.warn(
               `toggleSelection failed. Does the value ${value} exist in the list?`
             );
           }

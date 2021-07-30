@@ -1,4 +1,5 @@
-import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import logger from "../utils/logger";
 
 /**
  *  useWindowEventListener hook
@@ -17,7 +18,7 @@ function useWindowEventListener(
   listenerOptions: any = {},
   isLayoutEffect: boolean = false
 ): void {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     useGlobalObjectEventListener(
       window,
       eventName,
@@ -27,7 +28,7 @@ function useWindowEventListener(
       isLayoutEffect
     );
   } else {
-    console.warn(
+    logger.warn(
       "useWindowEventListener can't attach an event listener as window is undefined."
     );
   }

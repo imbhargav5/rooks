@@ -4,16 +4,17 @@ import type {
   OptionalIndicesValues,
 } from "@/types/index-value";
 import { useCallback, useState } from "react";
+import logger from "../utils/logger";
 
 function warnIfBothValueAndIndexAreProvided(functionName, object) {
   if (Object.values(object).every((v) => typeof v !== "undefined")) {
-    console.warn(
+    logger.warn(
       `${functionName}. Expected either ${Object.keys(object).join(
         " or "
       )} to be provided. However all were provided`
     );
   } else if (Object.values(object).every((v) => typeof v === "undefined")) {
-    console.warn(
+    logger.warn(
       `${functionName}. ${Object.keys(object).join(" , ")} are all undefined.`
     );
   }
@@ -54,7 +55,7 @@ function useMultiSelectableList<T>(
       });
       if (typeof indices !== "undefined") {
         if (!allowUnselected && indices.length === 0) {
-          console.warn(`updateSelections failed. indices is an empty list.`);
+          logger.warn(`updateSelections failed. indices is an empty list.`);
 
           return;
         }
@@ -74,7 +75,7 @@ function useMultiSelectableList<T>(
         } else if (allowUnselected) {
           setCurrentIndices(valueIndices);
         } else {
-          console.warn(
+          logger.warn(
             `updateSelections failed. Do the values exist in the list?`
           );
         }
@@ -99,9 +100,7 @@ function useMultiSelectableList<T>(
       } else if (allowUnselected) {
         setCurrentIndices(newIndices);
       } else {
-        console.warn(
-          `toggleSelection failed. Do the values exist in the list?`
-        );
+        logger.warn(`toggleSelection failed. Do the values exist in the list?`);
       }
     },
     [allowUnselected, currentIndices]

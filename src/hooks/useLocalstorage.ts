@@ -1,6 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
+import logger from "../utils/logger";
 
 type StorageHandlerAsObject = {
   value: any;
@@ -43,7 +44,7 @@ function useLocalstorage(
     try {
       return JSON.parse(storedValue);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
 
     return storedValue;

@@ -1,27 +1,28 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import { useSelectableList } from "../hooks/useSelectableList";
+import logger from "../utils/logger";
 
-jest.spyOn(console, "warn").mockImplementation(jest.fn);
+jest.spyOn(logger, "warn").mockImplementation(jest.fn);
 
 describe("useSelctableList", () => {
   afterEach(() => {
-    (console.warn as jest.Mock).mockReset();
+    (logger.warn as jest.Mock).mockReset();
   });
   const { result } = renderHook(() => useSelectableList([1, 2, 3]));
 
   describe("matchSelection", () => {
-    test("console.warn", () => {
+    test("logger.warn", () => {
       act(() => {
         result.current[1].matchSelection({ index: 1, value: 2 });
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "matchSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
         result.current[1].matchSelection({} as any);
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         2,
         "matchSelection. index , value are all undefined."
       );
@@ -84,29 +85,29 @@ describe("useSelctableList", () => {
         result.current[1].updateSelection({ value: 22 })();
       });
       const [afterIndex, afterValue] = result.current[0];
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "updateSelection failed. Does the value 22 exist in the list?"
       );
-      (console.warn as jest.Mock).mockReset();
+      (logger.warn as jest.Mock).mockReset();
 
       // default
       expect(beforeIndex).toBe(afterIndex);
       expect(beforeValue).toBe(afterValue);
     });
 
-    test("console.warn", () => {
+    test("logger.warn", () => {
       act(() => {
         result.current[1].updateSelection({ index: 1, value: 2 })();
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "updateSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
         result.current[1].updateSelection({} as any)();
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         2,
         "updateSelection. index , value are all undefined."
       );
@@ -139,11 +140,11 @@ describe("useSelctableList", () => {
       // default
       expect(beforeIndex).toBe(afterIndex);
       expect(beforeValue).toBe(afterValue);
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "allowUnselected is false. Cannot unselect item"
       );
-      (console.warn as jest.Mock).mockReset();
+      (logger.warn as jest.Mock).mockReset();
     });
     test("should toggle selected value", () => {
       const { result: internalResult } = renderHook(() =>
@@ -169,28 +170,28 @@ describe("useSelctableList", () => {
       });
       const [afterIndex, afterValue] = internalResult.current[0];
 
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "allowUnselected is false. Cannot unselect item"
       );
       // default
       expect(beforeIndex).toBe(afterIndex);
       expect(beforeValue).toBe(afterValue);
-      (console.warn as jest.Mock).mockReset();
+      (logger.warn as jest.Mock).mockReset();
     });
 
-    test("console.warn", () => {
+    test("logger.warn", () => {
       act(() => {
         result.current[1].toggleSelection({ index: 1, value: 2 })();
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         1,
         "toggleSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
         result.current[1].toggleSelection({} as any)();
       });
-      expect(console.warn).toHaveBeenNthCalledWith(
+      expect(logger.warn).toHaveBeenNthCalledWith(
         2,
         "toggleSelection. index , value are all undefined."
       );
