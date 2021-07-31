@@ -4,8 +4,8 @@ import {
   useRef,
   useCallback,
   useState,
-} from 'react';
-import type { HTMLElementOrNull, CallbackRef } from '../utils/utils';
+} from "react";
+import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
 
 /**
  * useOutsideClickRef hook
@@ -25,9 +25,10 @@ function useOutsideClickRef(
 
   const memoizedCallback = useCallback(
     (e: MouseEvent) => {
-      if (node && !node.contains(e.target as Element)) {
-        savedHandler.current(e);
+      if (!node || node.contains(e.target as Element)) {
+        return;
       }
+      savedHandler.current(e);
     },
     [node]
   );
@@ -42,12 +43,12 @@ function useOutsideClickRef(
 
   useEffect(() => {
     if (when) {
-      document.addEventListener('click', memoizedCallback);
-      document.addEventListener('ontouchstart', memoizedCallback);
+      document.addEventListener("click", memoizedCallback, true);
+      document.addEventListener("ontouchstart", memoizedCallback, true);
 
       return () => {
-        document.removeEventListener('click', memoizedCallback);
-        document.removeEventListener('ontouchstart', memoizedCallback);
+        document.removeEventListener("click", memoizedCallback, true);
+        document.removeEventListener("ontouchstart", memoizedCallback, true);
       };
     }
   }, [when, memoizedCallback]);
