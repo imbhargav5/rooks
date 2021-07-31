@@ -127,13 +127,9 @@ module.exports = {
           items: [
             {
               // Label of the link
-              label: "All in one",
+              label: "Getting Started",
               // Client-side routing, used for navigating within the website.
               // The baseUrl will be automatically prepended to this value.
-              to: "docs/",
-            },
-            {
-              label: "Getting Started",
               to: "docs/getting-started/",
             },
             {
@@ -194,16 +190,16 @@ module.exports = {
       copyright: "MIT© 2020 Bhargav Ponnapalli",
       logo: {},
     },
-    algolia: {
-      apiKey: process.env.ALGOLIA_API_KEY,
-      indexName: "react-hooks",
-      // Optional: see doc section bellow,
-      contextual: true,
-      // searchParameters: {
-      //   facetFilters: ["type:$TYPE"]
-      // }
+    // algolia: {
+    //   apiKey: process.env.ALGOLIA_API_KEY,
+    //   indexName: "react-hooks",
+    //   // Optional: see doc section bellow,
+    //   contextual: true,
+    //   // searchParameters: {
+    //   //   facetFilters: ["type:$TYPE"]
+    //   // }
 
-      //... other Algolia params
-    },
+    //   //... other Algolia params
+    // },
   },
 };

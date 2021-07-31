@@ -7,10 +7,13 @@ const writeFileSync = require("fs").writeFileSync;
 const readFileSync = require("fs").readFileSync;
 const parseReadme = require("./parse-readme");
 const replaceString = require("replace-string");
-  
+
 function ls() {
   let readmeFileContent = readFileSync(`./README.md`, "utf8");
-  readmeFileContent = readmeFileContent.replace(/!\[TitleCard\]\([:\.\w/-]+.svg\)/,"");
+  readmeFileContent = readmeFileContent.replace(
+    /!\[TitleCard\]\([:\.\w/-]+.svg\)/,
+    ""
+  );
   readmeFileContent = parseReadme(readmeFileContent);
   let examplesFileContent = null;
   try {
@@ -56,7 +59,7 @@ You can click on the floating discord icon at the bottom right of the screen and
 }
 
 function addToSidebarJson() {
-  let INDEPENDENT_PACKAGES_SIDEBAR_INDEX = 2
+  let CUSTOM_HOOKS_SIDEBAR_INDEX = 1;
   if (newReadmeFileName === "rooks") {
     return;
   }
@@ -66,29 +69,29 @@ function addToSidebarJson() {
     fileContent = readFileSync(`../docusaurus/sidebars.json`, "utf8");
     currentSidebarJson = JSON.parse(fileContent);
     if (
-      Object.keys(currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX].items).includes(
-        "newReadmeFileName"
-      )
+      Object.keys(
+        currentSidebarJson.docs[CUSTOM_HOOKS_SIDEBAR_INDEX].items
+      ).includes("newReadmeFileName")
     ) {
       return;
     }
-    const independentPackages = {
-      ...currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX],
+    const customHooks = {
+      ...currentSidebarJson.docs[CUSTOM_HOOKS_SIDEBAR_INDEX],
       items: Array.from(
         new Set(
           [
-            ...currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX].items,
+            ...currentSidebarJson.docs[CUSTOM_HOOKS_SIDEBAR_INDEX].items,
             newReadmeFileName,
           ].sort()
         )
-      )
+      ),
     };
     const newSidebarJson = {
       ...currentSidebarJson,
       docs: [
-        ...currentSidebarJson.docs.slice(0, INDEPENDENT_PACKAGES_SIDEBAR_INDEX),
-        independentPackages,
-        ...currentSidebarJson.docs.slice(INDEPENDENT_PACKAGES_SIDEBAR_INDEX+1)
+        ...currentSidebarJson.docs.slice(0, CUSTOM_HOOKS_SIDEBAR_INDEX),
+        customHooks,
+        ...currentSidebarJson.docs.slice(CUSTOM_HOOKS_SIDEBAR_INDEX + 1),
       ],
     };
     writeFileSync(
