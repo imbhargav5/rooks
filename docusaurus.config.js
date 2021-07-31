@@ -127,13 +127,9 @@ module.exports = {
           items: [
             {
               // Label of the link
-              label: "All in one",
+              label: "Getting Started",
               // Client-side routing, used for navigating within the website.
               // The baseUrl will be automatically prepended to this value.
-              to: "docs/",
-            },
-            {
-              label: "Getting Started",
               to: "docs/getting-started/",
             },
             {

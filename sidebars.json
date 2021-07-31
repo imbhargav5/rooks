@@ -3,25 +3,13 @@
     {
       "label": "Quick Start",
       "collapsed": false,
-      "items": [
-        "getting-started",
-        "motivation",
-        "hooks-list"
-      ],
-      "type": "category"
-    },
-    {
-      "label": "All In One",
-      "collapsed": false,
-      "items": [
-        "rooks"
-      ],
+      "items": ["getting-started", "motivation"],
       "type": "category"
     },
     {
       "type": "category",
       "collapsed": false,
-      "label": "Independent Packages",
+      "label": "Custom Hooks",
       "items": [
         "useBoundingclientrect",
         "useBoundingclientrectRef",
@@ -87,6 +75,11 @@
         "useWindowScrollPosition",
         "useWindowSize"
       ]
+    },
+    {
+      "type": "doc",
+      "id": "hooks-list",
+      "label": "Hooks List"
     }
   ]
 }
