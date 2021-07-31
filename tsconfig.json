@@ -24,8 +24,9 @@
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "rootDir": "src"
+    "rootDir": "src",
     //"strict": true,
+    "downlevelIteration": true
   },
   "exclude": [
     "node_modules",
