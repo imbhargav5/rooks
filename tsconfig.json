@@ -40,5 +40,5 @@
     "src/css",
     "src/theme"
   ],
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
