@@ -1,3 +1,10 @@
+## <small>5.4.4 (2021-07-31)</small>
+
+* fix(useMapState): Fix typo in tests (#532) ([5f66bcf](https://github.com/imbhargav5/rooks/commit/5f66bcf)), closes [#532](https://github.com/imbhargav5/rooks/issues/532)
+* chore(docs): Update changelog and docs ([a7731cc](https://github.com/imbhargav5/rooks/commit/a7731cc))
+
+
+
 ## <small>5.4.3 (2021-07-31)</small>
 
 * fix(useOutsideClickRef): fix child update logic and event listener phase (#534) ([8a68faf](https://github.com/imbhargav5/rooks/commit/8a68faf)), closes [#534](https://github.com/imbhargav5/rooks/issues/534)
