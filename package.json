@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "description": "Useful React hooks for everyone.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

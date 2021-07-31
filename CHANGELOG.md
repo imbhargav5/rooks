@@ -1,3 +1,16 @@
+## <small>5.4.3 (2021-07-31)</small>
+
+* fix(useOutsideClickRef): fix child update logic and event listener phase (#534) ([8a68faf](https://github.com/imbhargav5/rooks/commit/8a68faf)), closes [#534](https://github.com/imbhargav5/rooks/issues/534)
+* chore(docs): Update changelog and docs ([2a25edc](https://github.com/imbhargav5/rooks/commit/2a25edc))
+* chore(docs): update sidebar and helpers (#537) ([be40993](https://github.com/imbhargav5/rooks/commit/be40993)), closes [#537](https://github.com/imbhargav5/rooks/issues/537)
+* build(tsconfig): include .tsx files in tsconfig (#536) ([10d4b7b](https://github.com/imbhargav5/rooks/commit/10d4b7b)), closes [#536](https://github.com/imbhargav5/rooks/issues/536)
+* contrib-readme-action has updated readme ([3e0af80](https://github.com/imbhargav5/rooks/commit/3e0af80))
+* contrib-readme-action has updated readme ([173877d](https://github.com/imbhargav5/rooks/commit/173877d))
+* docs: add redirects for old links (#527) ([ae7659a](https://github.com/imbhargav5/rooks/commit/ae7659a)), closes [#527](https://github.com/imbhargav5/rooks/issues/527)
+* docs(useThrottle): update useThrottle example and sandbox (#514) ([9c469db](https://github.com/imbhargav5/rooks/commit/9c469db)), closes [#514](https://github.com/imbhargav5/rooks/issues/514)
+
+
+
 ## <small>5.4.2 (2021-07-25)</small>
 
 * fix(pkg): add more details to package.json (#522) ([440519f](https://github.com/imbhargav5/rooks/commit/440519f)), closes [#522](https://github.com/imbhargav5/rooks/issues/522)
