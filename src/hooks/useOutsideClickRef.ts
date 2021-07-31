@@ -25,10 +25,9 @@ function useOutsideClickRef(
 
   const memoizedCallback = useCallback(
     (e: MouseEvent) => {
-      if (!node || node.contains(e.target as Element)) {
-        return;
+      if (node && !node.contains(e.target as Element)) {
+        savedHandler.current(e);
       }
-      savedHandler.current(e);
     },
     [node]
   );
