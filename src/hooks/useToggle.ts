@@ -1,6 +1,6 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
-const defaultToggleFunction = (v: boolean): boolean => !v;
+const defaultToggleFunction = (value: boolean): boolean => !value;
 
 /**
  * Use toggle hook helps you easily toggle a value
@@ -9,8 +9,11 @@ const defaultToggleFunction = (v: boolean): boolean => !v;
  * @param toggleFunction A toggle function. This allows for non boolean toggles
  */
 export function useToggle(
-  initialValue: any = false,
-  toggleFunction: (state: any, action: any) => any = defaultToggleFunction
-): [any, (action: any) => any] {
+  initialValue: unknown = false,
+  toggleFunction: (
+    state: unknown,
+    action: unknown
+  ) => unknown = defaultToggleFunction
+): [unknown, (action: unknown) => unknown] {
   return useReducer(toggleFunction, initialValue);
 }
