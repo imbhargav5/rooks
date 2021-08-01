@@ -1,11 +1,11 @@
-import { useMemo, MutableRefObject } from 'react';
-import type { HTMLElementOrNull, CallbackRef, AnyRef } from '../utils/utils';
+import { useMemo } from "react";
+import type { CallbackRef, AnyRef, Nullable } from "../utils/utils";
 /**
  * Credit to material-ui for this snippet
  */
 
-function setRef(ref: AnyRef, value: HTMLElementOrNull) {
-  if (typeof ref === 'function') {
+function setRef(ref: AnyRef, value: Nullable<HTMLElement>) {
+  if (typeof ref === "function") {
     ref(value);
   } else if (ref) {
     ref.current = value;
@@ -26,11 +26,11 @@ function useForkRef(refA: AnyRef, refB: AnyRef): CallbackRef | null {
    * with the ref. Cleanup naturally emerges from this behavior
    */
   return useMemo(() => {
-    if (refA == null && refB == null) {
+    if (refA === null && refB === null) {
       return null;
     }
 
-    return (refValue: HTMLElementOrNull) => {
+    return (refValue: Nullable<HTMLElement>) => {
       setRef(refA, refValue);
       setRef(refB, refValue);
     };
