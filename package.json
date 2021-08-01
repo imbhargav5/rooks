@@ -1,7 +1,7 @@
 {
   "name": "rooks",
   "version": "5.4.4",
-  "description": "Useful React hooks for everyone.",
+  "description": "Essential React custom hooks ⚓ to super charge your components!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
