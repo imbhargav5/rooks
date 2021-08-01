@@ -138,7 +138,6 @@ MIT
 Thanks goes to these wonderful people
 
 <!-- readme: contributors -start -->
-
 <table>
 <tr>
     <td align="center">
@@ -177,13 +176,20 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/qiweiii">
+            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
+            <br />
+            <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/braxtonchristensen">
             <img src="https://avatars.githubusercontent.com/u/11494223?v=4" width="100;" alt="braxtonchristensen"/>
             <br />
             <sub><b>Braxton Christensen</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/hanselabreu">
             <img src="https://avatars.githubusercontent.com/u/27902567?v=4" width="100;" alt="hanselabreu"/>
@@ -217,13 +223,6 @@ Thanks goes to these wonderful people
             <img src="https://avatars.githubusercontent.com/u/5983927?v=4" width="100;" alt="mscottmoore"/>
             <br />
             <sub><b>Michael Moore</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/qiweiii">
-            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
-            <br />
-            <sub><b>Qiwei Yang</b></sub>
         </a>
     </td></tr>
 <tr>
