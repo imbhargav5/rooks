@@ -1,3 +1,12 @@
+## <small>5.4.5 (2021-08-01)</small>
+
+* fix(pkg): update package description and readme (#543) ([f950486](https://github.com/imbhargav5/rooks/commit/f950486)), closes [#543](https://github.com/imbhargav5/rooks/issues/543)
+* ci(codecov): add Codecov integration and prep for badge (#541) ([e0cfb9b](https://github.com/imbhargav5/rooks/commit/e0cfb9b)), closes [#541](https://github.com/imbhargav5/rooks/issues/541)
+* contrib-readme-action has updated readme ([a9db216](https://github.com/imbhargav5/rooks/commit/a9db216))
+* chore(docs): Update changelog and docs ([90184dc](https://github.com/imbhargav5/rooks/commit/90184dc))
+
+
+
 ## <small>5.4.4 (2021-07-31)</small>
 
 * fix(useMapState): Fix typo in tests (#532) ([5f66bcf](https://github.com/imbhargav5/rooks/commit/5f66bcf)), closes [#532](https://github.com/imbhargav5/rooks/issues/532)
