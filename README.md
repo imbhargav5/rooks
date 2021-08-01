@@ -9,7 +9,7 @@
 
 <br/>
 
-A super awesome collection of custom hooks for React.
+Essential React custom hooks ⚓ to super charge your components!
 
 ## [Complete Documentation](https://react-hooks.org/)
 
