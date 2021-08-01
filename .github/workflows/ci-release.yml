@@ -48,7 +48,9 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn
       - name: test
-        run: yarn test
+        run: yarn test --coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
 
   release:
     env:
