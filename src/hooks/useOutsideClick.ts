@@ -1,5 +1,5 @@
-import type { MutableRefObject } from 'react';
-import { useEffect, useRef, useCallback } from 'react';
+import type { MutableRefObject } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 /**
  *  useOutsideClick hook
@@ -10,7 +10,7 @@ import { useEffect, useRef, useCallback } from 'react';
  * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
  */
 function useOutsideClick(
-  ref: MutableRefObject<HTMLElement>,
+  ref: MutableRefObject<HTMLElement | null>,
   handler: (e: MouseEvent) => any,
   when: boolean = true
 ): void {
@@ -28,12 +28,12 @@ function useOutsideClick(
 
   useEffect(() => {
     if (when) {
-      document.addEventListener('click', memoizedCallback);
-      document.addEventListener('ontouchstart', memoizedCallback);
+      document.addEventListener("click", memoizedCallback, true);
+      document.addEventListener("ontouchstart", memoizedCallback, true);
 
       return () => {
-        document.removeEventListener('click', memoizedCallback);
-        document.removeEventListener('ontouchstart', memoizedCallback);
+        document.removeEventListener("click", memoizedCallback, true);
+        document.removeEventListener("ontouchstart", memoizedCallback, true);
       };
     }
   }, [ref, handler, when]);

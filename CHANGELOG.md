@@ -1,3 +1,32 @@
+## <small>5.4.5 (2021-08-01)</small>
+
+* fix(pkg): update package description and readme (#543) ([f950486](https://github.com/imbhargav5/rooks/commit/f950486)), closes [#543](https://github.com/imbhargav5/rooks/issues/543)
+* ci(codecov): add Codecov integration and prep for badge (#541) ([e0cfb9b](https://github.com/imbhargav5/rooks/commit/e0cfb9b)), closes [#541](https://github.com/imbhargav5/rooks/issues/541)
+* contrib-readme-action has updated readme ([a9db216](https://github.com/imbhargav5/rooks/commit/a9db216))
+* chore(docs): Update changelog and docs ([90184dc](https://github.com/imbhargav5/rooks/commit/90184dc))
+
+
+
+## <small>5.4.4 (2021-07-31)</small>
+
+* fix(useMapState): Fix typo in tests (#532) ([5f66bcf](https://github.com/imbhargav5/rooks/commit/5f66bcf)), closes [#532](https://github.com/imbhargav5/rooks/issues/532)
+* chore(docs): Update changelog and docs ([a7731cc](https://github.com/imbhargav5/rooks/commit/a7731cc))
+
+
+
+## <small>5.4.3 (2021-07-31)</small>
+
+* fix(useOutsideClickRef): fix child update logic and event listener phase (#534) ([8a68faf](https://github.com/imbhargav5/rooks/commit/8a68faf)), closes [#534](https://github.com/imbhargav5/rooks/issues/534)
+* chore(docs): Update changelog and docs ([2a25edc](https://github.com/imbhargav5/rooks/commit/2a25edc))
+* chore(docs): update sidebar and helpers (#537) ([be40993](https://github.com/imbhargav5/rooks/commit/be40993)), closes [#537](https://github.com/imbhargav5/rooks/issues/537)
+* build(tsconfig): include .tsx files in tsconfig (#536) ([10d4b7b](https://github.com/imbhargav5/rooks/commit/10d4b7b)), closes [#536](https://github.com/imbhargav5/rooks/issues/536)
+* contrib-readme-action has updated readme ([3e0af80](https://github.com/imbhargav5/rooks/commit/3e0af80))
+* contrib-readme-action has updated readme ([173877d](https://github.com/imbhargav5/rooks/commit/173877d))
+* docs: add redirects for old links (#527) ([ae7659a](https://github.com/imbhargav5/rooks/commit/ae7659a)), closes [#527](https://github.com/imbhargav5/rooks/issues/527)
+* docs(useThrottle): update useThrottle example and sandbox (#514) ([9c469db](https://github.com/imbhargav5/rooks/commit/9c469db)), closes [#514](https://github.com/imbhargav5/rooks/issues/514)
+
+
+
 ## <small>5.4.2 (2021-07-25)</small>
 
 * fix(pkg): add more details to package.json (#522) ([440519f](https://github.com/imbhargav5/rooks/commit/440519f)), closes [#522](https://github.com/imbhargav5/rooks/issues/522)

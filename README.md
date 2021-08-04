@@ -5,11 +5,11 @@
 </p>
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) [![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
+![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) ![GitHub](https://img.shields.io/github/license/imbhargav5/rooks) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks) [![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors) ![npm](https://img.shields.io/npm/dw/rooks) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks) ![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main) ![node-lts](https://img.shields.io/node/v-lts/rooks) [![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://react-hooks.org) ![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
 
 <br/>
 
-A super awesome collection of custom hooks for React.
+Essential React custom hooks ⚓ to super charge your components!
 
 ## [Complete Documentation](https://react-hooks.org/)
 
@@ -42,7 +42,7 @@ A super awesome collection of custom hooks for React.
 *   [useIntervalWhen](https://react-hooks.org/docs/useIntervalWhen) - Sets an interval immediately when a condition is true
 *   [useIsomorphicEffect](https://react-hooks.org/docs/useIsomorphicEffect) - A hook that resolves to useEffect on the server and useLayoutEffect on the client.
 *   [useKey](https://react-hooks.org/docs/useKey) - keypress, keyup and keydown event handlers as hooks for react.
-*   [useKeyBindings](https://react-hooks.org/docs/useKeyBindings) - useKeyBindings binds pairs of keyboard events and handlers.
+*   [useKeyBindings](https://react-hooks.org/docs/useKeyBindings) - useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.
 *   [useKeyRef](https://react-hooks.org/docs/useKeyRef) - Very similar useKey but it returns a ref
 *   [useKeys](https://react-hooks.org/docs/useKeys) - A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
 *   [useLifecycleLogger](https://react-hooks.org/docs/useLifecycleLogger) - A react hook that console logs parameters as component transitions through lifecycles.
@@ -90,7 +90,7 @@ A super awesome collection of custom hooks for React.
 
 <!--hookscount start-->
 
-✅ Collection of 62 hooks as standalone modules.
+✅ Collection of 63 hooks as standalone modules.
 
 <!--hookscount end-->
 
@@ -177,13 +177,20 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/qiweiii">
+            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
+            <br />
+            <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/braxtonchristensen">
             <img src="https://avatars.githubusercontent.com/u/11494223?v=4" width="100;" alt="braxtonchristensen"/>
             <br />
             <sub><b>Braxton Christensen</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/hanselabreu">
             <img src="https://avatars.githubusercontent.com/u/27902567?v=4" width="100;" alt="hanselabreu"/>
@@ -218,15 +225,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Michael Moore</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/iampika">
             <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
             <br />
             <sub><b>Mahendra Choudhary</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/phmngocnghia">
             <img src="https://avatars.githubusercontent.com/u/36730355?v=4" width="100;" alt="phmngocnghia"/>
@@ -261,15 +268,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Branden Visser</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/Dianoga">
             <img src="https://avatars.githubusercontent.com/u/1618956?v=4" width="100;" alt="Dianoga"/>
             <br />
             <sub><b>Brian Steere</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/calthejuggler">
             <img src="https://avatars.githubusercontent.com/u/30095183?v=4" width="100;" alt="calthejuggler"/>
@@ -304,27 +311,20 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Fernando Beck</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/joshdavenport">
             <img src="https://avatars.githubusercontent.com/u/757828?v=4" width="100;" alt="joshdavenport"/>
             <br />
             <sub><b>Josh Davenport</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/1337MARCEL">
             <img src="https://avatars.githubusercontent.com/u/16888873?v=4" width="100;" alt="1337MARCEL"/>
             <br />
             <sub><b>MARCEL</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/neilor">
-            <img src="https://avatars.githubusercontent.com/u/4008023?v=4" width="100;" alt="neilor"/>
-            <br />
-            <sub><b>Neilor Caldeira</b></sub>
         </a>
     </td></tr>
 </table>

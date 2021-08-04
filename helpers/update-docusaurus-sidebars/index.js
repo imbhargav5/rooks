@@ -14,7 +14,7 @@ async function updateDocusaurusSidebars() {
     fs.readFileSync(hooksListJSONFilePath, "utf-8")
   );
   const hookNames = hooksList.map(({ name }) => name);
-  let INDEPENDENT_PACKAGES_SIDEBAR_INDEX = 2;
+  let CUSTOM_HOOKS_SIDEBAR_INDEX = 1;
   let currentSidebarJson;
   let fileContent;
   try {
@@ -24,18 +24,16 @@ async function updateDocusaurusSidebars() {
     );
     currentSidebarJson = JSON.parse(fileContent);
 
-    const independentPackages = {
-      ...currentSidebarJson.docs[INDEPENDENT_PACKAGES_SIDEBAR_INDEX],
+    const customHooks = {
+      ...currentSidebarJson.docs[CUSTOM_HOOKS_SIDEBAR_INDEX],
       items: Array.from(new Set([...hookNames])).sort(),
     };
     const newSidebarJson = {
       ...currentSidebarJson,
       docs: [
-        ...currentSidebarJson.docs.slice(0, INDEPENDENT_PACKAGES_SIDEBAR_INDEX),
-        independentPackages,
-        ...currentSidebarJson.docs.slice(
-          INDEPENDENT_PACKAGES_SIDEBAR_INDEX + 1
-        ),
+        ...currentSidebarJson.docs.slice(0, CUSTOM_HOOKS_SIDEBAR_INDEX),
+        customHooks,
+        ...currentSidebarJson.docs.slice(CUSTOM_HOOKS_SIDEBAR_INDEX + 1),
       ],
     };
     writeFileSync(
