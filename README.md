@@ -5,11 +5,11 @@
 </p>
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) [![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
+![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) ![GitHub](https://img.shields.io/github/license/imbhargav5/rooks) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks) [![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors) ![npm](https://img.shields.io/npm/dw/rooks) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks) ![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main) ![node-lts](https://img.shields.io/node/v-lts/rooks) [![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://react-hooks.org) ![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
 
 <br/>
 
-A super awesome collection of custom hooks for React.
+Essential React custom hooks ⚓ to super charge your components!
 
 ## [Complete Documentation](https://react-hooks.org/)
 
@@ -138,7 +138,6 @@ MIT
 Thanks goes to these wonderful people
 
 <!-- readme: contributors -start -->
-
 <table>
 <tr>
     <td align="center">
@@ -177,13 +176,20 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/qiweiii">
+            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
+            <br />
+            <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/braxtonchristensen">
             <img src="https://avatars.githubusercontent.com/u/11494223?v=4" width="100;" alt="braxtonchristensen"/>
             <br />
             <sub><b>Braxton Christensen</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/hanselabreu">
             <img src="https://avatars.githubusercontent.com/u/27902567?v=4" width="100;" alt="hanselabreu"/>
@@ -217,13 +223,6 @@ Thanks goes to these wonderful people
             <img src="https://avatars.githubusercontent.com/u/5983927?v=4" width="100;" alt="mscottmoore"/>
             <br />
             <sub><b>Michael Moore</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/qiweiii">
-            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
-            <br />
-            <sub><b>Qiwei Yang</b></sub>
         </a>
     </td></tr>
 <tr>

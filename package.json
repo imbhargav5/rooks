@@ -1,7 +1,7 @@
 {
   "name": "rooks",
-  "version": "5.4.2",
-  "description": "Useful React hooks for everyone.",
+  "version": "5.4.5",
+  "description": "Essential React custom hooks ⚓ to super charge your components!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
@@ -9,8 +9,11 @@
   "typings": "dist/types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
+  "devEngines": {
+    "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
+  },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=10"
   },
   "homepage": "https://react-hooks.org",
   "repository": {
