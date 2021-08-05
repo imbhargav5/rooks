@@ -1,3 +1,12 @@
+## <small>5.4.6 (2021-08-05)</small>
+
+* fix(types): fix types in build step ([a34ad49](https://github.com/imbhargav5/rooks/commit/a34ad49))
+* contrib-readme-action has updated readme ([147143b](https://github.com/imbhargav5/rooks/commit/147143b))
+* docs: fix missing sidebar when click on docmentation (#547) ([9e521e3](https://github.com/imbhargav5/rooks/commit/9e521e3)), closes [#547](https://github.com/imbhargav5/rooks/issues/547)
+* chore(docs): Update changelog and docs ([c51e433](https://github.com/imbhargav5/rooks/commit/c51e433))
+
+
+
 ## <small>5.4.5 (2021-08-01)</small>
 
 * fix(pkg): update package description and readme (#543) ([f950486](https://github.com/imbhargav5/rooks/commit/f950486)), closes [#543](https://github.com/imbhargav5/rooks/issues/543)
