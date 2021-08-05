@@ -155,6 +155,13 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/qiweiii">
+            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
+            <br />
+            <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/maciekgrzybek">
             <img src="https://avatars.githubusercontent.com/u/16546428?v=4" width="100;" alt="maciekgrzybek"/>
             <br />
@@ -173,13 +180,6 @@ Thanks goes to these wonderful people
             <img src="https://avatars.githubusercontent.com/u/39908767?v=4" width="100;" alt="mahijendra"/>
             <br />
             <sub><b>B V K MAHIJENDRA </b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/qiweiii">
-            <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
-            <br />
-            <sub><b>Qiwei Yang</b></sub>
         </a>
     </td></tr>
 <tr>
