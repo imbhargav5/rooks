@@ -8,13 +8,7 @@ import ora from "ora";
 import execa from "execa";
 import truncate from "lodash.truncate";
 import addHookToListAndUpdate from "./addHookToListAndUpdate";
-
-export interface IHookDesc {
-  name: string;
-  description: string;
-  packageName?: string;
-  directoryName?: string;
-}
+import { IHookDesc } from "../types";
 
 const PROJECT_ROOT = process.cwd();
 

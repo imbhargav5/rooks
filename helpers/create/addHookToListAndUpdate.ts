@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import sortBy from "lodash.sortby";
-import { IHookDesc } from ".";
+import { IHookDesc } from "../types";
 const listOfHooksJsonPath = path.join(__dirname, "../hooks-list.json");
 
 export default function ({ name, description }: IHookDesc) {
