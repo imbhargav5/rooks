@@ -1,12 +1,11 @@
-const packageName = process.env.LERNA_PACKAGE_NAME;
-const newReadmeFileName = packageName.startsWith("@rooks")
-  ? packageName.split("@rooks/")[1]
-  : packageName;
+import { writeFileSync, readFileSync } from "fs";
+import parseReadme from "./parse-readme";
+import replaceString from "replace-string";
 
-const writeFileSync = require("fs").writeFileSync;
-const readFileSync = require("fs").readFileSync;
-const parseReadme = require("./parse-readme");
-const replaceString = require("replace-string");
+const packageName = process.env.LERNA_PACKAGE_NAME;
+const newReadmeFileName = packageName?.startsWith("@rooks")
+  ? packageName?.split("@rooks/")[1]
+  : packageName;
 
 function ls() {
   let readmeFileContent = readFileSync(`./README.md`, "utf8");
@@ -15,7 +14,7 @@ function ls() {
     ""
   );
   readmeFileContent = parseReadme(readmeFileContent);
-  let examplesFileContent = null;
+  let examplesFileContent = "";
   try {
     examplesFileContent = readFileSync(`./Examples.md`, "utf8");
   } catch (err) {
@@ -64,7 +63,7 @@ function addToSidebarJson() {
     return;
   }
   let currentSidebarJson;
-  let fileContent;
+  let fileContent: string;
   try {
     fileContent = readFileSync(`../docusaurus/sidebars.json`, "utf8");
     currentSidebarJson = JSON.parse(fileContent);

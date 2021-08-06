@@ -1,27 +1,20 @@
-const writeFileSync = require("fs").writeFileSync;
-const readFileSync = require("fs").readFileSync;
-const pkgDir = require("pkg-dir");
-const path = require("path");
-const fs = require("fs");
+import { writeFileSync, readFileSync } from "fs";
+import pkgDir from "pkg-dir";
+import { join } from "path";
+import { readFileSync as _readFileSync } from "fs";
 
 async function updateDocusaurusSidebars() {
-  const PROJECT_ROOT = await pkgDir(__dirname);
-  const hooksListJSONFilePath = path.join(
-    PROJECT_ROOT,
-    "./helpers/hooks-list.json"
-  );
+  const PROJECT_ROOT: string | any = await pkgDir(__dirname);
+  const hooksListJSONFilePath = join(PROJECT_ROOT, "./helpers/hooks-list.json");
   const { hooks: hooksList } = JSON.parse(
-    fs.readFileSync(hooksListJSONFilePath, "utf-8")
+    _readFileSync(hooksListJSONFilePath, "utf-8")
   );
   const hookNames = hooksList.map(({ name }) => name);
   let CUSTOM_HOOKS_SIDEBAR_INDEX = 1;
   let currentSidebarJson;
   let fileContent;
   try {
-    fileContent = readFileSync(
-      path.join(PROJECT_ROOT, `./sidebars.json`),
-      "utf8"
-    );
+    fileContent = readFileSync(join(PROJECT_ROOT, `./sidebars.json`), "utf8");
     currentSidebarJson = JSON.parse(fileContent);
 
     const customHooks = {
@@ -37,7 +30,7 @@ async function updateDocusaurusSidebars() {
       ],
     };
     writeFileSync(
-      path.join(PROJECT_ROOT, `./sidebars.json`),
+      join(PROJECT_ROOT, `./sidebars.json`),
       JSON.stringify(newSidebarJson, null, 2),
       "utf-8"
     );
@@ -48,7 +41,7 @@ async function updateDocusaurusSidebars() {
   }
 }
 
-module.exports = updateDocusaurusSidebars;
+export default updateDocusaurusSidebars;
 
 if (require.main === module) {
   updateDocusaurusSidebars();
