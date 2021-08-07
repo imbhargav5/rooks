@@ -33,7 +33,7 @@ describe("useMapState", () => {
     });
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 2 });
   });
-  it("should update old value correctly", () => {
+  it("set should update old value correctly", () => {
     const { result } = renderHook(() => useMapState({ a: 1 }));
     act(() => {
       result.current[1].set("a", 2);
@@ -59,7 +59,7 @@ describe("useMapState", () => {
 
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3, d: 4 });
   });
-  it("should update old value correctly", () => {
+  it("setMultiple should update old value correctly", () => {
     const { result, rerender } = renderHook(() => useMapState({ a: 1 }));
     act(() => {
       result.current[1].setMultiple({
