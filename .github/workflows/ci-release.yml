@@ -102,6 +102,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: update contributors
+        run: yarn contributors:update
       - name: generate docs and sidebars
         run: yarn update-docusaurus-sidebars
       - name: generate changelog
