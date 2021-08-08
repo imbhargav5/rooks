@@ -227,6 +227,13 @@ Thanks goes to these wonderful people
     </td></tr>
 <tr>
     <td align="center">
+        <a href="https://github.com/ChocolateLoverRaj">
+            <img src="https://avatars.githubusercontent.com/u/52586855?v=4" width="100;" alt="ChocolateLoverRaj"/>
+            <br />
+            <sub><b>Rajas Paranjpe</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/iampika">
             <img src="https://avatars.githubusercontent.com/u/31067376?v=4" width="100;" alt="iampika"/>
             <br />
@@ -260,15 +267,15 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Arman</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/mrvisser">
             <img src="https://avatars.githubusercontent.com/u/102265?v=4" width="100;" alt="mrvisser"/>
             <br />
             <sub><b>Branden Visser</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/Dianoga">
             <img src="https://avatars.githubusercontent.com/u/1618956?v=4" width="100;" alt="Dianoga"/>
@@ -303,27 +310,20 @@ Thanks goes to these wonderful people
             <br />
             <sub><b>Daniel Holmes</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/febeck">
             <img src="https://avatars.githubusercontent.com/u/12020091?v=4" width="100;" alt="febeck"/>
             <br />
             <sub><b>Fernando Beck</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/joshdavenport">
             <img src="https://avatars.githubusercontent.com/u/757828?v=4" width="100;" alt="joshdavenport"/>
             <br />
             <sub><b>Josh Davenport</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/1337MARCEL">
-            <img src="https://avatars.githubusercontent.com/u/16888873?v=4" width="100;" alt="1337MARCEL"/>
-            <br />
-            <sub><b>MARCEL</b></sub>
         </a>
     </td></tr>
 </table>
