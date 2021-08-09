@@ -148,17 +148,17 @@ Thanks goes to these wonderful people
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/simbathesailor">
-            <img src="https://avatars.githubusercontent.com/u/5938110?v=4" width="100;" alt="simbathesailor"/>
-            <br />
-            <sub><b>Anil Kumar Chaudhary</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/qiweiii">
             <img src="https://avatars.githubusercontent.com/u/32790369?v=4" width="100;" alt="qiweiii"/>
             <br />
             <sub><b>Qiwei Yang</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/simbathesailor">
+            <img src="https://avatars.githubusercontent.com/u/5938110?v=4" width="100;" alt="simbathesailor"/>
+            <br />
+            <sub><b>Anil Kumar Chaudhary</b></sub>
         </a>
     </td>
     <td align="center">
