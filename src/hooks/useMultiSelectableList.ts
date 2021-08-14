@@ -1,9 +1,9 @@
 /* eslint-disable no-negated-condition */
+import { useCallback, useState } from "react";
 import type {
   OptionalIndexValue,
   OptionalIndicesValues,
-} from "@/types/index-value";
-import { useCallback, useState } from "react";
+} from "../types/index-value";
 
 function warnIfBothValueAndIndexAreProvided(functionName, object) {
   if (Object.values(object).every((v) => typeof v !== "undefined")) {

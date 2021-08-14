@@ -1,14 +1,14 @@
-const inquirer = require("inquirer");
-const fs = require("fs");
-const fsExtra = require("fs-extra");
-const path = require("path");
-const replaceString = require("replace-string");
-const makeDir = require("make-dir");
-const ora = require("ora");
-const execa = require("execa");
-const truncate = require("lodash.truncate");
-const getExistingListOfHooksAsJSON = require("./addHookToListAndUpdate");
-const addHookToListAndUpdate = require("./addHookToListAndUpdate");
+import inquirer from "inquirer";
+import fs from "fs";
+import fsExtra from "fs-extra";
+import path from "path";
+import replaceString from "replace-string";
+import makeDir from "make-dir";
+import ora from "ora";
+import execa from "execa";
+import truncate from "lodash.truncate";
+import addHookToListAndUpdate from "./addHookToListAndUpdate";
+import { IHookDesc } from "../types";
 
 const PROJECT_ROOT = process.cwd();
 
@@ -23,18 +23,18 @@ const filesToWrite = [
   ({ name }) => `./docs/${name}.md`,
 ];
 
-function readFileAsString(relativeFilePath) {
+function readFileAsString(relativeFilePath: string) {
   return fs.readFileSync(path.join(PROJECT_ROOT, relativeFilePath), "utf-8");
 }
 
 function injectValuesIntoTemplate(
-  src,
-  { name, packageName, directoryName, description }
+  src: string,
+  { name, packageName, directoryName, description }: IHookDesc
 ) {
   const trimmedDescription = truncate(description, {
     length: 130,
   });
-  const descriptionWords = trimmedDescription.split(/\s+/);
+  const descriptionWords: string[] = trimmedDescription.split(/\s+/);
   const descriptionSplitUp = descriptionWords.reduce(
     (acc, descriptionWord) => {
       let { currentAccIndex, values } = acc;
@@ -60,7 +60,7 @@ function injectValuesIntoTemplate(
 
   const { values: descriptionArray } = descriptionSplitUp;
 
-  let result = src;
+  let result: string = src;
   result = replaceString(result, "%name%", name);
   result = replaceString(result, "%directoryName%", directoryName);
   result = replaceString(result, "%packageName%", packageName);
@@ -78,7 +78,7 @@ const questions = [
     message:
       "Name of the package in hyphen separated words starting with use.For eg: use-regina-phalange",
     default: "use-r",
-    validate(input) {
+    validate(input: string) {
       if (
         input.length > 4 &&
         input.startsWith("use-") &&
@@ -95,7 +95,7 @@ const questions = [
     message:
       "Name of the hook which will be used for it's javascript import etc. For eg: useReginaPhalange",
     default: "useR",
-    validate(input) {
+    validate(input: string) {
       if (input.length > 3 && input.startsWith("use")) {
         return true;
       }
@@ -123,7 +123,7 @@ inquirer.prompt(questions).then((answers) => {
     });
   });
 
-  filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
+  filesToWrite.map((relativeFilePathFromRootOfModule: any, index) => {
     const srcToWrite = transformedSources[index];
     if (typeof relativeFilePathFromRootOfModule === "function") {
       relativeFilePathFromRootOfModule = relativeFilePathFromRootOfModule(
