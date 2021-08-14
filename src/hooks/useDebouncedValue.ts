@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
+import {useDebounce} from './useDebounce'
+import { useDidMount } from "./useDidMount";
+import { useDidUpdate } from "./useDidUpdate";
 
-function useDebouncedValue<T = unknown>(value: T, timeout: number) {
-  const [updatedValue, setUpdatedValue] = useState<T | null>(null);
+type UseDebounceValueOptions = Partial<{
+  initializeWithNull: boolean;
+}>
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setUpdatedValue(value);
-    }, timeout);
-
-    return () => clearTimeout(timer);
-  }, [value, timeout]);
-
-  return updatedValue;
+const defaultUseDebounceValueOptions = {
+  initializeWithNull: false
 }
 
-export { useDebouncedValue };
+
+export const useDebouncedValue = <T = unknown>(value: T, timeout: number, options: UseDebounceValueOptions = {}) => {
+  const {initializeWithNull} = Object.assign({}, defaultUseDebounceValueOptions,options)
+  const [updatedValue, setUpdatedValue] = useState<T | null>( initializeWithNull ? null : value);
+  const debouncedSetUpdatedValue = useDebounce(setUpdatedValue, timeout);  
+  useDidMount(() => {
+    if(initializeWithNull){
+      debouncedSetUpdatedValue(value);
+    }
+  })
+  useDidUpdate(() => {
+    debouncedSetUpdatedValue(value);
+  }, [value])
+  
+  // No need to add `debouncedSetUpdatedValue ` to dependencies as it is a ref.current.
+  // returning both updatedValue and setUpdatedValue (not the debounced version) to instantly update this if  needed. 
+  return [updatedValue , setUpdatedValue];
+}

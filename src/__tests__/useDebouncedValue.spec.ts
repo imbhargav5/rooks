@@ -4,50 +4,62 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 
-jest.useFakeTimers();
+jest.useFakeTimers('modern');
 
 describe("useDebouncedValue", () => {
   it("should be defined", () => {
     expect(useDebouncedValue).toBeDefined();
   });
 
-  it("should return null if the timeout has not been reached", () => {
+  it("should initialize with first value if timeout is not reached and initializeWithNull is false", () => {
     const mockValue = "mock_value";
 
     const { result } = renderHook(() => useDebouncedValue(mockValue, 200));
 
     act(() => {
-      expect(result.current).toBeNull();
+      expect(result.current[0]).toBe(mockValue);
     });
   });
 
-  it("should returns updated value if the timeout has been reached", () => {
+
+  it("should return null if the timeout has not been reached and initializeWithNull is true", () => {
     const mockValue = "mock_value";
 
-    const { result } = renderHook(() => useDebouncedValue(mockValue, 200));
+    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));
 
     act(() => {
+      expect(result.current[0]).toBeNull();
+    });
+  });
+
+  it("should returns updated value if the timeout has been reached and initializeWithNull is true", () => {
+    const mockValue = "mock_value";
+
+    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));    
+    act(() => {
+      expect(result.current[0]).toBeNull();
       jest.runAllTimers();
-      expect(result.current).toBe(mockValue);
+      expect(result.current[0]).toBe(mockValue);
     });
   });
 
-  it("should respect the timeout value", () => {
+  it("should respect the timeout value if initializedWithNull is true", () => {
     const mockValue = "mock_value";
     const mockTimeout = 200;
 
     const { result } = renderHook(() =>
-      useDebouncedValue(mockValue, mockTimeout)
+      useDebouncedValue(mockValue, mockTimeout, {initializeWithNull : true})
     );
 
     act(() => {
-      jest.advanceTimersByTime(mockTimeout - 1);
-      expect(result.current).toBe(null);
+      jest.advanceTimersByTime(mockTimeout - 5);
+      expect(result.current[0]).toBe(null);
     });
 
     act(() => {
-      jest.advanceTimersByTime(1);
-      expect(result.current).toBe(mockValue);
+      // accounting for timing issues as it's not exactly accurate
+      jest.advanceTimersByTime(10);
+      expect(result.current[0]).toBe(mockValue);
     });
   });
 
@@ -57,11 +69,11 @@ describe("useDebouncedValue", () => {
     ["mock_item_1", "mock_item_2"],
     { another_key: "another_value", key: "value" },
   ])("should work with different types of values", (mockValue) => {
-    const { result } = renderHook(() => useDebouncedValue(mockValue, 200));
+    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));
 
     act(() => {
       jest.runAllTimers();
-      expect(result.current).toBe(mockValue);
+      expect(result.current[0]).toBe(mockValue);
     });
   });
 });
