@@ -335,6 +335,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cjpatoilo",
+      "name": "CJ Patoilo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1542831?v=4",
+      "profile": "https://github.com/cjpatoilo",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
