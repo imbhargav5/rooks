@@ -189,7 +189,7 @@
       "description": "A continuously running requestAnimationFrame hook for React"
     },
     {
-      "name": "useResizeObserver",
+      "name": "useResizeObserverRef",
       "description": "Resize Observer hook for React."
     },
     {

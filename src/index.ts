@@ -45,7 +45,7 @@ export { usePreviousDifferent } from "./hooks/usePreviousDifferent";
 export { usePreviousImmediate } from "./hooks/usePreviousImmediate";
 export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
-export { useResizeObserver } from "./hooks/useResizeObserver";
+export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
 export { useSelect } from "./hooks/useSelect";
 export { useSelectableList } from "./hooks/useSelectableList";
 export { useSessionstorage } from "./hooks/useSessionstorage";

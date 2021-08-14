@@ -1,10 +1,8 @@
-# @rooks/use-resize-observer
-![TitleCard](https://raw.githubusercontent.com/imbhargav5/rooks/HEAD/packages/resize-observer/title-card.svg)
-
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg)![](https://img.shields.io/npm/v/@rooks/use-resize-observer/latest.svg) ![](https://img.shields.io/npm/l/@rooks/use-resize-observer.svg) ![](https://img.shields.io/npm/dt/@rooks/use-resize-observer.svg) ![](https://img.shields.io/david/imbhargav5/rooks.svg?path=packages%2Fresize-observer)
-
-
-
+---
+id: useResizeObserverRef
+title: useResizeObserverRef
+sidebar_label: useResizeObserverRef
+---
 
 ## About 
 Resize Observer hook for React.
@@ -13,13 +11,13 @@ Resize Observer hook for React.
 ## Installation
 
 ```
-npm install --save @rooks/use-resize-observer
+npm install --save rooks
 ```
 
 ## Importing the hook
 
 ```javascript
-import useResizeObserver from "@rooks/use-resize-observer"
+import { useResizeObserverRef } from "rooks";
 ```
 
 
@@ -37,7 +35,7 @@ function Demo() {
     if (size.height !== height || size.width !== width)
       setSize(() => ({ height, width })); 
   }
-  useResizeObserver(myRef, callback);
+  useResizeObserverRef(myRef, callback);
 
   return (
     <>
@@ -95,3 +93,10 @@ render(<Demo/>)
 | callback   | ResizeObserverCallback  | Function that needs to be fired on resize                          | undefined                      |
 | options    | Object                  | An options object allowing you to set options for the observation  | {}                             |
 
+## Codesandbox Example
+
+### Basic Usage
+
+## Join Bhargav's discord server
+
+You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
