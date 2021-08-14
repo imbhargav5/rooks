@@ -103,7 +103,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: update contributors
-        run: yarn contributors:update
+        run: |
+          yarn contributors:update
+          yarn contributors:generate
       - name: generate docs and sidebars
         run: yarn update-docusaurus-sidebars
       - name: generate changelog
