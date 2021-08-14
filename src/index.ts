@@ -3,6 +3,7 @@ export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
 export { useCountdown } from "./hooks/useCountdown";
 export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";
+export { useDebouncedValue } from "./hooks/useDebouncedValue";
 export { useDidMount } from "./hooks/useDidMount";
 export { useDidUpdate } from "./hooks/useDidUpdate";
 export { useDimensionsRef } from "./hooks/useDimensionsRef";
