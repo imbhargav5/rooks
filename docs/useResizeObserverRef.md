@@ -25,17 +25,14 @@ import { useResizeObserverRef } from "rooks";
 
 ```jsx
 function Demo() {
-  const myRef = useRef(null);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
   const [size, setSize] = useState({ height: 0, width: 0 });
+  const [ref] = useResizeObserverRef(callback);
+
   const callback = () => {
-    const height = myRef.current.clientHeight;
-    const width = myRef.current.clientWidth;
-    if (size.height !== height || size.width !== width)
-      setSize(() => ({ height, width })); 
+    setSize(() => ({ height, width })); 
   }
-  useResizeObserverRef(myRef, callback);
 
   return (
     <>
@@ -57,7 +54,7 @@ function Demo() {
             color: "blue",
             maxWidth: "100%"
           }}
-          ref={myRef}
+          ref={ref}
         >
           <p>
             Resize this div as you see fit. To demonstrate that it also updates
@@ -89,9 +86,8 @@ render(<Demo/>)
 
 | Argument   | Type                    | Description                                                        | Default value                  |
 | ---------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------ |
-| ref        | React ref               | Ref which should be observed for Resizes                           | undefined                      |
 | callback   | ResizeObserverCallback  | Function that needs to be fired on resize                          | undefined                      |
-| options    | Object                  | An options object allowing you to set options for the observation  | {}                             |
+| options    | ResizeObserverOptions   | An options object allowing you to set options for the observation  | { box: "content-box" }         |
 
 ## Codesandbox Example
 
