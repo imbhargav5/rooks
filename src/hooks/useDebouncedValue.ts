@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, Dispatch, useState } from "react";
 import {useDebounce} from './useDebounce'
 import { useDidMount } from "./useDidMount";
 import { useDidUpdate } from "./useDidUpdate";
 
-type UseDebounceValueOptions = Partial<{
+type UseDebouncedValueOptions = Partial<{
   initializeWithNull: boolean;
 }>
 
@@ -11,8 +11,9 @@ const defaultUseDebounceValueOptions = {
   initializeWithNull: false
 }
 
+type UseDebouncedValueReturnType <T> = [debouncedValue: T | null, immediatelyUpdateDebouncedValue : Dispatch<SetStateAction<T| null>>]
 
-export const useDebouncedValue = <T = unknown>(value: T, timeout: number, options: UseDebounceValueOptions = {}) => {
+export const useDebouncedValue = <T = unknown>(value: T, timeout: number, options: UseDebouncedValueOptions = {}) : UseDebouncedValueReturnType<T> => {
   const {initializeWithNull} = Object.assign({}, defaultUseDebounceValueOptions,options)
   const [updatedValue, setUpdatedValue] = useState<T | null>( initializeWithNull ? null : value);
   const debouncedSetUpdatedValue = useDebounce(setUpdatedValue, timeout);  
