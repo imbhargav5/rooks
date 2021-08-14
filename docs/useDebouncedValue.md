@@ -27,8 +27,13 @@ import {useDebouncedValue} from "rooks"
 
 ```jsx
 function Demo() {
-  useDebouncedValue();
-  return null
+  const [value, setValue] = useState("");
+  const debouncedValue useDebouncedValue(value,1000);
+  return <div>
+      <p>Value is {value}</p>
+      <p>Debounced value is {debouncedValue}</p>
+      <button onClick={() => setValue(value + 1)}>Increment </button>
+  </div>
 }
 
 render(<Demo/>)

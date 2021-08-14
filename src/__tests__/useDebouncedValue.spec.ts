@@ -4,16 +4,21 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 
-jest.useFakeTimers('modern');
+
 
 describe("useDebouncedValue", () => {
+  beforeEach(() => {
+    jest.useFakeTimers('modern');
+  })
+  afterEach(() => {
+    jest.useRealTimers();
+   });
   it("should be defined", () => {
     expect(useDebouncedValue).toBeDefined();
   });
 
   it("should initialize with first value if timeout is not reached and initializeWithNull is false", () => {
     const mockValue = "mock_value";
-
     const { result } = renderHook(() => useDebouncedValue(mockValue, 200));
 
     act(() => {
@@ -34,13 +39,17 @@ describe("useDebouncedValue", () => {
 
   it("should returns updated value if the timeout has been reached and initializeWithNull is true", () => {
     const mockValue = "mock_value";
-
-    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));    
+    let result;
+    act(()=>{
+      const { result : resultFromHook } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));    
+      result = resultFromHook;
+    })
+    expect(result.current[0]).toBeNull();
     act(() => {
-      expect(result.current[0]).toBeNull();
       jest.runAllTimers();
-      expect(result.current[0]).toBe(mockValue);
     });
+    expect(result.current[0]).toBe(mockValue);
+
   });
 
   it("should respect the timeout value if initializedWithNull is true", () => {
@@ -53,14 +62,14 @@ describe("useDebouncedValue", () => {
 
     act(() => {
       jest.advanceTimersByTime(mockTimeout - 5);
-      expect(result.current[0]).toBe(null);
     });
+    expect(result.current[0]).toBe(null);
 
     act(() => {
       // accounting for timing issues as it's not exactly accurate
-      jest.advanceTimersByTime(10);
-      expect(result.current[0]).toBe(mockValue);
+      jest.advanceTimersByTime(5);
     });
+    expect(result.current[0]).toBe(mockValue);
   });
 
   it.each([
@@ -73,7 +82,7 @@ describe("useDebouncedValue", () => {
 
     act(() => {
       jest.runAllTimers();
-      expect(result.current[0]).toBe(mockValue);
     });
+    expect(result.current[0]).toBe(mockValue);
   });
 });
