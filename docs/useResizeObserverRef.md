@@ -25,36 +25,35 @@ import { useResizeObserverRef } from "rooks";
 
 ```jsx
 function Demo() {
+  const [resizeCount, setResizeCount] = useState(0);
+  const incrementResizeCount = () => {
+    return setResizeCount(resizeCount + 1);
+  };
+  const [myRef] = useResizeObserverRef(incrementResizeCount);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
-  const [size, setSize] = useState({ height: 0, width: 0 });
-  const [ref] = useResizeObserverRef(callback);
-
-  const callback = () => {
-    setSize(() => ({ height, width })); 
-  }
-
   return (
     <>
       <div
         style={{
           width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
+          background: 'lightblue',
+          padding: '10px',
+          position: 'absolute',
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
       >
         <div
           style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%"
+            resize: 'both',
+            overflow: 'auto',
+            background: 'white',
+            color: 'blue',
+            maxWidth: '100%',
           }}
-          ref={ref}
+          ref={myRef}
+          data-testid="app"
         >
           <p>
             Resize this div as you see fit. To demonstrate that it also updates
@@ -72,8 +71,7 @@ function Demo() {
         </p>
       </div>
       <div style={{ height: 500 }}>
-        <pre>height: {size.height}</pre>
-        <pre>width: {size.width}</pre>
+        <pre data-testid="message">Resize count: {resizeCount}</pre>
       </div>
     </>
   );
@@ -88,6 +86,14 @@ render(<Demo/>)
 | ---------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------ |
 | callback   | ResizeObserverCallback  | Function that needs to be fired on resize                          | undefined                      |
 | options    | ResizeObserverOptions   | An options object allowing you to set options for the observation  | { box: "content-box" }         |
+
+### Return value
+
+Returns an array with one element
+
+| Return value | Type        | Description                                |
+| ------------ | ----------- | ------------------------------------------ |
+| ref          | CallbackRef | Ref which should be observed for Resize    |
 
 ## Codesandbox Example
 

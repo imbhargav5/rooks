@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
-
-interface ResizeObserverOptions {
-  box: "content-box" | "border-box" | "device-pixel-content-box";
-}
+import { useFreshTick } from "./useFreshTick";
 
 const config: ResizeObserverOptions = {
   box: "content-box",
@@ -24,6 +21,7 @@ function useResizeObserverRef(
   options: ResizeObserverOptions = config
 ): [CallbackRef] {
   const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const freshCallback = useFreshTick(callback);
 
   useEffect(() => {
     if (node) {
@@ -37,7 +35,7 @@ function useResizeObserverRef(
         observer.disconnect();
       };
     }
-  }, [node, callback, options]);
+  }, [node, freshCallback, options]);
 
   const ref: CallbackRef = useCallback((node: HTMLElementOrNull) => {
     setNode(node);
