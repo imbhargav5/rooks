@@ -26,29 +26,29 @@ function Demo() {
   const incrementMutationCount = () => {
     return setMutationCount(mutationCount + 1);
   };
-  const [myRef] = useMutationObserver(myRef, incrementMutationCount);
+  const [myRef] = useMutationObserverRef(incrementMutationCount);
   const [XOffset, setXOffset] = useState(0);
   const [YOffset, setYOffset] = useState(300);
   return (
     <>
       <div
         style={{
-          width: 300,
-          background: 'lightblue',
-          padding: '10px',
-          position: 'absolute',
+          width: "auto",
+          background: "lightblue",
+          padding: "10px",
+          position: "absolute",
           left: XOffset,
-          top: YOffset,
+          top: YOffset
         }}
         ref={myRef}
       >
         <div
           style={{
-            resize: 'both',
-            overflow: 'auto',
-            background: 'white',
-            color: 'blue',
-            maxWidth: '100%',
+            resize: "both",
+            overflow: "auto",
+            background: "white",
+            color: "blue",
+            maxWidth: "100%"
           }}
         >
           <p>
@@ -66,7 +66,7 @@ function Demo() {
           <button onClick={() => setYOffset(YOffset + 5)}> Move Down </button>
         </p>
       </div>
-      <div style={{ height: 500 }} onClick={incrementMutationCount}>
+      <div style={{ height: 500 }}>
         <pre>Mutation count {mutationCount}</pre>
       </div>
     </>
@@ -87,9 +87,24 @@ render(<Demo />);
 
 Returns an array with one element
 
-| Argument | Type      | Description                                |
-| -------- | --------- | ------------------------------------------ |
-| ref      | React ref | Ref which should be observed for Mutations |
+| Argument | Type        | Description                                |
+| -------- | ----------- | ------------------------------------------ |
+| ref      | CallbackRef | Ref which should be observed for Mutations |
+
+### Basic usage
+
+<iframe src="https://codesandbox.io/embed/usemutationobserverref-2nfih?fontsize=14&hidenavigation=1&theme=dark"
+   style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+title="useMutationObserver"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
 
