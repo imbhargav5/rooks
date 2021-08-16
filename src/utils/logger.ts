@@ -4,13 +4,7 @@ type Methods = typeof methods[number];
 function consoleWrap(method: Methods) {
   return function (...args) {
     if (process.env.NODE_ENV !== "production") {
-      if (process.env.LOG_LEVEL === "debug") {
-        console[method](...args);
-      }
-    } else {
-      if (process.env.LOG_LEVEL === "production") {
-        console[method](...args);
-      }
+      console[method](...args);
     }
   };
 }
