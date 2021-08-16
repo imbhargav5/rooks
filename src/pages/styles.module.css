@@ -43,9 +43,24 @@
   max-height: 16px;
   fill: var(--ifm-color-primary);
 }
+
 .hooks-list ul {
   margin-left: 0;
 }
+
 .homeSandbox {
   margin: 64px 0;
+}
+
+.contributors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 0;
+  width: 100%;
+}
+
+.contributors > table {
+  width: auto;
 }
