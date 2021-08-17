@@ -23,17 +23,42 @@ import { useIntervalWhen } from 'rooks';
 ## Usage
 
 ```jsx
-function Demo() {
-  useIntervalWhen(() => {
-    console.log('runs every 2 seconds');
-  }, 2000);
-  return null;
-}
+function App() {
+  const [value, setValue] = useState(0);
+  const [booleanState, setBooleanState] = useState(true);
 
-render(<Demo />);
+  useIntervalWhen(
+    () => {
+      setValue(value + 10); 
+    },
+    1000,         // run callback every 1 second
+    booleanState, // start the timer when it's true
+    true          // no need to wait for the first interval
+  );
+
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks: useIntervalWhen example</h1>
+      <h2>Value: {value}</h2>
+    </div>
+  );
+}
 ```
 
----
+### Arguments
+
+| Argument         | Type     | Description                                              | Default value |
+| ---------------- | -------- | -------------------------------------------------------- | ------------- |
+| callback         | function | Function be invoked after each interval duration         | undefined     |
+| intervalDuration | number   | Duration in milliseconds after which callback is invoked | 0             |
+| when             | boolean  | Only start timer when `when` is true                     | true          |
+| startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
+
+### Returned Object
+
+No return value.
 
 ## Codesandbox Examples
 

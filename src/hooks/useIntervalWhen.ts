@@ -7,13 +7,13 @@ import { useRef, useEffect } from "react";
  * @param cb The callback to be invoked after interval
  * @param intervalDurationMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the interval
- * @param eager If the callback should be invoked eagerly
+ * @param startImmediate If the callback should be invoked immediately
  */
 function useIntervalWhen(
   callback_: () => void,
   intervalDurationMs: number = 0,
   when: boolean = true,
-  eager: boolean = false
+  startImmediate: boolean = false
 ): void {
   const savedRefCallback = useRef<() => any>();
 
@@ -27,7 +27,7 @@ function useIntervalWhen(
 
   useEffect(() => {
     if (when) {
-      if (eager) {
+      if (startImmediate) {
         callback();
       }
       const interval = window.setInterval(callback, intervalDurationMs);
