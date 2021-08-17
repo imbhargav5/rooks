@@ -92,7 +92,7 @@ module.exports = {
         },
         {
           href: "https://github.com/imbhargav5/rooks",
-          label: "Github",
+          label: "GitHub",
           position: "right",
         },
         {
@@ -163,7 +163,7 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Github",
+              label: "GitHub",
               to: "https://github.com/imbhargav5/rooks",
             },
             //           {
