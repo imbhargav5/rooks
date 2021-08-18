@@ -1,3 +1,12 @@
+## 5.6.0 (2021-08-18)
+
+* feat(useIntervalWhen): add support to fire the first callback eagerly ([13ebe92](https://github.com/imbhargav5/rooks/commit/13ebe92))
+* docs(userMutationObserverRef): fix examples and code sandboxes (#556) ([a50dd21](https://github.com/imbhargav5/rooks/commit/a50dd21)), closes [#556](https://github.com/imbhargav5/rooks/issues/556)
+* chore(contributors): automate readme contributors list update (#555) ([03252ac](https://github.com/imbhargav5/rooks/commit/03252ac)), closes [#555](https://github.com/imbhargav5/rooks/issues/555)
+* chore(docs): Update changelog and docs ([a35d392](https://github.com/imbhargav5/rooks/commit/a35d392))
+
+
+
 ## 5.5.0 (2021-08-14)
 
 * feat(useDebouncedValue): add useDebouncedValue hook (#552) ([92b3cb5](https://github.com/imbhargav5/rooks/commit/92b3cb5)), closes [#552](https://github.com/imbhargav5/rooks/issues/552)
