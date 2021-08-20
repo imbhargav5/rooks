@@ -20,21 +20,34 @@ npm install rooks
 ## Importing the hook
 
 ```javascript
-import {useDebouncedValue} from "rooks"
+import { useDebouncedValue } from "rooks"
 ```
 
 ## Usage
 
 ```jsx
+import React, { useState } from "react";
+import { useDebouncedValue } from "rooks";
+
 function Demo() {
   const [value, setValue] = useState("");
-  const debouncedValue useDebouncedValue(value,1000);
-  return <div>
-      <p>Value is {value}</p>
-      <p>Debounced value is {debouncedValue}</p>
-      <button onClick={() => setValue(value + 1)}>Increment </button>
-  </div>
+  const [debouncedFoo, immediatelyUpdateDebouncedValue] = useDebouncedValue(
+    value,
+    500
+  );
+  // use `immediatelyUpdateDebouncedValue` if you want to update `debouncedValue` immediately
+
+  return (
+    <div>
+      <input
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Please type here"
+      />
+      <div>{debouncedFoo}</div>
+    </div>
+  );
 }
+
 
 render(<Demo/>)
 ```
@@ -52,10 +65,10 @@ render(<Demo/>)
 
 An array is returned with the following items in it
 
-| Type   | | Type     Description                                                    |
-| ------ | -------------------------------------------------------------- |
-| debouncedValue | typeof value     | The debouncedValue |
-| immediatelyUpdateDebouncedValue| function | Handy utility function to update the debouncedValue instantly  | 
+| Type                                | Type         |  Description                                                    |
+| ----------------------------------- | ------------ | --------------------------------------------------------------- |
+| debouncedValue                      | typeof value | The debouncedValue                                              |
+| immediatelyUpdateDebouncedValue     | function     | Handy utility function to update the debouncedValue instantly   | 
 
 ---
 
@@ -63,6 +76,19 @@ An array is returned with the following items in it
 
 ### Basic Usage
 
+<iframe
+  src="https://codesandbox.io/embed/usedebouncedvalue-pgvg5?fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="quizzical-glitter-emrtj"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ---
 ## Join Bhargav's discord server
