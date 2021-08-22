@@ -8,7 +8,7 @@ sidebar_label: useMergeRefs
 
 Merges any number of refs into a single ref
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Merges any number of refs into a single ref
 ## Importing the hook
 
 ```javascript
-import { useMergeRefs } from 'rooks';
+import { useMergeRefs } from "rooks";
 ```
 
 ## Usage

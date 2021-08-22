@@ -15,18 +15,18 @@ Toggle (between booleans or custom data)hook for React.
 ## Importing the hook
 
 ```javascript
-import { useToggle } from 'rooks';
+import { useToggle } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
-const customToggleFunction = (v) => (v === 'start' ? 'stop' : 'start');
+const customToggleFunction = (v) => (v === "start" ? "stop" : "start");
 
 function Demo() {
   const [value1, toggleValue1] = useToggle();
   const [value2, toggleValue2] = useToggle(true);
-  const [value3, toggleValue3] = useToggle('start', customToggleFunction);
+  const [value3, toggleValue3] = useToggle("start", customToggleFunction);
 
   return (
     <>

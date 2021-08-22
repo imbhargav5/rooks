@@ -16,7 +16,7 @@ getBoundingClientRect hook for React.
 ## Importing the hook
 
 ```javascript
-import { useBoundingclientrect } from 'rooks';
+import { useBoundingclientrect } from "rooks";
 ```
 
 ## Usage
@@ -33,9 +33,9 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: 'lightblue',
-          padding: '10px',
-          position: 'absolute',
+          background: "lightblue",
+          padding: "10px",
+          position: "absolute",
           left: XOffset,
           top: YOffset,
         }}
@@ -43,11 +43,11 @@ function Demo() {
       >
         <div
           style={{
-            resize: 'both',
-            overflow: 'auto',
-            background: 'white',
-            color: 'blue',
-            maxWidth: '100%',
+            resize: "both",
+            overflow: "auto",
+            background: "white",
+            color: "blue",
+            maxWidth: "100%",
           }}
         >
           <p>

@@ -15,19 +15,19 @@ Session storage react hook. Easily manage session storage values.
 ## Importing the hook
 
 ```javascript
-import { useSessionstorage } from 'rooks';
+import { useSessionstorage } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const [value, set, remove] = useSessionstorage('my-value', 0);
+  const [value, set, remove] = useSessionstorage("my-value", 0);
   // Can also be used as {value, set, remove}
 
   return (
     <p>
-      Value is {value}{' '}
+      Value is {value}{" "}
       <button onClick={() => set(value !== null ? parseFloat(value) + 1 : 0)}>
         Increment
       </button>

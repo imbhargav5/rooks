@@ -8,7 +8,7 @@ sidebar_label: useMediaMatch
 
 Signal whether or not a media query is currently matched.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,15 +17,15 @@ Signal whether or not a media query is currently matched.
 ## Importing the hook
 
 ```javascript
-import { useMediaMatch } from 'rooks';
+import { useMediaMatch } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const isNarrowWidth = useMediaMatch('(max-width: 600px)');
-  return <span>Your screen is {isNarrowWidth ? 'narrow' : 'wide'}.</span>;
+  const isNarrowWidth = useMediaMatch("(max-width: 600px)");
+  return <span>Your screen is {isNarrowWidth ? "narrow" : "wide"}.</span>;
 }
 
 render(<Demo />);

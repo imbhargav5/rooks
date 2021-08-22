@@ -15,7 +15,7 @@ A hook to provide the geolocation info on client side.
 ## Importing the hook
 
 ```javascript
-import { useGeolocation } from 'rooks';
+import { useGeolocation } from "rooks";
 ```
 
 ## Usage
@@ -29,9 +29,9 @@ function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <p>{geoObj && JSON.stringify(geoObj)}</p>
@@ -54,9 +54,9 @@ function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <button

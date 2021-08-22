@@ -8,7 +8,7 @@ sidebar_label: useIsomorphicEffect
 
 A hook that resolves to useEffect on the server and useLayoutEffect on the client.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A hook that resolves to useEffect on the server and useLayoutEffect on the clien
 ## Importing the hook
 
 ```javascript
-import { useIsomorphicEffect } from 'rooks';
+import { useIsomorphicEffect } from "rooks";
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ import { useIsomorphicEffect } from 'rooks';
 ```jsx
 function Demo() {
   useIsomorphicEffect(() => {
-    console.log('Effect');
+    console.log("Effect");
   }, []);
   return null;
 }

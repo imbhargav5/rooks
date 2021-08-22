@@ -15,7 +15,7 @@ A React Hook to get time ago for timestamp millisecond value.
 ## Importing the hook
 
 ```javascript
-import { useTimeAgo } from 'rooks';
+import { useTimeAgo } from "rooks";
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ import { useTimeAgo } from 'rooks';
 function Demo() {
   const [date, setDate] = useState(new Date());
   const timeAgo = useTimeAgo(date.getTime() - 1000 * 12, {
-    locale: 'zh_CN',
+    locale: "zh_CN",
   });
   const timeAgo2 = useTimeAgo(date.getTime() - 1000 * 12);
   return (

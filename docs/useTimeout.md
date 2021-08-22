@@ -15,7 +15,7 @@ setTimeout hook for react.
 ## Importing the hook
 
 ```javascript
-import { useTimeout } from 'rooks';
+import { useTimeout } from "rooks";
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ import { useTimeout } from 'rooks';
 ```jsx
 function TimeoutComponent() {
   function doAlert() {
-    window.alert('timeout expired!');
+    window.alert("timeout expired!");
   }
   const { start, clear } = useTimeout(doAlert, 2000);
   return (

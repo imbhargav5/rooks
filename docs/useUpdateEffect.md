@@ -15,7 +15,7 @@ An useEffect that does not run on first render
 ## Importing the hook
 
 ```javascript
-import { useUpdateEffect } from 'rooks';
+import { useUpdateEffect } from "rooks";
 ```
 
 ## Usage

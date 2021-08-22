@@ -19,7 +19,7 @@ An important difference between `useKey` and `useKeys` is that `useKey` checks i
 ## Importing the hook
 
 ```javascript
-import { useKeys } from 'rooks';
+import { useKeys } from "rooks";
 ```
 
 ## Usage
@@ -31,9 +31,9 @@ function Demo() {
   const [isEventActive, setIsEventActive] = React.useState(true);
   const [firstCallbackCallCount, setFirstCallbackCallCount] = React.useState(0);
   useKeys(
-    ['ControlLeft', 'KeyS'],
+    ["ControlLeft", "KeyS"],
     () => {
-      alert('you presses ctrlLeft + s');
+      alert("you presses ctrlLeft + s");
       setFirstCallbackCallCount(firstCallbackCallCount + 1);
     },
     {
@@ -42,10 +42,10 @@ function Demo() {
     }
   );
   useKeys(
-    ['m', 'r'],
+    ["m", "r"],
     (event) => {
       // event.stopPropagation();
-      console.log('here you go m and r');
+      console.log("here you go m and r");
     },
     {
       when: isEventActive,
@@ -58,7 +58,7 @@ function Demo() {
         Callback Run Count:
         {firstCallbackCallCount}
       </p>
-      <p>Is events enabled ? ==> {isEventActive ? 'Yes' : 'No'}</p>
+      <p>Is events enabled ? ==> {isEventActive ? "Yes" : "No"}</p>
       <p>Press CtrlLeft + s to see update in count</p>
       <button
         onClick={() => {

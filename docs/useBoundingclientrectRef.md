@@ -15,7 +15,7 @@ A hook that tracks the boundingclientrect of an element. It returns a callbackRe
 ## Importing the hook
 
 ```javascript
-import { useBoundingclientrectRef } from 'rooks';
+import { useBoundingclientrectRef } from "rooks";
 ```
 
 ## Usage
@@ -31,9 +31,9 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: 'lightblue',
-          padding: '10px',
-          position: 'absolute',
+          background: "lightblue",
+          padding: "10px",
+          position: "absolute",
           left: XOffset,
           top: YOffset,
         }}
@@ -41,11 +41,11 @@ function Demo() {
       >
         <div
           style={{
-            resize: 'both',
-            overflow: 'auto',
-            background: 'white',
-            color: 'blue',
-            maxWidth: '100%',
+            resize: "both",
+            overflow: "auto",
+            background: "white",
+            color: "blue",
+            maxWidth: "100%",
           }}
         >
           <p>

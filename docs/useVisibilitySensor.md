@@ -15,7 +15,7 @@ Visibility sensor hook for React.
 ## Importing the hook
 
 ```javascript
-import { useVisibilitySensor } from 'rooks';
+import { useVisibilitySensor } from "rooks";
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ function Demo() {
   return (
     <div ref={rootNode}>
       <p>
-        {isVisible ? 'Visible' : isVisible === null ? 'Null' : 'Not Visible'}
+        {isVisible ? "Visible" : isVisible === null ? "Null" : "Not Visible"}
       </p>
     </div>
   );

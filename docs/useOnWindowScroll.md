@@ -16,14 +16,14 @@ A React hook for adding an event listener for window scroll
 ## Importing the hook
 
 ```javascript
-import { useOnWindowScroll } from 'rooks';
+import { useOnWindowScroll } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  useOnWindowScroll(() => console.log('window scrolled'));
+  useOnWindowScroll(() => console.log("window scrolled"));
   return <p> Hello world </p>;
 }
 

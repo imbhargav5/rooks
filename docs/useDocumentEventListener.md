@@ -8,7 +8,7 @@ sidebar_label: useDocumentEventListener
 
 A react hook to an event listener to the document object
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,15 +17,15 @@ A react hook to an event listener to the document object
 ## Importing the hook
 
 ```javascript
-import { useDocumentEventListener } from 'rooks';
+import { useDocumentEventListener } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  useDocumentEventListener('click', function () {
-    console.log('clicked');
+  useDocumentEventListener("click", function () {
+    console.log("clicked");
   });
   return null;
 }

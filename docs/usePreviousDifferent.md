@@ -8,7 +8,7 @@ sidebar_label: usePreviousDifferent
 
 usePreviousDifferent returns the last different value of a variable
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ usePreviousDifferent returns the last different value of a variable
 ## Importing the hook
 
 ```javascript
-import { usePreviousDifferent } from 'rooks';
+import { usePreviousDifferent } from "rooks";
 ```
 
 ## Usage

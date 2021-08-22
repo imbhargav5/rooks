@@ -16,7 +16,7 @@ componentDidMount hook for React
 ## Importing the hook
 
 ```javascript
-import { useDidMount } from 'rooks';
+import { useDidMount } from "rooks";
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ import { useDidMount } from 'rooks';
 ```jsx
 function Demo() {
   useDidMount(function () {
-    console.log('mounted');
+    console.log("mounted");
   });
   return null;
 }

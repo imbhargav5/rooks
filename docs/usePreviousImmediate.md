@@ -8,7 +8,7 @@ sidebar_label: usePreviousImmediate
 
 usePreviousImmediate returns the previous value of a variable even if it was the same or different
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ usePreviousImmediate returns the previous value of a variable even if it was the
 ## Importing the hook
 
 ```javascript
-import usePreviousImmediate from 'rooks';
+import usePreviousImmediate from "rooks";
 ```
 
 ## Usage

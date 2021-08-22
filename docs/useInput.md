@@ -15,7 +15,7 @@ Input hook for React.
 ## Importing the hook
 
 ```javascript
-import { useInput } from 'rooks';
+import { useInput } from "rooks";
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ import { useInput } from 'rooks';
 
 ```jsx
 function Demo() {
-  const myInput = useInput('hello');
+  const myInput = useInput("hello");
   return (
     <div>
       <input {...myInput} />
@@ -42,7 +42,7 @@ render(<Demo />);
 
 ```jsx
 function Demo() {
-  const myInput = useInput('hello', {
+  const myInput = useInput("hello", {
     validate: (newValue) => newValue.length < 15,
   });
   return (

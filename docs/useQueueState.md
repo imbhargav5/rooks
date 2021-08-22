@@ -8,7 +8,7 @@ sidebar_label: useQueueState
 
 A React hook that manages state in the form of a queue
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A React hook that manages state in the form of a queue
 ## Importing the hook
 
 ```javascript
-import { useQueueState } from 'rooks';
+import { useQueueState } from "rooks";
 ```
 
 ## Usage

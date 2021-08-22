@@ -15,7 +15,7 @@ Throttle custom hook for React
 ## Importing the hook
 
 ```javascript
-import { useThrottle } from 'rooks';
+import { useThrottle } from "rooks";
 ```
 
 ## Usage
@@ -59,10 +59,10 @@ render(<Demo />);
 
 ### Return value
 
-| Return value         | Type         | Description                                                                        |
-| -------------------- | ------------ | ---------------------------------------------------------------------------------- |
-| throttledFunction    | Function     | A throttled function that will run at most once per timeout ms                     |
-| isReady              | Boolean      | Tells whether calling throttledFunction at that point will fire or not             |
+| Return value      | Type     | Description                                                            |
+| ----------------- | -------- | ---------------------------------------------------------------------- |
+| throttledFunction | Function | A throttled function that will run at most once per timeout ms         |
+| isReady           | Boolean  | Tells whether calling throttledFunction at that point will fire or not |
 
 ## Codesandbox Example
 

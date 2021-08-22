@@ -8,7 +8,7 @@ sidebar_label: useStackState
 
 A React hook that manages state in the form of a stack
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A React hook that manages state in the form of a stack
 ## Importing the hook
 
 ```javascript
-import { useStackState } from 'rooks';
+import { useStackState } from "rooks";
 ```
 
 ## Usage

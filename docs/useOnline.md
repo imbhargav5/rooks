@@ -15,7 +15,7 @@ Online status hook for React.
 ### Importing the hook
 
 ```javascript
-import { useOnline } from 'rooks';
+import { useOnline } from "rooks";
 ```
 
 ### Usage

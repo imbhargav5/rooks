@@ -15,7 +15,7 @@ Count down to a target timestamp and call callbacks every second (or provided pe
 ## Importing the hook
 
 ```javascript
-import { useCountdown } from 'rooks';
+import { useCountdown } from "rooks";
 ```
 
 ## Usage
@@ -26,8 +26,8 @@ const endTime = new Date(Date.now() + 10000);
 function Demo() {
   const count = useCountdown(endTime, {
     interval: 1000,
-    onDown: (time) => console.log('onDown', time),
-    onEnd: (time) => console.log('onEnd', time),
+    onDown: (time) => console.log("onDown", time),
+    onEnd: (time) => console.log("onEnd", time),
   });
   return count;
 }

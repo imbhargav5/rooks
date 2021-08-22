@@ -22,7 +22,7 @@ export { useIntersectionObserverRef } from "./hooks/useIntersectionObserverRef";
 export { useInViewRef } from "./hooks/useInViewRef";
 export { useIsomorphicEffect } from "./hooks/useIsomorphicEffect";
 export { useKey } from "./hooks/useKey";
-export { useKeyBindings } from './hooks/useKeyBindings';
+export { useKeyBindings } from "./hooks/useKeyBindings";
 export { useKeyRef } from "./hooks/useKeyRef";
 export { useKeys } from "./hooks/useKeys";
 export { useLifecycleLogger } from "./hooks/useLifecycleLogger";

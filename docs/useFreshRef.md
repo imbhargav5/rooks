@@ -8,7 +8,7 @@ sidebar_label: useFreshRef
 
 Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Avoid stale state in callbacks with this hook. Auto updates values using a ref.
 ## Importing the hook
 
 ```javascript
-import { useFreshRef } from 'rooks';
+import { useFreshRef } from "rooks";
 ```
 
 ## Usage

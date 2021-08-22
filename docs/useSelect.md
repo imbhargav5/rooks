@@ -15,7 +15,7 @@ Select values from a list easily. List selection hook for react.
 ## Importing the hook
 
 ```javascript
-import { useSelect } from 'rooks';
+import { useSelect } from "rooks";
 ```
 
 ## Usage
@@ -23,12 +23,12 @@ import { useSelect } from 'rooks';
 ```jsx
 const list = [
   {
-    heading: 'Tab 1',
-    content: 'Tab 1 Content',
+    heading: "Tab 1",
+    content: "Tab 1 Content",
   },
   {
-    heading: 'Tab 2',
-    content: 'Tab 2 Content',
+    heading: "Tab 2",
+    content: "Tab 2 Content",
   },
 ];
 
@@ -40,7 +40,7 @@ function Demo() {
         <button
           key={listItemIndex}
           style={{
-            background: index === listItemIndex ? 'dodgerblue' : 'inherit',
+            background: index === listItemIndex ? "dodgerblue" : "inherit",
           }}
           onClick={() => setIndex(listItemIndex)}
         >

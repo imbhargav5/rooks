@@ -15,7 +15,7 @@ Drop in replacement for useState hook but with undo functionality.
 ## Importing the hook
 
 ```javascript
-import { useUndoState } from 'rooks';
+import { useUndoState } from "rooks";
 ```
 
 ## Usage

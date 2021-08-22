@@ -8,7 +8,7 @@ sidebar_label: useSessionstorageState
 
 useState but syncs with sessionstorage
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ useState but syncs with sessionstorage
 ## Importing the hook
 
 ```javascript
-import { useSessionstorageState } from 'rooks';
+import { useSessionstorageState } from "rooks";
 ```
 
 ## Usage

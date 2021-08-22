@@ -15,7 +15,7 @@ Outside click(for a ref) event as hook for React.
 ## Importing the hook
 
 ```javascript
-import { useOutsideClick } from 'rooks';
+import { useOutsideClick } from "rooks";
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ import { useOutsideClick } from 'rooks';
 function Demo() {
   const pRef = useRef();
   function outsidePClick() {
-    alert('Clicked outside p');
+    alert("Clicked outside p");
   }
   useOutsideClick(pRef, outsidePClick);
   return (

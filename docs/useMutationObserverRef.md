@@ -15,7 +15,7 @@ A hook that tracks mutations of an element. It returns a callbackRef.
 ## Importing the hook
 
 ```javascript
-import { useMutationObserverRef } from 'rooks';
+import { useMutationObserverRef } from "rooks";
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ function Demo() {
           padding: "10px",
           position: "absolute",
           left: XOffset,
-          top: YOffset
+          top: YOffset,
         }}
         ref={myRef}
       >
@@ -48,7 +48,7 @@ function Demo() {
             overflow: "auto",
             background: "white",
             color: "blue",
-            maxWidth: "100%"
+            maxWidth: "100%",
           }}
         >
           <p>

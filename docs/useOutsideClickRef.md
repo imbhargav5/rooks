@@ -15,7 +15,7 @@ A hook that can track a click event outside a ref. Returns a callbackRef.
 ## Importing the hook
 
 ```javascript
-import { useOutsideClickRef } from 'rooks';
+import { useOutsideClickRef } from "rooks";
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ import { useOutsideClickRef } from 'rooks';
 ```jsx
 function Demo() {
   function outsidePClick() {
-    alert('Clicked outside p');
+    alert("Clicked outside p");
   }
   const [ref] = useOutsideClickRef(outsidePClick);
   return (

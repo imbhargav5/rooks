@@ -8,7 +8,7 @@ sidebar_label: useWindowEventListener
 
 Adds an event listener to window
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,15 +17,15 @@ Adds an event listener to window
 ## Importing the hook
 
 ```javascript
-import { useWindowEventListener } from 'rooks';
+import { useWindowEventListener } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  useWindowEventListener('click', function () {
-    console.log('clicked');
+  useWindowEventListener("click", function () {
+    console.log("clicked");
   });
   return null;
 }
@@ -52,7 +52,6 @@ render(<Demo />);
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
 
 ## Join Bhargav's discord server
 
