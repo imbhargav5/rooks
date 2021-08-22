@@ -16,7 +16,7 @@ Counter hook for React.
 ## Importing the hook
 
 ```javascript
-import { useCounter } from 'rooks';
+import { useCounter } from "rooks";
 ```
 
 ## Usage

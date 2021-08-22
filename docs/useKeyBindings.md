@@ -8,7 +8,7 @@ sidebar_label: useKeyBindings
 
 useKeyBindings can bind pairs of keyboard events and handlers.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -19,16 +19,16 @@ npm install rooks
 ## Importing the hook
 
 ```javascript
-import { useKeyBindings } from 'rooks';
+import { useKeyBindings } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const cb1 = () => console.log('cb1');
-  const cb2 = () => console.log('cb2');
-  const cb3 = () => console.log('cb3');
+  const cb1 = () => console.log("cb1");
+  const cb2 = () => console.log("cb2");
+  const cb3 = () => console.log("cb3");
 
   useKeyBindings({ 1: cb1, 2: cb2, Enter: cb3 });
 
@@ -44,10 +44,10 @@ render(<Demo />);
 
 ### Arguments
 
-| Argument     | Type    | Description                            | Default value |
-| ------------ | ------- | -------------------------------------- | ------------- |
-| keyBindings  | Object  | pairs of keyboard events and handlers  | {}            |
-| options      | Options | refer to useKey                        | {}            |
+| Argument    | Type    | Description                           | Default value |
+| ----------- | ------- | ------------------------------------- | ------------- |
+| keyBindings | Object  | pairs of keyboard events and handlers | {}            |
+| options     | Options | refer to useKey                       | {}            |
 
 ---
 

@@ -15,7 +15,7 @@ setInterval hook for React.
 ## Importing the hook
 
 ```javascript
-import { useInterval } from 'rooks';
+import { useInterval } from "rooks";
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ import { useInterval } from 'rooks';
 ```jsx
 function reducer(state, action) {
   switch (action.type) {
-    case 'increment':
+    case "increment":
       return { count: state.count + 1 };
     default:
       return state;
@@ -35,7 +35,7 @@ function Demo() {
 
   function increment() {
     dispatcher({
-      type: 'increment',
+      type: "increment",
     });
   }
 

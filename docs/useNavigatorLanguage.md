@@ -15,7 +15,7 @@ Navigator Language hook for React.
 ## Importing the hook
 
 ```javascript
-import { useNavigatorLanguage } from 'rooks';
+import { useNavigatorLanguage } from "rooks";
 ```
 
 ## Usage

@@ -8,7 +8,7 @@ sidebar_label: useMultiSelectableList
 
 A custom hook to easily select multiple values from a list
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A custom hook to easily select multiple values from a list
 ## Importing the hook
 
 ```javascript
-import { useMultiSelectableList } from 'rooks';
+import { useMultiSelectableList } from "rooks";
 ```
 
 ## Usage

@@ -5,7 +5,6 @@ sidebar_label: rooks
 slug: /
 ---
 
-
 <img src="https://github.com/imbhargav5/rooks/raw/master/.github/assets/logo-dark.png" height="auto" width="100%" />
 
 <br/>
@@ -25,7 +24,7 @@ Standalone build for all rooks. This package contains all the hooks built as par
 Import any hook from "rooks" and start using them!
 
 ```jsx
-import { useDidMount } from 'rooks';
+import { useDidMount } from "rooks";
 ```
 
 ## Usage
@@ -33,7 +32,7 @@ import { useDidMount } from 'rooks';
 ```jsx
 function App() {
   useDidMount(() => {
-    alert('mounted');
+    alert("mounted");
   });
   return (
     <div className="App">

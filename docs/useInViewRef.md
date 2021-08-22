@@ -12,7 +12,7 @@ Simple hook that monitors element enters or leave the viewport that's using Inte
 
 It returns a ref to observed element, as well as boolean flag - `inView` that will tell if the element is inside of the viewport / parent element or not. You can also pass a callback that will be fired everytime the Observer will be triggered. To understand the Intersection Observer API better, please check its [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -21,7 +21,7 @@ It returns a ref to observed element, as well as boolean flag - `inView` that wi
 ## Importing the hook
 
 ```javascript
-import { useInViewRef } from 'rooks';
+import { useInViewRef } from "rooks";
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ function Demo() {
     <>
       <div
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           right: 0,
         }}
@@ -42,7 +42,7 @@ function Demo() {
         <h1>Is rectangle visible - {String(inView)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: 'red' }}></div>
+      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
       <div style={{ height: 2000 }}></div>
     </>
   );
@@ -85,7 +85,6 @@ Returns an array with the first element in the array being the callback ref for 
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
 
 ## Join Bhargav's discord server
 

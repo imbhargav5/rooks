@@ -8,7 +8,7 @@ sidebar_label: useSelectableList
 
 Easily select a single value from a list of values. very useful for radio buttons, select inputs etc.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Easily select a single value from a list of values. very useful for radio button
 ## Importing the hook
 
 ```javascript
-import { useSelectableList } from 'rooks';
+import { useSelectableList } from "rooks";
 ```
 
 ## Usage

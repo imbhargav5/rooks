@@ -8,7 +8,7 @@ sidebar_label: useEventListenerRef
 
 A react hook to add an event listener to a ref
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,15 +17,15 @@ A react hook to add an event listener to a ref
 ## Importing the hook
 
 ```javascript
-import { useEventListenerRef } from 'rooks';
+import { useEventListenerRef } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const ref = useEventListenerRef('click', function () {
-    console.log('clicked');
+  const ref = useEventListenerRef("click", function () {
+    console.log("clicked");
   });
   return <div ref={ref}>Click me</div>;
 }

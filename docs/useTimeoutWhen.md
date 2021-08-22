@@ -8,7 +8,7 @@ sidebar_label: useTimeoutWhen
 
 Takes a callback and fires it when a condition is true
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Takes a callback and fires it when a condition is true
 ## Importing the hook
 
 ```javascript
-import { useTimeoutWhen } from 'rooks';
+import { useTimeoutWhen } from "rooks";
 ```
 
 ## Usage

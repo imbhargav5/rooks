@@ -15,7 +15,7 @@ componentDidUpdate hook for react
 ## Importing the hook
 
 ```javascript
-import { useDidUpdate } from 'rooks';
+import { useDidUpdate } from "rooks";
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ function Demo() {
   const [value, setValue] = useState(0);
   const [hasUpdated, setHasUpdated] = useState(false);
   useDidUpdate(() => {
-    console.log('Update');
+    console.log("Update");
     setHasUpdated(true);
   }, [value]);
   return (
@@ -58,7 +58,6 @@ render(<Demo />);
     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
 
 ## Join Bhargav's discord server
 

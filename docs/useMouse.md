@@ -15,7 +15,7 @@ Mouse position hook for React.
 ## Importing the hook
 
 ```javascript
-import { useMouse } from 'rooks';
+import { useMouse } from "rooks";
 ```
 
 ## Usage
@@ -26,8 +26,8 @@ function Demo() {
   return (
     <>
       <p> Move mouse here to see changes to position </p>
-      <p>X position is {x || 'null'}</p>
-      <p>X position is {y || 'null'}</p>
+      <p>X position is {x || "null"}</p>
+      <p>X position is {y || "null"}</p>
     </>
   );
 }

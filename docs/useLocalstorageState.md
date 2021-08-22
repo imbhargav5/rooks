@@ -8,7 +8,7 @@ sidebar_label: useLocalstorageState
 
 UseState but auto updates values to localStorage
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ UseState but auto updates values to localStorage
 ## Importing the hook
 
 ```javascript
-import { useLocalstorageState } from 'rooks';
+import { useLocalstorageState } from "rooks";
 ```
 
 ## Usage

@@ -15,7 +15,7 @@ A hook to register an intersection observer listener.
 ## Importing the hook
 
 ```javascript
-import { useIntersectionObserverRef } from 'rooks';
+import { useIntersectionObserverRef } from "rooks";
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ function Demo() {
     <>
       <div
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           right: 0,
         }}
@@ -41,7 +41,7 @@ function Demo() {
         <h1>Is rectangle visible - {String(isVisible)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: 'red' }}></div>
+      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
       <div style={{ height: 2000 }}></div>
     </>
   );

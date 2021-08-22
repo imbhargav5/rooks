@@ -8,7 +8,7 @@ sidebar_label: useKeyRef
 
 Very similar useKey but it returns a ref
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Very similar useKey but it returns a ref
 ## Importing the hook
 
 ```javascript
-import { useKeyRef } from 'rooks';
+import { useKeyRef } from "rooks";
 ```
 
 ## Usage
@@ -27,10 +27,10 @@ import { useKeyRef } from 'rooks';
 ```jsx
 function Demo() {
   function vowelsEntered(e) {
-    console.log('[Demo 1] You typed a vowel');
+    console.log("[Demo 1] You typed a vowel");
   }
   // window is the target
-  const inputRef = useKeyRef(['a', 'e', 'i', 'o', 'u'], vowelsEntered);
+  const inputRef = useKeyRef(["a", "e", "i", "o", "u"], vowelsEntered);
   return (
     <>
       <p>Press a,e,i,o,u in the input to trigger a console.log statement</p>
@@ -47,14 +47,14 @@ render(<Demo />);
 ```jsx
 function Demo() {
   function vowelsEntered(e) {
-    console.log('[Demo 1] You typed a vowel');
+    console.log("[Demo 1] You typed a vowel");
   }
   function capitalVowelsEntered(e) {
-    console.log('[Demo 1] You typed a capital vowel');
+    console.log("[Demo 1] You typed a capital vowel");
   }
   // window is the target
-  const keyRef1 = useKeyRef(['a', 'e', 'i', 'o', 'u'], vowelsEntered);
-  const keyRef2 = useKeyRef(['A', 'E', 'I', 'O', 'U'], capitalVowelsEntered);
+  const keyRef1 = useKeyRef(["a", "e", "i", "o", "u"], vowelsEntered);
+  const keyRef2 = useKeyRef(["A", "E", "I", "O", "U"], capitalVowelsEntered);
   const inputRef = useMergeRefs(keyRef1, keyRef2);
   return (
     <>
@@ -72,12 +72,12 @@ render(<Demo />);
 ```jsx
 function Demo() {
   function onKeyInteraction(e) {
-    console.log('[Demo 2]Enter key', e.type);
+    console.log("[Demo 2]Enter key", e.type);
   }
 
-  const inputRef = useKeyRef(['Enter'], onKeyInteraction, {
+  const inputRef = useKeyRef(["Enter"], onKeyInteraction, {
     target: inputRef,
-    eventTypes: ['keypress', 'keydown', 'keyup'],
+    eventTypes: ["keypress", "keydown", "keyup"],
   });
   return (
     <>
@@ -103,11 +103,11 @@ function Demo() {
     setShouldListen(!shouldListen);
   }
   function onKeyInteraction(e) {
-    console.log('[Demo 3] Enter key', e.type);
+    console.log("[Demo 3] Enter key", e.type);
   }
 
-  const inputRef = useKeyRef(['Enter'], onKeyInteraction, {
-    eventTypes: ['keypress', 'keydown', 'keyup'],
+  const inputRef = useKeyRef(["Enter"], onKeyInteraction, {
+    eventTypes: ["keypress", "keydown", "keyup"],
     when: shouldListen,
   });
   return (
@@ -115,7 +115,7 @@ function Demo() {
       <p>
         Enter key events will only be logged when the listening state is true.
         Click on the button to toggle between listening and not listening
-        states.{' '}
+        states.{" "}
       </p>
       <p>
         Handy for adding and removing event handlers only when certain
@@ -124,7 +124,7 @@ function Demo() {
       <input ref={inputRef} />
       <br />
       <button onClick={toggleShouldListen}>
-        <b>{shouldListen ? 'Listening' : 'Not listening'}</b> - Toggle{' '}
+        <b>{shouldListen ? "Listening" : "Not listening"}</b> - Toggle{" "}
       </button>
     </>
   );

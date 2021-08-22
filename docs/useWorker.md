@@ -16,7 +16,7 @@ Worker hook for React.
 ## Importing the hook
 
 ```javascript
-import { useWorker } from 'rooks';
+import { useWorker } from "rooks";
 ```
 
 ## Usage

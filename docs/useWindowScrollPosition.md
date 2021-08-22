@@ -8,7 +8,7 @@ sidebar_label: useWindowScrollPosition
 
 A React hook to get the scroll position of the window
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A React hook to get the scroll position of the window
 ## Importing the hook
 
 ```javascript
-import { useWindowScrollPosition } from 'rooks';
+import { useWindowScrollPosition } from "rooks";
 ```
 
 ## Usage

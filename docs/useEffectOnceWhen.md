@@ -8,7 +8,7 @@ sidebar_label: useEffectOnceWhen
 
 Runs a callback effect atmost one time when a condition becomes true
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Runs a callback effect atmost one time when a condition becomes true
 ## Importing the hook
 
 ```javascript
-import { useEffectOnceWhen } from 'rooks';
+import { useEffectOnceWhen } from "rooks";
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import { useEffectOnceWhen } from 'rooks';
 function Demo() {
   const hasOpenedPage = true;
   useEffectOnceWhen(() => {
-    console.log('user has opened page');
+    console.log("user has opened page");
   }, hasOpenedPage);
   return null;
 }

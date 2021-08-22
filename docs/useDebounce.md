@@ -15,7 +15,7 @@ Debounce hook for react
 ## Importing the hook
 
 ```javascript
-import { useDebounce } from 'rooks';
+import { useDebounce } from "rooks";
 ```
 
 ## Usage

@@ -8,7 +8,7 @@ sidebar_label: useIntervalWhen
 
 Sets an interval immediately when a condition is true
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Sets an interval immediately when a condition is true
 ## Importing the hook
 
 ```javascript
-import { useIntervalWhen } from 'rooks';
+import { useIntervalWhen } from "rooks";
 ```
 
 ## Usage
@@ -29,11 +29,11 @@ function App() {
 
   useIntervalWhen(
     () => {
-      setValue(value + 10); 
+      setValue(value + 10);
     },
-    1000,         // run callback every 1 second
+    1000, // run callback every 1 second
     booleanState, // start the timer when it's true
-    true          // no need to wait for the first interval
+    true // no need to wait for the first interval
   );
 
   return (

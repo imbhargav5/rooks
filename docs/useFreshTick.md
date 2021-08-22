@@ -8,7 +8,7 @@ sidebar_label: useFreshTick
 
 Like useFreshRef but specifically for functions
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ Like useFreshRef but specifically for functions
 ## Importing the hook
 
 ```javascript
-import { useFreshTick } from 'rooks';
+import { useFreshTick } from "rooks";
 ```
 
 ## Usage

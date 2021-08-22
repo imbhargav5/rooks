@@ -15,14 +15,14 @@ Localstorage hook for React. Syncs with localstorage values across components an
 ## Importing the hook
 
 ```javascript
-import { useLocalstorage } from 'rooks';
+import { useLocalstorage } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
 function Demo() {
-  const [value, set, remove] = useLocalstorage('my-value', 0);
+  const [value, set, remove] = useLocalstorage("my-value", 0);
   // Can also be used as {value, set, remove}
 
   return (

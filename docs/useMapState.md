@@ -8,7 +8,7 @@ sidebar_label: useMapState
 
 A react hook to manage state in a key value pair map.
 
-[//]: # 'Main'
+[//]: # "Main"
 
 ## Installation
 
@@ -17,7 +17,7 @@ A react hook to manage state in a key value pair map.
 ## Importing the hook
 
 ```javascript
-import { useMapState } from 'rooks';
+import { useMapState } from "rooks";
 ```
 
 ## Usage

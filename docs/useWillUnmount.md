@@ -15,7 +15,7 @@ componentWillUnmount lifecycle as hook for React.
 ### Importing the hook
 
 ```javascript
-import { useWillUnmount } from '@rooks';
+import { useWillUnmount } from "@rooks";
 ```
 
 ### Usage
@@ -23,7 +23,7 @@ import { useWillUnmount } from '@rooks';
 ```jsx
 function Message() {
   useWillUnmount(function () {
-    alert('unmounted');
+    alert("unmounted");
   });
   return <p> Message </p>;
 }

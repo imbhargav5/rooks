@@ -15,7 +15,7 @@ A hook that can combine two refs(mutable or callbackRefs) into a single callback
 ## Importing the hook
 
 ```javascript
-import { useForkRef } from 'rooks';
+import { useForkRef } from "rooks";
 ```
 
 ## Usage
@@ -39,7 +39,7 @@ function Demo() {
     <>
       <div
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           right: 0,
         }}
@@ -47,7 +47,7 @@ function Demo() {
         <h1>Is rectangle visible - {String(isVisible)}</h1>
       </div>
       <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: 'lightblue' }}>
+      <div ref={myRef} style={{ height: 300, background: "lightblue" }}>
         <p>Boundingclientrect</p>
         <pre>{displayString}</pre>
       </div>

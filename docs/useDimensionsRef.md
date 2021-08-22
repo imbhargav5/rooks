@@ -4,12 +4,11 @@ title: useDimensionsRef
 sidebar_label: useDimensionsRef
 ---
 
-
 ## About
+
 Easily grab dimensions of an element with a ref using this hook
 
-
-[//]: # (Main)
+[//]: # "Main"
 
 ## Installation
 
@@ -20,7 +19,7 @@ npm install rooks
 ## Importing the hook
 
 ```javascript
-import {useDimensionsRef} from "rooks"
+import { useDimensionsRef } from "rooks";
 ```
 
 ## Usage
@@ -28,10 +27,10 @@ import {useDimensionsRef} from "rooks"
 ```jsx
 function Demo() {
   useDimensionsRef();
-  return null
+  return null;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ---
@@ -40,7 +39,8 @@ render(<Demo/>)
 
 ### Basic Usage
 
-
 ---
+
 ## Join Bhargav's discord server
+
 You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.
