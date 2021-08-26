@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useReducer, useCallback } from 'react';
+import { useEffect, useReducer, useCallback } from "react";
 
 type StorageHandlerAsObject = {
   value: any;
@@ -13,7 +13,7 @@ type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'set':
+    case "set":
       return action.payload;
     default:
       return state;
@@ -35,16 +35,16 @@ function useSessionstorage(
 
   function init() {
     const initialValue = getValueFromSessionStorage();
-    if (initialValue === null || initialValue === 'null') {
+    if (initialValue === null || initialValue === "null") {
       set(defaultValue);
     }
   }
 
   function getValueFromSessionStorage() {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
-    const storedValue = sessionStorage.getItem(key) || 'null';
+    const storedValue = sessionStorage.getItem(key) || "null";
     try {
       return JSON.parse(storedValue);
     } catch (error) {
@@ -55,7 +55,7 @@ function useSessionstorage(
   }
 
   function saveValueToSessionStorage(valueToSet: string | null) {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
 
@@ -65,7 +65,7 @@ function useSessionstorage(
   function setValue(valueToSet: string | null) {
     dispatch({
       payload: valueToSet,
-      type: 'set',
+      type: "set",
     });
   }
 
@@ -76,7 +76,7 @@ function useSessionstorage(
 
   // eslint-disable-next-line consistent-return
   function remove() {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
     sessionStorage.removeItem(key);
@@ -94,11 +94,15 @@ function useSessionstorage(
   }, []);
 
   useEffect(() => {
-    window.addEventListener('storage', listen);
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", listen);
 
-    return () => {
-      window.removeEventListener('storage', listen);
-    };
+      return () => {
+        window.removeEventListener("storage", listen);
+      };
+    } else {
+      console.warn("useSessionstorage: window is undefined.");
+    }
   }, []);
 
   const handler = Object.assign([value, set, remove], {

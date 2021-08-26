@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  *
  * @returns {boolean} Is navigator online
  */
 function getIsOnline(): boolean | null {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
@@ -33,13 +33,17 @@ function useOnline(): boolean | null {
   // we only needs this to be set on mount
   // hence []
   useEffect(() => {
-    window.addEventListener('online', setOnline);
-    window.addEventListener('offline', setOffline);
+    if (typeof window !== "undefined") {
+      window.addEventListener("online", setOnline);
+      window.addEventListener("offline", setOffline);
 
-    return () => {
-      window.removeEventListener('online', setOnline);
-      window.removeEventListener('offline', setOffline);
-    };
+      return () => {
+        window.removeEventListener("online", setOnline);
+        window.removeEventListener("offline", setOffline);
+      };
+    } else {
+      console.warn("useOnline: window is undefined.");
+    }
   }, []);
 
   return online;

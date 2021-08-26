@@ -81,11 +81,15 @@ function useSessionstorageState<S>(
 
   // check for changes across windows
   useEffect(() => {
-    window.addEventListener("storage", listen);
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", listen);
 
-    return () => {
-      window.removeEventListener("storage", listen);
-    };
+      return () => {
+        window.removeEventListener("storage", listen);
+      };
+    } else {
+      console.warn("useSessionstorageState: window is undefined.");
+    }
   }, []);
 
   const setValue = useCallback((newValue: S) => {
