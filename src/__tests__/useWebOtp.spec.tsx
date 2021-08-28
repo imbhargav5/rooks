@@ -38,7 +38,7 @@ function MockGetWebOtpHook() {
 					}}
 					type="button"
 				>
-					Enable WebOtp
+					Cancel WebOtp listener
 				</button>
 
 				<p data-testid="otp-info">{webOtpObject && JSON.stringify(webOtpObject)}</p>
