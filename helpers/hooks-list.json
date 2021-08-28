@@ -241,6 +241,10 @@
       "description": "Visibility sensor hook for React."
     },
     {
+      "name": "useWebOtp",
+      "description": "Verify phone numbers on the web with the WebOTP API"
+    },
+    {
       "name": "useWillUnmount",
       "description": "componentWillUnmount lifecycle as hook for React."
     },
