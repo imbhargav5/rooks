@@ -1,95 +1,87 @@
 /**
  * @jest-environment jsdom
  */
-import { useCountdown } from '../hooks/useCountdown';
+import { act, renderHook } from "@testing-library/react-hooks";
+import { useCountdown } from "../hooks/useCountdown";
 
 jest.useFakeTimers();
 
-describe('useCountdown', () => {
-  it('is defined', () => {
+describe("useCountdown", () => {
+  it("is defined", () => {
     expect(useCountdown).toBeDefined();
   });
-  // it('works', () => {
-  //   const OriginalDate = global.Date;
-  //   const now = Date.now();
 
-  //   let advancedTime;
+  describe("it works", () => {
+    const OriginalDate = global.Date;
+    const now = Date.now();
 
-  //   const advanceTimersInsideAct = time => {
-  //     advancedTime += time;
-  //     act(() => {
-  //       jest.advanceTimersByTime(time)
-  //     });
-  //   };
+    let advancedTime;
 
-  // beforeEach(() => {
-  //   advancedTime = 0;
-  //   global.Date = class extends Date {
-  //     constructor(time) {
-  //       super(time);
-  //       return new OriginalDate(time || now + advancedTime);
-  //     }
-  //   };
-  // });
+    const advanceTimersInsideAct = (time) => {
+      advancedTime += time;
+      act(() => {
+        jest.advanceTimersByTime(time);
+      });
+    };
 
-  // afterEach(() => {
-  //   global.Date = OriginalDate;
-  // });
+    beforeEach(() => {
+      advancedTime = 0;
+      // @ts-ignore
+      global.Date = class extends Date {
+        constructor(time) {
+          super(time);
+          return new OriginalDate(time || now + advancedTime);
+        }
+      };
+    });
 
-  // it('should run interval and clear it after unmount', () => {
-  //   const now = Date.now();
-  //   const endTime = new Date(now + 3000);
+    afterEach(() => {
+      global.Date = OriginalDate;
+    });
 
-  //   global.Date = class extends Date {
-  //     constructor(time) {
-  //       return new OriginalDate(time || now);
-  //     }
-  //   };
-  //   const { result, unmount } = renderHook(() => useCountdown(endTime));
-  //   const countdown = result.current;
+    it("should run interval and clear it after unmount", () => {
+      const now = Date.now();
+      const endTime = new Date(now + 3000);
 
-  //   expect(countdown).toEqual(3);
-  //   expect(setInterval).toHaveBeenCalledTimes(1);
+      const { result, unmount } = renderHook(() => useCountdown(endTime));
+      const countdown = result.current;
 
-  //   unmount();
+      expect(countdown).toEqual(4);
+      expect(setInterval).toHaveBeenCalledTimes(1);
 
-  //   expect(clearInterval).toHaveBeenCalledTimes(1);
-  //   expect(clearInterval).toHaveBeenCalledWith(
-  //     setInterval.mock.results[0].value,
-  //   );
-  // });
+      unmount();
 
-  // it('should call onDown after every interval', () => {
-  //   const endTime = new Date(now + 3000);
-  //   const onDown = jest.fn();
+      expect(clearInterval).toHaveBeenCalledTimes(1);
+    });
 
-  //   renderHook(() => useCountdown(endTime, { onDown }));
+    it("should call onDown after every interval", () => {
+      const endTime = new Date(now + 3000);
+      const onDown = jest.fn();
 
-  //   expect(onDown).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(1);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(2);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(3);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(3);
-  // });
+      renderHook(() => useCountdown(endTime, { onDown }));
 
-  // it('should call onEnd after it ends', () => {
-  //   const endTime = new Date(now + 3000);
-  //   const onEnd = jest.fn();
-  //   renderHook(() => useCountdown(endTime, { interval: 1000, onEnd }));
-  //   expect(onEnd).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(2000);
-  //   expect(onEnd).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(2000);
-  //   expect(onEnd).toHaveBeenCalledTimes(1);
-  //   expect(clearInterval).toHaveBeenCalledWith(
-  //     setInterval.mock.results[0].value,
-  //   );
-  // });
-  // })
+      expect(onDown).toHaveBeenCalledTimes(0);
+      advanceTimersInsideAct(1000);
+      expect(onDown).toHaveBeenCalledTimes(1);
+      advanceTimersInsideAct(1000);
+      expect(onDown).toHaveBeenCalledTimes(2);
+      advanceTimersInsideAct(1000);
+      expect(onDown).toHaveBeenCalledTimes(3);
+      advanceTimersInsideAct(1000);
+      expect(onDown).toHaveBeenCalledTimes(3);
+    });
+
+    it("should call onEnd after it ends", () => {
+      const endTime = new Date(now + 3000);
+      const onEnd = jest.fn();
+      renderHook(() => useCountdown(endTime, { interval: 1000, onEnd }));
+      expect(onEnd).toHaveBeenCalledTimes(0);
+      advanceTimersInsideAct(2000);
+      expect(onEnd).toHaveBeenCalledTimes(0);
+      advanceTimersInsideAct(2000);
+      expect(onEnd).toHaveBeenCalledTimes(1);
+    });
+  });
 });
 
 // figure out tests
