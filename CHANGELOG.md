@@ -1,3 +1,12 @@
+## <small>5.6.1 (2021-08-29)</small>
+
+* fix(docs): update docs for useOutsideClick, useOutsideClickRef, useOnWindowResize, useOnWindowScroll ([3b31a43](https://github.com/imbhargav5/rooks/commit/3b31a43)), closes [#566](https://github.com/imbhargav5/rooks/issues/566)
+* chore(docs): Update changelog and docs ([fc2a6b3](https://github.com/imbhargav5/rooks/commit/fc2a6b3))
+* chore(prettier): run yarn format (#562) ([ff39095](https://github.com/imbhargav5/rooks/commit/ff39095)), closes [#562](https://github.com/imbhargav5/rooks/issues/562)
+* docs(useDebouncedValue): fix example and add codesandbox (#560) ([99309e0](https://github.com/imbhargav5/rooks/commit/99309e0)), closes [#560](https://github.com/imbhargav5/rooks/issues/560)
+
+
+
 ## 5.6.0 (2021-08-18)
 
 * feat(useIntervalWhen): add support to fire the first callback eagerly ([13ebe92](https://github.com/imbhargav5/rooks/commit/13ebe92))
