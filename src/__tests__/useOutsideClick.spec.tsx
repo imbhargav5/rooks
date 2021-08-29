@@ -14,43 +14,43 @@ import { useOutsideClick } from "../hooks/useOutsideClick";
 const VolumeOn = () => (
   <svg
     fill="none"
-    stroke="currentColor"
-    width="60"
     height="60"
+    stroke="currentColor"
     viewBox="0 0 24 24"
+    width="60"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-    ></path>
+    />
   </svg>
 );
 
 const VolumeOff = () => (
   <svg
     fill="none"
-    width="60"
     height="60"
     stroke="currentColor"
     viewBox="0 0 24 24"
+    width="60"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
       clipRule="evenodd"
-    ></path>
-    <path
+      d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
+    />
+    <path
       d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-    ></path>
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
   </svg>
 );
 
@@ -58,7 +58,7 @@ const Button = () => {
   const [clicked, setClicked] = useState(false);
 
   return (
-    <div onClick={() => setClicked(!clicked)} data-testid="button">
+    <div data-testid="button" onClick={() => setClicked(!clicked)}>
       {clicked ? <VolumeOn /> : <VolumeOff />}
     </div>
   );
@@ -67,36 +67,38 @@ const Button = () => {
 describe("useOutsideClick", () => {
   let App;
   beforeEach(() => {
-    App = () => {
+    App = ({ detectIframe = true }: { detectIframe: boolean }) => {
       const [message, setMessage] = useState("");
       const ref = useRef(null);
-      useOutsideClick(ref, callback);
+      useOutsideClick(ref, callback, true, detectIframe);
       function callback() {
         setMessage("clicked outside");
       }
+
       return (
         <div
           className="App"
+          data-testid="app"
           style={{
+            alignItems: "center",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
           }}
-          data-testid="app"
         >
+          <iframe data-testid="iframe" src="https://example.com/" />
           <div
             style={{
+              alignItems: "center",
+              backgroundColor: "lightblue",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
               width: "100%",
-              backgroundColor: "lightblue",
             }}
           >
             <div
               className="inside"
-              style={{ backgroundColor: "lightgreen" }}
               ref={ref}
+              style={{ backgroundColor: "lightgreen" }}
             >
               <h2>This is inside</h2>
               <Button />
@@ -113,6 +115,42 @@ describe("useOutsideClick", () => {
 
   it("should be defined", () => {
     expect(useOutsideClick).toBeDefined();
+  });
+
+  it("should not trigger the callback when click on outside iframe and detectIframe = false", () => {
+    const { container } = render(<App detectIframe={false} />);
+    const iframe = getByTestId(
+      container as HTMLElement,
+      "iframe"
+    ) as HTMLFrameElement;
+    const message = getByTestId(container as HTMLElement, "message");
+
+    jest.useFakeTimers();
+    iframe.focus();
+    fireEvent.blur(window);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(message.innerHTML).toBe("");
+  });
+
+  it("should trigger the callback when click on outside iframe and detectIframe = true", () => {
+    const { container } = render(<App />);
+    const iframe = getByTestId(
+      container as HTMLElement,
+      "iframe"
+    ) as HTMLFrameElement;
+    const message = getByTestId(container as HTMLElement, "message");
+
+    jest.useFakeTimers();
+    iframe.focus();
+    fireEvent.blur(window);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(message.innerHTML).toBe("clicked outside");
   });
 
   it("should trigger the calback when click on outide", () => {
