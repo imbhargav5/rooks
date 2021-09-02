@@ -21,17 +21,4 @@ describe("useOnWindowResize", () => {
       expect(mockCallback.mock.calls.length).toBe(3);
     });
   });
-
-  describe("when window is undefined", () => {
-    const { window } = global;
-    const mockCallback = jest.fn(() => {});
-    beforeAll(() => {
-      // @ts-ignore
-      window = undefined;
-    });
-
-    it("renders without error", () => {
-      renderHook(() => useOnWindowResize(mockCallback));
-    });
-  });
 });
