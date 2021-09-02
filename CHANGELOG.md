@@ -1,3 +1,10 @@
+## 5.7.0 (2021-09-02)
+
+* feat(useRefElement): expose useRefElement hook (#573) ([f427465](https://github.com/imbhargav5/rooks/commit/f427465)), closes [#573](https://github.com/imbhargav5/rooks/issues/573)
+* chore(docs): Update changelog and docs ([85168ba](https://github.com/imbhargav5/rooks/commit/85168ba))
+
+
+
 ## <small>5.6.1 (2021-08-29)</small>
 
 * fix(docs): update docs for useOutsideClick, useOutsideClickRef, useOnWindowResize, useOnWindowScroll ([3b31a43](https://github.com/imbhargav5/rooks/commit/3b31a43)), closes [#566](https://github.com/imbhargav5/rooks/issues/566)
