@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 type MouseData = {
   x: number | null;
@@ -21,12 +21,12 @@ const initialMouseState: MouseData = {
   movementX: null,
   movementY: null,
   offsetX: null,
-  pageX: null,
   offsetY: null,
-  screenX: null,
+  pageX: null,
   pageY: null,
-  x: null,
+  screenX: null,
   screenY: null,
+  x: null,
   y: null,
 };
 
@@ -76,10 +76,10 @@ export function useMouse(): MouseData {
   }
 
   useEffect(() => {
-    document.addEventListener('mousemove', updateMousePosition);
+    document.addEventListener("mousemove", updateMousePosition);
 
     return () => {
-      document.removeEventListener('mousemove', updateMousePosition);
+      document.removeEventListener("mousemove", updateMousePosition);
     };
   }, []);
 

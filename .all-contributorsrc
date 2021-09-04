@@ -4,7 +4,8 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
-    "src/pages/_CONTRIBUTORS.md"
+    "src/pages/_CONTRIBUTORS.md",
+    "README.md"
   ],
   "imageSize": 100,
   "commit": false,
@@ -332,6 +333,24 @@
       "name": "wes christiansen",
       "avatar_url": "https://avatars.githubusercontent.com/u/5215218?v=4",
       "profile": "https://github.com/weschristiansen",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "cjpatoilo",
+      "name": "CJ Patoilo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1542831?v=4",
+      "profile": "https://github.com/cjpatoilo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mar1u50",
+      "name": "mar1u50",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17710919?v=4",
+      "profile": "https://github.com/mar1u50",
       "contributions": [
         "code"
       ]

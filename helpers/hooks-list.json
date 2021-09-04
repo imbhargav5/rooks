@@ -21,6 +21,10 @@
       "description": "Debounce hook for react"
     },
     {
+      "name": "useDebouncedValue",
+      "description": "Tracks another value and gets updated in a debounced way."
+    },
+    {
       "name": "useDidMount",
       "description": "componentDidMount hook for React"
     },

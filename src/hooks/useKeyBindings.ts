@@ -1,5 +1,6 @@
-import { useKey } from "./useKey";
 import type { Ref } from "react";
+import { useKey } from "./useKey";
+
 
 type Options = {
   /**

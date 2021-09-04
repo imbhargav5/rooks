@@ -1,3 +1,42 @@
+## 5.7.0 (2021-09-02)
+
+* feat(useRefElement): expose useRefElement hook (#573) ([f427465](https://github.com/imbhargav5/rooks/commit/f427465)), closes [#573](https://github.com/imbhargav5/rooks/issues/573)
+* chore(docs): Update changelog and docs ([85168ba](https://github.com/imbhargav5/rooks/commit/85168ba))
+
+
+
+## <small>5.6.1 (2021-08-29)</small>
+
+* fix(docs): update docs for useOutsideClick, useOutsideClickRef, useOnWindowResize, useOnWindowScroll ([3b31a43](https://github.com/imbhargav5/rooks/commit/3b31a43)), closes [#566](https://github.com/imbhargav5/rooks/issues/566)
+* chore(docs): Update changelog and docs ([fc2a6b3](https://github.com/imbhargav5/rooks/commit/fc2a6b3))
+* chore(prettier): run yarn format (#562) ([ff39095](https://github.com/imbhargav5/rooks/commit/ff39095)), closes [#562](https://github.com/imbhargav5/rooks/issues/562)
+* docs(useDebouncedValue): fix example and add codesandbox (#560) ([99309e0](https://github.com/imbhargav5/rooks/commit/99309e0)), closes [#560](https://github.com/imbhargav5/rooks/issues/560)
+
+
+
+## 5.6.0 (2021-08-18)
+
+* feat(useIntervalWhen): add support to fire the first callback eagerly ([13ebe92](https://github.com/imbhargav5/rooks/commit/13ebe92))
+* docs(userMutationObserverRef): fix examples and code sandboxes (#556) ([a50dd21](https://github.com/imbhargav5/rooks/commit/a50dd21)), closes [#556](https://github.com/imbhargav5/rooks/issues/556)
+* chore(contributors): automate readme contributors list update (#555) ([03252ac](https://github.com/imbhargav5/rooks/commit/03252ac)), closes [#555](https://github.com/imbhargav5/rooks/issues/555)
+* chore(docs): Update changelog and docs ([a35d392](https://github.com/imbhargav5/rooks/commit/a35d392))
+
+
+
+## 5.5.0 (2021-08-14)
+
+* feat(useDebouncedValue): add useDebouncedValue hook (#552) ([92b3cb5](https://github.com/imbhargav5/rooks/commit/92b3cb5)), closes [#552](https://github.com/imbhargav5/rooks/issues/552)
+* chore: Clearer test names (#549) ([de01605](https://github.com/imbhargav5/rooks/commit/de01605)), closes [#549](https://github.com/imbhargav5/rooks/issues/549)
+* chore(deps): bump path-parse from 1.0.6 to 1.0.7 (#551) ([ba103a7](https://github.com/imbhargav5/rooks/commit/ba103a7)), closes [#551](https://github.com/imbhargav5/rooks/issues/551)
+* chore(docs): fix typo of the GitHub name (#554) ([e5a55ec](https://github.com/imbhargav5/rooks/commit/e5a55ec)), closes [#554](https://github.com/imbhargav5/rooks/issues/554)
+* chore(docs): Update changelog and docs ([6ceaac8](https://github.com/imbhargav5/rooks/commit/6ceaac8))
+* chore(helpers): add all-contributors tools (#550) ([8e52dee](https://github.com/imbhargav5/rooks/commit/8e52dee)), closes [#550](https://github.com/imbhargav5/rooks/issues/550)
+* chore(helpers): change to use typescript (#538) ([a031dd5](https://github.com/imbhargav5/rooks/commit/a031dd5)), closes [#538](https://github.com/imbhargav5/rooks/issues/538)
+* contrib-readme-action has updated readme ([23191ec](https://github.com/imbhargav5/rooks/commit/23191ec))
+* contrib-readme-action has updated readme ([442339a](https://github.com/imbhargav5/rooks/commit/442339a))
+
+
+
 ## <small>5.4.6 (2021-08-05)</small>
 
 * fix(types): fix types in build step ([a34ad49](https://github.com/imbhargav5/rooks/commit/a34ad49))

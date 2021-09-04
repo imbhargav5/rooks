@@ -1,6 +1,6 @@
 // See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 type IntervalHandlerAsObject = {
   /**
@@ -25,7 +25,7 @@ type IntervalHandlerAsArray = Array<
   2: ReturnType<typeof setTimeout> | null;
 };
 
-type IntervalHandler = {} & IntervalHandlerAsArray;
+type IntervalHandler = IntervalHandlerAsArray & {};
 
 /**
  *

@@ -20,6 +20,7 @@
         "useCountdown",
         "useCounter",
         "useDebounce",
+        "useDebouncedValue",
         "useDidMount",
         "useDidUpdate",
         "useDimensionsRef",

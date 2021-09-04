@@ -15,7 +15,7 @@ Count down to a target timestamp and call callbacks every second (or provided pe
 ## Importing the hook
 
 ```javascript
-import { useCountdown } from 'rooks';
+import { useCountdown } from "rooks";
 ```
 
 ## Usage
@@ -26,8 +26,8 @@ const endTime = new Date(Date.now() + 10000);
 function Demo() {
   const count = useCountdown(endTime, {
     interval: 1000,
-    onDown: (time) => console.log('onDown', time),
-    onEnd: (time) => console.log('onEnd', time),
+    onDown: (time) => console.log("onDown", time),
+    onEnd: (time) => console.log("onEnd", time),
   });
   return count;
 }
@@ -49,6 +49,24 @@ render(<Demo />);
 | Type   | Description                                                    |
 | ------ | -------------------------------------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime |
+
+## Codesandbox Examples
+
+### Basic Usage
+
+<iframe
+  src="https://codesandbox.io/embed/usecountdown-w57yw?fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="quizzical-glitter-emrtj"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
 
