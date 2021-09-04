@@ -1,54 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-type IGetGeoLocation = {
-  lat?: number;
-  lng?: number;
-  isError: boolean;
-  message: string;
-};
+type UseGeolocationOptions = Partial<
+  PositionOptions & {
+    // Is the geolocation hook enabled
+    when: boolean;
+  }
+>;
 
-type IOptions = {
-  enableHighAccuracy?: boolean;
-  timeout?: number;
-  maximumAge?: number;
-  when?: boolean;
-};
+type UseGeolocationReturntype = [GeolocationPosition | null, Error | null];
 
-function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
+const getGeoLocation = (
+  controller: AbortController,
+  options: PositionOptions
+): Promise<GeolocationPosition> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (res) => {
-          const { coords } = res;
-          const { latitude, longitude } = coords;
-          resolve({
-            isError: false,
-            lat: latitude,
-            lng: longitude,
-            message: '',
-          });
+        (result: GeolocationPosition) => {
+          resolve(result);
         },
         (error) => {
-          reject({ isError: true, message: error.message });
+          reject(error);
         },
         options
       );
-    } else {
-      reject({
-        isError: true,
-        message: 'Geolocation is not supported for this Browser/OS.',
+      controller.signal.addEventListener("abort", () => {
+        reject(new Error("Aborted"));
       });
+    } else {
+      reject(new Error("Geolocation is not supported for this Browser/OS."));
     }
   });
-}
-
-// interface IUseGeoLocationHook {
-//   when?: boolean;
-// }
-
-// const defaultHookOptions = {
-//   when: true
-// };
+};
 
 const defaultGeoLocationOptions = {
   enableHighAccuracy: false,
@@ -64,32 +47,44 @@ const defaultGeoLocationOptions = {
  * @param geoLocationOptions Geolocation options
  */
 function useGeolocation(
-  // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
-  geoLocationOptions: IOptions = defaultGeoLocationOptions
-): IGetGeoLocation | null {
-  const [geoObject, setGeoObject] = useState<IGetGeoLocation | null>(null);
-  const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
+  hookOptions?: UseGeolocationOptions
+): UseGeolocationReturntype {
+  const options = Object.assign({}, defaultGeoLocationOptions, hookOptions);
+
+  // store the geolocation options
+  const [geoObject, setGeoObject] = useState<GeolocationPosition | null>(null);
+  // store the error option
+  const [geoObjectError, setGeoObjectError] = useState<Error | null>(null);
+
+  const { when, ...otherGeolocationOptions } = options;
 
   useEffect(() => {
-    async function getGeoCode() {
+    const fetchGeoloation = async (controller: AbortController) => {
       try {
-        const value = await getGeoLocation({
-          enableHighAccuracy,
-          maximumAge,
-          timeout,
-          when,
-        });
+        const value = await getGeoLocation(controller, otherGeolocationOptions);
         setGeoObject(value);
       } catch (error) {
-        setGeoObject(error);
+        setGeoObject(null);
+        setGeoObjectError(error);
       }
-    }
-    if (when) {
-      getGeoCode();
-    }
-  }, [when, enableHighAccuracy, timeout, maximumAge]);
 
-  return geoObject;
+      return () => {
+        controller.abort();
+      };
+    };
+    if (when) {
+      const controller = new AbortController();
+      void fetchGeoloation(controller);
+
+      return () => {
+        controller.abort();
+      };
+    }
+
+    return () => {};
+  }, [when, otherGeolocationOptions]);
+
+  return [geoObject, geoObjectError];
 }
 
 export { useGeolocation };
