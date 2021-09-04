@@ -15,18 +15,21 @@ const getGeoLocation = (
 ): Promise<GeolocationPosition> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
+      const handleAbort = () => {
+        reject(new Error("Aborted"));
+      };
       navigator.geolocation.getCurrentPosition(
         (result: GeolocationPosition) => {
+          controller.signal.removeEventListener("abort", handleAbort);
           resolve(result);
         },
         (error) => {
+          controller.signal.removeEventListener("abort", handleAbort);
           reject(error);
         },
         options
       );
-      controller.signal.addEventListener("abort", () => {
-        reject(new Error("Aborted"));
-      });
+      controller.signal.addEventListener("abort", handleAbort);
     } else {
       reject(new Error("Geolocation is not supported for this Browser/OS."));
     }
