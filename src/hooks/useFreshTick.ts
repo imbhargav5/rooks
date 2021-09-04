@@ -1,7 +1,7 @@
 import { useFreshRef } from "./useFreshRef";
 
-// eslint-disable-next-line promise/prefer-await-to-callbacks
 const useFreshTick = <T extends unknown[], U extends (...args: T) => void>(
+  // eslint-disable-next-line promise/prefer-await-to-callbacks
   callback: U
 ) => {
   const freshRef = useFreshRef<U>(callback);
