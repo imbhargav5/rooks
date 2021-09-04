@@ -20,6 +20,8 @@ import { useOutsideClick } from "rooks";
 
 ## Usage
 
+### Basic usage
+
 ```jsx
 function Demo() {
   const pRef = useRef();
@@ -37,11 +39,52 @@ function Demo() {
 render(<Demo />);
 ```
 
-### Codesandbox Example
+### Iframe usage
 
-## Basic usage
+```jsx
+function Demo() {
+  const pRef = useRef();
+  function outsidePClick() {
+    console.log("click outside");
+  }
+  useOutsideClick(pRef, outsidePClick, true);
+
+  return (
+    <div>
+      <p style={{ background: "red", color: "white" }} ref={pRef}>
+        Click outside me, or click on an iframe, and check the log in the
+        console
+      </p>
+      <hr />
+      <h1>I'm an iframe</h1>
+      <iframe title="example" src="https://example.com/" />
+    </div>
+  );
+}
+
+render(<Demo />);
+```
+
+## Codesandbox Example
+
+### Basic usage
 
 <iframe src="https://codesandbox.io/embed/usenavigatorlanguage-pnk7f?fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+  title="useNavigatorLanguage"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
+
+### Iframe usage
+
+<iframe src="https://codesandbox.io/embed/useoutsideclick-ctkk6?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.tsx&theme=dark"
    style={{
     width: "100%",
     height: 500,
@@ -49,10 +92,10 @@ render(<Demo />);
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useNavigatorLanguage"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/ >
+  title="useOutsideClickRef"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
 
