@@ -1,18 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useIsomorphicEffect } from './useIsomorphicEffect';
+import { useState, useEffect } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
-type WindowDimensions = {
-  innerWidth: number | null;
-  innerHeight: number | null;
-  outerWidth: number | null;
-  outerHeight: number | null;
-};
+type WindowDimensions = Pick<
+  Window,
+  "innerWidth" | "innerHeight" | "outerWidth" | "outerHeight"
+>;
 
-const nullDimensions: WindowDimensions = {
-  innerHeight: null,
-  innerWidth: null,
-  outerHeight: null,
-  outerWidth: null,
+const defaultDimensions: WindowDimensions = {
+  innerHeight: 0,
+  innerWidth: 0,
+  outerHeight: 0,
+  outerWidth: 0,
 };
 
 function getDimensions(): WindowDimensions {
@@ -32,10 +30,10 @@ function getDimensions(): WindowDimensions {
  */
 export function useWindowSize(): WindowDimensions {
   const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return getDimensions();
     } else {
-      return nullDimensions;
+      return defaultDimensions;
     }
   });
 
@@ -44,10 +42,10 @@ export function useWindowSize(): WindowDimensions {
     function onResize() {
       setWindowSize(getDimensions());
     }
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 

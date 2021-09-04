@@ -1,6 +1,4 @@
-import { useState, useEffect, ChangeEvent, useCallback, useMemo } from "react";
-
-type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+import { useState, useEffect, useCallback } from "react";
 
 type InputHandler = {
   /**
@@ -13,7 +11,7 @@ type InputHandler = {
    *
    * @param event The input change event
    */
-  onChange: (e: InputChangeEvent) => void;
+  onChange: (e) => void;
 };
 
 type Options = {
@@ -50,7 +48,7 @@ function useInput(
   const [value, setValue] = useState(initialValue);
 
   const onChange = useCallback(
-    (e: InputChangeEvent) => {
+    (e) => {
       const newValue = e.target.value;
       let shouldUpdate = true;
       if (typeof options.validate === "function") {
