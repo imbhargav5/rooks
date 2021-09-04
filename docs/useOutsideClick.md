@@ -63,7 +63,7 @@ function App() {
 |-----------|------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
 | ref       | React.MutableRefObject | Ref whose outside click needs to be listened to                                                                  |               |
 | handler   | function               | Callback to fire on outside click                                                                                |               |
-| when      | boolean                | A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
+| when      | boolean                | A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
 
 ### Returns
 
