@@ -1,14 +1,17 @@
-import { useFreshRef } from './useFreshRef';
+import { useFreshRef } from "./useFreshRef";
 
-function useFreshTick(callback: (...args: any[]) => void) {
-  const freshRef = useFreshRef(callback);
-  function tick(...args) {
-    if (freshRef && typeof freshRef.current === 'function') {
+// eslint-disable-next-line promise/prefer-await-to-callbacks
+const useFreshTick = <T extends unknown[], U extends (...args: T) => void>(
+  callback: U
+) => {
+  const freshRef = useFreshRef<U>(callback);
+  const tick = (...args: T) => {
+    if (freshRef && typeof freshRef.current === "function") {
       freshRef.current(...args);
     }
-  }
+  };
 
   return tick;
-}
+};
 
 export { useFreshTick };

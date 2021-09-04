@@ -1,4 +1,5 @@
-import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import { warning } from "./warning";
 
 /**
  *  useDocumentEventListener hook
@@ -13,11 +14,17 @@ import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
  */
 function useDocumentEventListener(
   eventName: string,
-  callback: (...args: any) => void,
-  listenerOptions: any = {},
+  callback: (...args: unknown[]) => void,
+  listenerOptions: AddEventListenerOptions,
   isLayoutEffect: boolean = false
 ): void {
-  if (typeof document !== 'undefined') {
+  if (typeof document === "undefined") {
+    warning(
+      false,
+      "useDocumentEventListener can't attach an event listener as document is undefined."
+    );
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useGlobalObjectEventListener(
       document,
       eventName,
@@ -25,10 +32,6 @@ function useDocumentEventListener(
       listenerOptions,
       true,
       isLayoutEffect
-    );
-  } else {
-    console.warn(
-      "useDocumentEventListener can't attach an event listener as document is undefined."
     );
   }
 }

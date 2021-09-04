@@ -1,4 +1,5 @@
-import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
+import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import { warning } from "./warning";
 
 /**
  *  useWindowEventListener hook
@@ -13,11 +14,17 @@ import { useGlobalObjectEventListener } from './useGlobalObjectEventListener';
  */
 function useWindowEventListener(
   eventName: string,
-  callback: (...args: any) => void,
-  listenerOptions: any = {},
+  callback: (...args: unknown[]) => void,
+  listenerOptions: AddEventListenerOptions,
   isLayoutEffect: boolean = false
 ): void {
-  if (typeof window !== 'undefined') {
+  if (typeof window === "undefined") {
+    warning(
+      false,
+      "useWindowEventListener can't attach an event listener as window is undefined."
+    );
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useGlobalObjectEventListener(
       window,
       eventName,
@@ -25,10 +32,6 @@ function useWindowEventListener(
       listenerOptions,
       true,
       isLayoutEffect
-    );
-  } else {
-    console.warn(
-      "useWindowEventListener can't attach an event listener as window is undefined."
     );
   }
 }

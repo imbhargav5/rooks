@@ -15,14 +15,14 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
  */
-function useGlobalObjectEventListener(
-  globalObject: Document | Window,
+const useGlobalObjectEventListener = <T extends Document | Window>(
+  globalObject: T,
   eventName: string,
-  callback: (...args: any) => void,
-  listenerOptions: any = {},
+  callback: EventListener,
+  listenerOptions: AddEventListenerOptions = {},
   when: boolean = true,
   isLayoutEffect: boolean = false
-): void {
+): void => {
   const freshCallback = useFreshTick(callback);
   const { capture, passive, once } = listenerOptions;
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
@@ -43,7 +43,9 @@ function useGlobalObjectEventListener(
         );
       };
     }
+
+    return () => {};
   }, [eventName, capture, passive, once]);
-}
+};
 
 export { useGlobalObjectEventListener };

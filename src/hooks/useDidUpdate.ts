@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
+import { warning } from "./warning";
 
 /**
  *  useDidUpdate hook
@@ -11,22 +12,29 @@ import { useEffect, useRef } from 'react';
  * @param {Array} conditions The list of variables which trigger update when they are changed
  * @returns {undefined}
  */
-function useDidUpdate(callback: () => any, conditions?: any[]): void {
+function useDidUpdate(
+  callback: () => void,
+  conditions?: unknown[] | unknown
+): void {
   const hasMountedRef = useRef(false);
-  if (typeof conditions !== 'undefined' && !Array.isArray(conditions)) {
-    conditions = [conditions];
-  } else if (Array.isArray(conditions) && conditions.length === 0) {
-    console.warn(
-      'Using [] as the second argument makes useDidUpdate a noop. The second argument should either be `undefined` or an array of length greater than 0.'
-    );
-  }
+  const conditionsArray: unknown[] = Array.isArray(conditions)
+    ? [callback, ...conditions]
+    : [callback, conditions];
+
+  warning(
+    Boolean(conditionsArray.length),
+    "Using [] as the second argument makes useDidUpdate a noop. The second argument should either be `undefined` or an array of length greater than 0."
+  );
+
   useEffect(() => {
     if (hasMountedRef.current) {
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
       callback();
     } else {
       hasMountedRef.current = true;
     }
-  }, conditions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, conditionsArray);
 }
 
 export { useDidUpdate };
