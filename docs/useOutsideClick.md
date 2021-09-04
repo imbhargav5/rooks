@@ -6,7 +6,7 @@ sidebar_label: useOutsideClick
 
 ## About
 
-Outside click(for a ref) event as hook for React.
+Outside click event (for a ref) as a React hook.
 
 ## Installation
 
@@ -23,20 +23,40 @@ import { useOutsideClick } from "rooks";
 ### Basic usage
 
 ```jsx
-function Demo() {
-  const pRef = useRef();
-  function outsidePClick() {
-    alert("Clicked outside p");
+import { useOutsideClick } from "rooks";
+import { useRef } from "react";
+
+function App() {
+  const ref = useRef();
+  function myComponent() {
+    console.log("Clicked outside");
   }
-  useOutsideClick(pRef, outsidePClick);
+  useOutsideClick(ref, myComponent);
+
   return (
-    <div>
-      <p ref={pRef}>Click outside me</p>
+    <div
+      className="App"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : useOutsideClick Example</h1>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          backgroundColor: "lightblue"
+        }}
+        ref={ref}
+      >
+        <h2 className="inside">
+          This is inside
+        </h2>
+      </div>
     </div>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Iframe usage
@@ -64,6 +84,18 @@ function Demo() {
 
 render(<Demo />);
 ```
+
+### Arguments
+
+| Arguments | Type                   | Description                                                                                                      | Default value |
+|-----------|------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
+| ref       | React.MutableRefObject | Ref whose outside click needs to be listened to                                                                  |               |
+| handler   | function               | Callback to fire on outside click                                                                                |               |
+| when      | boolean                | A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
+
+### Returns
+
+No return value.
 
 ## Codesandbox Example
 

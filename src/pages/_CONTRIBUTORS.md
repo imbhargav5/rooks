@@ -1,6 +1,6 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-37-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-38-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ## Contributors ✨
 
@@ -58,6 +58,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/weschristiansen"><img src="https://avatars.githubusercontent.com/u/5215218?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wes christiansen</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=weschristiansen" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/cjpatoilo"><img src="https://avatars.githubusercontent.com/u/1542831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>CJ Patoilo</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=cjpatoilo" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mar1u50"><img src="https://avatars.githubusercontent.com/u/17710919?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mar1u50</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mar1u50" title="Code">💻</a></td>
   </tr>
 </table>
 
