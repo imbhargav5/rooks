@@ -6,7 +6,9 @@ sidebar_label: useFullscreen
 
 ## About
 
-Use full screen api for making beautiful and emersive experinces.
+Use full screen api for making beautiful and emersive experinces. 
+
+### Note: You might need to add a polyfill. Check usage section.
 
 ## Installation
 
@@ -15,6 +17,7 @@ Use full screen api for making beautiful and emersive experinces.
 ## Importing the hook
 
 ```javascript
+import 'fullscreen-polyfill' // or any polyfill of your choice
 import { useFullscreen } from "rooks";
 ```
 
