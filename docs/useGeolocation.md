@@ -24,7 +24,7 @@ import { useGeolocation } from "rooks";
 
 ```jsx
 function App() {
-  const geoObj = useGeolocation();
+  const [geoObj, geoErr] = useGeolocation();
 
   return (
     <div
@@ -47,7 +47,7 @@ render(<App />);
 function App() {
   const [when, setWhen] = React.useState(false);
 
-  const geoObj = useGeolocation({
+  const [geoObj, geoErr] = useGeolocation({
     when,
   });
 
@@ -72,6 +72,19 @@ function App() {
 }
 render(<App />);
 ```
+
+### Arguments
+
+| Argument           | Type                  | Description           | Default value                                                                               |
+|--------------------|-----------------------|-----------------------|---------------------------------------------------------------------------------------------|
+| geoLocationOptions | UseGeolocationOptions | options for this hook | { enableHighAccuracy: false, maximumAge: 0, timeout: Number.POSITIVE_INFINITY, when: true } |
+                                                                          
+### Returns an array of 2 values
+
+| Return value   | Type                | Description            | Default value |
+|----------------|---------------------|------------------------|---------------|
+| geoObject      | GeolocationPosition | Get geolocation result | null          |
+| geoObjectError | Error               | Get geolocation error  | null          |
 
 ## Codesandbox Example
 
