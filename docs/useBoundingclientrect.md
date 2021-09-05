@@ -89,7 +89,7 @@ render(<Demo />);
 
 ## Codesandbox Example
 
-### BAsic Usage
+### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/useboundingclientrect-7zbcd?fontsize=14&hidenavigation=1&theme=dark"
    style={{
