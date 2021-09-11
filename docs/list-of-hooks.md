@@ -53,6 +53,7 @@ sidebar_label: Hooks List
 - [usePreviousImmediate](https://react-hooks.org/docs/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 - [useQueueState](https://react-hooks.org/docs/useQueueState) - A React hook that manages state in the form of a queue
 - [useRaf](https://react-hooks.org/docs/useRaf) - A continuously running requestAnimationFrame hook for React
+- [useRefElement](https://react-hooks.org/docs/useRefElement) - Helps bridge gap between callback ref and state
 - [useSelect](https://react-hooks.org/docs/useSelect) - Select values from a list easily. List selection hook for react.
 - [useSelectableList](https://react-hooks.org/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs etc.
 - [useSessionstorage](https://react-hooks.org/docs/useSessionstorage) - Session storage react hook. Easily manage session storage values.
