@@ -193,6 +193,10 @@
       "description": "A continuously running requestAnimationFrame hook for React"
     },
     {
+      "name": "useRefElement",
+      "description": "Helps bridge gap between callback ref and state"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react."
     },
