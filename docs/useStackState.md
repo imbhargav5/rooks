@@ -39,7 +39,7 @@ function Demo() {
   // This will render items in LIFO order
   return (
     <div>
-      {listInStackOrder.map((item) => (
+      {list.map((item) => (
         <span>{item}</span>
       ))}
     </div>
@@ -49,6 +49,21 @@ function Demo() {
 render(<Demo />);
 ```
 
+### Arguments
+
+| Arguments   | Type  | Description | Default value |
+|-------------|-------|-------------|---------------|
+| initialList | any[] | An array    | undefind      |
+
+### Returned array items
+
+| Returned items | Type     | Description                             |
+|----------------|----------|-----------------------------------------|
+| push           | function | Put an item to the top of the stack     |
+| pop            | function | Remove the item on the top of the stack |
+| peek           | function | Return the item on the top of the stack |
+| length         | number   | Number of items in the stack            |
+
 ---
 
 ## Codesandbox Examples
@@ -56,17 +71,17 @@ render(<Demo />);
 ### Basic Usage
 
 <iframe 
-    src="https://codesandbox.io/embed/bold-smoke-iedi8?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark"
-    style={{
-        width: "100%",
-        height: 500,
-        border: 0,
-        borderRadius: 4,
-        overflow: "hidden"
-    }}
-    title="useStackState"
-    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" 
+  src="https://codesandbox.io/embed/bold-smoke-iedi8?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="useStackState"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" 
 />
 
 ## Join Bhargav's discord server
