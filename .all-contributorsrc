@@ -354,6 +354,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ayushman-git",
+      "name": "Ayushman Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38486014?v=4",
+      "profile": "https://ayushman.me/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "RafaelFerreiraTVD",
+      "name": "Rafael Ferreira",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15105462?v=4",
+      "profile": "https://github.com/RafaelFerreiraTVD",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

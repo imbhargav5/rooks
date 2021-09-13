@@ -1,3 +1,15 @@
+## <small>5.7.1 (2021-09-13)</small>
+
+* fix(useMediaMatch): safari 13.1 addListener fix (#591) ([2bd2755](https://github.com/imbhargav5/rooks/commit/2bd2755)), closes [#591](https://github.com/imbhargav5/rooks/issues/591)
+* docs: update examples and usage (#589) ([a64f3a4](https://github.com/imbhargav5/rooks/commit/a64f3a4)), closes [#589](https://github.com/imbhargav5/rooks/issues/589)
+* docs(example): update doc for useCountdown, useDebounce ([dbe7264](https://github.com/imbhargav5/rooks/commit/dbe7264))
+* docs(useOutsideClick): fix typo in useOutsideClick.md  ([7454e07](https://github.com/imbhargav5/rooks/commit/7454e07))
+* docs(useRefElement): add to hook list and add to docs (#588) ([0c33eaf](https://github.com/imbhargav5/rooks/commit/0c33eaf)), closes [#588](https://github.com/imbhargav5/rooks/issues/588)
+* docs(useboundingclientrect):Typo in useboundingclientrect hook (#584) ([1774084](https://github.com/imbhargav5/rooks/commit/1774084)), closes [#584](https://github.com/imbhargav5/rooks/issues/584)
+* chore(docs): Update changelog and docs ([0840fbe](https://github.com/imbhargav5/rooks/commit/0840fbe))
+
+
+
 ## 5.7.0 (2021-09-02)
 
 * feat(useRefElement): expose useRefElement hook (#573) ([f427465](https://github.com/imbhargav5/rooks/commit/f427465)), closes [#573](https://github.com/imbhargav5/rooks/issues/573)
