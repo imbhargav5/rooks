@@ -25,9 +25,16 @@ function useMediaMatch(query: string): boolean {
     setMatches(matchMedia.matches);
     const listener = (event_: MediaQueryListEventMap['change']) =>
       setMatches(event_.matches);
-    matchMedia.addEventListener('change', listener);
 
-    return () => matchMedia.removeEventListener('change', listener);
+    if (matchMedia.addEventListener) {
+      matchMedia.addEventListener('change', listener)
+
+      return () => matchMedia.removeEventListener('change', listener)
+    } else {
+      matchMedia.addListener(listener)
+
+      return () => matchMedia.removeListener(listener)
+    }
   }, [matchMedia]);
 
   return matches;
