@@ -63,6 +63,7 @@
         "usePreviousImmediate",
         "useQueueState",
         "useRaf",
+        "useRefElement",
         "useSelect",
         "useSelectableList",
         "useSessionstorage",
