@@ -41,17 +41,28 @@ render(<Demo />);
 ### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/useeffectoncewhen-io8wo?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
+  style={{
     width: "100%",
     height: 500,
     border: 0,
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useEffectOnceWhen"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  title="useEffectOnceWhen"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
+
+### Arguments
+
+| Arguments | Type     | Description                          | Default value |
+|-----------|----------|--------------------------------------|---------------|
+| callback  | function | The callback to be called            | undefined     |
+| when      | boolean  | The condition which needs to be true | true          |
+
+### Return
+
+No return value.
 
 ## Join Bhargav's discord server
 
