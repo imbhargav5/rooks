@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { warning } from "./warning";
 
 function getValueFromSessionStorage(key) {
   if (typeof sessionStorage === "undefined") {
@@ -47,6 +48,10 @@ function useSessionstorageState<S>(
   key: string,
   initialState?: S | (() => S)
 ): [S, Dispatch<SetStateAction<S>>, () => void] {
+  warning(
+    false,
+    "useSessionstorageState is deprecated, it will be removed in rooks v7. Please use useSessionstorage instead."
+  );
   const [value, __setValue] = useState(() => initialize(key, initialState));
   const isUpdateFromListener = useRef(false);
 
