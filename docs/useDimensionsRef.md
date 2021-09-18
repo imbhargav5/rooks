@@ -51,9 +51,9 @@ render(<Demo />);
 
 ### Arguments
 
-| Arguments | Type                                                               | Description                                             | Default value                                                |
-|-----------|--------------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------|
-| options   | {<br> updateOnScroll?: boolean,<br> updateOnResize?: boolean<br> } | Whether to update dimension on window resize and scroll | { <br>updateOnScroll = true, <br>updateOnResize = true <br>} |
+| Arguments | Type                                                     | Description                                             | Default value                                      |
+|-----------|----------------------------------------------------------|---------------------------------------------------------|----------------------------------------------------|
+| options   | `{ updateOnScroll?: boolean, updateOnResize?: boolean }` | Whether to update dimension on window resize and scroll | `{ updateOnScroll = true, updateOnResize = true }` |
 
 
 ### Returns
@@ -62,7 +62,7 @@ Returns an array of 3 items:
 
 | Return item | Type                   | Description                                                                          | Default value |
 |-------------|------------------------|--------------------------------------------------------------------------------------|---------------|
-| ref         | Callback ref           | A callback ref function to be used as a ref for the element that needs to be tracked | () => null    |
+| ref         | Callback ref           | A callback ref function to be used as a ref for the element that needs to be tracked | undefined     |
 | dimensions  | UseDimensionsRefReturn | An object with dimensions of the ref element                                         | null          |
 | node        | HTMLElement            | The element being tracked by ref                                                     | null          |
 

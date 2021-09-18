@@ -4,6 +4,12 @@ title: useUpdateEffect
 sidebar_label: useUpdateEffect
 ---
 
+:::warning
+
+`useUpdateEffect` is deprecated, it will be removed in rooks v7. Please use [useDidUpdate](./useDidUpdate) instead.
+
+:::
+
 ## About
 
 An useEffect that does not run on first render

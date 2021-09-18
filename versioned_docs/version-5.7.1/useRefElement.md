@@ -45,10 +45,10 @@ No arguments.
 
 ### Returns an array of two items
 
-| Returned items | Type                                      | Description                   |
-|----------------|-------------------------------------------|-------------------------------|
-| ref            | (refElement: RefElementOrNull<T>) => void | The callback ref              |
-| element        | RefElementOrNull<T>                       | The element linked to the ref |
+| Returned items | Type                                        | Description                   |
+|----------------|---------------------------------------------|-------------------------------|
+| ref            | `(refElement: RefElementOrNull<T>) => void` | The callback ref              |
+| element        | `RefElementOrNull<T>`                       | The element linked to the ref |
 
 
 ## Codesandbox Example

@@ -4,6 +4,12 @@ title: useSessionstorageState
 sidebar_label: useSessionstorageState
 ---
 
+:::warning
+
+`useSessionstorageState` is deprecated, it will be removed in rooks v7. Please use [useSessionstorage](/useSessionstorage) instead.
+
+:::
+
 ## About
 
 useState but syncs with sessionstorage

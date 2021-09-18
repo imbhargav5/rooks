@@ -4,6 +4,12 @@ title: useTimeout
 sidebar_label: useTimeout
 ---
 
+:::warning
+
+`useTimeout` is deprecated, it will be removed in rooks v7. Please use [useTimeoutWhen](./useTimeoutWhen) instead.
+
+:::
+
 ## About
 
 setTimeout hook for react.
