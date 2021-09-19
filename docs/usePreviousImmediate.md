@@ -4,12 +4,6 @@ title: usePreviousImmediate
 sidebar_label: usePreviousImmediate
 ---
 
-:::warning
-
-`usePreviousImmediate` is deprecated, it will be removed in rooks v7. Please use [usePrevious](./usePrevious) instead.
-
-:::
-
 ## About
 
 usePreviousImmediate returns the previous value of a variable even if it was the same or different

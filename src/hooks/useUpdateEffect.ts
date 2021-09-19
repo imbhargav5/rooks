@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { warning } from "./warning";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 /**
  *  useDidUpdate hook
@@ -14,8 +14,7 @@ import { warning } from "./warning";
  * @returns {undefined}
  */
 function useUpdateEffect(callback: () => any, conditions?: any[]): void {
-  warning(
-    false,
+  useWarningOnMountInDevelopment(
     "useUpdateEffect is deprecated, it will be removed in rooks v7. Please use useDidUpdate instead."
   );
   const hasMountedRef = useRef(false);

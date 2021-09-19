@@ -4,7 +4,7 @@
 
 import { useEffect, useReducer, useLayoutEffect } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
-import { warning } from "./warning";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 function normalizeRect(rect) {
   if (rect.width === undefined) {
@@ -55,8 +55,7 @@ const DEFAULT_OPTIONS = {
  * @param opts Options
  */
 function useVisibilitySensor(ref, options) {
-  warning(
-    false,
+  useWarningOnMountInDevelopment(
     "useVisibilitySensor is deprecated, it will be removed in rooks v7. Please use useInViewRef instead."
   );
   /*

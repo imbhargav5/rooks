@@ -1,7 +1,7 @@
 // See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
 import { useState, useEffect, useRef } from "react";
-import { warning } from "./warning";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 type IntervalHandlerAsObject = {
   /**
@@ -45,8 +45,7 @@ function useInterval(
   intervalDuration: number | null,
   startImmediate: boolean = false
 ): IntervalHandler {
-  warning(
-    false,
+  useWarningOnMountInDevelopment(
     "useInterval is deprecated, it will be removed in rooks v7. Please use useIntervalWhen instead."
   );
   const internalIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
