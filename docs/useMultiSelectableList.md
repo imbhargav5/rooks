@@ -24,18 +24,61 @@ import { useMultiSelectableList } from "rooks";
 
 ```jsx
 function Demo() {
-  useMultiSelectableList();
+  const [
+    selection,
+    { matchSelection, toggleSelection, updateSelections }
+  ] = useMultiSelectableList(items, [0, 1]);
+
   return null;
 }
 
 render(<Demo />);
 ```
 
+### Arguments
+
+| Argument value       | Type            | Description                                              | Default value |
+|----------------------|-----------------|----------------------------------------------------------|---------------|
+| list                 | Array           | A list of items of any type                              | `[]`          |
+| initialSelectIndices | `Array<number>` | An array of indices that are selected initially          | `[0]`         |
+| allowUnselected      | Boolean         | Whether to allow unselect when updating selected indices | `false`       |
+
+### Returns
+
+Returns an array of following items:
+
+| Return value | Type   | Description                                                             |
+|--------------|--------|-------------------------------------------------------------------------|
+| selection    | Array  | An array of selected items                                            |
+| methods      | Object | Object with methods to control the selectable list, see the table below |
+
+Methods:
+
+| Return value     | Type                                  | Description                                      |
+|------------------|---------------------------------------|--------------------------------------------------|
+| matchSelection   | `(index) => Boolean`                  | if index is selected                             |
+| toggleSelection  | `(index) => () => void`               | returns a function to toggle the specified index |
+| updateSelections | `({ indices, values }) => () => void` | returns a function to update specified indices   |
+
+
 ---
 
 ## Codesandbox Examples
 
 ### Basic Usage
+
+<iframe src="https://codesandbox.io/embed/usemultiselectablelist-52ouc?fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }} 
+  title="useMultiSelectableList"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 ## Join Bhargav's discord server
 
