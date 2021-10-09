@@ -188,21 +188,47 @@ function Demo() {
 render(<Demo />);
 ```
 
+
+### Arguments
+
+The argument is an object with the following optional items:
+
+| Argument value                   | Type                                                    | Description                                    |
+|----------------------------------|---------------------------------------------------------|------------------------------------------------|
+| options.onChange                 | `(this: Document, event_: any, isOpen: boolean) => any` | Callback function to be called on change event |
+| options.onError                  | `(this: Document, event_: any) => any`                  | Callback function to be called on error        |
+| options.requestFullscreenOptions | `{ navigationUI?: string | "auto" | "hide" | "show" }`  | Whether to show navigation UI                  |
+
+### Returns
+
+Returns an object with following items:
+
+| Return value | Type        | Description                             |
+|--------------|-------------|-----------------------------------------|
+| isEnabled    | boolean     | Whether fullscreen controls are enabled |
+| toggle       | function    | toggle fullscreen                       |
+| request      | function    | request fullscreen                      |
+| exit         | function    | exit fullscreen                         |
+| isFullscreen | function    | Whether it is in fullscreen state       |
+| element      | HTMLElement | The HTML fullscreen element             |
+
+---
+
 ## Codesandbox Example
 
 ### Basic usage
 
 <iframe src="https://codesandbox.io/embed/usefullscreen-jqnzu?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
+  style={{
     width: "100%",
     height: 500,
     border: 0,
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useFullscreen"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  title="useFullscreen"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
 ## Join Bhargav's discord server
