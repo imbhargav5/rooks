@@ -1,3 +1,17 @@
+## <small>5.7.2 (2021-10-10)</small>
+
+* fix: add warning message for deprecated hooks (#595) ([c669a8e](https://github.com/imbhargav5/rooks/commit/c669a8e)), closes [#595](https://github.com/imbhargav5/rooks/issues/595)
+* docs: add examples (#600) ([0028ba3](https://github.com/imbhargav5/rooks/commit/0028ba3)), closes [#600](https://github.com/imbhargav5/rooks/issues/600)
+* docs: add more examples (#596) ([e33e116](https://github.com/imbhargav5/rooks/commit/e33e116)), closes [#596](https://github.com/imbhargav5/rooks/issues/596)
+* docs: add more examples (#599) ([260e606](https://github.com/imbhargav5/rooks/commit/260e606)), closes [#599](https://github.com/imbhargav5/rooks/issues/599)
+* docs: improve usage and examples (#593) ([05501a6](https://github.com/imbhargav5/rooks/commit/05501a6)), closes [#593](https://github.com/imbhargav5/rooks/issues/593)
+* chore(deps): bump prismjs from 1.24.0 to 1.25.0 (#597) ([5632db3](https://github.com/imbhargav5/rooks/commit/5632db3)), closes [#597](https://github.com/imbhargav5/rooks/issues/597)
+* chore(deps): bump tmpl from 1.0.4 to 1.0.5 (#598) ([a87c2b0](https://github.com/imbhargav5/rooks/commit/a87c2b0)), closes [#598](https://github.com/imbhargav5/rooks/issues/598)
+* chore(deps): bump url-parse from 1.5.1 to 1.5.3 (#601) ([13aceab](https://github.com/imbhargav5/rooks/commit/13aceab)), closes [#601](https://github.com/imbhargav5/rooks/issues/601)
+* chore(docs): Update changelog and docs ([b4c5604](https://github.com/imbhargav5/rooks/commit/b4c5604))
+
+
+
 ## <small>5.7.1 (2021-09-13)</small>
 
 * fix(useMediaMatch): safari 13.1 addListener fix (#591) ([2bd2755](https://github.com/imbhargav5/rooks/commit/2bd2755)), closes [#591](https://github.com/imbhargav5/rooks/issues/591)
