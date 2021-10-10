@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useReducer, useCallback } from 'react';
+import { useEffect, useReducer, useCallback } from "react";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 type StorageHandlerAsObject = {
   value: any;
@@ -13,7 +14,7 @@ type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'set':
+    case "set":
       return action.payload;
     default:
       return state;
@@ -31,20 +32,23 @@ function useSessionstorage(
   key: string,
   defaultValue: any = null
 ): StorageHandler {
+  useWarningOnMountInDevelopment(
+    "useSessionstorage is deprecated, it will be removed in rooks v7. Please use useSessionstorageState instead."
+  );
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
     const initialValue = getValueFromSessionStorage();
-    if (initialValue === null || initialValue === 'null') {
+    if (initialValue === null || initialValue === "null") {
       set(defaultValue);
     }
   }
 
   function getValueFromSessionStorage() {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
-    const storedValue = sessionStorage.getItem(key) || 'null';
+    const storedValue = sessionStorage.getItem(key) || "null";
     try {
       return JSON.parse(storedValue);
     } catch (error) {
@@ -55,7 +59,7 @@ function useSessionstorage(
   }
 
   function saveValueToSessionStorage(valueToSet: string | null) {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
 
@@ -65,7 +69,7 @@ function useSessionstorage(
   function setValue(valueToSet: string | null) {
     dispatch({
       payload: valueToSet,
-      type: 'set',
+      type: "set",
     });
   }
 
@@ -76,7 +80,7 @@ function useSessionstorage(
 
   // eslint-disable-next-line consistent-return
   function remove() {
-    if (typeof sessionStorage === 'undefined') {
+    if (typeof sessionStorage === "undefined") {
       return null;
     }
     sessionStorage.removeItem(key);
@@ -94,10 +98,10 @@ function useSessionstorage(
   }, []);
 
   useEffect(() => {
-    window.addEventListener('storage', listen);
+    window.addEventListener("storage", listen);
 
     return () => {
-      window.removeEventListener('storage', listen);
+      window.removeEventListener("storage", listen);
     };
   }, []);
 

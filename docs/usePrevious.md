@@ -4,6 +4,12 @@ title: usePrevious
 sidebar_label: usePrevious
 ---
 
+:::warning
+
+`usePrevious` is deprecated, it will be removed in rooks v7. Please use [usePreviousImmediate](./usePreviousImmediate) instead.
+
+:::
+
 ## About
 
 Access the previous value of a variable with this React hook

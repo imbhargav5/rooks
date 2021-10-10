@@ -51,6 +51,10 @@ render(<Demo />);
 
 ### Arguments
 
+| Arguments | Type                                                     | Description                                             | Default value                                      |
+|-----------|----------------------------------------------------------|---------------------------------------------------------|----------------------------------------------------|
+| options   | `{ updateOnScroll?: boolean, updateOnResize?: boolean }` | Whether to update dimension on window resize and scroll | `{ updateOnScroll = true, updateOnResize = true }` |
+=======
 | Arguments | Type                                                      | Description                                             | Default value                                        |
 |-----------|-----------------------------------------------------------|---------------------------------------------------------|------------------------------------------------------|
 | options   | `{ updateOnScroll?: boolean,  updateOnResize?: boolean }` | Whether to update dimension on window resize and scroll | `{  updateOnScroll = true,  updateOnResize = true }` |

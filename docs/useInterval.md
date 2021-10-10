@@ -4,6 +4,12 @@ title: useInterval
 sidebar_label: useInterval
 ---
 
+:::warning
+
+`useInterval` is deprecated, it will be removed in rooks v7. Please use [useIntervalWhen](./useIntervalWhen) instead.
+
+:::
+
 ## About
 
 setInterval hook for React.

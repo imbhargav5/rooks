@@ -2,8 +2,9 @@
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
 
-import { useEffect, useReducer, useLayoutEffect } from 'react';
-import { useIsomorphicEffect } from './useIsomorphicEffect';
+import { useEffect, useReducer, useLayoutEffect } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 function normalizeRect(rect) {
   if (rect.width === undefined) {
@@ -21,7 +22,7 @@ const initialState = { isVisible: null, visibilityRect: {} };
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'set':
+    case "set":
       if (state.isVisible === action.payload.isVisible) {
         return state;
       }
@@ -54,6 +55,9 @@ const DEFAULT_OPTIONS = {
  * @param opts Options
  */
 function useVisibilitySensor(ref, options) {
+  useWarningOnMountInDevelopment(
+    "useVisibilitySensor is deprecated, it will be removed in rooks v7. Please use useInViewRef instead."
+  );
   /*
       Create local state
     */
@@ -128,7 +132,7 @@ function useVisibilitySensor(ref, options) {
         rect.right >= containmentRect.left;
 
       // account for partial visibility on a single edge
-      if (typeof partialVisibility === 'string') {
+      if (typeof partialVisibility === "string") {
         partialVisible = visibilityRect[partialVisibility];
       }
 
@@ -149,7 +153,7 @@ function useVisibilitySensor(ref, options) {
     const { isVisible, visibilityRect } = checkVisibility();
     dispatch({
       payload: { isVisible, visibilityRect },
-      type: 'set',
+      type: "set",
     });
   }
 
@@ -208,7 +212,7 @@ function useVisibilitySensor(ref, options) {
   // If scroll check is needed
   useIsomorphicEffect(() => {
     if (scrollCheck) {
-      return createListener('scroll', scrollDebounce, scrollThrottle);
+      return createListener("scroll", scrollDebounce, scrollThrottle);
     }
   }, []);
 
@@ -216,7 +220,7 @@ function useVisibilitySensor(ref, options) {
 
   useIsomorphicEffect(() => {
     if (resizeCheck) {
-      return createListener('resize', resizeDebounce, resizeThrottle);
+      return createListener("resize", resizeDebounce, resizeThrottle);
     }
   }, []);
 

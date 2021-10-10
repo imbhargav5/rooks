@@ -4,6 +4,12 @@ title: useVisibilitySensor
 sidebar_label: useVisibilitySensor
 ---
 
+:::warning
+
+`useVisibilitySensor` is deprecated, it will be removed in rooks v7. Please use [useInViewRef](./useInViewRef) instead.
+
+:::
+
 ## About
 
 Visibility sensor hook for React.
