@@ -39,11 +39,29 @@ function Demo() {
 render(<Demo />);
 ```
 
+### Arguments
+
+| Argument value | Type   | Description                    | Defualt   |
+|----------------|--------|--------------------------------|-----------|
+| key            | string | Key of the localStorage object | undefined |
+| defaultValue   | any    | Default initial value          | null      |
+
+### Returns
+
+Returns an array or an object with following items:
+
+| Return value | Type                      | Description                         |
+|--------------|---------------------------|-------------------------------------|
+| value        | any                       | value stored in localStorage        |
+| set          | `(newValue: any) => void` | set value stored in localStorage    |
+| remove       | `() => void`              | remove value stored in localStorage |
+
+
 ## Codesandbox Example
 
 ### Basic Usage
 
-<iframe src="https://codesandbox.io/embed/usevisibilitysensor-ej29y?fontsize=14&hidenavigation=1&theme=dark"
+<iframe src="https://codesandbox.io/embed/uselocalstorage-dyfwt?fontsize=14&hidenavigation=1&theme=dark"
    style={{
     width: "100%",
     height: 500,
@@ -51,7 +69,7 @@ render(<Demo />);
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useVisibilitySensor"
+title="useLocalstorage"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
