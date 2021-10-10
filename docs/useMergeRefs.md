@@ -24,12 +24,41 @@ import { useMergeRefs } from "rooks";
 
 ```jsx
 function Demo() {
-  useMergeRefs();
-  return null;
+  const mousedownRef = useEventListenerRef("mousedown", () => {
+    console.log("mouse down");
+  });
+  const mouseupRef = useEventListenerRef("mouseup", () => {
+    console.log("mouse up");
+  });
+  const ref = useMergeRefs(mousedownRef, mouseupRef);
+
+  return (
+    <div>
+      <h1>Rooks : useMergeRefs Example</h1>
+      <hr></hr>
+      <div ref={ref}>
+        A div with multiple refs. Click me!!
+      </div>
+    </div>
+  );
 }
 
 render(<Demo />);
 ```
+
+### Arguments
+
+| Argument value | Type  | Description                                                          |
+|----------------|-------|----------------------------------------------------------------------|
+| refs           | Array | Takes any number of refs. Refs can be mutable refs or function refs. |
+
+### Returns
+
+| Return value | Type        | Description |
+|--------------|-------------|-------------|
+| ref          | CallbackRef | Merged ref  |
+
+
 
 ---
 
@@ -38,16 +67,16 @@ render(<Demo />);
 ### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usemergerefs-rk7m1?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
+  style={{
     width: "100%",
     height: 500,
     border: 0,
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useMergeRefs"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  title="useMergeRefs"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
 ## Join Bhargav's discord server

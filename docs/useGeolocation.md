@@ -73,21 +73,47 @@ function App() {
 render(<App />);
 ```
 
+
+### Arguments
+
+The argument is an object with the following optional items:
+
+| Argument value             | Type    | Description                              |
+|----------------------------|---------|------------------------------------------|
+| options.enableHighAccuracy | boolean | enable high accuracy if `true`           |
+| options.timeout            | number  | timeout in milliseconds                  |
+| options.maximumAge         | number  | maximumAge in milliseconds               |
+| options.when               | boolean | this hook will run when `when` is `true` |
+
+### Returns
+
+Returns an object with following items:
+
+```typescript
+{
+  lat?: number;
+  lng?: number;
+  isError: boolean;
+  message: string;
+}
+```
+
+
 ## Codesandbox Example
 
 ### Basic Usage
 
 <iframe src="https://codesandbox.io/embed/usegeolocation-r1lm7?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
+  style={{
     width: "100%",
     height: 500,
     border: 0,
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useGeolocation"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  title="useGeolocation"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
 ## Join Bhargav's discord server
