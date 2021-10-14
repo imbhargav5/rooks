@@ -1,3 +1,10 @@
+## <small>5.7.3 (2021-10-14)</small>
+
+* fix(useDebounce): update types for return type of callback (#603) ([d8a2695](https://github.com/imbhargav5/rooks/commit/d8a2695)), closes [#603](https://github.com/imbhargav5/rooks/issues/603)
+* chore(docs): Update changelog and docs ([665a780](https://github.com/imbhargav5/rooks/commit/665a780))
+
+
+
 ## <small>5.7.2 (2021-10-10)</small>
 
 * fix: add warning message for deprecated hooks (#595) ([c669a8e](https://github.com/imbhargav5/rooks/commit/c669a8e)), closes [#595](https://github.com/imbhargav5/rooks/issues/595)
