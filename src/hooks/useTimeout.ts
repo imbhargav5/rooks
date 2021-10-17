@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 type UseTimeoutHandler = {
   start: () => any;
@@ -17,6 +18,9 @@ function useTimeout(
   callback_: () => void,
   timeoutDelayMs: number = 0
 ): UseTimeoutHandler {
+  useWarningOnMountInDevelopment(
+    "useTimeout is deprecated, it will be removed in rooks v7. Please use useTimeoutWhen instead."
+  );
   const [isTimeoutActive, setIsTimeoutActive] = useState(false);
   const savedRefCallback = useRef<() => any>();
 

@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 /**
  *  useDidUpdate hook
@@ -13,12 +14,15 @@ import { useEffect, useRef } from 'react';
  * @returns {undefined}
  */
 function useUpdateEffect(callback: () => any, conditions?: any[]): void {
+  useWarningOnMountInDevelopment(
+    "useUpdateEffect is deprecated, it will be removed in rooks v7. Please use useDidUpdate instead."
+  );
   const hasMountedRef = useRef(false);
-  if (typeof conditions !== 'undefined' && !Array.isArray(conditions)) {
+  if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
     conditions = [conditions];
   } else if (Array.isArray(conditions) && conditions.length === 0) {
     console.warn(
-      'Using [] as the second argument makes useUpdateEffect a noop. The second argument should either be `undefined` or an array of length greater than 0.'
+      "Using [] as the second argument makes useUpdateEffect a noop. The second argument should either be `undefined` or an array of length greater than 0."
     );
   }
   useEffect(() => {

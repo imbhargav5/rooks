@@ -62,7 +62,7 @@ Returns an array of 3 items:
 
 | Return item | Type                   | Description                                                                          | Default value |
 |-------------|------------------------|--------------------------------------------------------------------------------------|---------------|
-| ref         | Callback ref           | A callback ref function to be used as a ref for the element that needs to be tracked | () => null    |
+| ref         | Callback ref           | A callback ref function to be used as a ref for the element that needs to be tracked | undefined     |
 | dimensions  | UseDimensionsRefReturn | An object with dimensions of the ref element                                         | null          |
 | node        | HTMLElement            | The element being tracked by ref                                                     | null          |
 

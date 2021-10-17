@@ -1,3 +1,4 @@
+import type { DebouncedFunc } from "lodash";
 import debounce from "lodash.debounce";
 import { useRef, useEffect, useCallback } from "react";
 
@@ -9,16 +10,20 @@ import { useRef, useEffect, useCallback } from "react";
  * @param {number} wait The duration to debounce
  * @returns {Function} The debounced callback
  */
-function useDebounce(callback: Function, wait: number, options?: {}): Function {
+function useDebounce<T extends (...args: any[]) => unknown>(
+  callback: T,
+  wait: number,
+  options?: {}
+): DebouncedFunc<T> {
   const createDebouncedCallback = useCallback(
-    (function_: Function): Function => {
+    (function_: T): DebouncedFunc<T> => {
       return debounce(function_, wait, options);
     },
     [wait, options]
   );
 
-  const callbackRef = useRef<Function>(callback);
-  const debouncedCallbackRef = useRef<Function>(
+  const callbackRef = useRef<T>(callback);
+  const debouncedCallbackRef = useRef<DebouncedFunc<T>>(
     createDebouncedCallback(callback)
   );
 
@@ -27,9 +32,7 @@ function useDebounce(callback: Function, wait: number, options?: {}): Function {
   });
 
   useEffect(() => {
-    debouncedCallbackRef.current = createDebouncedCallback((...args: any[]) => {
-      callbackRef.current(...args);
-    });
+    debouncedCallbackRef.current = createDebouncedCallback(callbackRef.current);
   }, [wait, options, createDebouncedCallback]);
 
   return debouncedCallbackRef.current;
