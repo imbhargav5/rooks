@@ -1,3 +1,4 @@
+import type React from "react";
 import { useCallback, useEffect, useRef } from "react";
 
 type Options = {
@@ -59,6 +60,10 @@ function useClickAndHold(
     stopActionInterval();
   }, [stopActionInterval]);
 
+  const onTouchCancel = useCallback(() => {
+    stopActionInterval();
+  }, [stopActionInterval]);
+
   const onMouseLeave = useCallback(() => {
     stopActionInterval();
   }, [stopActionInterval]);
@@ -85,6 +90,7 @@ function useClickAndHold(
     onMouseDown: disabled ? undefined : onMouseDown,
     onMouseLeave: disabled ? undefined : onMouseLeave,
     onMouseUp: disabled ? undefined : onMouseUp,
+    onTouchCancel: disabled ? undefined : onTouchCancel,
     onTouchEnd: disabled ? undefined : onTouchEnd,
     onTouchStart: disabled ? undefined : onTouchStart,
   };

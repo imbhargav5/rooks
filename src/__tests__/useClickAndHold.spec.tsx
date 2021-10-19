@@ -81,6 +81,26 @@ describe("useClickAndHold", () => {
     expect(actionSpy).toHaveBeenCalledWith(true);
   });
 
+  it("should stop onAction calls when touch is canceled", async () => {
+    expect.assertions(2);
+
+    const NUM_CLICKS = 3;
+    const actionSpy = jest.fn();
+    const { getByTestId } = render(
+      <Component delay={DELAY} initialDelay={DELAY} onAction={actionSpy} />
+    );
+
+    await act(async () => {
+      fireEvent.touchStart(getByTestId("btn"));
+      await sleep(NUM_CLICKS * DELAY + 50);
+      fireEvent.touchCancel(getByTestId("btn"));
+      await sleep(DELAY + 50);
+    });
+
+    expect(actionSpy).toHaveBeenCalledTimes(3);
+    expect(actionSpy).toHaveBeenCalledWith(true);
+  });
+
   it("should stop onAction calls after provide disabled arg as true", async () => {
     expect.assertions(2);
 
@@ -98,8 +118,8 @@ describe("useClickAndHold", () => {
     rerender(
       <Component
         delay={DELAY}
-        initialDelay={DELAY}
         disabled
+        initialDelay={DELAY}
         onAction={actionSpy}
       />
     );
@@ -118,8 +138,8 @@ describe("useClickAndHold", () => {
     const { getByTestId } = render(
       <Component
         delay={DELAY}
-        onAction={actionSpy}
         initialDelay={INITIAL_DELAY}
+        onAction={actionSpy}
       />
     );
 
@@ -142,8 +162,8 @@ describe("useClickAndHold", () => {
     const { getByTestId } = render(
       <Component
         delay={DELAY}
-        onAction={actionSpy}
         initialDelay={INITIAL_DELAY}
+        onAction={actionSpy}
       />
     );
 
@@ -166,8 +186,8 @@ describe("useClickAndHold", () => {
     const { getByTestId } = render(
       <Component
         delay={DELAY}
-        onAction={actionSpy}
         initialDelay={INITIAL_DELAY}
+        onAction={actionSpy}
       />
     );
 
