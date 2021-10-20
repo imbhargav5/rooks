@@ -130,6 +130,28 @@ describe("useClickAndHold", () => {
     expect(actionSpy).toHaveBeenCalledWith(true);
   });
 
+  it("should stop onAction calls after component is unmounted", async () => {
+    expect.assertions(2);
+
+    const NUM_CLICKS = 3;
+    const actionSpy = jest.fn();
+    const { getByTestId, rerender } = render(
+      <Component delay={DELAY} initialDelay={DELAY} onAction={actionSpy} />
+    );
+
+    await act(async () => {
+      fireEvent.mouseDown(getByTestId("btn"));
+      await sleep(NUM_CLICKS * DELAY + 50);
+    });
+
+    rerender(<div />);
+
+    await act(() => sleep(DELAY));
+
+    expect(actionSpy).toHaveBeenCalledTimes(3);
+    expect(actionSpy).toHaveBeenCalledWith(true);
+  });
+
   it("should works correctly with param initialDelay", async () => {
     expect.assertions(2);
 

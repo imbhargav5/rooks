@@ -1,4 +1,3 @@
-import type React from "react";
 import { useCallback, useEffect, useRef } from "react";
 
 type Options = {
@@ -47,6 +46,12 @@ function useClickAndHold(
       stopActionInterval();
     }
   }, [disabled, stopActionInterval]);
+
+  useEffect(() => {
+    return () => {
+      stopActionInterval();
+    };
+  }, [stopActionInterval]);
 
   const onMouseDown = useCallback(() => {
     setupActionInterval();
