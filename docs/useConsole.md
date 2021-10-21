@@ -22,7 +22,7 @@ useEffect(() => {
 }, [value])
 ```
 
-useConsole does that for with few more neat tricks so you can keep your
+useConsole does that for you. Also it has few neat tricks so you can keep your
 JS console nice and tidy and lose less time while debugging.
 
 [//]: # "Main"
