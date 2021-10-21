@@ -66,7 +66,7 @@ const Demo2 = () => {
   const [value, setValue] = useState(0);
 
 
-  useConsole("info", value);
+  useConsole('info', value);
 
   return (
     <div>
@@ -78,6 +78,18 @@ const Demo2 = () => {
 
 render(<Demo2 />);
 ```
+
+You can pass as many arguments as you want (just like console.log and other methods).
+
+```jsx
+useConsole(foo, value, bar);
+
+useConsole('error', error, error2, error3);
+```
+
+
+This hook will also automatically silence all logging when `NODE_ENV=production`
+so you do not need worry about cleaning it up.
 
 ## Arguments
 

@@ -5,10 +5,10 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 /**
  * Drop in replacement for javascript console but it is reactive.
  *
- * It also automatically silence all logs when in production.
+ * It also automatically silences all logs when in production.
  *
- * @param {unknown} levelMaybe
- * @param {...unknown[]} args
+ * @param {unknown} levelMaybe optional, if this is one of the Console log levels then it will change the underlying console method
+ * @param {...unknown[]} args any arguments to watch and log on changes
  */
 const useConsole = (levelMaybe: unknown, ...args: unknown[]): void => {
   const loggerArgs = useMemo(() => {
