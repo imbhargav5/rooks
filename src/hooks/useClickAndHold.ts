@@ -1,3 +1,4 @@
+import type React from "react";
 import { useCallback, useEffect, useRef } from "react";
 
 type Options = {
@@ -73,6 +74,22 @@ function useClickAndHold(
     stopActionInterval();
   }, [stopActionInterval]);
 
+  const onTouchMove = useCallback(
+    (event: React.TouchEvent<HTMLElement>) => {
+      if (touchLeftOfElement()) stopActionInterval();
+
+      function touchLeftOfElement() {
+        const touch = event.touches.item(0);
+        if (!touch) return false;
+
+        return (
+          document.elementFromPoint(touch.pageX, touch.pageY) !== event.target
+        );
+      }
+    },
+    [stopActionInterval]
+  );
+
   const shouldIgnoreOnClick = useRef(false);
   const onMouseUp = useCallback(() => {
     if (actionIntervalIsActive.current) {
@@ -97,6 +114,7 @@ function useClickAndHold(
     onMouseUp: disabled ? undefined : onMouseUp,
     onTouchCancel: disabled ? undefined : onTouchCancel,
     onTouchEnd: disabled ? undefined : onTouchEnd,
+    onTouchMove: disabled ? undefined : onTouchMove,
     onTouchStart: disabled ? undefined : onTouchStart,
   };
 }
