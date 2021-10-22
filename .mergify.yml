@@ -1,0 +1,23 @@
+pull_request_rules:
+  - name: update out-of-sync PR
+    conditions:
+      - base=master
+      - -conflict
+      - -draft
+    actions:
+      update:
+  - name: Automatic merge on approval
+    conditions:
+      - "#approved-reviews-by>=1"
+    actions:
+      merge:
+        method: merge
+  - name: close stale pull request
+    conditions:
+      - base=master
+      - -closed
+      - updated-at<14 days ago
+    actions:
+      close:
+        message: |
+          This pull request looks stale. Feel free to reopen it if you think it is a mistake.
