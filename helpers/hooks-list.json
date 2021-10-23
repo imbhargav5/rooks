@@ -9,7 +9,7 @@
       "description": "A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked."
     },
     {
-      "name": "useConsole",
+      "name": "useDebugLogger",
       "description": "Drop in replacement for javascript console but it is reactive."
     },
     {

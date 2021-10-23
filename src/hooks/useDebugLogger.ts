@@ -10,7 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
  * @param {unknown} levelMaybe optional, if this is one of the Console log levels then it will change the underlying console method
  * @param {...unknown[]} args any arguments to watch and log on changes
  */
-const useConsole = (levelMaybe: unknown, ...args: unknown[]): void => {
+const useDebugLogger = (levelMaybe: unknown, ...args: unknown[]): void => {
   const loggerArgs = useMemo(() => {
     if (console[typeof levelMaybe === "string" ? levelMaybe : ""]) {
       return args;
@@ -32,4 +32,4 @@ const useConsole = (levelMaybe: unknown, ...args: unknown[]): void => {
   }, [levelMaybe, loggerArgs]);
 };
 
-export { useConsole };
+export { useDebugLogger };

@@ -1,7 +1,7 @@
 ---
-id: useConsole
-title: useConsole
-sidebar_label: useConsole
+id: useDebugLogger
+title: useDebugLogger
+sidebar_label: useDebugLogger
 ---
 
 ## About
@@ -22,7 +22,7 @@ useEffect(() => {
 }, [value])
 ```
 
-useConsole does that for you. Also it has few neat tricks so you can keep your
+useDebugLogger does that for you. Also it has few neat tricks so you can keep your
 JS console nice and tidy and lose less time while debugging.
 
 [//]: # "Main"
@@ -36,7 +36,7 @@ npm install rooks
 ## Importing the hook
 
 ```javascript
-import { useConsole } from "rooks";
+import { useDebugLogger } from "rooks";
 ```
 
 ## Usage
@@ -46,7 +46,7 @@ const Demo = () => {
   const [value, setValue] = useState(0);
 
   // this will log to console only when the value changes
-  useConsole(value);
+  useDebugLogger(value);
 
   return (
     <div>
@@ -66,7 +66,7 @@ const Demo2 = () => {
   const [value, setValue] = useState(0);
 
 
-  useConsole('info', value);
+  useDebugLogger('info', value);
 
   return (
     <div>
@@ -82,9 +82,9 @@ render(<Demo2 />);
 You can pass as many arguments as you want (just like console.log and other methods).
 
 ```jsx
-useConsole(foo, value, bar);
+useDebugLogger(foo, value, bar);
 
-useConsole('error', error, error2, error3);
+useDebugLogger('error', error, error2, error3);
 ```
 
 
@@ -104,7 +104,7 @@ so you do not need worry about cleaning it up.
 
 ### Basic Usage
 
-<iframe src="https://codesandbox.io/s/useconsole-6h9ss?fontsize=14&hidenavigation=1&theme=dark"
+<iframe src="https://codesandbox.io/s/usedebuglogger-6h9ss?fontsize=14&hidenavigation=1&theme=dark"
    style={{
     width: "100%",
     height: 500,
@@ -112,7 +112,7 @@ so you do not need worry about cleaning it up.
     borderRadius: 4,
     overflow: "hidden"
   }} 
-title="useConsole"
+title="useDebugLogger"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />

@@ -5,14 +5,14 @@ import { cleanup } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
 import TestRenderer from "react-test-renderer";
-import { useConsole } from "../hooks/useConsole";
+import { useDebugLogger } from "../hooks/useDebugLogger";
 
 const { act } = TestRenderer;
 
 const useHook = () => {
   const [value, setValue] = useState(0);
 
-  useConsole("info", value);
+  useDebugLogger("info", value);
 
   return { setValue, value };
 };
@@ -20,16 +20,16 @@ const useHook = () => {
 const useInfoHook = () => {
   const [value, setValue] = useState(0);
 
-  useConsole(value);
+  useDebugLogger(value);
 
   return { setValue, value };
 };
 
-describe("useConsole", () => {
+describe("useDebugLogger", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
-    expect(useConsole).toBeDefined();
+    expect(useDebugLogger).toBeDefined();
   });
 
   it("should log to console when value changes", () => {
