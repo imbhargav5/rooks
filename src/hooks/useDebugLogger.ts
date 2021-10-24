@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useDebugValue, useEffect, useMemo } from "react";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -19,6 +19,8 @@ const useDebugLogger = (levelMaybe: unknown, ...args: unknown[]): void => {
     return [levelMaybe, ...args];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelMaybe, isDevelopment ? JSON.stringify(args) : undefined]);
+
+  useDebugValue(loggerArgs);
 
   useEffect(() => {
     if (!isDevelopment) {
