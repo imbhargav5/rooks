@@ -125,7 +125,7 @@
     "mdast-normalize-headings": "^2.0.0",
     "mdast-util-compact": "^3.0.0",
     "mdast-util-from-markdown": "^0.8.1",
-    "mdast-util-heading-range": "^2.1.5",
+    "mdast-util-heading-range": "^3.1.0",
     "mdast-util-to-markdown": "^0.5.3",
     "mdast-zone": "^4.0.1",
     "meow": "5.0.0",
