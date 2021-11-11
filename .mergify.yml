@@ -5,7 +5,7 @@ queue_rules:
     conditions:
       - check-success=Build (test)
       - check-success=Test (yarn test)
-gpull_request_rules:
+pull_request_rules:
   - name: update out-of-sync PR
     conditions:
       - base=master
