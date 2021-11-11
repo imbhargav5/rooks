@@ -18,6 +18,7 @@ on:
     branches-ignore: ["all-contributors/**"]
 jobs:
   main:
+    name: Build (production)
     runs-on: ubuntu-latest
     steps:
       - name: "Check if user has write access"
@@ -53,6 +54,7 @@ jobs:
         uses: codecov/codecov-action@v2
 
   release:
+    name: Publish To NPM
     env:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     needs: main

@@ -3,11 +3,9 @@ queue_rules:
     # speculative_checks: 3
     # batch_size: 2
     conditions:
-      - check-success=CI and Semantic Release / main (test)
-      - check-success=Pull Request / build (pull_request)
-      - check-success=CI and Semantic Release / main (15) (pull_request) 
-      - check-success=GitGuardian Security Checks
-pull_request_rules:
+      - check-success=Build (test)
+      - check-success=Test (yarn test)
+gpull_request_rules:
   - name: update out-of-sync PR
     conditions:
       - base=master

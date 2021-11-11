@@ -7,7 +7,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: build
+    name: Build (test)
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
@@ -32,18 +32,16 @@ jobs:
       - name: build
         run: yarn build      
   test:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: ['16', '17']
-    name: Test ${{ matrix.node }}
+    name: Test (yarn test)
     needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          version: ${{ matrix.node }}
+          version: 16
       - run: git config user.email "me@imbhargav5.com"
       - run: git config user.name "Bhargav Ponnapalli"
       - name: Get yarn cache directory path
