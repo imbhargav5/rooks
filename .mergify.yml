@@ -1,3 +1,10 @@
+queue_rules:
+  - name: default
+    # speculative_checks: 3
+    # batch_size: 2
+    conditions:
+      - check-success=Build (test)
+      - check-success=Test (yarn test)
 pull_request_rules:
   - name: update out-of-sync PR
     conditions:
