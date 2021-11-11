@@ -56,6 +56,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install project dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!      
+        run: yarn
       - name: test
         run: yarn test --coverage
       - name: Upload coverage to Codecov
