@@ -15,9 +15,6 @@ on:
     branches-ignore: ["all-contributors/**"]
 jobs:
   main:
-    strategy:
-      matrix:
-        node: [14, 15]
     runs-on: ubuntu-latest
     steps:
       - name: "Check if user has write access"
@@ -32,7 +29,7 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -63,11 +60,10 @@ jobs:
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
-
       - name: ⎔ Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
