@@ -139,7 +139,7 @@
     "react-test-renderer": "16.13.0",
     "read-pkg-up": "8.0.0",
     "readline-sync": "^1.4.10",
-    "remark": "^13.0.0",
+    "remark": "^14.0.1",
     "remark-behead": "^2.3.3",
     "remark-frontmatter": "^3.0.0",
     "remark-preset-lint-markdown-style-guide": "^4.0.0",
