@@ -22,11 +22,11 @@ type Options = {
  *
  * useKeyBindings binds pairs of keyboard events and handlers
  *
- * @param { [key: string]: () => void } keys
+ * @param { [key: string]: (e: KeyboardEvent) => void } keys
  * @param {Options} options
  */
 const useKeyBindings = (
-  keyBindings: { [key: string]: () => void },
+  keyBindings: { [key: string]: (e: KeyboardEvent) => void },
   options_?: Options
 ) => {
   for (const key in keyBindings) {
