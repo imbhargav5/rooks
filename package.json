@@ -64,7 +64,7 @@
     "raf": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.5",
+    "@babel/cli": "7.16.0",
     "@babel/core": "7.13.15",
     "@babel/plugin-external-helpers": "7.2.0",
     "@babel/plugin-proposal-export-default-from": "7.5.2",
@@ -96,7 +96,7 @@
     "babel-loader": "8.0.5",
     "babel-plugin-prismjs": "1.0.2",
     "babel-preset-minify": "0.5.1",
-    "browser-env": "3.2.5",
+    "browser-env": "3.3.0",
     "camel-case": "^4.1.1",
     "chalk": "2.4.2",
     "classnames": "^2.2.6",
@@ -113,7 +113,7 @@
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "gulp-conventional-changelog": "^2.0.35",
-    "husky": "^4.2.5",
+    "husky": "^7.0.4",
     "inquirer": "7.0.0",
     "jest": "^26.6.3",
     "jest-localstorage-mock": "^2.4.3",
