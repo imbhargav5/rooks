@@ -141,7 +141,7 @@
     "readline-sync": "^1.4.10",
     "remark": "^14.0.1",
     "remark-behead": "^2.3.3",
-    "remark-frontmatter": "^3.0.0",
+    "remark-frontmatter": "^4.0.1",
     "remark-preset-lint-markdown-style-guide": "^4.0.0",
     "remark-strip-badges": "^5.0.0",
     "replace-string": "2.0.0",
