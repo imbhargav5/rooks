@@ -3223,6 +3223,13 @@
     "@types/estree" "*"
     "@types/json-schema" "*"
 
+"@types/estree-jsx@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@types/estree-jsx/-/estree-jsx-0.0.1.tgz#c36d7a1afeb47a95a8ee0b7bc8bc705db38f919d"
+  integrity sha512-gcLAYiMfQklDCPjQegGn0TBAn9it05ISEsEhlKQUddIk7o2XDokOcTN7HBO8tznM0D9dGezvHEfRZBfZf6me0A==
+  dependencies:
+    "@types/estree" "*"
+
 "@types/estree@*":
   version "0.0.45"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
@@ -11978,6 +11985,13 @@ mdast-comment-marker@^1.0.0:
   resolved "https://registry.yarnpkg.com/mdast-comment-marker/-/mdast-comment-marker-1.1.2.tgz#5ad2e42cfcc41b92a10c1421a98c288d7b447a6d"
   integrity sha512-vTFXtmbbF3rgnTh3Zl3irso4LtvwUq/jaDvT2D1JqTGAwaipcS7RpTxzi6KjoRqI9n2yuAhzLDAC8xVTF3XYVQ==
 
+mdast-comment-marker@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mdast-comment-marker/-/mdast-comment-marker-2.1.0.tgz#67acce26def829b310016c7a186ec6ec3e7d6a3f"
+  integrity sha512-/+Cfm8A83PjkqjQDB9iYqHESGuXlriCWAwRGPJjkYmxXrF4r6saxeUlOKNrf+SogTwg9E8uyHRCFHLG6/BAAdA==
+  dependencies:
+    mdast-util-mdx-expression "^1.1.0"
+
 mdast-normalize-headings@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/mdast-normalize-headings/-/mdast-normalize-headings-3.1.0.tgz#45747f0b76ef9d7f5f741de652a951266f49aab5"
@@ -12039,6 +12053,13 @@ mdast-util-heading-style@^1.0.2:
   resolved "https://registry.yarnpkg.com/mdast-util-heading-style/-/mdast-util-heading-style-1.0.6.tgz#6410418926fd5673d40f519406b35d17da10e3c5"
   integrity sha512-8ZuuegRqS0KESgjAGW8zTx4tJ3VNIiIaGFNEzFpRSAQBavVc7AvOo9I4g3crcZBfYisHs4seYh0rAVimO6HyOw==
 
+mdast-util-mdx-expression@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-util-mdx-expression/-/mdast-util-mdx-expression-1.1.1.tgz#657522e78b84f5c85cd2395776aba8dcfb7bbb0f"
+  integrity sha512-RDLRkBFmBKCJl6/fQdxxKL2BqNtoPFoNBmQAlj5ZNKOijIWRKjdhPkeufsUOaexLj+78mhJc+L7d1MYka8/LdQ==
+  dependencies:
+    "@types/estree-jsx" "^0.0.1"
+
 mdast-util-to-hast@10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-10.0.1.tgz#0cfc82089494c52d46eb0e3edb7a4eb2aea021eb"
@@ -12080,13 +12101,15 @@ mdast-util-to-string@^3.0.0:
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-3.1.0.tgz#56c506d065fbf769515235e577b5a261552d56e9"
   integrity sha512-n4Vypz/DZgwo0iMHLQL49dJzlp7YtAJP+N07MZHpjPf/5XJuHUWstviF4Mn2jEiR/GNmtnRRqnwsXExk3igfFA==
 
-mdast-zone@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/mdast-zone/-/mdast-zone-4.0.1.tgz#314b954c6c87ee2864818f886d805b884ab4eb83"
-  integrity sha512-xWb6LpIWlDjaD5bT9/wDtCu/K7Ro/eu19jE2k8WzAzRaW6w9vwUyx+cXLBeTzPVoMyijJVVZxpLAl0bZOx9ikg==
+mdast-zone@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/mdast-zone/-/mdast-zone-5.1.0.tgz#e0190959b8db821dc955391e05753699b079d1f5"
+  integrity sha512-nXxbNnN5Q1w8idtgKgtmay7hwNjlgWtHvAop5e7ymeAoUWrrN9EdkdnmZhWK79KV0VcMp+EKhLzoPoPENF3G7g==
   dependencies:
-    mdast-comment-marker "^1.0.0"
-    unist-util-visit "^2.0.0"
+    "@types/mdast" "^3.0.0"
+    "@types/unist" "^2.0.0"
+    mdast-comment-marker "^2.0.0"
+    unist-util-visit "^4.0.0"
 
 mdn-data@2.0.14:
   version "2.0.14"
