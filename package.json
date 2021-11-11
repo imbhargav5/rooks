@@ -129,7 +129,7 @@
     "mdast-util-to-markdown": "^0.5.3",
     "mdast-zone": "^5.1.0",
     "meow": "5.0.0",
-    "mini-css-extract-plugin": "0.8.0",
+    "mini-css-extract-plugin": "2.4.4",
     "np": "^7.4.0",
     "ora": "4.0.3",
     "pkg-dir": "^6.0.1",
