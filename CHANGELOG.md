@@ -1,3 +1,12 @@
+## 5.8.0 (2021-11-11)
+
+* feat(types): updated useKeyBindings callback type (#610) ([4f01b72](https://github.com/imbhargav5/rooks/commit/4f01b72)), closes [#610](https://github.com/imbhargav5/rooks/issues/610)
+* ci(Mergify): configuration update (#607) ([9d3c272](https://github.com/imbhargav5/rooks/commit/9d3c272)), closes [#607](https://github.com/imbhargav5/rooks/issues/607)
+* test: add unit tests (#604) ([c981dc3](https://github.com/imbhargav5/rooks/commit/c981dc3)), closes [#604](https://github.com/imbhargav5/rooks/issues/604)
+* chore(docs): Update changelog and docs ([0f3804e](https://github.com/imbhargav5/rooks/commit/0f3804e))
+
+
+
 ## <small>5.7.3 (2021-10-14)</small>
 
 * fix(useDebounce): update types for return type of callback (#603) ([d8a2695](https://github.com/imbhargav5/rooks/commit/d8a2695)), closes [#603](https://github.com/imbhargav5/rooks/issues/603)
