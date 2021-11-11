@@ -28,3 +28,14 @@ pull_request_rules:
       close:
         message: |
           This pull request looks stale. Feel free to reopen it if you think it is a mistake.
+  - name: merge Dependabot pull request
+    conditions:
+      - author=dependabot[bot]
+    actions:
+      review:
+        type: APPROVE
+        message: Automatically approving Dependabot
+      queue:
+        name: default
+        method: rebase
+        priority: low
