@@ -57,7 +57,8 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
-    "contributors:update": "ts-node helpers/update-all-contributors"
+    "contributors:update": "ts-node helpers/update-all-contributors",
+    "prepare": "husky install"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
@@ -70,9 +71,9 @@
     "@babel/plugin-proposal-export-default-from": "7.5.2",
     "@babel/preset-env": "7.12.11",
     "@babel/preset-react": "7.0.0",
-    "@docusaurus/core": "^2.0.0-alpha.75",
+    "@docusaurus/core": "2.0.0-beta.9",
     "@docusaurus/plugin-client-redirects": "2.0.0-beta.9",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.75",
+    "@docusaurus/preset-classic": "2.0.0-beta.9",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -113,7 +114,7 @@
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "gulp-conventional-changelog": "^2.0.35",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "inquirer": "8.2.0",
     "jest": "^26.6.3",
     "jest-localstorage-mock": "^2.4.3",
