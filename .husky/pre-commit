@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;
