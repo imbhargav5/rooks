@@ -138,7 +138,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "17.0.2",
-    "read-pkg-up": "8.0.0",
+    "read-pkg-up": "9.0.0",
     "readline-sync": "^1.4.10",
     "remark": "^14.0.1",
     "remark-behead": "^2.3.3",
