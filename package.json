@@ -136,7 +136,7 @@
     "prettier": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "16.13.0",
+    "react-test-renderer": "17.0.2",
     "read-pkg-up": "8.0.0",
     "readline-sync": "^1.4.10",
     "remark": "^14.0.1",
