@@ -128,7 +128,7 @@
     "mdast-util-heading-range": "^3.1.0",
     "mdast-util-to-markdown": "^1.2.4",
     "mdast-zone": "^5.1.0",
-    "meow": "5.0.0",
+    "meow": "10.1.1",
     "mini-css-extract-plugin": "2.4.4",
     "np": "^7.4.0",
     "ora": "4.0.3",
