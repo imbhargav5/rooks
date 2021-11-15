@@ -2234,9 +2234,9 @@
     "@rollup/pluginutils" "^3.0.8"
 
 "@rollup/plugin-multi-entry@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-multi-entry/-/plugin-multi-entry-4.0.0.tgz#8e105f16ec1bb26639eb3302c8db5665f44b9939"
-  integrity sha512-1Sw86rwFxrNS7ECY3iSZ7T940xKnruNGpmQDgSDVTp+VTa1g5cPXNzBgp+IoOer41CiVeGFLwYwvicVoJLHEDQ==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-multi-entry/-/plugin-multi-entry-4.1.0.tgz#e531511d4a9f490f766dbee1f10d6d94d26b3863"
+  integrity sha512-nellK5pr50W0JA2+bDJbG8F79GBP802J40YRoC0wyfpTAeAn5mJ4eaFiB/MN+YoX9hgb/6RJoZl9leDjZnUFKw==
   dependencies:
     "@rollup/plugin-virtual" "^2.0.3"
     matched "^5.0.0"
