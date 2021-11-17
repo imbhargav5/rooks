@@ -9,4 +9,5 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      
+    ignore:
+      - dependency-name: "pkg-dir"
