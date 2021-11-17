@@ -109,7 +109,7 @@
     "eslint-config-canonical": "^25.9.1",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-testing-library": "^5.0.0",
-    "execa": "^5.1.1",
+    "execa": "^6.0.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
