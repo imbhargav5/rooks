@@ -16508,12 +16508,13 @@ unist-util-find-all-before@^2.0.5:
   dependencies:
     unist-util-is "^4.0.0"
 
-unist-util-find-all-before@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/unist-util-find-all-before/-/unist-util-find-all-before-3.0.1.tgz#c72018ef609168009d9e48c012c3135eb9fd3eaa"
-  integrity sha512-00YMzXOOu4z/qCHKQI6z7TeERAbIBda0E/1sZqP0cJdGd3d1OtUPvQlMhNCwz4QBFo//GcW2dHOYXPdu3jINdA==
+unist-util-find-all-before@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-find-all-before/-/unist-util-find-all-before-4.0.0.tgz#da5c5395cd883d8005775b36d71a0b8606ef992f"
+  integrity sha512-iMW5OS5EGQzOAOK3yhRjZp/AYQ3HH21pv9rxnxhI5IbzWGmUFaGbFE3Az+DZ3s+km+oEEH+oLxNUkXRv48o82A==
   dependencies:
-    unist-util-is "^4.0.0"
+    "@types/unist" "^2.0.0"
+    unist-util-is "^5.0.0"
 
 unist-util-find-all-between@^2.0.0, unist-util-find-all-between@^2.1.0:
   version "2.1.0"
