@@ -14501,9 +14501,9 @@ remark-strip-badges@^6.0.1:
     unist-util-visit "^4.0.0"
 
 remark@^14.0.1:
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/remark/-/remark-14.0.1.tgz#a97280d4f2a3010a7d81e6c292a310dcd5554d80"
-  integrity sha512-7zLG3u8EUjOGuaAS9gUNJPD2j+SqDqAFHv2g6WMpE5CU9rZ6e3IKDM12KHZ3x+YNje+NMAuN55yx8S5msGSx7Q==
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/remark/-/remark-14.0.2.tgz#4a1833f7441a5c29e44b37bb1843fb820797b40f"
+  integrity sha512-A3ARm2V4BgiRXaUo5K0dRvJ1lbogrbXnhkJRmD0yw092/Yl0kOCZt1k9ZeElEwkZsWGsMumz6qL5MfNJH9nOBA==
   dependencies:
     "@types/mdast" "^3.0.0"
     remark-parse "^10.0.0"
@@ -14579,10 +14579,10 @@ replace-homedir@^1.0.0:
     is-absolute "^1.0.0"
     remove-trailing-separator "^1.1.0"
 
-replace-string@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/replace-string/-/replace-string-2.0.0.tgz#2ba068708a4a88672e93b83acdb9f865f9e323ef"
-  integrity sha512-e6cHLIPJeIReWRcKFXdGC2bVR9dC4Bdwf2LIhzefHNPNR5ob90LtopHVGisQmaYEVfEtB945lmTA8B+e2lMJvQ==
+replace-string@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/replace-string/-/replace-string-4.0.0.tgz#2f7270b3e38d118a00ff328481305561c7fe74cf"
+  integrity sha512-fcgyZ62o26oBaihEC302pZQ2WectvmZ4sGOq4Lwa8ad12lPbhIlZCvLpgpI1sOAsbN83kpXiH5KCcr3pcZa8bA==
 
 req-all@^0.1.0:
   version "0.1.0"
