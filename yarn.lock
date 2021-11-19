@@ -14542,10 +14542,10 @@ replace-homedir@^1.0.0:
     is-absolute "^1.0.0"
     remove-trailing-separator "^1.1.0"
 
-replace-string@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/replace-string/-/replace-string-2.0.0.tgz#2ba068708a4a88672e93b83acdb9f865f9e323ef"
-  integrity sha512-e6cHLIPJeIReWRcKFXdGC2bVR9dC4Bdwf2LIhzefHNPNR5ob90LtopHVGisQmaYEVfEtB945lmTA8B+e2lMJvQ==
+replace-string@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/replace-string/-/replace-string-4.0.0.tgz#2f7270b3e38d118a00ff328481305561c7fe74cf"
+  integrity sha512-fcgyZ62o26oBaihEC302pZQ2WectvmZ4sGOq4Lwa8ad12lPbhIlZCvLpgpI1sOAsbN83kpXiH5KCcr3pcZa8bA==
 
 req-all@^0.1.0:
   version "0.1.0"
