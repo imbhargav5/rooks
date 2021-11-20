@@ -1,4 +1,7 @@
 name: CI and Semantic Release
+concurrency:
+  group: release-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 on:
   push:
     branches:
@@ -15,9 +18,7 @@ on:
     branches-ignore: ["all-contributors/**"]
 jobs:
   main:
-    strategy:
-      matrix:
-        node: [14, 15]
+    name: Build (production)
     runs-on: ubuntu-latest
     steps:
       - name: "Check if user has write access"
@@ -32,7 +33,7 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -53,6 +54,7 @@ jobs:
         uses: codecov/codecov-action@v2
 
   release:
+    name: Publish To NPM
     env:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     needs: main
@@ -63,11 +65,10 @@ jobs:
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
-
       - name: ⎔ Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

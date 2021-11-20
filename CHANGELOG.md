@@ -1,3 +1,61 @@
+## 5.8.0 (2021-11-11)
+
+* feat(types): updated useKeyBindings callback type (#610) ([4f01b72](https://github.com/imbhargav5/rooks/commit/4f01b72)), closes [#610](https://github.com/imbhargav5/rooks/issues/610)
+* ci(Mergify): configuration update (#607) ([9d3c272](https://github.com/imbhargav5/rooks/commit/9d3c272)), closes [#607](https://github.com/imbhargav5/rooks/issues/607)
+* test: add unit tests (#604) ([c981dc3](https://github.com/imbhargav5/rooks/commit/c981dc3)), closes [#604](https://github.com/imbhargav5/rooks/issues/604)
+* chore(docs): Update changelog and docs ([0f3804e](https://github.com/imbhargav5/rooks/commit/0f3804e))
+
+
+
+## <small>5.7.3 (2021-10-14)</small>
+
+* fix(useDebounce): update types for return type of callback (#603) ([d8a2695](https://github.com/imbhargav5/rooks/commit/d8a2695)), closes [#603](https://github.com/imbhargav5/rooks/issues/603)
+* chore(docs): Update changelog and docs ([665a780](https://github.com/imbhargav5/rooks/commit/665a780))
+
+
+
+## <small>5.7.2 (2021-10-10)</small>
+
+* fix: add warning message for deprecated hooks (#595) ([c669a8e](https://github.com/imbhargav5/rooks/commit/c669a8e)), closes [#595](https://github.com/imbhargav5/rooks/issues/595)
+* docs: add examples (#600) ([0028ba3](https://github.com/imbhargav5/rooks/commit/0028ba3)), closes [#600](https://github.com/imbhargav5/rooks/issues/600)
+* docs: add more examples (#596) ([e33e116](https://github.com/imbhargav5/rooks/commit/e33e116)), closes [#596](https://github.com/imbhargav5/rooks/issues/596)
+* docs: add more examples (#599) ([260e606](https://github.com/imbhargav5/rooks/commit/260e606)), closes [#599](https://github.com/imbhargav5/rooks/issues/599)
+* docs: improve usage and examples (#593) ([05501a6](https://github.com/imbhargav5/rooks/commit/05501a6)), closes [#593](https://github.com/imbhargav5/rooks/issues/593)
+* chore(deps): bump prismjs from 1.24.0 to 1.25.0 (#597) ([5632db3](https://github.com/imbhargav5/rooks/commit/5632db3)), closes [#597](https://github.com/imbhargav5/rooks/issues/597)
+* chore(deps): bump tmpl from 1.0.4 to 1.0.5 (#598) ([a87c2b0](https://github.com/imbhargav5/rooks/commit/a87c2b0)), closes [#598](https://github.com/imbhargav5/rooks/issues/598)
+* chore(deps): bump url-parse from 1.5.1 to 1.5.3 (#601) ([13aceab](https://github.com/imbhargav5/rooks/commit/13aceab)), closes [#601](https://github.com/imbhargav5/rooks/issues/601)
+* chore(docs): Update changelog and docs ([b4c5604](https://github.com/imbhargav5/rooks/commit/b4c5604))
+
+
+
+## <small>5.7.1 (2021-09-13)</small>
+
+* fix(useMediaMatch): safari 13.1 addListener fix (#591) ([2bd2755](https://github.com/imbhargav5/rooks/commit/2bd2755)), closes [#591](https://github.com/imbhargav5/rooks/issues/591)
+* docs: update examples and usage (#589) ([a64f3a4](https://github.com/imbhargav5/rooks/commit/a64f3a4)), closes [#589](https://github.com/imbhargav5/rooks/issues/589)
+* docs(example): update doc for useCountdown, useDebounce ([dbe7264](https://github.com/imbhargav5/rooks/commit/dbe7264))
+* docs(useOutsideClick): fix typo in useOutsideClick.md  ([7454e07](https://github.com/imbhargav5/rooks/commit/7454e07))
+* docs(useRefElement): add to hook list and add to docs (#588) ([0c33eaf](https://github.com/imbhargav5/rooks/commit/0c33eaf)), closes [#588](https://github.com/imbhargav5/rooks/issues/588)
+* docs(useboundingclientrect):Typo in useboundingclientrect hook (#584) ([1774084](https://github.com/imbhargav5/rooks/commit/1774084)), closes [#584](https://github.com/imbhargav5/rooks/issues/584)
+* chore(docs): Update changelog and docs ([0840fbe](https://github.com/imbhargav5/rooks/commit/0840fbe))
+
+
+
+## 5.7.0 (2021-09-02)
+
+* feat(useRefElement): expose useRefElement hook (#573) ([f427465](https://github.com/imbhargav5/rooks/commit/f427465)), closes [#573](https://github.com/imbhargav5/rooks/issues/573)
+* chore(docs): Update changelog and docs ([85168ba](https://github.com/imbhargav5/rooks/commit/85168ba))
+
+
+
+## <small>5.6.1 (2021-08-29)</small>
+
+* fix(docs): update docs for useOutsideClick, useOutsideClickRef, useOnWindowResize, useOnWindowScroll ([3b31a43](https://github.com/imbhargav5/rooks/commit/3b31a43)), closes [#566](https://github.com/imbhargav5/rooks/issues/566)
+* chore(docs): Update changelog and docs ([fc2a6b3](https://github.com/imbhargav5/rooks/commit/fc2a6b3))
+* chore(prettier): run yarn format (#562) ([ff39095](https://github.com/imbhargav5/rooks/commit/ff39095)), closes [#562](https://github.com/imbhargav5/rooks/issues/562)
+* docs(useDebouncedValue): fix example and add codesandbox (#560) ([99309e0](https://github.com/imbhargav5/rooks/commit/99309e0)), closes [#560](https://github.com/imbhargav5/rooks/issues/560)
+
+
+
 ## 5.6.0 (2021-08-18)
 
 * feat(useIntervalWhen): add support to fire the first callback eagerly ([13ebe92](https://github.com/imbhargav5/rooks/commit/13ebe92))

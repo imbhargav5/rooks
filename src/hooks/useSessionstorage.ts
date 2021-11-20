@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useReducer, useCallback } from "react";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 type StorageHandlerAsObject = {
   value: any;
@@ -31,6 +32,9 @@ function useSessionstorage(
   key: string,
   defaultValue: any = null
 ): StorageHandler {
+  useWarningOnMountInDevelopment(
+    "useSessionstorage is deprecated, it will be removed in rooks v7. Please use useSessionstorageState instead."
+  );
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
   function init() {
