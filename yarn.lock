@@ -14813,9 +14813,9 @@ rollup-plugin-dts@^2.0.0:
     "@babel/code-frame" "^7.10.4"
 
 rollup-plugin-esbuild@^4.0.1:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-esbuild/-/rollup-plugin-esbuild-4.6.0.tgz#293b0c8d2e64b753918f3023c1fb87dc4acdef3b"
-  integrity sha512-fjihkrOCy7qeNDd1VmtWw39UA4b6a96NVrsuK6eg1SArnWoS3G4xLoW7liF0oRQU7+ONPr/Gjxz9cv+WLRhaGA==
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-esbuild/-/rollup-plugin-esbuild-4.7.2.tgz#1a496a9f96257cdf5ed800e818932859232471f8"
+  integrity sha512-rBS2hTedtG+wL/yyIWQ84zju5rtfF15gkaCLN0vsWGmBdRd0UPm52meAwkmrsPQf3mB/H2o+k9Q8Ce8A66SE5A==
   dependencies:
     "@rollup/pluginutils" "^4.1.1"
     joycon "^3.0.1"
@@ -17321,10 +17321,10 @@ webpack-sources@^3.2.2:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.2.tgz#d88e3741833efec57c4c789b6010db9977545260"
   integrity sha512-cp5qdmHnu5T8wRg2G3vZZHoJPN14aqQ89SyQ11NpGH5zEMDCclt49rzo+MaRazk7/UeILhAI+/sEtcM+7Fr0nw==
 
-webpack@5.64.1, webpack@^5.61.0:
-  version "5.64.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.64.1.tgz#fd59840c16f04fe315f2b2598a85026f12dfa1bb"
-  integrity sha512-b4FHmRgaaAjP+aVOVz41a9Qa5SmkUPQ+u8FntTQ1roPHahSComB6rXnLwc976VhUY4CqTaLu5mCswuHiNhOfVw==
+webpack@5.64.3, webpack@^5.61.0:
+  version "5.64.3"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.64.3.tgz#f4792cc3f8528db2c18375fa2cd269f69e0bf69f"
+  integrity sha512-XF6/IL9Bw2PPQioiR1UYA8Bs4tX3QXJtSelezKECdLFeSFzWoe44zqTzPW5N+xI3fACaRl2/G3sNA4WYHD7Iww==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.50"
