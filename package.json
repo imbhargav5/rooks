@@ -104,7 +104,7 @@
     "clsx": "^1.1.1",
     "conventional-changelog-cli": "^2.1.1",
     "cz-conventional-changelog": "3.3.0",
-    "esbuild": "^0.13.13",
+    "esbuild": "^0.14.0",
     "eslint": "^7.24.0",
     "eslint-config-canonical": "^25.9.1",
     "eslint-config-prettier": "^8.2.0",
