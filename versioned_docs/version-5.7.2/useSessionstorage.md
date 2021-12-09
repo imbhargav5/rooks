@@ -6,7 +6,7 @@ sidebar_label: useSessionstorage
 
 :::warning
 
-`useSessionstorage` is deprecated, it will be removed in rooks v7. Please use [useSessionstorageState](/useSessionstorageState) instead.
+`useSessionstorage` is deprecated, it will be removed in rooks v7. Please use [useSessionstorageState](./useSessionstorageState) instead.
 
 :::
 
