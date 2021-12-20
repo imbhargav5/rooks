@@ -12746,9 +12746,9 @@ normalize-range@^0.1.2:
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
 normalize-url@^4.1.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
-  integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.1.tgz#0dd90cf1288ee1d1313b87081c9a5932ee48518a"
+  integrity sha512-9UZCFRHQdNrfTpGg8+1INIg93B6zE0aXMVFkw1WFwvO4SlZywU6aLg5Of0Ap/PgcbSw4LNxvMWXMeugwMCX0AA==
 
 normalize-url@^6.0.1:
   version "6.1.0"
@@ -15385,9 +15385,9 @@ remark-parse@^10.0.0:
     unified "^10.0.0"
 
 remark-preset-lint-markdown-style-guide@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/remark-preset-lint-markdown-style-guide/-/remark-preset-lint-markdown-style-guide-5.1.1.tgz#7dbc13b208b44360041ba92d9596bce289dd4835"
-  integrity sha512-QZr1Z0Ry83kF/qCa41c8JZlNR3RmI18AbQgK1kRKCdrnd4VSEIoMgeneb3B36qnJ8K5xugpf41ePL8oot6IArw==
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/remark-preset-lint-markdown-style-guide/-/remark-preset-lint-markdown-style-guide-5.1.2.tgz#877a837261df1f6c021557463aeda1e49506dd30"
+  integrity sha512-MIAhnz0wDOq/MqLucSaAPquKGFE2I5SxqRjgWT+ZGK7TmqTxrro53e11/Pc19xPX4evmzI5CZdvaRnIoxP3ysQ==
   dependencies:
     "@types/mdast" "^3.0.0"
     remark-lint "^9.0.0"
@@ -18009,9 +18009,9 @@ vfile-message@^3.0.0:
     unist-util-stringify-position "^3.0.0"
 
 vfile-reporter@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.2.tgz#2b3bfafb428581e72073c4337acdf82912385356"
-  integrity sha512-1bYxpyhl8vhAICiKR59vYyZHIOWsF7P1nV6xjaz3ZWAyOQDQhR4DjlOZo14+PiV9oLEWIrolvGHs0/2Bnaw5Vw==
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.3.tgz#faa72f6d2d56841b352480c827b53f8417cb1b33"
+  integrity sha512-q+ruTWxFHbow359TDqoNJn5THdwRDeV+XUOtzdT/OESgaGw05CjL68ImlbzRzqS5xL62Y1IaIWb8x+RbaNjayA==
   dependencies:
     "@types/supports-color" "^8.0.0"
     string-width "^5.0.0"
