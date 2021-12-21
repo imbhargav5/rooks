@@ -27,7 +27,7 @@ type Options = {
    * @returns {boolean} Whether an update should happen or not
    *
    * */
-  validate?: (newValue: any, currentValue: any) => boolean;
+  validate?: (newValue: string, currentValue: any) => boolean;
 };
 
 const defaultOptions: Options = {};
