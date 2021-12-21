@@ -68,7 +68,7 @@
     "@babel/cli": "7.16.0",
     "@babel/core": "7.16.0",
     "@babel/plugin-external-helpers": "7.16.0",
-    "@babel/plugin-proposal-export-default-from": "7.16.0",
+    "@babel/plugin-proposal-export-default-from": "7.16.5",
     "@babel/preset-env": "7.16.4",
     "@babel/preset-react": "7.16.0",
     "@docusaurus/core": "2.0.0-beta.9",
