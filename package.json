@@ -65,7 +65,7 @@
     "raf": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.16.0",
+    "@babel/cli": "7.16.7",
     "@babel/core": "7.16.7",
     "@babel/plugin-external-helpers": "7.16.7",
     "@babel/plugin-proposal-export-default-from": "7.16.7",
