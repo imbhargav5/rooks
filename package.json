@@ -152,7 +152,7 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.0",
-    "shelljs": "0.8.4",
+    "shelljs": "0.8.5",
     "terser": "^5.6.1",
     "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
