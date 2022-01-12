@@ -8,7 +8,7 @@ sidebar_label: Getting Started
 
 ### Installation
 
-    npm i - s rooks
+    npm i -s rooks
 
 ### Importing the hooks
 
