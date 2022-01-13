@@ -94,8 +94,8 @@ function useSessionstorageState<S>(
   }, []);
 
   const remove = useCallback(() => {
-    __setValue(null);
     sessionStorage.removeItem(key);
+    __setValue(null);
   }, []);
 
   return [value, setValue, remove];
