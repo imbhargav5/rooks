@@ -21,7 +21,7 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const restTime = endTime.getTime() - time.getTime();
   const count = restTime > 0 ? Math.ceil(restTime / interval) : 0;
 
-  useIntervalWhen(onTick, count ? interval : null, true, true);
+  useIntervalWhen(onTick, count ? interval : undefined, true, true);
 
   return count;
 
