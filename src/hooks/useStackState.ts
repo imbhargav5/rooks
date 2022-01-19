@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 
-function useStackState(
-  initialList: any[]
-): [
+function useStackState(initialList: any[]): [
   any[],
   {
+    clear: () => void;
+    isEmpty: () => boolean;
     push: (item: any) => number;
     pop: () => any | undefined;
     peek: () => any | undefined;
@@ -44,14 +44,20 @@ function useStackState(
   }, [list]);
 
   const peek = useCallback(() => {
-    if (length > 0) {
-      return list[length - 1];
+    if (list.length > 0) {
+      return list[list.length - 1];
     }
 
     return undefined;
   }, [list]);
 
+  const clear = () => setList([]);
+
+  const isEmpty = useCallback(() => list.length === 0, [list]);
+
   const controls = {
+    clear,
+    isEmpty,
     length,
     peek,
     pop,

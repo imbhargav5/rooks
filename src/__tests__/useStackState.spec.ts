@@ -107,4 +107,13 @@ describe("useStackState", () => {
     expect(result.current[1].length).toEqual(0);
     expect(result.current[2]).toEqual([]);
   });
+
+  it("should clear the stack", () => {
+    const { result } = renderHook(() => useStackState([1, 2, 3]));
+    expect(result.current[1].length).toEqual(3);
+    act(() => {
+      result.current[1].clear();
+    });
+    expect(result.current[1].isEmpty()).toBe(true);
+  });
 });
