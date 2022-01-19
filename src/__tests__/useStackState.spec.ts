@@ -76,7 +76,7 @@ describe("useStackState", () => {
     expect(result.current[1].length).toEqual(3);
   });
   it("handles empty arrays", () => {
-    const { result } = renderHook(() => useStackState([]));
+    const { result } = renderHook(() => useStackState<number>([]));
 
     act(() => {
       result.current[1].pop();

@@ -1,21 +1,21 @@
 import { useCallback, useMemo, useState } from "react";
 
-function useStackState(initialList: any[]): [
-  any[],
+function useStackState<T>(initialList: T[]): [
+  T[],
   {
     clear: () => void;
     isEmpty: () => boolean;
-    push: (item: any) => number;
-    pop: () => any | undefined;
-    peek: () => any | undefined;
+    push: (item: T) => number;
+    pop: () => T | undefined;
+    peek: () => T | undefined;
     length: number;
   },
-  any[]
+  T[]
 ] {
-  const [list, setList] = useState([...initialList]);
+  const [list, setList] = useState<T[]>([...initialList]);
   const length = list.length;
 
-  const listInReverse = useMemo(() => {
+  const listInReverse = useMemo<T[]>(() => {
     const reverseList = [...list];
     reverseList.reverse();
 
@@ -23,7 +23,7 @@ function useStackState(initialList: any[]): [
   }, [list]);
 
   const push = useCallback(
-    (item: any) => {
+    (item: T) => {
       const newList = [...list, item];
       setList(newList);
 
