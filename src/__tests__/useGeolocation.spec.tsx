@@ -1,108 +1,138 @@
 /**
  * @jest-environment jsdom
  */
-import { useGeolocation } from '../hooks/useGeolocation';
+import {
+  act,
+  cleanup,
+  fireEvent,
+  screen,
+  render,
+  waitFor,
+} from "@testing-library/react";
+import type { MutableRefObject } from "react";
+import React from "react";
+import { useGeolocation } from "../hooks/useGeolocation";
 
-// describe("useGeolocation", () => {
-//   let App;
-//   beforeEach(() => {
-//     const mockGeolocation = {
-//       getCurrentPosition: jest.fn()
-//         .mockImplementationOnce((success) => Promise.resolve(success({
-//           coords: {
-//             latitude: 51.1,
-//             longitude: 45.3
-//           }
-//         })))
-//     };
+describe("useGeolocation", () => {
+  type AppProps = {
+    customRef?: MutableRefObject<number>;
+  };
+  let App: React.FC<AppProps>;
+  beforeEach(() => {
+    App = function ({ customRef }: AppProps) {
+      const [when, setWhen] = React.useState(false);
+      const geoObject = useGeolocation({ when });
+      React.useEffect(() => {
+        if (typeof customRef === "undefined") return;
+        customRef.current++;
+      });
 
-//     global.navigator.geolocation = mockGeolocation;
+      return (
+        <div className="App">
+          <button
+            data-testid="get-geolocation-btn"
+            onClick={() => {
+              setWhen(true);
+            }}
+            type="button"
+          >
+            Get Geolocation
+          </button>
+          <p data-testid="geo-info">{geoObject && JSON.stringify(geoObject)}</p>
+        </div>
+      );
+    };
+  });
+  afterEach(cleanup);
 
-//     App = function (props) {
-//       let { customRef } = props
-//       if (!customRef) {
-//         customRef = React.useRef(0)
-//       }
-//       const [when, setWhen] = React.useState(false);
-//       const renderCountRef = customRef
-//       const geoObj = useGeolocation({
-//         when
-//       });
+  it("click on get geolocation gives geolocation", async () => {
+    expect.assertions(4);
+    const mockGeolocation = {
+      getCurrentPosition: jest
+        .fn()
+        .mockImplementationOnce((success) =>
+          success({ coords: { latitude: 51.1, longitude: 45.3 } })
+        ),
+    };
 
-//       React.useEffect(() => {
-//         renderCountRef.current++
-//       })
+    Object.defineProperty(global.navigator, "geolocation", {
+      value: mockGeolocation,
+      writable: true,
+    });
 
-//       return (
-//         <div className="App">
-//           <button
-//             data-testid="get-geolocation-btn"
-//             onClick={() => {
-//               setWhen(true);
-//             }}
-//           >
-//             Get Geolocation
-//           </button>
-//           <p data-testid="geo-info">{geoObj && JSON.stringify(geoObj)}</p>
-//         </div>
-//       );
-//     }
-//     //end
-//   });
-//   afterEach(cleanup);
+    render(<App />);
+    const getGeolocationButton = screen.getByTestId("get-geolocation-btn");
+    act(() => {
+      fireEvent.click(getGeolocationButton);
+    });
+    const geoInfoPElement = await screen.findByTestId("geo-info");
+    const geoObject = JSON.parse(geoInfoPElement.innerHTML);
+    expect(`${geoObject.lat}`).toBe("51.1");
+    expect(`${geoObject.lng}`).toBe("45.3");
+    expect(geoObject.isError).toBe(false);
+    expect(geoObject.message).toBe("");
+  });
 
-//   it("should be defined", () => {
-//     expect(useGeolocation).toBeDefined();
-//   });
+  it("render should not happen infinitely, when 'when' attribute changes to true", async () => {
+    expect.hasAssertions();
+    let customRef: MutableRefObject<number>;
+    function TestComp() {
+      customRef = React.useRef<number>(0);
 
-//   it("click on get geolocation gives geolocation", async () => {
-//     let container
-//     act(() => {
-//       container = render(<App />).container;
-//     })
+      return <App customRef={customRef} />;
+    }
+    render(<TestComp />);
+    const getGeolocationButton = screen.getByTestId("get-geolocation-btn");
+    act(() => {
+      fireEvent.click(getGeolocationButton);
+    });
+    await waitFor(() => expect(customRef.current).toBe(2));
+  });
 
-//     const getGeolocationBtn = getByTestId(container, "get-geolocation-btn");
-//     const geoInfoPElem = getByTestId(container, "geo-info");
+  // GeolocationPositionError - https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
+  it("should return error if user denied Geolocation", async () => {
+    expect.assertions(2);
+    const PERMISSION_DENIED_ERROR = new Error("User denied Geolocation");
+    const mockGeolocation = {
+      getCurrentPosition: jest
+        .fn()
+        .mockImplementationOnce((_, errorCallback) =>
+          errorCallback(PERMISSION_DENIED_ERROR)
+        ),
+    };
 
-//     act(() => {
-//       fireEvent.click(getGeolocationBtn)
-//     })
-//     await wait()
-//     const y = JSON.parse(geoInfoPElem.innerHTML)
-//     expect(`${y.lat}`).toBe("51.1")
-//     expect(`${y.lng}`).toBe("45.3")
-//     expect(y.isError).toBe(false)
-//     expect(y.message).toBe("")
+    Object.defineProperty(global.navigator, "geolocation", {
+      value: mockGeolocation,
+      writable: true,
+    });
 
-//   })
+    render(<App />);
+    const getGeolocationButton = screen.getByTestId("get-geolocation-btn");
+    act(() => {
+      fireEvent.click(getGeolocationButton);
+    });
+    const geoInfoPElement = await screen.findByTestId("geo-info");
+    const geoObject = JSON.parse(geoInfoPElement.innerHTML);
+    expect(geoObject.isError).toBe(true);
+    expect(geoObject.message).toBe("User denied Geolocation");
+  });
 
-//   it("render should not happen infinitely, when 'when' attribute changes to true ", async () => {
-//     let container
-//     let customRef
-//     function TestComp() {
-//       customRef = React.useRef(0)
-//       return (
-//         <App customRef={customRef} />
-//       )
-
-//     }
-//     act(() => {
-//       container = render(<TestComp />).container;
-//     })
-//     const getGeolocationBtn = getByTestId(container, "get-geolocation-btn");
-//     act(() => {
-//       fireEvent.click(getGeolocationBtn)
-//     })
-//     await wait()
-//     expect(customRef.current).toBe(3)
-
-//   })
-// });
-
-// // figure out tests
-
-describe('useGeolocation', () => {
-  it('is defined', () => {
-    expect(useGeolocation).toBeDefined();
+  it("should return error if browser does not support Geolocation", async () => {
+    expect.assertions(2);
+    Object.defineProperty(global.navigator, "geolocation", {
+      value: undefined,
+      writable: false,
+    });
+    render(<App />);
+    const getGeolocationButton = screen.getByTestId("get-geolocation-btn");
+    act(() => {
+      fireEvent.click(getGeolocationButton);
+    });
+    const geoInfoPElement = await screen.findByTestId("geo-info");
+    const geoObject = JSON.parse(geoInfoPElement.innerHTML);
+    expect(geoObject.isError).toBe(true);
+    expect(geoObject.message).toBe(
+      "Geolocation is not supported for this Browser/OS."
+    );
   });
 });
