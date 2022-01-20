@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
@@ -21,7 +22,7 @@ type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
  */
 function useLocalstorage(
   key: string,
-  defaultValue: any = null
+  defaultValue: any = [null]
 ): StorageHandler {
   const [value, setValue] = useState(getValueFromLocalStorage());
 
@@ -31,6 +32,7 @@ function useLocalstorage(
       valueLoadedFromLocalStorage === null ||
       valueLoadedFromLocalStorage === "null"
     ) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       set(defaultValue);
     }
   }
@@ -39,7 +41,13 @@ function useLocalstorage(
     if (typeof localStorage === "undefined") {
       return null;
     }
-    const storedValue = localStorage.getItem(key) || "null";
+
+    if (localStorage.getItem(key) === null) {
+      saveValueToLocalStorage(defaultValue);
+    }
+
+    const storedValue: any = localStorage.getItem(key);
+
     try {
       return JSON.parse(storedValue);
     } catch (error) {
