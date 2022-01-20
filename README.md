@@ -136,7 +136,7 @@ MIT
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-43-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-44-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -201,6 +201,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://trevorblades.com/"><img src="https://avatars.githubusercontent.com/u/1216917?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Trevor Blades</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=trevorblades" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mrdulin"><img src="https://avatars.githubusercontent.com/u/17866683?v=4?s=100" width="100px;" alt=""/><br /><sub><b>official_dulin</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mrdulin" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -1,3 +1,11 @@
+## 5.9.0 (2022-01-20)
+
+* fix(useGeolocation): improve tests (#791) ([cff25bf](https://github.com/imbhargav5/rooks/commit/cff25bf)), closes [#791](https://github.com/imbhargav5/rooks/issues/791)
+* feat: add more methods for useStackState (#790) ([fbf890f](https://github.com/imbhargav5/rooks/commit/fbf890f)), closes [#790](https://github.com/imbhargav5/rooks/issues/790)
+* chore(docs): Update changelog and docs ([265323e](https://github.com/imbhargav5/rooks/commit/265323e))
+
+
+
 ## <small>5.8.1 (2022-01-20)</small>
 
 * fix(useCountdown): useIntervalWhen in useCountdown (#768) ([dca51b8](https://github.com/imbhargav5/rooks/commit/dca51b8)), closes [#768](https://github.com/imbhargav5/rooks/issues/768)
