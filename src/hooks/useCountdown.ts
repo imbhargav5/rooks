@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useInterval } from './useInterval';
+import { useIntervalWhen } from './useIntervalWhen';
 
 type CountdownOptions = {
   interval?: number;
@@ -21,7 +21,7 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const restTime = endTime.getTime() - time.getTime();
   const count = restTime > 0 ? Math.ceil(restTime / interval) : 0;
 
-  useInterval(onTick, count ? interval : null, true);
+  useIntervalWhen(onTick, count ? interval : undefined, true, true);
 
   return count;
 
