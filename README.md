@@ -136,7 +136,7 @@ MIT
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-41-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-43-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -197,6 +197,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://ayushman.me/"><img src="https://avatars.githubusercontent.com/u/38486014?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ayushman Gupta</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=ayushman-git" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/RafaelFerreiraTVD"><img src="https://avatars.githubusercontent.com/u/15105462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rafael Ferreira</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=RafaelFerreiraTVD" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/krijoh92"><img src="https://avatars.githubusercontent.com/u/1156014?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kristinn Thor Johannsson</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=krijoh92" title="Code">💻</a></td>
+    <td align="center"><a href="https://michaelmakes.games/"><img src="https://avatars.githubusercontent.com/u/5983927?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Moore</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=MichaelMakesGames" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://trevorblades.com/"><img src="https://avatars.githubusercontent.com/u/1216917?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Trevor Blades</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=trevorblades" title="Code">💻</a></td>
   </tr>
 </table>
 
