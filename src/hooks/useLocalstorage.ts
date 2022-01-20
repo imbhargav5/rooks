@@ -20,6 +20,7 @@ type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
  * @param {string} key - Key of the localStorage object
  * @param {any} defaultValue - Default initial value
  */
+
 function useLocalstorage(key: string, defaultValue: any): StorageHandler {
   const [value, setValue] = useState(getValueFromLocalStorage());
 
