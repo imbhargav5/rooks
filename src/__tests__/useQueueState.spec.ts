@@ -17,7 +17,7 @@ describe("useQueueState", () => {
     const [, controls] = result.current;
     expect(controls.length).toBe(3);
   });
-  it.only("should enqueue correctly", () => {
+  it("should enqueue correctly", () => {
     const { result, rerender } = renderHook(() => useQueueState([1, 2, 3]));
     // test memo
     const enqueueBeforeRerender = result.current[1].enqueue;
@@ -69,7 +69,7 @@ describe("useQueueState", () => {
     expect(result.current[1].length).toEqual(3);
   });
   it("handles empty arrays", () => {
-    const { result } = renderHook(() => useQueueState([]));
+    const { result } = renderHook(() => useQueueState<number>([]));
     act(() => {
       result.current[1].dequeue();
     });
