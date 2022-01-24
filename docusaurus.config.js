@@ -74,8 +74,7 @@ module.exports = {
       title: "Rooks",
       logo: {
         alt: "Site Logo",
-        src:
-          "https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png",
+        src: "https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png",
         href: "/", // Default to `siteConfig.baseUrl`.
         target: "_self", // By default, this value is calculated based on the `href` attribute (the external link will open in a new tab, all others in the current one).
       },
@@ -94,6 +93,7 @@ module.exports = {
           href: "https://github.com/imbhargav5/rooks",
           label: "GitHub",
           position: "right",
+          className: "header-github-link",
         },
         {
           href: "/docs/hooks-list/",
