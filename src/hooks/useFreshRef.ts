@@ -1,6 +1,6 @@
-import type { RefObject } from 'react';
-import { useEffect, useRef } from 'react';
-import { useIsomorphicEffect } from './useIsomorphicEffect';
+import type { MutableRefObject } from "react";
+import { useEffect, useRef } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 /**
  * useFreshRef
@@ -14,7 +14,7 @@ import { useIsomorphicEffect } from './useIsomorphicEffect';
 function useFreshRef<T>(
   value: T,
   preferLayoutEffect: boolean = false
-): RefObject<T> {
+): MutableRefObject<T> {
   const useEffectToUse = preferLayoutEffect ? useIsomorphicEffect : useEffect;
   const ref = useRef(value);
   useEffectToUse(() => {
