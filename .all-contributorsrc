@@ -381,6 +381,51 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MichaelMakesGames",
+      "name": "Michael Moore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5983927?v=4",
+      "profile": "https://michaelmakes.games/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "trevorblades",
+      "name": "Trevor Blades",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1216917?v=4",
+      "profile": "https://trevorblades.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mrdulin",
+      "name": "official_dulin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17866683?v=4",
+      "profile": "https://github.com/mrdulin",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "billymosis",
+      "name": "Billy Mosis Priambodo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57342180?v=4",
+      "profile": "https://github.com/billymosis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "staff0rd",
+      "name": "Stafford Williams",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6289998?v=4",
+      "profile": "http://staffordwilliams.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

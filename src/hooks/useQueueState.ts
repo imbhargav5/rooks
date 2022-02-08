@@ -1,21 +1,18 @@
 import { useCallback, useState } from "react";
 
-function useQueueState(
-  initialList: any[]
-): [
-  any[],
+function useQueueState<T>(initialList: T[]): [
+  T[],
   {
-    enqueue: (item: any) => number;
-    dequeue: () => any | undefined;
-    peek: () => any | undefined;
+    enqueue: (item: T) => number;
+    dequeue: () => T | undefined;
+    peek: () => T | undefined;
     length: number;
   }
 ] {
-  const [list, setList] = useState([...initialList]);
-  const length = list.length;
+  const [list, setList] = useState<T[]>([...initialList]);
 
   const enqueue = useCallback(
-    (item: any) => {
+    (item: T) => {
       const newList = [...list, item];
 
       setList(newList);
@@ -37,7 +34,7 @@ function useQueueState(
   }, [list]);
 
   const peek = useCallback(() => {
-    if (length > 0) {
+    if (list.length > 0) {
       return list[0];
     }
 
@@ -47,7 +44,7 @@ function useQueueState(
   const controls = {
     dequeue,
     enqueue,
-    length,
+    length: list.length,
     peek,
   };
 

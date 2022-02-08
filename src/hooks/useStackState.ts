@@ -1,21 +1,21 @@
 import { useCallback, useMemo, useState } from "react";
 
-function useStackState(
-  initialList: any[]
-): [
-  any[],
+function useStackState<T>(initialList: T[]): [
+  T[],
   {
-    push: (item: any) => number;
-    pop: () => any | undefined;
-    peek: () => any | undefined;
+    clear: () => void;
+    isEmpty: () => boolean;
+    push: (item: T) => number;
+    pop: () => T | undefined;
+    peek: () => T | undefined;
     length: number;
   },
-  any[]
+  T[]
 ] {
-  const [list, setList] = useState([...initialList]);
+  const [list, setList] = useState<T[]>([...initialList]);
   const length = list.length;
 
-  const listInReverse = useMemo(() => {
+  const listInReverse = useMemo<T[]>(() => {
     const reverseList = [...list];
     reverseList.reverse();
 
@@ -23,7 +23,7 @@ function useStackState(
   }, [list]);
 
   const push = useCallback(
-    (item: any) => {
+    (item: T) => {
       const newList = [...list, item];
       setList(newList);
 
@@ -44,14 +44,20 @@ function useStackState(
   }, [list]);
 
   const peek = useCallback(() => {
-    if (length > 0) {
-      return list[length - 1];
+    if (list.length > 0) {
+      return list[list.length - 1];
     }
 
     return undefined;
   }, [list]);
 
+  const clear = () => setList([]);
+
+  const isEmpty = useCallback(() => list.length === 0, [list]);
+
   const controls = {
+    clear,
+    isEmpty,
     length,
     peek,
     pop,
