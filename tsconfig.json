@@ -24,7 +24,8 @@
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "outDir": ""
     //"strict": true,
   },
   "exclude": [
