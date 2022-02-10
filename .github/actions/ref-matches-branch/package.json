@@ -7,6 +7,6 @@
         "build": "npm install && ncc build main.js"
     },
     "dependencies": {
-        "@actions/core": "^1.1.0"
+        "@actions/core": "^1.2.6"
     }
 }
