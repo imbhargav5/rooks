@@ -27,9 +27,10 @@ function useWindowEventListener(
       isLayoutEffect
     );
   } else {
-    console.warn(
-      "useWindowEventListener can't attach an event listener as window is undefined."
-    );
+    if (process.env.NODE_ENV==='development')
+      console.warn(
+        "useWindowEventListener can't attach an event listener as window is undefined."
+      );
   }
 }
 
