@@ -399,6 +399,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mrdulin",
+      "name": "official_dulin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17866683?v=4",
+      "profile": "https://github.com/mrdulin",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "billymosis",
+      "name": "Billy Mosis Priambodo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57342180?v=4",
+      "profile": "https://github.com/billymosis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "staff0rd",
+      "name": "Stafford Williams",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6289998?v=4",
+      "profile": "http://staffordwilliams.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

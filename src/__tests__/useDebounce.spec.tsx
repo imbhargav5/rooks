@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import { renderHook } from "@testing-library/react-hooks";
+import type { DebouncedFunc } from "lodash";
 import { useState } from "react";
-import TestRenderer from "react-test-renderer";
 import { useDebounce } from "../hooks/useDebounce";
 
-const { act } = TestRenderer;
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("useDebounce", () => {
   it("should be defined", () => {
@@ -14,9 +14,9 @@ describe("useDebounce", () => {
   });
 });
 
-describe.skip("useDebounce behavior", () => {
+describe("useDebounce behavior", () => {
   const DEBOUNCE_WAIT = 500;
-  let useCustomDebounce;
+  let useCustomDebounce: () => { cb: DebouncedFunc<() => void>; value: number };
   beforeEach(() => {
     useCustomDebounce = function () {
       const [value, setValue] = useState(0);
@@ -29,114 +29,51 @@ describe.skip("useDebounce behavior", () => {
     };
   });
   it("runs only once if cb is called repeatedly in wait period", async () => {
-    const { result } = renderHook(() => useCustomDebounce());
-    act(() => {
-      result.current.cb();
-      result.current.cb();
-      result.current.cb();
-    });
-    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
-    act(() => {});
+    expect.assertions(1);
+    const { result, waitForNextUpdate } = renderHook(useCustomDebounce);
+    result.current.cb();
+    result.current.cb();
+    result.current.cb();
+    await waitForNextUpdate();
     expect(result.current.value).toBe(1);
   });
-  it("works properly if waited", async () => {
-    const { result } = renderHook(() => useCustomDebounce());
-    act(() => {
-      result.current.cb();
-      result.current.cb();
-      result.current.cb();
-    });
-    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
-    act(() => {
-      result.current.cb();
-    });
-    await new Promise((resolve) => setTimeout(() => resolve(0), DEBOUNCE_WAIT));
-    expect(result.current.value).toBe(2);
+  it("should apply default options", async () => {
+    expect.assertions(2);
+    const callback = jest.fn();
+    const { result } = renderHook(() => useDebounce(callback, 32));
+    result.current();
+    expect(callback).not.toHaveBeenCalled();
+    await wait(64);
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+  it("should support a `leading` option", async () => {
+    expect.assertions(2);
+    const callback = jest.fn();
+    const { result } = renderHook(() =>
+      useDebounce(callback, 32, { leading: true })
+    );
+    result.current();
+    expect(callback).toHaveBeenCalledTimes(1);
+    await wait(64);
+    result.current();
+    expect(callback).toHaveBeenCalledTimes(2);
+  });
+  it("should support a `trailing` option", async () => {
+    expect.assertions(4);
+    const withTrailing = jest.fn();
+    const { result: withTrailingResult } = renderHook(() =>
+      useDebounce(withTrailing, 32, { trailing: true })
+    );
+    const withoutTrailing = jest.fn();
+    const { result: withoutTrailingResult } = renderHook(() =>
+      useDebounce(withTrailing, 32, { trailing: false })
+    );
+    withTrailingResult.current();
+    expect(withTrailing).toHaveBeenCalledTimes(0);
+    withoutTrailingResult.current();
+    expect(withoutTrailing).toHaveBeenCalledTimes(0);
+    await wait(64);
+    expect(withTrailing).toHaveBeenCalledTimes(1);
+    expect(withoutTrailing).toHaveBeenCalledTimes(0);
   });
 });
-
-// describe("useDebounce", () => {
-//   let App;
-//   const DEBOUNCE_WAIT = 500;
-//   jest.useRealTimers();
-//   beforeEach(() => {
-//     App = function() {
-//       const [value, setValue] = useState(0);
-//       function log() {
-//         setValue(value + 1);
-//       }
-
-//       const debouncedLog = useDebounce(log, DEBOUNCE_WAIT);
-//       return (
-//         <div>
-//           <button data-testid="log-button" onClick={debouncedLog} />
-//           <span data-testid="value">{value}</span>
-//         </div>
-//       );
-//     };
-//   });
-//   afterEach(cleanup);
-
-//   it("should be defined", () => {
-//     expect(useDebounce).toBeDefined();
-//   });
-
-//   it("should run only once if multiple events are fired in the wait period", async () => {
-//     //jest.useFakeTimers();
-//     const { getByTestId } = render(<App />);
-//     const logButtonElement = getByTestId("log-button");
-//     const valueElement = getByTestId("value");
-//     act(() => {
-//       fireEvent.click(logButtonElement);
-//     });
-//     //jest.useRealTimers(); //needed for wait
-//     //TODO: no idea why I need to wait for next tick
-//     expect(parseInt(valueElement.innerHTML)).toBe(0);
-//     await wait(
-//       () => {
-//         expect(parseInt(valueElement.innerHTML)).toBe(1);
-//       },
-//       {
-//         timeout: DEBOUNCE_WAIT
-//       }
-//     );
-//   });
-
-//   it("should run multiple times if waited accordingly", async () => {
-//     //jest.useFakeTimers();
-//     const { getByTestId } = render(<App />);
-//     const logButtonElement = getByTestId("log-button");
-//     const valueElement = getByTestId("value");
-//     act(() => {
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//     });
-//     //needed for wait
-//     //TODO: no idea why I need to wait for next tick
-//     expect(parseInt(valueElement.innerHTML)).toBe(0);
-//     await wait(
-//       () => {
-//         expect(parseInt(valueElement.innerHTML)).toBe(1);
-//       },
-//       {
-//         timeout: DEBOUNCE_WAIT
-//       }
-//     );
-//     act(() => {
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//       fireEvent.click(logButtonElement);
-//     });
-//     await wait(
-//       () => {
-//         expect(parseInt(valueElement.innerHTML)).toBe(2);
-//       },
-//       {
-//         timeout: DEBOUNCE_WAIT
-//       }
-//     );
-//   });
-// });

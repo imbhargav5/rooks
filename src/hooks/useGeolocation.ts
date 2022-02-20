@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 type IGetGeoLocation = {
   lat?: number;
@@ -18,14 +18,14 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (res) => {
-          const { coords } = res;
+        (position: GeolocationPosition) => {
+          const { coords } = position;
           const { latitude, longitude } = coords;
           resolve({
             isError: false,
             lat: latitude,
             lng: longitude,
-            message: '',
+            message: "",
           });
         },
         (error) => {
@@ -36,7 +36,7 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
     } else {
       reject({
         isError: true,
-        message: 'Geolocation is not supported for this Browser/OS.',
+        message: "Geolocation is not supported for this Browser/OS.",
       });
     }
   });
