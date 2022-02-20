@@ -1,3 +1,15 @@
+## 5.10.0 (2022-01-24)
+
+* feat(useFreshRef): add more unit tests for useFreshRef and fix types (#804) ([53fd244](https://github.com/imbhargav5/rooks/commit/53fd244)), closes [#804](https://github.com/imbhargav5/rooks/issues/804)
+* test(useDebounce): improved unit tests for useDebounce, moved JSDoc types to typescript types, remov ([665e374](https://github.com/imbhargav5/rooks/commit/665e374)), closes [#803](https://github.com/imbhargav5/rooks/issues/803)
+* test(useMutationObserver): add unit tests (#795) ([e0e5a95](https://github.com/imbhargav5/rooks/commit/e0e5a95)), closes [#795](https://github.com/imbhargav5/rooks/issues/795)
+* docs: fix header github link style (#802) ([d3d4384](https://github.com/imbhargav5/rooks/commit/d3d4384)), closes [#802](https://github.com/imbhargav5/rooks/issues/802)
+* docs(docusaurus): remove netlify badge (#800) ([bdb2621](https://github.com/imbhargav5/rooks/commit/bdb2621)), closes [#800](https://github.com/imbhargav5/rooks/issues/800)
+* docs(installation): fix typo in installation ([3df8462](https://github.com/imbhargav5/rooks/commit/3df8462))
+* chore(docs): Update changelog and docs ([c5f19c6](https://github.com/imbhargav5/rooks/commit/c5f19c6))
+
+
+
 ## 5.9.0 (2022-01-20)
 
 * fix(useGeolocation): improve tests (#791) ([cff25bf](https://github.com/imbhargav5/rooks/commit/cff25bf)), closes [#791](https://github.com/imbhargav5/rooks/issues/791)

@@ -74,8 +74,7 @@ module.exports = {
       title: "Rooks",
       logo: {
         alt: "Site Logo",
-        src:
-          "https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png",
+        src: "https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png",
         href: "/", // Default to `siteConfig.baseUrl`.
         target: "_self", // By default, this value is calculated based on the `href` attribute (the external link will open in a new tab, all others in the current one).
       },
@@ -94,6 +93,7 @@ module.exports = {
           href: "https://github.com/imbhargav5/rooks",
           label: "GitHub",
           position: "right",
+          className: "header-github-link",
         },
         {
           href: "/docs/hooks-list/",
@@ -172,12 +172,6 @@ module.exports = {
             // <a class="github-button" href="https://github.com/imbhargav5/rooks" data-icon="octicon-star" aria-label="Star imbhargav5/rooks on GitHub">Star</a>
             //           `
             //           },
-            {
-              html: `
-            <a href="https://www.netlify.com">
-              <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
-            </a>`,
-            },
             {
               html: `
            <a href="https://splitbee.io?ref=badge">
