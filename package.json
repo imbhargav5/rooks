@@ -69,7 +69,7 @@
     "@babel/core": "7.17.5",
     "@babel/plugin-external-helpers": "7.16.7",
     "@babel/plugin-proposal-export-default-from": "7.16.7",
-    "@babel/preset-env": "7.16.8",
+    "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
     "@docusaurus/core": "2.0.0-beta.15",
     "@docusaurus/plugin-client-redirects": "2.0.0-beta.15",
