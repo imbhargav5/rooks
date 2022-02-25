@@ -13891,16 +13891,16 @@ remark-admonitions@^1.2.1:
     unified "^8.4.2"
     unist-util-visit "^2.0.1"
 
-remark-behead@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/remark-behead/-/remark-behead-2.3.3.tgz#536d7676e7f944433cf907e3c49d315591db74a6"
-  integrity sha512-quY6Of8Bwj4pgrG/Qce6a/sMMzFc0XxbfeYko+mPjOScIB+TKw3T0Y2GUcIEL8+xbQgAnCylkPQNt9haCEWK9w==
+remark-behead@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-behead/-/remark-behead-3.0.0.tgz#d64530509b223d62c1a467f37e1259cd9f740443"
+  integrity sha512-qbP+4Qfc1ArpXd4MQAxg1zQ20W3rJZ+2FmVoH6VhcNfDQuOFcndFV7GWRVsYRVAj0+42uobwh6yPNastFG0WXQ==
   dependencies:
-    unist-util-find "^1.0.1"
-    unist-util-find-all-after "^3.0.1"
-    unist-util-find-all-before "^2.0.5"
-    unist-util-find-all-between "^2.0.0"
-    unist-util-visit "^2.0.3"
+    unist-util-find "^1.0.2"
+    unist-util-find-all-after "^4.0.0"
+    unist-util-find-all-before "^4.0.0"
+    unist-util-find-all-between "^2.1.0"
+    unist-util-visit "^4.1.0"
 
 remark-emoji@^2.1.0:
   version "2.2.0"
@@ -16622,13 +16622,6 @@ unist-builder@2.0.3, unist-builder@^2.0.0:
   resolved "https://registry.yarnpkg.com/unist-builder/-/unist-builder-2.0.3.tgz#77648711b5d86af0942f334397a33c5e91516436"
   integrity sha512-f98yt5pnlMWlzP539tPc4grGMsFaQQlP/vM396b00jngsiINumNmsY8rkXjfoi1c6QaM8nQ3vaGDuoKWbe/1Uw==
 
-unist-util-find-all-after@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/unist-util-find-all-after/-/unist-util-find-all-after-3.0.2.tgz#fdfecd14c5b7aea5e9ef38d5e0d5f774eeb561f6"
-  integrity sha512-xaTC/AGZ0rIM2gM28YVRAFPIZpzbpDtU3dRmp7EXlNVA8ziQc4hY3H7BHXM1J49nEmiqc3svnqMReW+PGqbZKQ==
-  dependencies:
-    unist-util-is "^4.0.0"
-
 unist-util-find-all-after@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-find-all-after/-/unist-util-find-all-after-4.0.0.tgz#6ba05256a20ccb45e8140df98a8ae42d692674a0"
@@ -16636,13 +16629,6 @@ unist-util-find-all-after@^4.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-is "^5.0.0"
-
-unist-util-find-all-before@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/unist-util-find-all-before/-/unist-util-find-all-before-2.0.5.tgz#8b9958ae0590fc7c53cb16053f01d39a0452b1a4"
-  integrity sha512-lYakZyw3trON5qbsOsmtRARZTyKcQN8pkoMKLy558Nt8WhlqGAnRSD9qLrISkMKbS+0nhj8LiebgoheUtQXOZw==
-  dependencies:
-    unist-util-is "^4.0.0"
 
 unist-util-find-all-before@^4.0.0:
   version "4.0.0"
@@ -16652,7 +16638,7 @@ unist-util-find-all-before@^4.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^5.0.0"
 
-unist-util-find-all-between@^2.0.0, unist-util-find-all-between@^2.1.0:
+unist-util-find-all-between@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/unist-util-find-all-between/-/unist-util-find-all-between-2.1.0.tgz#18ddb51f7abc4e22c645b4321e82ab6a6decc640"
   integrity sha512-OCCUtDD8UHKeODw3TPXyFDxPCbpgBzbGTTaDpR68nvxkwiVcawBqMVrokfBMvUi7ij2F5q7S4s4Jq5dvkcBt+w==
