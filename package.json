@@ -73,7 +73,7 @@
     "@babel/preset-react": "7.16.7",
     "@docusaurus/core": "2.0.0-beta.15",
     "@docusaurus/plugin-client-redirects": "2.0.0-beta.16",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.16",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^18.1.0",
     "@rollup/plugin-json": "^4.1.0",
