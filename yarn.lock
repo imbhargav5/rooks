@@ -1685,16 +1685,16 @@
     "@types/react-router-dom" "*"
     react-helmet-async "*"
 
-"@docusaurus/plugin-client-redirects@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-client-redirects/-/plugin-client-redirects-2.0.0-beta.16.tgz#b0ac24b347de8a464d26ee08b689c77f0c128b5f"
-  integrity sha512-ZtIOytsUlHmuU/Lb844IuTgFwF/aqom3es2E6rn0UXeW4xsgf68PgPypqLADyhEfJo5B4bBEl0a7bBIe1FR6vw==
+"@docusaurus/plugin-client-redirects@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-client-redirects/-/plugin-client-redirects-2.0.0-beta.17.tgz#82691c22b9e7cf69ea1f5204a1f599dd7faeedd2"
+  integrity sha512-PfITCVgENyB0j1ErwSOQ3d1dvxbBEcZxiJrlu41v5Q6GiZWWJ4wSJRpOzqZiVUotfhnBn4NmpgVfGnmGkGPK4A==
   dependencies:
-    "@docusaurus/core" "2.0.0-beta.16"
-    "@docusaurus/logger" "2.0.0-beta.16"
-    "@docusaurus/utils" "2.0.0-beta.16"
-    "@docusaurus/utils-common" "2.0.0-beta.16"
-    "@docusaurus/utils-validation" "2.0.0-beta.16"
+    "@docusaurus/core" "2.0.0-beta.17"
+    "@docusaurus/logger" "2.0.0-beta.17"
+    "@docusaurus/utils" "2.0.0-beta.17"
+    "@docusaurus/utils-common" "2.0.0-beta.17"
+    "@docusaurus/utils-validation" "2.0.0-beta.17"
     eta "^1.12.3"
     fs-extra "^10.0.1"
     lodash "^4.17.21"
