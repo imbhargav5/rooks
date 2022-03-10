@@ -1,12 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-import { useCountdown } from '../hooks/useCountdown';
+import { useCountdown } from "../hooks/useCountdown";
 
 jest.useFakeTimers();
 
-describe('useCountdown', () => {
-  it('is defined', () => {
+describe("useCountdown", () => {
+  it("is defined", () => {
     expect(useCountdown).toBeDefined();
   });
   // it('works', () => {

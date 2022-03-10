@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 
 /**
  * useMediaMatch
@@ -10,30 +10,31 @@ import { useEffect, useMemo, useState } from 'react';
  * @returns Whether or not the media query is currently matched.
  */
 function useMediaMatch(query: string): boolean {
-  if (typeof window === 'undefined') {
-    console.warn('useMediaMatch cannot function as window is undefined.');
+  if (typeof window === "undefined") {
+    console.warn("useMediaMatch cannot function as window is undefined.");
 
     return false;
   }
 
-  const matchMedia = useMemo<MediaQueryList>(() => window.matchMedia(query), [
-    query,
-  ]);
+  const matchMedia = useMemo<MediaQueryList>(
+    () => window.matchMedia(query),
+    [query]
+  );
   const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
 
   useEffect(() => {
     setMatches(matchMedia.matches);
-    const listener = (event_: MediaQueryListEventMap['change']) =>
+    const listener = (event_: MediaQueryListEventMap["change"]) =>
       setMatches(event_.matches);
 
     if (matchMedia.addEventListener) {
-      matchMedia.addEventListener('change', listener)
+      matchMedia.addEventListener("change", listener);
 
-      return () => matchMedia.removeEventListener('change', listener)
+      return () => matchMedia.removeEventListener("change", listener);
     } else {
-      matchMedia.addListener(listener)
+      matchMedia.addListener(listener);
 
-      return () => matchMedia.removeListener(listener)
+      return () => matchMedia.removeListener(listener);
     }
   }, [matchMedia]);
 

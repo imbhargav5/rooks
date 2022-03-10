@@ -3,11 +3,7 @@
     {
       "label": "Quick Start",
       "collapsed": false,
-      "items": [
-        "getting-started",
-        "motivation",
-        "rooks"
-      ],
+      "items": ["getting-started", "motivation", "rooks"],
       "type": "category"
     },
     {

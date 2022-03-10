@@ -44,10 +44,18 @@ const getDimensionObject = (node: HTMLElement): UseDimensionsRefReturn => {
   };
 };
 
+const noWindowReturnValue: UseDimensionsHook = [undefined, null, null];
+
 export const useDimensionsRef = ({
   updateOnScroll = true,
   updateOnResize = true,
 }: UseDimensionsRefArgs = {}): UseDimensionsHook => {
+  if (typeof window === "undefined") {
+    console.warn("useDimensionsRef: window is undefined.");
+
+    return noWindowReturnValue;
+  }
+
   const [dimensions, setDimensions] = useState<UseDimensionsRefReturn>(null);
   const [node, setNode] = useState<HTMLElement | null>(null);
 

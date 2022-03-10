@@ -98,11 +98,15 @@ function useSessionstorage(
   }, []);
 
   useEffect(() => {
-    window.addEventListener("storage", listen);
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", listen);
 
-    return () => {
-      window.removeEventListener("storage", listen);
-    };
+      return () => {
+        window.removeEventListener("storage", listen);
+      };
+    } else {
+      console.warn("useSessionstorage: window is undefined.");
+    }
   }, []);
 
   const handler = Object.assign([value, set, remove], {
