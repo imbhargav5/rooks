@@ -1,1 +1,7 @@
 *.d.ts
+versioned_docs
+versioned_sidebars
+dist
+node_modules
+tsconfig.tsbuildinfo
+*.log
