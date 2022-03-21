@@ -181,11 +181,12 @@ module.exports = {
           ],
         },
       ],
-      copyright: "MIT© 2020 Bhargav Ponnapalli",
+      copyright: "MIT© 2022 Bhargav Ponnapalli",
       logo: {},
     },
     algolia: {
       apiKey: process.env.ALGOLIA_API_KEY,
+      appId: process.env.ALGOLIA_APP_ID,
       indexName: "react-hooks",
       // Optional: see doc section bellow,
       contextual: true,

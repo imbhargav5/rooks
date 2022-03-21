@@ -1,17 +1,17 @@
-import React from 'react';
-import Layout from '@theme/Layout';
-import { useVersions, useLatestVersion } from '@theme/hooks/useDocs';
-import useGlobalData from '@docusaurus/useGlobalData';
-import Link from '@docusaurus/Link';
+import React from "react";
+import Layout from "@theme/Layout";
+import useGlobalData from "@docusaurus/useGlobalData";
+import {
+  useVersions,
+  useLatestVersion,
+} from "@docusaurus/plugin-content-docs/client";
 
 function Versions(props) {
   const { config: siteConfig } = props;
-  console.log(siteConfig.baseUrl);
   const globalData = useGlobalData();
   const docsPath =
-    globalData['docusaurus-plugin-content-docs']?.default?.path || '/docs';
+    globalData["docusaurus-plugin-content-docs"]?.default?.path || "/docs";
   const versions = useVersions();
-  console.log(docsPath);
   const latestVersion = useLatestVersion();
   const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
   return (
@@ -32,7 +32,7 @@ function Versions(props) {
                         Example: href="<baseUrl>/docs(/:language)/:id" */}
                   <a
                     href={`${docsPath}/${
-                      props.language ? props.language + '/' : ''
+                      props.language ? props.language + "/" : ""
                     }`}
                   >
                     Documentation
@@ -60,7 +60,7 @@ function Versions(props) {
                         Example: href="<baseUrl>/docs(/:language)/next/:id" */}
                   <a
                     href={`${docsPath}/${
-                      props.language ? props.language + '/' : ''
+                      props.language ? props.language + "/" : ""
                     }next`}
                   >
                     Documentation
@@ -86,7 +86,7 @@ function Versions(props) {
                         Example: href="<baseUrl>/docs(/:language)/:version/:id" */}
                       <a
                         href={`${docsPath}/${
-                          props.language ? props.language + '/' : ''
+                          props.language ? props.language + "/" : ""
                         }${version.name}`}
                       >
                         Documentation
@@ -103,7 +103,7 @@ function Versions(props) {
             </tbody>
           </table>
           <p>
-            You can find past versions of this project on{' '}
+            You can find past versions of this project on{" "}
             <a href={repoUrl}>GitHub</a>.
           </p>
         </div>
