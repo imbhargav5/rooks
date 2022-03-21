@@ -16407,10 +16407,10 @@ type-fest@^1.0.1, type-fest@^1.2.1, type-fest@^1.2.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
   integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
 
-type-fest@^2.0.0, type-fest@^2.5.0:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.5.3.tgz#2538287381b24d0c1d4911279934f28aaa10d620"
-  integrity sha512-7VNmE7FlsrdcWjKbtuRuynZz96Gmf35p5DvoR2tbceNP0vd58ISx87PvUUInlhtRC49vSX6qlxEKc7AoiHRirg==
+type-fest@^2.0.0, type-fest@^2.12.1, type-fest@^2.5.0:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.1.tgz#d2be8f50bf5f8f0a5fd916d29bf3e98c17e960be"
+  integrity sha512-AiknQSEqKVGDDjtZqeKrUoTlcj7FKhupmnVUgz6KoOKtvMwRGE6hUNJ/nVear+h7fnUPO1q/htSkYKb1pyntkQ==
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
@@ -17559,13 +17559,13 @@ write-json-file@^5.0.0:
     sort-keys "^5.0.0"
     write-file-atomic "^3.0.3"
 
-write-pkg@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/write-pkg/-/write-pkg-5.0.0.tgz#b9fab4e78ee0e71b980867f2baff8b8564a77d26"
-  integrity sha512-ihflUwZ8WvVcXD2uhk4JAAe5+x9FT+0n4Z5b/OMZXBG8/hXCvSQXTYDf9raox0aqJGWRBipIE4rWSi6aCaiebw==
+write-pkg@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/write-pkg/-/write-pkg-5.1.0.tgz#421fca18c1b365aa4de7dac29e17539a7c53e06a"
+  integrity sha512-2LnW2htVtTQuLV/5JGaz09jTAE/Gv/lhy36xwxx1x22y+AnG9/YnIoDmA1Q8pooDnLO4vYLBCqO9g/qOdMZMPA==
   dependencies:
     sort-keys "^5.0.0"
-    type-fest "^2.0.0"
+    type-fest "^2.12.1"
     write-json-file "^5.0.0"
 
 ws@^6.1.2:
