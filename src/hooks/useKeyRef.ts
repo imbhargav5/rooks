@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { doesIdentifierMatchKeyboardEvent } from '../utils/doesIdentifierMatchKeyboardEvent';
-import type { CallbackRef, HTMLElementOrNull } from '../utils/utils';
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
+import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
 
 type Options = {
   /**
@@ -14,7 +14,7 @@ type Options = {
 };
 
 const defaultOptions = {
-  eventTypes: ['keydown'],
+  eventTypes: ["keydown"],
   when: true,
 };
 

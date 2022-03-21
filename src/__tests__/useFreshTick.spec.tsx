@@ -1,14 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook, cleanup } from '@testing-library/react-hooks';
-import { useEffect, useState } from 'react';
-import TestRenderer from 'react-test-renderer';
-import { useFreshTick } from '../hooks/useFreshTick';
+import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useEffect, useState } from "react";
+import TestRenderer from "react-test-renderer";
+import { useFreshTick } from "../hooks/useFreshTick";
 
 const { act } = TestRenderer;
 
-describe('useFreshTick', () => {
+describe("useFreshTick", () => {
   let useHook;
 
   beforeEach(() => {
@@ -32,10 +32,10 @@ describe('useFreshTick', () => {
 
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useFreshTick).toBeDefined();
   });
-  it('should increment correctly', () => {
+  it("should increment correctly", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
     act(() => {

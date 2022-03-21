@@ -1,5 +1,5 @@
-import { useEffect, Ref, MutableRefObject, useCallback, useState } from 'react';
-import type { CallbackRef, HTMLElementOrNull } from '../utils/utils';
+import { useEffect, Ref, MutableRefObject, useCallback, useState } from "react";
+import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
 
 const config: MutationObserverInit = {
   attributes: true,

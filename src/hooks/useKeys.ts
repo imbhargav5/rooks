@@ -1,6 +1,6 @@
-import type { MutableRefObject } from 'react';
-import { useEffect, useRef, useCallback } from 'react';
-import { doesIdentifierMatchKeyboardEvent } from '../utils/doesIdentifierMatchKeyboardEvent';
+import type { MutableRefObject } from "react";
+import { useEffect, useRef, useCallback } from "react";
+import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
 
 type TPressedKeyMapping = {
   [key: string]: boolean | undefined;
@@ -116,17 +116,17 @@ function useKeys(
    * Responsible for setting up the event listener and removing event listeners
    */
   useEffect((): any => {
-    if (when && typeof window !== 'undefined') {
+    if (when && typeof window !== "undefined") {
       const targetNode = target && target.current ? target.current : document;
       if (targetNode) {
-        targetNode.addEventListener('keydown', handleKeyDown);
-        targetNode.addEventListener('keyup', handleKeyUp);
+        targetNode.addEventListener("keydown", handleKeyDown);
+        targetNode.addEventListener("keyup", handleKeyUp);
       }
 
       return () => {
         if (targetNode)
-          targetNode.removeEventListener('keydown', handleKeyDown);
-        if (targetNode) targetNode.removeEventListener('keyup', handleKeyUp);
+          targetNode.removeEventListener("keydown", handleKeyDown);
+        if (targetNode) targetNode.removeEventListener("keyup", handleKeyUp);
       };
     }
   }, [when, target, keysList, handleKeyDown, handleKeyUp]);

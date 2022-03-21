@@ -1,11 +1,11 @@
-import React from 'react';
-import OriginalFooter from '@theme-original/Footer';
-import { useEffect } from 'react';
+import React from "react";
+import OriginalFooter from "@theme-original/Footer";
+import { useEffect } from "react";
 
 export default function Footer(props) {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3";
     script.async = true;
     script.defer = true;
     script.innerHTML = `

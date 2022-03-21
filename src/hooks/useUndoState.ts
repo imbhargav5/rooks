@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
 type UndoStateOptions = {
   maxSize: number;
@@ -27,7 +27,7 @@ const useUndoState = (
         const restValues =
           current.length >= maxSize ? current.slice(0, maxSize) : current;
 
-        if (typeof setterOrValue === 'function') {
+        if (typeof setterOrValue === "function") {
           return [setterOrValue(current[0]), ...restValues];
         } else {
           return [setterOrValue, ...restValues];

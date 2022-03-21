@@ -36,7 +36,7 @@ render(<Demo />);
 ### Arguments
 
 | Arguments      | Type     | Description                                    | Default value |
-|----------------|----------|------------------------------------------------|---------------|
+| -------------- | -------- | ---------------------------------------------- | ------------- |
 | eventName      | string   | The event to track                             | undefined     |
 | callback       | Function | The callback to be called on event             | () => void    |
 | conditions     | object   | The options to be passed to the event listener | {}            |
@@ -45,9 +45,8 @@ render(<Demo />);
 ### Return
 
 | Return value | Type     | Description                                 |
-|--------------|----------|---------------------------------------------|
+| ------------ | -------- | ------------------------------------------- |
 | ref          | Function | A callback ref that can be used as ref prop |
-
 
 ---
 

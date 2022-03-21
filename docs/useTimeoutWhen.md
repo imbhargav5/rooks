@@ -44,7 +44,7 @@ render(<Demo />);
 ### Arguments
 
 | Arguments | Type     | Description                                              | Default value |
-|-----------|----------|----------------------------------------------------------|---------------|
+| --------- | -------- | -------------------------------------------------------- | ------------- |
 | callback  | function | Function to be executed in timeout                       | undefind      |
 | delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
 | when      | boolean  | The condition which when true, sets the timeout          | true          |

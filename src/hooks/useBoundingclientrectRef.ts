@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import type { CallbackRef, HTMLElementOrNull } from '../utils/utils';
-import { useForkRef } from './useForkRef';
-import { useMutationObserverRef } from './useMutationObserverRef';
+import { useState, useEffect, useCallback } from "react";
+import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import { useForkRef } from "./useForkRef";
+import { useMutationObserverRef } from "./useMutationObserverRef";
 
 /**
  * @param element HTML element whose boundingclientrect is needed

@@ -2,10 +2,10 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook, cleanup, act } from '@testing-library/react-hooks';
-import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import { useMouse } from '../hooks/useMouse';
+import { renderHook, cleanup, act } from "@testing-library/react-hooks";
+import React from "react";
+import "@testing-library/jest-dom/extend-expect";
+import { useMouse } from "../hooks/useMouse";
 
 function TestMouse() {
   const mouse = useMouse();
@@ -13,14 +13,14 @@ function TestMouse() {
   return <div>{JSON.stringify(mouse)}</div>;
 }
 
-describe.skip('useMouse', () => {
+describe.skip("useMouse", () => {
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useMouse).toBeDefined();
   });
 
-  it('should default with null values', () => {
+  it("should default with null values", () => {
     const { result } = renderHook(() => useMouse());
     expect(result.current).toBe({
       x: null,
@@ -38,7 +38,7 @@ describe.skip('useMouse', () => {
     });
   });
 
-  it('should update client position when mouse is moved', () => {
+  it("should update client position when mouse is moved", () => {
     const { result } = renderHook(() => useMouse());
     const expected =
       '{"screenX":0,"screenY":0,"clientX":80,"clientY":20,"x":0,"y":0}';
@@ -46,7 +46,7 @@ describe.skip('useMouse', () => {
     // expect(getByText(expected)).toBeInTheDocument()
   });
 
-  it('should update screen position when mouse is moved', () => {
+  it("should update screen position when mouse is moved", () => {
     const { result } = renderHook(() => useMouse());
     const expected =
       '{"screenX":80,"screenY":20,"clientX":0,"clientY":0,"x":80,"y":20}';

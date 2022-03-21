@@ -42,7 +42,7 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type   | Description                    | Defualt   |
-|----------------|--------|--------------------------------|-----------|
+| -------------- | ------ | ------------------------------ | --------- |
 | key            | string | Key of the localStorage object | undefined |
 | defaultValue   | any    | Default initial value          | null      |
 
@@ -51,11 +51,10 @@ render(<Demo />);
 Returns an array or an object with following items:
 
 | Return value | Type                      | Description                         |
-|--------------|---------------------------|-------------------------------------|
+| ------------ | ------------------------- | ----------------------------------- |
 | value        | any                       | value stored in localStorage        |
 | set          | `(newValue: any) => void` | set value stored in localStorage    |
 | remove       | `() => void`              | remove value stored in localStorage |
-
 
 ## Codesandbox Example
 

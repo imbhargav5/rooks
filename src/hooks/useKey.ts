@@ -1,6 +1,6 @@
-import type { Ref } from 'react';
-import { useEffect, useCallback, useRef, useMemo } from 'react';
-import { doesIdentifierMatchKeyboardEvent } from '../utils/doesIdentifierMatchKeyboardEvent';
+import type { Ref } from "react";
+import { useEffect, useCallback, useRef, useMemo } from "react";
+import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
 
 type Options = {
   /**
@@ -19,7 +19,7 @@ type Options = {
 };
 
 const defaultOptions = {
-  eventTypes: ['keydown'],
+  eventTypes: ["keydown"],
   when: true,
 };
 
@@ -67,7 +67,7 @@ function useKey(
   );
 
   useEffect(() => {
-    if (when && typeof window !== 'undefined') {
+    if (when && typeof window !== "undefined") {
       const targetNode = target ? target.current : window;
       eventTypes.forEach((eventType) => {
         targetNode && targetNode.addEventListener(eventType, handle);

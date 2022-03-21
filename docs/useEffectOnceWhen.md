@@ -56,7 +56,7 @@ render(<Demo />);
 ### Arguments
 
 | Arguments | Type     | Description                          | Default value |
-|-----------|----------|--------------------------------------|---------------|
+| --------- | -------- | ------------------------------------ | ------------- |
 | callback  | function | The callback to be called            | undefined     |
 | when      | boolean  | The condition which needs to be true | true          |
 

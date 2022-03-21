@@ -1,11 +1,23 @@
 {
-  "eslint.workingDirectories": [
-    "./packages/shared",
-    "./packages/rooks",
-    "./packages/eslint-config",
-    "./packages/docusaurus",
-    "./"
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.codeActionsOnSave.rules": ["!@typescript-eslint/*", "*"],
+  "eslint.options": {
+    "cache": true
+  },
+  "eslint.packageManager": "yarn",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "json",
+    "typescript",
+    "typescriptreact",
+    "yaml"
   ],
+  "eslint.runtime": "node",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

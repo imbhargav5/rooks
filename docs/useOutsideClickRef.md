@@ -38,15 +38,15 @@ render(<Demo />);
 
 ### Arguments
 
-| Arguments | Type                   | Description                                                                                                      | Default value |
-|-----------|------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
-| handler   | function               | Callback to fire on outside click                                                                                |               |
-| when      | boolean                | A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
+| Arguments | Type     | Description                                                                                                      | Default value |
+| --------- | -------- | ---------------------------------------------------------------------------------------------------------------- | ------------- |
+| handler   | function | Callback to fire on outside click                                                                                |               |
+| when      | boolean  | A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
 
 ### Returns
 
 | Returned Array items | Type        | Description |
-|----------------------|-------------|-------------|
+| -------------------- | ----------- | ----------- |
 | ref                  | CallbackRef | ref         |
 
 ## Codesandbox Examples

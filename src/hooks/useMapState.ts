@@ -6,9 +6,7 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState(
-  initialValue: any
-): [
+function useMapState(initialValue: any): [
   any,
   {
     set: (key: any, value: any) => void;

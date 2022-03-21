@@ -1,17 +1,17 @@
 /**
  * @jest-environment jsdom
  */
-import { act, renderHook } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import { useTimeoutWhen } from '../hooks/useTimeoutWhen';
+import { act, renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import { useTimeoutWhen } from "../hooks/useTimeoutWhen";
 
-describe('useTimeoutWhen', () => {
-  it('should be defined', () => {
+describe("useTimeoutWhen", () => {
+  it("should be defined", () => {
     expect(useTimeoutWhen).toBeDefined();
   });
 });
 
-describe('base', () => {
+describe("base", () => {
   let useHook;
   beforeEach(() => {
     useHook = function () {
@@ -23,7 +23,7 @@ describe('base', () => {
       return { value };
     };
   });
-  it('runs immediately after mount', async () => {
+  it("runs immediately after mount", async () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
     act(() => {

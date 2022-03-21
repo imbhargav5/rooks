@@ -7,27 +7,27 @@ import {
   getByTestId,
   fireEvent,
   act,
-} from '@testing-library/react';
-import React from 'react';
-import { useSessionstorage } from '../hooks/useSessionstorage';
+} from "@testing-library/react";
+import React from "react";
+import { useSessionstorage } from "../hooks/useSessionstorage";
 
 /**
  * @jest-environment jsdom
  */
 
-describe('useSessionstorage defined', () => {
-  it('should be defined', () => {
+describe("useSessionstorage defined", () => {
+  it("should be defined", () => {
     expect(useSessionstorage).toBeDefined();
   });
 });
 
-describe('useSessionstorage with object destructuring', () => {
+describe("useSessionstorage with object destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const { value } = useSessionstorage('test-value', 'hello');
+      const { value } = useSessionstorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -40,20 +40,20 @@ describe('useSessionstorage with object destructuring', () => {
 
   afterEach(cleanup);
 
-  it('initializes correctly', () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('hello');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("hello");
   });
 });
 
-describe('useSessionstorage with array destructuring', () => {
+describe("useSessionstorage with array destructuring", () => {
   let App;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = function () {
-      const [currentValue] = useSessionstorage('test-value', 'hello');
+      const [currentValue] = useSessionstorage("test-value", "hello");
 
       return (
         <div data-testid="container">
@@ -66,25 +66,25 @@ describe('useSessionstorage with array destructuring', () => {
 
   afterEach(cleanup);
 
-  it('initializes correctly', () => {
+  it("initializes correctly", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    expect(valueElement.innerHTML).toBe('hello');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    expect(valueElement.innerHTML).toBe("hello");
   });
 });
 
 // figure out tests
 
-describe('useSessionstorage', () => {
+describe("useSessionstorage", () => {
   let App;
   beforeEach(() => {
     sessionStorage.clear();
     function SubApp1() {
-      const { value: titan, set, remove } = useSessionstorage('titan', 'eren');
+      const { value: titan, set, remove } = useSessionstorage("titan", "eren");
 
       return (
         <div>
-          <button data-testid="new-value" onClick={() => set('mikasa')}>
+          <button data-testid="new-value" onClick={() => set("mikasa")}>
             Add
           </button>
           <button data-testid="unset-value" onClick={() => remove()}>
@@ -96,7 +96,7 @@ describe('useSessionstorage', () => {
     }
 
     function SubApp2() {
-      const { value: titan } = useSessionstorage('titan');
+      const { value: titan } = useSessionstorage("titan");
 
       return (
         <div>
@@ -116,40 +116,40 @@ describe('useSessionstorage', () => {
 
   afterEach(cleanup); // <-- add this
 
-  it.skip('updating one component should update the other automatically', () => {
+  it.skip("updating one component should update the other automatically", () => {
     const { getByTestId: getByTestId1 } = render(<App />);
-    const renderedElement1 = getByTestId1('element1');
-    const renderedElement2 = getByTestId1('element2');
-    expect(renderedElement1.textContent).toEqual('');
-    expect(renderedElement2.textContent).toEqual('');
-    expect(renderedElement1.textContent).toEqual('eren');
+    const renderedElement1 = getByTestId1("element1");
+    const renderedElement2 = getByTestId1("element2");
+    expect(renderedElement1.textContent).toEqual("");
+    expect(renderedElement2.textContent).toEqual("");
+    expect(renderedElement1.textContent).toEqual("eren");
     // expect(renderedElement2.textContent).toEqual("eren");
   });
 
-  it('setting the new value', () => {
+  it("setting the new value", () => {
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
       container as HTMLElement,
-      'new-value'
+      "new-value"
     );
     act(() => {
       fireEvent.click(setToNewValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'element1');
-    expect(valueElement.innerHTML).toBe('mikasa');
+    const valueElement = getByTestId(container as HTMLElement, "element1");
+    expect(valueElement.innerHTML).toBe("mikasa");
   });
 
-  it('unsetting the value', () => {
+  it("unsetting the value", () => {
     const { container } = render(<App />);
     const unsetValueButton = getByTestId(
       container as HTMLElement,
-      'unset-value'
+      "unset-value"
     );
     act(() => {
       fireEvent.click(unsetValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, 'element1');
-    expect(valueElement.innerHTML).toBe('');
+    const valueElement = getByTestId(container as HTMLElement, "element1");
+    expect(valueElement.innerHTML).toBe("");
   });
 });
 

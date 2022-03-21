@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { act, renderHook } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import { usePreviousImmediate } from '../hooks/usePreviousImmediate';
+import { act, renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import { usePreviousImmediate } from "../hooks/usePreviousImmediate";
 
-describe('usePreviousImmediate', () => {
+describe("usePreviousImmediate", () => {
   let useHook;
   beforeEach(() => {
     useHook = function () {
@@ -18,15 +18,15 @@ describe('usePreviousImmediate', () => {
       return { increment, previousValue, value };
     };
   });
-  it('isDefined', async () => {
+  it("isDefined", async () => {
     expect(usePreviousImmediate).toBeDefined();
   });
-  it('initially returns null', async () => {
+  it("initially returns null", async () => {
     const { result } = renderHook(() => useHook());
     expect(result.current.previousValue).toBeNull();
   });
 
-  it('holds the previous value', async () => {
+  it("holds the previous value", async () => {
     const { result } = renderHook(() => useHook());
     act(() => {
       result.current.increment();

@@ -1,11 +1,11 @@
-import { useMemo, MutableRefObject } from 'react';
-import type { HTMLElementOrNull, CallbackRef, AnyRef } from '../utils/utils';
+import { useMemo, MutableRefObject } from "react";
+import type { HTMLElementOrNull, CallbackRef, AnyRef } from "../utils/utils";
 /**
  * Credit to material-ui for this snippet
  */
 
 function setRef(ref: AnyRef, value: HTMLElementOrNull) {
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(value);
   } else if (ref) {
     ref.current = value;

@@ -1,14 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook, cleanup } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import TestRenderer from 'react-test-renderer';
-import { useInterval } from '../hooks/useInterval';
+import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useState } from "react";
+import TestRenderer from "react-test-renderer";
+import { useInterval } from "../hooks/useInterval";
 
 const { act } = TestRenderer;
 
-describe('useInterval', () => {
+describe("useInterval", () => {
   let useHook;
 
   beforeEach(() => {
@@ -27,10 +27,10 @@ describe('useInterval', () => {
 
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useInterval).toBeDefined();
   });
-  it('should start timer when started with start function', () => {
+  it("should start timer when started with start function", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
     act(() => {
@@ -44,7 +44,7 @@ describe('useInterval', () => {
     jest.useRealTimers();
   });
 
-  it('should start timer when started with start function in array destructuring', () => {
+  it("should start timer when started with start function in array destructuring", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
     act(() => {

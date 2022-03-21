@@ -7,11 +7,11 @@ import {
   fireEvent,
   act,
   getByTestId,
-} from '@testing-library/react';
-import React from 'react';
-import { useWillUnmount } from '../hooks/useWillUnmount';
+} from "@testing-library/react";
+import React from "react";
+import { useWillUnmount } from "../hooks/useWillUnmount";
 
-describe('useWillUnmount', () => {
+describe("useWillUnmount", () => {
   let App;
   const mockCallback = jest.fn(() => null);
   // let firstCallback
@@ -46,16 +46,16 @@ describe('useWillUnmount', () => {
 
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useWillUnmount).toBeDefined();
   });
 
-  it('should only call the unmount function only when unmount', () => {
+  it("should only call the unmount function only when unmount", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
+    const valueElement = getByTestId(container as HTMLElement, "value");
     const toggleChildElement = getByTestId(
       container as HTMLElement,
-      'toggle-child'
+      "toggle-child"
     );
     expect(mockCallback.mock.calls.length).toBe(0);
     act(() => {

@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
-import React, { useState } from 'react';
-import { useDidUpdate } from '../hooks/useDidUpdate';
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
+import React, { useState } from "react";
+import { useDidUpdate } from "../hooks/useDidUpdate";
 
-describe('useDidUpdate', () => {
+describe("useDidUpdate", () => {
   let App;
   beforeEach(() => {
     App = function () {
@@ -28,27 +28,27 @@ describe('useDidUpdate', () => {
   });
   afterEach(cleanup); // <-- add this
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useDidUpdate).toBeDefined();
   });
 
-  it('initializes correctly', () => {
+  it("initializes correctly", () => {
     const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
+    const renderedElement = getByTestId("element");
     expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
   });
 
-  it('does not get called on mount', () => {
+  it("does not get called on mount", () => {
     const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
+    const renderedElement = getByTestId("element");
     expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
   });
 
-  it('gets called if a state value changes', () => {
+  it("gets called if a state value changes", () => {
     const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    const valueElement = getByTestId('value');
-    const triggerElement = getByTestId('trigger-btn');
+    const renderedElement = getByTestId("element");
+    const valueElement = getByTestId("value");
+    const triggerElement = getByTestId("trigger-btn");
     expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
     act(() => {
       fireEvent.click(triggerElement);
@@ -57,11 +57,11 @@ describe('useDidUpdate', () => {
     expect(Number.parseInt(String(renderedElement.textContent))).toEqual(1);
   });
 
-  it('does not get called if state value has not updated', () => {
+  it("does not get called if state value has not updated", () => {
     const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    const valueElement = getByTestId('value');
-    const triggerElement = getByTestId('trigger-btn');
+    const renderedElement = getByTestId("element");
+    const valueElement = getByTestId("value");
+    const triggerElement = getByTestId("trigger-btn");
     expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
     act(() => {
       fireEvent.click(triggerElement);
@@ -76,7 +76,7 @@ describe('useDidUpdate', () => {
   });
 });
 
-describe('useDidUpdate', () => {
+describe("useDidUpdate", () => {
   let App;
   beforeEach(() => {
     App = function () {
@@ -99,8 +99,8 @@ describe('useDidUpdate', () => {
   });
   afterEach(cleanup);
 
-  it('warns if conditionals is empty array', () => {
-    const spy = jest.spyOn(global.console, 'warn');
+  it("warns if conditionals is empty array", () => {
+    const spy = jest.spyOn(global.console, "warn");
     render(<App />);
     expect(spy).toHaveBeenCalled();
   });

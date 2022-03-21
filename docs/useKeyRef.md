@@ -134,20 +134,20 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type     | Description                                            | Defualt   |
-|----------------|----------|--------------------------------------------------------|-----------|
+| -------------- | -------- | ------------------------------------------------------ | --------- |
 | keyList        | Array    | A list of keys to listen                               | undefined |
 | callback       | Function | Callback function to be called when event is triggered | undefined |
 | options        | Object   | See table below                                        | undefined |
 
 | Options value | Type                      | Description                                                                      | Defualt     |
-|---------------|---------------------------|----------------------------------------------------------------------------------|-------------|
+| ------------- | ------------------------- | -------------------------------------------------------------------------------- | ----------- |
 | when          | Boolean                   | Condition which if true, will enable the event listeners                         | true        |
 | eventTypes    | Array of number or string | Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp | ['keydown'] |
 
 ### Returns
 
 | Return value | Type         | Description                                              | Defualt   |
-|--------------|--------------|----------------------------------------------------------|-----------|
+| ------------ | ------------ | -------------------------------------------------------- | --------- |
 | ref          | Callback Ref | A ref that can be used on the element you want to listen | undefined |
 
 ---
@@ -169,7 +169,6 @@ render(<Demo />);
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
 
 ## Join Bhargav's discord server
 

@@ -1,9 +1,9 @@
-import { useEffect, useCallback, useState } from 'react';
-import type { HTMLElementOrNull, CallbackRef } from '../utils/utils';
+import { useEffect, useCallback, useState } from "react";
+import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
 
 const config: IntersectionObserverInit = {
   root: null,
-  rootMargin: '0px 0px 0px 0px',
+  rootMargin: "0px 0px 0px 0px",
   threshold: [0, 1],
 };
 

@@ -25,10 +25,8 @@ import { useSelectableList } from "rooks";
 ```jsx
 function Demo() {
   const [total, setTotal] = useState(0);
-  const [
-    selection,
-    { matchSelection, toggleSelection, updateSelection }
-  ] = useSelectableList(toppings, 0);
+  const [selection, { matchSelection, toggleSelection, updateSelection }] =
+    useSelectableList(toppings, 0);
 
   useEffect(() => {
     setTotal(selection[1].price);
@@ -71,11 +69,10 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ### Arguments
 
 | Argument value  | Type      | Description                                     | Default value |
-|-----------------|-----------|-------------------------------------------------|---------------|
+| --------------- | --------- | ----------------------------------------------- | ------------- |
 | list            | Array     | A list of items of any type                     | `[]`          |
 | initialIndex    | `number`  | Index of the initially selected item            | `0`           |
 | allowUnselected | `boolean` | Whether to allow unselect when update selection | `false`       |
@@ -85,19 +82,17 @@ render(<Demo />);
 Returns an array of following items:
 
 | Return value | Type   | Description                                                                 |
-|--------------|--------|-----------------------------------------------------------------------------|
+| ------------ | ------ | --------------------------------------------------------------------------- |
 | selection    | Array  | The first item is the selected index, the second item is the selected value |
 | methods      | Object | Object with methods to control the selectable list, see the table below     |
 
 Methods:
 
 | Methods         | Type                                            | Description                                            |
-|-----------------|-------------------------------------------------|--------------------------------------------------------|
+| --------------- | ----------------------------------------------- | ------------------------------------------------------ |
 | matchSelection  | `({ index?: number, value?: T }) => Boolean`    | returns true if the item is selected                   |
 | toggleSelection | `({ index?: number, value?: T }) => () => void` | returns a function to toggle an item by index or value |
 | updateSelection | `({ index?: number, value?: T }) => () => void` | returns a function to update specified item            |
-
-
 
 ---
 

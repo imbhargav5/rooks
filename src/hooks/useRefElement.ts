@@ -1,5 +1,5 @@
-import { useCallback, useRef, useState, createRef } from 'react';
-import type { RefElementOrNull } from '../utils/utils';
+import { useCallback, useRef, useState, createRef } from "react";
+import type { RefElementOrNull } from "../utils/utils";
 
 /**
  * useRefElement hook for React

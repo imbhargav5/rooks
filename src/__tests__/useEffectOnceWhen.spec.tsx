@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { act, renderHook, cleanup } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import { useEffectOnceWhen } from '../hooks/useEffectOnceWhen';
+import { act, renderHook, cleanup } from "@testing-library/react-hooks";
+import { useState } from "react";
+import { useEffectOnceWhen } from "../hooks/useEffectOnceWhen";
 
-describe('useEffectOnceWhen', () => {
+describe("useEffectOnceWhen", () => {
   let useHook;
   beforeEach(() => {
     useHook = function () {
@@ -20,11 +20,11 @@ describe('useEffectOnceWhen', () => {
   });
   afterEach(cleanup); // <-- add this
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useEffectOnceWhen).toBeDefined();
   });
 
-  it('runs immediately after condition is enabled', async () => {
+  it("runs immediately after condition is enabled", async () => {
     const { result } = renderHook(() => useHook());
     expect(result.current.value).toBe(0);
     act(() => {

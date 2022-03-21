@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useOnWindowResize } from './useOnWindowResize';
-import { useOnWindowScroll } from './useOnWindowScroll';
+import { useState } from "react";
+import { useOnWindowResize } from "./useOnWindowResize";
+import { useOnWindowScroll } from "./useOnWindowScroll";
 
 type ScrollPosition = {
   scrollX: number;
@@ -8,7 +8,7 @@ type ScrollPosition = {
 };
 
 function getScrollPosition(): ScrollPosition {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     return {
       scrollX: window.pageXOffset,
       scrollY: window.pageYOffset,
@@ -29,9 +29,8 @@ function getScrollPosition(): ScrollPosition {
  * @returns an object containing scrollX and scrollY values
  */
 function useWindowScrollPosition(): ScrollPosition {
-  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>(
-    getScrollPosition
-  );
+  const [scrollPosition, setScrollPosition] =
+    useState<ScrollPosition>(getScrollPosition);
   /**
    * Recalculate on scroll
    */

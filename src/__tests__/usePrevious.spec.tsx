@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
-import React, { useState } from 'react';
-import { usePrevious } from '../hooks/usePrevious';
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
+import React, { useState } from "react";
+import { usePrevious } from "../hooks/usePrevious";
 
-describe('usePrevious', () => {
+describe("usePrevious", () => {
   let App;
 
   beforeEach(() => {
@@ -28,20 +28,20 @@ describe('usePrevious', () => {
   });
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(usePrevious).toBeDefined();
   });
-  it('sets initial value to null and updates after change in tracked value', () => {
+  it("sets initial value to null and updates after change in tracked value", () => {
     const { getByTestId } = render(<App />);
-    const currentElement = getByTestId('current-element');
-    const previousElement = getByTestId('previous-element');
-    expect(currentElement.innerHTML).toBe('0');
-    expect(previousElement.innerHTML).toBe('');
+    const currentElement = getByTestId("current-element");
+    const previousElement = getByTestId("previous-element");
+    expect(currentElement.innerHTML).toBe("0");
+    expect(previousElement.innerHTML).toBe("");
     act(() => {
       fireEvent.click(currentElement);
     });
-    expect(currentElement.innerHTML).toBe('1');
-    expect(previousElement.innerHTML).toBe('0');
+    expect(currentElement.innerHTML).toBe("1");
+    expect(previousElement.innerHTML).toBe("0");
   });
 });
 

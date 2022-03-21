@@ -188,23 +188,22 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ### Arguments
 
 The argument is an object with the following optional items:
 
 | Argument value                   | Type                                                    | Description                                    |
-|----------------------------------|---------------------------------------------------------|------------------------------------------------|
+| -------------------------------- | ------------------------------------------------------- | ---------------------------------------------- | ------ | --------- | ----------------------------- |
 | options.onChange                 | `(this: Document, event_: any, isOpen: boolean) => any` | Callback function to be called on change event |
 | options.onError                  | `(this: Document, event_: any) => any`                  | Callback function to be called on error        |
-| options.requestFullscreenOptions | `{ navigationUI?: string | "auto" | "hide" | "show" }`  | Whether to show navigation UI                  |
+| options.requestFullscreenOptions | `{ navigationUI?: string                                | "auto"                                         | "hide" | "show" }` | Whether to show navigation UI |
 
 ### Returns
 
 Returns an object with following items:
 
 | Return value | Type        | Description                             |
-|--------------|-------------|-----------------------------------------|
+| ------------ | ----------- | --------------------------------------- |
 | isEnabled    | boolean     | Whether fullscreen controls are enabled |
 | toggle       | function    | toggle fullscreen                       |
 | request      | function    | request fullscreen                      |

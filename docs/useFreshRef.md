@@ -35,9 +35,9 @@ function Demo() {
       freshIncrementRef.current();
     }
     const intervalId = setInterval(tick, 1000);
-    return () => { 
-      clearInterval(intervalId); 
-    }
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return null;
@@ -49,14 +49,14 @@ render(<Demo />);
 ### Arguments
 
 | Argument value     | Type    | Description                                                                               |
-|--------------------|---------|-------------------------------------------------------------------------------------------|
+| ------------------ | ------- | ----------------------------------------------------------------------------------------- |
 | value              | T       | The value which needs to be fresh at all times. Probably best used with functions         |
 | preferLayoutEffect | boolean | Should the value be updated using a layout effect or a passive effect. Defaults to false. |
 
 ### Returns
 
 | Return value | Type      | Description                      | Default value |
-|--------------|-----------|----------------------------------|---------------|
+| ------------ | --------- | -------------------------------- | ------------- |
 | ref          | RefObject | A ref containing the fresh value | () => null    |
 
 ---

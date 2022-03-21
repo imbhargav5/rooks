@@ -1,8 +1,8 @@
-import React from 'react';
-import GettingStartedContent from '../../docs/getting-started.md';
-import Layout from '@theme/Layout';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './page.module.css';
+import React from "react";
+import GettingStartedContent from "../../docs/getting-started.md";
+import Layout from "@theme/Layout";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import styles from "./page.module.css";
 
 function GettingStarted(props) {
   const context = useDocusaurusContext();
