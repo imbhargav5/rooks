@@ -1,69 +1,15 @@
 {
-  "name": "rooks",
-  "version": "5.10.0",
-  "description": "Essential React custom hooks ⚓ to super charge your components!",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "unpkg": "dist/umd/rooks.umd.js",
-  "types": "dist/types/index.d.ts",
-  "typings": "dist/types/index.d.ts",
-  "sideEffects": false,
-  "license": "MIT",
-  "devEngines": {
-    "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
-  },
-  "engines": {
-    "node": ">=10"
-  },
-  "homepage": "https://react-hooks.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/imbhargav5/rooks.git"
-  },
   "bugs": "https://github.com/imbhargav5/rooks/issues",
-  "scripts": {
-    "clean": "rimraf dist lib",
-    "commit": "cz",
-    "lint": "eslint src/**/*.ts",
-    "format": "yarn run prettier --write \"./src/**/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
-    "test": "jest",
-    "coverage": "yarn test --coverage",
-    "create": "ts-node helpers/create",
-    "new": "yarn run create",
-    "prebuild": "rimraf dist",
-    "update-package-list-to-markdown": "ts-node helpers/update-package-list-to-markdown",
-    "update-docusaurus-sidebars": "ts-node helpers/update-docusaurus-sidebars",
-    "update-docs-and-sidebars": "yarn update-package-list-to-markdown && yarn update-docusaurus-sidebars",
-    "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
-    "build:esm": "tsc -m esNext --outDir dist/esm",
-    "build:cjs": "tsc -m commonjs --outDir dist/cjs",
-    "build:umd": "rollup -c rollup.config.ts --configPlugin typescript",
-    "build:types": "rollup -c dts.rollup.config.js",
-    "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types",
-    "generate:changelog": "gulp changelog",
-    "release-dev": "np prerelease --tag=dev",
-    "docs:examples": "docusaurus-examples",
-    "docs:start": "docusaurus start",
-    "docs:build": "docusaurus build",
-    "docs:clear": "docusaurus clear",
-    "docs:publish-gh-pages": "docusaurus-publish",
-    "docs:write-translations": "docusaurus-write-translations",
-    "docs:version": "docusaurus docs:version",
-    "docs:rename-version": "docusaurus-rename-version",
-    "docs:deploy": "docusaurus deploy",
-    "docs:swizzle": "docusaurus swizzle",
-    "docs:docusaurus": "docusaurus",
-    "docs:serve": "docusaurus serve",
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate",
-    "contributors:check": "all-contributors check",
-    "contributors:update": "ts-node helpers/update-all-contributors",
-    "prepare": "husky install"
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
     "raf": "^3.4.1"
   },
+  "description": "Essential React custom hooks ⚓ to super charge your components!",
   "devDependencies": {
     "@babel/cli": "7.17.6",
     "@babel/core": "7.17.8",
@@ -170,21 +116,16 @@
     "wsrun": "^5.2.4",
     "yargs": "^17.2.1"
   },
-  "peerDependencies": {
-    "react": "^16.8.0  || ^17.0.0",
-    "react-dom": "^16.8.0  || ^17.0.0"
+  "devEngines": {
+    "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
   },
+  "engines": {
+    "node": ">=10"
+  },
+  "homepage": "https://react-hooks.org",
   "husky": {
     "hooks": {
       "pre-commit": "if [[ $IS_GH_ACTION != 1 ]]; then lint-staged; fi;"
-    }
-  },
-  "lint-staged": {
-    "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
     }
   },
   "keywords": [
@@ -194,5 +135,64 @@
     "custom-hooks",
     "typescript",
     "react-hooks"
-  ]
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "name": "rooks",
+  "peerDependencies": {
+    "react": "^16.8.0  || ^17.0.0",
+    "react-dom": "^16.8.0  || ^17.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imbhargav5/rooks.git"
+  },
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types",
+    "build:cjs": "tsc -m commonjs --outDir dist/cjs",
+    "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
+    "build:esm": "tsc -m esNext --outDir dist/esm",
+    "build:types": "rollup -c dts.rollup.config.js",
+    "build:umd": "rollup -c rollup.config.ts --configPlugin typescript",
+    "clean": "rimraf dist lib",
+    "commit": "cz",
+    "contributors:add": "all-contributors add",
+    "contributors:check": "all-contributors check",
+    "contributors:generate": "all-contributors generate",
+    "contributors:update": "ts-node helpers/update-all-contributors",
+    "coverage": "yarn test --coverage",
+    "create": "ts-node helpers/create",
+    "docs:build": "docusaurus build",
+    "docs:clear": "docusaurus clear",
+    "docs:deploy": "docusaurus deploy",
+    "docs:docusaurus": "docusaurus",
+    "docs:examples": "docusaurus-examples",
+    "docs:publish-gh-pages": "docusaurus-publish",
+    "docs:rename-version": "docusaurus-rename-version",
+    "docs:serve": "docusaurus serve",
+    "docs:start": "docusaurus start",
+    "docs:swizzle": "docusaurus swizzle",
+    "docs:version": "docusaurus docs:version",
+    "docs:write-translations": "docusaurus-write-translations",
+    "format": "yarn run prettier --write \"./src/**/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
+    "generate:changelog": "gulp changelog",
+    "lint": "eslint src/**/*.ts",
+    "new": "yarn run create",
+    "prebuild": "rimraf dist",
+    "prepare": "husky install",
+    "release-dev": "np prerelease --tag=dev",
+    "test": "jest",
+    "update-docs-and-sidebars": "yarn update-package-list-to-markdown && yarn update-docusaurus-sidebars",
+    "update-docusaurus-sidebars": "ts-node helpers/update-docusaurus-sidebars",
+    "update-package-list-to-markdown": "ts-node helpers/update-package-list-to-markdown"
+  },
+  "sideEffects": false,
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "unpkg": "dist/umd/rooks.umd.js",
+  "version": "5.10.0"
 }
