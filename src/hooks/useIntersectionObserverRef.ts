@@ -26,7 +26,7 @@ function useIntersectionObserverRef(
 
   useEffect(() => {
     // Create an observer instance linked to the callback function
-    if (node) {
+    if (node && callback) {
       const observer = new IntersectionObserver(callback, options);
 
       // Start observing the target node for configured mutations
