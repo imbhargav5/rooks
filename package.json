@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
-    "@babel/core": "7.17.7",
+    "@babel/core": "7.17.8",
     "@babel/plugin-external-helpers": "7.16.7",
     "@babel/plugin-proposal-export-default-from": "7.16.7",
     "@babel/preset-env": "7.16.11",
