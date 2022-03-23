@@ -17,7 +17,7 @@ const config: IntersectionObserverInit = {
  * @param {IntersectionObserverInit} options
  */
 function useIntersectionObserverRef(
-  callback: IntersectionObserverCallback,
+  callback: IntersectionObserverCallback | undefined,
   options: IntersectionObserverInit = config
 ): [CallbackRef] {
   const { root = null, rootMargin, threshold } = options;
