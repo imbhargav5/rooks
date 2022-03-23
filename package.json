@@ -94,7 +94,7 @@
     "all-contributors-cli": "^6.20.0",
     "assert": "^2.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.2.4",
     "babel-plugin-prismjs": "2.1.0",
     "babel-preset-minify": "0.5.1",
     "browser-env": "3.3.0",
