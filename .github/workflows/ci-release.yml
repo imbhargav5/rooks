@@ -57,6 +57,7 @@ jobs:
     name: Publish To NPM
     env:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      ALGOLIA_APP_ID: ${{secrets.ALGOLIA_APP_ID}}
     needs: main
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'imbhargav5/rooks' &&
