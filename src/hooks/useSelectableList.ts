@@ -33,7 +33,7 @@ function useSelectableList<T>(
   {
     updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
     toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    matchSelection: (parameters: OptionalIndexValue<T>) => void;
+    matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
   }
 ] {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -110,7 +110,7 @@ function useSelectableList<T>(
         return value === currentValue;
       }
     },
-    [currentIndex]
+    [currentIndex, currentValue]
   );
 
   const controls = {
@@ -119,7 +119,7 @@ function useSelectableList<T>(
     updateSelection,
   };
 
-  return [selection, controls as any];
+  return [selection, controls];
 }
 
 export { useSelectableList };
