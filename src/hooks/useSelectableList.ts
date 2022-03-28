@@ -16,6 +16,15 @@ function warnIfBothValueAndIndexAreProvided(functionName, object) {
   }
 }
 
+type UseSelectableListReturnType<T> = [
+  Array<T | number>,
+  {
+    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
+  }
+];
+
 /**
  * useSelectableList
  * Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
@@ -28,14 +37,7 @@ function useSelectableList<T>(
   list: T[] = [],
   initialIndex: number = 0,
   allowUnselected = false
-): [
-  Array<T | number>,
-  {
-    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    matchSelection: (parameters: OptionalIndexValue<T>) => void;
-  }
-] {
+): UseSelectableListReturnType<T> {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const currentValue = list[currentIndex];
   const selection = [currentIndex, currentValue];
@@ -102,7 +104,7 @@ function useSelectableList<T>(
   );
 
   const matchSelection = useCallback(
-    ({ index, value }: OptionalIndexValue<T>) => {
+    ({ index, value }: OptionalIndexValue<T>): boolean => {
       warnIfBothValueAndIndexAreProvided("matchSelection", { index, value });
       if (typeof index !== "undefined") {
         return index === currentIndex;
@@ -110,7 +112,7 @@ function useSelectableList<T>(
         return value === currentValue;
       }
     },
-    [currentIndex]
+    [currentIndex, currentValue]
   );
 
   const controls = {
@@ -119,7 +121,7 @@ function useSelectableList<T>(
     updateSelection,
   };
 
-  return [selection, controls as any];
+  return [selection, controls];
 }
 
 export { useSelectableList };
