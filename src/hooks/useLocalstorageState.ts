@@ -59,7 +59,7 @@ function useLocalstorageState<S>(
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
   const customEventTypeName = useMemo(() => {
-    return `${key}-update`;
+    return `rooks-${key}-localstorage-update`;
   }, [key]);
 
   useEffect(() => {
