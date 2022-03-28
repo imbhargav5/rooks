@@ -34,7 +34,7 @@ function useMultiSelectableList<T>(
   Array<number[] | T[]>,
   {
     toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    matchSelection: (parameters: OptionalIndexValue<T>) => void;
+    matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
     updateSelections: ({
       indices,
       values,
@@ -135,6 +135,8 @@ function useMultiSelectableList<T>(
       } else if (typeof value !== "undefined") {
         return currentValues.includes(value);
       }
+
+      return false;
     },
     [currentIndices, currentValues]
   );
