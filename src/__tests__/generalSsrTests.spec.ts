@@ -2,12 +2,12 @@
  * @jest-environment node
  */
 import { renderHook } from "@testing-library/react-hooks";
-import { useOnWindowResize } from "../hooks/useOnWindowResize";
-import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
-import { useIntervalWhen } from "../hooks/useIntervalWhen";
 import { useFullscreen } from "../hooks/useFullscreen";
+import { useIntervalWhen } from "../hooks/useIntervalWhen";
 import { useLocalstorage } from "../hooks/useLocalstorage";
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
+import { useOnWindowResize } from "../hooks/useOnWindowResize";
+import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
 import { useOnline } from "../hooks/useOnline";
 import { useSessionstorage } from "../hooks/useSessionstorage";
 import { useThrottle } from "../hooks/useThrottle";
@@ -50,7 +50,7 @@ describe("when window is undefined", () => {
 
   it("useLocalstorageState logs warning", () => {
     renderHook(() => useLocalstorageState("test"));
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
+    expect(consoleSpy).toHaveBeenCalledTimes(2);
   });
 
   it("useOnline logs warning", () => {

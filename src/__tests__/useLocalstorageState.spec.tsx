@@ -80,6 +80,7 @@ describe("useLocalstorageState basic", () => {
     expect(valueElement.innerHTML).toBe("new value");
   });
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip("unsetting the value", () => {
     const { container } = render(<App />);
     const unsetValueButton = getByTestId(
