@@ -1,3 +1,10 @@
+## <small>5.10.5 (2022-03-28)</small>
+
+* fix(uselocalstoragestate): localstorage state should update component… (#907) ([d81fcfd](https://github.com/imbhargav5/rooks/commit/d81fcfd)), closes [#907](https://github.com/imbhargav5/rooks/issues/907)
+* chore(docs): Update changelog and docs ([755fc47](https://github.com/imbhargav5/rooks/commit/755fc47))
+
+
+
 ## <small>5.10.4 (2022-03-28)</small>
 
 * fix(usemultiselectablelist): fix type of matchSelection (#906) ([b946a5e](https://github.com/imbhargav5/rooks/commit/b946a5e)), closes [#906](https://github.com/imbhargav5/rooks/issues/906)
