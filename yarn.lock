@@ -17047,9 +17047,9 @@ vfile-message@^3.0.0:
     unist-util-stringify-position "^3.0.0"
 
 vfile-reporter@^7.0.2:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.3.tgz#faa72f6d2d56841b352480c827b53f8417cb1b33"
-  integrity sha512-q+ruTWxFHbow359TDqoNJn5THdwRDeV+XUOtzdT/OESgaGw05CjL68ImlbzRzqS5xL62Y1IaIWb8x+RbaNjayA==
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.4.tgz#f5a91c7420c7b2d6bed6f64719069545d47a22cd"
+  integrity sha512-4cWalUnLrEnbeUQ+hARG5YZtaHieVK3Jp4iG5HslttkVl+MHunSGNAIrODOTLbtjWsNZJRMCkL66AhvZAYuJ9A==
   dependencies:
     "@types/supports-color" "^8.0.0"
     string-width "^5.0.0"
