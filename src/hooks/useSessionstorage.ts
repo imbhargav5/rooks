@@ -33,7 +33,7 @@ function useSessionstorage(
   defaultValue: any = null
 ): StorageHandler {
   useWarningOnMountInDevelopment(
-    "useSessionstorage is deprecated, it will be removed in rooks v7. Please use useSessionstorageState instead."
+    "useSessionstorage is deprecated, it will be removed in the next major release. Please use useSessionstorageState instead."
   );
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 

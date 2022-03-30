@@ -4,6 +4,12 @@ title: useLocalstorage
 sidebar_label: useLocalstorage
 ---
 
+:::warning
+
+`useLocalstorage` is deprecated, it will be removed in the next major release. Please use [useLocalstorageState](/useLocalstorageState) instead.
+
+:::
+
 ## About
 
 Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows.
