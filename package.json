@@ -83,12 +83,12 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.3.0",
     "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.1",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.4.1",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
     "@widgetbot/embed-api": "^1.1.3",
     "@widgetbot/react-embed": "^1.3.0",
     "all-contributors-cli": "^6.20.0",
@@ -117,8 +117,8 @@
     "gulp-conventional-changelog": "^2.0.35",
     "husky": "^7.0.0",
     "inquirer": "8.2.2",
-    "jest": "^26.6.3",
-    "jest-localstorage-mock": "^2.4.3",
+    "jest": "^27.5.1",
+    "jest-localstorage-mock": "^2.4.19",
     "lint-staged": "^12.0.2",
     "lodash.capitalize": "4.2.1",
     "lodash.sortby": "^4.7.0",
@@ -136,9 +136,9 @@
     "ora": "6.1.0",
     "pkg-dir": "^5.0.0",
     "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-test-renderer": "17.0.2",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-test-renderer": "18.0.0",
     "read-pkg-up": "9.1.0",
     "readline-sync": "^1.4.10",
     "remark": "^14.0.1",
@@ -171,8 +171,8 @@
     "yargs": "^17.2.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0  || ^17.0.0",
-    "react-dom": "^16.8.0  || ^17.0.0"
+    "react": "^16.8.0  || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0  || ^17.0.0 || ^18.0.0"
   },
   "husky": {
     "hooks": {
