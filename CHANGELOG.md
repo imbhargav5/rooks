@@ -1,3 +1,25 @@
+## 5.11.0 (2022-03-30)
+
+* feat(react): support v18 (#917) ([06b5b2c](https://github.com/imbhargav5/rooks/commit/06b5b2c)), closes [#917](https://github.com/imbhargav5/rooks/issues/917)
+* chore(deps-dev): bump esbuild from 0.14.27 to 0.14.29 ([afa451f](https://github.com/imbhargav5/rooks/commit/afa451f))
+
+
+
+## <small>5.10.6 (2022-03-30)</small>
+
+* fix(uselocalstorage): deprecate uselocalstorage and usesessionstorage hooks (#916) ([94c7bb0](https://github.com/imbhargav5/rooks/commit/94c7bb0)), closes [#916](https://github.com/imbhargav5/rooks/issues/916)
+* chore(deps-dev): bump @docusaurus/core ([7ef0153](https://github.com/imbhargav5/rooks/commit/7ef0153))
+* chore(deps-dev): bump @docusaurus/plugin-client-redirects ([8586de2](https://github.com/imbhargav5/rooks/commit/8586de2))
+* chore(deps-dev): bump @docusaurus/preset-classic ([553a40e](https://github.com/imbhargav5/rooks/commit/553a40e))
+* chore(deps-dev): bump @docusaurus/theme-common ([d083505](https://github.com/imbhargav5/rooks/commit/d083505))
+* chore(deps-dev): bump @testing-library/jest-dom from 5.16.2 to 5.16.3 ([a061132](https://github.com/imbhargav5/rooks/commit/a061132))
+* chore(deps-dev): bump inquirer from 8.2.1 to 8.2.2 ([1dd187b](https://github.com/imbhargav5/rooks/commit/1dd187b))
+* chore(deps-dev): bump prettier from 2.6.0 to 2.6.1 ([aa12670](https://github.com/imbhargav5/rooks/commit/aa12670))
+* chore(deps-dev): bump vfile-reporter from 7.0.3 to 7.0.4 ([855a962](https://github.com/imbhargav5/rooks/commit/855a962))
+* chore(docs): Update changelog and docs ([42ef756](https://github.com/imbhargav5/rooks/commit/42ef756))
+
+
+
 ## <small>5.10.5 (2022-03-28)</small>
 
 * fix(uselocalstoragestate): localstorage state should update component… (#907) ([d81fcfd](https://github.com/imbhargav5/rooks/commit/d81fcfd)), closes [#907](https://github.com/imbhargav5/rooks/issues/907)
