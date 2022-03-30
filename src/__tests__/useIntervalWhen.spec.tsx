@@ -13,6 +13,8 @@ describe("useIntervalWhen", () => {
   const EAGER = true;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(global, "setInterval");
     useHook = function (when, eager = false) {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
@@ -32,7 +34,8 @@ describe("useIntervalWhen", () => {
   });
 
   afterEach(() => {
-    cleanup();
+    void cleanup();
+    jest.useRealTimers();
     jest.clearAllTimers();
   });
 
@@ -42,7 +45,7 @@ describe("useIntervalWhen", () => {
   it("should start timer when started with start function", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook(true));
-    act(() => {
+    void act(() => {
       jest.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
@@ -55,7 +58,7 @@ describe("useIntervalWhen", () => {
     const { result } = renderHook(() => useHook(true, EAGER));
     // The value was already incremented because we use useIntervalWhen in EAGER mode
     expect(result.current.currentValue).toBe(1);
-    act(() => {
+    void act(() => {
       jest.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
