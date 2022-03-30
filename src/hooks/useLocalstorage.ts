@@ -1,6 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
+import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
 type StorageHandlerAsObject = {
   value: any;
@@ -24,6 +25,9 @@ function useLocalstorage(
   defaultValue: any = null
 ): StorageHandler {
   const [value, setValue] = useState(getValueFromLocalStorage());
+  useWarningOnMountInDevelopment(
+    "useLocalstorage is deprecated, it will be removed in the next major release. Please use useLocalstorageState instead."
+  );
 
   function init() {
     const valueLoadedFromLocalStorage = getValueFromLocalStorage();
