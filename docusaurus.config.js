@@ -182,7 +182,9 @@ module.exports = {
         },
       ],
       copyright: "MIT© 2022 Bhargav Ponnapalli",
-      logo: {},
+      logo: {
+        src: "https://github.com/imbhargav5/rooks/raw/master/.github/assets/icon.png",
+      },
     },
     algolia: {
       apiKey: process.env.ALGOLIA_API_KEY,
