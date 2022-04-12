@@ -7121,9 +7121,9 @@ eslint-plugin-sort-keys-fix@^1.1.1:
     requireindex "~1.2.0"
 
 eslint-plugin-testing-library@^5.0.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.2.1.tgz#3f89cd28ade81329a11584e0bbea129bede01619"
-  integrity sha512-88qJv6uzYALtiYJDzhelP3ov0Px/GLgnu+UekjjDxL2nMyvgdTyboKqcDBsvFPmAeizlCoSWOjeBN4DxO0BxaA==
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.3.1.tgz#7638ee79cc86fd8bb57d671af35a1cbaa77e9548"
+  integrity sha512-OfF4dlG/q6ck6DL3P8Z0FPdK0dU5K57gsBu7eUcaVbwYKaNzjgejnXiM9CCUevppORkvfek+9D3Uj/9ZZ8Vz8g==
   dependencies:
     "@typescript-eslint/utils" "^5.13.0"
 
