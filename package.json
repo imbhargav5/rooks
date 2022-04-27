@@ -136,7 +136,7 @@
     "ora": "6.1.0",
     "pkg-dir": "^5.0.0",
     "prettier": "^2.2.1",
-    "react": "18.0.0",
+    "react": "18.1.0",
     "react-dom": "18.0.0",
     "react-test-renderer": "18.0.0",
     "read-pkg-up": "9.1.0",
