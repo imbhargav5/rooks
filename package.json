@@ -116,7 +116,7 @@
     "gulp": "^4.0.2",
     "gulp-conventional-changelog": "^2.0.35",
     "husky": "^7.0.0",
-    "inquirer": "8.2.2",
+    "inquirer": "8.2.4",
     "jest": "^27.5.1",
     "jest-localstorage-mock": "^2.4.19",
     "lint-staged": "^12.0.2",
