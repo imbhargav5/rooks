@@ -26,10 +26,13 @@ function useDidUpdate(callback: () => any, conditions?: any[]): void {
     } else {
       hasMountedRef.current = true;
     }
+  }, conditions);
+  
+  useEffect(() => {
     return () => {
       hasMountedRef.current = false;
     }
-  }, conditions);
+  }, [])
 }
 
 export { useDidUpdate };
