@@ -26,6 +26,9 @@ function useDidUpdate(callback: () => any, conditions?: any[]): void {
     } else {
       hasMountedRef.current = true;
     }
+    return () => {
+      hasMountedRef.current = false;
+    }
   }, conditions);
 }
 
