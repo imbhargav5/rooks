@@ -96,7 +96,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "8.2.5",
     "babel-plugin-prismjs": "2.1.0",
-    "babel-preset-minify": "0.5.1",
+    "babel-preset-minify": "0.5.2",
     "browser-env": "3.3.0",
     "camel-case": "^4.1.1",
     "chalk": "5.0.1",
