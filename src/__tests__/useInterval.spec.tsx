@@ -1,17 +1,19 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook, cleanup } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import TestRenderer from 'react-test-renderer';
-import { useInterval } from '../hooks/useInterval';
+import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { useState } from "react";
+import TestRenderer from "react-test-renderer";
+import { useInterval } from "../hooks/useInterval";
 
 const { act } = TestRenderer;
 
-describe('useInterval', () => {
+describe("useInterval", () => {
   let useHook;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(global, "setInterval");
     useHook = function () {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
@@ -25,18 +27,21 @@ describe('useInterval', () => {
     };
   });
 
-  afterEach(cleanup);
+  afterEach(() => {
+    void cleanup();
+    jest.useRealTimers();
+  });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useInterval).toBeDefined();
   });
-  it('should start timer when started with start function', () => {
+  it("should start timer when started with start function", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
-    act(() => {
+    void act(() => {
       result.current.intervalHandler.start();
     });
-    act(() => {
+    void act(() => {
       jest.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
@@ -44,14 +49,14 @@ describe('useInterval', () => {
     jest.useRealTimers();
   });
 
-  it('should start timer when started with start function in array destructuring', () => {
+  it("should start timer when started with start function in array destructuring", () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook());
-    act(() => {
+    void act(() => {
       const [start] = result.current.intervalHandler;
       start();
     });
-    act(() => {
+    void act(() => {
       jest.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);

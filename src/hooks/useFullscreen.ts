@@ -149,6 +149,8 @@ function useFullscreen(
   options: FullScreenOptions = {}
 ): FullscreenApi | undefined {
   if (typeof window === "undefined") {
+    console.warn("useFullscreen: window is undefined.");
+
     return defaultValue;
   }
   const {

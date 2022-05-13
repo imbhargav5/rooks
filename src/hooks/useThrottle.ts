@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 
 /**
  * useThrottle
@@ -15,9 +15,9 @@ function useThrottle(
   const [ready, setReady] = useState(true);
   const timerRef = useRef<number | undefined>(undefined);
 
-  if (!function_ || typeof function_ !== 'function') {
+  if (!function_ || typeof function_ !== "function") {
     throw new Error(
-      'As a first argument, you need to pass a function to useThrottle hook.'
+      "As a first argument, you need to pass a function to useThrottle hook."
     );
   }
 
@@ -34,12 +34,16 @@ function useThrottle(
   );
 
   useEffect(() => {
-    if (!ready) {
-      timerRef.current = window.setTimeout(() => {
-        setReady(true);
-      }, timeout);
+    if (typeof window !== "undefined") {
+      if (!ready) {
+        timerRef.current = window.setTimeout(() => {
+          setReady(true);
+        }, timeout);
 
-      return () => window.clearTimeout(timerRef.current);
+        return () => window.clearTimeout(timerRef.current);
+      }
+    } else {
+      console.warn("useThrottle: window is undefined.");
     }
   }, [ready, timeout]);
 

@@ -18,6 +18,19 @@ function warnIfBothValueAndIndexAreProvided(functionName, object) {
     );
   }
 }
+
+type UseMultiSelectableListReturnType<T> = [
+  Array<number[] | T[]>,
+  {
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
+    updateSelections: ({
+      indices,
+      values,
+    }: OptionalIndicesValues<T>) => () => void;
+  }
+];
+
 /**
  * useMultiSelectableList
  * A custom hook to easily select multiple values from a list
@@ -30,17 +43,7 @@ function useMultiSelectableList<T>(
   list: T[] = [],
   initialSelectIndices: number[] = [0],
   allowUnselected: boolean = false
-): [
-  Array<number[] | T[]>,
-  {
-    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    matchSelection: (parameters: OptionalIndexValue<T>) => void;
-    updateSelections: ({
-      indices,
-      values,
-    }: OptionalIndicesValues<T>) => () => void;
-  }
-] {
+): UseMultiSelectableListReturnType<T> {
   const [currentIndices, setCurrentIndices] = useState(initialSelectIndices);
 
   const currentValues = currentIndices.map((index) => list[index]);
@@ -135,6 +138,8 @@ function useMultiSelectableList<T>(
       } else if (typeof value !== "undefined") {
         return currentValues.includes(value);
       }
+
+      return false;
     },
     [currentIndices, currentValues]
   );

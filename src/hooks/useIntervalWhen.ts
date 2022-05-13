@@ -26,15 +26,19 @@ function useIntervalWhen(
   }
 
   useEffect(() => {
-    if (when) {
-      if (startImmediate) {
-        callback();
-      }
-      const interval = window.setInterval(callback, intervalDurationMs);
+    if (typeof window !== "undefined") {
+      if (when) {
+        if (startImmediate) {
+          callback();
+        }
+        const interval = window.setInterval(callback, intervalDurationMs);
 
-      return () => {
-        window.clearInterval(interval);
-      };
+        return () => {
+          window.clearInterval(interval);
+        };
+      }
+    } else {
+      console.warn("useIntervalWhen: window is undefined.");
     }
   }, [when, intervalDurationMs]);
 }

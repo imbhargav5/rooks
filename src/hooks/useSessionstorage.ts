@@ -33,7 +33,7 @@ function useSessionstorage(
   defaultValue: any = null
 ): StorageHandler {
   useWarningOnMountInDevelopment(
-    "useSessionstorage is deprecated, it will be removed in rooks v7. Please use useSessionstorageState instead."
+    "useSessionstorage is deprecated, it will be removed in the next major release. Please use useSessionstorageState instead."
   );
   const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
@@ -98,11 +98,15 @@ function useSessionstorage(
   }, []);
 
   useEffect(() => {
-    window.addEventListener("storage", listen);
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", listen);
 
-    return () => {
-      window.removeEventListener("storage", listen);
-    };
+      return () => {
+        window.removeEventListener("storage", listen);
+      };
+    } else {
+      console.warn("useSessionstorage: window is undefined.");
+    }
   }, []);
 
   const handler = Object.assign([value, set, remove], {

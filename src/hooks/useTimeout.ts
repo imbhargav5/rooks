@@ -43,11 +43,15 @@ function useTimeout(
 
   useEffect(() => {
     if (isTimeoutActive) {
-      const timeout = window.setTimeout(callback, timeoutDelayMs);
+      if (typeof window !== "undefined") {
+        const timeout = window.setTimeout(callback, timeoutDelayMs);
 
-      return () => {
-        window.clearTimeout(timeout);
-      };
+        return () => {
+          window.clearTimeout(timeout);
+        };
+      } else {
+        console.warn("useTimeout: window is undefined.");
+      }
     }
   }, [isTimeoutActive, timeoutDelayMs]);
 

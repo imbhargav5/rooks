@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useFreshTick } from "./useFreshTick";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { warning } from "./warning";
 
 /**
  *  useGlobalObjectEventListener hook
@@ -28,6 +29,10 @@ function useGlobalObjectEventListener(
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
 
   useEffectToRun(() => {
+    warning(
+      typeof globalObject !== "undefined",
+      "[useGlobalObjectEventListener]: Cannot attach event handlers to undefined."
+    );
     if (
       typeof globalObject !== "undefined" &&
       globalObject.addEventListener &&
@@ -43,6 +48,8 @@ function useGlobalObjectEventListener(
         );
       };
     }
+
+    return () => {};
   }, [eventName, capture, passive, once]);
 }
 

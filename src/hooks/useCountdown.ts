@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useIntervalWhen } from './useIntervalWhen';
+import { useState } from "react";
+import { useIntervalWhen } from "./useIntervalWhen";
 
 type CountdownOptions = {
   interval?: number;
