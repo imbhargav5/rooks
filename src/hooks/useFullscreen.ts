@@ -147,7 +147,7 @@ function warnDeprecatedOnChangeAndOnErrorUsage() {
  */
 function useFullscreen(
   options: FullScreenOptions = {}
-): FullscreenApi | undefined {
+): FullscreenApi {
   if (typeof window === "undefined") {
     console.warn("useFullscreen: window is undefined.");
 
