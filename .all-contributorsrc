@@ -444,6 +444,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nlswtlr",
+      "name": "Nils Wittler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1405318?v=4",
+      "profile": "https://nilsw.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
