@@ -14453,9 +14453,9 @@ remark-admonitions@^1.2.1:
     unist-util-visit "^2.0.1"
 
 remark-behead@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/remark-behead/-/remark-behead-3.0.0.tgz#d64530509b223d62c1a467f37e1259cd9f740443"
-  integrity sha512-qbP+4Qfc1ArpXd4MQAxg1zQ20W3rJZ+2FmVoH6VhcNfDQuOFcndFV7GWRVsYRVAj0+42uobwh6yPNastFG0WXQ==
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/remark-behead/-/remark-behead-3.1.0.tgz#3ee827bef66c18e56c5cc05e82dd82a6fb3368c3"
+  integrity sha512-rKns7st91lgppaD5YaH58O4ECFVXTVnkyYQBuCw4ISRE2TFK/iVySMaKbvV2pVbUVIjAaDciugrTI/tyuPOlWQ==
   dependencies:
     unist-util-find "^1.0.2"
     unist-util-find-all-after "^4.0.0"
