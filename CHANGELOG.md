@@ -1,3 +1,12 @@
+## <small>5.11.2 (2022-05-20)</small>
+
+* fix(useDidUpdate): useDidUpdate to make it work with Strict Effects (#974) ([7e64d10](https://github.com/imbhargav5/rooks/commit/7e64d10)), closes [#974](https://github.com/imbhargav5/rooks/issues/974)
+* chore(deps-dev): bump @babel/plugin-external-helpers ([a890171](https://github.com/imbhargav5/rooks/commit/a890171))
+* chore(deps-dev): bump @babel/preset-env from 7.17.10 to 7.18.0 ([33093ff](https://github.com/imbhargav5/rooks/commit/33093ff))
+* chore(docs): Update changelog and docs ([b4ba478](https://github.com/imbhargav5/rooks/commit/b4ba478))
+
+
+
 ## <small>5.11.1 (2022-05-20)</small>
 
 * fix(types): change useFullscreen hook return type (it never returns undefined) (#1006) ([6ac36e1](https://github.com/imbhargav5/rooks/commit/6ac36e1)), closes [#1006](https://github.com/imbhargav5/rooks/issues/1006)

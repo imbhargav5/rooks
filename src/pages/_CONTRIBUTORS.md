@@ -1,6 +1,6 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-49-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-50-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ## Contributors ✨
 
@@ -72,6 +72,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/superLipbalm"><img src="https://avatars.githubusercontent.com/u/77329061?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chanhee Kim</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=superLipbalm" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/hooriza"><img src="https://avatars.githubusercontent.com/u/507927?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hooriza</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=hooriza" title="Code">💻</a></td>
     <td align="center"><a href="https://nilsw.io/"><img src="https://avatars.githubusercontent.com/u/1405318?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nils Wittler</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nlswtlr" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/sszczep"><img src="https://avatars.githubusercontent.com/u/21238816?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sebastian Szczepański</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=sszczep" title="Code">💻</a></td>
   </tr>
 </table>
 
