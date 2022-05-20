@@ -628,12 +628,12 @@
     "@babel/helper-skip-transparent-expression-wrappers" "^7.16.0"
     "@babel/plugin-proposal-optional-chaining" "^7.16.7"
 
-"@babel/plugin-external-helpers@7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-external-helpers/-/plugin-external-helpers-7.16.7.tgz#dd91e9b22d52f606461e7fcb4dc99a8b3392dd84"
-  integrity sha512-3MvRbPgl957CR3ZMeW/ukGrKDM3+m5vtTkgrBAKKbUgrAkb1molwjRqUvAYsCnwboN1vXgHStotdhAvTgQS/Gw==
+"@babel/plugin-external-helpers@7.17.12":
+  version "7.17.12"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-external-helpers/-/plugin-external-helpers-7.17.12.tgz#d6bc467215fd8a018b4685ade517624b927337d1"
+  integrity sha512-SyHYZFtsabbQL0ruTWZHmU70dxOSb1qIgGeJMp9evlgKH+2+1RwYnQgANN/IpUIMxKPliq+cslazqfq31dRs+w==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.16.7"
+    "@babel/helper-plugin-utils" "^7.17.12"
 
 "@babel/plugin-proposal-async-generator-functions@^7.16.8":
   version "7.16.8"

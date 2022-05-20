@@ -67,7 +67,7 @@
   "devDependencies": {
     "@babel/cli": "7.17.10",
     "@babel/core": "7.17.12",
-    "@babel/plugin-external-helpers": "7.16.7",
+    "@babel/plugin-external-helpers": "7.17.12",
     "@babel/plugin-proposal-export-default-from": "7.17.12",
     "@babel/preset-env": "7.17.10",
     "@babel/preset-react": "7.16.7",
