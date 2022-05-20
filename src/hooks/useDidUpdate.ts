@@ -27,6 +27,12 @@ function useDidUpdate(callback: () => any, conditions?: any[]): void {
       hasMountedRef.current = true;
     }
   }, conditions);
+  
+  useEffect(() => {
+    return () => {
+      hasMountedRef.current = false;
+    }
+  }, [])
 }
 
 export { useDidUpdate };
