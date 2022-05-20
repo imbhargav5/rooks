@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.11.1",
+  "version": "5.11.2",
   "description": "Essential React custom hooks ⚓ to super charge your components!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -66,11 +66,11 @@
   },
   "devDependencies": {
     "@babel/cli": "7.17.10",
-    "@babel/core": "7.17.12",
+    "@babel/core": "7.18.0",
     "@babel/plugin-external-helpers": "7.17.12",
     "@babel/plugin-proposal-export-default-from": "7.17.12",
     "@babel/preset-env": "7.18.0",
-    "@babel/preset-react": "7.16.7",
+    "@babel/preset-react": "7.17.12",
     "@docusaurus/core": "2.0.0-beta.20",
     "@docusaurus/plugin-client-redirects": "2.0.0-beta.20",
     "@docusaurus/preset-classic": "2.0.0-beta.20",
