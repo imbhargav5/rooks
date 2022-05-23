@@ -7114,9 +7114,9 @@ eslint-ast-utils@^1.0.0:
     lodash.zip "^4.2.0"
 
 eslint-config-canonical@^35.0.0:
-  version "35.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-canonical/-/eslint-config-canonical-35.0.0.tgz#87e29dbeaa5bc0f8388ba0dd49e79237ca73d2fa"
-  integrity sha512-MSePrImYP5NAKwTfMLErvk079exd8VAgv0wAN9lNXtd+uKBcJWJRJZ3SBXp3PygQXQz9fSzZ5loPjxTa/OM+4Q==
+  version "35.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-canonical/-/eslint-config-canonical-35.0.1.tgz#a11f9f7f23db94a9aa1e38db049ca32d0a47de7f"
+  integrity sha512-U+9SI4qReC8ahl2tOvZsKTxG/6VshW9wnPlDBCwh8rm9TOlmHffMvtMgq+mWKBpRKqEW//UztXoWcPeGdmbvPQ==
   dependencies:
     "@babel/core" "^7.17.9"
     "@babel/eslint-parser" "^7.17.0"
@@ -7128,7 +7128,7 @@ eslint-config-canonical@^35.0.0:
     "@typescript-eslint/parser" "^5.19.0"
     eslint-config-prettier "^8.5.0"
     eslint-plugin-ava "^13.2.0"
-    eslint-plugin-canonical "^3.0.2"
+    eslint-plugin-canonical "^3.1.0"
     eslint-plugin-cypress "^2.12.1"
     eslint-plugin-eslint-comments "^3.2.0"
     eslint-plugin-flowtype "^8.0.3"
@@ -7185,10 +7185,10 @@ eslint-plugin-ava@^13.2.0:
     pkg-dir "^5.0.0"
     resolve-from "^5.0.0"
 
-eslint-plugin-canonical@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-canonical/-/eslint-plugin-canonical-3.0.2.tgz#08d21c9446e0bcef98053dc892a45f5c1ddb2206"
-  integrity sha512-beby5H+FkQPVE9QdrZ9OKV7G1/6eBoGOsN1hjqLmue0T3buHFms7oHdkusMMWQcutxQo0kix8w2ESlkMMju+ng==
+eslint-plugin-canonical@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-canonical/-/eslint-plugin-canonical-3.1.0.tgz#f7c9dfe53ccee512eb4d7531419eddf2becaa97a"
+  integrity sha512-bZQiH2L3aIqC8WnMFnYMVtBW8HCZrQRUvn20FsbMiy56H6txjGS+uOxiItoNQjFDc9ADDruKgEFKm/Hi7jYBmw==
   dependencies:
     is-get-set-prop "^1.0.0"
     is-js-type "^2.0.0"
