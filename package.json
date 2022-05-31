@@ -71,7 +71,7 @@
     "@babel/plugin-proposal-export-default-from": "7.17.12",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
-    "@docusaurus/core": "2.0.0-beta.20",
+    "@docusaurus/core": "2.0.0-beta.21",
     "@docusaurus/plugin-client-redirects": "2.0.0-beta.20",
     "@docusaurus/preset-classic": "2.0.0-beta.20",
     "@docusaurus/theme-common": "^2.0.0-beta.17",
