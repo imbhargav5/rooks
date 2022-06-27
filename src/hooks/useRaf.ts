@@ -25,7 +25,6 @@ export function useRaf(
 
     function tick() {
       const timeElapsed = Date.now() - startTime;
-      startTime = Date.now();
       loop();
       savedCallback.current && savedCallback.current(timeElapsed);
     }
