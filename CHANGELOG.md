@@ -1,3 +1,10 @@
+## <small>5.11.4 (2022-06-30)</small>
+
+* fix(types): [1016] updated type definition of useForkRef with generic suppor… (#1017) ([add2bd5](https://github.com/imbhargav5/rooks/commit/add2bd5)), closes [#1017](https://github.com/imbhargav5/rooks/issues/1017)
+* chore(docs): Update changelog and docs ([2680f37](https://github.com/imbhargav5/rooks/commit/2680f37))
+
+
+
 ## <small>5.11.3 (2022-06-30)</small>
 
 * fix: Remove console.warn in SSR (#1030) ([84d1828](https://github.com/imbhargav5/rooks/commit/84d1828)), closes [#1030](https://github.com/imbhargav5/rooks/issues/1030)
