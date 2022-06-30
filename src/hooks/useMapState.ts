@@ -40,11 +40,11 @@ function useMapState<T>(initialValue: T): [
     }));
   }, []);
 
-  const removeMultiple = useCallback((...keys) => {
+  const removeMultiple = useCallback((...keys: Array<keyof T>) => {
     setMap((currentMap) => {
-      const newMap: T = {};
+      const newMap = {} as T;
       for (const key of Object.keys(currentMap)) {
-        if (!keys.includes(key)) {
+        if (!keys.includes(key as keyof T)) {
           newMap[key] = currentMap[key];
         }
       }
@@ -55,7 +55,7 @@ function useMapState<T>(initialValue: T): [
 
   const remove = useCallback((key: keyof T) => {
     setMap((currentMap) => {
-      const newMap: T = {};
+      const newMap = {} as T;
       for (const mapKey of Object.keys(currentMap)) {
         if (mapKey !== key) {
           newMap[mapKey] = currentMap[mapKey];
@@ -67,7 +67,7 @@ function useMapState<T>(initialValue: T): [
   }, []);
 
   const removeAll = useCallback(() => {
-    setMap({});
+    setMap({} as T);
   }, []);
 
   return [
