@@ -1,3 +1,38 @@
+## <small>5.11.3 (2022-06-30)</small>
+
+* fix: Remove console.warn in SSR (#1030) ([84d1828](https://github.com/imbhargav5/rooks/commit/84d1828)), closes [#1030](https://github.com/imbhargav5/rooks/issues/1030)
+* chore(deps-dev): bump @babel/core from 7.17.12 to 7.18.0 ([04e2a0d](https://github.com/imbhargav5/rooks/commit/04e2a0d))
+* chore(deps-dev): bump @babel/core from 7.18.0 to 7.18.2 ([6dcaae8](https://github.com/imbhargav5/rooks/commit/6dcaae8))
+* chore(deps-dev): bump @babel/preset-env from 7.18.0 to 7.18.2 ([1c9cc74](https://github.com/imbhargav5/rooks/commit/1c9cc74))
+* chore(deps-dev): bump @babel/preset-react from 7.16.7 to 7.17.12 ([8f4df45](https://github.com/imbhargav5/rooks/commit/8f4df45))
+* chore(deps-dev): bump @docusaurus/core ([bcd25df](https://github.com/imbhargav5/rooks/commit/bcd25df))
+* chore(deps-dev): bump @docusaurus/plugin-client-redirects ([741d5f5](https://github.com/imbhargav5/rooks/commit/741d5f5))
+* chore(deps-dev): bump @docusaurus/theme-common ([adb1e58](https://github.com/imbhargav5/rooks/commit/adb1e58))
+* chore(deps-dev): bump @rollup/plugin-typescript from 8.3.2 to 8.3.3 ([6d1a6d3](https://github.com/imbhargav5/rooks/commit/6d1a6d3))
+* chore(deps-dev): bump @types/react-dom from 18.0.4 to 18.0.5 ([2becfbe](https://github.com/imbhargav5/rooks/commit/2becfbe))
+* chore(deps-dev): bump esbuild from 0.14.39 to 0.14.40 ([8c463ca](https://github.com/imbhargav5/rooks/commit/8c463ca))
+* chore(deps-dev): bump esbuild from 0.14.40 to 0.14.42 ([6163c8c](https://github.com/imbhargav5/rooks/commit/6163c8c))
+* chore(deps-dev): bump esbuild from 0.14.42 to 0.14.45 ([a4d1137](https://github.com/imbhargav5/rooks/commit/a4d1137))
+* chore(deps-dev): bump esbuild from 0.14.45 to 0.14.46 ([bc7d623](https://github.com/imbhargav5/rooks/commit/bc7d623))
+* chore(deps-dev): bump esbuild from 0.14.46 to 0.14.47 ([8d62a23](https://github.com/imbhargav5/rooks/commit/8d62a23))
+* chore(deps-dev): bump eslint from 8.15.0 to 8.16.0 ([7c8d920](https://github.com/imbhargav5/rooks/commit/7c8d920))
+* chore(deps-dev): bump eslint from 8.16.0 to 8.17.0 ([b000c70](https://github.com/imbhargav5/rooks/commit/b000c70))
+* chore(deps-dev): bump eslint from 8.17.0 to 8.18.0 ([913b548](https://github.com/imbhargav5/rooks/commit/913b548))
+* chore(deps-dev): bump eslint-config-canonical from 35.0.0 to 35.0.1 ([ca6b7e5](https://github.com/imbhargav5/rooks/commit/ca6b7e5))
+* chore(deps-dev): bump eslint-plugin-testing-library from 5.5.0 to 5.5.1 ([109a185](https://github.com/imbhargav5/rooks/commit/109a185))
+* chore(deps-dev): bump lint-staged from 12.4.1 to 12.4.2 ([e19ee72](https://github.com/imbhargav5/rooks/commit/e19ee72))
+* chore(deps-dev): bump mini-css-extract-plugin from 2.6.0 to 2.6.1 ([9b8c769](https://github.com/imbhargav5/rooks/commit/9b8c769))
+* chore(deps-dev): bump prettier from 2.6.2 to 2.7.1 ([13975a9](https://github.com/imbhargav5/rooks/commit/13975a9))
+* chore(deps-dev): bump remark-behead from 3.0.0 to 3.1.0 ([b5a101c](https://github.com/imbhargav5/rooks/commit/b5a101c))
+* chore(deps-dev): bump rollup-plugin-typescript2 from 0.31.2 to 0.32.1 ([10c5d43](https://github.com/imbhargav5/rooks/commit/10c5d43))
+* chore(deps-dev): bump terser from 5.13.1 to 5.14.1 ([b40485c](https://github.com/imbhargav5/rooks/commit/b40485c))
+* chore(deps-dev): bump webpack-cli from 4.9.2 to 4.10.0 ([6403a67](https://github.com/imbhargav5/rooks/commit/6403a67))
+* chore(deps): bump dset from 3.1.1 to 3.1.2 ([6640ebf](https://github.com/imbhargav5/rooks/commit/6640ebf))
+* chore(deps): bump undici from 5.0.0 to 5.5.1 ([40b5961](https://github.com/imbhargav5/rooks/commit/40b5961))
+* chore(docs): Update changelog and docs ([1fa5c0b](https://github.com/imbhargav5/rooks/commit/1fa5c0b))
+
+
+
 ## <small>5.11.2 (2022-05-20)</small>
 
 * fix(useDidUpdate): useDidUpdate to make it work with Strict Effects (#974) ([7e64d10](https://github.com/imbhargav5/rooks/commit/7e64d10)), closes [#974](https://github.com/imbhargav5/rooks/issues/974)
