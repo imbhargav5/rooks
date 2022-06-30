@@ -98,7 +98,7 @@
     "babel-plugin-prismjs": "2.1.0",
     "babel-preset-minify": "0.5.2",
     "browser-env": "3.3.0",
-    "camel-case": "^4.1.1",
+    "camel-case": "^4.1.2",
     "chalk": "5.0.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
