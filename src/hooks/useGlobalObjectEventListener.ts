@@ -11,7 +11,7 @@ import { warning } from "./warning";
  * @param {Window|Document} globalObject The global object to add event onto
  * @param {string} eventName The event to track
  * @param {Function} callback The callback to be called on event
- * @param {object} conditions The options to be passed to the event listener
+ * @param {{capture?: boolean; once?: boolean; passive?: boolean;}} listenerOptions The options to be passed to the event listener
  * @param {boolean} when Should the event listener be active
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
@@ -20,12 +20,15 @@ function useGlobalObjectEventListener(
   globalObject: Document | Window,
   eventName: string,
   callback: (...args: any) => void,
-  listenerOptions: any = {},
+  listenerOptions: {
+    capture?: boolean;
+    once?: boolean;
+    passive?: boolean;
+  } = {},
   when: boolean = true,
   isLayoutEffect: boolean = false
 ): void {
   const freshCallback = useFreshTick(callback);
-  const { capture, passive, once } = listenerOptions;
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
 
   useEffectToRun(() => {
@@ -33,11 +36,7 @@ function useGlobalObjectEventListener(
       typeof globalObject !== "undefined",
       "[useGlobalObjectEventListener]: Cannot attach event handlers to undefined."
     );
-    if (
-      typeof globalObject !== "undefined" &&
-      globalObject.addEventListener &&
-      when
-    ) {
+    if (typeof globalObject !== "undefined" && when) {
       globalObject.addEventListener(eventName, freshCallback, listenerOptions);
 
       return () => {
@@ -50,7 +49,7 @@ function useGlobalObjectEventListener(
     }
 
     return () => {};
-  }, [eventName, capture, passive, once]);
+  }, [eventName, listenerOptions]);
 }
 
 export { useGlobalObjectEventListener };
