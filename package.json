@@ -112,7 +112,7 @@
     "eslint-plugin-testing-library": "^5.0.0",
     "execa": "^6.1.0",
     "fs-extra": "^10.0.0",
-    "glob": "^8.0.1",
+    "glob": "^8.0.3",
     "gulp": "^4.0.2",
     "gulp-conventional-changelog": "^2.0.35",
     "husky": "^8.0.1",
