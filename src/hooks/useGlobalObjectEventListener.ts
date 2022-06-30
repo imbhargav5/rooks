@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useFreshTick } from "./useFreshTick";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import { warning } from "./warning";
+import type { ListenerOptions } from "@/types/utils";
 
 /**
  *  useGlobalObjectEventListener hook
@@ -11,7 +12,7 @@ import { warning } from "./warning";
  * @param {Window|Document} globalObject The global object to add event onto
  * @param {string} eventName The event to track
  * @param {Function} callback The callback to be called on event
- * @param {boolean | {once?: boolean; passive?: boolean; signal?: AbortSignal; capture?: boolean;}} listenerOptions The options to be passed to the event listener
+ * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} when Should the event listener be active
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
@@ -20,14 +21,7 @@ function useGlobalObjectEventListener(
   globalObject: Document | Window,
   eventName: string,
   callback: (...args: any) => void,
-  listenerOptions:
-    | boolean
-    | {
-        once?: boolean;
-        passive?: boolean;
-        signal?: AbortSignal;
-        capture?: boolean;
-      } = {},
+  listenerOptions: ListenerOptions = {},
   when: boolean = true,
   isLayoutEffect: boolean = false
 ): void {

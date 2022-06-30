@@ -1,4 +1,5 @@
 import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import type { ListenerOptions } from "@/types/utils";
 
 /**
  *  useDocumentEventListener hook
@@ -7,21 +8,14 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  *
  * @param {string} eventName The event to track
  * @param {Function} callback The callback to be called on event
- * @param {boolean | {once?: boolean; passive?: boolean; signal?: AbortSignal; capture?: boolean;}} listenerOptions The options to be passed to the event listener
+ * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
  */
 function useDocumentEventListener(
   eventName: string,
   callback: (...args: any) => void,
-  listenerOptions:
-    | boolean
-    | {
-        capture?: boolean;
-        once?: boolean;
-        passive?: boolean;
-        signal?: AbortSignal;
-      } = {},
+  listenerOptions: ListenerOptions = {},
   isLayoutEffect: boolean = false
 ): void {
   useGlobalObjectEventListener(
