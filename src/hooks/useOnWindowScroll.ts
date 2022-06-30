@@ -14,20 +14,14 @@ function useOnWindowScroll(
   when: boolean = true,
   isLayoutEffect: boolean = false
 ): void {
-  if (typeof window !== "undefined") {
-    useGlobalObjectEventListener(
-      window,
-      "scroll",
-      callback,
-      { passive: true },
-      when,
-      isLayoutEffect
-    );
-  } else {
-    console.warn(
-      "useOnWindowScroll can't attach an event listener as window is undefined."
-    );
-  }
+  useGlobalObjectEventListener(
+    window,
+    "scroll",
+    callback,
+    { passive: true },
+    when,
+    isLayoutEffect
+  );
 }
 
 export { useOnWindowScroll };

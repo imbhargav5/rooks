@@ -15,20 +15,14 @@ function useOnWindowResize(
   when: boolean = true,
   isLayoutEffect: boolean = false
 ) {
-  if (typeof window !== "undefined") {
-    useGlobalObjectEventListener(
-      window,
-      "resize",
-      callback,
-      { passive: true },
-      when,
-      isLayoutEffect
-    );
-  } else {
-    console.warn(
-      "useOnWindowResize can't attach an event listener as window is undefined."
-    );
-  }
+  useGlobalObjectEventListener(
+    window,
+    "resize",
+    callback,
+    { passive: true },
+    when,
+    isLayoutEffect
+  );
 }
 
 export { useOnWindowResize };
