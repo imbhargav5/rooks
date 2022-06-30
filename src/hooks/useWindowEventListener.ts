@@ -7,18 +7,21 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  *
  * @param {string} eventName The event to track
  * @param {Function} callback The callback to be called on event
- * @param {{capture?: boolean; once?: boolean; passive?: boolean;}} listenerOptions The options to be passed to the event listener
+ * @param {boolean | {once?: boolean; passive?: boolean; signal?: AbortSignal; capture?: boolean;}} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
  */
 function useWindowEventListener(
   eventName: string,
   callback: (...args: any) => void,
-  listenerOptions: {
-    capture?: boolean;
-    once?: boolean;
-    passive?: boolean;
-  } = {},
+  listenerOptions:
+    | boolean
+    | {
+        capture?: boolean;
+        once?: boolean;
+        passive?: boolean;
+        signal?: AbortSignal;
+      } = {},
   isLayoutEffect: boolean = false
 ): void {
   useGlobalObjectEventListener(
