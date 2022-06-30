@@ -6,20 +6,20 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState(initialValue: any): [
-  any,
+function useMapState<T>(initialValue: T): [
+  T,
   {
-    has: (key: any) => boolean;
-    remove: (key: any) => void;
+    has: (key: keyof T) => boolean;
+    remove: (key: keyof T) => void;
     removeAll: () => void;
-    removeMultiple: (...keys: any[]) => void;
-    set: (key: any, value: any) => void;
-    setMultiple: (...keys: any[]) => void;
+    removeMultiple: (...keys: Array<keyof T>) => void;
+    set: (key: keyof T, value: any) => void;
+    setMultiple: (next: Partial<T>) => void;
   }
 ] {
   const [map, setMap] = useState(initialValue);
 
-  const set = useCallback((key: any, value: any) => {
+  const set = useCallback((key: keyof T, value: any) => {
     setMap((currentMap) => ({
       ...currentMap,
       [key]: value,
@@ -27,22 +27,22 @@ function useMapState(initialValue: any): [
   }, []);
 
   const has = useCallback(
-    (key: any) => {
+    (key: keyof T) => {
       return typeof map[key] !== "undefined";
     },
     [map]
   );
 
-  const setMultiple = useCallback((object: { any: any }) => {
+  const setMultiple = useCallback((nextMap: { [K in keyof T]: any }) => {
     setMap((currentMap) => ({
       ...currentMap,
-      ...object,
+      ...nextMap,
     }));
   }, []);
 
   const removeMultiple = useCallback((...keys) => {
     setMap((currentMap) => {
-      const newMap = {};
+      const newMap: T = {};
       for (const key of Object.keys(currentMap)) {
         if (!keys.includes(key)) {
           newMap[key] = currentMap[key];
@@ -53,9 +53,9 @@ function useMapState(initialValue: any): [
     });
   }, []);
 
-  const remove = useCallback((key: any) => {
+  const remove = useCallback((key: keyof T) => {
     setMap((currentMap) => {
-      const newMap = {};
+      const newMap: T = {};
       for (const mapKey of Object.keys(currentMap)) {
         if (mapKey !== key) {
           newMap[mapKey] = currentMap[mapKey];
@@ -70,16 +70,17 @@ function useMapState(initialValue: any): [
     setMap({});
   }, []);
 
-  const controls = {
-    has,
-    remove,
-    removeAll,
-    removeMultiple,
-    set,
-    setMultiple,
-  };
-
-  return [map, controls];
+  return [
+    map,
+    {
+      has,
+      remove,
+      removeAll,
+      removeMultiple,
+      set,
+      setMultiple,
+    },
+  ];
 }
 
 export { useMapState };
