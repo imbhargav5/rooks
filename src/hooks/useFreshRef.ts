@@ -1,5 +1,4 @@
-import type { MutableRefObject } from "react";
-import { useEffect, useRef } from "react";
+import { type MutableRefObject, useEffect, useRef } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 /**
