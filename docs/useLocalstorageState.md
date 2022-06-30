@@ -38,11 +38,10 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ### Arguments
 
 | Argument value | Type   | Description                    | Defualt   |
-|----------------|--------|--------------------------------|-----------|
+| -------------- | ------ | ------------------------------ | --------- |
 | key            | string | Key of the localStorage object | undefined |
 | defaultValue   | any    | Default initial value          | null      |
 
@@ -51,12 +50,10 @@ render(<Demo />);
 Returns an array of following items:
 
 | Return value | Type     | Description                         |
-|--------------|----------|-------------------------------------|
+| ------------ | -------- | ----------------------------------- |
 | value        | any      | value stored in localStorage        |
 | set          | Function | set value stored in localStorage    |
 | remove       | Function | remove value stored in localStorage |
-
-
 
 ---
 

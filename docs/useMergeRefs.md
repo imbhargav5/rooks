@@ -36,9 +36,7 @@ function Demo() {
     <div>
       <h1>Rooks : useMergeRefs Example</h1>
       <hr></hr>
-      <div ref={ref}>
-        A div with multiple refs. Click me!!
-      </div>
+      <div ref={ref}>A div with multiple refs. Click me!!</div>
     </div>
   );
 }
@@ -49,16 +47,14 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type  | Description                                                          |
-|----------------|-------|----------------------------------------------------------------------|
+| -------------- | ----- | -------------------------------------------------------------------- |
 | refs           | Array | Takes any number of refs. Refs can be mutable refs or function refs. |
 
 ### Returns
 
 | Return value | Type        | Description |
-|--------------|-------------|-------------|
+| ------------ | ----------- | ----------- |
 | ref          | CallbackRef | Merged ref  |
-
-
 
 ---
 

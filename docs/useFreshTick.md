@@ -46,13 +46,13 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type     | Description                                            |
-|----------------|----------|--------------------------------------------------------|
+| -------------- | -------- | ------------------------------------------------------ |
 | callback       | function | The function call which needs to be fresh at all times |
 
 ### Returns
 
 | Return value | Type     | Description                | Default value |
-|--------------|----------|----------------------------|---------------|
+| ------------ | -------- | -------------------------- | ------------- |
 | ref          | function | A function with fresh args | undefined     |
 
 ---

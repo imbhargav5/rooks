@@ -45,7 +45,7 @@ render(<Demo />);
 ### Arguments
 
 | Arguments      | Type     | Description                                    | Default value |
-|----------------|----------|------------------------------------------------|---------------|
+| -------------- | -------- | ---------------------------------------------- | ------------- |
 | eventName      | string   | The event to track                             | undefind      |
 | callback       | function | The callback to be called on event             | undefined     |
 | conditions     | object   | The options to be passed to the event listener | {}            |

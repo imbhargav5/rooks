@@ -24,10 +24,8 @@ import { useMultiSelectableList } from "rooks";
 
 ```jsx
 function Demo() {
-  const [
-    selection,
-    { matchSelection, toggleSelection, updateSelections }
-  ] = useMultiSelectableList(items, [0, 1]);
+  const [selection, { matchSelection, toggleSelection, updateSelections }] =
+    useMultiSelectableList(items, [0, 1]);
 
   return null;
 }
@@ -38,7 +36,7 @@ render(<Demo />);
 ### Arguments
 
 | Argument value       | Type            | Description                                      | Default value |
-|----------------------|-----------------|--------------------------------------------------|---------------|
+| -------------------- | --------------- | ------------------------------------------------ | ------------- |
 | list                 | Array           | A list of items of any type                      | `[]`          |
 | initialSelectIndices | `Array<number>` | An array of indices that are selected initially  | `[0]`         |
 | allowUnselected      | Boolean         | Whether to allow unselect when update selections | `false`       |
@@ -48,18 +46,17 @@ render(<Demo />);
 Returns an array of following items:
 
 | Return value | Type   | Description                                                                            |
-|--------------|--------|----------------------------------------------------------------------------------------|
+| ------------ | ------ | -------------------------------------------------------------------------------------- |
 | selection    | Array  | The first item is an array of selected indices, the second item is the selected values |
 | methods      | Object | Object with methods to control the selectable list, see the table below                |
 
 Methods:
 
 | Methods          | Type                                                   | Description                                            |
-|------------------|--------------------------------------------------------|--------------------------------------------------------|
+| ---------------- | ------------------------------------------------------ | ------------------------------------------------------ |
 | matchSelection   | `({ index?: number, value?: T }) => boolean`           | returns true if the item is selected                   |
 | toggleSelection  | `({ index?: number, value?: T }) => () => void`        | returns a function to toggle an item by index or value |
 | updateSelections | `({ indices?: number[], values?: T[] }) => () => void` | returns a function to update specified items           |
-
 
 ---
 

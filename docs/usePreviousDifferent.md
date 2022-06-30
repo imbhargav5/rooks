@@ -44,13 +44,13 @@ render(<Demo />);
 ### Arguments
 
 | Arguments    | Type | Description                                                    | Default value |
-|--------------|------|----------------------------------------------------------------|---------------|
-| currentValue | T    | The variable whose previously different value is to be tracked | undefined      |
+| ------------ | ---- | -------------------------------------------------------------- | ------------- |
+| currentValue | T    | The variable whose previously different value is to be tracked | undefined     |
 
 ### Return
 
 | Returned value | Type | Description                                                     |
-|----------------|------|-----------------------------------------------------------------|
+| -------------- | ---- | --------------------------------------------------------------- |
 | previousValue  | T    | returns the past value which was different from the current one |
 
 ---

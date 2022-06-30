@@ -33,7 +33,7 @@ render(<Demo />);
 ### Arguments
 
 | Arguments      | Type     | Description                                     | Default value |
-|----------------|----------|-------------------------------------------------|---------------|
+| -------------- | -------- | ----------------------------------------------- | ------------- |
 | callback       | function | Callback function which needs to run on unmount | undefined     |
 | when           | boolean  | When the event handler should be active         | true          |
 | isLayoutEffect | boolean  | Should it use layout effect.                    | false         |

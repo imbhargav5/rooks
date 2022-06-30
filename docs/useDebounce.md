@@ -40,7 +40,7 @@ function App() {
 ### Arguments
 
 | Argument | Type     | Description                              | Default value |
-|----------|----------|------------------------------------------|---------------|
+| -------- | -------- | ---------------------------------------- | ------------- |
 | callback | Function | The function to debounce                 | undefined     |
 | wait     | number   | The duration to debounce in milliseconds | undefined     |
 | options  | Object   | options to pass into lodash's debounce   | {}            |
@@ -48,9 +48,8 @@ function App() {
 ### Return Value
 
 | Name              | Type     | Description            |
-|-------------------|----------|------------------------|
+| ----------------- | -------- | ---------------------- |
 | debouncedFunction | Function | The debounced function |
-
 
 ## Codesandbox Examples
 

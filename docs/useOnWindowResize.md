@@ -15,25 +15,24 @@ A React hook for adding an event listener for window resize
 ## Importing the hook
 
 ```javascript
-import { useOnWindowResize } from "rooks"
+import { useOnWindowResize } from "rooks";
 ```
 
 ## Usage
 
 ```jsx
-
 function Demo() {
-  useOnWindowResize(() => console.log("window resized"))
-  return <p> Hello world </p>
+  useOnWindowResize(() => console.log("window resized"));
+  return <p> Hello world </p>;
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
 
 | Arguments      | Type     | Description                                     | Default value |
-|----------------|----------|-------------------------------------------------|---------------|
+| -------------- | -------- | ----------------------------------------------- | ------------- |
 | callback       | function | Callback function which needs to run on unmount | undefined     |
 | when           | boolean  | When the event handler should be active         | true          |
 | isLayoutEffect | boolean  | Should it use layout effect.                    | false         |

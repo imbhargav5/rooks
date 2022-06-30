@@ -34,15 +34,14 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type   | Description                                                                                                              |
-|----------------|--------|--------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
 | query          | string | The media query to signal on. Example, `"print"` will signal `true` when previewing in print mode, and `false` otherwise |
 
 ### Returns
 
 | Return value | Type    | Description                                         |
-|--------------|---------|-----------------------------------------------------|
+| ------------ | ------- | --------------------------------------------------- |
 | isMatch      | Boolean | Whether or not the media query is currently matched |
-
 
 ---
 

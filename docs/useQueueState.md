@@ -49,13 +49,13 @@ render(<Demo />);
 ### Arguments
 
 | Arguments   | Type  | Description | Default value |
-|-------------|-------|-------------|---------------|
+| ----------- | ----- | ----------- | ------------- |
 | initialList | any[] | An array    | undefind      |
 
 ### Returned array items
 
 | Returned items | Type     | Description                               |
-|----------------|----------|-------------------------------------------|
+| -------------- | -------- | ----------------------------------------- |
 | enqueue        | function | Put an item to the end of the queue       |
 | dequeue        | function | Remove the first item in the queue        |
 | peek           | function | Return the item at the front of the queue |
