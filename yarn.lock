@@ -2531,7 +2531,7 @@
     rtlcss "^3.5.0"
     tslib "^2.4.0"
 
-"@docusaurus/theme-common@2.0.0-beta.21", "@docusaurus/theme-common@^2.0.0-beta.17":
+"@docusaurus/theme-common@2.0.0-beta.21", "@docusaurus/theme-common@^2.0.0-beta.21":
   version "2.0.0-beta.21"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-common/-/theme-common-2.0.0-beta.21.tgz#508478251982d01655ef505ccb2420db38623db8"
   integrity sha512-fTKoTLRfjuFG6c3iwnVjIIOensxWMgdBKLfyE5iih3Lq7tQgkE7NyTGG9BKLrnTJ7cAD2UXdXM9xbB7tBf1qzg==
