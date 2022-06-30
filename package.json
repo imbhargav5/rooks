@@ -118,7 +118,7 @@
     "husky": "^8.0.1",
     "inquirer": "8.2.4",
     "jest": "^27.5.1",
-    "jest-localstorage-mock": "^2.4.19",
+    "jest-localstorage-mock": "^2.4.21",
     "lint-staged": "^12.0.2",
     "lodash.capitalize": "4.2.1",
     "lodash.sortby": "^4.7.0",
