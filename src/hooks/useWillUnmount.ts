@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
+
+type Callback = () => void;
 
 /**
  * useWillUnmount hook
@@ -6,11 +8,11 @@ import { useEffect } from 'react';
  *
  * @param {Function} callback Callback to be called before unmount
  */
-function useWillUnmount(callback: () => any): void {
+function useWillUnmount(callback: Callback): void {
   // run only once
   useEffect(() => {
     return callback;
-  }, []);
+  }, [callback]);
 }
 
 export { useWillUnmount };
