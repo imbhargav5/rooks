@@ -6,17 +6,15 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState(
-  initialValue: any
-): [
+function useMapState(initialValue: any): [
   any,
   {
-    set: (key: any, value: any) => void;
     has: (key: any) => boolean;
-    setMultiple: (...keys: any[]) => void;
     remove: (key: any) => void;
-    removeMultiple: (...keys: any[]) => void;
     removeAll: () => void;
+    removeMultiple: (...keys: any[]) => void;
+    set: (key: any, value: any) => void;
+    setMultiple: (...keys: any[]) => void;
   }
 ] {
   const [map, setMap] = useState(initialValue);
@@ -45,11 +43,11 @@ function useMapState(
   const removeMultiple = useCallback((...keys) => {
     setMap((currentMap) => {
       const newMap = {};
-      Object.keys(currentMap).forEach((key) => {
+      for (const key of Object.keys(currentMap)) {
         if (!keys.includes(key)) {
           newMap[key] = currentMap[key];
         }
-      });
+      }
 
       return newMap;
     });
@@ -58,11 +56,11 @@ function useMapState(
   const remove = useCallback((key: any) => {
     setMap((currentMap) => {
       const newMap = {};
-      Object.keys(currentMap).forEach((mapKey) => {
+      for (const mapKey of Object.keys(currentMap)) {
         if (mapKey !== key) {
           newMap[mapKey] = currentMap[mapKey];
         }
-      });
+      }
 
       return newMap;
     });
