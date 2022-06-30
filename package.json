@@ -126,7 +126,7 @@
     "make-dir": "3.1.0",
     "mdast-normalize-headings": "^3.1.0",
     "mdast-util-compact": "^4.1.0",
-    "mdast-util-from-markdown": "^1.0.4",
+    "mdast-util-from-markdown": "^1.2.0",
     "mdast-util-heading-range": "^3.1.0",
     "mdast-util-to-markdown": "^1.2.4",
     "mdast-zone": "^5.1.0",
