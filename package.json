@@ -106,7 +106,7 @@
     "cz-conventional-changelog": "3.3.0",
     "esbuild": "^0.14.48",
     "esbuild-jest": "^0.5.0",
-    "eslint": "^8.14.0",
+    "eslint": "^8.18.0",
     "eslint-config-canonical": "^35.0.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-testing-library": "^5.0.0",
