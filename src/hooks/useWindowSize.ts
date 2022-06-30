@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import type { DeepNullable } from "@/types/utils";
+import { useState } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
-type WindowDimensions = {
-  innerWidth: number | null;
-  innerHeight: number | null;
-  outerWidth: number | null;
-  outerHeight: number | null;
-};
+type WindowDimensions = DeepNullable<
+  Pick<Window, "innerHeight" | "innerWidth" | "outerHeight" | "outerWidth">
+>;
 
 const nullDimensions: WindowDimensions = {
   innerHeight: null,
@@ -32,26 +30,27 @@ function getDimensions(): WindowDimensions {
  */
 export function useWindowSize(): WindowDimensions {
   const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if (typeof window !== "undefined") {
-      return getDimensions();
-    } else {
+    if (typeof window === "undefined") {
       return nullDimensions;
+    } else {
+      return getDimensions();
     }
   });
 
+  function onResize() {
+    setWindowSize(getDimensions());
+  }
+
   // set resize handler once on mount and clean before unmount
   useIsomorphicEffect(() => {
-    function onResize() {
-      setWindowSize(getDimensions());
-    }
-    if (typeof window !== "undefined") {
+    if (typeof window === "undefined") {
+      return () => {};
+    } else {
       window.addEventListener("resize", onResize);
 
       return () => {
         window.removeEventListener("resize", onResize);
       };
-    } else {
-      console.warn("useWindowSize: window is undefined.");
     }
   }, []);
 
