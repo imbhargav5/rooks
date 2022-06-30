@@ -1,3 +1,24 @@
+## <small>5.11.5 (2022-06-30)</small>
+
+* fix(usewillunmount): update callback type to return void (#1071) ([e4d9ffb](https://github.com/imbhargav5/rooks/commit/e4d9ffb)), closes [#1071](https://github.com/imbhargav5/rooks/issues/1071)
+* docs: remove yarn dev; format (#1069) ([23d624c](https://github.com/imbhargav5/rooks/commit/23d624c)), closes [#1069](https://github.com/imbhargav5/rooks/issues/1069)
+* chore(deps-dev): bump @docusaurus/preset-classic ([c8463f4](https://github.com/imbhargav5/rooks/commit/c8463f4))
+* chore(deps): update dependency @babel/core to v7.18.6 ([85716d2](https://github.com/imbhargav5/rooks/commit/85716d2))
+* chore(deps): update dependency @babel/preset-env to v7.18.6 ([828c6ef](https://github.com/imbhargav5/rooks/commit/828c6ef))
+* chore(deps): update dependency @docusaurus/theme-common to ^2.0.0-beta.21 ([52b4dc6](https://github.com/imbhargav5/rooks/commit/52b4dc6))
+* chore(deps): update dependency @rollup/plugin-multi-entry to ^4.1.0 ([e9c315f](https://github.com/imbhargav5/rooks/commit/e9c315f))
+* chore(deps): update dependency @rollup/plugin-typescript to ^8.3.3 ([ec46846](https://github.com/imbhargav5/rooks/commit/ec46846))
+* chore(deps): update dependency @testing-library/react to ^12.1.5 ([6ee99c0](https://github.com/imbhargav5/rooks/commit/6ee99c0))
+* chore(deps): update dependency @types/jest to ^27.5.2 ([d69260c](https://github.com/imbhargav5/rooks/commit/d69260c))
+* chore(deps): update dependency ansi-regex to 3.0.1 [security] (#1050) ([254941a](https://github.com/imbhargav5/rooks/commit/254941a)), closes [#1050](https://github.com/imbhargav5/rooks/issues/1050)
+* chore(deps): update dependency minimist to 1.2.6 [security] ([42dd083](https://github.com/imbhargav5/rooks/commit/42dd083))
+* chore(docs): Update changelog and docs ([0e5d4fd](https://github.com/imbhargav5/rooks/commit/0e5d4fd))
+* chore(renovate): Add renovate (#1049) ([b30624f](https://github.com/imbhargav5/rooks/commit/b30624f)), closes [#1049](https://github.com/imbhargav5/rooks/issues/1049)
+* chore(unused): remove unused directory (#1052) ([b0c8821](https://github.com/imbhargav5/rooks/commit/b0c8821)), closes [#1052](https://github.com/imbhargav5/rooks/issues/1052)
+* ci(Mergify): configuration update (#1056) ([05cfb5d](https://github.com/imbhargav5/rooks/commit/05cfb5d)), closes [#1056](https://github.com/imbhargav5/rooks/issues/1056)
+
+
+
 ## <small>5.11.4 (2022-06-30)</small>
 
 * fix(types): [1016] updated type definition of useForkRef with generic suppor… (#1017) ([add2bd5](https://github.com/imbhargav5/rooks/commit/add2bd5)), closes [#1017](https://github.com/imbhargav5/rooks/issues/1017)

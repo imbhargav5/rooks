@@ -480,6 +480,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "qqpann",
+      "name": "Qiushi Pan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17402261?v=4",
+      "profile": "https://qpan.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "neolivz",
+      "name": "Jishnu Viswanath",
+      "avatar_url": "https://avatars.githubusercontent.com/u/754818?v=4",
+      "profile": "http://jishnu.me/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
