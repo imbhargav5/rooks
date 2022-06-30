@@ -132,7 +132,7 @@
     "mdast-zone": "^5.1.0",
     "meow": "10.1.3",
     "mini-css-extract-plugin": "2.6.1",
-    "np": "^7.4.0",
+    "np": "^7.6.2",
     "ora": "6.1.0",
     "pkg-dir": "^5.0.0",
     "prettier": "^2.2.1",
