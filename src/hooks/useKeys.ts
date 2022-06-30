@@ -124,9 +124,10 @@ function useKeys(
       }
 
       return () => {
-        if (targetNode)
+        if (targetNode){
           targetNode.removeEventListener('keydown', handleKeyDown);
-        if (targetNode) targetNode.removeEventListener('keyup', handleKeyUp);
+          targetNode.removeEventListener('keyup', handleKeyUp);
+        }
       };
     }
   }, [when, target, keysList, handleKeyDown, handleKeyUp]);
