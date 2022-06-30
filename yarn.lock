@@ -12676,10 +12676,10 @@ memfs@^3.4.1:
   dependencies:
     fs-monkey "1.0.3"
 
-meow@10.1.2:
-  version "10.1.2"
-  resolved "https://registry.yarnpkg.com/meow/-/meow-10.1.2.tgz#62951cb69afa69594142c8250806bc30a3912e4d"
-  integrity sha512-zbuAlN+V/sXlbGchNS9WTWjUzeamwMt/BApKCJi7B0QyZstZaMx0n4Unll/fg0njGtMdC9UP5SAscvOCLYdM+Q==
+meow@10.1.3:
+  version "10.1.3"
+  resolved "https://registry.yarnpkg.com/meow/-/meow-10.1.3.tgz#21689959a7d00e8901aff30d208acb2122eb8088"
+  integrity sha512-0WL7RMCPPdUTE00+GxJjL4d5Dm6eUbmAzxlzywJWiRUKCW093owmZ7/q74tH9VI91vxw9KJJNxAcvdpxb2G4iA==
   dependencies:
     "@types/minimist" "^1.2.2"
     camelcase-keys "^7.0.0"
