@@ -144,7 +144,7 @@
     "remark": "^14.0.2",
     "remark-behead": "^3.0.0",
     "remark-frontmatter": "^4.0.1",
-    "remark-preset-lint-markdown-style-guide": "^5.1.1",
+    "remark-preset-lint-markdown-style-guide": "^5.1.2",
     "remark-strip-badges": "^6.0.1",
     "replace-string": "4.0.0",
     "rollup": "^2.33.3",
