@@ -74,18 +74,16 @@ function Demo() {
 render(<Demo />);
 ```
 
-
 ### Arguments
 
 | Argument value | Type                            | Description                                                  | Default value |
-|----------------|---------------------------------|--------------------------------------------------------------|---------------|
+| -------------- | ------------------------------- | ------------------------------------------------------------ | ------------- |
 | callback       | `(timeElapsed: number) => void` | The callback function to be executed                         | undefined     |
 | isActive       | boolean                         | The value which while true, keeps the raf running infinitely | undefined     |
 
 ### Returns
 
 No return value.
-
 
 ## Codesandbox Examples
 
@@ -104,7 +102,6 @@ No return value.
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
 
 ## Join Bhargav's discord server
 

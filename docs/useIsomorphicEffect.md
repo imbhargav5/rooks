@@ -35,8 +35,8 @@ render(<Demo />);
 
 ### Arguments
 
-| Argument value | Type     | Description                                            |
-|----------------|----------|--------------------------------------------------------|
+| Argument value | Type     | Description                             |
+| -------------- | -------- | --------------------------------------- |
 | callback       | function | Callback function to be called on mount |
 
 ### Returns

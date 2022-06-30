@@ -73,13 +73,12 @@ function App() {
 render(<App />);
 ```
 
-
 ### Arguments
 
 The argument is an object with the following optional items:
 
 | Argument value             | Type    | Description                              |
-|----------------------------|---------|------------------------------------------|
+| -------------------------- | ------- | ---------------------------------------- |
 | options.enableHighAccuracy | boolean | enable high accuracy if `true`           |
 | options.timeout            | number  | timeout in milliseconds                  |
 | options.maximumAge         | number  | maximumAge in milliseconds               |
@@ -97,7 +96,6 @@ Returns an object with following items:
   message: string;
 }
 ```
-
 
 ## Codesandbox Example
 

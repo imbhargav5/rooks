@@ -29,10 +29,8 @@ function Demo() {
     }
   };
   const [myIntersectionObserverRef] = useIntersectionObserverRef(callback);
-  const [
-    myBoundingclientrectRef,
-    boundingclientrect,
-  ] = useBoundingclientrectRef();
+  const [myBoundingclientrectRef, boundingclientrect] =
+    useBoundingclientrectRef();
   const myRef = useForkRef(myIntersectionObserverRef, myBoundingclientrectRef);
   const displayString = JSON.stringify(boundingclientrect, null, 2);
   return (

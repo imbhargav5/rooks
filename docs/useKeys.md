@@ -80,13 +80,13 @@ render(<Demo />);
 ### Arguments
 
 | Argument value | Type     | Description                                            | Defualt   |
-|----------------|----------|--------------------------------------------------------|-----------|
+| -------------- | -------- | ------------------------------------------------------ | --------- |
 | keyList        | Array    | A list of keys to listen                               | undefined |
 | callback       | Function | Callback function to be called when event is triggered | undefined |
 | options        | Object   | See table below                                        | undefined |
 
 | Options value | Type                      | Description                                                                      | Defualt     |
-|---------------|---------------------------|----------------------------------------------------------------------------------|-------------|
+| ------------- | ------------------------- | -------------------------------------------------------------------------------- | ----------- |
 | when          | Boolean                   | Condition which if true, will enable the event listeners                         | true        |
 | eventTypes    | Array of number or string | Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp | ['keydown'] |
 | target        | HTMLElement ref           | target ref on which the events should be listened.                               | window      |
@@ -94,7 +94,6 @@ render(<Demo />);
 ### Returns
 
 No return value
-
 
 ## Codesandbox Examples
 
@@ -114,8 +113,6 @@ No return value
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
 
-
 ## Join Bhargav's discord server
-
 
 You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

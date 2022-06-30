@@ -52,13 +52,13 @@ render(<Demo />);
 ### Arguments
 
 | Arguments   | Type  | Description | Default value |
-|-------------|-------|-------------|---------------|
+| ----------- | ----- | ----------- | ------------- |
 | initialList | any[] | An array    | undefind      |
 
 ### Returned array items
 
 | Returned items | Type     | Description                             |
-|----------------|----------|-----------------------------------------|
+| -------------- | -------- | --------------------------------------- |
 | push           | function | Put an item to the top of the stack     |
 | pop            | function | Remove the item on the top of the stack |
 | peek           | function | Return the item on the top of the stack |

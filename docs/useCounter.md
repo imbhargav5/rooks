@@ -23,14 +23,8 @@ import { useCounter } from "rooks";
 
 ```jsx
 function CounterComponent() {
-  const {
-    value,
-    increment,
-    decrement,
-    incrementBy,
-    decrementBy,
-    reset,
-  } = useCounter(3);
+  const { value, increment, decrement, incrementBy, decrementBy, reset } =
+    useCounter(3);
 
   function incrementBy5() {
     incrementBy(5);

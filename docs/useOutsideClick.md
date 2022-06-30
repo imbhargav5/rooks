@@ -44,13 +44,11 @@ function App() {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          backgroundColor: "lightblue"
+          backgroundColor: "lightblue",
         }}
         ref={ref}
       >
-        <h2 className="inside">
-          This is inside
-        </h2>
+        <h2 className="inside">This is inside</h2>
       </div>
     </div>
   );
@@ -59,10 +57,10 @@ function App() {
 
 ### Arguments
 
-| Arguments | Type                   | Description                                                                                                      | Default value |
-|-----------|------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
-| ref       | React.MutableRefObject | Ref whose outside click needs to be listened to                                                                  |               |
-| handler   | function               | Callback to fire on outside click                                                                                |               |
+| Arguments | Type                   | Description                                                                                                | Default value |
+| --------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
+| ref       | React.MutableRefObject | Ref whose outside click needs to be listened to                                                            |               |
+| handler   | function               | Callback to fire on outside click                                                                          |               |
 | when      | boolean                | A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
 
 ### Returns

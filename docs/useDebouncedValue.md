@@ -53,7 +53,7 @@ render(<Demo />);
 ### Arguments
 
 | Argument                   | Type    | Description                                                     | Default value |
-|----------------------------|---------|-----------------------------------------------------------------|---------------|
+| -------------------------- | ------- | --------------------------------------------------------------- | ------------- |
 | value                      | Date    | the value to be debounced                                       | undefined     |
 | timeout                    | number  | milliseconds that it takes count down once                      | 1000          |
 | options.initializeWithNull | boolean | Should the debouncedValue start off as null in the first render | false         |
@@ -63,7 +63,7 @@ render(<Demo />);
 An array is returned with the following items in it
 
 | Name                            | Type         | Description                                                   |
-|---------------------------------|--------------|---------------------------------------------------------------|
+| ------------------------------- | ------------ | ------------------------------------------------------------- |
 | debouncedValue                  | typeof value | The debouncedValue                                            |
 | immediatelyUpdateDebouncedValue | function     | Handy utility function to update the debouncedValue instantly |
 

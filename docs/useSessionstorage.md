@@ -48,8 +48,8 @@ render(<Demo />);
 ### Arguments
 
 | Arguments    | Type   | Description                      | Default value |
-|--------------|--------|----------------------------------|---------------|
-| key          | string | Key of the value to be stored    | undefined      |
+| ------------ | ------ | -------------------------------- | ------------- |
+| key          | string | Key of the value to be stored    | undefined     |
 | defaultValue | any    | Default value of the stored item | null          |
 
 ### Returned items
@@ -57,13 +57,13 @@ render(<Demo />);
 ```javascript
 // can be an array or object
 const [value, set, remove] = useSessionstorage("my-value", 0);
-const {value, set, remove} = useSessionstorage("my-value", 0);
+const { value, set, remove } = useSessionstorage("my-value", 0);
 ```
 
 | Returned items | Type                    | Description                               |
-|----------------|-------------------------|-------------------------------------------|
+| -------------- | ----------------------- | ----------------------------------------- |
 | value          | any                     | the value stored in sessionStorage        |
-| set            | (newValue: any) => void | Set the value to `newValue`            |
+| set            | (newValue: any) => void | Set the value to `newValue`               |
 | remove         | () => void              | Remove the value stored in sessionStorage |
 
 ## Codesandbox Example

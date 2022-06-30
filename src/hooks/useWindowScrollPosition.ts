@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { useOnWindowResize } from './useOnWindowResize';
-import { useOnWindowScroll } from './useOnWindowScroll';
+import { useState } from "react";
+import { useOnWindowResize } from "./useOnWindowResize";
+import { useOnWindowScroll } from "./useOnWindowScroll";
 
 type ScrollPosition = {
-  scrollX: number;
-  scrollY: number;
+  scrollX: Window["scrollX"];
+  scrollY: Window["scrollY"];
 };
 
-function getScrollPosition(): ScrollPosition {
-  if (typeof window !== 'undefined') {
-    return {
-      scrollX: window.pageXOffset,
-      scrollY: window.pageYOffset,
-    };
-  } else {
+function computeScrollPosition(): ScrollPosition {
+  if (typeof window === "undefined") {
     return {
       scrollX: 0,
       scrollY: 0,
+    };
+  } else {
+    return {
+      scrollX: window.scrollX || window.pageXOffset,
+      scrollY: window.scrollY || window.pageYOffset,
     };
   }
 }
@@ -30,14 +30,14 @@ function getScrollPosition(): ScrollPosition {
  */
 function useWindowScrollPosition(): ScrollPosition {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>(
-    getScrollPosition
+    computeScrollPosition
   );
   /**
    * Recalculate on scroll
    */
   useOnWindowScroll(
     () => {
-      setScrollPosition(getScrollPosition());
+      setScrollPosition(computeScrollPosition());
     },
     true,
     true
@@ -47,7 +47,7 @@ function useWindowScrollPosition(): ScrollPosition {
    */
   useOnWindowResize(
     () => {
-      setScrollPosition(getScrollPosition());
+      setScrollPosition(computeScrollPosition());
     },
     true,
     true
