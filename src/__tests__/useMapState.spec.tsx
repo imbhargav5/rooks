@@ -17,11 +17,13 @@ describe("useMapState", () => {
     expect(useMapState).toBeDefined();
   });
   it("should initialize correctly", () => {
-    const { result } = renderHook(() => useMapState<Map>({ a: 1 }));
+    const { result } = renderHook(() => useMapState<Map, keyof Map>({ a: 1 }));
     expect(result.current[0]).toEqual({ a: 1 });
   });
   it("should set a new value correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState<Map>({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1 })
+    );
 
     // test memo
     const setBeforeRerender = result.current[1].set;
@@ -42,14 +44,16 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 2 });
   });
   it("set should update old value correctly", () => {
-    const { result } = renderHook(() => useMapState<Map>({ a: 1 }));
+    const { result } = renderHook(() => useMapState<Map, keyof Map>({ a: 1 }));
     act(() => {
       result.current[1].set("a", 2);
     });
     expect(result.current[0]).toEqual({ a: 2 });
   });
   it("should set multiple new values correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState<Map>({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1 })
+    );
     // test memo
     const setMultipleBeforeRerender = result.current[1].setMultiple;
     rerender();
@@ -68,7 +72,9 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3, d: 4 });
   });
   it("setMultiple should update old value correctly", () => {
-    const { result, rerender } = renderHook(() => useMapState<Map>({ a: 1 }));
+    const { result, rerender } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1 })
+    );
     act(() => {
       result.current[1].setMultiple({
         a: 2,
@@ -95,7 +101,7 @@ describe("useMapState", () => {
   });
   it("should remove existing values correctly", () => {
     const { result, rerender } = renderHook(() =>
-      useMapState<Map>({ a: 1, b: 3 })
+      useMapState<Map, keyof Map>({ a: 1, b: 3 })
     );
 
     // test memo
@@ -118,7 +124,9 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ b: 3 });
   });
   it("should work when value to remove does not exist", () => {
-    const { result } = renderHook(() => useMapState<Map>({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
+    );
     act(() => {
       result.current[1].remove("d");
     });
@@ -126,7 +134,7 @@ describe("useMapState", () => {
   });
   it("should remove multiple existing values correctly", () => {
     const { result, rerender } = renderHook(() =>
-      useMapState<Map>({ a: 1, b: 3, c: 5 })
+      useMapState<Map, keyof Map>({ a: 1, b: 3, c: 5 })
     );
     // test memo
     const removeMultipleBeforeRerender = result.current[1].removeMultiple;
@@ -147,14 +155,18 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ b: 3, e: 6 });
   });
   it("should work when value to removeMultiple does not exist", () => {
-    const { result } = renderHook(() => useMapState<Map>({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
+    );
     act(() => {
       result.current[1].removeMultiple("d", "e");
     });
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3 });
   });
   it("should work when some values to removeMultiple does not exist", () => {
-    const { result } = renderHook(() => useMapState<Map>({ a: 1, b: 2, c: 3 }));
+    const { result } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
+    );
     act(() => {
       result.current[1].removeMultiple("a", "e");
     });
@@ -162,7 +174,7 @@ describe("useMapState", () => {
   });
   it("should removeAll values", () => {
     const { result, rerender } = renderHook(() =>
-      useMapState<Map>({ a: 1, b: 2, c: 3 })
+      useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
     );
     // test memo
     const removeAllBeforeRerender = result.current[1].removeAll;

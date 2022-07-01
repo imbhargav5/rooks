@@ -21,7 +21,7 @@ function useMapState<T, K extends keyof T>(
 ] {
   const [map, setMap] = useState(initialValue);
 
-  const set = useCallback((key: keyof T, value: any) => {
+  const set = useCallback((key: K, value: any) => {
     setMap((currentMap) => ({
       ...currentMap,
       [key]: value,
@@ -29,48 +29,55 @@ function useMapState<T, K extends keyof T>(
   }, []);
 
   const has = useCallback(
-    (key: keyof T) => {
+    (key: K) => {
       return typeof map[key] !== "undefined";
     },
     [map]
   );
 
-  const setMultiple = useCallback((nextMap: { [K in keyof T]: any }) => {
+  const setMultiple = useCallback((nextMap: { [Key in keyof T]: any }) => {
     setMap((currentMap) => ({
       ...currentMap,
       ...nextMap,
     }));
   }, []);
 
-  const removeMultiple = useCallback((...keys: Array<keyof T>) => {
-    setMap((currentMap) => {
-      const newMap = {} as T;
-      for (const key of Object.keys(currentMap)) {
-        if (!keys.includes(key as keyof T)) {
-          newMap[key] = currentMap[key];
+  const removeMultiple = useCallback(
+    (...keys: K[]) => {
+      setMap((currentMap) => {
+        const nextMap = { ...currentMap };
+        for (const key of keys) {
+          delete nextMap[key];
         }
-      }
 
-      return newMap;
-    });
-  }, []);
+        return nextMap;
+      });
+    },
+    [setMap]
+  );
 
-  const remove = useCallback((key: keyof T) => {
-    setMap((currentMap) => {
-      const newMap = {} as T;
-      for (const mapKey of Object.keys(currentMap)) {
-        if (mapKey !== key) {
-          newMap[mapKey] = currentMap[mapKey];
-        }
-      }
+  const remove = useCallback(
+    (key: K) => {
+      setMap((currentMap) => {
+        const nextMap = { ...currentMap };
+        delete nextMap[key];
 
-      return newMap;
-    });
-  }, []);
+        return nextMap;
+      });
+    },
+    [setMap]
+  );
 
   const removeAll = useCallback(() => {
-    setMap({} as T);
-  }, []);
+    setMap((currentMap) => {
+      const nextMap = { ...currentMap };
+      for (const key in nextMap) {
+        delete nextMap[key];
+      }
+
+      return nextMap;
+    });
+  }, [setMap]);
 
   return [
     map,
