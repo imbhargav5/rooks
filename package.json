@@ -119,7 +119,7 @@
     "inquirer": "8.2.4",
     "jest": "^27.5.1",
     "jest-localstorage-mock": "^2.4.21",
-    "lint-staged": "^12.0.2",
+    "lint-staged": "^12.5.0",
     "lodash.capitalize": "4.2.1",
     "lodash.sortby": "^4.7.0",
     "lodash.truncate": "^4.4.2",
