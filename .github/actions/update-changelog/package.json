@@ -7,7 +7,7 @@
     "build": "npm install && ncc build main.js"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.9.0",
     "@actions/github": "^1.1.0"
   }
 }
