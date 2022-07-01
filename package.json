@@ -163,7 +163,7 @@
     "unist-util-find-all-before": "^4.0.0",
     "unist-util-find-all-between": "^2.1.0",
     "unist-util-visit": "^4.1.0",
-    "vfile-reporter": "^7.0.2",
+    "vfile-reporter": "^7.0.4",
     "webpack": "5.72.1",
     "webpack-cli": "^4.2.0",
     "write-pkg": "5.1.0",
