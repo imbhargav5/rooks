@@ -6,14 +6,16 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState<T>(initialValue: T): [
+function useMapState<T, K extends keyof T>(
+  initialValue: T
+): [
   T,
   {
-    has: (key: keyof T) => boolean;
-    remove: (key: keyof T) => void;
+    has: (key: K) => boolean;
+    remove: (key: K) => void;
     removeAll: () => void;
-    removeMultiple: (...keys: Array<keyof T>) => void;
-    set: (key: keyof T, value: any) => void;
+    removeMultiple: (...keys: K[]) => void;
+    set: (key: K, value: any) => void;
     setMultiple: (next: Partial<T>) => void;
   }
 ] {
