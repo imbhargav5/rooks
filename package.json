@@ -13,7 +13,7 @@
     "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=v10.24.1"
   },
   "homepage": "https://react-hooks.org",
   "repository": {
