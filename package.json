@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.11.5",
+  "version": "5.11.7",
   "description": "Essential React custom hooks ⚓ to super charge your components!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -13,7 +13,7 @@
     "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=v10.24.1"
   },
   "homepage": "https://react-hooks.org",
   "repository": {
@@ -164,7 +164,7 @@
     "unist-util-find-all-between": "^2.1.0",
     "unist-util-visit": "^4.1.0",
     "vfile-reporter": "^7.0.4",
-    "webpack": "5.72.1",
+    "webpack": "5.73.0",
     "webpack-cli": "^4.10.0",
     "write-pkg": "5.1.0",
     "wsrun": "^5.2.4",

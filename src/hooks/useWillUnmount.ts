@@ -12,7 +12,8 @@ function useWillUnmount(callback: Callback): void {
   // run only once
   useEffect(() => {
     return callback;
-  }, [callback]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }
 
 export { useWillUnmount };

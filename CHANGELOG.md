@@ -1,3 +1,53 @@
+## <small>5.11.7 (2022-07-02)</small>
+
+* fix(usewillunmount): revert usewillunmount bug commit (#1134) ([6c15f12](https://github.com/imbhargav5/rooks/commit/6c15f12)), closes [#1134](https://github.com/imbhargav5/rooks/issues/1134)
+* chore(dependabot): remove dependabot ([a38a62f](https://github.com/imbhargav5/rooks/commit/a38a62f))
+* chore(deps): update dependency @actions/core to ^1.9.0 ([4d454d9](https://github.com/imbhargav5/rooks/commit/4d454d9))
+* chore(deps): update dependency @babel/cli to v7.18.6 ([b505089](https://github.com/imbhargav5/rooks/commit/b505089))
+* chore(deps): update dependency @babel/plugin-external-helpers to v7.18.6 ([454fe22](https://github.com/imbhargav5/rooks/commit/454fe22))
+* chore(deps): update dependency @babel/preset-react to v7.18.6 ([04bd1a4](https://github.com/imbhargav5/rooks/commit/04bd1a4))
+* chore(deps): update dependency lerna-changelog to ^0.8.3 ([44c044c](https://github.com/imbhargav5/rooks/commit/44c044c))
+* chore(deps): update dependency lint-staged to ^12.5.0 ([34af442](https://github.com/imbhargav5/rooks/commit/34af442))
+* chore(deps): update dependency mdast-util-from-markdown to ^1.2.0 ([92b1d5d](https://github.com/imbhargav5/rooks/commit/92b1d5d))
+* chore(deps): update dependency mdast-util-to-markdown to ^1.3.0 ([6392b2b](https://github.com/imbhargav5/rooks/commit/6392b2b))
+* chore(deps): update dependency meow to v10.1.3 ([3af62dd](https://github.com/imbhargav5/rooks/commit/3af62dd))
+* chore(deps): update dependency np to ^7.6.2 ([681383c](https://github.com/imbhargav5/rooks/commit/681383c))
+* chore(deps): update dependency prettier to ^2.7.1 ([fac4ca7](https://github.com/imbhargav5/rooks/commit/fac4ca7))
+* chore(deps): update dependency react to v18.2.0 ([a9f824d](https://github.com/imbhargav5/rooks/commit/a9f824d))
+* chore(deps): update dependency react-test-renderer to v18.2.0 ([b1494af](https://github.com/imbhargav5/rooks/commit/b1494af))
+* chore(deps): update dependency remark to ^14.0.2 ([272c623](https://github.com/imbhargav5/rooks/commit/272c623))
+* chore(deps): update dependency remark-preset-lint-markdown-style-guide to ^5.1.2 ([02c11a7](https://github.com/imbhargav5/rooks/commit/02c11a7))
+* chore(deps): update dependency rollup-plugin-dts to ^2.0.1 ([a556c87](https://github.com/imbhargav5/rooks/commit/a556c87))
+* chore(deps): update dependency terser to ^5.14.1 ([45701da](https://github.com/imbhargav5/rooks/commit/45701da))
+* chore(deps): update dependency tslib to ^2.4.0 ([b69f36f](https://github.com/imbhargav5/rooks/commit/b69f36f))
+* chore(deps): update dependency vfile-reporter to ^7.0.4 ([d9fb59e](https://github.com/imbhargav5/rooks/commit/d9fb59e))
+* chore(deps): update dependency webpack to v5.73.0 ([c89436a](https://github.com/imbhargav5/rooks/commit/c89436a))
+* chore(deps): update dependency webpack-cli to ^4.10.0 ([06bdb08](https://github.com/imbhargav5/rooks/commit/06bdb08))
+* chore(deps): update dependency yargs to ^17.5.1 ([12e1863](https://github.com/imbhargav5/rooks/commit/12e1863))
+* chore(deps): update node.js to >=v10.24.1 ([8bc6472](https://github.com/imbhargav5/rooks/commit/8bc6472))
+
+
+
+## <small>5.11.6 (2022-06-30)</small>
+
+* fix(useGlobalEventListener): Better typing for useGlobalEventListener (#1070) ([b39f69d](https://github.com/imbhargav5/rooks/commit/b39f69d)), closes [#1070](https://github.com/imbhargav5/rooks/issues/1070)
+* chore(deps): update dependency @widgetbot/react-embed to ^1.4.1 ([9403042](https://github.com/imbhargav5/rooks/commit/9403042))
+* chore(deps): update dependency camel-case to ^4.1.2 ([cad6349](https://github.com/imbhargav5/rooks/commit/cad6349))
+* chore(deps): update dependency classnames to ^2.3.1 ([bacacf8](https://github.com/imbhargav5/rooks/commit/bacacf8))
+* chore(deps): update dependency conventional-changelog-cli to ^2.2.2 ([bb468c2](https://github.com/imbhargav5/rooks/commit/bb468c2))
+* chore(deps): update dependency esbuild to ^0.14.48 ([edb95b6](https://github.com/imbhargav5/rooks/commit/edb95b6))
+* chore(deps): update dependency eslint to ^8.18.0 ([f3b4374](https://github.com/imbhargav5/rooks/commit/f3b4374))
+* chore(deps): update dependency eslint-config-prettier to ^8.5.0 ([da9fafd](https://github.com/imbhargav5/rooks/commit/da9fafd))
+* chore(deps): update dependency execa to ^6.1.0 ([8543338](https://github.com/imbhargav5/rooks/commit/8543338))
+* chore(deps): update dependency glob to ^8.0.3 ([cf62c60](https://github.com/imbhargav5/rooks/commit/cf62c60))
+* chore(deps): update dependency jest-localstorage-mock to ^2.4.21 ([a8a5de9](https://github.com/imbhargav5/rooks/commit/a8a5de9))
+* chore(docs): Update changelog and docs ([f228560](https://github.com/imbhargav5/rooks/commit/f228560))
+* style(useKeys): Update useKeys.ts return value (#1046) ([2c00d99](https://github.com/imbhargav5/rooks/commit/2c00d99)), closes [#1046](https://github.com/imbhargav5/rooks/issues/1046)
+* style(usewindowscrollposition): minor stylistic changes (#1087) ([da76e8c](https://github.com/imbhargav5/rooks/commit/da76e8c)), closes [#1087](https://github.com/imbhargav5/rooks/issues/1087)
+* style(usewindowsize): refactor types (#1077) ([58d8110](https://github.com/imbhargav5/rooks/commit/58d8110)), closes [#1077](https://github.com/imbhargav5/rooks/issues/1077)
+
+
+
 ## <small>5.11.5 (2022-06-30)</small>
 
 * fix(usewillunmount): update callback type to return void (#1071) ([e4d9ffb](https://github.com/imbhargav5/rooks/commit/e4d9ffb)), closes [#1071](https://github.com/imbhargav5/rooks/issues/1071)
