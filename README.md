@@ -136,7 +136,7 @@ MIT
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-54-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-55-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -214,6 +214,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/ssmkhrj"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=ssmkhrj" title="Code">💻</a></td>
     <td align="center"><a href="https://qpan.dev/"><img src="https://avatars.githubusercontent.com/u/17402261?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Qiushi Pan</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=qqpann" title="Code">💻</a></td>
     <td align="center"><a href="http://jishnu.me/"><img src="https://avatars.githubusercontent.com/u/754818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jishnu Viswanath</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=neolivz" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/brahambence"><img src="https://avatars.githubusercontent.com/u/11694244?v=4?s=100" width="100px;" alt=""/><br /><sub><b>brahambence</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=brahambence" title="Code">💻</a></td>
   </tr>
 </table>
 
