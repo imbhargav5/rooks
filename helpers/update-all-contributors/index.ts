@@ -4,23 +4,31 @@
 // it using `yarn contributors:add <username> <contribution-type>`
 import { execSync } from "child_process";
 
-function getMissingContributosList() {
+function getMissingContributorsList() {
   let stdout = execSync("yarn contributors:check").toString();
-  return stdout.split(".all-contributorsrc:")[1].trim().split(", ");
+  let string = stdout;
+  if (string.includes("\nUnknown contributors")) {
+    string = string.split("\nUnknown contributors")[0];
+  }
+  return string.split(".all-contributorsrc:")[1].trim().split(", ");
 }
 
 function addContributorsAsCoder(list: string[]) {
   // remove all bots first
-  list = list.filter((item) => !item.endsWith("[bot]"));
+  //list = list.filter((item) => !item.endsWith("[bot]"));
   console.log("missing contributors: ", list);
   for (const people of list) {
     console.log("adding: ", people);
-    execSync(`yarn contributors:add ${people} code`);
+    try {
+      execSync(`yarn run contributors:add ${people} code`);
+    } catch (err) {
+      console.log("error adding user", people, err);
+    }
   }
 }
 
 try {
-  const list = getMissingContributosList();
+  const list = getMissingContributorsList();
   addContributorsAsCoder(list);
 } catch (err) {
   console.log(err);
