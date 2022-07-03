@@ -1,3 +1,10 @@
+## <small>5.11.8 (2022-07-02)</small>
+
+* revert: "fix: Remove console.warn in SSR (#1030)" (#1136) ([b5c723a](https://github.com/imbhargav5/rooks/commit/b5c723a)), closes [#1030](https://github.com/imbhargav5/rooks/issues/1030) [#1136](https://github.com/imbhargav5/rooks/issues/1136)
+* chore(docs): Update changelog and docs ([8f69ce7](https://github.com/imbhargav5/rooks/commit/8f69ce7))
+
+
+
 ## <small>5.11.7 (2022-07-02)</small>
 
 * fix(usewillunmount): revert usewillunmount bug commit (#1134) ([6c15f12](https://github.com/imbhargav5/rooks/commit/6c15f12)), closes [#1134](https://github.com/imbhargav5/rooks/issues/1134)
