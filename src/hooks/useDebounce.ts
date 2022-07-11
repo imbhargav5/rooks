@@ -26,13 +26,18 @@ function useDebounce<T extends (...args: any[]) => unknown>(
     [wait, options]
   );
 
+  const callbackRef = useRef<T>(callback);
   const debouncedCallbackRef = useRef<DebouncedFunc<T>>(
     createDebouncedCallback(callback)
   );
+    
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
 
   useEffect(() => {
-    debouncedCallbackRef.current = createDebouncedCallback(callback);
-  }, [callback, createDebouncedCallback]);
+    debouncedCallbackRef.current = createDebouncedCallback(callbackRef.current);
+  }, [createDebouncedCallback]);
 
   return debouncedCallbackRef.current;
 }
