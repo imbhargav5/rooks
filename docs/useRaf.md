@@ -24,8 +24,15 @@ import { useRaf } from "rooks";
 
 ```jsx
 let angle = 0;
-function updateAngle() {
-  angle = (angle + 3) % 360;
+function updateAngle(timeElapsed) {
+  // Measure the ratio of actual time elapsed in ms since the last frame relative to
+  // how long it would take at exactly 60fps (1/60 * 1000). This allows us to use 60fps
+  // as the target speed and compensate in our calculations if the actual framerate is lower
+  // or higher.
+  const deltaTime = timeElapsed / 16.666;
+  
+  const speed = (3 * deltaTime);
+  angle = (angle + speed) % 360;
   return (angle * Math.PI) / 180;
 }
 
@@ -33,10 +40,10 @@ function Demo() {
   const { value: shouldRun, toggleValue: toggleShouldRun } = useToggle(true);
   const myRef = useRef();
   const canvasRef = useRef();
-  useRaf(() => {
+  useRaf((timeElapsed) => {
     if (canvasRef && canvasRef.current) {
       const screenRatio = window.devicePixelRatio || 1;
-      let angle = updateAngle();
+      let angle = updateAngle(timeElapsed);
       const canvas = canvasRef.current;
       var ctx = canvas.getContext("2d");
       ctx.save();
@@ -76,10 +83,10 @@ render(<Demo />);
 
 ### Arguments
 
-| Argument value | Type                            | Description                                                  | Default value |
-| -------------- | ------------------------------- | ------------------------------------------------------------ | ------------- |
-| callback       | `(timeElapsed: number) => void` | The callback function to be executed                         | undefined     |
-| isActive       | boolean                         | The value which while true, keeps the raf running infinitely | undefined     |
+| Argument value | Type                            | Description                                                                                  | Default value |
+| -------------- | ------------------------------- | -------------------------------------------------------------------------------------------- | ------------- |
+| callback       | `(timeElapsed: number) => void` | The callback function to be executed. timeElapsed is the time in ms since the last raf call. | undefined     |
+| isActive       | boolean                         | The value which while true, keeps the raf running infinitely | undefined                     |
 
 ### Returns
 
