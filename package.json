@@ -50,6 +50,7 @@
     "docs:write-translations": "docusaurus-write-translations",
     "docs:version": "docusaurus docs:version",
     "docs:rename-version": "docusaurus-rename-version",
+    "docs:help": "docusaurus help",
     "docs:deploy": "docusaurus deploy",
     "docs:swizzle": "docusaurus swizzle",
     "docs:docusaurus": "docusaurus",
