@@ -191,7 +191,6 @@ module.exports = {
       appId: process.env.ALGOLIA_APP_ID,
       indexName: "react-hooks",
       // Optional: see doc section bellow,
-      contextual: true,
       // searchParameters: {
       //   facetFilters: ["type:$TYPE"]
       // }
