@@ -4,9 +4,9 @@ type Effect = (signal: AbortSignal) => Promise<void | CleanupFunction>;
 type CleanupFunction = () => void;
 
 /**
- *
- * @param effect
- * @param deps
+ * A version of useEffect that accepts an async function
+ * @param effect Async function that can return a cleanup function and takes in an AbortSignal
+ * @param deps If present, effect will only activate if the values in the list change
  */
 function useAsyncEffect(effect: Effect, deps?: DependencyList) {
   useEffect(() => {
