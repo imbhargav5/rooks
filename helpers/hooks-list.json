@@ -1,6 +1,10 @@
 {
   "hooks": [
     {
+      "name": "useAsyncEffect",
+      "description": "A version of useEffect that accepts an async function"
+    },
+    {
       "name": "useBoundingclientrect",
       "description": "getBoundingClientRect hook for React."
     },
