@@ -7,7 +7,7 @@ import { act } from "react-test-renderer";
 import { useAsyncEffect } from "../hooks/useAsyncEffect";
 
 describe("useAsyncEffect", () => {
-  it("should be defined", () => {
+  it("is defined", () => {
     expect(useAsyncEffect).toBeDefined();
   });
 
@@ -54,30 +54,49 @@ describe("useAsyncEffect", () => {
       waitFor(() => result.current.aborted)
     ).resolves.toBeUndefined();
   });
-});
 
-it("runs the cleanup function", async () => {
-  const { waitFor, result } = renderHook(() => {
-    const [cleanupRan, setCleanupRan] = useState(false);
-    const [forceUnload, setForceUnload] = useState(0);
+  it("runs the cleanup function", async () => {
+    const { waitFor, result } = renderHook(() => {
+      const [cleanupRan, setCleanupRan] = useState(false);
+      const [forceUnload, setForceUnload] = useState(0);
 
-    useAsyncEffect(
-      async (signal) => {
-        return () => setCleanupRan(true);
-      },
-      [forceUnload]
-    );
+      useAsyncEffect(
+        async (signal) => {
+          return () => setCleanupRan(true);
+        },
+        [forceUnload]
+      );
 
-    return { cleanupRan, forceUnload, setForceUnload };
+      return { cleanupRan, forceUnload, setForceUnload };
+    });
+
+    expect(result.current.cleanupRan).toBe(false);
+
+    act(() => {
+      result.current.setForceUnload((old) => old + 1);
+    });
+
+    await expect(
+      waitFor(() => result.current.cleanupRan)
+    ).resolves.toBeUndefined();
   });
 
-  expect(result.current.cleanupRan).toBe(false);
+  it("errors when the effect function rejects", (done) => {
+    const consoleSpy = jest
+      .spyOn(global.console, "error")
+      .mockImplementation(() => {});
 
-  act(() => {
-    result.current.setForceUnload((old) => old + 1);
+    renderHook(() => {
+      useAsyncEffect(async () => {
+        await new Promise((_, reject) => {
+          reject();
+        });
+      }, []);
+    });
+
+    setTimeout(() => {
+      expect(consoleSpy).toHaveBeenCalledTimes(1);
+      done();
+    });
   });
-
-  await expect(
-    waitFor(() => result.current.cleanupRan)
-  ).resolves.toBeUndefined();
 });
