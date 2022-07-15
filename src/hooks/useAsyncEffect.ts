@@ -12,17 +12,23 @@ function useAsyncEffect(effect: Effect, deps?: DependencyList) {
   useEffect(() => {
     const controller = new AbortController();
 
-    effect(controller.signal)
-      .then((cleanupFunction) => {
-        typeof cleanupFunction === "function" && cleanupFunction();
-      })
-      .catch(() => {
-        console.error(
-          "You should NEVER throw inside useAsyncEffect. This means the cleanup function will not run, which can cause unintended side effects. Please wrap your useAsyncEffect function in a try/catch."
-        );
-      });
+    const effectPromise = effect(controller.signal).catch(() => {
+      console.error(
+        "You should NEVER throw inside useAsyncEffect. This means the cleanup function will not run, which can cause unintended side effects. Please wrap your useAsyncEffect function in a try/catch."
+      );
+    });
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+      runCleanup();
+
+      async function runCleanup() {
+        const cleanupFunction = await effectPromise;
+        if (cleanupFunction) {
+          cleanupFunction();
+        }
+      }
+    };
   }, deps);
 }
 

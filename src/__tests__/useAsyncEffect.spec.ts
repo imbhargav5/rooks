@@ -23,7 +23,10 @@ describe("useAsyncEffect", () => {
     });
 
     expect(result.all[0]).toBe(false);
-    await expect(waitFor(() => result.current)).resolves.toBeUndefined();
+
+    await act(async () => {
+      await expect(waitFor(() => result.current)).resolves.toBeUndefined();
+    });
   });
 
   it("sends the abort signal", async () => {
@@ -50,9 +53,11 @@ describe("useAsyncEffect", () => {
       result.current.setForceUnload((old) => old + 1);
     });
 
-    await expect(
-      waitFor(() => result.current.aborted)
-    ).resolves.toBeUndefined();
+    await act(async () => {
+      await expect(
+        waitFor(() => result.current.aborted)
+      ).resolves.toBeUndefined();
+    });
   });
 
   it("runs the cleanup function", async () => {
