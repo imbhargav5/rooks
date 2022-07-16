@@ -1,6 +1,5 @@
 import { writeFileSync, readFileSync } from "fs";
 import parseReadme from "./parse-readme";
-import replaceString from "replace-string";
 
 const packageName = process.env.LERNA_PACKAGE_NAME;
 const newReadmeFileName = packageName?.startsWith("@rooks")

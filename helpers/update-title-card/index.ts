@@ -1,10 +1,11 @@
-import replaceString from "replace-string";
 import { camelCase } from "camel-case";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 var currentPath = process.cwd();
 const pkg = require(join(currentPath, "./package.json"));
 import truncate from "lodash.truncate";
+import { replaceString } from "../create";
+
 if (!Array.isArray(pkg.keywords)) {
   pkg.keywords = [];
 }

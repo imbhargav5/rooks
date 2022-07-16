@@ -2,13 +2,22 @@ import inquirer from "inquirer";
 import fs from "fs";
 import fsExtra from "fs-extra";
 import path from "path";
-import replaceString from "replace-string";
-import makeDir from "make-dir";
-import ora from "ora";
-import execa from "execa";
 import truncate from "lodash.truncate";
 import addHookToListAndUpdate from "./addHookToListAndUpdate";
 import { IHookDesc } from "../types";
+
+/**
+ * This function performs a global string replace
+ * @param string String to perform the replacement on
+ * @param needle Value to replace
+ * @param replacement Replacement value
+ * @returns The first argument with all occurrences of the needle changed to the replacement
+ */
+export const replaceString = (
+  string: string,
+  needle: string,
+  replacement: string
+) => string.split(needle).join(replacement);
 
 const PROJECT_ROOT = process.cwd();
 
@@ -62,8 +71,8 @@ function injectValuesIntoTemplate(
 
   let result: string = src;
   result = replaceString(result, "%name%", name);
-  result = replaceString(result, "%directoryName%", directoryName);
-  result = replaceString(result, "%packageName%", packageName);
+  result = replaceString(result, "%directoryName%", directoryName ?? "");
+  result = replaceString(result, "%packageName%", packageName ?? "");
   result = replaceString(result, "%description%", description);
   result = replaceString(result, "%description0%", descriptionArray[0]);
   result = replaceString(result, "%description1%", descriptionArray[1]);
@@ -126,9 +135,8 @@ inquirer.prompt(questions).then((answers) => {
   filesToWrite.map((relativeFilePathFromRootOfModule: any, index) => {
     const srcToWrite = transformedSources[index];
     if (typeof relativeFilePathFromRootOfModule === "function") {
-      relativeFilePathFromRootOfModule = relativeFilePathFromRootOfModule(
-        answers
-      );
+      relativeFilePathFromRootOfModule =
+        relativeFilePathFromRootOfModule(answers);
     }
     const pathToWriteTo = path.join(
       PROJECT_ROOT,
