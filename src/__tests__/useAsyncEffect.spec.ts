@@ -101,6 +101,11 @@ describe("useAsyncEffect", () => {
 
     setTimeout(() => {
       expect(consoleSpy).toHaveBeenCalledTimes(1);
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          "You should NEVER throw inside useAsyncEffect. This means the cleanup function will not run, which can cause unintended side effects. Please wrap your useAsyncEffect function in a try/catch."
+        )
+      );
       done();
     });
   });
