@@ -17,11 +17,11 @@ function warnIfBothValueAndIndexAreProvided(functionName, object) {
 }
 
 type UseSelectableListReturnType<T> = [
-  Array<T | number>,
+  [number, T],
   {
-    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
     matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
   }
 ];
 

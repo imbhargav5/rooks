@@ -1,10 +1,20 @@
 {
-  "eslint.workingDirectories": [
-    "./packages/shared",
-    "./packages/rooks",
-    "./packages/eslint-config",
-    "./packages/docusaurus",
-    "./"
+  "eslint.workingDirectories": ["./"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.options": {
+    "cache": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.packageManager": "yarn",
+  "eslint.runtime": "node",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "json",
+    "typescript",
+    "typescriptreact",
+    "yaml"
   ],
   "files.exclude": {
     "**/.git": true,
