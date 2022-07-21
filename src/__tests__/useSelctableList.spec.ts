@@ -10,7 +10,7 @@ describe("useSelctableList", () => {
   const { result } = renderHook(() => useSelectableList([1, 2, 3]));
 
   describe("matchSelection", () => {
-    test("console.warn", () => {
+    it("console.warn", () => {
       act(() => {
         result.current[1].matchSelection({ index: 1, value: 2 });
       });
@@ -19,7 +19,7 @@ describe("useSelctableList", () => {
         "matchSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].matchSelection({} as any);
+        result.current[1].matchSelection({});
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,
@@ -27,33 +27,29 @@ describe("useSelctableList", () => {
       );
     });
 
-    test("match index", () => {
+    it("match index", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
-      expect(
-        internalResult.current[1].matchSelection({ index: 0 } as any)
-      ).toBe(true);
-      expect(
-        internalResult.current[1].matchSelection({ index: 1 } as any)
-      ).toBe(false);
+      expect(internalResult.current[1].matchSelection({ index: 0 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ index: 1 })).toBe(
+        false
+      );
     });
 
-    test("match value", () => {
+    it("match value", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
-      expect(
-        internalResult.current[1].matchSelection({ value: 1 } as any)
-      ).toBe(true);
-      expect(
-        internalResult.current[1].matchSelection({ value: 2 } as any)
-      ).toBe(false);
+      expect(internalResult.current[1].matchSelection({ value: 1 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ value: 2 })).toBe(
+        false
+      );
     });
   });
 
   describe("updateSelection", () => {
-    test("set by index", () => {
+    it("set by index", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -65,7 +61,7 @@ describe("useSelctableList", () => {
       expect(currentIndex).toBe(1);
       expect(currentValue).toBe(2);
     });
-    test("set by value", () => {
+    it("set by value", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -78,7 +74,7 @@ describe("useSelctableList", () => {
       expect(currentValue).toBe(2);
     });
 
-    test("set by value fail", () => {
+    it("set by value fail", () => {
       const [beforeIndex, beforeValue] = result.current[0];
       act(() => {
         result.current[1].updateSelection({ value: 22 })();
@@ -95,7 +91,7 @@ describe("useSelctableList", () => {
       expect(beforeValue).toBe(afterValue);
     });
 
-    test("console.warn", () => {
+    it("console.warn", () => {
       act(() => {
         result.current[1].updateSelection({ index: 1, value: 2 })();
       });
@@ -104,7 +100,7 @@ describe("useSelctableList", () => {
         "updateSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].updateSelection({} as any)();
+        result.current[1].updateSelection({})();
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,
@@ -114,7 +110,7 @@ describe("useSelctableList", () => {
   });
 
   describe("toggleSelection", () => {
-    test("should toggle selected index", () => {
+    it("should toggle selected index", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -126,7 +122,7 @@ describe("useSelctableList", () => {
       expect(currentValue).toBe(undefined);
     });
 
-    test("shouldn't toggle selected index when allowUnselected = false", () => {
+    it("shouldn't toggle selected index when allowUnselected = false", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, false)
       );
@@ -145,7 +141,7 @@ describe("useSelctableList", () => {
       );
       (console.warn as jest.Mock).mockReset();
     });
-    test("should toggle selected value", () => {
+    it("should toggle selected value", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -159,7 +155,7 @@ describe("useSelctableList", () => {
       expect(currentValue).toBe(undefined);
     });
 
-    test("shouldn't toggle selected value when allowUnselected", () => {
+    it("shouldn't toggle selected value when allowUnselected", () => {
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, false)
       );
@@ -179,7 +175,7 @@ describe("useSelctableList", () => {
       (console.warn as jest.Mock).mockReset();
     });
 
-    test("console.warn", () => {
+    it("console.warn", () => {
       act(() => {
         result.current[1].toggleSelection({ index: 1, value: 2 })();
       });
@@ -188,7 +184,7 @@ describe("useSelctableList", () => {
         "toggleSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].toggleSelection({} as any)();
+        result.current[1].toggleSelection({})();
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,

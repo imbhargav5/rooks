@@ -16,12 +16,14 @@ function warnIfBothValueAndIndexAreProvided(functionName, object) {
   }
 }
 
+type Selection<T> = [number, T];
+
 type UseSelectableListReturnType<T> = [
-  Array<T | number>,
+  Selection<T>,
   {
-    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
-    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
     matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
+    updateSelection: (parameters: OptionalIndexValue<T>) => () => void;
   }
 ];
 
@@ -38,9 +40,9 @@ function useSelectableList<T>(
   initialIndex: number = 0,
   allowUnselected = false
 ): UseSelectableListReturnType<T> {
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
   const currentValue = list[currentIndex];
-  const selection = [currentIndex, currentValue];
+  const selection: Selection<T> = [currentIndex, currentValue];
 
   const updateSelection = useCallback(
     ({ index, value }: OptionalIndexValue<T>) => {
