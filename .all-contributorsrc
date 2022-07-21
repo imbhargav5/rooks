@@ -561,6 +561,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "akiszka",
+      "name": "Antoni Kiszka",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30828906?v=4",
+      "profile": "https://github.com/akiszka",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gpoole",
+      "name": "Greg Poole",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2898433?v=4",
+      "profile": "https://twitter.com/gpoole_is_taken",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

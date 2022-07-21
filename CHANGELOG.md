@@ -1,3 +1,15 @@
+## <small>5.11.9 (2022-07-21)</small>
+
+* fix: use selectable list types (#1149) ([b1060a5](https://github.com/imbhargav5/rooks/commit/b1060a5)), closes [#1149](https://github.com/imbhargav5/rooks/issues/1149)
+* chore: fix helpers/create (#1143) ([2d2139d](https://github.com/imbhargav5/rooks/commit/2d2139d)), closes [#1143](https://github.com/imbhargav5/rooks/issues/1143)
+* chore: update node-version (#1138) ([a4bc125](https://github.com/imbhargav5/rooks/commit/a4bc125)), closes [#1138](https://github.com/imbhargav5/rooks/issues/1138)
+* chore(docs): Update changelog and docs ([5f912b6](https://github.com/imbhargav5/rooks/commit/5f912b6))
+* Fix build (#1144) ([872670d](https://github.com/imbhargav5/rooks/commit/872670d)), closes [#1144](https://github.com/imbhargav5/rooks/issues/1144)
+* docs: Update useRaf to document timeElapsed (#1141) ([c626ed9](https://github.com/imbhargav5/rooks/commit/c626ed9)), closes [#1141](https://github.com/imbhargav5/rooks/issues/1141)
+* ci: contributors logic update (#1137) ([c2ca541](https://github.com/imbhargav5/rooks/commit/c2ca541)), closes [#1137](https://github.com/imbhargav5/rooks/issues/1137)
+
+
+
 ## <small>5.11.8 (2022-07-02)</small>
 
 * revert: "fix: Remove console.warn in SSR (#1030)" (#1136) ([b5c723a](https://github.com/imbhargav5/rooks/commit/b5c723a)), closes [#1030](https://github.com/imbhargav5/rooks/issues/1030) [#1136](https://github.com/imbhargav5/rooks/issues/1136)
