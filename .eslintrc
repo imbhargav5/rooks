@@ -13,9 +13,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": [
-      "./tsconfig.json"
-    ]
+    "project": ["./tsconfig.json"]
   },
   "parser": "@typescript-eslint/parser",
   "rules": {
@@ -59,9 +57,11 @@
     "unicorn/no-reduce": 0,
     "import/no-extraneous-dependencies": 0,
     "radix": 0,
-    "func-style": 0
+    "func-style": 0,
+    "canonical/destructuring-property-newline": 0,
+    "canonical/import-specifier-newline"
   },
-  "settings":{
+  "settings": {
     "react": {
       "version": "detect"
     }
