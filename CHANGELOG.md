@@ -1,3 +1,10 @@
+## 5.12.0 (2022-07-22)
+
+* feat: generic types for useMapState (#1100) ([1ab12b9](https://github.com/imbhargav5/rooks/commit/1ab12b9)), closes [#1100](https://github.com/imbhargav5/rooks/issues/1100)
+* chore(docs): Update changelog and docs ([4c9616c](https://github.com/imbhargav5/rooks/commit/4c9616c))
+
+
+
 ## <small>5.11.9 (2022-07-21)</small>
 
 * fix: use selectable list types (#1149) ([b1060a5](https://github.com/imbhargav5/rooks/commit/b1060a5)), closes [#1149](https://github.com/imbhargav5/rooks/issues/1149)
