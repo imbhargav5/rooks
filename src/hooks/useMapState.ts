@@ -6,22 +6,22 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState(
-  initialValue: any
+function useMapState<T, K extends keyof T>(
+  initialValue: T
 ): [
-  any,
+  T,
   {
-    set: (key: any, value: any) => void;
-    has: (key: any) => boolean;
-    setMultiple: (...keys: any[]) => void;
-    remove: (key: any) => void;
-    removeMultiple: (...keys: any[]) => void;
+    has: (key: K) => boolean;
+    remove: (key: K) => void;
     removeAll: () => void;
+    removeMultiple: (...keys: K[]) => void;
+    set: (key: K, value: any) => void;
+    setMultiple: (next: Partial<T>) => void;
   }
 ] {
   const [map, setMap] = useState(initialValue);
 
-  const set = useCallback((key: any, value: any) => {
+  const set = useCallback((key: K, value: any) => {
     setMap((currentMap) => ({
       ...currentMap,
       [key]: value,
@@ -29,59 +29,67 @@ function useMapState(
   }, []);
 
   const has = useCallback(
-    (key: any) => {
+    (key: K) => {
       return typeof map[key] !== "undefined";
     },
     [map]
   );
 
-  const setMultiple = useCallback((object: { any: any }) => {
+  const setMultiple = useCallback((nextMap: { [Key in keyof T]: any }) => {
     setMap((currentMap) => ({
       ...currentMap,
-      ...object,
+      ...nextMap,
     }));
   }, []);
 
-  const removeMultiple = useCallback((...keys) => {
-    setMap((currentMap) => {
-      const newMap = {};
-      Object.keys(currentMap).forEach((key) => {
-        if (!keys.includes(key)) {
-          newMap[key] = currentMap[key];
+  const removeMultiple = useCallback(
+    (...keys: K[]) => {
+      setMap((currentMap) => {
+        const nextMap = { ...currentMap };
+        for (const key of keys) {
+          delete nextMap[key];
         }
+
+        return nextMap;
       });
+    },
+    [setMap]
+  );
 
-      return newMap;
-    });
-  }, []);
+  const remove = useCallback(
+    (key: K) => {
+      setMap((currentMap) => {
+        const nextMap = { ...currentMap };
+        delete nextMap[key];
 
-  const remove = useCallback((key: any) => {
-    setMap((currentMap) => {
-      const newMap = {};
-      Object.keys(currentMap).forEach((mapKey) => {
-        if (mapKey !== key) {
-          newMap[mapKey] = currentMap[mapKey];
-        }
+        return nextMap;
       });
-
-      return newMap;
-    });
-  }, []);
+    },
+    [setMap]
+  );
 
   const removeAll = useCallback(() => {
-    setMap({});
-  }, []);
+    setMap((currentMap) => {
+      const nextMap = { ...currentMap };
+      for (const key in nextMap) {
+        delete nextMap[key];
+      }
 
-  const controls = {
-    has,
-    remove,
-    removeAll,
-    removeMultiple,
-    set,
-    setMultiple,
-  };
+      return nextMap;
+    });
+  }, [setMap]);
 
-  return [map, controls];
+  return [
+    map,
+    {
+      has,
+      remove,
+      removeAll,
+      removeMultiple,
+      set,
+      setMultiple,
+    },
+  ];
 }
 
 export { useMapState };
