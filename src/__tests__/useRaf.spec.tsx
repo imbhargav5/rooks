@@ -1,12 +1,8 @@
 import { render } from "@testing-library/react";
-import TestRenderer from "react-test-renderer";
 import { useRaf } from "../hooks/useRaf";
 import React, { useRef } from "react";
 
-const { act } = TestRenderer;
-
 describe("useRaf", () => {
-  let mockCallback;
   let TestJSX;
   let angle = 0;
   function updateAngle() {
@@ -43,7 +39,6 @@ describe("useRaf", () => {
     );
   }
   beforeEach(() => {
-    mockCallback = jest.fn(() => {});
     TestJSX = App;
   });
 

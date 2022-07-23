@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
@@ -53,6 +54,7 @@ function useTimeout(
         console.warn("useTimeout: window is undefined.");
       }
     }
+    return noop;
   }, [isTimeoutActive, timeoutDelayMs]);
 
   return {

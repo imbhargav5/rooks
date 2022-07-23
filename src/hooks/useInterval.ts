@@ -1,5 +1,6 @@
 // See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
+import { noop } from "@/utils/noop";
 import { useState, useEffect, useRef } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
@@ -83,6 +84,7 @@ function useInterval(
         clearInterval(id);
       };
     }
+    return noop;
   }, [intervalDuration, isRunning]);
 
   let handler: unknown;

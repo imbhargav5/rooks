@@ -1,5 +1,6 @@
-import raf from 'raf';
-import { useRef, useEffect } from 'react';
+import { noop } from "@/utils/noop";
+import raf from "raf";
+import { useRef, useEffect } from "react";
 
 /**
  *
@@ -41,6 +42,8 @@ export function useRaf(
       return () => {
         raf.cancel(animationFrame);
       };
+    } else {
+      return noop;
     }
   }, [isActive]);
 }

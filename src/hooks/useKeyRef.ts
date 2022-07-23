@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { doesIdentifierMatchKeyboardEvent } from '../utils/doesIdentifierMatchKeyboardEvent';
-import type { CallbackRef, HTMLElementOrNull } from '../utils/utils';
+import { noop } from "@/utils/noop";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
+import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
 
 type Options = {
   /**
@@ -14,7 +15,7 @@ type Options = {
 };
 
 const defaultOptions = {
-  eventTypes: ['keydown'],
+  eventTypes: ["keydown"],
   when: true,
 };
 
@@ -79,6 +80,7 @@ function useKeyRef(
         });
       };
     }
+    return noop;
   }, [targetNode, when, eventTypes, keyList, handle]);
 
   return ref;

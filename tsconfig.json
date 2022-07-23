@@ -16,9 +16,9 @@
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     // "noImplicitAny": true,
-    // "noImplicitReturns": true,
-    // "noImplicitThis": true,
-    // "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
     "paths": {
       "@/*": ["*"]
     },

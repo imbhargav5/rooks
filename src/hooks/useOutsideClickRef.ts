@@ -1,10 +1,5 @@
-import {
-  useEffect,
-  MutableRefObject,
-  useRef,
-  useCallback,
-  useState,
-} from "react";
+import { noop } from "@/utils/noop";
+import { useEffect, useRef, useCallback, useState } from "react";
 import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
 
 /**
@@ -50,6 +45,7 @@ function useOutsideClickRef(
         document.removeEventListener("ontouchstart", memoizedCallback, true);
       };
     }
+    return noop;
   }, [when, memoizedCallback]);
 
   return [ref];

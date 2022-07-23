@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { noop } from "@/utils/noop";
 import { useEffect, useReducer, useCallback } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
@@ -79,12 +80,13 @@ function useSessionstorage(
   }
 
   // eslint-disable-next-line consistent-return
-  function remove() {
+  function remove(): null | undefined {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
     sessionStorage.removeItem(key);
     setValue(null);
+    return undefined;
   }
 
   useEffect(() => {
@@ -107,6 +109,7 @@ function useSessionstorage(
     } else {
       console.warn("useSessionstorage: window is undefined.");
     }
+    return noop;
   }, []);
 
   const handler = Object.assign([value, set, remove], {

@@ -1,9 +1,10 @@
-import { useEffect, useCallback, useState } from 'react';
-import type { HTMLElementOrNull, CallbackRef } from '../utils/utils';
+import { noop } from "@/utils/noop";
+import { useEffect, useCallback, useState } from "react";
+import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
 
 const config: IntersectionObserverInit = {
   root: null,
-  rootMargin: '0px 0px 0px 0px',
+  rootMargin: "0px 0px 0px 0px",
   threshold: [0, 1],
 };
 
@@ -40,6 +41,7 @@ function useInViewRef(
         observer.disconnect();
       };
     }
+    return noop;
   }, [node, callback, root, rootMargin, threshold]);
 
   const ref = useCallback((node: HTMLElementOrNull) => {
