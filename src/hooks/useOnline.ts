@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useState, useEffect } from "react";
 
 /**
@@ -42,7 +43,7 @@ function useOnline(): boolean | null {
         window.removeEventListener("offline", setOffline);
       };
     } else {
-      console.warn("useOnline: window is undefined.");
+      return noop;
     }
   }, []);
 

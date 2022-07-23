@@ -1,5 +1,4 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useState } from "react";
 import { useWarningOnMountInDevelopment } from "../hooks/useWarningOnMountInDevelopment";
 
 describe("useWarningOnMountInDevelopment", () => {

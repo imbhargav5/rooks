@@ -2,7 +2,8 @@
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
 
-import { useEffect, useReducer, useLayoutEffect } from "react";
+import { noop } from "@/utils/noop";
+import { useEffect, useReducer } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
@@ -179,6 +180,7 @@ function useVisibilitySensor(ref, options) {
         clearInterval(intervalTimer);
       };
     }
+    return noop;
   }, [intervalCheck]);
 
   function createListener(event, debounce, throttle) {
@@ -214,6 +216,7 @@ function useVisibilitySensor(ref, options) {
     if (scrollCheck) {
       return createListener("scroll", scrollDebounce, scrollThrottle);
     }
+    return noop;
   }, []);
 
   // if resize check is needed
@@ -222,6 +225,7 @@ function useVisibilitySensor(ref, options) {
     if (resizeCheck) {
       return createListener("resize", resizeDebounce, resizeThrottle);
     }
+    return noop;
   }, []);
 
   return localState;

@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 /**
@@ -45,6 +46,7 @@ function useThrottle(
     } else {
       console.warn("useThrottle: window is undefined.");
     }
+    return noop;
   }, [ready, timeout]);
 
   return [throttledFunction, ready];

@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useRef, useEffect } from "react";
 
 /**
@@ -35,6 +36,7 @@ function useTimeoutWhen(
         console.warn("useTimeoutWhen: window is undefined.");
       }
     }
+    return noop;
   }, [when]);
 }
 

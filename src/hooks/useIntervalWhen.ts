@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useRef, useEffect } from "react";
 
 /**
@@ -40,6 +41,7 @@ function useIntervalWhen(
     } else {
       console.warn("useIntervalWhen: window is undefined.");
     }
+    return noop;
   }, [when, intervalDurationMs]);
 }
 

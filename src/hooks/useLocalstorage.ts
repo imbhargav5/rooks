@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { noop } from "@/utils/noop";
 import { useState, useEffect, useCallback } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
@@ -73,12 +74,13 @@ function useLocalstorage(
   }, []);
 
   // eslint-disable-next-line consistent-return
-  const remove = useCallback(() => {
+  const remove = useCallback((): false | undefined => {
     set(null);
     if (typeof localStorage === "undefined") {
       return false;
     }
     localStorage.removeItem(key);
+    return undefined;
   }, [key]);
 
   // initialize
@@ -97,6 +99,7 @@ function useLocalstorage(
     } else {
       console.warn("useLocalstorage: window is undefined.");
     }
+    return noop;
   }, []);
 
   const handler = Object.assign([value, set, remove], {
