@@ -14,13 +14,13 @@ import { useThrottle } from "../hooks/useThrottle";
 
 describe("when window is undefined", () => {
   const mockCallback = jest.fn(() => {});
-  let consoleSpy;
+  let consoleSpy: unknown;
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
   });
 
   afterEach(() => {
-    consoleSpy.mockClear();
+    (consoleSpy as jest.SpyInstance).mockClear();
   });
 
   it("useOnWindowResize logs warning", () => {

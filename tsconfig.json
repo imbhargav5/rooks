@@ -15,7 +15,7 @@
     //"forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    // "noImplicitAny": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,

@@ -22,6 +22,7 @@ export const useDebouncedValue = <T = unknown>(
   timeout: number,
   options: UseDebouncedValueOptions = {}
 ): UseDebouncedValueReturnType<T> => {
+  // eslint-disable-next-line prefer-object-spread
   const { initializeWithNull } = Object.assign(
     {},
     defaultUseDebounceValueOptions,

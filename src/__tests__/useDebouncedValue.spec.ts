@@ -1,16 +1,17 @@
 /**
  * @jest-environment jsdom
  */
+import type { RenderResult } from "@testing-library/react-hooks";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 
 describe("useDebouncedValue", () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern');
-  })
+    jest.useFakeTimers("modern");
+  });
   afterEach(() => {
     jest.useRealTimers();
-   });
+  });
   it("should be defined", () => {
     expect(useDebouncedValue).toBeDefined();
   });
@@ -24,11 +25,12 @@ describe("useDebouncedValue", () => {
     });
   });
 
-
   it("should return null if the timeout has not been reached and initializeWithNull is true", () => {
     const mockValue = "mock_value";
 
-    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));
+    const { result } = renderHook(() =>
+      useDebouncedValue(mockValue, 200, { initializeWithNull: true })
+    );
 
     act(() => {
       expect(result.current[0]).toBeNull();
@@ -38,16 +40,23 @@ describe("useDebouncedValue", () => {
   it("should returns updated value if the timeout has been reached and initializeWithNull is true", () => {
     const mockValue = "mock_value";
     let result;
-    act(()=>{
-      const { result : resultFromHook } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));    
+    act(() => {
+      const { result: resultFromHook } = renderHook(() =>
+        useDebouncedValue(mockValue, 200, { initializeWithNull: true })
+      );
       result = resultFromHook;
-    })
-    expect(result.current[0]).toBeNull();
+    });
+    expect(
+      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
+        .current[0]
+    ).toBeNull();
     act(() => {
       jest.runAllTimers();
     });
-    expect(result.current[0]).toBe(mockValue);
-
+    expect(
+      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
+        .current[0]
+    ).toBe(mockValue);
   });
 
   it("should respect the timeout value if initializedWithNull is true", () => {
@@ -55,13 +64,16 @@ describe("useDebouncedValue", () => {
     const mockTimeout = 200;
 
     const { result } = renderHook(() =>
-      useDebouncedValue(mockValue, mockTimeout, {initializeWithNull : true})
+      useDebouncedValue(mockValue, mockTimeout, { initializeWithNull: true })
     );
 
     act(() => {
       jest.advanceTimersByTime(mockTimeout - 5);
     });
-    expect(result.current[0]).toBe(null);
+    expect(
+      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
+        .current[0]
+    ).toBeNull();
 
     act(() => {
       // accounting for timing issues as it's not exactly accurate
@@ -76,7 +88,9 @@ describe("useDebouncedValue", () => {
     ["mock_item_1", "mock_item_2"],
     { another_key: "another_value", key: "value" },
   ])("should work with different types of values", (mockValue) => {
-    const { result } = renderHook(() => useDebouncedValue(mockValue, 200, {initializeWithNull : true}));
+    const { result } = renderHook(() =>
+      useDebouncedValue(mockValue, 200, { initializeWithNull: true })
+    );
 
     act(() => {
       jest.runAllTimers();

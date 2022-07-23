@@ -1,6 +1,6 @@
 const doesIdentifierMatchKeyboardEvent = (
   error: KeyboardEvent,
-  identifier
+  identifier: number | string
 ): boolean => {
   if (
     error.key === identifier ||
