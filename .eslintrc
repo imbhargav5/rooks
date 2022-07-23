@@ -59,7 +59,7 @@
     "radix": 0,
     "func-style": 0,
     "canonical/destructuring-property-newline": 0,
-    "canonical/import-specifier-newline"
+    "canonical/import-specifier-newline": 0
   },
   "settings": {
     "react": {

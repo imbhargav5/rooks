@@ -1,15 +1,21 @@
 // jest.config.ts
 import type { Config } from "@jest/types";
+import { pathsToModuleNameMapper } from "ts-jest";
 
 // Or async function
-export default async (): Promise<Config.InitialOptions> => {
+export default (): Config.InitialOptions => {
   return {
     testEnvironment: "jsdom",
-    testMatch: ["<rootDir>/src/__tests__/**/*.(spec|test).(ts|tsx)"],
+    testMatch: ["<rootDir>/__tests__/**/*.(spec|test).(ts|tsx)"],
     verbose: true,
     transform: {
       "^.+\\.[jt]sx?$": "esbuild-jest",
     },
+    moduleNameMapper: pathsToModuleNameMapper({
+      "@/*": ["*"],
+    }),
+    rootDir: "src",
     coverageProvider: "v8",
+    modulePaths: ["<rootDir>"],
   };
 };

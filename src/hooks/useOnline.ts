@@ -34,6 +34,7 @@ function useOnline(): boolean | null {
   // we only needs this to be set on mount
   // hence []
   useEffect(() => {
+    // eslint-disable-next-line no-negated-condition
     if (typeof window !== "undefined") {
       window.addEventListener("online", setOnline);
       window.addEventListener("offline", setOffline);
@@ -43,6 +44,7 @@ function useOnline(): boolean | null {
         window.removeEventListener("offline", setOffline);
       };
     } else {
+      console.warn("useOnline: window is undefined.");
       return noop;
     }
   }, []);
