@@ -11,9 +11,9 @@ import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment
  *
  * @param {Function} callback The callback and its cleanup to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
- * @returns {undefined}
+ * @returns {}
  */
-function useUpdateEffect(callback: () => any, conditions?: any[]): void {
+function useUpdateEffect(callback: () => void, conditions?: unknown[]): void {
   useWarningOnMountInDevelopment(
     "useUpdateEffect is deprecated, it will be removed in rooks v7. Please use useDidUpdate instead."
   );
