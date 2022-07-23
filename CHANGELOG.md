@@ -1,3 +1,16 @@
+## <small>5.13.1 (2022-07-23)</small>
+
+* fix: cleanup types (#1151) ([e611a06](https://github.com/imbhargav5/rooks/commit/e611a06)), closes [#1151](https://github.com/imbhargav5/rooks/issues/1151)
+
+
+
+## 5.13.0 (2022-07-23)
+
+* feat(effects): update types for useDidMount, useDidUpdate, useUpdateEffect (#1150) ([3ae5adc](https://github.com/imbhargav5/rooks/commit/3ae5adc)), closes [#1150](https://github.com/imbhargav5/rooks/issues/1150)
+* chore(docs): Update changelog and docs ([2777302](https://github.com/imbhargav5/rooks/commit/2777302))
+
+
+
 ## 5.12.0 (2022-07-22)
 
 * feat: generic types for useMapState (#1100) ([1ab12b9](https://github.com/imbhargav5/rooks/commit/1ab12b9)), closes [#1100](https://github.com/imbhargav5/rooks/issues/1100)
