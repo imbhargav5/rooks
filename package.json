@@ -102,7 +102,7 @@
     "camel-case": "^4.1.2",
     "chalk": "5.0.1",
     "classnames": "^2.3.1",
-    "clsx": "^1.1.1",
+    "clsx": "^1.2.1",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "3.3.0",
     "esbuild": "^0.14.49",
