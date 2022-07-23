@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * useDidMount hook
  * Calls a function on mount
  *
  * @param {Function} callback Callback function to be called on mount
+ *
  */
-function useDidMount(callback: () => any): void {
+function useDidMount(callback: () => void): void {
   useEffect(() => {
-    if (typeof callback === 'function') {
+    if (typeof callback === "function") {
       callback();
     }
   }, []);
