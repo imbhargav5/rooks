@@ -1,3 +1,10 @@
+## <small>5.13.2 (2022-07-23)</small>
+
+* fix: fix build paths (#1154) (#1155) ([27d0d13](https://github.com/imbhargav5/rooks/commit/27d0d13)), closes [#1154](https://github.com/imbhargav5/rooks/issues/1154) [#1155](https://github.com/imbhargav5/rooks/issues/1155)
+* chore(docs): Update changelog and docs ([581d12d](https://github.com/imbhargav5/rooks/commit/581d12d))
+
+
+
 ## <small>5.13.1 (2022-07-23)</small>
 
 * fix: cleanup types (#1151) ([e611a06](https://github.com/imbhargav5/rooks/commit/e611a06)), closes [#1151](https://github.com/imbhargav5/rooks/issues/1151)
