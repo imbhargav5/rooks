@@ -69,6 +69,10 @@
       "description": "A hook to provide the geolocation info on client side."
     },
     {
+      "name": "useGetIsMounted",
+      "description": "Checks if a component is mounted or not at the time. Useful for async effects"
+    },
+    {
       "name": "useInViewRef",
       "description": "Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. "
     },

@@ -14,6 +14,7 @@ export { useFreshRef } from "./hooks/useFreshRef";
 export { useFreshTick } from "./hooks/useFreshTick";
 export { useFullscreen } from "./hooks/useFullscreen";
 export { useForkRef } from "./hooks/useForkRef";
+export { useGetIsMounted } from "./hooks/useGetIsMounted";
 export { useGeolocation } from "./hooks/useGeolocation";
 export { useInput } from "./hooks/useInput";
 export { useInterval } from "./hooks/useInterval";
