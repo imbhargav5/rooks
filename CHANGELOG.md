@@ -1,3 +1,23 @@
+## 5.14.0 (2022-07-24)
+
+* feat(usegetismounted): new hook to check if a component is mounted at any time (#1172) ([14923ea](https://github.com/imbhargav5/rooks/commit/14923ea)), closes [#1172](https://github.com/imbhargav5/rooks/issues/1172)
+* chore(deps): update dependency @babel/cli to v7.18.9 ([e9f5659](https://github.com/imbhargav5/rooks/commit/e9f5659))
+* chore(deps): update dependency @babel/core to v7.18.9 ([8eda01b](https://github.com/imbhargav5/rooks/commit/8eda01b))
+* chore(deps): update dependency @babel/plugin-proposal-export-default-from to v7.18.9 ([e5af8c4](https://github.com/imbhargav5/rooks/commit/e5af8c4))
+* chore(deps): update dependency @babel/preset-env to v7.18.9 ([4f083d7](https://github.com/imbhargav5/rooks/commit/4f083d7))
+* chore(deps): update dependency @docusaurus/core to v2.0.0-rc.1 ([7938fed](https://github.com/imbhargav5/rooks/commit/7938fed))
+* chore(deps): update dependency @docusaurus/plugin-client-redirects to v2.0.0-rc.1 ([746a798](https://github.com/imbhargav5/rooks/commit/746a798))
+* chore(deps): update dependency @docusaurus/preset-classic to v2.0.0-rc.1 ([d27da78](https://github.com/imbhargav5/rooks/commit/d27da78))
+* chore(deps): update dependency @docusaurus/theme-common to ^2.0.0-rc.1 ([36bc789](https://github.com/imbhargav5/rooks/commit/36bc789))
+* chore(deps): update dependency @types/react to ^18.0.15 ([b986511](https://github.com/imbhargav5/rooks/commit/b986511))
+* chore(deps): update dependency clsx to ^1.2.1 ([c723738](https://github.com/imbhargav5/rooks/commit/c723738))
+* chore(deps): update dependency esbuild to ^0.14.49 ([9d85467](https://github.com/imbhargav5/rooks/commit/9d85467))
+* chore(deps): update dependency eslint to ^8.20.0 ([08ce991](https://github.com/imbhargav5/rooks/commit/08ce991))
+* chore(deps): update dependency terser to ^5.14.2 ([ff5496a](https://github.com/imbhargav5/rooks/commit/ff5496a))
+* chore(docs): Update changelog and docs ([68c8d70](https://github.com/imbhargav5/rooks/commit/68c8d70))
+
+
+
 ## <small>5.13.2 (2022-07-23)</small>
 
 * fix: fix build paths (#1154) (#1155) ([27d0d13](https://github.com/imbhargav5/rooks/commit/27d0d13)), closes [#1154](https://github.com/imbhargav5/rooks/issues/1154) [#1155](https://github.com/imbhargav5/rooks/issues/1155)
