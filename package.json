@@ -77,7 +77,7 @@
     "@docusaurus/preset-classic": "2.0.0-rc.1",
     "@docusaurus/theme-common": "^2.0.0-rc.1",
     "@rollup/plugin-babel": "^5.2.1",
-    "@rollup/plugin-commonjs": "^18.1.0",
+    "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
