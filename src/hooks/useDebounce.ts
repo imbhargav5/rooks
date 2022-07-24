@@ -32,6 +32,7 @@ function useDebounce<T extends (...args: any[]) => unknown>(
 
   useEffect(() => {
     debouncedCallbackRef.current = createDebouncedCallback(callback);
+    return debouncedCallbackRef.current.cancel();
   }, [callback, createDebouncedCallback]);
 
   return debouncedCallbackRef.current;
