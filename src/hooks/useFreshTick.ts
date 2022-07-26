@@ -1,8 +1,10 @@
 import { useFreshRef } from "./useFreshRef";
 
-function useFreshTick(callback: (...args: any[]) => void) {
+type CallbackType<T> = (...args: T[]) => void;
+
+function useFreshTick<T>(callback: CallbackType<T>): CallbackType<T> {
   const freshRef = useFreshRef(callback);
-  function tick(...args) {
+  function tick(...args: T[]) {
     if (typeof freshRef.current === "function") {
       freshRef.current(...args);
     }
