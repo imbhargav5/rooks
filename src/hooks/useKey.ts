@@ -3,13 +3,13 @@ import { useEffect, useCallback, useRef, useMemo } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
 import { noop } from "@/utils/noop";
 
-type TrackedKeyEvents = ["keyDown", "keyPress", "keyUp"];
+type TrackedKeyEvents = "keyDown" | "keyPress" | "keyUp";
 
 type Options = {
   /**
    * Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp
    */
-  eventTypes?: TrackedKeyEvents;
+  eventTypes?: TrackedKeyEvents[];
   /**
    * target mutable ref on which the events should be listened. Doesn't work with callback refs.
    * Please use useKeyRef instead if you want to use with callback refs.
@@ -22,35 +22,35 @@ type Options = {
   when?: boolean;
 };
 
+type Callback = (event: KeyboardEvent) => void;
+
 const defaultOptions = {
   eventTypes: ["keydown"],
   when: true,
 };
-
-type Callback = (event: KeyboardEvent) => void;
 
 /**
  * useKey hook
  *
  * Fires a callback on keyboard events like keyDown, keyPress and keyUp
  *
- * @param {TrackedKeyEvents} keyList List of keyboard events to listen for
+ * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
  * @param {Callback} callback  Callback to fire on keyboard events
  * @param {Options} options Options
  * @see {@link https://react-hooks.org/docs/useKey}
  */
 function useKey(
-  input: Array<number | string> | number | string,
+  keys: Array<number | string> | number | string,
   callback: (event: KeyboardEvent) => void,
   options?: Options
 ): void {
   const keyList: Array<number | string> = useMemo(() => {
-    if (Array.isArray(input)) {
-      return input;
+    if (Array.isArray(keys)) {
+      return keys;
     } else {
-      return [input];
+      return [keys];
     }
-  }, [input]);
+  }, [keys]);
   const internalOptions = useMemo(() => {
     return { ...defaultOptions, ...options };
   }, [options]);
