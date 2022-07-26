@@ -3,7 +3,7 @@ import { useEffect, useCallback, useRef, useMemo } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
 import { noop } from "@/utils/noop";
 
-type TrackedKeyEvents = "keyDown" | "keyPress" | "keyUp";
+type TrackedKeyEvents = "keydown" | "keypress" | "keyup";
 
 type Options = {
   /**
