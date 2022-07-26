@@ -56,6 +56,7 @@ const DEFAULT_OPTIONS = {
  *
  * @param ref The ref to track visibility of
  * @param opts Options
+ * @see {@link https://react-hooks.org/docs/useVisibilitySensor}
  */
 function useVisibilitySensor(ref, options) {
   useWarningOnMountInDevelopment(

@@ -36,9 +36,10 @@ type UseSelectableListReturnType<T> = [
  * useSelectableList
  * Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
  *
- * @param list
- * @param initialIndex
+ * @param list - The list of values to select from
+ * @param initialIndex  - The index of the initial selection
  * @param allowUnselected
+ * @see {@link https://react-hooks.org/docs/useSelectableList}
  */
 function useSelectableList<T>(
   list: T[] = [],
