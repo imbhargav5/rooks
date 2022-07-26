@@ -10,6 +10,7 @@ type Callback<T> = (...args: T[]) => void;
  *
  * @param callback The callback to throttle
  * @param timeout Throttle timeout
+ * @see {@link https://react-hooks.org/docs/useThrottle}
  */
 function useThrottle<T>(
   callback: Callback<T>,
