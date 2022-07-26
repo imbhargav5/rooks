@@ -1,22 +1,22 @@
 /* eslint-disable id-length */
 /**
  *  Inspired from https://github.com/Swizec/useDimensions
-
- **/
+ *
+ */
 import { useState, useCallback, useLayoutEffect } from "react";
 import type { LegacyRef } from "react";
 import { useOnWindowResize } from "./useOnWindowResize";
 import { useOnWindowScroll } from "./useOnWindowScroll";
 
 type UseDimensionsRefReturn = {
-  width: number;
+  bottom: number;
   height: number;
-  top: number;
   left: number;
+  right: number;
+  top: number;
+  width: number;
   x: number;
   y: number;
-  right: number;
-  bottom: number;
 } | null;
 
 type UseDimensionsHook = [
@@ -26,8 +26,8 @@ type UseDimensionsHook = [
 ];
 
 type UseDimensionsRefArgs = {
-  updateOnScroll?: boolean;
   updateOnResize?: boolean;
+  updateOnScroll?: boolean;
 };
 const getDimensionObject = (node: HTMLElement): UseDimensionsRefReturn => {
   const rect = node.getBoundingClientRect();
@@ -50,16 +50,10 @@ export const useDimensionsRef = ({
   updateOnScroll = true,
   updateOnResize = true,
 }: UseDimensionsRefArgs = {}): UseDimensionsHook => {
-  if (typeof window === "undefined") {
-    console.warn("useDimensionsRef: window is undefined.");
-
-    return noWindowReturnValue;
-  }
-
   const [dimensions, setDimensions] = useState<UseDimensionsRefReturn>(null);
   const [node, setNode] = useState<HTMLElement | null>(null);
 
-  const ref = useCallback((nodeFromCallback) => {
+  const ref = useCallback((nodeFromCallback: HTMLElement | null) => {
     setNode(nodeFromCallback);
   }, []);
 
@@ -90,6 +84,12 @@ export const useDimensionsRef = ({
     updateOnScroll,
     true
   );
+
+  if (typeof window === "undefined") {
+    console.warn("useDimensionsRef: window is undefined.");
+
+    return noWindowReturnValue;
+  }
 
   return [ref, dimensions, node];
 };
