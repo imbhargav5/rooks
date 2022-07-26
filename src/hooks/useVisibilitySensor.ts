@@ -1,8 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+// @ts-nocheck
 // Massive respect for Josh Johnston
 // A lot of the logic is taken from his repo -> https://github.com/joshwnj/react-visibility-sensor
 // And is rewritten for hooks api
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
-// @ts-ignore
 
 import { useEffect, useReducer } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
