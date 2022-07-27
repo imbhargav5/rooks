@@ -9,8 +9,6 @@ import { useLocalstorageState } from "../hooks/useLocalstorageState";
 import { useOnWindowResize } from "../hooks/useOnWindowResize";
 import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
 import { useOnline } from "../hooks/useOnline";
-import { useSessionstorage } from "../hooks/useSessionstorage";
-import { useThrottle } from "../hooks/useThrottle";
 
 describe("when window is undefined", () => {
   const mockCallback = jest.fn(() => {});
@@ -55,16 +53,6 @@ describe("when window is undefined", () => {
 
   it("useOnline logs warning", () => {
     renderHook(() => useOnline());
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("useSessionstorage logs warning", () => {
-    renderHook(() => useSessionstorage("test"));
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("useThrottle logs warning", () => {
-    renderHook(() => useThrottle(mockCallback));
     expect(consoleSpy).toHaveBeenCalledTimes(1);
   });
 });

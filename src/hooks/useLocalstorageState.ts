@@ -6,6 +6,7 @@ function getValueFromLocalStorage(key: string) {
   if (typeof localStorage === "undefined") {
     return null;
   }
+
   const storedValue = localStorage.getItem(key) ?? "null";
   try {
     return JSON.parse(storedValue);

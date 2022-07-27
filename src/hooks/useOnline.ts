@@ -1,5 +1,5 @@
-import { noop } from "@/utils/noop";
 import { useState, useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 /**
  *
@@ -21,14 +21,14 @@ function getIsOnline(): boolean | null {
  * @returns {boolean} The value of navigator.onLine
  */
 function useOnline(): boolean | null {
-  const [online, changeOnline] = useState<boolean | null>(() => getIsOnline());
+  const [isOnline, setIsOnline] = useState<boolean | null>(() => getIsOnline());
 
   function setOffline() {
-    changeOnline(false);
+    setIsOnline(false);
   }
 
   function setOnline() {
-    changeOnline(true);
+    setIsOnline(true);
   }
 
   // we only needs this to be set on mount
@@ -49,7 +49,7 @@ function useOnline(): boolean | null {
     }
   }, []);
 
-  return online;
+  return isOnline;
 }
 
 export { useOnline };
