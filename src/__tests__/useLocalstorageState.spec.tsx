@@ -19,10 +19,10 @@ describe("useLocalstorageState defined", () => {
 });
 
 describe("useLocalstorageState basic", () => {
-  let App;
+  let App = () => <div />;
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = () => {
       const [value, set, remove] = useLocalstorageState("test-value", "hello");
 
       return (
@@ -33,10 +33,11 @@ describe("useLocalstorageState basic", () => {
             onClick={() => {
               set("new value");
             }}
+            type="button"
           >
             Set to new value
           </button>
-          <button data-testid="unset-value" onClick={remove}>
+          <button data-testid="unset-value" onClick={remove} type="button">
             Unset the value
           </button>
         </div>
@@ -47,7 +48,7 @@ describe("useLocalstorageState basic", () => {
 
   afterEach(cleanup);
 
-  test("memo", () => {
+  it("memo", () => {
     const { result, rerender } = renderHook(() =>
       useLocalstorageState("key1", "value")
     );

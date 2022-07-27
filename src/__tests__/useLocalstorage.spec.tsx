@@ -19,11 +19,11 @@ describe("useLocalstorage defined", () => {
 });
 
 describe("useLocalstorage with object destructuring", () => {
-  let App;
+  let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = () => {
       const { value } = useLocalstorage("test-value", "hello");
 
       return (
@@ -45,10 +45,10 @@ describe("useLocalstorage with object destructuring", () => {
 });
 
 describe("useLocalstorage with array destructuring", () => {
-  let App;
+  let App = () => <div />;
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = () => {
       const [currentValue, set, remove] = useLocalstorage(
         "test-value",
         "hello"
@@ -62,10 +62,11 @@ describe("useLocalstorage with array destructuring", () => {
             onClick={() => {
               set("new value");
             }}
+            type="button"
           >
             Set to new value
           </button>
-          <button data-testid="unset-value" onClick={remove}>
+          <button data-testid="unset-value" onClick={remove} type="button">
             Unset the value
           </button>
         </div>
@@ -82,7 +83,7 @@ describe("useLocalstorage with array destructuring", () => {
     expect(valueElement.innerHTML).toBe("hello");
   });
 
-  test("set ", () => {
+  it("set", () => {
     const { result, rerender } = renderHook(() =>
       useLocalstorage("test-value", "hello")
     );
