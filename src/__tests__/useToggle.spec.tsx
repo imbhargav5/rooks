@@ -1,14 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { render, cleanup, fireEvent } from '@testing-library/react';
-import React from 'react';
-import { useToggle } from '../hooks/useToggle';
+import { render, cleanup, fireEvent } from "@testing-library/react";
+import React from "react";
+import { useToggle } from "../hooks/useToggle";
 
-describe('useToggle behaviour', () => {
-  let App;
+describe("useToggle basic behavior", () => {
+  let App = () => <p />;
   beforeEach(() => {
-    App = function () {
+    App = () => {
       const [value, toggleValue] = useToggle(true);
 
       return (
@@ -18,31 +18,32 @@ describe('useToggle behaviour', () => {
       );
     };
   });
-  afterEach(cleanup); // <-- add this
-  it('should be defined', () => {
+  afterEach(cleanup);
+  it("should be defined", () => {
     expect(useToggle).toBeDefined();
   });
 
-  it('sets initial value correctly', () => {
+  it("sets initial value correctly", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
-    expect(toggleElement.innerHTML).toBe('true');
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("true");
   });
 
-  it('updates value', () => {
+  it("updates value", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
+    const toggleElement = getByTestId("toggle-element");
     fireEvent.click(toggleElement);
-    expect(toggleElement.innerHTML).toBe('false');
+    expect(toggleElement.innerHTML).toBe("false");
   });
 });
 
-describe('useToggle with custom toggle function', () => {
-  let App;
+describe("useToggle with custom toggle function and with strings", () => {
+  let App = () => <p />;
   beforeEach(() => {
-    App = function () {
-      const [value, toggleValue] = useToggle('regina', (v) =>
-        v === 'regina' ? 'phalange' : 'regina'
+    App = () => {
+      // eslint-disable-next-line no-confusing-arrow
+      const [value, toggleValue] = useToggle("regina", (_value) =>
+        _value === "regina" ? "phalange" : "regina"
       );
 
       return (
@@ -52,30 +53,30 @@ describe('useToggle with custom toggle function', () => {
       );
     };
   });
-  afterEach(cleanup); // <-- add this
+  afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useToggle).toBeDefined();
   });
 
-  it('sets initial value correctly', () => {
+  it("sets initial value correctly", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
-    expect(toggleElement.innerHTML).toBe('regina');
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("regina");
   });
 
-  it('updates value', () => {
+  it("updates value", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
+    const toggleElement = getByTestId("toggle-element");
     fireEvent.click(toggleElement);
-    expect(toggleElement.innerHTML).toBe('phalange');
+    expect(toggleElement.innerHTML).toBe("phalange");
   });
 });
 
-describe('useToggle with custom toggle function', () => {
-  let App;
+describe("useToggle with custom toggle function false by default", () => {
+  let App = () => <p />;
   beforeEach(() => {
-    App = function () {
+    App = () => {
       const [value, toggleValue] = useToggle();
 
       return (
@@ -85,70 +86,88 @@ describe('useToggle with custom toggle function', () => {
       );
     };
   });
-  afterEach(cleanup); // <-- add this
-  it('should be false by default', () => {
+  afterEach(cleanup);
+  it("should be false by default", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
-    expect(toggleElement.innerHTML).toBe('false');
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("false");
   });
 });
 
-describe('useToggle with reducer', () => {
-  let App;
-  let toggleReducer;
+describe("useToggle with reducer", () => {
+  let App = () => <div />;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let toggleReducer = (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _state: number,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _action: {
+      type: string;
+    }
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+  ) => 5;
   beforeEach(() => {
-    toggleReducer = function (state, action) {
+    toggleReducer = function (
+      state: number,
+      action: {
+        type: string;
+      }
+    ): number {
       switch (action.type) {
-        case 'yep':
+        case "yep":
           return 1;
-        case 'nope':
+        case "nope":
           return -1;
-        case 'maybe':
+        case "maybe":
           return 0;
         default:
           return state;
       }
     };
-    App = function () {
+
+    App = () => {
       const [value, dispatch] = useToggle(1, toggleReducer);
 
       return (
-        <>
+        <div>
           <p data-testid="toggle-element">{value.toString()}</p>
           <button
             data-testid="yep-button"
-            onClick={() => dispatch({ type: 'yep' })}
+            onClick={() => dispatch({ type: "yep" })}
+            type="button"
           />
           <button
             data-testid="nope-button"
-            onClick={() => dispatch({ type: 'nope' })}
+            onClick={() => dispatch({ type: "nope" })}
+            type="button"
           />
           <button
             data-testid="maybe-button"
-            onClick={() => dispatch({ type: 'maybe' })}
+            onClick={() => dispatch({ type: "maybe" })}
+            type="button"
           />
-        </>
+        </div>
       );
     };
   });
-  afterEach(cleanup); // <-- add this
-  it('should be 1 by default', () => {
+  afterEach(cleanup);
+  it("should be 1 by default", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
-    expect(toggleElement.innerHTML).toBe('1');
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("1");
   });
-  it('should update with dispatched actions', () => {
+  it("should update with dispatched actions", () => {
     const { getByTestId } = render(<App />);
-    const toggleElement = getByTestId('toggle-element');
-    const nopeButton = getByTestId('nope-button');
-    const maybeButton = getByTestId('maybe-button');
-    const yepButton = getByTestId('yep-button');
+    const toggleElement = getByTestId("toggle-element");
+    const nopeButton = getByTestId("nope-button");
+    const maybeButton = getByTestId("maybe-button");
+    const yepButton = getByTestId("yep-button");
     fireEvent.click(nopeButton);
-    expect(toggleElement.innerHTML).toBe('-1');
+    expect(toggleElement.innerHTML).toBe("-1");
     fireEvent.click(maybeButton);
-    expect(toggleElement.innerHTML).toBe('0');
+    expect(toggleElement.innerHTML).toBe("0");
     fireEvent.click(yepButton);
-    expect(toggleElement.innerHTML).toBe('1');
+    expect(toggleElement.innerHTML).toBe("1");
   });
 });
 

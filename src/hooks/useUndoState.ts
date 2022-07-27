@@ -1,20 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
+import type {
+  UseUndoStateOptions,
+  UseUndoStatePushFunction,
+  UseUndoStateReturnValue,
+} from "@/types/types";
 import type { ExcludeFunction } from "@/types/utils";
 
-type UndoStateOptions = {
-  maxSize: number;
-};
-
-const defaultOptions: UndoStateOptions = { maxSize: 100 };
-
-type PushFunctionArgumentsCallback<T> = (currentValue: T) => T;
-type PushFunction<T> = (argument: PushFunctionArgumentsCallback<T> | T) => void;
-type UndoFunction = () => void;
-type UseUndoStateReturnValue<T> = [
-  ExcludeFunction<T>,
-  PushFunction<ExcludeFunction<T>>,
-  UndoFunction
-];
+const defaultOptions: UseUndoStateOptions = { maxSize: 100 };
 
 /**
  * useUndoState hook
@@ -24,13 +16,13 @@ type UseUndoStateReturnValue<T> = [
  * @type {object}
  * @property {number} maxSize - Maximum number of states to keep in the undo stack.
  * @param {any} defaultValue - Default value to use for the state. This will be the first value in the undo stack.
- * @param {UndoStateOptions} options - Options for the undo state. Currently takes the maxSize option.
+ * @param {UseUndoStateOptions} options - Options for the undo state. Currently takes the maxSize option.
  * @returns {UseUndoStateReturnValue}
  * @see {@link https://react-hooks.org/docs/useUndoState}
  */
 const useUndoState = <T>(
   defaultValue: ExcludeFunction<T>,
-  options?: UndoStateOptions
+  options?: UseUndoStateOptions
 ): UseUndoStateReturnValue<T> => {
   const { maxSize } = useMemo(() => {
     return { ...defaultOptions, ...options };
@@ -38,7 +30,7 @@ const useUndoState = <T>(
 
   const [value, setValue] = useState<Array<ExcludeFunction<T>>>([defaultValue]);
 
-  const push: PushFunction<ExcludeFunction<T>> = useCallback(
+  const push: UseUndoStatePushFunction<ExcludeFunction<T>> = useCallback(
     (argument) => {
       return setValue((current) => {
         const restValues =
