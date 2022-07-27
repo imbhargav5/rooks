@@ -59,7 +59,17 @@
     "radix": 0,
     "func-style": 0,
     "canonical/destructuring-property-newline": 0,
-    "canonical/import-specifier-newline": 0
+    "canonical/import-specifier-newline": 0,
+    "canonical/prefer-inline-type-import": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // or error
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
   },
   "settings": {
     "react": {

@@ -1,10 +1,14 @@
 // See also: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
-import { noop } from "@/utils/noop";
 import { useState, useEffect, useRef } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
+import { noop } from "@/utils/noop";
 
 type IntervalHandlerAsObject = {
+  /**
+   * IntervalId of the interval
+   */
+  intervalId: ReturnType<typeof setTimeout> | null;
   /**
    * Function to start the interval
    */
@@ -13,10 +17,6 @@ type IntervalHandlerAsObject = {
    * Function to stop the interval
    */
   stop: () => void;
-  /**
-   * IntervalId of the interval
-   */
-  intervalId: ReturnType<typeof setTimeout> | null;
 };
 
 type IntervalHandlerAsArray = Array<
@@ -27,7 +27,7 @@ type IntervalHandlerAsArray = Array<
   2: ReturnType<typeof setTimeout> | null;
 };
 
-type IntervalHandler = IntervalHandlerAsArray & {};
+type IntervalHandler = IntervalHandlerAsArray & IntervalHandlerAsObject;
 
 /**
  *
@@ -36,13 +36,13 @@ type IntervalHandler = IntervalHandlerAsArray & {};
  * Declaratively creates a setInterval to run a callback after a fixed
  * amount of time
  *
- *@param {funnction} callback - Callback to be fired
+ *@param {Function} callback - Callback to be fired
  *@param {number} intervalId - Interval duration in milliseconds after which the callback is to be fired
  *@param {boolean} startImmediate - Whether the interval should start immediately on initialise
  *@returns {IntervalHandler}
  */
 function useInterval(
-  callback: () => any,
+  callback: () => void,
   intervalDuration: number | null,
   startImmediate: boolean = false
 ): IntervalHandler {
@@ -51,7 +51,7 @@ function useInterval(
   );
   const internalIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isRunning, setIsRunning] = useState(startImmediate);
-  const savedCallback = useRef<() => any>();
+  const savedCallback = useRef<() => void>();
 
   function start() {
     if (!isRunning) {
@@ -73,8 +73,9 @@ function useInterval(
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      savedCallback.current && savedCallback.current();
+      savedCallback.current?.();
     }
+
     if (intervalDuration !== null && isRunning) {
       const id = setInterval(tick, intervalDuration);
       internalIdRef.current = id;
@@ -84,6 +85,7 @@ function useInterval(
         clearInterval(id);
       };
     }
+
     return noop;
   }, [intervalDuration, isRunning]);
 

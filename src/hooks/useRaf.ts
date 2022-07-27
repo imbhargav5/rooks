@@ -1,6 +1,6 @@
-import { noop } from "@/utils/noop";
 import raf from "raf";
 import { useRef, useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 /**
  *
@@ -8,7 +8,8 @@ import { useRef, useEffect } from "react";
  * Uses a polyfilled version of requestAnimationFrame
  *
  * @param {Function} callback The callback function to be executed
- * @param {boolean} [isActive=true] The value which while true, keeps the raf running infinitely
+ * @param {boolean} [isActive] The value which while true, keeps the raf running infinitely
+ * @see {@link https://react-hooks.org/docs/useRaf}
  */
 export function useRaf(
   callback: (timeElapsed: number) => void,
@@ -21,14 +22,14 @@ export function useRaf(
   }, [callback]);
 
   useEffect(() => {
-    let animationFrame;
-    let startTime;
+    let animationFrame: number | undefined;
+    let startTime: number = Date.now();
 
     function tick() {
       const timeElapsed = Date.now() - startTime;
       startTime = Date.now();
       loop();
-      savedCallback.current && savedCallback.current(timeElapsed);
+      savedCallback.current?.(timeElapsed);
     }
 
     function loop() {
@@ -40,7 +41,9 @@ export function useRaf(
       loop();
 
       return () => {
-        raf.cancel(animationFrame);
+        if (animationFrame) {
+          raf.cancel(animationFrame);
+        }
       };
     } else {
       return noop;

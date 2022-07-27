@@ -7,26 +7,29 @@ import {
   fireEvent,
   act,
   getByTestId,
-} from '@testing-library/react';
-import React from 'react';
-import { useKeyBindings } from '../hooks/useKeyBindings';
+} from "@testing-library/react";
+import React from "react";
+import { useKeyBindings } from "../hooks/useKeyBindings";
 
-describe('useKeyBindings', () => {
-  let App;
+describe("useKeyBindings", () => {
+  let App = () => <div />;
   beforeEach(() => {
-    App = function () {
+    App = () => {
       const inputRef = React.useRef(null);
       const [value, setValue] = React.useState(0);
       useKeyBindings({
+        // eslint-disable-next-line id-length
         s: () => {
           setValue(value + 1);
         },
       });
       useKeyBindings(
         {
+          // eslint-disable-next-line id-length
           r: () => {
             setValue(value + 1);
           },
+          // eslint-disable-next-line id-length
           v: () => {
             setValue(value + 1);
           },
@@ -54,25 +57,25 @@ describe('useKeyBindings', () => {
 
   afterEach(cleanup);
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(useKeyBindings).toBeDefined();
   });
 
-  it('should trigger the calback when pressed on document or target', () => {
+  it("should trigger the calback when pressed on document or target", () => {
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, 'value');
-    const inputElement = getByTestId(container as HTMLElement, 'input');
+    const valueElement = getByTestId(container as HTMLElement, "value");
+    const inputElement = getByTestId(container as HTMLElement, "input");
     act(() => {
-      fireEvent.keyDown(window, { charCode: 83, code: 'keyS', key: 's' });
+      fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
-    expect(valueElement.innerHTML).toBe('1');
+    expect(valueElement.innerHTML).toBe("1");
     act(() => {
-      fireEvent.keyDown(inputElement, { charCode: 82, code: 'keyR', key: 'r' });
+      fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
-    expect(valueElement.innerHTML).toBe('2');
+    expect(valueElement.innerHTML).toBe("2");
     act(() => {
-      fireEvent.keyDown(inputElement, { charCode: 86, code: 'keyV', key: 'v' });
+      fireEvent.keyDown(inputElement, { charCode: 86, code: "keyV", key: "v" });
     });
-    expect(valueElement.innerHTML).toBe('3');
+    expect(valueElement.innerHTML).toBe("3");
   });
 });

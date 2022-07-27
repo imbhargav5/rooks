@@ -1,12 +1,28 @@
 /**
  * @jest-environment jsdom
  */
-import { act, renderHook } from '@testing-library/react-hooks';
-import { useState } from 'react';
-import { usePreviousDifferent } from '../hooks/usePreviousDifferent';
+import { act, renderHook } from "@testing-library/react-hooks";
+import { useState } from "react";
+import { usePreviousDifferent } from "../hooks/usePreviousDifferent";
 
-describe('usePreviousDifferent', () => {
-  let useHook;
+describe("usePreviousDifferent", () => {
+  let useHook = (): {
+    increment: () => void;
+    increment2: () => void;
+    previousValue: number | null;
+    value: number;
+    value2: number;
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+  } => {
+    return {
+      increment: () => {},
+      increment2: () => {},
+      previousValue: 5,
+      value: 6,
+      value2: 7,
+    };
+  };
+
   beforeEach(() => {
     useHook = function () {
       const [value, setValue] = useState(0);
@@ -15,6 +31,7 @@ describe('usePreviousDifferent', () => {
       const increment = () => {
         setValue(value + 1);
       };
+
       const increment2 = () => {
         setValue2(value2 + 1);
       };
@@ -22,15 +39,18 @@ describe('usePreviousDifferent', () => {
       return { increment, increment2, previousValue, value, value2 };
     };
   });
-  it('isDefined', async () => {
+  it("isDefined", async () => {
+    expect.hasAssertions();
     expect(usePreviousDifferent).toBeDefined();
   });
-  it('initially returns null', async () => {
+  it("initially returns null", async () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook());
     expect(result.current.previousValue).toBeNull();
   });
 
-  it('holds the previous value', async () => {
+  it("holds the previous value", async () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook());
     act(() => {
       result.current.increment();
@@ -38,7 +58,8 @@ describe('usePreviousDifferent', () => {
     expect(result.current.value).toBe(1);
     expect(result.current.previousValue).toBe(0);
   });
-  it('does not update the previous value if current value is unchanged', async () => {
+  it("does not update the previous value if current value is unchanged", async () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook());
     act(() => {
       result.current.increment();

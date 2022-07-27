@@ -10,3 +10,5 @@ export type ListenerOptions =
       passive?: boolean;
       signal?: AbortSignal;
     };
+
+export type ExcludeFunction<T> = Exclude<T, Function>;

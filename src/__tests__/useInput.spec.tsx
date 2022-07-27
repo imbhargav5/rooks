@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-warning-comments
+// TODO: deprecate this hook in favor of useForm
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import { renderHook, act as actHook } from "@testing-library/react-hooks";
 import React from "react";
@@ -6,9 +8,9 @@ import { useInput } from "../hooks/useInput";
 describe("useInput", () => {
   // basic tests
   describe("basic", () => {
-    let App;
+    let App = () => <div />;
     beforeEach(() => {
-      App = function () {
+      App = () => {
         const myInput = useInput("hello");
 
         return (
@@ -19,9 +21,9 @@ describe("useInput", () => {
         );
       };
     });
-    afterEach(cleanup); // <-- add this
+    afterEach(cleanup);
 
-    test("memo", () => {
+    it("memo", () => {
       const { result, rerender } = renderHook(() => useInput("hello"));
       const onChangeBeforeRerender = result.current.onChange;
       rerender();
@@ -29,12 +31,14 @@ describe("useInput", () => {
       // fn is memo
       expect(onChangeBeforeRerender).toBe(onChangeAfterRerender);
       actHook(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChangeAfterRerender({ target: { value: "string" } } as any);
       });
       // memo fn is still able to set data
       expect(result.current.value).toBe("string");
       // memo fn is reactive
       actHook(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChangeAfterRerender({ target: { value: "string2" } } as any);
       });
       expect(result.current.value).toBe("string2");
@@ -67,11 +71,30 @@ describe("useInput", () => {
   });
   // validate
   describe("validate", () => {
-    let App;
+    let App = ({
+      validate,
+    }: {
+      validate?: (newValue: number, oldValue: number) => boolean;
+    }) => {
+      const myInput = useInput(5, {
+        validate: validate ?? ((newValue: number) => newValue < 10),
+      });
+
+      return (
+        <div>
+          <input data-testid="input-element" type="number" {...myInput} />
+        </div>
+      );
+    };
+
     beforeEach(() => {
-      App = function ({ validate }) {
+      App = ({
+        validate,
+      }: {
+        validate?: (newValue: number, oldValue: number) => boolean;
+      }) => {
         const myInput = useInput(5, {
-          validate: validate || ((newValue) => newValue < 10),
+          validate: validate ?? ((newValue: number) => newValue < 10),
         });
 
         return (
@@ -81,7 +104,7 @@ describe("useInput", () => {
         );
       };
     });
-    afterEach(cleanup); // <-- add this
+    afterEach(cleanup);
 
     it("does not update if validate returns false", () => {
       const { getByTestId } = render(<App />);
@@ -110,7 +133,7 @@ describe("useInput", () => {
     it("validate can be used to compare possible newvalue with current value", () => {
       const { getByTestId } = render(
         <App
-          validate={(newValue, currentValue) => newValue % currentValue != 0}
+          validate={(newValue, currentValue) => newValue % currentValue !== 0}
         />
       );
       const inputElement = getByTestId("input-element") as HTMLInputElement;
@@ -134,9 +157,10 @@ describe("useInput", () => {
   });
 
   describe("multiple", () => {
-    let App;
+    let App = () => <div />;
+
     beforeEach(() => {
-      App = function () {
+      App = () => {
         const myInput = useInput(5);
         const myInput2 = useInput(myInput.value);
 
@@ -148,7 +172,7 @@ describe("useInput", () => {
         );
       };
     });
-    afterEach(cleanup); // <-- add this
+    afterEach(cleanup);
 
     it("updates value of input if initial value changes", () => {
       const { getByTestId } = render(<App />);

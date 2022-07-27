@@ -2,20 +2,19 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "strictNullChecks": true, // enable strict null checks as a best practice
-    "module": "commonjs", // specify module code generation
-    "jsx": "react", // use typescript to transpile jsx to js
-    "target": "ES5", // specify ECMAScript target version
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "target": "ES5",
     "composite": true,
     "pretty": true,
     "esModuleInterop": true,
     "baseUrl": "src",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    //"forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    // "noImplicitAny": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
@@ -25,7 +24,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "rootDir": "src"
-    //"strict": true,
   },
   "exclude": [
     "node_modules",

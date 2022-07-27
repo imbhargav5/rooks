@@ -23,11 +23,12 @@ describe("useEventListenerRef", () => {
 });
 
 describe("useEventListenerRef jsx", () => {
-  let mockCallback;
-  let TestJSX;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let mockCallback = () => {};
+  let TestJSX = () => <div />;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});
-    TestJSX = function () {
+    TestJSX = () => {
       const ref = useEventListenerRef("click", mockCallback);
 
       return (
@@ -60,9 +61,9 @@ describe("useEventListenerRef jsx", () => {
 });
 
 describe("useEventListenerRef state variables", () => {
-  let TestJSX;
+  let TestJSX = () => <div />;
   beforeEach(() => {
-    TestJSX = function () {
+    TestJSX = () => {
       const { increment, value } = useCounter(0);
       const ref = useEventListenerRef("click", increment);
 

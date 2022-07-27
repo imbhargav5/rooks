@@ -5,7 +5,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import { useNavigatorLanguage } from "../hooks/useNavigatorLanguage";
 
 describe("useNavigatorLanguage", () => {
-  let languageGetter;
+  let languageGetter = jest.spyOn(window.navigator, "language", "get");
 
   beforeEach(() => {
     languageGetter = jest.spyOn(window.navigator, "language", "get");

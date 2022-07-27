@@ -1,26 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { noop } from "@/utils/noop";
-import { useEffect, useReducer, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
+import { useDidMount } from "./useDidMount";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
 
-type StorageHandlerAsObject = {
-  value: any;
-  set: (newValue: any) => void;
-  remove: () => void;
+type StorageHandlerAsObject<T> = {
+  remove: () => null | undefined;
+  set: (newValue: T) => void;
+  value: T;
 };
 
-type StorageHandlerAsArray = [any, (newValue: any) => void, () => void];
+type StorageHandlerAsArray<T> = [T, (newValue: T) => void, () => void];
 
-type StorageHandler = StorageHandlerAsArray & StorageHandlerAsObject;
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "set":
-      return action.payload;
-    default:
-      return state;
-  }
-}
+type StorageHandler<T> = StorageHandlerAsArray<T> & StorageHandlerAsObject<T>;
 
 /**
  * useSessionstorage
@@ -28,89 +18,99 @@ function reducer(state, action) {
  *
  * @param key Key of the value to be stored
  * @param defaultValue Default value of the stored item
+ * @see {@link https://react-hooks.org/docs/useSessionstorage}
  */
-function useSessionstorage(
+function useSessionstorage<T>(
   key: string,
-  defaultValue: any = null
-): StorageHandler {
+  defaultValue: T | null = null
+): StorageHandler<T> {
   useWarningOnMountInDevelopment(
     "useSessionstorage is deprecated, it will be removed in the next major release. Please use useSessionstorageState instead."
   );
-  const [value, dispatch] = useReducer(reducer, getValueFromSessionStorage());
 
-  function init() {
-    const initialValue = getValueFromSessionStorage();
-    if (initialValue === null || initialValue === "null") {
-      set(defaultValue);
-    }
-  }
-
-  function getValueFromSessionStorage() {
-    if (typeof sessionStorage === "undefined") {
+  const parseJSONString = useCallback((valueToParse: string | null) => {
+    if (!valueToParse) {
       return null;
     }
-    const storedValue = sessionStorage.getItem(key) || "null";
+
     try {
-      return JSON.parse(storedValue);
-    } catch (error) {
-      console.error(error);
+      return JSON.parse(valueToParse) as T;
+    } catch {
+      return valueToParse as unknown as T;
     }
+  }, []);
 
-    return storedValue;
-  }
-
-  function saveValueToSessionStorage(valueToSet: string | null) {
+  const getValueFromSessionStorage: () => T | null = useCallback(() => {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
 
-    return sessionStorage.setItem(key, JSON.stringify(valueToSet));
-  }
+    const storedValue = sessionStorage.getItem(key) ?? "null";
+    return parseJSONString(storedValue);
+  }, [key, parseJSONString]);
 
-  function setValue(valueToSet: string | null) {
-    dispatch({
-      payload: valueToSet,
-      type: "set",
-    });
-  }
+  const [value, setValue] = useState<T | null>(getValueFromSessionStorage());
 
-  function set(newValue: string | null) {
-    saveValueToSessionStorage(newValue);
-    setValue(newValue);
-  }
+  const saveValueToSessionStorage = useCallback(
+    (valueToSet: T | null) => {
+      if (typeof sessionStorage === "undefined") {
+        return null;
+      }
+
+      return sessionStorage.setItem(key, JSON.stringify(valueToSet));
+    },
+    [key]
+  );
+
+  const set = useCallback(
+    (newValue: T | null) => {
+      saveValueToSessionStorage(newValue);
+      setValue(newValue);
+    },
+    [saveValueToSessionStorage, setValue]
+  );
 
   // eslint-disable-next-line consistent-return
   function remove(): null | undefined {
     if (typeof sessionStorage === "undefined") {
       return null;
     }
+
     sessionStorage.removeItem(key);
     setValue(null);
     return undefined;
   }
 
-  useEffect(() => {
+  function init() {
+    const initialValue = getValueFromSessionStorage();
+    if (
+      initialValue === null ||
+      (initialValue as unknown as string) === "null"
+    ) {
+      set(defaultValue);
+    }
+  }
+
+  useDidMount(() => {
     init();
-  }, []);
+  });
 
-  const listen = useCallback((event: StorageEvent) => {
-    if (event.storageArea === sessionStorage && event.key === key) {
-      set(event.newValue);
-    }
-  }, []);
+  const listen = useCallback(
+    (event: StorageEvent) => {
+      if (event.storageArea === sessionStorage && event.key === key) {
+        set(parseJSONString(event.newValue));
+      }
+    },
+    [key, parseJSONString, set]
+  );
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("storage", listen);
+    window.addEventListener("storage", listen);
 
-      return () => {
-        window.removeEventListener("storage", listen);
-      };
-    } else {
-      console.warn("useSessionstorage: window is undefined.");
-    }
-    return noop;
-  }, []);
+    return () => {
+      window.removeEventListener("storage", listen);
+    };
+  }, [listen]);
 
   const handler = Object.assign([value, set, remove], {
     remove,
@@ -118,7 +118,7 @@ function useSessionstorage(
     value,
   });
 
-  return handler as StorageHandler;
+  return handler as StorageHandler<T>;
 }
 
 export { useSessionstorage };
