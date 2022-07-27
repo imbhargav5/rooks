@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useThrottle } from "../hooks/useThrottle";
 
 describe("useThrottle hook", () => {
-  let App;
+  let App = () => <div />;
   const TIMEOUT = 300;
   const consoleError = console.error;
 
@@ -29,16 +29,17 @@ describe("useThrottle hook", () => {
   });
 
   beforeEach(() => {
-    App = function () {
+    App = () => {
       const [number, setNumber] = useState(0);
       const [argumentNumber, setArgumentNumber] = useState(0);
       const addNumber = () => setNumber(number + 1);
       const [addNumberThrottled] = useThrottle(addNumber, TIMEOUT);
 
-      const addNumberWithParameter = (argumentNumber_) => {
+      const addNumberWithParameter = (argumentNumber_: number) => {
         setArgumentNumber(argumentNumber_ + 2);
         setNumber(number + 1);
       };
+
       const [addNumberThrottledWithParameter] = useThrottle(
         () => addNumberWithParameter(5),
         1_000
@@ -48,12 +49,17 @@ describe("useThrottle hook", () => {
         <div>
           <span data-testid="throttle-value">{number}</span>
           <span data-testid="throttle-value-with-param">{argumentNumber}</span>
-          <button data-testid="throttle-button" onClick={addNumberThrottled}>
+          <button
+            data-testid="throttle-button"
+            onClick={addNumberThrottled}
+            type="button"
+          >
             Add number throttled
           </button>
           <button
             data-testid="throttle-button-with-param"
             onClick={addNumberThrottledWithParameter}
+            type="button"
           >
             Add number throttled
           </button>
@@ -98,6 +104,7 @@ describe("useThrottle hook", () => {
   });
 
   it("should update value twice when clicked twice, with 300ms break between them", async () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const throttleButton = getByTestId("throttle-button");
     const throttleValue = getByTestId("throttle-value");
@@ -124,7 +131,8 @@ describe("useThrottle hook", () => {
       }
     );
   });
-  it("should update value of state acording to argument passed in callback", async () => {
+  it("should update value of state according to argument passed in callback", async () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const throttleButtonWithParameter = getByTestId(
       "throttle-button-with-param"
