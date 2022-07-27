@@ -27,7 +27,7 @@ type IntervalHandlerAsArray = Array<
   2: ReturnType<typeof setTimeout> | null;
 };
 
-type IntervalHandler = IntervalHandlerAsArray & {};
+type IntervalHandler = IntervalHandlerAsArray & IntervalHandlerAsObject;
 
 /**
  *
