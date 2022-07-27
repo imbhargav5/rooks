@@ -9,7 +9,19 @@ import { useInterval } from "../hooks/useInterval";
 const { act } = TestRenderer;
 
 describe("useInterval", () => {
-  let useHook;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let useHook = function () {
+    const [currentValue, setCurrentValue] = useState(0);
+    function increment() {
+      setCurrentValue(currentValue + 1);
+    }
+
+    const intervalHandler = useInterval(() => {
+      increment();
+    }, 1_000);
+
+    return { currentValue, intervalHandler };
+  };
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -19,6 +31,7 @@ describe("useInterval", () => {
       function increment() {
         setCurrentValue(currentValue + 1);
       }
+
       const intervalHandler = useInterval(() => {
         increment();
       }, 1_000);

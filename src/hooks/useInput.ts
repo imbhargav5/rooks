@@ -1,22 +1,23 @@
+import type { ChangeEvent } from "react";
 import { useState, useEffect, useCallback } from "react";
 
-type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+type InputChangeEvent = ChangeEvent<HTMLInputElement>;
 
-type InputHandler = {
-  /**
-   * The current value of the input
-   */
-  value: any;
-
+type InputHandler<T> = {
   /**
    * Function to handle onChange of an input element
    *
    * @param event The input change event
    */
-  onChange: (e: InputChangeEvent) => void;
+  onChange: (event: InputChangeEvent) => void;
+
+  /**
+   * The current value of the input
+   */
+  value: T;
 };
 
-type Options = {
+type Options<T> = {
   /**
    * validate
    *
@@ -25,12 +26,11 @@ type Options = {
    * @param {any} New value
    * @param {any} Current value
    * @returns {boolean} Whether an update should happen or not
-   *
-   * */
-  validate?: (newValue: any, currentValue: any) => boolean;
+   */
+  validate?: (newValue: T, currentValue: T) => boolean;
 };
 
-const defaultOptions: Options = {};
+const defaultOptions = {};
 
 /**
  *
@@ -39,28 +39,31 @@ const defaultOptions: Options = {};
  * Handles an input's value and onChange props internally to
  * make text input creation process easier
  *
- * @param {any} [initialValue=""] Initial value of the input
- * @param {Options} [opts={}] Options object
+ * @param {unknown} [initialValue] Initial value of the input
+ * @param {Options} [options] Options object
  * @returns {InputHandler} Input handler with value and onChange
  */
-function useInput(
-  initialValue: any = "",
-  options: Options = defaultOptions
-): InputHandler {
-  const [value, setValue] = useState(initialValue);
+function useInput<
+  T extends number | string | readonly string[] | undefined = string
+>(
+  initialValue: T = "" as T,
+  options: Options<T> = defaultOptions
+): InputHandler<T> {
+  const [value, setValue] = useState<T>(initialValue);
 
   const onChange = useCallback(
-    (e: InputChangeEvent) => {
-      const newValue = e.target.value;
+    (event: InputChangeEvent) => {
+      const newValue = event.target.value as T;
       let shouldUpdate = true;
       if (typeof options.validate === "function") {
         shouldUpdate = options.validate(newValue, value);
       }
+
       if (shouldUpdate) {
         setValue(newValue);
       }
     },
-    [value]
+    [options, value]
   );
 
   // sync with default value
@@ -68,7 +71,7 @@ function useInput(
     setValue(initialValue);
   }, [initialValue]);
 
-  const handler: InputHandler = {
+  const handler: InputHandler<T> = {
     onChange,
     value,
   };

@@ -1,14 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
-import React, { useState } from 'react';
-import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
+import React, { useState } from "react";
+import { useUpdateEffect } from "../hooks/useUpdateEffect";
 
-describe('useUpdateEffect', () => {
-  let App;
+describe("useUpdateEffect", () => {
+  let App = () => <div />;
   beforeEach(() => {
-    App = function () {
+    App = () => {
       const [value, setValue] = useState(0);
       const [hasUpdated, setHasUpdated] = useState(0);
       useUpdateEffect(() => {
@@ -17,78 +17,11 @@ describe('useUpdateEffect', () => {
 
       return (
         <div>
-          <button data-testid="trigger-btn" onClick={() => setValue(value + 1)}>
-            Trigger updation
-          </button>
-          <span data-testid="value">{value.toString()}</span>
-          <span data-testid="element">{hasUpdated}</span>
-        </div>
-      );
-    };
-  });
-  afterEach(cleanup); // <-- add this
-
-  it('should be defined', () => {
-    expect(useUpdateEffect).toBeDefined();
-  });
-
-  it('initializes correctly', () => {
-    const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
-  });
-
-  it('does not get called on mount', () => {
-    const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
-  });
-
-  it('gets called if a state value changes', () => {
-    const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    const valueElement = getByTestId('value');
-    const triggerElement = getByTestId('trigger-btn');
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
-    act(() => {
-      fireEvent.click(triggerElement);
-    });
-    expect(Number.parseInt(String(valueElement.textContent))).toEqual(1);
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(1);
-  });
-
-  it('does not get called if state value has not updated', () => {
-    const { getByTestId } = render(<App />);
-    const renderedElement = getByTestId('element');
-    const valueElement = getByTestId('value');
-    const triggerElement = getByTestId('trigger-btn');
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(0);
-    act(() => {
-      fireEvent.click(triggerElement);
-    });
-    expect(Number.parseInt(String(valueElement.textContent))).toEqual(1);
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(1);
-    act(() => {
-      fireEvent.click(triggerElement);
-    });
-    expect(Number.parseInt(String(valueElement.textContent))).toEqual(2);
-    expect(Number.parseInt(String(renderedElement.textContent))).toEqual(1);
-  });
-});
-
-describe('useUpdateEffect with []', () => {
-  let App;
-  beforeEach(() => {
-    App = function () {
-      const [value, setValue] = useState(0);
-      const [hasUpdated, setHasUpdated] = useState(0);
-      useUpdateEffect(() => {
-        setHasUpdated(hasUpdated + 1);
-      }, []);
-
-      return (
-        <div>
-          <button data-testid="trigger-btn" onClick={() => setValue(value + 1)}>
+          <button
+            data-testid="trigger-btn"
+            onClick={() => setValue(value + 1)}
+            type="button"
+          >
             Trigger updation
           </button>
           <span data-testid="value">{value.toString()}</span>
@@ -99,19 +32,96 @@ describe('useUpdateEffect with []', () => {
   });
   afterEach(cleanup);
 
-  it('warns if conditionals is empty array', () => {
-    const spy = jest.spyOn(global.console, 'warn');
+  it("should be defined", () => {
+    expect(useUpdateEffect).toBeDefined();
+  });
+
+  it("initializes correctly", () => {
+    const { getByTestId } = render(<App />);
+    const renderedElement = getByTestId("element");
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
+  });
+
+  it("does not get called on mount", () => {
+    const { getByTestId } = render(<App />);
+    const renderedElement = getByTestId("element");
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
+  });
+
+  it("gets called if a state value changes", () => {
+    const { getByTestId } = render(<App />);
+    const renderedElement = getByTestId("element");
+    const valueElement = getByTestId("value");
+    const triggerElement = getByTestId("trigger-btn");
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
+    expect(Number.parseInt(String(valueElement.textContent))).toBe(1);
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(1);
+  });
+
+  it("does not get called if state value has not updated", () => {
+    const { getByTestId } = render(<App />);
+    const renderedElement = getByTestId("element");
+    const valueElement = getByTestId("value");
+    const triggerElement = getByTestId("trigger-btn");
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
+    expect(Number.parseInt(String(valueElement.textContent))).toBe(1);
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(1);
+    act(() => {
+      fireEvent.click(triggerElement);
+    });
+    expect(Number.parseInt(String(valueElement.textContent))).toBe(2);
+    expect(Number.parseInt(String(renderedElement.textContent))).toBe(1);
+  });
+});
+
+describe("useUpdateEffect with []", () => {
+  let App = () => <div />;
+  beforeEach(() => {
+    App = () => {
+      const [value, setValue] = useState(0);
+      const [hasUpdated, setHasUpdated] = useState(0);
+      useUpdateEffect(() => {
+        setHasUpdated(hasUpdated + 1);
+      }, []);
+
+      return (
+        <div>
+          <button
+            data-testid="trigger-btn"
+            onClick={() => setValue(value + 1)}
+            type="button"
+          >
+            Trigger updation
+          </button>
+          <span data-testid="value">{value.toString()}</span>
+          <span data-testid="element">{hasUpdated}</span>
+        </div>
+      );
+    };
+  });
+  afterEach(cleanup);
+
+  it("warns if conditionals is empty array", () => {
+    const spy = jest.spyOn(global.console, "warn");
     render(<App />);
+    // eslint-disable-next-line jest/prefer-called-with
     expect(spy).toHaveBeenCalled();
   });
 });
 
-describe('useUpdateEffect with cleanup phase', () => {
-  let App;
-  let mockCallback;
+describe("useUpdateEffect with cleanup phase", () => {
+  let App = () => <div />;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let mockCallback = () => {};
   beforeEach(() => {
-    mockCallback = jest.fn(() => console.log('cleanup'));
-    App = function () {
+    mockCallback = jest.fn(() => console.log("cleanup"));
+    App = () => {
       const [value, setValue] = useState(0);
       useUpdateEffect(() => {
         console.log(value);
@@ -121,7 +131,11 @@ describe('useUpdateEffect with cleanup phase', () => {
 
       return (
         <div>
-          <button data-testid="trigger-btn" onClick={() => setValue(value + 1)}>
+          <button
+            data-testid="trigger-btn"
+            onClick={() => setValue(value + 1)}
+            type="button"
+          >
             Trigger updation
           </button>
           <span data-testid="value">{value.toString()}</span>
@@ -131,20 +145,20 @@ describe('useUpdateEffect with cleanup phase', () => {
   });
   afterEach(cleanup);
 
-  it('cleanup is called', () => {
+  it("cleanup is called", () => {
     const { getByTestId } = render(<App />);
-    const valueElement = getByTestId('value');
-    const triggerElement = getByTestId('trigger-btn');
+    const valueElement = getByTestId("value");
+    const triggerElement = getByTestId("trigger-btn");
     expect(mockCallback).toHaveBeenCalledTimes(0);
     act(() => {
       fireEvent.click(triggerElement);
     });
-    expect(Number.parseInt(String(valueElement.textContent))).toEqual(1);
+    expect(Number.parseInt(String(valueElement.textContent))).toBe(1);
     expect(mockCallback).toHaveBeenCalledTimes(0);
     act(() => {
       fireEvent.click(triggerElement);
     });
-    expect(Number.parseInt(String(valueElement.textContent))).toEqual(2);
+    expect(Number.parseInt(String(valueElement.textContent))).toBe(2);
     expect(mockCallback).toHaveBeenCalledTimes(1);
   });
 });
