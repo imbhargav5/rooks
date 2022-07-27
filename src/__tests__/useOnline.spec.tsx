@@ -5,7 +5,8 @@ import { renderHook } from "@testing-library/react-hooks";
 import { useOnline } from "../hooks/useOnline";
 
 describe("useOnline", () => {
-  let onlineGetter;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let onlineGetter = jest.spyOn(window.navigator, "onLine", "get");
 
   beforeEach(() => {
     onlineGetter = jest.spyOn(window.navigator, "onLine", "get");
