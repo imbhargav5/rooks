@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import {
   render,
   cleanup,
@@ -22,11 +19,11 @@ describe("useSessionstorage defined", () => {
 });
 
 describe("useSessionstorage with object destructuring", () => {
-  let App;
+  let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = () => {
       const { value } = useSessionstorage("test-value", "hello");
 
       return (
@@ -48,11 +45,11 @@ describe("useSessionstorage with object destructuring", () => {
 });
 
 describe("useSessionstorage with array destructuring", () => {
-  let App;
+  let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
     // firstCallback = jest.fn()
-    App = function () {
+    App = () => {
       const [currentValue] = useSessionstorage("test-value", "hello");
 
       return (
@@ -76,35 +73,48 @@ describe("useSessionstorage with array destructuring", () => {
 // figure out tests
 
 describe("useSessionstorage", () => {
-  let App;
+  let App = () => <div />;
   beforeEach(() => {
     sessionStorage.clear();
-    function SubApp1() {
-      const { value: titan, set, remove } = useSessionstorage("titan", "eren");
+    const SubApp1 = () => {
+      const {
+        value: titan,
+        set,
+        remove,
+      } = useSessionstorage("titan", "typescript");
 
       return (
         <div>
-          <button data-testid="new-value" onClick={() => set("mikasa")}>
+          <button
+            data-testid="new-value"
+            onClick={() => set("javascript")}
+            type="button"
+          >
             Add
           </button>
-          <button data-testid="unset-value" onClick={() => remove()}>
+          <button
+            data-testid="unset-value"
+            onClick={() => remove()}
+            type="button"
+          >
             Remove
           </button>
           <p data-testid="element1">{titan}</p>
         </div>
       );
-    }
+    };
 
-    function SubApp2() {
+    const SubApp2 = () => {
       const { value: titan } = useSessionstorage("titan");
 
       return (
         <div>
-          <p data-testid="element2">{titan}</p>
+          <p data-testid="element2">{String(titan)}</p>
         </div>
       );
-    }
-    App = function () {
+    };
+
+    App = () => {
       return (
         <>
           <SubApp1 />
@@ -116,16 +126,6 @@ describe("useSessionstorage", () => {
 
   afterEach(cleanup);
 
-  it.skip("updating one component should update the other automatically", () => {
-    const { getByTestId: getByTestId1 } = render(<App />);
-    const renderedElement1 = getByTestId1("element1");
-    const renderedElement2 = getByTestId1("element2");
-    expect(renderedElement1.textContent).toEqual("");
-    expect(renderedElement2.textContent).toEqual("");
-    expect(renderedElement1.textContent).toEqual("eren");
-    // expect(renderedElement2.textContent).toEqual("eren");
-  });
-
   it("setting the new value", () => {
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
@@ -136,7 +136,7 @@ describe("useSessionstorage", () => {
       fireEvent.click(setToNewValueButton);
     });
     const valueElement = getByTestId(container as HTMLElement, "element1");
-    expect(valueElement.innerHTML).toBe("mikasa");
+    expect(valueElement.innerHTML).toBe("javascript");
   });
 
   it("unsetting the value", () => {
