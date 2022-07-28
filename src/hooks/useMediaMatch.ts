@@ -10,12 +10,6 @@ import { useEffect, useMemo, useState } from "react";
  * @returns Whether or not the media query is currently matched.
  */
 function useMediaMatch(query: string): boolean {
-  if (typeof window === "undefined") {
-    console.warn("useMediaMatch cannot function as window is undefined.");
-
-    return false;
-  }
-
   const matchMedia = useMemo<MediaQueryList>(
     () => window.matchMedia(query),
     [query]
@@ -24,19 +18,17 @@ function useMediaMatch(query: string): boolean {
 
   useEffect(() => {
     setMatches(matchMedia.matches);
-    const listener = (event_: MediaQueryListEventMap["change"]) =>
-      setMatches(event_.matches);
-
-    if (matchMedia.addEventListener) {
-      matchMedia.addEventListener("change", listener);
-
-      return () => matchMedia.removeEventListener("change", listener);
-    } else {
-      matchMedia.addListener(listener);
-
-      return () => matchMedia.removeListener(listener);
-    }
+    const listener = (event: MediaQueryListEventMap["change"]) =>
+      setMatches(event.matches);
+    matchMedia.addEventListener("change", listener);
+    return () => matchMedia.removeEventListener("change", listener);
   }, [matchMedia]);
+
+  if (typeof window === "undefined") {
+    console.warn("useMediaMatch cannot function as window is undefined.");
+
+    return false;
+  }
 
   return matches;
 }
