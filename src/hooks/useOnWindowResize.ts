@@ -11,24 +11,18 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  */
 function useOnWindowResize(
-  callback: (event: any) => void,
+  callback: EventListener,
   when: boolean = true,
   isLayoutEffect: boolean = false
 ) {
-  if (typeof window !== "undefined") {
-    useGlobalObjectEventListener(
-      window,
-      "resize",
-      callback,
-      { passive: true },
-      when,
-      isLayoutEffect
-    );
-  } else {
-    console.warn(
-      "useOnWindowResize can't attach an event listener as window is undefined."
-    );
-  }
+  useGlobalObjectEventListener(
+    window,
+    "resize",
+    callback,
+    { passive: true },
+    when,
+    isLayoutEffect
+  );
 }
 
 export { useOnWindowResize };

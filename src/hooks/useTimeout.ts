@@ -1,38 +1,33 @@
-import { noop } from "@/utils/noop";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
+import { noop } from "@/utils/noop";
 
 type UseTimeoutHandler = {
-  start: () => any;
-  clear: () => any;
-  stop: () => any;
+  clear: () => void;
   isActive: boolean;
+  start: () => void;
+  stop: () => void;
 };
 
 /**
  * A setTimeout hook that calls a callback after a timeout duration
  *
- * @param cb The callback to be invoked after timeout
+ * @param callback The callback to be invoked after timeout
  * @param timeoutDelayMs Amount of time in ms after which to invoke
  */
 function useTimeout(
-  callback_: () => void,
+  callback: () => void,
   timeoutDelayMs: number = 0
 ): UseTimeoutHandler {
   useWarningOnMountInDevelopment(
     "useTimeout is deprecated, it will be removed in rooks v7. Please use useTimeoutWhen instead."
   );
   const [isTimeoutActive, setIsTimeoutActive] = useState(false);
-  const savedRefCallback = useRef<() => any>();
+  const savedRefCallback = useRef<() => void>();
 
   useEffect(() => {
-    savedRefCallback.current = callback_;
-  }, [callback_]);
-
-  function callback() {
-    savedRefCallback.current && savedRefCallback.current();
-    clear();
-  }
+    savedRefCallback.current = callback;
+  }, [callback]);
 
   const clear = useCallback(() => {
     setIsTimeoutActive(false);
@@ -42,10 +37,16 @@ function useTimeout(
     setIsTimeoutActive(true);
   }, []);
 
+  const internalCallback = useCallback(() => {
+    savedRefCallback.current?.();
+    clear();
+  }, [clear]);
+
   useEffect(() => {
     if (isTimeoutActive) {
+      // eslint-disable-next-line no-negated-condition
       if (typeof window !== "undefined") {
-        const timeout = window.setTimeout(callback, timeoutDelayMs);
+        const timeout = window.setTimeout(internalCallback, timeoutDelayMs);
 
         return () => {
           window.clearTimeout(timeout);
@@ -54,8 +55,9 @@ function useTimeout(
         console.warn("useTimeout: window is undefined.");
       }
     }
+
     return noop;
-  }, [isTimeoutActive, timeoutDelayMs]);
+  }, [internalCallback, isTimeoutActive, timeoutDelayMs]);
 
   return {
     clear,

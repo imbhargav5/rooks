@@ -20,7 +20,7 @@ import type { ListenerOptions } from "@/types/utils";
 function useGlobalObjectEventListener(
   globalObject: Document | Window,
   eventName: string,
-  callback: (...args: any) => void,
+  callback: EventListener,
   listenerOptions: ListenerOptions = {},
   when: boolean = true,
   isLayoutEffect: boolean = false

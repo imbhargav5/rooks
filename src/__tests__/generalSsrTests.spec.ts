@@ -6,8 +6,6 @@ import { useFullscreen } from "../hooks/useFullscreen";
 import { useIntervalWhen } from "../hooks/useIntervalWhen";
 import { useLocalstorage } from "../hooks/useLocalstorage";
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
-import { useOnWindowResize } from "../hooks/useOnWindowResize";
-import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
 import { useOnline } from "../hooks/useOnline";
 
 describe("when window is undefined", () => {
@@ -19,16 +17,6 @@ describe("when window is undefined", () => {
 
   afterEach(() => {
     (consoleSpy as jest.SpyInstance).mockClear();
-  });
-
-  it("useOnWindowResize logs warning", () => {
-    renderHook(() => useOnWindowResize(mockCallback));
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("useOnWindowScroll logs warning", () => {
-    renderHook(() => useOnWindowScroll(mockCallback));
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
   });
 
   it("useIntervalWhen logs warning", () => {

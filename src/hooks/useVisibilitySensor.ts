@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
 // @ts-nocheck
 // Massive respect for Josh Johnston
@@ -55,7 +58,7 @@ const DEFAULT_OPTIONS = {
  * Tracks the visibility of a ref
  *
  * @param ref The ref to track visibility of
- * @param opts Options
+ * @param options Options
  * @see {@link https://react-hooks.org/docs/useVisibilitySensor}
  */
 function useVisibilitySensor(ref, options) {
