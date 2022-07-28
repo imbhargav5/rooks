@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
+import { noop } from "@/utils/noop";
 
 /**
  *  useDidUpdate hook
@@ -18,20 +19,27 @@ function useUpdateEffect(callback: () => void, conditions?: unknown[]): void {
     "useUpdateEffect is deprecated, it will be removed in rooks v7. Please use useDidUpdate instead."
   );
   const hasMountedRef = useRef(false);
-  if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
-    conditions = [conditions];
-  } else if (Array.isArray(conditions) && conditions.length === 0) {
-    console.warn(
-      "Using [] as the second argument makes useUpdateEffect a noop. The second argument should either be `undefined` or an array of length greater than 0."
-    );
-  }
+  const deps = useMemo(() => {
+    if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
+      return [conditions];
+    } else if (Array.isArray(conditions) && conditions.length === 0) {
+      console.warn(
+        "Using [] as the second argument makes useUpdateEffect a noop. The second argument should either be `undefined` or an array of length greater than 0."
+      );
+    }
+
+    return conditions;
+  }, [conditions]);
+
   useEffect(() => {
     if (hasMountedRef.current) {
       return callback();
     } else {
       hasMountedRef.current = true;
+      return noop;
     }
-  }, conditions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 }
 
 export { useUpdateEffect };

@@ -5,6 +5,7 @@ function getValueFromSessionStorage(key: string) {
   if (typeof sessionStorage === "undefined") {
     return null;
   }
+
   const storedValue = sessionStorage.getItem(key) ?? "null";
   try {
     return JSON.parse(storedValue);

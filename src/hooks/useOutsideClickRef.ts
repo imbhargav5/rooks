@@ -1,6 +1,6 @@
-import { noop } from "@/utils/noop";
 import { useEffect, useRef, useCallback, useState } from "react";
 import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
+import { noop } from "@/utils/noop";
 
 /**
  * useOutsideClickRef hook
@@ -11,7 +11,7 @@ import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
  * @returns An array with first item being ref
  */
 function useOutsideClickRef(
-  handler: (e: MouseEvent) => any,
+  handler: (event: MouseEvent) => void,
   when: boolean = true
 ): [CallbackRef] {
   const savedHandler = useRef(handler);
@@ -19,9 +19,9 @@ function useOutsideClickRef(
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 
   const memoizedCallback = useCallback(
-    (e: MouseEvent) => {
-      if (node && !node.contains(e.target as Element)) {
-        savedHandler.current(e);
+    (event: MouseEvent) => {
+      if (node && !node.contains(event.target as Element)) {
+        savedHandler.current(event);
       }
     },
     [node]
@@ -31,8 +31,8 @@ function useOutsideClickRef(
     savedHandler.current = handler;
   });
 
-  const ref = useCallback((node: HTMLElementOrNull) => {
-    setNode(node);
+  const ref = useCallback((nodeElement: HTMLElementOrNull) => {
+    setNode(nodeElement);
   }, []);
 
   useEffect(() => {
@@ -45,6 +45,7 @@ function useOutsideClickRef(
         document.removeEventListener("ontouchstart", memoizedCallback, true);
       };
     }
+
     return noop;
   }, [when, memoizedCallback]);
 

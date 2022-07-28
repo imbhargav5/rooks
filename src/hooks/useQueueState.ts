@@ -3,10 +3,10 @@ import { useCallback, useState } from "react";
 function useQueueState<T>(initialList: T[]): [
   T[],
   {
-    enqueue: (item: T) => number;
     dequeue: () => T | undefined;
-    peek: () => T | undefined;
+    enqueue: (item: T) => number;
     length: number;
+    peek: () => T | undefined;
   }
 ] {
   const [list, setList] = useState<T[]>([...initialList]);

@@ -1,15 +1,15 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable id-length */
-/* eslint-disable fp/no-this */
+
 /* eslint-disable no-eq-null */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
-/* eslint-disable fp/no-class */
+
 // Polyfill DOMRect
 // It's not available on Edge or IE11
 
 export class DOMRectPolyfill implements DOMRect {
   static fromRect(
-    rect: { x?: number; y?: number; width?: number; height?: number } = {}
+    rect: { height?: number; width?: number; x?: number; y?: number } = {}
   ) {
     return new this(
       rect.x ?? 0,
@@ -23,12 +23,15 @@ export class DOMRectPolyfill implements DOMRect {
     if (x != null) {
       this.x = x;
     }
+
     if (y != null) {
       this.y = y;
     }
+
     if (width != null) {
       this.width = width;
     }
+
     if (height != null) {
       this.height = height;
     }
