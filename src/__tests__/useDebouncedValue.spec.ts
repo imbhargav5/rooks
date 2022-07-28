@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import type { RenderResult } from "@testing-library/react-hooks";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";

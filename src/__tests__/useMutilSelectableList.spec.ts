@@ -20,7 +20,7 @@ describe("useMultiSelectableList", () => {
         "matchSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].matchSelection({} as any);
+        result.current[1].matchSelection({});
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,
@@ -32,24 +32,20 @@ describe("useMultiSelectableList", () => {
       const { result: internalResult } = renderHook(() =>
         useMultiSelectableList([1, 2, 3], [0, 1], true)
       );
-      expect(
-        internalResult.current[1].matchSelection({ index: 0 } as any)
-      ).toBe(true);
-      expect(
-        internalResult.current[1].matchSelection({ index: 2 } as any)
-      ).toBe(false);
+      expect(internalResult.current[1].matchSelection({ index: 0 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ index: 2 })).toBe(
+        false
+      );
     });
 
     it("match value", () => {
       const { result: internalResult } = renderHook(() =>
         useMultiSelectableList([1, 2, 3], [0, 1], true)
       );
-      expect(
-        internalResult.current[1].matchSelection({ value: 1 } as any)
-      ).toBe(true);
-      expect(
-        internalResult.current[1].matchSelection({ value: 3 } as any)
-      ).toBe(false);
+      expect(internalResult.current[1].matchSelection({ value: 1 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ value: 3 })).toBe(
+        false
+      );
     });
   });
 
@@ -105,7 +101,7 @@ describe("useMultiSelectableList", () => {
         "updateSelections. Expected either indices or values to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].updateSelections({} as any)();
+        result.current[1].updateSelections({})();
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,
@@ -169,7 +165,7 @@ describe("useMultiSelectableList", () => {
         "toggleSelection. Expected either index or value to be provided. However all were provided"
       );
       act(() => {
-        result.current[1].toggleSelection({} as any)();
+        result.current[1].toggleSelection({})();
       });
       expect(console.warn).toHaveBeenNthCalledWith(
         2,

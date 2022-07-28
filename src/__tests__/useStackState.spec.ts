@@ -28,7 +28,7 @@ describe("useStackState", () => {
     expect(pushBeforeRerender).toBe(pushAfterRerender);
 
     // after memo still work
-    act(() => {
+    void act(() => {
       result.current[1].push(7);
     });
     const [list, controls] = result.current;
@@ -37,7 +37,7 @@ describe("useStackState", () => {
 
     // re-create fn to reactive list deps
     rerender();
-    act(() => {
+    void act(() => {
       result.current[1].push(7);
     });
     const [list2] = result.current;
@@ -56,20 +56,20 @@ describe("useStackState", () => {
     expect(peekBeforeRerender).toBe(peekAfterRerender);
 
     // after memo, should work
-    act(() => {
+    void act(() => {
       result.current[1].push(7);
     });
-    act(() => {
+    void act(() => {
       result.current[1].push(11);
     });
     const [, controls] = result.current;
     expect(controls.peek()).toBe(11);
 
     // run 2nd times should work: should be reactive because of list deps
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
     expect(result.current[1].peek()).toBe(3);
@@ -78,29 +78,29 @@ describe("useStackState", () => {
   it("handles empty arrays", () => {
     const { result } = renderHook(() => useStackState<number>([]));
 
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
     const [, controls] = result.current;
     expect(controls.peek()).toBeUndefined();
     expect(controls).toHaveLength(0);
-    act(() => {
+    void act(() => {
       result.current[1].push(7);
     });
-    act(() => {
+    void act(() => {
       result.current[1].push(11);
     });
     expect(result.current[2]).toEqual([11, 7]);
     expect(result.current[1].peek()).toBe(11);
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
     expect(result.current[2]).toEqual([7]);
     expect(result.current[1].peek()).toBe(7);
-    act(() => {
+    void act(() => {
       result.current[1].pop();
     });
     expect(result.current[1].peek()).toBeUndefined();
@@ -111,7 +111,7 @@ describe("useStackState", () => {
   it("should clear the stack", () => {
     const { result } = renderHook(() => useStackState([1, 2, 3]));
     expect(result.current[1]).toHaveLength(3);
-    act(() => {
+    void act(() => {
       result.current[1].clear();
     });
     expect(result.current[1].isEmpty()).toBe(true);

@@ -19,6 +19,7 @@ type CounterHandler = {
  * @property {Function} incrementBy Increment counter by incrAmount
  * @property {Function} decrementBy Decrement counter by decrAmount
  * @property {Function} reset Reset counter to initialValue
+ * @see {@link https://react-hooks.org/docs/useCounter}
  */
 
 /**
@@ -43,28 +44,31 @@ function useCounter(initialValue: number): CounterHandler {
    *
    * @param {*} decrAmount
    */
-  const decrementBy = useCallback((decrAmount: number) => {
-    incrementBy(-decrAmount);
-  }, []);
+  const decrementBy = useCallback(
+    (decrAmount: number) => {
+      incrementBy(-decrAmount);
+    },
+    [incrementBy]
+  );
 
   /**
    * Increment counter by 1
    */
   const increment = useCallback(() => {
     incrementBy(1);
-  }, []);
+  }, [incrementBy]);
   /**
    * Decrement counter by 1
    */
   const decrement = useCallback(() => {
     incrementBy(-1);
-  }, []);
+  }, [incrementBy]);
   /**
    * Reset counter to initial value
    */
   const reset = useCallback(() => {
     setCounter(initialValue);
-  }, []);
+  }, [initialValue]);
 
   return {
     decrement,

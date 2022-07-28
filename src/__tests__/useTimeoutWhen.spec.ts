@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
 import { useTimeoutWhen } from "../hooks/useTimeoutWhen";

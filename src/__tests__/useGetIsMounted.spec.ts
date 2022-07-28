@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { renderHook } from "@testing-library/react-hooks";
 import { useGetIsMounted } from "../hooks/useGetIsMounted";
 

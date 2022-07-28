@@ -25,14 +25,14 @@ describe("useQueueState", () => {
     const enqueueAfterRerender = result.current[1].enqueue;
     expect(enqueueBeforeRerender).toBe(enqueueAfterRerender);
 
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(7);
     });
     const [list, controls] = result.current;
     expect(list).toEqual([1, 2, 3, 7]);
     expect(controls).toHaveLength(4);
     // test memo reactivity
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(8);
     });
     const [list2] = result.current;
@@ -50,19 +50,19 @@ describe("useQueueState", () => {
     expect(peekBeforeRerender).toBe(peekAfterRerender);
 
     // after memo, should work
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(7);
     });
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(11);
     });
     expect(result.current[1].peek()).toBe(1);
 
     // run 2nd times should work: should be reactive because of list deps
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
     expect(result.current[1].peek()).toBe(3);
@@ -70,27 +70,27 @@ describe("useQueueState", () => {
   });
   it("handles empty arrays", () => {
     const { result } = renderHook(() => useQueueState<number>([]));
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
     const [, controls] = result.current;
     expect(controls.peek()).toBeUndefined();
     expect(controls).toHaveLength(0);
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(7);
     });
-    act(() => {
+    void act(() => {
       result.current[1].enqueue(11);
     });
     expect(result.current[1].peek()).toBe(7);
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
     expect(result.current[1].peek()).toBe(11);
-    act(() => {
+    void act(() => {
       result.current[1].dequeue();
     });
     expect(result.current[1].peek()).toBeUndefined();

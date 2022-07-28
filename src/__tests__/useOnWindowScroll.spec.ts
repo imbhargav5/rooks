@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import { useOnWindowScroll } from "../hooks/useOnWindowScroll";

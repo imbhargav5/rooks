@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import { renderHook } from "@testing-library/react-hooks";
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
 import { useOnline } from "../hooks/useOnline";

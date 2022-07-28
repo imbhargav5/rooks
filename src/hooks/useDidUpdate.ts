@@ -11,6 +11,7 @@ import { useWillUnmount } from "./useWillUnmount";
  *
  * @param {Function} callback The callback to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
+ * @see {@link https://react-hooks.org/docs/useDidUpdate}
  */
 function useDidUpdate(callback: () => void, conditions?: unknown[]): void {
   const hasMountedRef = useRef<boolean>(false);
