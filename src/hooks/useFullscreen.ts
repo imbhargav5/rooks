@@ -175,6 +175,7 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
   );
 
   const request = useCallback(
+    // eslint-disable-next-line consistent-return
     async (internalElement?: HTMLElement) => {
       try {
         const finalElement = internalElement ?? document.documentElement;
@@ -203,6 +204,7 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
   }, [element, fullscreenControls.exitFullscreen]);
 
   const toggle = useCallback(
+    // eslint-disable-next-line no-confusing-arrow
     (newElement?: HTMLElement) =>
       element ? exit() : newElement ? request(newElement) : null,
     [element, exit, request]
