@@ -22,7 +22,7 @@
   },
   "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
-    "clean": "rimraf dist lib",
+    "clean": "rimraf dist lib src/hooks/**.d.ts src/__tests__/**.d.ts",
     "commit": "cz",
     "lint": "eslint src/**/*.ts",
     "format": "yarn run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
