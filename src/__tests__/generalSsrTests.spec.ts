@@ -2,13 +2,10 @@
  * @jest-environment node
  */
 import { renderHook } from "@testing-library/react-hooks";
-import { useFullscreen } from "../hooks/useFullscreen";
-import { useIntervalWhen } from "../hooks/useIntervalWhen";
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
 import { useOnline } from "../hooks/useOnline";
 
 describe("when window is undefined", () => {
-  const mockCallback = jest.fn(() => {});
   let consoleSpy: unknown;
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
@@ -16,16 +13,6 @@ describe("when window is undefined", () => {
 
   afterEach(() => {
     (consoleSpy as jest.SpyInstance).mockClear();
-  });
-
-  it("useIntervalWhen logs warning", () => {
-    renderHook(() => useIntervalWhen(mockCallback));
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("useFullscreen logs warning", () => {
-    renderHook(() => useFullscreen());
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
   });
 
   it("useLocalstorageState logs warning", () => {
