@@ -15,10 +15,10 @@ describe("useOnWindowScroll", () => {
     it("should call callback after resize", () => {
       renderHook(() => useOnWindowScroll(mockCallback));
       fireEvent(window, new Event("scroll"));
-      expect(mockCallback.mock.calls.length).toBe(1);
+      expect(mockCallback.mock.calls).toHaveLength(1);
       fireEvent(window, new Event("scroll"));
       fireEvent(window, new Event("scroll"));
-      expect(mockCallback.mock.calls.length).toBe(3);
+      expect(mockCallback.mock.calls).toHaveLength(3);
     });
   });
 });

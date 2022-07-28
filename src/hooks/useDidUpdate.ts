@@ -19,6 +19,7 @@ function useDidUpdate(callback: () => void, conditions?: unknown[]): void {
       "Using [] as the second argument makes useDidUpdate a noop. The second argument should either be `undefined` or an array of length greater than 0."
     );
   }
+
   useEffect(() => {
     if (hasMountedRef.current) {
       callback();

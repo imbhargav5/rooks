@@ -1,13 +1,13 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { noop } from "@/utils/noop";
 import { useState, useEffect, useCallback } from "react";
 import { useWarningOnMountInDevelopment } from "./useWarningOnMountInDevelopment";
+import { noop } from "@/utils/noop";
 
 type StorageHandlerAsObject = {
-  value: any;
-  set: (newValue: any) => void;
   remove: () => void;
+  set: (newValue: any) => void;
+  value: any;
 };
 
 type StorageHandlerAsArray = [any, (newValue: any) => void, () => void];
@@ -44,6 +44,7 @@ function useLocalstorage(
     if (typeof localStorage === "undefined") {
       return null;
     }
+
     const storedValue = localStorage.getItem(key) || "null";
     try {
       return JSON.parse(storedValue);
@@ -79,6 +80,7 @@ function useLocalstorage(
     if (typeof localStorage === "undefined") {
       return false;
     }
+
     localStorage.removeItem(key);
     return undefined;
   }, [key]);
@@ -99,13 +101,14 @@ function useLocalstorage(
     } else {
       console.warn("useLocalstorage: window is undefined.");
     }
+
     return noop;
   }, []);
 
   const handler = Object.assign([value, set, remove], {
-    value,
     remove,
     set,
+    value,
   });
 
   return handler as StorageHandler;

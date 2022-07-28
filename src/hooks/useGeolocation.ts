@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
 type IGetGeoLocation = {
+  isError: boolean;
   lat?: number;
   lng?: number;
-  isError: boolean;
   message: string;
 };
 
 type IOptions = {
   enableHighAccuracy?: boolean;
-  timeout?: number;
   maximumAge?: number;
+  timeout?: number;
   when?: boolean;
 };
 
@@ -84,6 +84,7 @@ function useGeolocation(
         setGeoObject(error);
       }
     }
+
     if (when) {
       getGeoCode();
     }

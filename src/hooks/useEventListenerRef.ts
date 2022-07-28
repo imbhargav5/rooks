@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import type { RefElementOrNull } from '../utils/utils';
-import { useFreshTick } from './useFreshTick';
-import { useIsomorphicEffect } from './useIsomorphicEffect';
-import { useRefElement } from './useRefElement';
+import { useEffect } from "react";
+import type { RefElementOrNull } from "../utils/utils";
+import { useFreshTick } from "./useFreshTick";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useRefElement } from "./useRefElement";
 
 /**
  *  useEventListenerRef hook
@@ -31,6 +31,7 @@ function useEventListenerRef(
     if (!(element && element.addEventListener)) {
       return;
     }
+
     element.addEventListener(eventName, freshCallback, listenerOptions);
 
     return () => {

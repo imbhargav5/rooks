@@ -15,7 +15,7 @@ describe("useQueueState", () => {
   it("should return length correctly", () => {
     const { result } = renderHook(() => useQueueState([1, 2, 3]));
     const [, controls] = result.current;
-    expect(controls.length).toBe(3);
+    expect(controls).toHaveLength(3);
   });
   it("should enqueue correctly", () => {
     const { result, rerender } = renderHook(() => useQueueState([1, 2, 3]));
@@ -30,7 +30,7 @@ describe("useQueueState", () => {
     });
     const [list, controls] = result.current;
     expect(list).toEqual([1, 2, 3, 7]);
-    expect(controls.length).toBe(4);
+    expect(controls).toHaveLength(4);
     // test memo reactivity
     act(() => {
       result.current[1].enqueue(8);
@@ -56,7 +56,7 @@ describe("useQueueState", () => {
     act(() => {
       result.current[1].enqueue(11);
     });
-    expect(result.current[1].peek()).toEqual(1);
+    expect(result.current[1].peek()).toBe(1);
 
     // run 2nd times should work: should be reactive because of list deps
     act(() => {
@@ -65,8 +65,8 @@ describe("useQueueState", () => {
     act(() => {
       result.current[1].dequeue();
     });
-    expect(result.current[1].peek()).toEqual(3);
-    expect(result.current[1].length).toEqual(3);
+    expect(result.current[1].peek()).toBe(3);
+    expect(result.current[1]).toHaveLength(3);
   });
   it("handles empty arrays", () => {
     const { result } = renderHook(() => useQueueState<number>([]));
@@ -77,23 +77,23 @@ describe("useQueueState", () => {
       result.current[1].dequeue();
     });
     const [, controls] = result.current;
-    expect(controls.peek()).toEqual(undefined);
-    expect(controls.length).toEqual(0);
+    expect(controls.peek()).toBeUndefined();
+    expect(controls).toHaveLength(0);
     act(() => {
       result.current[1].enqueue(7);
     });
     act(() => {
       result.current[1].enqueue(11);
     });
-    expect(result.current[1].peek()).toEqual(7);
+    expect(result.current[1].peek()).toBe(7);
     act(() => {
       result.current[1].dequeue();
     });
-    expect(result.current[1].peek()).toEqual(11);
+    expect(result.current[1].peek()).toBe(11);
     act(() => {
       result.current[1].dequeue();
     });
     expect(result.current[1].peek()).toBeUndefined();
-    expect(result.current[1].length).toEqual(0);
+    expect(result.current[1]).toHaveLength(0);
   });
 });

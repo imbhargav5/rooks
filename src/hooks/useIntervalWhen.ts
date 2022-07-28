@@ -1,5 +1,5 @@
-import { noop } from "@/utils/noop";
 import { useRef, useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 /**
  * A setInterval hook that calls a callback after a interval duration
@@ -32,6 +32,7 @@ function useIntervalWhen(
         if (startImmediate) {
           callback();
         }
+
         const interval = window.setInterval(callback, intervalDurationMs);
 
         return () => {
@@ -41,6 +42,7 @@ function useIntervalWhen(
     } else {
       console.warn("useIntervalWhen: window is undefined.");
     }
+
     return noop;
   }, [when, intervalDurationMs]);
 }

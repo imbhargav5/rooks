@@ -15,7 +15,7 @@ describe("useStackState", () => {
   it("should return length correctly", () => {
     const { result } = renderHook(() => useStackState([1, 2, 3]));
     const [, controls] = result.current;
-    expect(controls.length).toBe(3);
+    expect(controls).toHaveLength(3);
   });
   it("should push correctly", () => {
     const { result, rerender } = renderHook(() => useStackState([1, 2, 3]));
@@ -33,7 +33,7 @@ describe("useStackState", () => {
     });
     const [list, controls] = result.current;
     expect(list).toEqual([1, 2, 3, 7]);
-    expect(controls.length).toBe(4);
+    expect(controls).toHaveLength(4);
 
     // re-create fn to reactive list deps
     rerender();
@@ -63,7 +63,7 @@ describe("useStackState", () => {
       result.current[1].push(11);
     });
     const [, controls] = result.current;
-    expect(controls.peek()).toEqual(11);
+    expect(controls.peek()).toBe(11);
 
     // run 2nd times should work: should be reactive because of list deps
     act(() => {
@@ -72,8 +72,8 @@ describe("useStackState", () => {
     act(() => {
       result.current[1].pop();
     });
-    expect(result.current[1].peek()).toEqual(3);
-    expect(result.current[1].length).toEqual(3);
+    expect(result.current[1].peek()).toBe(3);
+    expect(result.current[1]).toHaveLength(3);
   });
   it("handles empty arrays", () => {
     const { result } = renderHook(() => useStackState<number>([]));
@@ -85,8 +85,8 @@ describe("useStackState", () => {
       result.current[1].pop();
     });
     const [, controls] = result.current;
-    expect(controls.peek()).toEqual(undefined);
-    expect(controls.length).toEqual(0);
+    expect(controls.peek()).toBeUndefined();
+    expect(controls).toHaveLength(0);
     act(() => {
       result.current[1].push(7);
     });
@@ -94,23 +94,23 @@ describe("useStackState", () => {
       result.current[1].push(11);
     });
     expect(result.current[2]).toEqual([11, 7]);
-    expect(result.current[1].peek()).toEqual(11);
+    expect(result.current[1].peek()).toBe(11);
     act(() => {
       result.current[1].pop();
     });
     expect(result.current[2]).toEqual([7]);
-    expect(result.current[1].peek()).toEqual(7);
+    expect(result.current[1].peek()).toBe(7);
     act(() => {
       result.current[1].pop();
     });
     expect(result.current[1].peek()).toBeUndefined();
-    expect(result.current[1].length).toEqual(0);
+    expect(result.current[1]).toHaveLength(0);
     expect(result.current[2]).toEqual([]);
   });
 
   it("should clear the stack", () => {
     const { result } = renderHook(() => useStackState([1, 2, 3]));
-    expect(result.current[1].length).toEqual(3);
+    expect(result.current[1]).toHaveLength(3);
     act(() => {
       result.current[1].clear();
     });

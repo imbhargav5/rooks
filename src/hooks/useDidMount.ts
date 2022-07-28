@@ -5,7 +5,6 @@ import { useEffect } from "react";
  * Calls a function on mount
  *
  * @param {Function} callback Callback function to be called on mount
- *
  */
 function useDidMount(callback: () => void): void {
   useEffect(() => {

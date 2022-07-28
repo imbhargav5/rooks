@@ -1,18 +1,18 @@
 import { useCallback, useState } from "react";
 
 type CounterHandler = {
-  value: number;
-  increment: () => void;
   decrement: () => void;
-  incrementBy: (amount: number) => void;
   decrementBy: (amount: number) => void;
+  increment: () => void;
+  incrementBy: (amount: number) => void;
   reset: () => void;
+  value: number;
 };
 
 /**
  *
  * @typedef handler
- * @type {Object}
+ * @type {object}
  * @property {number} value The value of the counter
  * @property {Function}  increment Increment counter value by 1
  * @property {Function} decrement Decrement counter value by 1

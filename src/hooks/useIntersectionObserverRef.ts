@@ -1,6 +1,6 @@
-import { noop } from "@/utils/noop";
 import { useEffect, useCallback, useState } from "react";
 import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
+import { noop } from "@/utils/noop";
 
 const config: IntersectionObserverInit = {
   root: null,
