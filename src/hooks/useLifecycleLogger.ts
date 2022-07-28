@@ -1,5 +1,5 @@
 import { useDidMount } from "./useDidMount";
-import { useUpdateEffect } from "./useUpdateEffect";
+import { useDidUpdate } from "./useDidUpdate";
 import { useWillUnmount } from "./useWillUnmount";
 
 /**
@@ -19,7 +19,7 @@ const useLifecycleLogger = (
     return () => console.log(`${componentName} unmounted`);
   });
 
-  useUpdateEffect(() => {
+  useDidUpdate(() => {
     console.log(`${componentName} updated`, ...otherArgs);
   });
 

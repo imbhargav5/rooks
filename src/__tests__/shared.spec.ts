@@ -4,10 +4,8 @@ import { useDidUpdate } from "../hooks/useDidUpdate";
 import { useForkRef } from "../hooks/useForkRef";
 import { useInput } from "../hooks/useInput";
 import { useIntersectionObserverRef } from "../hooks/useIntersectionObserverRef";
-import { useInterval } from "../hooks/useInterval";
 import { useIsomorphicEffect } from "../hooks/useIsomorphicEffect";
 import { useKey } from "../hooks/useKey";
-import { useLocalstorage } from "../hooks/useLocalstorage";
 import { useMouse } from "../hooks/useMouse";
 import { useMutationObserver } from "../hooks/useMutationObserver";
 import { useMutationObserverRef } from "../hooks/useMutationObserverRef";
@@ -17,16 +15,12 @@ import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
 import { useOnline } from "../hooks/useOnline";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { useOutsideClickRef } from "../hooks/useOutsideClickRef";
-import { usePrevious } from "../hooks/usePrevious";
 import { useRaf } from "../hooks/useRaf";
 import { useSelect } from "../hooks/useSelect";
 import { useSelectableList } from "../hooks/useSelectableList";
-import { useSessionstorage } from "../hooks/useSessionstorage";
 import { useThrottle } from "../hooks/useThrottle";
-import { useTimeout } from "../hooks/useTimeout";
 import { useToggle } from "../hooks/useToggle";
 import { useUndoState } from "../hooks/useUndoState";
-import { useVisibilitySensor } from "../hooks/useVisibilitySensor";
 import { useWillUnmount } from "../hooks/useWillUnmount";
 import { useWindowSize } from "../hooks/useWindowSize";
 
@@ -66,12 +60,6 @@ describe("useIntersectionObserverRef", () => {
   });
 });
 
-describe("useInterval", () => {
-  it("is defined", () => {
-    expect(useInterval).toBeDefined();
-  });
-});
-
 describe("useIsomorphicEffect", () => {
   it("is defined", () => {
     expect(useIsomorphicEffect).toBeDefined();
@@ -89,11 +77,7 @@ describe("useKeys", () => {
     expect(useKey).toBeDefined();
   });
 });
-describe("useLocalstorage", () => {
-  it("is defined", () => {
-    expect(useLocalstorage).toBeDefined();
-  });
-});
+
 describe("useMouse", () => {
   it("is defined", () => {
     expect(useMouse).toBeDefined();
@@ -139,11 +123,6 @@ describe("useOutsideClickRef", () => {
     expect(useOutsideClickRef).toBeDefined();
   });
 });
-describe("usePrevious", () => {
-  it("is defined", () => {
-    expect(usePrevious).toBeDefined();
-  });
-});
 describe("useRaf", () => {
   it("is defined", () => {
     expect(useRaf).toBeDefined();
@@ -159,21 +138,12 @@ describe("useSelectableList", () => {
     expect(useSelectableList).toBeDefined();
   });
 });
-describe("useSessionstorage", () => {
-  it("is defined", () => {
-    expect(useSessionstorage).toBeDefined();
-  });
-});
 describe("useThrottle", () => {
   it("is defined", () => {
     expect(useThrottle).toBeDefined();
   });
 });
-describe("useTimeout", () => {
-  it("is defined", () => {
-    expect(useTimeout).toBeDefined();
-  });
-});
+
 describe("useToggle", () => {
   it("is defined", () => {
     expect(useToggle).toBeDefined();
@@ -182,11 +152,6 @@ describe("useToggle", () => {
 describe("useUndoState", () => {
   it("is defined", () => {
     expect(useUndoState).toBeDefined();
-  });
-});
-describe("useVisibilitySensor", () => {
-  it("is defined", () => {
-    expect(useVisibilitySensor).toBeDefined();
   });
 });
 describe("useWillUnmount", () => {

@@ -4,7 +4,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useFullscreen } from "../hooks/useFullscreen";
 import { useIntervalWhen } from "../hooks/useIntervalWhen";
-import { useLocalstorage } from "../hooks/useLocalstorage";
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
 import { useOnline } from "../hooks/useOnline";
 
@@ -26,11 +25,6 @@ describe("when window is undefined", () => {
 
   it("useFullscreen logs warning", () => {
     renderHook(() => useFullscreen());
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("useLocalstorage logs warning", () => {
-    renderHook(() => useLocalstorage("test"));
     expect(consoleSpy).toHaveBeenCalledTimes(1);
   });
 
