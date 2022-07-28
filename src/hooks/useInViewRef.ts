@@ -16,6 +16,7 @@ const config: IntersectionObserverInit = {
  *
  * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
  * @param {IntersectionObserverInit} options
+ * @see {@link https://react-hooks.org/docs/useInViewRef}
  */
 function useInViewRef(
   callback: IntersectionObserverCallback = () => {},
@@ -43,10 +44,10 @@ function useInViewRef(
     }
 
     return noop;
-  }, [node, callback, root, rootMargin, threshold]);
+  }, [node, callback, root, rootMargin, threshold, options]);
 
-  const ref = useCallback((node: HTMLElementOrNull) => {
-    setNode(node);
+  const ref = useCallback((nodeElement: HTMLElementOrNull) => {
+    setNode(nodeElement);
   }, []);
 
   return [ref, inView];

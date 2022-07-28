@@ -1,6 +1,7 @@
 import type { MutableRefObject } from "react";
 import { useEffect, useRef, useCallback } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
+import { noop } from "@/utils/noop";
 
 type TPressedKeyMapping = {
   [key: string]: boolean | undefined;
@@ -33,18 +34,19 @@ const defaultOptions = {
 /**
  * useKeys hook
  *
- * @param keysList
- * @param callback
- * @param opts
+ * @param keysList - list of keys to listen to
+ * @param callback  - callback to be called when a key is pressed
+ * @param options - options to be passed to the event listener
+ * @see {@link https://react-hooks.org/docs/useKeys}
  */
 function useKeys(
   keysList: string[],
-  callback: (e: KeyboardEvent) => any,
-  options_?: Options
+  callback: (event: KeyboardEvent) => void,
+  options?: Options
 ): void {
-  const options = { ...defaultOptions, ...options_ };
-  const { target, when, continuous } = options;
-  const savedCallback = useRef<(event: KeyboardEvent) => any>(callback);
+  const internalOptions = { ...defaultOptions, ...options };
+  const { target, when, continuous } = internalOptions;
+  const savedCallback = useRef<(event: KeyboardEvent) => void>(callback);
   /**
    * PressedKeyMapping will do the bookkeeping the pressed keys
    */
@@ -83,9 +85,7 @@ function useKeys(
       }
 
       if (areAllKeysFromListPressed) {
-        if (savedCallback.current) {
-          savedCallback.current(event);
-        }
+        savedCallback.current(event);
 
         /**
          * If not continuous
@@ -96,7 +96,7 @@ function useKeys(
         }
       }
     },
-    [keysList, continuous]
+    [keysList, PressedKeyMapping, continuous]
   );
 
   /**
@@ -106,32 +106,33 @@ function useKeys(
    *
    * KeyUp event handler which will update the keys pressed state in PressedKeyMapping
    */
-  const handleKeyUp = useCallback((event: KeyboardEvent) => {
-    for (const identifier of keysList) {
-      if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
-        PressedKeyMapping[identifier] = undefined;
+  const handleKeyUp = useCallback(
+    (event: KeyboardEvent) => {
+      for (const identifier of keysList) {
+        if (doesIdentifierMatchKeyboardEvent(event, identifier)) {
+          PressedKeyMapping[identifier] = undefined;
+        }
       }
-    }
-  }, []);
+    },
+    [PressedKeyMapping, keysList]
+  );
 
   /**
    * Responsible for setting up the event listener and removing event listeners
    */
-  useEffect((): any => {
+  useEffect(() => {
     if (when && typeof window !== "undefined") {
-      const targetNode = target && target.current ? target.current : document;
-      if (targetNode) {
-        targetNode.addEventListener("keydown", handleKeyDown);
-        targetNode.addEventListener("keyup", handleKeyUp);
-      }
+      const targetNode = target?.current ? target.current : document;
+      targetNode.addEventListener("keydown", handleKeyDown);
+      targetNode.addEventListener("keyup", handleKeyUp);
 
       return () => {
-        if (targetNode) {
-          targetNode.removeEventListener("keydown", handleKeyDown);
-          targetNode.removeEventListener("keyup", handleKeyUp);
-        }
+        targetNode.removeEventListener("keydown", handleKeyDown);
+        targetNode.removeEventListener("keyup", handleKeyUp);
       };
     }
+
+    return noop;
   }, [when, target, keysList, handleKeyDown, handleKeyUp]);
 }
 

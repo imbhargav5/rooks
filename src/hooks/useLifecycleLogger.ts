@@ -7,7 +7,7 @@ import { useWillUnmount } from "./useWillUnmount";
  * logs parameters as component transitions through lifecycles
  *
  * @param componentName Name of the component
- * @param rest
+ * @param {...*} otherArgs Other arguments to log
  */
 const useLifecycleLogger = (
   componentName: string = "Component",
