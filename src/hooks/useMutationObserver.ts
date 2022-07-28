@@ -1,6 +1,6 @@
-import { noop } from "@/utils/noop";
 import type { MutableRefObject } from "react";
 import { useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 const config: MutationObserverInit = {
   attributes: true,
@@ -36,8 +36,9 @@ function useMutationObserver(
         observer.disconnect();
       };
     }
+
     return noop;
-  }, [callback, options]);
+  }, [callback, options, ref]);
 }
 
 export { useMutationObserver };
