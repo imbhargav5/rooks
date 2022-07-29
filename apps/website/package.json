@@ -25,7 +25,6 @@
   "scripts": {
     "start": "next start",
     "build": "next build && next export",
-    "dev": "next dev",
-    "test": "next test"
+    "dev": "next dev"
   }
 }

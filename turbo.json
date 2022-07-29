@@ -9,6 +9,16 @@
     },
     "dev": {
       "cache": false
+    },
+    "coverage": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "outputs": ["src/coverage/**"]
+    },
+    "test": {
+      "cache": false,
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**", "dist/**", ".next/**"]
     }
   }
 }
