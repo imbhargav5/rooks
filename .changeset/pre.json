@@ -7,5 +7,7 @@
     "rooks": "5.14.0",
     "tsconfig": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "big-rings-notice"
+  ]
 }

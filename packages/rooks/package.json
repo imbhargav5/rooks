@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "5.14.0",
+  "version": "6.0.0-alpha.0",
   "description": "Essential React custom hooks ⚓ to super charge your components!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -33,7 +33,7 @@
     "build:cjs": "tsc -m commonjs --outDir dist/cjs && resolve-tspaths -o dist/cjs",
     "build:umd": "rollup -c rollup.config.ts --configPlugin typescript",
     "build:types": "rollup -c dts.rollup.config.js",
-    "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types"    
+    "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
