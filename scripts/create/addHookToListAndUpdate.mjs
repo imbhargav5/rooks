@@ -1,7 +1,13 @@
 import fs from "fs";
 import path from "path";
 import sortBy from "lodash.sortby";
-import { IHookDesc } from "../types";
+import esMain from "es-main";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const listOfHooksJsonPath = path.join(__dirname, "../hooks-list.json");
 
 export default function({ name, description }) {

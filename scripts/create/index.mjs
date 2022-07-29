@@ -4,7 +4,6 @@ import fsExtra from "fs-extra";
 import path from "path";
 import truncate from "lodash.truncate";
 import addHookToListAndUpdate from "./addHookToListAndUpdate.mjs";
-import { IHookDesc } from "../types";
 
 /**
  * This function performs a global string replace
