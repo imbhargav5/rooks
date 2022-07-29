@@ -6,11 +6,13 @@ on:
   push:
     branches:
       - main
+      - alpha
+      - next
 jobs:
   test:
     name: Build (production)
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'imbhargav5/rooks' && contains('refs/heads/main,github.ref)}}
+    if: ${{ github.repository == 'imbhargav5/rooks' && contains('refs/heads/main,refs/heads/alpha,refs/heads/next',github.ref)}}
     steps:
       - name: "Check if user has write access"
         uses: "lannonbr/repo-permission-check-action@2.0.0"
@@ -37,7 +39,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'imbhargav5/rooks' &&
-      contains('refs/heads/main,github.ref) && github.event_name == 'push' }}
+      contains('refs/heads/main,refs/heads/alpha,refs/heads/next',github.ref) && github.event_name == 'push' }}
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
