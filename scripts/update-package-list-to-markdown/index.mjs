@@ -43,7 +43,7 @@ const updatePackageListToMarkdown = async () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const markdownTemplate = ({ name, description }) =>
       `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
-
+    console.log(hooksList.length);
     const pluginsListMdast = {
       children: hooksList.map(pkg => ({
         children: [fromMarkdown(markdownTemplate(pkg))],
