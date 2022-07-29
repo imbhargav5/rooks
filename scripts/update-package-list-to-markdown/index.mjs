@@ -35,7 +35,7 @@ const updatePackageListToMarkdown = async () => {
 
   const PROJECT_ROOT = await pkgDir(__dirname);
   if (PROJECT_ROOT) {
-    const hooksListJSON = join(PROJECT_ROOT, "./helpers/hooks-list.json");
+    const hooksListJSON = join(PROJECT_ROOT, "./data/hooks-list.json");
 
     const { hooks: hooksList } = JSON.parse(
       readFileSync(hooksListJSON, "utf8")
@@ -45,7 +45,7 @@ const updatePackageListToMarkdown = async () => {
       `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
 
     const pluginsListMdast = {
-      children: hooksList.map((pkg) => ({
+      children: hooksList.map(pkg => ({
         children: [fromMarkdown(markdownTemplate(pkg))],
         spread: false,
         type: "listItem",
@@ -66,7 +66,7 @@ const updatePackageListToMarkdown = async () => {
       type: "paragraph",
     };
 
-    const updateMarkdownFile = (filePath) => {
+    const updateMarkdownFile = filePath => {
       const readmeContentString =
         readFileSync(join(PROJECT_ROOT, filePath), "utf8") ?? "";
       const readmeVFile = remark()
@@ -78,7 +78,7 @@ const updatePackageListToMarkdown = async () => {
     };
 
     updateMarkdownFile("./README.md");
-    updateMarkdownFile("./docs/list-of-hooks.md");
+    updateMarkdownFile("./apps/website/src/pages/list-of-hooks.md");
   } else {
     console.warn("Could not find project root");
   }
