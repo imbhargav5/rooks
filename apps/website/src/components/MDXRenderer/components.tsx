@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Text } from "@nextui-org/react";
 import Image from "next/image";
 import {
