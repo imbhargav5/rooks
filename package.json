@@ -58,7 +58,7 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
-    "contributors:update": "ts-node helpers/update-all-contributors",
+    "contributors:update": "node helpers/update-all-contributors/index.mjs",
     "prepare": "husky install"
   },
   "dependencies": {
