@@ -1,0 +1,12 @@
+.section {
+  padding: 4rem 0;
+}
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+.section ul {
+  margin: 0;
+  padding: 0;
+}
