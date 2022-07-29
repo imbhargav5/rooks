@@ -29,7 +29,12 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
-    "contributors:update": "node scripts/update-all-contributors/index.mjs"
+    "contributors:update": "node scripts/update-all-contributors/index.mjs",
+    "create": "node scripts/create/index.mjs",
+    "new": "yarn run create",
+    "prebuild": "rimraf dist",
+    "update-package-list-to-markdown": "node scripts/update-package-list-to-markdown/index.mjs"
+    
   },
   "husky": {
     "hooks": {

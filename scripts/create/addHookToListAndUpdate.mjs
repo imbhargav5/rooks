@@ -4,7 +4,7 @@ import sortBy from "lodash.sortby";
 import { IHookDesc } from "../types";
 const listOfHooksJsonPath = path.join(__dirname, "../hooks-list.json");
 
-export default function ({ name, description }: IHookDesc) {
+export default function({ name, description }) {
   const listOfHooksJson = fs.readFileSync(listOfHooksJsonPath, "utf-8");
   const obj = JSON.parse(listOfHooksJson);
   obj.hooks.push({ name, description });

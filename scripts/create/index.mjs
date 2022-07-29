@@ -3,7 +3,7 @@ import fs from "fs";
 import fsExtra from "fs-extra";
 import path from "path";
 import truncate from "lodash.truncate";
-import addHookToListAndUpdate from "./addHookToListAndUpdate";
+import addHookToListAndUpdate from "./addHookToListAndUpdate.mjs";
 import { IHookDesc } from "../types";
 
 /**
@@ -13,11 +13,8 @@ import { IHookDesc } from "../types";
  * @param replacement Replacement value
  * @returns The first argument with all occurrences of the needle changed to the replacement
  */
-export const replaceString = (
-  string: string,
-  needle: string,
-  replacement: string
-) => string.split(needle).join(replacement);
+export const replaceString = (string, needle, replacement) =>
+  string.split(needle).join(replacement);
 
 const PROJECT_ROOT = process.cwd();
 
@@ -27,23 +24,23 @@ const filesToRead = [
   "./template/README.md",
 ];
 const filesToWrite = [
-  ({ name }) => `./src/__tests__/${name}.spec.ts`,
-  ({ name }) => `./src/hooks/${name}.ts`,
-  ({ name }) => `./docs/${name}.md`,
+  ({ name }) => `./packages/rooks/src/__tests__/${name}.spec.ts`,
+  ({ name }) => `./packages/rooks/src/hooks/${name}.ts`,
+  ({ name }) => `./apps/website/src/pages/docs/${name}.md`,
 ];
 
-function readFileAsString(relativeFilePath: string) {
+function readFileAsString(relativeFilePath) {
   return fs.readFileSync(path.join(PROJECT_ROOT, relativeFilePath), "utf-8");
 }
 
 function injectValuesIntoTemplate(
-  src: string,
-  { name, packageName, directoryName, description }: IHookDesc
+  src,
+  { name, packageName, directoryName, description }
 ) {
   const trimmedDescription = truncate(description, {
     length: 130,
   });
-  const descriptionWords: string[] = trimmedDescription.split(/\s+/);
+  const descriptionWords = trimmedDescription.split(/\s+/);
   const descriptionSplitUp = descriptionWords.reduce(
     (acc, descriptionWord) => {
       let { currentAccIndex, values } = acc;
@@ -69,7 +66,7 @@ function injectValuesIntoTemplate(
 
   const { values: descriptionArray } = descriptionSplitUp;
 
-  let result: string = src;
+  let result = src;
   result = replaceString(result, "%name%", name);
   result = replaceString(result, "%directoryName%", directoryName ?? "");
   result = replaceString(result, "%packageName%", packageName ?? "");
@@ -87,7 +84,7 @@ const questions = [
     message:
       "Name of the package in hyphen separated words starting with use.For eg: use-regina-phalange",
     default: "use-r",
-    validate(input: string) {
+    validate(input) {
       if (
         input.length > 4 &&
         input.startsWith("use-") &&
@@ -104,7 +101,7 @@ const questions = [
     message:
       "Name of the hook which will be used for it's javascript import etc. For eg: useReginaPhalange",
     default: "useR",
-    validate(input: string) {
+    validate(input) {
       if (input.length > 3 && input.startsWith("use")) {
         return true;
       }
@@ -119,10 +116,10 @@ const questions = [
   },
 ];
 
-inquirer.prompt(questions).then((answers) => {
+inquirer.prompt(questions).then(answers => {
   const { name, packageName, description } = answers;
   const directoryName = packageName.substring(4);
-  const transformedSources = filesToRead.map((filePath) => {
+  const transformedSources = filesToRead.map(filePath => {
     const src = readFileAsString(filePath);
     return injectValuesIntoTemplate(src, {
       name,
@@ -132,11 +129,12 @@ inquirer.prompt(questions).then((answers) => {
     });
   });
 
-  filesToWrite.map((relativeFilePathFromRootOfModule: any, index) => {
+  filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
     const srcToWrite = transformedSources[index];
     if (typeof relativeFilePathFromRootOfModule === "function") {
-      relativeFilePathFromRootOfModule =
-        relativeFilePathFromRootOfModule(answers);
+      relativeFilePathFromRootOfModule = relativeFilePathFromRootOfModule(
+        answers
+      );
     }
     const pathToWriteTo = path.join(
       PROJECT_ROOT,
