@@ -110,11 +110,6 @@ jobs:
           yarn contributors:generate
       - name: generate docs and sidebars
         run: yarn update-docusaurus-sidebars
-      - name: generate changelog
-        if:
-          ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&
-          contains('refs/heads/main',github.ref)}}
-        run: yarn generate:changelog
       - name: create docusaurus version
         if:
           ${{ steps.semantic-release.outputs.new_release_published == 'true' && github.repository == 'imbhargav5/rooks' &&

@@ -1,4 +1,4 @@
-/node_modules
+node_modules
 /.package.json
 package-lock.json
 lib
@@ -27,3 +27,12 @@ translated_docs
 build/
 yarn.lock
 i18n/*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
