@@ -11,6 +11,7 @@
     "Mdast",
     "nocheck",
     "tsconfigs",
+    "tspaths",
     "updation"
   ]
 }

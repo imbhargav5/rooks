@@ -3,11 +3,7 @@
     {
       "label": "Quick Start",
       "collapsed": false,
-      "items": [
-        "getting-started",
-        "motivation",
-        "rooks"
-      ],
+      "items": ["getting-started", "motivation", "rooks"],
       "type": "category"
     },
     {
@@ -36,7 +32,6 @@
         "useInViewRef",
         "useInput",
         "useIntersectionObserverRef",
-        "useInterval",
         "useIntervalWhen",
         "useIsomorphicEffect",
         "useKey",
@@ -44,7 +39,6 @@
         "useKeyRef",
         "useKeys",
         "useLifecycleLogger",
-        "useLocalstorage",
         "useLocalstorageState",
         "useMapState",
         "useMediaMatch",
@@ -59,7 +53,6 @@
         "useOnline",
         "useOutsideClick",
         "useOutsideClickRef",
-        "usePrevious",
         "usePreviousDifferent",
         "usePreviousImmediate",
         "useQueueState",
@@ -67,11 +60,9 @@
         "useRefElement",
         "useSelect",
         "useSelectableList",
-        "useSessionstorage",
         "useSessionstorageState",
         "useStackState",
         "useThrottle",
-        "useTimeout",
         "useTimeoutWhen",
         "useToggle",
         "useUndoState",

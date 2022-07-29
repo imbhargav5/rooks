@@ -32,7 +32,7 @@
     "new": "yarn run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "node helpers/update-package-list-to-markdown/index.mjs",
-    "update-docusaurus-sidebars": "ts-node --project tsconfig-helpers.json  helpers/update-docusaurus-sidebars",
+    "update-docusaurus-sidebars": "node helpers/update-docusaurus-sidebars/index.mjs",
     "update-docs-and-sidebars": "yarn update-package-list-to-markdown && yarn update-docusaurus-sidebars",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:esm": "tsc -m esNext --outDir dist/esm && resolve-tspaths -o dist/esm",

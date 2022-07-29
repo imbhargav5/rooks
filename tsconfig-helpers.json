@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": ["./helpers/**/*.ts", "./helpers/**/*.tsx"],
-  "compilerOptions": {
-    "rootDir": "helpers"
-  }
-}
