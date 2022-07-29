@@ -44,7 +44,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
       - name: ⎔ CI Setup
-      - uses: ./.github/actions/ci-setup
+        uses: ./.github/actions/ci-setup
 
       - name: 🏗 Run build script
         run: yarn run build
