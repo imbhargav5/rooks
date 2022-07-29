@@ -30,8 +30,8 @@ function updateAngle(timeElapsed) {
   // as the target speed and compensate in our calculations if the actual framerate is lower
   // or higher.
   const deltaTime = timeElapsed / 16.666;
-  
-  const speed = (3 * deltaTime);
+
+  const speed = 3 * deltaTime;
   angle = (angle + speed) % 360;
   return (angle * Math.PI) / 180;
 }
@@ -86,7 +86,7 @@ render(<Demo />);
 | Argument value | Type                            | Description                                                                                  | Default value |
 | -------------- | ------------------------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | callback       | `(timeElapsed: number) => void` | The callback function to be executed. timeElapsed is the time in ms since the last raf call. | undefined     |
-| isActive       | boolean                         | The value which while true, keeps the raf running infinitely | undefined                     |
+| isActive       | boolean                         | The value which while true, keeps the raf running infinitely                                 | undefined     |
 
 ### Returns
 

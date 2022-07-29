@@ -29,7 +29,7 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
-    "contributors:update": "node scripts/update-all-contributors/index.mjs"    
+    "contributors:update": "node scripts/update-all-contributors/index.mjs"
   },
   "husky": {
     "hooks": {
@@ -38,18 +38,20 @@
   },
   "lint-staged": {
     "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
-  },  
+  },
   "devDependencies": {
-    "all-contributors-cli": "^6.20.0",
     "@changesets/changelog-github": "^0.4.2",
     "@changesets/cli": "^2.23.0",
     "@manypkg/cli": "^0.19.1",
     "@manypkg/get-packages": "^1.1.3",
+    "all-contributors-cli": "^6.20.0",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "3.3.0",
     "eslint-config-custom": "*",
+    "lint-staged": "^13.0.3",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "^4.7.4"
   },
   "packageManager": "yarn@1.22.18"
 }
