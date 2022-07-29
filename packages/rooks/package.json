@@ -157,5 +157,8 @@
     "custom-hooks",
     "typescript",
     "react-hooks"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
