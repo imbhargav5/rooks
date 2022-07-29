@@ -10,7 +10,9 @@ Mouse position hook for React.
 
 ## Installation
 
+```shell
     npm install --save rooks
+```
 
 ## Importing the hook
 

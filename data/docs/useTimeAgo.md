@@ -43,7 +43,7 @@ render(<Demo />);
 | Argument | Type   | Description    | Default value    |
 | -------- | ------ | -------------- | ---------------- | ----------------------------------- | --------- |
 | input    | Date   | Timestamp      | etc              | Any input that time-ago.js supports | undefined |
-| options  | Object | Options object | { intervalMs:0 } |
+| options  | Object | Options object | \{ intervalMs:0 \} |
 
 #### Options
 

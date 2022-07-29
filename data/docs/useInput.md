@@ -64,7 +64,7 @@ render(<Demo />);
 | Argument     | Type   | Description                 | Default value |
 | ------------ | ------ | --------------------------- | ------------- |
 | initialValue | string | Initial value of the string | ""            |
-| opts         | object | Options                     | {}            |
+| opts         | object | Options                     | \{\}            |
 
 ### Options
 
@@ -76,7 +76,7 @@ render(<Demo />);
 
 | Return value      | Type   | Description                                                                                                          |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| {value, onChange} | Object | Object containing {value : "String", onChange: "function that accepts an event and updates the value of the string"} |
+| \{value, onChange\} | Object | Object containing \{value : "String", onChange: "function that accepts an event and updates the value of the string"\} |
 
 ## Codesandbox Examples
 

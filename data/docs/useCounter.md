@@ -60,7 +60,7 @@ render(<CounterComponent />);
 
 | Return value | Type   | Description                                                                 |
 | ------------ | ------ | --------------------------------------------------------------------------- |
-| counter      | Object | Object containing {value,increment,decrement,incrementBy,decrementBy,reset} |
+| counter      | Object | Object containing \{value,increment,decrement,incrementBy,decrementBy,reset\} |
 
 ---
 
