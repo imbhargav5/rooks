@@ -36,3 +36,4 @@ i18n/*
 
 # turbo
 .turbo
+.vercel
