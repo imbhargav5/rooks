@@ -1,6 +1,0 @@
-{
-  "extends": "../.eslintrc",
-  "rules": {
-    "canonical/filename-match-exported": "off"
-  }
-}

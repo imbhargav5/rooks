@@ -1,1 +1,0 @@
-rollup -c ../../scripts/dts.rollup.config.js && rm -rf dist

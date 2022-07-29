@@ -1,0 +1,30 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "next": "^12.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rooks": "*"
+  },
+  "devDependencies": {
+    "@mdx-js/loader": "^2.1.2",
+    "@next/mdx": "^12.2.3",
+    "@types/node": "^17.0.12",
+    "@types/react": "17.0.37",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "*",
+    "next-transpile-modules": "9.0.0",
+    "rooks": "*",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  },
+  "scripts": {
+    "start": "next start",
+    "build": "next build && next export",
+    "dev": "next dev"
+  }
+}
