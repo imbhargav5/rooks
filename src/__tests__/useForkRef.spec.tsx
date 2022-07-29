@@ -1,17 +1,18 @@
 import { render, getByTestId, fireEvent } from "@testing-library/react";
-import TestRenderer from "react-test-renderer";
-import { useForkRef } from "../hooks/useForkRef";
-import { useEventListenerRef } from "../hooks/useEventListenerRef";
 import React from "react";
+import TestRenderer from "react-test-renderer";
+import { useEventListenerRef } from "../hooks/useEventListenerRef";
+import { useForkRef } from "../hooks/useForkRef";
 
 const { act } = TestRenderer;
 
 describe("useForkRef", () => {
-  let mockCallback;
-  let TestJSX;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let mockCallback = () => {};
+  let TestJSX = () => <div />;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});
-    TestJSX = function () {
+    TestJSX = () => {
       const mouseUpRef = useEventListenerRef("mouseup", mockCallback);
       const mouseDownRef = useEventListenerRef("mousedown", mockCallback);
       const ref = useForkRef(mouseUpRef, mouseDownRef);

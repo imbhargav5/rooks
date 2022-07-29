@@ -1,23 +1,28 @@
-import { noop } from "@/utils/noop";
-import type { Ref } from "react";
+import type { RefObject } from "react";
 import { useEffect, useCallback, useRef, useMemo } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
+import { noop } from "@/utils/noop";
+
+type TrackedKeyEvents = "keydown" | "keypress" | "keyup";
 
 type Options = {
+  /**
+   * Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp
+   */
+  eventTypes?: TrackedKeyEvents[];
+  /**
+   * target mutable ref on which the events should be listened. Doesn't work with callback refs.
+   * Please use useKeyRef instead if you want to use with callback refs.
+   * If no target is specified, events are listened to on the window. Defaults to window.
+   */
+  target?: RefObject<HTMLElement>;
   /**
    * Condition which if true, will enable the event listeners
    */
   when?: boolean;
-  /**
-   * Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp
-   */
-  eventTypes?: Array<number | string>;
-  /**
-   * target ref on which the events should be listened. If no target is specified,
-   * events are listened to on the window
-   */
-  target?: Ref<HTMLElement>;
 };
+
+type Callback = (event: KeyboardEvent) => void;
 
 const defaultOptions = {
   eventTypes: ["keydown"],
@@ -29,39 +34,42 @@ const defaultOptions = {
  *
  * Fires a callback on keyboard events like keyDown, keyPress and keyUp
  *
- * @param {[string|number]} keyList
- * @param {Function} callback
- * @param {Options} options
+ * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
+ * @param {Callback} callback  Callback to fire on keyboard events
+ * @param {Options} options Options
+ * @see {@link https://react-hooks.org/docs/useKey}
  */
 function useKey(
-  input: Array<number | string> | number | string,
-  callback: (e: KeyboardEvent) => any,
-  options_?: Options
+  keys: Array<number | string> | number | string,
+  callback: (event: KeyboardEvent) => void,
+  options?: Options
 ): void {
   const keyList: Array<number | string> = useMemo(() => {
-    if (Array.isArray(input)) {
-      return input;
+    if (Array.isArray(keys)) {
+      return keys;
     } else {
-      return [input];
+      return [keys];
     }
-  }, [input]);
-  const options = (<any>Object).assign({}, defaultOptions, options_);
-  const { when, eventTypes } = options;
-  const callbackRef = useRef<(e: KeyboardEvent) => any>(callback);
-  const { target } = options;
+  }, [keys]);
+  const internalOptions = useMemo(() => {
+    return { ...defaultOptions, ...options };
+  }, [options]);
+  const { when, eventTypes } = internalOptions;
+  const callbackRef = useRef<Callback>(callback);
+  const { target } = internalOptions;
 
   useEffect(() => {
     callbackRef.current = callback;
   });
 
   const handle = useCallback(
-    (e: KeyboardEvent) => {
+    (event: KeyboardEvent) => {
       if (
         keyList.some((identifier) =>
-          doesIdentifierMatchKeyboardEvent(e, identifier)
+          doesIdentifierMatchKeyboardEvent(event, identifier)
         )
       ) {
-        callbackRef.current(e);
+        callbackRef.current(event);
       }
     },
     [keyList]
@@ -69,19 +77,35 @@ function useKey(
 
   useEffect(() => {
     if (when && typeof window !== "undefined") {
-      const targetNode = target ? target.current : window;
-      eventTypes.forEach((eventType) => {
-        targetNode && targetNode.addEventListener(eventType, handle);
-      });
+      // If target is defined by the user
+      if (target) {
+        const targetNode = target.current;
+        if (targetNode) {
+          for (const eventType of eventTypes) {
+            targetNode.addEventListener(eventType, handle);
+          }
 
-      return () => {
-        eventTypes.forEach((eventType) => {
-          targetNode && targetNode.removeEventListener(eventType, handle);
-        });
-      };
+          return () => {
+            for (const eventType of eventTypes) {
+              targetNode.removeEventListener(eventType, handle);
+            }
+          };
+        }
+      } else {
+        for (const eventType of eventTypes) {
+          window.addEventListener(eventType, handle);
+        }
+
+        return () => {
+          for (const eventType of eventTypes) {
+            window.removeEventListener(eventType, handle);
+          }
+        };
+      }
     }
+
     return noop;
-  }, [when, eventTypes, keyList, target, callback]);
+  }, [when, eventTypes, keyList, target, callback, handle]);
 }
 
 export { useKey };

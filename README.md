@@ -24,6 +24,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - Counter hook for React.
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
+*   [useDebouncedValue](https://react-hooks.org/docs/useDebouncedValue) - Tracks another value and gets updated in a debounced way.
 *   [useDidMount](https://react-hooks.org/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://react-hooks.org/docs/useDidUpdate) - componentDidUpdate hook for react
 *   [useDimensionsRef](https://react-hooks.org/docs/useDimensionsRef) - Easily grab dimensions of an element with a ref using this hook
@@ -35,6 +36,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useFreshTick](https://react-hooks.org/docs/useFreshTick) - Like use-fresh-ref but specifically for functions
 *   [useFullscreen](https://react-hooks.org/docs/useFullscreen) - Use full screen api for making beautiful and emersive experinces.
 *   [useGeolocation](https://react-hooks.org/docs/useGeolocation) - A hook to provide the geolocation info on client side.
+*   [useGetIsMounted](https://react-hooks.org/docs/useGetIsMounted) - Checks if a component is mounted or not at the time. Useful for async effects
 *   [useInViewRef](https://react-hooks.org/docs/useInViewRef) - Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.
 *   [useInput](https://react-hooks.org/docs/useInput) - Input hook for React.
 *   [useIntersectionObserverRef](https://react-hooks.org/docs/useIntersectionObserverRef) - A hook to register an intersection observer listener.
@@ -66,6 +68,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [usePreviousImmediate](https://react-hooks.org/docs/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 *   [useQueueState](https://react-hooks.org/docs/useQueueState) - A React hook that manages state in the form of a queue
 *   [useRaf](https://react-hooks.org/docs/useRaf) - A continuously running requestAnimationFrame hook for React
+*   [useRefElement](https://react-hooks.org/docs/useRefElement) - Helps bridge gap between callback ref and state
 *   [useSelect](https://react-hooks.org/docs/useSelect) - Select values from a list easily. List selection hook for react.
 *   [useSelectableList](https://react-hooks.org/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [useSessionstorage](https://react-hooks.org/docs/useSessionstorage) - Session storage react hook. Easily manage session storage values.
@@ -89,7 +92,7 @@ Essential React custom hooks ⚓ to super charge your components!
 
 <!--hookscount start-->
 
-✅ Collection of 63 hooks as standalone modules.
+✅ Collection of 66 hooks as standalone modules.
 
 <!--hookscount end-->
 

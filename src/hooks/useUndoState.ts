@@ -1,36 +1,47 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from "react";
+import type {
+  UseUndoStateOptions,
+  UseUndoStatePushFunction,
+  UseUndoStateReturnValue,
+} from "@/types/types";
+import type { ExcludeFunction } from "@/types/utils";
 
-type UndoStateOptions = {
-  maxSize: number;
-};
-
-const defaultOptions: UndoStateOptions = { maxSize: 100 };
+const defaultOptions: UseUndoStateOptions = { maxSize: 100 };
 
 /**
  * useUndoState hook
  * Drop in replacement for useState hook but with undo functionality.
  *
- * @param {any} defaultValue
- * @param {UndoStateOptions} [{ maxSize }=defaultOptions]
- * @returns {[any, Function, Function]}
+ * @typedef UndoStateOptions
+ * @type {object}
+ * @property {number} maxSize - Maximum number of states to keep in the undo stack.
+ * @param {any} defaultValue - Default value to use for the state. This will be the first value in the undo stack.
+ * @param {UseUndoStateOptions} options - Options for the undo state. Currently takes the maxSize option.
+ * @returns {UseUndoStateReturnValue}
+ * @see {@link https://react-hooks.org/docs/useUndoState}
  */
-const useUndoState = (
-  defaultValue: any,
-  options?: UndoStateOptions
-): [any, (previousState: any) => any, () => void] => {
-  const { maxSize } = Object.assign({}, defaultOptions, options);
-  const [value, setValue] = useState([defaultValue]);
+const useUndoState = <T>(
+  defaultValue: ExcludeFunction<T>,
+  options?: UseUndoStateOptions
+): UseUndoStateReturnValue<T> => {
+  const { maxSize } = useMemo(() => {
+    return { ...defaultOptions, ...options };
+  }, [options]);
 
-  const push = useCallback(
-    (setterOrValue) => {
+  const [value, setValue] = useState<Array<ExcludeFunction<T>>>([defaultValue]);
+
+  const push: UseUndoStatePushFunction<ExcludeFunction<T>> = useCallback(
+    (argument) => {
       return setValue((current) => {
         const restValues =
           current.length >= maxSize ? current.slice(0, maxSize) : current;
 
-        if (typeof setterOrValue === 'function') {
-          return [setterOrValue(current[0]), ...restValues];
+        if (typeof argument === "function") {
+          // I dislike this type assertion, but it's the only way to get the type to match
+          // as the type guard doesn't seem to be working here.
+          return [(argument as Function)(current[0]), ...restValues];
         } else {
-          return [setterOrValue, ...restValues];
+          return [argument, ...restValues];
         }
       });
     },

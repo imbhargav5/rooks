@@ -5,14 +5,19 @@ import type {
   OptionalIndicesValues,
 } from "../types/index-value";
 
-function warnIfBothValueAndIndexAreProvided(functionName, object) {
-  if (Object.values(object).every((v) => typeof v !== "undefined")) {
+function warnIfBothValueAndIndexAreProvided<T>(
+  functionName: string,
+  object: OptionalIndexValue<T> | OptionalIndicesValues<T>
+) {
+  if (Object.values(object).every((value) => typeof value !== "undefined")) {
     console.warn(
       `${functionName}. Expected either ${Object.keys(object).join(
         " or "
       )} to be provided. However all were provided`
     );
-  } else if (Object.values(object).every((v) => typeof v === "undefined")) {
+  } else if (
+    Object.values(object).every((value) => typeof value === "undefined")
+  ) {
     console.warn(
       `${functionName}. ${Object.keys(object).join(" , ")} are all undefined.`
     );
@@ -22,8 +27,8 @@ function warnIfBothValueAndIndexAreProvided(functionName, object) {
 type UseMultiSelectableListReturnType<T> = [
   Array<number[] | T[]>,
   {
-    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
     matchSelection: (parameters: OptionalIndexValue<T>) => boolean;
+    toggleSelection: (parameters: OptionalIndexValue<T>) => () => void;
     updateSelections: ({
       indices,
       values,
@@ -35,9 +40,10 @@ type UseMultiSelectableListReturnType<T> = [
  * useMultiSelectableList
  * A custom hook to easily select multiple values from a list
  *
- * @param list
- * @param initialSelectIndices
- * @param allowUnselected
+ * @param list - The list of values to select from
+ * @param initialSelectIndices - The indices of the initial selections
+ * @param allowUnselected - Whether or not to allow unselected values
+ * @see {@link https://react-hooks.org/docs/useMultiSelectableList}
  */
 function useMultiSelectableList<T>(
   list: T[] = [],
@@ -61,8 +67,10 @@ function useMultiSelectableList<T>(
 
           return;
         }
+
         setCurrentIndices(indices);
       } else if (typeof values !== "undefined") {
+        // eslint-disable-next-line unicorn/no-array-reduce
         const valueIndices = list.reduce((accumulator, current, index) => {
           if (values.includes(current)) {
             const array = [...accumulator, index];
@@ -86,7 +94,7 @@ function useMultiSelectableList<T>(
   };
 
   const toggleSelectionByIndex = useCallback(
-    (index) => {
+    (index: number) => {
       let newIndices;
       if (!currentIndices.includes(index)) {
         newIndices = [...currentIndices, index];
@@ -97,6 +105,7 @@ function useMultiSelectableList<T>(
           newIndices.splice(indexOfIndex, 1);
         }
       }
+
       if (newIndices.length > 0) {
         setCurrentIndices(newIndices);
       } else if (allowUnselected) {

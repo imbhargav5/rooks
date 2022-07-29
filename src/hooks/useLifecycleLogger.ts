@@ -1,5 +1,5 @@
 import { useDidMount } from "./useDidMount";
-import { useUpdateEffect } from "./useUpdateEffect";
+import { useDidUpdate } from "./useDidUpdate";
 import { useWillUnmount } from "./useWillUnmount";
 
 /**
@@ -7,7 +7,7 @@ import { useWillUnmount } from "./useWillUnmount";
  * logs parameters as component transitions through lifecycles
  *
  * @param componentName Name of the component
- * @param rest
+ * @param {...*} otherArgs Other arguments to log
  */
 const useLifecycleLogger = (
   componentName: string = "Component",
@@ -19,7 +19,7 @@ const useLifecycleLogger = (
     return () => console.log(`${componentName} unmounted`);
   });
 
-  useUpdateEffect(() => {
+  useDidUpdate(() => {
     console.log(`${componentName} updated`, ...otherArgs);
   });
 

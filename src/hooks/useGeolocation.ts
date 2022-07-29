@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 
 type IGetGeoLocation = {
+  isError: boolean;
   lat?: number;
   lng?: number;
-  isError: boolean;
   message: string;
 };
 
 type IOptions = {
   enableHighAccuracy?: boolean;
-  timeout?: number;
   maximumAge?: number;
+  timeout?: number;
   when?: boolean;
 };
 
 function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
   return new Promise((resolve, reject) => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
@@ -29,11 +30,13 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
           });
         },
         (error) => {
+          // eslint-disable-next-line prefer-promise-reject-errors
           reject({ isError: true, message: error.message });
         },
         options
       );
     } else {
+      // eslint-disable-next-line prefer-promise-reject-errors
       reject({
         isError: true,
         message: "Geolocation is not supported for this Browser/OS.",
@@ -41,14 +44,6 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
     }
   });
 }
-
-// interface IUseGeoLocationHook {
-//   when?: boolean;
-// }
-
-// const defaultHookOptions = {
-//   when: true
-// };
 
 const defaultGeoLocationOptions = {
   enableHighAccuracy: false,
@@ -84,8 +79,9 @@ function useGeolocation(
         setGeoObject(error);
       }
     }
+
     if (when) {
-      getGeoCode();
+      void getGeoCode();
     }
   }, [when, enableHighAccuracy, timeout, maximumAge]);
 

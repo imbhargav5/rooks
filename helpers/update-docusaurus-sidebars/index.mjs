@@ -2,9 +2,16 @@ import { writeFileSync, readFileSync } from "fs";
 import pkgDir from "pkg-dir";
 import { join } from "path";
 import { readFileSync as _readFileSync } from "fs";
+import esMain from "es-main";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function updateDocusaurusSidebars() {
-  const PROJECT_ROOT: string | any = await pkgDir(__dirname);
+  const PROJECT_ROOT = await pkgDir(__dirname);
+  console.log(PROJECT_ROOT);
   const hooksListJSONFilePath = join(PROJECT_ROOT, "./helpers/hooks-list.json");
   const { hooks: hooksList } = JSON.parse(
     _readFileSync(hooksListJSONFilePath, "utf-8")
@@ -43,6 +50,6 @@ async function updateDocusaurusSidebars() {
 
 export default updateDocusaurusSidebars;
 
-if (require.main === module) {
+if (esMain(import.meta)) {
   updateDocusaurusSidebars();
 }

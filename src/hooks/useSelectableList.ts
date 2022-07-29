@@ -2,14 +2,19 @@
 import { useCallback, useState } from "react";
 import type { OptionalIndexValue } from "../types/index-value";
 
-function warnIfBothValueAndIndexAreProvided(functionName, object) {
-  if (Object.values(object).every((v) => typeof v !== "undefined")) {
+function warnIfBothValueAndIndexAreProvided<T>(
+  functionName: string,
+  object: OptionalIndexValue<T>
+) {
+  if (Object.values(object).every((value) => typeof value !== "undefined")) {
     console.warn(
       `${functionName}. Expected either ${Object.keys(object).join(
         " or "
       )} to be provided. However all were provided`
     );
-  } else if (Object.values(object).every((v) => typeof v === "undefined")) {
+  } else if (
+    Object.values(object).every((value) => typeof value === "undefined")
+  ) {
     console.warn(
       `${functionName}. ${Object.keys(object).join(" , ")} are all undefined.`
     );
@@ -31,9 +36,10 @@ type UseSelectableListReturnType<T> = [
  * useSelectableList
  * Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
  *
- * @param list
- * @param initialIndex
+ * @param list - The list of values to select from
+ * @param initialIndex  - The index of the initial selection
  * @param allowUnselected
+ * @see {@link https://react-hooks.org/docs/useSelectableList}
  */
 function useSelectableList<T>(
   list: T[] = [],

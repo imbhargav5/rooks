@@ -4,5 +4,15 @@
   "language": "en",
   "minWordLength": 5,
   "version": "0.2",
-  "words": ["tsconfigs", "localstorage", "imbhargav5", "data-testid"]
+  "words": [
+    "contributorsrc",
+    "data-testid",
+    "imbhargav5",
+    "localstorage",
+    "Mdast",
+    "nocheck",
+    "tsconfigs",
+    "tspaths",
+    "updation"
+  ]
 }

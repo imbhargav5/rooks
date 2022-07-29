@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
  *
  * @param initialValue Initial value of the map
  */
-function useMapState<T, K extends keyof T>(
+function useMapState<T extends {}, K extends keyof T>(
   initialValue: T
 ): [
   T,
@@ -15,13 +15,13 @@ function useMapState<T, K extends keyof T>(
     remove: (key: K) => void;
     removeAll: () => void;
     removeMultiple: (...keys: K[]) => void;
-    set: (key: K, value: any) => void;
+    set: (key: K, value: T[K]) => void;
     setMultiple: (next: Partial<T>) => void;
   }
 ] {
   const [map, setMap] = useState(initialValue);
 
-  const set = useCallback((key: K, value: any) => {
+  const set = useCallback((key: K, value: T[K]) => {
     setMap((currentMap) => ({
       ...currentMap,
       [key]: value,
@@ -35,7 +35,7 @@ function useMapState<T, K extends keyof T>(
     [map]
   );
 
-  const setMultiple = useCallback((nextMap: { [Key in keyof T]: any }) => {
+  const setMultiple = useCallback((nextMap: T) => {
     setMap((currentMap) => ({
       ...currentMap,
       ...nextMap,
@@ -47,6 +47,7 @@ function useMapState<T, K extends keyof T>(
       setMap((currentMap) => {
         const nextMap = { ...currentMap };
         for (const key of keys) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete nextMap[key];
         }
 
@@ -60,6 +61,7 @@ function useMapState<T, K extends keyof T>(
     (key: K) => {
       setMap((currentMap) => {
         const nextMap = { ...currentMap };
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete nextMap[key];
 
         return nextMap;
@@ -72,7 +74,11 @@ function useMapState<T, K extends keyof T>(
     setMap((currentMap) => {
       const nextMap = { ...currentMap };
       for (const key in nextMap) {
-        delete nextMap[key];
+        // eslint-disable-next-line no-prototype-builtins
+        if (nextMap.hasOwnProperty(key)) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete nextMap[key];
+        }
       }
 
       return nextMap;

@@ -1,43 +1,47 @@
 import { render } from "@testing-library/react";
-import { useRaf } from "../hooks/useRaf";
 import React, { useRef } from "react";
+import { useRaf } from "../hooks/useRaf";
 
 describe("useRaf", () => {
-  let TestJSX;
+  let TestJSX = () => <canvas />;
   let angle = 0;
   function updateAngle() {
     angle = (angle + 2) % 360;
     return (angle * Math.PI) / 180;
   }
-  function App() {
-    const canvasRef = useRef(null);
+
+  const App = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     useRaf(() => {
-      if (canvasRef && canvasRef.current) {
+      if (canvasRef.current) {
         const screenRatio = window.devicePixelRatio || 1;
-        let angle = updateAngle();
-        const canvas: any = canvasRef.current;
-        if (canvas) var ctx = canvas.getContext("2d");
-        ctx.save();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.scale(screenRatio, screenRatio);
-        ctx.fillStyle = "midnightblue";
-        ctx.globalAlpha = 1;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "yellow";
-        ctx.lineWidth = 2;
-        ctx.translate(50, 50);
-        ctx.rotate(angle);
-        ctx.fillRect(-20, -20, 40, 40);
-        ctx.restore();
+        const angle2 = updateAngle();
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        if (context) {
+          context.save();
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.scale(screenRatio, screenRatio);
+          context.fillStyle = "midnightblue";
+          context.globalAlpha = 1;
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.fillStyle = "yellow";
+          context.lineWidth = 2;
+          context.translate(50, 50);
+          context.rotate(angle2);
+          context.fillRect(-20, -20, 40, 40);
+          context.restore();
+        }
       }
     }, true);
     return (
       <canvas
         ref={canvasRef}
-        style={{ height: `100px`, width: `100%`, background: "grey" }}
+        style={{ background: "grey", height: `100px`, width: `100%` }}
       />
     );
-  }
+  };
+
   beforeEach(() => {
     TestJSX = App;
   });

@@ -1,51 +1,45 @@
-import { noop } from "@/utils/noop";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { noop } from "@/utils/noop";
+
+type Callback<T> = (...args: T[]) => void;
 
 /**
  * useThrottle
  * Throttles a function with a timeout and ensures
  * that the callback function runs at most once in that duration
  *
- * @param fn The callback to throttle
+ * @param callback The callback to throttle
  * @param timeout Throttle timeout
+ * @see {@link https://react-hooks.org/docs/useThrottle}
  */
-function useThrottle(
-  function_: Function,
+function useThrottle<T>(
+  callback: Callback<T>,
   timeout: number = 300
-): [(...args: any) => any, boolean] {
+): [Callback<T>, boolean] {
   const [ready, setReady] = useState(true);
   const timerRef = useRef<number | undefined>(undefined);
 
-  if (!function_ || typeof function_ !== "function") {
-    throw new Error(
-      "As a first argument, you need to pass a function to useThrottle hook."
-    );
-  }
-
   const throttledFunction = useCallback(
-    (...args) => {
+    (...args: T[]) => {
       if (!ready) {
         return;
       }
 
       setReady(false);
-      function_(...args);
+      callback(...args);
     },
-    [ready, function_]
+    [ready, callback]
   );
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (!ready) {
-        timerRef.current = window.setTimeout(() => {
-          setReady(true);
-        }, timeout);
+    if (!ready) {
+      timerRef.current = window.setTimeout(() => {
+        setReady(true);
+      }, timeout);
 
-        return () => window.clearTimeout(timerRef.current);
-      }
-    } else {
-      console.warn("useThrottle: window is undefined.");
+      return () => window.clearTimeout(timerRef.current);
     }
+
     return noop;
   }, [ready, timeout]);
 

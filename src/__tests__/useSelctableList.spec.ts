@@ -119,7 +119,7 @@ describe("useSelctableList", () => {
       });
       const [currentIndex, currentValue] = internalResult.current[0];
       expect(currentIndex).toBe(-1);
-      expect(currentValue).toBe(undefined);
+      expect(currentValue).toBeUndefined();
     });
 
     it("shouldn't toggle selected index when allowUnselected = false", () => {
@@ -152,7 +152,7 @@ describe("useSelctableList", () => {
       const [currentIndex, currentValue] = internalResult.current[0];
 
       expect(currentIndex).toBe(-1);
-      expect(currentValue).toBe(undefined);
+      expect(currentValue).toBeUndefined();
     });
 
     it("shouldn't toggle selected value when allowUnselected", () => {

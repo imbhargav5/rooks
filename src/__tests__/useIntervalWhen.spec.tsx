@@ -7,19 +7,29 @@ import TestRenderer from "react-test-renderer";
 import { useIntervalWhen } from "../hooks/useIntervalWhen";
 
 const { act } = TestRenderer;
-
+type UseHook = (
+  when: boolean,
+  eager?: boolean
+) => {
+  currentValue: number;
+};
 describe("useIntervalWhen", () => {
-  let useHook;
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  let useHook: UseHook = () => ({
+    currentValue: 5,
+  });
+
   const EAGER = true;
 
   beforeEach(() => {
     jest.useFakeTimers();
     jest.spyOn(global, "setInterval");
-    useHook = function (when, eager = false) {
+    useHook = function (when: boolean, eager: boolean = false) {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
         setCurrentValue(currentValue + 1);
       }
+
       useIntervalWhen(
         () => {
           increment();

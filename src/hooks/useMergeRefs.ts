@@ -1,13 +1,16 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+import type { MutableRefObject, RefCallback } from "react";
 import { useMemo } from "react";
-import type { HTMLElementOrNull, CallbackRef, AnyRef } from "../utils/utils";
+import type { PossibleRef } from "../utils/utils";
 
-function setRef(ref: AnyRef, value: HTMLElementOrNull) {
+function setRef<T>(ref: PossibleRef<T>, value: T) {
   if (typeof ref === "function") {
     ref(value);
-  } else if (ref) {
-    ref.current = value;
+  } else if (ref !== null && ref !== undefined) {
+    (ref as MutableRefObject<T>).current = value;
   }
 }
+
 /**
  * useMergeRefs
  * Merges multiple refs into a single function ref.
@@ -16,18 +19,18 @@ function setRef(ref: AnyRef, value: HTMLElementOrNull) {
  *
  * @param refs
  */
-function useMergeReferences(...references: AnyRef[]): CallbackRef | null {
+export function useMergeRefs<T>(
+  ...refs: Array<PossibleRef<T>>
+): RefCallback<T> | null {
   return useMemo(() => {
-    if (references.every((ref) => ref === null)) {
+    if (refs.every((ref) => ref === null)) {
       return null;
     }
 
-    return (refValue) => {
-      references.forEach((ref) => {
-        setRef(ref, refValue);
-      });
+    return (refValue: T) => {
+      for (const ref of refs) {
+        setRef<T>(ref, refValue);
+      }
     };
-  }, [...references]);
+  }, [refs]);
 }
-
-export { useMergeReferences as useMergeRefs };

@@ -10,8 +10,27 @@ const { act } = TestRenderer;
 
 // eslint-disable-next-line jest/no-disabled-tests
 describe.skip("useFreshTick", () => {
-  let useHook;
-  let intervalCallback = jest.fn();
+  const intervalCallback = jest.fn();
+  let useHook = function () {
+    const [currentValue, setCurrentValue] = useState(0);
+    function increment() {
+      intervalCallback();
+      setCurrentValue(currentValue + 1);
+    }
+
+    const freshTick = useFreshTick(increment);
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        freshTick();
+      }, 1_000);
+
+      return () => clearInterval(intervalId);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return { currentValue };
+  };
+
   beforeEach(() => {
     jest.useFakeTimers("modern");
     jest.spyOn(global, "setInterval");
@@ -21,6 +40,7 @@ describe.skip("useFreshTick", () => {
         intervalCallback();
         setCurrentValue(currentValue + 1);
       }
+
       const freshTick = useFreshTick(increment);
       useEffect(() => {
         const intervalId = setInterval(() => {
@@ -28,6 +48,7 @@ describe.skip("useFreshTick", () => {
         }, 1_000);
 
         return () => clearInterval(intervalId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
       return { currentValue };
@@ -55,18 +76,8 @@ describe.skip("useFreshTick", () => {
     });
   });
 
-  // it("should start timer when started with start function in array destructuring", () => {
-  //     jest.useFakeTimers();
-  //     const { result } = renderHook(() => useHook());
-  //     act(() => {
-  //         const [start] = result.current.intervalHandler;
-  //         start();
-  //     });
-  //     act(() => {
-  //       jest.advanceTimersByTime(1000);
-  //     });
-  //     expect(setInterval).toHaveBeenCalledTimes(1);
-  //     expect(result.current.currentValue).toBe(1);
-  //     jest.useRealTimers();
-  //   });
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.todo(
+    "should start timer when started with start function in array destructuring"
+  );
 });

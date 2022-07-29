@@ -5,10 +5,10 @@ function useStackState<T>(initialList: T[]): [
   {
     clear: () => void;
     isEmpty: () => boolean;
-    push: (item: T) => number;
-    pop: () => T | undefined;
-    peek: () => T | undefined;
     length: number;
+    peek: () => T | undefined;
+    pop: () => T | undefined;
+    push: (item: T) => number;
   },
   T[]
 ] {

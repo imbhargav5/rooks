@@ -1,21 +1,22 @@
+// @ts-nocheck
 import { useState, useCallback, useRef } from "react";
 import { useDocumentEventListener } from "./useDocumentEventListener";
 import { warning } from "./warning";
 
-type EventCallback = (this: Document, event_: any) => any;
+type EventCallback = (this: Document, event_: unknown) => unknown;
 type OnChangeEventCallback = (
   this: Document,
-  event_: any,
+  event_: unknown,
   isOpen: boolean
-) => any;
+) => unknown;
 
 type NormalizedFullscreenApi = {
-  requestFullscreen: string;
   exitFullscreen: string;
   fullscreenElement: string;
   fullscreenEnabled: string;
   fullscreenchange: string;
   fullscreenerror: string;
+  requestFullscreen: string;
 };
 
 const getFullscreenControls = (): NormalizedFullscreenApi => {
@@ -66,31 +67,44 @@ const getFullscreenControls = (): NormalizedFullscreenApi => {
 
   const returnValue = {} as NormalizedFullscreenApi;
 
-  functionMap.forEach((functionSet) => {
+  for (const functionSet of functionMap) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (functionSet && functionSet[1] in document) {
-      functionSet.forEach((_function, index) => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      for (const [index, _function] of functionSet.entries()) {
         returnValue[functionMap[0][index]] = functionSet[index];
-      });
+      }
     }
-  });
+  }
 
   return returnValue;
 };
+
 type NoopFunction = () => void;
 
 type FullscreenApi = {
-  isEnabled: boolean;
-  toggle: NoopFunction | ((element?: HTMLElement) => Promise<unknown>); // toggle
-
-  /** @deprecated Please use useFullScreen({onChange : function() {}}) instead. */
-  onChange: NoopFunction | ((callback: OnChangeEventCallback) => void); // onchange
-
-  /** @deprecated Please use useFullScreen({onError : function() {}}) instead. */
-  onError: NoopFunction | ((callback: EventCallback) => void); // onerror
-  request: NoopFunction | ((element?: HTMLElement) => Promise<unknown>); // request
-  exit: NoopFunction | (() => Promise<unknown>); // exit
-  isFullscreen: boolean; // isFullscreen
+  // isFullscreen
   element: HTMLElement | null | undefined;
+  // request
+  exit: NoopFunction | (() => Promise<unknown>);
+
+  isEnabled: boolean;
+
+  // exit
+  isFullscreen: boolean;
+  // toggle
+  /**
+   * @deprecated Please use useFullScreen({onChange : function() {}}) instead.
+   */
+  onChange: NoopFunction | ((callback: OnChangeEventCallback) => void);
+  // onchange
+  /**
+   * @deprecated Please use useFullScreen({onError : function() {}}) instead.
+   */
+  onError: NoopFunction | ((callback: EventCallback) => void);
+  // onerror
+  request: NoopFunction | ((element?: HTMLElement) => Promise<unknown>);
+  toggle: NoopFunction | ((element?: HTMLElement) => Promise<unknown>);
 };
 
 const noop: NoopFunction = () => {};
@@ -145,14 +159,7 @@ function warnDeprecatedOnChangeAndOnErrorUsage() {
  * useFullscreen
  * A hook that helps make the document fullscreen
  */
-function useFullscreen(
-  options: FullScreenOptions = {}
-): FullscreenApi {
-  if (typeof window === "undefined") {
-    console.warn("useFullscreen: window is undefined.");
-
-    return defaultValue;
-  }
+function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
   const {
     onChange: onChangeArgument,
     onError: onErrorArgument,
@@ -167,32 +174,40 @@ function useFullscreen(
     document[fullscreenControls.fullscreenElement]
   );
 
-  const request = useCallback(async (element?: HTMLElement) => {
-    try {
-      const finalElement = element || document.documentElement;
+  const request = useCallback(
+    // eslint-disable-next-line consistent-return
+    async (internalElement?: HTMLElement) => {
+      try {
+        const finalElement = internalElement ?? document.documentElement;
 
-      return await finalElement[fullscreenControls.requestFullscreen](
-        requestFullscreenOptions
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+        // eslint-disable-next-line @typescript-eslint/return-await
+        return await finalElement[fullscreenControls.requestFullscreen](
+          requestFullscreenOptions
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [fullscreenControls.requestFullscreen, requestFullscreenOptions]
+  );
 
+  // eslint-disable-next-line consistent-return
   const exit = useCallback(async () => {
     if (element) {
       try {
+        // eslint-disable-next-line @typescript-eslint/return-await
         return await document[fullscreenControls.exitFullscreen]();
       } catch (error) {
         console.warn(error);
       }
     }
-  }, [element]);
+  }, [element, fullscreenControls.exitFullscreen]);
 
   const toggle = useCallback(
+    // eslint-disable-next-line no-confusing-arrow
     (newElement?: HTMLElement) =>
-      Boolean(element) ? exit() : newElement ? request(newElement) : null,
-    [element]
+      element ? exit() : newElement ? request(newElement) : null,
+    [element, exit, request]
   );
 
   const onChangeDeprecatedHandlerRef = useRef<Function>(noop);
@@ -225,14 +240,21 @@ function useFullscreen(
       setIsFullscreen(false);
       setElement(null);
     }
+
     onChangeArgument?.call(document, event, isOpen);
-    onChangeDeprecatedHandlerRef.current?.call(document, event, isOpen);
+    onChangeDeprecatedHandlerRef.current.call(document, event, isOpen);
   });
 
   useDocumentEventListener(fullscreenControls.fullscreenerror, (event) => {
     onErrorArgument?.call(document, event);
-    onErrorDeprecatedHandlerRef.current?.call(document, event);
+    onErrorDeprecatedHandlerRef.current.call(document, event);
   });
+
+  if (typeof window === "undefined") {
+    console.warn("useFullscreen: window is undefined.");
+
+    return defaultValue;
+  }
 
   return {
     element,

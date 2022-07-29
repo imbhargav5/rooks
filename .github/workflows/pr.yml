@@ -13,7 +13,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: "16"
+          node-version: 18.7
       - run: git config user.email "me@imbhargav5.com"
       - run: git config user.name "Bhargav Ponnapalli"
       - name: Get yarn cache directory path

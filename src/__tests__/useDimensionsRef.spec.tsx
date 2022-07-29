@@ -21,17 +21,22 @@ describe("useDimensionsRef", () => {
   });
 
   describe("usage", () => {
-    let App;
+    let App = () => <div />;
 
     beforeEach(() => {
+      jest
+        .spyOn(Element.prototype, "getBoundingClientRect")
+        .mockImplementation(() => new window.DOMRect(0, 0, 120, 300));
+      jest
+        .spyOn(window, "requestAnimationFrame")
+        .mockImplementation((callback: Function) => callback());
+
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (typeof window !== "undefined" && !window.DOMRect) {
         (window as { DOMRect: typeof DOMRect }).DOMRect = DOMRectPolyfill;
       }
-      jest
-        .spyOn(Element.prototype, "getBoundingClientRect")
-        .mockImplementation(() => new DOMRect(0, 0, 120, 300));
 
-      App = function () {
+      App = () => {
         const [ref, dimensions] = useDimensionsRef();
 
         return (
@@ -44,22 +49,15 @@ describe("useDimensionsRef", () => {
         );
       };
     });
-    afterEach(cleanup);
+    afterEach(() => {
+      (window.requestAnimationFrame as jest.Mock).mockRestore();
+      cleanup();
+    });
 
     it("gets called if a state value changes", () => {
       const { getByTestId } = render(<App />);
       const valueElement = getByTestId("value");
-      expect(valueElement.textContent).toEqual("120");
+      expect(valueElement.textContent).toBe("120");
     });
-  });
-  beforeEach(() => {
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
-    jest
-      .spyOn(window, "requestAnimationFrame")
-      .mockImplementation((callback: Function) => callback());
-  });
-
-  afterEach(() => {
-    (window.requestAnimationFrame as jest.Mock).mockRestore();
   });
 });
