@@ -5,11 +5,9 @@ import { useMutationObserver } from "./useMutationObserver";
 
 /**
  * @param element HTML element whose boundingclientrect is needed
- * @returns ClientRect
+ * @returns DOMRect
  */
-function getBoundingClientRect(
-  element: HTMLElement
-): ClientRect | DOMRect | null {
+function getBoundingClientRect(element: HTMLElement): DOMRect | null {
   return element.getBoundingClientRect();
 }
 
@@ -17,16 +15,17 @@ function getBoundingClientRect(
  * useBoundingclientRect hook
  *
  * @param ref The React ref whose ClientRect is needed
- * @returns ClientRect
+ * @returns DOMRect | null
+ * @see {@link https://react-hooks.org/docs/useBoundingclientRect}
  */
 function useBoundingclientrect(
   ref: MutableRefObject<HTMLElement | null>
-): ClientRect | DOMRect | null {
-  const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
+): DOMRect | null {
+  const [domRect, setDomRect] = useState<DOMRect | null>(null);
 
   const update = useCallback(() => {
-    setValue(ref.current ? getBoundingClientRect(ref.current) : null);
-  }, []);
+    setDomRect(ref.current ? getBoundingClientRect(ref.current) : null);
+  }, [ref]);
 
   useDidMount(() => {
     update();
@@ -34,7 +33,7 @@ function useBoundingclientrect(
 
   useMutationObserver(ref, update);
 
-  return value;
+  return domRect;
 }
 
 export { useBoundingclientrect };

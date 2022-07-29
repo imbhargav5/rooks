@@ -2,7 +2,7 @@ import { renderHook, act } from "@testing-library/react-hooks";
 import { useSelect } from "../hooks/useSelect";
 
 describe("useSelect", () => {
-  test("should return correct value at index", () => {
+  it("should return correct value at index", () => {
     let array = [1, 2];
     const { result, rerender } = renderHook(() => useSelect(array, 0));
 

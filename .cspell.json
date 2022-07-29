@@ -5,11 +5,14 @@
   "minWordLength": 5,
   "version": "0.2",
   "words": [
+    "contributorsrc",
     "data-testid",
     "imbhargav5",
     "localstorage",
+    "Mdast",
     "nocheck",
     "tsconfigs",
+    "tspaths",
     "updation"
   ]
 }

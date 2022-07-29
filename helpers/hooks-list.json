@@ -85,10 +85,6 @@
       "description": "A hook to register an intersection observer listener."
     },
     {
-      "name": "useInterval",
-      "description": "setInterval hook for React."
-    },
-    {
       "name": "useIntervalWhen",
       "description": "Sets an interval immediately when a condition is true"
     },
@@ -115,10 +111,6 @@
     {
       "name": "useLifecycleLogger",
       "description": "A react hook that console logs parameters as component transitions through lifecycles."
-    },
-    {
-      "name": "useLocalstorage",
-      "description": "Localstorage hook for React. Syncs with localstorage values across components and browser windows automatically. Sets and retrieves a key from localStorage and subscribes to it for updates across windows."
     },
     {
       "name": "useLocalstorageState",
@@ -177,10 +169,6 @@
       "description": "A hook that can track a click event outside a ref. Returns a callbackRef."
     },
     {
-      "name": "usePrevious",
-      "description": "Access the previous value of a variable with this React hook"
-    },
-    {
       "name": "usePreviousDifferent",
       "description": "usePreviousDifferent returns the last different value of a variable"
     },
@@ -209,10 +197,6 @@
       "description": "Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc."
     },
     {
-      "name": "useSessionstorage",
-      "description": "Session storage react hook. Easily manage session storage values."
-    },
-    {
       "name": "useSessionstorageState",
       "description": "useState but syncs with sessionstorage"
     },
@@ -223,10 +207,6 @@
     {
       "name": "useThrottle",
       "description": "Throttle custom hook for React"
-    },
-    {
-      "name": "useTimeout",
-      "description": "setTimeout hook for react."
     },
     {
       "name": "useTimeoutWhen",

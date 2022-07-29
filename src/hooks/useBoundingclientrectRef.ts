@@ -1,46 +1,48 @@
-import { useState, useEffect, useCallback } from 'react';
-import type { CallbackRef, HTMLElementOrNull } from '../utils/utils';
-import { useForkRef } from './useForkRef';
-import { useMutationObserverRef } from './useMutationObserverRef';
+import { useState, useEffect, useCallback } from "react";
+import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import { useForkRef } from "./useForkRef";
+import { useMutationObserverRef } from "./useMutationObserverRef";
 
 /**
  * @param element HTML element whose boundingclientrect is needed
- * @returns ClientRect
+ * @returns DOMRect
  */
-function getBoundingClientRect(element: HTMLElement): ClientRect | DOMRect {
+function getBoundingClientRect(element: HTMLElement): DOMRect {
   return element.getBoundingClientRect();
 }
 
 /**
  * useBoundingclientrectRef hook
+ * Tracks the boundingclientrect of a React Ref and fires a callback when the element's size changes.
  *
- * @returns [CallbackRef | null, ClientRect | DOMRect | null, () => void]
+ * @returns [CallbackRef | null, DOMRect | null, () => void]
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect}
  */
 function useBoundingclientrectRef(): [
   CallbackRef | null,
-  ClientRect | DOMRect | null,
+  DOMRect | null,
   () => void
 ] {
-  const [value, setValue] = useState<ClientRect | DOMRect | null>(null);
+  const [domRect, setDomRect] = useState<DOMRect | null>(null);
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 
   const update = useCallback(() => {
-    setValue(node ? getBoundingClientRect(node) : null);
+    setDomRect(node ? getBoundingClientRect(node) : null);
   }, [node]);
 
   useEffect(() => {
     update();
-  }, [node]);
+  }, [update]);
 
-  const ref = useCallback((node: HTMLElement | null) => {
-    setNode(node);
+  const ref = useCallback((nodeElement: HTMLElement | null) => {
+    setNode(nodeElement);
   }, []);
 
   const [mutationObserverRef] = useMutationObserverRef(update);
 
   const forkedRef = useForkRef(ref, mutationObserverRef);
 
-  return [forkedRef, value, update];
+  return [forkedRef, domRect, update];
 }
 
 export { useBoundingclientrectRef };

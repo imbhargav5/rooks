@@ -1,6 +1,6 @@
-import type { DeepNullable } from "@/types/utils";
 import { useState } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import type { DeepNullable } from "@/types/utils";
 
 type WindowDimensions = DeepNullable<
   Pick<Window, "innerHeight" | "innerWidth" | "outerHeight" | "outerWidth">

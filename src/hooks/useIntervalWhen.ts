@@ -1,48 +1,47 @@
-import { noop } from "@/utils/noop";
 import { useRef, useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 /**
  * A setInterval hook that calls a callback after a interval duration
  * when a condition is true
  *
- * @param cb The callback to be invoked after interval
+ * @param callback The callback to be invoked after interval
  * @param intervalDurationMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the interval
  * @param startImmediate If the callback should be invoked immediately
+ * @see {@link https://react-hooks.org/docs/useIntervalWhen}
  */
 function useIntervalWhen(
-  callback_: () => void,
+  callback: () => void,
   intervalDurationMs: number = 0,
   when: boolean = true,
   startImmediate: boolean = false
 ): void {
-  const savedRefCallback = useRef<() => any>();
+  const savedRefCallback = useRef<() => void>();
 
   useEffect(() => {
-    savedRefCallback.current = callback_;
+    savedRefCallback.current = callback;
   });
 
-  function callback() {
-    savedRefCallback.current && savedRefCallback.current();
+  function internalCallback() {
+    savedRefCallback.current?.();
   }
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (when) {
-        if (startImmediate) {
-          callback();
-        }
-        const interval = window.setInterval(callback, intervalDurationMs);
-
-        return () => {
-          window.clearInterval(interval);
-        };
+    if (when) {
+      if (startImmediate) {
+        internalCallback();
       }
-    } else {
-      console.warn("useIntervalWhen: window is undefined.");
+
+      const interval = window.setInterval(internalCallback, intervalDurationMs);
+
+      return () => {
+        window.clearInterval(interval);
+      };
     }
+
     return noop;
-  }, [when, intervalDurationMs]);
+  }, [when, intervalDurationMs, startImmediate]);
 }
 
 export { useIntervalWhen };

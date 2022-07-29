@@ -10,7 +10,7 @@
   "sideEffects": false,
   "license": "MIT",
   "devEngines": {
-    "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x"
+    "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x || 17.x || 18.x"
   },
   "engines": {
     "node": ">=v10.24.1"
@@ -22,7 +22,7 @@
   },
   "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
-    "clean": "rimraf dist lib",
+    "clean": "rimraf dist lib src/hooks/**.d.ts src/__tests__/**.d.ts",
     "commit": "cz",
     "lint": "eslint src/**/*.ts",
     "format": "yarn run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
@@ -31,8 +31,8 @@
     "create": "ts-node helpers/create",
     "new": "yarn run create",
     "prebuild": "rimraf dist",
-    "update-package-list-to-markdown": "ts-node helpers/update-package-list-to-markdown",
-    "update-docusaurus-sidebars": "ts-node helpers/update-docusaurus-sidebars",
+    "update-package-list-to-markdown": "node helpers/update-package-list-to-markdown/index.mjs",
+    "update-docusaurus-sidebars": "node helpers/update-docusaurus-sidebars/index.mjs",
     "update-docs-and-sidebars": "yarn update-package-list-to-markdown && yarn update-docusaurus-sidebars",
     "build:custom-github-actions": "cd ./.github/actions && for d in ./*/ ; do (cd \"$d\" && npm install && npm run build); done",
     "build:esm": "tsc -m esNext --outDir dist/esm && resolve-tspaths -o dist/esm",
@@ -58,7 +58,7 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
-    "contributors:update": "ts-node helpers/update-all-contributors",
+    "contributors:update": "node helpers/update-all-contributors/index.mjs",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -70,6 +70,7 @@
     "@babel/core": "7.18.9",
     "@babel/plugin-external-helpers": "7.18.6",
     "@babel/plugin-proposal-export-default-from": "7.18.9",
+    "@babel/plugin-proposal-unicode-property-regex": "^7.18.6",
     "@babel/preset-env": "7.18.9",
     "@babel/preset-react": "7.18.6",
     "@docusaurus/core": "2.0.0-rc.1",
@@ -106,6 +107,7 @@
     "clsx": "^1.2.1",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "3.3.0",
+    "es-main": "^1.2.0",
     "esbuild": "^0.14.49",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.20.0",
@@ -161,11 +163,13 @@
     "ts-node": "^9.1.1",
     "tslib": "^2.4.0",
     "typescript": "^4.3.5",
+    "unified": "^10.1.2",
     "unist-util-find": "^1.0.2",
     "unist-util-find-all-after": "^4.0.0",
     "unist-util-find-all-before": "^4.0.0",
     "unist-util-find-all-between": "^2.1.0",
     "unist-util-visit": "^4.1.0",
+    "vfile": "^5.3.4",
     "vfile-reporter": "^7.0.4",
     "webpack": "5.73.0",
     "webpack-cli": "^4.10.0",

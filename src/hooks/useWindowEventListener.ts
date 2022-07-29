@@ -14,7 +14,7 @@ import type { ListenerOptions } from "@/types/utils";
  */
 function useWindowEventListener(
   eventName: string,
-  callback: (...args: any) => void,
+  callback: (...args: unknown[]) => void,
   listenerOptions: ListenerOptions = {},
   isLayoutEffect: boolean = false
 ): void {

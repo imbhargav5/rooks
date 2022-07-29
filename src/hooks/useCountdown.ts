@@ -31,6 +31,7 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
       if (onEnd) {
         onEnd(newTime);
       }
+
       setTime(endTime);
 
       return;
@@ -39,6 +40,7 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
     if (onDown) {
       onDown(restTime, newTime);
     }
+
     setTime(newTime);
   }
 }

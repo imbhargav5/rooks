@@ -7,13 +7,13 @@ import { execSync } from "child_process";
 function getMissingContributorsList() {
   let stdout = execSync("yarn contributors:check").toString();
   let string = stdout;
-  if (string.includes("\nUnknown contributors")) {
-    string = string.split("\nUnknown contributors")[0];
+  if (string.includes("Unknown contributors")) {
+    string = string.split("Unknown contributors")[1];
   }
   return string.split(".all-contributorsrc:")[1].trim().split(", ");
 }
 
-function addContributorsAsCoder(list: string[]) {
+function addContributorsAsCoder(list) {
   // remove all bots first
   //list = list.filter((item) => !item.endsWith("[bot]"));
   console.log("missing contributors: ", list);

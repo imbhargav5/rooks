@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { useDidMount } from "./useDidMount";
+import { useWillUnmount } from "./useWillUnmount";
 
 /**
  *  useDidUpdate hook
@@ -9,29 +11,36 @@ import { useEffect, useRef } from "react";
  *
  * @param {Function} callback The callback to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
+ * @see {@link https://react-hooks.org/docs/useDidUpdate}
  */
 function useDidUpdate(callback: () => void, conditions?: unknown[]): void {
-  const hasMountedRef = useRef(false);
-  if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
-    conditions = [conditions];
-  } else if (Array.isArray(conditions) && conditions.length === 0) {
-    console.warn(
-      "Using [] as the second argument makes useDidUpdate a noop. The second argument should either be `undefined` or an array of length greater than 0."
-    );
-  }
+  const hasMountedRef = useRef<boolean>(false);
+  const internalConditions = useMemo(() => {
+    if (typeof conditions !== "undefined" && !Array.isArray(conditions)) {
+      return [conditions];
+    } else if (Array.isArray(conditions) && conditions.length === 0) {
+      console.warn(
+        "Using [] as the second argument makes useDidUpdate a noop. The second argument should either be `undefined` or an array of length greater than 0."
+      );
+    }
+
+    return conditions;
+  }, [conditions]);
+
   useEffect(() => {
     if (hasMountedRef.current) {
       callback();
-    } else {
-      hasMountedRef.current = true;
     }
-  }, conditions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, internalConditions);
 
-  useEffect(() => {
-    return () => {
-      hasMountedRef.current = false;
-    };
-  }, []);
+  useDidMount(() => {
+    hasMountedRef.current = true;
+  });
+
+  useWillUnmount(() => {
+    hasMountedRef.current = false;
+  });
 }
 
 export { useDidUpdate };

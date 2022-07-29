@@ -1,6 +1,6 @@
-import { noop } from "@/utils/noop";
 import { useEffect, useCallback, useState } from "react";
 import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
+import { noop } from "@/utils/noop";
 
 const config: IntersectionObserverInit = {
   root: null,
@@ -16,6 +16,7 @@ const config: IntersectionObserverInit = {
  *
  * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
  * @param {IntersectionObserverInit} options
+ * @see {@link https://react-hooks.org/docs/useInViewRef}
  */
 function useInViewRef(
   callback: IntersectionObserverCallback = () => {},
@@ -30,7 +31,7 @@ function useInViewRef(
     // Create an observer instance linked to the callback function
     if (node) {
       const observer = new IntersectionObserver((entries, observerRef) => {
-        entries.forEach(({ isIntersecting }) => setInView(isIntersecting));
+        for (const { isIntersecting } of entries) setInView(isIntersecting);
         callback(entries, observerRef);
       }, options);
 
@@ -41,11 +42,12 @@ function useInViewRef(
         observer.disconnect();
       };
     }
-    return noop;
-  }, [node, callback, root, rootMargin, threshold]);
 
-  const ref = useCallback((node: HTMLElementOrNull) => {
-    setNode(node);
+    return noop;
+  }, [node, callback, root, rootMargin, threshold, options]);
+
+  const ref = useCallback((nodeElement: HTMLElementOrNull) => {
+    setNode(nodeElement);
   }, []);
 
   return [ref, inView];

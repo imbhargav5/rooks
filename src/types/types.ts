@@ -13,3 +13,5 @@ export type UseUndoStateReturnValue<T> = [
   UseUndoStatePushFunction<ExcludeFunction<T>>,
   UndoFunction
 ];
+
+export type CallbackWithNoArguments = () => void;

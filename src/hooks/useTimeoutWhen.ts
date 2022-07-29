@@ -1,33 +1,35 @@
-import { noop } from "@/utils/noop";
 import { useRef, useEffect } from "react";
+import { noop } from "@/utils/noop";
 
 /**
  * A setTimeout hook that calls a callback after a timeout duration
  * when a condition is true
  *
- * @param cb The callback to be invoked after timeout
+ * @param callback The callback to be invoked after timeout
  * @param timeoutDelayMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the timeout
+ * @see {@link https://react-hooks.org/docs/useTimeout}
  */
 function useTimeoutWhen(
-  callback_: () => void,
+  callback: () => void,
   timeoutDelayMs: number = 0,
   when: boolean = true
 ): void {
-  const savedRefCallback = useRef<() => any>();
+  const savedRefCallback = useRef<() => void>();
 
   useEffect(() => {
-    savedRefCallback.current = callback_;
+    savedRefCallback.current = callback;
   });
 
-  function callback() {
-    savedRefCallback.current && savedRefCallback.current();
+  function internalCallback() {
+    savedRefCallback.current?.();
   }
 
   useEffect(() => {
     if (when) {
+      // eslint-disable-next-line no-negated-condition
       if (typeof window !== "undefined") {
-        const timeout = window.setTimeout(callback, timeoutDelayMs);
+        const timeout = window.setTimeout(internalCallback, timeoutDelayMs);
 
         return () => {
           window.clearTimeout(timeout);
@@ -36,8 +38,9 @@ function useTimeoutWhen(
         console.warn("useTimeoutWhen: window is undefined.");
       }
     }
+
     return noop;
-  }, [when]);
+  }, [timeoutDelayMs, when]);
 }
 
 export { useTimeoutWhen };

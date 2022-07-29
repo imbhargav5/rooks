@@ -12,8 +12,8 @@ function useRefElement<T>(): [
 ] {
   const [refElement, setRefElement] = useState<RefElementOrNull<T>>(null);
   const ref = useCallback<(refElement: RefElementOrNull<T>) => void>(
-    (refElement: RefElementOrNull<T>) => {
-      setRefElement(refElement);
+    (element: RefElementOrNull<T>) => {
+      setRefElement(element);
     },
     []
   );
