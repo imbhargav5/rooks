@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import React from "react";
 import {
   act,
   cleanup,
@@ -10,7 +11,6 @@ import {
   waitFor,
 } from "@testing-library/react";
 import type { MutableRefObject } from "react";
-
 import { useGeolocation } from "../hooks/useGeolocation";
 
 describe("useGeolocation", () => {

@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { useCountdown } from "../hooks/useCountdown";
 
 jest.useFakeTimers();

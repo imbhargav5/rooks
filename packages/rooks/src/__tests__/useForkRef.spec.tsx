@@ -1,3 +1,4 @@
+import React from "react";
 import { render, getByTestId, fireEvent } from "@testing-library/react";
 
 import TestRenderer from "react-test-renderer";
