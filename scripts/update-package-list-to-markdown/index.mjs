@@ -17,7 +17,6 @@ console.log(__dirname);
 
 const updatePackageListToMarkdown = async () => {
   function createZoneReplacePlugin(commentName, mdastToInject) {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const plugin = () => {
       function mutate(start, _nodes, end) {
         return [start, mdastToInject, end];
@@ -40,7 +39,6 @@ const updatePackageListToMarkdown = async () => {
     const { hooks: hooksList } = JSON.parse(
       readFileSync(hooksListJSON, "utf8")
     );
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const markdownTemplate = ({ name, description }) =>
       `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
     console.log(hooksList.length);

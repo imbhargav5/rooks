@@ -34,7 +34,7 @@ function readFileAsString(relativeFilePath) {
 
 function injectValuesIntoTemplate(
   src,
-  { name, packageName, directoryName, description }
+  { name, packageName, directoryName, description, category }
 ) {
   const trimmedDescription = truncate(description, {
     length: 130,
@@ -73,6 +73,7 @@ function injectValuesIntoTemplate(
   result = replaceString(result, "%description0%", descriptionArray[0]);
   result = replaceString(result, "%description1%", descriptionArray[1]);
   result = replaceString(result, "%description2%", descriptionArray[2]);
+  result = replaceString(result, "%category%", category);
   return result;
 }
 
@@ -113,10 +114,17 @@ const questions = [
     message: "Description of the hook.",
     default: "",
   },
+  {
+    type: "list",
+    name: "category",
+    message: "Category of the hook",
+    choices: ["ui", "misc", "state", "effects"],
+    default: "state",
+  },
 ];
 
 inquirer.prompt(questions).then(answers => {
-  const { name, packageName, description } = answers;
+  const { name, packageName, description, category } = answers;
   const directoryName = packageName.substring(4);
   const transformedSources = filesToRead.map(filePath => {
     const src = readFileAsString(filePath);
@@ -125,6 +133,7 @@ inquirer.prompt(questions).then(answers => {
       packageName,
       directoryName,
       description,
+      category,
     });
   });
 
@@ -142,5 +151,5 @@ inquirer.prompt(questions).then(answers => {
     fsExtra.ensureFileSync(pathToWriteTo);
     fs.writeFileSync(pathToWriteTo, srcToWrite);
   });
-  addHookToListAndUpdate({ name, description });
+  addHookToListAndUpdate({ name, description, category });
 });
