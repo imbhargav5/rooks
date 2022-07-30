@@ -77,7 +77,7 @@ const getStaticPaths = async () => {
   const websitePath = await pkgDir(__dirname);
   const projectPath = path.join(websitePath as string, "../../");
   const files = fs.readdirSync(path.join(projectPath, "data/docs"));
-  const paths = files.map((filename) => ({
+  const paths = files.map(filename => ({
     params: {
       slug: filename.replace(".md", ""),
     },

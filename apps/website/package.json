@@ -29,7 +29,10 @@
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "next-transpile-modules": "9.0.0",
+    "remark-comment": "^1.0.0",
     "remark-gfm": "^3.0.1",
+    "remark-html": "^15.0.1",
+    "remark-remove-comments": "^0.2.0",
     "rooks": "6.0.0-alpha.0",
     "tsconfig": "*",
     "typescript": "^4.5.3"
