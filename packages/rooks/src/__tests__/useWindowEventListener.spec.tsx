@@ -1,6 +1,6 @@
 import { render, getByTestId, fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import React from "react";
+
 import TestRenderer from "react-test-renderer";
 import { useCounter } from "../hooks/useCounter";
 import { useWindowEventListener } from "../hooks/useWindowEventListener";

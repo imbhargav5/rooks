@@ -2,7 +2,7 @@
 // TODO: deprecate this hook in favor of useForm
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import { renderHook, act as actHook } from "@testing-library/react-hooks";
-import React from "react";
+
 import { useInput } from "../hooks/useInput";
 
 describe("useInput", () => {

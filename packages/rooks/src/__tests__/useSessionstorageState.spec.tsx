@@ -8,7 +8,7 @@ import {
   fireEvent,
   act,
 } from "@testing-library/react";
-import React from "react";
+
 import { useSessionstorageState } from "../hooks/useSessionstorageState";
 
 describe("useSessionstorageState defined", () => {

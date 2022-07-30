@@ -10,7 +10,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 import type { MutableRefObject } from "react";
-import React from "react";
+
 import { useGeolocation } from "../hooks/useGeolocation";
 
 describe("useGeolocation", () => {

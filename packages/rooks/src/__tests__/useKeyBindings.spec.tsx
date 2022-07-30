@@ -8,7 +8,7 @@ import {
   act,
   getByTestId,
 } from "@testing-library/react";
-import React from "react";
+
 import { useKeyBindings } from "../hooks/useKeyBindings";
 
 describe("useKeyBindings", () => {
