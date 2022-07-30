@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import React from "react";
 import {
   render,
   cleanup,
@@ -8,7 +9,7 @@ import {
   act,
   getByTestId,
 } from "@testing-library/react";
-import React from "react";
+
 import { useKey } from "../hooks/useKey";
 
 describe("useKey", () => {

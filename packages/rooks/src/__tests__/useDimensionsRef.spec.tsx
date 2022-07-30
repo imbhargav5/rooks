@@ -1,9 +1,10 @@
 /**
  * @jest-environment jsdom
  */
+import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import React from "react";
+
 import { useDimensionsRef } from "../hooks/useDimensionsRef";
 import { DOMRectPolyfill } from "../utils/domrect-polyfill";
 

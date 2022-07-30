@@ -22,6 +22,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo run test",
+    "start": "turbo run start",
     "coverage": "turbo run coverage",
     "commit": "cz",
     "version-packages": "changeset version",
@@ -36,7 +37,6 @@
     "new": "yarn run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "node scripts/update-package-list-to-markdown/index.mjs"
-    
   },
   "husky": {
     "hooks": {
@@ -51,14 +51,19 @@
     "@changesets/cli": "^2.23.0",
     "@manypkg/cli": "^0.19.1",
     "@manypkg/get-packages": "^1.1.3",
+    "@types/inquirer": "^8.2.1",
     "all-contributors-cli": "^6.20.0",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "3.3.0",
     "eslint-config-custom": "*",
     "lint-staged": "^13.0.3",
-    "prettier": "latest",
+    "lodash": "^4.17.21",
+    "prettier": "^2.7.1",
     "turbo": "latest",
     "typescript": "^4.7.4"
+  },
+  "resolutions": {
+    "prettier": "^2.7.1"
   },
   "packageManager": "yarn@1.22.18"
 }

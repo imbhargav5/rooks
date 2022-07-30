@@ -10,10 +10,11 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * @param preferLayoutEffect Should the value be updated using a layout effect
  * or a passive effect. Defaults to false.
  * @returns A ref containing the fresh value
+ * @see https://react-hooks.org/docs/useFreshRef
  */
 function useFreshRef<T>(
   value: T,
-  preferLayoutEffect: boolean = false
+  preferLayoutEffect = false
 ): MutableRefObject<T> {
   const useEffectToUse = preferLayoutEffect ? useIsomorphicEffect : useEffect;
   const ref = useRef(value);

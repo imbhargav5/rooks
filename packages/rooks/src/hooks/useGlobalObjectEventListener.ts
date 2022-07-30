@@ -15,15 +15,15 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} when Should the event listener be active
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
- * @returns {undefined}
+ * @see https://react-hooks.org/docs/useGlobalObjectEventListener
  */
 function useGlobalObjectEventListener(
   globalObject: Document | Window,
   eventName: string,
   callback: EventListener,
   listenerOptions: ListenerOptions = {},
-  when: boolean = true,
-  isLayoutEffect: boolean = false
+  when = true,
+  isLayoutEffect = false
 ): void {
   const freshCallback = useFreshTick(callback);
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;

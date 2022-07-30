@@ -17,6 +17,7 @@ const config: MutationObserverInit = {
  *
  * @param {MutationCallback} callback Function that needs to be fired on mutation
  * @param {MutationObserverInit} options
+ * @see https://react-hooks.org/docs/useMutationObserverRef
  */
 function useMutationObserverRef(
   callback: MutationCallback,

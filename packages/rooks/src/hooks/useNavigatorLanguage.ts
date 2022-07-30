@@ -18,7 +18,7 @@ function getLanguage(): Language {
  * Returns the language of the navigator
  *
  * @returns {Language}
- * @see {@link https://react-hooks.org/docs/useNavigatorLanguage}
+ * @see https://react-hooks.org/docs/useNavigatorLanguage
  */
 export function useNavigatorLanguage(): Language {
   const [language, setLanguage] = useState<Language>(getLanguage);

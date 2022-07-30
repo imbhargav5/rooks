@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import React from "react";
 import {
   render,
   cleanup,
@@ -9,7 +10,7 @@ import {
   act,
 } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import React from "react";
+
 import { useLocalstorageState } from "../hooks/useLocalstorageState";
 
 describe("useLocalstorageState defined", () => {

@@ -10,11 +10,12 @@ type Callback<T> = (...args: T[]) => void;
  *
  * @param callback The callback to throttle
  * @param timeout Throttle timeout
- * @see {@link https://react-hooks.org/docs/useThrottle}
+ * @returns [Callback, isReady] The throttled callback and if it is currently throttled
+ * @see https://react-hooks.org/docs/useThrottle
  */
 function useThrottle<T>(
   callback: Callback<T>,
-  timeout: number = 300
+  timeout = 300
 ): [Callback<T>, boolean] {
   const [ready, setReady] = useState(true);
   const timerRef = useRef<number | undefined>(undefined);

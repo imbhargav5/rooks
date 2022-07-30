@@ -9,15 +9,23 @@ import { fromMarkdown } from "mdast-util-from-markdown";
 import esMain from "es-main";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import lodash from "lodash";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log(__dirname);
+const emojiByCategory = {
+  state: "❇️",
+  effects: "🔥",
+  navigator: "🚃",
+  misc: "✨",
+  form: "📝",
+  events: "🚀",
+  ui: "⚛️",
+};
 
 const updatePackageListToMarkdown = async () => {
   function createZoneReplacePlugin(commentName, mdastToInject) {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const plugin = () => {
       function mutate(start, _nodes, end) {
         return [start, mdastToInject, end];
@@ -40,21 +48,54 @@ const updatePackageListToMarkdown = async () => {
     const { hooks: hooksList } = JSON.parse(
       readFileSync(hooksListJSON, "utf8")
     );
-    // eslint-disable-next-line unicorn/consistent-function-scoping
-    const markdownTemplate = ({ name, description }) =>
+    const hooksByCategory = hooksList.reduce((acc, hook) => {
+      const { category } = hook;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(hook);
+      return acc;
+    }, {});
+
+    const hookEntryMarkdownTemplate = ({ name, description }) =>
       `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
-    console.log(hooksList.length);
-    const pluginsListMdast = {
-      children: hooksList.map(pkg => ({
-        children: [fromMarkdown(markdownTemplate(pkg))],
-        spread: false,
-        type: "listItem",
-      })),
-      ordered: false,
-      spread: false,
-      start: 1,
-      type: "list",
+
+    const hooksByCategoryKeys = Object.keys(hooksByCategory);
+    const hooksListByCategoryMDAST = {
+      type: "root",
+      children: [],
     };
+    for (const category of hooksByCategoryKeys) {
+      const hooks = hooksByCategory[category];
+      const hooksListMDAST = {
+        children: (hooks ?? []).map(pkg => ({
+          children: [fromMarkdown(hookEntryMarkdownTemplate(pkg))],
+          spread: false,
+          type: "listItem",
+        })),
+        ordered: false,
+        spread: false,
+        start: 1,
+        type: "list",
+      };
+
+      const headingMDAST = {
+        type: "strong",
+        children: [
+          {
+            type: "text",
+            value:
+              category === "ui"
+                ? `<h3 align="center">${emojiByCategory["ui"] ?? "✅"} UI</h3>`
+                : `<h3 align="center">${emojiByCategory[category] ??
+                    "✅"} ${lodash.startCase(category)}</h3>`,
+          },
+        ],
+      };
+
+      hooksListByCategoryMDAST.children.push(headingMDAST);
+      hooksListByCategoryMDAST.children.push(hooksListMDAST);
+    }
 
     const pluginsCountMdast = {
       children: [
@@ -71,7 +112,7 @@ const updatePackageListToMarkdown = async () => {
         readFileSync(join(PROJECT_ROOT, filePath), "utf8") ?? "";
       const readmeVFile = remark()
         .use(frontmatter)
-        .use(createZoneReplacePlugin("hookslist", pluginsListMdast))
+        .use(createZoneReplacePlugin("hookslist", hooksListByCategoryMDAST))
         .use(createZoneReplacePlugin("hookscount", pluginsCountMdast))
         .processSync(readmeContentString);
       writeFileSync(filePath, String(readmeVFile), "utf8");

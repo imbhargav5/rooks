@@ -19,6 +19,11 @@
       "cache": false,
       "dependsOn": ["build"],
       "outputs": ["coverage/**", "dist/**", ".next/**"]
+    },
+    "start": {
+      "cache": false,
+      "dependsOn": ["build"],
+      "outputs": ["dist/**", ".next/**"]
     }
   }
 }

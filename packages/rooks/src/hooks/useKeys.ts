@@ -37,7 +37,7 @@ const defaultOptions = {
  * @param keysList - list of keys to listen to
  * @param callback  - callback to be called when a key is pressed
  * @param options - options to be passed to the event listener
- * @see {@link https://react-hooks.org/docs/useKeys}
+ * @see https://react-hooks.org/docs/useKeys
  */
 function useKeys(
   keysList: string[],

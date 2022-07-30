@@ -9,11 +9,12 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  * @param {Function} callback Callback to be called before unmount
  * @param {boolean} when When the handler should be applied
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
+ * @see https://react-hooks.org/docs/useOnWindowResize
  */
 function useOnWindowResize(
   callback: EventListener,
-  when: boolean = true,
-  isLayoutEffect: boolean = false
+  when = true,
+  isLayoutEffect = false
 ) {
   useGlobalObjectEventListener(
     window,

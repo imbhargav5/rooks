@@ -39,11 +39,11 @@ type UseSelectableListReturnType<T> = [
  * @param list - The list of values to select from
  * @param initialIndex  - The index of the initial selection
  * @param allowUnselected
- * @see {@link https://react-hooks.org/docs/useSelectableList}
+ * @see https://react-hooks.org/docs/useSelectableList
  */
 function useSelectableList<T>(
   list: T[] = [],
-  initialIndex: number = 0,
+  initialIndex = 0,
   allowUnselected = false
 ): UseSelectableListReturnType<T> {
   const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);

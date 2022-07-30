@@ -14,9 +14,9 @@ type SelectHandler<T> = {
  * @param list List of values to select a value from
  * @param {number} initialIndex Initial index which is selected
  * @returns handler
- * @see {@link https://react-hooks.org/docs/useSelect}
+ * @see https://react-hooks.org/docs/useSelect
  */
-function useSelect<T>(list: T[], initialIndex: number = 0): SelectHandler<T> {
+function useSelect<T>(list: T[], initialIndex = 0): SelectHandler<T> {
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
   const setItem = useCallback(

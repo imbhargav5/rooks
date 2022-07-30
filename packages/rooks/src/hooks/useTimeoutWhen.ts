@@ -8,12 +8,12 @@ import { noop } from "@/utils/noop";
  * @param callback The callback to be invoked after timeout
  * @param timeoutDelayMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the timeout
- * @see {@link https://react-hooks.org/docs/useTimeout}
+ * @see https://react-hooks.org/docs/useTimeoutWhen
  */
 function useTimeoutWhen(
   callback: () => void,
-  timeoutDelayMs: number = 0,
-  when: boolean = true
+  timeoutDelayMs = 0,
+  when = true
 ): void {
   const savedRefCallback = useRef<() => void>();
 

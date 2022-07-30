@@ -65,6 +65,7 @@ function getMousePositionFromEvent(event: MouseEvent): MouseData {
  *
  * Retrieves current mouse position and information about the position like
  * screenX, pageX, clientX, movementX, offsetX
+ * @see https://react-hooks.org/docs/useMouse
  */
 export function useMouse(): MouseData {
   const [mousePosition, setMousePosition] =

@@ -30,7 +30,7 @@ type KeyBindings = { [key: string]: (event: KeyboardEvent) => void };
  *
  * @param { KeyBindings } keyBindings
  * @param {Options} options
- * @see {@link https://react-hooks.org/docs/useKeyBindings}
+ * @see https://react-hooks.org/docs/useKeyBindings
  */
 const useKeyBindings = (keyBindings: KeyBindings, options?: Options) => {
   for (const key in keyBindings) {

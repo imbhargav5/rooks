@@ -1,8 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { render, cleanup, fireEvent } from "@testing-library/react";
 import React from "react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
+
 import { useToggle } from "../hooks/useToggle";
 
 describe("useToggle basic behavior", () => {

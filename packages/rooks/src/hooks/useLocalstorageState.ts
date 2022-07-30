@@ -51,6 +51,7 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  *
  * @param {string} key - Key of the localStorage object
  * @param {any} initialState - Default initial value
+ * @see https://react-hooks.org/docs/useLocalstorageState
  */
 function useLocalstorageState<S>(
   key: string,

@@ -27,6 +27,7 @@ type CounterHandler = {
  *
  * @param {number} initialValue The initial value of the counter
  * @returns {handler} A handler to interact with the counter
+ * @see https://react-hooks.org/docs/useCounter
  */
 function useCounter(initialValue: number): CounterHandler {
   const [counter, setCounter] = useState(initialValue);

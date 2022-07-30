@@ -12,6 +12,8 @@ const defaultToggleFunction = <S>(value: S) => !value as unknown as S;
  * Use toggle hook helps you easily toggle a value.
  *
  * @param initialValue Initial value of the toggle, which will be false if not provided.
+ * @returns [value, setValue]
+ * @see https://react-hooks.org/docs/useToggle
  * @example
  * const [boolean, toggle] = useToggle();
  * // value is false
