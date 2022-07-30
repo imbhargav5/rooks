@@ -4,5 +4,19 @@
   "language": "en",
   "minWordLength": 5,
   "version": "0.2",
-  "words": ["tsconfigs", "localstorage", "imbhargav5", "data-testid"]
+  "words": [
+    "Codecov",
+    "contributorsrc",
+    "data-testid",
+    "imbhargav5",
+    "jsvalue",
+    "localstorage",
+    "Mdast",
+    "nextui",
+    "nocheck",
+    "tsconfigs",
+    "tspaths",
+    "unoptimized",
+    "updation"
+  ]
 }

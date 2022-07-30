@@ -1,0 +1,309 @@
+{
+  "hooks": [
+    {
+      "name": "useBoundingclientrect",
+      "description": "getBoundingClientRect hook for React.",
+      "category": "ui"
+    },
+    {
+      "name": "useBoundingclientrectRef",
+      "description": "A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.",
+      "category": "ui"
+    },
+    {
+      "name": "useCountdown",
+      "description": "Count down to a target timestamp and call callbacks every second (or provided peried)",
+      "category": "state"
+    },
+    {
+      "name": "useCounter",
+      "description": "Counter hook for React.",
+      "category": "state"
+    },
+    {
+      "name": "useDebounce",
+      "description": "Debounce hook for react",
+      "category": "misc"
+    },
+    {
+      "name": "useDebouncedValue",
+      "description": "Tracks another value and gets updated in a debounced way.",
+      "category": "misc"
+    },
+    {
+      "name": "useDidMount",
+      "description": "componentDidMount hook for React",
+      "category": "effects"
+    },
+    {
+      "name": "useDidUpdate",
+      "description": "componentDidUpdate hook for react",
+      "category": "effects"
+    },
+    {
+      "name": "useDimensionsRef",
+      "description": "Easily grab dimensions of an element with a ref using this hook",
+      "category": "misc"
+    },
+    {
+      "name": "useDocumentEventListener",
+      "description": "A react hook to an event listener to the document object",
+      "category": "events"
+    },
+    {
+      "name": "useEffectOnceWhen",
+      "description": "Runs a callback effect atmost one time when a condition becomes true",
+      "category": "effects"
+    },
+    {
+      "name": "useEventListenerRef",
+      "description": "A react hook to add an event listener to a ref",
+      "category": "misc"
+    },
+    {
+      "name": "useForkRef",
+      "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
+      "category": "misc"
+    },
+    {
+      "name": "useFreshRef",
+      "description": "Avoid stale state in callbacks with this hook. Auto updates values using a ref.",
+      "category": "misc"
+    },
+    {
+      "name": "useFreshTick",
+      "description": "Like use-fresh-ref but specifically for functions",
+      "category": "misc"
+    },
+    {
+      "name": "useFullscreen",
+      "description": "Use full screen api for making beautiful and emersive experinces.",
+      "category": "ui"
+    },
+    {
+      "name": "useGeolocation",
+      "description": "A hook to provide the geolocation info on client side.",
+      "category": "ui"
+    },
+    {
+      "name": "useGetIsMounted",
+      "description": "Checks if a component is mounted or not at the time. Useful for async effects",
+      "category": "state"
+    },
+    {
+      "name": "useInViewRef",
+      "description": "Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. ",
+      "category": "ui"
+    },
+    {
+      "name": "useInput",
+      "description": "Input hook for React.",
+      "category": "form"
+    },
+    {
+      "name": "useIntersectionObserverRef",
+      "description": "A hook to register an intersection observer listener.",
+      "category": "ui"
+    },
+    {
+      "name": "useIntervalWhen",
+      "description": "Sets an interval immediately when a condition is true",
+      "category": "effects"
+    },
+    {
+      "name": "useIsomorphicEffect",
+      "description": "A hook that resolves to useEffect on the server and useLayoutEffect on the client.",
+      "category": "effects"
+    },
+    {
+      "name": "useKey",
+      "description": "keypress, keyup and keydown event handlers as hooks for react.",
+      "category": "ui"
+    },
+    {
+      "name": "useKeyBindings",
+      "description": "useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.",
+      "category": "ui"
+    },
+    {
+      "name": "useKeyRef",
+      "description": "Very similar useKey but it returns a ref",
+      "category": "ui"
+    },
+    {
+      "name": "useKeys",
+      "description": "A hook which allows to setup callbacks when a combination of keys are pressed at the same time.",
+      "category": "ui"
+    },
+    {
+      "name": "useLifecycleLogger",
+      "description": "A react hook that console logs parameters as component transitions through lifecycles.",
+      "category": "effects"
+    },
+    {
+      "name": "useLocalstorageState",
+      "description": "UseState but auto updates values to localStorage",
+      "category": "state"
+    },
+    {
+      "name": "useMapState",
+      "description": "A react hook to manage state in a key value pair map.",
+      "category": "state"
+    },
+    {
+      "name": "useMediaMatch",
+      "description": "Signal whether or not a media query is currently matched.",
+      "category": "ui"
+    },
+    {
+      "name": "useMergeRefs",
+      "description": "Merges any number of refs into a single ref",
+      "category": "misc"
+    },
+    {
+      "name": "useMouse",
+      "description": "Mouse position hook for React.",
+      "category": "ui"
+    },
+    {
+      "name": "useMultiSelectableList",
+      "description": "A custom hook to easily select multiple values from a list",
+      "category": "state"
+    },
+    {
+      "name": "useMutationObserver",
+      "description": "Mutation Observer hook for React.",
+      "category": "ui"
+    },
+    {
+      "name": "useMutationObserverRef",
+      "description": "A hook that tracks mutations of an element. It returns a callbackRef.",
+      "category": "ui"
+    },
+    {
+      "name": "useNavigatorLanguage",
+      "description": "Navigator Language hook for React.",
+      "category": "navigator"
+    },
+    {
+      "name": "useOnWindowResize",
+      "description": "A React hook for adding an event listener for window resize",
+      "category": "events"
+    },
+    {
+      "name": "useOnWindowScroll",
+      "description": "A React hook for adding an event listener for window scroll",
+      "category": "events"
+    },
+    {
+      "name": "useOnline",
+      "description": "Online status hook for React.",
+      "category": "navigator"
+    },
+    {
+      "name": "useOutsideClick",
+      "description": "Outside click(for a ref) event as hook for React.",
+      "category": "events"
+    },
+    {
+      "name": "useOutsideClickRef",
+      "description": "A hook that can track a click event outside a ref. Returns a callbackRef.",
+      "category": "events"
+    },
+    {
+      "name": "usePreviousDifferent",
+      "description": "usePreviousDifferent returns the last different value of a variable",
+      "category": "state"
+    },
+    {
+      "name": "usePreviousImmediate",
+      "description": "usePreviousImmediate returns the previous value of a variable even if it was the same or different",
+      "category": "state"
+    },
+    {
+      "name": "useQueueState",
+      "description": "A React hook that manages state in the form of a queue",
+      "category": "state"
+    },
+    {
+      "name": "useRaf",
+      "description": "A continuously running requestAnimationFrame hook for React",
+      "category": "ui"
+    },
+    {
+      "name": "useRefElement",
+      "description": "Helps bridge gap between callback ref and state",
+      "category": "misc"
+    },
+    {
+      "name": "useSelect",
+      "description": "Select values from a list easily. List selection hook for react.",
+      "category": "state"
+    },
+    {
+      "name": "useSelectableList",
+      "description": "Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.",
+      "category": "state"
+    },
+    {
+      "name": "useSessionstorageState",
+      "description": "useState but syncs with sessionstorage",
+      "category": "state"
+    },
+    {
+      "name": "useStackState",
+      "description": "A React hook that manages state in the form of a stack",
+      "category": "state"
+    },
+    {
+      "name": "useThrottle",
+      "description": "Throttle custom hook for React",
+      "category": "misc"
+    },
+    {
+      "name": "useTimeoutWhen",
+      "description": "Takes a callback and fires it when a condition is true",
+      "category": "misc"
+    },
+    {
+      "name": "useToggle",
+      "description": "Toggle (between booleans or custom data)hook for React.",
+      "category": "misc"
+    },
+    {
+      "name": "useUndoState",
+      "description": "Drop in replacement for useState hook but with undo functionality.",
+      "category": "state"
+    },
+    {
+      "name": "useUpdateEffect",
+      "description": "An useEffect that does not run on first render",
+      "category": "effects"
+    },
+    {
+      "name": "useVisibilitySensor",
+      "description": "Visibility sensor hook for React.",
+      "category": "ui"
+    },
+    {
+      "name": "useWillUnmount",
+      "description": "componentWillUnmount lifecycle as hook for React.",
+      "category": "effects"
+    },
+    {
+      "name": "useWindowEventListener",
+      "description": "Adds an event listener to window",
+      "category": "events"
+    },
+    {
+      "name": "useWindowScrollPosition",
+      "description": "A React hook to get the scroll position of the window",
+      "category": "ui"
+    },
+    {
+      "name": "useWindowSize",
+      "description": "Window size hook for React.",
+      "category": "ui"
+    }
+  ]
+}

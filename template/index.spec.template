@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-import React from "react";
+import React from 'react'
 import { %name% } from '../hooks/%name%';
 
 
@@ -10,5 +7,3 @@ describe("%name%", () => {
     expect(%name%).toBeDefined();
   });
 });
-
-// figure out tests

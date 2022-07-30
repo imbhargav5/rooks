@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "website": "1.0.0",
+    "eslint-config-custom": "0.0.0",
+    "rooks": "5.14.0",
+    "tsconfig": "0.0.0"
+  },
+  "changesets": [
+    "big-rings-notice"
+  ]
+}
