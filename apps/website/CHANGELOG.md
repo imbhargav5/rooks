@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - Updated dependencies [8b98cf06]
-  - rooks@6.0.0
+  - rooks@6.0.1
 
 ## 1.0.1-alpha.0
 
