@@ -8,18 +8,20 @@
 ![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) ![GitHub](https://img.shields.io/github/license/imbhargav5/rooks) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks) [![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors) ![npm](https://img.shields.io/npm/dw/rooks) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks) ![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main) ![node-lts](https://img.shields.io/node/v-lts/rooks) [![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://react-hooks.org) ![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
 
 <br/>
+<br/>
+<br/>
 
-Essential React custom hooks ⚓ to super charge your components!
+<h2 align="center">Essential React custom hooks ⚓ to super charge your components! </h2>
 
-## [Complete Documentation](https://react-hooks.org/)
+<br/>
+<br/>
+<br/>
 
-[![Image from Gyazo](https://i.gyazo.com/742dc22ec370af0a96322427b6a32a9b.gif)](https://gyazo.com/742dc22ec370af0a96322427b6a32a9b)
-
-## List of all hooks
+**<h2 align="center">List of all hooks</h2>**
 
 <!--hookslist start-->
 
-## ⚛️ UI
+**<h3 align="center">⚛️ UI</h3>**
 
 *   [useBoundingclientrect](https://react-hooks.org/docs/useBoundingclientrect) - getBoundingClientRect hook for React.
 *   [useBoundingclientrectRef](https://react-hooks.org/docs/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
@@ -40,7 +42,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useWindowScrollPosition](https://react-hooks.org/docs/useWindowScrollPosition) - A React hook to get the scroll position of the window
 *   [useWindowSize](https://react-hooks.org/docs/useWindowSize) - Window size hook for React.
 
-## ❇️ State
+**<h3 align="center">❇️ State</h3>**
 
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - Counter hook for React.
@@ -57,7 +59,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useUndoState](https://react-hooks.org/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
-## ✨ Misc
+**<h3 align="center">✨ Misc</h3>**
 
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
 *   [useDebouncedValue](https://react-hooks.org/docs/useDebouncedValue) - Tracks another value and gets updated in a debounced way.
@@ -72,7 +74,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useTimeoutWhen](https://react-hooks.org/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://react-hooks.org/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
 
-## 🔥 Effects
+**<h3 align="center">🔥 Effects</h3>**
 
 *   [useDidMount](https://react-hooks.org/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://react-hooks.org/docs/useDidUpdate) - componentDidUpdate hook for react
@@ -83,7 +85,7 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useUpdateEffect](https://react-hooks.org/docs/useUpdateEffect) - An useEffect that does not run on first render
 *   [useWillUnmount](https://react-hooks.org/docs/useWillUnmount) - componentWillUnmount lifecycle as hook for React.
 
-## 🚀 Events
+**<h3 align="center">🚀 Events</h3>**
 
 *   [useDocumentEventListener](https://react-hooks.org/docs/useDocumentEventListener) - A react hook to an event listener to the document object
 *   [useOnWindowResize](https://react-hooks.org/docs/useOnWindowResize) - A React hook for adding an event listener for window resize
@@ -92,16 +94,19 @@ Essential React custom hooks ⚓ to super charge your components!
 *   [useOutsideClickRef](https://react-hooks.org/docs/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [useWindowEventListener](https://react-hooks.org/docs/useWindowEventListener) - Adds an event listener to window
 
-## 📝 Form
+**<h3 align="center">📝 Form</h3>**
 
 *   [useInput](https://react-hooks.org/docs/useInput) - Input hook for React.
 
-## 🚃 Navigator
+**<h3 align="center">🚃 Navigator</h3>**
 
 *   [useNavigatorLanguage](https://react-hooks.org/docs/useNavigatorLanguage) - Navigator Language hook for React.
 *   [useOnline](https://react-hooks.org/docs/useOnline) - Online status hook for React.
 
 <!--hookslist end-->
+
+<br/>
+<br/>
 
 ## Features
 

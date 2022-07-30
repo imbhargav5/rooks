@@ -6,7 +6,7 @@ sidebar_label: Hooks List
 
 <!--hookslist start-->
 
-## ⚛️ UI
+**<h3 align="center">⚛️ UI</h3>**
 
 *   [useBoundingclientrect](https://react-hooks.org/docs/useBoundingclientrect) - getBoundingClientRect hook for React.
 *   [useBoundingclientrectRef](https://react-hooks.org/docs/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
@@ -27,7 +27,7 @@ sidebar_label: Hooks List
 *   [useWindowScrollPosition](https://react-hooks.org/docs/useWindowScrollPosition) - A React hook to get the scroll position of the window
 *   [useWindowSize](https://react-hooks.org/docs/useWindowSize) - Window size hook for React.
 
-## ❇️ State
+**<h3 align="center">❇️ State</h3>**
 
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - Counter hook for React.
@@ -44,7 +44,7 @@ sidebar_label: Hooks List
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useUndoState](https://react-hooks.org/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
-## ✨ Misc
+**<h3 align="center">✨ Misc</h3>**
 
 *   [useDebounce](https://react-hooks.org/docs/useDebounce) - Debounce hook for react
 *   [useDebouncedValue](https://react-hooks.org/docs/useDebouncedValue) - Tracks another value and gets updated in a debounced way.
@@ -59,7 +59,7 @@ sidebar_label: Hooks List
 *   [useTimeoutWhen](https://react-hooks.org/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://react-hooks.org/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
 
-## 🔥 Effects
+**<h3 align="center">🔥 Effects</h3>**
 
 *   [useDidMount](https://react-hooks.org/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://react-hooks.org/docs/useDidUpdate) - componentDidUpdate hook for react
@@ -70,7 +70,7 @@ sidebar_label: Hooks List
 *   [useUpdateEffect](https://react-hooks.org/docs/useUpdateEffect) - An useEffect that does not run on first render
 *   [useWillUnmount](https://react-hooks.org/docs/useWillUnmount) - componentWillUnmount lifecycle as hook for React.
 
-## 🚀 Events
+**<h3 align="center">🚀 Events</h3>**
 
 *   [useDocumentEventListener](https://react-hooks.org/docs/useDocumentEventListener) - A react hook to an event listener to the document object
 *   [useOnWindowResize](https://react-hooks.org/docs/useOnWindowResize) - A React hook for adding an event listener for window resize
@@ -79,11 +79,11 @@ sidebar_label: Hooks List
 *   [useOutsideClickRef](https://react-hooks.org/docs/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
 *   [useWindowEventListener](https://react-hooks.org/docs/useWindowEventListener) - Adds an event listener to window
 
-## 📝 Form
+**<h3 align="center">📝 Form</h3>**
 
 *   [useInput](https://react-hooks.org/docs/useInput) - Input hook for React.
 
-## 🚃 Navigator
+**<h3 align="center">🚃 Navigator</h3>**
 
 *   [useNavigatorLanguage](https://react-hooks.org/docs/useNavigatorLanguage) - Navigator Language hook for React.
 *   [useOnline](https://react-hooks.org/docs/useOnline) - Online status hook for React.

@@ -80,17 +80,15 @@ const updatePackageListToMarkdown = async () => {
       };
 
       const headingMDAST = {
-        type: "heading",
-        depth: 2,
+        type: "strong",
         children: [
           {
             type: "text",
             value:
               category === "ui"
-                ? `${emojiByCategory["ui"] ?? "✅"} UI`
-                : `${emojiByCategory[category] ?? "✅"} ${lodash.startCase(
-                    category
-                  )}`,
+                ? `<h3 align="center">${emojiByCategory["ui"] ?? "✅"} UI</h3>`
+                : `<h3 align="center">${emojiByCategory[category] ??
+                    "✅"} ${lodash.startCase(category)}</h3>`,
           },
         ],
       };
