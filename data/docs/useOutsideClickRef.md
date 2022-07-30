@@ -11,19 +11,38 @@ A hook that can track a click event outside a ref. Returns a callbackRef.
 ## Examples
 
 ```jsx
-function Demo() {
-  function outsidePClick() {
-    alert("Clicked outside p");
+import "./styles.css";
+import { useOutsideClickRef } from "rooks";
+
+function App() {
+  function myComponent() {
+    alert("Clicked outside");
   }
-  const [ref] = useOutsideClickRef(outsidePClick);
+  const [ref] = useOutsideClickRef(myComponent);
   return (
-    <div>
-      <p ref={ref}>Click outside me</p>
+    <div
+      className="App"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : useOutsideClick Example</h1>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          backgroundColor: "lightblue",
+        }}
+        ref={ref}
+      >
+        <h2 className="inside">This is inside</h2>
+      </div>
     </div>
   );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -38,20 +57,3 @@ render(<Demo />);
 | Returned Array items | Type        | Description |
 | -------------------- | ----------- | ----------- |
 | ref                  | CallbackRef | ref         |
-
-## Codesandbox Examples
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/useoutsideclickref-q76i8?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useOutsideClickRef"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

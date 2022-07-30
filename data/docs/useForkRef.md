@@ -11,42 +11,45 @@ A hook that can combine two refs(mutable or callbackRefs) into a single callback
 ## Examples
 
 ```jsx
-function Demo() {
-  const [isVisible, setIsVisible] = useState(false);
-  const callback = entries => {
-    if (entries && entries[0]) {
-      setIsVisible(entries[0].isIntersecting);
-    }
-  };
-  const [myIntersectionObserverRef] = useIntersectionObserverRef(callback);
+import "./styles.css";
+import {
+  useBoundingclientrectRef,
+  useForkRef,
+  useOutsideClickRef,
+} from "rooks";
+
+function App() {
+  const [outsideClickRef] = useOutsideClickRef(() => {
+    console.log("clicked outside");
+  });
   const [
     myBoundingclientrectRef,
     boundingclientrect,
   ] = useBoundingclientrectRef();
-  const myRef = useForkRef(myIntersectionObserverRef, myBoundingclientrectRef);
-  const displayString = JSON.stringify(boundingclientrect, null, 2);
+  const myRef = useForkRef(outsideClickRef, myBoundingclientrectRef);
   return (
-    <>
+    <div>
+      <h1>Rooks : useForkRef example </h1>
       <div
+        ref={myRef}
         style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
+          background: "teal",
+          color: "white",
+          padding: 8,
+          margin: 4,
+          marginTop: 20,
         }}
       >
-        <h1>Is rectangle visible - {String(isVisible)}</h1>
+        <p>
+          Click outside the box to see logs{" "}
+          {JSON.stringify(boundingclientrect, 1, 2)}
+        </p>
       </div>
-      <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "lightblue" }}>
-        <p>Boundingclientrect</p>
-        <pre>{displayString}</pre>
-      </div>
-      <div style={{ height: 2000 }}></div>
-    </>
+    </div>
   );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -67,20 +70,3 @@ render(<Demo />);
 _Note_: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
 
 [Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
-
-## Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/useforkref-ptmok?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useForkRef"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

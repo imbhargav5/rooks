@@ -12,35 +12,25 @@ A React hook to get the scroll position of the window
 
 ## Examples
 
+### Basic Usage
+
 ```jsx
-function Demo() {
-  const { scrollX, scrollY } = useWindowScrollPosition();
+import "./styles.css";
+import { useWindowScrollPosition } from "rooks";
+
+function App() {
+  const position = useWindowScrollPosition(); // default config: { wait = 100, passive = true }
+  console.log(position); // {x: ..., y: ...}
   return (
-    <div>
-      <p> Window X position is {scrollX}</p>
-      <p> Window Y position is {scrollY}</p>
+    <div style={{ height: 800 }}>
+      <h1>Rooks : useWindowScrollPosition Example </h1>
+      <br></br>
+
+      <p>Scroll </p>
+      <p> {JSON.stringify(position)} </p>
     </div>
   );
 }
 
-render(<Demo />);
+export default App;
 ```
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usewindowscrollposition-qspkk?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useWindowScrollPosition"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

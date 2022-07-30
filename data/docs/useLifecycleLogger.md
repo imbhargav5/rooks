@@ -15,13 +15,26 @@ A react hook that console logs parameters as component transitions through lifec
 ## Examples
 
 ```jsx
-function Demo(props) {
-  useLifecycleLogger("Demo", props);
-  // it will props log on mount, update and unmount
-  return null;
-}
+import "./styles.css";
+import { useLifecycleLogger } from "rooks";
+import { useEffect, useState } from "react";
 
-render(<Demo />);
+export default function App() {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    setValue(1);
+  }, []);
+
+  useLifecycleLogger("Demo", value);
+
+  return (
+    <div className="App">
+      <h1>useLifecycleLogger example</h1>
+      <h2>See console for logs</h2>
+    </div>
+  );
+}
 ```
 
 ### Arguments
@@ -34,25 +47,3 @@ render(<Demo />);
 ### Returns
 
 No return value
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe
-  src="https://codesandbox.io/embed/uselifecyclelogger-rgzep?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="useLifecycleLogger example"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
-
----

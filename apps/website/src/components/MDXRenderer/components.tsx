@@ -68,6 +68,9 @@ function Code({ children }: { children?: ReactNode }) {
               "react-dom": "^18.2.0",
               "react-is": "^18.2.0",
               rooks: "latest",
+              random: "latest",
+              "styled-components": "latest",
+              "framer-motion": "latest",
             },
           }}
         />

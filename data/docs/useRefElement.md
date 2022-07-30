@@ -11,7 +11,10 @@ Helps bridge gap between callback ref and state. Manages the element called with
 ## Examples
 
 ```jsx
-// Build a useEventListenerRef hook using useRefElement
+import { useEffect, useState } from "react";
+import { useRefElement } from "rooks";
+import "./styles.css";
+
 function useEventListenerRef(eventName, callback) {
   const [ref, element] = useRefElement();
 
@@ -27,6 +30,28 @@ function useEventListenerRef(eventName, callback) {
 
   return ref;
 }
+
+export default function App() {
+  const [value, setValue] = useState(0);
+  const ref = useEventListenerRef("click", function() {
+    setValue(value + 1);
+  });
+
+  return (
+    <div
+      ref={ref}
+      className="App"
+      style={{
+        padding: "20px",
+        border: "5px solid dodgerblue",
+      }}
+    >
+      <h1>useRefElement Example</h1>
+      <h2>Click in this box</h2>
+      <p> Value is {value}</p>
+    </div>
+  );
+}
 ```
 
 ### Arguments
@@ -39,20 +64,3 @@ No arguments.
 | -------------- | ------------------------------------------- | ----------------------------- |
 | ref            | `(refElement: RefElementOrNull<T>) => void` | The callback ref              |
 | element        | `RefElementOrNull<T>`                       | The element linked to the ref |
-
-## Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/userefelement-183yk?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useSelect"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

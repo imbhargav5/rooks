@@ -15,7 +15,9 @@ An important difference between `useKey` and `useKeys` is that `useKey` checks i
 ## Examples
 
 ```jsx
-function Demo() {
+import * as React from "react";
+import { useKeys } from "rooks";
+export default function App() {
   const containerRef = React.useRef(document);
   const inputRef = React.useRef(null);
   const [isEventActive, setIsEventActive] = React.useState(true);
@@ -63,8 +65,6 @@ function Demo() {
     </div>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Arguments
@@ -84,21 +84,3 @@ render(<Demo />);
 ### Returns
 
 No return value
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe
-  src="https://codesandbox.io/embed/smoosh-fire-uzlde?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="useKeys usage"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

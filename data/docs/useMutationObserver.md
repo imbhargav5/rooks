@@ -11,6 +11,9 @@ Mutation Observer hook for React.
 ## Examples
 
 ```jsx
+import React, { useState, useRef } from "react";
+import { useMutationObserver } from "rooks";
+
 function Demo() {
   const myRef = useRef();
   const [mutationCount, setMutationCount] = useState(0);
@@ -24,7 +27,7 @@ function Demo() {
     <>
       <div
         style={{
-          width: 300,
+          width: "auto",
           background: "lightblue",
           padding: "10px",
           position: "absolute",
@@ -64,7 +67,22 @@ function Demo() {
   );
 }
 
-render(<Demo />);
+const App = () => {
+  // useMutationObserver =>
+  // which runs a callback whenever a target element changes, passed in as a react ref.
+
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : useMutationObserver example</h1>
+      <br></br>
+      <Demo />
+    </div>
+  );
+};
+
+export default App;
 ```
 
 ### Arguments
@@ -74,20 +92,3 @@ render(<Demo />);
 | ref      | React ref | Ref which should be observed for Mutations                                                        | undefined                                                                 |
 | callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                                 |
 | config   | object    | Mutation Observer configuration                                                                   | \{attributes: true,,characterData: true,,subtree: true,,childList: true\} |
-
-### Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/usemutationobserver-mj489?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useMutationObserver"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

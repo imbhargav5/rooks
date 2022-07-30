@@ -13,15 +13,52 @@ A react hook to manage state in a key value pair map.
 ## Examples
 
 ```jsx
-function Demo() {
+import "./styles.css";
+import { useMapState } from "rooks";
+import { useState } from "react";
+
+export default function App() {
   const [
     map,
     { set, setMultiple, has, remove, removeMultiple, removeAll },
   ] = useMapState({ a: 1, b: 2 });
-  return null;
-}
+  const [setInputKey, setSetInputKey] = useState("");
+  const [setInputValue, setSetInputValue] = useState("");
+  const [removeInputKey, setRemoveInputKey] = useState("");
 
-render(<Demo />);
+  return (
+    <div className="App">
+      <h1>useMapState CodeSandbox</h1>
+
+      <div className="input">
+        <input
+          value={setInputKey}
+          onChange={e => setSetInputKey(e.target.value)}
+          placeholder="key"
+        />
+        <input
+          value={setInputValue}
+          onChange={e => setSetInputValue(e.target.value)}
+          placeholder="value"
+        />
+        <button onClick={() => set(setInputKey, setInputValue)}>set</button>
+      </div>
+
+      <div className="input">
+        <input
+          value={removeInputKey}
+          onChange={e => setRemoveInputKey(e.target.value)}
+          placeholder="key"
+        />
+        <button onClick={() => remove(removeInputKey)}>remove</button>
+      </div>
+
+      {Object.entries(map).map(item => {
+        return <div>{item.join(": ")}</div>;
+      })}
+    </div>
+  );
+}
 ```
 
 ### Arguments
@@ -51,20 +88,3 @@ map methods:
 | removeAll      | `() => void`                     | remove all key value pair in map      |
 
 ---
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usemapstate-oh8cs?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="usemapstate"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

@@ -12,8 +12,14 @@ Takes a callback and fires it when a condition is true
 
 ## Examples
 
+### Basic usage
+
 ```jsx
-function Demo() {
+import "./styles.css";
+import { useTimeoutWhen } from "rooks";
+import { useState } from "react";
+
+function App() {
   const [start, setStart] = useState(false);
   useTimeoutWhen(() => setStart(false), 2000, start);
   return (
@@ -28,7 +34,7 @@ function Demo() {
   );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -42,22 +48,3 @@ render(<Demo />);
 ### Returned
 
 No return value.
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usetimeoutwhen-l6fbj?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useTimeoutWhen"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

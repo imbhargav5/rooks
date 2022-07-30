@@ -15,7 +15,8 @@ Very similar useKey but it returns a ref
 #### Basic example with keydown
 
 ```jsx
-function Demo() {
+import { useKeyRef } from "rooks";
+export default function App() {
   function vowelsEntered(e) {
     console.log("[Demo 1] You typed a vowel");
   }
@@ -28,14 +29,13 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
 #### Multiple handlers on the same element
 
 ```jsx
-function Demo() {
+import { useKeyRef, useMergeRefs } from "rooks";
+export default function App() {
   function vowelsEntered(e) {
     console.log("[Demo 1] You typed a vowel");
   }
@@ -53,14 +53,13 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
 #### Multiple kinds of events
 
 ```jsx
-function Demo() {
+import { useKeyRef } from "rooks";
+export default function App() {
   function onKeyInteraction(e) {
     console.log("[Demo 2]Enter key", e.type);
   }
@@ -79,13 +78,13 @@ function Demo() {
     </>
   );
 }
-render(<Demo />);
 ```
 
 #### Conditionally setting handlers
 
 ```jsx
-function Demo() {
+import { useKeyRef } from "rooks";
+export default function App() {
   const [shouldListen, setShouldListen] = useState(false);
 
   function toggleShouldListen() {
@@ -118,7 +117,6 @@ function Demo() {
     </>
   );
 }
-render(<Demo />);
 ```
 
 ### Arguments
@@ -139,23 +137,3 @@ render(<Demo />);
 | Return value | Type         | Description                                              | Defualt   |
 | ------------ | ------------ | -------------------------------------------------------- | --------- |
 | ref          | Callback Ref | A ref that can be used on the element you want to listen | undefined |
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe
-  src="https://codesandbox.io/embed/fun-usekeyref-usage-ifh09?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="Fun useKeyRef usage"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

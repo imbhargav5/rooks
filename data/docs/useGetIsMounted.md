@@ -12,29 +12,16 @@ Checks if a component is mounted or not at the time. Useful for async effects
 
 ## Examples
 
+### Basic usage
+
 ```jsx
-function Demo() {
+import { useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+export default function App() {
   const getIsMounted = useGetIsMounted();
   useEffect(() => {
-    doSomethingAsync().then(() => {
-      if(getIsMounted()){
-        keepGoing();
-      }
-      return;
-    })
-  }, [...])
-  return null
+    alert("Mounted " + String(getIsMounted()));
+  }, []);
+  return null;
 }
-
-render(<Demo/>)
 ```
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-Please consider submitting a codesandbox with usage as PR. Thanks!
-
----

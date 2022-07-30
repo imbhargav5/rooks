@@ -10,27 +10,46 @@ Select values from a list easily. List selection hook for react.
 
 ## Examples
 
+### Basic usage
+
 ```jsx
+import "./styles.css";
+import { useSelect } from "rooks";
+
 const list = [
   {
-    heading: "Tab 1",
-    content: "Tab 1 Content",
+    heading: "Awesome",
+    content: "Great, tell me about it!",
   },
   {
-    heading: "Tab 2",
-    content: "Tab 2 Content",
+    heading: "I don't know",
+    content: "That's okay.",
+  },
+  {
+    heading: "Worst",
+    content: "The day is young.",
   },
 ];
 
-function Demo() {
+export default function App() {
   const { index, setIndex, item } = useSelect(list, 0);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "20px",
+      }}
+    >
+      <h1>Rooks: useSelect Example</h1>
+      <h3>How're you feeling today?</h3>
       {list.map((listItem, listItemIndex) => (
         <button
           key={listItemIndex}
           style={{
-            background: index === listItemIndex ? "dodgerblue" : "inherit",
+            background: index === listItemIndex ? "Teal" : "inherit",
           }}
           onClick={() => setIndex(listItemIndex)}
         >
@@ -41,7 +60,6 @@ function Demo() {
     </div>
   );
 }
-render(<Demo />);
 ```
 
 ### Arguments
@@ -59,20 +77,3 @@ render(<Demo />);
 | item                       | any      | Currently selected item           |
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
-
-## Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/useselect-jn2rn?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useSelect"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

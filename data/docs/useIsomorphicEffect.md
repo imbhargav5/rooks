@@ -13,14 +13,41 @@ A hook that resolves to useEffect on the server and useLayoutEffect on the clien
 ## Examples
 
 ```jsx
-function Demo() {
+import "./styles.css";
+import { useState } from "react";
+import { useIsomorphicEffect } from "rooks";
+
+function Component() {
   useIsomorphicEffect(() => {
-    console.log("Effect");
+    console.log("Rendered");
   }, []);
   return null;
 }
 
-render(<Demo />);
+const App = () => {
+  const [shouldRender, enableRender] = useState(true);
+  return (
+    <div>
+      <h1>Rook: useIsomorphicEffect Example</h1>
+      <hr></hr>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <br></br>
+        <button onClick={() => enableRender(!shouldRender)}> Click me! </button>
+        <p>Explore console</p>
+        {shouldRender && <Component />}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 ```
 
 ### Arguments
@@ -32,22 +59,3 @@ render(<Demo />);
 ### Returns
 
 Returns `useEffect` when "window" is not in scope and `useLayoutEffect` in the browser
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/useisomorphiceffect-kn02d?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useIsomorphicEffect"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

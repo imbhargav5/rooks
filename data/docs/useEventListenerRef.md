@@ -12,15 +12,32 @@ A react hook to add an event listener to a ref
 
 ## Examples
 
-```jsx
-function Demo() {
-  const ref = useEventListenerRef("click", function() {
-    console.log("clicked");
-  });
-  return <div ref={ref}>Click me</div>;
-}
+### Basic usage
 
-render(<Demo />);
+```jsx
+import { useState } from "react";
+import { useEventListenerRef } from "rooks";
+import "./styles.css";
+
+export default function App() {
+  const [value, setValue] = useState(0);
+  const ref = useEventListenerRef("click", function() {
+    setValue(value + 1);
+  });
+  return (
+    <div
+      ref={ref}
+      className="App"
+      style={{
+        padding: "20px",
+        border: "5px solid dodgerblue",
+      }}
+    >
+      <h2>Click in this box</h2>
+      <p> Value is {value}</p>
+    </div>
+  );
+}
 ```
 
 ### Arguments
@@ -39,21 +56,3 @@ render(<Demo />);
 | ref          | Function | A callback ref that can be used as ref prop |
 
 ---
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe
-  src="https://codesandbox.io/embed/red-sunset-1ph98?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="red-sunset-1ph98"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

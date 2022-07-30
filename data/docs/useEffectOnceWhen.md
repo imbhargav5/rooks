@@ -13,35 +13,34 @@ Runs a callback effect atmost one time when a condition becomes true
 ## Examples
 
 ```jsx
-function Demo() {
-  const hasOpenedPage = true;
+import { useState } from "react";
+import { useEffectOnceWhen } from "rooks";
+
+const App = () => {
+  const [loading, setLoading] = useState(true);
+
   useEffectOnceWhen(() => {
-    console.log("user has opened page");
-  }, hasOpenedPage);
-  return null;
-}
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Countdown for 3 sec
+  }, loading);
 
-render(<Demo />);
+  return (
+    <div>
+      <h1>Rooks: useEffectOnceWhen Example</h1>
+      <hr></hr>
+
+      <p style={{ fontSize: "20px" }}>
+        {loading
+          ? "Loading Component (will be gone in 3 secs)...."
+          : "Counter Component"}
+      </p>
+    </div>
+  );
+};
+
+export default App;
 ```
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/useeffectoncewhen-io8wo?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useEffectOnceWhen"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
 
 ### Arguments
 

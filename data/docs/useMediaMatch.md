@@ -13,12 +13,34 @@ Signal whether or not a media query is currently matched.
 ## Examples
 
 ```jsx
-function Demo() {
-  const isNarrowWidth = useMediaMatch("(max-width: 600px)");
-  return <span>Your screen is {isNarrowWidth ? "narrow" : "wide"}</span>;
+import "./styles.css";
+import { useMediaMatch } from "rooks";
+
+function App() {
+  const Component = useMediaMatch("(max-width: 600px)");
+
+  return (
+    <div>
+      <h1>Rooks : useMediaMatch example</h1>
+      <hr></hr>
+
+      <div
+        style={{
+          backgroundColor: "lightblue",
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span>Your screen is {Component ? "narrow" : "wide"}</span>
+      </div>
+    </div>
+  );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -34,20 +56,3 @@ render(<Demo />);
 | isMatch      | Boolean | Whether or not the media query is currently matched |
 
 ---
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usemediamatch-f616x?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useMediaMatch"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

@@ -6,36 +6,47 @@ sidebar_label: useWillUnmount
 
 ### About
 
-componentWillUnmount lifecycle as hook for React.
+A React hook for componentWillUnmount lifecycle method.
 
 ### Examples
 
 ```jsx
+import "./styles.css";
+import { useState } from "react";
+import { useWillUnmount } from "rooks";
+
 function Message() {
-  useWillUnmount(function() {
-    alert("unmounted");
+  useWillUnmount(function(props) {
+    console.log("UNMOUNT", props);
   });
-  return <p> Message </p>;
+  return <p> This component will unmount </p>;
 }
 
-function Demo() {
-  const [value, changeValue] = useState(true);
-
-  function toggleValue() {
-    changeValue(!value);
-  }
-
+const App = () => {
+  const [shouldRender, enableRender] = useState(true);
   return (
-    <>
-      <p>
-        <button onClick={toggleValue}>Toggle show </button>
-      </p>
-      {value && <Message />}
-    </>
-  );
-}
+    <div>
+      <h1>Rook: useWillUnmount Example</h1>
+      <hr></hr>
 
-render(<Demo />);
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <br></br>
+        <p> Check or Uncheck the box</p>
+        <input onClick={() => enableRender(!shouldRender)} type="checkBox" />
+
+        {shouldRender && <Message />}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 ```
 
 #### Arguments
@@ -43,22 +54,3 @@ render(<Demo />);
 | Arguments | Type     | Description                                     | Default value |
 | --------- | -------- | ----------------------------------------------- | ------------- |
 | callback  | function | Callback function which needs to run on unmount | undefined     |
-
-## A React hook for componentWillUnmount lifecycle method.
-
-## Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/usewillunmount-ogk90?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useWillUnmount"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

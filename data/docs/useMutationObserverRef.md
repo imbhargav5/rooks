@@ -11,6 +11,9 @@ A hook that tracks mutations of an element. It returns a callbackRef.
 ## Examples
 
 ```jsx
+import React, { useState } from "react";
+import { useMutationObserverRef } from "rooks";
+
 function Demo() {
   const [mutationCount, setMutationCount] = useState(0);
   const incrementMutationCount = () => {
@@ -63,7 +66,19 @@ function Demo() {
   );
 }
 
-render(<Demo />);
+const App = () => {
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : useMutationObserverRef example</h1>
+      <br></br>
+      <Demo />
+    </div>
+  );
+};
+
+export default App;
 ```
 
 ### Arguments
@@ -80,18 +95,3 @@ Returns an array with one element
 | Argument | Type        | Description                                |
 | -------- | ----------- | ------------------------------------------ |
 | ref      | CallbackRef | Ref which should be observed for Mutations |
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/usemutationobserverref-2nfih?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useMutationObserver"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

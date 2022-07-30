@@ -10,31 +10,43 @@ Drop in replacement for useState hook but with undo functionality.
 
 ## Examples
 
+### Basic usage
+
 ```jsx
-const Demo = () => {
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
   const [value, setValue, undo] = useUndoState(0);
 
   return (
     <div>
       <span>Current value: {value}</span>
+      <br />
       <button onClick={() => setValue(value + 1)}>Increment</button>
       <button onClick={undo}>Undo</button>
     </div>
   );
 };
 
-render(<Demo />);
+export default App;
 ```
+
+### Any kind of value
 
 You can pass any kind of value to hook just like React's own useState.
 
 ```jsx
-const Demo = () => {
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
   const [value, setValue, undo] = useUndoState({ data: 42 });
 
   return (
     <div>
-      <span>Current value: {value}</span>
+      <span>Current value: {JSON.stringify(value)}</span>
+      <br />
       <button onClick={() => setValue({ data: value.data + 1 })}>
         Increment object data
       </button>
@@ -43,24 +55,24 @@ const Demo = () => {
   );
 };
 
-render(<Demo />);
+export default App;
 ```
+
+### Setter function is still the same
 
 Setter function can also be used with callback just like React's own useState.
 
-```javascript
-const [value, setValue, undo] = useUndoState({ data: 42 })
-
-() => setValue(current => current + 1)
-```
-
 ```jsx
-const Demo = () => {
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
   const [value, setValue, undo] = useUndoState(0);
 
   return (
     <div>
       <span>Current value: {value}</span>
+      <br />
       <button onClick={() => setValue(current => current + 1)}>
         Increment
       </button>
@@ -69,13 +81,33 @@ const Demo = () => {
   );
 };
 
-render(<Demo />);
+export default App;
 ```
+
+### Max undo stack size
 
 To preserve memory you can limit number of steps that will be preserved in undo history.
 
 ```javascript
-const [value, setValue, undo] = useUndoState(0, { maxSize: 30 });
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
+  const [value, setValue, undo] = useUndoState(0, { maxSize: 30 });
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <br />
+      <button onClick={() => setValue(current => current + 1)}>
+        Increment
+      </button>
+      <button onClick={undo}>Undo</button>
+    </div>
+  );
+};
+
+export default App;
 
 // now when calling undo only last 30 changes to the value will be preserved
 ```
@@ -96,20 +128,3 @@ Note: The second argument is an options object which currently accepts a maxSize
 | value                | Any      | Current value                   |
 | setValue             | function | Setter function to update value |
 | undo                 | function | Undo state value                |
-
-## Codesandbox Example
-
-## Basic usage
-
-<iframe src="https://codesandbox.io/embed/useundostate-jy37w?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useUndoState"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

@@ -13,25 +13,36 @@ Merges any number of refs into a single ref
 ## Examples
 
 ```jsx
-function Demo() {
+import "./styles.css";
+import { useMergeRefs, useEventListenerRef } from "rooks";
+
+function App() {
   const mousedownRef = useEventListenerRef("mousedown", () => {
     console.log("mouse down");
   });
   const mouseupRef = useEventListenerRef("mouseup", () => {
     console.log("mouse up");
   });
-  const ref = useMergeRefs(mousedownRef, mouseupRef);
+  const refs = useMergeRefs(mousedownRef, mouseupRef);
 
   return (
     <div>
       <h1>Rooks : useMergeRefs Example</h1>
       <hr></hr>
-      <div ref={ref}>A div with multiple refs. Click me!!</div>
+      <div
+        ref={refs}
+        style={{
+          width: 250,
+          height: 200,
+          border: "blue 1px solid",
+        }}
+      >
+        A div with multiple refs. Click me!!
+      </div>
     </div>
   );
 }
-
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -45,22 +56,3 @@ render(<Demo />);
 | Return value | Type        | Description |
 | ------------ | ----------- | ----------- |
 | ref          | CallbackRef | Merged ref  |
-
----
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usemergerefs-rk7m1?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useMergeRefs"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

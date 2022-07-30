@@ -10,31 +10,42 @@ A hook to provide the geolocation info on client side.
 
 ## Examples
 
-### 1. Getting geolocation in a component
+### Getting geolocation in a component
 
 ```jsx
+import { useGeolocation } from "rooks";
+import React from "react";
+import { useState } from "react";
+
 function App() {
   const geoObj = useGeolocation();
 
   return (
     <div
+      className="App"
       style={{
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
+      <h1>Rooks : useGeolocation Example</h1>
       <p>{geoObj && JSON.stringify(geoObj)}</p>
     </div>
   );
 }
-render(<App />);
+
+export default App;
 ```
 
-### 2. Getting geolocation in a component on some condition
+### Getting geolocation in a component on some condition
 
 ```jsx
-function App() {
+import { useGeolocation } from "rooks";
+import React from "react";
+import { useState } from "react";
+
+export default function App() {
   const [when, setWhen] = React.useState(false);
 
   const geoObj = useGeolocation({
@@ -43,24 +54,35 @@ function App() {
 
   return (
     <div
+      className="App"
       style={{
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <button
-        onClick={() => {
-          setWhen(true);
+      <h1>Rooks : useGeolocation Example</h1>
+      <p>Check out console</p>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        Get Geolocation
-      </button>
-      <p>{geoObj && JSON.stringify(geoObj)}</p>
+        <button
+          onClick={() => {
+            setWhen(true);
+          }}
+        >
+          Get Geolocation
+        </button>
+        <p>{geoObj && JSON.stringify(geoObj)}</p>
+      </div>
     </div>
   );
 }
-render(<App />);
 ```
 
 ### Arguments
@@ -86,20 +108,3 @@ Returns an object with following items:
   message: string;
 }
 ```
-
-## Codesandbox Example
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usegeolocation-r1lm7?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useGeolocation"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

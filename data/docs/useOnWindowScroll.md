@@ -12,12 +12,40 @@ A React hook for adding an event listener for window scroll
 ## Examples
 
 ```jsx
-function Demo() {
+import "./styles.css";
+import { useOnWindowScroll } from "rooks";
+
+function App() {
   useOnWindowScroll(() => console.log("window scrolled"));
-  return <p> Hello world </p>;
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : useOnWindowScroll example</h1>
+      <p>Scroll Down</p>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "200px",
+            height: "800px",
+            backgroundColor: "teal",
+            marginTop: "20px",
+          }}
+        ></div>
+      </div>
+      <p>Scroll Up</p>
+    </div>
+  );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -31,20 +59,3 @@ render(<Demo />);
 ### Returns
 
 No return value.
-
-## Codesandbox Example
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/useonwindowscroll-58uiy?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useOnWindowScroll"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

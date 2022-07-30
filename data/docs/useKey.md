@@ -10,10 +10,14 @@ keypress, keyup and keydown event handlers as hooks for react.
 
 ## Examples
 
-#### Basic example with keydown
+## Basic example with keydown
 
 ```jsx
-function Demo() {
+import React, { useRef, useState } from "react";
+import "./styles.css";
+import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
+
+export default function App() {
   const inputRef = useRef();
   function windowEnter(e) {
     console.log("[Demo 1] Enter key was pressed on window");
@@ -41,14 +45,16 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
-#### Multiple kinds of events
+### Multiple kinds of events
 
 ```jsx
-function Demo() {
+import React, { useRef, useState } from "react";
+import "./styles.css";
+import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
+
+export default function App() {
   const inputRef = useRef();
   function onKeyInteraction(e) {
     console.log("[Demo 2]Enter key", e.type);
@@ -69,13 +75,16 @@ function Demo() {
     </>
   );
 }
-render(<Demo />);
 ```
 
-#### Conditionally setting handlers
+### Conditionally setting handlers
 
 ```jsx
-function Demo() {
+import React, { useRef, useState } from "react";
+import "./styles.css";
+import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
+
+export default function App() {
   const inputRef = useRef();
   const [shouldListen, setShouldListen] = useState(false);
   function toggleShouldListen() {
@@ -109,7 +118,261 @@ function Demo() {
     </>
   );
 }
-render(<Demo />);
+```
+
+### Fun little game
+
+```jsx
+import React, { useRef, useState } from "react";
+import "./styles.css";
+import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
+import random from "random";
+import styled from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
+
+const colors = [
+  "#1D4ED8",
+  "#6D28D9",
+  "#92400E",
+  "#047857",
+  "#DC2626",
+  "#374151",
+  "##BE185D",
+];
+
+export const Root = styled.div`
+  position: fixed;
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100%;
+`;
+
+export function useMapState(initialValue) {
+  const [map, setMap] = useState(initialValue);
+
+  function set(key, value) {
+    setMap({
+      ...map,
+      [key]: value,
+    });
+  }
+  function has(key) {
+    return typeof map[key] !== "undefined";
+  }
+  function setMultiple(...obj) {
+    setMap({
+      ...map,
+      ...obj,
+    });
+  }
+  function removeMultiple(...keys) {
+    const newMap = {};
+    Object.keys(map).forEach(key => {
+      if (!keys.includes(key)) {
+        newMap[key] = map[key];
+      }
+    });
+    setMap(newMap);
+  }
+  function remove(key) {
+    const newMap = {};
+    Object.keys(map).forEach(mapKey => {
+      if (mapKey !== key) {
+        newMap[mapKey] = map[mapKey];
+      }
+    });
+    setMap(newMap);
+  }
+  function removeAll() {
+    setMap({});
+  }
+
+  const controls = {
+    set,
+    has,
+    setMultiple,
+    remove,
+    removeMultiple,
+    removeAll,
+  };
+  return [map, controls];
+}
+
+const KeyWrapper = styled(motion.div)`
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  background: dodgerblue;
+  display: flex;
+  place-content: center;
+  color: white;
+  border-radius: 6px;
+  border: 1px solid dodgerblue;
+  place-items: center;
+  ${props => {
+    return `
+      background: ${props.background};
+      transform: rotateZ(${props.rotation}deg);
+      left: ${props.leftOffset}%;
+    `;
+  }}
+`;
+
+function getVariants(topOffset) {
+  return {
+    initial: {
+      top: "100%",
+      opacity: 0,
+      scale: 0.5,
+    },
+    visible: {
+      top: `${topOffset}%`,
+      opacity: 1,
+      scale: 1,
+      rotate: 720 + random.int(-45, 45),
+      transition: {
+        duration: 1,
+      },
+    },
+    exit: {
+      top: "-100%",
+      opacity: 0,
+      scale: 0.5,
+      rotate: 2160,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+}
+
+function KeyDiv({ keyData, removeKey }) {
+  const { rotation, bgRandomInt, topOffset, text, leftOffset } = keyData;
+
+  useTimeoutWhen(removeKey, 2000);
+
+  return (
+    <KeyWrapper
+      variants={getVariants(topOffset)}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      //transition={{ duration: 2 }}
+      rotation={rotation}
+      background={colors[bgRandomInt]}
+      leftOffset={leftOffset}
+    >
+      {text}
+    </KeyWrapper>
+  );
+}
+
+export function RenderKeys({ keyMap, removeKey }) {
+  return (
+    <AnimatePresence>
+      {Object.entries(keyMap).map(([mapkey, keyData]) => {
+        return (
+          <KeyDiv
+            key={mapkey}
+            keyData={keyData}
+            removeKey={() => removeKey(mapkey)}
+          />
+        );
+      })}
+    </AnimatePresence>
+  );
+}
+
+const Alphabets = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
+const allKeysToHandle = Alphabets.map(key => `Key${key}`);
+
+function createKeyData(alphabetKeyCode) {
+  return {
+    text: alphabetKeyCode.split("Key")[1],
+    rotation: random.int(-3, 3) * 15,
+    bgRandomInt: random.int(0, 100) % 6,
+    topOffset: random.int(10, 80),
+    leftOffset: random.int(10, 80),
+  };
+}
+
+function Main() {
+  const [keyMap, { set, remove }] = useMapState({});
+  const dirtyCounterRef = useRef(0);
+
+  function addKey(alphabetKeyCode) {
+    dirtyCounterRef.current = dirtyCounterRef.current + 1;
+    set(dirtyCounterRef.current, createKeyData(alphabetKeyCode));
+  }
+
+  const [throttledAddkey] = useThrottle(addKey, 500);
+  // harmless forloop
+  // hook count is the same so this is fine
+  allKeysToHandle.forEach(alphabetKeyCode => {
+    useKey(alphabetKeyCode, () => {
+      throttledAddkey(alphabetKeyCode);
+    });
+  });
+
+  useTimeoutWhen(() => {
+    addKey("KeyA");
+  }, 500);
+  useTimeoutWhen(() => {
+    addKey("KeyS");
+  }, 1500);
+  useTimeoutWhen(() => {
+    addKey("KeyD");
+  }, 2500);
+  useTimeoutWhen(() => {
+    addKey("KeyF");
+  }, 3500);
+
+  console.log(keyMap);
+
+  return (
+    <Root>
+      <RenderKeys keyMap={keyMap} removeKey={remove} />
+    </Root>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Type any key</h1>
+      <Main />
+    </div>
+  );
+}
 ```
 
 ### Arguments
@@ -129,23 +392,3 @@ render(<Demo />);
 ### Returns
 
 No return value
-
----
-
-## Codesandbox Examples
-
-### Fun Usekey Usage
-
-<iframe
-  src="https://codesandbox.io/embed/optimistic-wildflower-rg5yr?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="Fun useKey usage"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

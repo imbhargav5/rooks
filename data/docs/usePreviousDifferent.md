@@ -13,22 +13,36 @@ usePreviousDifferent returns the last different value of a variable
 ## Examples
 
 ```jsx
-function Demo() {
-  const [value, setValue] = useState(0);
-  const previousValue = usePreviousDifferent(value);
+import { usePreviousDifferent, useCounter } from "rooks";
 
+function App() {
+  const { value: counter1Value, increment: incrementCounter1 } = useCounter(0);
+  const previousCounter1Value = usePreviousDifferent(counter1Value);
+  const { value: counter2Value, increment: incrementCounter2 } = useCounter(0);
+  const previousCounter2Value = usePreviousDifferent(counter2Value);
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1>Rooks : usePreviousDifferent example </h1>
+      <p>
+        Notice how previously different values are tracked across rerenders and
+        when other values change.
+      </p>
       <div>
-        <p>Counter: {value}</p>
-        <p>Previous Counter: {previousValue}</p>
-        <button onClick={() => setValue(value + 1)}>Next</button>
+        <p>Counter: {String(counter1Value)}</p>
+        <p>Previous Counter 1 value: {String(previousCounter1Value)}</p>
+        <p>Counter: {String(counter2Value)}</p>
+        <p>Previous Counter 1 value: {String(previousCounter2Value)}</p>
+        <button onClick={incrementCounter1}>Increment counter 1</button>
+        <br />
+        <button onClick={incrementCounter2}>Increment counter 2</button>
       </div>
     </div>
   );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -44,20 +58,3 @@ render(<Demo />);
 | previousValue  | T    | returns the past value which was different from the current one |
 
 ---
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usepreviousdifferent-cvnhh?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="usePreviousDifferent"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

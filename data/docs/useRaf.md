@@ -8,32 +8,28 @@ sidebar_label: useRaf
 
 A continuously running requestAnimationFrame hook for React
 
-[![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
-
 ## Examples
 
-```jsx
-let angle = 0;
-function updateAngle(timeElapsed) {
-  // Measure the ratio of actual time elapsed in ms since the last frame relative to
-  // how long it would take at exactly 60fps (1/60 * 1000). This allows us to use 60fps
-  // as the target speed and compensate in our calculations if the actual framerate is lower
-  // or higher.
-  const deltaTime = timeElapsed / 16.666;
+### Basic example
 
-  const speed = 3 * deltaTime;
-  angle = (angle + speed) % 360;
+```jsx
+import React, { useRef } from "react";
+import "./styles.css";
+import { useRaf, useToggle } from "rooks";
+
+let angle = 0;
+function updateAngle() {
+  angle = (angle + 2) % 360;
   return (angle * Math.PI) / 180;
 }
 
-function Demo() {
-  const { value: shouldRun, toggleValue: toggleShouldRun } = useToggle(true);
-  const myRef = useRef();
+export default function App() {
+  const [shouldRun, toggleShouldRun] = useToggle(true);
   const canvasRef = useRef();
-  useRaf(timeElapsed => {
+  useRaf(() => {
     if (canvasRef && canvasRef.current) {
       const screenRatio = window.devicePixelRatio || 1;
-      let angle = updateAngle(timeElapsed);
+      let angle = updateAngle();
       const canvas = canvasRef.current;
       var ctx = canvas.getContext("2d");
       ctx.save();
@@ -67,8 +63,6 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Arguments
@@ -81,21 +75,3 @@ render(<Demo />);
 ### Returns
 
 No return value.
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe
-  src="https://codesandbox.io/embed/useraf-1uxn0?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
-  title="useRaf usage"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>

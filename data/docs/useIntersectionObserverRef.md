@@ -10,35 +10,41 @@ A hook to register an intersection observer listener.
 
 ## Examples
 
+### Basic usage
+
 ```jsx
-function Demo() {
-  const [isVisible, setIsVisible] = useState(false);
+import React, { useState } from "react";
+import { useIntersectionObserverRef } from "rooks";
+import "./styles.css";
+
+function App() {
+  const [isThingIntersecting, setThingIntersecting] = useState(false);
   const callback = entries => {
     if (entries && entries[0]) {
-      setIsVisible(entries[0].isIntersecting);
+      setThingIntersecting(entries[0].isIntersecting);
     }
   };
   const [myRef] = useIntersectionObserverRef(callback);
+
   return (
-    <>
+    <div className="App">
+      <h1>Rooks : useIntersectionObserverRef example</h1>
+      <h3>Scroll down</h3>
       <div
         style={{
           position: "fixed",
-          top: 0,
-          right: 0,
+          left: "250px",
         }}
       >
-        <h1>Is rectangle visible - {String(isVisible)}</h1>
+        <h1>Is rectangle visible - {String(isThingIntersecting)}</h1>
       </div>
-      <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
-      <div style={{ height: 2000 }}></div>
-    </>
+      <div style={{ height: 1500 }}></div>
+      <div ref={myRef} style={{ height: 300, background: "teal" }}></div>
+    </div>
   );
-  return null;
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -55,20 +61,3 @@ Returns an array with the first element in the array being the callback ref for 
 | Return value | Type        | Description                                                    | Default value |
 | ------------ | ----------- | -------------------------------------------------------------- | ------------- |
 | ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
-
-## Codesandbox Example
-
-### Basic usage
-
-<iframe src="https://codesandbox.io/embed/useintersectionobserverref-gm6j6?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useIntersectionObserverRef"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
