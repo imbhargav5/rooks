@@ -6,7 +6,7 @@ sidebar_label: useFullscreen
 
 ## About
 
-Use full screen api for making beautiful and emersive experinces.
+Use full screen api for making beautiful and immersive experiences.
 
 ## Examples
 
@@ -186,7 +186,7 @@ The argument is an object with the following optional items:
 | -------------------------------- | ------------------------------------------------------- | ---------------------------------------------- |
 | options.onChange                 | `(this: Document, event_: any, isOpen: boolean) => any` | Callback function to be called on change event |
 | options.onError                  | `(this: Document, event_: any) => any`                  | Callback function to be called on error        |
-| options.requestFullscreenOptions | `{ navigationUI?: string | "auto" | "hide" | "show" }`  | Whether to show navigation UI                  |
+| options.requestFullscreenOptions | \{ navigationUI?: string                                | "auto"                                         | "hide" | "show" \} | Whether to show navigation UI |
 
 ### Returns
 
