@@ -1,4 +1,4 @@
-import { Text, TextProps } from "@nextui-org/react";
+import { Text } from "@nextui-org/react";
 import { ComponentProps } from "react";
 
 /*
