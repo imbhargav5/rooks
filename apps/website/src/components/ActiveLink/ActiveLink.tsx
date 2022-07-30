@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link, { LinkProps } from "next/link";
-import React, { Children } from "react";
+import React from "react";
 import { Link as NextUILink } from "@nextui-org/react";
 export const ActiveLink = ({
   children,

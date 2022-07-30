@@ -4,13 +4,7 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import pkgDir from "pkg-dir";
-import {
-  Container,
-  Spacer,
-  Text,
-  Link as NextUILink,
-  styled,
-} from "@nextui-org/react";
+import { Container, Spacer, Text, styled } from "@nextui-org/react";
 import { MDXRenderer } from "../../components/MDXRenderer";
 import { mdxSerialize } from "../../utils/mdxSerialize";
 import {
@@ -18,7 +12,6 @@ import {
   SecondLevelHeadline,
 } from "../../components/Headings";
 import { LeftSidebar, MainLayout, RightSidebar } from "../../components/Layout";
-import Link from "next/link";
 import lodash from "lodash";
 import { ActiveLink } from "../../components/ActiveLink";
 
