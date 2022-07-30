@@ -1,4 +1,4 @@
-import { Spacer } from "@nextui-org/react";
+import { Col, Row, Spacer } from "@nextui-org/react";
 import { Container, styled } from "@nextui-org/react";
 import path from "path";
 import pkgDir from "pkg-dir";
@@ -8,6 +8,7 @@ import {
   FirstLevelHeadline,
   SecondLevelHeadline,
 } from "../components/Headings";
+import Link from "next/link";
 
 const StyledImage = styled(Image, {
   borderRadius: "$rounded",
@@ -56,10 +57,30 @@ const Home = ({ contributors }: HomeProps) => {
   return (
     <Container lg>
       <FirstLevelHeadline>Rooks</FirstLevelHeadline>
+      <Container>
+        <Row gap={1}>
+          <Col
+            as="span"
+            css={{
+              width: "auto",
+            }}
+          >
+            <Link href="/docs/useDidMount">Documentation</Link>
+          </Col>
+          <Col
+            as="span"
+            css={{
+              width: "auto",
+            }}
+          >
+            <a href="https://github.com/imbhargav5/rooks">Github</a>
+          </Col>
+        </Row>
+      </Container>
       <Spacer y={1} />
       <SecondLevelHeadline> Contributors </SecondLevelHeadline>
       <StyledGrid>
-        {contributors.map(contributor => (
+        {contributors.map((contributor) => (
           <ImageContainer key={contributor.login}>
             <StyledImage
               src={getPathFromUrl(contributor.avatar_url)}
