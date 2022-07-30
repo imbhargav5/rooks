@@ -8,17 +8,7 @@ sidebar_label: useKey
 
 keypress, keyup and keydown event handlers as hooks for react.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useKey } from "rooks";
-```
-
-## Usage
+## Examples
 
 #### Basic example with keydown
 
@@ -159,7 +149,3 @@ No return value
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

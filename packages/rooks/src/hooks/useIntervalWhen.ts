@@ -9,13 +9,13 @@ import { noop } from "@/utils/noop";
  * @param intervalDurationMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the interval
  * @param startImmediate If the callback should be invoked immediately
- * @see {@link https://react-hooks.org/docs/useIntervalWhen}
+ * @see https://react-hooks.org/docs/useIntervalWhen
  */
 function useIntervalWhen(
   callback: () => void,
-  intervalDurationMs: number = 0,
-  when: boolean = true,
-  startImmediate: boolean = false
+  intervalDurationMs = 0,
+  when = true,
+  startImmediate = false
 ): void {
   const savedRefCallback = useRef<() => void>();
 

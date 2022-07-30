@@ -12,17 +12,7 @@ A react hook that console logs parameters as component transitions through lifec
 
 ## Installation
 
-```
-npm install rooks
-```
-
-## Importing the hook
-
-```javascript
-import { useLifecycleLogger } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo(props) {
@@ -66,7 +56,3 @@ No return value
 />
 
 ---
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

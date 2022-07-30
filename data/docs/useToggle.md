@@ -8,20 +8,10 @@ sidebar_label: useToggle
 
 Toggle (between booleans or custom data)hook for React.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useToggle } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
-const customToggleFunction = (v) => (v === "start" ? "stop" : "start");
+const customToggleFunction = v => (v === "start" ? "stop" : "start");
 
 function Demo() {
   const [value1, toggleValue1] = useToggle();
@@ -81,7 +71,3 @@ title="useToggle"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

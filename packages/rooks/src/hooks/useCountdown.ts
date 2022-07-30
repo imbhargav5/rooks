@@ -3,8 +3,8 @@ import { useIntervalWhen } from "./useIntervalWhen";
 
 type CountdownOptions = {
   interval?: number;
-  onDown?: Function;
-  onEnd?: Function;
+  onDown?: (restTime: number, newTime: Date) => void;
+  onEnd?: (newTime: Date) => void;
 };
 
 /**
@@ -14,6 +14,7 @@ type CountdownOptions = {
  *
  * @param endTime Time to countdown
  * @param options  Countdown options
+ * @see https://react-hooks.org/docs/useCountdown
  */
 function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const { interval = 1_000, onDown, onEnd } = options;

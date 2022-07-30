@@ -18,7 +18,7 @@ const defaultOptions: UseUndoStateOptions = { maxSize: 100 };
  * @param {any} defaultValue - Default value to use for the state. This will be the first value in the undo stack.
  * @param {UseUndoStateOptions} options - Options for the undo state. Currently takes the maxSize option.
  * @returns {UseUndoStateReturnValue}
- * @see {@link https://react-hooks.org/docs/useUndoState}
+ * @see https://react-hooks.org/docs/useUndoState
  */
 const useUndoState = <T>(
   defaultValue: ExcludeFunction<T>,
@@ -39,6 +39,7 @@ const useUndoState = <T>(
         if (typeof argument === "function") {
           // I dislike this type assertion, but it's the only way to get the type to match
           // as the type guard doesn't seem to be working here.
+          // eslint-disable-next-line @typescript-eslint/ban-types
           return [(argument as Function)(current[0]), ...restValues];
         } else {
           return [argument, ...restValues];

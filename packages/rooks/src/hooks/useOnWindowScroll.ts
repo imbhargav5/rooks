@@ -8,12 +8,13 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  * @param {Function} callback Callback to be called before unmount
  * @param {boolean} when When the handler should be applied
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
- * @see {@link https://react-hooks.org/docs/useOnWindowScroll}
+ * @see https://react-hooks.org/docs/useOnWindowScroll
+ *
  */
 function useOnWindowScroll(
   callback: EventListener,
-  when: boolean = true,
-  isLayoutEffect: boolean = false
+  when = true,
+  isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
     window,

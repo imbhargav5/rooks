@@ -8,9 +8,10 @@ import { useWillUnmount } from "./useWillUnmount";
  *
  * @param componentName Name of the component
  * @param {...*} otherArgs Other arguments to log
+ * @see https://react-hooks.org/docs/useLifecycleLogger
  */
 const useLifecycleLogger = (
-  componentName: string = "Component",
+  componentName = "Component",
   ...otherArgs: unknown[]
 ) => {
   useDidMount(() => {

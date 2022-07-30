@@ -8,17 +8,7 @@ sidebar_label: useUndoState
 
 Drop in replacement for useState hook but with undo functionality.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useUndoState } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 const Demo = () => {
@@ -71,7 +61,7 @@ const Demo = () => {
   return (
     <div>
       <span>Current value: {value}</span>
-      <button onClick={() => setValue((current) => current + 1)}>
+      <button onClick={() => setValue(current => current + 1)}>
         Increment
       </button>
       <button onClick={undo}>Undo</button>
@@ -92,9 +82,9 @@ const [value, setValue, undo] = useUndoState(0, { maxSize: 30 });
 
 ## Arguments
 
-| Arguments    | Type    | Description                    | Default value  |
-| ------------ | ------- | ------------------------------ | -------------- |
-| initialValue | boolean | Initial value of the state     | false          |
+| Arguments    | Type    | Description                    | Default value    |
+| ------------ | ------- | ------------------------------ | ---------------- |
+| initialValue | boolean | Initial value of the state     | false            |
 | Options      | Object  | An options object for the hook | \{maxSize: 100\} |
 
 Note: The second argument is an options object which currently accepts a maxSize which governs the maximum number of previous states to keep track of.
@@ -123,7 +113,3 @@ title="useUndoState"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

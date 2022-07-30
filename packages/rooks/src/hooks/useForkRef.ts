@@ -19,6 +19,8 @@ function setRef<T>(ref: PossibleRef<T> | null, value: T) {
  *
  * @param refA
  * @param refB
+ * @returns MutableRefObject
+ * @see https://react-hooks.org/docs/useForkRef
  */
 function useForkRef<T>(
   refA: PossibleRef<T> | null,

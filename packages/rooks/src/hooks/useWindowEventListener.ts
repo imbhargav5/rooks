@@ -11,12 +11,13 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
+ * @see https://react-hooks.org/docs/useWindowEventListener
  */
 function useWindowEventListener(
   eventName: string,
   callback: (...args: unknown[]) => void,
   listenerOptions: ListenerOptions = {},
-  isLayoutEffect: boolean = false
+  isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
     window,

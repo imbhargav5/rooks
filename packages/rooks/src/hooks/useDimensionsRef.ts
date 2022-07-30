@@ -46,6 +46,13 @@ const getDimensionObject = (node: HTMLElement): UseDimensionsRefReturn => {
 
 const noWindowReturnValue: UseDimensionsHook = [undefined, null, null];
 
+/**
+ * useDimensionsRef
+ * @param updateOnScroll Whether to update on scroll
+ * @param updateOnResize Whether to update on resize
+ * @returns [React.Ref<HTMLDivElement>, UseDimensionsRefReturn, HTMLElement | null]
+ * @see https://react-hooks.org/docs/useDimensionsRef
+ */
 export const useDimensionsRef = ({
   updateOnScroll = true,
   updateOnResize = true,

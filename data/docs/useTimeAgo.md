@@ -8,17 +8,7 @@ sidebar_label: useTimeAgo
 
 A React Hook to get time ago for timestamp millisecond value.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useTimeAgo } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo() {
@@ -40,9 +30,9 @@ render(<Demo />);
 
 ### Arguments
 
-| Argument | Type   | Description    | Default value    |
-| -------- | ------ | -------------- | ---------------- | ----------------------------------- | --------- |
-| input    | Date   | Timestamp      | etc              | Any input that time-ago.js supports | undefined |
+| Argument | Type   | Description    | Default value      |
+| -------- | ------ | -------------- | ------------------ |
+| input    | Date   | Timestamp      | etc                | Any input that time-ago.js supports | undefined |
 | options  | Object | Options object | \{ intervalMs:0 \} |
 
 #### Options
@@ -56,7 +46,3 @@ render(<Demo />);
 ### Returned Value
 
 Timeago string is returned.
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -16,7 +16,7 @@ function getBoundingClientRect(element: HTMLElement): DOMRect | null {
  *
  * @param ref The React ref whose ClientRect is needed
  * @returns DOMRect | null
- * @see {@link https://react-hooks.org/docs/useBoundingclientRect}
+ * @see https://react-hooks.org/docs/useBoundingclientRect
  */
 function useBoundingclientrect(
   ref: MutableRefObject<HTMLElement | null>

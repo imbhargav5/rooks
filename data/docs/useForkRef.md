@@ -8,29 +8,21 @@ sidebar_label: useForkRef
 
 A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useForkRef } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo() {
   const [isVisible, setIsVisible] = useState(false);
-  const callback = (entries) => {
+  const callback = entries => {
     if (entries && entries[0]) {
       setIsVisible(entries[0].isIntersecting);
     }
   };
   const [myIntersectionObserverRef] = useIntersectionObserverRef(callback);
-  const [myBoundingclientrectRef, boundingclientrect] =
-    useBoundingclientrectRef();
+  const [
+    myBoundingclientrectRef,
+    boundingclientrect,
+  ] = useBoundingclientrectRef();
   const myRef = useForkRef(myIntersectionObserverRef, myBoundingclientrectRef);
   const displayString = JSON.stringify(boundingclientrect, null, 2);
   return (
@@ -92,7 +84,3 @@ title="useForkRef"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

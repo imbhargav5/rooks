@@ -6,6 +6,7 @@ import { useRef, useEffect } from "react";
  *
  * @param currentValue The value whose previously different value is to be tracked
  * @returns The previous value
+ * @see https://react-hooks.org/docs/usePreviousDifferent
  */
 function usePreviousDifferent<T>(currentValue: T): T | null {
   const previousRef = useRef<T | null>(null);

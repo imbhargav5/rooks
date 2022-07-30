@@ -8,17 +8,7 @@ sidebar_label: useNavigatorLanguage
 
 Navigator Language hook for React.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useNavigatorLanguage } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo() {
@@ -49,7 +39,3 @@ title="useNavigatorLanguage"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

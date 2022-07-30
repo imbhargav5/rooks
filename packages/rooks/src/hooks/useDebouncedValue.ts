@@ -17,6 +17,13 @@ type UseDebouncedValueReturnType<T> = [
   immediatelyUpdateDebouncedValue: Dispatch<SetStateAction<T | null>>
 ];
 
+/**
+ * useDebouncedValue
+ * @param value The value to debounce
+ * @param timeout The duration to debounce
+ * @param options The options object.
+ * @see https://react-hooks.org/docs/useDebouncedValue
+ */
 export const useDebouncedValue = <T = unknown>(
   value: T,
   timeout: number,

@@ -18,6 +18,7 @@ const config: MutationObserverInit = {
  * @param {MutableRefObject<HTMLElement | null>} ref React ref on which mutations are to be observed
  * @param {MutationCallback} callback Function that needs to be fired on mutation
  * @param {MutationObserverInit} options
+ * @see https://react-hooks.org/docs/useMutationObserver
  */
 function useMutationObserver(
   ref: MutableRefObject<HTMLElement | null>,

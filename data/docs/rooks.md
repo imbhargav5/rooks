@@ -27,7 +27,7 @@ Import any hook from "rooks" and start using them!
 import { useDidMount } from "rooks";
 ```
 
-## Usage
+## Examples
 
 ```jsx
 function App() {
@@ -48,7 +48,3 @@ function App() {
 ## License
 
 MIT
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

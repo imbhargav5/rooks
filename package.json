@@ -36,7 +36,6 @@
     "new": "yarn run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "node scripts/update-package-list-to-markdown/index.mjs"
-    
   },
   "husky": {
     "hooks": {
@@ -56,7 +55,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint-config-custom": "*",
     "lint-staged": "^13.0.3",
-    "prettier": "latest",
+    "prettier": "^2.7.1",
     "turbo": "latest",
     "typescript": "^4.7.4"
   },

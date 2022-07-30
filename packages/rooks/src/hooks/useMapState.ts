@@ -5,8 +5,14 @@ import { useCallback, useState } from "react";
  * A hook to manage state in the form of a map or object.
  *
  * @param initialValue Initial value of the map
+ * @see https://react-hooks.org/docs/useMapState
  */
-function useMapState<T extends {}, K extends keyof T>(
+function useMapState<
+  T extends {
+    [key: string]: unknown;
+  },
+  K extends keyof T
+>(
   initialValue: T
 ): [
   T,

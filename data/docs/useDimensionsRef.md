@@ -10,22 +10,12 @@ Easily grab dimensions of an element with a ref using this hook
 
 [//]: # "Main"
 
-## Installation
-
-```
-npm install rooks
-```
-
-## Importing the hook
-
-```javascript
-import { useDimensionsRef } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
-function Demo() {
+import { useDimensionsRef } from "rooks";
+
+export default function App() {
   const [ref, dimensions, node] = useDimensionsRef();
 
   return (
@@ -39,21 +29,20 @@ function Demo() {
           height: "200px",
         }}
       >
-        dimensions.height: {dimensions.height}px dimensions.width:{" "}
-        {dimensions.width}px
+        dimensions.height: {dimensions?.height}px
+        <br />
+        dimensions.width: {dimensions?.width}px
       </div>
     </div>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Arguments
 
 | Arguments | Type                                                     | Description                                             | Default value                                      |
 | --------- | -------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------- |
-| options   | `{ updateOnScroll?: boolean, updateOnResize?: boolean }` | Whether to update dimension on window resize and scroll | `{ updateOnScroll = true, updateOnResize = true }` |
+| options   | \{ updateOnScroll?: boolean, updateOnResize?: boolean \} | Whether to update dimension on window resize and scroll | \{ updateOnScroll = true, updateOnResize = true \} |
 
 ### Returns
 
@@ -66,26 +55,3 @@ Returns an array of 3 items:
 | node        | HTMLElement            | The element being tracked by ref                                                     | null          |
 
 ---
-
-## Codesandbox Examples
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/usedimensionsref-jjxsy?fontsize=14&hidenavigation=1&theme=dark"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-  title="useDimensionsRef"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
-
----
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -43,12 +43,15 @@ type UseSessionstorateStateReturnValue<S> = [
   () => void
 ];
 type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
+
 /**
  * useSessionstorageState hook
  * Tracks a value within sessionStorage and updates it
  *
  * @param {string} key - Key of the sessionStorage object
  * @param {any} initialState - Default initial value
+ * @returns {[any, Dispatch<SetStateAction<any>>, () => void]}
+ * @see https://react-hooks.org/docs/useSessionstorageState
  */
 function useSessionstorageState<S>(
   key: string,

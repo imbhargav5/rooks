@@ -43,12 +43,12 @@ type UseMultiSelectableListReturnType<T> = [
  * @param list - The list of values to select from
  * @param initialSelectIndices - The indices of the initial selections
  * @param allowUnselected - Whether or not to allow unselected values
- * @see {@link https://react-hooks.org/docs/useMultiSelectableList}
+ * @see https://react-hooks.org/docs/useMultiSelectableList
  */
 function useMultiSelectableList<T>(
   list: T[] = [],
   initialSelectIndices: number[] = [0],
-  allowUnselected: boolean = false
+  allowUnselected = false
 ): UseMultiSelectableListReturnType<T> {
   const [currentIndices, setCurrentIndices] = useState(initialSelectIndices);
 

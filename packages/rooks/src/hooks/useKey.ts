@@ -37,7 +37,7 @@ const defaultOptions = {
  * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
  * @param {Callback} callback  Callback to fire on keyboard events
  * @param {Options} options Options
- * @see {@link https://react-hooks.org/docs/useKey}
+ * @see https://react-hooks.org/docs/useKey
  */
 function useKey(
   keys: Array<number | string> | number | string,

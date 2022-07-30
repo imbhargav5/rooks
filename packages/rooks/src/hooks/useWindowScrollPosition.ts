@@ -27,6 +27,7 @@ function computeScrollPosition(): ScrollPosition {
  * A React hook to get the scroll position of the window
  *
  * @returns an object containing scrollX and scrollY values
+ * @see https://react-hooks.org/docs/useWindowScrollPosition
  */
 function useWindowScrollPosition(): ScrollPosition {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>(

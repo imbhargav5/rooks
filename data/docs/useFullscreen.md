@@ -8,17 +8,7 @@ sidebar_label: useFullscreen
 
 Use full screen api for making beautiful and emersive experinces.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useFullscreen } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 import React, { useState, useRef } from "react";
@@ -175,7 +165,7 @@ function Demo() {
             src="https://sindresorhus.com/unicorn"
             width="500"
             style={styles.demo_img}
-            onClick={(e) => {
+            onClick={e => {
               toggle(e.target);
             }}
           />
@@ -193,10 +183,10 @@ render(<Demo />);
 The argument is an object with the following optional items:
 
 | Argument value                   | Type                                                    | Description                                    |
-| -------------------------------- | ------------------------------------------------------- | ---------------------------------------------- | ------ | --------- | ----------------------------- |
+| -------------------------------- | ------------------------------------------------------- | ---------------------------------------------- |
 | options.onChange                 | `(this: Document, event_: any, isOpen: boolean) => any` | Callback function to be called on change event |
 | options.onError                  | `(this: Document, event_: any) => any`                  | Callback function to be called on error        |
-| options.requestFullscreenOptions | `{ navigationUI?: string                                | "auto"                                         | "hide" | "show" }` | Whether to show navigation UI |
+| options.requestFullscreenOptions | `{ navigationUI?: string | "auto" | "hide" | "show" }`  | Whether to show navigation UI                  |
 
 ### Returns
 
@@ -229,7 +219,3 @@ Returns an object with following items:
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

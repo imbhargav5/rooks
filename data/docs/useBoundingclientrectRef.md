@@ -8,23 +8,16 @@ sidebar_label: useBoundingclientrectRef
 
 A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useBoundingclientrectRef } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
-function Demo() {
+import { useState } from "react";
+import { useBoundingclientrectRef } from "rooks";
+
+export default function App() {
   const [myRef, boundingClientRect] = useBoundingclientrectRef();
   const [XOffset, setXOffset] = useState(0);
-  const [YOffset, setYOffset] = useState(300);
+  const [YOffset, setYOffset] = useState(100);
   const displayString = JSON.stringify(boundingClientRect, null, 2);
   return (
     <>
@@ -69,13 +62,11 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Arguments
 
-N/A
+Doesn't take any arguments.
 
 ### Returns an array of 3 values
 
@@ -84,24 +75,3 @@ N/A
 | ref          | Callback ref | A callback ref function to use as a ref for the component that needs to be tracked | () => null    |
 | value        | DOMRect      | DOMRect Object containing x,y, width, height, left,right,top and bottom keys       | null          |
 | update       | Function     | Function that can be called at any time to force a recalculation of the clientrect | null          |
-
-## Codesandbox Example
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/useboundingclientrectref-kqc8y?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useBoundingclientrectRef"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

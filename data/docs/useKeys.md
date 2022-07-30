@@ -12,17 +12,7 @@ A hook which allows to setup callbacks when a combination of keys are pressed at
 
 An important difference between `useKey` and `useKeys` is that `useKey` checks if **EITHER** of the keys in the list is pressed, while `useKeys` checks if **ALL** of the keys in the list are active.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useKeys } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo() {
@@ -43,7 +33,7 @@ function Demo() {
   );
   useKeys(
     ["m", "r"],
-    (event) => {
+    event => {
       // event.stopPropagation();
       console.log("here you go m and r");
     },
@@ -112,7 +102,3 @@ No return value
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

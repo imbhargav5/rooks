@@ -9,24 +9,19 @@ sidebar_label: useBoundingclientrect
 getBoundingClientRect hook for React.
 <br/>
 
-## Installation
+## Examples
 
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useBoundingclientrect } from "rooks";
-```
-
-## Usage
+### Basic example
 
 ```jsx
-function Demo() {
+import { useBoundingclientrect } from "rooks";
+import { useRef, useState } from "react";
+
+function App() {
   const myRef = useRef();
   const getBoundingClientRect = useBoundingclientrect(myRef);
   const [XOffset, setXOffset] = useState(0);
-  const [YOffset, setYOffset] = useState(300);
+  const [YOffset, setYOffset] = useState(100);
   const displayString = JSON.stringify(getBoundingClientRect, null, 2);
   return (
     <>
@@ -72,7 +67,7 @@ function Demo() {
   );
 }
 
-render(<Demo />);
+export default App;
 ```
 
 ### Arguments
@@ -81,29 +76,8 @@ render(<Demo />);
 | -------- | --------- | ------------------------------------------------- |
 | ref      | React ref | React ref whose boundingClientRect is to be found |
 
-### Return
+### Return value
 
 | Return value | Type    | Description                                                                  | Default value |
 | ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
 | value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
-
-## Codesandbox Example
-
-### Basic Usage
-
-<iframe src="https://codesandbox.io/embed/useboundingclientrect-7zbcd?fontsize=14&hidenavigation=1&theme=dark"
-   style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }} 
-title="useBoundingclientrect"
-allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-/>
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

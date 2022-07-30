@@ -4,9 +4,13 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import pkgDir from "pkg-dir";
-import { Container, Grid, Spacer } from "@nextui-org/react";
+import { Container, Grid, Spacer, Text } from "@nextui-org/react";
 import { MDXRenderer } from "../../components/MDXRenderer";
 import { mdxSerialize } from "../../utils/mdxSerialize";
+import {
+  FirstLevelHeadline,
+  SecondLevelHeadline,
+} from "../../components/Headings";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -53,8 +57,14 @@ const PostPage = ({ frontMatter: { title }, mdxSource }: PostPageProps) => {
       <Grid xs={6}>
         <Container>
           <Spacer y={5} />
-          <h1 className="title">{title}</h1>
+          <FirstLevelHeadline>{title}</FirstLevelHeadline>
           <MDXRenderer mdxSource={mdxSource} />
+          <Spacer y={1} />
+          <SecondLevelHeadline>Join the community!</SecondLevelHeadline>
+          <Text>
+            Join our discord server! You can click the floating discord icon at
+            the bottom right of the screen and chat with us!
+          </Text>
           <Spacer y={5} />
         </Container>
       </Grid>

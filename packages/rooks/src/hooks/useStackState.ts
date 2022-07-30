@@ -1,5 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
 
+/**
+ * useStackState
+ * @description Manages a stack with react hooks.
+ * @param initialList Initial value of the list
+ * @returns The list and controls to modify the stack
+ * @see https://react-hooks.org/docs/useStackState
+ */
 function useStackState<T>(initialList: T[]): [
   T[],
   {

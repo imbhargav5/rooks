@@ -8,17 +8,7 @@ sidebar_label: useMutationObserverRef
 
 A hook that tracks mutations of an element. It returns a callbackRef.
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useMutationObserverRef } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 function Demo() {
@@ -78,9 +68,9 @@ render(<Demo />);
 
 ### Arguments
 
-| Argument | Type     | Description                                                                                       | Default value                                                           |
-| -------- | -------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| callback | function | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                               |
+| Argument | Type     | Description                                                                                       | Default value                                                             |
+| -------- | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| callback | function | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                                 |
 | config   | object   | Mutation Observer configuration                                                                   | \{attributes: true,,characterData: true,,subtree: true,,childList: true\} |
 
 ### Return value
@@ -105,7 +95,3 @@ title="useMutationObserver"
 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -10,17 +10,7 @@ A continuously running requestAnimationFrame hook for React
 
 [![Image from Gyazo](https://i.gyazo.com/8c7393678112dc0cee575cbff570096d.gif)](https://gyazo.com/8c7393678112dc0cee575cbff570096d)
 
-## Installation
-
-    npm install --save rooks
-
-## Importing the hook
-
-```javascript
-import { useRaf } from "rooks";
-```
-
-## Usage
+## Examples
 
 ```jsx
 let angle = 0;
@@ -40,7 +30,7 @@ function Demo() {
   const { value: shouldRun, toggleValue: toggleShouldRun } = useToggle(true);
   const myRef = useRef();
   const canvasRef = useRef();
-  useRaf((timeElapsed) => {
+  useRaf(timeElapsed => {
     if (canvasRef && canvasRef.current) {
       const screenRatio = window.devicePixelRatio || 1;
       let angle = updateAngle(timeElapsed);
@@ -109,7 +99,3 @@ No return value.
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 />
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

@@ -16,6 +16,7 @@ import { noop } from "@/utils/noop";
  * @param {object} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {Function} A callback ref that can be used as ref prop
+ * @see https://react-hooks.org/docs/useEventListenerRef
  */
 function useEventListenerRef(
   eventName: string,
@@ -24,7 +25,7 @@ function useEventListenerRef(
     | AddEventListenerOptions
     | EventListenerOptions
     | boolean = {},
-  isLayoutEffect: boolean = false
+  isLayoutEffect = false
 ): (refElement: RefElementOrNull<HTMLElement>) => void {
   const [ref, element] = useRefElement<HTMLElement>();
   const freshCallback = useFreshTick(callback);

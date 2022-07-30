@@ -1,3 +1,8 @@
+/**
+ * %name%
+ * @description %description%
+ * @see {@link https://react-hooks.org/docs/%name%}
+*/
 function %name%() {
   return null;
 }
