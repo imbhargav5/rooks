@@ -158,7 +158,7 @@
     {
       "name": "useMergeRefs",
       "description": "Merges any number of refs into a single ref",
-      "category": "refs"
+      "category": "misc"
     },
     {
       "name": "useMouse",
@@ -188,12 +188,12 @@
     {
       "name": "useOnWindowResize",
       "description": "A React hook for adding an event listener for window resize",
-      "category": "ui"
+      "category": "events"
     },
     {
       "name": "useOnWindowScroll",
       "description": "A React hook for adding an event listener for window scroll",
-      "category": "ui"
+      "category": "events"
     },
     {
       "name": "useOnline",
@@ -203,12 +203,12 @@
     {
       "name": "useOutsideClick",
       "description": "Outside click(for a ref) event as hook for React.",
-      "category": "ui"
+      "category": "events"
     },
     {
       "name": "useOutsideClickRef",
       "description": "A hook that can track a click event outside a ref. Returns a callbackRef.",
-      "category": "ui"
+      "category": "events"
     },
     {
       "name": "usePreviousDifferent",
@@ -233,7 +233,7 @@
     {
       "name": "useRefElement",
       "description": "Helps bridge gap between callback ref and state",
-      "category": "refs"
+      "category": "misc"
     },
     {
       "name": "useSelect",

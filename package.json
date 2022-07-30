@@ -57,6 +57,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint-config-custom": "*",
     "lint-staged": "^13.0.3",
+    "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "turbo": "latest",
     "typescript": "^4.7.4"
