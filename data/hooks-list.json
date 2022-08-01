@@ -256,6 +256,11 @@
       "category": "state"
     },
     {
+      "name": "useSuspenseResource",
+      "description": "A suspense resource hook that manages a resource and will suspend while it is fetched.",
+      "category": "misc"
+    },
+    {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "misc"
