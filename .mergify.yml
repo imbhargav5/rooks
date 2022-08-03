@@ -50,4 +50,3 @@ pull_request_rules:
       close:
         message: |
           This automated pull request has a conflict. Closing - Renovate will create a new PR.
- 

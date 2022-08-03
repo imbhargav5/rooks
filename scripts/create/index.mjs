@@ -25,7 +25,7 @@ const filesToRead = [
 const filesToWrite = [
   ({ name }) => `./packages/rooks/src/__tests__/${name}.spec.ts`,
   ({ name }) => `./packages/rooks/src/hooks/${name}.ts`,
-  ({ name }) => `./docs/${name}.md`,
+  ({ name }) => `./data/docs/${name}.md`,
 ];
 
 function readFileAsString(relativeFilePath) {
@@ -123,10 +123,10 @@ const questions = [
   },
 ];
 
-inquirer.prompt(questions).then(answers => {
+inquirer.prompt(questions).then((answers) => {
   const { name, packageName, description, category } = answers;
   const directoryName = packageName.substring(4);
-  const transformedSources = filesToRead.map(filePath => {
+  const transformedSources = filesToRead.map((filePath) => {
     const src = readFileAsString(filePath);
     return injectValuesIntoTemplate(src, {
       name,
@@ -140,9 +140,8 @@ inquirer.prompt(questions).then(answers => {
   filesToWrite.map((relativeFilePathFromRootOfModule, index) => {
     const srcToWrite = transformedSources[index];
     if (typeof relativeFilePathFromRootOfModule === "function") {
-      relativeFilePathFromRootOfModule = relativeFilePathFromRootOfModule(
-        answers
-      );
+      relativeFilePathFromRootOfModule =
+        relativeFilePathFromRootOfModule(answers);
     }
     const pathToWriteTo = path.join(
       PROJECT_ROOT,
