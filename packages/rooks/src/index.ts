@@ -1,3 +1,4 @@
+export { useAsyncEffect } from "./hooks/useAsyncEffect";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
 export { useCountdown } from "./hooks/useCountdown";
