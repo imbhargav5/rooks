@@ -14,7 +14,10 @@ Resize Observer hook for React.
 ### Basic usage
 
 ```jsx
-function Demo() {
+import { useState } from "react";
+import { useResizeObserverRef } from "rooks";
+
+export default function App() {
   const [resizeCount, setResizeCount] = useState(0);
   const incrementResizeCount = () => {
     return setResizeCount(resizeCount + 1);
@@ -66,8 +69,6 @@ function Demo() {
     </>
   );
 }
-
-render(<Demo />);
 ```
 
 ### Arguments
