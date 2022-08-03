@@ -17,5 +17,6 @@ export default (): Config.InitialOptions => {
     rootDir: "src",
     coverageProvider: "v8",
     modulePaths: ["<rootDir>"],
+    setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   };
 };

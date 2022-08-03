@@ -44,6 +44,7 @@ export { usePreviousDifferent } from "./hooks/usePreviousDifferent";
 export { usePreviousImmediate } from "./hooks/usePreviousImmediate";
 export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
+export { useRenderCount } from "./hooks/useRenderCount";
 export { useRefElement } from "./hooks/useRefElement";
 export { useSelect } from "./hooks/useSelect";
 export { useSelectableList } from "./hooks/useSelectableList";
