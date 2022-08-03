@@ -291,11 +291,6 @@
       "category": "state"
     },
     {
-      "name": "useUpdateEffect",
-      "description": "An useEffect that does not run on first render",
-      "category": "effects"
-    },
-    {
       "name": "useVisibilitySensor",
       "description": "Visibility sensor hook for React.",
       "category": "ui"
