@@ -241,6 +241,11 @@
       "category": "misc"
     },
     {
+      "name": "useResizeObserverRef",
+      "description": "Resize Observer hook for React.",
+      "category": "ui"
+    },
+    {
       "name": "useRenderCount",
       "description": "Get the render count of a component",
       "category": "misc"
