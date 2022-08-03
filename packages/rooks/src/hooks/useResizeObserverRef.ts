@@ -27,7 +27,7 @@ function useResizeObserverRef(
   useEffect(() => {
     if (node) {
       // Create an observer instance linked to the callback function
-      const observer = new ResizeObserver(callback);
+      const observer = new ResizeObserver(freshCallback);
 
       // Start observing the target node for resizes
       observer.observe(node, options);
