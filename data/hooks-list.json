@@ -236,6 +236,11 @@
       "category": "misc"
     },
     {
+      "name": "useRenderCount",
+      "description": "Get the render count of a component",
+      "category": "misc"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
