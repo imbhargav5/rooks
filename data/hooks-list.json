@@ -236,6 +236,11 @@
       "category": "misc"
     },
     {
+      "name": "useRenderCount",
+      "description": "Get the render count of a component",
+      "category": "misc"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
@@ -254,6 +259,11 @@
       "name": "useStackState",
       "description": "A React hook that manages state in the form of a stack",
       "category": "state"
+    },
+    {
+      "name": "useSuspenseResource",
+      "description": "A suspense resource hook that manages a resource and will suspend while it is fetched.",
+      "category": "misc"
     },
     {
       "name": "useThrottle",

@@ -38,7 +38,9 @@ describe("useGeolocation", () => {
           >
             Get Geolocation
           </button>
-          <p data-testid="geo-info">{geoObject && JSON.stringify(geoObject)}</p>
+          {geoObject ? (
+            <p data-testid="geo-info">{JSON.stringify(geoObject)}</p>
+          ) : null}
         </div>
       );
     };
@@ -50,8 +52,8 @@ describe("useGeolocation", () => {
     const mockGeolocation = {
       getCurrentPosition: jest
         .fn()
-        .mockImplementationOnce((success) =>
-          success({ coords: { latitude: 51.1, longitude: 45.3 } })
+        .mockImplementationOnce((successCallback) =>
+          successCallback({ coords: { latitude: 51.1, longitude: 45.3 } })
         ),
     };
 
@@ -66,6 +68,7 @@ describe("useGeolocation", () => {
       fireEvent.click(getGeolocationButton);
     });
     const geoInfoPElement = await screen.findByTestId("geo-info");
+    screen.debug(screen.getByTestId("geo-info"));
     const geoObject = JSON.parse(geoInfoPElement.innerHTML);
     expect(`${geoObject.lat}`).toBe("51.1");
     expect(`${geoObject.lng}`).toBe("45.3");
@@ -97,7 +100,7 @@ describe("useGeolocation", () => {
       getCurrentPosition: jest
         .fn()
         .mockImplementationOnce((_, errorCallback) =>
-          errorCallback(PERMISSION_DENIED_ERROR)
+          errorCallback(PERMISSION_DENIED_ERROR, false)
         ),
     };
 

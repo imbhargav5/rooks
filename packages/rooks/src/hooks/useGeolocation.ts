@@ -1,20 +1,14 @@
+import { UseGeolocationReturnType } from "../types/types";
 import { useEffect, useState } from "react";
+import { useGetIsMounted } from "./useGetIsMounted";
 
-type IGetGeoLocation = {
-  isError: boolean;
-  lat?: number;
-  lng?: number;
-  message: string;
-};
-
-type IOptions = {
-  enableHighAccuracy?: boolean;
-  maximumAge?: number;
-  timeout?: number;
+type UseGeoLocationOptions = PositionOptions & {
   when?: boolean;
 };
 
-function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
+function getGeoLocation(
+  options: UseGeoLocationOptions
+): Promise<UseGeolocationReturnType> {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (navigator.geolocation) {
@@ -45,7 +39,7 @@ function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
   });
 }
 
-const defaultGeoLocationOptions = {
+const defaultGeoLocationOptions: UseGeoLocationOptions = {
   enableHighAccuracy: false,
   maximumAge: 0,
   timeout: Number.POSITIVE_INFINITY,
@@ -56,15 +50,17 @@ const defaultGeoLocationOptions = {
  * useGeolocation
  * Gets the geolocation data as a hook
  *
- * @param geoLocationOptions Geolocation options
+ * @param {UseGeoLocationOptions} geoLocationOptions Geolocation options
+ * @see {https://react-hooks.org/docs/useGeolocation}
  */
 function useGeolocation(
-  // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
-  geoLocationOptions: IOptions = defaultGeoLocationOptions
-): IGetGeoLocation | null {
-  const [geoObject, setGeoObject] = useState<IGetGeoLocation | null>(null);
+  geoLocationOptions: UseGeoLocationOptions = defaultGeoLocationOptions
+): UseGeolocationReturnType | null {
+  const [geoObject, setGeoObject] = useState<UseGeolocationReturnType | null>(
+    null
+  );
   const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
-
+  const getIsMounted = useGetIsMounted();
   useEffect(() => {
     async function getGeoCode() {
       try {
@@ -74,16 +70,19 @@ function useGeolocation(
           timeout,
           when,
         });
-        setGeoObject(value);
+        if (getIsMounted()) {
+          setGeoObject(value);
+        }
       } catch (error) {
-        setGeoObject(error);
+        if (getIsMounted()) {
+          setGeoObject(error);
+        }
       }
     }
-
     if (when) {
       void getGeoCode();
     }
-  }, [when, enableHighAccuracy, timeout, maximumAge]);
+  }, [when, enableHighAccuracy, timeout, maximumAge, getIsMounted]);
 
   return geoObject;
 }

@@ -15,3 +15,10 @@ export type UseUndoStateReturnValue<T> = [
 ];
 
 export type CallbackWithNoArguments = () => void;
+
+export type UseGeolocationReturnType = {
+  isError: boolean;
+  lat?: number;
+  lng?: number;
+  message: string;
+};

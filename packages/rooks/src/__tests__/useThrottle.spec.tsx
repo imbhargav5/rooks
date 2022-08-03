@@ -1,10 +1,4 @@
-import {
-  cleanup,
-  render,
-  act,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { cleanup, render, act, fireEvent } from "@testing-library/react";
 import React, { useState } from "react";
 import { useThrottle } from "../hooks/useThrottle";
 
@@ -71,10 +65,12 @@ describe("useThrottle hook", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useThrottle).toBeDefined();
   });
 
   it("should update value when used once", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const throttleButton = getByTestId("throttle-button");
     const throttleValue = getByTestId("throttle-value");
@@ -87,6 +83,7 @@ describe("useThrottle hook", () => {
   });
 
   it("should update value once when clicked multiple times, one after another", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const throttleButton = getByTestId("throttle-button");
     const throttleValue = getByTestId("throttle-value");
@@ -105,6 +102,7 @@ describe("useThrottle hook", () => {
 
   it("should update value twice when clicked twice, with 300ms break between them", async () => {
     expect.hasAssertions();
+    jest.useFakeTimers();
     const { getByTestId } = render(<App />);
     const throttleButton = getByTestId("throttle-button");
     const throttleValue = getByTestId("throttle-value");
@@ -113,23 +111,27 @@ describe("useThrottle hook", () => {
       fireEvent.click(throttleButton);
     });
 
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        act(() => {
-          fireEvent.click(throttleButton);
-          resolve(0);
-        });
-      }, TIMEOUT);
+    act(() => {
+      jest.advanceTimersByTime(TIMEOUT);
     });
 
-    await waitFor(
-      () => {
-        expect(Number.parseInt(throttleValue.innerHTML)).toBe(2);
-      },
-      {
-        timeout: TIMEOUT,
-      }
-    );
+    act(() => {
+      fireEvent.click(throttleButton);
+    });
+    expect(Number.parseInt(throttleValue.innerHTML)).toBe(2);
+    act(() => {
+      jest.advanceTimersByTime(TIMEOUT);
+    });
+
+    act(() => {
+      fireEvent.click(throttleButton);
+    });
+    act(() => {
+      fireEvent.click(throttleButton);
+    });
+    expect(Number.parseInt(throttleValue.innerHTML)).toBe(3);
+
+    jest.useRealTimers();
   });
   it("should update value of state according to argument passed in callback", async () => {
     expect.hasAssertions();
