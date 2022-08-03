@@ -60,7 +60,7 @@ const updatePackageListToMarkdown = async () => {
     const hookEntryMarkdownTemplate = ({ name, description }) =>
       `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
 
-    const hooksByCategoryKeys = Object.keys(hooksByCategory);
+    const hooksByCategoryKeys = Object.keys(hooksByCategory).sort();
     const hooksListByCategoryMDAST = {
       type: "root",
       children: [],
@@ -68,7 +68,7 @@ const updatePackageListToMarkdown = async () => {
     for (const category of hooksByCategoryKeys) {
       const hooks = hooksByCategory[category];
       const hooksListMDAST = {
-        children: (hooks ?? []).map(pkg => ({
+        children: (hooks ?? []).map((pkg) => ({
           children: [fromMarkdown(hookEntryMarkdownTemplate(pkg))],
           spread: false,
           type: "listItem",
@@ -87,8 +87,9 @@ const updatePackageListToMarkdown = async () => {
             value:
               category === "ui"
                 ? `<h3 align="center">${emojiByCategory["ui"] ?? "✅"} UI</h3>`
-                : `<h3 align="center">${emojiByCategory[category] ??
-                    "✅"} ${lodash.startCase(category)}</h3>`,
+                : `<h3 align="center">${
+                    emojiByCategory[category] ?? "✅"
+                  } ${lodash.startCase(category)}</h3>`,
           },
         ],
       };
@@ -107,7 +108,7 @@ const updatePackageListToMarkdown = async () => {
       type: "paragraph",
     };
 
-    const updateMarkdownFile = filePath => {
+    const updateMarkdownFile = (filePath) => {
       const readmeContentString =
         readFileSync(join(PROJECT_ROOT, filePath), "utf8") ?? "";
       const readmeVFile = remark()
@@ -119,6 +120,7 @@ const updatePackageListToMarkdown = async () => {
     };
 
     updateMarkdownFile("./README.md");
+    updateMarkdownFile("./packages/rooks/README.md");
     updateMarkdownFile("./apps/website/src/pages/list-of-hooks.md");
   } else {
     console.warn("Could not find project root");
