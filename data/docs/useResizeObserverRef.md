@@ -4,24 +4,14 @@ title: useResizeObserverRef
 sidebar_label: useResizeObserverRef
 ---
 
-## About 
+## About
+
 Resize Observer hook for React.
 <br/>
 
-## Installation
+## Examples
 
-```
-npm install --save rooks
-```
-
-## Importing the hook
-
-```javascript
-import { useResizeObserverRef } from "rooks";
-```
-
-
-## Usage
+### Basic usage
 
 ```jsx
 function Demo() {
@@ -37,20 +27,20 @@ function Demo() {
       <div
         style={{
           width: 300,
-          background: 'lightblue',
-          padding: '10px',
-          position: 'absolute',
+          background: "lightblue",
+          padding: "10px",
+          position: "absolute",
           left: XOffset,
           top: YOffset,
         }}
       >
         <div
           style={{
-            resize: 'both',
-            overflow: 'auto',
-            background: 'white',
-            color: 'blue',
-            maxWidth: '100%',
+            resize: "both",
+            overflow: "auto",
+            background: "white",
+            color: "blue",
+            maxWidth: "100%",
           }}
           ref={myRef}
           data-testid="app"
@@ -77,23 +67,23 @@ function Demo() {
   );
 }
 
-render(<Demo/>)
+render(<Demo />);
 ```
 
 ### Arguments
 
-| Argument   | Type                    | Description                                                        | Default value                  |
-| ---------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------ |
-| callback   | ResizeObserverCallback  | Function that needs to be fired on resize                          | undefined                      |
-| options    | ResizeObserverOptions   | An options object allowing you to set options for the observation  | { box: "content-box" }         |
+| Argument | Type                   | Description                                                       | Default value            |
+| -------- | ---------------------- | ----------------------------------------------------------------- | ------------------------ |
+| callback | ResizeObserverCallback | Function that needs to be fired on resize                         | undefined                |
+| options  | ResizeObserverOptions  | An options object allowing you to set options for the observation | \{ box: "content-box" \} |
 
 ### Return value
 
 Returns an array with one element
 
-| Return value | Type        | Description                                |
-| ------------ | ----------- | ------------------------------------------ |
-| ref          | CallbackRef | Ref which should be observed for Resize    |
+| Return value | Type        | Description                             |
+| ------------ | ----------- | --------------------------------------- |
+| ref          | CallbackRef | Ref which should be observed for Resize |
 
 ## Codesandbox Example
 

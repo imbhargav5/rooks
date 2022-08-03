@@ -1,3 +1,4 @@
+import { noop } from "@/utils/noop";
 import { useCallback, useEffect, useState } from "react";
 import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
 import { useFreshTick } from "./useFreshTick";
@@ -35,6 +36,7 @@ function useResizeObserverRef(
         observer.disconnect();
       };
     }
+    return noop;
   }, [node, freshCallback, options]);
 
   const ref: CallbackRef = useCallback((node: HTMLElementOrNull) => {
