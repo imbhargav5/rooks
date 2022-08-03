@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 
-type IGetGeoLocation = {
+type GetGeoLocation = {
   isError: boolean;
   lat?: number;
   lng?: number;
   message: string;
 };
 
-type IOptions = {
+type UseGeoLocationOptions = {
   enableHighAccuracy?: boolean;
   maximumAge?: number;
   timeout?: number;
   when?: boolean;
 };
 
-function getGeoLocation(options: IOptions): Promise<IGetGeoLocation> {
+function getGeoLocation(
+  options: UseGeoLocationOptions
+): Promise<GetGeoLocation> {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (navigator.geolocation) {
@@ -60,9 +62,9 @@ const defaultGeoLocationOptions = {
  */
 function useGeolocation(
   // hooksOptions: IUseGeoLocationHook = defaultHookOptions,
-  geoLocationOptions: IOptions = defaultGeoLocationOptions
-): IGetGeoLocation | null {
-  const [geoObject, setGeoObject] = useState<IGetGeoLocation | null>(null);
+  geoLocationOptions: UseGeoLocationOptions = defaultGeoLocationOptions
+): GetGeoLocation | null {
+  const [geoObject, setGeoObject] = useState<GetGeoLocation | null>(null);
   const { when, enableHighAccuracy, timeout, maximumAge } = geoLocationOptions;
 
   useEffect(() => {
