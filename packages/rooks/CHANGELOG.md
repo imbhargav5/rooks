@@ -1,5 +1,11 @@
 # rooks
 
+## 6.2.0
+
+### Minor Changes
+
+- 11d5b33a: add useResizeObserverRef hook
+
 ## 6.1.0
 
 ### Minor Changes
