@@ -1,10 +1,4 @@
-import {
-  cleanup,
-  render,
-  act,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { cleanup, render, act, fireEvent } from "@testing-library/react";
 import React, { useState } from "react";
 import { useThrottle } from "../hooks/useThrottle";
 
