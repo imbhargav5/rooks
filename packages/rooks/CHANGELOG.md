@@ -1,5 +1,11 @@
 # rooks
 
+## 6.1.0
+
+### Minor Changes
+
+- 33f6630d: add useAsyncEffect and useRenderCount hooks
+
 ## 6.0.1
 
 ### Major Changes

@@ -1,5 +1,12 @@
 # website
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [33f6630d]
+  - rooks@6.1.0
+
 ## 1.0.1
 
 ### Patch Changes
