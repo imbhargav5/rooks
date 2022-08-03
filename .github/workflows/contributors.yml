@@ -1,0 +1,40 @@
+name: All Contributors
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  update-contributors:
+    if: github.repository == 'imbhargav5/rooks'
+
+    timeout-minutes: 20
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/ci-setup
+      # - uses: ./.github/actions/ci-checks
+      - name: Generate list of contributors
+        run: |
+          yarn contributors:update
+          yarn contributors:generate
+      - name: Auto update Readme
+        run: |
+          yarn update-package-list-to-markdown
+      - name: Create or Update Pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: actions/all-contributors-update
+          commit-message: Update Contributors List in Readme
+          title: Update Contributors List in Readme
+          body: Automatically generating contributors
+          delete-branch: true
+          labels: all-contributors-update
+          draft: false

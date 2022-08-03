@@ -1,4 +1,4 @@
-/node_modules
+node_modules
 /.package.json
 package-lock.json
 lib
@@ -18,7 +18,7 @@ yarn-error*
 !.github/actions/**/package-lock.json
 *.d.ts
 .changelog
-src/dist
+dist
 src/declarations
 
 
@@ -27,3 +27,13 @@ translated_docs
 build/
 yarn.lock
 i18n/*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
+.vercel

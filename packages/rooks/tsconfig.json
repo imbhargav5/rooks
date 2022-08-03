@@ -1,0 +1,29 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["*"]
+    },
+    "rootDir": "src",
+    "strict": false,
+    "module": "commonjs",
+    "jsx": "react",
+    "target": "ES5",
+    "composite": true,
+    "baseUrl": "src",
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "scripts",
+    "docs",
+    "versioned_docs",
+    "versioned_sidebars",
+    "src/pages",
+    "src/css",
+    "src/theme"
+  ],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}

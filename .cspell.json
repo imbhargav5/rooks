@@ -1,0 +1,22 @@
+{
+  "allowCompoundWords": true,
+  "ignoreRegExpList": ["/.*[0-9].*/"],
+  "language": "en",
+  "minWordLength": 5,
+  "version": "0.2",
+  "words": [
+    "Codecov",
+    "contributorsrc",
+    "data-testid",
+    "imbhargav5",
+    "jsvalue",
+    "localstorage",
+    "Mdast",
+    "nextui",
+    "nocheck",
+    "tsconfigs",
+    "tspaths",
+    "unoptimized",
+    "updation"
+  ]
+}
