@@ -55,6 +55,8 @@ sidebar_label: Hooks List
 *   [useFreshTick](https://react-hooks.org/docs/useFreshTick) - Like use-fresh-ref but specifically for functions
 *   [useMergeRefs](https://react-hooks.org/docs/useMergeRefs) - Merges any number of refs into a single ref
 *   [useRefElement](https://react-hooks.org/docs/useRefElement) - Helps bridge gap between callback ref and state
+*   [useRenderCount](https://react-hooks.org/docs/useRenderCount) - Get the render count of a component
+*   [useSuspenseResource](https://react-hooks.org/docs/useSuspenseResource) - A suspense resource hook that manages a resource and will suspend while it is fetched.
 *   [useThrottle](https://react-hooks.org/docs/useThrottle) - Throttle custom hook for React
 *   [useTimeoutWhen](https://react-hooks.org/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://react-hooks.org/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
