@@ -86,6 +86,7 @@ sidebar_label: Hooks List
 *   [useMutationObserver](https://react-hooks.org/docs/useMutationObserver) - Mutation Observer hook for React.
 *   [useMutationObserverRef](https://react-hooks.org/docs/useMutationObserverRef) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [useRaf](https://react-hooks.org/docs/useRaf) - A continuously running requestAnimationFrame hook for React
+*   [useResizeObserverRef](https://react-hooks.org/docs/useResizeObserverRef) - Resize Observer hook for React.
 *   [useVisibilitySensor](https://react-hooks.org/docs/useVisibilitySensor) - Visibility sensor hook for React.
 *   [useWindowScrollPosition](https://react-hooks.org/docs/useWindowScrollPosition) - A React hook to get the scroll position of the window
 *   [useWindowSize](https://react-hooks.org/docs/useWindowSize) - Window size hook for React.
