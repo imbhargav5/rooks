@@ -3,7 +3,7 @@
  */
 import { waitFor } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { act } from "react-test-renderer";
 import { useAsyncEffect } from "../hooks/useAsyncEffect";
 
