@@ -9,7 +9,6 @@ describe("usePreviousDifferent", () => {
     previousValue: number | null;
     value: number;
     value2: number;
-    // eslint-disable-next-line unicorn/consistent-function-scoping
   } => {
     return {
       increment: () => {},
