@@ -4,6 +4,7 @@ import { useMutationObserver } from "../hooks/useMutationObserver";
 
 describe("useMutationObserver", () => {
   it("should watch for children changes being made to the DOM node", () => {
+    expect.hasAssertions();
     let id = 1;
     const TestComp = () => {
       const ref = useRef<HTMLUListElement>(null);
@@ -16,7 +17,6 @@ describe("useMutationObserver", () => {
 
       useMutationObserver(ref, (mutations) => {
         for (const mutation of mutations) {
-          // eslint-disable-next-line jest/no-conditional-in-test
           if (mutation.type === "childList") {
             for (const node of Array.from(mutation.addedNodes)) {
               console.log(`${node.textContent} has been added to todo list.`);
@@ -57,7 +57,6 @@ describe("useMutationObserver", () => {
           <div ref={ref}>status: coding</div>
           <button
             onClick={() => {
-              // eslint-disable-next-line jest/no-conditional-in-test
               if (ref.current) {
                 ref.current.textContent = "status: Gaming";
               }
@@ -74,9 +73,7 @@ describe("useMutationObserver", () => {
     const button = screen.getByText(/start to play game!/iu);
     fireEvent.click(button);
     await waitFor(() => {
-      // eslint-disable-next-line jest/prefer-called-with
       expect(listener1).toHaveBeenCalled();
-      // eslint-disable-next-line jest/prefer-called-with
       expect(listener2).toHaveBeenCalled();
     });
   });
@@ -99,7 +96,6 @@ describe("useMutationObserver", () => {
           <div ref={ref}>status: coding</div>
           <button
             onClick={() => {
-              // eslint-disable-next-line jest/no-conditional-in-test
               if (ref.current) {
                 ref.current.textContent = "status: Gaming";
               }
@@ -126,9 +122,7 @@ describe("useMutationObserver", () => {
     const TestComp = () => {
       const ref = useRef<HTMLDivElement>(null);
 
-      // eslint-disable-next-line unicorn/consistent-function-scoping
       const listener = (_: unknown, observer: MutationObserver) => {
-        // eslint-disable-next-line jest/no-conditional-in-test
         if (calls === 1) {
           observer.disconnect();
         }
@@ -143,7 +137,6 @@ describe("useMutationObserver", () => {
           <div ref={ref}>status: coding</div>
           <button
             onClick={() => {
-              // eslint-disable-next-line jest/no-conditional-in-test
               if (ref.current) {
                 ref.current.textContent = "status: Gaming";
               }
