@@ -41,9 +41,11 @@ describe.skip("useFreshRef", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useFreshRef).toBeDefined();
   });
   it("should increment correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(useHook);
     act(() => {
       jest.advanceTimersByTime(5_000);

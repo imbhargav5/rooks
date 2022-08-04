@@ -26,10 +26,12 @@ describe("useForkRef", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useForkRef).toBeDefined();
   });
 
   it("should be called on mouse events", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
     act(() => {

@@ -47,10 +47,12 @@ describe("useRaf", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useRaf).toBeDefined();
   });
 
   it("should render", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     expect(container).toBeDefined();
   });

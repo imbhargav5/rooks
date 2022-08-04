@@ -53,10 +53,12 @@ describe("useWillUnmount", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useWillUnmount).toBeDefined();
   });
 
   it("should only call the unmount function only when unmount", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     const toggleChildElement = getByTestId(

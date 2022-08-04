@@ -49,9 +49,11 @@ describe("useIntervalWhen", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useIntervalWhen).toBeDefined();
   });
   it("should start timer when started with start function", () => {
+    expect.hasAssertions();
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook(true));
     void act(() => {
@@ -63,6 +65,7 @@ describe("useIntervalWhen", () => {
   });
 
   it("should call the callback eagerly", () => {
+    expect.hasAssertions();
     jest.useFakeTimers();
     const { result } = renderHook(() => useHook(true, EAGER));
     // The value was already incremented because we use useIntervalWhen in EAGER mode

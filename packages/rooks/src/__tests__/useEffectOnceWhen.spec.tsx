@@ -30,6 +30,7 @@ describe("useEffectOnceWhen", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useEffectOnceWhen).toBeDefined();
   });
 

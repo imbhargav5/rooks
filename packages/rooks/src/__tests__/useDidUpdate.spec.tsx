@@ -33,22 +33,26 @@ describe("useDidUpdate", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useDidUpdate).toBeDefined();
   });
 
   it("initializes correctly", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
     expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
   });
 
   it("does not get called on mount", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
     expect(Number.parseInt(String(renderedElement.textContent))).toBe(0);
   });
 
   it("gets called if a state value changes", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
     const valueElement = getByTestId("value");
@@ -62,6 +66,7 @@ describe("useDidUpdate", () => {
   });
 
   it("does not get called if state value has not updated", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const renderedElement = getByTestId("element");
     const valueElement = getByTestId("value");
@@ -108,6 +113,7 @@ describe("useDidUpdate tests", () => {
   afterEach(cleanup);
 
   it("warns if conditionals is empty array", () => {
+    expect.hasAssertions();
     const spy = jest.spyOn(global.console, "warn");
     render(<App />);
     // eslint-disable-next-line jest/prefer-called-with
