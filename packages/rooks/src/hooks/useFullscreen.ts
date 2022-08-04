@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { UnknownFunction } from "@/types/utils";
 import { useState, useCallback, useRef } from "react";
 import { useDocumentEventListener } from "./useDocumentEventListener";
 import { warning } from "./warning";
@@ -210,8 +211,8 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
     [element, exit, request]
   );
 
-  const onChangeDeprecatedHandlerRef = useRef<Function>(noop);
-  const onErrorDeprecatedHandlerRef = useRef<Function>(noop);
+  const onChangeDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
+  const onErrorDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
 
   // Hack to not break it for everyone
   // Honestly these two functions are tragedy and must be removed in v5
