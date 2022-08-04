@@ -17,7 +17,6 @@ describe("useWillUnmount", () => {
   const mockCallback = jest.fn(() => null);
   // let firstCallback
   beforeEach(() => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const Child = () => {
       useWillUnmount(mockCallback);
 

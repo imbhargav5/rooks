@@ -24,7 +24,6 @@ describe("useEventListenerRef", () => {
 });
 
 describe("useEventListenerRef jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
   let TestJSX = () => <div />;
   beforeEach(() => {

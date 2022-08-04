@@ -24,9 +24,7 @@ describe("useWindowEventListener", () => {
 });
 
 describe("useWindowEventListener jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => null;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});

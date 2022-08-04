@@ -8,7 +8,6 @@ import { useForkRef } from "../hooks/useForkRef";
 const { act } = TestRenderer;
 
 describe("useForkRef", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
   let TestJSX = () => <div />;
   beforeEach(() => {

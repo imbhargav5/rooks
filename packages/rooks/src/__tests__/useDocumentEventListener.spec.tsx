@@ -24,9 +24,7 @@ describe("useDocumentEventListener", () => {
 });
 
 describe("useDocumentEventListener jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => null;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});
@@ -58,7 +56,6 @@ describe("useDocumentEventListener jsx", () => {
 });
 
 describe("useDocumentEventListener state variables", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => <div />;
   beforeEach(() => {
     TestJSX = () => {

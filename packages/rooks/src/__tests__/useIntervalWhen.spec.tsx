@@ -14,7 +14,6 @@ type UseHook = (
   currentValue: number;
 };
 describe("useIntervalWhen", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook: UseHook = () => ({
     currentValue: 5,
   });
@@ -24,7 +23,7 @@ describe("useIntervalWhen", () => {
   beforeEach(() => {
     jest.useFakeTimers();
     jest.spyOn(global, "setInterval");
-    useHook = function (when: boolean, eager: boolean = false) {
+    useHook = function (when: boolean, eager = false) {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
         setCurrentValue(currentValue + 1);

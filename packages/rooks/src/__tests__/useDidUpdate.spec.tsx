@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import { useDidUpdate } from "../hooks/useDidUpdate";
 
 describe("useDidUpdate", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let App = () => <div />;
   beforeEach(() => {
     App = () => {
@@ -82,7 +81,6 @@ describe("useDidUpdate", () => {
 });
 
 describe("useDidUpdate tests", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let App = () => <div />;
   beforeEach(() => {
     App = () => {

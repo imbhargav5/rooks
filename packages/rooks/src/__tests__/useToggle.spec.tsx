@@ -97,7 +97,6 @@ describe("useToggle with custom toggle function false by default", () => {
 
 describe("useToggle with reducer", () => {
   let App = () => <div />;
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let toggleReducer = (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _state: number,
@@ -105,7 +104,6 @@ describe("useToggle with reducer", () => {
     _action: {
       type: string;
     }
-    // eslint-disable-next-line unicorn/consistent-function-scoping
   ) => 5;
   beforeEach(() => {
     toggleReducer = function (

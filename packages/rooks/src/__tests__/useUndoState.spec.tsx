@@ -11,7 +11,6 @@ const { act } = TestRenderer;
 
 describe("useUndoState", () => {
   afterEach(cleanup);
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook = function (defaultValue: number, options?: UseUndoStateOptions) {
     const [value, setValue, undo] = useUndoState<number>(defaultValue, options);
     function increment() {
