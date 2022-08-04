@@ -15,6 +15,15 @@ From the root of the project:
 - run `yarn install`
 - run `yarn build`
 
+### Adding Changeset information
+
+* Changeset information is a **must** when you are making a change to `rooks`(your change can be a new feature or a bug fix).
+* To add a changeset -> run `yarn add changeset`
+* It let's you to select *which packages needs to be bumped into which version*.
+* After answering the questions in the cli, you can see your changeset information in the `.changeset` folder in the root of our project folder.
+* Create a commit after adding the changeset information.
+* It's that simple.
+
 ## Contributing Guidelines
 
 When adding a new hook, please make sure that
