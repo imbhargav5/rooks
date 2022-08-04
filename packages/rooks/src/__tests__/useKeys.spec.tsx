@@ -20,7 +20,7 @@ describe("useKeys", () => {
       const documentRef = useRef(document);
       const inputRef = useRef(null);
       const [isEventActive, setIsEventActive] = useState(true);
-      // eslint-disable-next-line @typescript-eslint/naming-convention, react/hook-use-state
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const [testValue, _setTestValue] = useState(0);
       const [firstCallbackCallCount, setFirstCallbackCallCount] = useState(0);
       useKeys(
@@ -74,10 +74,12 @@ describe("useKeys", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useKeys).toBeDefined();
   });
 
   it("should trigger the calback when pressed m + r", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const firstcallbackP = getByTestId(
       container as HTMLElement,
@@ -95,6 +97,7 @@ describe("useKeys", () => {
   });
 
   it("should trigger the callback when pressed ctrlLeft + s", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
 
     const firstcallbackP = getByTestId(
@@ -113,6 +116,7 @@ describe("useKeys", () => {
   });
 
   it("should not trigger whenever 'when ' value is false and trigger whenever'when' value is true", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
 
     const firstcallbackP = getByTestId(
@@ -177,6 +181,7 @@ describe("useKeys: continuous mode", () => {
   afterEach(cleanup);
 
   it("should trigger continuously whenever 'continuous' is true", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
 
     const testValueElement = getByTestId(container as HTMLElement, "value");
