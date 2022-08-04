@@ -44,10 +44,12 @@ describe("useKeyRef", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useKeyRef).toBeDefined();
   });
 
   it("should trigger the calback when pressed on document or target", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");
@@ -93,10 +95,12 @@ describe("non array input", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useKeyRef).toBeDefined();
   });
 
   it("should trigger the calback when pressed on document or target", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");
@@ -154,10 +158,12 @@ describe("when", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useKeyRef).toBeDefined();
   });
 
   it("should not trigger whenever 'when ' value is false and trigger when 'when' is true", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     console.log("container.innerHTML before", container.innerHTML);
     const valueElement = getByTestId(container as HTMLElement, "value");

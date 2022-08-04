@@ -59,10 +59,12 @@ describe("useKeyBindings", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useKeyBindings).toBeDefined();
   });
 
   it("should trigger the calback when pressed on document or target", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");

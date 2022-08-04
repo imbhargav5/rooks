@@ -10,9 +10,11 @@ const { act } = TestRenderer;
 
 describe("useDocumentEventListener", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useDocumentEventListener).toBeDefined();
   });
   it("should return a undefined", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useDocumentEventListener("click", () => {
         console.log("clicked");
@@ -24,9 +26,7 @@ describe("useDocumentEventListener", () => {
 });
 
 describe("useDocumentEventListener jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => null;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});
@@ -38,11 +38,13 @@ describe("useDocumentEventListener jsx", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     render(<TestJSX />);
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     render(<TestJSX />);
     act(() => {
       fireEvent.click(document);
@@ -58,7 +60,6 @@ describe("useDocumentEventListener jsx", () => {
 });
 
 describe("useDocumentEventListener state variables", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => <div />;
   beforeEach(() => {
     TestJSX = () => {
@@ -70,12 +71,14 @@ describe("useDocumentEventListener state variables", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);

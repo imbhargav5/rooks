@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useEffectOnceWhen } from "../hooks/useEffectOnceWhen";
 
 describe("useEffectOnceWhen", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook = function () {
     const [value, setValue] = useState(0);
     const [isEnabled, setIsEnabled] = useState(false);
@@ -31,6 +30,7 @@ describe("useEffectOnceWhen", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useEffectOnceWhen).toBeDefined();
   });
 

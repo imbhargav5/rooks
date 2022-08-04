@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import type { MutableRefObject, RefCallback } from "react";
 import { useMemo } from "react";
 import type { PossibleRef } from "../utils/utils";

@@ -4,11 +4,13 @@ import { useWindowScrollPosition } from "../hooks/useWindowScrollPosition";
 
 describe("useWindowScrollPosition", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useWindowScrollPosition).toBeDefined();
   });
 
   describe("basic", () => {
     it("should call callback after resize", () => {
+      expect.hasAssertions();
       const { result } = renderHook(() => useWindowScrollPosition());
       expect(result.current.scrollX).toBe(0);
       expect(result.current.scrollY).toBe(0);

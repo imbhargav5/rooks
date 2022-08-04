@@ -14,13 +14,16 @@ type Map = {
 
 describe("useMapState", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useMapState).toBeDefined();
   });
   it("should initialize correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useMapState<Map, keyof Map>({ a: 1 }));
     expect(result.current[0]).toEqual({ a: 1 });
   });
   it("should set a new value correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1 })
     );
@@ -44,6 +47,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 2 });
   });
   it("set should update old value correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useMapState<Map, keyof Map>({ a: 1 }));
     act(() => {
       result.current[1].set("a", 2);
@@ -51,6 +55,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 2 });
   });
   it("should set multiple new values correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1 })
     );
@@ -72,6 +77,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3, d: 4 });
   });
   it("setMultiple should update old value correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1 })
     );
@@ -100,6 +106,7 @@ describe("useMapState", () => {
     expect(result.current[1].has("c")).toBeTruthy();
   });
   it("should remove existing values correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 3 })
     );
@@ -124,6 +131,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ b: 3 });
   });
   it("should work when value to remove does not exist", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
     );
@@ -133,6 +141,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3 });
   });
   it("should remove multiple existing values correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 3, c: 5 })
     );
@@ -155,6 +164,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ b: 3, e: 6 });
   });
   it("should work when value to removeMultiple does not exist", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
     );
@@ -164,6 +174,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ a: 1, b: 2, c: 3 });
   });
   it("should work when some values to removeMultiple does not exist", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
     );
@@ -173,6 +184,7 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({ b: 2, c: 3 });
   });
   it("should removeAll values", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: 1, b: 2, c: 3 })
     );

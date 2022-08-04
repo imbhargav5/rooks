@@ -45,7 +45,6 @@ module.exports = {
     "import/no-unassigned-import": 0,
     "import/no-unresolved": 0,
     "max-nested-callbacks": 0,
-    "unicorn/no-reduce": 0,
     "import/no-extraneous-dependencies": 0,
     radix: 0,
     "func-style": 0,

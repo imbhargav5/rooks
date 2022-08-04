@@ -14,6 +14,7 @@ describe("useMediaMatch", () => {
   });
 
   it("should track a boolean", async () => {
+    expect.hasAssertions();
     const matchMedia = jest.fn<MediaQueryList, [string]>();
     const addEventListener = jest.fn<
       void,

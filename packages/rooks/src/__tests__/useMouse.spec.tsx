@@ -10,10 +10,12 @@ describe.skip("useMouse", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useMouse).toBeDefined();
   });
 
   it("should default with null values", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useMouse());
     expect(result.current).toBe({
       x: null,

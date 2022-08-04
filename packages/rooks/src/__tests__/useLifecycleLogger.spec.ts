@@ -9,9 +9,11 @@ describe("useLifecycleLogger", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useLifecycleLogger).toBeDefined();
   });
   it("should work without arguments", () => {
+    expect.hasAssertions();
     const { unmount } = renderHook(() => useLifecycleLogger());
 
     expect(logSpy).toHaveBeenCalledTimes(1);
@@ -20,6 +22,7 @@ describe("useLifecycleLogger", () => {
     expect(logSpy).toHaveBeenCalledTimes(2);
   });
   it("should log the provided args on mount", () => {
+    expect.hasAssertions();
     const args = ["foo", "bar"];
     const { unmount } = renderHook(() => useLifecycleLogger("Test1", args));
 
@@ -30,6 +33,7 @@ describe("useLifecycleLogger", () => {
   });
 
   it("should log when the component has unmounted", () => {
+    expect.hasAssertions();
     const args = ["foo", "bar"];
     const { unmount } = renderHook(() => useLifecycleLogger("Test2", args));
 
@@ -39,6 +43,7 @@ describe("useLifecycleLogger", () => {
   });
 
   it("should log updates as args change", () => {
+    expect.hasAssertions();
     const { unmount, rerender } = renderHook(
       ({ componentName, args }) => useLifecycleLogger(componentName, args),
       {

@@ -25,6 +25,7 @@ describe("useInput", () => {
     afterEach(cleanup);
 
     it("memo", () => {
+      expect.hasAssertions();
       const { result, rerender } = renderHook(() => useInput("hello"));
       const onChangeBeforeRerender = result.current.onChange;
       rerender();
@@ -46,14 +47,17 @@ describe("useInput", () => {
     });
 
     it("should be defined", () => {
+      expect.hasAssertions();
       expect(useInput).toBeDefined();
     });
     it("sets initial value correctly", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element") as HTMLInputElement;
       expect(inputElement.value).toBe("hello");
     });
     it("updates value correctly", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element") as HTMLInputElement;
       const displayElement = getByTestId("display-element") as HTMLInputElement;
@@ -108,6 +112,7 @@ describe("useInput", () => {
     afterEach(cleanup);
 
     it("does not update if validate returns false", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
@@ -120,6 +125,7 @@ describe("useInput", () => {
       expect(Number.parseInt(inputElement.value)).toBe(5);
     });
     it("updates if validate returns true", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const inputElement = getByTestId("input-element") as HTMLInputElement;
       act(() => {
@@ -132,6 +138,7 @@ describe("useInput", () => {
       expect(Number.parseInt(inputElement.value)).toBe(9);
     });
     it("validate can be used to compare possible newvalue with current value", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(
         <App
           validate={(newValue, currentValue) => newValue % currentValue !== 0}
@@ -176,6 +183,7 @@ describe("useInput", () => {
     afterEach(cleanup);
 
     it("updates value of input if initial value changes", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const inputElement1 = getByTestId("input-element1") as HTMLInputElement;
       const inputElement2 = getByTestId("input-element2") as HTMLInputElement;
