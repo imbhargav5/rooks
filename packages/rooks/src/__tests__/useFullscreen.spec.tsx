@@ -3,6 +3,7 @@ import { useFullscreen } from "../hooks/useFullscreen";
 
 describe("useFullscreen", () => {
   it("should forward requestFullscreenOptions to requestFullscreen", () => {
+    expect.hasAssertions();
     document.exitFullscreen = jest.fn();
     const element = { requestFullscreen: jest.fn() };
     const mockRequestFullscreenOptions = { navigationUI: "show" };

@@ -112,10 +112,12 @@ describe("useOutsideClickRef", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useOutsideClickRef).toBeDefined();
   });
 
   it("should trigger the calback when click on outide", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const app = getByTestId(container as HTMLElement, "app");
     const message = getByTestId(container as HTMLElement, "message");
@@ -126,6 +128,7 @@ describe("useOutsideClickRef", () => {
   });
 
   it("should not trigger the calback when click the volume button (inside)", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const button = getByTestId(container as HTMLElement, "button");
     const message = getByTestId(container as HTMLElement, "message");

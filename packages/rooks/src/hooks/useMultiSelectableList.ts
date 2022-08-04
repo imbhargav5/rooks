@@ -70,7 +70,6 @@ function useMultiSelectableList<T>(
 
         setCurrentIndices(indices);
       } else if (typeof values !== "undefined") {
-        // eslint-disable-next-line unicorn/no-array-reduce
         const valueIndices = list.reduce((accumulator, current, index) => {
           if (values.includes(current)) {
             const array = [...accumulator, index];

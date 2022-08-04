@@ -21,16 +21,19 @@ describe("useToggle basic behavior", () => {
   });
   afterEach(cleanup);
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useToggle).toBeDefined();
   });
 
   it("sets initial value correctly", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     expect(toggleElement.innerHTML).toBe("true");
   });
 
   it("updates value", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     fireEvent.click(toggleElement);
@@ -57,16 +60,19 @@ describe("useToggle with custom toggle function and with strings", () => {
   afterEach(cleanup);
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useToggle).toBeDefined();
   });
 
   it("sets initial value correctly", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     expect(toggleElement.innerHTML).toBe("regina");
   });
 
   it("updates value", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     fireEvent.click(toggleElement);
@@ -89,6 +95,7 @@ describe("useToggle with custom toggle function false by default", () => {
   });
   afterEach(cleanup);
   it("should be false by default", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     expect(toggleElement.innerHTML).toBe("false");
@@ -97,7 +104,6 @@ describe("useToggle with custom toggle function false by default", () => {
 
 describe("useToggle with reducer", () => {
   let App = () => <div />;
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let toggleReducer = (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _state: number,
@@ -105,7 +111,6 @@ describe("useToggle with reducer", () => {
     _action: {
       type: string;
     }
-    // eslint-disable-next-line unicorn/consistent-function-scoping
   ) => 5;
   beforeEach(() => {
     toggleReducer = function (
@@ -153,11 +158,13 @@ describe("useToggle with reducer", () => {
   });
   afterEach(cleanup);
   it("should be 1 by default", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     expect(toggleElement.innerHTML).toBe("1");
   });
   it("should update with dispatched actions", () => {
+    expect.hasAssertions();
     const { getByTestId } = render(<App />);
     const toggleElement = getByTestId("toggle-element");
     const nopeButton = getByTestId("nope-button");

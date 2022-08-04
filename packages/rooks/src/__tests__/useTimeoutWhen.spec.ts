@@ -4,12 +4,12 @@ import { useTimeoutWhen } from "../hooks/useTimeoutWhen";
 
 describe("useTimeoutWhen", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useTimeoutWhen).toBeDefined();
   });
 });
 
 describe("base", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook = () => ({ value: 5 });
   beforeEach(() => {
     useHook = function () {

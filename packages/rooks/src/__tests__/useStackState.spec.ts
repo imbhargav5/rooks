@@ -6,18 +6,22 @@ const { act } = TestRenderer;
 
 describe("useStackState", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useStackState).toBeDefined();
   });
   it("should initialize correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useStackState([1, 2, 3]));
     expect(result.current[0]).toEqual([1, 2, 3]);
   });
   it("should return length correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useStackState([1, 2, 3]));
     const [, controls] = result.current;
     expect(controls).toHaveLength(3);
   });
   it("should push correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useStackState([1, 2, 3]));
 
     // memo
@@ -44,6 +48,7 @@ describe("useStackState", () => {
     expect(list2).toEqual([1, 2, 3, 7, 7]);
   });
   it("should peek and pop correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useStackState([1, 2, 3]));
 
     // memo
@@ -76,6 +81,7 @@ describe("useStackState", () => {
     expect(result.current[1]).toHaveLength(3);
   });
   it("handles empty arrays", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useStackState<number>([]));
 
     void act(() => {
@@ -109,6 +115,7 @@ describe("useStackState", () => {
   });
 
   it("should clear the stack", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useStackState([1, 2, 3]));
     expect(result.current[1]).toHaveLength(3);
     void act(() => {

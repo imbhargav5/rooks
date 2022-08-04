@@ -8,7 +8,6 @@ import { useForkRef } from "../hooks/useForkRef";
 const { act } = TestRenderer;
 
 describe("useForkRef", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
   let TestJSX = () => <div />;
   beforeEach(() => {
@@ -27,10 +26,12 @@ describe("useForkRef", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useForkRef).toBeDefined();
   });
 
   it("should be called on mouse events", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
     act(() => {

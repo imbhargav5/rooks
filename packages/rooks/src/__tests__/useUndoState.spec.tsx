@@ -11,7 +11,6 @@ const { act } = TestRenderer;
 
 describe("useUndoState", () => {
   afterEach(cleanup);
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook = function (defaultValue: number, options?: UseUndoStateOptions) {
     const [value, setValue, undo] = useUndoState<number>(defaultValue, options);
     function increment() {
@@ -33,15 +32,18 @@ describe("useUndoState", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useUndoState).toBeDefined();
   });
 
   it("should honor default value", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
     expect(result.current.value).toBe(42);
   });
 
   it("should show latest value", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
 
     void act(() => {
@@ -53,6 +55,7 @@ describe("useUndoState", () => {
 
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip("should show previous value after undo", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
 
     void act(() => {
@@ -65,6 +68,7 @@ describe("useUndoState", () => {
   });
 
   it("should show initial value after multiple undo", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
 
     void act(() => {
@@ -82,6 +86,7 @@ describe("useUndoState", () => {
 
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip("should respect maxSize option", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useHook(42, { maxSize: 2 }));
 
     void act(() => {

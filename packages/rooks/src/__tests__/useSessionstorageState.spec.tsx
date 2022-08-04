@@ -14,6 +14,7 @@ import { useSessionstorageState } from "../hooks/useSessionstorageState";
 
 describe("useSessionstorageState defined", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useSessionstorageState).toBeDefined();
   });
 });
@@ -52,12 +53,14 @@ describe("useSessionstorageState basic", () => {
   afterEach(cleanup);
 
   it("initializes correctly", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
   it("setting the new value", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
       container as HTMLElement,

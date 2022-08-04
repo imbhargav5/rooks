@@ -10,9 +10,11 @@ const { act } = TestRenderer;
 
 describe("useWindowEventListener", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useWindowEventListener).toBeDefined();
   });
   it("should return a undefined", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useWindowEventListener("click", () => {
         console.log("clicked");
@@ -24,9 +26,7 @@ describe("useWindowEventListener", () => {
 });
 
 describe("useWindowEventListener jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let TestJSX = () => null;
   beforeEach(() => {
     mockCallback = jest.fn(() => {});
@@ -38,11 +38,13 @@ describe("useWindowEventListener jsx", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     render(<TestJSX />);
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     render(<TestJSX />);
     act(() => {
       fireEvent.click(window);
@@ -69,12 +71,14 @@ describe("useWindowEventListener state variables", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);

@@ -51,11 +51,11 @@ const defaultGeoLocationOptions: UseGeoLocationOptions = {
  * Gets the geolocation data as a hook
  *
  * @param {UseGeoLocationOptions} geoLocationOptions Geolocation options
- * @see {https://react-hooks.org/docs/useGeolocation}
+ * @see {@link https://react-hooks.org/docs/useGeolocation}
  */
-function useGeolocation(
+const useGeolocation = (
   geoLocationOptions: UseGeoLocationOptions = defaultGeoLocationOptions
-): UseGeolocationReturnType | null {
+): UseGeolocationReturnType | null => {
   const [geoObject, setGeoObject] = useState<UseGeolocationReturnType | null>(
     null
   );
@@ -85,6 +85,6 @@ function useGeolocation(
   }, [when, enableHighAccuracy, timeout, maximumAge, getIsMounted]);
 
   return geoObject;
-}
+};
 
 export { useGeolocation };
