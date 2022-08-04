@@ -12,10 +12,12 @@ describe("useNavigatorLanguage", () => {
   });
 
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useNavigatorLanguage).toBeDefined();
   });
 
   it("should get the navigator language", () => {
+    expect.hasAssertions();
     languageGetter.mockReturnValue("de");
     const { result } = renderHook(() => useNavigatorLanguage());
     expect(result.current).toBe("de");
