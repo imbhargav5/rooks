@@ -11,13 +11,13 @@
       "cache": false
     },
     "coverage": {
-      "dependsOn": ["build"],
+      "dependsOn": ["rooks#build"],
       "cache": false,
       "outputs": ["src/coverage/**"]
     },
     "test": {
       "cache": false,
-      "dependsOn": ["build"],
+      "dependsOn": ["rooks#build"],
       "outputs": ["coverage/**", "dist/**", ".next/**"]
     },
     "start": {
