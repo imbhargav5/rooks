@@ -1,6 +1,7 @@
 import { Spacer, Text } from "@nextui-org/react";
 import Image from "next/image";
 import {
+  ComponentProps,
   ComponentPropsWithoutRef,
   PropsWithRef,
   ReactElement,
@@ -10,6 +11,7 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/dracula";
 import { styled } from "@stitches/react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import { MDXProvider } from "@mdx-js/react";
 import {
   FirstLevelHeadline,
   SecondLevelHeadline,
@@ -115,7 +117,7 @@ const StyledTable = styled("table", {
   },
 });
 
-export const components = {
+export const components: ComponentProps<typeof MDXProvider>["components"] = {
   img: ResponsiveImage,
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <FirstLevelHeadline {...props} />
@@ -128,6 +130,5 @@ export const components = {
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => <Text as="p" {...props} />,
   pre: Code,
-  code: Code,
   table: StyledTable,
 };
