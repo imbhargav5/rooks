@@ -26,7 +26,7 @@ export default function App() {
     ["ControlLeft", "KeyS"],
     () => {
       alert("you presses ctrlLeft + s");
-      setFirstCallbackCallCount(firstCallbackCallCount + 1);
+      setFirstCallbackCallCount((curr) => curr + 1);
     },
     {
       target: containerRef,
@@ -35,7 +35,7 @@ export default function App() {
   );
   useKeys(
     ["m", "r"],
-    event => {
+    (event) => {
       // event.stopPropagation();
       console.log("here you go m and r");
     },
