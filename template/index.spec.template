@@ -1,9 +1,10 @@
-import React from 'react'
-import { %name% } from '../hooks/%name%';
+import React from "react";
+import { %name% } from "../hooks/%name%";
 
 
 describe("%name%", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(%name%).toBeDefined();
   });
 });
