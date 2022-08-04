@@ -22,6 +22,10 @@ type Options = {
    * remove the eventlistener if any
    */
   when?: boolean;
+  /**
+   * opt-in to prevent alert, confirm and prompt from causing the eventlistener to lose track of keyup events.
+   */
+  preventLostKeyup?: boolean;
 };
 /**
  * defaultOptions which will be merged with passed in options
@@ -45,7 +49,7 @@ function useKeys(
   options?: Options
 ): void {
   const internalOptions = { ...defaultOptions, ...options };
-  const { target, when, continuous } = internalOptions;
+  const { target, when, continuous, preventLostKeyup } = internalOptions;
   const savedCallback = useRef<(event: KeyboardEvent) => void>(callback);
   /**
    * PressedKeyMapping will do the bookkeeping the pressed keys
@@ -134,6 +138,46 @@ function useKeys(
 
     return noop;
   }, [when, target, keysList, handleKeyDown, handleKeyUp]);
+
+  useEffect(() => {
+    if (preventLostKeyup !== true) return noop;
+    if (typeof window !== "undefined") {
+      const originalAlert = window.alert;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      window.alert = (message?: any) => {
+        for (const identifier of keysList) {
+          PressedKeyMapping[identifier] = undefined;
+        }
+        return originalAlert(message);
+      };
+
+      const originalConfirm = window.confirm;
+      window.confirm = (message?: string | undefined) => {
+        for (const identifier of keysList) {
+          PressedKeyMapping[identifier] = undefined;
+        }
+        return originalConfirm(message);
+      };
+
+      const originalPrompt = window.prompt;
+      window.prompt = (
+        message?: string | undefined,
+        _default?: string | undefined
+      ) => {
+        for (const identifier of keysList) {
+          PressedKeyMapping[identifier] = undefined;
+        }
+        return originalPrompt(message, _default);
+      };
+
+      return () => {
+        window.alert = originalAlert;
+        window.confirm = originalConfirm;
+        window.prompt = originalPrompt;
+      };
+    }
+    return noop;
+  }, [PressedKeyMapping, keysList, preventLostKeyup]);
 }
 
 export { useKeys };
