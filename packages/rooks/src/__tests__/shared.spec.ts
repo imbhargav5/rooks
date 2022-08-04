@@ -26,141 +26,167 @@ import { useWindowSize } from "../hooks/useWindowSize";
 
 describe("useBoundingClientRect", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useBoundingclientrect).toBeDefined();
   });
 });
 
 describe("useBoundingclientrectRef", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useBoundingclientrectRef).toBeDefined();
   });
 });
 
 describe("useDidUpdate", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useDidUpdate).toBeDefined();
   });
 });
 
 describe("useForkRef", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useForkRef).toBeDefined();
   });
 });
 
 describe("useInput", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useInput).toBeDefined();
   });
 });
 
 describe("useIntersectionObserverRef", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useIntersectionObserverRef).toBeDefined();
   });
 });
 
 describe("useIsomorphicEffect", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useIsomorphicEffect).toBeDefined();
   });
 });
 
 describe("useKey", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useKey).toBeDefined();
   });
 });
 
 describe("useKeys", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useKey).toBeDefined();
   });
 });
 
 describe("useMouse", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useMouse).toBeDefined();
   });
 });
 describe("useMutationObserver", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useMutationObserver).toBeDefined();
   });
 });
 describe("useMutationObserverRef", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useMutationObserverRef).toBeDefined();
   });
 });
 describe("useNavigatorLanguage", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useNavigatorLanguage).toBeDefined();
   });
 });
 describe("useOnWindowResize", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useOnWindowResize).toBeDefined();
   });
 });
 describe("useOnWindowScroll", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useOnWindowScroll).toBeDefined();
   });
 });
 describe("useOnline", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useOnline).toBeDefined();
   });
 });
 describe("useOutsideClick", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useOutsideClick).toBeDefined();
   });
 });
 describe("useOutsideClickRef", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useOutsideClickRef).toBeDefined();
   });
 });
 describe("useRaf", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useRaf).toBeDefined();
   });
 });
 describe("useSelect", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useSelect).toBeDefined();
   });
 });
 describe("useSelectableList", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useSelectableList).toBeDefined();
   });
 });
 describe("useThrottle", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useThrottle).toBeDefined();
   });
 });
 
 describe("useToggle", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useToggle).toBeDefined();
   });
 });
 describe("useUndoState", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useUndoState).toBeDefined();
   });
 });
 describe("useWillUnmount", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useWillUnmount).toBeDefined();
   });
 });
 describe("useWindowSize", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useWindowSize).toBeDefined();
   });
 });

@@ -6,18 +6,22 @@ const { act } = TestRenderer;
 
 describe("useQueueState", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useQueueState).toBeDefined();
   });
   it("should initialize correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useQueueState([1, 2, 3]));
     expect(result.current[0]).toEqual([1, 2, 3]);
   });
   it("should return length correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useQueueState([1, 2, 3]));
     const [, controls] = result.current;
     expect(controls).toHaveLength(3);
   });
   it("should enqueue correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useQueueState([1, 2, 3]));
     // test memo
     const enqueueBeforeRerender = result.current[1].enqueue;
@@ -39,6 +43,7 @@ describe("useQueueState", () => {
     expect(list2).toEqual([1, 2, 3, 7, 8]);
   });
   it("should peek and dequeue correctly", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useQueueState([1, 2, 3]));
     // memo
     const enqueueBeforeRerender = result.current[1].enqueue;
@@ -69,6 +74,7 @@ describe("useQueueState", () => {
     expect(result.current[1]).toHaveLength(3);
   });
   it("handles empty arrays", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useQueueState<number>([]));
     void act(() => {
       result.current[1].dequeue();

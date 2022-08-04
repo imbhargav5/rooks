@@ -4,12 +4,14 @@ import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
 
 describe("useOnWindowScroll", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useOnWindowScroll).toBeDefined();
   });
 
   describe("basic", () => {
     const mockCallback = jest.fn(() => {});
     it("should call callback after resize", () => {
+      expect.hasAssertions();
       renderHook(() => useOnWindowScroll(mockCallback));
       fireEvent(window, new Event("scroll"));
       expect(mockCallback.mock.calls).toHaveLength(1);
