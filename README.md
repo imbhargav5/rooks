@@ -264,3 +264,18 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+## Other hooks libraries
+
+These are some libraries that I constantly take inspiration and ideas from
+
+1. [React-use](https://github.com/streamich/react-use)
+2. [React-aria](https://react-spectrum.adobe.com/react-aria)
+3. [Valtio](https://github.com/pmndrs/valtio)
+4. [Jotai](https://github.com/pmndrs/jotai/tree/)
+5. [Recoil](https://recoiljs.org/)
+6. [Downshiftjs](https://www.downshift-js.com/)
+7. [React hook form](https://react-hook-form.com/)
+
+
