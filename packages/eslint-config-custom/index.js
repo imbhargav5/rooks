@@ -59,7 +59,8 @@ module.exports = {
     ],
   },
   parserOptions: {
-    project: "tsconfig/base.json",
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
   },
   plugins: ["jest"],
   settings: {
