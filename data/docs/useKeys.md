@@ -26,16 +26,17 @@ export default function App() {
     ["ControlLeft", "KeyS"],
     () => {
       alert("you presses ctrlLeft + s");
-      setFirstCallbackCallCount((curr) => curr + 1);
+      setFirstCallbackCallCount(curr => curr + 1);
     },
     {
       target: containerRef,
       when: isEventActive,
+      preventLostKeyup: true,
     }
   );
   useKeys(
     ["m", "r"],
-    (event) => {
+    event => {
       // event.stopPropagation();
       console.log("here you go m and r");
     },
@@ -75,11 +76,12 @@ export default function App() {
 | callback       | Function | Callback function to be called when event is triggered | undefined |
 | options        | Object   | See table below                                        | undefined |
 
-| Options value | Type                      | Description                                                                      | Defualt     |
-| ------------- | ------------------------- | -------------------------------------------------------------------------------- | ----------- |
-| when          | Boolean                   | Condition which if true, will enable the event listeners                         | true        |
-| eventTypes    | Array of number or string | Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp | ['keydown'] |
-| target        | HTMLElement ref           | target ref on which the events should be listened.                               | window      |
+| Options value    | Type                      | Description                                                                      | Defualt     |
+| ---------------- | ------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| when             | Boolean                   | Condition which if true, will enable the event listeners                         | true        |
+| eventTypes       | Array of number or string | Keyboardevent types to listen for. Valid options are keyDown, keyPress and keyUp | ['keydown'] |
+| target           | HTMLElement ref           | target ref on which the events should be listened.                               | window      |
+| preventLostKeyup | Boolean                   | Prevent keyup events get lost tracking when alert is triggered.                  | false       |
 
 ### Returns
 
