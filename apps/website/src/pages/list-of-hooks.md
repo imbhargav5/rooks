@@ -42,7 +42,6 @@ sidebar_label: Hooks List
 *   [useMergeRefs](https://react-hooks.org/docs/useMergeRefs) - Merges any number of refs into a single ref
 *   [useRefElement](https://react-hooks.org/docs/useRefElement) - Helps bridge gap between callback ref and state
 *   [useRenderCount](https://react-hooks.org/docs/useRenderCount) - Get the render count of a component
-*   [useSuspenseResource](https://react-hooks.org/docs/useSuspenseResource) - A suspense resource hook that manages a resource and will suspend while it is fetched.
 *   [useThrottle](https://react-hooks.org/docs/useThrottle) - Throttle custom hook for React
 *   [useTimeoutWhen](https://react-hooks.org/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://react-hooks.org/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
@@ -87,7 +86,6 @@ sidebar_label: Hooks List
 *   [useMutationObserverRef](https://react-hooks.org/docs/useMutationObserverRef) - A hook that tracks mutations of an element. It returns a callbackRef.
 *   [useRaf](https://react-hooks.org/docs/useRaf) - A continuously running requestAnimationFrame hook for React
 *   [useResizeObserverRef](https://react-hooks.org/docs/useResizeObserverRef) - Resize Observer hook for React.
-*   [useVisibilitySensor](https://react-hooks.org/docs/useVisibilitySensor) - Visibility sensor hook for React.
 *   [useWindowScrollPosition](https://react-hooks.org/docs/useWindowScrollPosition) - A React hook to get the scroll position of the window
 *   [useWindowSize](https://react-hooks.org/docs/useWindowSize) - Window size hook for React.
 
