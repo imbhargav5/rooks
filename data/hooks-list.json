@@ -271,11 +271,6 @@
       "category": "state"
     },
     {
-      "name": "useSuspenseResource",
-      "description": "A suspense resource hook that manages a resource and will suspend while it is fetched.",
-      "category": "misc"
-    },
-    {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "misc"
@@ -294,11 +289,6 @@
       "name": "useUndoState",
       "description": "Drop in replacement for useState hook but with undo functionality.",
       "category": "state"
-    },
-    {
-      "name": "useVisibilitySensor",
-      "description": "Visibility sensor hook for React.",
-      "category": "ui"
     },
     {
       "name": "useWillUnmount",
