@@ -10,7 +10,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 
-import { useKey } from "../hooks/useKey";
+import { useKey } from "@/hooks/useKey";
 
 describe("useKey", () => {
   let App = () => <div />;

@@ -3,7 +3,7 @@
  */
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import React, { useState } from "react";
-import { useDidUpdate } from "../hooks/useDidUpdate";
+import { useDidUpdate } from "@/hooks/useDidUpdate";
 
 describe("useDidUpdate", () => {
   let App = () => <div />;

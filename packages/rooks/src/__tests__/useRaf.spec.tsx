@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React, { useRef } from "react";
-import { useRaf } from "../hooks/useRaf";
+import { useRaf } from "@/hooks/useRaf";
 
 describe("useRaf", () => {
   let TestJSX = () => <canvas />;

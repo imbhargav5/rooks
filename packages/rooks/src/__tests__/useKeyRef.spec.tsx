@@ -11,7 +11,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 
-import { useKeyRef } from "../hooks/useKeyRef";
+import { useKeyRef } from "@/hooks/useKeyRef";
 
 describe("useKeyRef", () => {
   let App = () => <div />;

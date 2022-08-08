@@ -9,7 +9,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 import React, { useState } from "react";
-import { useOutsideClickRef } from "../hooks/useOutsideClickRef";
+import { useOutsideClickRef } from "@/hooks/useOutsideClickRef";
 
 const VolumeOn = () => (
   <svg

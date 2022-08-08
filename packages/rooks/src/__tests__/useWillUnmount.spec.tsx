@@ -10,7 +10,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 
-import { useWillUnmount } from "../hooks/useWillUnmount";
+import { useWillUnmount } from "@/hooks/useWillUnmount";
 
 describe("useWillUnmount", () => {
   let App = () => <div />;

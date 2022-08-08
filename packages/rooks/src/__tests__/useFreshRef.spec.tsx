@@ -3,7 +3,7 @@
  */
 import { renderHook, cleanup, act } from "@testing-library/react-hooks";
 import { useCallback, useEffect, useState } from "react";
-import { useFreshRef } from "../hooks/useFreshRef";
+import { useFreshRef } from "@/hooks/useFreshRef";
 
 // eslint-disable-next-line jest/no-disabled-tests
 describe.skip("useFreshRef", () => {

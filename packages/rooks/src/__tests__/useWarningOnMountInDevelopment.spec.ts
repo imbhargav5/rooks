@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useWarningOnMountInDevelopment } from "../hooks/useWarningOnMountInDevelopment";
+import { useWarningOnMountInDevelopment } from "@/hooks/useWarningOnMountInDevelopment";
 
 describe("useWarningOnMountInDevelopment", () => {
   it("is defined", () => {

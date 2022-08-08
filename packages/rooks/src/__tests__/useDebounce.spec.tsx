@@ -4,7 +4,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 import type { DebouncedFunc } from "lodash";
 import { useState } from "react";
-import { useDebounce } from "../hooks/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

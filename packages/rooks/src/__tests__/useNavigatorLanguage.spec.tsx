@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { renderHook } from "@testing-library/react-hooks";
-import { useNavigatorLanguage } from "../hooks/useNavigatorLanguage";
+import { useNavigatorLanguage } from "@/hooks/useNavigatorLanguage";
 
 describe("useNavigatorLanguage", () => {
   let languageGetter = jest.spyOn(window.navigator, "language", "get");
