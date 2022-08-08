@@ -66,6 +66,11 @@
       "category": "misc"
     },
     {
+      "name": "useFocus",
+      "description": "Handles focus events for the immediate target element.",
+      "category": "events"
+    },
+    {
       "name": "useFocusWithin",
       "description": "Handles focus events for the target component.",
       "category": "events"
