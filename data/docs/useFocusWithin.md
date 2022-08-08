@@ -10,33 +10,44 @@ Handles focus events for the target component.
 
 ## Examples
 
-```jsx
+```tsx
+import { useState } from "react";
 import { useFocusWithin } from "rooks";
-import React from "react";
 
-export default function App() {
-  const [isFocusWithin, setFocusWithin] = React.useState(false);
-  const { focusWithinProps } = useFocusWithin({
-    onFocusWithin: (e) => console.log("focus within"),
-    onBlurWithin: (e) => console.log("blur within"),
-    onFocusWithinChange: (isFocusWithin) => setFocusWithin(isFocusWithin),
+const Page = () => {
+  const [isFocusWithin, setIsFocusWithin] = useState<boolean>(false);
+  const { focusWithinProps } = useFocusWithin<HTMLDivElement>({
+    onFocusWithin: () => {
+      console.log("focus within");
+    },
+    onBlurWithin: () => {
+      console.log("blur within");
+    },
+    onFocusWithinChange: (isFocusWithin) => {
+      setIsFocusWithin(isFocusWithin);
+    },
   });
 
   return (
     <div
       {...focusWithinProps}
       style={{
-        background: isFocusWithin ? "goldenrod" : "",
-        color: isFocusWithin ? "black" : "",
+        display: "inline-block",
+        border: "1px solid gray",
+        padding: 10,
+        margin: "auto",
+        background: isFocusWithin ? "goldenrod" : "gray",
+        color: isFocusWithin ? "black" : "white",
       }}
     >
-      <label>
+      <label style={{ display: "block" }}>
         First Name: <input />
       </label>
-      <label>
+      <label style={{ display: "block" }}>
         Last Name: <input />
       </label>
     </div>
   );
-}
+};
+export default Page;
 ```
