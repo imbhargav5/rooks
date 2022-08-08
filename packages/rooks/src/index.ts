@@ -1,3 +1,4 @@
+export { useArrayState } from "./hooks/useArrayState";
 export { useAsyncEffect } from "./hooks/useAsyncEffect";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";

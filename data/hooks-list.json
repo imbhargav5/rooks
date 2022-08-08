@@ -1,6 +1,11 @@
 {
   "hooks": [
     {
+      "name": "useArrayState",
+      "description": "Array state manager hook for React",
+      "category": "state"
+    },
+    {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
       "category": "effects"
@@ -241,14 +246,14 @@
       "category": "misc"
     },
     {
-      "name": "useResizeObserverRef",
-      "description": "Resize Observer hook for React.",
-      "category": "ui"
-    },
-    {
       "name": "useRenderCount",
       "description": "Get the render count of a component",
       "category": "misc"
+    },
+    {
+      "name": "useResizeObserverRef",
+      "description": "Resize Observer hook for React.",
+      "category": "ui"
     },
     {
       "name": "useSelect",
