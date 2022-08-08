@@ -1,5 +1,15 @@
-import { UseSetStateControls, UseSetStateReturnValue } from "@/types/types";
 import { useCallback, useMemo, useState } from "react";
+
+type Add<T> = (...args: Parameters<Set<T>["add"]>) => void;
+type Delete<T> = (...args: Parameters<Set<T>["delete"]>) => void;
+
+export type UseSetStateControls<T> = {
+  add: Add<T>;
+  delete: Delete<T>;
+  clear: () => void;
+};
+
+export type UseSetStateReturnValue<T> = [Set<T>, UseSetStateControls<T>];
 
 /**
  * useSetState
@@ -19,15 +29,15 @@ import { useCallback, useMemo, useState } from "react";
 function useSetState<T>(initialSetValue: Set<T>): UseSetStateReturnValue<T> {
   const [setValue, setSetValue] = useState<Set<T>>(new Set(initialSetValue));
 
-  const add = useCallback(
-    (...args: Parameters<Set<T>["add"]>) => {
+  const add = useCallback<Add<T>>(
+    (...args): void => {
       setSetValue(new Set(setValue.add(...args)));
     },
     [setValue, setSetValue]
   );
 
-  const deleteValue = useCallback(
-    (...args: Parameters<Set<T>["delete"]>) => {
+  const deleteValue = useCallback<Delete<T>>(
+    (...args): void => {
       const newSetValue = new Set(setValue);
       newSetValue.delete(...args);
       setSetValue(newSetValue);
@@ -35,7 +45,7 @@ function useSetState<T>(initialSetValue: Set<T>): UseSetStateReturnValue<T> {
     [setValue, setSetValue]
   );
 
-  const clear = useCallback(() => {
+  const clear = useCallback((): void => {
     setSetValue(new Set());
   }, [setSetValue]);
 

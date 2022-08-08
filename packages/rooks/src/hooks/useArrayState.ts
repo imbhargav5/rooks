@@ -1,5 +1,26 @@
-import { UseArrayStateControls, UseArrayStateReturnValue } from "@/types/types";
 import { useCallback, useMemo, useState } from "react";
+
+type Push<T> = (...args: Parameters<Array<T>["push"]>) => void;
+type Pop = () => void;
+type Unshift<T> = (...args: Parameters<Array<T>["unshift"]>) => void;
+type Shift = () => void;
+type Reverse = () => void;
+type Concat<T> = (value: T[]) => void;
+type Fill<T> = (value: T, start?: number, end?: number) => void;
+type Clear = () => void;
+
+export type UseArrayStateControls<T> = {
+  push: Push<T>;
+  pop: Pop;
+  clear: Clear;
+  unshift: Unshift<T>;
+  shift: Shift;
+  reverse: Reverse;
+  concat: Concat<T>;
+  fill: Fill<T>;
+};
+
+export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
 
 /**
  * useArrayState
@@ -23,44 +44,44 @@ import { useCallback, useMemo, useState } from "react";
 function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
   const [array, setArray] = useState(initialArray);
 
-  const push = useCallback(
-    (value: T) => {
+  const push = useCallback<Push<T>>(
+    (value) => {
       setArray([...array, value]);
     },
     [array]
   );
 
-  const pop = useCallback(() => {
+  const pop = useCallback<Pop>(() => {
     setArray(array.slice(0, array.length - 1));
   }, [array]);
 
-  const clear = useCallback(() => {
+  const clear = useCallback<Clear>(() => {
     setArray([]);
   }, []);
 
-  const unshift = useCallback(
-    (value: T) => {
+  const unshift = useCallback<Unshift<T>>(
+    (value) => {
       setArray([value, ...array]);
     },
     [array]
   );
 
-  const shift = useCallback(() => {
+  const shift = useCallback<Shift>(() => {
     setArray(array.slice(1));
   }, [array]);
 
-  const reverse = useCallback(() => {
+  const reverse = useCallback<Reverse>(() => {
     setArray([...array].reverse());
   }, [array]);
 
-  const concat = useCallback(
+  const concat = useCallback<Concat<T>>(
     (value: T[]) => {
       setArray([...array, ...value]);
     },
     [array]
   );
 
-  const fill = useCallback(
+  const fill = useCallback<Fill<T>>(
     (value: T, start?: number, end?: number) => {
       setArray([...array].fill(value, start, end));
     },
