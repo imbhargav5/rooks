@@ -1,24 +1,24 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
-import { useFocus } from "../hooks/useFocus";
+import { useFocusWithin } from "../hooks/useFocusWithin";
 
-describe("useFocus", () => {
+describe("useFocusWithin", () => {
   let events: { type: string; target?: EventTarget; isFocused?: boolean }[] =
     [];
   let App = () => <div />;
   beforeEach(() => {
     events = [];
     App = () => {
-      const { focusProps } = useFocus({
-        onFocus: (e: React.FocusEvent) =>
+      const { focusWithinProps } = useFocusWithin({
+        onFocusWithin: (e: React.FocusEvent) =>
           events.push({ type: e.type, target: e.target }),
-        onBlur: (e: React.FocusEvent) =>
+        onBlurWithin: (e: React.FocusEvent) =>
           events.push({ type: e.type, target: e.target }),
-        onFocusChange: (isFocused) =>
+        onFocusWithinChange: (isFocused) =>
           events.push({ type: "focuschange", isFocused }),
       });
       return (
-        <div {...focusProps} data-testid="example">
+        <div {...focusWithinProps} data-testid="example">
           <div data-testid="child"></div>
         </div>
       );
@@ -28,13 +28,12 @@ describe("useFocus", () => {
 
   it("should be defined", () => {
     expect.hasAssertions();
-    expect(useFocus).toBeDefined();
+    expect(useFocusWithin).toBeDefined();
   });
 
-  it("handles focus events on the immediate target", () => {
+  it("handles focus events on the target itself", () => {
     expect.hasAssertions();
     const tree = render(<App />);
-
     const el = tree.getByTestId("example");
     act(() => {
       fireEvent.focus(el);
@@ -51,12 +50,17 @@ describe("useFocus", () => {
     ]);
   });
 
-  it("does not handle focus events on children", () => {
+  it("does handle focus events on children", function () {
     expect.hasAssertions();
     const tree = render(<App />);
-
     const el = tree.getByTestId("example");
     const child = tree.getByTestId("child");
+    act(() => {
+      fireEvent.focus(child);
+    });
+    act(() => {
+      fireEvent.focus(el);
+    });
     act(() => {
       fireEvent.focus(child);
     });
@@ -64,19 +68,10 @@ describe("useFocus", () => {
       fireEvent.blur(child);
     });
 
-    expect(events).toEqual([]);
-
-    act(() => {
-      fireEvent.focus(el);
-    });
-    act(() => {
-      fireEvent.blur(el);
-    });
-
     expect(events).toEqual([
-      { type: "focus", target: el },
+      { type: "focus", target: child },
       { type: "focuschange", isFocused: true },
-      { type: "blur", target: el },
+      { type: "blur", target: child },
       { type: "focuschange", isFocused: false },
     ]);
   });
