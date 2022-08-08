@@ -17,7 +17,7 @@ import { useCallback, useMemo, useState } from "react";
  * controls.unshift(0); // [0, 1, 2, 3]
  * controls.shift(); // [1, 2, 3]
  * controls.reverse(); // [3, 2, 1]
- * controls.concat([4, 5, 6]); // [1, 2, 3, 4, 5, 6]
+ * controls.concat([4, 5, 6]); // [3, 2, 1, 4, 5, 6]
  * controls.fill(0); // [0, 0, 0, 0, 0, 0]
  */
 function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
