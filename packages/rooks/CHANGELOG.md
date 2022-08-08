@@ -1,5 +1,11 @@
 # rooks
 
+## 6.2.2-alpha.0
+
+### Patch Changes
+
+- 2d51915e: decrease bundle size
+
 ## 6.2.1
 
 ### Patch Changes
