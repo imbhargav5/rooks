@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { renderHook } from "@testing-library/react-hooks";
-import { useOnline } from "../hooks/useOnline";
+import { useOnline } from "@/hooks/useOnline";
 
 describe("useOnline", () => {
   let onlineGetter = jest.spyOn(window.navigator, "onLine", "get");

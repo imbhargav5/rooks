@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from "react-test-renderer";
-import { useStackState } from "../hooks/useStackState";
+import { useStackState } from "@/hooks/useStackState";
 
 const { act } = TestRenderer;
 

@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
-import { usePreviousImmediate } from "../hooks/usePreviousImmediate";
+import { usePreviousImmediate } from "@/hooks/usePreviousImmediate";
 
 describe("usePreviousImmediate", () => {
   let useHook = (): {

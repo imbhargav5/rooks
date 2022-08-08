@@ -3,7 +3,7 @@
  */
 import { act, renderHook, cleanup } from "@testing-library/react-hooks";
 import { useState } from "react";
-import { useEffectOnceWhen } from "../hooks/useEffectOnceWhen";
+import { useEffectOnceWhen } from "@/hooks/useEffectOnceWhen";
 
 describe("useEffectOnceWhen", () => {
   let useHook = function () {

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React, { useRef } from "react";
-import { useMutationObserver } from "../hooks/useMutationObserver";
+import { useMutationObserver } from "@/hooks/useMutationObserver";
 
 describe("useMutationObserver", () => {
   it("should watch for children changes being made to the DOM node", () => {

@@ -5,7 +5,7 @@ import { waitFor } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
 import { act } from "react-test-renderer";
-import { useAsyncEffect } from "../hooks/useAsyncEffect";
+import { useAsyncEffect } from "@/hooks/useAsyncEffect";
 
 describe("useAsyncEffect", () => {
   it("is defined", () => {

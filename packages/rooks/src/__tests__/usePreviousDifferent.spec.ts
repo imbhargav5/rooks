@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
-import { usePreviousDifferent } from "../hooks/usePreviousDifferent";
+import { usePreviousDifferent } from "@/hooks/usePreviousDifferent";
 
 describe("usePreviousDifferent", () => {
   let useHook = (): {

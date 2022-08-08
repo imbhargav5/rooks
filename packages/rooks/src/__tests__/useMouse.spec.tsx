@@ -4,7 +4,7 @@
  */
 import { renderHook, cleanup } from "@testing-library/react-hooks";
 import "@testing-library/jest-dom/extend-expect";
-import { useMouse } from "../hooks/useMouse";
+import { useMouse } from "@/hooks/useMouse";
 
 describe.skip("useMouse", () => {
   afterEach(cleanup);

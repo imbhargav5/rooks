@@ -4,7 +4,7 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
-import { useToggle } from "../hooks/useToggle";
+import { useToggle } from "@/hooks/useToggle";
 
 describe("useToggle basic behavior", () => {
   let App = () => <p />;

@@ -2,8 +2,8 @@ import React from "react";
 import { render, getByTestId, fireEvent } from "@testing-library/react";
 
 import TestRenderer from "react-test-renderer";
-import { useEventListenerRef } from "../hooks/useEventListenerRef";
-import { useForkRef } from "../hooks/useForkRef";
+import { useEventListenerRef } from "@/hooks/useEventListenerRef";
+import { useForkRef } from "@/hooks/useForkRef";
 
 const { act } = TestRenderer;
 

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { renderHook } from "@testing-library/react-hooks";
-import { useWindowSize } from "../hooks/useWindowSize";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 describe("useWindowSize", () => {
   it("should be defined", () => {

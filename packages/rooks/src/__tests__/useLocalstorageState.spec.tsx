@@ -11,7 +11,7 @@ import {
 } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 
-import { useLocalstorageState } from "../hooks/useLocalstorageState";
+import { useLocalstorageState } from "@/hooks/useLocalstorageState";
 
 describe("useLocalstorageState defined", () => {
   it("should be defined", () => {

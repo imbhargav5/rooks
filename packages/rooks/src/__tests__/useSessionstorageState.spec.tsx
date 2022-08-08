@@ -10,7 +10,7 @@ import {
   act,
 } from "@testing-library/react";
 
-import { useSessionstorageState } from "../hooks/useSessionstorageState";
+import { useSessionstorageState } from "@/hooks/useSessionstorageState";
 
 describe("useSessionstorageState defined", () => {
   it("should be defined", () => {

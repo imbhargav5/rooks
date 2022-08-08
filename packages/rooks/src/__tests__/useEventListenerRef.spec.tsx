@@ -3,8 +3,8 @@ import { render, getByTestId, fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 
 import TestRenderer from "react-test-renderer";
-import { useCounter } from "../hooks/useCounter";
-import { useEventListenerRef } from "../hooks/useEventListenerRef";
+import { useCounter } from "@/hooks/useCounter";
+import { useEventListenerRef } from "@/hooks/useEventListenerRef";
 
 const { act } = TestRenderer;
 

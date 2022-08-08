@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import { useOnWindowResize } from "../hooks/useOnWindowResize";
+import { useOnWindowResize } from "@/hooks/useOnWindowResize";
 
 describe("useOnWindowResize", () => {
   it("should be defined", () => {

@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useMultiSelectableList } from "../hooks/useMultiSelectableList";
+import { useMultiSelectableList } from "@/hooks/useMultiSelectableList";
 
 jest.spyOn(console, "warn").mockImplementation(jest.fn);
 
