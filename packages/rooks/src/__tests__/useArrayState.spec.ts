@@ -1,3 +1,4 @@
+import { act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import React from "react";
 import { useArrayState } from "../hooks/useArrayState";
@@ -19,7 +20,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].push(4);
+    act(() => {
+      result.current[1].push(4);
+    });
 
     expect(result.current[0]).toEqual([1, 2, 3, 4]);
   });
@@ -28,7 +31,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].pop();
+    act(() => {
+      result.current[1].pop();
+    });
 
     expect(result.current[0]).toEqual([1, 2]);
   });
@@ -37,8 +42,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].unshift(0);
-
+    act(() => {
+      result.current[1].unshift(0);
+    });
     expect(result.current[0]).toEqual([0, 1, 2, 3]);
   });
 
@@ -46,8 +52,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].shift();
-
+    act(() => {
+      result.current[1].shift();
+    });
     expect(result.current[0]).toEqual([2, 3]);
   });
 
@@ -55,7 +62,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].reverse();
+    act(() => {
+      result.current[1].reverse();
+    });
 
     expect(result.current[0]).toEqual([3, 2, 1]);
   });
@@ -64,7 +73,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].concat([4, 5, 6]);
+    act(() => {
+      result.current[1].concat([4, 5, 6]);
+    });
 
     expect(result.current[0]).toEqual([1, 2, 3, 4, 5, 6]);
   });
@@ -73,7 +84,9 @@ describe("useArrayState", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
 
-    result.current[1].fill(0);
+    act(() => {
+      result.current[1].fill(0);
+    });
 
     expect(result.current[0]).toEqual([0, 0, 0]);
   });

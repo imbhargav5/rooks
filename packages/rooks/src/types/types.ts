@@ -23,7 +23,7 @@ export type UseGeolocationReturnType = {
   message: string;
 };
 
-type UseArrayStateControls<T> = {
+export type UseArrayStateControls<T> = {
   push: (...args: Parameters<Array<T>["push"]>) => void;
   pop: () => void;
   clear: () => void;
@@ -35,3 +35,11 @@ type UseArrayStateControls<T> = {
 };
 
 export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
+
+export type UseSetStateControls<T> = {
+  add: (...args: Parameters<Set<T>["add"]>) => void;
+  delete: (...args: Parameters<Set<T>["delete"]>) => void;
+  clear: () => void;
+};
+
+export type UseSetStateReturnValue<T> = [Set<T>, UseSetStateControls<T>];

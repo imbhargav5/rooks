@@ -1,5 +1,5 @@
-import { UseArrayStateReturnValue } from "@/types/types";
-import { useCallback, useState } from "react";
+import { UseArrayStateControls, UseArrayStateReturnValue } from "@/types/types";
+import { useCallback, useMemo, useState } from "react";
 
 /**
  * useArrayState
@@ -67,7 +67,24 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     [array]
   );
 
-  return [array, { push, pop, clear, unshift, shift, reverse, concat, fill }];
+  const controls = useMemo<UseArrayStateControls<T>>(() => {
+    return {
+      push,
+      pop,
+      clear,
+      unshift,
+      shift,
+      reverse,
+      concat,
+      fill,
+    };
+  }, [push, pop, clear, unshift, shift, reverse, concat, fill]);
+
+  const returnValue = useMemo<UseArrayStateReturnValue<T>>(() => {
+    return [array, controls];
+  }, [array, controls]);
+
+  return returnValue;
 }
 
 export { useArrayState };

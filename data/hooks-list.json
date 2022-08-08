@@ -271,6 +271,11 @@
       "category": "state"
     },
     {
+      "name": "useSetState",
+      "description": "Manage the state of a Set in React. ",
+      "category": "state"
+    },
+    {
       "name": "useStackState",
       "description": "A React hook that manages state in the form of a stack",
       "category": "state"
