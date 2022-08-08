@@ -3,9 +3,9 @@ import { FocusEvent, useCallback } from "react";
 
 type FocusProps = FocusEvents;
 
-interface FocusResult {
+interface FocusResult<T> {
   /** Props to spread onto the target element. */
-  focusProps: DOMAttributes;
+  focusProps: DOMAttributes<T>;
 }
 
 /**
@@ -13,7 +13,7 @@ interface FocusResult {
  * @description Handles focus events for the immediate target element.
  * @see {@link https://react-hooks.org/docs/useFocus}
  */
-const useFocus = (props: FocusProps): FocusResult => {
+const useFocus = <T extends HTMLElement>(props: FocusProps): FocusResult<T> => {
   const {
     onBlur: propsOnBlur,
     onFocus: propsOnFocus,
