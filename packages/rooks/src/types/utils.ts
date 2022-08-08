@@ -11,4 +11,5 @@ export type ListenerOptions =
       signal?: AbortSignal;
     };
 
-export type ExcludeFunction<T> = Exclude<T, Function>;
+export type UnknownFunction = (...args: unknown[]) => unknown;
+export type ExcludeFunction<T> = Exclude<T, UnknownFunction>;

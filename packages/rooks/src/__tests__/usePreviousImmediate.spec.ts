@@ -3,12 +3,10 @@ import { useState } from "react";
 import { usePreviousImmediate } from "../hooks/usePreviousImmediate";
 
 describe("usePreviousImmediate", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let useHook = (): {
     increment: () => void;
     previousValue: number | null;
     value: number;
-    // eslint-disable-next-line unicorn/consistent-function-scoping
   } => {
     return {
       increment: () => {},

@@ -3,6 +3,7 @@ import { useSelect } from "../hooks/useSelect";
 
 describe("useSelect", () => {
   it("should return correct value at index", () => {
+    expect.hasAssertions();
     let array = [1, 2];
     const { result, rerender } = renderHook(() => useSelect(array, 0));
 

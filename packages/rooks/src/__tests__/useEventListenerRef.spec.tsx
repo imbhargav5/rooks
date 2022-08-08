@@ -10,9 +10,11 @@ const { act } = TestRenderer;
 
 describe("useEventListenerRef", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useEventListenerRef).toBeDefined();
   });
   it("should return a callback ref", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useEventListenerRef("click", () => {
         console.log("clicked");
@@ -24,7 +26,6 @@ describe("useEventListenerRef", () => {
 });
 
 describe("useEventListenerRef jsx", () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   let mockCallback = () => {};
   let TestJSX = () => <div />;
   beforeEach(() => {
@@ -41,11 +42,13 @@ describe("useEventListenerRef jsx", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     render(<TestJSX />);
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
     act(() => {
@@ -80,12 +83,14 @@ describe("useEventListenerRef state variables", () => {
   });
 
   it("should not call callback by default", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
   it("should not call callback when event fires", () => {
+    expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
     const valueElement = getByTestId(container as HTMLElement, "value");

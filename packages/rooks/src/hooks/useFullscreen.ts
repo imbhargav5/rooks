@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { UnknownFunction } from "@/types/utils";
 import { useState, useCallback, useRef } from "react";
 import { useDocumentEventListener } from "./useDocumentEventListener";
 import { warning } from "./warning";
@@ -68,9 +70,7 @@ const getFullscreenControls = (): NormalizedFullscreenApi => {
   const returnValue = {} as NormalizedFullscreenApi;
 
   for (const functionSet of functionMap) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (functionSet && functionSet[1] in document) {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       for (const [index, _function] of functionSet.entries()) {
         returnValue[functionMap[0][index]] = functionSet[index];
       }
@@ -175,12 +175,10 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
   );
 
   const request = useCallback(
-    // eslint-disable-next-line consistent-return
     async (internalElement?: HTMLElement) => {
       try {
         const finalElement = internalElement ?? document.documentElement;
 
-        // eslint-disable-next-line @typescript-eslint/return-await
         return await finalElement[fullscreenControls.requestFullscreen](
           requestFullscreenOptions
         );
@@ -191,11 +189,9 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
     [fullscreenControls.requestFullscreen, requestFullscreenOptions]
   );
 
-  // eslint-disable-next-line consistent-return
   const exit = useCallback(async () => {
     if (element) {
       try {
-        // eslint-disable-next-line @typescript-eslint/return-await
         return await document[fullscreenControls.exitFullscreen]();
       } catch (error) {
         console.warn(error);
@@ -204,14 +200,14 @@ function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
   }, [element, fullscreenControls.exitFullscreen]);
 
   const toggle = useCallback(
-    // eslint-disable-next-line no-confusing-arrow
-    (newElement?: HTMLElement) =>
-      element ? exit() : newElement ? request(newElement) : null,
+    (newElement?: HTMLElement) => {
+      return element ? exit() : newElement ? request(newElement) : null;
+    },
     [element, exit, request]
   );
 
-  const onChangeDeprecatedHandlerRef = useRef<Function>(noop);
-  const onErrorDeprecatedHandlerRef = useRef<Function>(noop);
+  const onChangeDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
+  const onErrorDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
 
   // Hack to not break it for everyone
   // Honestly these two functions are tragedy and must be removed in v5

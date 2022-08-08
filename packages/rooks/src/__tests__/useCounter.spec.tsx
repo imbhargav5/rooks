@@ -6,14 +6,17 @@ const { act } = TestRenderer;
 
 describe("useCounter", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useCounter).toBeDefined();
   });
   it("should initialize correctly", () => {
+    expect.hasAssertions();
     const { result } = renderHook(() => useCounter(0));
 
     expect(result.current.value).toBe(0);
   });
   it("should increment", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useCounter(0));
 
     act(() => {
@@ -35,6 +38,7 @@ describe("useCounter", () => {
     expect(result.current.value).toBe(2);
   });
   it("should decrement", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useCounter(0));
     act(() => {
       result.current.decrement();
@@ -54,6 +58,7 @@ describe("useCounter", () => {
     expect(result.current.value).toBe(-2);
   });
   it("should incrementBy", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useCounter(5));
 
     act(() => {
@@ -75,6 +80,7 @@ describe("useCounter", () => {
     expect(result.current.value).toBe(26);
   });
   it("should decrementBy", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() => useCounter(5));
 
     act(() => {

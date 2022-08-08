@@ -11,6 +11,7 @@ describe("useSelctableList", () => {
 
   describe("matchSelection", () => {
     it("console.warn", () => {
+      expect.hasAssertions();
       act(() => {
         result.current[1].matchSelection({ index: 1, value: 2 });
       });
@@ -28,6 +29,7 @@ describe("useSelctableList", () => {
     });
 
     it("match index", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -38,6 +40,7 @@ describe("useSelctableList", () => {
     });
 
     it("match value", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -50,6 +53,7 @@ describe("useSelctableList", () => {
 
   describe("updateSelection", () => {
     it("set by index", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -62,6 +66,7 @@ describe("useSelctableList", () => {
       expect(currentValue).toBe(2);
     });
     it("set by value", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -75,6 +80,7 @@ describe("useSelctableList", () => {
     });
 
     it("set by value fail", () => {
+      expect.hasAssertions();
       const [beforeIndex, beforeValue] = result.current[0];
       act(() => {
         result.current[1].updateSelection({ value: 22 })();
@@ -92,6 +98,7 @@ describe("useSelctableList", () => {
     });
 
     it("console.warn", () => {
+      expect.hasAssertions();
       act(() => {
         result.current[1].updateSelection({ index: 1, value: 2 })();
       });
@@ -111,6 +118,7 @@ describe("useSelctableList", () => {
 
   describe("toggleSelection", () => {
     it("should toggle selected index", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -123,6 +131,7 @@ describe("useSelctableList", () => {
     });
 
     it("shouldn't toggle selected index when allowUnselected = false", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, false)
       );
@@ -142,6 +151,7 @@ describe("useSelctableList", () => {
       (console.warn as jest.Mock).mockReset();
     });
     it("should toggle selected value", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, true)
       );
@@ -156,6 +166,7 @@ describe("useSelctableList", () => {
     });
 
     it("shouldn't toggle selected value when allowUnselected", () => {
+      expect.hasAssertions();
       const { result: internalResult } = renderHook(() =>
         useSelectableList([1, 2, 3], 0, false)
       );
@@ -176,6 +187,7 @@ describe("useSelctableList", () => {
     });
 
     it("console.warn", () => {
+      expect.hasAssertions();
       act(() => {
         result.current[1].toggleSelection({ index: 1, value: 2 })();
       });

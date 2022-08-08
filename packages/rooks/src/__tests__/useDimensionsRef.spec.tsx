@@ -10,6 +10,7 @@ import { DOMRectPolyfill } from "../utils/domrect-polyfill";
 
 describe("useDimensionsRef", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useDimensionsRef).toBeDefined();
   });
 
@@ -30,6 +31,7 @@ describe("useDimensionsRef", () => {
         .mockImplementation(() => new window.DOMRect(0, 0, 120, 300));
       jest
         .spyOn(window, "requestAnimationFrame")
+        // eslint-disable-next-line @typescript-eslint/ban-types
         .mockImplementation((callback: Function) => callback());
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -56,6 +58,7 @@ describe("useDimensionsRef", () => {
     });
 
     it("gets called if a state value changes", () => {
+      expect.hasAssertions();
       const { getByTestId } = render(<App />);
       const valueElement = getByTestId("value");
       expect(valueElement.textContent).toBe("120");

@@ -15,6 +15,7 @@ import { useLocalstorageState } from "../hooks/useLocalstorageState";
 
 describe("useLocalstorageState defined", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useLocalstorageState).toBeDefined();
   });
 });
@@ -50,6 +51,7 @@ describe("useLocalstorageState basic", () => {
   afterEach(cleanup);
 
   it("memo", () => {
+    expect.hasAssertions();
     const { result, rerender } = renderHook(() =>
       useLocalstorageState("key1", "value")
     );
@@ -64,12 +66,14 @@ describe("useLocalstorageState basic", () => {
   });
 
   it("initializes correctly", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
   it("setting the new value", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
       container as HTMLElement,
@@ -84,6 +88,7 @@ describe("useLocalstorageState basic", () => {
 
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip("unsetting the value", () => {
+    expect.hasAssertions();
     const { container } = render(<App />);
     const unsetValueButton = getByTestId(
       container as HTMLElement,

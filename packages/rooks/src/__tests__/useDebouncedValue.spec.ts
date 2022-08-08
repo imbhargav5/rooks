@@ -10,10 +10,12 @@ describe("useDebouncedValue", () => {
     jest.useRealTimers();
   });
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useDebouncedValue).toBeDefined();
   });
 
   it("should initialize with first value if timeout is not reached and initializeWithNull is false", () => {
+    expect.hasAssertions();
     const mockValue = "mock_value";
     const { result } = renderHook(() => useDebouncedValue(mockValue, 200));
 
@@ -23,6 +25,7 @@ describe("useDebouncedValue", () => {
   });
 
   it("should return null if the timeout has not been reached and initializeWithNull is true", () => {
+    expect.hasAssertions();
     const mockValue = "mock_value";
 
     const { result } = renderHook(() =>
@@ -35,6 +38,7 @@ describe("useDebouncedValue", () => {
   });
 
   it("should returns updated value if the timeout has been reached and initializeWithNull is true", () => {
+    expect.hasAssertions();
     const mockValue = "mock_value";
     let result;
     act(() => {
@@ -57,6 +61,7 @@ describe("useDebouncedValue", () => {
   });
 
   it("should respect the timeout value if initializedWithNull is true", () => {
+    expect.hasAssertions();
     const mockValue = "mock_value";
     const mockTimeout = 200;
 
@@ -85,6 +90,7 @@ describe("useDebouncedValue", () => {
     ["mock_item_1", "mock_item_2"],
     { another_key: "another_value", key: "value" },
   ])("should work with different types of values", (mockValue) => {
+    expect.hasAssertions();
     const { result } = renderHook(() =>
       useDebouncedValue(mockValue, 200, { initializeWithNull: true })
     );

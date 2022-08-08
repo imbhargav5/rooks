@@ -4,6 +4,7 @@ jest.useFakeTimers();
 
 describe("useCountdown", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useCountdown).toBeDefined();
   });
   // it('works', () => {

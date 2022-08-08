@@ -3,9 +3,11 @@ import { useWarningOnMountInDevelopment } from "../hooks/useWarningOnMountInDeve
 
 describe("useWarningOnMountInDevelopment", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useWarningOnMountInDevelopment).toBeDefined();
   });
   it("logs error in dev env", () => {
+    expect.hasAssertions();
     const spy = jest.spyOn(global.console, "error");
     renderHook(() => useWarningOnMountInDevelopment("message"));
     // eslint-disable-next-line jest/prefer-called-with

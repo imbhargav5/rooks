@@ -1,5 +1,12 @@
 # rooks
 
+## 6.2.1
+
+### Patch Changes
+
+- e3866ce5: useKeys comes with a new preventLostKeyup option for native events
+- 7aea2fea: Add an opt-in option to prevent useKeys from losing track of keyup.
+
 ## 6.2.0
 
 ### Minor Changes

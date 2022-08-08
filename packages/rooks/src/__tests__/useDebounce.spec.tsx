@@ -10,6 +10,7 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("useDebounce", () => {
   it("should be defined", () => {
+    expect.hasAssertions();
     expect(useDebounce).toBeDefined();
   });
 });

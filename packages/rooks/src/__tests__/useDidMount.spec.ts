@@ -4,10 +4,10 @@ import { useDidMount } from "../hooks/useDidMount";
 
 describe("useDidMount", () => {
   it("is defined", () => {
+    expect.hasAssertions();
     expect(useDidMount).toBeDefined();
   });
   describe("base", () => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     let useHook = () => {
       return {
         value: 0,
