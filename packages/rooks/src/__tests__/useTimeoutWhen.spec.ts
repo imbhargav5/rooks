@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
-import { useTimeoutWhen } from "../hooks/useTimeoutWhen";
+import { useTimeoutWhen } from "@/hooks/useTimeoutWhen";
 
 describe("useTimeoutWhen", () => {
   it("should be defined", () => {

@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useGetIsMounted } from "../hooks/useGetIsMounted";
+import { useGetIsMounted } from "@/hooks/useGetIsMounted";
 
 describe("useGetIsMounted", () => {
   it("should be defined", () => {

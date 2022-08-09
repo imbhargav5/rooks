@@ -4,7 +4,7 @@ import React from "react";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import { renderHook, act as actHook } from "@testing-library/react-hooks";
 
-import { useInput } from "../hooks/useInput";
+import { useInput } from "@/hooks/useInput";
 
 describe("useInput", () => {
   // basic tests

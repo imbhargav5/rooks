@@ -9,7 +9,7 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react";
-import { useResizeObserverRef } from "../hooks/useResizeObserverRef";
+import { useResizeObserverRef } from "@/hooks/useResizeObserverRef";
 
 describe("useResizeObserverRef", () => {
   test("should be defined", () => {

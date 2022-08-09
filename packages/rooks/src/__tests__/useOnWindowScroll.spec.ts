@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import { useOnWindowScroll } from "../hooks/useOnWindowScroll";
+import { useOnWindowScroll } from "@/hooks/useOnWindowScroll";
 
 describe("useOnWindowScroll", () => {
   it("should be defined", () => {

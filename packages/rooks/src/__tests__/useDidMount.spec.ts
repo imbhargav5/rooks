@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useState } from "react";
-import { useDidMount } from "../hooks/useDidMount";
+import { useDidMount } from "@/hooks/useDidMount";
 
 describe("useDidMount", () => {
   it("is defined", () => {

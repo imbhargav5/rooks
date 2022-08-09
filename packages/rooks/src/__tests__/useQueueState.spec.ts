@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from "react-test-renderer";
-import { useQueueState } from "../hooks/useQueueState";
+import { useQueueState } from "@/hooks/useQueueState";
 
 const { act } = TestRenderer;
 

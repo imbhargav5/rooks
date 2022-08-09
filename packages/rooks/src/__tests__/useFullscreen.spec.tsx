@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useFullscreen } from "../hooks/useFullscreen";
+import { useFullscreen } from "@/hooks/useFullscreen";
 
 describe("useFullscreen", () => {
   it("should forward requestFullscreenOptions to requestFullscreen", () => {

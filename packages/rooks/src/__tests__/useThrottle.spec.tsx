@@ -1,6 +1,6 @@
 import { cleanup, render, act, fireEvent } from "@testing-library/react";
 import React, { useState } from "react";
-import { useThrottle } from "../hooks/useThrottle";
+import { useThrottle } from "@/hooks/useThrottle";
 
 describe("useThrottle hook", () => {
   let App = () => <div />;

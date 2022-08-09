@@ -1,4 +1,4 @@
-import { useCountdown } from "../hooks/useCountdown";
+import { useCountdown } from "@/hooks/useCountdown";
 
 jest.useFakeTimers();
 

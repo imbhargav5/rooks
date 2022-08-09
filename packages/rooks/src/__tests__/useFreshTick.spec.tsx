@@ -4,7 +4,7 @@
 import { renderHook, cleanup } from "@testing-library/react-hooks";
 import { useEffect, useState } from "react";
 import TestRenderer from "react-test-renderer";
-import { useFreshTick } from "../hooks/useFreshTick";
+import { useFreshTick } from "@/hooks/useFreshTick";
 
 const { act } = TestRenderer;
 

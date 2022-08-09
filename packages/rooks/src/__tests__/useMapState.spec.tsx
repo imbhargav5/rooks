@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from "react-test-renderer";
-import { useMapState } from "../hooks/useMapState";
+import { useMapState } from "@/hooks/useMapState";
 
 const { act } = TestRenderer;
 

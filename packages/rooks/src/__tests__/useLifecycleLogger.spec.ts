@@ -1,5 +1,5 @@
 import { renderHook, cleanup } from "@testing-library/react-hooks";
-import { useLifecycleLogger } from "../hooks/useLifecycleLogger";
+import { useLifecycleLogger } from "@/hooks/useLifecycleLogger";
 
 const logSpy = jest.spyOn(global.console, "log").mockImplementation(() => {});
 describe("useLifecycleLogger", () => {

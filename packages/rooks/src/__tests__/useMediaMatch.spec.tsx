@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from "react-test-renderer";
-import { useMediaMatch } from "../hooks/useMediaMatch";
+import { useMediaMatch } from "@/hooks/useMediaMatch";
 
 const { act } = TestRenderer;
 
