@@ -66,6 +66,16 @@
       "category": "misc"
     },
     {
+      "name": "useFocus",
+      "description": "Handles focus events for the immediate target element.",
+      "category": "events"
+    },
+    {
+      "name": "useFocusWithin",
+      "description": "Handles focus events for the target component.",
+      "category": "events"
+    },
+    {
       "name": "useForkRef",
       "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
       "category": "misc"
@@ -241,14 +251,14 @@
       "category": "misc"
     },
     {
-      "name": "useResizeObserverRef",
-      "description": "Resize Observer hook for React.",
-      "category": "ui"
-    },
-    {
       "name": "useRenderCount",
       "description": "Get the render count of a component",
       "category": "misc"
+    },
+    {
+      "name": "useResizeObserverRef",
+      "description": "Resize Observer hook for React.",
+      "category": "ui"
     },
     {
       "name": "useSelect",
