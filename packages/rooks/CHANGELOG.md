@@ -1,5 +1,11 @@
 # rooks
 
+## 6.4.0
+
+### Minor Changes
+
+- 182e8498: add useArrayState and useSetState hooks to manage arrays and sets
+
 ## 6.3.0
 
 ### Minor Changes
