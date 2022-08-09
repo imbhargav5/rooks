@@ -1,6 +1,11 @@
 {
   "hooks": [
     {
+      "name": "useArrayState",
+      "description": "Array state manager hook for React",
+      "category": "state"
+    },
+    {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
       "category": "effects"
@@ -273,6 +278,11 @@
     {
       "name": "useSessionstorageState",
       "description": "useState but syncs with sessionstorage",
+      "category": "state"
+    },
+    {
+      "name": "useSetState",
+      "description": "Manage the state of a Set in React. ",
       "category": "state"
     },
     {
