@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "alpha",
   "initialVersions": {
     "website": "1.0.4",
@@ -7,7 +7,5 @@
     "rooks": "6.2.1",
     "tsconfig": "0.0.0"
   },
-  "changesets": [
-    "breezy-buckets-tan"
-  ]
+  "changesets": ["breezy-buckets-tan"]
 }
