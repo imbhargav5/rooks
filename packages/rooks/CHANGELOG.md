@@ -1,5 +1,11 @@
 # rooks
 
+## 6.3.0
+
+### Minor Changes
+
+- 2eac1e11: add useFocus & useFocusWithin hooks
+
 ## 6.2.1
 
 ### Patch Changes
