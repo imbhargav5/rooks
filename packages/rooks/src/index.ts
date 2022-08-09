@@ -1,3 +1,4 @@
+export { useArrayState } from "./hooks/useArrayState";
 export { useAsyncEffect } from "./hooks/useAsyncEffect";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
@@ -53,6 +54,7 @@ export { useRefElement } from "./hooks/useRefElement";
 export { useSelect } from "./hooks/useSelect";
 export { useSelectableList } from "./hooks/useSelectableList";
 export { useSessionstorageState } from "./hooks/useSessionstorageState";
+export { useSetState } from "./hooks/useSetState";
 export { useStackState } from "./hooks/useStackState";
 export { useThrottle } from "./hooks/useThrottle";
 export { useTimeoutWhen } from "./hooks/useTimeoutWhen";
