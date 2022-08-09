@@ -1,11 +1,18 @@
 # website
 
-## 1.0.5-alpha.0
+## 1.0.6
 
 ### Patch Changes
 
-- Updated dependencies [2d51915e]
-  - rooks@6.2.2-alpha.0
+- Updated dependencies [182e8498]
+  - rooks@6.4.0
+
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies [2eac1e11]
+  - rooks@6.3.0
 
 ## 1.0.4
 

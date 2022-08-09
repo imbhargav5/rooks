@@ -1,10 +1,16 @@
 # rooks
 
-## 6.2.2-alpha.0
+## 6.4.0
 
-### Patch Changes
+### Minor Changes
 
-- 2d51915e: decrease bundle size
+- 182e8498: add useArrayState and useSetState hooks to manage arrays and sets
+
+## 6.3.0
+
+### Minor Changes
+
+- 2eac1e11: add useFocus & useFocusWithin hooks
 
 ## 6.2.1
 

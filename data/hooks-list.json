@@ -1,6 +1,11 @@
 {
   "hooks": [
     {
+      "name": "useArrayState",
+      "description": "Array state manager hook for React",
+      "category": "state"
+    },
+    {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
       "category": "effects"
@@ -64,6 +69,16 @@
       "name": "useEventListenerRef",
       "description": "A react hook to add an event listener to a ref",
       "category": "misc"
+    },
+    {
+      "name": "useFocus",
+      "description": "Handles focus events for the immediate target element.",
+      "category": "events"
+    },
+    {
+      "name": "useFocusWithin",
+      "description": "Handles focus events for the target component.",
+      "category": "events"
     },
     {
       "name": "useForkRef",
@@ -241,14 +256,14 @@
       "category": "misc"
     },
     {
-      "name": "useResizeObserverRef",
-      "description": "Resize Observer hook for React.",
-      "category": "ui"
-    },
-    {
       "name": "useRenderCount",
       "description": "Get the render count of a component",
       "category": "misc"
+    },
+    {
+      "name": "useResizeObserverRef",
+      "description": "Resize Observer hook for React.",
+      "category": "ui"
     },
     {
       "name": "useSelect",
@@ -263,6 +278,11 @@
     {
       "name": "useSessionstorageState",
       "description": "useState but syncs with sessionstorage",
+      "category": "state"
+    },
+    {
+      "name": "useSetState",
+      "description": "Manage the state of a Set in React. ",
       "category": "state"
     },
     {

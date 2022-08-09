@@ -10,7 +10,7 @@ sidebar_label: %name%
 
 ## Examples
 
-```jsx
+```tsx
 import {%name%} from "rooks"
 export default function App() {
   %name%();
