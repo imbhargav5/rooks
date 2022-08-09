@@ -55,6 +55,7 @@ sidebar_label: Hooks List
 
 **<h3 align="center">❇️ State</h3>**
 
+*   [useArrayState](https://react-hooks.org/docs/useArrayState) - Array state manager hook for React
 *   [useCountdown](https://react-hooks.org/docs/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
 *   [useCounter](https://react-hooks.org/docs/useCounter) - Counter hook for React.
 *   [useGetIsMounted](https://react-hooks.org/docs/useGetIsMounted) - Checks if a component is mounted or not at the time. Useful for async effects
@@ -67,6 +68,7 @@ sidebar_label: Hooks List
 *   [useSelect](https://react-hooks.org/docs/useSelect) - Select values from a list easily. List selection hook for react.
 *   [useSelectableList](https://react-hooks.org/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
+*   [useSetState](https://react-hooks.org/docs/useSetState) - Manage the state of a Set in React.
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useUndoState](https://react-hooks.org/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
