@@ -1,5 +1,11 @@
 # rooks
 
+## 6.4.1
+
+### Patch Changes
+
+- 2d51915e: decrease bundle size
+
 ## 6.4.0
 
 ### Minor Changes
