@@ -14,6 +14,8 @@ export { useEventListenerRef } from "./hooks/useEventListenerRef";
 export { useFreshRef } from "./hooks/useFreshRef";
 export { useFreshTick } from "./hooks/useFreshTick";
 export { useFullscreen } from "./hooks/useFullscreen";
+export { useFocus } from "./hooks/useFocus";
+export { useFocusWithin } from "./hooks/useFocusWithin";
 export { useForkRef } from "./hooks/useForkRef";
 export { useGetIsMounted } from "./hooks/useGetIsMounted";
 export { useGeolocation } from "./hooks/useGeolocation";
