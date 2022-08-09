@@ -4,7 +4,7 @@
 import { renderHook, cleanup } from "@testing-library/react-hooks";
 import { useState } from "react";
 import TestRenderer from "react-test-renderer";
-import { useIntervalWhen } from "../hooks/useIntervalWhen";
+import { useIntervalWhen } from "@/hooks/useIntervalWhen";
 
 const { act } = TestRenderer;
 type UseHook = (

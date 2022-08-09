@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
-import { useWindowScrollPosition } from "../hooks/useWindowScrollPosition";
+import { useWindowScrollPosition } from "@/hooks/useWindowScrollPosition";
 
 describe("useWindowScrollPosition", () => {
   it("should be defined", () => {

@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useSelect } from "../hooks/useSelect";
+import { useSelect } from "@/hooks/useSelect";
 
 describe("useSelect", () => {
   it("should return correct value at index", () => {

@@ -10,7 +10,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 
-import { useKeyBindings } from "../hooks/useKeyBindings";
+import { useKeyBindings } from "@/hooks/useKeyBindings";
 
 describe("useKeyBindings", () => {
   let App = () => <div />;
