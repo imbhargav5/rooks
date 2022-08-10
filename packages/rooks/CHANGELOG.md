@@ -1,5 +1,11 @@
 # rooks
 
+## 6.4.1
+
+### Patch Changes
+
+- 19b280fa: decrease bundle size
+
 ## 6.4.0
 
 ### Minor Changes
