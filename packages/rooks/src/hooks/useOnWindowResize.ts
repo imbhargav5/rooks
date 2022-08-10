@@ -16,8 +16,12 @@ function useOnWindowResize(
   when = true,
   isLayoutEffect = false
 ) {
+  let windowOrNull = null;
+  if (typeof window !== "undefined") {
+    windowOrNull = window;
+  }
   useGlobalObjectEventListener(
-    window,
+    windowOrNull,
     "resize",
     callback,
     { passive: true },

@@ -18,7 +18,7 @@ import type { ListenerOptions } from "@/types/utils";
  * @see https://react-hooks.org/docs/useGlobalObjectEventListener
  */
 function useGlobalObjectEventListener(
-  globalObject: Document | Window,
+  globalObject: Document | Window | null,
   eventName: string,
   callback: EventListener,
   listenerOptions: ListenerOptions = {},
