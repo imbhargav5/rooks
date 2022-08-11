@@ -26,13 +26,19 @@ export const Footer = () => {
               width: "auto",
             }}
           >
-            <Image
-              layout="intrinsic"
-              src="/images/powered-by-vercel.svg"
-              alt="Powered by vercel"
-              width="200px"
-              height="60px"
-            />
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://vercel.com?utm_source=rooks&utm_campaign=oss"
+            >
+              <Image
+                layout="intrinsic"
+                src="/images/powered-by-vercel.svg"
+                alt="Powered by vercel"
+                width="200px"
+                height="60px"
+              />
+            </a>
           </Col>
         </Row>
       </Container>
