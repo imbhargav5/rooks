@@ -48,6 +48,7 @@ function useWindowScrollPosition(): ScrollPosition {
    */
   useOnWindowResize(
     () => {
+      console.log("resize");
       setScrollPosition(computeScrollPosition());
     },
     true,

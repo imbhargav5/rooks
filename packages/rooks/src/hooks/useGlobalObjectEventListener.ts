@@ -18,7 +18,7 @@ import type { ListenerOptions } from "@/types/utils";
  * @see https://react-hooks.org/docs/useGlobalObjectEventListener
  */
 function useGlobalObjectEventListener(
-  globalObject: Document | Window | null,
+  globalObject: Document | Window,
   eventName: string,
   callback: EventListener,
   listenerOptions: ListenerOptions = {},
@@ -27,7 +27,6 @@ function useGlobalObjectEventListener(
 ): void {
   const freshCallback = useFreshTick(callback);
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
-
   useEffectToRun(() => {
     warning(
       typeof globalObject !== "undefined",
