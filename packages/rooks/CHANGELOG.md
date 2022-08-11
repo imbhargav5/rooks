@@ -1,5 +1,11 @@
 # rooks
 
+## 6.4.2
+
+### Patch Changes
+
+- 47e847ae: bugfix: window (or document) is not defined when using ssr
+
 ## 6.4.1
 
 ### Patch Changes
