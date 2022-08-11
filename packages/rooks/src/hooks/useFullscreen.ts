@@ -63,7 +63,7 @@ const FullscreenApi = {
     if (!eventsNames) return null;
 
     if (eventType === "change") return eventsNames[0];
-    if (eventType === "error") return eventsNames[1];
+    return eventsNames[1];
   },
 
   get fullscreenEnabled() {
