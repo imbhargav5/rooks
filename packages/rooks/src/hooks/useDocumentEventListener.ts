@@ -19,7 +19,7 @@ function useDocumentEventListener(
   isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
-    document,
+    global.document,
     eventName,
     callback,
     listenerOptions,

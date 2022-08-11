@@ -17,7 +17,7 @@ function useOnWindowResize(
   isLayoutEffect = false
 ) {
   useGlobalObjectEventListener(
-    window,
+    global.window,
     "resize",
     callback,
     { passive: true },

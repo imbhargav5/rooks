@@ -20,7 +20,7 @@ function useWindowEventListener(
   isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
-    window,
+    global.window,
     eventName,
     callback,
     listenerOptions,
