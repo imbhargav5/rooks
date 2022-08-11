@@ -18,14 +18,16 @@ function useDocumentEventListener(
   listenerOptions: ListenerOptions = {},
   isLayoutEffect = false
 ): void {
-  useGlobalObjectEventListener(
-    document,
-    eventName,
-    callback,
-    listenerOptions,
-    true,
-    isLayoutEffect
-  );
+  if (typeof document !== "undefined") {
+    useGlobalObjectEventListener(
+      document,
+      eventName,
+      callback,
+      listenerOptions,
+      true,
+      isLayoutEffect
+    );
+  }
 }
 
 export { useDocumentEventListener };

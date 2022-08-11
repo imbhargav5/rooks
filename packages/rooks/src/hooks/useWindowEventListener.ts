@@ -19,18 +19,16 @@ function useWindowEventListener(
   listenerOptions: ListenerOptions = {},
   isLayoutEffect = false
 ): void {
-  let windowOrNull = null;
   if (typeof window !== "undefined") {
-    windowOrNull = window;
+    useGlobalObjectEventListener(
+      window,
+      eventName,
+      callback,
+      listenerOptions,
+      true,
+      isLayoutEffect
+    );
   }
-  useGlobalObjectEventListener(
-    windowOrNull,
-    eventName,
-    callback,
-    listenerOptions,
-    true,
-    isLayoutEffect
-  );
 }
 
 export { useWindowEventListener };
