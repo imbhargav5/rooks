@@ -1,5 +1,12 @@
 # website
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [47e847ae]
+  - rooks@6.4.2
+
 ## 1.0.7
 
 ### Patch Changes
