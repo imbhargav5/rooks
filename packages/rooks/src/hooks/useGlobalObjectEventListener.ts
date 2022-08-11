@@ -27,6 +27,7 @@ function useGlobalObjectEventListener(
 ): void {
   const freshCallback = useFreshTick(callback);
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
+
   useEffectToRun(() => {
     warning(
       typeof globalObject !== "undefined",
