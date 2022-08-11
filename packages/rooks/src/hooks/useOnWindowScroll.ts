@@ -17,7 +17,7 @@ function useOnWindowScroll(
   isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
-    window,
+    global.window,
     "scroll",
     callback,
     { passive: true },
