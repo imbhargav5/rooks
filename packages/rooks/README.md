@@ -16,11 +16,11 @@
 <br/>
 
 <p align="center">
-  <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://vercel.com?utm_source=rooks&utm_campaign=oss"
-            >
+  <a 
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://vercel.com?utm_source=rooks&utm_campaign=oss"
+  >
   <img src="../../.github/powered-by-vercel.svg"  />
   </a>
 </p>
