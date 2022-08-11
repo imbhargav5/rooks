@@ -9,6 +9,7 @@ import {
   SecondLevelHeadline,
 } from "../components/Headings";
 import Link from "next/link";
+import { Footer } from "../components/Footer";
 
 const StyledImage = styled(Image, {
   borderRadius: "$rounded",
@@ -55,14 +56,20 @@ type HomeProps = {
 
 const Home = ({ contributors }: HomeProps) => {
   return (
-    <Container lg>
-      <FirstLevelHeadline>Rooks</FirstLevelHeadline>
-      <Container>
-        <Row gap={1}>
+    <div>
+      <Container lg>
+        <FirstLevelHeadline>Rooks</FirstLevelHeadline>
+        <Row
+          gap={1}
+          css={{
+            marginLeft: 0,
+          }}
+        >
           <Col
             as="span"
             css={{
               width: "auto",
+              paddingLeft: 0,
             }}
           >
             <Link href="/docs/useDidMount">Documentation</Link>
@@ -76,23 +83,24 @@ const Home = ({ contributors }: HomeProps) => {
             <a href="https://github.com/imbhargav5/rooks">Github</a>
           </Col>
         </Row>
+        <Spacer y={1} />
+        <SecondLevelHeadline> Contributors </SecondLevelHeadline>
+        <StyledGrid>
+          {contributors.map((contributor) => (
+            <ImageContainer key={contributor.login}>
+              <StyledImage
+                src={getPathFromUrl(contributor.avatar_url)}
+                layout="fixed"
+                height="90px"
+                width="90px"
+                alt={contributor.name}
+              />
+            </ImageContainer>
+          ))}
+        </StyledGrid>
       </Container>
-      <Spacer y={1} />
-      <SecondLevelHeadline> Contributors </SecondLevelHeadline>
-      <StyledGrid>
-        {contributors.map((contributor) => (
-          <ImageContainer key={contributor.login}>
-            <StyledImage
-              src={getPathFromUrl(contributor.avatar_url)}
-              layout="fixed"
-              height="90px"
-              width="90px"
-              alt={contributor.name}
-            />
-          </ImageContainer>
-        ))}
-      </StyledGrid>
-    </Container>
+      <Footer />
+    </div>
   );
 };
 

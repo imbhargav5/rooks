@@ -14,6 +14,7 @@ import {
 import { LeftSidebar, MainLayout, RightSidebar } from "../../components/Layout";
 import lodash from "lodash";
 import { ActiveLink } from "../../components/ActiveLink";
+import { Footer } from "../../components/Footer";
 
 const StyledLinkContainer = styled("div", {
   display: "block",
@@ -108,6 +109,7 @@ const PostPage = ({
           </Text>
           <Spacer y={5} />
         </Container>
+        <Footer />
       </div>
       <RightSidebar></RightSidebar>
     </MainLayout>

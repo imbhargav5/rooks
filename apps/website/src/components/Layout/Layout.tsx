@@ -3,7 +3,6 @@ import { styled } from "@stitches/react";
 export const MainLayout = styled("div", {
   display: "grid",
   gridTemplateColumns: "280px 1fr 220px",
-  gridColumnGap: "16px",
   maxWidth: 1320,
   margin: "auto",
 });
