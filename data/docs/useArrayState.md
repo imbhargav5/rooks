@@ -11,9 +11,19 @@ Array state manager hook for React. It exposes push, pop, unshift, shift, concat
 ## Examples
 
 ```jsx
-import { useArrayState } from "rooks";
+import { useArrayState, useInput } from "rooks";
 export default function App() {
   const [array, controls] = useArrayState([1, 2, 3]);
-  return null;
+  const numberInput = useInput(0);
+
+  return <div>
+        <p> Array items are - {array.join(",")} </p>
+    <input {...numberInput} type="number"/>    
+    <button onClick={() => {
+       controls.push(Number.parseInt(numberInput.value));       
+       numberInput.onChange({target: {value: 0}});
+    }}> Push value</button>
+  </div>;
 }
+
 ```
