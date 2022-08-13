@@ -151,6 +151,24 @@ interface UseFullscreenProps {
   requestFullScreenOptions?: FullscreenOptions;
 }
 
+/**
+ *
+ * useFullscreen hook
+ *
+ * Gives control to make HTML Elements fullscreen.
+ *
+ * @param {Element | undefined} props.target The target element to be fullscreen.
+ * @param {(event: Event) => void} props.onChange The function to be called when the fullscreen changes.
+ * @param {(event: Event) => void} props.onError The function to be called when the fullscreen error occurs.
+ * @param {FullscreenOptions} props.requestFullscreenOptions The options to be passed to the requestFullscreen function.
+ * @return {Object} returns - The controlls of useFullscreen hook.
+ * @return {boolean} returns.isFullscreenAvailable - Whether the fullscreen is available.
+ * @return {Element | null} returns.fullscreenElement - The fullscreen element.
+ * @return {boolean} returns.isFullscreenEnabled - Whether the fullscreen is enabled.
+ * @return {() => Promise<void>} returns.enableFullscreen - The function to enable fullscreen.
+ * @return {() => Promise<void>} returns.disableFullscreen - The function to disable fullscreen.
+ * @return {() => Promise<void>} returns.toggleFullscreen - The function to toggle fullscreen.
+ */
 function useFullscreen(props: UseFullscreenProps = {}) {
   const { target, onChange, onError, requestFullScreenOptions } = props;
 
