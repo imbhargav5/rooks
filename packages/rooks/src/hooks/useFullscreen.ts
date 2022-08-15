@@ -1,39 +1,54 @@
 import { useState, useCallback, useEffect } from "react";
 import type { RefObject } from "react";
 
-declare global {
-  interface Element {
-    webkitRequestFullscreen: Element["requestFullscreen"];
-    webkitRequestFullScreen: Element["requestFullscreen"];
-    mozRequestFullScreen: Element["requestFullscreen"];
-    msRequestFullscreen: Element["requestFullscreen"];
-  }
+interface FullscreenElement {
+  requestFullscreen?: Element["requestFullscreen"];
+  webkitRequestFullscreen?: Element["requestFullscreen"];
+  webkitRequestFullScreen?: Element["requestFullscreen"];
+  mozRequestFullScreen?: Element["requestFullscreen"];
+  msRequestFullscreen?: Element["requestFullscreen"];
+}
 
-  interface Document {
-    webkitFullscreenEnabled: Document["fullscreenEnabled"];
-    mozFullScreenEnabled: Document["fullscreenEnabled"];
-    msFullscreenEnabled: Document["fullscreenEnabled"];
+interface FullscreenDocumentEventMap {
+  fullscreenchange: DocumentEventMap["fullscreenchange"];
+  webkitfullscreenchange: DocumentEventMap["fullscreenchange"];
+  mozfullscreenchange: DocumentEventMap["fullscreenchange"];
+  MSFullscreenChange: DocumentEventMap["fullscreenchange"];
 
-    webkitFullscreenElement: Document["fullscreenElement"];
-    webkitCurrentFullScreenElement: Document["fullscreenElement"];
-    mozFullScreenElement: Document["fullscreenElement"];
-    msFullscreenElement: Document["fullscreenElement"];
+  fullscreenerror: DocumentEventMap["fullscreenerror"];
+  webkitfullscreenerror: DocumentEventMap["fullscreenerror"];
+  mozfullscreenerror: DocumentEventMap["fullscreenerror"];
+  MSFullscreenError: DocumentEventMap["fullscreenerror"];
+}
 
-    webkitExitFullscreen: Document["exitFullscreen"];
-    webkitCancelFullScreen: Document["exitFullscreen"];
-    mozCancelFullScreen: Document["exitFullscreen"];
-    msExitFullscreen: Document["exitFullscreen"];
-  }
+interface FullscreenDocument {
+  fullscreenEnabled?: Document["fullscreenEnabled"];
+  webkitFullscreenEnabled?: Document["fullscreenEnabled"];
+  mozFullScreenEnabled?: Document["fullscreenEnabled"];
+  msFullscreenEnabled?: Document["fullscreenEnabled"];
 
-  interface DocumentEventMap {
-    webkitfullscreenchange: DocumentEventMap["fullscreenchange"];
-    mozfullscreenchange: DocumentEventMap["fullscreenchange"];
-    MSFullscreenChange: DocumentEventMap["fullscreenchange"];
+  fullscreenElement?: Document["fullscreenElement"];
+  webkitFullscreenElement?: Document["fullscreenElement"];
+  webkitCurrentFullScreenElement?: Document["fullscreenElement"];
+  mozFullScreenElement?: Document["fullscreenElement"];
+  msFullscreenElement?: Document["fullscreenElement"];
 
-    webkitfullscreenerror: DocumentEventMap["fullscreenerror"];
-    mozfullscreenerror: DocumentEventMap["fullscreenerror"];
-    MSFullscreenError: DocumentEventMap["fullscreenerror"];
-  }
+  exitFullscreen?: Document["exitFullscreen"];
+  webkitExitFullscreen?: Document["exitFullscreen"];
+  webkitCancelFullScreen?: Document["exitFullscreen"];
+  mozCancelFullScreen?: Document["exitFullscreen"];
+  msExitFullscreen?: Document["exitFullscreen"];
+
+  addEventListener<K extends keyof FullscreenDocumentEventMap>(
+    type: K,
+    listener: (this: Document, ev: FullscreenDocumentEventMap[K]) => unknown,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+  removeEventListener<K extends keyof FullscreenDocumentEventMap>(
+    type: K,
+    listener: (this: Document, ev: FullscreenDocumentEventMap[K]) => unknown,
+    options?: boolean | EventListenerOptions
+  ): void;
 }
 
 const FullscreenApi = {
@@ -41,18 +56,20 @@ const FullscreenApi = {
     "DOM is unavailable server-side. Please use this method client-side only.",
   FULLSCREEN_UNSUPPORTED_ERROR: "Your browser does not support Fullscreen API.",
 
-  getEventsNames() {
+  getEventsNames(): Array<keyof FullscreenDocumentEventMap> | null {
     if (typeof document === "undefined") return null;
 
-    if ("exitFullscreen" in document)
+    const _document = document as FullscreenDocument;
+
+    if ("exitFullscreen" in _document)
       return ["fullscreenchange", "fullscreenerror"];
-    if ("webkitExitFullscreen" in document)
+    if ("webkitExitFullscreen" in _document)
       return ["webkitfullscreenchange", "webkitfullscreenerror"];
-    if ("webkitCancelFullScreen" in document)
+    if ("webkitCancelFullScreen" in _document)
       return ["webkitfullscreenchange", "webkitfullscreenerror"];
-    if ("mozCancelFullScreen" in document)
+    if ("mozCancelFullScreen" in _document)
       return ["mozfullscreenchange", "mozfullscreenerror"];
-    if ("msExitFullscreen" in document)
+    if ("msExitFullscreen" in _document)
       return ["MSFullscreenChange", "MSFullscreenError"];
 
     return null;
@@ -69,12 +86,14 @@ const FullscreenApi = {
   get fullscreenEnabled() {
     if (typeof document === "undefined") return false;
 
+    const _document = document as FullscreenDocument;
+
     return (
-      document.fullscreenEnabled ||
-      document.webkitFullscreenEnabled ||
-      !!document.webkitCancelFullScreen ||
-      document.mozFullScreenEnabled ||
-      document.msFullscreenEnabled ||
+      _document.fullscreenEnabled ||
+      _document.webkitFullscreenEnabled ||
+      !!_document.webkitCancelFullScreen ||
+      _document.mozFullScreenEnabled ||
+      _document.msFullscreenEnabled ||
       false
     );
   },
@@ -82,12 +101,14 @@ const FullscreenApi = {
   get fullscreenElement() {
     if (typeof document === "undefined") return null;
 
+    const _document = document as FullscreenDocument;
+
     return (
-      document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      document.webkitCurrentFullScreenElement ||
-      document.mozFullScreenElement ||
-      document.msFullscreenElement ||
+      _document.fullscreenElement ||
+      _document.webkitFullscreenElement ||
+      _document.webkitCurrentFullScreenElement ||
+      _document.mozFullScreenElement ||
+      _document.msFullscreenElement ||
       null
     );
   },
@@ -99,7 +120,7 @@ const FullscreenApi = {
     if (typeof document === "undefined")
       throw new Error(this.DOM_UNAVAILABLE_ERROR);
 
-    const target = element ?? document.documentElement;
+    const target = (element ?? document.documentElement) as FullscreenElement;
 
     const method =
       target.requestFullscreen ||
@@ -117,30 +138,32 @@ const FullscreenApi = {
     if (typeof document === "undefined")
       throw new Error(this.DOM_UNAVAILABLE_ERROR);
 
+    const _document = document as FullscreenDocument;
+
     const method =
-      document.exitFullscreen ||
-      document.webkitExitFullscreen ||
-      document.webkitCancelFullScreen ||
-      document.mozCancelFullScreen ||
-      document.msExitFullscreen;
+      _document.exitFullscreen ||
+      _document.webkitExitFullscreen ||
+      _document.webkitCancelFullScreen ||
+      _document.mozCancelFullScreen ||
+      _document.msExitFullscreen;
 
     if (!method) throw new Error(this.FULLSCREEN_UNSUPPORTED_ERROR);
 
-    return method.call(document);
+    return method.call(_document);
   },
 
   on(eventType: "change" | "error", callback: (event: Event) => void) {
     const eventName = this.getEventName(eventType);
     if (!eventName) return;
 
-    document?.addEventListener(eventName, callback);
+    (document as FullscreenDocument).addEventListener(eventName, callback);
   },
 
   off(eventType: "change" | "error", callback: (event: Event) => void) {
     const eventName = this.getEventName(eventType);
     if (!eventName) return;
 
-    document?.removeEventListener(eventName, callback);
+    (document as FullscreenDocument).removeEventListener(eventName, callback);
   },
 };
 
