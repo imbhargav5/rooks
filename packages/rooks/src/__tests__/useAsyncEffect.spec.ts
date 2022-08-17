@@ -1,8 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { waitFor } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { waitFor, renderHook } from "@testing-library/react";
 import { useState } from "react";
 import { act } from "react-test-renderer";
 import { useAsyncEffect } from "@/hooks/useAsyncEffect";
@@ -15,26 +14,137 @@ describe("useAsyncEffect", () => {
 
   it("runs the callback", async () => {
     expect.hasAssertions();
-    const { waitFor, result } = renderHook(() => {
+    jest.useFakeTimers();
+    const { result } = renderHook(() => {
       const [value, setValue] = useState(false);
 
       useAsyncEffect(async () => {
-        setValue(true);
+        setTimeout(() => {
+          setValue(true);
+        }, 100);
       }, []);
 
       return value;
     });
 
-    expect(result.all[0]).toBe(false);
-
-    await act(async () => {
-      await expect(waitFor(() => result.current)).resolves.toBeUndefined();
+    expect(result.current).toBe(false);
+    act(() => {
+      jest.runAllTimers();
     });
+    await waitFor(() => {
+      expect(result.current).toBe(true);
+    });
+    jest.useRealTimers();
+    jest.clearAllMocks();
+  });
+
+  it("runs the callback only once per deps change", async () => {
+    expect.hasAssertions();
+    jest.useFakeTimers();
+    const effectSpy = jest.fn();
+    const { result, unmount } = renderHook(() => {
+      const [value, setValue] = useState(false);
+      const [unrelatedDep, setUnrelatedDep] = useState(1);
+
+      useAsyncEffect(async () => {
+        effectSpy();
+        setTimeout(() => {
+          setValue(true);
+        }, 100);
+      }, []);
+
+      const increment = () => {
+        setUnrelatedDep(unrelatedDep + 1);
+      };
+
+      return [value, unrelatedDep, increment];
+    });
+
+    expect(result.current[0]).toBe(false);
+    act(() => {
+      jest.runAllTimers();
+    });
+    await waitFor(() => {
+      expect(result.current[0]).toBe(true);
+    });
+    act(() => {
+      const increment = result.current[2];
+      typeof increment === "function" && increment();
+    });
+    await waitFor(() => {
+      expect(result.current[1]).toBe(2);
+    });
+    unmount();
+    expect(effectSpy).toHaveBeenCalledTimes(1);
+    jest.useRealTimers();
+    jest.clearAllMocks();
+  });
+
+  it("runs the callback again if deps change", async () => {
+    expect.hasAssertions();
+    jest.useFakeTimers();
+    const effectSpy = jest.fn();
+    const { result, unmount } = renderHook(() => {
+      const [value, setValue] = useState(1);
+      const [squareValue, setSquareValue] = useState<number>(0);
+      const [unrelatedDep, setUnrelatedDep] = useState(1);
+
+      useAsyncEffect(async () => {
+        effectSpy();
+        setTimeout(() => {
+          setSquareValue(value * value);
+        }, 100);
+      }, [value]);
+
+      const increment = () => {
+        setValue(value + 1);
+      };
+
+      const incrementUnrelated = () => {
+        setUnrelatedDep(unrelatedDep + 1);
+      };
+
+      return {
+        value,
+        increment,
+        squareValue,
+        unrelatedDep,
+        incrementUnrelated,
+      };
+    });
+
+    expect(result.current.value).toBe(1);
+    expect(result.current.squareValue).toBe(0);
+    act(() => {
+      jest.runAllTimers();
+    });
+    await waitFor(() => {
+      expect(result.current.squareValue).toBe(1);
+    });
+    act(() => {
+      const increment = result.current.increment;
+      typeof increment === "function" && increment();
+    });
+    expect(result.current.value).toBe(2);
+    expect(result.current.squareValue).toBe(1);
+    act(() => {
+      jest.runAllTimers();
+    });
+    await waitFor(() => {
+      expect(result.current.squareValue).toBe(4);
+    });
+    act(() => {
+      const incrementUnrelated = result.current.incrementUnrelated;
+      typeof incrementUnrelated === "function" && incrementUnrelated();
+    });
+    expect(effectSpy).toHaveBeenCalledTimes(2);
+    jest.useRealTimers();
+    jest.clearAllMocks();
   });
 
   it("runs the cleanup function", async () => {
     expect.hasAssertions();
-    const { waitFor, result } = renderHook(() => {
+    const { result } = renderHook(() => {
       const [cleanupRan, setCleanupRan] = useState(false);
       const [forceUnload, setForceUnload] = useState(0);
 
@@ -53,9 +163,7 @@ describe("useAsyncEffect", () => {
       result.current.setForceUnload((old) => old + 1);
     });
 
-    await expect(
-      waitFor(() => result.current.cleanupRan)
-    ).resolves.toBeUndefined();
+    await waitFor(() => expect(result.current.cleanupRan).toBe(true));
   });
 
   it("it can help destroy the effect if the component unmounts", async () => {

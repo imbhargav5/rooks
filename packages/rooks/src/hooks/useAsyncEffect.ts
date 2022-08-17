@@ -1,4 +1,5 @@
 import { type DependencyList, useEffect, useRef, useCallback } from "react";
+import { useFreshRef } from "./useFreshRef";
 import { useGetIsMounted } from "./useGetIsMounted";
 
 type Effect<T> = (shouldContinueEffect: () => boolean) => Promise<T>;
@@ -37,19 +38,20 @@ function useAsyncEffect<T>(
   // the closure it was called in
   const lastCallId = useRef(0);
   const getIsMounted = useGetIsMounted();
+  const effectRef = useFreshRef(effect);
   const callback = useCallback(async (): Promise<void | T> => {
     const callId = ++lastCallId.current;
     const shouldContinueEffect = () => {
       return getIsMounted() && callId === lastCallId.current;
     };
     try {
-      return await effect(shouldContinueEffect);
+      return await effectRef.current(shouldContinueEffect);
     } catch (error) {
       throw error;
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [effect, getIsMounted, ...deps]);
+  }, [getIsMounted, ...deps]);
 
   useEffect(() => {
     let result: void | T;
