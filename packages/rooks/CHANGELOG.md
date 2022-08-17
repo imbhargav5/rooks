@@ -6,6 +6,12 @@
 
 - 140fceab: fix dependency checking in useAsyncEffect
 
+## 7.0.0-alpha.0
+
+### Major Changes
+
+- 9ca2be66: useFullscreen hook rewrite
+
 ## 6.4.2
 
 ### Patch Changes
