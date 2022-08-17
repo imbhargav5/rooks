@@ -1,5 +1,11 @@
 # rooks
 
+## 6.4.3
+
+### Patch Changes
+
+- 140fceab: fix dependency checking in useAsyncEffect
+
 ## 7.0.0-alpha.0
 
 ### Major Changes
