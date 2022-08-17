@@ -82,7 +82,7 @@
     "esbuild": "^0.14.49",
     "esbuild-jest": "^0.5.0",
     "execa": "^6.1.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "gulp": "^4.0.2",
     "gulp-conventional-changelog": "^2.0.35",
