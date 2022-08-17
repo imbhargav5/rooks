@@ -90,7 +90,7 @@
     "inquirer": "8.2.4",
     "jest": "^27.5.1",
     "jest-dom": "^4.0.0",
-    "jest-localstorage-mock": "^2.4.21",
+    "jest-localstorage-mock": "^2.4.22",
     "lodash.capitalize": "4.2.1",
     "lodash.sortby": "^4.7.0",
     "lodash.truncate": "^4.4.2",
