@@ -22,9 +22,9 @@ type UseMapStateReturnValue<I> = [
  * @param initialValue Initial value of the map
  * @see https://react-hooks.org/docs/useMapState
  */
-function useMapState<K extends Key, V, I extends MapState<K, V>>(
-  initialValue: I = new Map() as I
-): UseMapStateReturnValue<I> {
+function useMapState<K extends Key, V, M extends MapState<K, V>>(
+  initialValue: M = new Map() as M
+): UseMapStateReturnValue<M> {
   const [map, setMap] = useState<MapState<K, V>>(initialValue);
   const set = useCallback((key: Key, value: unknown) => {
     setMap(currentMap => {
@@ -121,7 +121,7 @@ function useMapState<K extends Key, V, I extends MapState<K, V>>(
   }, [setMap]);
 
   return [
-    map,
+    map as M,
     {
       has,
       remove,
