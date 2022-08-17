@@ -1,5 +1,12 @@
 # website
 
+## 1.0.9-alpha.0
+
+### Patch Changes
+
+- Updated dependencies [9ca2be66]
+  - rooks@7.0.0-alpha.0
+
 ## 1.0.8
 
 ### Patch Changes
