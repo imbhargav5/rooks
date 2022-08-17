@@ -84,7 +84,7 @@ describe("useAsyncEffect", () => {
     expect.hasAssertions();
     jest.useFakeTimers();
     const effectSpy = jest.fn();
-    const { result, unmount } = renderHook(() => {
+    const { result } = renderHook(() => {
       const [value, setValue] = useState(1);
       const [squareValue, setSquareValue] = useState<number>(0);
       const [unrelatedDep, setUnrelatedDep] = useState(1);
