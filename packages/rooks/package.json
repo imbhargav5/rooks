@@ -126,7 +126,7 @@
     "rollup-plugin-typescript2": "^0.32.1",
     "shelljs": "0.8.5",
     "terser": "^5.14.2",
-    "ts-jest": "^28.0.7",
+    "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
     "tsconfig": "*",
     "tslib": "^2.4.0",
