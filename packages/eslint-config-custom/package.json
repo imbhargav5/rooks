@@ -9,7 +9,7 @@
     "eslint": "^8.20.0",
     "eslint-config-next": "^12.2.5",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.6.0",
+    "eslint-plugin-jest": "^26.8.3",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-testing-library": "^5.0.0"
   },
