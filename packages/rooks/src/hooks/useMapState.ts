@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 type Key = string | number | symbol;
-type MapState<K extends Key, V> = Record<K, V> | Map<K, V>;
+type MapLike<K extends Key = Key, V = unknown> = Record<K, V> | Map<K, V>;
 
 type UseMapStateReturnValue<I> = [
   I,
@@ -22,17 +22,16 @@ type UseMapStateReturnValue<I> = [
  * @param initialValue Initial value of the map
  * @see https://react-hooks.org/docs/useMapState
  */
-function useMapState<K extends Key, V, M extends MapState<K, V>>(
+function useMapState<M extends MapLike>(
   initialValue: M = new Map() as M
 ): UseMapStateReturnValue<M> {
-  const [map, setMap] = useState<MapState<K, V>>(initialValue);
+  const [map, setMap] = useState<MapLike>(initialValue);
   const set = useCallback((key: Key, value: unknown) => {
     setMap(currentMap => {
       if (currentMap instanceof Map) {
-        return new Map<Key, unknown>(currentMap).set(key, value) as MapState<
-          K,
-          V
-        >;
+        const newMap = new Map<Key, unknown>(currentMap);
+        newMap.set(key, value);
+        return newMap;
       } else {
         return {
           ...currentMap,
@@ -45,7 +44,7 @@ function useMapState<K extends Key, V, M extends MapState<K, V>>(
   const has = useCallback(
     (key: Key) => {
       if (map instanceof Map) {
-        return map.has(key as K);
+        return map.has(key);
       } else {
         return key in map;
       }
@@ -60,7 +59,7 @@ function useMapState<K extends Key, V, M extends MapState<K, V>>(
         Object.keys(nextMap).forEach(key => {
           newMap.set(key, nextMap[key] as unknown);
         });
-        return newMap as MapState<K, V>;
+        return newMap;
       } else {
         return {
           ...currentMap,
@@ -78,14 +77,14 @@ function useMapState<K extends Key, V, M extends MapState<K, V>>(
           keys.forEach(key => {
             newMap.delete(key);
           });
-          return newMap as MapState<K, V>;
+          return newMap;
         } else {
           const newMap = { ...currentMap };
           keys.forEach(key => {
-            const key2 = key as keyof Partial<MapState<K, V>>;
+            const key2 = key as keyof Partial<MapLike>;
             delete newMap[key2];
           });
-          return newMap as MapState<K, V>;
+          return newMap;
         }
       });
     },
@@ -98,12 +97,12 @@ function useMapState<K extends Key, V, M extends MapState<K, V>>(
         if (currentMap instanceof Map) {
           const map = new Map<Key, unknown>(currentMap);
           map.delete(key);
-          return map as MapState<K, V>;
+          return map;
         } else {
           const newMap = { ...currentMap };
-          const key2 = key as keyof Partial<MapState<K, V>>;
+          const key2 = key as keyof Partial<MapLike>;
           delete newMap[key2];
-          return newMap as MapState<K, V>;
+          return newMap;
         }
       });
     },
@@ -113,9 +112,9 @@ function useMapState<K extends Key, V, M extends MapState<K, V>>(
   const removeAll = useCallback(() => {
     setMap(currentMap => {
       if (currentMap instanceof Map) {
-        return new Map<Key, unknown>() as MapState<K, V>;
+        return new Map<Key, unknown>();
       } else {
-        return {} as MapState<K, V>;
+        return {};
       }
     });
   }, [setMap]);

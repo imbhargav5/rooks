@@ -80,7 +80,6 @@ describe("useMapState", () => {
       rerender();
       const hasAfterRerender = result.current[1].has;
       expect(hasBeforeRerender).toBe(hasAfterRerender);
-
       expect(result.current[0]).toEqual({ a: 2, b: 3 });
       expect(result.current[1].has("a")).toBeTruthy();
       expect(result.current[1].has("b")).toBeTruthy();
@@ -187,6 +186,7 @@ describe("useMapState", () => {
       expect.hasAssertions();
       const { result } = renderHook(() => useMapState(new Map([["a", 1]])));
       const myMap = result.current[0];
+      expect(myMap.has("a")).toBeTruthy();
       expect(myMap).toEqual(new Map([["a", 1]]));
     });
     it("should set a new value correctly", () => {
