@@ -2532,10 +2532,10 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.2.5.tgz#d908c57b35262b94db3e431e869b72ac3e1ad3e3"
   integrity sha512-vLPLV3cpPGjUPT3PjgRj7e3nio9t6USkuew3JE/jMeon/9Mvp1WyR18v3iwnCuX7eUAm1HmAbJHHLAbcu/EJcw==
 
-"@next/eslint-plugin-next@12.2.3":
-  version "12.2.3"
-  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-12.2.3.tgz#63726691aac6a7f01b64190a0323d590a0e8154d"
-  integrity sha512-B2e8Yg1MpuLsGxhCx4rU8/Tcnr5wFmCx1O2eyLXBPnaCcsFXfGCo067ujagtDLtWASL3GNgzg78U1SB0dbc38A==
+"@next/eslint-plugin-next@12.2.5":
+  version "12.2.5"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-12.2.5.tgz#4f3acccd2ed4f9300fbf9fd480cc8a0b261889a8"
+  integrity sha512-VBjVbmqEzGiOTBq4+wpeVXt/KgknnGB6ahvC/AxiIGnN93/RCSyXhFRI4uSfftM2Ba3w7ZO7076bfKasZsA0fw==
   dependencies:
     glob "7.1.7"
 
@@ -3675,13 +3675,12 @@
   resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.0.tgz#9140779736aa2655635ee756e2467d787cfe8a2a"
   integrity sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
 
-"@types/inquirer@^8.2.1":
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-8.2.1.tgz#28a139be3105a1175e205537e8ac10830e38dbf4"
-  integrity sha512-wKW3SKIUMmltbykg4I5JzCVzUhkuD9trD6efAmYgN2MrSntY0SMRQzEnD3mkyJ/rv9NLbTC7g3hKKE86YwEDLw==
+"@types/inquirer@^8.2.3":
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-8.2.3.tgz#985515d04879a0d0c1f5f49ec375767410ba9dab"
+  integrity sha512-ZlBqD+8WIVNy3KIVkl+Qne6bGLW2erwN0GJXY9Ri/9EMbyupee3xw3H0Mmv5kJoLyNpfd/oHlwKxO0DUDH7yWA==
   dependencies:
     "@types/through" "*"
-    rxjs "^7.2.0"
 
 "@types/is-ci@^3.0.0":
   version "3.0.0"
@@ -7308,12 +7307,12 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-next@^12.0.8:
-  version "12.2.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-12.2.3.tgz#468fe9756ccbf7e4452139062db5b4e6557dc885"
-  integrity sha512-xAQqAqwa2bu9ZMRypz58ym4tNCo22Wc6LuoLpbpf3yW5c4ZkVib9934AgGDDvh2zKrP56Z6X0Pp6gNnuuZzcRw==
+eslint-config-next@^12.2.5:
+  version "12.2.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-12.2.5.tgz#76ce83f18cc02f6f42ed407a127f83db54fabd3c"
+  integrity sha512-SOowilkqPzW6DxKp3a3SYlrfPi5Ajs9MIzp9gVfUDxxH9QFM5ElkR1hX5m/iICJuvCbWgQqFBiA3mCMozluniw==
   dependencies:
-    "@next/eslint-plugin-next" "12.2.3"
+    "@next/eslint-plugin-next" "12.2.5"
     "@rushstack/eslint-patch" "^1.1.3"
     "@typescript-eslint/parser" "^5.21.0"
     eslint-import-resolver-node "^0.3.6"
@@ -10122,10 +10121,10 @@ jest-leak-detector@^27.5.1:
     jest-get-type "^27.5.1"
     pretty-format "^27.5.1"
 
-jest-localstorage-mock@^2.4.21:
-  version "2.4.21"
-  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.21.tgz#920aa6fc8f8ab2f81e40433e48e2efdb2d81a6e0"
-  integrity sha512-IBXPBufnfPyr4VkoQeJ+zlfWlG84P0KbL4ejcV9j3xNI0v6OWznQlH6Ke9xjSarleR11090oSeWADSUow0PmFw==
+jest-localstorage-mock@^2.4.22:
+  version "2.4.22"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.22.tgz#9d70be92bfc591c0be289ee2f71de1b4b2a5ca9b"
+  integrity sha512-60PWSDFQOS5v7JzSmYLM3dPLg0JLl+2Vc4lIEz/rj2yrXJzegsFLn7anwc5IL0WzJbBa/Las064CHbFg491/DQ==
 
 jest-matcher-utils@^27.0.0, jest-matcher-utils@^27.5.1:
   version "27.5.1"
@@ -14755,13 +14754,6 @@ rxjs@^6.3.3, rxjs@^6.4.0, rxjs@^6.5.3, rxjs@^6.6.0, rxjs@^6.6.3:
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
   dependencies:
     tslib "^1.9.0"
-
-rxjs@^7.2.0:
-  version "7.5.6"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
-  integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
-  dependencies:
-    tslib "^2.1.0"
 
 rxjs@^7.5.5:
   version "7.5.5"
