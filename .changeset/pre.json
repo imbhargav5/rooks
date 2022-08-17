@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "website": "1.0.8",
+    "eslint-config-custom": "0.0.0",
+    "rooks": "6.4.2",
+    "tsconfig": "0.0.0"
+  },
+  "changesets": [
+    "tiny-rabbits-reply"
+  ]
+}

@@ -1,266 +1,267 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { UnknownFunction } from "@/types/utils";
-import { useState, useCallback, useRef } from "react";
-import { useDocumentEventListener } from "./useDocumentEventListener";
-import { warning } from "./warning";
+import { useState, useCallback, useEffect } from "react";
+import type { RefObject } from "react";
 
-type EventCallback = (this: Document, event_: unknown) => unknown;
-type OnChangeEventCallback = (
-  this: Document,
-  event_: unknown,
-  isOpen: boolean
-) => unknown;
+interface FullscreenElement {
+  requestFullscreen?: Element["requestFullscreen"];
+  webkitRequestFullscreen?: Element["requestFullscreen"];
+  webkitRequestFullScreen?: Element["requestFullscreen"];
+  mozRequestFullScreen?: Element["requestFullscreen"];
+  msRequestFullscreen?: Element["requestFullscreen"];
+}
 
-type NormalizedFullscreenApi = {
-  exitFullscreen: string;
-  fullscreenElement: string;
-  fullscreenEnabled: string;
-  fullscreenchange: string;
-  fullscreenerror: string;
-  requestFullscreen: string;
+interface FullscreenDocumentEventMap {
+  fullscreenchange: DocumentEventMap["fullscreenchange"];
+  webkitfullscreenchange: DocumentEventMap["fullscreenchange"];
+  mozfullscreenchange: DocumentEventMap["fullscreenchange"];
+  MSFullscreenChange: DocumentEventMap["fullscreenchange"];
+
+  fullscreenerror: DocumentEventMap["fullscreenerror"];
+  webkitfullscreenerror: DocumentEventMap["fullscreenerror"];
+  mozfullscreenerror: DocumentEventMap["fullscreenerror"];
+  MSFullscreenError: DocumentEventMap["fullscreenerror"];
+}
+
+interface FullscreenDocument {
+  fullscreenEnabled?: Document["fullscreenEnabled"];
+  webkitFullscreenEnabled?: Document["fullscreenEnabled"];
+  mozFullScreenEnabled?: Document["fullscreenEnabled"];
+  msFullscreenEnabled?: Document["fullscreenEnabled"];
+
+  fullscreenElement?: Document["fullscreenElement"];
+  webkitFullscreenElement?: Document["fullscreenElement"];
+  webkitCurrentFullScreenElement?: Document["fullscreenElement"];
+  mozFullScreenElement?: Document["fullscreenElement"];
+  msFullscreenElement?: Document["fullscreenElement"];
+
+  exitFullscreen?: Document["exitFullscreen"];
+  webkitExitFullscreen?: Document["exitFullscreen"];
+  webkitCancelFullScreen?: Document["exitFullscreen"];
+  mozCancelFullScreen?: Document["exitFullscreen"];
+  msExitFullscreen?: Document["exitFullscreen"];
+
+  addEventListener<K extends keyof FullscreenDocumentEventMap>(
+    type: K,
+    listener: (this: Document, ev: FullscreenDocumentEventMap[K]) => unknown,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+  removeEventListener<K extends keyof FullscreenDocumentEventMap>(
+    type: K,
+    listener: (this: Document, ev: FullscreenDocumentEventMap[K]) => unknown,
+    options?: boolean | EventListenerOptions
+  ): void;
+}
+
+const FullscreenApi = {
+  DOM_UNAVAILABLE_ERROR:
+    "DOM is unavailable server-side. Please use this method client-side only.",
+  FULLSCREEN_UNSUPPORTED_ERROR: "Your browser does not support Fullscreen API.",
+
+  getEventsNames(): Array<keyof FullscreenDocumentEventMap> | null {
+    if (typeof document === "undefined") return null;
+
+    const _document = document as FullscreenDocument;
+
+    if ("exitFullscreen" in _document)
+      return ["fullscreenchange", "fullscreenerror"];
+    if ("webkitExitFullscreen" in _document)
+      return ["webkitfullscreenchange", "webkitfullscreenerror"];
+    if ("webkitCancelFullScreen" in _document)
+      return ["webkitfullscreenchange", "webkitfullscreenerror"];
+    if ("mozCancelFullScreen" in _document)
+      return ["mozfullscreenchange", "mozfullscreenerror"];
+    if ("msExitFullscreen" in _document)
+      return ["MSFullscreenChange", "MSFullscreenError"];
+
+    return null;
+  },
+
+  getEventName(eventType: "change" | "error") {
+    const eventsNames = this.getEventsNames();
+    if (!eventsNames) return null;
+
+    if (eventType === "change") return eventsNames[0];
+    return eventsNames[1];
+  },
+
+  get fullscreenEnabled() {
+    if (typeof document === "undefined") return false;
+
+    const _document = document as FullscreenDocument;
+
+    return (
+      _document.fullscreenEnabled ||
+      _document.webkitFullscreenEnabled ||
+      !!_document.webkitCancelFullScreen ||
+      _document.mozFullScreenEnabled ||
+      _document.msFullscreenEnabled ||
+      false
+    );
+  },
+
+  get fullscreenElement() {
+    if (typeof document === "undefined") return null;
+
+    const _document = document as FullscreenDocument;
+
+    return (
+      _document.fullscreenElement ||
+      _document.webkitFullscreenElement ||
+      _document.webkitCurrentFullScreenElement ||
+      _document.mozFullScreenElement ||
+      _document.msFullscreenElement ||
+      null
+    );
+  },
+
+  requestFullscreen(
+    element: Element | null,
+    options?: FullscreenOptions | undefined
+  ): Promise<void> {
+    if (typeof document === "undefined")
+      throw new Error(this.DOM_UNAVAILABLE_ERROR);
+
+    const target = (element ?? document.documentElement) as FullscreenElement;
+
+    const method =
+      target.requestFullscreen ||
+      target.webkitRequestFullscreen ||
+      target.webkitRequestFullScreen ||
+      target.mozRequestFullScreen ||
+      target.msRequestFullscreen;
+
+    if (!method) throw new Error(this.FULLSCREEN_UNSUPPORTED_ERROR);
+
+    return method.call(target, options);
+  },
+
+  exitFullscreen(): Promise<void> {
+    if (typeof document === "undefined")
+      throw new Error(this.DOM_UNAVAILABLE_ERROR);
+
+    const _document = document as FullscreenDocument;
+
+    const method =
+      _document.exitFullscreen ||
+      _document.webkitExitFullscreen ||
+      _document.webkitCancelFullScreen ||
+      _document.mozCancelFullScreen ||
+      _document.msExitFullscreen;
+
+    if (!method) throw new Error(this.FULLSCREEN_UNSUPPORTED_ERROR);
+
+    return method.call(_document);
+  },
+
+  on(eventType: "change" | "error", callback: (event: Event) => void) {
+    const eventName = this.getEventName(eventType);
+    if (!eventName) return;
+
+    (document as FullscreenDocument).addEventListener(eventName, callback);
+  },
+
+  off(eventType: "change" | "error", callback: (event: Event) => void) {
+    const eventName = this.getEventName(eventType);
+    if (!eventName) return;
+
+    (document as FullscreenDocument).removeEventListener(eventName, callback);
+  },
 };
 
-const getFullscreenControls = (): NormalizedFullscreenApi => {
-  const functionMap = [
-    [
-      "requestFullscreen",
-      "exitFullscreen",
-      "fullscreenElement",
-      "fullscreenEnabled",
-      "fullscreenchange",
-      "fullscreenerror",
-    ],
-    // New WebKit
-    [
-      "webkitRequestFullscreen",
-      "webkitExitFullscreen",
-      "webkitFullscreenElement",
-      "webkitFullscreenEnabled",
-      "webkitfullscreenchange",
-      "webkitfullscreenerror",
-    ],
-    // Old WebKit
-    [
-      "webkitRequestFullScreen",
-      "webkitCancelFullScreen",
-      "webkitCurrentFullScreenElement",
-      "webkitCancelFullScreen",
-      "webkitfullscreenchange",
-      "webkitfullscreenerror",
-    ],
-    [
-      "mozRequestFullScreen",
-      "mozCancelFullScreen",
-      "mozFullScreenElement",
-      "mozFullScreenEnabled",
-      "mozfullscreenchange",
-      "mozfullscreenerror",
-    ],
-    [
-      "msRequestFullscreen",
-      "msExitFullscreen",
-      "msFullscreenElement",
-      "msFullscreenEnabled",
-      "MSFullscreenChange",
-      "MSFullscreenError",
-    ],
-  ];
-
-  const returnValue = {} as NormalizedFullscreenApi;
-
-  for (const functionSet of functionMap) {
-    if (functionSet && functionSet[1] in document) {
-      for (const [index, _function] of functionSet.entries()) {
-        returnValue[functionMap[0][index]] = functionSet[index];
-      }
-    }
-  }
-
-  return returnValue;
-};
-
-type NoopFunction = () => void;
-
-type FullscreenApi = {
-  // isFullscreen
-  element: HTMLElement | null | undefined;
-  // request
-  exit: NoopFunction | (() => Promise<unknown>);
-
-  isEnabled: boolean;
-
-  // exit
-  isFullscreen: boolean;
-  // toggle
-  /**
-   * @deprecated Please use useFullScreen({onChange : function() {}}) instead.
-   */
-  onChange: NoopFunction | ((callback: OnChangeEventCallback) => void);
-  // onchange
-  /**
-   * @deprecated Please use useFullScreen({onError : function() {}}) instead.
-   */
-  onError: NoopFunction | ((callback: EventCallback) => void);
-  // onerror
-  request: NoopFunction | ((element?: HTMLElement) => Promise<unknown>);
-  toggle: NoopFunction | ((element?: HTMLElement) => Promise<unknown>);
-};
-
-const noop: NoopFunction = () => {};
-
-const defaultValue: FullscreenApi = {
-  // isFullscreen
-  element: undefined,
-
-  // request
-  exit: noop,
-
-  isEnabled: false,
-
-  // exit
-  isFullscreen: false,
-
-  // toggle
-  onChange: noop,
-
-  // onchange
-  onError: noop,
-
-  // onerror
-  request: noop,
-
-  toggle: noop,
-};
-
-type RequestFullscreenOptions = {
-  // string will help to ease type casting
-  navigationUI?: string | "auto" | "hide" | "show";
-};
-
-type FullScreenOptions = {
-  onChange?: OnChangeEventCallback;
-  onError?: EventCallback;
-  requestFullscreenOptions?: RequestFullscreenOptions;
-};
-
-function warnDeprecatedOnChangeAndOnErrorUsage() {
-  warning(
-    false,
-    `Using onChange and onError from the return value is deprecated and 
-    will be removed in the next major version. 
-    Please use it with arguments instead. 
-    For eg: useFullscreen({onChange: function() {}, onError: function(){}})
-  `
-  );
+interface UseFullscreenProps {
+  target?: RefObject<Element>;
+  onChange?: (event: Event) => void;
+  onError?: (event: Event) => void;
+  requestFullScreenOptions?: FullscreenOptions;
 }
 
 /**
- * useFullscreen
- * A hook that helps make the document fullscreen
+ *
+ * useFullscreen hook
+ *
+ * Gives control to make HTML Elements fullscreen.
+ *
+ * @param {Element | undefined} props.target The target element to be fullscreen.
+ * @param {(event: Event) => void} props.onChange The function to be called when the fullscreen changes.
+ * @param {(event: Event) => void} props.onError The function to be called when the fullscreen error occurs.
+ * @param {FullscreenOptions} props.requestFullscreenOptions The options to be passed to the requestFullscreen function.
+ * @return {Object} returns - The controlls of useFullscreen hook.
+ * @return {boolean} returns.isFullscreenAvailable - Whether the fullscreen is available.
+ * @return {Element | null} returns.fullscreenElement - The fullscreen element.
+ * @return {boolean} returns.isFullscreenEnabled - Whether the fullscreen is enabled.
+ * @return {() => Promise<void>} returns.enableFullscreen - The function to enable fullscreen.
+ * @return {() => Promise<void>} returns.disableFullscreen - The function to disable fullscreen.
+ * @return {() => Promise<void>} returns.toggleFullscreen - The function to toggle fullscreen.
  */
-function useFullscreen(options: FullScreenOptions = {}): FullscreenApi {
-  const {
-    onChange: onChangeArgument,
-    onError: onErrorArgument,
-    requestFullscreenOptions = {},
-  } = options;
+function useFullscreen(props: UseFullscreenProps = {}) {
+  const { target, onChange, onError, requestFullScreenOptions } = props;
 
-  const fullscreenControls = getFullscreenControls();
-  const [isFullscreen, setIsFullscreen] = useState(
-    Boolean(document[fullscreenControls.fullscreenElement])
+  const [isFullscreenAvailable, setIsFullscreenAvailable] =
+    useState<boolean>(false);
+  const [fullscreenElement, setFullscreenElement] = useState<Element | null>(
+    null
   );
-  const [element, setElement] = useState(
-    document[fullscreenControls.fullscreenElement]
-  );
+  const [isFullscreenEnabled, setIsFullscreenEnabled] =
+    useState<boolean>(false);
 
-  const request = useCallback(
-    async (internalElement?: HTMLElement) => {
-      try {
-        const finalElement = internalElement ?? document.documentElement;
+  const enableFullscreen = useCallback(() => {
+    return FullscreenApi.requestFullscreen(
+      target?.current || null,
+      requestFullScreenOptions
+    );
+  }, [target, requestFullScreenOptions]);
 
-        return await finalElement[fullscreenControls.requestFullscreen](
-          requestFullscreenOptions
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [fullscreenControls.requestFullscreen, requestFullscreenOptions]
-  );
-
-  const exit = useCallback(async () => {
-    if (element) {
-      try {
-        return await document[fullscreenControls.exitFullscreen]();
-      } catch (error) {
-        console.warn(error);
-      }
-    }
-  }, [element, fullscreenControls.exitFullscreen]);
-
-  const toggle = useCallback(
-    (newElement?: HTMLElement) => {
-      return element ? exit() : newElement ? request(newElement) : null;
-    },
-    [element, exit, request]
-  );
-
-  const onChangeDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
-  const onErrorDeprecatedHandlerRef = useRef<UnknownFunction>(noop);
-
-  // Hack to not break it for everyone
-  // Honestly these two functions are tragedy and must be removed in v5
-  const onChangeDeprecated = useCallback((callback: OnChangeEventCallback) => {
-    warnDeprecatedOnChangeAndOnErrorUsage();
-
-    return (onChangeDeprecatedHandlerRef.current = callback);
+  const disableFullscreen = useCallback(() => {
+    return FullscreenApi.exitFullscreen();
   }, []);
 
-  const onErrorDeprecated = useCallback((callback: EventCallback) => {
-    warnDeprecatedOnChangeAndOnErrorUsage();
+  const toggleFullscreen = useCallback(() => {
+    if (!!FullscreenApi.fullscreenElement) return disableFullscreen();
+    return enableFullscreen();
+  }, [enableFullscreen, disableFullscreen]);
 
-    return (onErrorDeprecatedHandlerRef.current = callback);
+  const onChangeHandler = useCallback(
+    (event: Event) => {
+      const fullscreenElement = FullscreenApi.fullscreenElement;
+      setFullscreenElement(fullscreenElement);
+      setIsFullscreenEnabled(!!fullscreenElement);
+      onChange?.(event);
+    },
+    [onChange]
+  );
+
+  const onErrorHandler = useCallback(
+    (event: Event) => {
+      const fullscreenElement = FullscreenApi.fullscreenElement;
+      setFullscreenElement(fullscreenElement);
+      setIsFullscreenEnabled(!!fullscreenElement);
+      onError?.(event);
+    },
+    [onError]
+  );
+
+  // Set state after first client-side render
+  useEffect(() => {
+    setIsFullscreenAvailable(FullscreenApi.fullscreenEnabled);
   }, []);
 
-  useDocumentEventListener(fullscreenControls.fullscreenchange, (event) => {
-    const currentFullscreenElement =
-      document[fullscreenControls.fullscreenElement];
-    const isOpen = Boolean(currentFullscreenElement);
-    if (isOpen) {
-      // fullscreen was enabled
-      setIsFullscreen(true);
-      setElement(currentFullscreenElement);
-    } else {
-      // fullscreen was disabled
-      setIsFullscreen(false);
-      setElement(null);
-    }
+  // Attach event listeners
+  useEffect(() => {
+    FullscreenApi.on("change", onChangeHandler);
+    FullscreenApi.on("error", onErrorHandler);
 
-    onChangeArgument?.call(document, event, isOpen);
-    onChangeDeprecatedHandlerRef.current.call(document, event, isOpen);
-  });
-
-  useDocumentEventListener(fullscreenControls.fullscreenerror, (event) => {
-    onErrorArgument?.call(document, event);
-    onErrorDeprecatedHandlerRef.current.call(document, event);
-  });
-
-  if (typeof window === "undefined") {
-    console.warn("useFullscreen: window is undefined.");
-
-    return defaultValue;
-  }
+    return () => {
+      FullscreenApi.off("change", onChangeHandler);
+      FullscreenApi.off("error", onErrorHandler);
+    };
+  }, [onChangeHandler, onErrorHandler]);
 
   return {
-    element,
-    exit,
-    isEnabled: Boolean(document[fullscreenControls.fullscreenEnabled]),
-    isFullscreen,
-    onChange: onChangeDeprecated,
-    onError: onErrorDeprecated,
-    request,
-    toggle,
+    isFullscreenAvailable,
+    fullscreenElement,
+    isFullscreenEnabled,
+    enableFullscreen,
+    disableFullscreen,
+    toggleFullscreen,
   };
 }
 
