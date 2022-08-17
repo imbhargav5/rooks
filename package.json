@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --force -vvv",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
