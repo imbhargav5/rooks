@@ -47,7 +47,7 @@
     "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.2",
+    "@changesets/changelog-github": "^0.4.6",
     "@changesets/cli": "^2.24.3",
     "@manypkg/cli": "^0.19.1",
     "@manypkg/get-packages": "^1.1.3",
