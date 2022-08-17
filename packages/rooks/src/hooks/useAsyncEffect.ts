@@ -1,5 +1,4 @@
 import { type DependencyList, useEffect, useRef, useCallback } from "react";
-import { useFreshRef } from "./useFreshRef";
 import { useGetIsMounted } from "./useGetIsMounted";
 
 type Effect<T> = (shouldContinueEffect: () => boolean) => Promise<T>;
