@@ -8,6 +8,7 @@
     "tsconfig": "0.0.0"
   },
   "changesets": [
+    "afraid-ants-watch",
     "tiny-rabbits-reply"
   ]
 }
