@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
 
 type UseDocumentVisibilityStateReturnType = Document["visibilityState"] | null;
@@ -15,12 +15,14 @@ function useDocumentVisibilityState(): UseDocumentVisibilityStateReturnType {
       document ? document.visibilityState : null
     );
 
+  const handleVisibilityChange = useCallback(() => {
+    setVisibilityState(document ? document.visibilityState : null);
+  }, []);
+
   useGlobalObjectEventListener(
     global.document,
     "visibilitychange",
-    () => {
-      setVisibilityState(document.visibilityState);
-    },
+    handleVisibilityChange,
     {},
     true,
     true
