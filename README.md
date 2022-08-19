@@ -175,19 +175,14 @@ MIT
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-63-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-66-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore-start -->
-
 <!-- markdownlint-disable -->
-
 <table>
   <tr>
     <td align="center"><a href="https://codewithbhargav.com/"><img src="https://avatars.githubusercontent.com/u/2936644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bhargav Ponnapalli</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=imbhargav5" title="Code">💻</a> <a href="#maintenance-imbhargav5" title="Maintenance">🚧</a></td>
@@ -270,10 +265,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/akiszka"><img src="https://avatars.githubusercontent.com/u/30828906?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Antoni Kiszka</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=akiszka" title="Code">💻</a></td>
     <td align="center"><a href="https://twitter.com/gpoole_is_taken"><img src="https://avatars.githubusercontent.com/u/2898433?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Greg Poole</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=gpoole" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/apps/mergify"><img src="https://avatars.githubusercontent.com/in/10562?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mergify[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mergify[bot]" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Chaitanya7666"><img src="https://avatars.githubusercontent.com/u/56331036?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chaitanya J</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=Chaitanya7666" title="Code">💻</a></td>
+    <td align="center"><a href="https://gmahima.dev/"><img src="https://avatars.githubusercontent.com/u/39587007?v=4?s=100" width="100px;" alt=""/><br /><sub><b>G H Mahimaanvita</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=gmahima" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
-
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

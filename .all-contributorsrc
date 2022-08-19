@@ -579,6 +579,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mergify[bot]",
+      "name": "mergify[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/10562?v=4",
+      "profile": "https://github.com/apps/mergify",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Chaitanya7666",
+      "name": "Chaitanya J",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56331036?v=4",
+      "profile": "https://github.com/Chaitanya7666",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gmahima",
+      "name": "G H Mahimaanvita",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39587007?v=4",
+      "profile": "https://gmahima.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
