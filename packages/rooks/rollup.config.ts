@@ -3,16 +3,14 @@ import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
 import babel from "@rollup/plugin-babel";
 import json from "@rollup/plugin-json";
-import typescript2 from "rollup-plugin-typescript2";
+import typescript from "rollup-plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import sourceMaps from "rollup-plugin-sourcemaps";
 import pkg from "./package.json";
 
 const commonPlugins = [
   nodeResolve(),
-  typescript2({
-    tsconfigOverride: { compilerOptions: { module: "es2015" } },
-  }),
+  typescript(),
   sourceMaps(),
   json(),
   babel({
@@ -40,18 +38,10 @@ const config = {
   plugins: commonPlugins,
   output: [
     {
-      file: "dist/umd/rooks.js",
+      file: "dist/umd/rooks.umd.js",
       format: "umd",
       globals,
       name: "rooks",
-      sourcemap: true,
-    },
-    {
-      file: "dist/umd/rooks.min.js",
-      format: "umd",
-      globals,
-      name: "rooks",
-      sourcemap: true,
       plugins: prodPlugins,
     },
   ],

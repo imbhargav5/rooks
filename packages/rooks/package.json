@@ -29,11 +29,10 @@
     "test": "jest",
     "coverage": "yarn test --coverage",
     "prebuild": "rimraf dist",
-    "build:esm": "tsc -m esNext --outDir dist/esm && resolve-tspaths -o dist/esm",
+    "build:esm": "tsc -m esNext --outDir dist/esm && resolve-tspaths -o dist/esm && rollup -c dts.rollup.config.js",
     "build:cjs": "tsc -m commonjs --outDir dist/cjs && resolve-tspaths -o dist/cjs",
     "build:umd": "rollup -c rollup.config.ts --configPlugin typescript",
-    "build:types": "rollup -c dts.rollup.config.js",
-    "build": "yarn build:esm && yarn build:cjs && yarn build:umd && yarn build:types"
+    "build": "yarn build:esm && yarn build:cjs && yarn build:umd"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
@@ -123,6 +122,7 @@
     "rollup-plugin-esbuild": "^4.9.3",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-typescript2": "^0.32.1",
     "shelljs": "0.8.5",
     "terser": "^5.14.2",

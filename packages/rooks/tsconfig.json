@@ -6,12 +6,13 @@
     },
     "rootDir": "src",
     "strict": false,
-    "module": "commonjs",
+    "module": "esnext",
     "jsx": "react",
-    "target": "ES5",
+    "target": "esnext",
     "composite": true,
     "baseUrl": "src",
-    "lib": ["dom", "dom.iterable", "esnext"]
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "outDir": "build"
   },
   "exclude": [
     "node_modules",
