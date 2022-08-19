@@ -4,6 +4,24 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import { warning } from "./warning";
 import type { ListenerOptions } from "@/types/utils";
 
+function useGlobalObjectEventListener(
+  globalObject: Document,
+  eventName: keyof DocumentEventMap,
+  callback: EventListener,
+  listenerOptions: ListenerOptions,
+  when: boolean,
+  isLayoutEffect: boolean
+): void;
+
+function useGlobalObjectEventListener(
+  globalObject: Window,
+  eventName: keyof WindowEventMap,
+  callback: EventListener,
+  listenerOptions: ListenerOptions,
+  when: boolean,
+  isLayoutEffect: boolean
+): void;
+
 /**
  *  useGlobalObjectEventListener hook
  *
@@ -17,9 +35,9 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://react-hooks.org/docs/useGlobalObjectEventListener
  */
-function useGlobalObjectEventListener(
-  globalObject: Document | Window,
-  eventName: string,
+function useGlobalObjectEventListener<GlobalObject extends Window | Document>(
+  globalObject: GlobalObject,
+  eventName: keyof DocumentEventMap | keyof WindowEventMap,
   callback: EventListener,
   listenerOptions: ListenerOptions = {},
   when = true,

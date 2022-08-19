@@ -61,6 +61,11 @@
       "category": "events"
     },
     {
+      "name": "useDocumentVisibilityState",
+      "description": "Returns the visibility state of the document.",
+      "category": "events"
+    },
+    {
       "name": "useEffectOnceWhen",
       "description": "Runs a callback effect atmost one time when a condition becomes true",
       "category": "effects"

@@ -6,7 +6,7 @@ import type { ListenerOptions } from "@/types/utils";
  *
  *  A react hook to an event listener to the window
  *
- * @param {string} eventName The event to track
+ * @param {keyof WindowEventMap} eventName The event to track
  * @param {Function} callback The callback to be called on event
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
@@ -14,7 +14,7 @@ import type { ListenerOptions } from "@/types/utils";
  * @see https://react-hooks.org/docs/useWindowEventListener
  */
 function useWindowEventListener(
-  eventName: string,
+  eventName: keyof WindowEventMap,
   callback: (...args: unknown[]) => void,
   listenerOptions: ListenerOptions = {},
   isLayoutEffect = false
