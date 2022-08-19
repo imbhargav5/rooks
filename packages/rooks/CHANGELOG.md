@@ -1,5 +1,11 @@
 # rooks
 
+## 7.0.0-alpha.1
+
+### Patch Changes
+
+- b2003b87: bundle size decrease
+
 ## 6.4.3
 
 ### Patch Changes
