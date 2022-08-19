@@ -20,6 +20,7 @@ sidebar_label: Hooks List
 **<h3 align="center">🚀 Events</h3>**
 
 *   [useDocumentEventListener](https://react-hooks.org/docs/useDocumentEventListener) - A react hook to an event listener to the document object
+*   [useDocumentVisibilityState](https://react-hooks.org/docs/useDocumentVisibilityState) - Returns the visibility state of the document.
 *   [useFocus](https://react-hooks.org/docs/useFocus) - Handles focus events for the immediate target element.
 *   [useFocusWithin](https://react-hooks.org/docs/useFocusWithin) - Handles focus events for the target component.
 *   [useOnWindowResize](https://react-hooks.org/docs/useOnWindowResize) - A React hook for adding an event listener for window resize
