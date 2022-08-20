@@ -12,6 +12,8 @@ UseState but auto updates values to localStorage
 
 ## Examples
 
+### Basic example
+
 ```jsx
 import "./styles.css";
 import React from "react";
@@ -31,6 +33,40 @@ export default function App() {
 }
 ```
 
+### Using a boolean value to toggle a sidebar
+
+```jsx
+import "./styles.css";
+import { useLocalstorageState } from "rooks";
+
+export default function App() {
+  const [
+    showSidebar,
+    setShowSidebar
+  ] = useLocalstorageState(
+    "my-app:showSidebar",
+    false
+  );
+
+  return (
+    <div className="App">
+      {showSidebar ? <aside></aside> : null}
+      <main>
+        <button
+          onClick={() =>
+            setShowSidebar(!showSidebar)
+          }
+        >
+          Toggle sidebar
+        </button>
+      </main>
+    </div>
+  );
+}
+
+```
+
+
 ### Arguments
 
 | Argument value | Type   | Description                    | Defualt   |
@@ -47,3 +83,5 @@ Returns an array of following items:
 | value        | any      | value stored in localStorage        |
 | set          | Function | set value stored in localStorage    |
 | remove       | Function | remove value stored in localStorage |
+
+
