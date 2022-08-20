@@ -5,7 +5,7 @@
 </p>
 <br/>
 
-![Build Status](https://github.com/imbhargav5/rooks/workflows/Node%20CI/badge.svg) ![Release script](https://github.com/imbhargav5/rooks/workflows/Release%20script/badge.svg) ![GitHub](https://img.shields.io/github/license/imbhargav5/rooks) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks) [![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors) ![npm](https://img.shields.io/npm/dw/rooks) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks) ![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main) ![node-lts](https://img.shields.io/node/v-lts/rooks) [![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://react-hooks.org) ![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
+[![CI and Semantic Release](https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml/badge.svg)](https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml) ![GitHub](https://img.shields.io/github/license/imbhargav5/rooks) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks) [![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors) ![npm](https://img.shields.io/npm/dw/rooks) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks) ![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main) ![node-lts](https://img.shields.io/node/v-lts/rooks) [![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://react-hooks.org) ![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
 
 <br/>
 <br/>
