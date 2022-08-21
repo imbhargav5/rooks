@@ -136,7 +136,7 @@
     "unist-util-find-all-after": "^4.0.0",
     "unist-util-find-all-before": "^4.0.0",
     "unist-util-find-all-between": "^2.1.0",
-    "unist-util-visit": "^4.1.0",
+    "unist-util-visit": "^4.1.1",
     "vfile": "^5.3.4",
     "vfile-reporter": "^7.0.4",
     "webpack": "5.74.0",
