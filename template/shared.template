@@ -1,6 +1,8 @@
 /**
  * %name%
  * @description %description%
+ * @param
+ * @returns
  * @see {@link https://react-hooks.org/docs/%name%}
 */
 function %name%() {
