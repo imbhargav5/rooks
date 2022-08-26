@@ -119,7 +119,7 @@
     "resolve-tspaths": "^0.7.4",
     "rollup": "^2.78.1",
     "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-esbuild": "^4.9.3",
+    "rollup-plugin-esbuild": "^4.10.1",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript": "^1.0.1",
