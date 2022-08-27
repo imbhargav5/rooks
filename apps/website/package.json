@@ -27,7 +27,7 @@
     "@types/react": "17.0.48",
     "@types/react-is": "^17.0.3",
     "@types/react-syntax-highlighter": "^15.5.5",
-    "eslint": "8.22.0",
+    "eslint": "8.23.0",
     "eslint-config-custom": "*",
     "next-transpile-modules": "9.0.0",
     "remark-comment": "^1.0.0",
