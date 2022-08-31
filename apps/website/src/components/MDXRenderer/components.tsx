@@ -53,29 +53,33 @@ function Code({ children }: { children?: ReactNode }) {
     return (
       <div>
         <Spacer y={0.5} />
-        <Sandpack
-          template="react"
-          files={{
-            "/App.js": code,
-          }}
-          theme="dark"
-          options={{
-            showLineNumbers: true,
-            editorHeight: 350,
-            editorWidthPercentage: 60,
-          }}
-          customSetup={{
-            dependencies: {
-              react: "^18.2.0",
-              "react-dom": "^18.2.0",
-              "react-is": "^18.2.0",
-              rooks: "latest",
-              random: "latest",
-              "styled-components": "latest",
-              "framer-motion": "latest",
-            },
-          }}
-        />
+        <CustomSandpack>
+          <Sandpack
+            template="react"
+            files={{
+              "/App.js": code,
+            }}
+            theme="dark"
+            options={{
+              showLineNumbers: true,
+              editorHeight: 350,
+              editorWidthPercentage: 60,
+              showConsoleButton: code.match(/console\./gm),
+              showConsole: code.match(/console\./gm),
+            }}
+            customSetup={{
+              dependencies: {
+                react: "^18.2.0",
+                "react-dom": "^18.2.0",
+                "react-is": "^18.2.0",
+                rooks: "latest",
+                random: "latest",
+                "styled-components": "latest",
+                "framer-motion": "latest",
+              },
+            }}
+          />
+        </CustomSandpack>
         <Spacer y={2} />
       </div>
     );
@@ -102,6 +106,11 @@ function Code({ children }: { children?: ReactNode }) {
     );
   }
 }
+
+const CustomSandpack = styled("div", {
+  pre: { fontSize: "11.5px" },
+  code: { fontSize: "11.5px", background: "none", padding: 0 },
+});
 
 const StyledTable = styled("table", {
   padding: "8px",

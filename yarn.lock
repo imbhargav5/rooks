@@ -1918,10 +1918,10 @@
     codesandbox-import-utils "^1.2.3"
     lodash.isequal "^4.5.0"
 
-"@codesandbox/sandpack-react@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.7.0.tgz#4a0fed8b043a6359ae81be750359f0f090d3a30c"
-  integrity sha512-D5MzXZjB3ddcKDNCRjed3PEyL3jSpMaVURTRlhTZWsLtD+drb9AyV6mYG65YWEQimj6S7qkE0ZQ3qrW8frNKyA==
+"@codesandbox/sandpack-react@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.7.1.tgz#c8ec71e25b39e6bfb3a9679cf65d8d9f70fa6887"
+  integrity sha512-TwkinJgEIu+tpoEQrEBTEkMlOpngaGAqulNxZ0yFwj9/WMfzI1y5kr32UTsQvw7WwGmJ3AlTnWPEvGQMoP/D4A==
   dependencies:
     "@code-hike/classer" "^0.0.0-aa6efee"
     "@codemirror/closebrackets" "^0.19.0"

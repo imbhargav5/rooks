@@ -8,6 +8,9 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 import { CssBaseline } from "@nextui-org/react";
+import { getSandpackCssText } from "@codesandbox/sandpack-react";
+
+const cssTextOutput = getSandpackCssText();
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -23,7 +26,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>{CssBaseline.flush()}</Head>
+        <Head>
+          {CssBaseline.flush()}{" "}
+          <style
+            dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
+            id="sandpack"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
