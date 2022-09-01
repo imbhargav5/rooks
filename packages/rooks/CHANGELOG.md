@@ -1,5 +1,11 @@
 # rooks
 
+## 7.0.0-alpha.2
+
+### Patch Changes
+
+- 886a6721: Make useKey target option support undefined
+
 ## 7.0.0-alpha.1
 
 ### Patch Changes
