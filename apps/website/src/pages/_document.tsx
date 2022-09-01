@@ -10,8 +10,6 @@ import Document, {
 import { CssBaseline } from "@nextui-org/react";
 import { getSandpackCssText } from "@codesandbox/sandpack-react";
 
-const cssTextOutput = getSandpackCssText();
-
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
