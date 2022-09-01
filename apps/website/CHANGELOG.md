@@ -1,5 +1,14 @@
 # website
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [b2003b87]
+- Updated dependencies [886a6721]
+- Updated dependencies [ae9a465a]
+  - rooks@7.0.0
+
 ## 1.0.10-alpha.2
 
 ### Patch Changes

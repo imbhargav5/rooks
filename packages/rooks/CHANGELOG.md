@@ -1,5 +1,16 @@
 # rooks
 
+## 7.0.0
+
+### Major Changes
+
+- ae9a465a: useFullscreen hook rewrite
+
+### Patch Changes
+
+- b2003b87: bundle size decrease
+- 886a6721: Make useKey target option support undefined
+
 ## 7.0.0-alpha.2
 
 ### Patch Changes
