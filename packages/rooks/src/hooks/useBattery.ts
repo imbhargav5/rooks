@@ -32,10 +32,6 @@ interface BatteryManager extends Readonly<BatteryState>, EventTarget {
   onchargingtimechange: () => void;
   ondischargingtimechange: () => void;
   onlevelchange: () => void;
-  level: number;
-  chargingTime: number;
-  dischargingTime: number;
-  charging: boolean;
 }
 
 interface NavigatorWithPossibleBattery extends Navigator {
@@ -58,6 +54,7 @@ const isBatteryApiSupported = nav && typeof nav.getBattery === "function";
  *
  * A hook that utilizes the getBattery() method on naviagator
  *  to get the battery information of device
+ *
  */
 
 function useBattery(): UseBatteryState {
