@@ -1,5 +1,6 @@
 export { useArrayState } from "@/hooks/useArrayState";
 export { useAsyncEffect } from "@/hooks/useAsyncEffect";
+export { useBattery } from "@/hooks/useBattery";
 export { useBoundingclientrect } from "@/hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "@/hooks/useBoundingclientrectRef";
 export { useCountdown } from "@/hooks/useCountdown";
