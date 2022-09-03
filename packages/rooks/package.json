@@ -7,6 +7,15 @@
   "unpkg": "dist/umd/rooks.umd.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.js",
+      "module": "./dist/esm/index.js",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "sideEffects": false,
   "license": "MIT",
   "devEngines": {
