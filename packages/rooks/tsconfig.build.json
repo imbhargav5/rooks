@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "ES2017",
+    "module": "ESNext",
+    "composite": false,
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": true,
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["./src/**/*.spec.ts", "./src/**/*.spec.tsx"]
+}
