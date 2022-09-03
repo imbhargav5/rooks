@@ -9,7 +9,6 @@
     "module": "esnext",
     "jsx": "react",
     "target": "esnext",
-    "composite": true,
     "baseUrl": "src",
     "lib": ["dom", "dom.iterable", "esnext"],
     "outDir": "build"
