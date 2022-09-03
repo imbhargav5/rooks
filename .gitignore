@@ -18,8 +18,7 @@ yarn-error*
 !.github/actions/**/package-lock.json
 *.d.ts
 .changelog
-dist
-tsconfig.tsbuildinfo
+**/tsconfig.tsbuildinfo
 src/declarations
 
 
