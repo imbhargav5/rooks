@@ -1,5 +1,12 @@
 # website
 
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies [bea1ddaf]
+  - rooks@7.1.1
+
 ## 1.0.11
 
 ### Patch Changes
