@@ -1,5 +1,11 @@
 # rooks
 
+## 7.1.0
+
+### Minor Changes
+
+- 0dc2004e: New hook! useTimeTravelState hook added which can undo and redo a state variable seamlessly.
+
 ## 7.0.0
 
 ### Major Changes
