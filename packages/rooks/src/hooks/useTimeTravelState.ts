@@ -46,6 +46,8 @@ type UseTimeTravelStateControls<T> = {
   back: (step?: number) => void;
   forward: (step?: number) => void;
   reset: (newInitialValue?: T) => void;
+  undo: (step?: number) => void;
+  redo: (step?: number) => void;
   canUndo: boolean;
   canRedo: boolean;
 };
@@ -128,7 +130,7 @@ export default function useTimeTravelState<T>(
       } else {
         newValue = val;
       }
-      if (overwriteLastEntry && past.length > 0) {
+      if (overwriteLastEntry) {
         return {
           present: newValue,
           past,
@@ -213,6 +215,8 @@ export default function useTimeTravelState<T>(
       back,
       forward,
       reset,
+      undo: back,
+      redo: forward,
       canUndo,
       canRedo,
     };

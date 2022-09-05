@@ -17,7 +17,13 @@ describe("useTimeTravelState", () => {
       setValue((current) => (current || 0) + 1);
     }
 
-    return { increment, controls, value };
+    function incrementOverwrite() {
+      setValue((current) => (current || 0) + 1, {
+        overwriteLastEntry: true,
+      });
+    }
+
+    return { increment, controls, value, incrementOverwrite };
   };
 
   beforeEach(() => {
@@ -27,7 +33,13 @@ describe("useTimeTravelState", () => {
         setValue((current) => (current || 0) + 1);
       }
 
-      return { increment, controls, value };
+      function incrementOverwrite() {
+        setValue((current) => (current || 0) + 1, {
+          overwriteLastEntry: true,
+        });
+      }
+
+      return { increment, controls, value, incrementOverwrite };
     };
   });
 
@@ -53,8 +65,7 @@ describe("useTimeTravelState", () => {
     expect(result.current.value).toBe(43);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip("should show previous value after undo", () => {
+  it("should show previous value after undo", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
 
@@ -111,5 +122,44 @@ describe("useTimeTravelState", () => {
       result.current.controls.go(2);
     });
     expect(result.current.value).toBe(44);
+  });
+
+  it("should overwrite value if overwriteLastEntry is provided ", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useHook(42));
+
+    void act(() => {
+      result.current.incrementOverwrite();
+      result.current.incrementOverwrite();
+    });
+
+    expect(result.current.controls.canUndo).toBe(false);
+    expect(result.current.controls.canRedo).toBe(false);
+    expect(result.current.value).toBe(44);
+
+    void act(() => {
+      result.current.increment();
+      result.current.increment();
+    });
+    expect(result.current.controls.canUndo).toBe(true);
+    expect(result.current.value).toBe(46);
+    void act(() => {
+      result.current.incrementOverwrite();
+      result.current.incrementOverwrite();
+    });
+
+    expect(result.current.value).toBe(48);
+    expect(result.current.controls.canUndo).toBe(true);
+    expect(result.current.controls.canRedo).toBe(false);
+    void act(() => {
+      result.current.controls.back();
+    });
+    expect(result.current.value).toBe(45);
+    expect(result.current.controls.canUndo).toBe(true);
+    expect(result.current.controls.canRedo).toBe(true);
+    void act(() => {
+      result.current.controls.forward();
+    });
+    expect(result.current.value).toBe(48);
   });
 });
