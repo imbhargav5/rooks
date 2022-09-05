@@ -61,7 +61,11 @@ const useUndoState = <T>(
     });
   }, []);
 
-  return [value[0], push, undo];
+  const returnValue = useMemo<UseUndoStateReturnValue<T>>(() => {
+    return [value[0], push, undo];
+  }, [push, undo, value]);
+
+  return returnValue;
 };
 
 export { useUndoState };
