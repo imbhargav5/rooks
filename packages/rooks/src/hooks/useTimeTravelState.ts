@@ -1,5 +1,4 @@
-import { isFunction } from "@/utils/utils";
-import { isNumber } from "lodash";
+import { isFunction, isNumber } from "@/utils/utils";
 import { useCallback, useMemo, useRef, useState } from "react";
 
 type DataWithHistory<T> = {
