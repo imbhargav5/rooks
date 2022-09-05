@@ -1,5 +1,11 @@
 # rooks
 
+## 7.1.1
+
+### Patch Changes
+
+- bea1ddaf: fix isNumber import in usetimeTravelState
+
 ## 7.1.0
 
 ### Minor Changes
