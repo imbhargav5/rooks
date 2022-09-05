@@ -96,6 +96,7 @@
 *   [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
 *   [useSetState](https://react-hooks.org/docs/useSetState) - Manage the state of a Set in React.
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
+*   [useTimeTravelState](https://react-hooks.org/docs/useTimeTravelState) - A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
 *   [useUndoState](https://react-hooks.org/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
 **<h3 align="center">⚛️ UI</h3>**
@@ -128,7 +129,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 67 hooks as standalone modules.
+✅ Collection of 68 hooks as standalone modules.
 
 <!--hookscount end-->
 
