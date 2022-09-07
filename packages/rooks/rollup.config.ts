@@ -17,7 +17,7 @@ const external = [
 
 const umdGlobals = { react: "React", "react-dom": "ReactDOM" };
 
-const distDir = "./dist/future";
+const distDir = "./dist";
 
 const tsPathPlugin = typescriptPaths({
   preserveExtensions: true,
