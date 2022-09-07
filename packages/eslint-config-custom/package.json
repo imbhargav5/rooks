@@ -11,7 +11,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^27.0.1",
     "eslint-plugin-react": "7.31.7",
-    "eslint-plugin-testing-library": "^5.6.1"
+    "eslint-plugin-testing-library": "^5.6.2"
   },
   "devDependencies": {
     "tsconfig": "*"
