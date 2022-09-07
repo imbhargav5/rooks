@@ -36,6 +36,7 @@
     "lint": "eslint src/**/*.ts",
     "format": "yarn run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
     "test": "jest",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "check:dist": "es-check",
     "coverage": "yarn test --coverage",
     "prebuild": "rimraf dist",
