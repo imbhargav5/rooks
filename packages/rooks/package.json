@@ -31,7 +31,7 @@
   },
   "bugs": "https://github.com/imbhargav5/rooks/issues",
   "scripts": {
-    "clean": "rimraf dist lib src/hooks/**.d.ts src/__tests__/**.d.ts",
+    "clean": "rimraf dist lib",
     "commit": "cz",
     "lint": "eslint src/**/*.ts",
     "format": "yarn run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && yarn run prettier --write \"./docs/*.+(md|mdxx)\"",
@@ -39,11 +39,7 @@
     "check:dist": "es-check",
     "coverage": "yarn test --coverage",
     "prebuild": "rimraf dist",
-    "build:esm": "tsc -m esNext --outDir dist/esm && resolve-tspaths -o dist/esm && rollup -c dts.rollup.config.js",
-    "build:cjs": "tsc -m commonjs --outDir dist/cjs && resolve-tspaths -o dist/cjs",
-    "build:umd": "rollup -c rollup.config.ts --configPlugin typescript",
-    "build": "yarn build:esm && yarn build:cjs && yarn build:umd",
-    "build-future": "yarn rollup -c rollup.future.config.ts"
+    "build": "yarn rollup -c rollup.config.ts"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
