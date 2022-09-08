@@ -116,7 +116,7 @@
     "remark-frontmatter": "^4.0.1",
     "remark-preset-lint-markdown-style-guide": "^5.1.2",
     "remark-strip-badges": "^6.0.1",
-    "resolve-tspaths": "^0.7.4",
+    "resolve-tspaths": "^0.7.5",
     "rollup": "^2.79.0",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-esbuild": "^4.10.1",
