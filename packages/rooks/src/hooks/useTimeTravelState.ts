@@ -89,7 +89,7 @@ type UseTimeTravelStateReturnValue<T> = [
  * controls.back(2); // value === 1
  *
  */
-export default function useTimeTravelState<T>(
+function useTimeTravelState<T>(
   initialValue: T
 ): UseTimeTravelStateReturnValue<T> {
   const [history, setHistory] = useState<DataWithHistory<T>>({
