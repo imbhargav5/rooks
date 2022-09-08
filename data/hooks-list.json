@@ -301,6 +301,11 @@
       "category": "misc"
     },
     {
+      "name": "useTimeTravelState",
+      "description": "A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.",
+      "category": "state"
+    },
+    {
       "name": "useTimeoutWhen",
       "description": "Takes a callback and fires it when a condition is true",
       "category": "misc"
