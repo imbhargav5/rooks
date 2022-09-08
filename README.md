@@ -96,6 +96,7 @@
 *   [useSessionstorageState](https://react-hooks.org/docs/useSessionstorageState) - useState but syncs with sessionstorage
 *   [useSetState](https://react-hooks.org/docs/useSetState) - Manage the state of a Set in React.
 *   [useStackState](https://react-hooks.org/docs/useStackState) - A React hook that manages state in the form of a stack
+*   [useTimeTravelState](https://react-hooks.org/docs/useTimeTravelState) - A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
 *   [useUndoState](https://react-hooks.org/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
 **<h3 align="center">⚛️ UI</h3>**
@@ -128,7 +129,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 67 hooks as standalone modules.
+✅ Collection of 68 hooks as standalone modules.
 
 <!--hookscount end-->
 
@@ -176,7 +177,7 @@ MIT
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-68-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-69-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -276,6 +277,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://gmahima.dev/"><img src="https://avatars.githubusercontent.com/u/39587007?v=4?s=100" width="100px;" alt=""/><br /><sub><b>G H Mahimaanvita</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=gmahima" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/danilowoz"><img src="https://avatars.githubusercontent.com/u/4838076?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Danilo Woznica</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=danilowoz" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dan-klasson"><img src="https://avatars.githubusercontent.com/u/1314838?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dan-klasson</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=dan-klasson" title="Code">💻</a></td>
+    <td align="center"><a href="https://soluble.io/pro"><img src="https://avatars.githubusercontent.com/u/259798?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sébastien Vanvelthem</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=belgattitude" title="Code">💻</a></td>
   </tr>
 </table>
 

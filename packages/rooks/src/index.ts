@@ -57,6 +57,7 @@ export { useSelectableList } from "@/hooks/useSelectableList";
 export { useSessionstorageState } from "@/hooks/useSessionstorageState";
 export { useSetState } from "@/hooks/useSetState";
 export { useStackState } from "@/hooks/useStackState";
+export { useTimeTravelState } from "@/hooks/useTimeTravelState";
 export { useThrottle } from "@/hooks/useThrottle";
 export { useTimeoutWhen } from "@/hooks/useTimeoutWhen";
 export { useToggle } from "@/hooks/useToggle";
