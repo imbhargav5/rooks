@@ -1,17 +1,22 @@
 module.exports = [
   {
-    name: 'ESM bundle size',
-    path: ['dist/esm/index.js', 'dist/esm/hooks/**/*.js'],
-    limit: '40KB',
+    name: "ESM Webpack (useDebounce)",
+    webpack: true,
+    path: ["dist/esm/index.js"],
+    import: "{ useDebounce }",
+    limit: "2KB",
   },
   {
-    name: 'CJS bundle size',
-    path: ['dist/cjs/index.js', 'dist/cjs/hooks/**/*.js'],
-    limit: '45KB',
+    name: "CJS Webpack (useDebounce)",
+    path: ["dist/cjs/index.js"],
+    webpack: true,
+    import: "{ useDebounce }",
+    limit: "15KB",
   },
   {
-    name: 'UMD bundle size',
-    path: ['dist/umd/rooks.umd.js'],
-    limit: '10KB',
+    name: "UMD bundle size",
+    path: ["dist/umd/rooks.umd.js"],
+    webpack: true,
+    limit: "10KB",
   },
 ];
