@@ -1,5 +1,6 @@
 // @ts-check
 
+// Regularly update this max size when new hooks are added (keep a threshold)
 const fullBundleMaxSize = "12KB";
 
 /**
