@@ -4446,10 +4446,10 @@ ajv@^8.0.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-all-contributors-cli@^6.20.3:
-  version "6.20.3"
-  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.20.3.tgz#ba85e44614536299496756401dae871f871c6d7b"
-  integrity sha512-mn2+IvHq15yNkLiw8A6OBtCUiKDJF0ILVeegTUZQ6rlvXIRjI1mBbxiI1SOQ9Xl4cPjoWguj4F4OjKh4K1oDZw==
+all-contributors-cli@^6.20.4:
+  version "6.20.4"
+  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.20.4.tgz#de69d243206cb821f8c33ef0b57e9f511ceb7e25"
+  integrity sha512-oLOrCGh1LjR/EkaESbLe7faTX1tq8TP4pcR6CvkKED5O9E7Yahk5DiexR8roghluljwI20m2JX2I6UTYV7/tLg==
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^3.1.0"
@@ -16688,10 +16688,20 @@ vfile@^5.0.0:
     unist-util-stringify-position "^3.0.0"
     vfile-message "^3.0.0"
 
-vfile@^5.3.0, vfile@^5.3.4:
+vfile@^5.3.0:
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.4.tgz#bbb8c96b956693bbf70b2c67fdb5781dff769b93"
   integrity sha512-KI+7cnst03KbEyN1+JE504zF5bJBZa+J+CrevLeyIMq0aPU681I2rQ5p4PlnQ6exFtWiUrg26QUdFMnAKR6PIw==
+  dependencies:
+    "@types/unist" "^2.0.0"
+    is-buffer "^2.0.0"
+    unist-util-stringify-position "^3.0.0"
+    vfile-message "^3.0.0"
+
+vfile@^5.3.5:
+  version "5.3.5"
+  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.5.tgz#ec2e206b1414f561c85b7972bb1eeda8ab47ee61"
+  integrity sha512-U1ho2ga33eZ8y8pkbQLH54uKqGhFJ6GYIHnnG5AhRpAh3OWjkrRHKa/KogbmQn8We+c0KVV3rTOgR9V/WowbXQ==
   dependencies:
     "@types/unist" "^2.0.0"
     is-buffer "^2.0.0"
