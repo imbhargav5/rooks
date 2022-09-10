@@ -100,7 +100,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/dan-klasson"><img src="https://avatars.githubusercontent.com/u/1314838?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dan-klasson</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=dan-klasson" title="Code">💻</a></td>
       <td align="center"><a href="https://soluble.io/pro"><img src="https://avatars.githubusercontent.com/u/259798?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sébastien Vanvelthem</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=belgattitude" title="Code">💻</a></td>
     </tr>
-  </tobdy>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
