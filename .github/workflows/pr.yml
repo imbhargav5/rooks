@@ -20,6 +20,7 @@ jobs:
         with:
           script: yarn run check-size
           skip_step: build
+          directory: packages/rooks
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Get coverage
         run: yarn run coverage
