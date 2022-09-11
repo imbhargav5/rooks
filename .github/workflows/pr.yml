@@ -18,7 +18,7 @@ jobs:
       - uses: ./.github/actions/ci-setup
       - name: Get coverage
         run: yarn run coverage
-      - uses: andresz1/size-limit-action@v1.7
+      - uses: andresz1/size-limit-action@v1.7.0
         with:
           script: "yarn run check-size"
           skip_step: "build"
