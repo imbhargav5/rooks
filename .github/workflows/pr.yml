@@ -21,8 +21,8 @@ jobs:
       - uses: andresz1/size-limit-action@v1
         with:
           script: "yarn run check-size"
-          skip_step: build
-          directory: packages/rooks
+          skip_step: "build"
+          directory: "packages/rooks"
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
