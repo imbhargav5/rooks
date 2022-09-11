@@ -59,7 +59,7 @@
     "@rollup/plugin-commonjs": "^18.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-node-resolve": "^14.0.1",
     "@rollup/plugin-replace": "^4.0.0",
     "@size-limit/file": "^8.1.0",
     "@size-limit/webpack": "^8.1.0",
