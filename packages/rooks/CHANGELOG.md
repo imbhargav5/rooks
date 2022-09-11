@@ -1,5 +1,11 @@
 # rooks
 
+## 7.1.2-alpha.0
+
+### Patch Changes
+
+- [#1408](https://github.com/imbhargav5/rooks/pull/1408) [`fec6932b`](https://github.com/imbhargav5/rooks/commit/fec6932bb0e5120ab448ed7b3318db7e16289b12) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Restore support for es2017 in dist files
+
 ## 7.1.1
 
 ### Patch Changes
