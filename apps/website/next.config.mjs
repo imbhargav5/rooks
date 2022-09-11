@@ -16,10 +16,8 @@ const withTM = tm(["rooks"]);
 
 const config = withTM({
   reactStrictMode: true,
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
+  images: {
+    unoptimized: true,
   },
 });
 
