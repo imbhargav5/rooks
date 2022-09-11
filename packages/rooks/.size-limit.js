@@ -19,13 +19,14 @@ module.exports = [
     limit: fullBundleMaxSize,
   },
   // Size of an individual import from the esm bundle
-  {
-    name: "ESM Webpack ({ useDebounce })",
-    webpack: true,
-    path: ["dist/esm/index.js"],
-    import: "{ useDebounce }",
-    limit: "2KB",
-  },
+  // We can also do this eventually if we want
+  // {
+  //   name: "ESM Webpack ({ useDebounce })",
+  //   webpack: true,
+  //   path: ["dist/esm/index.js"],
+  //   import: "{ useDebounce }",
+  //   limit: "2KB",
+  // },
   {
     name: "CJS Webpack (*)",
     path: ["dist/cjs/index.js"],
