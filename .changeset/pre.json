@@ -7,5 +7,7 @@
     "rooks": "7.1.1",
     "tsconfig": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "empty-hairs-hunt"
+  ]
 }
