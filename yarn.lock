@@ -15012,10 +15012,10 @@ rollup-plugin-typescript-paths@^1.4.0:
   resolved "https://registry.yarnpkg.com/rollup-plugin-typescript-paths/-/rollup-plugin-typescript-paths-1.4.0.tgz#cfae829c2f52a7dd3f1a2c4982ae66788239a54b"
   integrity sha512-6EgeLRjTVmymftEyCuYu91XzY5XMB5lR0YrJkeT0D7OG2RGSdbNL+C/hfPIdc/sjMa9Sl5NLsxIr6C/+/5EUpA==
 
-rollup-plugin-typescript2@^0.33.0:
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.33.0.tgz#2bb943f83e9d3a4c61a19aed5bee5bcff28d16a3"
-  integrity sha512-7ZXoZeX93kNb4/ICzOi2AlperVV6cAsNz8THqrbz+KNvpn47P2F/nFdK/BGhkoOsOwuYDuY57vccdZZrcd8/dA==
+rollup-plugin-typescript2@^0.34.0:
+  version "0.34.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.34.0.tgz#06ed351dc84bf7101bca2b3098c7d6a737aeae33"
+  integrity sha512-dGtOz2kL6nQVgfIOmnA4Xh+5cFrs3bdu4jja/ej7WKR92RzOOixsn71LY5ZFFmKe1R677nUh+k2++NiY3un2PQ==
   dependencies:
     "@rollup/pluginutils" "^4.1.2"
     find-cache-dir "^3.3.2"
