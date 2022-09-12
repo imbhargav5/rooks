@@ -12,6 +12,23 @@ This is a version of `useEffect` that accepts an async function.
 
 [//]: # "Main"
 
-## Examples
+```jsx
+import { useDidMount } from "rooks";
+export default function App() {
+  const [value, setValue] = useState(false);
+  useAsyncEffect(async () => {
+    setTimeout(() => {
+      setValue(true);
+    }, 100);
+  }, []);
 
-### Basic example
+  return value;
+}
+```
+
+### Arguments
+
+| Argument | Type     | Description                 |
+| -------- | -------- | --------------------------- |
+| callback | function | Async function to be called |
+| deps | array | Dependency array |
