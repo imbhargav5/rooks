@@ -12,5 +12,5 @@ export type ListenerOptions =
     };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnknownFunction = (...args: any[]) => unknown;
-export type ExcludeFunction<T> = Exclude<T, UnknownFunction>;
+export type AnyFunction = (...args: any[]) => any;
+export type ExcludeFunction<T> = Exclude<T, AnyFunction>;

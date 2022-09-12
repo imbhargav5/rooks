@@ -1,4 +1,4 @@
-import { UnknownFunction } from "@/types/utils";
+import { AnyFunction } from "@/types/utils";
 import type { DebouncedFunc, DebounceSettings } from "lodash";
 import debounce from "lodash.debounce";
 import { useRef, useEffect, useCallback } from "react";
@@ -16,7 +16,7 @@ import { useRef, useEffect, useCallback } from "react";
  * @returns Returns the new debounced function.
  * @see https://react-hooks.org/docs/useDebounce
  */
-function useDebounce<T extends UnknownFunction>(
+function useDebounce<T extends AnyFunction>(
   callback: T,
   wait?: number,
   options?: DebounceSettings
