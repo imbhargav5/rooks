@@ -1,7 +1,7 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-69-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-70-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -99,6 +99,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/danilowoz"><img src="https://avatars.githubusercontent.com/u/4838076?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Danilo Woznica</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=danilowoz" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/dan-klasson"><img src="https://avatars.githubusercontent.com/u/1314838?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dan-klasson</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=dan-klasson" title="Code">💻</a></td>
       <td align="center"><a href="https://soluble.io/pro"><img src="https://avatars.githubusercontent.com/u/259798?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sébastien Vanvelthem</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=belgattitude" title="Code">💻</a></td>
+      <td align="center"><a href="http://drk.me.uk/"><img src="https://avatars.githubusercontent.com/u/8918168?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aleksandr Soldatov</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=aso1datov" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
