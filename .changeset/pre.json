@@ -8,6 +8,7 @@
     "tsconfig": "0.0.0"
   },
   "changesets": [
-    "empty-hairs-hunt"
+    "empty-hairs-hunt",
+    "famous-hounds-tie"
   ]
 }
