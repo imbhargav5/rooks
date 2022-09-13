@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- [`2ff6c4fc`](https://github.com/imbhargav5/rooks/commit/2ff6c4fc28739cd82b952b16c287d741fc44c937) Thanks [@imbhargav5](https://github.com/imbhargav5)! - update type signature for anyFunction
+- [`2ff6c4fc`](https://github.com/imbhargav5/rooks/commit/2ff6c4fc28739cd82b952b16c287d741fc44c937) Thanks [@aso1datov](https://github.com/aso1datov)! - update type signature for anyFunction
 
 ## 7.1.2-alpha.0
 
