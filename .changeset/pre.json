@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "alpha",
   "initialVersions": {
     "website": "1.0.12",
@@ -7,8 +7,5 @@
     "rooks": "7.1.1",
     "tsconfig": "0.0.0"
   },
-  "changesets": [
-    "empty-hairs-hunt",
-    "famous-hounds-tie"
-  ]
+  "changesets": ["empty-hairs-hunt", "famous-hounds-tie"]
 }
