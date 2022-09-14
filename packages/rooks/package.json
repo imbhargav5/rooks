@@ -2,9 +2,10 @@
   "name": "rooks",
   "version": "7.1.2-alpha.1",
   "description": "Essential React custom hooks ⚓ to super charge your components!",
-  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
+  "jsdelivr": "dist/umd/rooks.umd.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "exports": {
@@ -12,7 +13,8 @@
       "types": "./dist/types/index.d.ts",
       "module": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json"
   },
