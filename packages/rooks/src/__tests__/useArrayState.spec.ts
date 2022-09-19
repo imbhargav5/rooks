@@ -111,4 +111,15 @@ describe("useArrayState", () => {
 
     expect(result.current[0]).toEqual([1, 4, 3]);
   });
+
+  it("should set array ", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].setArray([4, 5, 6]);
+    });
+
+    expect(result.current[0]).toEqual([4, 5, 6]);
+  });
 });

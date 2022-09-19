@@ -9,6 +9,7 @@ type Concat<T> = (value: T[]) => void;
 type Fill<T> = (value: T, start?: number, end?: number) => void;
 type UpdateItemAtIndex<T> = (index: number, value: T) => void;
 type Clear = () => void;
+type SetArray<T> = (value: T[]) => void;
 
 export type UseArrayStateControls<T> = {
   push: Push<T>;
@@ -20,6 +21,7 @@ export type UseArrayStateControls<T> = {
   concat: Concat<T>;
   fill: Fill<T>;
   updateItemAtIndex: UpdateItemAtIndex<T>;
+  setArray: SetArray<T>;
 };
 
 export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
@@ -42,6 +44,9 @@ export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
  * controls.reverse(); // [3, 2, 1]
  * controls.concat([4, 5, 6]); // [3, 2, 1, 4, 5, 6]
  * controls.fill(0); // [0, 0, 0, 0, 0, 0]
+ * controls.updateItemAtIndex(0, 1); // [1, 0, 0, 0, 0, 0]
+ * controls.clear(); // []
+ * controls.setArray([1, 2, 3]); // [1, 2, 3]
  */
 function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
   const [array, setArray] = useState(initialArray);
@@ -112,6 +117,7 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
       concat,
       fill,
       updateItemAtIndex,
+      setArray,
     };
   }, [
     push,
@@ -123,6 +129,7 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     concat,
     fill,
     updateItemAtIndex,
+    setArray,
   ]);
 
   const returnValue = useMemo<UseArrayStateReturnValue<T>>(() => {
