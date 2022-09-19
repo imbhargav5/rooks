@@ -1,5 +1,11 @@
 # rooks
 
+## 7.2.1
+
+### Patch Changes
+
+- [`e9e03e42`](https://github.com/imbhargav5/rooks/commit/e9e03e42d231f8b122738b59cdea117f7acdb3df) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add setArray method to array controls
+
 ## 7.2.0
 
 ### Minor Changes
