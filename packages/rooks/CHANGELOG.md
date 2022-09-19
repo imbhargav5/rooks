@@ -1,5 +1,11 @@
 # rooks
 
+## 7.2.0
+
+### Minor Changes
+
+- [`41796346`](https://github.com/imbhargav5/rooks/commit/41796346759c275ef08cfea6c5fe3af44e1a8e38) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add updateItemAtIndex control for useArrayState hook
+
 ## 7.1.2
 
 ### Patch Changes
