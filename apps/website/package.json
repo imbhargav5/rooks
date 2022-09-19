@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -18,7 +18,7 @@
     "react-is": "^18.2.0",
     "react-syntax-highlighter": "^15.5.0",
     "remark-remove-comments": "^0.2.0",
-    "rooks": "7.2.0"
+    "rooks": "7.2.1"
   },
   "devDependencies": {
     "@mdx-js/loader": "^2.1.3",
@@ -34,7 +34,7 @@
     "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.1",
     "remark-remove-comments": "^0.2.0",
-    "rooks": "7.2.0",
+    "rooks": "7.2.1",
     "tsconfig": "*",
     "typescript": "^4.8.3"
   },
