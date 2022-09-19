@@ -7,6 +7,7 @@ type Shift = () => void;
 type Reverse = () => void;
 type Concat<T> = (value: T[]) => void;
 type Fill<T> = (value: T, start?: number, end?: number) => void;
+type UpdateItemAtIndex<T> = (index: number, value: T) => void;
 type Clear = () => void;
 
 export type UseArrayStateControls<T> = {
@@ -18,6 +19,7 @@ export type UseArrayStateControls<T> = {
   reverse: Reverse;
   concat: Concat<T>;
   fill: Fill<T>;
+  updateItemAtIndex: UpdateItemAtIndex<T>;
 };
 
 export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
@@ -88,6 +90,17 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     [array]
   );
 
+  const updateItemAtIndex = useCallback(
+    (index: number, value: T) => {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        newArray[index] = value;
+        return newArray;
+      });
+    },
+    [setArray]
+  );
+
   const controls = useMemo<UseArrayStateControls<T>>(() => {
     return {
       push,
@@ -98,8 +111,19 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
       reverse,
       concat,
       fill,
+      updateItemAtIndex,
     };
-  }, [push, pop, clear, unshift, shift, reverse, concat, fill]);
+  }, [
+    push,
+    pop,
+    clear,
+    unshift,
+    shift,
+    reverse,
+    concat,
+    fill,
+    updateItemAtIndex,
+  ]);
 
   const returnValue = useMemo<UseArrayStateReturnValue<T>>(() => {
     return [array, controls];

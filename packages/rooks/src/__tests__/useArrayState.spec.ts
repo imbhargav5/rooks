@@ -89,4 +89,26 @@ describe("useArrayState", () => {
 
     expect(result.current[0]).toEqual([0, 0, 0]);
   });
+
+  it("should clear correctly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].clear();
+    });
+
+    expect(result.current[0]).toEqual([]);
+  });
+
+  it("should update item at index correctly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].updateItemAtIndex(1, 4);
+    });
+
+    expect(result.current[0]).toEqual([1, 4, 3]);
+  });
 });
