@@ -76,7 +76,7 @@
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@widgetbot/embed-api": "^1.2.0",
-    "@widgetbot/react-embed": "^1.5.0",
+    "@widgetbot/react-embed": "^1.6.0",
     "all-contributors-cli": "^6.20.4",
     "assert": "^2.0.0",
     "babel-core": "^7.0.0-bridge.0",
