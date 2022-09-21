@@ -122,4 +122,37 @@ describe("useArrayState", () => {
 
     expect(result.current[0]).toEqual([4, 5, 6]);
   });
+
+  it("should remove item at index correctly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].removeItemAtIndex(1);
+    });
+
+    expect(result.current[0]).toEqual([1, 3]);
+  });
+
+  it("should replace item at index correctly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].replaceItemAtIndex(1, 4);
+    });
+
+    expect(result.current[0]).toEqual([1, 4, 3]);
+  });
+
+  it("should splice correctly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+
+    act(() => {
+      result.current[1].splice(1, 1, 4);
+    });
+
+    expect(result.current[0]).toEqual([1, 4, 3]);
+  });
 });

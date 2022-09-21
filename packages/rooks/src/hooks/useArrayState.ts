@@ -10,6 +10,9 @@ type Fill<T> = (value: T, start?: number, end?: number) => void;
 type UpdateItemAtIndex<T> = (index: number, value: T) => void;
 type Clear = () => void;
 type SetArray<T> = (value: T[]) => void;
+type Splice<T> = (...args: Parameters<Array<T>["splice"]>) => void;
+type RemoveItemAtIndex<T> = (index: number) => void;
+type ReplaceItemAtIndex<T> = (index: number, value: T) => void;
 
 export type UseArrayStateControls<T> = {
   push: Push<T>;
@@ -22,6 +25,9 @@ export type UseArrayStateControls<T> = {
   fill: Fill<T>;
   updateItemAtIndex: UpdateItemAtIndex<T>;
   setArray: SetArray<T>;
+  splice: Splice<T>;
+  removeItemAtIndex: RemoveItemAtIndex<T>;
+  replaceItemAtIndex: ReplaceItemAtIndex<T>;
 };
 
 export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
@@ -106,6 +112,39 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     [setArray]
   );
 
+  const splice = useCallback<Splice<T>>(
+    (...args) => {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        newArray.splice(...args);
+        return newArray;
+      });
+    },
+    [setArray]
+  );
+
+  const removeItemAtIndex = useCallback<RemoveItemAtIndex<T>>(
+    (index: number) => {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        newArray.splice(index, 1);
+        return newArray;
+      });
+    },
+    [setArray]
+  );
+
+  const replaceItemAtIndex = useCallback<ReplaceItemAtIndex<T>>(
+    (index: number, value: T) => {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        newArray.splice(index, 1, value);
+        return newArray;
+      });
+    },
+    [setArray]
+  );
+
   const controls = useMemo<UseArrayStateControls<T>>(() => {
     return {
       push,
@@ -118,6 +157,9 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
       fill,
       updateItemAtIndex,
       setArray,
+      splice,
+      removeItemAtIndex,
+      replaceItemAtIndex,
     };
   }, [
     push,
@@ -130,6 +172,9 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     fill,
     updateItemAtIndex,
     setArray,
+    splice,
+    removeItemAtIndex,
+    replaceItemAtIndex,
   ]);
 
   const returnValue = useMemo<UseArrayStateReturnValue<T>>(() => {
