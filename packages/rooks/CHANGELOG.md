@@ -1,5 +1,11 @@
 # rooks
 
+## 7.3.0
+
+### Minor Changes
+
+- [`f2ee3a66`](https://github.com/imbhargav5/rooks/commit/f2ee3a66be7eda8c217a080574275d97f37cbea5) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add splice, removeItemAtIndex and replaceItemAtIndex controls for useArrayState
+
 ## 7.2.1
 
 ### Patch Changes
