@@ -1,5 +1,11 @@
 # rooks
 
+## 7.4.0
+
+### Minor Changes
+
+- [`85395a0c`](https://github.com/imbhargav5/rooks/commit/85395a0ceb992d32f420c4dd84b6937ba1a092ce) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add insertItemAtIndex and sort controls to useArrayState
+
 ## 7.3.0
 
 ### Minor Changes
