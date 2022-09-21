@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "7.2.1",
+  "version": "7.3.0",
   "description": "Essential React custom hooks ⚓ to super charge your components!",
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
