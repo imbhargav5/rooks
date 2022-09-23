@@ -13,13 +13,18 @@ This is a version of `useEffect` that accepts an async function.
 [//]: # "Main"
 
 ```jsx
-import { useDidMount } from "rooks";
+import { useAsyncEffect  } from "rooks";
+
+const foo = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("bar");
+  }, 300);
+});
+
 export default function App() {
   const [value, setValue] = useState(false);
   useAsyncEffect(async () => {
-    setTimeout(() => {
-      setValue(true);
-    }, 100);
+    await foo() 
   }, []);
 
   return value;
