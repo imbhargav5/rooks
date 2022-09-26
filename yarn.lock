@@ -1983,10 +1983,10 @@
     codesandbox-import-utils "^1.2.3"
     lodash.isequal "^4.5.0"
 
-"@codesandbox/sandpack-react@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.8.0.tgz#d10da497127ef1deb5e8a7d49066e4fe3132253c"
-  integrity sha512-KnSEC0KSmX7jL7jpVM2/XcfpBihqOdJFsWlI4Rp3FiPsDVEHR29uN5DGsTBLjNk4w/mokUNvhvKaoHgdj9Rdkg==
+"@codesandbox/sandpack-react@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.8.1.tgz#6a6d45053c7477e6d67390034da77f7d572ca54a"
+  integrity sha512-EU1hYRdHewIPatihPgWMcOkDQs7XeLVyE+JDP9IorfYPFgJLQjj8JZ3N1Pr9zqhiNZqU6BMEZGOta2xm9Pp3sA==
   dependencies:
     "@code-hike/classer" "^0.0.0-aa6efee"
     "@codemirror/closebrackets" "^0.19.0"
@@ -3949,10 +3949,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.55.tgz#c329cbd434c42164f846b909bd6f85b5537f6240"
   integrity sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==
 
-"@types/node@^18.7.22":
-  version "18.7.22"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.22.tgz#76f7401362ad63d9d7eefa7dcdfa5fcd9baddff3"
-  integrity sha512-TsmoXYd4zrkkKjJB0URF/mTIKPl+kVcbqClB2F/ykU7vil1BfWZVndOnpEIozPv4fURD28gyPFeIkW2G+KXOvw==
+"@types/node@^18.7.23":
+  version "18.7.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.23.tgz#75c580983846181ebe5f4abc40fe9dfb2d65665f"
+  integrity sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
