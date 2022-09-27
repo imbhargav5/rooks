@@ -1983,10 +1983,10 @@
     codesandbox-import-utils "^1.2.3"
     lodash.isequal "^4.5.0"
 
-"@codesandbox/sandpack-react@^1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.8.1.tgz#6a6d45053c7477e6d67390034da77f7d572ca54a"
-  integrity sha512-EU1hYRdHewIPatihPgWMcOkDQs7XeLVyE+JDP9IorfYPFgJLQjj8JZ3N1Pr9zqhiNZqU6BMEZGOta2xm9Pp3sA==
+"@codesandbox/sandpack-react@^1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-1.8.4.tgz#f9f6f4ce165478a1ad8c3660534ab32e4cf581be"
+  integrity sha512-5YxNzJAy5AYYBqgnRpT2s10/f+3Iqnw8w6CvxSKQNQszPhpylO5p6wZ6uA2NRzgmpvjhypREvJgF9X2EKEqX9w==
   dependencies:
     "@code-hike/classer" "^0.0.0-aa6efee"
     "@codemirror/closebrackets" "^0.19.0"
