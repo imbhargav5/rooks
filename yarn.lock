@@ -3832,10 +3832,10 @@
   resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.0.tgz#9140779736aa2655635ee756e2467d787cfe8a2a"
   integrity sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
 
-"@types/inquirer@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-9.0.1.tgz#b816a888dccbf13bd0053e74d89fbd1fa78fc6c2"
-  integrity sha512-I4eZdYXpFHj0pAzMndJFQMu/4hCc6Z340au9lvxHofGJnFmVgckxR/t9jRzsOVviajsOmEL+OABx+e0e28IbNw==
+"@types/inquirer@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-9.0.2.tgz#846b141c17608aad9fc62572280753bb6ec09184"
+  integrity sha512-MQc3adiIh/rDxLkjnvL03rSvuHg+/dKif4dn/MRsnE+oU1bAdyuDbW0w+ewR1M/M/u/Z0YAbw7NZYCpgQ5SW8A==
   dependencies:
     "@types/through" "*"
     rxjs "^7.2.0"
