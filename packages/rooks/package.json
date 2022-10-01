@@ -157,7 +157,7 @@
     "webpack-cli": "^4.10.0",
     "write-pkg": "5.1.0",
     "wsrun": "^5.2.4",
-    "yargs": "^17.5.1"
+    "yargs": "^17.6.0"
   },
   "peerDependencies": {
     "react": "^16.8.0  || ^17.0.0 || ^18.0.0",
