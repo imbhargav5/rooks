@@ -282,6 +282,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="http://drk.me.uk/"><img src="https://avatars.githubusercontent.com/u/8918168?v=4?s=100" width="100px;" alt="Aleksandr Soldatov"/><br /><sub><b>Aleksandr Soldatov</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=aso1datov" title="Code">💻</a></td>
     </tr>
   </tbody>
+  <tfoot>
+
+  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
