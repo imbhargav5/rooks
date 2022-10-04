@@ -57,7 +57,7 @@ function useSelectableList<T>(
         if (typeof index !== "undefined") {
           setCurrentIndex(index);
         } else if (typeof value !== "undefined") {
-          const valueIndex = list.indexOf(value);
+          const valueIndex = list.findIndex(i => (i?.value || i?.id || i) === value);
           if (valueIndex > -1) {
             setCurrentIndex(valueIndex);
           } else {
