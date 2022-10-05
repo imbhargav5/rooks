@@ -139,7 +139,7 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "shelljs": "0.8.5",
     "size-limit": "^8.1.0",
-    "terser": "^5.15.0",
+    "terser": "^5.15.1",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "tsconfig": "*",
