@@ -29,7 +29,7 @@
     "@types/react-syntax-highlighter": "^15.5.5",
     "eslint": "8.25.0",
     "eslint-config-custom": "*",
-    "next-transpile-modules": "9.0.0",
+    "next-transpile-modules": "9.1.0",
     "remark-comment": "^1.0.0",
     "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.1",
