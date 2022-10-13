@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@codesandbox/sandpack-react": "^1.14.2",
-    "@mdx-js/react": "^2.1.4",
+    "@mdx-js/react": "^2.1.5",
     "@nextui-org/react": "^1.0.0-beta.10",
     "@stitches/react": "^1.2.8",
     "gray-matter": "^4.0.3",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@mdx-js/loader": "^2.1.5",
     "@next/mdx": "^12.3.1",
-    "@types/node": "^18.8.3",
+    "@types/node": "^18.8.5",
     "@types/react": "18.0.21",
     "@types/react-is": "^17.0.3",
     "@types/react-syntax-highlighter": "^15.5.5",
