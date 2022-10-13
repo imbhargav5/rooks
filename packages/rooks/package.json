@@ -85,7 +85,7 @@
     "babel-preset-minify": "0.5.2",
     "browser-env": "3.3.0",
     "camel-case": "^4.1.2",
-    "chalk": "5.1.0",
+    "chalk": "5.1.2",
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "conventional-changelog-cli": "^2.2.2",
