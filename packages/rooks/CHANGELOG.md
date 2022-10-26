@@ -1,5 +1,11 @@
 # rooks
 
+## 7.4.1
+
+### Patch Changes
+
+- [#1556](https://github.com/imbhargav5/rooks/pull/1556) [`2511d61e`](https://github.com/imbhargav5/rooks/commit/2511d61e5943e32ccbe7804132115c8e62fc2ea0) Thanks [@reflog](https://github.com/reflog)! - fix(useMediaMatch): safari 13.1 addListener fix
+
 ## 7.4.0
 
 ### Minor Changes
