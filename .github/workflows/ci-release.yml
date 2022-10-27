@@ -27,8 +27,8 @@ jobs:
       - name: ⎔ CI Setup
         uses: ./.github/actions/ci-setup
 
-      - name: test
-        run: yarn run coverage
+      - name: run all checks and get coverage
+        run: yarn run all-checks
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2

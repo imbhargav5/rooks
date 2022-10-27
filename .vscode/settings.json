@@ -14,7 +14,6 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.packageManager": "yarn",
-  "eslint.runtime": "node",
   "eslint.validate": [
     "javascript",
     "javascriptreact",

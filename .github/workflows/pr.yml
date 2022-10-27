@@ -16,8 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/ci-setup
-      - name: Get coverage
-        run: yarn run coverage
+      - name: run all checks and get coverage
+        run: yarn run all-checks
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:

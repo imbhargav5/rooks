@@ -25,6 +25,7 @@
     "test": "turbo run test",
     "start": "turbo run start",
     "coverage": "turbo run coverage",
+    "all-checks": "turbo run all-checks",
     "commit": "cz",
     "version-packages": "changeset version",
     "changeset": "changeset",

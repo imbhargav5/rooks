@@ -11,7 +11,7 @@ type UpdateItemAtIndex<T> = (index: number, value: T) => void;
 type Clear = () => void;
 type SetArray<T> = (value: T[]) => void;
 type Splice<T> = (...args: Parameters<Array<T>["splice"]>) => void;
-type RemoveItemAtIndex<T> = (index: number) => void;
+type RemoveItemAtIndex = (index: number) => void;
 type ReplaceItemAtIndex<T> = (index: number, value: T) => void;
 type InsertItemAtIndex<T> = (index: number, value: T) => void;
 type Sort<T> = (compareFn?: (a: T, b: T) => number) => void;
@@ -28,7 +28,7 @@ export type UseArrayStateControls<T> = {
   updateItemAtIndex: UpdateItemAtIndex<T>;
   setArray: SetArray<T>;
   splice: Splice<T>;
-  removeItemAtIndex: RemoveItemAtIndex<T>;
+  removeItemAtIndex: RemoveItemAtIndex;
   replaceItemAtIndex: ReplaceItemAtIndex<T>;
   insertItemAtIndex: InsertItemAtIndex<T>;
   sort: Sort<T>;
@@ -133,7 +133,7 @@ function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
     [setArray]
   );
 
-  const removeItemAtIndex = useCallback<RemoveItemAtIndex<T>>(
+  const removeItemAtIndex = useCallback<RemoveItemAtIndex>(
     (index: number) => {
       setArray((prevArray) => {
         const newArray = [...prevArray];

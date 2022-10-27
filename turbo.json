@@ -18,6 +18,11 @@
       "cache": false,
       "outputs": ["src/coverage/**"]
     },
+    "all-checks": {
+      "dependsOn": ["coverage", "rooks#typecheck", "lint"],
+      "cache": false,
+      "outputs": []
+    },
     "test": {
       "cache": false,
       "dependsOn": ["rooks#build"],
