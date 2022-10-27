@@ -2,6 +2,7 @@ import type { MutableRefObject } from "react";
 import { useEffect, useRef, useCallback } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
 import { noop } from "@/utils/noop";
+import { ElementOrNull } from "@/utils/utils";
 
 type TPressedKeyMapping = {
   [key: string]: boolean | undefined;
@@ -16,7 +17,9 @@ type Options = {
    * target ref on which the events should be listened. If no target is specified,
    * events are listened to on the document
    */
-  target?: MutableRefObject<Document> | MutableRefObject<HTMLElement | null | undefined>;
+  target?:
+    | MutableRefObject<Document>
+    | MutableRefObject<ElementOrNull | undefined>;
   /**
    * when boolean to enable and disable events, when passed false
    * remove the eventlistener if any

@@ -20,7 +20,7 @@ interface FocusWithinResult<T> {
  * @description Handles focus events for the target component.
  * @see {@link https://react-hooks.org/docs/useFocusWithin}
  */
-const useFocusWithin = <T extends HTMLElement>(
+const useFocusWithin = <T extends Element>(
   props: FocusWithinProps
 ): FocusWithinResult<T> => {
   const { onBlurWithin, onFocusWithin, onFocusWithinChange } = props;

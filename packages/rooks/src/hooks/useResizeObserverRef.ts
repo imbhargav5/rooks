@@ -1,6 +1,6 @@
 import { noop } from "@/utils/noop";
 import { useCallback, useEffect, useState } from "react";
-import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import type { CallbackRef, ElementOrNull } from "../utils/utils";
 import { useFreshTick } from "./useFreshTick";
 
 const config: ResizeObserverOptions = {
@@ -23,7 +23,7 @@ function useResizeObserverRef(
   callback: ResizeObserverCallback,
   options: ResizeObserverOptions = config
 ): [CallbackRef] {
-  const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const [node, setNode] = useState<ElementOrNull>(null);
   const freshCallback = useFreshTick(callback);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function useResizeObserverRef(
     return noop;
   }, [node, freshCallback, options]);
 
-  const ref: CallbackRef = useCallback((node: HTMLElementOrNull) => {
+  const ref: CallbackRef = useCallback((node: ElementOrNull) => {
     setNode(node);
   }, []);
 

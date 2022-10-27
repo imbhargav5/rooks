@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { doesIdentifierMatchKeyboardEvent } from "../utils/doesIdentifierMatchKeyboardEvent";
-import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import type { CallbackRef, ElementOrNull } from "../utils/utils";
 import { noop } from "@/utils/noop";
 
 type TrackedKeyEvents = "keydown" | "keypress" | "keyup";
@@ -38,9 +38,9 @@ function useKeyRef(
   callback: Callback,
   options?: Options
 ): CallbackRef {
-  const [targetNode, setTargetNode] = useState<HTMLElementOrNull>(null);
+  const [targetNode, setTargetNode] = useState<ElementOrNull>(null);
 
-  const ref = useCallback((node: HTMLElement | null) => {
+  const ref = useCallback((node: ElementOrNull) => {
     setTargetNode(node);
   }, []);
 

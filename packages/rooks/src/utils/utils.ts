@@ -1,13 +1,14 @@
 import type { MutableRefObject, Ref } from "react";
 
 export type HTMLElementOrNull = HTMLElement | null;
+export type ElementOrNull = Element | null;
 export type RefElementOrNull<T> = T | null;
 
-export type CallbackRef<T extends HTMLElement | null = HTMLElementOrNull> = (
+export type CallbackRef<T extends ElementOrNull = ElementOrNull> = (
   node: T
 ) => void;
 
-export type AnyRef<T extends HTMLElement | null = HTMLElementOrNull> =
+export type AnyRef<T extends ElementOrNull = ElementOrNull> =
   | CallbackRef<T>
   | MutableRefObject<T>;
 

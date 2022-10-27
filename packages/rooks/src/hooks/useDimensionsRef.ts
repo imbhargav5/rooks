@@ -7,6 +7,7 @@ import { useState, useCallback, useLayoutEffect } from "react";
 import type { LegacyRef } from "react";
 import { useOnWindowResize } from "./useOnWindowResize";
 import { useOnWindowScroll } from "./useOnWindowScroll";
+import { ElementOrNull } from "@/utils/utils";
 
 type UseDimensionsRefReturn = {
   bottom: number;
@@ -22,14 +23,14 @@ type UseDimensionsRefReturn = {
 type UseDimensionsHook = [
   LegacyRef<HTMLDivElement> | undefined,
   UseDimensionsRefReturn,
-  HTMLElement | null
+  ElementOrNull
 ];
 
 type UseDimensionsRefArgs = {
   updateOnResize?: boolean;
   updateOnScroll?: boolean;
 };
-const getDimensionObject = (node: HTMLElement): UseDimensionsRefReturn => {
+const getDimensionObject = (node: Element): UseDimensionsRefReturn => {
   const rect = node.getBoundingClientRect();
 
   return {
@@ -50,7 +51,7 @@ const noWindowReturnValue: UseDimensionsHook = [undefined, null, null];
  * useDimensionsRef
  * @param updateOnScroll Whether to update on scroll
  * @param updateOnResize Whether to update on resize
- * @returns [React.Ref<HTMLDivElement>, UseDimensionsRefReturn, HTMLElement | null]
+ * @returns [React.Ref<HTMLDivElement>, UseDimensionsRefReturn, ElementOrNull]
  * @see https://react-hooks.org/docs/useDimensionsRef
  */
 export const useDimensionsRef = ({
@@ -58,9 +59,9 @@ export const useDimensionsRef = ({
   updateOnResize = true,
 }: UseDimensionsRefArgs = {}): UseDimensionsHook => {
   const [dimensions, setDimensions] = useState<UseDimensionsRefReturn>(null);
-  const [node, setNode] = useState<HTMLElement | null>(null);
+  const [node, setNode] = useState<ElementOrNull>(null);
 
-  const ref = useCallback((nodeFromCallback: HTMLElement | null) => {
+  const ref = useCallback((nodeFromCallback: ElementOrNull) => {
     setNode(nodeFromCallback);
   }, []);
 

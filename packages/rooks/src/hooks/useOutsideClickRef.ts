@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
-import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
+import type { ElementOrNull, CallbackRef } from "../utils/utils";
 import { noop } from "@/utils/noop";
 
 /**
@@ -17,7 +17,7 @@ function useOutsideClickRef(
 ): [CallbackRef] {
   const savedHandler = useRef(handler);
 
-  const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const [node, setNode] = useState<ElementOrNull>(null);
 
   const memoizedCallback = useCallback(
     (event: MouseEvent) => {
@@ -32,7 +32,7 @@ function useOutsideClickRef(
     savedHandler.current = handler;
   });
 
-  const ref = useCallback((nodeElement: HTMLElementOrNull) => {
+  const ref = useCallback((nodeElement: ElementOrNull) => {
     setNode(nodeElement);
   }, []);
 

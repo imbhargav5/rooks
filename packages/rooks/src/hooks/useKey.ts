@@ -15,7 +15,7 @@ type Options = {
    * Please use useKeyRef instead if you want to use with callback refs.
    * If no target is specified, events are listened to on the window. Defaults to window.
    */
-  target?: RefObject<HTMLElement>;
+  target?: RefObject<Element>;
   /**
    * Condition which if true, will enable the event listeners
    */

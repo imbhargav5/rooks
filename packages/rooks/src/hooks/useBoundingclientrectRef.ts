@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import type { CallbackRef } from "../utils/utils";
 import { useForkRef } from "./useForkRef";
 import { useMutationObserverRef } from "./useMutationObserverRef";
 
@@ -7,7 +7,7 @@ import { useMutationObserverRef } from "./useMutationObserverRef";
  * @param element HTML element whose boundingclientrect is needed
  * @returns DOMRect
  */
-function getBoundingClientRect(element: HTMLElement): DOMRect {
+function getBoundingClientRect(element: Element): DOMRect {
   return element.getBoundingClientRect();
 }
 
@@ -24,7 +24,7 @@ function useBoundingclientrectRef(): [
   () => void
 ] {
   const [domRect, setDomRect] = useState<DOMRect | null>(null);
-  const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const [node, setNode] = useState<Element | null>(null);
 
   const update = useCallback(() => {
     setDomRect(node ? getBoundingClientRect(node) : null);
@@ -34,7 +34,7 @@ function useBoundingclientrectRef(): [
     update();
   }, [update]);
 
-  const ref = useCallback((nodeElement: HTMLElement | null) => {
+  const ref = useCallback((nodeElement: Element | null) => {
     setNode(nodeElement);
   }, []);
 

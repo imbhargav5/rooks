@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
+import type { CallbackRef, ElementOrNull } from "../utils/utils";
 import { noop } from "@/utils/noop";
 
 const config: MutationObserverInit = {
@@ -23,7 +23,7 @@ function useMutationObserverRef(
   callback: MutationCallback,
   options: MutationObserverInit = config
 ): [CallbackRef] {
-  const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const [node, setNode] = useState<ElementOrNull>(null);
 
   useEffect(() => {
     // Create an observer instance linked to the callback function
@@ -41,7 +41,7 @@ function useMutationObserverRef(
     return noop;
   }, [node, callback, options]);
 
-  const ref: CallbackRef = useCallback((nodeElement: HTMLElementOrNull) => {
+  const ref: CallbackRef = useCallback((nodeElement: ElementOrNull) => {
     setNode(nodeElement);
   }, []);
 

@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
+import type { ElementOrNull, CallbackRef } from "../utils/utils";
 import { noop } from "@/utils/noop";
 
 const config: IntersectionObserverInit = {
@@ -24,7 +24,7 @@ function useIntersectionObserverRef(
 ): [CallbackRef] {
   const { root = null, rootMargin, threshold } = options;
 
-  const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const [node, setNode] = useState<ElementOrNull>(null);
 
   useEffect(() => {
     // Create an observer instance linked to the callback function
@@ -42,7 +42,7 @@ function useIntersectionObserverRef(
     return noop;
   }, [node, callback, root, rootMargin, threshold, options]);
 
-  const ref = useCallback((nodeElement: HTMLElementOrNull) => {
+  const ref = useCallback((nodeElement: ElementOrNull) => {
     setNode(nodeElement);
   }, []);
 

@@ -1,3 +1,4 @@
+import { ElementOrNull } from "@/utils/utils";
 import type { MutableRefObject } from "react";
 import { useState, useCallback } from "react";
 import { useDidMount } from "./useDidMount";
@@ -7,7 +8,7 @@ import { useMutationObserver } from "./useMutationObserver";
  * @param element HTML element whose boundingclientrect is needed
  * @returns DOMRect
  */
-function getBoundingClientRect(element: HTMLElement): DOMRect | null {
+function getBoundingClientRect(element: Element): DOMRect | null {
   return element.getBoundingClientRect();
 }
 
@@ -19,7 +20,7 @@ function getBoundingClientRect(element: HTMLElement): DOMRect | null {
  * @see https://react-hooks.org/docs/useBoundingclientRect
  */
 function useBoundingclientrect(
-  ref: MutableRefObject<HTMLElement | null>
+  ref: MutableRefObject<ElementOrNull>
 ): DOMRect | null {
   const [domRect, setDomRect] = useState<DOMRect | null>(null);
 

@@ -26,8 +26,8 @@ function useEventListenerRef(
     | EventListenerOptions
     | boolean = {},
   isLayoutEffect = false
-): (refElement: RefElementOrNull<HTMLElement>) => void {
-  const [ref, element] = useRefElement<HTMLElement>();
+): (refElement: RefElementOrNull<Element>) => void {
+  const [ref, element] = useRefElement<Element>();
   const freshCallback = useFreshTick(callback);
   const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
 

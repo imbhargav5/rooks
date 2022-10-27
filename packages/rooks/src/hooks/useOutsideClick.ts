@@ -1,6 +1,7 @@
 import type { MutableRefObject } from "react";
 import { useEffect, useRef, useCallback } from "react";
 import { noop } from "@/utils/noop";
+import { ElementOrNull } from "@/utils/utils";
 
 /**
  * useOutsideClick hook
@@ -33,7 +34,7 @@ import { noop } from "@/utils/noop";
  * ```
  */
 function useOutsideClick(
-  ref: MutableRefObject<HTMLElement | null>,
+  ref: MutableRefObject<ElementOrNull>,
   handler: (event: MouseEvent) => void,
   when = true
 ): void {
