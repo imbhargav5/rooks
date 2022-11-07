@@ -1,5 +1,11 @@
 # rooks
 
+## 7.4.2
+
+### Patch Changes
+
+- [`780c00fb`](https://github.com/imbhargav5/rooks/commit/780c00fb47a7b0a36a3041815697291ec8e462ef) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Update website link
+
 ## 7.4.1
 
 ### Patch Changes
