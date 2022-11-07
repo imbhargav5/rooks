@@ -58,7 +58,7 @@ const updatePackageListToMarkdown = async () => {
     }, {});
 
     const hookEntryMarkdownTemplate = ({ name, description }) =>
-      `[${name}](https://react-hooks.org/docs/${name}) - ${description}`;
+      `[${name}](https://rooks.vercel.app/docs/${name}) - ${description}`;
 
     const hooksByCategoryKeys = Object.keys(hooksByCategory).sort();
     const hooksListByCategoryMDAST = {

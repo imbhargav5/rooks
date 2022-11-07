@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  *
  * @param callback The callback to fire
  * @param when The condition which needs to be true
- * @see https://react-hooks.org/docs/useEffectOnceWhen
+ * @see https://rooks.vercel.app/docs/useEffectOnceWhen
  */
 function useEffectOnceWhen(callback: () => void, when = true): void {
   const hasRunOnceRef = useRef(false);

@@ -7,7 +7,7 @@ type Callback = () => void;
  * Fires a callback just before component unmounts
  *
  * @param {Function} callback Callback to be called before unmount
- * @see https://react-hooks.org/docs/useWillUnmount
+ * @see https://rooks.vercel.app/docs/useWillUnmount
  */
 function useWillUnmount(callback: Callback): void {
   // run only once

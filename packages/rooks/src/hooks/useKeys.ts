@@ -16,7 +16,9 @@ type Options = {
    * target ref on which the events should be listened. If no target is specified,
    * events are listened to on the document
    */
-  target?: MutableRefObject<Document> | MutableRefObject<HTMLElement | null | undefined>;
+  target?:
+    | MutableRefObject<Document>
+    | MutableRefObject<HTMLElement | null | undefined>;
   /**
    * when boolean to enable and disable events, when passed false
    * remove the eventlistener if any
@@ -41,7 +43,7 @@ const defaultOptions = {
  * @param keysList - list of keys to listen to
  * @param callback  - callback to be called when a key is pressed
  * @param options - options to be passed to the event listener
- * @see https://react-hooks.org/docs/useKeys
+ * @see https://rooks.vercel.app/docs/useKeys
  */
 function useKeys(
   keysList: string[],

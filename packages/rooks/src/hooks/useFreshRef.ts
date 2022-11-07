@@ -10,7 +10,7 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
  * @param preferLayoutEffect Should the value be updated using a layout effect
  * or a passive effect. Defaults to false.
  * @returns A ref containing the fresh value
- * @see https://react-hooks.org/docs/useFreshRef
+ * @see https://rooks.vercel.app/docs/useFreshRef
  */
 function useFreshRef<T>(
   value: T,

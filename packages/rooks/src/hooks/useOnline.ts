@@ -19,7 +19,7 @@ function getIsOnline(): boolean | null {
  * Returns true if navigator is online, false if not.
  *
  * @returns {boolean} The value of navigator.onLine
- * @see https://react-hooks.org/docs/useOnline
+ * @see https://rooks.vercel.app/docs/useOnline
  */
 function useOnline(): boolean | null {
   const [isOnline, setIsOnline] = useState<boolean | null>(() => getIsOnline());

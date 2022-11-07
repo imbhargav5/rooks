@@ -11,7 +11,7 @@ type Callback<T> = (...args: T[]) => void;
  * @param callback The callback to throttle
  * @param timeout Throttle timeout
  * @returns [Callback, isReady] The throttled callback and if it is currently throttled
- * @see https://react-hooks.org/docs/useThrottle
+ * @see https://rooks.vercel.app/docs/useThrottle
  */
 function useThrottle<T>(
   callback: Callback<T>,

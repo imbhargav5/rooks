@@ -17,7 +17,7 @@ const config: ResizeObserverOptions = {
  * @param {ResizeObserverCallback} callback Function that needs to be fired on resize
  * @param {ResizeObserverOptions} options An options object allowing you to set options for the observation
  * @returns {[CallbackRef]} callbackref
- * @see https://react-hooks.org/docs/useResizeObserverRef
+ * @see https://rooks.vercel.app/docs/useResizeObserverRef
  */
 function useResizeObserverRef(
   callback: ResizeObserverCallback,

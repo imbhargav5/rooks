@@ -14,7 +14,7 @@ import { useRef, useEffect, useCallback } from "react";
  * @param options.maxWait The maximum time func is allowed to be delayed before it’s invoked.
  * @param options.trailing Specify invoking on the trailing edge of the timeout.
  * @returns Returns the new debounced function.
- * @see https://react-hooks.org/docs/useDebounce
+ * @see https://rooks.vercel.app/docs/useDebounce
  */
 function useDebounce<T extends AnyFunction>(
   callback: T,

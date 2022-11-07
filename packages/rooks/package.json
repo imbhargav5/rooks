@@ -26,7 +26,7 @@
   "engines": {
     "node": ">=v10.24.1"
   },
-  "homepage": "https://react-hooks.org",
+  "homepage": "https://rooks.vercel.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/imbhargav5/rooks.git"

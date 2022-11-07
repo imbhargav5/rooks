@@ -11,7 +11,7 @@ interface FocusResult<T> {
 /**
  * useFocus
  * @description Handles focus events for the immediate target element.
- * @see {@link https://react-hooks.org/docs/useFocus}
+ * @see {@link https://rooks.vercel.app/docs/useFocus}
  */
 const useFocus = <T extends HTMLElement>(props: FocusProps): FocusResult<T> => {
   const {

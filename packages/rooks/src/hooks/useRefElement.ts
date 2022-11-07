@@ -6,7 +6,7 @@ import type { RefElementOrNull } from "../utils/utils";
  * Helps bridge gap between callback ref and state
  * Manages the element called with callback ref api using state variable
  * @returns {[RefElementOrNull, (element: HTMLElementOrNull) => void]}
- * @see https://react-hooks.org/docs/useRefElement
+ * @see https://rooks.vercel.app/docs/useRefElement
  */
 function useRefElement<T>(): [
   (refElement: RefElementOrNull<T>) => void,

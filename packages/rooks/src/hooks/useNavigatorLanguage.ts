@@ -18,7 +18,7 @@ function getLanguage(): Language {
  * Returns the language of the navigator
  *
  * @returns {Language}
- * @see https://react-hooks.org/docs/useNavigatorLanguage
+ * @see https://rooks.vercel.app/docs/useNavigatorLanguage
  */
 export function useNavigatorLanguage(): Language {
   const [language, setLanguage] = useState<Language>(getLanguage);

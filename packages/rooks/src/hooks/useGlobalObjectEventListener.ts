@@ -33,7 +33,7 @@ function useGlobalObjectEventListener(
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} when Should the event listener be active
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
- * @see https://react-hooks.org/docs/useGlobalObjectEventListener
+ * @see https://rooks.vercel.app/docs/useGlobalObjectEventListener
  */
 function useGlobalObjectEventListener<GlobalObject extends Window | Document>(
   globalObject: GlobalObject,

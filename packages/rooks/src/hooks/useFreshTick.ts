@@ -5,7 +5,7 @@ type CallbackType<T> = (...args: T[]) => void;
  * useFreshTick
  * @param callback The callback to be called on mount
  * @returns A fresh callback.
- * @see https://react-hooks.org/docs/useFreshCallback
+ * @see https://rooks.vercel.app/docs/useFreshCallback
  */
 function useFreshTick<T>(callback: CallbackType<T>): CallbackType<T> {
   const freshRef = useFreshRef(callback);

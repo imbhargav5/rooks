@@ -13,7 +13,7 @@ const defaultToggleFunction = <S>(value: S) => !value as unknown as S;
  *
  * @param initialValue Initial value of the toggle, which will be false if not provided.
  * @returns [value, setValue]
- * @see https://react-hooks.org/docs/useToggle
+ * @see https://rooks.vercel.app/docs/useToggle
  * @example
  * const [boolean, toggle] = useToggle();
  * // value is false

@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
  * Manages a queue with react hooks.
  * @param initialList Initial value of the list
  * @returns The list and controls to modify the queue
- * @see https://react-hooks.org/docs/useQueueState
+ * @see https://rooks.vercel.app/docs/useQueueState
  */
 function useQueueState<T>(initialList: T[]): [
   T[],
