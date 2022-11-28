@@ -11,13 +11,20 @@ import { useEffect, useMemo, useState } from "react";
  * @see https://rooks.vercel.app/docs/useMediaMatch
  */
 function useMediaMatch(query: string): boolean {
-  const matchMedia = useMemo<MediaQueryList>(
-    () => window.matchMedia(query),
-    [query]
+  const isWindowDefined = typeof window !== "undefined";
+  const matchMedia = useMemo<MediaQueryList | undefined>(
+    () => (isWindowDefined ? window.matchMedia(query) : undefined),
+    [query, isWindowDefined]
   );
-  const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
+  const [matches, setMatches] = useState<boolean>(() =>
+    (isWindowDefined && matchMedia ? matchMedia.matches : false)
+  );
 
   useEffect(() => {
+    if (!matchMedia) {
+      return;
+    }
+
     setMatches(matchMedia.matches);
     const listener = (event: MediaQueryListEventMap["change"]) =>
       setMatches(event.matches);

@@ -78,6 +78,38 @@ describe("useMediaMatch", () => {
   });
 });
 
+it("should not throw an exception when window is undefined", async () => {
+  expect.hasAssertions();
+  const matchMedia = jest.fn<MediaQueryList, [string]>();
+  const addEventListener = jest.fn<
+    void,
+    [string, (event_: MediaQueryListEventMap["change"]) => void]
+  >();
+  const removeEventListener = jest.fn<void, [string, () => void]>();
+
+  matchMedia.mockReturnValue({
+    addEventListener,
+    matches: true,
+    removeEventListener,
+  } as any);
+
+  const windowSpy = jest.spyOn(window, "window", "get");
+
+  windowSpy.mockImplementation(() => undefined as any);
+
+  const { result, unmount } = renderHook(({ query }) => useMediaMatch(query), {
+    initialProps: { query: "print" },
+  });
+
+  expect(matchMedia).not.toHaveBeenCalled();
+  expect(addEventListener).not.toHaveBeenCalled();
+  expect(result.current).toBe(false);
+
+  // Unmount, ensuring we unbind the listener
+  unmount();
+  windowSpy.mockRestore();
+});
+
 function expectDefined<T>(t: T | undefined): T {
   expect(t).toBeDefined();
 
