@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
  * @see https://rooks.vercel.app/docs/useMediaMatch
  */
 function useMediaMatch(query: string): boolean {
-  const isWindowDefined = typeof window !== "undefined";
+  const isWindowDefined = typeof window !== "undefined" && window.matchMedia;
   const matchMedia = useMemo<MediaQueryList | undefined>(
     () => (isWindowDefined ? window.matchMedia(query) : undefined),
     [query, isWindowDefined]
@@ -21,7 +21,7 @@ function useMediaMatch(query: string): boolean {
   );
 
   useEffect(() => {
-    if (!matchMedia) {
+    if (!isWindowDefined || !matchMedia) {
       return;
     }
 
@@ -36,9 +36,9 @@ function useMediaMatch(query: string): boolean {
       matchMedia.addListener(listener);
       return () => matchMedia.removeListener(listener);
     }
-  }, [matchMedia]);
+  }, [isWindowDefined, matchMedia]);
 
-  if (typeof window === "undefined") {
+  if (isWindowDefined) {
     console.warn("useMediaMatch cannot function as window is undefined.");
 
     return false;
