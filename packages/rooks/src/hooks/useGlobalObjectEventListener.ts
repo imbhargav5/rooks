@@ -4,19 +4,19 @@ import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import { warning } from "./warning";
 import type { ListenerOptions } from "@/types/utils";
 
-function useGlobalObjectEventListener(
+function useGlobalObjectEventListener<T extends keyof DocumentEventMap>(
   globalObject: Document,
-  eventName: keyof DocumentEventMap,
-  callback: EventListener,
+  eventName: T,
+  callback: (event: DocumentEventMap[T]) => void,
   listenerOptions: ListenerOptions,
   when: boolean,
   isLayoutEffect: boolean
 ): void;
 
-function useGlobalObjectEventListener(
+function useGlobalObjectEventListener<T extends keyof WindowEventMap>(
   globalObject: Window,
-  eventName: keyof WindowEventMap,
-  callback: EventListener,
+  eventName: T,
+  callback: (event: WindowEventMap[T]) => void,
   listenerOptions: ListenerOptions,
   when: boolean,
   isLayoutEffect: boolean
@@ -35,10 +35,14 @@ function useGlobalObjectEventListener(
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://rooks.vercel.app/docs/useGlobalObjectEventListener
  */
-function useGlobalObjectEventListener<GlobalObject extends Window | Document>(
-  globalObject: GlobalObject,
-  eventName: keyof DocumentEventMap | keyof WindowEventMap,
-  callback: EventListener,
+function useGlobalObjectEventListener<T extends keyof WindowEventMap | keyof DocumentEventMap>(
+  globalObject: Window | Document,
+  eventName: T,
+  callback: T extends keyof WindowEventMap
+    ? (event: WindowEventMap[K]) => void
+    : T extends keyof DocumentEventMap
+    ? (event: DocumentEventMap[K]) => void
+    : never,
   listenerOptions: ListenerOptions = {},
   when = true,
   isLayoutEffect = false
@@ -52,12 +56,12 @@ function useGlobalObjectEventListener<GlobalObject extends Window | Document>(
       "[useGlobalObjectEventListener]: Cannot attach event handlers to undefined."
     );
     if (typeof globalObject !== "undefined" && when) {
-      globalObject.addEventListener(eventName, freshCallback, listenerOptions);
+      globalObject.addEventListener(eventName, freshCallback as EventListener, listenerOptions);
 
       return () => {
         globalObject.removeEventListener(
           eventName,
-          freshCallback,
+          freshCallback as EventListener,
           listenerOptions
         );
       };
