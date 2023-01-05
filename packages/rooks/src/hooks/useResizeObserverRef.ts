@@ -19,7 +19,7 @@ const config: ResizeObserverOptions = {
  * @see https://rooks.vercel.app/docs/useResizeObserverRef
  */
 function useResizeObserverRef(
-  callback: ResizeObserverCallback,
+  callback: ResizeObserverCallback | undefined,
   options: ResizeObserverOptions = config
 ): [CallbackRef] {
   const { box } = options;
@@ -29,13 +29,13 @@ function useResizeObserverRef(
 
   const handleResizeObserver = useCallback<ResizeObserverCallback>(
     (...args) => {
-      callbackRef.current(...args);
+      callbackRef.current?.(...args);
     },
     []
   );
 
   useEffect(() => {
-    if (node) {
+    if (node && callbackRef.current) {
       // Create an observer instance linked to the callback function
       const observer = new ResizeObserver(handleResizeObserver);
 
