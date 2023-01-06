@@ -27,7 +27,9 @@ function useIntersectionObserverRef(
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 
   const callbackRef = useRef(callback);
-  callbackRef.current = callback;
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
 
   const handleIntersectionObserver = useCallback<IntersectionObserverCallback>(
     (...args) => {
