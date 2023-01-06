@@ -40,7 +40,7 @@ function useIntersectionObserverRef(
 
   useEffect(() => {
     // Create an observer instance linked to the callback function
-    if (node && callbackRef.current) {
+    if (node) {
       const observer = new IntersectionObserver(handleIntersectionObserver, {
         root,
         rootMargin,
