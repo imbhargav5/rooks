@@ -25,7 +25,10 @@ function useResizeObserverRef(
   const { box } = options;
   const [node, setNode] = useState<HTMLElementOrNull>(null);
   const callbackRef = useRef(callback);
-  callbackRef.current = callback;
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
 
   const handleResizeObserver = useCallback<ResizeObserverCallback>(
     (...args) => {
