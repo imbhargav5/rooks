@@ -651,6 +651,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mahendrjy",
+      "name": "Mahendra Choudhary",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31067376?v=4",
+      "profile": "http://pka.netlify.app/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "7777chaitanya",
+      "name": "Chaitanya J",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56331036?v=4",
+      "profile": "https://github.com/7777chaitanya",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
