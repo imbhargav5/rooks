@@ -1,7 +1,6 @@
 import { noop } from "@/utils/noop";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CallbackRef, HTMLElementOrNull } from "../utils/utils";
-import { useFreshTick } from "./useFreshTick";
 
 const config: ResizeObserverOptions = {
   box: "content-box",
@@ -20,26 +19,38 @@ const config: ResizeObserverOptions = {
  * @see https://rooks.vercel.app/docs/useResizeObserverRef
  */
 function useResizeObserverRef(
-  callback: ResizeObserverCallback,
+  callback: ResizeObserverCallback | undefined,
   options: ResizeObserverOptions = config
 ): [CallbackRef] {
+  const { box } = options;
   const [node, setNode] = useState<HTMLElementOrNull>(null);
-  const freshCallback = useFreshTick(callback);
+  const callbackRef = useRef(callback);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+
+  const handleResizeObserver = useCallback<ResizeObserverCallback>(
+    (...args) => {
+      callbackRef.current?.(...args);
+    },
+    []
+  );
 
   useEffect(() => {
     if (node) {
       // Create an observer instance linked to the callback function
-      const observer = new ResizeObserver(freshCallback);
+      const observer = new ResizeObserver(handleResizeObserver);
 
       // Start observing the target node for resizes
-      observer.observe(node, options);
+      observer.observe(node, { box });
 
       return () => {
         observer.disconnect();
       };
     }
     return noop;
-  }, [node, freshCallback, options]);
+  }, [node, handleResizeObserver, box]);
 
   const ref: CallbackRef = useCallback((node: HTMLElementOrNull) => {
     setNode(node);
