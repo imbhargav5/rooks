@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import type { HTMLElementOrNull, CallbackRef } from "../utils/utils";
 import { noop } from "@/utils/noop";
 
@@ -26,10 +26,26 @@ function useIntersectionObserverRef(
 
   const [node, setNode] = useState<HTMLElementOrNull>(null);
 
+  const callbackRef = useRef(callback);
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+
+  const handleIntersectionObserver = useCallback<IntersectionObserverCallback>(
+    (...args) => {
+      return callbackRef.current?.(...args);
+    },
+    []
+  );
+
   useEffect(() => {
     // Create an observer instance linked to the callback function
-    if (node && callback) {
-      const observer = new IntersectionObserver(callback, options);
+    if (node) {
+      const observer = new IntersectionObserver(handleIntersectionObserver, {
+        root,
+        rootMargin,
+        threshold,
+      });
 
       // Start observing the target node for configured mutations
       observer.observe(node);
@@ -40,7 +56,7 @@ function useIntersectionObserverRef(
     }
 
     return noop;
-  }, [node, callback, root, rootMargin, threshold, options]);
+  }, [node, handleIntersectionObserver, root, rootMargin, threshold]);
 
   const ref = useCallback((nodeElement: HTMLElementOrNull) => {
     setNode(nodeElement);
