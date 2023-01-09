@@ -1,5 +1,11 @@
 # rooks
 
+## 7.4.3
+
+### Patch Changes
+
+- [#1568](https://github.com/imbhargav5/rooks/pull/1568) [`03f7c711`](https://github.com/imbhargav5/rooks/commit/03f7c71118e00e2a92099c0635d21630d5bf00d2) Thanks [@hooriza](https://github.com/hooriza)! - Reduce the frequency of `useIntersectionObserver` callback execution
+
 ## 7.4.2
 
 ### Patch Changes
