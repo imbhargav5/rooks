@@ -2,6 +2,16 @@ import type { RenderResult } from "@testing-library/react-hooks";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+  ? 1
+  : 2
+  ? true
+  : false;
+
+type Expect<T extends true> = T;
+
+const doNotExecute = (_func: () => void) => true;
+
 describe("useDebouncedValue", () => {
   beforeEach(() => {
     jest.useFakeTimers("modern");
@@ -99,5 +109,43 @@ describe("useDebouncedValue", () => {
       jest.runAllTimers();
     });
     expect(result.current[0]).toBe(mockValue);
+  });
+
+  describe("types", () => {
+    it("should return a union with null when initializeWithNull is true", () => {
+      doNotExecute(() => {
+        const hookResult = renderHook(() =>
+          useDebouncedValue("mock_value", 200, { initializeWithNull: true })
+        );
+        const result: Expect<
+          Equal<string | null, typeof hookResult.result.current[0]>
+        > = true;
+        return result;
+      });
+    });
+
+    it("should not return a union with null per default", () => {
+      doNotExecute(() => {
+        const hookResult = renderHook(() =>
+          useDebouncedValue("mock_value", 200)
+        );
+        const result: Expect<
+          Equal<string, typeof hookResult.result.current[0]>
+        > = true;
+        return result;
+      });
+    });
+
+    it("should not return a union with null when initializeWithNull is false", () => {
+      doNotExecute(() => {
+        const hookResult = renderHook(() =>
+          useDebouncedValue("mock_value", 200, { initializeWithNull: false })
+        );
+        const result: Expect<
+          Equal<string, typeof hookResult.result.current[0]>
+        > = true;
+        return result;
+      });
+    });
   });
 });
