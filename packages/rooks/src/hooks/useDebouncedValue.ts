@@ -4,17 +4,23 @@ import { useDebounce } from "./useDebounce";
 import { useDidMount } from "./useDidMount";
 import { useDidUpdate } from "./useDidUpdate";
 
-type UseDebouncedValueOptions = Partial<{
-  initializeWithNull: boolean;
-}>;
+type UseDebouncedValueOptions<TInitializeWithNull extends boolean = false> =
+  Partial<{
+    initializeWithNull: TInitializeWithNull;
+  }>;
 
 const defaultUseDebounceValueOptions = {
   initializeWithNull: false,
 };
 
-type UseDebouncedValueReturnType<T> = [
-  debouncedValue: T | null,
-  immediatelyUpdateDebouncedValue: Dispatch<SetStateAction<T | null>>
+type UseDebouncedValueReturnType<
+  TValue = unknown,
+  TInitializeWithNull extends boolean = false
+> = [
+  debouncedValue: TInitializeWithNull extends true ? TValue | null : TValue,
+  immediatelyUpdateDebouncedValue: Dispatch<
+    SetStateAction<TInitializeWithNull extends true ? TValue | null : TValue>
+  >
 ];
 
 /**
@@ -24,18 +30,21 @@ type UseDebouncedValueReturnType<T> = [
  * @param options The options object.
  * @see https://rooks.vercel.app/docs/useDebouncedValue
  */
-export const useDebouncedValue = <T = unknown>(
-  value: T,
+export const useDebouncedValue = <
+  TValue = unknown,
+  TInitializeWithNull extends boolean = false
+>(
+  value: TValue,
   timeout: number,
-  options: UseDebouncedValueOptions = {}
-): UseDebouncedValueReturnType<T> => {
+  options: UseDebouncedValueOptions<TInitializeWithNull> = {}
+): UseDebouncedValueReturnType<TValue, TInitializeWithNull> => {
   // eslint-disable-next-line prefer-object-spread
   const { initializeWithNull } = Object.assign(
     {},
     defaultUseDebounceValueOptions,
     options
   );
-  const [updatedValue, setUpdatedValue] = useState<T | null>(
+  const [updatedValue, setUpdatedValue] = useState<TValue | null>(
     initializeWithNull ? null : value
   );
   const debouncedSetUpdatedValue = useDebounce(setUpdatedValue, timeout);
@@ -50,5 +59,8 @@ export const useDebouncedValue = <T = unknown>(
 
   // No need to add `debouncedSetUpdatedValue ` to dependencies as it is a ref.current.
   // returning both updatedValue and setUpdatedValue (not the debounced version) to instantly update this if  needed.
-  return [updatedValue, setUpdatedValue];
+  return [updatedValue, setUpdatedValue] as UseDebouncedValueReturnType<
+    TValue,
+    TInitializeWithNull
+  >;
 };
