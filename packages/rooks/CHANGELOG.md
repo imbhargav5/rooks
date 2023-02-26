@@ -1,5 +1,11 @@
 # rooks
 
+## 7.4.4
+
+### Patch Changes
+
+- [#1576](https://github.com/imbhargav5/rooks/pull/1576) [`33b09d7a`](https://github.com/imbhargav5/rooks/commit/33b09d7a1b7b95d10637de1eda94b503d30315d6) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useDebounce bug fixes. It will now work as intended with inline functions. Stale closure bug fixed
+
 ## 7.4.3
 
 ### Patch Changes
