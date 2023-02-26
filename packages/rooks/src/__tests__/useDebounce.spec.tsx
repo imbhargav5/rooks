@@ -171,4 +171,50 @@ describe("useDebounce behavior", () => {
 
     expect(fn).not.toHaveBeenCalled();
   });
+
+  it("should work with inline functions", async () => {
+    expect.assertions(2);
+    const fn = jest.fn();
+    function App() {
+      const [value, setValue] = useState(0);
+      const [done, setDone] = useState(false);
+
+      const debounced = useDebounce(() => {
+        fn(value);
+        setValue(value + 1);
+        setDone(true);
+      }, 64);
+
+      return (
+        <div>
+          <button
+            onClick={() => {
+              debounced();
+              setValue(value + 100);
+            }}
+          >
+            inc
+          </button>
+          <h1>value: {String(value)}</h1>
+          <h2>done: {String(done)}</h2>
+        </div>
+      );
+    }
+
+    const rendered = render(<App />);
+    await waitFor(() => rendered.getByText("value: 0"));
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
+    });
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
+    });
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
+    });
+    await waitFor(() => rendered.getByText("done: true"));
+
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn).toHaveBeenCalledWith(300);
+  });
 });
