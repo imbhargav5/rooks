@@ -1,10 +1,12 @@
 /**
  * @jest-environment jsdom
  */
+import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import type { DebouncedFunc } from "lodash";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -76,5 +78,97 @@ describe("useDebounce behavior", () => {
     await wait(64);
     expect(withTrailing).toHaveBeenCalledTimes(1);
     expect(withoutTrailing).toHaveBeenCalledTimes(0);
+  });
+
+  it("should not have stale closure problems", async () => {
+    expect.assertions(2);
+    const fn = jest.fn();
+    function App() {
+      const [value, setValue] = useState(0);
+      const [done, setDone] = useState(false);
+
+      function doSomething() {
+        fn(value);
+        setDone(true);
+      }
+
+      const debounced = useDebounce(doSomething, 64);
+
+      return (
+        <div>
+          <button
+            onClick={() => {
+              debounced();
+              setValue(100);
+            }}
+          >
+            inc
+          </button>
+          <h1>value: {String(value)}</h1>
+          <h2>done: {String(done)}</h2>
+        </div>
+      );
+    }
+
+    const rendered = render(<App />);
+    await waitFor(() => rendered.getByText("value: 0"));
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
+    });
+    await waitFor(() => rendered.getByText("value: 100"));
+    await waitFor(() => rendered.getByText("done: true"));
+
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn).toHaveBeenCalledWith(100);
+  });
+
+  it("should cancel on unmount", async () => {
+    expect.assertions(1);
+
+    const fn = jest.fn();
+
+    function Child() {
+      const debounced = useDebounce(fn, 64);
+
+      return (
+        <div>
+          <button
+            onClick={() => {
+              debounced();
+            }}
+          >
+            debounce
+          </button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [mounted, setMounted] = useState(true);
+
+      return (
+        <div>
+          <button
+            onClick={() => {
+              setMounted(false);
+            }}
+          >
+            unmount
+          </button>
+          {mounted && <Child />}
+        </div>
+      );
+    }
+
+    const rendered = render(<App />);
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /debounce/i }));
+    });
+    act(() => {
+      fireEvent.click(rendered.getByRole("button", { name: /unmount/i }));
+    });
+    await wait(100);
+
+    expect(fn).not.toHaveBeenCalled();
   });
 });

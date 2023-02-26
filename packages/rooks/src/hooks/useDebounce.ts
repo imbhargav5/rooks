@@ -2,6 +2,15 @@ import { AnyFunction } from "@/types/utils";
 import type { DebouncedFunc, DebounceSettings } from "lodash";
 import debounce from "lodash.debounce";
 import { useRef, useEffect, useCallback } from "react";
+import { useFreshRef } from "./useFreshRef";
+import { useFreshTick } from "./useFreshTick";
+import { useWillUnmount } from "./useWillUnmount";
+
+type CanAlsoReturnVoid<T extends AnyFunction> = T | (() => void);
+
+type DebouncedFunction<T extends AnyFunction> = CanAlsoReturnVoid<
+  DebouncedFunc<T>
+>;
 
 /**
  * Debounce hook
@@ -22,20 +31,25 @@ function useDebounce<T extends AnyFunction>(
   options?: DebounceSettings
 ) {
   const createDebouncedCallback = useCallback(
-    (function_: T): DebouncedFunc<T> => {
+    (function_: CanAlsoReturnVoid<T>): DebouncedFunc<T> => {
       return debounce(function_, wait, options);
     },
     [wait, options]
   );
 
+  const freshCallback = useFreshRef(callback);
+
+  function tick(...args: Parameters<T>) {
+    freshCallback.current?.(...args);
+  }
+
   const debouncedCallbackRef = useRef<DebouncedFunc<T>>(
-    createDebouncedCallback(callback)
+    createDebouncedCallback(tick)
   );
 
-  useEffect(() => {
-    debouncedCallbackRef.current = createDebouncedCallback(callback);
-    return () => debouncedCallbackRef.current?.cancel();
-  }, [callback, createDebouncedCallback]);
+  useWillUnmount(() => {
+    return debouncedCallbackRef.current?.cancel();
+  });
 
   return debouncedCallbackRef.current;
 }
