@@ -1,16 +1,11 @@
 import { AnyFunction } from "@/types/utils";
 import type { DebouncedFunc, DebounceSettings } from "lodash";
 import debounce from "lodash.debounce";
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
-import { useFreshTick } from "./useFreshTick";
 import { useWillUnmount } from "./useWillUnmount";
 
 type CanAlsoReturnVoid<T extends AnyFunction> = T | (() => void);
-
-type DebouncedFunction<T extends AnyFunction> = CanAlsoReturnVoid<
-  DebouncedFunc<T>
->;
 
 /**
  * Debounce hook
