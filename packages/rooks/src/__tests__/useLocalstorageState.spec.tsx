@@ -72,6 +72,23 @@ describe("useLocalstorageState basic", () => {
     expect(valueElement.innerHTML).toBe("hello");
   });
 
+  it("initializes correctly with a function initializer", () => {
+    expect.hasAssertions();
+
+    const AppWithFunctionInitializer = () => {
+      const [value] = useLocalstorageState(
+        "test-value-function",
+        () => "hello"
+      );
+
+      return <p data-testid="value-function">{value}</p>;
+    };
+
+    const { getByTestId } = render(<AppWithFunctionInitializer />);
+    const valueElement = getByTestId("value-function");
+    expect(valueElement.innerHTML).toBe("hello");
+  });
+
   it("setting the new value", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
@@ -99,5 +116,56 @@ describe("useLocalstorageState basic", () => {
     });
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("");
+  });
+});
+
+describe("useLocalstorageState localStorage", () => {
+  beforeEach(() => {
+    jest.spyOn(Storage.prototype, "setItem");
+    jest.spyOn(Storage.prototype, "getItem");
+    jest.spyOn(Storage.prototype, "removeItem");
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("reads value from localStorage", () => {
+    expect.hasAssertions();
+
+    localStorage.setItem(
+      "test-value-localstorage",
+      JSON.stringify("hello-from-localstorage")
+    );
+
+    const { result } = renderHook(() =>
+      useLocalstorageState("test-value-localstorage")
+    );
+
+    expect(localStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem).toHaveBeenCalledWith(
+      "test-value-localstorage"
+    );
+    expect(result.current[0]).toBe("hello-from-localstorage");
+  });
+
+  it("writes value to localStorage", () => {
+    expect.hasAssertions();
+
+    const { result } = renderHook(() =>
+      useLocalstorageState("test-value-localstorage", "initial-value")
+    );
+
+    const [, setValue] = result.current;
+
+    act(() => {
+      setValue("new-value");
+    });
+
+    expect(localStorage.setItem).toHaveBeenCalledTimes(2);
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "test-value-localstorage",
+      JSON.stringify("new-value")
+    );
   });
 });
