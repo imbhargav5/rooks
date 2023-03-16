@@ -9,7 +9,7 @@ import { useFreshRef } from "./useFreshRef";
 type CallbackType<T> = (...args: T[]) => void;
 /**
  * useFreshCallback
- * @param callback The callback to be called on mount
+ * @param callback Any callback function
  * @returns A fresh callback.
  * @see https://rooks.vercel.app/docs/useFreshCallback
  */
