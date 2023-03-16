@@ -1,5 +1,11 @@
 # rooks
 
+## 7.5.0
+
+### Minor Changes
+
+- [`7773cf47`](https://github.com/imbhargav5/rooks/commit/7773cf47a6d624f4129db5d0113cdf0c5863d8ff) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useArrayState initializer can be a function returning an array
+
 ## 7.4.4
 
 ### Patch Changes
