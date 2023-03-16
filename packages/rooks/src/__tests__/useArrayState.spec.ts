@@ -177,4 +177,10 @@ describe("useArrayState", () => {
 
     expect(result.current[0]).toEqual([1, 2, 3]);
   });
+  it("should work with initializer function", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState(() => [1, 2, 3]));
+
+    expect(result.current[0]).toEqual([1, 2, 3]);
+  });
 });

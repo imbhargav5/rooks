@@ -64,8 +64,10 @@ export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
  * controls.sort((a, b) => a - b); // [1, 2]
  *
  */
-function useArrayState<T>(initialArray: T[] = []): UseArrayStateReturnValue<T> {
-  const [array, setArray] = useState(initialArray);
+function useArrayState<T>(
+  initial: T[] | (() => T[])
+): UseArrayStateReturnValue<T> {
+  const [array, setArray] = useState(initial ?? []);
 
   const push = useCallback<Push<T>>(
     (value) => {
