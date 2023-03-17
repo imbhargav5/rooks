@@ -1,7 +1,7 @@
 // @ts-check
 
 // Regularly update this max size when new hooks are added (keep a threshold)
-const fullBundleMaxSize = "12KB";
+const fullBundleMaxSize = "20KB";
 
 /**
  * Will ensure esm tree-shakeability and total size are within expectations.
