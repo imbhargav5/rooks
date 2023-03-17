@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import useVideo from "@/hooks/useVideo";
+import { useVideo } from "@/hooks/useVideo";
 // write a simple test which checks if useAudio is defined
 describe("useVideo", () => {
   it("is defined", () => {

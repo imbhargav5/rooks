@@ -143,4 +143,4 @@ const useVideo = (): [
   return [videoRef, state, controls];
 };
 
-export default useVideo;
+export { useVideo };
