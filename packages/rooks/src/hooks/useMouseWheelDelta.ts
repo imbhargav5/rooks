@@ -34,12 +34,15 @@ function useMouseWheelDelta(): ReturnValue {
     (event: WheelEvent) => {
       const currentTimestamp = event.timeStamp;
       const lastDelta = lastDeltaRef.current;
-      console.log(event);
       if (lastDelta) {
         const delta = event.deltaY;
 
         const timeDelta = currentTimestamp - lastDelta.timeStamp;
+        console.log(timeDelta);
         const velocity = timeDelta === 0 ? 0 : delta / timeDelta;
+        console.log("delta", delta);
+        console.log("timedelta", timeDelta);
+        console.log("velocity", velocity);
         lastDeltaRef.current = deltaState;
         setDeltaState({
           delta,

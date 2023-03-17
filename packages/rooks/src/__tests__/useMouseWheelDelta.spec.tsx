@@ -38,7 +38,6 @@ describe("useMouseWheelDelta", () => {
     act(() => {
       fireEvent.wheel(document, { deltaY: 50, timeStamp: Date.now() });
     });
-    console.log(outputElement.textContent);
     expect(outputElement.textContent).not.toBe("0,0");
     if (!outputElement.textContent) {
       throw new Error("outputElement.textContent is null");
@@ -51,7 +50,7 @@ describe("useMouseWheelDelta", () => {
     expect(newVelocity).toBe(0);
     await wait(64);
     act(() => {
-      fireEvent.wheel(window, { deltaY: 50 });
+      fireEvent.wheel(document, { deltaY: 60, timeStamp: Date.now() });
     });
 
     expect(outputElement.textContent).not.toBe("0,0");
@@ -62,11 +61,11 @@ describe("useMouseWheelDelta", () => {
       .split(",")
       .map((value) => parseFloat(value));
 
-    expect(newDelta2).toBe(50);
+    expect(newDelta2).toBe(60);
     expect(newVelocity2).toBeGreaterThan(0);
   });
 
-  it.skip("calculates velocity correctly based on deltaY and time difference", async () => {
+  it("calculates velocity correctly based on deltaY and time difference", async () => {
     expect.hasAssertions();
     const TestComponent = () => {
       const { delta: deltaY, velocity } = useMouseWheelDelta();
