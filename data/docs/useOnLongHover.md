@@ -32,7 +32,7 @@ export default function App() {
 }
 ```
 
-#### Custom delay and mouse leave behavior
+#### Custom duration and mouse leave behavior
 
 ```jsx
 import { useOnLongHover } from "rooks";
@@ -46,8 +46,7 @@ export default function App() {
   };
 
   const longHoverRef = useOnLongHover(handleLongHover, {
-    delay: 1000,
-    onMouseLeave: handleMouseLeave,
+    duration: 1000,
   });
 
   return (
@@ -61,18 +60,17 @@ export default function App() {
 
 ### Arguments
 
-| Argument value | Type     | Description                                                | Defualt   |
+| Argument value | Type     | Description                                                | Default   |
 | -------------- | -------- | ---------------------------------------------------------- | --------- |
 | callback       | Function | Callback function to be called when long hover is detected | undefined |
 | options        | Object   | See table below                                            | undefined |
 
-| Options value | Type     | Description                                                                                    | Defualt   |
-| ------------- | -------- | ---------------------------------------------------------------------------------------------- | --------- |
-| delay         | Number   | The delay (in ms) after which long hover is detected                                           | 500       |
-| onMouseLeave  | Function | Callback function to be called when the mouse leaves the element before long hover is detected | undefined |
+| Options value | Type   | Description                                             | Default |
+| ------------- | ------ | ------------------------------------------------------- | ------- |
+| duration      | Number | The duration (in ms) after which long hover is detected | 500     |
 
 ### Returns
 
-| Return value | Type         | Description                                                            | Defualt   |
+| Return value | Type         | Description                                                            | Default   |
 | ------------ | ------------ | ---------------------------------------------------------------------- | --------- |
 | ref          | Callback Ref | A ref that can be used on the element you want to detect long hover on | undefined |
