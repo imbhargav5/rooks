@@ -6,11 +6,12 @@
 import { useState, useEffect, MouseEvent, useCallback } from "react";
 import { usePreviousImmediate } from "@/hooks/usePreviousImmediate";
 import { useFreshCallback } from "./useFreshCallback";
+import { usePreviousDifferent } from "./usePreviousDifferent";
 
 const useMouseWheelDelta = () => {
   const [delta, setDelta] = useState(0);
   const [velocity, setVelocity] = useState(0);
-  const lastDelta = usePreviousImmediate(delta);
+  const lastDelta = usePreviousDifferent(delta);
   const lastTimestamp = usePreviousImmediate(Date.now());
 
   const handleWheel = useCallback(
