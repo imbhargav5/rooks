@@ -4,9 +4,6 @@
  * @see {@link https://rooks.vercel.app/docs/useMouseMoveDelta}
  */
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { usePreviousImmediate } from "@/hooks/usePreviousImmediate";
-import { useMouse } from "./useMouse";
-import { usePreviousDifferent } from "./usePreviousDifferent";
 import { useFreshCallback } from "./useFreshCallback";
 
 type Delta = {
@@ -92,7 +89,9 @@ function useMouseMoveDelta(): ReturnValue {
 
   const freshMouseMove = useFreshCallback(handleMouseMove);
   useEffect(() => {
-    document.addEventListener("mousemove", freshMouseMove);
+    document.addEventListener("mousemove", freshMouseMove, {
+      passive: true,
+    });
     return () => {
       document.removeEventListener("mousemove", freshMouseMove);
     };

@@ -1,49 +1,79 @@
 /**
  * useMouseWheelDelta
- * @description Tracks delta of mouse move
+ * @description Tracks delta of mouse wheel
  * @see {@link https://rooks.vercel.app/docs/useMouseWheelDelta}
  */
-import { useState, useEffect, MouseEvent, useCallback } from "react";
-import { usePreviousImmediate } from "@/hooks/usePreviousImmediate";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useFreshCallback } from "./useFreshCallback";
-import { usePreviousDifferent } from "./usePreviousDifferent";
 
-const useMouseWheelDelta = () => {
-  const [delta, setDelta] = useState(0);
-  const [velocity, setVelocity] = useState(0);
-  const lastDelta = usePreviousDifferent(delta);
-  const lastTimestamp = usePreviousImmediate(Date.now());
+type MouseWheelDelta = {
+  delta: number;
+  velocity: number;
+  timeStamp: number;
+};
+
+type ReturnValue = Omit<MouseWheelDelta, "timeStamp">;
+
+const initialDelta: MouseWheelDelta = {
+  delta: 0,
+  velocity: 0,
+  timeStamp: Date.now(),
+};
+
+function useMouseWheelDelta(): ReturnValue {
+  const [deltaState, setDeltaState] = useState<MouseWheelDelta>(() => {
+    return {
+      ...initialDelta,
+      timeStamp: Date.now(),
+    };
+  });
+
+  const lastDeltaRef = useRef<MouseWheelDelta | null>(null);
 
   const handleWheel = useCallback(
     (event: WheelEvent) => {
-      const currentDelta = event.deltaY;
-      const currentTimestamp = Date.now();
+      const currentTimestamp = event.timeStamp;
+      const lastDelta = lastDeltaRef.current;
+      console.log(event);
+      if (lastDelta) {
+        const delta = event.deltaY;
 
-      if (lastTimestamp !== null) {
-        const deltaYDiff = currentDelta - (lastDelta ?? 0);
-        const timeDiff = currentTimestamp - lastTimestamp;
-
-        const currentVelocity = deltaYDiff / timeDiff;
-
-        setVelocity(currentVelocity);
+        const timeDelta = currentTimestamp - lastDelta.timeStamp;
+        const velocity = timeDelta === 0 ? 0 : delta / timeDelta;
+        lastDeltaRef.current = deltaState;
+        setDeltaState({
+          delta,
+          velocity,
+          timeStamp: currentTimestamp,
+        });
+      } else {
+        lastDeltaRef.current = {
+          velocity: 0,
+          delta: 0,
+          timeStamp: event.timeStamp,
+        };
+        setDeltaState({
+          delta: event.deltaY,
+          velocity: 0,
+          timeStamp: event.timeStamp,
+        });
       }
-
-      setDelta(currentDelta);
     },
-    [lastDelta, lastTimestamp]
+    [deltaState]
   );
 
-  const freshHandleWheel = useFreshCallback(handleWheel);
-
+  const freshWheel = useFreshCallback(handleWheel);
   useEffect(() => {
-    window.addEventListener("wheel", freshHandleWheel);
-
+    document.addEventListener("wheel", freshWheel);
     return () => {
-      window.removeEventListener("wheel", freshHandleWheel);
+      document.removeEventListener("wheel", freshWheel);
     };
-  }, [lastDelta, lastTimestamp, freshHandleWheel]);
-
-  return { delta, velocity };
-};
+  }, [freshWheel]);
+  console.log(deltaState);
+  return useMemo(() => {
+    const { delta, velocity } = deltaState;
+    return { delta, velocity };
+  }, [deltaState]);
+}
 
 export { useMouseWheelDelta };
