@@ -1,5 +1,11 @@
 # rooks
 
+## 7.6.0
+
+### Minor Changes
+
+- [#1583](https://github.com/imbhargav5/rooks/pull/1583) [`ac0086dd`](https://github.com/imbhargav5/rooks/commit/ac0086dd09b879f7aa4ab811551df061940933c5) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useAudio, useVideo, useOnLongHover, useOnLongPress, useFreshCallback, useFileDropRef, useOrientation, useVibrate, useMouseMoveDelta, useMouseWheelDelta, useIsDroppingFiles hooks
+
 ## 7.5.0
 
 ### Minor Changes
