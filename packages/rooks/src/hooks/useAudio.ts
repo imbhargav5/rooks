@@ -3,7 +3,7 @@
  * @description Audio hook
  * @see {@link https://rooks.vercel.app/docs/useAudio}
  */
-import { useState, useRef, useEffect, RefCallback } from "react";
+import { useState, useEffect, RefCallback } from "react";
 import { useFreshCallback } from "@/hooks/useFreshCallback";
 
 const noop = () => {};

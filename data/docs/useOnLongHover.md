@@ -6,14 +6,73 @@ sidebar_label: useOnLongHover
 
 ## About
 
-Fires a callback when an element is hovered for a while
+A hook to detect long hover on an element.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
-import {useOnLongHover} from "rooks"
+#### Basic example
+
+```jsx
+import { useOnLongHover } from "rooks";
 export default function App() {
-  useOnLongHover();
-  return null
+  const handleLongHover = () => {
+    console.log("Long hover detected");
+  };
+
+  const longHoverRef = useOnLongHover(handleLongHover);
+
+  return (
+    <>
+      <p>Hover on the button for 500ms to trigger a console.log statement</p>
+      <button ref={longHoverRef}>Long hover me</button>
+    </>
+  );
 }
 ```
+
+#### Custom delay and mouse leave behavior
+
+```jsx
+import { useOnLongHover } from "rooks";
+export default function App() {
+  const handleLongHover = () => {
+    console.log("Long hover detected");
+  };
+
+  const handleMouseLeave = () => {
+    console.log("Mouse left before long hover completed");
+  };
+
+  const longHoverRef = useOnLongHover(handleLongHover, {
+    delay: 1000,
+    onMouseLeave: handleMouseLeave,
+  });
+
+  return (
+    <>
+      <p>Hover on the button for 1000ms to trigger a console.log statement</p>
+      <button ref={longHoverRef}>Long hover me</button>
+    </>
+  );
+}
+```
+
+### Arguments
+
+| Argument value | Type     | Description                                                | Defualt   |
+| -------------- | -------- | ---------------------------------------------------------- | --------- |
+| callback       | Function | Callback function to be called when long hover is detected | undefined |
+| options        | Object   | See table below                                            | undefined |
+
+| Options value | Type     | Description                                                                                    | Defualt   |
+| ------------- | -------- | ---------------------------------------------------------------------------------------------- | --------- |
+| delay         | Number   | The delay (in ms) after which long hover is detected                                           | 500       |
+| onMouseLeave  | Function | Callback function to be called when the mouse leaves the element before long hover is detected | undefined |
+
+### Returns
+
+| Return value | Type         | Description                                                            | Defualt   |
+| ------------ | ------------ | ---------------------------------------------------------------------- | --------- |
+| ref          | Callback Ref | A ref that can be used on the element you want to detect long hover on | undefined |
