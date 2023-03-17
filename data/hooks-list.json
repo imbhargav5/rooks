@@ -81,7 +81,7 @@
       "category": "misc"
     },
     {
-      "name": "useFileDrop",
+      "name": "useFileDropRef",
       "description": "Drop files easily",
       "category": "form"
     },
@@ -151,7 +151,7 @@
       "category": "effects"
     },
     {
-      "name": "useIsDropping",
+      "name": "useIsDroppingFiles",
       "description": "Check if any files are currently being dropped anywhere. Useful for highlighting drop areas. ",
       "category": "events"
     },
