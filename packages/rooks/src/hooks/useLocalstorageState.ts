@@ -171,13 +171,17 @@ function useLocalstorageState<S>(
   );
 
   const set = useCallback(
-    (newValue: S) => {
+    (newValue: SetStateAction<S>) => {
+      const resolvedNewValue =
+        typeof newValue === "function"
+          ? (newValue as (prevState: S) => S)(value)
+          : newValue;
       isUpdateFromCrossDocumentListener.current = false;
       isUpdateFromWithinDocumentListener.current = false;
-      setValue(newValue);
-      broadcastValueWithinDocument(newValue);
+      setValue(resolvedNewValue);
+      broadcastValueWithinDocument(resolvedNewValue);
     },
-    [broadcastValueWithinDocument]
+    [broadcastValueWithinDocument, value]
   );
 
   const remove = useCallback(() => {

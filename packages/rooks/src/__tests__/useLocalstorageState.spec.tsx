@@ -8,6 +8,8 @@ import {
   getByTestId,
   fireEvent,
   act,
+  waitFor,
+  screen,
 } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 
@@ -48,7 +50,10 @@ describe("useLocalstorageState basic", () => {
     // end
   });
 
-  afterEach(cleanup);
+  afterEach(() => {
+    localStorage.clear();
+    cleanup();
+  });
 
   it("memo", () => {
     expect.hasAssertions();
@@ -89,7 +94,7 @@ describe("useLocalstorageState basic", () => {
     expect(valueElement.innerHTML).toBe("hello");
   });
 
-  it("setting the new value", () => {
+  it("setting the new value", async () => {
     expect.hasAssertions();
     const { container } = render(<App />);
     const setToNewValueButton = getByTestId(
@@ -100,22 +105,20 @@ describe("useLocalstorageState basic", () => {
       fireEvent.click(setToNewValueButton);
     });
     const valueElement = getByTestId(container as HTMLElement, "value");
-    expect(valueElement.innerHTML).toBe("new value");
+    await waitFor(() => expect(valueElement.innerHTML).toBe("new value"));
   });
 
   // eslint-disable-next-line jest/no-disabled-tests
-  it.skip("unsetting the value", () => {
+  it.skip("unsetting the value", async () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const unsetValueButton = getByTestId(
-      container as HTMLElement,
-      "unset-value"
-    );
+    render(<App />);
+    const unsetValueButton = screen.getByTestId("unset-value");
+    const valueElement = screen.getByTestId("value");
+    expect(valueElement.innerHTML).toBe("hello");
     act(() => {
       fireEvent.click(unsetValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, "value");
-    expect(valueElement.innerHTML).toBe("");
+    await waitFor(() => expect(valueElement.innerHTML).toBe(""));
   });
 });
 
@@ -127,6 +130,7 @@ describe("useLocalstorageState localStorage", () => {
   });
 
   afterEach(() => {
+    localStorage.clear();
     jest.restoreAllMocks();
   });
 
@@ -160,6 +164,26 @@ describe("useLocalstorageState localStorage", () => {
 
     act(() => {
       setValue("new-value");
+    });
+
+    expect(localStorage.setItem).toHaveBeenCalledTimes(2);
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "test-value-localstorage",
+      JSON.stringify("new-value")
+    );
+  });
+
+  it("writes value to localStorage using a function setter as well", () => {
+    expect.hasAssertions();
+
+    const { result } = renderHook(() =>
+      useLocalstorageState("test-value-localstorage", () => "initial-value")
+    );
+
+    const [, setValue] = result.current;
+
+    act(() => {
+      setValue(() => "new-value");
     });
 
     expect(localStorage.setItem).toHaveBeenCalledTimes(2);
