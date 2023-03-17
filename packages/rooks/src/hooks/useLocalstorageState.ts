@@ -30,10 +30,12 @@ function saveValueToLocalStorage<S>(key: string, value: S) {
  * @param key Key of the localStorage object
  * @param initialState Default initial value
  */
-function initialize<S>(key: string, initialState: S) {
+function initialize<S>(key: string, initialState: S | (() => S)) {
   const valueLoadedFromLocalStorage = getValueFromLocalStorage(key);
   if (valueLoadedFromLocalStorage === null) {
-    return initialState;
+    return typeof initialState === "function"
+      ? (initialState as () => S)()
+      : initialState;
   } else {
     return valueLoadedFromLocalStorage;
   }

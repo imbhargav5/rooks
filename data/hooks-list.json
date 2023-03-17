@@ -11,6 +11,11 @@
       "category": "effects"
     },
     {
+      "name": "useAudio",
+      "description": "Audio hook",
+      "category": "ui"
+    },
+    {
       "name": "useBoundingclientrect",
       "description": "getBoundingClientRect hook for React.",
       "category": "ui"
@@ -76,6 +81,11 @@
       "category": "misc"
     },
     {
+      "name": "useFileDropRef",
+      "description": "Drop files easily",
+      "category": "form"
+    },
+    {
       "name": "useFocus",
       "description": "Handles focus events for the immediate target element.",
       "category": "events"
@@ -88,6 +98,11 @@
     {
       "name": "useForkRef",
       "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
+      "category": "misc"
+    },
+    {
+      "name": "useFreshCallback",
+      "description": "Avoid stale closures and keep your callback fresh",
       "category": "misc"
     },
     {
@@ -134,6 +149,11 @@
       "name": "useIntervalWhen",
       "description": "Sets an interval immediately when a condition is true",
       "category": "effects"
+    },
+    {
+      "name": "useIsDroppingFiles",
+      "description": "Check if any files are currently being dropped anywhere. Useful for highlighting drop areas. ",
+      "category": "events"
     },
     {
       "name": "useIsomorphicEffect",
@@ -191,6 +211,16 @@
       "category": "ui"
     },
     {
+      "name": "useMouseMoveDelta",
+      "description": "Tracks delta of mouse move",
+      "category": "effects"
+    },
+    {
+      "name": "useMouseWheelDelta",
+      "description": "Tracks delta of mouse move",
+      "category": "effects"
+    },
+    {
       "name": "useMultiSelectableList",
       "description": "A custom hook to easily select multiple values from a list",
       "category": "state"
@@ -211,6 +241,16 @@
       "category": "navigator"
     },
     {
+      "name": "useOnLongHover",
+      "description": "Fires a callback when an element is hovered for a while",
+      "category": "events"
+    },
+    {
+      "name": "useOnLongPress",
+      "description": "Fire a callback on long press",
+      "category": "events"
+    },
+    {
       "name": "useOnWindowResize",
       "description": "A React hook for adding an event listener for window resize",
       "category": "events"
@@ -224,6 +264,11 @@
       "name": "useOnline",
       "description": "Online status hook for React.",
       "category": "navigator"
+    },
+    {
+      "name": "useOrientation",
+      "description": "orientation hook for react",
+      "category": "misc"
     },
     {
       "name": "useOutsideClick",
@@ -319,6 +364,16 @@
       "name": "useUndoState",
       "description": "Drop in replacement for useState hook but with undo functionality.",
       "category": "state"
+    },
+    {
+      "name": "useVibrate",
+      "description": "Vibration API hook for React",
+      "category": "misc"
+    },
+    {
+      "name": "useVideo",
+      "description": "Video hook for react",
+      "category": "ui"
     },
     {
       "name": "useWillUnmount",

@@ -43,7 +43,8 @@
     "check:size": "size-limit --highlight-less",
     "coverage": "yarn test --coverage",
     "prebuild": "rimraf dist",
-    "build": "yarn rollup -c rollup.config.ts"
+    "build": "yarn rollup -c rollup.config.ts",
+    "test-ct": "playwright test -c playwright-ct.config.ts"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
