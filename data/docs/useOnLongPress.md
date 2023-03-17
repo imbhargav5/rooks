@@ -34,7 +34,7 @@ export default function App() {
 }
 ```
 
-#### Custom delay and touch end behavior
+#### Custom duration and touch end behavior
 
 ```jsx
 import { useOnLongPress } from "rooks";
@@ -43,13 +43,9 @@ export default function App() {
     console.log("Long press detected");
   };
 
-  const handleTouchEnd = () => {
-    console.log("Touch ended before long press completed");
-  };
-
   const longPressRef = useOnLongPress(handleLongPress, {
-    delay: 1000,
-    onTouchEnd: handleTouchEnd,
+    duration: 1000,
+    onClick: handleTouchEnd,
   });
 
   return (
@@ -70,10 +66,10 @@ export default function App() {
 | callback       | Function | Callback function to be called when long press is detected | undefined |
 | options        | Object   | See table below                                            | undefined |
 
-| Options value | Type     | Description                                                                      | Defualt   |
-| ------------- | -------- | -------------------------------------------------------------------------------- | --------- |
-| delay         | Number   | The delay (in ms) after which long press is detected                             | 500       |
-| onTouchEnd    | Function | Callback function to be called when the touch ends before long press is detected | undefined |
+| Options value | Type     | Description                                             | Default   |
+| ------------- | -------- | ------------------------------------------------------- | --------- |
+| duration      | Number   | The duration (in ms) after which long press is detected | 300       |
+| onClick       | Function | Fires on click                                          | undefined |
 
 ### Returns
 
