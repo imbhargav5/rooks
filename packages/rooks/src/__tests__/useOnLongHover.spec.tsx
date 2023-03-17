@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { render, fireEvent, act, waitFor } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import { useOnLongHover } from "@/hooks/useOnLongHover";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

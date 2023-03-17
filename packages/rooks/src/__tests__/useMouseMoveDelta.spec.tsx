@@ -17,7 +17,6 @@ describe("useMouseMoveDelta", () => {
   it("should update delta values and velocity on mouse move", async () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useMouseMoveDelta());
-    const currentTime = Date.now();
 
     act(() => {
       fireEvent.mouseMove(document, { clientX: 50, clientY: 50 });

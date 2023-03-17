@@ -1,6 +1,6 @@
 import { useVibrate } from "@/hooks/useVibrate";
 import { waitFor } from "@testing-library/react";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 
 describe("useVibrate", () => {
   let originalVibrate: typeof navigator.vibrate;
