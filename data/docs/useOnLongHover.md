@@ -14,7 +14,7 @@ A hook to detect long hover on an element.
 
 #### Basic example
 
-```tsx
+```jsx
 import { useOnLongHover } from "rooks";
 export default function App() {
   const handleLongHover = () => {
@@ -34,7 +34,7 @@ export default function App() {
 
 #### Custom delay and mouse leave behavior
 
-```tsx
+```jsx
 import { useOnLongHover } from "rooks";
 export default function App() {
   const handleLongHover = () => {

@@ -14,7 +14,7 @@ A hook to detect long press on an element.
 
 #### Basic example
 
-```tsx
+```jsx
 import { useOnLongPress } from "rooks";
 export default function App() {
   const handleLongPress = () => {
@@ -36,7 +36,7 @@ export default function App() {
 
 #### Custom delay and touch end behavior
 
-```tsx
+```jsx
 import { useOnLongPress } from "rooks";
 export default function App() {
   const handleLongPress = () => {
@@ -80,7 +80,3 @@ export default function App() {
 | Return value | Type         | Description                                                            | Defualt   |
 | ------------ | ------------ | ---------------------------------------------------------------------- | --------- |
 | ref          | Callback Ref | A ref that can be used on the element you want to detect long press on | undefined |
-
-```
-
-```

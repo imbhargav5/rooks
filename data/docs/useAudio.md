@@ -14,7 +14,7 @@ A hook to control and manage audio elements in your React application.
 
 #### Basic example
 
-```tsx
+```jsx
 import { useAudio } from "rooks";
 
 export default function App() {
