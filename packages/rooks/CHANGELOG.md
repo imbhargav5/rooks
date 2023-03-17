@@ -1,5 +1,11 @@
 # rooks
 
+## 7.6.1
+
+### Patch Changes
+
+- [`ddab30d4`](https://github.com/imbhargav5/rooks/commit/ddab30d476ffc162c7ec281d5cba718e7f6613b4) Thanks [@imbhargav5](https://github.com/imbhargav5)! - localstorage set will accept a function argument
+
 ## 7.6.0
 
 ### Minor Changes
