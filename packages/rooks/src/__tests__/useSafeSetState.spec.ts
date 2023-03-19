@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import useSafeSetState from "@/hooks/useSafeSetState";
+import { useSafeSetState } from "@/hooks/useSafeSetState";
 
 describe("useSafeSetState", () => {
   it("should update state when the component is mounted", () => {

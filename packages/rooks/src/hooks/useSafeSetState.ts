@@ -22,4 +22,4 @@ function useSafeSetState<T>(initialState: T): [T, Dispatch<SetStateAction<T>>] {
   return [state, safeSetState];
 }
 
-export default useSafeSetState;
+export { useSafeSetState };
