@@ -336,6 +336,11 @@
       "category": "ui"
     },
     {
+      "name": "useSafeSetState",
+      "description": "set state but ignores if component has already unmounted",
+      "category": "state"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
