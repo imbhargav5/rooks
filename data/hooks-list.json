@@ -201,7 +201,7 @@
       "category": "effects"
     },
     {
-      "name": "useMapObjectState",
+      "name": "useNativeMapState",
       "description": "Manage Map() object state in React",
       "category": "state"
     },

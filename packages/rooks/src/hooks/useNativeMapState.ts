@@ -1,7 +1,7 @@
 /**
- * useMapObjectState
+ * useNativeMapState
  * @description Manage Map() object state in React
- * @see {@link https://rooks.vercel.app/docs/useMapObjectState}
+ * @see {@link https://rooks.vercel.app/docs/useNativeMapState}
  */
 import { useState, useCallback } from "react";
 
@@ -18,7 +18,7 @@ type MapControls<K, V> = {
   hasEvery: (keys: K[]) => boolean;
 };
 
-function useMapObjectState<K, V>(
+function useNativeMapState<K, V>(
   initialMapState?: Map<K, V>
 ): [Map<K, V>, MapControls<K, V>] {
   const [map, setMap] = useState<Map<K, V>>(initialMapState || new Map<K, V>());
@@ -107,4 +107,4 @@ function useMapObjectState<K, V>(
   return [map, controls];
 }
 
-export { useMapObjectState };
+export { useNativeMapState };

@@ -1,10 +1,10 @@
-import { useMapObjectState } from "@/hooks/useMapObjectState";
+import { useNativeMapState } from "@/hooks/useNativeMapState";
 import { renderHook, act } from "@testing-library/react-hooks";
 
-describe("useMapObjectState", () => {
+describe("useNativeMapState", () => {
   it("should initialize with an empty map by default", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useMapObjectState<string, number>());
+    const { result } = renderHook(() => useNativeMapState<string, number>());
 
     expect(result.current[0]).toBeInstanceOf(Map);
     expect(result.current[0].size).toBe(0);
@@ -16,7 +16,7 @@ describe("useMapObjectState", () => {
       ["a", 1],
       ["b", 2],
     ]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
 
     expect(result.current[0]).toEqual(initialMap);
     expect(result.current[0].size).toBe(2);
@@ -24,7 +24,7 @@ describe("useMapObjectState", () => {
 
   it("should set a key-value pair", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useMapObjectState<string, number>());
+    const { result } = renderHook(() => useNativeMapState<string, number>());
     const [_, controls] = result.current;
 
     act(() => {
@@ -37,7 +37,7 @@ describe("useMapObjectState", () => {
   it("should remove a key-value pair", () => {
     expect.hasAssertions();
     const initialMap = new Map<string, number>([["a", 1]]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     act(() => {
@@ -53,7 +53,7 @@ describe("useMapObjectState", () => {
       ["a", 1],
       ["b", 2],
     ]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     act(() => {
@@ -66,7 +66,7 @@ describe("useMapObjectState", () => {
   it("should check if a key exists in the map", () => {
     expect.hasAssertions();
     const initialMap = new Map<string, number>([["a", 1]]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     expect(controls.has("a")).toBe(true);
@@ -76,7 +76,7 @@ describe("useMapObjectState", () => {
   it("should get the value associated with a key", () => {
     expect.hasAssertions();
     const initialMap = new Map<string, number>([["a", 1]]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     expect(controls.get("a")).toBe(1);
@@ -85,7 +85,7 @@ describe("useMapObjectState", () => {
 
   it("should set multiple key-value pairs", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useMapObjectState<string, number>());
+    const { result } = renderHook(() => useNativeMapState<string, number>());
     const [_, controls] = result.current;
 
     act(() => {
@@ -106,7 +106,7 @@ describe("useMapObjectState", () => {
       ["b", 2],
       ["c", 3],
     ]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     act(() => {
@@ -121,7 +121,7 @@ describe("useMapObjectState", () => {
   it("should check if some keys exist in the map", () => {
     expect.hasAssertions();
     const initialMap = new Map<string, number>([["a", 1]]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     expect(controls.hasSome(["a", "b"])).toBe(true);
@@ -134,7 +134,7 @@ describe("useMapObjectState", () => {
       ["a", 1],
       ["b", 2],
     ]);
-    const { result } = renderHook(() => useMapObjectState(initialMap));
+    const { result } = renderHook(() => useNativeMapState(initialMap));
     const [_, controls] = result.current;
 
     expect(controls.hasEvery(["a", "b"])).toBe(true);

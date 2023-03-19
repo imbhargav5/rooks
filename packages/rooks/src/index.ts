@@ -43,7 +43,7 @@ export { useLifecycleLogger } from "@/hooks/useLifecycleLogger";
 export { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 export { useLocalstorageState } from "@/hooks/useLocalstorageState";
 export { useMapState };
-export { useMapObjectState } from "@/hooks/useMapObjectState";
+export { useNativeMapState } from "@/hooks/useNativeMapState";
 export { useMediaMatch } from "@/hooks/useMediaMatch";
 export { useMergeRefs } from "@/hooks/useMergeRefs";
 export { useMouse } from "@/hooks/useMouse";
