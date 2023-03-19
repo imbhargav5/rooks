@@ -246,6 +246,16 @@
       "category": "navigator"
     },
     {
+      "name": "useOnClickRef",
+      "description": "Callback on click/tap events",
+      "category": "events"
+    },
+    {
+      "name": "useOnHoverRef",
+      "description": "On hover callback hook",
+      "category": "events"
+    },
+    {
       "name": "useOnLongHover",
       "description": "Fires a callback when an element is hovered for a while",
       "category": "events"
