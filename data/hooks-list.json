@@ -46,6 +46,11 @@
       "category": "misc"
     },
     {
+      "name": "useDeepCompareEffect",
+      "description": "Deep compare dependencies instead of shallow for useEffect",
+      "category": "effects"
+    },
+    {
       "name": "useDidMount",
       "description": "componentDidMount hook for React",
       "category": "effects"
