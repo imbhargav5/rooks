@@ -201,6 +201,11 @@
       "category": "effects"
     },
     {
+      "name": "useMapObjectState",
+      "description": "Manage Map() object state in React",
+      "category": "state"
+    },
+    {
       "name": "useMapState",
       "description": "A react hook to manage state in a key value pair map.",
       "category": "state"

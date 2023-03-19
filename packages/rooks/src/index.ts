@@ -1,5 +1,6 @@
 import { useOnLongHover } from "@/hooks/useOnLongHover";
 import { useOnLongPress } from "@/hooks/useOnLongPress";
+import { useMapState } from "@/hooks/useMapState";
 
 export { useArrayState } from "@/hooks/useArrayState";
 export { useAsyncEffect } from "@/hooks/useAsyncEffect";
@@ -41,7 +42,8 @@ export { useKeys } from "@/hooks/useKeys";
 export { useLifecycleLogger } from "@/hooks/useLifecycleLogger";
 export { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 export { useLocalstorageState } from "@/hooks/useLocalstorageState";
-export { useMapState } from "@/hooks/useMapState";
+export { useMapState };
+export { useMapObjectState } from "@/hooks/useMapObjectState";
 export { useMediaMatch } from "@/hooks/useMediaMatch";
 export { useMergeRefs } from "@/hooks/useMergeRefs";
 export { useMouse } from "@/hooks/useMouse";
@@ -50,6 +52,7 @@ export { useMouseWheelDelta } from "@/hooks/useMouseWheelDelta";
 export { useMultiSelectableList } from "@/hooks/useMultiSelectableList";
 export { useMutationObserver } from "@/hooks/useMutationObserver";
 export { useMutationObserverRef } from "@/hooks/useMutationObserverRef";
+export { useMapState as useObjectState };
 export { useNavigatorLanguage } from "@/hooks/useNavigatorLanguage";
 export { useOnClickRef } from "@/hooks/useOnClickRef";
 export { useOnHoverRef } from "@/hooks/useOnHoverRef";
