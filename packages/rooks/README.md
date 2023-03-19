@@ -34,12 +34,14 @@
 **<h3 align="center">🔥 Effects</h3>**
 
 *   [useAsyncEffect](https://rooks.vercel.app/docs/useAsyncEffect) - A version of useEffect that accepts an async function
+*   [useDeepCompareEffect](https://rooks.vercel.app/docs/useDeepCompareEffect) - Deep compare dependencies instead of shallow for useEffect
 *   [useDidMount](https://rooks.vercel.app/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://rooks.vercel.app/docs/useDidUpdate) - componentDidUpdate hook for react
 *   [useEffectOnceWhen](https://rooks.vercel.app/docs/useEffectOnceWhen) - Runs a callback effect atmost one time when a condition becomes true
 *   [useIntervalWhen](https://rooks.vercel.app/docs/useIntervalWhen) - Sets an interval immediately when a condition is true
 *   [useIsomorphicEffect](https://rooks.vercel.app/docs/useIsomorphicEffect) - A hook that resolves to useEffect on the server and useLayoutEffect on the client.
 *   [useLifecycleLogger](https://rooks.vercel.app/docs/useLifecycleLogger) - A react hook that console logs parameters as component transitions through lifecycles.
+*   [useLockBodyScroll](https://rooks.vercel.app/docs/useLockBodyScroll) - This hook locks the scroll of the body element when `isLocked` is set to `true`.
 *   [useMouseMoveDelta](https://rooks.vercel.app/docs/useMouseMoveDelta) - Tracks delta of mouse move
 *   [useMouseWheelDelta](https://rooks.vercel.app/docs/useMouseWheelDelta) - Tracks delta of mouse move
 *   [useWillUnmount](https://rooks.vercel.app/docs/useWillUnmount) - componentWillUnmount lifecycle as hook for React.
@@ -51,6 +53,8 @@
 *   [useFocus](https://rooks.vercel.app/docs/useFocus) - Handles focus events for the immediate target element.
 *   [useFocusWithin](https://rooks.vercel.app/docs/useFocusWithin) - Handles focus events for the target component.
 *   [useIsDroppingFiles](https://rooks.vercel.app/docs/useIsDroppingFiles) - Check if any files are currently being dropped anywhere. Useful for highlighting drop areas.
+*   [useOnClickRef](https://rooks.vercel.app/docs/useOnClickRef) - Callback on click/tap events
+*   [useOnHoverRef](https://rooks.vercel.app/docs/useOnHoverRef) - On hover callback hook
 *   [useOnLongHover](https://rooks.vercel.app/docs/useOnLongHover) - Fires a callback when an element is hovered for a while
 *   [useOnLongPress](https://rooks.vercel.app/docs/useOnLongPress) - Fire a callback on long press
 *   [useOnWindowResize](https://rooks.vercel.app/docs/useOnWindowResize) - A React hook for adding an event listener for window resize
@@ -95,11 +99,13 @@
 *   [useCounter](https://rooks.vercel.app/docs/useCounter) - Counter hook for React.
 *   [useGetIsMounted](https://rooks.vercel.app/docs/useGetIsMounted) - Checks if a component is mounted or not at the time. Useful for async effects
 *   [useLocalstorageState](https://rooks.vercel.app/docs/useLocalstorageState) - UseState but auto updates values to localStorage
+*   [useNativeMapState](https://rooks.vercel.app/docs/useNativeMapState) - Manage Map() object state in React
 *   [useMapState](https://rooks.vercel.app/docs/useMapState) - A react hook to manage state in a key value pair map.
 *   [useMultiSelectableList](https://rooks.vercel.app/docs/useMultiSelectableList) - A custom hook to easily select multiple values from a list
 *   [usePreviousDifferent](https://rooks.vercel.app/docs/usePreviousDifferent) - usePreviousDifferent returns the last different value of a variable
 *   [usePreviousImmediate](https://rooks.vercel.app/docs/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
 *   [useQueueState](https://rooks.vercel.app/docs/useQueueState) - A React hook that manages state in the form of a queue
+*   [useSafeSetState](https://rooks.vercel.app/docs/useSafeSetState) - set state but ignores if component has already unmounted
 *   [useSelect](https://rooks.vercel.app/docs/useSelect) - Select values from a list easily. List selection hook for react.
 *   [useSelectableList](https://rooks.vercel.app/docs/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
 *   [useSessionstorageState](https://rooks.vercel.app/docs/useSessionstorageState) - useState but syncs with sessionstorage
@@ -140,7 +146,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 79 hooks as standalone modules.
+✅ Collection of 85 hooks as standalone modules.
 
 <!--hookscount end-->
 
