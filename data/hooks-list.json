@@ -191,6 +191,11 @@
       "category": "state"
     },
     {
+      "name": "useLockBodyScroll",
+      "description": "This hook locks the scroll of the body element when `isLocked` is set to `true`.",
+      "category": "effects"
+    },
+    {
       "name": "useMapState",
       "description": "A react hook to manage state in a key value pair map.",
       "category": "state"

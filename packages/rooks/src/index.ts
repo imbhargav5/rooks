@@ -35,6 +35,7 @@ export { useKeyBindings } from "@/hooks/useKeyBindings";
 export { useKeyRef } from "@/hooks/useKeyRef";
 export { useKeys } from "@/hooks/useKeys";
 export { useLifecycleLogger } from "@/hooks/useLifecycleLogger";
+export { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 export { useLocalstorageState } from "@/hooks/useLocalstorageState";
 export { useMapState } from "@/hooks/useMapState";
 export { useMediaMatch } from "@/hooks/useMediaMatch";
