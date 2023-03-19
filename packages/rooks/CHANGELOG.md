@@ -1,5 +1,15 @@
 # rooks
 
+## 7.7.0
+
+### Minor Changes
+
+- [`27469ff1`](https://github.com/imbhargav5/rooks/commit/27469ff15c51da8b86b0181e3b035ec74e70a6cd) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useLockBodyScroll hook
+
+### Patch Changes
+
+- [`f2096713`](https://github.com/imbhargav5/rooks/commit/f2096713dd0d14a3420102b17b0557cacd481dbb) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useOnline now uses useSyncExternalStore
+
 ## 7.6.1
 
 ### Patch Changes
