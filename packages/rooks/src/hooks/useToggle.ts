@@ -10,8 +10,6 @@ const defaultToggleFunction = <S>(value: S) => !value as unknown as S;
 
 /**
  * Use toggle hook helps you easily toggle a value.
- *
- * @param initialValue Initial value of the toggle, which will be false if not provided.
  * @returns [value, setValue]
  * @see https://rooks.vercel.app/docs/useToggle
  * @example
@@ -19,9 +17,9 @@ const defaultToggleFunction = <S>(value: S) => !value as unknown as S;
  * // value is false
  * // toggle() will change value to true.
  */
-export function useToggle<S = boolean>(
-  initialValue?: boolean
-): [S, Dispatch<unknown>];
+export function useToggle<S = boolean>(): [S, () => void];
+export function useToggle(initialValue: boolean): [boolean, () => void];
+
 /**
  * Use toggle hook helps you easily toggle a value
  *
@@ -48,7 +46,7 @@ export function useToggle<S>(
  */
 export function useToggle<S>(
   initialValue: S,
-  toggleFunction: ReducerWithoutAction<S>
+  toggleFunction?: ReducerWithoutAction<S>
 ): [S, DispatchWithoutAction];
 
 /**

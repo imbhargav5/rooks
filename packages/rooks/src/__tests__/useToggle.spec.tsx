@@ -6,6 +6,41 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 
 import { useToggle } from "@/hooks/useToggle";
 
+describe("useToggle without argument", () => {
+  let App = () => <p />;
+  beforeEach(() => {
+    App = () => {
+      const [value, toggleValue] = useToggle();
+      const updateValue = () => toggleValue();
+      return (
+        <p data-testid="toggle-element" onClick={updateValue}>
+          {value.toString()}
+        </p>
+      );
+    };
+  });
+  afterEach(cleanup);
+  it("should be defined", () => {
+    expect.hasAssertions();
+    expect(useToggle).toBeDefined();
+  });
+
+  it("sets initial value correctly", () => {
+    expect.hasAssertions();
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("false");
+  });
+
+  it("updates value", () => {
+    expect.hasAssertions();
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    fireEvent.click(toggleElement);
+    expect(toggleElement.innerHTML).toBe("true");
+  });
+});
+
 describe("useToggle basic behavior", () => {
   let App = () => <p />;
   beforeEach(() => {
@@ -20,10 +55,6 @@ describe("useToggle basic behavior", () => {
     };
   });
   afterEach(cleanup);
-  it("should be defined", () => {
-    expect.hasAssertions();
-    expect(useToggle).toBeDefined();
-  });
 
   it("sets initial value correctly", () => {
     expect.hasAssertions();
@@ -179,4 +210,40 @@ describe("useToggle with reducer", () => {
   });
 });
 
-// figure out tests
+describe("with boolean but with reducer", () => {
+  let App = () => <p />;
+  beforeEach(() => {
+    App = () => {
+      const [value, toggleValue] = useToggle(false, (state, action) => {
+        switch (action) {
+          case "toggle":
+            return !state;
+          default:
+            return state;
+        }
+      });
+      const updateValue = () => toggleValue("toggle");
+      return (
+        <p data-testid="toggle-element" onClick={updateValue}>
+          {value.toString()}
+        </p>
+      );
+    };
+  });
+  afterEach(cleanup);
+
+  it("should be false by default", () => {
+    expect.hasAssertions();
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    expect(toggleElement.innerHTML).toBe("false");
+  });
+
+  it("should update with dispatched actions", () => {
+    expect.hasAssertions();
+    const { getByTestId } = render(<App />);
+    const toggleElement = getByTestId("toggle-element");
+    fireEvent.click(toggleElement);
+    expect(toggleElement.innerHTML).toBe("true");
+  });
+});
