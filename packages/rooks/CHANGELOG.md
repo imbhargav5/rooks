@@ -1,5 +1,11 @@
 # rooks
 
+## 7.8.1
+
+### Patch Changes
+
+- [`f791599e`](https://github.com/imbhargav5/rooks/commit/f791599efb3d86bf69d761269ed733f112bfcce5) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useToggle boolean toggle function overload bug fix
+
 ## 7.8.0
 
 ### Minor Changes
