@@ -1,16 +1,30 @@
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { noop } from "@/utils/noop";
 
 /**
  *
  * @returns {boolean} Is navigator online
  */
-function getIsOnline(): boolean | null {
+function getSnapshot(): boolean | null {
   if (typeof window === "undefined") {
     return null;
   }
 
   return navigator.onLine;
+}
+
+function subscribe(onStoreChange: () => void): () => void {
+  if (typeof window !== "undefined") {
+    window.addEventListener("online", onStoreChange);
+    window.addEventListener("offline", onStoreChange);
+    return () => {
+      window.removeEventListener("online", onStoreChange);
+      window.removeEventListener("offline", onStoreChange);
+    };
+  } else {
+    console.warn("useOnline: window is undefined.");
+    return noop;
+  }
 }
 
 /**
@@ -22,33 +36,7 @@ function getIsOnline(): boolean | null {
  * @see https://rooks.vercel.app/docs/useOnline
  */
 function useOnline(): boolean | null {
-  const [isOnline, setIsOnline] = useState<boolean | null>(() => getIsOnline());
-
-  function setOffline() {
-    setIsOnline(false);
-  }
-
-  function setOnline() {
-    setIsOnline(true);
-  }
-
-  // we only needs this to be set on mount
-  // hence []
-  useEffect(() => {
-    // eslint-disable-next-line no-negated-condition
-    if (typeof window !== "undefined") {
-      window.addEventListener("online", setOnline);
-      window.addEventListener("offline", setOffline);
-
-      return () => {
-        window.removeEventListener("online", setOnline);
-        window.removeEventListener("offline", setOffline);
-      };
-    } else {
-      console.warn("useOnline: window is undefined.");
-      return noop;
-    }
-  }, []);
+  const isOnline = useSyncExternalStore<boolean | null>(subscribe, getSnapshot);
 
   return isOnline;
 }
