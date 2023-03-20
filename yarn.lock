@@ -3745,10 +3745,10 @@
   dependencies:
     semver "7.3.8"
 
-"@size-limit/webpack-why@^8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@size-limit/webpack-why/-/webpack-why-8.1.0.tgz#b23b3b65c5bb98e8e20ae750399d69bde98cb395"
-  integrity sha512-az2cEr/YJY7t36fCaFR2Z3uWUNhZatto24gvji2e9s0eodTrAvdZ3LGRQA3sFX9l32OL7717t6ToshQzHcOo5A==
+"@size-limit/webpack-why@^8.2.4":
+  version "8.2.4"
+  resolved "https://registry.yarnpkg.com/@size-limit/webpack-why/-/webpack-why-8.2.4.tgz#59fd31f662155d78f00de83f02976be245c70347"
+  integrity sha512-jil+Ka1GzFBSw/6C/2fmtEtKv5dcKzvsbk3OIFQUiGin/M76cPPqEg2AuOA4vUmPWmqKd69L0kt2zJLvxYShBg==
   dependencies:
     "@statoscope/webpack-plugin" "^5.24.0"
 
