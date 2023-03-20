@@ -24,7 +24,7 @@
     "@mdx-js/loader": "^2.1.5",
     "@next/mdx": "^12.3.4",
     "@types/node": "^18.11.4",
-    "@types/react": "18.0.22",
+    "@types/react": "18.0.28",
     "@types/react-is": "^17.0.3",
     "@types/react-syntax-highlighter": "^15.5.5",
     "eslint": "8.25.0",
