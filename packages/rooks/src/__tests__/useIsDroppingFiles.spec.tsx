@@ -26,13 +26,17 @@ describe("useIsDroppingFiles", () => {
     act(() => {
       fireEvent.dragEnter(dropZone, {
         dataTransfer: {
-          files: [
-            {
-              name: "test-file",
-              size: 100,
-              type: "text/plain",
-            },
-          ],
+          files: [],
+          types: ["Files"],
+        },
+      });
+    });
+
+    act(() => {
+      fireEvent.dragOver(dropZone, {
+        dataTransfer: {
+          files: [],
+          types: ["Files"],
         },
       });
     });
@@ -70,13 +74,17 @@ describe("useIsDroppingFiles", () => {
     act(() => {
       fireEvent.dragEnter(window, {
         dataTransfer: {
-          files: [
-            {
-              name: "test-file",
-              size: 100,
-              type: "text/plain",
-            },
-          ],
+          files: [],
+          types: ["Files"],
+        },
+      });
+    });
+
+    act(() => {
+      fireEvent.dragOver(window, {
+        dataTransfer: {
+          files: [],
+          types: ["Files"],
         },
       });
     });

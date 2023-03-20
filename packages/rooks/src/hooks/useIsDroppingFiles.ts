@@ -5,6 +5,7 @@
  */
 import { CallbackRef, HTMLElementOrNull } from "@/utils/utils";
 import { useState, useEffect, useCallback } from "react";
+import { useFreshCallback } from "./useFreshCallback";
 
 function useIsDroppingFiles(isTargetWindow: true): boolean;
 function useIsDroppingFiles(
@@ -21,39 +22,76 @@ function useIsDroppingFiles(
   }, []);
   const [isDroppingFiles, setIsDroppingFiles] = useState(false);
 
+  const handleDragEnter = useCallback(
+    (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer?.types.includes("Files")) {
+        if (!isDroppingFiles) {
+          setIsDroppingFiles(true);
+        }
+      } else {
+        setIsDroppingFiles(false);
+      }
+    },
+    [isDroppingFiles]
+  );
+
+  const handleDragOver = useCallback(
+    (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer?.types.includes("Files")) {
+        if (!isDroppingFiles) {
+          setIsDroppingFiles(true);
+        }
+      } else {
+        setIsDroppingFiles(false);
+      }
+    },
+    [isDroppingFiles]
+  );
+
+  const handleDragLeave = useCallback((e: DragEvent) => {
+    e.preventDefault();
+    setIsDroppingFiles(false);
+  }, []);
+
+  const handleDrop = useCallback((e: DragEvent) => {
+    e.preventDefault();
+    setIsDroppingFiles(false);
+  }, []);
+
+  const freshHandleDragEnter = useFreshCallback(handleDragEnter);
+  const freshHandleDragOver = useFreshCallback(handleDragOver);
+  const freshHandleDragLeave = useFreshCallback(handleDragLeave);
+  const freshHandleDrop = useFreshCallback(handleDrop);
+
   useEffect(() => {
     const target = isTargetWindow ? window : targetNode;
-    const handleDragEnter = (e: DragEvent) => {
-      e.preventDefault();
-      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
-        setIsDroppingFiles(true);
-      }
-    };
-
-    const handleDragLeave = (e: DragEvent) => {
-      e.preventDefault();
-      setIsDroppingFiles(false);
-    };
-
-    const handleDrop = (e: DragEvent) => {
-      e.preventDefault();
-      setIsDroppingFiles(false);
-    };
 
     if (target) {
-      target.addEventListener("dragenter", handleDragEnter);
-      target.addEventListener("dragleave", handleDragLeave);
-      target.addEventListener("drop", handleDrop);
+      target.addEventListener("dragenter", freshHandleDragEnter);
+      target.addEventListener("dragover", freshHandleDragOver);
+      target.addEventListener("dragleave", freshHandleDragLeave);
+      target.addEventListener("drop", freshHandleDrop);
     }
 
     return () => {
       if (target) {
-        target.removeEventListener("dragenter", handleDragEnter);
-        target.removeEventListener("dragleave", handleDragLeave);
-        target.removeEventListener("drop", handleDrop);
+        target.removeEventListener("dragenter", freshHandleDragEnter);
+        target.removeEventListener("dragover", freshHandleDragOver);
+        target.removeEventListener("dragleave", freshHandleDragLeave);
+        target.removeEventListener("drop", freshHandleDrop);
       }
     };
-  }, [isTargetWindow, targetNode]);
+  }, [
+    freshHandleDragEnter,
+    freshHandleDragLeave,
+    freshHandleDragOver,
+    freshHandleDrop,
+    isDroppingFiles,
+    isTargetWindow,
+    targetNode,
+  ]);
   if (isTargetWindow) {
     return isDroppingFiles;
   }
