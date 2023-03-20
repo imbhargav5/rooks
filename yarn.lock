@@ -11922,10 +11922,10 @@ mdast-util-gfm@^2.0.0:
     mdast-util-gfm-task-list-item "^1.0.0"
     mdast-util-to-markdown "^1.0.0"
 
-mdast-util-heading-range@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/mdast-util-heading-range/-/mdast-util-heading-range-3.1.0.tgz#911dc32df69878024161bcf4c82a3efc2e221dd8"
-  integrity sha512-utI/jMJR/d2/ImBxG/ko0BIyVA5B9lg9rIgHFVc9HdanBNpfEJqqqtKXYeFzkSFhPs7rogne8a8DNxJKCNIzYw==
+mdast-util-heading-range@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-util-heading-range/-/mdast-util-heading-range-3.1.1.tgz#88f651105aed3bb8b89e2eb288efbdb8dbfbd4d5"
+  integrity sha512-Dxyx/mzVcmzFgW8TtorRTisWaTS9WgooSiVdCYnp48iSjzsAQD0uwtLYxcgxoPCSINuKxWLZGz+OOZcsqhqNTg==
   dependencies:
     "@types/mdast" "^3.0.0"
     "@types/unist" "^2.0.0"
