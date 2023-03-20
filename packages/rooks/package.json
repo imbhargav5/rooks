@@ -122,7 +122,7 @@
     "meow": "10.1.5",
     "mini-css-extract-plugin": "2.7.5",
     "np": "^7.6.4",
-    "ora": "6.1.2",
+    "ora": "6.2.0",
     "pkg-dir": "^7.0.0",
     "prettier": "^2.7.1",
     "react": "18.2.0",
