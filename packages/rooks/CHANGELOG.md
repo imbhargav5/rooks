@@ -1,5 +1,11 @@
 # rooks
 
+## 7.8.2
+
+### Patch Changes
+
+- [`9c82b066`](https://github.com/imbhargav5/rooks/commit/9c82b0665d894806e53b296a17435a6fa3547486) Thanks [@imbhargav5](https://github.com/imbhargav5)! - shim use syncsternal store while using with useOnline
+
 ## 7.8.1
 
 ### Patch Changes
