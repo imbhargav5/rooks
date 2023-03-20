@@ -1,5 +1,11 @@
 # rooks
 
+## 7.8.4
+
+### Patch Changes
+
+- [`420e5e93`](https://github.com/imbhargav5/rooks/commit/420e5e93047a04a9a342797da93d00cdf7644f23) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useIsDroppingFiles bug fix
+
 ## 7.8.3
 
 ### Patch Changes
