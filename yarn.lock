@@ -11806,10 +11806,10 @@ mdast-comment-marker@^2.0.0:
   dependencies:
     mdast-util-mdx-expression "^1.1.0"
 
-mdast-normalize-headings@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/mdast-normalize-headings/-/mdast-normalize-headings-3.1.0.tgz#45747f0b76ef9d7f5f741de652a951266f49aab5"
-  integrity sha512-QL9XJ610dApHcsScRTbWiFtn7QO4wcE2fu6Jpyt4vja3qW28tpwDe0SBpM1lCYYtZi+2XNEb04Wlue8RYG6GqA==
+mdast-normalize-headings@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-normalize-headings/-/mdast-normalize-headings-3.1.1.tgz#b818e080be89e56842734924a0921c6b4c19dfe7"
+  integrity sha512-+pC9V143AkHl7TO16FLWV9LdMQjJMCZpTVPijpdpJpcch78P9aRjfv9hA4FvC0zgUkGdNe2PMNFAU8M9Xm/igw==
   dependencies:
     "@types/mdast" "^3.0.0"
     unist-util-visit "^4.0.0"
