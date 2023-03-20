@@ -143,7 +143,7 @@
     "rollup-plugin-typescript-paths": "^1.4.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "shelljs": "0.8.5",
-    "size-limit": "^8.1.0",
+    "size-limit": "^8.2.4",
     "terser": "^5.15.1",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
