@@ -4836,10 +4836,10 @@
   dependencies:
     post-robot "^8.0.28"
 
-"@widgetbot/react-embed@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.6.0.tgz#6338699c177a152061f03847306fd41c70c0633f"
-  integrity sha512-uNZpt9am+pHRsymEV6vZJey1lNApnX4KrIxKHdtHe9idYsAX3q179xBxGf489rBG9kczWvHM+vqB+HDms7O6kQ==
+"@widgetbot/react-embed@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.7.0.tgz#bdc3e47962aeaab12314b5e91231b8ede74d5901"
+  integrity sha512-usVCBLKQsVFQYm3pzSR5gRp6dq4sU0r79lIO/KLtaDrGe4/Rik5iNsQcUKl1q48I6Kru/pLTgQT3vMGpG5HSOw==
   dependencies:
     "@widgetbot/embed-api" "^1.1.3"
     react "^18.2.0"
