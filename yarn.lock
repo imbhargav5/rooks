@@ -16957,6 +16957,14 @@ unist-util-find-all-after@^4.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^5.0.0"
 
+unist-util-find-all-after@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/unist-util-find-all-after/-/unist-util-find-all-after-4.0.1.tgz#b840111fc4671abbed0b1305d918328bef7fd3fa"
+  integrity sha512-AO8++e6HJfwNoTrqkV7xSeW65e6uSsLRQST/9LWi8FmFSz1gS7TBd+DkL/CYiElsSZIQgT4J5U54v5/kJX5Nqg==
+  dependencies:
+    "@types/unist" "^2.0.0"
+    unist-util-is "^5.0.0"
+
 unist-util-find-all-before@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-find-all-before/-/unist-util-find-all-before-4.0.0.tgz#da5c5395cd883d8005775b36d71a0b8606ef992f"
