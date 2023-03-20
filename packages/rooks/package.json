@@ -81,7 +81,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "@types/use-sync-external-store": "^0.0.3",
     "@widgetbot/embed-api": "^1.2.8",
-    "@widgetbot/react-embed": "^1.6.0",
+    "@widgetbot/react-embed": "^1.7.0",
     "all-contributors-cli": "^6.24.0",
     "assert": "^2.0.0",
     "babel-core": "^7.0.0-bridge.0",
