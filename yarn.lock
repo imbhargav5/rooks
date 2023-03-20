@@ -2609,13 +2609,12 @@
   dependencies:
     "@lezer/common" "^1.0.0"
 
-"@manypkg/cli@^0.19.2":
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/@manypkg/cli/-/cli-0.19.2.tgz#0b8a466aa66464d228c3b0b0438d95c35e2338c0"
-  integrity sha512-DXx/P1lyunNoFWwOj1MWBucUhaIJljoiAGOpO2fE0GKMBCI6EZBZD0Up1+fQZoXBecKXRgV9mGgLvIB2fOQ0KQ==
+"@manypkg/cli@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@manypkg/cli/-/cli-0.20.0.tgz#fe4fec8fc49e831e94fa48c9b41d8fcea1aa20e2"
+  integrity sha512-xOAyzHp4cF6+1VxCeVi14k4WJBbKAExuYVA+wXlCHPLoTUv64D2HQrLUOFO8bXtzW9KFhGhdP2xGFq9n9rSDiw==
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    "@manypkg/get-packages" "^1.1.3"
+    "@manypkg/get-packages" "^2.0.0"
     chalk "^2.4.2"
     detect-indent "^6.0.0"
     find-up "^4.1.0"
@@ -2639,6 +2638,16 @@
     find-up "^4.1.0"
     fs-extra "^8.1.0"
 
+"@manypkg/find-root@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@manypkg/find-root/-/find-root-2.1.0.tgz#555072fde526f3986e5a02200440f7f7746ed6ce"
+  integrity sha512-NEYRVlZCJYhRTqQURhv+WBpDcvmsp/M423Wcdvggv8lYJYD4GtqnTMLrQaTjA10fYt/PIc3tSdwV+wxJnWqPfQ==
+  dependencies:
+    "@manypkg/tools" "^1.0.0"
+    "@types/node" "^12.7.1"
+    find-up "^4.1.0"
+    fs-extra "^8.1.0"
+
 "@manypkg/get-packages@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@manypkg/get-packages/-/get-packages-1.1.3.tgz#e184db9bba792fa4693de4658cfb1463ac2c9c47"
@@ -2649,6 +2658,24 @@
     "@manypkg/find-root" "^1.1.0"
     fs-extra "^8.1.0"
     globby "^11.0.0"
+    read-yaml-file "^1.1.0"
+
+"@manypkg/get-packages@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@manypkg/get-packages/-/get-packages-2.1.0.tgz#f7308e7b7c14c4a630256d3da73f2d0f75bfede2"
+  integrity sha512-IgWPEGgeKeR3ISlgHAMbY+m042yjNe3NPt8UmJT0xMwofe/UifUVtOq5aUBkNSygfOrcUh/j5JExLPuOx72quA==
+  dependencies:
+    "@manypkg/find-root" "^2.1.0"
+    "@manypkg/tools" "^1.0.0"
+
+"@manypkg/tools@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@manypkg/tools/-/tools-1.0.0.tgz#60c41eaca846b32c4924aeb892194d5a5b3c1174"
+  integrity sha512-W8uDMhDGtwNyXYr6A+MWggxdL3spOQ8rfMNYpNph1GDJ0v084MnBFdpF1jvcPZ0okHAeYccV7le8AUs+fzwsAQ==
+  dependencies:
+    fs-extra "^8.1.0"
+    globby "^11.0.0"
+    jju "^1.4.0"
     read-yaml-file "^1.1.0"
 
 "@mdx-js/loader@^2.1.5":
@@ -10905,6 +10932,11 @@ jest@^27.5.1:
     "@jest/core" "^27.5.1"
     import-local "^3.0.2"
     jest-cli "^27.5.1"
+
+jju@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/jju/-/jju-1.4.0.tgz#a3abe2718af241a2b2904f84a625970f389ae32a"
+  integrity sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==
 
 jora@^1.0.0-beta.7:
   version "1.0.0-beta.7"
