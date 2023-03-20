@@ -4767,10 +4767,10 @@
   resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.3.tgz#c7fd8069d7ce2ec7740d8bf4140c786c636fb3d6"
   integrity sha1-x/2AadfOLsd0DYv0FAx4bGNvs9Y=
 
-"@widgetbot/embed-api@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.2.1.tgz#fb79806d5b33275a0afec581022ac86bb9862f4d"
-  integrity sha512-voUhqR1d9N4Kor/2F7VggIfIvoSbskd2l96iBK5hxbumOtENJIBvd8iQAjGjhSxt8X4Ejsp6amR0/0txqLvvaQ==
+"@widgetbot/embed-api@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.2.8.tgz#cf4466b3add9e95c15e0f80d79ff73cbaa10ecb9"
+  integrity sha512-2fMnUGCZDDsqVBWzkv0f6E9NgiHVcTusLCH8V0Ar3cAOXRVB0QDYuQPHojxpe5z7xazYa2iqEI+WXrq/zWMbQg==
   dependencies:
     post-robot "^8.0.28"
 
