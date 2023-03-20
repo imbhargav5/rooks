@@ -12027,10 +12027,10 @@ mdast-util-to-string@^3.0.0, mdast-util-to-string@^3.1.0:
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-3.1.0.tgz#56c506d065fbf769515235e577b5a261552d56e9"
   integrity sha512-n4Vypz/DZgwo0iMHLQL49dJzlp7YtAJP+N07MZHpjPf/5XJuHUWstviF4Mn2jEiR/GNmtnRRqnwsXExk3igfFA==
 
-mdast-zone@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/mdast-zone/-/mdast-zone-5.1.0.tgz#e0190959b8db821dc955391e05753699b079d1f5"
-  integrity sha512-nXxbNnN5Q1w8idtgKgtmay7hwNjlgWtHvAop5e7ymeAoUWrrN9EdkdnmZhWK79KV0VcMp+EKhLzoPoPENF3G7g==
+mdast-zone@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-zone/-/mdast-zone-5.1.1.tgz#602447482e514fcf6659ac581c3634b69fb1efc0"
+  integrity sha512-dd4BCwwk6Baqu7mOkro40/AwJQ3t28D1pQcd3pb8C48mU1Vm7d5fOhoxE/Q7FtoUMMkAP2YxnzaHnlrNV2ieYw==
   dependencies:
     "@types/mdast" "^3.0.0"
     "@types/unist" "^2.0.0"
