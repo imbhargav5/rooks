@@ -1,5 +1,11 @@
 # rooks
 
+## 7.8.3
+
+### Patch Changes
+
+- [`6b36874b`](https://github.com/imbhargav5/rooks/commit/6b36874bfa9b97e999e3821c536f13161e00f868) Thanks [@imbhargav5](https://github.com/imbhargav5)! - noop import fix
+
 ## 7.8.2
 
 ### Patch Changes
