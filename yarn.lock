@@ -16960,6 +16960,14 @@ unist-util-find-all-before@^4.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^5.0.0"
 
+unist-util-find-all-before@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/unist-util-find-all-before/-/unist-util-find-all-before-4.0.1.tgz#d5e5ce04a7db4969757a065f7c2f9b3d4a682621"
+  integrity sha512-xg4UHtZ6VbcjQbfDtmLZch6kQYQFF3nfaW05Ie3+t2UectzeqSx/iqLmh/wWogwU+YDWnD40PjZKK7ORmCma+g==
+  dependencies:
+    "@types/unist" "^2.0.0"
+    unist-util-is "^5.0.0"
+
 unist-util-find-all-between@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/unist-util-find-all-between/-/unist-util-find-all-between-2.1.0.tgz#18ddb51f7abc4e22c645b4321e82ab6a6decc640"

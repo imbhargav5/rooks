@@ -153,7 +153,7 @@
     "unified": "^10.1.2",
     "unist-util-find": "^1.0.2",
     "unist-util-find-all-after": "^4.0.0",
-    "unist-util-find-all-before": "^4.0.0",
+    "unist-util-find-all-before": "^4.0.1",
     "unist-util-find-all-between": "^2.1.0",
     "unist-util-visit": "^4.1.1",
     "vfile": "^5.3.5",
