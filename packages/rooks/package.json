@@ -157,7 +157,7 @@
     "unist-util-find-all-between": "^2.1.0",
     "unist-util-visit": "^4.1.1",
     "vfile": "^5.3.5",
-    "vfile-reporter": "^7.0.4",
+    "vfile-reporter": "^7.0.5",
     "webpack": "5.74.0",
     "webpack-cli": "^4.10.0",
     "write-pkg": "5.1.0",

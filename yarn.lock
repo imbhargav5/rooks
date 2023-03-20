@@ -17311,15 +17311,17 @@ vfile-message@^3.0.0:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^3.0.0"
 
-vfile-reporter@^7.0.4:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.4.tgz#f5a91c7420c7b2d6bed6f64719069545d47a22cd"
-  integrity sha512-4cWalUnLrEnbeUQ+hARG5YZtaHieVK3Jp4iG5HslttkVl+MHunSGNAIrODOTLbtjWsNZJRMCkL66AhvZAYuJ9A==
+vfile-reporter@^7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-7.0.5.tgz#a0cbf3922c08ad428d6db1161ec64a53b5725785"
+  integrity sha512-NdWWXkv6gcd7AZMvDomlQbK3MqFWL1RlGzMn++/O2TI+68+nqxCPTvLugdOtfSzXmjh+xUyhp07HhlrbJjT+mw==
   dependencies:
     "@types/supports-color" "^8.0.0"
     string-width "^5.0.0"
     supports-color "^9.0.0"
     unist-util-stringify-position "^3.0.0"
+    vfile "^5.0.0"
+    vfile-message "^3.0.0"
     vfile-sort "^3.0.0"
     vfile-statistics "^2.0.0"
 
