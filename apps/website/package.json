@@ -21,7 +21,7 @@
     "rooks": "7.8.4"
   },
   "devDependencies": {
-    "@mdx-js/loader": "^2.1.5",
+    "@mdx-js/loader": "^2.3.0",
     "@next/mdx": "^12.3.4",
     "@types/node": "^18.11.4",
     "@types/react": "18.0.28",
