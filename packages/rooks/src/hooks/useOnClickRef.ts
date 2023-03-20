@@ -1,4 +1,4 @@
-import { noop } from "lodash";
+import { noop } from "@/utils/noop";
 import { useState, useEffect, useCallback } from "react";
 import { useFreshCallback } from "./useFreshCallback";
 
