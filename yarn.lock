@@ -12885,10 +12885,10 @@ now-and-later@^2.0.0:
   dependencies:
     once "^1.3.2"
 
-np@^7.6.2:
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/np/-/np-7.6.2.tgz#02650c024b232cb8c958846c44f672c2f8951b7c"
-  integrity sha512-gExmKGKixh7ITc4Q+Lv7nfCby0CVKvzri9zN8970oKD8976T4L5dw8QWUtMcXcIjhFF6h5lbvztao/NurDbmxQ==
+np@^7.6.4:
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/np/-/np-7.6.4.tgz#5b901be85cb498e9feada52b2945c8a0ae68d2f7"
+  integrity sha512-w1bwfhN2OCY8VgVdtkSn2vHN+c0KtPnCCWKWvPjuB6WCxMc1bmU797xCc1NZJdRAW2F79zrMMKOIh0N/A1xdXg==
   dependencies:
     "@samverschueren/stream-to-observable" "^0.3.1"
     any-observable "^0.5.1"
