@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@mdx-js/loader": "^2.1.5",
-    "@next/mdx": "^12.3.4",
+    "@next/mdx": "^13.2.4",
     "@types/node": "^18.11.4",
     "@types/react": "18.0.28",
     "@types/react-is": "^17.0.3",
