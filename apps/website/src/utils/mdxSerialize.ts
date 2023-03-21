@@ -17,7 +17,10 @@ export const mdxSerialize = async (
   const markdownWithMeta = fs.readFileSync(filePath, "utf-8");
 
   const { data: frontMatter, content } = matter(markdownWithMeta);
-  const mdxSource = await serialize(content, {
+  const mdxSource = await serialize<
+    Record<string, unknown>,
+    Record<string, string>
+  >(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
     },
