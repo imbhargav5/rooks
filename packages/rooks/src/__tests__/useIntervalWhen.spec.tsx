@@ -78,4 +78,60 @@ describe("useIntervalWhen", () => {
     expect(result.current.currentValue).toBe(2);
     jest.useRealTimers();
   });
+
+  it("should not start the timer when the condition is false", () => {
+    expect.hasAssertions();
+    jest.useFakeTimers();
+    const { result } = renderHook(() => useHook(false));
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(setInterval).toHaveBeenCalledTimes(0);
+    expect(result.current.currentValue).toBe(0);
+    jest.useRealTimers();
+  });
+  it("should stop the timer when the condition becomes false", () => {
+    expect.hasAssertions();
+    jest.useFakeTimers();
+    const { result, rerender } = renderHook(({ when }) => useHook(when), {
+      initialProps: { when: true },
+    });
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(setInterval).toHaveBeenCalledTimes(1);
+    expect(result.current.currentValue).toBe(1);
+
+    rerender({ when: false });
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(result.current.currentValue).toBe(1);
+    jest.useRealTimers();
+  });
+  it("should resume the timer when the condition becomes true again", () => {
+    expect.hasAssertions();
+    jest.useFakeTimers();
+    const { result, rerender } = renderHook(({ when }) => useHook(when), {
+      initialProps: { when: true },
+    });
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(setInterval).toHaveBeenCalledTimes(1);
+    expect(result.current.currentValue).toBe(1);
+
+    rerender({ when: false });
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(result.current.currentValue).toBe(1);
+
+    rerender({ when: true });
+    act(() => {
+      jest.advanceTimersByTime(1_000);
+    });
+    expect(result.current.currentValue).toBe(2);
+    jest.useRealTimers();
+  });
 });

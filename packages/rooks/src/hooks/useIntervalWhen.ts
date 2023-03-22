@@ -23,12 +23,12 @@ function useIntervalWhen(
     savedRefCallback.current = callback;
   });
 
-  function internalCallback() {
-    savedRefCallback.current?.();
-  }
-
   useEffect(() => {
     if (when) {
+      function internalCallback() {
+        savedRefCallback.current?.();
+      }
+
       if (startImmediate) {
         internalCallback();
       }
