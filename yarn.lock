@@ -2877,10 +2877,12 @@
   dependencies:
     glob "7.1.7"
 
-"@next/mdx@^12.3.4":
-  version "12.3.4"
-  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-12.3.4.tgz#1bd3e4df37040ba20fceff33d25791a3199745d3"
-  integrity sha512-YTF/ph9NMKjmrNsr8O+y3IiZee9TaxSd6051qI0Fj/du75pKRRZ1DnOX6ZS7mMgswH7VMERVV7fBZxmJr9sN7Q==
+"@next/mdx@^13.2.4":
+  version "13.2.4"
+  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-13.2.4.tgz#055dd5928a488ad9cc6ced03aff5807ad48f0ac4"
+  integrity sha512-inl7u+OEa4Ok3uL052oa8EDw1bUkMGLVKzFfVBIgG19s29gxQvcWYzxa5t438J31ljApjh6Y5k4AD6yLaCAlQw==
+  dependencies:
+    source-map "^0.7.0"
 
 "@next/swc-android-arm-eabi@12.3.4":
   version "12.3.4"
