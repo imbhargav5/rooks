@@ -21,12 +21,11 @@ function useTimeoutWhen(
     savedRefCallback.current = callback;
   });
 
-  function internalCallback() {
-    savedRefCallback.current?.();
-  }
-
   useEffect(() => {
     if (when) {
+      function internalCallback() {
+        savedRefCallback.current?.();
+      }
       // eslint-disable-next-line no-negated-condition
       if (typeof window !== "undefined") {
         const timeout = window.setTimeout(internalCallback, timeoutDelayMs);
