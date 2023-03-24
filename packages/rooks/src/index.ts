@@ -68,6 +68,7 @@ export { useOutsideClick } from "@/hooks/useOutsideClick";
 export { useOutsideClickRef } from "@/hooks/useOutsideClickRef";
 export { usePreviousDifferent } from "@/hooks/usePreviousDifferent";
 export { usePreviousImmediate } from "@/hooks/usePreviousImmediate";
+export { usePromise } from "@/hooks/usePromise";
 export { useQueueState } from "@/hooks/useQueueState";
 export { useRaf } from "@/hooks/useRaf";
 export { useResizeObserverRef } from "@/hooks/useResizeObserverRef";

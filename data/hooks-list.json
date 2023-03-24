@@ -316,6 +316,11 @@
       "category": "state"
     },
     {
+      "name": "usePromise",
+      "description": "Promise management hook for react",
+      "category": "state"
+    },
+    {
       "name": "useQueueState",
       "description": "A React hook that manages state in the form of a queue",
       "category": "state"
