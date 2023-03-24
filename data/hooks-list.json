@@ -201,11 +201,6 @@
       "category": "effects"
     },
     {
-      "name": "useNativeMapState",
-      "description": "Manage Map() object state in React",
-      "category": "state"
-    },
-    {
       "name": "useMapState",
       "description": "A react hook to manage state in a key value pair map.",
       "category": "state"
@@ -249,6 +244,11 @@
       "name": "useMutationObserverRef",
       "description": "A hook that tracks mutations of an element. It returns a callbackRef.",
       "category": "ui"
+    },
+    {
+      "name": "useNativeMapState",
+      "description": "Manage Map() object state in React",
+      "category": "state"
     },
     {
       "name": "useNavigatorLanguage",
@@ -364,6 +364,11 @@
       "name": "useSetState",
       "description": "Manage the state of a Set in React. ",
       "category": "state"
+    },
+    {
+      "name": "useSpeech",
+      "description": "Speech synthesis hook for React",
+      "category": "misc"
     },
     {
       "name": "useStackState",
