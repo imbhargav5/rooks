@@ -1,5 +1,11 @@
 # rooks
 
+## 7.9.0
+
+### Minor Changes
+
+- [`81e24680`](https://github.com/imbhargav5/rooks/commit/81e24680f1623bbf80fe46ca814b5fb116ba0004) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useSpeech, usePromise and useDebounceFn hooks
+
 ## 7.8.5
 
 ### Patch Changes
