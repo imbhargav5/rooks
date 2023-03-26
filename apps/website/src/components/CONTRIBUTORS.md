@@ -1,7 +1,7 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-74-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-75-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -106,6 +106,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://pka.netlify.app/"><img src="https://avatars.githubusercontent.com/u/31067376?v=4?s=100" width="100px;" alt="Mahendra Choudhary"/><br /><sub><b>Mahendra Choudhary</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=mahendrjy" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/7777chaitanya"><img src="https://avatars.githubusercontent.com/u/56331036?v=4?s=100" width="100px;" alt="Chaitanya J"/><br /><sub><b>Chaitanya J</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=7777chaitanya" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/TkDodo"><img src="https://avatars.githubusercontent.com/u/1021430?v=4?s=100" width="100px;" alt="Dominik Dorfmeister"/><br /><sub><b>Dominik Dorfmeister</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=TkDodo" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://12bay.vn/"><img src="https://avatars.githubusercontent.com/u/4768095?v=4?s=100" width="100px;" alt="Nghiệp"/><br /><sub><b>Nghiệp</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nghiepdev" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
