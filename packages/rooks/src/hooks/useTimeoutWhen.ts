@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { noop } from "@/utils/noop";
+import { useFreshCallback } from "./useFreshCallback";
 
 /**
  * A setTimeout hook that calls a callback after a timeout duration
@@ -13,18 +14,15 @@ import { noop } from "@/utils/noop";
 function useTimeoutWhen(
   callback: () => void,
   timeoutDelayMs = 0,
-  when = true
+  when = true,
+  key: string | number = 0
 ): void {
-  const savedRefCallback = useRef<() => void>();
-
-  useEffect(() => {
-    savedRefCallback.current = callback;
-  });
+  const freshCallback = useFreshCallback(callback);
 
   useEffect(() => {
     if (when) {
       function internalCallback() {
-        savedRefCallback.current?.();
+        freshCallback();
       }
       // eslint-disable-next-line no-negated-condition
       if (typeof window !== "undefined") {
@@ -39,7 +37,7 @@ function useTimeoutWhen(
     }
 
     return noop;
-  }, [timeoutDelayMs, when]);
+  }, [timeoutDelayMs, when, key, freshCallback]);
 }
 
 export { useTimeoutWhen };

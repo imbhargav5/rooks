@@ -10,6 +10,7 @@ export { useBoundingclientrectRef } from "@/hooks/useBoundingclientrectRef";
 export { useCountdown } from "@/hooks/useCountdown";
 export { useCounter } from "@/hooks/useCounter";
 export { useDebounce } from "@/hooks/useDebounce";
+export { useDebounceFn } from "@/hooks/useDebounceFn";
 export { useDebouncedValue } from "@/hooks/useDebouncedValue";
 export { useDeepCompareEffect } from "@/hooks/useDeepCompareEffect";
 export { useDidMount } from "@/hooks/useDidMount";

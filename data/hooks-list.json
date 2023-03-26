@@ -41,6 +41,11 @@
       "category": "misc"
     },
     {
+      "name": "useDebounceFn",
+      "description": "Powerful debounce function hook for React",
+      "category": "misc"
+    },
+    {
       "name": "useDebouncedValue",
       "description": "Tracks another value and gets updated in a debounced way.",
       "category": "misc"
