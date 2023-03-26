@@ -71,6 +71,7 @@
 **<h3 align="center">✨ Misc</h3>**
 
 *   [useDebounce](https://rooks.vercel.app/docs/useDebounce) - Debounce hook for react
+*   [useDebounceFn](https://rooks.vercel.app/docs/useDebounceFn) - Powerful debounce function hook for React
 *   [useDebouncedValue](https://rooks.vercel.app/docs/useDebouncedValue) - Tracks another value and gets updated in a debounced way.
 *   [useDimensionsRef](https://rooks.vercel.app/docs/useDimensionsRef) - Easily grab dimensions of an element with a ref using this hook
 *   [useEventListenerRef](https://rooks.vercel.app/docs/useEventListenerRef) - A react hook to add an event listener to a ref
@@ -82,6 +83,7 @@
 *   [useOrientation](https://rooks.vercel.app/docs/useOrientation) - orientation hook for react
 *   [useRefElement](https://rooks.vercel.app/docs/useRefElement) - Helps bridge gap between callback ref and state
 *   [useRenderCount](https://rooks.vercel.app/docs/useRenderCount) - Get the render count of a component
+*   [useSpeech](https://rooks.vercel.app/docs/useSpeech) - Speech synthesis hook for React
 *   [useThrottle](https://rooks.vercel.app/docs/useThrottle) - Throttle custom hook for React
 *   [useTimeoutWhen](https://rooks.vercel.app/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://rooks.vercel.app/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
@@ -99,11 +101,12 @@
 *   [useCounter](https://rooks.vercel.app/docs/useCounter) - Counter hook for React.
 *   [useGetIsMounted](https://rooks.vercel.app/docs/useGetIsMounted) - Checks if a component is mounted or not at the time. Useful for async effects
 *   [useLocalstorageState](https://rooks.vercel.app/docs/useLocalstorageState) - UseState but auto updates values to localStorage
-*   [useNativeMapState](https://rooks.vercel.app/docs/useNativeMapState) - Manage Map() object state in React
 *   [useMapState](https://rooks.vercel.app/docs/useMapState) - A react hook to manage state in a key value pair map.
 *   [useMultiSelectableList](https://rooks.vercel.app/docs/useMultiSelectableList) - A custom hook to easily select multiple values from a list
+*   [useNativeMapState](https://rooks.vercel.app/docs/useNativeMapState) - Manage Map() object state in React
 *   [usePreviousDifferent](https://rooks.vercel.app/docs/usePreviousDifferent) - usePreviousDifferent returns the last different value of a variable
 *   [usePreviousImmediate](https://rooks.vercel.app/docs/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
+*   [usePromise](https://rooks.vercel.app/docs/usePromise) - Promise management hook for react
 *   [useQueueState](https://rooks.vercel.app/docs/useQueueState) - A React hook that manages state in the form of a queue
 *   [useSafeSetState](https://rooks.vercel.app/docs/useSafeSetState) - set state but ignores if component has already unmounted
 *   [useSelect](https://rooks.vercel.app/docs/useSelect) - Select values from a list easily. List selection hook for react.
@@ -146,7 +149,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 85 hooks as standalone modules.
+✅ Collection of 88 hooks as standalone modules.
 
 <!--hookscount end-->
 
