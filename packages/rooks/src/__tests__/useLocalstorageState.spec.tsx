@@ -192,4 +192,49 @@ describe("useLocalstorageState localStorage", () => {
       JSON.stringify("new-value")
     );
   });
+
+  it("do not writes undefined value to localStorage", () => {
+    expect.hasAssertions();
+
+    const { result } = renderHook(() =>
+      useLocalstorageState<string | undefined>(
+        "test-value-localstorage",
+        undefined
+      )
+    );
+
+    expect(localStorage.getItem).toHaveBeenCalledWith(
+      "test-value-localstorage"
+    );
+    expect(result.current[0]).toBeUndefined();
+
+    const [, setValue] = result.current;
+
+    act(() => {
+      setValue("new-value");
+    });
+
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(result.current[0]).toBe("new-value");
+  });
+
+  it("setValue(undefined) should be remove from localStorage", () => {
+    expect.hasAssertions();
+
+    const { result } = renderHook(() =>
+      useLocalstorageState("test-value-localstorage")
+    );
+
+    const [, setValue] = result.current;
+
+    act(() => {
+      setValue(undefined);
+    });
+
+    expect(localStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem).toHaveBeenCalledWith(
+      "test-value-localstorage"
+    );
+    expect(result.current[0]).toBeUndefined();
+  });
 });
