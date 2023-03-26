@@ -23,6 +23,10 @@ function saveValueToLocalStorage<S>(key: string, value: S) {
     return null;
   }
 
+  if (value === undefined) {
+    return localStorage.removeItem(key);
+  }
+
   return localStorage.setItem(key, JSON.stringify(value));
 }
 
