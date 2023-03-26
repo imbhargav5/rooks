@@ -1,5 +1,5 @@
 import { usePromise } from "@/hooks/usePromise";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 
 describe("usePromise", () => {
   it("sets the loading state correctly", async () => {
