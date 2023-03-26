@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { noop } from "@/utils/noop";
 import { useFreshCallback } from "./useFreshCallback";
 

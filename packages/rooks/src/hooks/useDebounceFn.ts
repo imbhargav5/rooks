@@ -3,7 +3,7 @@
  * @description Powerful debounce function hook for React
  * @see {@link https://rooks.vercel.app/docs/useDebounceFn}
  */
-import { useRef, useCallback, useState, MutableRefObject } from "react";
+import { useRef, useCallback, useState } from "react";
 import { useFreshCallback } from "./useFreshCallback";
 import { useTimeoutWhen } from "./useTimeoutWhen";
 
