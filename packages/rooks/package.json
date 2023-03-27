@@ -77,7 +77,7 @@
     "@types/lodash.debounce": "^4.0.7",
     "@types/raf": "^3.4.0",
     "@types/react": "^18.0.30",
-    "@types/react-dom": "^18.0.7",
+    "@types/react-dom": "^18.0.11",
     "@types/react-test-renderer": "^18.0.0",
     "@types/use-sync-external-store": "^0.0.3",
     "@widgetbot/embed-api": "^1.2.8",
