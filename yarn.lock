@@ -17612,10 +17612,10 @@ vfile@^5.3.0:
     unist-util-stringify-position "^3.0.0"
     vfile-message "^3.0.0"
 
-vfile@^5.3.5:
-  version "5.3.5"
-  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.5.tgz#ec2e206b1414f561c85b7972bb1eeda8ab47ee61"
-  integrity sha512-U1ho2ga33eZ8y8pkbQLH54uKqGhFJ6GYIHnnG5AhRpAh3OWjkrRHKa/KogbmQn8We+c0KVV3rTOgR9V/WowbXQ==
+vfile@^5.3.7:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.7.tgz#de0677e6683e3380fafc46544cfe603118826ab7"
+  integrity sha512-r7qlzkgErKjobAmyNIkkSpizsFPYiUPuJb5pNW1RB4JcYVZhs4lIbVqk8XPk033CV/1z8ss5pkax8SuhGpcG8g==
   dependencies:
     "@types/unist" "^2.0.0"
     is-buffer "^2.0.0"
