@@ -2788,7 +2788,7 @@
     globby "^11.0.0"
     read-yaml-file "^1.1.0"
 
-"@manypkg/get-packages@^2.0.0":
+"@manypkg/get-packages@^2.0.0", "@manypkg/get-packages@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@manypkg/get-packages/-/get-packages-2.1.0.tgz#f7308e7b7c14c4a630256d3da73f2d0f75bfede2"
   integrity sha512-IgWPEGgeKeR3ISlgHAMbY+m042yjNe3NPt8UmJT0xMwofe/UifUVtOq5aUBkNSygfOrcUh/j5JExLPuOx72quA==
