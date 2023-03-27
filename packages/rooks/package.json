@@ -24,7 +24,7 @@
     "node": "^12.17.0 || 13.x || 14.x || 15.x || 16.x || 17.x || 18.x"
   },
   "engines": {
-    "node": ">=v10.24.1"
+    "node": ">=v18.15.0"
   },
   "homepage": "https://rooks.vercel.app/",
   "repository": {
