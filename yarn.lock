@@ -11994,10 +11994,10 @@ mdast-normalize-headings@^3.1.1:
     "@types/mdast" "^3.0.0"
     unist-util-visit "^4.0.0"
 
-mdast-util-compact@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-4.1.0.tgz#3ed3d2596d19709cd5b90c9e2f963e47de159e1a"
-  integrity sha512-71VOtWvbVcgez/IpDcrjERgiXjrE2Ylw8kuIWeWQ1JpIYleTQgwxf0t4lRmZERuiL0fzBsqSrkUI8qMLm10/PQ==
+mdast-util-compact@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-4.1.1.tgz#b2d99402b41f368509c9324437f18c9b8c867644"
+  integrity sha512-h/UFPIkf4ZlJw50k9UC+CkY+/urhFHZB25GXGh0f+kbqSulzZMSEGWeFjAe2jEQsFu9bSjf0s/TdZXsjvtmxIQ==
   dependencies:
     "@types/mdast" "^3.0.0"
     unist-util-visit "^4.0.0"
