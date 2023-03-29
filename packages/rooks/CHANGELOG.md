@@ -1,5 +1,11 @@
 # rooks
 
+## 7.10.0
+
+### Minor Changes
+
+- [`c3c8f761`](https://github.com/imbhargav5/rooks/commit/c3c8f76171c88df81df58acb5a4905d7a646c14d) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useUndoRedoState hook
+
 ## 7.9.0
 
 ### Minor Changes
