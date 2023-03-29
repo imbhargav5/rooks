@@ -18,6 +18,22 @@ type UndoRedoControls = {
   canRedo: () => boolean;
 };
 
+/**
+ * useUndoRedoState hook
+ *
+ * This hook manages the state with undo and redo capabilities.
+ *
+ * @param initialState - The initial state value
+ * @param options - An optional object with a `maxDepth` property to limit the history and future arrays
+ * @returns A tuple with the current state, a function to update the state, and an object with undo and redo controls
+ *
+ * @example
+ * const [state, setState, controls] = useUndoRedoState(0, { maxDepth: 3 });
+ * // state is 0
+ * setState(1); // state is 1
+ * controls.undo(); // state is 0
+ * controls.redo(); // state is 1
+ */
 function useUndoRedoState<T>(
   initialState: T,
   options?: { maxDepth?: number }
