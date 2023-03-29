@@ -90,6 +90,7 @@ sidebar_label: Hooks List
 *   [useSetState](https://rooks.vercel.app/docs/useSetState) - Manage the state of a Set in React.
 *   [useStackState](https://rooks.vercel.app/docs/useStackState) - A React hook that manages state in the form of a stack
 *   [useTimeTravelState](https://rooks.vercel.app/docs/useTimeTravelState) - A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
+*   [useUndoRedoState](https://rooks.vercel.app/docs/useUndoRedoState) - Setstate but can also undo and redo
 *   [useUndoState](https://rooks.vercel.app/docs/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
 **<h3 align="center">⚛️ UI</h3>**
