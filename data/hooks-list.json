@@ -406,6 +406,11 @@
       "category": "misc"
     },
     {
+      "name": "useUndoRedoState",
+      "description": "Setstate but can also undo and redo ",
+      "category": "state"
+    },
+    {
       "name": "useUndoState",
       "description": "Drop in replacement for useState hook but with undo functionality.",
       "category": "state"
