@@ -1,5 +1,11 @@
 # rooks
 
+## 7.10.1
+
+### Patch Changes
+
+- [`6fd5f336`](https://github.com/imbhargav5/rooks/commit/6fd5f3364aed83f18e612902c8e061acc4cb40d7) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useInViewRef supports no callback, no options overloads
+
 ## 7.10.0
 
 ### Minor Changes
