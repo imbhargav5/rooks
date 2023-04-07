@@ -8,34 +8,37 @@ const config: IntersectionObserverInit = {
   threshold: [0, 1],
 };
 
-/**
- *
- * useInViewRef hook
- *
- * Returns a mutation observer for a React Ref and true/false when element enters/leaves the viewport. Also fires a callback.
- *
- * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
- * @param {IntersectionObserverInit} options
- * @see https://rooks.vercel.app/docs/useInViewRef
- */
+function useInViewRef(): [CallbackRef, boolean];
 function useInViewRef(
-  callback: IntersectionObserverCallback = () => {},
-  options: IntersectionObserverInit = config
+  options: IntersectionObserverInit
+): [CallbackRef, boolean];
+function useInViewRef(
+  callback: IntersectionObserverCallback,
+  options?: IntersectionObserverInit
+): [CallbackRef, boolean];
+function useInViewRef(
+  callbackOrOptions?: IntersectionObserverCallback | IntersectionObserverInit,
+  options?: IntersectionObserverInit
 ): [CallbackRef, boolean] {
-  const { root = null, rootMargin, threshold } = options;
+  const callback =
+    typeof callbackOrOptions === "function" ? callbackOrOptions : noop;
+  const opts =
+    typeof callbackOrOptions === "object"
+      ? callbackOrOptions
+      : options || config;
+
+  const { root = null, rootMargin, threshold } = opts;
 
   const [node, setNode] = useState<HTMLElementOrNull>(null);
   const [inView, setInView] = useState<boolean>(false);
 
   useEffect(() => {
-    // Create an observer instance linked to the callback function
     if (node) {
       const observer = new IntersectionObserver((entries, observerRef) => {
         for (const { isIntersecting } of entries) setInView(isIntersecting);
         callback(entries, observerRef);
-      }, options);
+      }, opts);
 
-      // Start observing the target node for configured mutations
       observer.observe(node);
 
       return () => {
@@ -44,7 +47,7 @@ function useInViewRef(
     }
 
     return noop;
-  }, [node, callback, root, rootMargin, threshold, options]);
+  }, [node, callback, root, rootMargin, threshold, opts]);
 
   const ref = useCallback((nodeElement: HTMLElementOrNull) => {
     setNode(nodeElement);
