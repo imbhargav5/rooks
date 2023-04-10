@@ -1,5 +1,11 @@
 # rooks
 
+## 7.11.0
+
+### Minor Changes
+
+- [`498f4f40`](https://github.com/imbhargav5/rooks/commit/498f4f406eca708f6251d8913639fecc08623d4c) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add useDocumentTitle hook
+
 ## 7.10.1
 
 ### Patch Changes
