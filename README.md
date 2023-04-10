@@ -37,6 +37,7 @@
 *   [useDeepCompareEffect](https://rooks.vercel.app/docs/useDeepCompareEffect) - Deep compare dependencies instead of shallow for useEffect
 *   [useDidMount](https://rooks.vercel.app/docs/useDidMount) - componentDidMount hook for React
 *   [useDidUpdate](https://rooks.vercel.app/docs/useDidUpdate) - componentDidUpdate hook for react
+*   [useDocumentTitle](https://rooks.vercel.app/docs/useDocumentTitle) - A hook to easily update document title with React
 *   [useEffectOnceWhen](https://rooks.vercel.app/docs/useEffectOnceWhen) - Runs a callback effect atmost one time when a condition becomes true
 *   [useIntervalWhen](https://rooks.vercel.app/docs/useIntervalWhen) - Sets an interval immediately when a condition is true
 *   [useIsomorphicEffect](https://rooks.vercel.app/docs/useIsomorphicEffect) - A hook that resolves to useEffect on the server and useLayoutEffect on the client.
@@ -150,7 +151,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 89 hooks as standalone modules.
+✅ Collection of 90 hooks as standalone modules.
 
 <!--hookscount end-->
 
