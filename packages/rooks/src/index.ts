@@ -17,6 +17,7 @@ export { useDidMount } from "@/hooks/useDidMount";
 export { useDidUpdate } from "@/hooks/useDidUpdate";
 export { useDimensionsRef } from "@/hooks/useDimensionsRef";
 export { useDocumentEventListener } from "@/hooks/useDocumentEventListener";
+export { useDocumentTitle } from "@/hooks/useDocumentTitle";
 export { useDocumentVisibilityState } from "@/hooks/useDocumentVisibilityState";
 export { useEffectOnceWhen } from "@/hooks/useEffectOnceWhen";
 export { useEventListenerRef } from "@/hooks/useEventListenerRef";

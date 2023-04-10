@@ -76,6 +76,11 @@
       "category": "events"
     },
     {
+      "name": "useDocumentTitle",
+      "description": "A hook to easily update document title with React",
+      "category": "effects"
+    },
+    {
       "name": "useDocumentVisibilityState",
       "description": "Returns the visibility state of the document.",
       "category": "events"
