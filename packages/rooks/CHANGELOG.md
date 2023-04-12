@@ -1,5 +1,11 @@
 # rooks
 
+## 7.11.1
+
+### Patch Changes
+
+- [`2fe9046c`](https://github.com/imbhargav5/rooks/commit/2fe9046c6183c7f8b1938124dc63ef8b859c3e7e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - fix noop import
+
 ## 7.11.0
 
 ### Minor Changes
