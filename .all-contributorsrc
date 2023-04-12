@@ -687,6 +687,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "edoko",
+      "name": "Seongmin Park",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1365682?v=4",
+      "profile": "https://github.com/edoko",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
