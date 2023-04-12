@@ -2,7 +2,7 @@
  * useDocumentTitle
  * @description A hook to easily update document title with React
  */
-import { noop } from "lodash";
+import { noop } from "@/utils/noop";
 import { useEffect, useRef } from "react";
 
 type UseDocumentTitleOptions = {
