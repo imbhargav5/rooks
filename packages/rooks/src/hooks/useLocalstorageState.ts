@@ -1,6 +1,6 @@
-import { useFreshRef } from "@/hooks/useFreshRef";
 import type { Dispatch, SetStateAction } from "react";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useFreshRef } from "./useFreshRef";
 
 // Gets value from localstorage
 function getValueFromLocalStorage(key: string) {
