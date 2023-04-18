@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useFreshRef } from "./useFreshRef";
 
 // Gets value from localstorage
 function getValueFromLocalStorage(key: string) {
@@ -174,18 +175,20 @@ function useLocalstorageState<S>(
     [customEventTypeName]
   );
 
+  const currentValue = useFreshRef(value, true);
+
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
       const resolvedNewValue =
         typeof newValue === "function"
-          ? (newValue as (prevState: S) => S)(value)
+          ? (newValue as (prevState: S) => S)(currentValue.current)
           : newValue;
       isUpdateFromCrossDocumentListener.current = false;
       isUpdateFromWithinDocumentListener.current = false;
       setValue(resolvedNewValue);
       broadcastValueWithinDocument(resolvedNewValue);
     },
-    [broadcastValueWithinDocument, value]
+    [broadcastValueWithinDocument, currentValue]
   );
 
   const remove = useCallback(() => {

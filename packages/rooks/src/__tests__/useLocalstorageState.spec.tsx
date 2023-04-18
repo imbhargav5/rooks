@@ -68,6 +68,20 @@ describe("useLocalstorageState basic", () => {
     const removeAfterRerender = result.current[2];
     expect(setBeforeRerender).toBe(setAfterRerender);
     expect(removeBeforeRerender).toBe(removeAfterRerender);
+    act(() => {
+      setBeforeRerender("next value");
+    });
+    const setAfterSet = result.current[1];
+    const removeAfterSet = result.current[2];
+    expect(setBeforeRerender).toBe(setAfterSet);
+    expect(removeBeforeRerender).toBe(removeAfterSet);
+    act(() => {
+      removeBeforeRerender();
+    });
+    const setAfterRemove = result.current[1];
+    const removeAfterRemove = result.current[2];
+    expect(setBeforeRerender).toBe(setAfterRemove);
+    expect(removeBeforeRerender).toBe(removeAfterRemove);
   });
 
   it("initializes correctly", () => {
