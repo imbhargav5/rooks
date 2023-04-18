@@ -1,5 +1,11 @@
 # rooks
 
+## 7.11.2
+
+### Patch Changes
+
+- [#1714](https://github.com/imbhargav5/rooks/pull/1714) [`19129f40`](https://github.com/imbhargav5/rooks/commit/19129f40ac1b0ee4c676bedb91eb3599e719c4f3) Thanks [@nathggns](https://github.com/nathggns)! - useLocalstorageState: ensure stable identity for set/remove functions
+
 ## 7.11.1
 
 ### Patch Changes
