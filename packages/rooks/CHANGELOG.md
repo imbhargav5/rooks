@@ -1,5 +1,11 @@
 # rooks
 
+## 7.11.3
+
+### Patch Changes
+
+- [`fe501fde`](https://github.com/imbhargav5/rooks/commit/fe501fde6940a80f132c9770cdb212b358c6e8f3) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Use ReadonlyMap for useNativeMapState
+
 ## 7.11.2
 
 ### Patch Changes
