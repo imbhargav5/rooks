@@ -20,7 +20,7 @@ type MapControls<K, V> = {
 
 function useNativeMapState<K, V>(
   initialMapState?: Map<K, V>
-): [Map<K, V>, MapControls<K, V>] {
+): [ReadonlyMap<K, V>, MapControls<K, V>] {
   const [map, setMap] = useState<Map<K, V>>(initialMapState || new Map<K, V>());
 
   const set = useCallback((key: K, value: V) => {
