@@ -148,6 +148,33 @@ describe("useLocalstorageState localStorage", () => {
     jest.restoreAllMocks();
   });
 
+  it("handles changing key without overriding existing value", () => {
+    expect.hasAssertions();
+
+    localStorage.setItem("first-key", JSON.stringify("first-value"));
+
+    const { result } = renderHook(() => {
+      const [key, setKey] = React.useState("second-key");
+      const [value] = useLocalstorageState(key, "second-value");
+      return { value, setKey };
+    });
+
+    expect(result.current.value).toBe("second-value");
+    expect(localStorage.getItem("second-key")).toBe(
+      JSON.stringify("second-value")
+    );
+    expect(localStorage.getItem("first-key")).toBe(
+      JSON.stringify("first-value")
+    );
+
+    // changing the key of the hook should not override the existing value
+    act(() => {
+      result.current.setKey("first-key");
+    });
+
+    expect(result.current.value).toBe("first-value");
+  });
+
   it("reads value from localStorage", () => {
     expect.hasAssertions();
 
