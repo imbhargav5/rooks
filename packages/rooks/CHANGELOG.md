@@ -1,5 +1,11 @@
 # rooks
 
+## 7.12.0
+
+### Minor Changes
+
+- [`b2262dce`](https://github.com/imbhargav5/rooks/commit/b2262dce87040e345322740cdcd9ff59b0eea69e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add clear controls for useUndoRedoState
+
 ## 7.11.3
 
 ### Patch Changes
