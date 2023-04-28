@@ -97,4 +97,52 @@ describe("useUndoRedoState", () => {
     });
     expect(result.current[0]).toBe(2);
   });
+  it("should clear the undo stack", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+    act(() => {
+      result.current[1](1);
+      result.current[1](2);
+      result.current[2].clearUndoStack();
+      result.current[2].undo();
+    });
+    expect(result.current[0]).toBe(2); // Should not undo as the undo stack is cleared
+  });
+
+  it("should clear the redo stack", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+    act(() => {
+      result.current[1](1);
+    });
+    act(() => {
+      result.current[1](2);
+    });
+    act(() => {
+      result.current[2].undo();
+    });
+    act(() => {
+      result.current[2].clearRedoStack();
+    });
+    act(() => {
+      result.current[2].redo();
+    });
+    expect(result.current[0]).toBe(1); // Should not redo as the redo stack is cleared
+  });
+
+  it("should clear both undo and redo stacks", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+    act(() => {
+      result.current[1](1);
+      result.current[1](2);
+      result.current[2].clearAll();
+      result.current[2].undo();
+    });
+    expect(result.current[0]).toBe(2); // Should not undo as both stacks are cleared
+    act(() => {
+      result.current[2].redo();
+    });
+    expect(result.current[0]).toBe(2); // Should not redo as both stacks are cleared
+  });
 });

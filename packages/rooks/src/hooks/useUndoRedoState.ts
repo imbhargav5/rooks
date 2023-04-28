@@ -3,7 +3,13 @@
  * @description Setstate but can also undo and redo
  * @see {@link https://rooks.vercel.app/docs/useUndoRedoState}
  */
-import { useState, useCallback, SetStateAction, Dispatch } from "react";
+import {
+  useState,
+  useCallback,
+  SetStateAction,
+  Dispatch,
+  useMemo,
+} from "react";
 
 function isFunctionInitializer<T>(
   functionToCheck: SetStateAction<T>
@@ -16,6 +22,9 @@ type UndoRedoControls = {
   redo: () => void;
   canUndo: () => boolean;
   canRedo: () => boolean;
+  clearUndoStack: () => void;
+  clearRedoStack: () => void;
+  clearAll: () => void;
 };
 
 /**
@@ -90,12 +99,30 @@ function useUndoRedoState<T>(
     [state, maxDepth]
   );
 
-  const controls: UndoRedoControls = {
-    undo,
-    redo,
-    canUndo,
-    canRedo,
-  };
+  const clearUndoStack = useCallback(() => {
+    setPast([]);
+  }, []);
+
+  const clearRedoStack = useCallback(() => {
+    setFuture([]);
+  }, []);
+
+  const clearAll = useCallback(() => {
+    setPast([]);
+    setFuture([]);
+  }, []);
+
+  const controls: UndoRedoControls = useMemo(() => {
+    return {
+      undo,
+      redo,
+      canUndo,
+      canRedo,
+      clearUndoStack,
+      clearRedoStack,
+      clearAll,
+    };
+  }, [undo, redo, canUndo, canRedo, clearUndoStack, clearRedoStack, clearAll]);
 
   return [state, setState, controls];
 }
