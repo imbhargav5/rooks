@@ -20,11 +20,21 @@ function isFunctionInitializer<T>(
 type UndoRedoControls = {
   undo: () => void;
   redo: () => void;
+  /**
+   * @deprecated
+   * Use `isUndoPossible` instead
+   */
   canUndo: () => boolean;
+  /**
+   * @deprecated
+   * Use `isRedoPossible` instead
+   * */
   canRedo: () => boolean;
   clearUndoStack: () => void;
   clearRedoStack: () => void;
   clearAll: () => void;
+  isUndoPossible: boolean;
+  isRedoPossible: boolean;
 };
 
 /**
@@ -82,6 +92,8 @@ function useUndoRedoState<T>(
 
   const canUndo = useCallback(() => past.length > 0, [past]);
   const canRedo = useCallback(() => future.length > 0, [future]);
+  const isUndoPossible = useMemo(() => past.length > 0, [past]);
+  const isRedoPossible = useMemo(() => future.length > 0, [future]);
 
   const setState = useCallback(
     (value: SetStateAction<T>) => {
@@ -121,8 +133,20 @@ function useUndoRedoState<T>(
       clearUndoStack,
       clearRedoStack,
       clearAll,
+      isUndoPossible,
+      isRedoPossible,
     };
-  }, [undo, redo, canUndo, canRedo, clearUndoStack, clearRedoStack, clearAll]);
+  }, [
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    clearUndoStack,
+    clearRedoStack,
+    clearAll,
+    isUndoPossible,
+    isRedoPossible,
+  ]);
 
   return [state, setState, controls];
 }

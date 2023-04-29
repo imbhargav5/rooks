@@ -145,4 +145,35 @@ describe("useUndoRedoState", () => {
     });
     expect(result.current[0]).toBe(2); // Should not redo as both stacks are cleared
   });
+
+  it("should correctly set isUndoPossible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+    expect(result.current[2].isUndoPossible).toBe(false);
+    act(() => {
+      result.current[1](1);
+    });
+    expect(result.current[2].isUndoPossible).toBe(true);
+    act(() => {
+      result.current[2].undo();
+    });
+    expect(result.current[2].isUndoPossible).toBe(false);
+  });
+
+  it("should correctly set isRedoPossible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+    expect(result.current[2].isRedoPossible).toBe(false);
+    act(() => {
+      result.current[1](1);
+    });
+    act(() => {
+      result.current[2].undo();
+    });
+    expect(result.current[2].isRedoPossible).toBe(true);
+    act(() => {
+      result.current[2].redo();
+    });
+    expect(result.current[2].isRedoPossible).toBe(false);
+  });
 });
