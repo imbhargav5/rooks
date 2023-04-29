@@ -431,6 +431,11 @@
       "category": "ui"
     },
     {
+      "name": "useWhyDidYouUpdate",
+      "description": "A hook that can track which value change caused a rerender",
+      "category": "misc"
+    },
+    {
       "name": "useWillUnmount",
       "description": "componentWillUnmount lifecycle as hook for React.",
       "category": "effects"
