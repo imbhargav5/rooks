@@ -1,5 +1,11 @@
 # rooks
 
+## 7.14.0
+
+### Minor Changes
+
+- [`27a29e4a`](https://github.com/imbhargav5/rooks/commit/27a29e4ab46d6caff16ecf3e370e6b88e8b056f0) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useWhyDidYouUpdate hook
+
 ## 7.13.0
 
 ### Minor Changes
