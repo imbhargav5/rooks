@@ -89,6 +89,7 @@
 *   [useTimeoutWhen](https://rooks.vercel.app/docs/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 *   [useToggle](https://rooks.vercel.app/docs/useToggle) - Toggle (between booleans or custom data)hook for React.
 *   [useVibrate](https://rooks.vercel.app/docs/useVibrate) - Vibration API hook for React
+*   [useWhyDidYouUpdate](https://rooks.vercel.app/docs/useWhyDidYouUpdate) - A hook that can track which value change caused a rerender
 
 **<h3 align="center">🚃 Navigator</h3>**
 
@@ -151,7 +152,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 90 hooks as standalone modules.
+✅ Collection of 91 hooks as standalone modules.
 
 <!--hookscount end-->
 
