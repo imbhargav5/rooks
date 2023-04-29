@@ -1,5 +1,11 @@
 # rooks
 
+## 7.13.0
+
+### Minor Changes
+
+- [`5b90f1b1`](https://github.com/imbhargav5/rooks/commit/5b90f1b1e9871bd4cf7c50820bbdfa24d7814edd) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useUndoRedoState: add isUndoPossible, isRedoPossible booleans to controls
+
 ## 7.12.0
 
 ### Minor Changes
