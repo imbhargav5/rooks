@@ -126,10 +126,10 @@ describe("useUndoRedoState", () => {
 
     // Set state after undo and redo operations
     act(() => {
-      result.current[1](3);
+      result.current[1]((prevState) => prevState + 5);
     });
 
-    expect(result.current[0]).toBe(3);
+    expect(result.current[0]).toBe(7);
 
     // Check undo and redo stacks
     act(() => {
@@ -140,7 +140,7 @@ describe("useUndoRedoState", () => {
     act(() => {
       result.current[2].redo();
     });
-    expect(result.current[0]).toBe(3);
+    expect(result.current[0]).toBe(7);
   });
 
   it("should clear the undo stack", () => {
