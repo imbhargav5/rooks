@@ -97,6 +97,52 @@ describe("useUndoRedoState", () => {
     });
     expect(result.current[0]).toBe(2);
   });
+  it("should correctly setState after multiple undo and redo operations", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useUndoRedoState(0));
+
+    act(() => {
+      result.current[1](1);
+    });
+    act(() => {
+      result.current[1](2);
+    });
+
+    // Perform undo operations
+    act(() => {
+      result.current[2].undo();
+    });
+    act(() => {
+      result.current[2].undo();
+    });
+
+    // Perform redo operations
+    act(() => {
+      result.current[2].redo();
+    });
+    act(() => {
+      result.current[2].redo();
+    });
+
+    // Set state after undo and redo operations
+    act(() => {
+      result.current[1](3);
+    });
+
+    expect(result.current[0]).toBe(3);
+
+    // Check undo and redo stacks
+    act(() => {
+      result.current[2].undo();
+    });
+    expect(result.current[0]).toBe(2);
+
+    act(() => {
+      result.current[2].redo();
+    });
+    expect(result.current[0]).toBe(3);
+  });
+
   it("should clear the undo stack", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useUndoRedoState(0));

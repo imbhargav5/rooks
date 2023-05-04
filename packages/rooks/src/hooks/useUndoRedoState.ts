@@ -97,18 +97,22 @@ function useUndoRedoState<T>(
 
   const setState = useCallback(
     (value: SetStateAction<T>) => {
-      const nextState = isFunctionInitializer(value) ? value(state) : value;
-      setPast((pastStates) => {
-        const newPast = [...pastStates, state];
-        if (newPast.length > maxDepth) {
-          newPast.shift();
-        }
-        return newPast;
+      _setState((prevState) => {
+        const nextState = isFunctionInitializer(value)
+          ? value(prevState)
+          : value;
+        setPast((pastStates) => {
+          const newPast = [...pastStates, prevState];
+          if (newPast.length > maxDepth) {
+            newPast.shift();
+          }
+          return newPast;
+        });
+        setFuture([]);
+        return nextState;
       });
-      setFuture([]);
-      _setState(nextState);
     },
-    [state, maxDepth]
+    [maxDepth]
   );
 
   const clearUndoStack = useCallback(() => {
