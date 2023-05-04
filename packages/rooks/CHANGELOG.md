@@ -1,5 +1,11 @@
 # rooks
 
+## 7.14.1
+
+### Patch Changes
+
+- [`22f820ca`](https://github.com/imbhargav5/rooks/commit/22f820ca07692107adbf70b7c3b26be9a91c80fc) Thanks [@imbhargav5](https://github.com/imbhargav5)! - fix setState logic for undoredostate
+
 ## 7.14.0
 
 ### Minor Changes
