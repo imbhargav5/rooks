@@ -15,7 +15,7 @@ function useHighlight({
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (keyword && isReady) {
+    if (keyword && isReady && ref.current) {
       const contentElement = ref.current;
       if (contentElement) {
         const text = contentElement.innerHTML;

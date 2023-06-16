@@ -6,7 +6,7 @@ sidebar_label: useHighlight
 
 ## About
 
-search for a keyword in the DOM and highlight them, you need to add a global style for the <mark> tag for this purpose
+search for a keyword in the DOM and highlight them, you need to add a global style for the mark tag for this purpose
 
 ## Examples
 
