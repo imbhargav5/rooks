@@ -146,6 +146,11 @@
       "category": "state"
     },
     {
+      "name": "useHighlight",
+      "description": "search for a keyword in the DOM and highlight them",
+      "category": "ui"
+    },
+    {
       "name": "useInViewRef",
       "description": "Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. ",
       "category": "ui"
