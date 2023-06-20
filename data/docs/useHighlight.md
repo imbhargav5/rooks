@@ -13,7 +13,7 @@ search for a keyword in the DOM and highlight them, you need to add a global sty
 ```tsx
 import { useHighlight } from "rooks";
 export default function App() {
-  const ref = useHighlight({ keyword: "something", isReady: true });
+  const ref = useHighlight("something", { when: true });
   return (
     <div ref={ref}>
       <p>
@@ -33,10 +33,11 @@ export default function App() {
 
 ### Arguments
 
-| Argument | Type    | Description                                                                                  | Default value |
-| -------- | ------- | -------------------------------------------------------------------------------------------- | ------------- |
-| keyword  | string  | the word you want to search for it in the DOM, you can use input value or query param for it | empty string  |
-| isReady  | boolean | When your content is fetched, you assign a boolean value of true to this argument.           | false         |
+| Argument | Type     | Description                                                                                    | Default value                                          |
+| -------- | -------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| keyword  | string   | the word you want to search for it in the DOM, you can use input value or query param for it   | empty string                                           |
+| when     | boolean  | When your content is fetched, you assign a boolean value of true to this argument.             | false                                                  |
+| render   | Function | this function that receives the matched keyword as an argument and returns the desired markup. | (match) => `<mark class="highlighted">${match}</mark>` |
 
 ### Return Value
 

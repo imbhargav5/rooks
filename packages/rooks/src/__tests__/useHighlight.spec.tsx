@@ -6,13 +6,13 @@ import { useHighlight } from "@/hooks/useHighlight";
 afterEach(cleanup);
 
 describe("useHighlight", () => {
-  it("should highlight the keyword in the DOM when isReady is true", () => {
+  it("should highlight the keyword in the DOM when it is ready {when: true}", () => {
     expect.hasAssertions();
     const keyword = "example";
     const content = "This is an example sentence.";
 
     const TestComponent = () => {
-      const ref = useHighlight({ isReady: true, keyword });
+      const ref = useHighlight(keyword, { when: true });
 
       return <div ref={ref}>{content}</div>;
     };
@@ -25,13 +25,13 @@ describe("useHighlight", () => {
     expect(highlightedText?.innerHTML).toEqual(keyword);
   });
 
-  it("should not highlight the keyword in the DOM when isReady is false", () => {
+  it("should not highlight the keyword in the DOM when it is ready {when: false}", () => {
     expect.hasAssertions();
     const keyword = "example";
     const content = "This is an example sentence.";
 
     const TestComponent = () => {
-      const ref = useHighlight({ isReady: false, keyword });
+      const ref = useHighlight(keyword, { when: false });
 
       return <div ref={ref}>{content}</div>;
     };
@@ -50,7 +50,7 @@ describe("useHighlight", () => {
     const content = "This is an example sentence.";
 
     const TestComponent = ({ keyword = initialKeyword }) => {
-      const ref = useHighlight({ isReady: true, keyword: keyword });
+      const ref = useHighlight(keyword, { when: true });
 
       return <div ref={ref}>{content}</div>;
     };
@@ -70,5 +70,23 @@ describe("useHighlight", () => {
         container.querySelector("mark.highlighted");
       expect(updatedHighlightedText?.innerHTML).toEqual(updatedKeyword);
     }, 10);
+  });
+
+  it("should not highlight the keyword in the DOM that is already highlighted", () => {
+    expect.hasAssertions();
+    const keyword = "example";
+    const content = `something <mark class="highlighted">${keyword}</mark>`;
+
+    const TestComponent = () => {
+      const ref = useHighlight(keyword, { when: true });
+
+      return <div ref={ref}>{content}</div>;
+    };
+
+    const { container } = render(<TestComponent />);
+
+    const highlightedText = container.querySelector("mark.highlighted");
+
+    expect(highlightedText?.innerHTML).toEqual(keyword);
   });
 });

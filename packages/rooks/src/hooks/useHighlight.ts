@@ -5,29 +5,26 @@
  */
 import { useEffect, useRef } from "react";
 
-function useHighlight({
-  isReady = false,
-  keyword = "",
-}: {
-  isReady: boolean;
-  keyword: string;
-}) {
+function useHighlight(
+  keyword: string,
+  {
+    when = true,
+    render = (match) => `<mark class="highlighted">${match}</mark>`,
+  }: { when: boolean; render: (match: string) => string }
+) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (keyword && isReady && ref.current) {
+    if (keyword && when && ref.current) {
       const contentElement = ref.current;
       if (contentElement) {
         const text = contentElement.innerHTML;
         const regex = new RegExp(keyword, "g");
-        const newText = text.replace(
-          regex,
-          `<mark class="highlighted">${keyword}</mark>`
-        );
+        const newText = text.replace(regex, render);
         contentElement.innerHTML = newText;
       }
     }
-  }, [isReady, keyword]);
+  }, [when, keyword, render]);
 
   return ref;
 }
