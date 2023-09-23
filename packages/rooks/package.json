@@ -66,7 +66,7 @@
     "@rollup/plugin-multi-entry": "^4.1.0",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-replace": "^4.0.0",
-    "@size-limit/file": "^8.2.4",
+    "@size-limit/file": "^8.2.6",
     "@size-limit/webpack": "^8.2.4",
     "@size-limit/webpack-why": "^8.2.4",
     "@testing-library/jest-dom": "^5.16.5",
