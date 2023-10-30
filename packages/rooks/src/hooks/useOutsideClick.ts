@@ -55,11 +55,11 @@ function useOutsideClick(
   useEffect(() => {
     if (when) {
       document.addEventListener("click", memoizedCallback, true);
-      document.addEventListener("ontouchstart", memoizedCallback, true);
+      document.addEventListener("touchstart", memoizedCallback, true);
 
       return () => {
         document.removeEventListener("click", memoizedCallback, true);
-        document.removeEventListener("ontouchstart", memoizedCallback, true);
+        document.removeEventListener("touchstart", memoizedCallback, true);
       };
     }
 
