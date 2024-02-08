@@ -25,7 +25,7 @@
     "@next/mdx": "^13.2.4",
     "@types/node": "^18.11.4",
     "@types/react": "18.0.30",
-    "@types/react-is": "^17.0.3",
+    "@types/react-is": "^17.0.7",
     "@types/react-syntax-highlighter": "^15.5.6",
     "eslint": "8.36.0",
     "eslint-config-custom": "*",
