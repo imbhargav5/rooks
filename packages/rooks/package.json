@@ -68,7 +68,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@size-limit/file": "^8.2.4",
     "@size-limit/webpack": "^8.2.4",
-    "@size-limit/webpack-why": "^8.2.4",
+    "@size-limit/webpack-why": "^8.2.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
