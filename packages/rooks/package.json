@@ -79,7 +79,7 @@
     "@types/react": "^18.0.30",
     "@types/react-dom": "^18.0.11",
     "@types/react-test-renderer": "^18.0.0",
-    "@types/use-sync-external-store": "^0.0.3",
+    "@types/use-sync-external-store": "^0.0.6",
     "@widgetbot/embed-api": "^1.2.8",
     "@widgetbot/react-embed": "^1.7.0",
     "all-contributors-cli": "^6.24.0",
