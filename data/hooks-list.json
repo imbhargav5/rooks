@@ -26,6 +26,11 @@
       "category": "ui"
     },
     {
+      "name": "useCallOnce",
+      "description": "Call the passed function once",
+      "category": "effects"
+    },
+    {
       "name": "useCountdown",
       "description": "Count down to a target timestamp and call callbacks every second (or provided peried)",
       "category": "state"
