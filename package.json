@@ -60,12 +60,12 @@
     "eslint-config-custom": "*",
     "lint-staged": "^13.2.0",
     "lodash": "^4.17.21",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "turbo": "latest",
     "typescript": "^4.9.5"
   },
   "resolutions": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "packageManager": "yarn@1.22.19"
 }
