@@ -32,11 +32,11 @@ export default function App() {
     return response;
   };
 
-  const { data, isLoading, isLastPage, loadMoreRef } =
+  const { apiResponse, isLoading, isLastPage, loadMoreRef } =
     useInfiniteScroll<DataItem>(fetchMoreData);
   return (
     <div>
-      {data.map((item) => (
+      {apiResponse.map((item) => (
         <div key={item.id}>
           {item.id}: {item.title}
         </div>
