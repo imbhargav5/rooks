@@ -151,6 +151,11 @@
       "category": "ui"
     },
     {
+      "name": "useInfiniteScroll",
+      "description": "A custom React hook that handles infinite scrolling by fetching additional data when the user scrolls to the bottom of the page. It manages the current page, accumulates fetched data, and handles loading and error states.",
+      "category": "misc"
+    },
+    {
       "name": "useInput",
       "description": "Input hook for React.",
       "category": "form"
