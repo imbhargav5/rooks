@@ -14,26 +14,6 @@ Sets the document title and optionally resets the title on unmount
 
 ### Basic example
 
-````jsx
-import { useDocumentTitle } from "rooks";
-
-function App() {
-  useDocumentTitle("New document title");
-
-  return (
-    <div>
-      <h1>Document title is now "New document title"</h1>
-    </div>
-  );
-}
-
-export default App;
-
-
-## Examples
-
-### Basic example
-
 ```jsx
 import { useDocumentTitle } from "rooks";
 
@@ -48,8 +28,7 @@ function App() {
 }
 
 export default App;
-
-````
+```
 
 ### Example with reset
 
