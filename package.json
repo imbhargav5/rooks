@@ -67,5 +67,5 @@
   "resolutions": {
     "prettier": "^2.8.7"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.22"
 }
