@@ -2,6 +2,7 @@ import { contributorsListData } from './contributors-list-data';
 
 import Image from 'next/image';
 
+const fallbackAvatarURL = 'https://placehold.co/90x90';
 
 // Individual contributor item component
 function ContributorItem({
@@ -15,6 +16,12 @@ function ContributorItem({
     avatar_url: string;
     profile: string;
 }) {
+    let avatarURLWithoutQueryParams: string | undefined = avatar_url
+    try {
+        avatarURLWithoutQueryParams = avatar_url.split('?')[0];
+    } catch (error) {
+        console.error('Error splitting avatar URL:', error);
+    }
     return (
         <a
             href={profile}
@@ -25,7 +32,7 @@ function ContributorItem({
         >
             <div className="border-2 border-primary rounded-lg flex items-center justify-center h-24 w-24 p-0 transition-transform hover:scale-105">
                 <Image
-                    src={avatar_url}
+                    src={avatarURLWithoutQueryParams || fallbackAvatarURL}
                     alt={name || login}
                     height={90}
                     width={90}
