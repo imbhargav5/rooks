@@ -8,5 +8,5 @@ export default function Page() {
     useEffect(() => {
         router.replace('/docs');
     }, []);
-    return <div className="text-4xl font-bold">Hello World</div>;
+    return null;
 }
