@@ -105,7 +105,7 @@ function useLocalstorageState<S>(
 
   // check for changes across documents
   useEffect(() => {
-    // eslint-disable-next-line no-negated-condition
+
     if (typeof window !== "undefined") {
       window.addEventListener("storage", listenToCrossDocumentStorageEvents);
 
@@ -118,7 +118,7 @@ function useLocalstorageState<S>(
     } else {
       console.warn("useLocalstorageState: window is undefined.");
 
-      return () => {};
+      return () => { };
     }
   }, [listenToCrossDocumentStorageEvents]);
 
@@ -139,29 +139,29 @@ function useLocalstorageState<S>(
 
   // check for changes within document
   useEffect(() => {
-    // eslint-disable-next-line no-negated-condition
+
     if (typeof document !== "undefined") {
       document.addEventListener(
         customEventTypeName,
-        listenToCustomEventWithinDocument
+        listenToCustomEventWithinDocument as EventListener
       );
 
       return () => {
         document.removeEventListener(
           customEventTypeName,
-          listenToCustomEventWithinDocument
+          listenToCustomEventWithinDocument as EventListener
         );
       };
     } else {
       console.warn("[useLocalstorageState] document is undefined.");
 
-      return () => {};
+      return () => { };
     }
   }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
     (newValue: S) => {
-      // eslint-disable-next-line no-negated-condition
+
       if (typeof document !== "undefined") {
         const event: BroadcastCustomEvent<S> = new CustomEvent(
           customEventTypeName,

@@ -32,7 +32,7 @@ describe.skip("useFreshTick", () => {
   };
 
   beforeEach(() => {
-    jest.useFakeTimers("modern");
+    jest.useFakeTimers();
     jest.spyOn(global, "setInterval");
     useHook = function () {
       const [currentValue, setCurrentValue] = useState(0);

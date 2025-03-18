@@ -15,16 +15,16 @@ function useMapState<
 >(
   initialValue: T
 ): [
-  T,
-  {
-    has: (key: K) => boolean;
-    remove: (key: K) => void;
-    removeAll: () => void;
-    removeMultiple: (...keys: K[]) => void;
-    set: (key: K, value: T[K]) => void;
-    setMultiple: (next: Partial<T>) => void;
-  }
-] {
+    T,
+    {
+      has: (key: K) => boolean;
+      remove: (key: K) => void;
+      removeAll: () => void;
+      removeMultiple: (...keys: K[]) => void;
+      set: (key: K, value: T[K]) => void;
+      setMultiple: (next: Partial<T>) => void;
+    }
+  ] {
   const [map, setMap] = useState(initialValue);
 
   const set = useCallback((key: K, value: T[K]) => {
@@ -41,7 +41,7 @@ function useMapState<
     [map]
   );
 
-  const setMultiple = useCallback((nextMap: T) => {
+  const setMultiple = useCallback((nextMap: Partial<T>) => {
     setMap((currentMap) => ({
       ...currentMap,
       ...nextMap,
@@ -53,7 +53,7 @@ function useMapState<
       setMap((currentMap) => {
         const nextMap = { ...currentMap };
         for (const key of keys) {
-          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+
           delete nextMap[key];
         }
 
@@ -67,7 +67,7 @@ function useMapState<
     (key: K) => {
       setMap((currentMap) => {
         const nextMap = { ...currentMap };
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+
         delete nextMap[key];
 
         return nextMap;
@@ -82,7 +82,7 @@ function useMapState<
       for (const key in nextMap) {
         // eslint-disable-next-line no-prototype-builtins
         if (nextMap.hasOwnProperty(key)) {
-          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+
           delete nextMap[key];
         }
       }

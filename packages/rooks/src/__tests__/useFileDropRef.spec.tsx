@@ -1,7 +1,6 @@
 import React from "react";
-import { fireEvent } from "@testing-library/dom";
+import { render, fireEvent } from "@testing-library/react";
 import { useFileDropRef } from "@/hooks/useFileDropRef";
-import { render } from "@testing-library/react";
 
 function createFileWithSize(name: string, type: string, size: number) {
   const content = new ArrayBuffer(size);

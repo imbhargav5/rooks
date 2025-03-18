@@ -76,7 +76,7 @@ describe("useToggle with custom toggle function and with strings", () => {
   let App = () => <p />;
   beforeEach(() => {
     App = () => {
-      // eslint-disable-next-line no-confusing-arrow
+
       const [value, toggleValue] = useToggle("regina", (_value) =>
         _value === "regina" ? "phalange" : "regina"
       );
@@ -136,21 +136,12 @@ describe("useToggle with custom toggle function false by default", () => {
 describe("useToggle with reducer", () => {
   let App = () => <div />;
   let toggleReducer = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _state: number,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _action: {
-      type: string;
-    }
-  ) => 5;
-  beforeEach(() => {
-    toggleReducer = function (
-      state: number,
-      action: {
-        type: string;
-      }
-    ): number {
-      switch (action.type) {
+    state: number,
+    action: unknown
+  ): number => {
+    if (typeof action === 'object' && action !== null && 'type' in action) {
+      const actionObj = action as { type: string };
+      switch (actionObj.type) {
         case "yep":
           return 1;
         case "nope":
@@ -160,6 +151,28 @@ describe("useToggle with reducer", () => {
         default:
           return state;
       }
+    }
+    return state;
+  };
+  beforeEach(() => {
+    toggleReducer = function (
+      state: number,
+      action: unknown
+    ): number {
+      if (typeof action === 'object' && action !== null && 'type' in action) {
+        const actionObj = action as { type: string };
+        switch (actionObj.type) {
+          case "yep":
+            return 1;
+          case "nope":
+            return -1;
+          case "maybe":
+            return 0;
+          default:
+            return state;
+        }
+      }
+      return state;
     };
 
     App = () => {

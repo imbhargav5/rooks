@@ -95,12 +95,20 @@ describe("useGeolocation", () => {
   // GeolocationPositionError - https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
   it("should return error if user denied Geolocation", async () => {
     expect.assertions(2);
-    const PERMISSION_DENIED_ERROR = new Error("User denied Geolocation");
+    // Create an object that looks like a GeolocationPositionError
+    const PERMISSION_DENIED_ERROR = {
+      code: 1,
+      message: "User denied Geolocation",
+      PERMISSION_DENIED: 1,
+      POSITION_UNAVAILABLE: 2,
+      TIMEOUT: 3
+    };
+
     const mockGeolocation = {
       getCurrentPosition: jest
         .fn()
-        .mockImplementationOnce((_, errorCallback) =>
-          errorCallback(PERMISSION_DENIED_ERROR, false)
+        .mockImplementationOnce((successCallback, errorCallback) =>
+          errorCallback(PERMISSION_DENIED_ERROR)
         ),
     };
 

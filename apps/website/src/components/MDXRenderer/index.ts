@@ -1,1 +1,0 @@
-export { MDXRenderer } from "./MDXRenderer";

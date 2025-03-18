@@ -9,49 +9,44 @@ import { useReducer } from "react";
 const defaultToggleFunction = <S>(value: S) => !value as unknown as S;
 
 /**
- * Use toggle hook helps you easily toggle a value.
- * @returns [value, setValue]
- * @see https://rooks.vercel.app/docs/useToggle
+ * Use toggle hook helps you easily toggle a value
+ * 
  * @example
- * const [boolean, toggle] = useToggle();
- * // value is false
- * // toggle() will change value to true.
+ * const [value, toggle] = useToggle(false); // initialValue defaults to false
+ * // value === false
+ * toggle();
+ * // value === true
  */
 export function useToggle<S = boolean>(): [S, () => void];
-export function useToggle(initialValue: boolean): [boolean, () => void];
 
 /**
  * Use toggle hook helps you easily toggle a value
- *
- * @param initialValue Initial value of the toggle, which will be false if not provided.
+ * 
+ * @param initialValue the initial value of the boolean
+ * @example
+ * const [value, toggle] = useToggle(true);
+ * // value === true
+ * toggle();
+ * // value === false
+ */
+export function useToggle<S>(initialValue: S): [S, Dispatch<unknown>];
+
+/**
+ * Use toggle hook helps you easily toggle a value
+ * 
+ * @param initialValue the initial value of the boolean
  * @param toggleFunction A toggle function. This allows for non boolean toggles
  * @example
- * const [value, toggle] = useToggle("on", _value => _value === "on" ? "off" : "on");
- * // value is "on"
- * // toggle() will change value to "off". Calling it again will change value to "on".
+ * const [value, dispatch] = useToggle(1, myReducer);
  */
 export function useToggle<S>(
   initialValue: S,
   toggleFunction?: Reducer<S, unknown>
 ): [S, Dispatch<unknown>];
-/**
- * Use toggle hook helps you easily toggle a value
- *
- * @param initialValue Initial value of the toggle, which will be false if not provided.
- * @param toggleFunction A toggle function. This allows for non boolean toggles
- * @example
- * const [value, toggle] = useToggle("on", _value => _value === "on" ? "off" : "on");
- * // value is "on"
- * // toggle() will change value to "off". Calling it again will change value to "on".
- */
-export function useToggle<S>(
-  initialValue: S,
-  toggleFunction?: ReducerWithoutAction<S>
-): [S, DispatchWithoutAction];
 
 /**
  * Use toggle hook helps you easily toggle a value
- *
+ * 
  * @param initialValue Initial value of the toggle, which will be false if not provided.
  * @param toggleFunction A toggle function. This allows for non boolean toggles
  * @example
@@ -66,5 +61,6 @@ export function useToggle<S>(
     action?: unknown
   ) => S = defaultToggleFunction
 ) {
-  return useReducer<Reducer<S, unknown>>(toggleFunction, initialValue);
+  // @ts-ignore - Using a cast to work around the typing issue
+  return useReducer(toggleFunction, initialValue);
 }

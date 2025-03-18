@@ -149,7 +149,7 @@ describe("useAsyncEffect", () => {
       const [forceUnload, setForceUnload] = useState(0);
 
       useAsyncEffect(
-        async () => {},
+        async () => { },
         [forceUnload],
         () => setCleanupRan(true)
       );
@@ -256,7 +256,7 @@ describe("useAsyncEffect", () => {
     const cleanupFn = jest.fn();
     const { result } = renderHook(() => {
       const [input] = useState(1);
-      const [error, setError] = useState(null);
+      const [error, setError] = useState<Error | null>(null);
       useAsyncEffect(
         async (): Promise<number | undefined> => {
           try {
@@ -266,7 +266,9 @@ describe("useAsyncEffect", () => {
               }, 3000);
             });
           } catch (err) {
-            setError(err);
+            if (err instanceof Error) {
+              setError(err);
+            }
           }
           return undefined;
         },

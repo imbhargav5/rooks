@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/ci-setup
       - name: run all checks and get coverage
-        run: yarn run all-checks
+        run: pnpm run all-checks
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/ci-setup
       - uses: andresz1/size-limit-action@v1.7.0
         with:

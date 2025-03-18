@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
+import React, { RefObject } from "react";
 import {
   render,
   cleanup,
@@ -16,27 +16,27 @@ describe("useKeyBindings", () => {
   let App = () => <div />;
   beforeEach(() => {
     App = () => {
-      const inputRef = React.useRef(null);
+      const inputRef = React.useRef<HTMLInputElement>(null);
       const [value, setValue] = React.useState(0);
       useKeyBindings({
-        // eslint-disable-next-line id-length
+
         s: () => {
           setValue(value + 1);
         },
       });
       useKeyBindings(
         {
-          // eslint-disable-next-line id-length
+
           r: () => {
             setValue(value + 1);
           },
-          // eslint-disable-next-line id-length
+
           v: () => {
             setValue(value + 1);
           },
         },
         {
-          target: inputRef,
+          target: inputRef as unknown as RefObject<HTMLElement>,
         }
       );
 

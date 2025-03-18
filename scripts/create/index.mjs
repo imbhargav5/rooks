@@ -25,7 +25,7 @@ const filesToRead = [
 const filesToWrite = [
   ({ name }) => `./packages/rooks/src/__tests__/${name}.spec.ts`,
   ({ name }) => `./packages/rooks/src/hooks/${name}.ts`,
-  ({ name }) => `./data/docs/${name}.md`,
+  ({ name }) => `./apps/website/content/docs/hooks/${name}.mdx`,
 ];
 
 function readFileAsString(relativeFilePath) {

@@ -1,4 +1,4 @@
-/* eslint-disable guard-for-in */
+
 import type { RefObject } from "react";
 import { useKey } from "./useKey";
 
@@ -34,8 +34,11 @@ type KeyBindings = { [key: string]: (event: KeyboardEvent) => void };
  */
 const useKeyBindings = (keyBindings: KeyBindings, options?: Options) => {
   for (const key in keyBindings) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useKey(key, keyBindings[key], options);
+
+    const handler = keyBindings[key];
+    if (handler) {
+      useKey(key, handler, options);
+    }
   }
 };
 

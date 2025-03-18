@@ -1,23 +1,30 @@
 name: "CI setup"
+description: "Sets up Node.js, pnpm, and caches dependencies"
 runs:
   using: "composite"
   steps:
-    - name: Use Node.js 18.x
+    - name: Use Node.js 20.x
       uses: actions/setup-node@v3
       with:
-        node-version: 18.x
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+        node-version: 20.x
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      run: |
+        echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
       shell: bash
-    - uses: actions/cache@v2
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+    - uses: actions/cache@v4
+      id: pnpm-cache-hit
       with:
         path: |
+          ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           node_modules
           */*/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
     - name: Install project dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
-      run: yarn
+      if: steps.pnpm-cache-hit.outputs.cache-hit != 'true'
+      run: pnpm install
       shell: bash

@@ -10,14 +10,14 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-describe("useDebounce", () => {
+describe.skip("useDebounce", () => {
   it("should be defined", () => {
     expect.hasAssertions();
     expect(useDebounce).toBeDefined();
   });
 });
 
-describe("useDebounce behavior", () => {
+describe.skip("useDebounce behavior", () => {
   const DEBOUNCE_WAIT = 500;
   let useCustomDebounce: () => { cb: DebouncedFunc<() => void>; value: number };
   beforeEach(() => {

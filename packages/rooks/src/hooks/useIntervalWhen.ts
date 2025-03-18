@@ -17,7 +17,7 @@ function useIntervalWhen(
   when = true,
   startImmediate = false
 ): void {
-  const savedRefCallback = useRef<() => void>();
+  const savedRefCallback = useRef<() => void | undefined>(undefined);
 
   useEffect(() => {
     savedRefCallback.current = callback;

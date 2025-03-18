@@ -25,7 +25,7 @@ type VideoControls = {
 };
 
 const useVideo = (): [
-  RefObject<HTMLVideoElement>,
+  RefObject<HTMLVideoElement | null>,
   VideoState,
   VideoControls
 ] => {

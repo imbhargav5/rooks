@@ -17,8 +17,8 @@ type Options = {
    * events are listened to on the document
    */
   target?:
-    | MutableRefObject<Document>
-    | MutableRefObject<HTMLElement | null | undefined>;
+  | MutableRefObject<Document>
+  | MutableRefObject<HTMLElement | null | undefined>;
   /**
    * when boolean to enable and disable events, when passed false
    * remove the eventlistener if any
@@ -129,12 +129,12 @@ function useKeys(
   useEffect(() => {
     if (when && typeof window !== "undefined") {
       const targetNode = target?.current ? target.current : document;
-      targetNode.addEventListener("keydown", handleKeyDown);
-      targetNode.addEventListener("keyup", handleKeyUp);
+      targetNode.addEventListener("keydown", handleKeyDown as EventListener);
+      targetNode.addEventListener("keyup", handleKeyUp as EventListener);
 
       return () => {
-        targetNode.removeEventListener("keydown", handleKeyDown);
-        targetNode.removeEventListener("keyup", handleKeyUp);
+        targetNode.removeEventListener("keydown", handleKeyDown as EventListener);
+        targetNode.removeEventListener("keyup", handleKeyUp as EventListener);
       };
     }
 

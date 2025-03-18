@@ -22,13 +22,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⎔ CI Setup
         uses: ./.github/actions/ci-setup
 
       - name: run all checks and get coverage
-        run: yarn run all-checks
+        run: pnpm run all-checks
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
@@ -46,7 +46,7 @@ jobs:
       contains('refs/heads/main,refs/heads/alpha,refs/heads/next',github.ref) && github.event_name == 'push' }}
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # To run comparison we need more than the latest commit. Keep the fetch-depth relatively
           # high or set it to zero to get all commits from the git repo.
@@ -57,14 +57,14 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: 🏗 Run build script
-        run: yarn run build
+        run: pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: yarn run release
-          version: yarn run version
+          publish: pnpm run release
+          version: pnpm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
