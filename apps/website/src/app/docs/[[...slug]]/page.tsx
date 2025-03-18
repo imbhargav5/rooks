@@ -1,4 +1,4 @@
-import { source } from '@/lib/source';
+import { source } from '~/lib/source';
 import type { Metadata } from 'next';
 import {
     DocsPage,
@@ -7,12 +7,10 @@ import {
     DocsDescription,
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import { Contributors } from '@/components/Contributors';
+import { Contributors } from '~/components/Contributors';
 import { MDXContent } from '@content-collections/mdx/react';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import dynamic from 'next/dynamic';
-import { ClientHighlight } from '@/components/ClientHighlight';
-import { ClientHightlightWrapper } from '@/components/ClientHightlightWrapper';
 import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
 
 

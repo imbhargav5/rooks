@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getUrl } from '@/utils/url';
+import { getUrl } from '~/utils/url';
 
 
 interface Contributor {
