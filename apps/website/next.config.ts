@@ -39,6 +39,15 @@ const config = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/docs',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withContentCollections(config);
