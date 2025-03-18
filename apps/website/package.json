@@ -6,9 +6,7 @@
   "private": true,
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.20.0",
-    "@content-collections/core": "^0.8.2",
     "@content-collections/mdx": "^0.2.2",
-    "@content-collections/next": "^0.2.6",
     "@fumadocs/content-collections": "^1.1.8",
     "@mdx-js/react": "^3.1.0",
     "@tailwindcss/postcss": "^4.0.14",
@@ -31,6 +29,9 @@
     "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
+    "@content-collections/cli": "^0.1.6",
+    "@content-collections/core": "^0.8.2",
+    "@content-collections/next": "^0.2.6",
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^15.2.3",
     "@repo/eslint-config": "workspace:*",
