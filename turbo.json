@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "typecheck": {
       "outputs": []
@@ -17,7 +17,7 @@
     "coverage": {
       "dependsOn": ["rooks#build"],
       "cache": false,
-      "outputs": ["src/coverage/**"]
+      "outputs": ["coverage/**"]
     },
     "all-checks": {
       "dependsOn": ["coverage", "rooks#typecheck", "lint"],
