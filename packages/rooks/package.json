@@ -44,7 +44,8 @@
     "coverage": "pnpm test --coverage",
     "prebuild": "rimraf dist",
     "build": "rollup -c register.js",
-    "test-ct": "playwright test -c playwright-ct.config.ts"
+    "test-ct": "playwright test -c playwright-ct.config.ts",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.3",
