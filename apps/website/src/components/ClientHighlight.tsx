@@ -9,10 +9,16 @@ type ClientHighlightProps = {
 };
 
 export function ClientHighlight({ code, language }: ClientHighlightProps) {
+    console.log('ClientHighlight', code, language);
+    // Ensure code is a non-empty string
+    const safeCode = typeof code === 'string' ? code : '';
+    // Ensure language is valid
+    const safeLanguage = typeof language === 'string' ? language : 'text';
+
     // If language is javascript or jsx, render Sandpack
-    if (language === 'javascript' || language === 'jsx') {
+    if (safeLanguage === 'javascript' || safeLanguage === 'jsx') {
         // Check if code contains console statements
-        const hasConsoleStatements = !!code.match(/console\./gm);
+        const hasConsoleStatements = !!safeCode.match(/console\./gm);
 
         return (
             <div className="my-4">
@@ -22,7 +28,7 @@ export function ClientHighlight({ code, language }: ClientHighlightProps) {
                         <Sandpack
                             template="react"
                             files={{
-                                "/App.js": code,
+                                "/App.js": safeCode,
                             }}
                             theme="dark"
                             options={{
@@ -54,8 +60,8 @@ export function ClientHighlight({ code, language }: ClientHighlightProps) {
     return (
         <Highlight
             theme={themes.dracula}
-            code={code}
-            language={language as any}
+            code={safeCode}
+            language={safeLanguage as any}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={style}>

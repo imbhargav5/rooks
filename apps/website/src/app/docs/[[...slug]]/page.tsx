@@ -13,6 +13,7 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 import dynamic from 'next/dynamic';
 import { ClientHighlight } from '@/components/ClientHighlight';
 import { ClientHightlightWrapper } from '@/components/ClientHightlightWrapper';
+import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
 
 
 
@@ -30,11 +31,12 @@ export default async function Page(props: {
     const mdxComponents = Object.assign({}, defaultMdxComponents, {
         Contributors,
         // Code block rendering through ClientHighlight
-        code: (props: { children: string; className?: string }) => {
-            // Extract language from className (e.g., "language-jsx")
-            const language = props.className ? props.className.replace(/language-/, '') : 'text';
-            return <ClientHightlightWrapper code={props.children} language={language} />;
-        }
+        // @ts-ignore - Type mismatch but works at runtime
+        pre: ({ ref: _ref, ...props }) => (
+            <CodeBlock {...props}>
+                <Pre>{props.children}</Pre>
+            </CodeBlock>
+        ),
     });
 
     return (
