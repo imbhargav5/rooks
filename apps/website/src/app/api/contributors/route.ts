@@ -10,16 +10,19 @@ interface Contributor {
     contributions: string[];
 }
 
+// Use find-up to locate the .all-contributorsrc file by walking up directories
+const contributorsConfigPath = findUpSync('.all-contributorsrc');
+
+if (!contributorsConfigPath) {
+    throw new Error('.all-contributorsrc file not found');
+}
+
+
+const allContributorsRaw = readFileSync(contributorsConfigPath, "utf-8");
+
+
 export async function GET() {
     try {
-        // Use find-up to locate the .all-contributorsrc file by walking up directories
-        const contributorsConfigPath = findUpSync('.all-contributorsrc');
-
-        if (!contributorsConfigPath) {
-            throw new Error('.all-contributorsrc file not found');
-        }
-
-        const allContributorsRaw = readFileSync(contributorsConfigPath, "utf-8");
 
         const allContributors = JSON.parse(allContributorsRaw);
 
