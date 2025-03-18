@@ -33,6 +33,10 @@
       "cache": false,
       "dependsOn": ["build"],
       "outputs": ["dist/**", ".next/**"]
+    },
+    "prepare-publish": {
+      "dependsOn": ["rooks#build"],
+      "outputs": ["dist/**"]
     }
   }
 }
