@@ -26,7 +26,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "remark-remove-comments": "^1.1.1",
     "rooks": "workspace:*",
-    "tailwindcss": "^4.0.14"
+    "tailwindcss": "^4.0.14",
+    "url-join": "^5.0.0"
   },
   "devDependencies": {
     "@content-collections/cli": "^0.1.6",

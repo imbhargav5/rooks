@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { getUrl } from '@/utils/url';
+
 
 interface Contributor {
     login: string;
@@ -13,7 +15,7 @@ interface Contributor {
 
 // API query function
 async function fetchContributors(): Promise<Contributor[]> {
-    const response = await fetch('/api/contributors');
+    const response = await fetch(getUrl('/api/contributors'));
     if (!response.ok) {
         throw new Error('Failed to fetch contributors');
     }
