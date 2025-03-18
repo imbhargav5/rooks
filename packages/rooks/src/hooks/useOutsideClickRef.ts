@@ -12,15 +12,14 @@ import { noop } from "@/utils/noop";
  * @see https://rooks.vercel.app/docs/useOutsideClick
  */
 function useOutsideClickRef(
-  handler: (event: MouseEvent) => void,
+  handler: (event: MouseEvent | TouchEvent) => void,
   when = true
 ): [CallbackRef] {
-  const savedHandler = useRef(handler);
-
   const [node, setNode] = useState<HTMLElementOrNull>(null);
+  const savedHandler = useRef<(event: MouseEvent | TouchEvent) => void>(handler);
 
   const memoizedCallback = useCallback(
-    (event: MouseEvent) => {
+    (event: MouseEvent | TouchEvent) => {
       if (node && !node.contains(event.target as Element)) {
         savedHandler.current(event);
       }
@@ -39,11 +38,11 @@ function useOutsideClickRef(
   useEffect(() => {
     if (when) {
       document.addEventListener("click", memoizedCallback, true);
-      document.addEventListener("ontouchstart", memoizedCallback, true);
+      document.addEventListener("touchstart", memoizedCallback, true);
 
       return () => {
         document.removeEventListener("click", memoizedCallback, true);
-        document.removeEventListener("ontouchstart", memoizedCallback, true);
+        document.removeEventListener("touchstart", memoizedCallback, true);
       };
     }
 

@@ -1,5 +1,19 @@
-import { DOMAttributes, FocusEvents } from "@react-types/shared";
 import { FocusEvent, useCallback } from "react";
+
+// Define our own types instead of using @react-types/shared
+interface FocusEvents {
+  /** Handler that is called when the element receives focus. */
+  onFocus?: (e: FocusEvent) => void;
+  /** Handler that is called when the element loses focus. */
+  onBlur?: (e: FocusEvent) => void;
+  /** Handler that is called when the element's focus status changes. */
+  onFocusChange?: (isFocused: boolean) => void;
+}
+
+interface DOMAttributes<T> {
+  onFocus?: (e: FocusEvent<T>) => void;
+  onBlur?: (e: FocusEvent<T>) => void;
+}
 
 type FocusProps = FocusEvents;
 

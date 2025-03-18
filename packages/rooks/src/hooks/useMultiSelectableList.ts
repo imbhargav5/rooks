@@ -1,4 +1,3 @@
-/* eslint-disable no-negated-condition */
 import { useCallback, useState } from "react";
 import type {
   OptionalIndexValue,
@@ -52,8 +51,8 @@ function useMultiSelectableList<T>(
 ): UseMultiSelectableListReturnType<T> {
   const [currentIndices, setCurrentIndices] = useState(initialSelectIndices);
 
-  const currentValues = currentIndices.map((index) => list[index]);
-  const selection = [currentIndices, currentValues];
+  const currentValues = currentIndices.map((index) => list[index]).filter((value): value is T => value !== undefined);
+  const selection: [number[], T[]] = [currentIndices, currentValues];
 
   const updateSelections = ({ indices, values }: OptionalIndicesValues<T>) => {
     return () => {
@@ -70,7 +69,7 @@ function useMultiSelectableList<T>(
 
         setCurrentIndices(indices);
       } else if (typeof values !== "undefined") {
-        const valueIndices = list.reduce((accumulator, current, index) => {
+        const valueIndices = list.reduce<number[]>((accumulator, current, index) => {
           if (values.includes(current)) {
             const array = [...accumulator, index];
 

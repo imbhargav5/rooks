@@ -82,23 +82,23 @@ function useKey(
         const targetNode = target.current;
         if (targetNode) {
           for (const eventType of eventTypes) {
-            targetNode.addEventListener(eventType, handle);
+            targetNode.addEventListener(eventType, handle as EventListener);
           }
 
           return () => {
             for (const eventType of eventTypes) {
-              targetNode.removeEventListener(eventType, handle);
+              targetNode.removeEventListener(eventType, handle as EventListener);
             }
           };
         }
       } else {
         for (const eventType of eventTypes) {
-          window.addEventListener(eventType, handle);
+          window.addEventListener(eventType, handle as EventListener);
         }
 
         return () => {
           for (const eventType of eventTypes) {
-            window.removeEventListener(eventType, handle);
+            window.removeEventListener(eventType, handle as EventListener);
           }
         };
       }

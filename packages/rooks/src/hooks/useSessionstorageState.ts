@@ -94,7 +94,7 @@ function useSessionstorageState<S>(
 
   // check for changes across windows
   useEffect(() => {
-    // eslint-disable-next-line no-negated-condition
+
     if (typeof window !== "undefined") {
       window.addEventListener("storage", listenToCrossDocumentStorageEvents);
 
@@ -107,7 +107,7 @@ function useSessionstorageState<S>(
     } else {
       console.warn("[useSessionstorageState] window is undefined.");
 
-      return () => {};
+      return () => { };
     }
   }, [listenToCrossDocumentStorageEvents]);
 
@@ -128,29 +128,29 @@ function useSessionstorageState<S>(
 
   // check for changes within document
   useEffect(() => {
-    // eslint-disable-next-line no-negated-condition
+
     if (typeof document !== "undefined") {
       document.addEventListener(
         customEventTypeName,
-        listenToCustomEventWithinDocument
+        listenToCustomEventWithinDocument as EventListener
       );
 
       return () => {
         document.removeEventListener(
           customEventTypeName,
-          listenToCustomEventWithinDocument
+          listenToCustomEventWithinDocument as EventListener
         );
       };
     } else {
       console.warn("[useSessionstorageState] document is undefined.");
 
-      return () => {};
+      return () => { };
     }
   }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
     (newValue: S) => {
-      // eslint-disable-next-line no-negated-condition
+
       if (typeof document !== "undefined") {
         const event: BroadcastCustomEvent<S> = new CustomEvent(
           customEventTypeName,
@@ -165,13 +165,16 @@ function useSessionstorageState<S>(
   );
 
   const set = useCallback(
-    (newValue: S) => {
+    (newValue: SetStateAction<S>) => {
+      const resolvedNewValue = typeof newValue === "function"
+        ? (newValue as (prevState: S) => S)(value)
+        : newValue;
       isUpdateFromCrossDocumentListener.current = false;
       isUpdateFromWithinDocumentListener.current = false;
-      setValue(newValue);
-      broadcastValueWithinDocument(newValue);
+      setValue(resolvedNewValue);
+      broadcastValueWithinDocument(resolvedNewValue);
     },
-    [broadcastValueWithinDocument]
+    [broadcastValueWithinDocument, value]
   );
 
   const remove = useCallback(() => {

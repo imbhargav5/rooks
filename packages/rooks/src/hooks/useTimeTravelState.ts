@@ -155,7 +155,7 @@ function useTimeTravelState<T>(
 
       return {
         past: [...past, present, ..._before],
-        present: _current,
+        present: _current as T,
         future: _after,
       };
     });
@@ -170,7 +170,7 @@ function useTimeTravelState<T>(
       const { _before, _current, _after } = split(step, past);
       return {
         past: _before,
-        present: _current,
+        present: _current as T,
         future: [..._after, present, ...future],
       };
     });

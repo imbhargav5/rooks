@@ -41,7 +41,7 @@ describe("useMediaMatch", () => {
 
     // We call once for the memo initialization
     expect(matchMedia).toHaveBeenCalledTimes(1);
-    expect(matchMedia.mock.calls[0][0]).toBe("print");
+    expect(matchMedia.mock.calls[0]![0]).toBe("print");
     expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
       "change",
@@ -66,7 +66,7 @@ describe("useMediaMatch", () => {
     } as any);
     rerender({ query: "(max-width: 640px)" });
     expect(matchMedia).toHaveBeenCalledTimes(2);
-    expect(matchMedia.mock.calls[1][0]).toBe("(max-width: 640px)");
+    expect(matchMedia.mock.calls[1]![0]).toBe("(max-width: 640px)");
     expect(result.current).toBe(true);
     // We should have also cleaned up the old event listener and bound a new one
     expect(removeEventListener).toHaveBeenCalledTimes(1);

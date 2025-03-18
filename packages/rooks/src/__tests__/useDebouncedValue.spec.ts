@@ -14,7 +14,7 @@ const doNotExecute = (_func: () => void) => true;
 
 describe("useDebouncedValue", () => {
   beforeEach(() => {
-    jest.useFakeTimers("modern");
+    jest.useFakeTimers();
   });
   afterEach(() => {
     jest.useRealTimers();

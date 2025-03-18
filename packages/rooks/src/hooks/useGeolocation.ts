@@ -10,7 +10,7 @@ function getGeoLocation(
   options: UseGeoLocationOptions
 ): Promise<UseGeolocationReturnType> {
   return new Promise((resolve, reject) => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
@@ -24,14 +24,17 @@ function getGeoLocation(
           });
         },
         (error) => {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ isError: true, message: error.message });
+          resolve({
+            isError: true,
+            message: error && typeof error === 'object' && 'message' in error
+              ? error.message
+              : "Geolocation error",
+          });
         },
         options
       );
     } else {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      reject({
+      resolve({
         isError: true,
         message: "Geolocation is not supported for this Browser/OS.",
       });
@@ -75,7 +78,10 @@ const useGeolocation = (
         }
       } catch (error) {
         if (getIsMounted()) {
-          setGeoObject(error);
+          setGeoObject({
+            isError: true,
+            message: error instanceof Error ? error.message : String(error),
+          });
         }
       }
     }

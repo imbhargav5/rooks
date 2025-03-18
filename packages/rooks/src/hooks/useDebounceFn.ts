@@ -31,8 +31,8 @@ function useDebounceFn<F extends AnyFunction>(
   // we use key to reset a timeout when the key changes
   const [key, setKey] = useState<number>(0);
   const lastExecutionTimeRef = useRef<number>(0);
+  const argsRef = useRef<Parameters<F> | undefined>(undefined);
 
-  const argsRef = useRef<Parameters<F>>();
   const debouncedFn = useCallback(
     (...args: Parameters<F>) => {
       argsRef.current = args;
@@ -127,7 +127,7 @@ function useDebounceFn<F extends AnyFunction>(
     key
   );
 
-  const freshDebouncedFn = useFreshCallback(debouncedFn);
+  const freshDebouncedFn = useFreshCallback(debouncedFn as any);
 
   return [freshDebouncedFn, isTimeoutEnabled];
 }

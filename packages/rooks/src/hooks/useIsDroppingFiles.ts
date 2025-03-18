@@ -69,18 +69,18 @@ function useIsDroppingFiles(
     const target = isTargetWindow ? window : targetNode;
 
     if (target) {
-      target.addEventListener("dragenter", freshHandleDragEnter);
-      target.addEventListener("dragover", freshHandleDragOver);
-      target.addEventListener("dragleave", freshHandleDragLeave);
-      target.addEventListener("drop", freshHandleDrop);
+      target.addEventListener("dragenter", freshHandleDragEnter as EventListener);
+      target.addEventListener("dragover", freshHandleDragOver as EventListener);
+      target.addEventListener("dragleave", freshHandleDragLeave as EventListener);
+      target.addEventListener("drop", freshHandleDrop as EventListener);
     }
 
     return () => {
       if (target) {
-        target.removeEventListener("dragenter", freshHandleDragEnter);
-        target.removeEventListener("dragover", freshHandleDragOver);
-        target.removeEventListener("dragleave", freshHandleDragLeave);
-        target.removeEventListener("drop", freshHandleDrop);
+        target.removeEventListener("dragenter", freshHandleDragEnter as EventListener);
+        target.removeEventListener("dragover", freshHandleDragOver as EventListener);
+        target.removeEventListener("dragleave", freshHandleDragLeave as EventListener);
+        target.removeEventListener("drop", freshHandleDrop as EventListener);
       }
     };
   }, [

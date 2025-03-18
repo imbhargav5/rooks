@@ -34,13 +34,13 @@ import { noop } from "@/utils/noop";
  */
 function useOutsideClick(
   ref: MutableRefObject<HTMLElement | null>,
-  handler: (event: MouseEvent) => void,
+  handler: (event: MouseEvent | TouchEvent) => void,
   when = true
 ): void {
-  const savedHandler = useRef(handler);
+  const savedHandler = useRef<(event: MouseEvent | TouchEvent) => void>(handler);
 
   const memoizedCallback = useCallback(
-    (event: MouseEvent) => {
+    (event: MouseEvent | TouchEvent) => {
       if (ref.current && !ref.current.contains(event.target as Element)) {
         savedHandler.current(event);
       }
@@ -55,11 +55,11 @@ function useOutsideClick(
   useEffect(() => {
     if (when) {
       document.addEventListener("click", memoizedCallback, true);
-      document.addEventListener("ontouchstart", memoizedCallback, true);
+      document.addEventListener("touchstart", memoizedCallback, true);
 
       return () => {
         document.removeEventListener("click", memoizedCallback, true);
-        document.removeEventListener("ontouchstart", memoizedCallback, true);
+        document.removeEventListener("touchstart", memoizedCallback, true);
       };
     }
 

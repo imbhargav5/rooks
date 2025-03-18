@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
+import React, { RefObject } from "react";
 import {
   render,
   cleanup,
@@ -18,7 +18,7 @@ describe("useKey", () => {
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = () => {
-      const inputRef = React.useRef(null);
+      const inputRef = React.useRef<HTMLInputElement>(null);
       const [value, setValue] = React.useState(0);
       useKey(["s"], () => {
         setValue(value + 1);
@@ -29,7 +29,7 @@ describe("useKey", () => {
           setValue(value + 1);
         },
         {
-          target: inputRef,
+          target: inputRef as unknown as RefObject<HTMLElement>,
         }
       );
 
@@ -79,7 +79,7 @@ describe("non array input", () => {
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = () => {
-      const inputRef = React.useRef(null);
+      const inputRef = React.useRef<HTMLInputElement>(null);
       const [value, setValue] = React.useState(0);
       useKey("s", () => {
         setValue(value + 1);
@@ -90,7 +90,7 @@ describe("non array input", () => {
           setValue(value + 1);
         },
         {
-          target: inputRef,
+          target: inputRef as unknown as RefObject<HTMLElement>,
         }
       );
 
@@ -140,7 +140,7 @@ describe("when", () => {
   beforeEach(() => {
     // firstCallback = jest.fn()
     App = () => {
-      const inputRef = React.useRef(null);
+      const inputRef = React.useRef<HTMLInputElement>(null);
       const [when, setWhen] = React.useState(true);
 
       function toggleWhen() {
@@ -163,7 +163,7 @@ describe("when", () => {
           setValue(value + 1);
         },
         {
-          target: inputRef,
+          target: inputRef as unknown as RefObject<HTMLElement>,
           when,
         }
       );

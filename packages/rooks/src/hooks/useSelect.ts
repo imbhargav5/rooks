@@ -28,7 +28,7 @@ function useSelect<T>(list: T[], initialIndex = 0): SelectHandler<T> {
 
   return {
     index: selectedIndex,
-    item: list[selectedIndex],
+    item: list[selectedIndex] as T,
     setIndex: setSelectedIndex,
     setItem,
   };

@@ -15,7 +15,7 @@ export function useRaf(
   callback: (timeElapsed: number) => void,
   isActive: boolean
 ): void {
-  const savedCallback = useRef<(timeElapsed: number) => void>();
+  const savedCallback = useRef<(timeElapsed: number) => void>(null);
   // Remember the latest function.
   useEffect(() => {
     savedCallback.current = callback;

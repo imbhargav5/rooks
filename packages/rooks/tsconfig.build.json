@@ -4,11 +4,15 @@
     "baseUrl": "./src",
     "target": "ES2017",
     "module": "ESNext",
+    "moduleResolution": "Bundler",
     "composite": false,
     "sourceMap": false,
     "declaration": false,
     "declarationMap": false,
     "incremental": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "exclude": ["./src/**/*.spec.ts", "./src/**/*.spec.tsx"]

@@ -63,5 +63,8 @@
   "resolutions": {
     "prettier": "^2.8.7"
   },
-  "packageManager": "pnpm@9.2.0"
+  "packageManager": "pnpm@9.2.0",
+  "dependencies": {
+    "rimraf": "^6.0.1"
+  }
 }

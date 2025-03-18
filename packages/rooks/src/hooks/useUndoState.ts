@@ -62,7 +62,7 @@ const useUndoState = <T>(
   }, []);
 
   const returnValue = useMemo<UseUndoStateReturnValue<T>>(() => {
-    return [value[0], push, undo];
+    return [value[0] as ExcludeFunction<T>, push, undo];
   }, [push, undo, value]);
 
   return returnValue;

@@ -1,4 +1,4 @@
-/* eslint-disable no-negated-condition */
+
 import { useCallback, useState } from "react";
 import type { OptionalIndexValue } from "../types/index-value";
 
@@ -48,7 +48,7 @@ function useSelectableList<T>(
 ): UseSelectableListReturnType<T> {
   const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
   const currentValue = list[currentIndex];
-  const selection: Selection<T> = [currentIndex, currentValue];
+  const selection: Selection<T> = [currentIndex, currentValue as T];
 
   const updateSelection = useCallback(
     ({ index, value }: OptionalIndexValue<T>) => {

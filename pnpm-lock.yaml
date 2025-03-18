@@ -10,6 +10,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
     devDependencies:
       '@changesets/changelog-github':
         specifier: ^0.5.1
@@ -256,6 +260,9 @@ importers:
       '@babel/preset-react':
         specifier: 7.26.3
         version: 7.26.3(@babel/core@7.26.10)
+      '@react-types/shared':
+        specifier: ^3.28.0
+        version: 3.28.0(react@19.0.0)
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -280,6 +287,9 @@ importers:
       '@rollup/plugin-replace':
         specifier: ^6.0.2
         version: 6.0.2(rollup@4.36.0)
+      '@rollup/plugin-typescript':
+        specifier: ^12.1.2
+        version: 12.1.2(rollup@4.36.0)(tslib@2.8.1)(typescript@5.8.2)
       '@size-limit/file':
         specifier: ^11.2.0
         version: 11.2.0(size-limit@11.2.0)
@@ -304,6 +314,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
@@ -2640,6 +2653,11 @@ packages:
     peerDependencies:
       react: '>=16.8'
 
+  '@react-types/shared@3.28.0':
+    resolution: {integrity: sha512-9oMEYIDc3sk0G5rysnYvdNrkSg7B04yTKl50HHSZVbokeHpnU0yRmsDaWb9B/5RprcKj8XszEk5guBO8Sa/Q+Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
   '@rollup/plugin-babel@6.0.4':
     resolution: {integrity: sha512-YF7Y52kFdFT/xVSuVdjkV5ZdX/3YtmX0QulG+x0taQOtJdHYzVU61aSSkAgVJ7NOv6qPkIYiJSgSWWN/DM5sGw==}
     engines: {node: '>=14.0.0'}
@@ -2696,6 +2714,19 @@ packages:
       rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
+        optional: true
+
+  '@rollup/plugin-typescript@12.1.2':
+    resolution: {integrity: sha512-cdtSp154H5sv637uMr1a8OTWB0L1SWDSm1rDGiyfcGcvQ6cuTs4MDk2BVEBGysUWago4OJN4EQZqOTl/QY3Jgg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0||^4.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
         optional: true
 
   '@rollup/plugin-virtual@3.0.2':
@@ -12383,6 +12414,10 @@ snapshots:
     dependencies:
       react: 19.0.0
 
+  '@react-types/shared@3.28.0(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+
   '@rollup/plugin-babel@6.0.4(@babel/core@7.26.10)(@types/babel__core@7.20.5)(rollup@4.36.0)':
     dependencies:
       '@babel/core': 7.26.10
@@ -12435,6 +12470,15 @@ snapshots:
       magic-string: 0.30.17
     optionalDependencies:
       rollup: 4.36.0
+
+  '@rollup/plugin-typescript@12.1.2(rollup@4.36.0)(tslib@2.8.1)(typescript@5.8.2)':
+    dependencies:
+      '@rollup/pluginutils': 5.1.4(rollup@4.36.0)
+      resolve: 1.22.10
+      typescript: 5.8.2
+    optionalDependencies:
+      rollup: 4.36.0
+      tslib: 2.8.1
 
   '@rollup/plugin-virtual@3.0.2(rollup@4.36.0)':
     optionalDependencies:
