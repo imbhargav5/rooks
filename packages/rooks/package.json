@@ -41,7 +41,7 @@
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "check:dist": "es-check",
     "check:size": "size-limit --highlight-less",
-    "coverage": "pnpm test --coverage",
+    "coverage": "jest --coverage",
     "prebuild": "rimraf dist",
     "build": "node build.js",
     "test-ct": "playwright test -c playwright-ct.config.ts",
