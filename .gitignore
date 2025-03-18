@@ -37,7 +37,6 @@ i18n/*
 # turbo
 .turbo
 .vercel
-.rollup.cache
 
 
 # content-collections
