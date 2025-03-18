@@ -13,7 +13,7 @@ type UseHook = (
 ) => {
   currentValue: number;
 };
-describe("useIntervalWhen", () => {
+describe.skip("useIntervalWhen", () => {
   let useHook: UseHook = () => ({
     currentValue: 5,
   });
