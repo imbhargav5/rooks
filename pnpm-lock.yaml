@@ -206,7 +206,7 @@ importers:
         specifier: ^9.22.0
         version: 9.22.0
       '@next/eslint-plugin-next':
-        specifier: ^15.2.1
+        specifier: ^15.2.3
         version: 15.2.3
       eslint:
         specifier: ^9.22.0
