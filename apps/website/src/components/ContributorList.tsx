@@ -15,11 +15,16 @@ interface Contributor {
 
 // API query function
 async function fetchContributors(): Promise<Contributor[]> {
-    const response = await fetch(getUrl('/api/contributors'));
-    if (!response.ok) {
-        throw new Error('Failed to fetch contributors');
+    try {
+        const response = await fetch(getUrl('/api/contributors'));
+        if (!response.ok) {
+            throw new Error('Failed to fetch contributors');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching contributors:', error);
+        return [];
     }
-    return response.json();
 }
 
 // Individual contributor item component
