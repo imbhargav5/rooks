@@ -10,6 +10,11 @@ import { notFound } from 'next/navigation';
 import { Contributors } from '@/components/Contributors';
 import { MDXContent } from '@content-collections/mdx/react';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import dynamic from 'next/dynamic';
+import { ClientHighlight } from '@/components/ClientHighlight';
+import { ClientHightlightWrapper } from '@/components/ClientHightlightWrapper';
+
+
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[] }>;
@@ -23,7 +28,13 @@ export default async function Page(props: {
 
     // Add custom components to the MDX components
     const mdxComponents = Object.assign({}, defaultMdxComponents, {
-        Contributors
+        Contributors,
+        // Code block rendering through ClientHighlight
+        code: (props: { children: string; className?: string }) => {
+            // Extract language from className (e.g., "language-jsx")
+            const language = props.className ? props.className.replace(/language-/, '') : 'text';
+            return <ClientHightlightWrapper code={props.children} language={language} />;
+        }
     });
 
     return (
