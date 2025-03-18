@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: run all checks and get coverage
-        run: yarn run all-checks
+        run: pnpm run all-checks
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
@@ -57,14 +57,14 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: 🏗 Run build script
-        run: yarn run build
+        run: pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: yarn run release
-          version: yarn run version
+          publish: pnpm run release
+          version: pnpm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

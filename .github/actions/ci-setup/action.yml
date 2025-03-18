@@ -6,18 +6,24 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      run: |
+        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
       shell: bash
     - uses: actions/cache@v2
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      id: pnpm-cache-hit
       with:
         path: |
+          ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           node_modules
           */*/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
     - name: Install project dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
-      run: yarn
+      if: steps.pnpm-cache-hit.outputs.cache-hit != 'true'
+      run: pnpm install
       shell: bash
