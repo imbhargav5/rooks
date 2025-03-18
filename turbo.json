@@ -1,8 +1,13 @@
 {
-  "pipeline": {
+  "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     },
     "typecheck": {
       "outputs": []
@@ -14,24 +19,43 @@
       "cache": false
     },
     "coverage": {
-      "dependsOn": ["rooks#build"],
+      "dependsOn": [
+        "rooks#build"
+      ],
       "cache": false,
-      "outputs": ["src/coverage/**"]
+      "outputs": [
+        "src/coverage/**"
+      ]
     },
     "all-checks": {
-      "dependsOn": ["coverage", "rooks#typecheck", "lint"],
+      "dependsOn": [
+        "coverage",
+        "rooks#typecheck",
+        "lint"
+      ],
       "cache": false,
       "outputs": []
     },
     "test": {
       "cache": false,
-      "dependsOn": ["rooks#build"],
-      "outputs": ["coverage/**", "dist/**", ".next/**"]
+      "dependsOn": [
+        "rooks#build"
+      ],
+      "outputs": [
+        "coverage/**",
+        "dist/**",
+        ".next/**"
+      ]
     },
     "start": {
       "cache": false,
-      "dependsOn": ["build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     }
   }
 }
