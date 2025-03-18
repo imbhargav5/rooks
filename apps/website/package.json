@@ -27,7 +27,8 @@
     "remark-remove-comments": "^1.1.1",
     "rooks": "workspace:*",
     "tailwindcss": "^4.0.14",
-    "url-join": "^5.0.0"
+    "url-join": "^5.0.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@content-collections/cli": "^0.1.6",
@@ -49,11 +50,14 @@
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "remark-remove-comments": "^0.2.0",
+    "ts-node": "^10.9.2",
     "tsconfig": "^7.0.0",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   },
   "scripts": {
     "start": "next start",
+    "prebuild": "tsx dump-contributors.ts",
     "build": "content-collections build && next build",
     "dev": "NODE_OPTIONS='--no-warnings' concurrently \"content-collections watch\" \"next dev --turbo \""
   }
