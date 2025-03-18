@@ -28,10 +28,9 @@
 
 
 import { withContentCollections } from '@content-collections/next';
+import { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const config = {
-  reactStrictMode: true,
+const config: NextConfig = {
   images: {
     remotePatterns: [
       {
