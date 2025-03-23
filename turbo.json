@@ -24,6 +24,10 @@
       "cache": false,
       "outputs": []
     },
+    "test-hooks": {
+      "cache": false,
+      "outputs": []
+    },
     "test": {
       "cache": false,
       "dependsOn": ["rooks#build"],

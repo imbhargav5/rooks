@@ -18,6 +18,7 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test-hooks": "turbo run test-hooks",
     "test": "turbo run test",
     "start": "turbo run start",
     "coverage": "turbo run coverage",

@@ -9,20 +9,39 @@ const tsConfig = JSON.parse(readFileSync(tsConfigPath, 'utf8'));
 
 const config: JestConfigWithTsJest = {
   preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   testMatch: ['<rootDir>/src/__tests__/**/*.(spec|test).(ts|tsx)'],
   verbose: true,
   transform: {
-    '^.+\\.[jt]sx?$': 'esbuild-jest',
+    '^.+\\.[jt]sx?$': '@swc/jest',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(some-module-that-needs-transforming)/)',
+  ],
   moduleNameMapper: {
     // Map paths from tsconfig
     '@/(.*)$': '<rootDir>/src/$1',
   },
   rootDir: '.',
   coverageProvider: 'v8',
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/index.{js,ts}',
+    '!src/**/*.stories.{js,jsx,ts,tsx}',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+    },
+  },
   modulePaths: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/src/jest.setup.ts'],
+  cache: true,
+  cacheDirectory: '<rootDir>/.jest-cache',
+  maxWorkers: '50%',
 };
 
 export default config;
