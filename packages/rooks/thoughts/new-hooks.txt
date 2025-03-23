@@ -1,0 +1,797 @@
+# New Hooks for Rooks
+
+## Coding Patterns and Guidelines
+
+When implementing these hooks, follow these patterns to maintain consistency with existing hooks:
+
+1. **TypeScript Types**:
+   - Define clear TypeScript interfaces at the top
+   - Use descriptive type names (e.g., `ClipboardHandler`, `IndexedDBHandler`)
+
+2. **Documentation**:
+   - Include JSDoc comments for the main hook and all methods
+   - Add a link to documentation with `@see`
+   - Document all parameters and return values
+
+3. **Implementation**:
+   - Use React hooks like useState, useCallback, useEffect appropriately
+   - Memoize functions with useCallback to prevent unnecessary re-renders
+   - Keep functionality focused and specific
+   - Handle cleanup in useEffect return functions
+
+4. **Return Pattern**:
+   - Return an object with named methods and values
+   - Use consistent naming conventions (e.g., `value`, `setValue`, `reset`)
+
+5. **Error Handling**:
+   - Include proper error handling for browser APIs
+   - Provide fallbacks for unsupported features
+
+## Hooks Descriptions and Expected Behaviors
+
+### 1. useClipboard
+A hook to interact with the Clipboard API.
+
+```typescript
+function useClipboard(): ClipboardHandler {
+  // implementation
+}
+
+// Usage
+const { copyToClipboard, readFromClipboard, clipboardState } = useClipboard();
+
+// Copy text
+copyToClipboard("Text to copy");
+
+// Read from clipboard (with permissions)
+readFromClipboard().then(text => console.log(text));
+
+// Check clipboard state
+if (clipboardState.error) {
+  console.error(clipboardState.error);
+}
+```
+
+### 2. useIndexedDB
+A hook to work with IndexedDB for client-side storage.
+
+```typescript
+function useIndexedDB<T>(dbName: string, storeName: string, version: number = 1): IndexedDBHandler<T> {
+  // implementation
+}
+
+// Usage
+const { add, get, getAll, update, remove, clear, error } = useIndexedDB<User>("myApp", "users", 1);
+
+// Add an item
+add({ id: 1, name: "John", email: "john@example.com" });
+
+// Get an item by key
+get(1).then(user => console.log(user));
+
+// Update an item
+update(1, { name: "John Updated" });
+
+// Remove an item
+remove(1);
+```
+
+### 3. useWebSocket
+A hook for WebSocket connections and real-time communication.
+
+```typescript
+function useWebSocket(url: string, options?: WebSocketOptions): WebSocketHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  sendMessage, 
+  lastMessage, 
+  readyState, 
+  connectionStatus, 
+  connect, 
+  disconnect 
+} = useWebSocket("wss://echo.websocket.org");
+
+// Send a message
+sendMessage("Hello WebSocket");
+
+// Get last received message
+console.log(lastMessage);
+
+// Connect/disconnect manually
+disconnect();
+connect();
+```
+
+### 4. useMediaRecorder
+A hook to record audio/video from user devices.
+
+```typescript
+function useMediaRecorder(options?: MediaRecorderOptions): MediaRecorderHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  startRecording, 
+  stopRecording, 
+  pauseRecording, 
+  resumeRecording, 
+  recordingState, 
+  recordedChunks, 
+  mediaBlob 
+} = useMediaRecorder({ audio: true, video: true });
+
+// Start recording
+startRecording();
+
+// Stop and get result
+stopRecording();
+console.log(mediaBlob);
+```
+
+### 5. useServiceWorker
+A hook to register and communicate with service workers.
+
+```typescript
+function useServiceWorker(scriptURL: string, options?: RegistrationOptions): ServiceWorkerHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  registration, 
+  error, 
+  update, 
+  unregister, 
+  isUpdateAvailable 
+} = useServiceWorker("/service-worker.js");
+
+// Check for updates
+if (isUpdateAvailable) {
+  update();
+}
+```
+
+### 6. usePermissions
+A hook to request and track browser permissions.
+
+```typescript
+function usePermissions(permissionNames: PermissionName[]): PermissionsHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  status, 
+  request, 
+  check, 
+  isGranted, 
+  isDenied, 
+  isPrompt 
+} = usePermissions(["camera", "microphone"]);
+
+// Request permissions
+request().then(() => {
+  if (isGranted("camera")) {
+    // Camera permission granted
+  }
+});
+```
+
+### 7. useBroadcastChannel
+A hook for communication between browser tabs.
+
+```typescript
+function useBroadcastChannel(channelName: string): BroadcastChannelHandler {
+  // implementation
+}
+
+// Usage
+const { postMessage, lastMessage, error } = useBroadcastChannel("app-sync");
+
+// Send a message to other tabs
+postMessage({ type: "USER_LOGGED_IN", payload: { userId: 123 } });
+
+// React to messages from other tabs
+console.log(lastMessage);
+```
+
+### 8. useFileSystem
+A hook to interact with the File System Access API.
+
+```typescript
+function useFileSystem(): FileSystemHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  openFile, 
+  saveFile, 
+  createDirectory, 
+  currentFile, 
+  fileContents, 
+  error 
+} = useFileSystem();
+
+// Open a file
+openFile({ accept: [".txt", ".md"] }).then(() => {
+  console.log(fileContents);
+});
+
+// Save changes
+saveFile("New content for the file");
+```
+
+### 9. useShare
+A hook for the Web Share API.
+
+```typescript
+function useShare(): ShareHandler {
+  // implementation
+}
+
+// Usage
+const { share, canShare, error } = useShare();
+
+// Share content
+if (canShare) {
+  share({
+    title: "Check this out!",
+    text: "Interesting article about React hooks",
+    url: "https://example.com/article"
+  });
+}
+```
+
+### 10. useScreenWakeLock
+A hook to prevent the screen from sleeping.
+
+```typescript
+function useScreenWakeLock(): ScreenWakeLockHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  request, 
+  release, 
+  isActive, 
+  error 
+} = useScreenWakeLock();
+
+// Prevent screen from sleeping
+request();
+
+// Release when done
+release();
+```
+
+### 11. useNetworkInformation
+A hook to monitor network status and changes.
+
+```typescript
+function useNetworkInformation(): NetworkInformationHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  isOnline, 
+  effectiveType, 
+  downlink, 
+  rtt, 
+  saveData 
+} = useNetworkInformation();
+
+// Check if user is online
+if (!isOnline) {
+  showOfflineMessage();
+}
+
+// Adapt experience based on connection quality
+if (effectiveType === '4g') {
+  loadHighQualityAssets();
+} else {
+  loadLowQualityAssets();
+}
+```
+
+### 12. usePaymentRequest
+A hook for the Web Payment API.
+
+```typescript
+function usePaymentRequest(methodData: PaymentMethodData[], details: PaymentDetailsInit, options?: PaymentOptions): PaymentRequestHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  show, 
+  abort, 
+  canMakePayment, 
+  paymentResponse 
+} = usePaymentRequest(
+  [{ supportedMethods: "basic-card" }],
+  { total: { label: "Total", amount: { currency: "USD", value: "19.99" } } }
+);
+
+// Show payment UI
+if (canMakePayment) {
+  show();
+}
+```
+
+### 13. useSpeechRecognition
+A hook for voice input capture and processing.
+
+```typescript
+function useSpeechRecognition(options?: SpeechRecognitionOptions): SpeechRecognitionHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  start, 
+  stop, 
+  transcript, 
+  isListening, 
+  error, 
+  clearTranscript 
+} = useSpeechRecognition({ continuous: true });
+
+// Start listening
+start();
+
+// Use the transcript
+console.log(transcript);
+```
+
+### 14. useCredentials
+A hook for the Credential Management API.
+
+```typescript
+function useCredentials(): CredentialsHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  get, 
+  store, 
+  preventSilentAccess, 
+  credential 
+} = useCredentials();
+
+// Get stored credentials
+get({ password: true }).then(cred => {
+  if (cred) {
+    // Auto sign in
+  }
+});
+
+// Store new credentials
+store({ id: "user@example.com", password: "password123", name: "User Name" });
+```
+
+### 15. useNotifications
+A hook for the Web Notifications API.
+
+```typescript
+function useNotifications(): NotificationsHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  requestPermission, 
+  showNotification, 
+  permissionState, 
+  closeAll 
+} = useNotifications();
+
+// Request permission
+requestPermission().then(state => {
+  if (state === "granted") {
+    showNotification("New Message", {
+      body: "You have a new message",
+      icon: "/notification-icon.png"
+    });
+  }
+});
+```
+
+### 16. usePushSubscription
+A hook for the Push API.
+
+```typescript
+function usePushSubscription(publicKey?: string): PushSubscriptionHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  subscribe, 
+  unsubscribe, 
+  subscription, 
+  permissionState 
+} = usePushSubscription("YOUR_PUBLIC_VAPID_KEY");
+
+// Subscribe to push notifications
+subscribe().then(sub => {
+  // Send subscription to server
+  saveSubscriptionToServer(sub);
+});
+```
+
+### 17. useBluetoothLE
+A hook for the Web Bluetooth API.
+
+```typescript
+function useBluetoothLE(): BluetoothLEHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  requestDevice, 
+  connect, 
+  disconnect, 
+  readValue, 
+  writeValue, 
+  device, 
+  isConnected 
+} = useBluetoothLE();
+
+// Request a device
+requestDevice({ filters: [{ services: ['heart_rate'] }] }).then(() => {
+  connect();
+  // Read heart rate
+  readValue("heart_rate", "heart_rate_measurement").then(value => {
+    console.log(value);
+  });
+});
+```
+
+### 18. useUSB
+A hook for WebUSB API.
+
+```typescript
+function useUSB(): USBHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  requestDevice, 
+  connect, 
+  disconnect, 
+  sendData, 
+  receiveData, 
+  device, 
+  isConnected 
+} = useUSB();
+
+// Request a USB device
+requestDevice({ filters: [{ vendorId: 0x2341 }] }).then(() => {
+  connect();
+  // Send data to device
+  sendData(new Uint8Array([0x01, 0x02, 0x03]));
+});
+```
+
+### 19. useAsync
+A hook for async data fetching with loading/error states.
+
+```typescript
+function useAsync<T>(asyncFunction: () => Promise<T>, immediate: boolean = true): AsyncHandler<T> {
+  // implementation
+}
+
+// Usage
+const {
+  execute,
+  status,
+  value,
+  error,
+  isLoading,
+  isSuccess,
+  isError
+} = useAsync(fetchUserData);
+
+// Manually execute if immediate is false
+if (!isLoading) {
+  execute();
+}
+
+// Use the fetched data
+if (isSuccess) {
+  console.log(value);
+}
+```
+
+### 20. useInfiniteScroll
+A hook for infinite scrolling with intersection observer.
+
+```typescript
+function useInfiniteScroll(callback: () => void, options?: IntersectionObserverInit): InfiniteScrollHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  sentinelRef, 
+  isLoading, 
+  stopObserving, 
+  resumeObserving 
+} = useInfiniteScroll(loadMoreItems);
+
+// In your JSX, add the sentinel element at the end of your list
+<div ref={sentinelRef}>
+  {isLoading ? "Loading more..." : ""}
+</div>
+```
+
+### 21. useBreakpoint
+A hook for responsive design breakpoints.
+
+```typescript
+function useBreakpoint(breakpoints: Record<string, number>): BreakpointHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  breakpoint, 
+  is, 
+  isGreaterThan, 
+  isLessThan 
+} = useBreakpoint({
+  xs: 0,
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280
+});
+
+// Conditionally render based on breakpoint
+if (is("md") || isGreaterThan("md")) {
+  // Render desktop version
+} else {
+  // Render mobile version
+}
+```
+
+### 22. useColorScheme
+A hook to detect and react to system color scheme.
+
+```typescript
+function useColorScheme(): ColorSchemeHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  colorScheme, 
+  isDark, 
+  isLight 
+} = useColorScheme();
+
+// Apply theme based on system preference
+useEffect(() => {
+  document.body.classList.toggle("dark-theme", isDark);
+  document.body.classList.toggle("light-theme", isLight);
+}, [isDark, isLight]);
+```
+
+### 23. useReducedMotion
+A hook to respect user's reduced motion preferences.
+
+```typescript
+function useReducedMotion(): boolean {
+  // implementation
+}
+
+// Usage
+const prefersReducedMotion = useReducedMotion();
+
+// Adjust animations based on preference
+const animationStyle = prefersReducedMotion
+  ? { transition: 'none' }
+  : { transition: 'all 0.5s ease' };
+```
+
+### 24. useSwipe
+A hook to detect swipe gestures.
+
+```typescript
+function useSwipe(options?: SwipeOptions): SwipeHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  ref, 
+  swipeState, 
+  isSwipeLeft, 
+  isSwipeRight 
+} = useSwipe({ threshold: 50 });
+
+// Apply ref to your element
+<div ref={ref}>Swipe me</div>
+
+// React to swipe gestures
+useEffect(() => {
+  if (isSwipeLeft) {
+    // Handle swipe left
+  } else if (isSwipeRight) {
+    // Handle swipe right
+  }
+}, [isSwipeLeft, isSwipeRight]);
+```
+
+### 25. usePinchZoom
+A hook to handle pinch zoom gestures.
+
+```typescript
+function usePinchZoom(options?: PinchZoomOptions): PinchZoomHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  ref, 
+  scale, 
+  setScale, 
+  reset 
+} = usePinchZoom({ 
+  minScale: 0.5, 
+  maxScale: 3,
+  initialScale: 1 
+});
+
+// Apply ref to your element
+<div ref={ref} style={{ transform: `scale(${scale})` }}>Zoom me</div>
+
+// Reset zoom programmatically
+<button onClick={reset}>Reset Zoom</button>
+```
+
+### 26. useIdleTimer
+A hook to detect user inactivity.
+
+```typescript
+function useIdleTimer(options?: IdleTimerOptions): IdleTimerHandler {
+  // implementation
+}
+
+// Usage
+const { 
+  isIdle, 
+  lastActive, 
+  reset, 
+  pause, 
+  resume 
+} = useIdleTimer({ 
+  timeout: 5000, 
+  onIdle: () => console.log("User is idle"), 
+  onActive: () => console.log("User is active") 
+});
+
+// Check if user is idle
+if (isIdle) {
+  showIdleWarning();
+}
+
+// Reset the timer manually
+reset();
+```
+
+### 27. useStorageSync
+A hook to sync state across browser tabs.
+
+```typescript
+function useStorageSync<T>(key: string, initialValue: T): StorageSyncHandler<T> {
+  // implementation
+}
+
+// Usage
+const {
+  value,
+  setValue,
+  reset,
+  removeValue
+} = useStorageSync("user-settings", { theme: "light", fontSize: "medium" });
+
+// Update value (will sync across tabs)
+setValue({ ...value, theme: "dark" });
+
+// Remove from storage
+removeValue();
+```
+
+### 28. useQueryParams
+A hook to sync state with URL query parameters.
+
+```typescript
+function useQueryParams<T>(defaultParams?: T): QueryParamsHandler<T> {
+  // implementation
+}
+
+// Usage
+const {
+  queryParams,
+  setQueryParams,
+  getParam,
+  setParam,
+  removeParam,
+  clearParams
+} = useQueryParams({ page: "1", sort: "newest" });
+
+// Update a single parameter
+setParam("page", "2");
+
+// Get the current value of a parameter
+const currentPage = getParam("page");
+
+// Update multiple parameters
+setQueryParams({ page: "3", sort: "oldest" });
+```
+
+### 29. useAnimationFrame
+A hook to run code on animation frames.
+
+```typescript
+function useAnimationFrame(callback: (deltaTime: number) => void): AnimationFrameHandler {
+  // implementation
+}
+
+// Usage
+const {
+  start,
+  stop,
+  isRunning
+} = useAnimationFrame((deltaTime) => {
+  // Update animation based on deltaTime
+  updateAnimation(deltaTime);
+});
+
+// Start the animation loop
+start();
+
+// Stop when component is not visible
+if (!isVisible) {
+  stop();
+}
+```
+
+### 30. useDarkMode
+A hook to toggle between light and dark modes.
+
+```typescript
+function useDarkMode(initialValue?: boolean): DarkModeHandler {
+  // implementation
+}
+
+// Usage
+const {
+  isDarkMode,
+  toggle,
+  enable,
+  disable
+} = useDarkMode();
+
+// Toggle theme
+<button onClick={toggle}>
+  {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+</button>
+
+// Force dark mode
+<button onClick={enable}>Dark Mode</button>
+
+// Force light mode
+<button onClick={disable}>Light Mode</button>
+```

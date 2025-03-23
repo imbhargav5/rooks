@@ -1,0 +1,23 @@
+---
+description: 
+globs: packages/rooks/src/__tests__/**/*.tsx,packages/rooks/src/hooks/**/*.ts
+alwaysApply: false
+---
+A hook must be export by name.
+
+It should have corresponding test cases.
+
+When ran in the terminal with pnpm test-hooks hookName eg `pnpm test-hooks useWillUnmount`, all the tests should pass.
+
+Once a hook is ready to be tested, you should ask me whether I want to run tests in the terminal, if I confirm, you run this command and check what happens. 
+
+Location of tests. This project is a mono repo, with rooks being the main package. The hooks are present in the src/hooks folder of the package. The tests are present in src/__tests__ folder of the rooks package. The rooks package is in the packages folder. 
+
+See [useClipboard.ts](mdc:packages/rooks/src/hooks/useClipboard.ts) to understand how we write hooks.
+See [useClipboard.spec.tsx](mdc:packages/rooks/src/__tests__/useClipboard.spec.tsx) for inspiration on how to write tests for a hook. 
+
+
+If you ask me for confirmation for writing tests and I tell you to write tests, then you should first check if the file exists, and prompt me to confirm file creation. And then continue.
+If there are errors, you either fix the test cases, or ask if I want to edit the hook source. 
+
+Write fully typesafe code. Writing any / unknown is not allowed. Only in test cases mocking situations, you can use any/unknown, but only if there is no better option.

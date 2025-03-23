@@ -41,3 +41,4 @@ i18n/*
 
 # content-collections
 .content-collections/
+.jest-cache/

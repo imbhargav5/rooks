@@ -33,3 +33,17 @@ class SpeechSynthesisUtteranceMock {
 
 // Add the mock implementation to the global scope
 (global as any).SpeechSynthesisUtterance = SpeechSynthesisUtteranceMock;
+
+// With SWC, we need to set up the global environment differently
+if (typeof global !== 'undefined') {
+  // Initialize the property first
+  (global as any).IS_REACT_ACT_ENVIRONMENT = true;
+
+  // Define self if it doesn't exist
+  if (typeof (global as any).self === 'undefined') {
+    (global as any).self = global;
+  }
+
+  // Set the property on self as well
+  (global.self as any).IS_REACT_ACT_ENVIRONMENT = true;
+}
