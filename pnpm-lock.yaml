@@ -286,10 +286,10 @@ importers:
         version: 11.2.0(size-limit@11.2.0)
       '@size-limit/webpack':
         specifier: ^11.2.0
-        version: 11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1)
+        version: 11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1(webpack@5.98.0))
       '@size-limit/webpack-why':
         specifier: ^11.2.0
-        version: 11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1)(webpack@5.98.0)
+        version: 11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
@@ -343,7 +343,7 @@ importers:
         version: 7.0.0-bridge.0(@babel/core@7.26.10)
       babel-loader:
         specifier: 10.0.0
-        version: 10.0.0(@babel/core@7.26.10)(webpack@5.98.0)
+        version: 10.0.0(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       babel-plugin-prismjs:
         specifier: 2.1.0
         version: 2.1.0(prismjs@1.30.0)
@@ -460,7 +460,7 @@ importers:
         version: 13.2.0
       mini-css-extract-plugin:
         specifier: 2.9.2
-        version: 2.9.2(webpack@5.98.0)
+        version: 2.9.2(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       np:
         specifier: ^10.2.0
         version: 10.2.0(@types/node@22.13.10)(typescript@5.8.2)
@@ -474,13 +474,13 @@ importers:
         specifier: ^2.8.7
         version: 2.8.8
       react:
-        specifier: 19.0.0
+        specifier: ^19.0.0
         version: 19.0.0
       react-dom:
-        specifier: 19.0.0
+        specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       react-test-renderer:
-        specifier: 19.0.0
+        specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       read-pkg-up:
         specifier: 11.0.0
@@ -12183,9 +12183,9 @@ snapshots:
     dependencies:
       size-limit: 11.2.0
 
-  '@size-limit/webpack-why@11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@size-limit/webpack-why@11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
-      '@statoscope/webpack-plugin': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)
+      '@statoscope/webpack-plugin': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       size-limit: 11.2.0
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
     transitivePeerDependencies:
@@ -12194,7 +12194,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@size-limit/webpack@11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1)':
+  '@size-limit/webpack@11.2.0(esbuild@0.25.1)(size-limit@11.2.0)(webpack-cli@6.0.1(webpack@5.98.0))':
     dependencies:
       nanoid: 5.1.4
       size-limit: 11.2.0
@@ -12255,7 +12255,7 @@ snapshots:
     dependencies:
       '@statoscope/stats': 5.28.1
 
-  '@statoscope/webpack-model@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)':
+  '@statoscope/webpack-model@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))':
     dependencies:
       '@statoscope/extensions': 5.28.1
       '@statoscope/helpers': 5.28.1
@@ -12266,7 +12266,7 @@ snapshots:
       '@statoscope/stats-extension-stats-validation-result': 5.28.1
       '@statoscope/types': 5.28.1
       '@types/md5': 2.3.5
-      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)
+      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
       md5: 2.3.0
     transitivePeerDependencies:
       - '@swc/core'
@@ -12274,7 +12274,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@statoscope/webpack-plugin@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@statoscope/webpack-plugin@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
       '@statoscope/report-writer': 5.28.1
@@ -12282,12 +12282,12 @@ snapshots:
       '@statoscope/stats-extension-compressed': 5.28.1
       '@statoscope/stats-extension-custom-reports': 5.28.1
       '@statoscope/types': 5.28.1
-      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)
-      '@statoscope/webpack-stats-extension-compressed': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)
-      '@statoscope/webpack-stats-extension-package-info': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)
+      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
+      '@statoscope/webpack-stats-extension-compressed': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
+      '@statoscope/webpack-stats-extension-package-info': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       '@statoscope/webpack-ui': 5.28.3
       '@types/node': 18.19.80
-      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)
+      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
       open: 8.4.2
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
     transitivePeerDependencies:
@@ -12296,12 +12296,12 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@statoscope/webpack-stats-extension-compressed@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@statoscope/webpack-stats-extension-compressed@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       '@statoscope/stats': 5.28.1
       '@statoscope/stats-extension-compressed': 5.28.1
-      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)
-      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)
+      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
+      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - '@swc/core'
@@ -12309,12 +12309,12 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@statoscope/webpack-stats-extension-package-info@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@statoscope/webpack-stats-extension-package-info@5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       '@statoscope/stats': 5.28.1
       '@statoscope/stats-extension-package-info': 5.28.1
-      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1)
-      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)
+      '@statoscope/webpack-model': 5.28.3(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
+      '@types/webpack': 5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - '@swc/core'
@@ -12660,7 +12660,7 @@ snapshots:
 
   '@types/use-sync-external-store@0.0.6': {}
 
-  '@types/webpack@5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)':
+  '@types/webpack@5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1(webpack@5.98.0))':
     dependencies:
       '@types/node': 18.19.80
       tapable: 2.2.1
@@ -12878,17 +12878,17 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.98.0)
 
-  '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@webpack-cli/info@3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.98.0)
 
-  '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)':
+  '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))':
     dependencies:
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.98.0)
@@ -13259,7 +13259,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.26.10)(webpack@5.98.0):
+  babel-loader@10.0.0(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)):
     dependencies:
       '@babel/core': 7.26.10
       find-up: 5.0.0
@@ -14659,7 +14659,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@5.62.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1)(eslint@9.22.0(jiti@2.4.2)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@5.62.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.31.0)(eslint@9.22.0(jiti@2.4.2)))(eslint@9.22.0(jiti@2.4.2)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -14681,7 +14681,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.22.0(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@5.62.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1)(eslint@9.22.0(jiti@2.4.2))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@5.62.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.31.0)(eslint@9.22.0(jiti@2.4.2)))(eslint@9.22.0(jiti@2.4.2))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -17702,7 +17702,7 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  mini-css-extract-plugin@2.9.2(webpack@5.98.0):
+  mini-css-extract-plugin@2.9.2(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)):
     dependencies:
       schema-utils: 4.3.0
       tapable: 2.2.1
@@ -19961,6 +19961,17 @@ snapshots:
       ansi-escapes: 5.0.0
       supports-hyperlinks: 2.3.0
 
+  terser-webpack-plugin@5.3.14(esbuild@0.25.1)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 4.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.39.0
+      webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
+    optionalDependencies:
+      esbuild: 0.25.1
+
   terser-webpack-plugin@5.3.14(esbuild@0.25.1)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -19972,17 +19983,6 @@ snapshots:
     optionalDependencies:
       esbuild: 0.25.1
     optional: true
-
-  terser-webpack-plugin@5.3.14(esbuild@0.25.1)(webpack@5.98.0):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 4.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.39.0
-      webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
-    optionalDependencies:
-      esbuild: 0.25.1
 
   terser@5.39.0:
     dependencies:
@@ -20651,9 +20651,9 @@ snapshots:
   webpack-cli@6.0.1(webpack@5.98.0):
     dependencies:
       '@discoveryjs/json-ext': 0.6.3
-      '@webpack-cli/configtest': 3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)
-      '@webpack-cli/info': 3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)
-      '@webpack-cli/serve': 3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)
+      '@webpack-cli/configtest': 3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
+      '@webpack-cli/info': 3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
+      '@webpack-cli/serve': 3.0.1(webpack-cli@6.0.1(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       colorette: 2.0.20
       commander: 12.1.0
       cross-spawn: 7.0.6
@@ -20726,7 +20726,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.14(esbuild@0.25.1)(webpack@5.98.0)
+      terser-webpack-plugin: 5.3.14(esbuild@0.25.1)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:
