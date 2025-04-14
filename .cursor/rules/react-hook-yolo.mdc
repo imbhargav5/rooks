@@ -1,9 +1,15 @@
 ---
-description: 
+description: Use this rule, if the prompt says "create a react hook"
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
-A hook must be export by name.
+All react hooks are created in the packages/rooks/src/hooks folder. 
+A hook must be exported by name.
+It should then be reexported from the packages/rooks/src/index.ts file.
+
+Hooks must be created in a TDD approach. First step is to always create tests with expected behaviour. Then you must ask me to confirm that the test suite is good or if it should be improved. After tests are approved by me, then you can continue with editing the hook. 
+
+Do not proceed further without asking me for clarifying questions regarding the test cases you wrote and implementation details. Ask me at least 1-2 clarification questions on implementation.
 
 First ensure that the hook has a comprehensive test suite. If there are no tests yet, first add test cases in the packages/rooks/src/__tests__ directory.
 
@@ -13,7 +19,7 @@ If tests don't pass, update the hook until all the tests pass.
 
  This project is a mono repo, with rooks being the main package. The hooks are present in the src/hooks folder of the package. The tests are present in src/__tests__ folder of the rooks package. The rooks package is in the packages folder. 
 
-See [useClipboard.ts](mdc:packages/rooks/src/hooks/useClipboard.ts) to understand how we write hooks.
-See [useClipboard.spec.tsx](mdc:packages/rooks/src/__tests__/useClipboard.spec.tsx) for inspiration on how to write tests for a hook. 
+See [useCounter.ts](mdc:packages/rooks/src/hooks/useCounter.ts) to understand how we write hooks.
+See [useCountdown.spec.tsx](mdc:packages/rooks/src/__tests__/useCountdown.spec.tsx) for inspiration on how to write tests for a hook. 
 
 Write fully typesafe code. Writing any / unknown is not allowed. Only in test cases mocking situations, you can use any/unknown, but only if there is no better option.

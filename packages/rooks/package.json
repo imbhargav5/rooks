@@ -45,7 +45,8 @@
     "prebuild": "rimraf dist",
     "build": "node build.js",
     "test-ct": "playwright test -c playwright-ct.config.ts",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "test-hooks": "jest"
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.3",
