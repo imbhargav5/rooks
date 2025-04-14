@@ -128,9 +128,9 @@
     "ora": "8.2.0",
     "pkg-dir": "^8.0.0",
     "prettier": "^3.5.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-test-renderer": "19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-test-renderer": "^19.0.0",
     "read-pkg-up": "11.0.0",
     "readline-sync": "^1.4.10",
     "remark": "^15.0.1",
@@ -161,8 +161,8 @@
     "yargs": "^17.7.2"
   },
   "peerDependencies": {
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "keywords": [
     "react",
