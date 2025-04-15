@@ -1,5 +1,11 @@
 # rooks
 
+## 8.0.1
+
+### Patch Changes
+
+- [`f97e3f9`](https://github.com/imbhargav5/rooks/commit/f97e3f9e7e514944d2780334eef4933ec3238899) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Remove lock on package versions
+
 ## 8.0.0
 
 ### Major Changes
