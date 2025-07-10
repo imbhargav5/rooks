@@ -6,14 +6,234 @@ sidebar_label: useVideo
 
 ## About
 
-Video hook for react
+A comprehensive React hook for video control and state management. This hook provides a ref to attach to video elements, reactive state tracking, and a complete set of video control methods.
 
 ## Examples
 
-```tsx
-import {useVideo} from "rooks"
+### Basic video player
+
+```jsx
+import { useVideo } from "rooks";
+import React from "react";
+
 export default function App() {
-  useVideo();
-  return null
+  const [videoRef, videoState, videoControls] = useVideo();
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Basic Video Player</h1>
+      <video
+        ref={videoRef}
+        width="400"
+        height="300"
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        controls={false}
+      />
+      <div style={{ marginTop: "10px" }}>
+        <p>Current Time: {videoState.currentTime.toFixed(2)}s</p>
+        <p>Duration: {videoState.duration.toFixed(2)}s</p>
+        <p>Status: {videoState.isPaused ? "Paused" : "Playing"}</p>
+        <p>Volume: {(videoState.volume * 100).toFixed(0)}%</p>
+        <p>Muted: {videoState.isMuted ? "Yes" : "No"}</p>
+      </div>
+      <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+        <button onClick={videoControls.play}>Play</button>
+        <button onClick={videoControls.pause}>Pause</button>
+        <button onClick={videoControls.toggleMute}>Toggle Mute</button>
+        <button onClick={videoControls.toggleFullScreen}>Fullscreen</button>
+      </div>
+    </div>
+  );
 }
 ```
+
+### Advanced video player with seek controls
+
+```jsx
+import { useVideo } from "rooks";
+import React from "react";
+
+export default function App() {
+  const [videoRef, videoState, videoControls] = useVideo();
+
+  const handleSeek = (event) => {
+    const seekTime = parseFloat(event.target.value);
+    videoControls.setCurrentTime(seekTime);
+  };
+
+  const handleVolumeChange = (event) => {
+    const newVolume = parseFloat(event.target.value);
+    videoControls.setVolume(newVolume);
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px" }}>
+      <h1>Advanced Video Player</h1>
+      <video
+        ref={videoRef}
+        width="100%"
+        height="300"
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        controls={false}
+      />
+      
+      {/* Progress bar */}
+      <div style={{ marginTop: "10px" }}>
+        <input
+          type="range"
+          min="0"
+          max={videoState.duration || 0}
+          value={videoState.currentTime}
+          onChange={handleSeek}
+          style={{ width: "100%" }}
+        />
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px" }}>
+          <span>{videoState.currentTime.toFixed(2)}s</span>
+          <span>{videoState.duration.toFixed(2)}s</span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div style={{ marginTop: "10px", display: "flex", gap: "10px", alignItems: "center" }}>
+        <button onClick={() => videoControls.rewind(10)}>⏪ 10s</button>
+        <button onClick={videoState.isPaused ? videoControls.play : videoControls.pause}>
+          {videoState.isPaused ? "▶️" : "⏸️"}
+        </button>
+        <button onClick={() => videoControls.fastForward(10)}>⏩ 10s</button>
+        <button onClick={videoControls.toggleMute}>
+          {videoState.isMuted ? "🔇" : "🔊"}
+        </button>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={videoState.volume}
+          onChange={handleVolumeChange}
+          style={{ width: "100px" }}
+        />
+        <span>{(videoState.volume * 100).toFixed(0)}%</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Video playlist with multiple videos
+
+```jsx
+import { useVideo } from "rooks";
+import React, { useState } from "react";
+
+export default function App() {
+  const [videoRef, videoState, videoControls] = useVideo();
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const videos = [
+    {
+      src: "https://www.w3schools.com/html/mov_bbb.mp4",
+      title: "Big Buck Bunny",
+    },
+    {
+      src: "https://www.w3schools.com/html/movie.mp4",
+      title: "Sample Video 2",
+    },
+  ];
+
+  const nextVideo = () => {
+    if (currentVideoIndex < videos.length - 1) {
+      setCurrentVideoIndex(currentVideoIndex + 1);
+    }
+  };
+
+  const prevVideo = () => {
+    if (currentVideoIndex > 0) {
+      setCurrentVideoIndex(currentVideoIndex - 1);
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px" }}>
+      <h1>Video Playlist</h1>
+      <h2>{videos[currentVideoIndex].title}</h2>
+      
+      <video
+        ref={videoRef}
+        width="100%"
+        height="300"
+        src={videos[currentVideoIndex].src}
+        controls={false}
+        key={currentVideoIndex} // Force re-render when video changes
+      />
+      
+      <div style={{ marginTop: "10px" }}>
+        <p>
+          Video {currentVideoIndex + 1} of {videos.length}
+        </p>
+        <p>Progress: {videoState.currentTime.toFixed(2)}s / {videoState.duration.toFixed(2)}s</p>
+      </div>
+
+      <div style={{ marginTop: "10px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button onClick={prevVideo} disabled={currentVideoIndex === 0}>
+          Previous
+        </button>
+        <button onClick={videoState.isPaused ? videoControls.play : videoControls.pause}>
+          {videoState.isPaused ? "Play" : "Pause"}
+        </button>
+        <button onClick={nextVideo} disabled={currentVideoIndex === videos.length - 1}>
+          Next
+        </button>
+        <button onClick={() => videoControls.fastForward(30)}>Skip 30s</button>
+        <button onClick={videoControls.toggleMute}>
+          {videoState.isMuted ? "Unmute" : "Mute"}
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+The `useVideo` hook takes no arguments.
+
+### Return Value
+
+Returns an array with three elements:
+
+```typescript
+[
+  RefObject<HTMLVideoElement | null>,
+  VideoState,
+  VideoControls
+]
+```
+
+#### VideoState
+
+| Property    | Type    | Description                                    |
+| ----------- | ------- | ---------------------------------------------- |
+| currentTime | number  | Current playback time in seconds               |
+| duration    | number  | Total duration of the video in seconds         |
+| isPaused    | boolean | Whether the video is currently paused          |
+| isMuted     | boolean | Whether the video is currently muted           |
+| volume      | number  | Current volume level (0.0 to 1.0)              |
+
+#### VideoControls
+
+| Method              | Type                      | Description                                    |
+| ------------------- | ------------------------- | ---------------------------------------------- |
+| play                | () => void                | Start playing the video                        |
+| pause               | () => void                | Pause the video                                |
+| toggleMute          | () => void                | Toggle mute state                              |
+| setVolume           | (volume: number) => void  | Set volume level (0.0 to 1.0)                 |
+| setCurrentTime      | (time: number) => void    | Set current playback time in seconds           |
+| fastForward         | (seconds: number) => void | Fast forward by specified seconds              |
+| rewind              | (seconds: number) => void | Rewind by specified seconds                    |
+| toggleFullScreen    | () => void                | Toggle fullscreen mode                         |
+
+#### VideoRef
+
+The first element in the return array is a React ref that should be attached to the video element you want to control. This ref provides access to the underlying HTMLVideoElement.
+
+---
