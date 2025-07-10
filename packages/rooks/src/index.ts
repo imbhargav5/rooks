@@ -31,6 +31,7 @@ export { useFocusWithin } from "@/hooks/useFocusWithin";
 export { useForkRef } from "@/hooks/useForkRef";
 export { useGetIsMounted } from "@/hooks/useGetIsMounted";
 export { useGeolocation } from "@/hooks/useGeolocation";
+export { useIdle } from "@/hooks/useIdle";
 export { useInput } from "@/hooks/useInput";
 export { useIntervalWhen } from "@/hooks/useIntervalWhen";
 export { useIntersectionObserverRef } from "@/hooks/useIntersectionObserverRef";
