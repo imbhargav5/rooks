@@ -145,11 +145,7 @@
       "description": "Checks if a component is mounted or not at the time. Useful for async effects",
       "category": "state"
     },
-    {
-      "name": "useIdle",
-      "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
-      "category": "misc"
-    },
+
     {
       "name": "useIdleDetectionApi",
       "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
