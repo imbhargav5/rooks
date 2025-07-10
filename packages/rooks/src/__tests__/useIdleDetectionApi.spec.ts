@@ -1,8 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import TestRenderer from "react-test-renderer";
-import { useIdle } from "@/hooks/useIdle";
-
-const { act: testRendererAct } = TestRenderer;
+import { useIdleDetectionApi } from "@/hooks/useIdleDetectionApi";
 
 // Mock IdleDetector for testing
 class MockIdleDetector {
@@ -61,16 +58,12 @@ class MockIdleDetector {
 // Global mock setup
 const mockIdleDetector = new MockIdleDetector();
 
-describe("useIdle", () => {
+describe("useIdleDetectionApi", () => {
   beforeEach(() => {
     // Mock global IdleDetector
     (global as any).IdleDetector = class {
-      userState: "active" | "idle" | null = "active";
-      screenState: "locked" | "unlocked" | null = "unlocked";
-
       constructor() {
-        this.userState = "active";
-        this.screenState = "unlocked";
+        // Constructor body
       }
 
       static requestPermission() {
@@ -107,12 +100,12 @@ describe("useIdle", () => {
 
   it("should be defined", () => {
     expect.hasAssertions();
-    expect(useIdle).toBeDefined();
+    expect(useIdleDetectionApi).toBeDefined();
   });
 
   it("should return initial state correctly", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useIdle({ threshold: 60000 }));
+    const { result } = renderHook(() => useIdleDetectionApi({ threshold: 60000 }));
 
     expect(result.current.isIdle).toBe(false);
     expect(result.current.userState).toBe("active");
@@ -125,7 +118,7 @@ describe("useIdle", () => {
 
   it("should detect native IdleDetector support", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useIdle({ threshold: 60000 }));
+    const { result } = renderHook(() => useIdleDetectionApi({ threshold: 60000 }));
     
     expect(result.current.isSupported).toBe(true);
   });
@@ -134,7 +127,7 @@ describe("useIdle", () => {
     expect.hasAssertions();
     delete (global as any).IdleDetector;
     
-    const { result } = renderHook(() => useIdle({ threshold: 60000 }));
+    const { result } = renderHook(() => useIdleDetectionApi({ threshold: 60000 }));
     
     expect(result.current.isSupported).toBe(false);
     expect(result.current.isIdle).toBe(false);
@@ -145,7 +138,7 @@ describe("useIdle", () => {
   it("should request permission when requestPermission is true", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -158,7 +151,7 @@ describe("useIdle", () => {
     (global as any).IdleDetector.requestPermission = jest.fn().mockResolvedValue("denied");
     
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -169,7 +162,7 @@ describe("useIdle", () => {
   it("should update state when idle detection changes", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -186,7 +179,7 @@ describe("useIdle", () => {
   it("should handle screen lock state changes", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -205,7 +198,7 @@ describe("useIdle", () => {
     const onIdleChange = jest.fn();
     
     const { waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true, onIdleChange })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true, onIdleChange })
     );
     
     await waitForNextUpdate();
@@ -227,7 +220,7 @@ describe("useIdle", () => {
     (global as any).IdleDetector.requestPermission = jest.fn().mockRejectedValue(new Error("Permission error"));
     
     const { waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true, onError })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true, onError })
     );
     
     await waitForNextUpdate();
@@ -237,7 +230,7 @@ describe("useIdle", () => {
 
   it("should enforce minimum threshold of 60000ms", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useIdle({ threshold: 30000 }));
+    const { result } = renderHook(() => useIdleDetectionApi({ threshold: 30000 }));
     
     // Should still work but internally use 60000ms minimum
     expect(result.current.isIdle).toBe(false);
@@ -246,7 +239,7 @@ describe("useIdle", () => {
   it("should auto-start when autoStart is true", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, autoStart: true, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, autoStart: true, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -258,7 +251,7 @@ describe("useIdle", () => {
   it("should provide start and stop methods", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();
@@ -288,7 +281,7 @@ describe("useIdle", () => {
     const onIdleChange = jest.fn();
     
     const { waitForNextUpdate } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true, onIdleChange })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true, onIdleChange })
     );
     
     await waitForNextUpdate();
@@ -319,7 +312,7 @@ describe("useIdle", () => {
   it("should cleanup properly on unmount", async () => {
     expect.hasAssertions();
     const { result, waitForNextUpdate, unmount } = renderHook(() => 
-      useIdle({ threshold: 60000, requestPermission: true })
+      useIdleDetectionApi({ threshold: 60000, requestPermission: true })
     );
     
     await waitForNextUpdate();

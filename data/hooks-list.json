@@ -151,6 +151,11 @@
       "category": "misc"
     },
     {
+      "name": "useIdleDetectionApi",
+      "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
+      "category": "misc"
+    },
+    {
       "name": "useInput",
       "description": "Input hook for React.",
       "category": "form"

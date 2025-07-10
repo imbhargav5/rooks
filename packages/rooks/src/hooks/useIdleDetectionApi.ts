@@ -20,8 +20,8 @@ declare global {
   }
 }
 
-// Options interface for useIdle hook
-interface UseIdleOptions {
+// Options interface for useIdleDetectionApi hook
+interface UseIdleDetectionApiOptions {
   threshold?: number;
   autoStart?: boolean;
   requestPermission?: boolean;
@@ -33,7 +33,7 @@ interface UseIdleOptions {
   onError?: (error: Error) => void;
 }
 
-interface UseIdleReturn {
+interface UseIdleDetectionApiReturn {
   isIdle: boolean;
   userState: "active" | "idle";
   screenState: "locked" | "unlocked";
@@ -158,12 +158,12 @@ class IdlePolyfill {
 }
 
 /**
- * useIdle hook - Detects when user is idle using Idle Detection API with polyfill
+ * useIdleDetectionApi hook - Detects when user is idle using Idle Detection API with polyfill
  *
  * @param options Configuration options
  * @returns Object with idle state and control methods
  */
-export function useIdle(options: UseIdleOptions = {}): UseIdleReturn {
+export function useIdleDetectionApi(options: UseIdleDetectionApiOptions = {}): UseIdleDetectionApiReturn {
   const {
     threshold = 60000, // Default 60 seconds
     autoStart = false,
