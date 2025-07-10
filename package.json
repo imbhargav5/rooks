@@ -32,6 +32,7 @@
     "contributors:check": "all-contributors check",
     "contributors:update": "node scripts/update-all-contributors/index.mjs",
     "create": "node scripts/create/index.mjs",
+    "create:cli": "node scripts/create/cli.mjs",
     "new": "yarn run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "node scripts/update-package-list-to-markdown/index.mjs"
@@ -57,7 +58,7 @@
     "lint-staged": "^15.5.0",
     "lodash": "^4.17.21",
     "prettier": "^3.5.3",
-    "turbo": "^2.4.4",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.2"
   },
   "resolutions": {

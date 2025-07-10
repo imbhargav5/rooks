@@ -41,13 +41,13 @@
       "category": "misc"
     },
     {
-      "name": "useDebounceFn",
-      "description": "Powerful debounce function hook for React",
+      "name": "useDebouncedValue",
+      "description": "Tracks another value and gets updated in a debounced way.",
       "category": "misc"
     },
     {
-      "name": "useDebouncedValue",
-      "description": "Tracks another value and gets updated in a debounced way.",
+      "name": "useDebounceFn",
+      "description": "Powerful debounce function hook for React",
       "category": "misc"
     },
     {
@@ -146,11 +146,6 @@
       "category": "state"
     },
     {
-      "name": "useInViewRef",
-      "description": "Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. ",
-      "category": "ui"
-    },
-    {
       "name": "useInput",
       "description": "Input hook for React.",
       "category": "form"
@@ -164,6 +159,11 @@
       "name": "useIntervalWhen",
       "description": "Sets an interval immediately when a condition is true",
       "category": "effects"
+    },
+    {
+      "name": "useInViewRef",
+      "description": "Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API. ",
+      "category": "ui"
     },
     {
       "name": "useIsDroppingFiles",
@@ -276,6 +276,11 @@
       "category": "events"
     },
     {
+      "name": "useOnline",
+      "description": "Online status hook for React.",
+      "category": "navigator"
+    },
+    {
       "name": "useOnLongHover",
       "description": "Fires a callback when an element is hovered for a while",
       "category": "events"
@@ -294,11 +299,6 @@
       "name": "useOnWindowScroll",
       "description": "A React hook for adding an event listener for window scroll",
       "category": "events"
-    },
-    {
-      "name": "useOnline",
-      "description": "Online status hook for React.",
-      "category": "navigator"
     },
     {
       "name": "useOrientation",
@@ -390,20 +390,21 @@
       "description": "A React hook that manages state in the form of a stack",
       "category": "state"
     },
+
     {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "misc"
     },
     {
-      "name": "useTimeTravelState",
-      "description": "A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.",
-      "category": "state"
-    },
-    {
       "name": "useTimeoutWhen",
       "description": "Takes a callback and fires it when a condition is true",
       "category": "misc"
+    },
+    {
+      "name": "useTimeTravelState",
+      "description": "A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.",
+      "category": "state"
     },
     {
       "name": "useToggle",
