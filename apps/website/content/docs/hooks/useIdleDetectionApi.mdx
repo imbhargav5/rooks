@@ -6,14 +6,198 @@ sidebar_label: useIdleDetectionApi
 
 ## About
 
-Hook to detect when user is idle using Idle Detection API with polyfill
+Hook to detect when user is idle using the native Idle Detection API with polyfill fallback. This hook provides comprehensive idle detection capabilities including user activity state, screen lock state, and permission management.
+<br/>
 
 ## Examples
 
-```tsx
-import {useIdleDetectionApi} from "rooks"
+### Basic idle detection
+
+```jsx
+import { useIdleDetectionApi } from "rooks";
+
 export default function App() {
-  useIdleDetectionApi();
-  return null
+  const { isIdle, userState, screenState, isSupported, start, stop } = useIdleDetectionApi({
+    threshold: 60000, // 60 seconds
+    autoStart: true,
+    requestPermission: true
+  });
+
+  return (
+    <div>
+      <h3>Idle Detection Status</h3>
+      <p>API Supported: {isSupported ? "Yes" : "No"}</p>
+      <p>User State: <strong>{userState}</strong></p>
+      <p>Screen State: <strong>{screenState}</strong></p>
+      <p>Is Idle: <strong>{isIdle ? "Yes" : "No"}</strong></p>
+      
+      <button onClick={start}>Start Detection</button>
+      <button onClick={stop}>Stop Detection</button>
+    </div>
+  );
 }
 ```
+
+### With state change callbacks
+
+```jsx
+import { useIdleDetectionApi } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [lastChange, setLastChange] = useState(null);
+  const [errors, setErrors] = useState([]);
+
+  const { isIdle, userState, screenState, isPermissionGranted } = useIdleDetectionApi({
+    threshold: 120000, // 2 minutes
+    autoStart: true,
+    requestPermission: true,
+    onIdleChange: (state) => {
+      setLastChange({
+        timestamp: new Date().toLocaleTimeString(),
+        ...state
+      });
+    },
+    onError: (error) => {
+      setErrors(prev => [...prev, error.message]);
+    }
+  });
+
+  return (
+    <div>
+      <h3>Idle Detection with Callbacks</h3>
+      <p>Current State: {isIdle ? "Idle" : "Active"}</p>
+      <p>User State: {userState}</p>
+      <p>Screen State: {screenState}</p>
+      <p>Permission Granted: {isPermissionGranted ? "Yes" : "No"}</p>
+      
+      {lastChange && (
+        <div>
+          <h4>Last Change:</h4>
+          <p>Time: {lastChange.timestamp}</p>
+          <p>Was Idle: {lastChange.isIdle ? "Yes" : "No"}</p>
+          <p>User State: {lastChange.userState}</p>
+          <p>Screen State: {lastChange.screenState}</p>
+        </div>
+      )}
+      
+      {errors.length > 0 && (
+        <div>
+          <h4>Errors:</h4>
+          {errors.map((error, index) => (
+            <p key={index} style={{ color: "red" }}>{error}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Manual control with custom threshold
+
+```jsx
+import { useIdleDetectionApi } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [customThreshold, setCustomThreshold] = useState(60000);
+  const [isStarted, setIsStarted] = useState(false);
+
+  const { 
+    isIdle, 
+    userState, 
+    screenState, 
+    isSupported, 
+    isPermissionGranted, 
+    start, 
+    stop 
+  } = useIdleDetectionApi({
+    threshold: customThreshold,
+    autoStart: false, // Manual control
+    requestPermission: true
+  });
+
+  const handleStart = async () => {
+    await start();
+    setIsStarted(true);
+  };
+
+  const handleStop = () => {
+    stop();
+    setIsStarted(false);
+  };
+
+  const handleThresholdChange = (e) => {
+    setCustomThreshold(parseInt(e.target.value) * 1000);
+  };
+
+  return (
+    <div>
+      <h3>Manual Idle Detection Control</h3>
+      
+      <div>
+        <label>
+          Threshold (seconds): 
+          <input 
+            type="number" 
+            min="60" 
+            value={customThreshold / 1000} 
+            onChange={handleThresholdChange}
+            disabled={isStarted}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <button onClick={handleStart} disabled={isStarted || !isSupported}>
+          Start Detection
+        </button>
+        <button onClick={handleStop} disabled={!isStarted}>
+          Stop Detection
+        </button>
+      </div>
+      
+      <div>
+        <h4>Status:</h4>
+        <p>API Supported: {isSupported ? "Yes" : "No"}</p>
+        <p>Permission Granted: {isPermissionGranted ? "Yes" : "No"}</p>
+        <p>Detection Active: {isStarted ? "Yes" : "No"}</p>
+        <p>Current State: {isIdle ? "Idle" : "Active"}</p>
+        <p>User State: {userState}</p>
+        <p>Screen State: {screenState}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type   | Description                                    | Default value |
+| -------- | ------ | ---------------------------------------------- | ------------- |
+| options  | object | Configuration options for idle detection      | \{\}          |
+
+### Options
+
+| Option key        | Type     | Description                                                                                                                                                | Default value          |
+| ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| threshold         | number   | Minimum time in milliseconds before user is considered idle. Must be at least 60000ms (60 seconds) per W3C specification                                | 60000                  |
+| autoStart         | boolean  | Whether to automatically start idle detection when the hook mounts                                                                                         | false                  |
+| requestPermission | boolean  | Whether to automatically request permission for the Idle Detection API (required for native API usage)                                                    | false                  |
+| onIdleChange      | function | Callback function called when idle state changes. Receives object with \{isIdle, userState, screenState\}                                                | <mark>undefined</mark> |
+| onError           | function | Callback function called when an error occurs during idle detection setup or operation. Receives Error object                                             | <mark>undefined</mark> |
+
+### Return value
+
+| Return value         | Type    | Description                                                                                           |
+| -------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| isIdle               | boolean | Whether the user is currently idle                                                                    |
+| userState            | string  | Current user activity state: "active" or "idle"                                                      |
+| screenState          | string  | Current screen state: "locked" or "unlocked"                                                         |
+| isSupported          | boolean | Whether the native Idle Detection API is supported in the current browser                            |
+| isPermissionGranted  | boolean | Whether permission has been granted for the Idle Detection API                                       |
+| start                | function | Function to manually start idle detection. Returns a Promise that resolves when detection starts     |
+| stop                 | function | Function to manually stop idle detection and reset states                                            |
+
+---
