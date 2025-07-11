@@ -116,6 +116,23 @@ describe("usePictureInPictureApi", () => {
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isSupported).toBe(false);
     });
+
+    it("should reactively update support when video element properties change", () => {
+      const { result, rerender } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      
+      // Initially supported
+      expect(result.current.isSupported).toBe(true);
+      
+      // Change video element property
+      act(() => {
+        mockVideoElement.disablePictureInPicture = true;
+      });
+      
+      rerender();
+      
+      // Should now be unsupported
+      expect(result.current.isSupported).toBe(false);
+    });
   });
 
   describe("Enter PiP Functionality", () => {
@@ -127,8 +144,39 @@ describe("usePictureInPictureApi", () => {
       });
 
       expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
-      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
       expect(result.current.error).toBe(null);
+      
+      // pipWindow should be set via event, not directly from the promise
+      // (following best practice to wait for browser event)
+      expect(result.current.pipWindow).toBe(null);
+    });
+
+    it("should set pipWindow via enterpictureinpicture event (best practice)", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      // Enter PiP mode
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      // pipWindow should initially be null
+      expect(result.current.pipWindow).toBe(null);
+
+      // Simulate the enterpictureinpicture event
+      const enterEvent = {
+        type: "enterpictureinpicture",
+        pictureInPictureWindow: mockPictureInPictureWindow,
+      } as PictureInPictureEvent;
+
+      act(() => {
+        const enterHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "enterpictureinpicture"
+        )[1];
+        enterHandler(enterEvent);
+      });
+
+      // Now pipWindow should be set
+      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
     });
 
     it("should handle errors when entering PiP", async () => {
@@ -205,6 +253,54 @@ describe("usePictureInPictureApi", () => {
 
       expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
       expect(result.current.error).toBe(null);
+      
+      // pipWindow should be cleared via event, not directly
+      // (following best practice to wait for browser event)
+    });
+
+    it("should clear pipWindow via leavepictureinpicture event (best practice)", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      // First set pipWindow via enter event
+      const enterEvent = {
+        type: "enterpictureinpicture",
+        pictureInPictureWindow: mockPictureInPictureWindow,
+      } as PictureInPictureEvent;
+
+      act(() => {
+        const enterHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "enterpictureinpicture"
+        )[1];
+        enterHandler(enterEvent);
+      });
+
+      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
+
+      // Mock that element is in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+
+      // Exit PiP mode
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      // pipWindow should still be set (not cleared directly)
+      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
+
+      // Now simulate the leavepictureinpicture event
+      const leaveEvent = {
+        type: "leavepictureinpicture",
+      } as Event;
+
+      act(() => {
+        const leaveHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "leavepictureinpicture"
+        )[1];
+        leaveHandler(leaveEvent);
+      });
+
+      // Now pipWindow should be cleared
+      expect(result.current.pipWindow).toBe(null);
     });
 
     it("should handle errors when exiting PiP", async () => {
@@ -444,6 +540,99 @@ describe("usePictureInPictureApi", () => {
 
       // Error should persist
       expect(result.current.error).toBe(testError);
+    });
+  });
+
+  describe("Video Element Changes", () => {
+    it("should handle video element changing during hook lifetime", () => {
+      const newVideoElement = {
+        requestPictureInPicture: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        disablePictureInPicture: false,
+      } as unknown as HTMLVideoElement;
+
+      const mutableVideoRef = {
+        current: mockVideoElement,
+      } as RefObject<HTMLVideoElement>;
+
+      const { result, rerender } = renderHook(() => usePictureInPictureApi(mutableVideoRef));
+
+      // Initially uses first video element
+      expect(result.current.isSupported).toBe(true);
+
+      // Change video element
+      act(() => {
+        mutableVideoRef.current = newVideoElement;
+      });
+
+      rerender();
+
+      // Should work with new video element
+      expect(result.current.isSupported).toBe(true);
+    });
+
+    it("should clean up event listeners when video element changes", () => {
+      const newVideoElement = {
+        requestPictureInPicture: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        disablePictureInPicture: false,
+      } as unknown as HTMLVideoElement;
+
+      const mutableVideoRef = {
+        current: mockVideoElement,
+      } as RefObject<HTMLVideoElement>;
+
+      const { rerender } = renderHook(() => usePictureInPictureApi(mutableVideoRef));
+
+      // Change video element
+      act(() => {
+        mutableVideoRef.current = newVideoElement;
+      });
+
+      rerender();
+
+      // Should have cleaned up listeners from old element
+      expect(mockRemoveEventListener).toHaveBeenCalledWith(
+        "enterpictureinpicture",
+        expect.any(Function)
+      );
+      expect(mockRemoveEventListener).toHaveBeenCalledWith(
+        "leavepictureinpicture",
+        expect.any(Function)
+      );
+
+      // Should have added listeners to new element
+      expect(newVideoElement.addEventListener).toHaveBeenCalledWith(
+        "enterpictureinpicture",
+        expect.any(Function)
+      );
+      expect(newVideoElement.addEventListener).toHaveBeenCalledWith(
+        "leavepictureinpicture",
+        expect.any(Function)
+      );
+    });
+
+    it("should handle video element changing to null", () => {
+      const mutableVideoRef = {
+        current: mockVideoElement,
+      } as RefObject<HTMLVideoElement>;
+
+      const { result, rerender } = renderHook(() => usePictureInPictureApi(mutableVideoRef));
+
+      // Initially supported
+      expect(result.current.isSupported).toBe(true);
+
+      // Change to null
+      act(() => {
+        mutableVideoRef.current = null;
+      });
+
+      rerender();
+
+      // Should be unsupported
+      expect(result.current.isSupported).toBe(false);
     });
   });
 });
