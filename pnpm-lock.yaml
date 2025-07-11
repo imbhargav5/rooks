@@ -30,6 +30,12 @@ importers:
       '@types/inquirer':
         specifier: ^9.0.7
         version: 9.0.7
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.13.10
       all-contributors-cli:
         specifier: ^6.26.1
         version: 6.26.1
@@ -48,9 +54,27 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      mdast-util-from-markdown:
+        specifier: ^2.0.2
+        version: 2.0.2
+      mdast-zone:
+        specifier: ^6.1.0
+        version: 6.1.0
+      pkg-dir:
+        specifier: ^8.0.0
+        version: 8.0.0
       prettier:
         specifier: ^2.8.7
         version: 2.8.8
+      remark:
+        specifier: ^15.0.1
+        version: 15.0.1
+      remark-frontmatter:
+        specifier: ^5.0.0
+        version: 5.0.0
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.3
       turbo:
         specifier: ^2.5.4
         version: 2.5.4
@@ -12662,7 +12686,7 @@ snapshots:
 
   '@types/webpack@5.28.5(esbuild@0.25.1)(webpack-cli@6.0.1)':
     dependencies:
-      '@types/node': 18.19.80
+      '@types/node': 22.13.10
       tapable: 2.2.1
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@6.0.1)
     transitivePeerDependencies:
