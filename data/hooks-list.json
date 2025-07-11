@@ -441,6 +441,11 @@
       "category": "ui"
     },
     {
+      "name": "useWebLocksApi",
+      "description": "Hook for coordinating operations across tabs/workers with Web Locks API",
+      "category": "misc"
+    },
+    {
       "name": "useWhyDidYouUpdate",
       "description": "A hook that can track which value change caused a rerender",
       "category": "misc"

@@ -35,7 +35,7 @@
     "create:cli": "node scripts/create/cli.mjs",
     "new": "yarn run create",
     "prebuild": "rimraf dist",
-    "update-package-list-to-markdown": "node scripts/update-package-list-to-markdown/index.mjs"
+    "update-package-list-to-markdown": "tsx scripts/update-package-list-to-markdown/index.ts"
   },
   "husky": {
     "hooks": {
@@ -51,13 +51,21 @@
     "@manypkg/cli": "^0.23.0",
     "@manypkg/get-packages": "^2.2.2",
     "@types/inquirer": "^9.0.7",
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.0.0",
     "all-contributors-cli": "^6.26.1",
     "conventional-changelog-cli": "^5.0.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint-config-custom": "^0.0.0",
     "lint-staged": "^15.5.0",
     "lodash": "^4.17.21",
+    "mdast-util-from-markdown": "^2.0.2",
+    "mdast-zone": "^6.1.0",
+    "pkg-dir": "^8.0.0",
     "prettier": "^3.5.3",
+    "remark": "^15.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "tsx": "^4.19.2",
     "turbo": "^2.5.4",
     "typescript": "^5.8.2"
   },
