@@ -145,6 +145,12 @@
       "description": "Checks if a component is mounted or not at the time. Useful for async effects",
       "category": "state"
     },
+
+    {
+      "name": "useIdleDetectionApi",
+      "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
+      "category": "misc"
+    },
     {
       "name": "useInput",
       "description": "Input hook for React.",
@@ -390,7 +396,6 @@
       "description": "A React hook that manages state in the form of a stack",
       "category": "state"
     },
-
     {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",

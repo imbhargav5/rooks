@@ -184,7 +184,7 @@ Here are some ideas for new hooks that could be added to the collection:
 - **Misc:**
     - `useClipboard`: A hook for copying text to the clipboard.
     - `useCookie`: A hook for getting and setting cookies.
-    - `useIdle`: A hook for detecting when the user is idle.
+    - `useIdleDetectionApi`: A hook for detecting when the user is idle using Idle Detection API with polyfill.
     - `useScript`: A hook for dynamically loading scripts.
     - `useFavicon`: A hook for changing the favicon.
 
