@@ -114,6 +114,7 @@ sidebar_label: Hooks List
 * [useMouse](https://rooks.vercel.app/docs/useMouse) - Mouse position hook for React.
 * [useMutationObserver](https://rooks.vercel.app/docs/useMutationObserver) - Mutation Observer hook for React.
 * [useMutationObserverRef](https://rooks.vercel.app/docs/useMutationObserverRef) - A hook that tracks mutations of an element. It returns a callbackRef.
+* [usePictureInPictureApi](https://rooks.vercel.app/docs/usePictureInPictureApi) - Hook for managing Picture-in-Picture video functionality
 * [useRaf](https://rooks.vercel.app/docs/useRaf) - A continuously running requestAnimationFrame hook for React
 * [useResizeObserverRef](https://rooks.vercel.app/docs/useResizeObserverRef) - Resize Observer hook for React.
 * [useVideo](https://rooks.vercel.app/docs/useVideo) - Video hook for react
