@@ -92,6 +92,7 @@ export { useUndoState } from "@/hooks/useUndoState";
 export { useUndoRedoState } from "@/hooks/useUndoRedoState";
 export { useVibrate } from "@/hooks/useVibrate";
 export { useVideo } from "@/hooks/useVideo";
+export { useWebLocksApi } from "@/hooks/useWebLocksApi";
 export { useWhyDidYouUpdate } from "@/hooks/useWhyDidYouUpdate";
 export { useWillUnmount } from "@/hooks/useWillUnmount";
 export { useWindowEventListener } from "@/hooks/useWindowEventListener";

@@ -145,7 +145,6 @@
       "description": "Checks if a component is mounted or not at the time. Useful for async effects",
       "category": "state"
     },
-
     {
       "name": "useIdleDetectionApi",
       "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
@@ -435,6 +434,11 @@
       "name": "useVideo",
       "description": "Video hook for react",
       "category": "ui"
+    },
+    {
+      "name": "useWebLocksApi",
+      "description": "Hook for coordinating operations across tabs/workers with Web Locks API",
+      "category": "misc"
     },
     {
       "name": "useWhyDidYouUpdate",
