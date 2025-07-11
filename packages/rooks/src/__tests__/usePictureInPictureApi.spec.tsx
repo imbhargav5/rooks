@@ -35,28 +35,33 @@ const mockVideoRefNull = {
   current: null,
 } as RefObject<HTMLVideoElement>;
 
-// Mock document
-const mockDocument = {
-  pictureInPictureEnabled: true,
-  pictureInPictureElement: null,
-  exitPictureInPicture: mockExitPictureInPicture,
-};
+// Mock document (definitions moved to Object.defineProperty below)
 
-// Override global document
-Object.defineProperty(window, 'document', {
-  value: mockDocument,
+// Override global document properties
+Object.defineProperty(document, 'pictureInPictureEnabled', {
+  value: true,
   writable: true,
 });
 
-describe("usePictureInPictureApi", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-    mockDocument.pictureInPictureElement = null;
-    mockDocument.pictureInPictureEnabled = true;
-    mockVideoElement.disablePictureInPicture = false;
-    mockRequestPictureInPicture.mockResolvedValue(mockPictureInPictureWindow);
-    mockExitPictureInPicture.mockResolvedValue(undefined);
-  });
+Object.defineProperty(document, 'pictureInPictureElement', {
+  value: null,
+  writable: true,
+});
+
+Object.defineProperty(document, 'exitPictureInPicture', {
+  value: mockExitPictureInPicture,
+  writable: true,
+});
+
+  describe("usePictureInPictureApi", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      (document as any).pictureInPictureElement = null;
+      (document as any).pictureInPictureEnabled = true;
+      mockVideoElement.disablePictureInPicture = false;
+      mockRequestPictureInPicture.mockResolvedValue(mockPictureInPictureWindow);
+      mockExitPictureInPicture.mockResolvedValue(undefined);
+    });
 
   describe("Hook Definition", () => {
     it("should be defined", () => {
@@ -85,7 +90,7 @@ describe("usePictureInPictureApi", () => {
     });
 
     it("should detect no support when pictureInPictureEnabled is false", () => {
-      mockDocument.pictureInPictureEnabled = false;
+      (document as any).pictureInPictureEnabled = false;
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isSupported).toBe(false);
     });
@@ -205,7 +210,7 @@ describe("usePictureInPictureApi", () => {
     });
 
     it("should not enter PiP when not supported", async () => {
-      mockDocument.pictureInPictureEnabled = false;
+      (document as any).pictureInPictureEnabled = false;
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
       await act(async () => {
@@ -245,7 +250,7 @@ describe("usePictureInPictureApi", () => {
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
       // Mock that element is in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
 
       await act(async () => {
         await result.current.exitPiP();
@@ -277,7 +282,7 @@ describe("usePictureInPictureApi", () => {
       expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
 
       // Mock that element is in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
 
       // Exit PiP mode
       await act(async () => {
@@ -310,7 +315,7 @@ describe("usePictureInPictureApi", () => {
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
       // Mock that element is in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
 
       await act(async () => {
         await result.current.exitPiP();
@@ -320,7 +325,7 @@ describe("usePictureInPictureApi", () => {
     });
 
     it("should not exit PiP when no element is in PiP mode", async () => {
-      mockDocument.pictureInPictureElement = null;
+      (document as any).pictureInPictureElement = null;
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
       await act(async () => {
@@ -338,7 +343,7 @@ describe("usePictureInPictureApi", () => {
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
       // Mock that element is in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
 
       // First attempt with error
       await act(async () => {
@@ -372,7 +377,7 @@ describe("usePictureInPictureApi", () => {
 
     it("should toggle from active to inactive (exit PiP)", async () => {
       // Mock that element is already in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
 
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
@@ -401,14 +406,14 @@ describe("usePictureInPictureApi", () => {
   describe("PiP State Detection", () => {
     it("should detect when current video is in PiP mode", () => {
       // Mock that this video is in PiP mode
-      mockDocument.pictureInPictureElement = mockVideoElement;
+      (document as any).pictureInPictureElement = mockVideoElement;
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isPiPActive).toBe(true);
     });
 
     it("should detect when current video is not in PiP mode", () => {
       // Mock that no video is in PiP mode
-      mockDocument.pictureInPictureElement = null;
+      (document as any).pictureInPictureElement = null;
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isPiPActive).toBe(false);
     });
@@ -416,7 +421,7 @@ describe("usePictureInPictureApi", () => {
     it("should detect when a different video is in PiP mode", () => {
       // Mock that a different video is in PiP mode
       const differentVideoElement = document.createElement('video');
-      mockDocument.pictureInPictureElement = differentVideoElement;
+      (document as any).pictureInPictureElement = differentVideoElement;
       
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isPiPActive).toBe(false);
