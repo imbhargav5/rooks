@@ -138,13 +138,8 @@ class PackageListUpdater {
     const title = category === "ui" ? "UI" : lodash.startCase(category);
     
     return {
-      type: "strong",
-      children: [
-        {
-          type: "text",
-          value: `<h3 align="center">${emoji} ${title}</h3>`,
-        },
-      ],
+      type: "html",
+      value: `<h3 align="center">${emoji} ${title}</h3>`,
     };
   }
 
