@@ -79,6 +79,7 @@ export { useResizeObserverRef } from "@/hooks/useResizeObserverRef";
 export { useRenderCount } from "@/hooks/useRenderCount";
 export { useRefElement } from "@/hooks/useRefElement";
 export { useSafeSetState } from "@/hooks/useSafeSetState";
+export { useScreenDetailsApi } from "@/hooks/useScreenDetailsApi";
 export { useSelect } from "@/hooks/useSelect";
 export { useSelectableList } from "@/hooks/useSelectableList";
 export { useSessionstorageState } from "@/hooks/useSessionstorageState";

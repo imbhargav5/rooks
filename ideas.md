@@ -364,9 +364,9 @@ This document contains ideas for new hooks to add to the rooks collection, focus
   ```
   *Hook Benefit*: Uses `useState` for capture state, `useEffect` for stream lifecycle, `useRef` for stream reference, providing reactive screen capture management.
 
-- **useScreenDetails** - Hook for multi-screen information and management
+- **useScreenDetailsApi** - Hook for multi-screen information and management
   ```tsx
-  const { screens, currentScreen, onChange } = useScreenDetails();
+  const { screens, currentScreen, onChange } = useScreenDetailsApi();
   const externalScreen = screens.find(s => !s.isPrimary);
   ```
   *Hook Benefit*: Uses `useState` for screen state, `useEffect` for screen change detection, `useMemo` for screen calculations, enabling reactive multi-screen management.
