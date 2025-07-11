@@ -1,0 +1,358 @@
+---
+id: useScreenDetails
+title: useScreenDetails
+sidebar_label: useScreenDetails
+---
+
+## About
+
+Hook for multi-screen information and management using the Screen Details API. This hook provides access to information about all screens connected to the user's device and allows for reactive updates when screens are added, removed, or changed.
+
+**Note**: This hook requires the Screen Details API which is experimental and only available in Chromium-based browsers with appropriate permissions.
+
+<br/>
+
+## Examples
+
+### Basic Usage
+
+```jsx
+import React from "react";
+import { useScreenDetails } from "rooks";
+
+export default function ScreenInfo() {
+  const { 
+    screens, 
+    currentScreen, 
+    isSupported, 
+    hasPermission, 
+    requestPermission, 
+    error 
+  } = useScreenDetails();
+
+  if (!isSupported) {
+    return <div>Screen Details API is not supported in this browser</div>;
+  }
+
+  if (!hasPermission) {
+    return (
+      <div>
+        <p>Permission required to access screen details</p>
+        <button onClick={requestPermission}>Request Permission</button>
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h2>Screen Information</h2>
+      <p>Total screens: {screens.length}</p>
+      
+      <h3>Current Screen</h3>
+      {currentScreen && (
+        <div>
+          <p>Label: {currentScreen.label}</p>
+          <p>Resolution: {currentScreen.width}x{currentScreen.height}</p>
+          <p>Available area: {currentScreen.availWidth}x{currentScreen.availHeight}</p>
+          <p>Primary: {currentScreen.isPrimary ? 'Yes' : 'No'}</p>
+          <p>Internal: {currentScreen.isInternal ? 'Yes' : 'No'}</p>
+        </div>
+      )}
+      
+      <h3>All Screens</h3>
+      {screens.map((screen, index) => (
+        <div key={index} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px 0' }}>
+          <h4>{screen.label}</h4>
+          <p>Resolution: {screen.width}x{screen.height}</p>
+          <p>Position: ({screen.left}, {screen.top})</p>
+          <p>Available: {screen.availWidth}x{screen.availHeight}</p>
+          <p>Primary: {screen.isPrimary ? 'Yes' : 'No'}</p>
+          <p>Internal: {screen.isInternal ? 'Yes' : 'No'}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Multi-Screen Window Management
+
+```jsx
+import React, { useState } from "react";
+import { useScreenDetails } from "rooks";
+
+export default function MultiScreenManager() {
+  const { 
+    screens, 
+    primaryScreen, 
+    externalScreens, 
+    hasPermission, 
+    requestPermission, 
+    refresh 
+  } = useScreenDetails({ requestOnMount: true });
+
+  const [openWindows, setOpenWindows] = useState([]);
+
+  const openWindowOnScreen = (screen) => {
+    const windowFeatures = `
+      left=${screen.availLeft},
+      top=${screen.availTop},
+      width=${screen.availWidth},
+      height=${screen.availHeight}
+    `;
+    
+    const newWindow = window.open(
+      '/demo-page',
+      `_blank_${screen.label}`,
+      windowFeatures
+    );
+    
+    if (newWindow) {
+      setOpenWindows(prev => [...prev, { window: newWindow, screen }]);
+    }
+  };
+
+  const closeAllWindows = () => {
+    openWindows.forEach(({ window }) => {
+      if (!window.closed) {
+        window.close();
+      }
+    });
+    setOpenWindows([]);
+  };
+
+  if (!hasPermission) {
+    return (
+      <div>
+        <h2>Multi-Screen Window Manager</h2>
+        <button onClick={requestPermission}>Enable Multi-Screen Support</button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h2>Multi-Screen Window Manager</h2>
+      <div style={{ marginBottom: '20px' }}>
+        <button onClick={refresh}>Refresh Screen Info</button>
+        <button onClick={closeAllWindows}>Close All Windows</button>
+      </div>
+      
+      <h3>Primary Screen</h3>
+      {primaryScreen && (
+        <div style={{ padding: '10px', backgroundColor: '#e8f5e8' }}>
+          <p><strong>{primaryScreen.label}</strong></p>
+          <p>Resolution: {primaryScreen.width}x{primaryScreen.height}</p>
+          <button onClick={() => openWindowOnScreen(primaryScreen)}>
+            Open Window on Primary Screen
+          </button>
+        </div>
+      )}
+      
+      <h3>External Screens ({externalScreens.length})</h3>
+      {externalScreens.map((screen, index) => (
+        <div key={index} style={{ 
+          padding: '10px', 
+          backgroundColor: '#f0f0f0', 
+          margin: '10px 0' 
+        }}>
+          <p><strong>{screen.label}</strong></p>
+          <p>Resolution: {screen.width}x{screen.height}</p>
+          <p>Position: ({screen.left}, {screen.top})</p>
+          <button onClick={() => openWindowOnScreen(screen)}>
+            Open Window on {screen.label}
+          </button>
+        </div>
+      ))}
+      
+      <div style={{ marginTop: '20px' }}>
+        <p>Open windows: {openWindows.length}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Screen Layout Visualization
+
+```jsx
+import React from "react";
+import { useScreenDetails } from "rooks";
+
+export default function ScreenLayout() {
+  const { 
+    screens, 
+    currentScreen, 
+    hasPermission, 
+    requestPermission, 
+    isLoading 
+  } = useScreenDetails();
+
+  if (!hasPermission) {
+    return (
+      <div>
+        <h2>Screen Layout Visualizer</h2>
+        <button onClick={requestPermission}>
+          {isLoading ? 'Loading...' : 'Request Permission'}
+        </button>
+      </div>
+    );
+  }
+
+  // Calculate the bounding box of all screens
+  const bounds = screens.reduce((acc, screen) => ({
+    minX: Math.min(acc.minX, screen.left),
+    minY: Math.min(acc.minY, screen.top),
+    maxX: Math.max(acc.maxX, screen.left + screen.width),
+    maxY: Math.max(acc.maxY, screen.top + screen.height),
+  }), { minX: 0, minY: 0, maxX: 0, maxY: 0 });
+
+  const totalWidth = bounds.maxX - bounds.minX;
+  const totalHeight = bounds.maxY - bounds.minY;
+  const scale = Math.min(800 / totalWidth, 600 / totalHeight, 1);
+
+  return (
+    <div>
+      <h2>Screen Layout Visualizer</h2>
+      <div style={{ 
+        position: 'relative', 
+        width: totalWidth * scale, 
+        height: totalHeight * scale,
+        border: '2px solid #333',
+        margin: '20px 0'
+      }}>
+        {screens.map((screen, index) => (
+          <div
+            key={index}
+            style={{
+              position: 'absolute',
+              left: (screen.left - bounds.minX) * scale,
+              top: (screen.top - bounds.minY) * scale,
+              width: screen.width * scale,
+              height: screen.height * scale,
+              border: screen.isPrimary ? '3px solid #007bff' : '2px solid #666',
+              backgroundColor: screen === currentScreen ? '#e8f5e8' : '#f8f9fa',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: '12px',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{ fontWeight: 'bold' }}>
+              {screen.label}
+            </div>
+            <div>
+              {screen.width}×{screen.height}
+            </div>
+            <div>
+              {screen.isPrimary ? 'Primary' : 'Secondary'}
+            </div>
+            {screen === currentScreen && (
+              <div style={{ color: '#007bff', fontWeight: 'bold' }}>
+                Current
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      <div style={{ marginTop: '20px' }}>
+        <h3>Legend</h3>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ 
+              width: '20px', 
+              height: '20px', 
+              border: '3px solid #007bff',
+              backgroundColor: '#f8f9fa',
+              marginRight: '8px'
+            }}></div>
+            Primary Screen
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ 
+              width: '20px', 
+              height: '20px', 
+              border: '2px solid #666',
+              backgroundColor: '#f8f9fa',
+              marginRight: '8px'
+            }}></div>
+            Secondary Screen
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ 
+              width: '20px', 
+              height: '20px', 
+              border: '2px solid #666',
+              backgroundColor: '#e8f5e8',
+              marginRight: '8px'
+            }}></div>
+            Current Screen
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Options
+
+| Option        | Type    | Default | Description                                      |
+| ------------- | ------- | ------- | ------------------------------------------------ |
+| requestOnMount| boolean | false   | Whether to automatically request permission on mount |
+| autoRefresh   | boolean | true    | Whether to automatically refresh screen details on events |
+
+### Return Value
+
+| Property      | Type                | Description                              |
+| ------------- | ------------------- | ---------------------------------------- |
+| screens       | ScreenDetailed[]    | Array of all available screens           |
+| currentScreen | ScreenDetailed\|null | Current screen where the browser window is displayed |
+| primaryScreen | ScreenDetailed\|null | Primary screen (the main display)       |
+| externalScreens | ScreenDetailed[]  | External screens (non-primary screens)  |
+| isSupported   | boolean             | Whether the Screen Details API is supported |
+| isLoading     | boolean             | Whether the hook is currently loading screen details |
+| hasPermission | boolean             | Whether permission has been granted      |
+| error         | string\|null        | Error message if any operation failed    |
+| requestPermission | () => Promise\<void\> | Request permission to access screen details |
+| refresh       | () => Promise\<void\> | Manually refresh screen details          |
+
+### ScreenDetailed Object
+
+| Property       | Type    | Description                                    |
+| -------------- | ------- | ---------------------------------------------- |
+| availLeft      | number  | X-coordinate of available screen area          |
+| availTop       | number  | Y-coordinate of available screen area          |
+| availWidth     | number  | Width of available screen area                 |
+| availHeight    | number  | Height of available screen area                |
+| left           | number  | X-coordinate of total screen area              |
+| top            | number  | Y-coordinate of total screen area              |
+| width          | number  | Width of total screen area                     |
+| height         | number  | Height of total screen area                    |
+| colorDepth     | number  | Color depth of the screen                      |
+| pixelDepth     | number  | Pixel depth of the screen                      |
+| devicePixelRatio | number | Device pixel ratio                           |
+| isPrimary      | boolean | Whether this is the primary screen             |
+| isInternal     | boolean | Whether this is an internal screen             |
+| label          | string  | Human-readable label for the screen            |
+
+## Browser Support
+
+The Screen Details API is experimental and currently only supported in:
+- Chrome/Chromium-based browsers (version 100+)
+- Requires HTTPS context
+- Requires user permission (window-management permission)
+
+## Notes
+
+- The hook will automatically detect if the API is supported and provide appropriate fallbacks
+- Permission must be requested and granted before accessing screen details
+- The hook automatically sets up event listeners for screen changes when permission is granted
+- Screen details are automatically refreshed when screens are added, removed, or changed (unless `autoRefresh` is disabled)
+- All screen coordinates are in CSS pixels relative to the multi-screen coordinate system
+
+---

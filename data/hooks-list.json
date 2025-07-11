@@ -145,7 +145,6 @@
       "description": "Checks if a component is mounted or not at the time. Useful for async effects",
       "category": "state"
     },
-
     {
       "name": "useIdleDetectionApi",
       "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
@@ -365,6 +364,11 @@
       "name": "useSafeSetState",
       "description": "set state but ignores if component has already unmounted",
       "category": "state"
+    },
+    {
+      "name": "useScreenDetails",
+      "description": "Hook for multi-screen information and management using Screen Details API",
+      "category": "navigator"
     },
     {
       "name": "useSelect",
