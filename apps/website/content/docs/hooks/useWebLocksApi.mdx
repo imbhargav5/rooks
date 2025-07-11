@@ -1,0 +1,325 @@
+---
+id: useWebLocksApi
+title: useWebLocksApi
+sidebar_label: useWebLocksApi
+---
+
+## About
+
+A React hook for managing Web Locks API functionality that allows coordinating operations across tabs/workers by acquiring locks on named resources.
+
+The Web Locks API provides a way to coordinate work across multiple tabs or workers by allowing them to acquire locks on named resources. This is useful for ensuring that only one tab performs certain operations at a time, such as data synchronization or critical operations.
+
+## Installation
+
+```bash
+npm install rooks
+```
+
+## Basic Usage
+
+```jsx
+import React, { useState } from "react";
+import { useWebLocksApi } from "rooks";
+
+function TabCoordinator() {
+  const [isWorking, setIsWorking] = useState(false);
+  const [result, setResult] = useState(null);
+  
+  const { acquire, isSupported, isLocked, waitingCount, error } = useWebLocksApi("critical-task");
+
+  const performCriticalTask = async () => {
+    if (!isSupported) {
+      alert("Web Locks API is not supported in this browser");
+      return;
+    }
+
+    setIsWorking(true);
+    try {
+      const taskResult = await acquire(async () => {
+        // Only one tab can execute this code at a time
+        await new Promise(resolve => setTimeout(resolve, 3000)); // Simulate work
+        return "Task completed successfully!";
+      });
+      setResult(taskResult);
+    } catch (err) {
+      console.error("Task failed:", err);
+      setResult("Task failed");
+    } finally {
+      setIsWorking(false);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Tab Coordinator</h2>
+      <p>Web Locks API supported: {isSupported ? "Yes" : "No"}</p>
+      <p>Resource locked: {isLocked ? "Yes" : "No"}</p>
+      <p>Waiting count: {waitingCount}</p>
+      {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
+      
+      <button onClick={performCriticalTask} disabled={isWorking}>
+        {isWorking ? "Working..." : "Start Critical Task"}
+      </button>
+      
+      {result && <p>Result: {result}</p>}
+    </div>
+  );
+}
+```
+
+## Lock Modes
+
+The hook supports both exclusive and shared locks:
+
+```jsx
+import React from "react";
+import { useWebLocksApi } from "rooks";
+
+function LockModes() {
+  const exclusiveLock = useWebLocksApi("exclusive-resource");
+  const sharedLock = useWebLocksApi("shared-resource");
+
+  const performExclusiveOperation = async () => {
+    // Only one tab can hold this lock at a time
+    await exclusiveLock.acquire(async () => {
+      console.log("Exclusive operation running");
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }, { mode: "exclusive" });
+  };
+
+  const performSharedOperation = async () => {
+    // Multiple tabs can hold this lock simultaneously
+    await sharedLock.acquire(async () => {
+      console.log("Shared operation running");
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }, { mode: "shared" });
+  };
+
+  return (
+    <div>
+      <h2>Lock Modes Example</h2>
+      <button onClick={performExclusiveOperation}>
+        Exclusive Operation
+      </button>
+      <button onClick={performSharedOperation}>
+        Shared Operation
+      </button>
+    </div>
+  );
+}
+```
+
+## Conditional Lock Acquisition
+
+Use the `ifAvailable` option to avoid waiting for locks:
+
+```jsx
+import React, { useState } from "react";
+import { useWebLocksApi } from "rooks";
+
+function ConditionalLocking() {
+  const [status, setStatus] = useState("idle");
+  const { acquire, isSupported } = useWebLocksApi("quick-task");
+
+  const tryQuickTask = async () => {
+    if (!isSupported) return;
+
+    setStatus("attempting");
+    try {
+      await acquire(async (lock) => {
+        if (!lock) {
+          setStatus("locked by another tab");
+          return;
+        }
+        
+        setStatus("working");
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setStatus("completed");
+      }, { ifAvailable: true });
+    } catch (err) {
+      setStatus("failed");
+    }
+  };
+
+  return (
+    <div>
+      <h2>Conditional Locking</h2>
+      <p>Status: {status}</p>
+      <button onClick={tryQuickTask}>Try Quick Task</button>
+    </div>
+  );
+}
+```
+
+## Periodic Lock State Monitoring
+
+Enable periodic checking to monitor lock state changes:
+
+```jsx
+import React from "react";
+import { useWebLocksApi } from "rooks";
+
+function LockMonitor() {
+  const { isLocked, waitingCount, query } = useWebLocksApi("monitored-resource", {
+    periodicCheck: true,
+    checkInterval: 2000 // Check every 2 seconds
+  });
+
+  const manualQuery = async () => {
+    try {
+      const state = await query();
+      console.log("Lock state:", state);
+    } catch (err) {
+      console.error("Query failed:", err);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Lock Monitor</h2>
+      <p>Resource locked: {isLocked ? "Yes" : "No"}</p>
+      <p>Waiting count: {waitingCount}</p>
+      <button onClick={manualQuery}>Manual Query</button>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `resourceName` | `string` | **Required.** Name of the resource to manage locks for |
+| `options` | `UseWebLocksApiOptions` | Optional configuration object |
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `periodicCheck` | `boolean` | `false` | Enable periodic checking of lock state |
+| `checkInterval` | `number` | `1000` | Interval in milliseconds for periodic checks |
+
+### Return Value
+
+The hook returns an object with the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `isSupported` | `boolean` | Whether Web Locks API is supported |
+| `isLocked` | `boolean` | Whether the resource is currently locked |
+| `waitingCount` | `number` | Number of pending lock requests |
+| `error` | `Error \| null` | Current error state |
+| `resourceName` | `string` | The resource name being managed |
+| `acquire` | `function` | Function to acquire a lock |
+| `release` | `function` | Function to release current locks |
+| `query` | `function` | Function to query lock state |
+
+### Lock Options
+
+When calling `acquire()`, you can pass options:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `mode` | `"exclusive" \| "shared"` | `"exclusive"` | Lock mode |
+| `ifAvailable` | `boolean` | `false` | Only acquire if immediately available |
+| `steal` | `boolean` | `false` | Steal existing locks (use with caution) |
+| `signal` | `AbortSignal` | `undefined` | Signal to abort lock request |
+
+## Browser Support
+
+The Web Locks API is supported in modern browsers. The hook automatically detects support and provides graceful fallbacks.
+
+- **Chrome**: 69+
+- **Firefox**: 96+
+- **Safari**: 15.4+
+- **Edge**: 79+
+
+## Use Cases
+
+### Data Synchronization
+Ensure only one tab syncs data with a server:
+
+```jsx
+const { acquire } = useWebLocksApi("data-sync");
+
+const syncData = async () => {
+  await acquire(async () => {
+    // Only one tab performs sync
+    await uploadPendingChanges();
+    await downloadLatestData();
+  });
+};
+```
+
+### Leader Election
+Designate a primary tab for background tasks:
+
+```jsx
+const { acquire } = useWebLocksApi("leader-election");
+
+const becomeLeader = async () => {
+  await acquire(async () => {
+    // This tab is now the leader
+    startBackgroundTasks();
+    // Hold the lock indefinitely
+    await new Promise(() => {}); // Never resolves
+  });
+};
+```
+
+### Critical Sections
+Protect critical operations across tabs:
+
+```jsx
+const { acquire } = useWebLocksApi("critical-operation");
+
+const performCriticalOperation = async () => {
+  await acquire(async () => {
+    // Critical code that must not run concurrently
+    await updateSharedResource();
+  });
+};
+```
+
+## Important Notes
+
+- Always validate that the Web Locks API is supported before using
+- Use appropriate lock modes (`exclusive` vs `shared`) based on your use case
+- Be cautious with the `steal` option as it can lead to race conditions
+- Clean up properly to avoid deadlocks
+- The hook automatically handles cleanup on component unmount
+
+## Error Handling
+
+The hook provides comprehensive error handling:
+
+```jsx
+const { acquire, error } = useWebLocksApi("error-example");
+
+const handleTask = async () => {
+  try {
+    await acquire(async () => {
+      // Task that might fail
+      if (Math.random() > 0.5) {
+        throw new Error("Random failure");
+      }
+      return "Success";
+    });
+  } catch (err) {
+    console.error("Task failed:", err);
+    // Error is also available in the error state
+  }
+};
+
+// Monitor error state
+useEffect(() => {
+  if (error) {
+    console.log("Hook error:", error.message);
+  }
+}, [error]);
+```
+
+---
