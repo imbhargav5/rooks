@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import TestRenderer from "react-test-renderer";
-import { useScreenDetails } from "@/hooks/useScreenDetails";
+import { useScreenDetailsApi } from "@/hooks/useScreenDetailsApi";
 
 const { act } = TestRenderer;
 
@@ -85,7 +85,7 @@ Object.defineProperty(navigator, 'permissions', {
   configurable: true,
 });
 
-describe("useScreenDetails", () => {
+describe("useScreenDetailsApi", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     
@@ -114,12 +114,12 @@ describe("useScreenDetails", () => {
 
   it("should be defined", () => {
     expect.hasAssertions();
-    expect(useScreenDetails).toBeDefined();
+    expect(useScreenDetailsApi).toBeDefined();
   });
 
   it("should initialize with correct default values", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     expect(result.current.screens).toEqual([]);
     expect(result.current.currentScreen).toBeNull();
@@ -141,7 +141,7 @@ describe("useScreenDetails", () => {
       configurable: true,
     });
     
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
     expect(result.current.isSupported).toBe(true);
   });
 
@@ -156,7 +156,7 @@ describe("useScreenDetails", () => {
       configurable: true,
     });
     
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
     expect(result.current.isSupported).toBe(false);
     
     // Clean up and restore for next test
@@ -178,7 +178,7 @@ describe("useScreenDetails", () => {
       removeEventListener: jest.fn(),
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -198,7 +198,7 @@ describe("useScreenDetails", () => {
       removeEventListener: jest.fn(),
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -214,7 +214,7 @@ describe("useScreenDetails", () => {
     const error = new Error("Permission request failed");
     mockPermissionsQuery.mockRejectedValue(error);
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -234,7 +234,7 @@ describe("useScreenDetails", () => {
       removeEventListener: jest.fn(),
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -259,7 +259,7 @@ describe("useScreenDetails", () => {
       removeEventListener: jest.fn(),
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -279,7 +279,7 @@ describe("useScreenDetails", () => {
       }
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -337,7 +337,7 @@ describe("useScreenDetails", () => {
       }
     });
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -372,7 +372,7 @@ describe("useScreenDetails", () => {
   it("should manually refresh screen details", async () => {
     expect.hasAssertions();
     
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -401,7 +401,7 @@ describe("useScreenDetails", () => {
   it("should handle refresh error", async () => {
     expect.hasAssertions();
     
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -421,7 +421,7 @@ describe("useScreenDetails", () => {
   it("should cleanup event listeners on unmount", async () => {
     expect.hasAssertions();
     
-    const { result, unmount } = renderHook(() => useScreenDetails());
+    const { result, unmount } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -461,7 +461,7 @@ describe("useScreenDetails", () => {
     
     mockGetScreenDetails.mockReturnValue(screenDetailsPromise);
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     // Start permission request
     act(() => {
@@ -484,7 +484,7 @@ describe("useScreenDetails", () => {
   it("should provide computed properties for external screens", async () => {
     expect.hasAssertions();
     
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -506,7 +506,7 @@ describe("useScreenDetails", () => {
     
     mockGetScreenDetails.mockResolvedValue(singleScreenDetails);
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();
@@ -525,7 +525,7 @@ describe("useScreenDetails", () => {
       autoRefresh: false,
     };
 
-    const { result } = renderHook(() => useScreenDetails(options));
+    const { result } = renderHook(() => useScreenDetailsApi(options));
 
     // With requestOnMount false, should not have permission initially
     expect(result.current.hasPermission).toBe(false);
@@ -540,7 +540,7 @@ describe("useScreenDetails", () => {
     };
 
     await act(async () => {
-      renderHook(() => useScreenDetails(options));
+      renderHook(() => useScreenDetailsApi(options));
     });
 
     // Should have called permission query automatically
@@ -564,7 +564,7 @@ describe("useScreenDetails", () => {
 
     mockPermissionsQuery.mockResolvedValue(mockPermissionStatus);
 
-    const { result } = renderHook(() => useScreenDetails());
+    const { result } = renderHook(() => useScreenDetailsApi());
 
     await act(async () => {
       await result.current.requestPermission();

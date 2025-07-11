@@ -1,7 +1,7 @@
 ---
-id: useScreenDetails
-title: useScreenDetails
-sidebar_label: useScreenDetails
+id: useScreenDetailsApi
+title: useScreenDetailsApi
+sidebar_label: useScreenDetailsApi
 ---
 
 ## About
@@ -18,7 +18,7 @@ Hook for multi-screen information and management using the Screen Details API. T
 
 ```jsx
 import React from "react";
-import { useScreenDetails } from "rooks";
+import { useScreenDetailsApi } from "rooks";
 
 export default function ScreenInfo() {
   const { 
@@ -28,7 +28,7 @@ export default function ScreenInfo() {
     hasPermission, 
     requestPermission, 
     error 
-  } = useScreenDetails();
+  } = useScreenDetailsApi();
 
   if (!isSupported) {
     return <div>Screen Details API is not supported in this browser</div>;
@@ -80,7 +80,7 @@ export default function ScreenInfo() {
 
 ```jsx
 import React, { useState } from "react";
-import { useScreenDetails } from "rooks";
+import { useScreenDetailsApi } from "rooks";
 
 export default function MultiScreenManager() {
   const { 
@@ -90,7 +90,7 @@ export default function MultiScreenManager() {
     hasPermission, 
     requestPermission, 
     refresh 
-  } = useScreenDetails({ requestOnMount: true });
+  } = useScreenDetailsApi({ requestOnMount: true });
 
   const [openWindows, setOpenWindows] = useState([]);
 
@@ -178,7 +178,7 @@ export default function MultiScreenManager() {
 
 ```jsx
 import React from "react";
-import { useScreenDetails } from "rooks";
+import { useScreenDetailsApi } from "rooks";
 
 export default function ScreenLayout() {
   const { 
@@ -187,7 +187,7 @@ export default function ScreenLayout() {
     hasPermission, 
     requestPermission, 
     isLoading 
-  } = useScreenDetails();
+  } = useScreenDetailsApi();
 
   if (!hasPermission) {
     return (

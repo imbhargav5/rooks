@@ -366,7 +366,7 @@
       "category": "state"
     },
     {
-      "name": "useScreenDetails",
+      "name": "useScreenDetailsApi",
       "description": "Hook for multi-screen information and management using Screen Details API",
       "category": "navigator"
     },

@@ -27,7 +27,7 @@ interface ScreenDetails {
   removeEventListener: (event: string, handler: (event: Event) => void) => void;
 }
 
-interface UseScreenDetailsOptions {
+interface UseScreenDetailsApiOptions {
   /**
    * Whether to automatically request permission on mount
    * @default false
@@ -40,7 +40,7 @@ interface UseScreenDetailsOptions {
   autoRefresh?: boolean;
 }
 
-interface UseScreenDetailsReturn {
+interface UseScreenDetailsApiReturn {
   /** Array of all available screens */
   screens: ScreenDetailed[];
   /** Current screen where the browser window is displayed */
@@ -67,9 +67,9 @@ interface UseScreenDetailsReturn {
  * Hook for multi-screen information and management using Screen Details API
  * @param options Configuration options for the hook
  * @returns Object containing screen details and control functions
- * @see {@link https://rooks.vercel.app/docs/useScreenDetails}
+ * @see {@link https://rooks.vercel.app/docs/useScreenDetailsApi}
  */
-function useScreenDetails(options: UseScreenDetailsOptions = {}): UseScreenDetailsReturn {
+function useScreenDetailsApi(options: UseScreenDetailsApiOptions = {}): UseScreenDetailsApiReturn {
   const { requestOnMount = false, autoRefresh = true } = options;
   
   const [screens, setScreens] = useState<ScreenDetailed[]>([]);
@@ -246,10 +246,10 @@ function useScreenDetails(options: UseScreenDetailsOptions = {}): UseScreenDetai
   };
 }
 
-export { useScreenDetails };
+export { useScreenDetailsApi };
 export type { 
-  UseScreenDetailsOptions, 
-  UseScreenDetailsReturn, 
+  UseScreenDetailsApiOptions, 
+  UseScreenDetailsApiReturn, 
   ScreenDetailed, 
   ScreenDetails 
 };
