@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 
 /**
  * Web Locks API lock request options
@@ -101,8 +101,12 @@ function useWebLocksApi(
 
   const { periodicCheck = false, checkInterval = 1000 } = options;
 
-  // Check if Web Locks API is supported
-  const isSupported = typeof navigator !== "undefined" && "locks" in navigator;
+  // Check if Web Locks API is supported - check both existence and locks property
+  const isSupported = useMemo(() => {
+    return typeof navigator !== "undefined" && 
+           navigator.locks !== undefined && 
+           typeof navigator.locks.request === "function";
+  }, []);
 
   // State management
   const [isLocked, setIsLocked] = useState(false);
