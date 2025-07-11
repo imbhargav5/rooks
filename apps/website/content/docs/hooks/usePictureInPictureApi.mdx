@@ -1,0 +1,303 @@
+---
+id: usePictureInPictureApi
+title: usePictureInPictureApi
+sidebar_label: usePictureInPictureApi
+---
+
+## About
+
+Picture-in-Picture hook for React video elements. This hook provides a simple interface to control Picture-in-Picture functionality for video elements, including entering and exiting PiP mode, tracking PiP state, and handling errors.
+
+## Installation
+
+```bash
+npm install rooks
+```
+
+## Importing
+
+```javascript
+import { usePictureInPictureApi } from "rooks";
+```
+
+## Examples
+
+### Basic Usage
+
+```jsx
+import React, { useRef } from "react";
+import { usePictureInPictureApi } from "rooks";
+
+export default function VideoPlayer() {
+  const videoRef = useRef(null);
+  const {
+    isPiPActive,
+    isSupported,
+    error,
+    enterPiP,
+    exitPiP,
+    toggle,
+  } = usePictureInPictureApi(videoRef);
+
+  return (
+    <div>
+      <video
+        ref={videoRef}
+        src="/sample-video.mp4"
+        controls
+        width="640"
+        height="360"
+      />
+      <div>
+        <p>PiP Status: {isPiPActive ? "Active" : "Inactive"}</p>
+        <p>PiP Supported: {isSupported ? "Yes" : "No"}</p>
+        {error && <p>Error: {error.message}</p>}
+        
+        <button onClick={enterPiP} disabled={!isSupported || isPiPActive}>
+          Enter PiP
+        </button>
+        <button onClick={exitPiP} disabled={!isPiPActive}>
+          Exit PiP
+        </button>
+        <button onClick={toggle} disabled={!isSupported}>
+          Toggle PiP
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Advanced Usage with Custom Controls
+
+```jsx
+import React, { useRef, useState } from "react";
+import { usePictureInPictureApi } from "rooks";
+
+export default function AdvancedVideoPlayer() {
+  const videoRef = useRef(null);
+  const [videoSrc, setVideoSrc] = useState("/sample-video.mp4");
+  const {
+    isPiPActive,
+    isSupported,
+    error,
+    pipWindow,
+    enterPiP,
+    exitPiP,
+    toggle,
+  } = usePictureInPictureApi(videoRef);
+
+  const handleVideoChange = (event) => {
+    setVideoSrc(event.target.value);
+  };
+
+  const handleEnterPiP = async () => {
+    try {
+      await enterPiP();
+      console.log("Entered PiP mode successfully");
+    } catch (err) {
+      console.error("Failed to enter PiP mode:", err);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Advanced Video Player</h2>
+      
+      <select onChange={handleVideoChange} value={videoSrc}>
+        <option value="/sample-video.mp4">Sample Video 1</option>
+        <option value="/another-video.mp4">Sample Video 2</option>
+      </select>
+      
+      <video
+        ref={videoRef}
+        src={videoSrc}
+        controls
+        width="640"
+        height="360"
+        style={{ display: "block", margin: "20px 0" }}
+      />
+      
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button 
+          onClick={handleEnterPiP}
+          disabled={!isSupported || isPiPActive}
+          style={{ padding: "10px 20px" }}
+        >
+          📺 Enter Picture-in-Picture
+        </button>
+        
+        <button 
+          onClick={exitPiP}
+          disabled={!isPiPActive}
+          style={{ padding: "10px 20px" }}
+        >
+          ❌ Exit Picture-in-Picture
+        </button>
+        
+        <button 
+          onClick={toggle}
+          disabled={!isSupported}
+          style={{ padding: "10px 20px" }}
+        >
+          🔄 Toggle PiP
+        </button>
+      </div>
+      
+      <div style={{ marginTop: "20px", padding: "10px", backgroundColor: "#f5f5f5" }}>
+        <h3>Status Information</h3>
+        <ul>
+          <li>PiP Active: <strong>{isPiPActive ? "✅ Yes" : "❌ No"}</strong></li>
+          <li>PiP Supported: <strong>{isSupported ? "✅ Yes" : "❌ No"}</strong></li>
+          <li>PiP Window: <strong>{pipWindow ? `${pipWindow.width}x${pipWindow.height}` : "None"}</strong></li>
+          {error && <li>Error: <strong style={{ color: "red" }}>{error.message}</strong></li>}
+        </ul>
+      </div>
+    </div>
+  );
+}
+```
+
+### Multiple Videos with PiP Management
+
+```jsx
+import React, { useRef, useState } from "react";
+import { usePictureInPictureApi } from "rooks";
+
+function VideoPlayerWithPiP({ src, title }) {
+  const videoRef = useRef(null);
+  const {
+    isPiPActive,
+    isSupported,
+    error,
+    enterPiP,
+    exitPiP,
+    toggle,
+  } = usePictureInPictureApi(videoRef);
+
+  return (
+    <div style={{ border: "1px solid #ccc", padding: "20px", margin: "10px" }}>
+      <h3>{title}</h3>
+      <video
+        ref={videoRef}
+        src={src}
+        controls
+        width="320"
+        height="180"
+        style={{ display: "block", margin: "10px 0" }}
+      />
+      
+      <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        <button 
+          onClick={toggle}
+          disabled={!isSupported}
+          style={{ 
+            padding: "5px 15px",
+            backgroundColor: isPiPActive ? "#ff4444" : "#4CAF50",
+            color: "white",
+            border: "none",
+            borderRadius: "4px"
+          }}
+        >
+          {isPiPActive ? "Exit PiP" : "Enter PiP"}
+        </button>
+        
+        <span style={{ 
+          padding: "5px 10px",
+          backgroundColor: isPiPActive ? "#4CAF50" : "#f0f0f0",
+          color: isPiPActive ? "white" : "black",
+          borderRadius: "4px",
+          fontSize: "12px"
+        }}>
+          {isPiPActive ? "IN PiP" : "Normal"}
+        </span>
+        
+        {!isSupported && (
+          <span style={{ color: "red", fontSize: "12px" }}>
+            PiP not supported
+          </span>
+        )}
+      </div>
+      
+      {error && (
+        <div style={{ color: "red", fontSize: "12px", marginTop: "5px" }}>
+          Error: {error.message}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function MultipleVideoApp() {
+  const videos = [
+    { src: "/video1.mp4", title: "Conference Talk" },
+    { src: "/video2.mp4", title: "Tutorial Video" },
+    { src: "/video3.mp4", title: "Product Demo" },
+  ];
+
+  return (
+    <div>
+      <h1>Multiple Video Players</h1>
+      <p>Each video can be put into Picture-in-Picture mode independently.</p>
+      
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        {videos.map((video, index) => (
+          <VideoPlayerWithPiP
+            key={index}
+            src={video.src}
+            title={video.title}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type                          | Description                                    |
+| -------- | ----------------------------- | ---------------------------------------------- |
+| videoRef | RefObject<HTMLVideoElement>   | React ref object pointing to the video element |
+
+## Return
+
+The hook returns an object with the following properties:
+
+| Property     | Type                                | Description                                                      |
+| ------------ | ----------------------------------- | ---------------------------------------------------------------- |
+| isPiPActive  | boolean                             | Whether the video is currently in Picture-in-Picture mode       |
+| isSupported  | boolean                             | Whether Picture-in-Picture is supported in the current browser  |
+| error        | Error \| null                       | Any error that occurred during PiP operations                   |
+| pipWindow    | PictureInPictureWindow \| null      | Reference to the Picture-in-Picture window when active          |
+| enterPiP     | () => Promise<void>                 | Function to enter Picture-in-Picture mode                       |
+| exitPiP      | () => Promise<void>                 | Function to exit Picture-in-Picture mode                        |
+| toggle       | () => Promise<void>                 | Function to toggle Picture-in-Picture mode                      |
+
+## Features
+
+- **Browser Support Detection**: Automatically detects if Picture-in-Picture is supported
+- **Error Handling**: Provides detailed error information when PiP operations fail
+- **Event Listeners**: Automatically manages PiP event listeners for the video element
+- **Reactive State**: All state changes are reactive and will trigger component re-renders
+- **TypeScript Support**: Fully typed with comprehensive TypeScript definitions
+- **Cleanup**: Automatically cleans up event listeners when the component unmounts
+
+## Browser Support
+
+Picture-in-Picture API is supported in:
+- Chrome 70+
+- Edge 79+
+- Safari 13.1+
+- Firefox 109+
+
+The hook will automatically detect support and set `isSupported` accordingly.
+
+## Notes
+
+- The video element must be passed through a React ref
+- PiP mode can only be activated through user interaction (e.g., button click)
+- Only one video can be in PiP mode at a time per document
+- Some browsers may have additional restrictions on PiP usage
+
+---
