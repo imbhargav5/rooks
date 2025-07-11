@@ -67,7 +67,7 @@ export { useOnLongPress };
 export { useOnLongHover as useOnLongHoverRef };
 export { useOnLongPress as useOnLongPressRef };
 export { useOrientation } from "@/hooks/useOrientation";
-export { usePictureInPictureApi } from "@/hooks/usePictureInPictureApi";
+
 export { useOutsideClick } from "@/hooks/useOutsideClick";
 export { useOutsideClickRef } from "@/hooks/useOutsideClickRef";
 export { usePreviousDifferent } from "@/hooks/usePreviousDifferent";

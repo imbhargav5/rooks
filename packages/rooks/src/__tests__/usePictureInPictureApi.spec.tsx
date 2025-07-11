@@ -14,7 +14,9 @@ const mockPictureInPictureWindow = {
   height: 360,
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
-};
+  onresize: null,
+  dispatchEvent: jest.fn(),
+} as unknown as PictureInPictureWindow;
 
 // Mock video element
 const mockVideoElement = {
@@ -51,284 +53,397 @@ describe("usePictureInPictureApi", () => {
     jest.clearAllMocks();
     mockDocument.pictureInPictureElement = null;
     mockDocument.pictureInPictureEnabled = true;
+    mockVideoElement.disablePictureInPicture = false;
     mockRequestPictureInPicture.mockResolvedValue(mockPictureInPictureWindow);
     mockExitPictureInPicture.mockResolvedValue(undefined);
   });
 
-  it("should be defined", () => {
-    expect(usePictureInPictureApi).toBeDefined();
+  describe("Hook Definition", () => {
+    it("should be defined", () => {
+      expect(usePictureInPictureApi).toBeDefined();
+    });
   });
 
-  it("should initialize with correct default values", () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+  describe("Initial State", () => {
+    it("should initialize with correct default values", () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    expect(result.current.isPiPActive).toBe(false);
-    expect(result.current.isSupported).toBe(true);
-    expect(result.current.error).toBe(null);
-    expect(result.current.pipWindow).toBe(null);
-    expect(typeof result.current.enterPiP).toBe("function");
-    expect(typeof result.current.exitPiP).toBe("function");
-    expect(typeof result.current.toggle).toBe("function");
+      expect(result.current.isPiPActive).toBe(false);
+      expect(result.current.isSupported).toBe(true);
+      expect(result.current.error).toBe(null);
+      expect(result.current.pipWindow).toBe(null);
+      expect(typeof result.current.enterPiP).toBe("function");
+      expect(typeof result.current.exitPiP).toBe("function");
+      expect(typeof result.current.toggle).toBe("function");
+    });
   });
 
-  it("should detect PiP support correctly", () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-    expect(result.current.isSupported).toBe(true);
-
-    // Test unsupported case
-    mockDocument.pictureInPictureEnabled = false;
-    const { result: resultUnsupported } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-    expect(resultUnsupported.current.isSupported).toBe(false);
-  });
-
-  it("should handle null video ref", () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRefNull));
-    expect(result.current.isSupported).toBe(false);
-  });
-
-  it("should enter Picture-in-Picture mode successfully", async () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    await act(async () => {
-      await result.current.enterPiP();
+  describe("Support Detection", () => {
+    it("should detect PiP support when all conditions are met", () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isSupported).toBe(true);
     });
 
-    expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
-    expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
-    expect(result.current.error).toBe(null);
+    it("should detect no support when pictureInPictureEnabled is false", () => {
+      mockDocument.pictureInPictureEnabled = false;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isSupported).toBe(false);
+    });
+
+    it("should detect no support when video ref is null", () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRefNull));
+      expect(result.current.isSupported).toBe(false);
+    });
+
+    it("should detect no support when video element lacks requestPictureInPicture", () => {
+      const unsupportedVideo = {
+        requestPictureInPicture: undefined,
+        addEventListener: mockAddEventListener,
+        removeEventListener: mockRemoveEventListener,
+        disablePictureInPicture: false,
+      } as unknown as HTMLVideoElement;
+
+      const unsupportedVideoRef = {
+        current: unsupportedVideo,
+      } as RefObject<HTMLVideoElement>;
+
+      const { result } = renderHook(() => usePictureInPictureApi(unsupportedVideoRef));
+      expect(result.current.isSupported).toBe(false);
+    });
+
+    it("should detect no support when disablePictureInPicture is true", () => {
+      mockVideoElement.disablePictureInPicture = true;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isSupported).toBe(false);
+    });
   });
 
-  it("should exit Picture-in-Picture mode successfully", async () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+  describe("Enter PiP Functionality", () => {
+    it("should enter Picture-in-Picture mode successfully", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    // First enter PiP mode
-    await act(async () => {
-      await result.current.enterPiP();
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
+      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
+      expect(result.current.error).toBe(null);
     });
 
-    // Mock that element is now in PiP mode
-    mockDocument.pictureInPictureElement = mockVideoElement;
+    it("should handle errors when entering PiP", async () => {
+      const testError = new Error("Not supported");
+      mockRequestPictureInPicture.mockRejectedValue(testError);
 
-    await act(async () => {
-      await result.current.exitPiP();
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(result.current.error).toBe(testError);
+      expect(result.current.pipWindow).toBe(null);
     });
 
-    expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
-    expect(result.current.error).toBe(null);
+    it("should not enter PiP when video ref is null", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRefNull));
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(mockRequestPictureInPicture).not.toHaveBeenCalled();
+      expect(result.current.error).toBe(null);
+    });
+
+    it("should not enter PiP when not supported", async () => {
+      mockDocument.pictureInPictureEnabled = false;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(mockRequestPictureInPicture).not.toHaveBeenCalled();
+      expect(result.current.error).toBe(null);
+    });
+
+    it("should clear previous error when entering PiP successfully", async () => {
+      const testError = new Error("Previous error");
+      mockRequestPictureInPicture.mockRejectedValueOnce(testError);
+
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      // First attempt with error
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(result.current.error).toBe(testError);
+
+      // Second attempt successful
+      mockRequestPictureInPicture.mockResolvedValueOnce(mockPictureInPictureWindow);
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(result.current.error).toBe(null);
+    });
   });
 
-  it("should toggle Picture-in-Picture mode", async () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+  describe("Exit PiP Functionality", () => {
+    it("should exit Picture-in-Picture mode successfully", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    // Toggle to enter PiP
-    await act(async () => {
-      await result.current.toggle();
+      // Mock that element is in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
+      expect(result.current.error).toBe(null);
     });
 
-    expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
+    it("should handle errors when exiting PiP", async () => {
+      const testError = new Error("Exit failed");
+      mockExitPictureInPicture.mockRejectedValue(testError);
 
-    // Mock that element is now in PiP mode
-    mockDocument.pictureInPictureElement = mockVideoElement;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    // Toggle to exit PiP
-    await act(async () => {
-      await result.current.toggle();
+      // Mock that element is in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      expect(result.current.error).toBe(testError);
     });
 
-    expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
+    it("should not exit PiP when no element is in PiP mode", async () => {
+      mockDocument.pictureInPictureElement = null;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      expect(mockExitPictureInPicture).not.toHaveBeenCalled();
+      expect(result.current.error).toBe(null);
+    });
+
+    it("should clear previous error when exiting PiP successfully", async () => {
+      const testError = new Error("Previous error");
+      mockExitPictureInPicture.mockRejectedValueOnce(testError);
+
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      // Mock that element is in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+
+      // First attempt with error
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      expect(result.current.error).toBe(testError);
+
+      // Second attempt successful
+      mockExitPictureInPicture.mockResolvedValueOnce(undefined);
+
+      await act(async () => {
+        await result.current.exitPiP();
+      });
+
+      expect(result.current.error).toBe(null);
+    });
   });
 
-  it("should handle errors when entering PiP", async () => {
-    const testError = new Error("Not supported");
-    mockRequestPictureInPicture.mockRejectedValue(testError);
+  describe("Toggle Functionality", () => {
+    it("should toggle from inactive to active (enter PiP)", async () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      await act(async () => {
+        await result.current.toggle();
+      });
 
-    await act(async () => {
-      await result.current.enterPiP();
+      expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
+      expect(mockExitPictureInPicture).not.toHaveBeenCalled();
     });
 
-    expect(result.current.error).toBe(testError);
-    expect(result.current.pipWindow).toBe(null);
+    it("should toggle from active to inactive (exit PiP)", async () => {
+      // Mock that element is already in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.toggle();
+      });
+
+      expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
+      expect(mockRequestPictureInPicture).not.toHaveBeenCalled();
+    });
+
+    it("should handle errors during toggle", async () => {
+      const testError = new Error("Toggle failed");
+      mockRequestPictureInPicture.mockRejectedValue(testError);
+
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.toggle();
+      });
+
+      expect(result.current.error).toBe(testError);
+    });
   });
 
-  it("should handle errors when exiting PiP", async () => {
-    const testError = new Error("Exit failed");
-    mockExitPictureInPicture.mockRejectedValue(testError);
-
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    // First enter PiP mode
-    await act(async () => {
-      await result.current.enterPiP();
+  describe("PiP State Detection", () => {
+    it("should detect when current video is in PiP mode", () => {
+      // Mock that this video is in PiP mode
+      mockDocument.pictureInPictureElement = mockVideoElement;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isPiPActive).toBe(true);
     });
 
-    // Mock that element is now in PiP mode
-    mockDocument.pictureInPictureElement = mockVideoElement;
-
-    await act(async () => {
-      await result.current.exitPiP();
+    it("should detect when current video is not in PiP mode", () => {
+      // Mock that no video is in PiP mode
+      mockDocument.pictureInPictureElement = null;
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isPiPActive).toBe(false);
     });
 
-    expect(result.current.error).toBe(testError);
+    it("should detect when a different video is in PiP mode", () => {
+      // Mock that a different video is in PiP mode
+      const differentVideoElement = document.createElement('video');
+      mockDocument.pictureInPictureElement = differentVideoElement;
+      
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      expect(result.current.isPiPActive).toBe(false);
+    });
   });
 
-  it("should not enter PiP when video ref is null", async () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRefNull));
+  describe("Event Listeners", () => {
+    it("should set up event listeners on mount", () => {
+      renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-    await act(async () => {
-      await result.current.enterPiP();
+      expect(mockAddEventListener).toHaveBeenCalledWith(
+        "enterpictureinpicture",
+        expect.any(Function)
+      );
+      expect(mockAddEventListener).toHaveBeenCalledWith(
+        "leavepictureinpicture",
+        expect.any(Function)
+      );
     });
 
-    expect(mockRequestPictureInPicture).not.toHaveBeenCalled();
-  });
+    it("should clean up event listeners on unmount", () => {
+      const { unmount } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-  it("should not enter PiP when not supported", async () => {
-    mockDocument.pictureInPictureEnabled = false;
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+      unmount();
 
-    await act(async () => {
-      await result.current.enterPiP();
+      expect(mockRemoveEventListener).toHaveBeenCalledWith(
+        "enterpictureinpicture",
+        expect.any(Function)
+      );
+      expect(mockRemoveEventListener).toHaveBeenCalledWith(
+        "leavepictureinpicture",
+        expect.any(Function)
+      );
     });
 
-    expect(mockRequestPictureInPicture).not.toHaveBeenCalled();
-  });
+    it("should handle enterpictureinpicture event", () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
 
-  it("should detect active PiP state correctly", () => {
-    // Initially not active
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-    expect(result.current.isPiPActive).toBe(false);
+      // Create a proper PictureInPictureEvent
+      const enterEvent = {
+        type: "enterpictureinpicture",
+        pictureInPictureWindow: mockPictureInPictureWindow,
+      } as PictureInPictureEvent;
 
-    // Mock that this video is in PiP mode
-    mockDocument.pictureInPictureElement = mockVideoElement;
-    const { result: resultActive } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-    expect(resultActive.current.isPiPActive).toBe(true);
-  });
+      act(() => {
+        const enterHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "enterpictureinpicture"
+        )[1];
+        enterHandler(enterEvent);
+      });
 
-  it("should handle video element without PiP support", () => {
-    const unsupportedVideo = {
-      requestPictureInPicture: undefined,
-      addEventListener: mockAddEventListener,
-      removeEventListener: mockRemoveEventListener,
-    } as unknown as HTMLVideoElement;
-
-    const unsupportedVideoRef = {
-      current: unsupportedVideo,
-    } as RefObject<HTMLVideoElement>;
-
-    const { result } = renderHook(() => usePictureInPictureApi(unsupportedVideoRef));
-    expect(result.current.isSupported).toBe(false);
-  });
-
-  it("should set up event listeners on mount", () => {
-    renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    expect(mockAddEventListener).toHaveBeenCalledWith(
-      "enterpictureinpicture",
-      expect.any(Function)
-    );
-    expect(mockAddEventListener).toHaveBeenCalledWith(
-      "leavepictureinpicture",
-      expect.any(Function)
-    );
-  });
-
-  it("should clean up event listeners on unmount", () => {
-    const { unmount } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    unmount();
-
-    expect(mockRemoveEventListener).toHaveBeenCalledWith(
-      "enterpictureinpicture",
-      expect.any(Function)
-    );
-    expect(mockRemoveEventListener).toHaveBeenCalledWith(
-      "leavepictureinpicture",
-      expect.any(Function)
-    );
-  });
-
-  it("should handle enterpictureinpicture event", () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    // Simulate enterpictureinpicture event
-    const enterEvent = new CustomEvent("enterpictureinpicture", {
-      detail: { pictureInPictureWindow: mockPictureInPictureWindow },
+      expect(result.current.isPiPActive).toBe(true);
+      expect(result.current.pipWindow).toBe(mockPictureInPictureWindow);
     });
 
-    act(() => {
-      const enterHandler = mockAddEventListener.mock.calls.find(
-        (call) => call[0] === "enterpictureinpicture"
-      )[1];
-      enterHandler(enterEvent);
+    it("should handle leavepictureinpicture event", () => {
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      // First simulate entering PiP
+      const enterEvent = {
+        type: "enterpictureinpicture",
+        pictureInPictureWindow: mockPictureInPictureWindow,
+      } as PictureInPictureEvent;
+
+      act(() => {
+        const enterHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "enterpictureinpicture"
+        )[1];
+        enterHandler(enterEvent);
+      });
+
+      // Then simulate leaving PiP
+      const leaveEvent = {
+        type: "leavepictureinpicture",
+      } as Event;
+
+      act(() => {
+        const leaveHandler = mockAddEventListener.mock.calls.find(
+          (call) => call[0] === "leavepictureinpicture"
+        )[1];
+        leaveHandler(leaveEvent);
+      });
+
+      expect(result.current.isPiPActive).toBe(false);
+      expect(result.current.pipWindow).toBe(null);
     });
 
-    expect(result.current.isPiPActive).toBe(true);
+    it("should not set up event listeners when video ref is null", () => {
+      renderHook(() => usePictureInPictureApi(mockVideoRefNull));
+
+      expect(mockAddEventListener).not.toHaveBeenCalled();
+    });
   });
 
-  it("should handle leavepictureinpicture event", () => {
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+  describe("Error Handling", () => {
+    it("should handle non-Error objects as errors", async () => {
+      const nonErrorObject = "String error";
+      mockRequestPictureInPicture.mockRejectedValue(nonErrorObject);
 
-    // First simulate entering PiP
-    const enterEvent = new CustomEvent("enterpictureinpicture", {
-      detail: { pictureInPictureWindow: mockPictureInPictureWindow },
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.message).toBe("String error");
     });
 
-    act(() => {
-      const enterHandler = mockAddEventListener.mock.calls.find(
-        (call) => call[0] === "enterpictureinpicture"
-      )[1];
-      enterHandler(enterEvent);
+    it("should maintain error state until next successful operation", async () => {
+      const testError = new Error("Test error");
+      mockRequestPictureInPicture.mockRejectedValueOnce(testError);
+
+      const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
+
+      await act(async () => {
+        await result.current.enterPiP();
+      });
+
+      expect(result.current.error).toBe(testError);
+
+      // Error should persist
+      expect(result.current.error).toBe(testError);
     });
-
-    // Then simulate leaving PiP
-    const leaveEvent = new CustomEvent("leavepictureinpicture");
-
-    act(() => {
-      const leaveHandler = mockAddEventListener.mock.calls.find(
-        (call) => call[0] === "leavepictureinpicture"
-      )[1];
-      leaveHandler(leaveEvent);
-    });
-
-    expect(result.current.isPiPActive).toBe(false);
-    expect(result.current.pipWindow).toBe(null);
-  });
-
-  it("should clear error when entering PiP successfully after previous error", async () => {
-    const testError = new Error("Previous error");
-    mockRequestPictureInPicture.mockRejectedValueOnce(testError);
-
-    const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-
-    // First attempt with error
-    await act(async () => {
-      await result.current.enterPiP();
-    });
-
-    expect(result.current.error).toBe(testError);
-
-    // Second attempt successful
-    mockRequestPictureInPicture.mockResolvedValueOnce(mockPictureInPictureWindow);
-
-    await act(async () => {
-      await result.current.enterPiP();
-    });
-
-    expect(result.current.error).toBe(null);
-  });
-
-  it("should handle disabled PiP on video element", () => {
-    const disabledVideoElement = {
-      ...mockVideoElement,
-      disablePictureInPicture: true,
-    } as HTMLVideoElement;
-
-    const disabledVideoRef = {
-      current: disabledVideoElement,
-    } as RefObject<HTMLVideoElement>;
-
-    const { result } = renderHook(() => usePictureInPictureApi(disabledVideoRef));
-    expect(result.current.isSupported).toBe(false);
   });
 });
