@@ -321,6 +321,11 @@
       "category": "events"
     },
     {
+      "name": "usePictureInPictureApi",
+      "description": "Hook for managing Picture-in-Picture video functionality",
+      "category": "ui"
+    },
+    {
       "name": "usePreviousDifferent",
       "description": "usePreviousDifferent returns the last different value of a variable",
       "category": "state"
