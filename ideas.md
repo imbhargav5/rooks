@@ -44,19 +44,8 @@ This document contains ideas for new hooks to add to the rooks collection, focus
   ```
   *Hook Benefit*: Uses `useState` for current time state, `useEffect` with intervals for auto-updates, `useRef` for cleanup, providing live time updates in components.
 
-- **useTemporalComparison** - Hook for comparing and sorting Temporal objects
-  ```tsx
-  const { compare, sort, isBefore, isAfter, equals } = useTemporalComparison();
-  const sortedDates = sort(dates, 'asc');
-  ```
-  *Hook Benefit*: Uses `useMemo` for expensive sorting operations, `useCallback` for comparison functions, enabling reactive sorting when date arrays change.
-
-- **useTemporalArithmetic** - Hook for date/time arithmetic operations
-  ```tsx
-  const { add, subtract, until, since } = useTemporalArithmetic(baseDate);
-  const futureDate = add({ days: 7, hours: 2 });
-  ```
-  *Hook Benefit*: Uses `useMemo` for arithmetic results, `useCallback` for operation functions, enabling reactive calculations based on base date changes.
+- ~~**useTemporalComparison**~~ - ❌ *Should be utility functions* - Just comparison/sorting functions, no React state needed
+- ~~**useTemporalArithmetic**~~ - ❌ *Should be utility functions* - Just arithmetic operations, no React state needed
 
 ### Records & Tuples (Proposal Stage 2)
 - **useRecord** - Hook for managing immutable record data structures
@@ -82,12 +71,7 @@ This document contains ideas for new hooks to add to the rooks collection, focus
   ```
   *Hook Benefit*: Uses `useState` with custom reducer, `useMemo` for deep equality checks, providing immutable state updates that work seamlessly with React's reconciliation algorithm.
 
-- **useDeepEquals** - Hook for deep equality comparisons using records/tuples
-  ```tsx
-  const isEqual = useDeepEquals(prevData, currentData);
-  const hasChanged = useDeepEquals(props, prevProps, { inverse: true });
-  ```
-  *Hook Benefit*: Uses `useMemo` to memoize expensive deep comparisons, `useRef` for previous value tracking, enabling efficient equality checks that prevent unnecessary re-renders.
+- ~~**useDeepEquals**~~ - ❌ *Should be utility function* - Just comparison logic, use `useMemo` directly in components instead
 
 ### Iterator Helpers (Baseline 2025)
 - **useIteratorHelpers** - Hook for working with new iterator methods (map, filter, take, etc.)
@@ -144,12 +128,7 @@ This document contains ideas for new hooks to add to the rooks collection, focus
   ```
   *Hook Benefit*: Uses `useState` for buffer state, `useMemo` for typed array views, `useEffect` for worker communication, enabling reactive shared memory updates.
 
-- **useAtomicOperations** - Hook for atomic operations on shared memory
-  ```tsx
-  const { add, compareExchange, load, store, notify, wait } = useAtomicOperations(sharedArray);
-  const result = add(index, value); // Thread-safe addition
-  ```
-  *Hook Benefit*: Uses `useCallback` for atomic operation wrappers, `useRef` for shared array reference, enabling thread-safe operations with React integration.
+- ~~**useAtomicOperations**~~ - ❌ *Should be utility functions* - Just atomic operation wrappers, no React state needed
 
 - **usePromiseTry** - Hook for Promise.try() operations (Baseline 2025)
   ```tsx
@@ -474,9 +453,9 @@ This document contains ideas for new hooks to add to the rooks collection, focus
   *Hook Benefit*: Uses `useState` for stream state, `useEffect` for stream reading, `useRef` for reader instance, providing reactive stream processing with progress tracking.
 
 ### Data Processing & Transformation
-- **useTransformStream** - Hook for stream transformation operations
+- **useTransformStream** - Hook for stream transformation operations  
 - **useCompressionStream** - Hook for data compression/decompression
-- **useStructuredClone** - Hook for deep cloning with structured clone algorithm
+- ~~**useStructuredClone**~~ - ❌ *Should be utility function* - Just cloning operation, no state
 - **useSerializableState** - Hook for state that can be serialized across contexts
 
 ### Memory Management
@@ -485,10 +464,10 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 - **useGarbageCollectionTiming** - Hook for monitoring garbage collection performance
 
 ### Internationalization & Localization
-- **useIntlSegmenter** - Hook for locale-sensitive text segmentation
-- **useIntlDurationFormat** - Hook for formatting time durations (Baseline 2025)
-- **useIntlListFormat** - Hook for formatting lists in different locales
-- **useIntlRelativeTime** - Hook for relative time formatting
+- ~~**useIntlSegmenter**~~ - ❌ *Should be utility function* - Just text segmentation, no state
+- ~~**useIntlDurationFormat**~~ - ❌ *Should be utility function* - Just formatting, no state  
+- ~~**useIntlListFormat**~~ - ❌ *Should be utility function* - Just formatting, no state
+- ~~**useIntlRelativeTime**~~ - ❌ *Should be utility function* - Just formatting, no state
 
 ### Advanced DOM & Layout
 - **useContainerQueries** - Hook for CSS container query matching
@@ -517,10 +496,10 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 - **useReducedMotion** - Hook for respecting motion preferences
 
 ### Development & Testing
-- **useFeatureDetection** - Hook for progressive enhancement feature detection
-- **usePolyfillLoader** - Hook for dynamic polyfill loading
-- **useBrowserCapabilities** - Hook for browser capability testing
-- **useBaselineCompatibility** - Hook for checking Web Platform Baseline compatibility
+- ~~**useFeatureDetection**~~ - ❌ *Should be utility function* - Just capability detection, no state
+- **usePolyfillLoader** - Hook for dynamic polyfill loading (needs loading state)
+- ~~**useBrowserCapabilities**~~ - ❌ *Should be utility function* - Just capability testing, no state  
+- ~~**useBaselineCompatibility**~~ - ❌ *Should be utility function* - Just compatibility checking, no state
 
 ## 📊 Data Structure Hooks
 
@@ -532,11 +511,11 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 - **useMultiMap** - Hook for maps with multiple values per key
 
 ### Specialized Data Structures
-- **useBloomFilter** - Hook for probabilistic data structure operations
-- **useTrie** - Hook for prefix tree data structure
-- **useGraph** - Hook for graph data structure and algorithms
-- **useTreeStructure** - Hook for tree data manipulation
-- **useLRUCache** - Hook for Least Recently Used caching
+- ~~**useBloomFilter**~~ - ❌ *Should be utility class* - Just data structure operations, no React state
+- ~~**useTrie**~~ - ❌ *Should be utility class* - Just data structure operations, no React state
+- ~~**useGraph**~~ - ❌ *Should be utility class* - Just algorithms, no React state
+- ~~**useTreeStructure**~~ - ❌ *Should be utility class* - Just data structure, no React state
+- **useLRUCache** - Hook for LRU caching (needs state for cache management and reactive updates)
 
 ### Stream Processing
 - **useDataStream** - Hook for processing continuous data streams
@@ -546,10 +525,10 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 ## 🚀 Future-Ready Hooks
 
 ### Emerging Standards
-- **useWebTransport** - Hook for WebTransport protocol
-- **useWebCodecsRegistry** - Hook for codec registration and management
-- **useComputeShader** - Hook for compute shader operations
-- **useWebAssemblyGC** - Hook for WebAssembly garbage collection
+- **useWebTransport** - Hook for WebTransport protocol (needs connection state)
+- ~~**useWebCodecsRegistry**~~ - ❌ *Should be utility functions* - Just codec registration, no state
+- **useComputeShader** - Hook for compute shader operations (needs GPU state)
+- ~~**useWebAssemblyGC**~~ - ❌ *Should be utility functions* - Just GC operations, no React state
 
 ### Experimental Features
 - **useSharedStorage** - Hook for Privacy Sandbox Shared Storage API
@@ -582,9 +561,29 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 
 ---
 
+## 📝 Hook vs Utility Function Guidelines
+
+### ✅ **Valid React Hooks** (Provide React Integration)
+Hooks that genuinely benefit from React's lifecycle and state management:
+- Manage reactive state that triggers re-renders
+- Need cleanup/lifecycle management (`useEffect`)  
+- Handle async operations with loading states
+- Provide event listening with automatic cleanup
+- Manage complex state transitions
+- Integrate with React's concurrent features
+
+### ❌ **Should Be Utility Functions** (Struck Through Above)
+Functions that don't need React integration:
+- Pure computational operations
+- Simple data transformations  
+- One-time API calls without state
+- Static configurations
+- Mathematical operations
+- Format/parsing functions
+
 ## 📝 Note on Remaining Hook Signatures
 
-*The sections above demonstrate the complete pattern for hook signatures and benefits. The remaining hooks in this document (Background & Sync APIs, Communication & Sharing APIs, Performance & Monitoring APIs, Security & Privacy APIs, Payment & Commerce APIs, Data Processing & Transformation, Memory Management, Internationalization & Localization, Advanced DOM & Layout, Specialized Use Cases, Data Structure Hooks, and Future-Ready Hooks) would follow the same pattern:*
+*The remaining **valid hooks** in this document (Background & Sync APIs, Communication & Sharing APIs, Performance & Monitoring APIs, Security & Privacy APIs, Payment & Commerce APIs, etc.) would follow the same pattern as demonstrated above:*
 
 **Each hook would include:**
 1. **Usage signature** showing the hook's API and typical usage
@@ -612,6 +611,31 @@ This document contains ideas for new hooks to add to the rooks collection, focus
 - Error boundary integration
 - Suspense compatibility where applicable
 
+## 📊 **Summary of Revisions**
+
+### ❌ **Removed Hooks** (Should be utility functions):
+- `useTemporalComparison` → Use `Temporal.PlainDate.compare()` directly
+- `useTemporalArithmetic` → Use `temporal.add()`, `temporal.subtract()` directly  
+- `useDeepEquals` → Use `useMemo` with comparison logic in components
+- `useAtomicOperations` → Use `Atomics` API directly
+- `useIntlSegmenter` → Use `Intl.Segmenter` directly
+- `useIntlDurationFormat` → Use `Intl.DurationFormat` directly
+- `useIntlListFormat` → Use `Intl.ListFormat` directly
+- `useIntlRelativeTime` → Use `Intl.RelativeTimeFormat` directly
+- `useStructuredClone` → Use `structuredClone()` directly
+- `useFeatureDetection` → Use feature detection utilities
+- `useBrowserCapabilities` → Use capability detection functions
+- `useBaselineCompatibility` → Use compatibility checking utilities
+- `useBloomFilter` → Use BloomFilter class/library
+- `useTrie` → Use Trie data structure class
+- `useGraph` → Use graph algorithm libraries
+- `useTreeStructure` → Use tree data structure classes
+- `useWebCodecsRegistry` → Use WebCodecs registration functions
+- `useWebAssemblyGC` → Use WASM GC operations directly
+
+### ✅ **Kept as Hooks** (Provide meaningful React integration):
+All remaining hooks provide reactive state management, lifecycle integration, or async operation handling that benefits from React's hook system.
+
 ---
 
-*This list represents modern web platform capabilities that would benefit from hook abstractions. Implementation should prioritize hooks based on community demand and browser support levels.*
+*This curated list now represents web platform capabilities that truly benefit from React hook abstractions, focusing on stateful, reactive, and lifecycle-aware functionality.*
