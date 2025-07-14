@@ -1,5 +1,11 @@
 # rooks
 
+## 8.1.0
+
+### Minor Changes
+
+- [`be8409a`](https://github.com/imbhargav5/rooks/commit/be8409a9745a4b6f0a8b83820d651b92dfd1b23c) Thanks [@imbhargav5](https://github.com/imbhargav5)! - new hooks added
+
 ## 8.0.1
 
 ### Patch Changes
