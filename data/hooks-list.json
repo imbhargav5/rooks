@@ -271,6 +271,11 @@
       "category": "navigator"
     },
     {
+      "name": "useNavigatorPermissions",
+      "description": "Hook to manage browser navigator permissions with comprehensive error handling and status tracking",
+      "category": "navigator"
+    },
+    {
       "name": "useOnClickRef",
       "description": "Callback on click/tap events",
       "category": "events"
