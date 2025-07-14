@@ -33,7 +33,7 @@ const mockVideoRef = {
 
 const mockVideoRefNull = {
   current: null,
-} as RefObject<HTMLVideoElement>;
+} as unknown as RefObject<HTMLVideoElement>;
 
 // Mock document (definitions moved to Object.defineProperty below)
 
@@ -53,15 +53,15 @@ Object.defineProperty(document, 'exitPictureInPicture', {
   writable: true,
 });
 
-  describe("usePictureInPictureApi", () => {
-    beforeEach(() => {
-      jest.clearAllMocks();
-      (document as any).pictureInPictureElement = null;
-      (document as any).pictureInPictureEnabled = true;
-      mockVideoElement.disablePictureInPicture = false;
-      mockRequestPictureInPicture.mockResolvedValue(mockPictureInPictureWindow);
-      mockExitPictureInPicture.mockResolvedValue(undefined);
-    });
+describe("usePictureInPictureApi", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (document as any).pictureInPictureElement = null;
+    (document as any).pictureInPictureEnabled = true;
+    mockVideoElement.disablePictureInPicture = false;
+    mockRequestPictureInPicture.mockResolvedValue(mockPictureInPictureWindow);
+    mockExitPictureInPicture.mockResolvedValue(undefined);
+  });
 
   describe("Hook Definition", () => {
     it("should be defined", () => {
@@ -124,17 +124,17 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
     it("should reactively update support when video element properties change", () => {
       const { result, rerender } = renderHook(() => usePictureInPictureApi(mockVideoRef));
-      
+
       // Initially supported
       expect(result.current.isSupported).toBe(true);
-      
+
       // Change video element property
       act(() => {
         mockVideoElement.disablePictureInPicture = true;
       });
-      
+
       rerender();
-      
+
       // Should now be unsupported
       expect(result.current.isSupported).toBe(false);
     });
@@ -150,7 +150,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
       expect(mockRequestPictureInPicture).toHaveBeenCalledTimes(1);
       expect(result.current.error).toBe(null);
-      
+
       // pipWindow should be set via event, not directly from the promise
       // (following best practice to wait for browser event)
       expect(result.current.pipWindow).toBe(null);
@@ -258,7 +258,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
       expect(mockExitPictureInPicture).toHaveBeenCalledTimes(1);
       expect(result.current.error).toBe(null);
-      
+
       // pipWindow should be cleared via event, not directly
       // (following best practice to wait for browser event)
     });
@@ -422,7 +422,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
       // Mock that a different video is in PiP mode
       const differentVideoElement = document.createElement('video');
       (document as any).pictureInPictureElement = differentVideoElement;
-      
+
       const { result } = renderHook(() => usePictureInPictureApi(mockVideoRef));
       expect(result.current.isPiPActive).toBe(false);
     });
@@ -568,7 +568,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
       // Change video element
       act(() => {
-        mutableVideoRef.current = newVideoElement;
+        (mutableVideoRef as any).current = newVideoElement;
       });
 
       rerender();
@@ -593,7 +593,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
       // Change video element
       act(() => {
-        mutableVideoRef.current = newVideoElement;
+        (mutableVideoRef as any).current = newVideoElement;
       });
 
       rerender();
@@ -622,7 +622,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
     it("should handle video element changing to null", () => {
       const mutableVideoRef = {
         current: mockVideoElement,
-      } as RefObject<HTMLVideoElement>;
+      } as unknown as RefObject<HTMLVideoElement>;
 
       const { result, rerender } = renderHook(() => usePictureInPictureApi(mutableVideoRef));
 
@@ -631,7 +631,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
       // Change to null
       act(() => {
-        mutableVideoRef.current = null;
+        (mutableVideoRef as any).current = null;
       });
 
       rerender();
