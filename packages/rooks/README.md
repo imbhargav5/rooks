@@ -97,6 +97,7 @@
 
 * [useNavigatorLanguage](https://rooks.vercel.app/docs/useNavigatorLanguage) - Navigator Language hook for React.
 * [useOnline](https://rooks.vercel.app/docs/useOnline) - Online status hook for React.
+* [useScreenDetailsApi](https://rooks.vercel.app/docs/useScreenDetailsApi) - Hook for multi-screen information and management using Screen Details API
 
 <h3 align="center">❇️ State</h3>
 
@@ -155,7 +156,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 94 hooks as standalone modules.
+✅ Collection of 95 hooks as standalone modules.
 
 <!--hookscount end-->
 
