@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type PermissionStatus = 'granted' | 'denied' | 'prompt';
 
-type PermissionName = 
+type SupportedPermissionName = 
   | 'geolocation' 
   | 'camera' 
   | 'microphone' 
@@ -23,7 +23,7 @@ type PermissionErrorType =
 
 interface PermissionError extends Error {
   type: PermissionErrorType;
-  permissionName: PermissionName;
+  permissionName: SupportedPermissionName;
   timestamp: Date;
   originalError?: unknown;
 }
@@ -48,13 +48,91 @@ interface UseNavigatorPermissionsReturn {
   requestPermission: () => Promise<PermissionStatus>;
 }
 
+// Type guard for PermissionStatus
+function isValidPermissionStatus(value: unknown): value is PermissionStatus {
+  return typeof value === 'string' && ['granted', 'denied', 'prompt'].includes(value);
+}
+
+// Type guard for Navigator with permissions
+function hasPermissionsAPI(nav: unknown): nav is Navigator & { permissions: Permissions } {
+  return typeof nav === 'object' && nav !== null && 'permissions' in nav;
+}
+
+// Factory function to create PermissionError
+function createPermissionError(
+  type: PermissionErrorType,
+  message: string,
+  permissionName: SupportedPermissionName,
+  originalError?: unknown
+): PermissionError {
+  const error = new Error(message);
+  const permissionError: PermissionError = {
+    ...error,
+    name: 'PermissionError',
+    type,
+    permissionName,
+    timestamp: new Date(),
+    originalError,
+  };
+  return permissionError;
+}
+
+// Safe permission query wrapper
+async function queryPermission(
+  permissionName: SupportedPermissionName
+): Promise<PermissionStatus | null> {
+  try {
+    const result = await navigator.permissions.query({ 
+      name: permissionName as never
+    });
+    
+    if (result && isValidPermissionStatus(result.state)) {
+      return result.state;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// Safe permission query with event listener
+async function queryPermissionWithListener(
+  permissionName: SupportedPermissionName,
+  changeHandler: () => void
+): Promise<{ status: PermissionStatus | null; cleanup: () => void }> {
+  try {
+    const result = await navigator.permissions.query({ 
+      name: permissionName as never
+    });
+    
+    if (result && isValidPermissionStatus(result.state)) {
+      result.addEventListener('change', changeHandler);
+      
+      return {
+        status: result.state,
+        cleanup: () => result.removeEventListener('change', changeHandler)
+      };
+    }
+    
+    return {
+      status: null,
+      cleanup: () => {}
+    };
+  } catch {
+    return {
+      status: null,
+      cleanup: () => {}
+    };
+  }
+}
+
 /**
  * useNavigatorPermissions
  * @description Hook to manage browser navigator permissions with comprehensive error handling and status tracking
  * @see {@link https://rooks.vercel.app/docs/useNavigatorPermissions}
 */
 function useNavigatorPermissions(
-  permissionName: PermissionName,
+  permissionName: SupportedPermissionName,
   options: UseNavigatorPermissionsOptions = {}
 ): UseNavigatorPermissionsReturn {
   const {
@@ -70,6 +148,7 @@ function useNavigatorPermissions(
   const [isInitialized, setIsInitialized] = useState(false);
   
   const permissionObjectRef = useRef<PermissionStatus | null>(null);
+  const cleanupRef = useRef<(() => void) | null>(null);
   const callbacksRef = useRef({ onStatusChange, onGranted, onDenied, onPrompt });
 
   // Update callbacks ref
@@ -78,21 +157,7 @@ function useNavigatorPermissions(
   }, [onStatusChange, onGranted, onDenied, onPrompt]);
 
   // Check if Permissions API is supported
-  const isSupported = typeof navigator !== 'undefined' && 'permissions' in navigator;
-
-  // Create error helper
-  const createError = useCallback((
-    type: PermissionErrorType,
-    message: string,
-    originalError?: unknown
-  ): PermissionError => {
-    const error = new Error(message) as PermissionError;
-    error.type = type;
-    error.permissionName = permissionName;
-    error.timestamp = new Date();
-    error.originalError = originalError;
-    return error;
-  }, [permissionName]);
+  const isSupported = typeof navigator !== 'undefined' && hasPermissionsAPI(navigator);
 
   // Handle status change
   const handleStatusChange = useCallback((newStatus: PermissionStatus) => {
@@ -126,7 +191,7 @@ function useNavigatorPermissions(
   // Request permission function
   const requestPermission = useCallback(async (): Promise<PermissionStatus> => {
     if (!isSupported) {
-      const error = createError('NOT_SUPPORTED', 'Permissions API is not supported');
+      const error = createPermissionError('NOT_SUPPORTED', 'Permissions API is not supported', permissionName);
       onError(error);
       throw error;
     }
@@ -134,23 +199,21 @@ function useNavigatorPermissions(
     setIsLoading(true);
     
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const permissionStatus = await navigator.permissions.query({ 
-        name: permissionName as any 
-      });
+      const result = await queryPermission(permissionName);
       
-      if (permissionStatus?.state) {
-        handleStatusChange(permissionStatus.state);
-        return permissionStatus.state;
+      if (result) {
+        handleStatusChange(result);
+        return result;
       }
       
-      const error = createError('SYSTEM_ERROR', 'Permission query returned invalid result');
+      const error = createPermissionError('SYSTEM_ERROR', 'Permission query returned invalid result', permissionName);
       onError(error);
       throw error;
     } catch (error) {
-      const permissionError = createError(
+      const permissionError = createPermissionError(
         'REQUEST_FAILED',
         `Failed to request permission: ${error}`,
+        permissionName,
         error
       );
       onError(permissionError);
@@ -158,7 +221,7 @@ function useNavigatorPermissions(
     } finally {
       setIsLoading(false);
     }
-  }, [isSupported, permissionName, onError, createError, handleStatusChange]);
+  }, [isSupported, permissionName, onError, handleStatusChange]);
 
   // Initial permission check
   useEffect(() => {
@@ -168,24 +231,22 @@ function useNavigatorPermissions(
 
     const checkPermission = async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const permissionStatus = await navigator.permissions.query({ 
-          name: permissionName as any 
-        });
+        const { status: permissionStatus, cleanup } = await queryPermissionWithListener(
+          permissionName,
+          handlePermissionChange
+        );
         
-        if (permissionStatus?.state) {
-          permissionObjectRef.current = permissionStatus.state;
-          handleStatusChange(permissionStatus.state);
-          
-          // Add event listener for permission changes
-          permissionStatus.addEventListener('change', handlePermissionChange);
-          
+        if (permissionStatus) {
+          permissionObjectRef.current = permissionStatus;
+          cleanupRef.current = cleanup;
+          handleStatusChange(permissionStatus);
           setIsInitialized(true);
         }
       } catch (error) {
-        const permissionError = createError(
+        const permissionError = createPermissionError(
           'REQUEST_FAILED',
           `Failed to check permission: ${error}`,
+          permissionName,
           error
         );
         onError(permissionError);
@@ -196,10 +257,12 @@ function useNavigatorPermissions(
 
     // Cleanup function
     return () => {
-      // Note: we can't easily clean up the event listener here since we don't have access to the permission object
-      // This is a limitation of the current implementation, but the browser will handle cleanup when the component unmounts
+      if (cleanupRef.current) {
+        cleanupRef.current();
+        cleanupRef.current = null;
+      }
     };
-  }, [isSupported, permissionName, onError, createError, handleStatusChange, handlePermissionChange]);
+  }, [isSupported, permissionName, onError, handleStatusChange, handlePermissionChange]);
 
   // Computed convenience flags
   const isGranted = status === 'granted';
