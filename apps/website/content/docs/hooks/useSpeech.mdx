@@ -6,14 +6,277 @@ sidebar_label: useSpeech
 
 ## About
 
-Speech synthesis hook for React
+Speech synthesis hook for React that provides an easy-to-use interface for the Web Speech API. This hook allows you to convert text to speech with customizable voice settings and playback controls.
+
+<br/>
 
 ## Examples
 
-```tsx
-import {useSpeech} from "rooks"
+### Basic example
+
+```jsx
+import { useSpeech } from "rooks";
+
 export default function App() {
-  useSpeech();
-  return null
+  const { start, stop, isPlaying } = useSpeech({
+    text: "Hello, welcome to our application!",
+  });
+
+  return (
+    <div>
+      <h3>Basic Text to Speech</h3>
+      <p>Text: "Hello, welcome to our application!"</p>
+      <button onClick={start} disabled={isPlaying}>
+        {isPlaying ? "Speaking..." : "Start Speaking"}
+      </button>
+      <button onClick={stop} disabled={!isPlaying}>
+        Stop
+      </button>
+    </div>
+  );
 }
 ```
+
+### Advanced settings example
+
+```jsx
+import { useSpeech } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [text, setText] = useState("This is a customizable speech example.");
+  const [language, setLanguage] = useState("en-US");
+  const [rate, setRate] = useState(1);
+  const [pitch, setPitch] = useState(1);
+  const [volume, setVolume] = useState(1);
+
+  const { start, pause, resume, stop, isPlaying } = useSpeech({
+    text,
+    language,
+    rate,
+    pitch,
+    volume,
+  });
+
+  return (
+    <div>
+      <h3>Advanced Speech Settings</h3>
+      
+      <div>
+        <label>
+          Text:
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows={3}
+            cols={50}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Language:
+          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+          </select>
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Rate: {rate}
+          <input
+            type="range"
+            min="0.1"
+            max="2"
+            step="0.1"
+            value={rate}
+            onChange={(e) => setRate(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Pitch: {pitch}
+          <input
+            type="range"
+            min="0"
+            max="2"
+            step="0.1"
+            value={pitch}
+            onChange={(e) => setPitch(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Volume: {volume}
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <button onClick={start} disabled={isPlaying}>
+          Start
+        </button>
+        <button onClick={pause} disabled={!isPlaying}>
+          Pause
+        </button>
+        <button onClick={resume} disabled={isPlaying}>
+          Resume
+        </button>
+        <button onClick={stop} disabled={!isPlaying}>
+          Stop
+        </button>
+      </div>
+      
+      <p>Status: {isPlaying ? "Speaking" : "Stopped"}</p>
+    </div>
+  );
+}
+```
+
+### Voice selection and callbacks example
+
+```jsx
+import { useSpeech } from "rooks";
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [text, setText] = useState("Choose a voice and listen to this text.");
+  const [selectedVoice, setSelectedVoice] = useState("");
+  const [voices, setVoices] = useState([]);
+  const [speechCount, setSpeechCount] = useState(0);
+
+  const { start, pause, resume, stop, isPlaying } = useSpeech({
+    text,
+    voiceURI: selectedVoice,
+    onEnd: () => {
+      setSpeechCount(prev => prev + 1);
+      console.log("Speech finished!");
+    },
+  });
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+      if (availableVoices.length > 0 && !selectedVoice) {
+        setSelectedVoice(availableVoices[0].voiceURI);
+      }
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, [selectedVoice]);
+
+  const handleVoiceChange = (e) => {
+    setSelectedVoice(e.target.value);
+  };
+
+  return (
+    <div>
+      <h3>Voice Selection & Callbacks</h3>
+      
+      <div>
+        <label>
+          Text:
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ width: "100%", marginTop: "5px" }}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Voice:
+          <select value={selectedVoice} onChange={handleVoiceChange}>
+            {voices.map((voice) => (
+              <option key={voice.voiceURI} value={voice.voiceURI}>
+                {voice.name} ({voice.lang})
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      
+      <div>
+        <button onClick={start} disabled={isPlaying}>
+          Start Speaking
+        </button>
+        <button onClick={pause} disabled={!isPlaying}>
+          Pause
+        </button>
+        <button onClick={resume} disabled={isPlaying}>
+          Resume
+        </button>
+        <button onClick={stop} disabled={!isPlaying}>
+          Stop
+        </button>
+      </div>
+      
+      <div>
+        <p>Status: {isPlaying ? "🔊 Speaking" : "🔇 Stopped"}</p>
+        <p>Speech completed {speechCount} times</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type   | Description           |
+| -------- | ------ | --------------------- |
+| options  | Object | Configuration options |
+
+### Options
+
+| Option   | Type     | Description                                          | Default value |
+| -------- | -------- | ---------------------------------------------------- | ------------- |
+| text     | string   | The text to be spoken                                | **required**  |
+| language | string   | Language code (e.g., "en-US", "es-ES", "fr-FR")     | "en-US"       |
+| voiceURI | string   | Specific voice URI to use for speech                 | undefined     |
+| onEnd    | function | Callback function called when speech ends           | undefined     |
+| volume   | number   | Volume level (0 to 1)                               | 1             |
+| pitch    | number   | Pitch level (0 to 2)                                | 1             |
+| rate     | number   | Speech rate (0.1 to 10)                             | 1             |
+
+### Return
+
+| Return value | Type   | Description                                                                               |
+| ------------ | ------ | ----------------------------------------------------------------------------------------- |
+| controls     | Object | Object containing \{start, pause, resume, stop, isPlaying\} speech control functions and state |
+
+### Controls Object
+
+| Property  | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| start     | function | Start speaking the text                        |
+| pause     | function | Pause the current speech                       |
+| resume    | function | Resume paused speech                           |
+| stop      | function | Stop speaking and reset                        |
+| isPlaying | boolean  | Current playing state of the speech synthesis  |
+
+---
