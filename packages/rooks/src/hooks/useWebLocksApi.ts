@@ -8,17 +8,17 @@ type LockOptions = {
    * The lock mode - "exclusive" (default) or "shared"
    */
   mode?: "exclusive" | "shared";
-  
+
   /**
    * If true, the lock request will only succeed if the lock is available immediately
    */
   ifAvailable?: boolean;
-  
+
   /**
    * If true, any held locks with the same name will be released first
    */
   steal?: boolean;
-  
+
   /**
    * AbortSignal to cancel the lock request
    */
@@ -33,7 +33,7 @@ type UseWebLocksApiOptions = {
    * Enable periodic checking of lock state (disabled by default)
    */
   periodicCheck?: boolean;
-  
+
   /**
    * Interval in milliseconds for periodic checks (default: 1000ms)
    */
@@ -48,37 +48,37 @@ type UseWebLocksApiReturn = {
    * Whether Web Locks API is supported
    */
   isSupported: boolean;
-  
+
   /**
    * Whether the resource is currently locked
    */
   isLocked: boolean;
-  
+
   /**
    * Number of pending lock requests for this resource
    */
   waitingCount: number;
-  
+
   /**
    * Current error state
    */
   error: Error | null;
-  
+
   /**
    * The resource name being managed
    */
   resourceName: string;
-  
+
   /**
    * Acquire a lock on the resource
    */
   acquire: <T>(callback: () => Promise<T> | T, options?: LockOptions) => Promise<T>;
-  
+
   /**
    * Release the current lock
    */
   release: () => void;
-  
+
   /**
    * Query the current lock state
    */
@@ -103,9 +103,9 @@ function useWebLocksApi(
 
   // Check if Web Locks API is supported - check both existence and locks property
   const isSupported = useMemo(() => {
-    return typeof navigator !== "undefined" && 
-           navigator.locks !== undefined && 
-           typeof navigator.locks.request === "function";
+    return typeof navigator !== "undefined" &&
+      navigator.locks !== undefined &&
+      typeof navigator.locks.request === "function";
   }, []);
 
   // State management
@@ -135,17 +135,17 @@ function useWebLocksApi(
       setErrorState(err);
       throw err;
     }
-    
+
     try {
       const result = await navigator.locks.query();
-      
-      // Update state based on query results
-      const resourceLocks = result.held.filter((lock: any) => lock.name === resourceName);
-      const pendingLocks = result.pending.filter((lock: any) => lock.name === resourceName);
-      
+
+      // Update state based on query results with null checks
+      const resourceLocks = result.held?.filter((lock: any) => lock.name === resourceName) || [];
+      const pendingLocks = result.pending?.filter((lock: any) => lock.name === resourceName) || [];
+
       setIsLocked(resourceLocks.length > 0);
       setWaitingCount(pendingLocks.length);
-      
+
       clearError();
       return result;
     } catch (err) {
@@ -243,7 +243,7 @@ function useWebLocksApi(
             });
         }, checkInterval);
       };
-      
+
       setupPeriodicCheck();
     }
 

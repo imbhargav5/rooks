@@ -13,48 +13,15 @@ const external = [
   ...Object.keys(pkg.peerDependencies || {}),
 ];
 
-// Create dist directory if it doesn't exist
-if (!fs.existsSync("dist")) {
-  fs.mkdirSync("dist");
-}
+async function build() {
+  try {
+    // Create dist directory if it doesn't exist
+    if (!fs.existsSync("dist")) {
+      fs.mkdirSync("dist");
+    }
 
-// ESM Build
-esbuild
-  .build({
-    entryPoints: ["src/index.ts"],
-    outdir: "dist/esm",
-    bundle: true,
-    splitting: true,
-    format: "esm",
-    platform: "neutral",
-    external,
-    sourcemap: false,
-    minify: false,
-    outExtension: { ".js": ".js" },
-    plugins: [
-      dtsPlugin({
-        outDir: "dist/types",
-      }),
-    ],
-  })
-  .catch(() => process.exit(1));
-
-// CJS Build
-esbuild
-  .build({
-    entryPoints: ["src/index.ts"],
-    outdir: "dist/cjs",
-    bundle: true,
-    format: "cjs",
-    platform: "neutral",
-    external,
-    sourcemap: false,
-    minify: false,
-  })
-  .catch(() => process.exit(1));
-
-// UMD Build - using IIFE with UMD wrapper
-const umdBannerContent = `/*
+    // UMD Build banner content
+    const umdBannerContent = `/*
 * Rooks v${pkg.version}
 * https://github.com/imbhargav5/rooks
 * (c) ${new Date().getFullYear()} Bhargav Ponnapalli
@@ -66,27 +33,67 @@ const umdBannerContent = `/*
   (global = global || self, global.rooks = factory(global.React, global.ReactDOM));
 }(this, function(React, ReactDOM) {`;
 
-esbuild
-  .build({
-    entryPoints: ["src/index.ts"],
-    outfile: "dist/umd/rooks.umd.js",
-    bundle: true,
-    format: "iife",
-    globalName: "rooks",
-    platform: "browser",
-    external: ["react", "react-dom"],
-    sourcemap: false,
-    minify: true,
-    define: {
-      __VERSION__: `"${pkg.version}"`,
-    },
-    banner: {
-      js: umdBannerContent,
-    },
-    footer: {
-      js: "return rooks; }));",
-    },
-  })
-  .catch(() => process.exit(1));
+    // Run all builds in parallel
+    await Promise.all([
+      // ESM Build
+      esbuild.build({
+        entryPoints: ["src/index.ts"],
+        outdir: "dist/esm",
+        bundle: true,
+        splitting: true,
+        format: "esm",
+        platform: "neutral",
+        external,
+        sourcemap: false,
+        minify: false,
+        outExtension: { ".js": ".js" },
+        plugins: [
+          dtsPlugin({
+            outDir: "dist/types",
+          }),
+        ],
+      }),
 
-console.log("Build completed successfully!");
+      // CJS Build
+      esbuild.build({
+        entryPoints: ["src/index.ts"],
+        outdir: "dist/cjs",
+        bundle: true,
+        format: "cjs",
+        platform: "neutral",
+        external,
+        sourcemap: false,
+        minify: false,
+      }),
+
+      // UMD Build - using IIFE with UMD wrapper
+      esbuild.build({
+        entryPoints: ["src/index.ts"],
+        outfile: "dist/umd/rooks.umd.js",
+        bundle: true,
+        format: "iife",
+        globalName: "rooks",
+        platform: "browser",
+        external: ["react", "react-dom"],
+        sourcemap: false,
+        minify: true,
+        define: {
+          __VERSION__: `"${pkg.version}"`,
+        },
+        banner: {
+          js: umdBannerContent,
+        },
+        footer: {
+          js: "return rooks; }));",
+        },
+      }),
+    ]);
+
+    console.log("Build completed successfully!");
+  } catch (error) {
+    console.error("Build failed:", error);
+    process.exit(1);
+  }
+}
+
+build();
