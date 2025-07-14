@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
 import { useNavigatorPermissions } from "@/hooks/useNavigatorPermissions";
 
