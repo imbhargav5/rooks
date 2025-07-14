@@ -371,6 +371,11 @@
       "category": "state"
     },
     {
+      "name": "useScreenDetailsApi",
+      "description": "Hook for multi-screen information and management using Screen Details API",
+      "category": "navigator"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
