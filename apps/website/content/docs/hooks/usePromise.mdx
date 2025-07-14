@@ -6,14 +6,134 @@ sidebar_label: usePromise
 
 ## About
 
-Promise management hook for react
+Promise management hook for React that handles async operations with automatic loading, error, and data states.
+<br/>
 
 ## Examples
 
-```tsx
-import {usePromise} from "rooks"
+### Basic usage
+
+```jsx
+import React from "react";
+import { usePromise } from "rooks";
+
+function fetchUserData() {
+  return fetch('/api/user').then(res => res.json());
+}
+
 export default function App() {
-  usePromise();
-  return null
+  const { data, loading, error } = usePromise(fetchUserData);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  
+  return (
+    <div>
+      <h1>User Profile</h1>
+      {data && <p>Welcome, {data.name}!</p>}
+    </div>
+  );
 }
 ```
+
+### With dependencies
+
+```jsx
+import React, { useState } from "react";
+import { usePromise } from "rooks";
+
+function fetchUserPosts(userId) {
+  return fetch(`/api/users/${userId}/posts`).then(res => res.json());
+}
+
+export default function App() {
+  const [userId, setUserId] = useState(1);
+  
+  const { data: posts, loading, error } = usePromise(
+    () => fetchUserPosts(userId),
+    [userId] // Re-fetch when userId changes
+  );
+
+  return (
+    <div>
+      <button onClick={() => setUserId(userId + 1)}>
+        Load User {userId + 1} Posts
+      </button>
+      
+      {loading && <div>Loading posts...</div>}
+      {error && <div>Error: {error.message}</div>}
+      
+      {posts && (
+        <ul>
+          {posts.map(post => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+### Error handling
+
+```jsx
+import React, { useState } from "react";
+import { usePromise } from "rooks";
+
+function fetchData(shouldFail = false) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldFail) {
+        reject(new Error("Network request failed"));
+      } else {
+        resolve({ message: "Data loaded successfully!" });
+      }
+    }, 1000);
+  });
+}
+
+export default function App() {
+  const [shouldFail, setShouldFail] = useState(false);
+  
+  const { data, loading, error } = usePromise(
+    () => fetchData(shouldFail),
+    [shouldFail]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setShouldFail(!shouldFail)}>
+        Toggle Error: {shouldFail ? "Will Fail" : "Will Succeed"}
+      </button>
+      
+      {loading && <div>Loading...</div>}
+      {error && (
+        <div style={{ color: "red" }}>
+          Error occurred: {error.message}
+        </div>
+      )}
+      {data && (
+        <div style={{ color: "green" }}>
+          {data.message}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument      | Type           | Description                                    | Default value |
+| ------------- | -------------- | ---------------------------------------------- | ------------- |
+| asyncFunction | function       | Async function that returns a Promise         | -             |
+| deps          | array          | Dependency array for re-running the promise   | []            |
+
+### Return value
+
+| Return value | Type   | Description                                                                                        |
+| ------------ | ------ | -------------------------------------------------------------------------------------------------- |
+| state        | Object | Object containing `{data: T \| null, loading: boolean, error: Error \| null}`                     |
+
+---
