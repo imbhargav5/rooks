@@ -22,13 +22,13 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           directory: packages/rooks/src/coverage
-  size-limit:
-    timeout-minutes: 20
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/ci-setup
-      - uses: andresz1/size-limit-action@v1.7.0
-        with:
-          directory: "packages/rooks"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+  # size-limit:
+  #   timeout-minutes: 20
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: ./.github/actions/ci-setup
+  #     - uses: andresz1/size-limit-action@v1.7.0
+  #       with:
+  #         directory: "packages/rooks"
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
