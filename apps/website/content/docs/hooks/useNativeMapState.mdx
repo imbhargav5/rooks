@@ -6,14 +6,238 @@ sidebar_label: useNativeMapState
 
 ## About
 
-Manage Map() object state in React
+Hook to manage native JavaScript Map() object state in React with a comprehensive set of map operations.
+<br/>
 
 ## Examples
 
-```tsx
+### Basic usage
+
+```jsx
+import React, { useState } from "react";
 import { useNativeMapState } from "rooks";
+
 export default function App() {
-  useNativeMapState();
-  return null;
+  const [map, { set, get, has, remove, clear, size }] = useNativeMapState();
+  const [key, setKey] = useState("");
+  const [value, setValue] = useState("");
+
+  const handleAdd = () => {
+    if (key && value) {
+      set(key, value);
+      setKey("");
+      setValue("");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Native Map State</h1>
+      
+      <div>
+        <input 
+          value={key} 
+          onChange={e => setKey(e.target.value)}
+          placeholder="Enter key"
+        />
+        <input 
+          value={value} 
+          onChange={e => setValue(e.target.value)}
+          placeholder="Enter value"
+        />
+        <button onClick={handleAdd}>Add</button>
+        <button onClick={clear}>Clear All</button>
+      </div>
+      
+      <div>
+        <h2>Map Contents ({size()} items)</h2>
+        {Array.from(map.entries()).map(([k, v]) => (
+          <div key={k} style={{ margin: '5px 0' }}>
+            <strong>{k}:</strong> {v}
+            <button onClick={() => remove(k)} style={{ marginLeft: '10px' }}>
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 ```
+
+### Individual operations
+
+```jsx
+import React, { useState } from "react";
+import { useNativeMapState } from "rooks";
+
+export default function App() {
+  const initialMap = new Map([
+    ["name", "John"],
+    ["age", "25"],
+    ["city", "New York"]
+  ]);
+  
+  const [map, { set, get, has, remove, clear, size }] = useNativeMapState(initialMap);
+  const [lookupKey, setLookupKey] = useState("");
+  const [result, setResult] = useState("");
+
+  const handleGet = () => {
+    const value = get(lookupKey);
+    setResult(value ? `Value: ${value}` : "Key not found");
+  };
+
+  const handleHas = () => {
+    const exists = has(lookupKey);
+    setResult(exists ? "Key exists" : "Key does not exist");
+  };
+
+  return (
+    <div>
+      <h1>Map Operations</h1>
+      
+      <div>
+        <input 
+          value={lookupKey}
+          onChange={e => setLookupKey(e.target.value)}
+          placeholder="Enter key to lookup"
+        />
+        <button onClick={handleGet}>Get Value</button>
+        <button onClick={handleHas}>Check Exists</button>
+      </div>
+      
+      {result && <div><strong>Result:</strong> {result}</div>}
+      
+      <div>
+        <h2>Current Map (Size: {size()})</h2>
+        {Array.from(map.entries()).map(([k, v]) => (
+          <div key={k}>
+            <strong>{k}:</strong> {v}
+            <button onClick={() => remove(k)}>Remove</button>
+          </div>
+        ))}
+      </div>
+      
+      <div>
+        <button onClick={() => set("timestamp", new Date().toISOString())}>
+          Add Timestamp
+        </button>
+        <button onClick={clear}>Clear All</button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Bulk operations
+
+```jsx
+import React, { useState } from "react";
+import { useNativeMapState } from "rooks";
+
+export default function App() {
+  const [map, { 
+    setMultiple, 
+    removeMultiple, 
+    hasSome, 
+    hasEvery, 
+    size 
+  }] = useNativeMapState();
+  
+  const [checkResult, setCheckResult] = useState("");
+
+  const addMultipleUsers = () => {
+    const users = [
+      ["user1", "Alice"],
+      ["user2", "Bob"],
+      ["user3", "Charlie"]
+    ];
+    setMultiple(users);
+  };
+
+  const addMultipleSettings = () => {
+    const settings = [
+      ["theme", "dark"],
+      ["language", "en"],
+      ["notifications", "enabled"]
+    ];
+    setMultiple(settings);
+  };
+
+  const removeUsers = () => {
+    removeMultiple(["user1", "user2", "user3"]);
+  };
+
+  const checkSomeKeys = () => {
+    const keys = ["user1", "theme", "nonexistent"];
+    const result = hasSome(keys);
+    setCheckResult(`Has some of [${keys.join(", ")}]: ${result}`);
+  };
+
+  const checkAllKeys = () => {
+    const keys = ["theme", "language", "notifications"];
+    const result = hasEvery(keys);
+    setCheckResult(`Has all of [${keys.join(", ")}]: ${result}`);
+  };
+
+  return (
+    <div>
+      <h1>Bulk Map Operations</h1>
+      
+      <div>
+        <button onClick={addMultipleUsers}>Add Multiple Users</button>
+        <button onClick={addMultipleSettings}>Add Multiple Settings</button>
+        <button onClick={removeUsers}>Remove All Users</button>
+      </div>
+      
+      <div>
+        <button onClick={checkSomeKeys}>Check Some Keys</button>
+        <button onClick={checkAllKeys}>Check All Settings</button>
+      </div>
+      
+      {checkResult && <div><strong>Check Result:</strong> {checkResult}</div>}
+      
+      <div>
+        <h2>Current Map (Size: {size()})</h2>
+        {Array.from(map.entries()).map(([k, v]) => (
+          <div key={k}>
+            <strong>{k}:</strong> {v}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument         | Type          | Description                    | Default value |
+| ---------------- | ------------- | ------------------------------ | ------------- |
+| initialMapState  | Map<K, V>     | Initial map state              | new Map()     |
+
+### Return value
+
+Returns an array with the following items:
+
+| Return value | Type                       | Description                                       |
+| ------------ | -------------------------- | ------------------------------------------------- |
+| map          | ReadonlyMap<K, V>         | Current map state (read-only)                     |
+| controls     | MapControls<K, V>         | Object with methods to manipulate the map        |
+
+### Map Controls
+
+| Method         | Type                           | Description                                  |
+| -------------- | ------------------------------ | -------------------------------------------- |
+| set            | `(key: K, value: V) => void`   | Set a key-value pair                         |
+| get            | `(key: K) => V \| undefined`   | Get value by key                             |
+| has            | `(key: K) => boolean`          | Check if key exists                          |
+| remove         | `(key: K) => void`             | Remove a key-value pair                      |
+| clear          | `() => void`                   | Clear all entries                            |
+| size           | `() => number`                 | Get number of entries                        |
+| setMultiple    | `(entries: [K, V][]) => void`  | Set multiple key-value pairs                 |
+| removeMultiple | `(keys: K[]) => void`          | Remove multiple keys                         |
+| hasSome        | `(keys: K[]) => boolean`       | Check if at least one key exists            |
+| hasEvery       | `(keys: K[]) => boolean`       | Check if all keys exist                      |
+
+---

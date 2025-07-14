@@ -6,14 +6,67 @@ sidebar_label: useOrientation
 
 ## About
 
-orientation hook for react
+Hook to detect and track device orientation changes in React applications.
+<br/>
 
 ## Examples
 
-```tsx
-import {useOrientation} from "rooks"
+```jsx
+import React from "react";
+import { useOrientation } from "rooks";
+
 export default function App() {
-  useOrientation();
-  return null
+  const orientation = useOrientation();
+
+  if (!orientation) {
+    return <div>Orientation API not supported</div>;
+  }
+
+  return (
+    <div>
+      <h1>Device Orientation</h1>
+      <div>
+        <strong>Angle:</strong> {orientation.angle}°
+      </div>
+      <div>
+        <strong>Type:</strong> {orientation.type}
+      </div>
+      
+      <div style={{ marginTop: '20px' }}>
+        <p>Try rotating your device to see the orientation change!</p>
+        
+        {orientation.type.includes('portrait') && (
+          <div style={{ color: 'blue' }}>
+            📱 Portrait mode detected
+          </div>
+        )}
+        
+        {orientation.type.includes('landscape') && (
+          <div style={{ color: 'green' }}>
+            🔄 Landscape mode detected
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 ```
+
+### Arguments
+
+This hook takes no arguments.
+
+### Return value
+
+| Return value | Type                        | Description                                                                                   |
+| ------------ | --------------------------- | --------------------------------------------------------------------------------------------- |
+| orientation  | ScreenOrientation \| null   | Current orientation object with `angle` and `type` properties, or null if not supported     |
+
+### ScreenOrientation Properties
+
+| Property | Type   | Description                                                                                        |
+| -------- | ------ | -------------------------------------------------------------------------------------------------- |
+| angle    | number | The orientation angle in degrees (0, 90, 180, or 270)                                             |
+| type     | string | The orientation type (e.g., "portrait-primary", "landscape-primary", "portrait-secondary", etc.) |
+
+---
