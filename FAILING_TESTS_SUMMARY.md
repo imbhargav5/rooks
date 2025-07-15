@@ -2,13 +2,23 @@
 
 ## Test Results Overview
 - **Total Tests**: 16
-- **Passed**: 3 
-- **Failed**: 13
-- **Root Cause**: Async state updates not triggering re-renders and improper navigation API support detection
+- **Passed**: 1 (basic initialization test)
+- **Failed**: 13+ (majority timing out)
+- **Root Cause**: React testing environment not properly handling async state updates
+
+## Core Problem Analysis
+
+### **Primary Issue: Async State Updates Not Triggering Re-renders**
+The main issue is that the hook's `useEffect` runs an async operation (`checkPermission`) that updates state (`setStatus`, `setIsInitialized`, `setIsSupported`), but these updates don't trigger re-renders that `waitForNextUpdate()` can detect.
+
+### **React Testing Environment Issues**
+- Console shows "The current testing environment is not configured to support act(...)"
+- Async operations in `useEffect` aren't properly wrapped in `act()`
+- `waitForNextUpdate()` expects synchronous re-renders but gets async ones
 
 ## Failing Tests and Issues
 
-### 1. **Timeout Issues (8 tests)**
+### 1. **Timeout Issues (8+ tests)**
 These tests are timing out because the hook isn't triggering re-renders after async operations:
 
 - `should handle granted permission status` - Timeout after 1000ms
@@ -63,10 +73,27 @@ The `useEffect` dependency array may be causing re-runs that interfere with asyn
 
 ## Required Fixes
 
-### 1. **Fix Async State Updates**
-- Ensure `setIsInitialized(true)` is called after async operations complete
-- Make sure state updates trigger re-renders properly
-- Handle both success and error cases
+### 1. **CRITICAL: Fix Async/Testing Environment Issues**
+The core issue is that React's testing environment expects async operations to be properly wrapped in `act()`. The hook needs to be restructured:
+
+**Current problematic approach:**
+```typescript
+useEffect(() => {
+  const checkPermission = async () => {
+    // async operations that don't trigger proper re-renders
+    const result = await navigator.permissions.query(...);
+    setStatus(result.state); // This doesn't trigger waitForNextUpdate()
+    setIsInitialized(true);
+  };
+  checkPermission();
+}, []);
+```
+
+**Solutions to try:**
+1. Use `flushSync` to force synchronous updates
+2. Restructure to avoid async operations in `useEffect`
+3. Use different testing approach that doesn't rely on `waitForNextUpdate()`
+4. Properly wrap async operations in `act()` within the hook
 
 ### 2. **Fix Support Detection**
 - Make `isSupported` reactive to navigator changes
