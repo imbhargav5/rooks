@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { useAsyncCallback } from "./useAsyncCallback";
 
 type PermissionStatus = 'granted' | 'denied' | 'prompt';
 
@@ -136,7 +137,7 @@ function useNavigatorPermissions(
   }, [handleStatusChange]);
 
   // Check permissions and setup listeners
-  const checkPermission = useCallback(async () => {
+  const checkPermission = useAsyncCallback(async () => {
     const currentSupported = typeof navigator !== 'undefined' && hasPermissionsAPI(navigator);
     
     // Use flushSync to force synchronous updates for testing
@@ -184,7 +185,7 @@ function useNavigatorPermissions(
   }, [permissionName, onError, handleStatusChange, handlePermissionChange]);
 
   // Request permission function
-  const requestPermission = useCallback(async (): Promise<PermissionStatus> => {
+  const requestPermission = useAsyncCallback(async (): Promise<PermissionStatus> => {
     const currentSupported = typeof navigator !== 'undefined' && hasPermissionsAPI(navigator);
     if (!currentSupported) {
       const error = createPermissionError('NOT_SUPPORTED', 'Permissions API is not supported', permissionName);

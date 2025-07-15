@@ -3,6 +3,7 @@ import { useOnLongPress } from "@/hooks/useOnLongPress";
 import { useMapState } from "@/hooks/useMapState";
 
 export { useArrayState } from "@/hooks/useArrayState";
+export { useAsyncCallback } from "@/hooks/useAsyncCallback";
 export { useAsyncEffect } from "@/hooks/useAsyncEffect";
 export { useAudio } from "@/hooks/useAudio";
 export { useBoundingclientrect } from "@/hooks/useBoundingclientrect";
