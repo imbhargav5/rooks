@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { useAsyncCallback } from "./useAsyncCallback";
+import { useFreshRef } from "./useFreshRef";
+import { useGetIsMounted } from "./useGetIsMounted";
 
 type PermissionStatus = 'granted' | 'denied' | 'prompt';
 
@@ -36,7 +37,6 @@ interface UseNavigatorPermissionsOptions {
   onGranted?: () => void;
   onDenied?: () => void;
   onPrompt?: () => void;
-  autoRequest?: boolean;
 }
 
 interface UseNavigatorPermissionsReturn {
@@ -50,12 +50,12 @@ interface UseNavigatorPermissionsReturn {
   requestPermission: () => Promise<PermissionStatus>;
 }
 
-// Type guard for PermissionStatus
-function isValidPermissionStatus(value: unknown): value is PermissionStatus {
-  return typeof value === 'string' && ['granted', 'denied', 'prompt'].includes(value);
+// Type guards
+function isValidPermissionStatus(status: unknown): status is PermissionStatus {
+  return typeof status === 'string' && 
+         ['granted', 'denied', 'prompt'].includes(status);
 }
 
-// Type guard for Navigator with permissions
 function hasPermissionsAPI(nav: unknown): nav is Navigator & { permissions: Permissions } {
   return typeof nav === 'object' && 
          nav !== null && 
@@ -65,27 +65,22 @@ function hasPermissionsAPI(nav: unknown): nav is Navigator & { permissions: Perm
          typeof (nav as any).permissions.query === 'function';
 }
 
-// Factory function to create PermissionError
+// Error factory
 function createPermissionError(
   type: PermissionErrorType,
   message: string,
   permissionName: SupportedPermissionName,
   originalError?: unknown
 ): PermissionError {
-  const error = new Error(message);
-  const permissionError: PermissionError = {
-    ...error,
-    name: 'PermissionError',
-    type,
-    permissionName,
-    timestamp: new Date(),
-    originalError,
-  };
-  return permissionError;
+  const error = new Error(message) as PermissionError;
+  error.type = type;
+  error.permissionName = permissionName;
+  error.timestamp = new Date();
+  error.originalError = originalError;
+  return error;
 }
 
 /**
- * useNavigatorPermissions
  * @description Hook to manage browser navigator permissions with comprehensive error handling and status tracking
  * @see {@link https://rooks.vercel.app/docs/useNavigatorPermissions}
 */
@@ -108,37 +103,55 @@ function useNavigatorPermissions(
   
   const permissionObjectRef = useRef<any>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
+  
+  // Safe async pattern - call ID tracking and mount checks
+  const lastCallId = useRef(0);
+  const getIsMounted = useGetIsMounted();
+
+  // Fresh refs for callbacks to avoid stale closures
+  const onErrorRef = useFreshRef(onError);
+  const onStatusChangeRef = useFreshRef(onStatusChange);
+  const onGrantedRef = useFreshRef(onGranted);
+  const onDeniedRef = useFreshRef(onDenied);
+  const onPromptRef = useFreshRef(onPrompt);
 
   // Handle status change and call callbacks
   const handleStatusChange = useCallback((newStatus: PermissionStatus) => {
-    setStatus(newStatus);
+    if (!getIsMounted()) return;
     
-    // Call callbacks
-    onStatusChange?.(newStatus);
+    flushSync(() => {
+      setStatus(newStatus);
+    });
+    
+    // Call callbacks using fresh refs to avoid stale closures
+    onStatusChangeRef.current?.(newStatus);
     
     switch (newStatus) {
       case 'granted':
-        onGranted?.();
+        onGrantedRef.current?.();
         break;
       case 'denied':
-        onDenied?.();
+        onDeniedRef.current?.();
         break;
       case 'prompt':
-        onPrompt?.();
+        onPromptRef.current?.();
         break;
     }
-  }, [onStatusChange, onGranted, onDenied, onPrompt]);
+  }, [getIsMounted, onStatusChangeRef, onGrantedRef, onDeniedRef, onPromptRef]);
 
   // Permission change event handler
   const handlePermissionChange = useCallback(() => {
+    if (!getIsMounted()) return;
     if (permissionObjectRef.current && permissionObjectRef.current.state) {
       handleStatusChange(permissionObjectRef.current.state);
     }
-  }, [handleStatusChange]);
+  }, [getIsMounted, handleStatusChange]);
 
-  // Check permissions and setup listeners
-  const checkPermission = useAsyncCallback(async () => {
+  // Safe async permission check with proper cleanup
+  const checkPermissionSafely = useCallback(async (shouldContinue: () => boolean) => {
     const currentSupported = typeof navigator !== 'undefined' && hasPermissionsAPI(navigator);
+    
+    if (!shouldContinue()) return;
     
     // Use flushSync to force synchronous updates for testing
     flushSync(() => {
@@ -146,6 +159,7 @@ function useNavigatorPermissions(
     });
     
     if (!currentSupported) {
+      if (!shouldContinue()) return;
       flushSync(() => {
         setIsInitialized(true);
       });
@@ -157,6 +171,8 @@ function useNavigatorPermissions(
         name: permissionName as never
       });
       
+      if (!shouldContinue()) return;
+      
       if (result && isValidPermissionStatus(result.state)) {
         permissionObjectRef.current = result;
         
@@ -165,32 +181,65 @@ function useNavigatorPermissions(
         cleanupRef.current = () => result.removeEventListener('change', handlePermissionChange);
         
         // Update status with flushSync
-        flushSync(() => {
-          handleStatusChange(result.state);
-        });
+        if (shouldContinue()) {
+          flushSync(() => {
+            handleStatusChange(result.state);
+          });
+        }
       }
     } catch (error) {
+      if (!shouldContinue()) return;
+      
       const permissionError = createPermissionError(
         'REQUEST_FAILED',
         `Failed to check permission: ${String(error)}`,
         permissionName,
         error
       );
-      onError(permissionError);
+      onErrorRef.current(permissionError);
     } finally {
-      flushSync(() => {
-        setIsInitialized(true);
-      });
+      if (shouldContinue()) {
+        flushSync(() => {
+          setIsInitialized(true);
+        });
+      }
     }
-  }, [permissionName, onError, handleStatusChange, handlePermissionChange]);
+  }, [permissionName, handlePermissionChange, handleStatusChange, onErrorRef]);
 
-  // Request permission function
-  const requestPermission = useAsyncCallback(async (): Promise<PermissionStatus> => {
+  // Initial permission check using safe async pattern
+  useEffect(() => {
+    const callId = ++lastCallId.current;
+    const shouldContinue = () => {
+      return getIsMounted() && callId === lastCallId.current;
+    };
+
+    checkPermissionSafely(shouldContinue);
+
+    // Cleanup function
+    return () => {
+      if (cleanupRef.current) {
+        cleanupRef.current();
+        cleanupRef.current = null;
+      }
+    };
+  }, [checkPermissionSafely, getIsMounted]);
+
+  // Request permission function using safe async pattern
+  const requestPermission = useCallback(async (): Promise<PermissionStatus> => {
+    const callId = ++lastCallId.current;
+    const shouldContinue = () => {
+      return getIsMounted() && callId === lastCallId.current;
+    };
+
     const currentSupported = typeof navigator !== 'undefined' && hasPermissionsAPI(navigator);
     if (!currentSupported) {
       const error = createPermissionError('NOT_SUPPORTED', 'Permissions API is not supported', permissionName);
-      onError(error);
+      onErrorRef.current(error);
       throw error;
+    }
+
+    if (!shouldContinue()) {
+      throw new Error('Component unmounted during permission request');
     }
 
     setIsLoading(true);
@@ -200,40 +249,37 @@ function useNavigatorPermissions(
         name: permissionName as never
       });
       
+      if (!shouldContinue()) {
+        throw new Error('Component unmounted during permission request');
+      }
+      
       if (result && isValidPermissionStatus(result.state)) {
         handleStatusChange(result.state);
         return result.state;
       }
       
       const error = createPermissionError('SYSTEM_ERROR', 'Permission query returned invalid result', permissionName);
-      onError(error);
+      onErrorRef.current(error);
       throw error;
     } catch (error) {
+      if (!shouldContinue()) {
+        throw new Error('Component unmounted during permission request');
+      }
+      
       const permissionError = createPermissionError(
         'REQUEST_FAILED',
         `Failed to request permission: ${String(error)}`,
         permissionName,
         error
       );
-      onError(permissionError);
+      onErrorRef.current(permissionError);
       throw permissionError;
     } finally {
-      setIsLoading(false);
-    }
-  }, [permissionName, onError, handleStatusChange]);
-
-  // Initial permission check
-  useEffect(() => {
-    checkPermission();
-
-    // Cleanup function
-    return () => {
-      if (cleanupRef.current) {
-        cleanupRef.current();
-        cleanupRef.current = null;
+      if (shouldContinue()) {
+        setIsLoading(false);
       }
-    };
-  }, [checkPermission]);
+    }
+  }, [permissionName, getIsMounted, handleStatusChange, onErrorRef]);
 
   // Computed convenience flags
   const isGranted = status === 'granted';
