@@ -6,14 +6,400 @@ sidebar_label: useNavigatorPermissions
 
 ## About
 
-Hook to manage browser navigator permissions with comprehensive error handling and status tracking
+A comprehensive React hook for managing browser navigator permissions with comprehensive error handling and status tracking. This hook provides real-time permission status monitoring, callback-based event handling, and methods to request permissions programmatically.
+
+The hook supports all major browser permissions including geolocation, camera, microphone, notifications, and more. It includes automatic initialization, reactive state updates, and proper cleanup of event listeners.
 
 ## Examples
 
-```tsx
-import {useNavigatorPermissions} from "rooks"
+### Basic permission status monitoring
+
+```jsx
+import { useNavigatorPermissions } from "rooks";
+import React from "react";
+
 export default function App() {
-  useNavigatorPermissions();
-  return null
+  const { status, isSupported, isInitialized, isGranted, isDenied, isPrompt } = 
+    useNavigatorPermissions('geolocation');
+
+  if (!isSupported) {
+    return <div>Geolocation API is not supported in this browser</div>;
+  }
+
+  if (!isInitialized) {
+    return <div>Loading permission status...</div>;
+  }
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Geolocation Permission Status</h1>
+      <div style={{ marginBottom: "20px" }}>
+        <p><strong>Status:</strong> {status || 'Unknown'}</p>
+        <p><strong>Granted:</strong> {isGranted ? 'Yes' : 'No'}</p>
+        <p><strong>Denied:</strong> {isDenied ? 'Yes' : 'No'}</p>
+        <p><strong>Prompt:</strong> {isPrompt ? 'Yes' : 'No'}</p>
+      </div>
+      
+      <div style={{ padding: "10px", borderRadius: "5px", backgroundColor: 
+        isGranted ? "#d4edda" : isDenied ? "#f8d7da" : "#fff3cd" }}>
+        {isGranted && "✅ Permission granted - Location access is available"}
+        {isDenied && "❌ Permission denied - Location access is blocked"}
+        {isPrompt && "⚠️ Permission prompt - User hasn't decided yet"}
+      </div>
+    </div>
+  );
 }
 ```
+
+### Permission request with callbacks
+
+```jsx
+import { useNavigatorPermissions } from "rooks";
+import React, { useState } from "react";
+
+export default function App() {
+  const [messages, setMessages] = useState([]);
+  
+  const addMessage = (message) => {
+    setMessages(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+  };
+
+  const {
+    status,
+    isSupported,
+    isInitialized,
+    isLoading,
+    isGranted,
+    requestPermission
+  } = useNavigatorPermissions('notifications', {
+    onStatusChange: (status) => addMessage(`Status changed to: ${status}`),
+    onGranted: () => addMessage("Permission granted! 🎉"),
+    onDenied: () => addMessage("Permission denied 😞"),
+    onPrompt: () => addMessage("Permission is in prompt state"),
+    onError: (error) => addMessage(`Error: ${error.message}`)
+  });
+
+  const handleRequest = async () => {
+    try {
+      const result = await requestPermission();
+      addMessage(`Permission request result: ${result}`);
+    } catch (error) {
+      addMessage(`Request failed: ${error.message}`);
+    }
+  };
+
+  if (!isSupported) {
+    return <div>Notifications API is not supported in this browser</div>;
+  }
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px" }}>
+      <h1>Notification Permission Manager</h1>
+      
+      <div style={{ marginBottom: "20px" }}>
+        <p><strong>Current Status:</strong> {status || 'Loading...'}</p>
+        <p><strong>Initialized:</strong> {isInitialized ? 'Yes' : 'No'}</p>
+        <p><strong>Loading:</strong> {isLoading ? 'Yes' : 'No'}</p>
+      </div>
+
+      <div style={{ marginBottom: "20px" }}>
+        <button
+          onClick={handleRequest}
+          disabled={!isInitialized || isLoading || isGranted}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: isGranted ? "#28a745" : "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: isGranted ? "not-allowed" : "pointer"
+          }}
+        >
+          {isLoading ? "Requesting..." : 
+           isGranted ? "Already Granted" : 
+           "Request Notification Permission"}
+        </button>
+      </div>
+
+      <div style={{ 
+        backgroundColor: "#f8f9fa", 
+        padding: "15px", 
+        borderRadius: "5px",
+        maxHeight: "200px",
+        overflowY: "auto"
+      }}>
+        <h3>Activity Log:</h3>
+        {messages.length === 0 ? (
+          <p>No activity yet...</p>
+        ) : (
+          messages.map((message, index) => (
+            <div key={index} style={{ marginBottom: "5px", fontSize: "14px" }}>
+              {message}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+### Multi-permission dashboard
+
+```jsx
+import { useNavigatorPermissions } from "rooks";
+import React, { useState } from "react";
+
+const PermissionCard = ({ permissionName, title, description, icon }) => {
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  const {
+    status,
+    isSupported,
+    isInitialized,
+    isLoading,
+    isGranted,
+    isDenied,
+    isPrompt,
+    requestPermission
+  } = useNavigatorPermissions(permissionName, {
+    onError: (error) => setErrorMessage(error.message),
+    onStatusChange: () => setErrorMessage(''), // Clear error on status change
+  });
+
+  const handleRequest = async () => {
+    try {
+      await requestPermission();
+      setErrorMessage('');
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const getStatusColor = () => {
+    if (isGranted) return "#28a745";
+    if (isDenied) return "#dc3545";
+    if (isPrompt) return "#ffc107";
+    return "#6c757d";
+  };
+
+  const getStatusText = () => {
+    if (!isSupported) return "Not Supported";
+    if (!isInitialized) return "Loading...";
+    if (isLoading) return "Requesting...";
+    return status || "Unknown";
+  };
+
+  return (
+    <div style={{
+      border: "1px solid #dee2e6",
+      borderRadius: "8px",
+      padding: "20px",
+      backgroundColor: "white",
+      boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+        <span style={{ fontSize: "24px", marginRight: "10px" }}>{icon}</span>
+        <h3 style={{ margin: 0 }}>{title}</h3>
+      </div>
+      
+      <p style={{ color: "#6c757d", marginBottom: "15px" }}>{description}</p>
+      
+      <div style={{ marginBottom: "15px" }}>
+        <span style={{
+          display: "inline-block",
+          padding: "4px 8px",
+          borderRadius: "4px",
+          fontSize: "12px",
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: getStatusColor()
+        }}>
+          {getStatusText()}
+        </span>
+      </div>
+
+      {errorMessage && (
+        <div style={{
+          color: "#dc3545",
+          fontSize: "14px",
+          marginBottom: "10px",
+          padding: "5px",
+          backgroundColor: "#f8d7da",
+          borderRadius: "4px"
+        }}>
+          {errorMessage}
+        </div>
+      )}
+
+      <button
+        onClick={handleRequest}
+        disabled={!isSupported || !isInitialized || isLoading || isGranted}
+        style={{
+          width: "100%",
+          padding: "8px 16px",
+          backgroundColor: isGranted ? "#28a745" : "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "4px",
+          cursor: isGranted || !isSupported ? "not-allowed" : "pointer",
+          opacity: !isSupported || isGranted ? 0.6 : 1
+        }}
+      >
+        {!isSupported ? "Not Supported" :
+         isLoading ? "Requesting..." :
+         isGranted ? "Granted" :
+         "Request Permission"}
+      </button>
+    </div>
+  );
+};
+
+export default function App() {
+  const permissions = [
+    {
+      name: 'geolocation',
+      title: 'Geolocation',
+      description: 'Access your location for location-based features',
+      icon: '📍'
+    },
+    {
+      name: 'camera',
+      title: 'Camera',
+      description: 'Access camera for photo and video capture',
+      icon: '📷'
+    },
+    {
+      name: 'microphone',
+      title: 'Microphone',
+      description: 'Access microphone for audio recording',
+      icon: '🎤'
+    },
+    {
+      name: 'notifications',
+      title: 'Notifications',
+      description: 'Show notifications for important updates',
+      icon: '🔔'
+    },
+    {
+      name: 'clipboard-read',
+      title: 'Clipboard Read',
+      description: 'Read clipboard content for paste functionality',
+      icon: '📋'
+    },
+    {
+      name: 'clipboard-write',
+      title: 'Clipboard Write',
+      description: 'Write to clipboard for copy functionality',
+      icon: '✂️'
+    }
+  ];
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+      <h1>Permission Manager Dashboard</h1>
+      <p style={{ marginBottom: "30px", color: "#6c757d" }}>
+        Manage all your browser permissions in one place. Click "Request Permission" 
+        to grant access to various browser features.
+      </p>
+      
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: "20px"
+      }}>
+        {permissions.map((permission) => (
+          <PermissionCard
+            key={permission.name}
+            permissionName={permission.name}
+            title={permission.title}
+            description={permission.description}
+            icon={permission.icon}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+The `useNavigatorPermissions` hook accepts the following arguments:
+
+| Argument       | Type                             | Description                                                    | Required |
+| -------------- | -------------------------------- | -------------------------------------------------------------- | -------- |
+| permissionName | SupportedPermissionName          | The name of the permission to monitor                          | Yes      |
+| options        | UseNavigatorPermissionsOptions   | Configuration object for callbacks and behavior               | No       |
+
+#### SupportedPermissionName
+
+Supported permission names include:
+
+- `'geolocation'` - Location access
+- `'camera'` - Camera access
+- `'microphone'` - Microphone access
+- `'notifications'` - Notification permission
+- `'persistent-storage'` - Persistent storage access
+- `'push'` - Push messaging
+- `'midi'` - MIDI device access
+- `'background-sync'` - Background sync
+- `'clipboard-read'` - Clipboard read access
+- `'clipboard-write'` - Clipboard write access
+
+#### UseNavigatorPermissionsOptions
+
+| Property      | Type                                    | Description                                      | Default     |
+| ------------- | --------------------------------------- | ------------------------------------------------ | ----------- |
+| onError       | (error: PermissionError) => void        | Called when an error occurs                     | () => {}    |
+| onStatusChange| (status: PermissionStatus) => void      | Called when permission status changes           | undefined   |
+| onGranted     | () => void                              | Called when permission is granted               | undefined   |
+| onDenied      | () => void                              | Called when permission is denied                | undefined   |
+| onPrompt      | () => void                              | Called when permission is in prompt state       | undefined   |
+| autoRequest   | boolean                                 | Automatically request permission on mount       | false       |
+
+### Return Value
+
+Returns an object with the following properties:
+
+```typescript
+{
+  status: PermissionStatus | null;
+  isSupported: boolean;
+  isInitialized: boolean;
+  isLoading: boolean;
+  isGranted: boolean;
+  isDenied: boolean;
+  isPrompt: boolean;
+  requestPermission: () => Promise<PermissionStatus>;
+}
+```
+
+#### Return Properties
+
+| Property          | Type                                   | Description                                           |
+| ----------------- | -------------------------------------- | ----------------------------------------------------- |
+| status            | PermissionStatus \| null               | Current permission status ('granted', 'denied', 'prompt') |
+| isSupported       | boolean                                | Whether the Permissions API is supported             |
+| isInitialized     | boolean                                | Whether the hook has finished initialization         |
+| isLoading         | boolean                                | Whether a permission request is in progress          |
+| isGranted         | boolean                                | Whether the permission is granted                    |
+| isDenied          | boolean                                | Whether the permission is denied                     |
+| isPrompt          | boolean                                | Whether the permission is in prompt state           |
+| requestPermission | () => Promise<PermissionStatus>        | Function to request the permission                   |
+
+#### PermissionStatus
+
+The `PermissionStatus` type can be one of:
+- `'granted'` - Permission has been granted
+- `'denied'` - Permission has been denied
+- `'prompt'` - Permission prompt will be shown to user
+
+#### PermissionError
+
+Error object with the following properties:
+- `type`: Error type ('NOT_SUPPORTED', 'INVALID_PERMISSION', 'REQUEST_FAILED', 'USER_ABORT', 'SYSTEM_ERROR')
+- `message`: Human-readable error message
+- `permissionName`: The permission name that caused the error
+- `timestamp`: Date when the error occurred
+- `originalError`: Original error object (if available)
