@@ -57,6 +57,7 @@ export { useMutationObserver } from "@/hooks/useMutationObserver";
 export { useMutationObserverRef } from "@/hooks/useMutationObserverRef";
 export { useMapState as useObjectState };
 export { useNavigatorLanguage } from "@/hooks/useNavigatorLanguage";
+export { useNavigatorPermissions } from "@/hooks/useNavigatorPermissions";
 export { useOnClickRef } from "@/hooks/useOnClickRef";
 export { useOnHoverRef } from "@/hooks/useOnHoverRef";
 export { useOnWindowResize } from "@/hooks/useOnWindowResize";
