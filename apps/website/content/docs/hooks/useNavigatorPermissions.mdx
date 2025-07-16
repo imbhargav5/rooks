@@ -329,8 +329,8 @@ The `useNavigatorPermissions` hook accepts the following arguments:
 
 | Argument       | Type                             | Description                                                    | Required |
 | -------------- | -------------------------------- | -------------------------------------------------------------- | -------- |
-| permissionName | SupportedPermissionName          | The name of the permission to monitor                          | Yes      |
-| options        | UseNavigatorPermissionsOptions   | Configuration object for callbacks and behavior               | No       |
+| permissionName | `SupportedPermissionName`        | The name of the permission to monitor                          | Yes      |
+| options        | `UseNavigatorPermissionsOptions` | Configuration object for callbacks and behavior               | No       |
 
 #### SupportedPermissionName
 
@@ -351,8 +351,8 @@ Supported permission names include:
 
 | Property      | Type                                    | Description                                      | Default     |
 | ------------- | --------------------------------------- | ------------------------------------------------ | ----------- |
-| onError       | (error: PermissionError) => void        | Called when an error occurs                     | () => {}    |
-| onStatusChange| (status: PermissionStatus) => void      | Called when permission status changes           | undefined   |
+| onError       | `(error: PermissionError) => void`      | Called when an error occurs                     | () => {}    |
+| onStatusChange| `(status: PermissionStatus) => void`    | Called when permission status changes           | undefined   |
 | onGranted     | () => void                              | Called when permission is granted               | undefined   |
 | onDenied      | () => void                              | Called when permission is denied                | undefined   |
 | onPrompt      | () => void                              | Called when permission is in prompt state       | undefined   |
@@ -379,14 +379,14 @@ Returns an object with the following properties:
 
 | Property          | Type                                   | Description                                           |
 | ----------------- | -------------------------------------- | ----------------------------------------------------- |
-| status            | PermissionStatus \| null               | Current permission status ('granted', 'denied', 'prompt') |
-| isSupported       | boolean                                | Whether the Permissions API is supported             |
-| isInitialized     | boolean                                | Whether the hook has finished initialization         |
-| isLoading         | boolean                                | Whether a permission request is in progress          |
-| isGranted         | boolean                                | Whether the permission is granted                    |
-| isDenied          | boolean                                | Whether the permission is denied                     |
-| isPrompt          | boolean                                | Whether the permission is in prompt state           |
-| requestPermission | () => Promise<PermissionStatus>        | Function to request the permission                   |
+| status            | `PermissionStatus \| null`             | Current permission status ('granted', 'denied', 'prompt') |
+| isSupported       | `boolean`                              | Whether the Permissions API is supported             |
+| isInitialized     | `boolean`                              | Whether the hook has finished initialization         |
+| isLoading         | `boolean`                              | Whether a permission request is in progress          |
+| isGranted         | `boolean`                              | Whether the permission is granted                    |
+| isDenied          | `boolean`                              | Whether the permission is denied                     |
+| isPrompt          | `boolean`                              | Whether the permission is in prompt state           |
+| requestPermission | `() => Promise<PermissionStatus>`      | Function to request the permission                   |
 
 #### PermissionStatus
 
