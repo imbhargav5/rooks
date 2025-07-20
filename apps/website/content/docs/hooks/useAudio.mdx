@@ -18,19 +18,22 @@ A hook to control and manage audio elements in your React application.
 import { useAudio } from "rooks";
 
 export default function App() {
-  const audioSrc = "https://example.com/audio.mp3";
-  const [{ isPlaying, isMuted }, audioRef] = useAudio({ autoPlay: false });
-
-  const handlePlay = () => audioRef.current.play();
-  const handlePause = () => audioRef.current.pause();
-  const handleToggleMute = () => (audioRef.current.muted = !isMuted);
+  const audioSrc =
+    "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3";
+  const [audioRef, audioState, audioControls] = useAudio({
+    autoPlay: false,
+  });
 
   return (
     <>
+      {audioState.isPlaying ? "Playing" : "Not playing "}
+      <br />
       <audio ref={audioRef} src={audioSrc} />
-      <button onClick={handlePlay}>Play</button>
-      <button onClick={handlePause}>Pause</button>
-      <button onClick={handleToggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+      <button onClick={audioControls.play}>Play</button>
+      <button onClick={audioControls.pause}>Pause</button>
+      <button onClick={audioControls.toggleMute}>
+        {audioState.isMuted ? "Unmute" : "Mute"}
+      </button>
     </>
   );
 }
@@ -41,15 +44,49 @@ export default function App() {
 | Argument value | Type   | Description     | Default |
 | -------------- | ------ | --------------- | ------- |
 | options        | Object | See table below | {}      |
+| callbacks      | Object | See table below | {}      |
+
+### Options
 
 | Options value | Type    | Description                                               | Default |
 | ------------- | ------- | --------------------------------------------------------- | ------- |
 | autoPlay      | Boolean | Indicates if the audio should start playing automatically | false   |
 | isMuted       | Boolean | Indicates if the audio should be muted by default         | false   |
 
+### Callbacks
+
+| Callbacks value  | Type     | Description                          | Default   |
+| ---------------- | -------- | ------------------------------------ | --------- |
+| onPlay           | Function | Called when audio starts playing     | undefined |
+| onPause          | Function | Called when audio is paused          | undefined |
+| onMute           | Function | Called when audio is muted           | undefined |
+| onUnmute         | Function | Called when audio is unmuted         | undefined |
+| onLoadedMetadata | Function | Called when audio metadata is loaded | undefined |
+
 ### Returns
+
+Returns an array with three elements:
 
 | Return value | Type         | Description                                                        | Default   |
 | ------------ | ------------ | ------------------------------------------------------------------ | --------- |
-| state        | Object       | An object containing isPlaying and isMuted properties              | {}        |
 | ref          | Callback Ref | A ref that should be used on the audio element you want to control | undefined |
+| state        | Object       | An object containing isPlaying and isMuted properties              | {}        |
+| controls     | Object       | An object containing audio control methods                         | {}        |
+
+### State Properties
+
+| Property  | Type    | Description                  |
+| --------- | ------- | ---------------------------- |
+| isPlaying | Boolean | Whether the audio is playing |
+| isMuted   | Boolean | Whether the audio is muted   |
+
+### Control Methods
+
+| Method     | Type     | Description              |
+| ---------- | -------- | ------------------------ |
+| play       | Function | Start playing the audio  |
+| pause      | Function | Pause the audio          |
+| togglePlay | Function | Toggle play/pause state  |
+| mute       | Function | Mute the audio           |
+| unmute     | Function | Unmute the audio         |
+| toggleMute | Function | Toggle mute/unmute state |
