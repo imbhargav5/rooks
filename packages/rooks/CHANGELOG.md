@@ -1,5 +1,11 @@
 # rooks
 
+## 8.1.1
+
+### Patch Changes
+
+- [`477133e`](https://github.com/imbhargav5/rooks/commit/477133e0adc74640c5b843a1659871bbff74448d) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Rewrite useNavigatorLanguage and useDocumentVisibilityState to useSyncExternalStore
+
 ## 8.1.0
 
 ### Minor Changes
