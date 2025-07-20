@@ -1,5 +1,6 @@
 {
   "title": "Hooks",
-  "icon": "Home",
-  "root": true
+  "icon": "Anchor",
+  "root": true,
+  "defaultOpen": true
 }
