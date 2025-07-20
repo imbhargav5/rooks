@@ -1,16 +1,31 @@
-import { useState } from "react";
-import { useWindowEventListener } from "./useWindowEventListener";
+import { useSyncExternalStore } from "react";
 
 type Language = string | null;
 
-function getLanguage(): Language {
-  // eslint-disable-next-line no-negated-condition
+function getLanguageSnapshot(): Language {
+
   if (typeof navigator !== "undefined") {
-    // eslint-disable-next-line @typescript-eslint/dot-notation
+
     return navigator.language;
   } else {
     return null;
   }
+}
+
+function getLanguageSubscription(callback: () => void) {
+  // subscription function is only called on the client side
+  if (typeof window !== "undefined") {
+    window.addEventListener("languagechange", callback);
+    return () => {
+      window.removeEventListener("languagechange", callback);
+    };
+  }
+  // unreachable
+  return () => { };
+}
+
+function getLanguageServerSnapshot(): Language {
+  return null;
 }
 
 /**
@@ -21,11 +36,5 @@ function getLanguage(): Language {
  * @see https://rooks.vercel.app/docs/useNavigatorLanguage
  */
 export function useNavigatorLanguage(): Language {
-  const [language, setLanguage] = useState<Language>(getLanguage);
-
-  useWindowEventListener("languagechange", () => {
-    setLanguage(getLanguage);
-  });
-
-  return language;
+  return useSyncExternalStore(getLanguageSubscription, getLanguageSnapshot, getLanguageServerSnapshot);
 }
