@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import type { DeepNullable } from "@/types/utils";
 
@@ -38,19 +38,19 @@ export function useWindowSize(): WindowDimensions {
     }
   });
 
-  function onResize() {
-    setWindowSize(getDimensions());
-  }
 
   // set resize handler once on mount and clean before unmount
   useIsomorphicEffect(() => {
     if (typeof window === "undefined") {
-      return () => {};
+      return () => { };
     } else {
-      window.addEventListener("resize", onResize);
+      function handleResize() {
+        setWindowSize(getDimensions());
+      }
+      window.addEventListener("resize", handleResize);
 
       return () => {
-        window.removeEventListener("resize", onResize);
+        window.removeEventListener("resize", handleResize);
       };
     }
   }, []);
