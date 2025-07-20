@@ -1,7 +1,30 @@
-import { useCallback, useState } from "react";
-import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
+import { useSyncExternalStore } from "react";
 
 type UseDocumentVisibilityStateReturnType = Document["visibilityState"] | null;
+
+function getVisibilityStateSnapshot(): UseDocumentVisibilityStateReturnType {
+  if (typeof document !== "undefined") {
+    return document.visibilityState;
+  } else {
+    return null;
+  }
+}
+
+function getVisibilityStateSubscription(callback: () => void) {
+  // subscription function is only called on the client side
+  if (typeof document !== "undefined") {
+    document.addEventListener("visibilitychange", callback);
+    return () => {
+      document.removeEventListener("visibilitychange", callback);
+    };
+  }
+  // unreachable
+  return () => { };
+}
+
+function getVisibilityStateServerSnapshot(): UseDocumentVisibilityStateReturnType {
+  return null;
+}
 
 /**
  * useDocumentVisibilityState
@@ -10,25 +33,7 @@ type UseDocumentVisibilityStateReturnType = Document["visibilityState"] | null;
  * @see {@link https://rooks.vercel.app/docs/useDocumentVisibilityState}
  */
 function useDocumentVisibilityState(): UseDocumentVisibilityStateReturnType {
-  const [visibilityState, setVisibilityState] =
-    useState<UseDocumentVisibilityStateReturnType>(
-      document ? document.visibilityState : null
-    );
-
-  const handleVisibilityChange = useCallback(() => {
-    setVisibilityState(document ? document.visibilityState : null);
-  }, []);
-
-  useGlobalObjectEventListener(
-    global.document,
-    "visibilitychange",
-    handleVisibilityChange,
-    {},
-    true,
-    true
-  );
-
-  return visibilityState;
+  return useSyncExternalStore(getVisibilityStateSubscription, getVisibilityStateSnapshot, getVisibilityStateServerSnapshot);
 }
 
 export { useDocumentVisibilityState };
