@@ -6,8 +6,126 @@ sidebar_label: useRenderCount
 
 ## About
 
-Get the render count of a component
+A simple debugging hook that tracks how many times a component has rendered. Useful for identifying unnecessary re-renders and optimizing component performance.
+
+[//]: # "Main"
 
 ## Examples
 
-TODO: Add an example here.
+#### Basic example
+
+```jsx
+import { useRenderCount } from "rooks";
+
+export default function App() {
+  const renderCount = useRenderCount();
+
+  return (
+    <div>
+      <h1>Component Render Count</h1>
+      <p>This component has rendered {renderCount} times</p>
+    </div>
+  );
+}
+```
+
+#### Debugging unnecessary re-renders
+
+```jsx
+import { useState } from "react";
+import { useRenderCount } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  const renderCount = useRenderCount();
+
+  return (
+    <div>
+      <h1>Debugging Re-renders</h1>
+      <p>Render count: {renderCount}</p>
+      
+      <div>
+        <label>Counter: {count}</label>
+        <button onClick={() => setCount(c => c + 1)}>Increment</button>
+      </div>
+      
+      <div>
+        <label>Name:</label>
+        <input 
+          value={name} 
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Type your name"
+        />
+      </div>
+      
+      {renderCount > 10 && (
+        <div style={{color: 'red'}}>
+          Warning: This component has re-rendered {renderCount} times!
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+#### Conditional behavior based on render count
+
+```jsx
+import { useState, useEffect } from "react";
+import { useRenderCount } from "rooks";
+
+export default function App() {
+  const [data, setData] = useState(null);
+  const renderCount = useRenderCount();
+
+  // Only show loading indicator after first render
+  const showLoading = renderCount === 1 && !data;
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setData("Data loaded successfully!");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div>
+      <h1>Conditional Rendering Example</h1>
+      <p>Render #{renderCount}</p>
+      
+      {showLoading && <p>Loading...</p>}
+      {data && <p>{data}</p>}
+      
+      <button onClick={() => setData(null)}>Reset Data</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+This hook does not accept any arguments.
+
+### Returns
+
+| Return value | Type   | Description                                                    |
+| ------------ | ------ | -------------------------------------------------------------- |
+| renderCount  | Number | The number of times the component has rendered (starts from 1) |
+
+## Use Cases
+
+- **Performance Debugging**: Identify components that re-render too frequently
+- **Development Tools**: Build custom debugging components that show render information
+- **Conditional Logic**: Execute code only after a certain number of renders
+- **Testing**: Verify that optimizations are working correctly
+- **Component Analysis**: Understand how state changes affect component rendering
+
+## Notes
+
+- The render count starts from 1 (not 0) on the first render
+- Each call to the hook maintains its own independent render count
+- The count persists for the lifetime of the component
+- This hook is primarily intended for development and debugging purposes
