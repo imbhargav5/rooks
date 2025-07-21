@@ -6,14 +6,158 @@ sidebar_label: useOnHoverRef
 
 ## About
 
-On hover callback hook
+A hook that returns a ref callback to easily attach hover event listeners (mouseenter and mouseleave) to DOM elements. The hook automatically manages event listeners and cleans them up when the component unmounts or the target element changes.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
-import {useOnHoverRef} from "rooks"
+#### Basic example
+
+```jsx
+import { useOnHoverRef } from "rooks";
+
 export default function App() {
-  useOnHoverRef();
-  return null
+  const hoverRef = useOnHoverRef(
+    () => console.log("Mouse entered!"),
+    () => console.log("Mouse left!")
+  );
+
+  return (
+    <div 
+      ref={hoverRef}
+      style={{ 
+        padding: "20px", 
+        backgroundColor: "lightblue",
+        border: "1px solid blue"
+      }}
+    >
+      Hover over me and check the console!
+    </div>
+  );
 }
 ```
+
+#### Hover state management
+
+```jsx
+import { useState } from "react";
+import { useOnHoverRef } from "rooks";
+
+export default function App() {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const hoverRef = useOnHoverRef(
+    () => setIsHovered(true),
+    () => setIsHovered(false)
+  );
+
+  return (
+    <div>
+      <div 
+        ref={hoverRef}
+        style={{
+          padding: "20px",
+          backgroundColor: isHovered ? "lightgreen" : "lightgray",
+          border: "2px solid",
+          borderColor: isHovered ? "green" : "gray",
+          borderRadius: "8px",
+          cursor: "pointer",
+          transition: "all 0.3s ease"
+        }}
+      >
+        {isHovered ? "Currently hovering! 🎉" : "Hover over me"}
+      </div>
+      <p>Hover state: {isHovered ? "Active" : "Inactive"}</p>
+    </div>
+  );
+}
+```
+
+#### Advanced example with event details
+
+```jsx
+import { useState } from "react";
+import { useOnHoverRef } from "rooks";
+
+export default function App() {
+  const [hoverInfo, setHoverInfo] = useState(null);
+  
+  const hoverRef = useOnHoverRef(
+    (event) => {
+      setHoverInfo({
+        type: "enter",
+        x: event.clientX,
+        y: event.clientY,
+        timestamp: Date.now()
+      });
+    },
+    (event) => {
+      setHoverInfo({
+        type: "leave", 
+        x: event.clientX,
+        y: event.clientY,
+        timestamp: Date.now()
+      });
+    }
+  );
+
+  return (
+    <div>
+      <div 
+        ref={hoverRef}
+        style={{
+          width: "200px",
+          height: "100px",
+          backgroundColor: "lightyellow",
+          border: "2px dashed orange",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "20px"
+        }}
+      >
+        Hover tracking area
+      </div>
+      
+      {hoverInfo && (
+        <div style={{ padding: "10px", backgroundColor: "#f0f0f0" }}>
+          <h4>Last hover event:</h4>
+          <p>Type: {hoverInfo.type}</p>
+          <p>Position: ({hoverInfo.x}, {hoverInfo.y})</p>
+          <p>Time: {new Date(hoverInfo.timestamp).toLocaleTimeString()}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument     | Type     | Description                                    | Default   |
+| ------------ | -------- | ---------------------------------------------- | --------- |
+| onMouseEnter | Function | Callback function called when mouse enters    | undefined |
+| onMouseLeave | Function | Callback function called when mouse leaves    | undefined |
+
+### Callback Parameters
+
+Both `onMouseEnter` and `onMouseLeave` callbacks receive the following parameter:
+
+| Parameter | Type       | Description                    |
+| --------- | ---------- | ------------------------------ |
+| event     | MouseEvent | The native mouse event object  |
+
+### Returns
+
+| Return value | Type         | Description                                                           |
+| ------------ | ------------ | --------------------------------------------------------------------- |
+| ref          | Callback Ref | A ref callback that should be passed to the element you want to track |
+
+### Usage Notes
+
+- The hook automatically handles adding and removing event listeners
+- Event listeners are cleaned up when the component unmounts or when the target element changes
+- Both callback parameters are optional - you can provide just one if needed
+- The hook uses `mouseenter` and `mouseleave` events, which don't bubble and only trigger when crossing the element boundary
+- Callbacks are wrapped with `useFreshCallback` to ensure they always have access to the latest values from closures

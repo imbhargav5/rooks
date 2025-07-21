@@ -6,15 +6,15 @@ sidebar_label: useSessionstorageState
 
 ## About
 
-useState but syncs with sessionstorage
+A hook that provides state management synchronized with sessionStorage. It automatically persists state changes to sessionStorage and provides real-time synchronization across browser windows and tabs. The hook handles JSON serialization/deserialization automatically and provides a clean API similar to React's useState.
 
 [//]: # "Main"
 
 ## Examples
 
+#### Basic example
+
 ```jsx
-import "./styles.css";
-import React from "react";
 import { useSessionstorageState } from "rooks";
 
 export default function App() {
@@ -22,11 +22,187 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Rooks : useSessionstorageState</h1>
-      <p> Refresh the page to see the previous value in tact</p>
-      <button onClick={() => setCount(0)}>clear</button>
-      <button onClick={() => setCount(count + 1)}>Click me {count}</button>
+      <h1>Session Storage Counter</h1>
+      <p>Count: {count}</p>
+      <p>Refresh the page to see the value persisted!</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
     </div>
   );
 }
 ```
+
+#### Complex object storage
+
+```jsx
+import { useSessionstorageState } from "rooks";
+
+export default function UserProfile() {
+  const [user, setUser] = useSessionstorageState("user-profile", {
+    name: "",
+    email: "",
+    preferences: {
+      theme: "light",
+      notifications: true
+    }
+  });
+
+  const updateUser = (field, value) => {
+    setUser(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const updatePreferences = (pref, value) => {
+    setUser(prev => ({
+      ...prev,
+      preferences: {
+        ...prev.preferences,
+        [pref]: value
+      }
+    }));
+  };
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <input
+        placeholder="Name"
+        value={user.name}
+        onChange={(e) => updateUser("name", e.target.value)}
+      />
+      <input
+        placeholder="Email"
+        value={user.email}
+        onChange={(e) => updateUser("email", e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={user.preferences.notifications}
+          onChange={(e) => updatePreferences("notifications", e.target.checked)}
+        />
+        Enable notifications
+      </label>
+      <select
+        value={user.preferences.theme}
+        onChange={(e) => updatePreferences("theme", e.target.value)}
+      >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+  );
+}
+```
+
+#### Cross-window synchronization with remove functionality
+
+```jsx
+import { useSessionstorageState } from "rooks";
+
+export default function SyncDemo() {
+  const [message, setMessage, removeMessage] = useSessionstorageState(
+    "sync-message", 
+    "Hello World"
+  );
+  const [lastUpdated, setLastUpdated] = useSessionstorageState(
+    "last-updated", 
+    Date.now()
+  );
+
+  const updateMessage = (newMessage) => {
+    setMessage(newMessage);
+    setLastUpdated(Date.now());
+  };
+
+  const clearAll = () => {
+    removeMessage();
+    setLastUpdated(Date.now());
+  };
+
+  return (
+    <div>
+      <h2>Cross-Window Sync Demo</h2>
+      <p>Open this page in multiple tabs to see real-time synchronization!</p>
+      
+      <div>
+        <strong>Current Message:</strong> {message || "No message"}
+      </div>
+      <div>
+        <strong>Last Updated:</strong> {new Date(lastUpdated).toLocaleTimeString()}
+      </div>
+      
+      <input
+        value={message || ""}
+        onChange={(e) => updateMessage(e.target.value)}
+        placeholder="Type a message..."
+      />
+      
+      <button onClick={() => updateMessage("Updated from tab!")}>
+        Update Message
+      </button>
+      <button onClick={clearAll}>
+        Clear Message
+      </button>
+      
+      <p>
+        <em>Try changing the message in one tab and watch it update in others!</em>
+      </p>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument     | Type              | Description                                    | Default |
+| ------------ | ----------------- | ---------------------------------------------- | ------- |
+| key          | string            | The sessionStorage key to use for persistence | -       |
+| initialState | S \| (() => S)    | Initial state value or function that returns initial state | -       |
+
+### Returns
+
+Returns an array with three elements:
+
+| Return value | Type                        | Description                                           |
+| ------------ | --------------------------- | ----------------------------------------------------- |
+| value        | S                           | Current state value, synchronized with sessionStorage |
+| setValue     | `Dispatch<SetStateAction<S>>` | Function to update the state (similar to useState)    |
+| remove       | () => void                  | Function to remove the item from sessionStorage       |
+
+### Features
+
+#### Automatic Persistence
+- State changes are automatically saved to sessionStorage
+- Values are JSON serialized/deserialized automatically
+- Handles complex objects, arrays, and primitive values
+
+#### Cross-Window Synchronization
+- Changes in one browser tab/window automatically sync to other tabs/windows
+- Uses native `storage` events for cross-document communication
+- Real-time updates without page refresh
+
+#### Within-Document Synchronization
+- Multiple instances of the same hook with the same key stay synchronized
+- Uses custom events for efficient within-document communication
+- Prevents infinite update loops
+
+#### Error Handling
+- Gracefully handles JSON parsing errors
+- Safe fallback when sessionStorage is unavailable (SSR)
+- Console warnings for debugging in non-browser environments
+
+#### Memory Management
+- Automatically cleans up event listeners on unmount
+- Optimized re-renders using useCallback and useRef
+- No memory leaks from event listeners
+
+### Notes
+
+- The hook is SSR-safe and handles cases where `window` or `sessionStorage` are undefined
+- Values are stored as JSON strings, so only JSON-serializable values are supported
+- sessionStorage data persists until the browser tab is closed (unlike localStorage which persists indefinitely)
+- Cross-window synchronization only works within the same domain and browser session
