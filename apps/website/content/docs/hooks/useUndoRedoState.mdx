@@ -6,14 +6,197 @@ sidebar_label: useUndoRedoState
 
 ## About
 
-Setstate but can also undo and redo 
+A hook that provides state management with undo and redo capabilities. It maintains a history of state changes and allows you to navigate through them, making it perfect for features like text editors, drawing apps, or any application where users need to undo/redo their actions.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
-import {useUndoRedoState} from "rooks"
+#### Basic counter example
+
+```jsx
+import { useUndoRedoState } from "rooks";
+
 export default function App() {
-  useUndoRedoState();
-  return null
+  const [count, setCount, controls] = useUndoRedoState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <br />
+      <button onClick={controls.undo} disabled={!controls.isUndoPossible}>
+        Undo
+      </button>
+      <button onClick={controls.redo} disabled={!controls.isRedoPossible}>
+        Redo
+      </button>
+      <button onClick={controls.clearAll}>Clear History</button>
+    </div>
+  );
 }
 ```
+
+#### Text editor with function updater
+
+```jsx
+import { useUndoRedoState } from "rooks";
+
+export default function TextEditor() {
+  const [text, setText, controls] = useUndoRedoState("");
+
+  const handleAddText = (newText) => {
+    setText(prevText => prevText + newText);
+  };
+
+  const handleClearText = () => {
+    setText("");
+  };
+
+  return (
+    <div>
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Start typing..."
+        rows={4}
+        cols={50}
+      />
+      <br />
+      <button onClick={() => handleAddText(" Hello!")}>Add Hello</button>
+      <button onClick={handleClearText}>Clear</button>
+      <br />
+      <button onClick={controls.undo} disabled={!controls.isUndoPossible}>
+        Undo ({controls.isUndoPossible ? "Available" : "Not Available"})
+      </button>
+      <button onClick={controls.redo} disabled={!controls.isRedoPossible}>
+        Redo ({controls.isRedoPossible ? "Available" : "Not Available"})
+      </button>
+      <br />
+      <button onClick={controls.clearUndoStack}>Clear Undo History</button>
+      <button onClick={controls.clearRedoStack}>Clear Redo History</button>
+    </div>
+  );
+}
+```
+
+#### Advanced example with limited history
+
+```jsx
+import { useUndoRedoState } from "rooks";
+
+export default function DrawingApp() {
+  const [shapes, setShapes, controls] = useUndoRedoState([], { maxDepth: 5 });
+
+  const addShape = (shape) => {
+    setShapes(prevShapes => [...prevShapes, shape]);
+  };
+
+  const addCircle = () => {
+    addShape({
+      type: "circle",
+      id: Date.now(),
+      x: Math.random() * 300,
+      y: Math.random() * 200
+    });
+  };
+
+  const addSquare = () => {
+    addShape({
+      type: "square",
+      id: Date.now(),
+      x: Math.random() * 300,
+      y: Math.random() * 200
+    });
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={addCircle}>Add Circle</button>
+        <button onClick={addSquare}>Add Square</button>
+        <button onClick={() => setShapes([])}>Clear All</button>
+      </div>
+      <div>
+        <button onClick={controls.undo} disabled={!controls.isUndoPossible}>
+          Undo
+        </button>
+        <button onClick={controls.redo} disabled={!controls.isRedoPossible}>
+          Redo
+        </button>
+        <span style={{ marginLeft: 20 }}>
+          History limited to 5 actions
+        </span>
+      </div>
+      <div style={{ border: "1px solid #ccc", width: 400, height: 300, position: "relative" }}>
+        {shapes.map(shape => (
+          <div
+            key={shape.id}
+            style={{
+              position: "absolute",
+              left: shape.x,
+              top: shape.y,
+              width: 20,
+              height: 20,
+              backgroundColor: shape.type === "circle" ? "red" : "blue",
+              borderRadius: shape.type === "circle" ? "50%" : "0"
+            }}
+          />
+        ))}
+      </div>
+      <p>Shapes count: {shapes.length}</p>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument value | Type   | Description                      | Default |
+| -------------- | ------ | -------------------------------- | ------- |
+| initialState   | T      | The initial state value          | -       |
+| options        | Object | Configuration options (optional) | {}      |
+
+### Options
+
+| Options value | Type   | Description                                                                    | Default |
+| ------------- | ------ | ------------------------------------------------------------------------------ | ------- |
+| maxDepth      | Number | Maximum number of states to keep in history. Older states are automatically removed | 100     |
+
+### Returns
+
+Returns an array with three elements:
+
+| Return value | Type         | Description                                                          | Default   |
+| ------------ | ------------ | -------------------------------------------------------------------- | --------- |
+| state        | T            | The current state value                                              | initialState |
+| setState     | Function     | Function to update the state (supports both values and functions)   | -         |
+| controls     | Object       | An object containing undo/redo methods and state flags              | {}        |
+
+### Control Methods
+
+| Method         | Type     | Description                                                     |
+| -------------- | -------- | --------------------------------------------------------------- |
+| undo           | Function | Move to the previous state in history                           |
+| redo           | Function | Move to the next state in history                               |
+| canUndo        | Function | **Deprecated:** Use `isUndoPossible` instead. Returns boolean   |
+| canRedo        | Function | **Deprecated:** Use `isRedoPossible` instead. Returns boolean   |
+| clearUndoStack | Function | Clear all undo history                                          |
+| clearRedoStack | Function | Clear all redo history                                          |
+| clearAll       | Function | Clear both undo and redo history                                |
+
+### Control Properties
+
+| Property       | Type    | Description                                    |
+| -------------- | ------- | ---------------------------------------------- |
+| isUndoPossible | Boolean | Whether an undo operation is possible          |
+| isRedoPossible | Boolean | Whether a redo operation is possible           |
+
+### Notes
+
+- The `setState` function accepts both direct values and function updaters, just like React's `useState`
+- When a new state is set, the redo history is automatically cleared
+- The hook maintains separate undo and redo stacks internally
+- History is limited by the `maxDepth` option to prevent memory issues
+- The `canUndo` and `canRedo` methods are deprecated in favor of the `isUndoPossible` and `isRedoPossible` properties
