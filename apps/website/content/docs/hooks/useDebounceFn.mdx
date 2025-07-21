@@ -6,14 +6,210 @@ sidebar_label: useDebounceFn
 
 ## About
 
-Powerful debounce function hook for React
+A powerful debounce function hook that wraps any function with debounce functionality. This hook is useful for limiting the rate at which a function can fire, commonly used for search inputs, API calls, resize handlers, and other performance-sensitive operations.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
-import {useDebounceFn} from "rooks"
+#### Basic trailing debounce
+
+```jsx
+import { useDebounceFn } from "rooks";
+import { useState } from "react";
+
 export default function App() {
-  useDebounceFn();
-  return null
+  const [count, setCount] = useState(0);
+  const [logs, setLogs] = useState([]);
+
+  const addLog = (message) => {
+    setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+  };
+
+  const [debouncedIncrement, isDebouncing] = useDebounceFn(
+    () => {
+      setCount(prev => prev + 1);
+      addLog("Counter incremented!");
+    },
+    500
+  );
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Is debouncing: {isDebouncing ? "Yes" : "No"}</p>
+      <button onClick={debouncedIncrement}>
+        Increment (debounced)
+      </button>
+      <div>
+        <h4>Logs:</h4>
+        {logs.map((log, index) => (
+          <div key={index}>{log}</div>
+        ))}
+      </div>
+    </div>
+  );
 }
 ```
+
+#### Leading edge debounce
+
+```jsx
+import { useDebounceFn } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [clickCount, setClickCount] = useState(0);
+
+  const [debouncedClick, isDebouncing] = useDebounceFn(
+    () => {
+      setClickCount(prev => prev + 1);
+    },
+    1000,
+    { leading: true, trailing: false }
+  );
+
+  return (
+    <div>
+      <p>Click count: {clickCount}</p>
+      <p>Status: {isDebouncing ? "Cooling down..." : "Ready"}</p>
+      <button onClick={debouncedClick}>
+        Click me (fires immediately, then cooldown)
+      </button>
+    </div>
+  );
+}
+```
+
+#### Search input with debounce
+
+```jsx
+import { useDebounceFn } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const performSearch = async (term) => {
+    if (!term.trim()) {
+      setSearchResults([]);
+      return;
+    }
+    
+    setIsSearching(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setSearchResults([
+      `Result 1 for "${term}"`,
+      `Result 2 for "${term}"`,
+      `Result 3 for "${term}"`
+    ]);
+    setIsSearching(false);
+  };
+
+  const [debouncedSearch, isDebouncing] = useDebounceFn(
+    performSearch,
+    300
+  );
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    debouncedSearch(value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Search..."
+      />
+      <p>
+        Status: {isDebouncing ? "Typing..." : isSearching ? "Searching..." : "Ready"}
+      </p>
+      <ul>
+        {searchResults.map((result, index) => (
+          <li key={index}>{result}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+#### Advanced usage with maxWait
+
+```jsx
+import { useDebounceFn } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [logs, setLogs] = useState([]);
+
+  const addLog = (message) => {
+    setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+  };
+
+  const [debouncedLog, isDebouncing] = useDebounceFn(
+    (message) => addLog(message),
+    2000,
+    { 
+      leading: true, 
+      trailing: true, 
+      maxWait: 3000 
+    }
+  );
+
+  return (
+    <div>
+      <p>Status: {isDebouncing ? "Debouncing..." : "Ready"}</p>
+      <button onClick={() => debouncedLog("Button clicked!")}>
+        Click rapidly (leading + trailing + maxWait)
+      </button>
+      <div>
+        <h4>Logs:</h4>
+        {logs.map((log, index) => (
+          <div key={index}>{log}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type     | Description                                    | Default                              |
+| -------- | -------- | ---------------------------------------------- | ------------------------------------ |
+| func     | Function | The function to debounce                       | -                                    |
+| delay    | Number   | The delay in milliseconds                      | -                                    |
+| options  | Object   | Configuration options (see options table)     | { leading: false, trailing: true }   |
+
+### Options
+
+| Option   | Type    | Description                                                              | Default |
+| -------- | ------- | ------------------------------------------------------------------------ | ------- |
+| leading  | Boolean | Execute the function on the leading edge of the delay                   | false   |
+| trailing | Boolean | Execute the function on the trailing edge of the delay                  | true    |
+| maxWait  | Number  | Maximum time the function can be delayed before it's forcibly executed  | -       |
+
+### Returns
+
+Returns an array with two elements:
+
+| Return value     | Type     | Description                                                                |
+| ---------------- | -------- | -------------------------------------------------------------------------- |
+| debouncedFn      | Function | The debounced version of the original function                             |
+| isDebouncing     | Boolean  | Whether the debounce timer is currently active                             |
+
+### Notes
+
+- At least one of `leading` or `trailing` must be `true`. Setting both to `false` will throw an error.
+- If `maxWait` is specified, it must be greater than or equal to the `delay` value.
+- The `maxWait` option ensures the function is called at least once every `maxWait` milliseconds, even if the debounced function keeps being called.
+- The debounced function preserves the original function's arguments and is type-safe.
+- The `isDebouncing` boolean can be used to show loading states or disable UI elements while debouncing is active.
