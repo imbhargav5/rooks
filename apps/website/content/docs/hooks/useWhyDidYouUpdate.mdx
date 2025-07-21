@@ -15,6 +15,7 @@ A hook that tracks which props or values changed to cause a component rerender. 
 #### Basic example with component props
 
 ```jsx
+import { useState } from "react";
 import { useWhyDidYouUpdate } from "rooks";
 
 function ExpensiveComponent({ name, age, hobbies, settings }) {
@@ -56,6 +57,7 @@ export default function App() {
 #### Advanced example with specific values
 
 ```jsx
+import { useState, useMemo, useEffect } from "react";
 import { useWhyDidYouUpdate } from "rooks";
 
 function DataVisualization({ data, filters }) {
@@ -144,6 +146,8 @@ When props change, the hook logs information in the following format:
 
 2. **Object and Array Props**: Pay special attention to object and array props that might be recreated on every render:
    ```jsx
+   import { useMemo } from "react";
+   
    // ❌ Bad - creates new array every render
    <Component items={data.map(transform)} />
    
