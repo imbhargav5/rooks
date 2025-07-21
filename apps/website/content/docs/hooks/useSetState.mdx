@@ -8,12 +8,118 @@ sidebar_label: useSetState
 
 Manage the state of a Set in React. Exposes add, delete and clear methods along with the current set to easily manipulate values in a set.
 
+[//]: # "Main"
+
 ## Examples
+
+#### Basic example with numbers
 
 ```jsx
 import { useSetState } from "rooks";
+
 export default function App() {
-  useSetState();
-  return null;
+  const [numberSet, setControls] = useSetState(new Set([1, 2, 3]));
+
+  return (
+    <div>
+      <div>Current set: {Array.from(numberSet).join(", ")}</div>
+      <div>Set size: {numberSet.size}</div>
+      <br />
+      <button onClick={() => setControls.add(4)}>Add 4</button>
+      <button onClick={() => setControls.add(5)}>Add 5</button>
+      <button onClick={() => setControls.delete(1)}>Delete 1</button>
+      <button onClick={() => setControls.clear()}>Clear All</button>
+    </div>
+  );
 }
 ```
+
+#### Working with strings and membership checking
+
+```jsx
+import { useSetState } from "rooks";
+
+export default function App() {
+  const [fruits, fruitControls] = useSetState(new Set(["apple", "banana"]));
+
+  const addRandomFruit = () => {
+    const randomFruits = ["orange", "grape", "mango", "pear"];
+    const randomFruit = randomFruits[Math.floor(Math.random() * randomFruits.length)];
+    fruitControls.add(randomFruit);
+  };
+
+  return (
+    <div>
+      <div>Fruits: {Array.from(fruits).join(", ")}</div>
+      <div>Has apple: {fruits.has("apple") ? "Yes" : "No"}</div>
+      <div>Has orange: {fruits.has("orange") ? "Yes" : "No"}</div>
+      <br />
+      <button onClick={addRandomFruit}>Add Random Fruit</button>
+      <button onClick={() => fruitControls.delete("apple")}>Remove Apple</button>
+      <button onClick={() => fruitControls.clear()}>Clear All</button>
+    </div>
+  );
+}
+```
+
+#### Managing selected items
+
+```jsx
+import { useSetState } from "rooks";
+
+export default function App() {
+  const [selectedItems, itemControls] = useSetState(new Set());
+  const availableItems = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+
+  const toggleItem = (item) => {
+    if (selectedItems.has(item)) {
+      itemControls.delete(item);
+    } else {
+      itemControls.add(item);
+    }
+  };
+
+  return (
+    <div>
+      <div>Selected items: {Array.from(selectedItems).join(", ")}</div>
+      <div>Total selected: {selectedItems.size}</div>
+      <br />
+      {availableItems.map((item) => (
+        <label key={item} style={{ display: "block", margin: "5px 0" }}>
+          <input
+            type="checkbox"
+            checked={selectedItems.has(item)}
+            onChange={() => toggleItem(item)}
+          />
+          {item}
+        </label>
+      ))}
+      <br />
+      <button onClick={() => itemControls.clear()}>Clear Selection</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument value   | Type   | Description                      | Default |
+| ---------------- | ------ | -------------------------------- | ------- |
+| initialSetValue  | Set<T> | The initial value of the set to manage | Required |
+
+### Returns
+
+Returns an array with two elements:
+
+| Return value | Type                    | Description                                    | Default   |
+| ------------ | ----------------------- | ---------------------------------------------- | --------- |
+| set          | Set<T>                  | The current state of the Set                   | new Set() |
+| controls     | UseSetStateControls<T>  | An object containing set manipulation methods   | {}        |
+
+### Control Methods
+
+| Method | Type     | Description                              |
+| ------ | -------- | ---------------------------------------- |
+| add    | Function | Add one or more values to the set        |
+| delete | Function | Delete one or more values from the set   |
+| clear  | Function | Remove all values from the set           |
