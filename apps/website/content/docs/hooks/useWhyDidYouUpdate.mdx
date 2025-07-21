@@ -6,14 +6,165 @@ sidebar_label: useWhyDidYouUpdate
 
 ## About
 
-A hook that can track which value change caused a rerender
+A hook that tracks which props or values changed to cause a component rerender. This is extremely useful for debugging performance issues and understanding why your component is re-rendering unnecessarily.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
-import {useWhyDidYouUpdate} from "rooks"
+#### Basic example with component props
+
+```jsx
+import { useWhyDidYouUpdate } from "rooks";
+
+function ExpensiveComponent({ name, age, hobbies, settings }) {
+  // Track all props to see which ones are causing rerenders
+  useWhyDidYouUpdate("ExpensiveComponent", {
+    name,
+    age,
+    hobbies,
+    settings
+  });
+
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Hobbies: {hobbies.join(", ")}</p>
+    </div>
+  );
+}
+
 export default function App() {
-  useWhyDidYouUpdate();
-  return null
+  const [count, setCount] = useState(0);
+  const user = {
+    name: "John",
+    age: 30,
+    hobbies: ["reading", "coding"], // This creates a new array on every render!
+    settings: { theme: "dark" }
+  };
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>Count: {count}</button>
+      <ExpensiveComponent {...user} />
+    </>
+  );
 }
 ```
+
+#### Advanced example with specific values
+
+```jsx
+import { useWhyDidYouUpdate } from "rooks";
+
+function DataVisualization({ data, filters }) {
+  const [processedData, setProcessedData] = useState([]);
+  const expensiveComputation = useMemo(() => {
+    return data.filter(filters.filterFn).map(filters.mapFn);
+  }, [data, filters]);
+
+  // Track specific values that might cause expensive recalculations
+  useWhyDidYouUpdate("DataVisualization", {
+    dataLength: data.length,
+    filterType: filters.type,
+    hasFilterFn: !!filters.filterFn,
+    expensiveComputationResult: expensiveComputation
+  });
+
+  useEffect(() => {
+    setProcessedData(expensiveComputation);
+  }, [expensiveComputation]);
+
+  return <Chart data={processedData} />;
+}
+```
+
+#### Example with conditional logging
+
+```jsx
+import { useWhyDidYouUpdate } from "rooks";
+
+function ProductionComponent({ userId, preferences, theme }) {
+  // Only enable logging in development
+  useWhyDidYouUpdate(
+    "ProductionComponent",
+    { userId, preferences, theme },
+    process.env.NODE_ENV === "development"
+  );
+
+  return (
+    <div className={theme}>
+      <UserProfile userId={userId} preferences={preferences} />
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument      | Type        | Description                                                           | Default |
+| ------------- | ----------- | --------------------------------------------------------------------- | ------- |
+| componentName | string      | Name of the component for identification in console logs              | -       |
+| currentProps  | PropsRecord | Object containing the current props/values you want to track         | -       |
+| enableLogging | boolean     | Whether to enable console logging (useful to disable in production)  | true    |
+
+### PropsRecord Type
+
+```typescript
+export type PropsRecord = Record<string, unknown>;
+```
+
+A record object where keys are strings and values can be any type.
+
+### Returns
+
+This hook doesn't return anything. It performs side effects by logging to the console when tracked values change.
+
+### Console Output
+
+When props change, the hook logs information in the following format:
+
+```
+[why-did-you-update] ComponentName {
+  propName: {
+    from: previousValue,
+    to: newValue
+  },
+  anotherProp: {
+    from: oldValue,
+    to: currentValue
+  }
+}
+```
+
+### Usage Tips
+
+1. **Performance Debugging**: Use this hook to identify which props are causing unnecessary rerenders in expensive components.
+
+2. **Object and Array Props**: Pay special attention to object and array props that might be recreated on every render:
+   ```jsx
+   // ❌ Bad - creates new array every render
+   <Component items={data.map(transform)} />
+   
+   // ✅ Good - memoize the transformation
+   const transformedItems = useMemo(() => data.map(transform), [data]);
+   <Component items={transformedItems} />
+   ```
+
+3. **Production Usage**: Consider disabling logging in production builds to avoid console pollution:
+   ```jsx
+   useWhyDidYouUpdate("MyComponent", props, __DEV__);
+   ```
+
+4. **Selective Tracking**: Instead of tracking all props, focus on the ones you suspect are causing issues:
+   ```jsx
+   // Instead of tracking all props
+   useWhyDidYouUpdate("Component", props);
+   
+   // Track only suspicious ones
+   useWhyDidYouUpdate("Component", {
+     expensiveData: props.data,
+     computedValue: props.computed
+   });
+   ```
