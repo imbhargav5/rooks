@@ -1,0 +1,31 @@
+---
+description: This rule is helpful for creating documentation or updating documentation for hooks.
+alwaysApply: false
+---
+
+create full docs content for requested hook similar to how we have docs for useAudio, useCounter etc.
+
+**How to solve the task?**
+
+First analyse the hook's source code. The source for the hook will be in packages/rooks/src/hooks/\*.ts.
+
+**Format for documentation:**
+
+First analyze the documentation for useAudio hook at apps/website/content/docs/hooks/useAudio.mdx. The source of the hook is at packages/rooks/src/hooks/useAudio.ts.
+
+Notice how we document the hook by writing about the hook's purpose, arguments, return type, state properties, control methods, callbacks, and usage examples.
+
+Ensure we document at least 1-3 examples.
+
+If the hook is basic and doesn't accept arguments, then 1-2 examples are enough.
+
+If the hook is complex and accepts arguments, then 3-4 examples are enough.
+
+**Procedure for the documentation task:**
+
+1. Analyze the hook's source code.
+2. Analyze the documentation for useAudio hook at apps/website/content/docs/hooks/useAudio.mdx.
+3. Create a new file if needed in apps/website/content/docs/hooks/ with the hook's name. If the file already exists, then update the file.
+4. Next plan the hook's documentation and request for my approval.
+5. Once I approve, then write the documentation.
+6. Once the documentation is written, then create a pull request.
