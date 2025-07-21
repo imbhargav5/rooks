@@ -104,18 +104,19 @@ export default function DataFetcher() {
   const [data, setData] = useState(null);
 
   useDeepCompareEffect(() => {
-    let cancelled = false;
+    const controller = new AbortController();
     
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/products?${new URLSearchParams(filters)}`);
+        const response = await fetch(
+          `/api/products?${new URLSearchParams(filters)}`,
+          { signal: controller.signal }
+        );
         const result = await response.json();
-        
-        if (!cancelled) {
-          setData(result);
-        }
+        setData(result);
       } catch (error) {
-        if (!cancelled) {
+        // Ignore fetch abort errors, as they are expected on cleanup
+        if (error.name !== "AbortError") {
           console.error("Fetch failed:", error);
         }
       }
@@ -123,9 +124,9 @@ export default function DataFetcher() {
 
     fetchData();
 
-    // Cleanup function to cancel the request if dependencies change
+    // Cleanup function to abort the fetch request if dependencies change
     return () => {
-      cancelled = true;
+      controller.abort();
     };
   }, [filters]);
 
