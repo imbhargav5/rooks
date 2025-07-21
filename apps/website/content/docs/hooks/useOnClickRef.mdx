@@ -6,14 +6,164 @@ sidebar_label: useOnClickRef
 
 ## About
 
-Callback on click/tap events
+A hook that creates a callback ref for handling both click and touch events on DOM elements. It automatically prevents default behavior and provides a unified interface for mouse clicks and touch interactions.
+
+[//]: # "Main"
 
 ## Examples
 
-```tsx
+#### Basic example
+
+```jsx
 import { useOnClickRef } from "rooks";
+
 export default function App() {
-  useOnClickRef();
-  return null;
+  const handleClick = () => {
+    console.log("Element was clicked or tapped!");
+  };
+
+  const ref = useOnClickRef(handleClick);
+
+  return (
+    <div>
+      <button ref={ref}>Click me!</button>
+    </div>
+  );
 }
 ```
+
+#### Touch-friendly button example
+
+```jsx
+import { useOnClickRef } from "rooks";
+import { useState } from "react";
+
+export default function TouchButton() {
+  const [count, setCount] = useState(0);
+  
+  const handleIncrement = () => {
+    setCount(prev => prev + 1);
+  };
+
+  const incrementRef = useOnClickRef(handleIncrement);
+
+  return (
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h2>Count: {count}</h2>
+      <button 
+        ref={incrementRef}
+        style={{
+          padding: "15px 30px",
+          fontSize: "18px",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer"
+        }}
+      >
+        Tap to Increment
+      </button>
+    </div>
+  );
+}
+```
+
+#### Multiple elements example
+
+```jsx
+import { useOnClickRef } from "rooks";
+import { useState } from "react";
+
+export default function MultipleElements() {
+  const [message, setMessage] = useState("Click any element");
+
+  const handleHeaderClick = () => {
+    setMessage("Header was clicked!");
+  };
+
+  const handleCardClick = () => {
+    setMessage("Card was clicked!");
+  };
+
+  const handleFooterClick = () => {
+    setMessage("Footer was clicked!");
+  };
+
+  const headerRef = useOnClickRef(handleHeaderClick);
+  const cardRef = useOnClickRef(handleCardClick);
+  const footerRef = useOnClickRef(handleFooterClick);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <header 
+        ref={headerRef}
+        style={{
+          backgroundColor: "#f8f9fa",
+          padding: "20px",
+          marginBottom: "10px",
+          cursor: "pointer",
+          borderRadius: "5px"
+        }}
+      >
+        Clickable Header
+      </header>
+      
+      <div 
+        ref={cardRef}
+        style={{
+          backgroundColor: "#e9ecef",
+          padding: "20px",
+          marginBottom: "10px",
+          cursor: "pointer",
+          borderRadius: "5px"
+        }}
+      >
+        Clickable Card
+      </div>
+      
+      <footer 
+        ref={footerRef}
+        style={{
+          backgroundColor: "#dee2e6",
+          padding: "20px",
+          cursor: "pointer",
+          borderRadius: "5px"
+        }}
+      >
+        Clickable Footer
+      </footer>
+      
+      <p style={{ marginTop: "20px", fontWeight: "bold" }}>
+        Status: {message}
+      </p>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type     | Description                                              | Default |
+| -------- | -------- | -------------------------------------------------------- | ------- |
+| onClick  | Function | Callback function to execute when element is clicked/tapped | -       |
+
+### Returns
+
+| Return value | Type         | Description                                                    | Default   |
+| ------------ | ------------ | -------------------------------------------------------------- | --------- |
+| ref          | Callback Ref | A callback ref that should be attached to the target element  | undefined |
+
+### Behavior
+
+- **Event Handling**: Listens for both `click` and `touchend` events
+- **Default Prevention**: Automatically calls `preventDefault()` on triggered events
+- **Cleanup**: Automatically removes event listeners when the component unmounts or when the ref is detached
+- **Fresh Callbacks**: Uses internal optimization to ensure the latest onClick callback is always used
+
+### Use Cases
+
+- Creating touch-friendly interactive elements
+- Building custom clickable components that work on both desktop and mobile
+- Handling click events with automatic preventDefault behavior
+- Unifying mouse and touch interactions in a single handler
