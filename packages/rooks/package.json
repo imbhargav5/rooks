@@ -6,11 +6,11 @@
   "main": "dist/cjs/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
   "jsdelivr": "dist/umd/rooks.umd.js",
-  "types": "dist/types/index.d.ts",
-  "typings": "dist/types/index.d.ts",
+  "types": "dist/esm/index.d.ts",
+  "typings": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/esm/index.d.ts",
       "module": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js",
