@@ -3,6 +3,17 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { useSuspenseNavigatorUserAgentData } from "@/hooks/useSuspenseNavigatorUserAgentData";
 import { clearCache } from "@/hooks/useSuspenseNavigatorUserAgentData";
 
+// Import the HighEntropyHint type
+type HighEntropyHint =
+  | "architecture"
+  | "bitness"
+  | "formFactors"
+  | "fullVersionList"
+  | "model"
+  | "platformVersion"
+  | "uaFullVersion"
+  | "wow64";
+
 // Mock navigator.userAgentData
 const mockGetHighEntropyValues = jest.fn();
 
@@ -45,7 +56,7 @@ afterEach(() => {
 });
 
 // Test component that uses the hook
-function TestComponent({ hints }: { hints?: string[] }) {
+function TestComponent({ hints }: { hints?: HighEntropyHint[] }) {
   const data = useSuspenseNavigatorUserAgentData(hints);
   return (
     <div>
@@ -278,7 +289,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
   it("should cache results for the same hints", async () => {
     expect.hasAssertions();
 
-    const hints = ["architecture", "bitness"];
+    const hints: HighEntropyHint[] = ["architecture", "bitness"];
     const mockData = { architecture: "x64", bitness: "64" };
 
     mockGetHighEntropyValues.mockResolvedValue(mockData);
@@ -314,8 +325,8 @@ describe("useSuspenseNavigatorUserAgentData", () => {
   it("should handle different hint combinations separately", async () => {
     expect.hasAssertions();
 
-    const hints1 = ["architecture"];
-    const hints2 = ["bitness"];
+    const hints1: HighEntropyHint[] = ["architecture"];
+    const hints2: HighEntropyHint[] = ["bitness"];
     const mockData1 = { architecture: "x64" };
     const mockData2 = { bitness: "64" };
 
