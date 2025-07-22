@@ -177,6 +177,60 @@ describe("useWebLocksApi", () => {
         expect.any(Function)
       );
     });
+
+    it("should not combine signal and ifAvailable options", async () => {
+      expect.hasAssertions();
+      const mockCallback = jest.fn().mockResolvedValue("success");
+      
+      mockNavigatorLocks.request.mockImplementation(
+        (name: string, options: any, callback: Function) => {
+          // Verify that signal and ifAvailable are not both present
+          expect(!(options.signal && options.ifAvailable)).toBe(true);
+          return callback();
+        }
+      );
+
+      const { result } = renderHook(() => useWebLocksApi("test-resource"));
+      
+      // Test with ifAvailable: true - should not include signal
+      await act(async () => {
+        await result.current.acquire(mockCallback, { ifAvailable: true });
+      });
+
+      expect(mockNavigatorLocks.request).toHaveBeenCalledWith(
+        "test-resource",
+        expect.objectContaining({ ifAvailable: true }),
+        expect.any(Function)
+      );
+
+      // Verify the options don't contain signal when ifAvailable is true
+      const lastCall = mockNavigatorLocks.request.mock.calls[mockNavigatorLocks.request.mock.calls.length - 1];
+      expect(lastCall[1]).not.toHaveProperty('signal');
+    });
+
+    it("should use custom signal when provided", async () => {
+      expect.hasAssertions();
+      const mockCallback = jest.fn().mockResolvedValue("success");
+      const customController = new AbortController();
+      
+      mockNavigatorLocks.request.mockImplementation(
+        (name: string, options: any, callback: Function) => {
+          return callback();
+        }
+      );
+
+      const { result } = renderHook(() => useWebLocksApi("test-resource"));
+      
+      await act(async () => {
+        await result.current.acquire(mockCallback, { signal: customController.signal });
+      });
+
+      expect(mockNavigatorLocks.request).toHaveBeenCalledWith(
+        "test-resource",
+        expect.objectContaining({ signal: customController.signal }),
+        expect.any(Function)
+      );
+    });
   });
 
   describe("Lock State Management", () => {
