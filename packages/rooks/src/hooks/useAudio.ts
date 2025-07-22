@@ -49,9 +49,9 @@ type AudioState = {
 };
 
 type AudioControls = {
-  play: () => Promise<void>;
+  play: () => void;
   pause: () => void;
-  togglePlay: () => Promise<void>;
+  togglePlay: () => void;
   mute: () => void;
   unmute: () => void;
   toggleMute: () => void;
@@ -272,12 +272,10 @@ function useAudio(
   ]);
 
   // Control methods
-  const play = async (): Promise<void> => {
+  const play = (): void => {
     if (!audioNode) return;
     
-    try {
-      await audioNode.play();
-    } catch (error) {
+    audioNode.play().catch((error) => {
       const errorMessage = error instanceof Error ? error.message : "Failed to play audio";
       setState(prev => ({
         ...prev,
@@ -286,8 +284,7 @@ function useAudio(
         isPlaying: false,
       }));
       onError(errorMessage);
-      throw error;
-    }
+    });
   };
 
   const pause = (): void => {
@@ -295,11 +292,11 @@ function useAudio(
     audioNode.pause();
   };
 
-  const togglePlay = async (): Promise<void> => {
+  const togglePlay = (): void => {
     if (state.isPlaying) {
       pause();
     } else {
-      await play();
+      play();
     }
   };
 
