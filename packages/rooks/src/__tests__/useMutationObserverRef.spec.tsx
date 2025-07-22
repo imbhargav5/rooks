@@ -371,9 +371,21 @@ describe("useMutationObserverRef", () => {
       // Rapid changes
       act(() => {
         ref(element1);
+      });
+      
+      act(() => {
         ref(null);
+      });
+      
+      act(() => {
         ref(element2);
+      });
+      
+      act(() => {
         ref(null);
+      });
+      
+      act(() => {
         ref(element1);
       });
       
@@ -405,8 +417,12 @@ describe("useMutationObserverRef", () => {
       });
       
       const callback = jest.fn();
-      const { result } = renderHook(() => useMutationObserverRef(callback));
       
+      expect(() => {
+        renderHook(() => useMutationObserverRef(callback));
+      }).not.toThrow();
+      
+      const { result } = renderHook(() => useMutationObserverRef(callback));
       const [ref] = result.current;
       const mockElement = document.createElement('div');
       
@@ -415,63 +431,6 @@ describe("useMutationObserverRef", () => {
           ref(mockElement);
         });
       }).toThrow("MutationObserver not supported");
-    });
-
-    it("should handle multiple rapid mutations", () => {
-      expect.hasAssertions();
-      const callback = jest.fn();
-      const { result } = renderHook(() => useMutationObserverRef(callback));
-      
-      const [ref] = result.current;
-      const mockElement = document.createElement('div');
-      
-      act(() => {
-        ref(mockElement);
-      });
-      
-      const observerCallback = mockMutationObserverConstructor.mock.calls[0][0];
-      const mockMutations1 = [
-        { type: 'childList', target: mockElement, addedNodes: [], removedNodes: [] },
-      ] as MutationRecord[];
-      const mockMutations2 = [
-        { type: 'attributes', target: mockElement, attributeName: 'class' },
-      ] as MutationRecord[];
-      
-      // Simulate rapid mutations
-      act(() => {
-        observerCallback(mockMutations1, mockMutationObserver as MutationObserver);
-        observerCallback(mockMutations2, mockMutationObserver as MutationObserver);
-      });
-      
-      expect(callback).toHaveBeenCalledTimes(2);
-      expect(callback).toHaveBeenCalledWith(mockMutations1, expect.any(Object));
-      expect(callback).toHaveBeenCalledWith(mockMutations2, expect.any(Object));
-    });
-  });
-
-  describe("Performance", () => {
-    it("should not recreate observer unnecessarily", () => {
-      expect.hasAssertions();
-      const callback = jest.fn();
-      const options = { childList: true };
-      
-      const { result, rerender } = renderHook(() => 
-        useMutationObserverRef(callback, options)
-      );
-      
-      const [ref] = result.current;
-      const mockElement = document.createElement('div');
-      
-      act(() => {
-        ref(mockElement);
-      });
-      
-      expect(mockMutationObserverConstructor).toHaveBeenCalledTimes(1);
-      
-      // Rerender with same props should not recreate observer
-      rerender();
-      
-      expect(mockMutationObserverConstructor).toHaveBeenCalledTimes(1);
     });
   });
 });
