@@ -8,4 +8,4 @@
  * import { useSuspenseNavigatorUserAgentData } from 'rooks/experimental'
  */
 
-export { useSuspenseNavigatorUserAgentData } from "./src/hooks/useSuspenseNavigatorUserAgentData";
+export { useSuspenseNavigatorUserAgentData } from "./hooks/useSuspenseNavigatorUserAgentData";
