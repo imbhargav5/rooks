@@ -205,9 +205,13 @@ describe("useIntersectionObserverRef", () => {
           target: mockElement,
           isIntersecting: true,
           intersectionRatio: 0.5,
+          boundingClientRect: {} as DOMRectReadOnly,
+          intersectionRect: {} as DOMRectReadOnly,
+          rootBounds: null,
+          time: 0,
         },
       ] as IntersectionObserverEntry[];
-      const mockObserver = mockIntersectionObserver as IntersectionObserver;
+      const mockObserver = mockIntersectionObserver as unknown as IntersectionObserver;
       
       // Simulate intersection
       act(() => {
@@ -237,7 +241,7 @@ describe("useIntersectionObserverRef", () => {
       // Get the callback that was passed to IntersectionObserver
       const observerCallback = mockIntersectionObserverConstructor.mock.calls[0][0];
       const mockEntries = [] as IntersectionObserverEntry[];
-      const mockObserver = mockIntersectionObserver as IntersectionObserver;
+      const mockObserver = mockIntersectionObserver as unknown as IntersectionObserver;
       
       // Simulate intersection with first callback
       act(() => {
@@ -272,7 +276,7 @@ describe("useIntersectionObserverRef", () => {
       // Get the callback that was passed to IntersectionObserver
       const observerCallback = mockIntersectionObserverConstructor.mock.calls[0][0];
       const mockEntries = [] as IntersectionObserverEntry[];
-      const mockObserver = mockIntersectionObserver as IntersectionObserver;
+      const mockObserver = mockIntersectionObserver as unknown as IntersectionObserver;
       
       // Should not throw when callback is undefined
       expect(() => {
@@ -375,11 +379,15 @@ describe("useIntersectionObserverRef", () => {
           target: screen.getByTestId("target"),
           isIntersecting: true,
           intersectionRatio: 0.5,
+          boundingClientRect: {} as DOMRectReadOnly,
+          intersectionRect: {} as DOMRectReadOnly,
+          rootBounds: null,
+          time: 0,
         },
       ] as IntersectionObserverEntry[];
       
       act(() => {
-        observerCallback(mockEntries, mockIntersectionObserver as IntersectionObserver);
+        observerCallback(mockEntries, mockIntersectionObserver as unknown as IntersectionObserver);
       });
       
       await waitFor(() => {

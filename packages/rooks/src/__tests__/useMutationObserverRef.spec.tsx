@@ -153,7 +153,7 @@ describe("useMutationObserverRef", () => {
       expect.hasAssertions();
       const callback = jest.fn();
       const initialOptions = { childList: true };
-      const newOptions = { attributes: true };
+      const newOptions = { childList: false, attributes: true };
       
       const { result, rerender } = renderHook(
         ({ options }) => useMutationObserverRef(callback, options),
@@ -194,15 +194,29 @@ describe("useMutationObserverRef", () => {
       
       // Get the callback that was passed to MutationObserver
       const observerCallback = mockMutationObserverConstructor.mock.calls[0][0];
+      
+      // Create mock NodeLists
+      const mockAddedNodes = Object.assign([document.createElement('span')], {
+        item: (index: number) => index === 0 ? document.createElement('span') : null
+      }) as unknown as NodeList;
+      const mockRemovedNodes = Object.assign([], {
+        item: () => null
+      }) as unknown as NodeList;
+      
       const mockMutations = [
         {
-          type: 'childList',
+          type: 'childList' as MutationRecordType,
           target: mockElement,
-          addedNodes: [document.createElement('span')],
-          removedNodes: [],
+          addedNodes: mockAddedNodes,
+          removedNodes: mockRemovedNodes,
+          attributeName: null,
+          attributeNamespace: null,
+          nextSibling: null,
+          oldValue: null,
+          previousSibling: null,
         },
       ] as MutationRecord[];
-      const mockObserver = mockMutationObserver as MutationObserver;
+      const mockObserver = mockMutationObserver as unknown as MutationObserver;
       
       // Simulate mutation
       act(() => {
@@ -295,7 +309,7 @@ describe("useMutationObserverRef", () => {
         const callback = jest.fn((mutations: MutationRecord[]) => {
           setMutationCount(prev => prev + mutations.length);
           if (mutations.length > 0) {
-            setLastMutationType(mutations[0].type);
+            setLastMutationType(mutations[0]?.type || 'none');
           }
         });
         
@@ -338,17 +352,31 @@ describe("useMutationObserverRef", () => {
       
       // Simulate mutation by triggering the callback directly
       const observerCallback = mockMutationObserverConstructor.mock.calls[0][0];
+      
+      // Create mock NodeLists
+      const mockAddedNodes = Object.assign([document.createElement('span')], {
+        item: (index: number) => index === 0 ? document.createElement('span') : null
+      }) as unknown as NodeList;
+      const mockRemovedNodes = Object.assign([], {
+        item: () => null
+      }) as unknown as NodeList;
+      
       const mockMutations = [
         {
-          type: 'childList',
+          type: 'childList' as MutationRecordType,
           target: screen.getByTestId("target"),
-          addedNodes: [document.createElement('span')],
-          removedNodes: [],
+          addedNodes: mockAddedNodes,
+          removedNodes: mockRemovedNodes,
+          attributeName: null,
+          attributeNamespace: null,
+          nextSibling: null,
+          oldValue: null,
+          previousSibling: null,
         },
       ] as MutationRecord[];
       
       act(() => {
-        observerCallback(mockMutations, mockMutationObserver as MutationObserver);
+        observerCallback(mockMutations, mockMutationObserver as unknown as MutationObserver);
       });
       
       await waitFor(() => {

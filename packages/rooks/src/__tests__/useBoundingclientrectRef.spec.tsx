@@ -83,7 +83,7 @@ describe("useBoundingclientrectRef", () => {
       const mockElement = document.createElement('div');
       
       act(() => {
-        ref(mockElement);
+        ref?.(mockElement);
       });
       
       const [, domRect] = result.current;
@@ -111,14 +111,14 @@ describe("useBoundingclientrectRef", () => {
       
       // First set to element
       act(() => {
-        ref(mockElement);
+        ref?.(mockElement);
       });
       
       expect(result.current[1]).not.toBe(null);
       
       // Then set to null
       act(() => {
-        ref(null);
+        ref?.(null);
       });
       
       const [, domRect] = result.current;
@@ -135,7 +135,7 @@ describe("useBoundingclientrectRef", () => {
       const mockElement = document.createElement('div');
       
       act(() => {
-        ref(mockElement);
+        ref?.(mockElement);
       });
       
       // Clear mock calls from initial setup
@@ -198,7 +198,7 @@ describe("useBoundingclientrectRef", () => {
       const mockElement = document.createElement('div');
       
       act(() => {
-        ref(mockElement);
+        ref?.(mockElement);
       });
       
       expect(MutationObserver).toHaveBeenCalled();
@@ -221,7 +221,7 @@ describe("useBoundingclientrectRef", () => {
       const mockElement = document.createElement('div');
       
       act(() => {
-        ref(mockElement);
+        ref?.(mockElement);
       });
       
       unmount();
@@ -290,13 +290,13 @@ describe("useBoundingclientrectRef", () => {
       const element1 = document.createElement('div');
       const element2 = document.createElement('div');
       
-      // Rapid changes
-      act(() => {
-        ref(element1);
-        ref(element2);
-        ref(null);
-        ref(element1);
-      });
+              // Rapid changes
+        act(() => {
+          ref?.(element1);
+          ref?.(element2);
+          ref?.(null);
+          ref?.(element1);
+        });
       
       // Should handle without errors
       expect(result.current[1]).not.toBe(null);
