@@ -1,7 +1,7 @@
 <br/>
 <br/>
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/761126463457460234/775262278026788885/Final_Copy_8.png" height="auto" width="100%" />
+  <img src=".github/assets/Final_Copy_8.png" height="auto" width="100%" />
 </p>
 <br/>
 
