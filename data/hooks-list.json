@@ -406,6 +406,11 @@
       "category": "state"
     },
     {
+      "name": "useSuspenseNavigatorUserAgentData",
+      "description": "Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API",
+      "category": "experimental"
+    },
+    {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "performance"

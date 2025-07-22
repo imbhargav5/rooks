@@ -6,15 +6,22 @@
   "main": "dist/cjs/index.js",
   "unpkg": "dist/umd/rooks.umd.js",
   "jsdelivr": "dist/umd/rooks.umd.js",
-  "types": "dist/types/index.d.ts",
-  "typings": "dist/types/index.d.ts",
+  "types": "dist/esm/index.d.ts",
+  "typings": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/esm/index.d.ts",
       "module": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js",
       "default": "./dist/cjs/index.js"
+    },
+    "./experimental": {
+      "types": "./dist/esm/experimental.d.ts",
+      "module": "./dist/esm/experimental.js",
+      "import": "./dist/esm/experimental.js",
+      "require": "./dist/cjs/experimental.js",
+      "default": "./dist/cjs/experimental.js"
     },
     "./package.json": "./package.json"
   },
@@ -38,6 +45,10 @@
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "check:dist": "es-check",
     "check:size": "size-limit --highlight-less",
+    "sanity-check": "npx tsx scripts/sanity-check-all.ts",
+    "sanity:types": "npx tsx scripts/sanity-check-types.ts",
+    "sanity:imports": "npx tsx scripts/sanity-check-imports.ts",
+    "sanity:eslint": "npx tsx scripts/sanity-check-eslint.ts",
     "coverage": "jest --coverage",
     "prebuild": "rimraf dist",
     "build": "node build.js",

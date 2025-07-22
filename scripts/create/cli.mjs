@@ -174,6 +174,7 @@ function validateArgs({ packageName, name, description, category }) {
     "navigator",
     "form",
     "events",
+    "experimental",
   ];
   if (!category) {
     errors.push("--category is required");
@@ -192,7 +193,7 @@ Arguments:
   --packageName   Name of the package in hyphen separated words starting with use (e.g., use-my-hook)
   --name          Name of the hook in camelCase starting with use (e.g., useMyHook)
   --description   Description of the hook
-  --category      Category of the hook (ui, misc, state, effects, navigator, form, events)
+  --category      Category of the hook (ui, misc, state, effects, navigator, form, events, experimental)
 
 Example:
   node scripts/create/cli.mjs --packageName use-idle --name useIdle --description "Hook to detect when user is idle" --category misc

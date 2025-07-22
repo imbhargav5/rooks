@@ -37,7 +37,7 @@ async function build() {
     await Promise.all([
       // ESM Build
       esbuild.build({
-        entryPoints: ["src/index.ts"],
+        entryPoints: ["src/index.ts", "src/experimental.ts"],
         outdir: "dist/esm",
         bundle: true,
         splitting: true,
@@ -56,7 +56,7 @@ async function build() {
 
       // CJS Build
       esbuild.build({
-        entryPoints: ["src/index.ts"],
+        entryPoints: ["src/index.ts", "src/experimental.ts"],
         outdir: "dist/cjs",
         bundle: true,
         format: "cjs",

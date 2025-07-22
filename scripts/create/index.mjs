@@ -118,7 +118,7 @@ const questions = [
     type: "list",
     name: "category",
     message: "Category of the hook",
-    choices: ["ui", "misc", "state", "effects", "navigator", "form", "events"],
+    choices: ["ui", "misc", "state", "effects", "navigator", "form", "events", "experimental"],
     default: "state",
   },
 ];
