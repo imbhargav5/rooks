@@ -188,13 +188,21 @@ class PackageListUpdater {
   }
 
   private createHooksListByCategoryMDAST(hooksByCategory: HooksByCategory): Root {
-    const hooksByCategoryKeys = Object.keys(hooksByCategory).sort();
+    const allCategories = Object.keys(hooksByCategory);
+    
+    // Separate experimental hooks from regular categories
+    const experimentalCategories = allCategories.filter(category => category === "experimental");
+    const regularCategories = allCategories.filter(category => category !== "experimental").sort();
+    
+    // Process regular categories first (alphabetically), then experimental categories at the end
+    const orderedCategories = [...regularCategories, ...experimentalCategories];
+    
     const hooksListByCategoryMDAST: Root = {
       type: "root",
       children: [],
     };
 
-    for (const category of hooksByCategoryKeys) {
+    for (const category of orderedCategories) {
       const hooks = hooksByCategory[category];
       if (!hooks || hooks.length === 0) {
         console.warn(`No hooks found for category: ${category}`);
