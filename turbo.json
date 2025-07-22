@@ -19,8 +19,13 @@
       "cache": false,
       "outputs": ["coverage/**"]
     },
+    "sanity-check": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "outputs": []
+    },
     "all-checks": {
-      "dependsOn": ["coverage", "rooks#typecheck", "lint"],
+      "dependsOn": ["coverage", "rooks#typecheck", "lint", "rooks#sanity-check"],
       "cache": false,
       "outputs": []
     },

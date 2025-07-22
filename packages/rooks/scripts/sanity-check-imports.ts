@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
-const { execSync, spawn } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import { execSync, spawn } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 console.log('🔍 Sanity Check: Import Resolution');
 console.log('='.repeat(40));
@@ -14,7 +14,13 @@ if (!fs.existsSync('dist')) {
 }
 
 // Test files to create
-const tests = [
+interface TestCase {
+  name: string;
+  file: string;
+  content: string;
+}
+
+const tests: TestCase[] = [
   {
     name: 'CJS Main Import',
     file: 'temp-cjs-main.js',
@@ -61,9 +67,9 @@ if (content.includes('export') && content.includes('useSuspenseNavigatorUserAgen
   }
 ];
 
-const createdFiles = [];
+const createdFiles: string[] = [];
 
-async function runTest(test) {
+async function runTest(test: TestCase): Promise<void> {
   return new Promise((resolve, reject) => {
     console.log(`🔍 Testing ${test.name}...`);
     
@@ -107,7 +113,7 @@ async function runTest(test) {
   });
 }
 
-async function runAllTests() {
+async function runAllTests(): Promise<void> {
   try {
     for (const test of tests) {
       await runTest(test);
