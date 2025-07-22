@@ -1,7 +1,7 @@
 <br/>
 <br/>
 <p align="center">
-  <img src=".github/assets/Final_Copy_8.png" height="auto" width="100%" />
+  <img src="https://raw.githubusercontent.com/imbhargav5/rooks/main/.github/assets/Final_Copy_8.png" height="auto" width="100%" />
 </p>
 <br/>
 
