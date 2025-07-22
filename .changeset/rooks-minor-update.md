@@ -5,7 +5,7 @@
 ## New Features and Improvements
 
 ### New Hooks
-- Add experimental suspense user agent data hook for enhanced user agent detection capabilities
+- Add experimental `useSuspenseNavigatorUserAgentData` hook for enhanced user agent detection capabilities
 
 ### Bug Fixes and Enhancements
 - Fix Web Locks API hook to prevent combining signal and ifAvailable parameters, improving API reliability
