@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { useSuspenseNavigatorUserAgentData, clearCache } from "@/hooks/useSuspenseNavigatorUserAgentData";
+import { useSuspenseNavigatorUserAgentData } from "@/hooks/useSuspenseNavigatorUserAgentData";
+import { clearCache } from "@/hooks/useSuspenseNavigatorUserAgentData";
 
 // Mock navigator.userAgentData
 const mockGetHighEntropyValues = jest.fn();

@@ -16,6 +16,13 @@
       "require": "./dist/cjs/index.js",
       "default": "./dist/cjs/index.js"
     },
+    "./experimental": {
+      "types": "./dist/esm/experimental.d.ts",
+      "module": "./dist/esm/experimental.js",
+      "import": "./dist/esm/experimental.js",
+      "require": "./dist/cjs/experimental.js",
+      "default": "./dist/cjs/experimental.js"
+    },
     "./package.json": "./package.json"
   },
   "sideEffects": false,

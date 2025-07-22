@@ -18,7 +18,7 @@ A Suspense-enabled hook for getting high entropy values from the Navigator User 
 
 ```jsx
 import React, { Suspense } from "react";
-import { useSuspenseNavigatorUserAgentData } from "rooks";
+import { useSuspenseNavigatorUserAgentData } from "rooks/experimental";
 
 function UserAgentInfo() {
   const userAgentData = useSuspenseNavigatorUserAgentData();
@@ -57,7 +57,7 @@ export default function App() {
 
 ```jsx
 import React, { Suspense } from "react";
-import { useSuspenseNavigatorUserAgentData } from "rooks";
+import { useSuspenseNavigatorUserAgentData } from "rooks/experimental";
 
 function PlatformInfo() {
   const userAgentData = useSuspenseNavigatorUserAgentData([
@@ -88,7 +88,7 @@ export default function App() {
 ```jsx
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useSuspenseNavigatorUserAgentData } from "rooks";
+import { useSuspenseNavigatorUserAgentData } from "rooks/experimental";
 
 function DeviceInfo() {
   const userAgentData = useSuspenseNavigatorUserAgentData(["model", "formFactors"]);
