@@ -77,6 +77,8 @@
 
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
 
+<p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
+
 <h3 align="center">📝 Form & File Handling - 1 hook</h3>
 
 * [useFileDropRef](https://rooks.vercel.app/docs/useFileDropRef) - Drop files easily

@@ -206,6 +206,15 @@ class PackageListUpdater {
 
       hooksListByCategoryMDAST.children.push(headingMDAST);
       hooksListByCategoryMDAST.children.push(hooksListMDAST);
+
+      // Add experimental hooks disclaimer
+      if (category === "experimental") {
+        const disclaimerMDAST: RootContent = {
+          type: "html",
+          value: `<p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>`,
+        };
+        hooksListByCategoryMDAST.children.push(disclaimerMDAST);
+      }
     }
 
     return hooksListByCategoryMDAST;
