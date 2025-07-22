@@ -1,0 +1,179 @@
+---
+id: useSuspenseNavigatorUserAgentData
+title: useSuspenseNavigatorUserAgentData
+sidebar_label: useSuspenseNavigatorUserAgentData
+---
+
+## About
+
+⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
+
+A Suspense-enabled hook for getting high entropy values from the Navigator User Agent Data API. This hook suspends while the API is fetching data and must be wrapped in a Suspense boundary. It provides access to detailed browser and platform information that requires user permission.
+
+[//]: # "Main"
+
+## Examples
+
+#### Basic Usage with All Hints
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorUserAgentData } from "rooks";
+
+function UserAgentInfo() {
+  const userAgentData = useSuspenseNavigatorUserAgentData();
+
+  return (
+    <div>
+      <h2>User Agent Information</h2>
+      <p>Architecture: {userAgentData.architecture}</p>
+      <p>Platform Version: {userAgentData.platformVersion}</p>
+      <p>Bitness: {userAgentData.bitness}</p>
+      <p>WoW64: {userAgentData.wow64 ? "Yes" : "No"}</p>
+      {userAgentData.fullVersionList && (
+        <div>
+          <h3>Browser Versions:</h3>
+          {userAgentData.fullVersionList.map((item, index) => (
+            <p key={index}>
+              {item.brand}: {item.version}
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading user agent data...</div>}>
+      <UserAgentInfo />
+    </Suspense>
+  );
+}
+```
+
+#### Requesting Specific Hints
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorUserAgentData } from "rooks";
+
+function PlatformInfo() {
+  const userAgentData = useSuspenseNavigatorUserAgentData([
+    "architecture",
+    "platformVersion",
+  ]);
+
+  return (
+    <div>
+      <h2>Platform Information</h2>
+      <p>Architecture: {userAgentData.architecture}</p>
+      <p>Platform Version: {userAgentData.platformVersion}</p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading platform info...</div>}>
+      <PlatformInfo />
+    </Suspense>
+  );
+}
+```
+
+#### With Error Boundary
+
+```jsx
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { useSuspenseNavigatorUserAgentData } from "rooks";
+
+function DeviceInfo() {
+  const userAgentData = useSuspenseNavigatorUserAgentData(["model", "formFactors"]);
+
+  return (
+    <div>
+      <h2>Device Information</h2>
+      <p>Model: {userAgentData.model || "Not available"}</p>
+      <p>Form Factors: {userAgentData.formFactors?.join(", ") || "Not available"}</p>
+    </div>
+  );
+}
+
+function ErrorFallback({ error }) {
+  return (
+    <div>
+      <h2>Error</h2>
+      <p>Failed to load user agent data: {error.message}</p>
+      <p>This API is only available in Chromium-based browsers.</p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={<div>Loading device info...</div>}>
+        <DeviceInfo />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type     | Description                                                                                       | Default      |
+| -------- | -------- | ------------------------------------------------------------------------------------------------- | ------------ |
+| hints    | string[] | Array of high entropy hints to request. See available hints below.                               | All hints    |
+
+### Available High Entropy Hints
+
+| Hint             | Type     | Description                                                                 |
+| ---------------- | -------- | --------------------------------------------------------------------------- |
+| architecture     | string   | The underlying platform architecture (e.g., "x64", "arm")                 |
+| bitness          | string   | The architecture bitness (e.g., "32", "64")                               |
+| formFactors      | string[] | The form factors of the device (e.g., ["Desktop"], ["Mobile", "Tablet"])  |
+| fullVersionList  | object[] | Array of browser brands and their full versions                            |
+| model            | string   | The device model name (mainly for mobile devices)                          |
+| platformVersion  | string   | The platform version (e.g., "10.0" for Windows)                          |
+| uaFullVersion    | string   | Full browser version (deprecated, use fullVersionList instead)             |
+| wow64            | boolean  | Whether the browser is running in 32-bit mode on 64-bit Windows           |
+
+### Returns
+
+Returns an object containing the requested high entropy values.
+
+### Return Value Properties
+
+The returned object may contain any of the following properties based on the hints requested:
+
+| Property         | Type     | Description                                                                 |
+| ---------------- | -------- | --------------------------------------------------------------------------- |
+| architecture     | string   | The underlying platform architecture                                        |
+| bitness          | string   | The architecture bitness                                                    |
+| formFactors      | string[] | Array of device form factors                                               |
+| fullVersionList  | object[] | Array of objects with `brand` and `version` properties                    |
+| model            | string   | The device model name                                                       |
+| platformVersion  | string   | The platform version                                                        |
+| uaFullVersion    | string   | Full browser version (deprecated)                                          |
+| wow64            | boolean  | Whether running in WoW64 mode                                              |
+
+### Browser Support
+
+This hook uses the Navigator User Agent Data API, which is currently only supported in:
+- Chrome 90+
+- Edge 90+
+- Opera 76+
+
+The hook will throw an error in unsupported browsers.
+
+### Important Notes
+
+- **Experimental Status**: This hook is experimental and may change or be removed in future versions
+- **Privacy**: High entropy values may require user permission and can be used for fingerprinting
+- **Suspense Required**: This hook must be wrapped in a React Suspense boundary
+- **Error Boundaries**: Consider using error boundaries to handle unsupported browsers
+- **Caching**: Results are cached to prevent duplicate API calls with the same hints

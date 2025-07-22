@@ -73,6 +73,9 @@ const emojiByCategory: Record<string, string> = {
   
   // Utilities
   "utilities": "🔧",               // Utilities & Refs
+  
+  // Experimental
+  "experimental": "🧪",            // Experimental Hooks
 };
 
 class PackageListUpdater {
@@ -172,6 +175,7 @@ class PackageListUpdater {
       "animation": "Animation & Timing",
       "viewport": "Window & Viewport",
       "lifecycle": "Lifecycle & Effects",
+      "experimental": "Experimental Hooks",
     };
     
     const title = categoryTitleMap[category] || lodash.startCase(category);

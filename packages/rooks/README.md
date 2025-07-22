@@ -73,6 +73,10 @@
 * [useOutsideClickRef](https://rooks.vercel.app/docs/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
 * [useWindowEventListener](https://rooks.vercel.app/docs/useWindowEventListener) - Adds an event listener to window
 
+<h3 align="center">🧪 Experimental Hooks - 1 hook</h3>
+
+* [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
+
 <h3 align="center">📝 Form & File Handling - 1 hook</h3>
 
 * [useFileDropRef](https://rooks.vercel.app/docs/useFileDropRef) - Drop files easily
@@ -177,7 +181,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 95 hooks as standalone modules.
+✅ Collection of 96 hooks as standalone modules.
 
 <!--hookscount end-->
 
