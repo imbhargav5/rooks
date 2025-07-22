@@ -1,5 +1,26 @@
 # rooks
 
+## 8.3.0
+
+### Minor Changes
+
+- [#1841](https://github.com/imbhargav5/rooks/pull/1841) [`a70de17`](https://github.com/imbhargav5/rooks/commit/a70de1748201a9067d85acad29c251c992fcf1ff) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Enhance useAudio hook, add unit tests, and update documentation
+
+  - **useAudio Enhancement**: Significantly enhanced the useAudio hook with improved functionality and comprehensive documentation (679 additions, 80 deletions across hook implementation, tests, and docs)
+  - **Unit Tests**: Add unit tests for useBoundingclientrectRef, useFullscreen, useIntersectionObserverRef, useIsomorphicEffect, and useMutationObserverRef hooks
+  - **Documentation**: Update README image source to use raw GitHub URL for better accessibility
+
+  This minor release includes major improvements to the useAudio hook with new features, expanded test coverage for multiple hooks, and enhanced documentation accessibility.
+
+### Patch Changes
+
+- [#1841](https://github.com/imbhargav5/rooks/pull/1841) [`a70de17`](https://github.com/imbhargav5/rooks/commit/a70de1748201a9067d85acad29c251c992fcf1ff) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add unit tests for several hooks and update README image source
+
+  - Add unit tests for useBoundingclientrectRef, useFullscreen, useIntersectionObserverRef, useIsomorphicEffect, and useMutationObserverRef hooks
+  - Update README image source to use raw GitHub URL for better accessibility
+
+  This patch includes improvements to test coverage and documentation accessibility.
+
 ## 8.2.0
 
 ### Minor Changes
