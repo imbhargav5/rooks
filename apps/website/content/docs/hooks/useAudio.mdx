@@ -6,7 +6,7 @@ sidebar_label: useAudio
 
 ## About
 
-A hook to control and manage audio elements in your React application.
+A comprehensive hook to control and manage audio elements in your React application with advanced features like volume control, playback rate adjustment, seeking, and error handling.
 
 [//]: # "Main"
 
@@ -26,15 +26,231 @@ export default function App() {
 
   return (
     <>
-      {audioState.isPlaying ? "Playing" : "Not playing "}
-      <br />
+      <div>Status: {audioState.isPlaying ? "Playing" : "Not playing"}</div>
+      <div>Volume: {Math.round(audioState.volume * 100)}%</div>
+      <div>Time: {audioState.currentTime.toFixed(1)}s / {audioState.duration.toFixed(1)}s</div>
+      {audioState.hasError && <div>Error: {audioState.error}</div>}
+      
       <audio ref={audioRef} src={audioSrc} />
-      <button onClick={audioControls.play}>Play</button>
-      <button onClick={audioControls.pause}>Pause</button>
-      <button onClick={audioControls.toggleMute}>
-        {audioState.isMuted ? "Unmute" : "Mute"}
-      </button>
+      
+      <div>
+        <button onClick={audioControls.play}>Play</button>
+        <button onClick={audioControls.pause}>Pause</button>
+        <button onClick={audioControls.toggleMute}>
+          {audioState.isMuted ? "Unmute" : "Mute"}
+        </button>
+      </div>
     </>
+  );
+}
+```
+
+#### Advanced audio player with controls
+
+```jsx
+import { useAudio } from "rooks";
+
+export default function AudioPlayer() {
+  const audioSrc =
+    "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3";
+  
+  const [audioRef, audioState, audioControls] = useAudio(
+    {
+      autoPlay: false,
+      volume: 0.8,
+      preload: "metadata",
+    },
+    {
+      onPlay: () => console.log("Audio started playing"),
+      onPause: () => console.log("Audio paused"),
+      onEnded: () => console.log("Audio ended"),
+      onError: (error) => console.error("Audio error:", error),
+    }
+  );
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const handleSeek = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    audioControls.setCurrentTime(percent * audioState.duration);
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "400px" }}>
+      <audio ref={audioRef} src={audioSrc} />
+      
+      {audioState.isLoading && <div>Loading...</div>}
+      {audioState.isBuffering && <div>Buffering...</div>}
+      {audioState.hasError && <div>Error: {audioState.error}</div>}
+      
+      {/* Progress Bar */}
+      <div
+        onClick={handleSeek}
+        style={{
+          width: "100%",
+          height: "8px",
+          background: "#ddd",
+          cursor: "pointer",
+          margin: "10px 0",
+        }}
+      >
+        <div
+          style={{
+            width: `${(audioState.currentTime / audioState.duration) * 100}%`,
+            height: "100%",
+            background: "#007bff",
+          }}
+        />
+      </div>
+      
+      {/* Time Display */}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span>{formatTime(audioState.currentTime)}</span>
+        <span>{formatTime(audioState.duration)}</span>
+      </div>
+      
+      {/* Controls */}
+      <div style={{ display: "flex", gap: "10px", margin: "10px 0" }}>
+        <button onClick={() => audioControls.rewind(10)}>⏪ 10s</button>
+        <button onClick={audioControls.togglePlay}>
+          {audioState.isPlaying ? "⏸️ Pause" : "▶️ Play"}
+        </button>
+        <button onClick={() => audioControls.fastForward(10)}>⏩ 10s</button>
+        <button onClick={audioControls.toggleMute}>
+          {audioState.isMuted ? "🔇" : "🔊"}
+        </button>
+      </div>
+      
+      {/* Volume Control */}
+      <div style={{ margin: "10px 0" }}>
+        <label>Volume: {Math.round(audioState.volume * 100)}%</label>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={audioState.volume}
+          onChange={(e) => audioControls.setVolume(parseFloat(e.target.value))}
+          style={{ width: "100%", margin: "5px 0" }}
+        />
+      </div>
+      
+      {/* Playback Speed */}
+      <div style={{ margin: "10px 0" }}>
+        <label>Speed: {audioState.playbackRate}x</label>
+        <div style={{ display: "flex", gap: "5px", margin: "5px 0" }}>
+          <button onClick={() => audioControls.setPlaybackRate(0.5)}>0.5x</button>
+          <button onClick={() => audioControls.setPlaybackRate(1)}>1x</button>
+          <button onClick={() => audioControls.setPlaybackRate(1.25)}>1.25x</button>
+          <button onClick={() => audioControls.setPlaybackRate(1.5)}>1.5x</button>
+          <button onClick={() => audioControls.setPlaybackRate(2)}>2x</button>
+        </div>
+      </div>
+      
+      {/* Loop Control */}
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={audioState.loop}
+            onChange={(e) => audioControls.setLoop(e.target.checked)}
+          />
+          Loop
+        </label>
+      </div>
+    </div>
+  );
+}
+```
+
+#### Audio player with playlist
+
+```jsx
+import { useAudio } from "rooks";
+import { useState } from "react";
+
+export default function PlaylistPlayer() {
+  const playlist = [
+    {
+      title: "Track 1",
+      src: "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
+    },
+    {
+      title: "Track 2", 
+      src: "https://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg"
+    }
+  ];
+  
+  const [currentTrack, setCurrentTrack] = useState(0);
+  
+  const [audioRef, audioState, audioControls] = useAudio(
+    {
+      autoPlay: false,
+    },
+    {
+      onEnded: () => {
+        // Auto-play next track
+        if (currentTrack < playlist.length - 1) {
+          setCurrentTrack(prev => prev + 1);
+        }
+      },
+    }
+  );
+
+  const playTrack = (index) => {
+    setCurrentTrack(index);
+    // The audio src will change, and we can play after it loads
+    setTimeout(() => audioControls.play(), 100);
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Now Playing: {playlist[currentTrack]?.title}</h3>
+      
+      <audio ref={audioRef} src={playlist[currentTrack]?.src} />
+      
+      <div style={{ margin: "20px 0" }}>
+        <button onClick={audioControls.togglePlay}>
+          {audioState.isPlaying ? "Pause" : "Play"}
+        </button>
+        <button 
+          onClick={() => playTrack(Math.max(0, currentTrack - 1))}
+          disabled={currentTrack === 0}
+        >
+          Previous
+        </button>
+        <button 
+          onClick={() => playTrack(Math.min(playlist.length - 1, currentTrack + 1))}
+          disabled={currentTrack === playlist.length - 1}
+        >
+          Next
+        </button>
+      </div>
+      
+      <div>
+        <h4>Playlist:</h4>
+        {playlist.map((track, index) => (
+          <div 
+            key={index}
+            onClick={() => playTrack(index)}
+            style={{
+              padding: "10px",
+              cursor: "pointer",
+              background: index === currentTrack ? "#e0e0e0" : "transparent",
+              border: "1px solid #ccc",
+              margin: "2px 0"
+            }}
+          >
+            {track.title} {index === currentTrack && audioState.isPlaying && "🎵"}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 ```
@@ -48,20 +264,33 @@ export default function App() {
 
 ### Options
 
-| Options value | Type    | Description                                               | Default |
-| ------------- | ------- | --------------------------------------------------------- | ------- |
-| autoPlay      | Boolean | Indicates if the audio should start playing automatically | false   |
-| isMuted       | Boolean | Indicates if the audio should be muted by default         | false   |
+| Options value | Type    | Description                                               | Default    |
+| ------------- | ------- | --------------------------------------------------------- | ---------- |
+| autoPlay      | Boolean | Indicates if the audio should start playing automatically | false      |
+| isMuted       | Boolean | Indicates if the audio should be muted by default         | false      |
+| volume        | Number  | Initial volume level (0-1)                                | 1          |
+| playbackRate  | Number  | Initial playback speed (0.25-4)                          | 1          |
+| loop          | Boolean | Whether the audio should loop                             | false      |
+| preload       | String  | How much of the audio to preload ("none", "metadata", "auto") | "metadata" |
 
 ### Callbacks
 
-| Callbacks value  | Type     | Description                          | Default   |
-| ---------------- | -------- | ------------------------------------ | --------- |
-| onPlay           | Function | Called when audio starts playing     | undefined |
-| onPause          | Function | Called when audio is paused          | undefined |
-| onMute           | Function | Called when audio is muted           | undefined |
-| onUnmute         | Function | Called when audio is unmuted         | undefined |
-| onLoadedMetadata | Function | Called when audio metadata is loaded | undefined |
+| Callbacks value  | Type     | Description                                  | Default   |
+| ---------------- | -------- | -------------------------------------------- | --------- |
+| onPlay           | Function | Called when audio starts playing            | undefined |
+| onPause          | Function | Called when audio is paused                 | undefined |
+| onEnded          | Function | Called when audio playback ends             | undefined |
+| onMute           | Function | Called when audio is muted                  | undefined |
+| onUnmute         | Function | Called when audio is unmuted                | undefined |
+| onLoadedMetadata | Function | Called when audio metadata is loaded        | undefined |
+| onTimeUpdate     | Function | Called when current time changes (currentTime) | undefined |
+| onDurationChange | Function | Called when duration changes (duration)     | undefined |
+| onVolumeChange   | Function | Called when volume changes (volume)         | undefined |
+| onRateChange     | Function | Called when playback rate changes (rate)    | undefined |
+| onError          | Function | Called when an error occurs (error)         | undefined |
+| onLoadStart      | Function | Called when loading starts                  | undefined |
+| onCanPlay        | Function | Called when audio can start playing         | undefined |
+| onWaiting        | Function | Called when audio is buffering              | undefined |
 
 ### Returns
 
@@ -75,18 +304,34 @@ Returns an array with three elements:
 
 ### State Properties
 
-| Property  | Type    | Description                  |
-| --------- | ------- | ---------------------------- |
-| isPlaying | Boolean | Whether the audio is playing |
-| isMuted   | Boolean | Whether the audio is muted   |
+| Property     | Type    | Description                                    |
+| ------------ | ------- | ---------------------------------------------- |
+| isPlaying    | Boolean | Whether the audio is playing                   |
+| isMuted      | Boolean | Whether the audio is muted                     |
+| volume       | Number  | Current volume level (0-1)                     |
+| currentTime  | Number  | Current playback position in seconds           |
+| duration     | Number  | Total duration of audio in seconds             |
+| playbackRate | Number  | Current playback speed (0.25-4)                |
+| isLoading    | Boolean | Whether the audio is loading                   |
+| isBuffering  | Boolean | Whether the audio is buffering                 |
+| loop         | Boolean | Whether the audio is set to loop              |
+| hasError     | Boolean | Whether an error has occurred                  |
+| error        | String  | Error message (only present when hasError is true) |
 
 ### Control Methods
 
-| Method     | Type     | Description              |
-| ---------- | -------- | ------------------------ |
-| play       | Function | Start playing the audio  |
-| pause      | Function | Pause the audio          |
-| togglePlay | Function | Toggle play/pause state  |
-| mute       | Function | Mute the audio           |
-| unmute     | Function | Unmute the audio         |
-| toggleMute | Function | Toggle mute/unmute state |
+| Method          | Type     | Description                                          |
+| --------------- | -------- | ---------------------------------------------------- |
+| play            | Function | Start playing the audio (returns Promise)           |
+| pause           | Function | Pause the audio                                      |
+| togglePlay      | Function | Toggle play/pause state (returns Promise)           |
+| mute            | Function | Mute the audio                                       |
+| unmute          | Function | Unmute the audio                                     |
+| toggleMute      | Function | Toggle mute/unmute state                             |
+| setVolume       | Function | Set volume level (0-1)                               |
+| setCurrentTime  | Function | Set current playback position in seconds             |
+| setPlaybackRate | Function | Set playback speed (0.25-4)                         |
+| seek            | Function | Seek forward/backward by specified seconds           |
+| fastForward     | Function | Fast forward by 10 seconds (or custom amount)       |
+| rewind          | Function | Rewind by 10 seconds (or custom amount)             |
+| setLoop         | Function | Enable/disable looping                               |
