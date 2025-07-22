@@ -8,7 +8,7 @@
     {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useAudio",
@@ -38,37 +38,37 @@
     {
       "name": "useDebounce",
       "description": "Debounce hook for react",
-      "category": "misc"
+      "category": "performance"
     },
     {
       "name": "useDebouncedValue",
       "description": "Tracks another value and gets updated in a debounced way.",
-      "category": "misc"
+      "category": "performance"
     },
     {
       "name": "useDebounceFn",
       "description": "Powerful debounce function hook for React",
-      "category": "misc"
+      "category": "performance"
     },
     {
       "name": "useDeepCompareEffect",
       "description": "Deep compare dependencies instead of shallow for useEffect",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useDidMount",
       "description": "componentDidMount hook for React",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useDidUpdate",
       "description": "componentDidUpdate hook for react",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useDimensionsRef",
       "description": "Easily grab dimensions of an element with a ref using this hook",
-      "category": "misc"
+      "category": "ui"
     },
     {
       "name": "useDocumentEventListener",
@@ -78,7 +78,7 @@
     {
       "name": "useDocumentTitle",
       "description": "A hook to easily update document title with React",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useDocumentVisibilityState",
@@ -88,12 +88,12 @@
     {
       "name": "useEffectOnceWhen",
       "description": "Runs a callback effect atmost one time when a condition becomes true",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useEventListenerRef",
       "description": "A react hook to add an event listener to a ref",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useFileDropRef",
@@ -113,22 +113,22 @@
     {
       "name": "useForkRef",
       "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useFreshCallback",
       "description": "Avoid stale closures and keep your callback fresh",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useFreshRef",
       "description": "Avoid stale state in callbacks with this hook. Auto updates values using a ref.",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useFreshTick",
       "description": "Like use-fresh-ref but specifically for functions",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useFullscreen",
@@ -138,7 +138,7 @@
     {
       "name": "useGeolocation",
       "description": "A hook to provide the geolocation info on client side.",
-      "category": "ui"
+      "category": "browser"
     },
     {
       "name": "useGetIsMounted",
@@ -148,12 +148,12 @@
     {
       "name": "useIdleDetectionApi",
       "description": "Hook to detect when user is idle using Idle Detection API with polyfill",
-      "category": "misc"
+      "category": "browser"
     },
     {
       "name": "useInput",
       "description": "Input hook for React.",
-      "category": "form"
+      "category": "keyboard"
     },
     {
       "name": "useIntersectionObserverRef",
@@ -163,7 +163,7 @@
     {
       "name": "useIntervalWhen",
       "description": "Sets an interval immediately when a condition is true",
-      "category": "effects"
+      "category": "animation"
     },
     {
       "name": "useInViewRef",
@@ -178,32 +178,32 @@
     {
       "name": "useIsomorphicEffect",
       "description": "A hook that resolves to useEffect on the server and useLayoutEffect on the client.",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useKey",
       "description": "keypress, keyup and keydown event handlers as hooks for react.",
-      "category": "ui"
+      "category": "keyboard"
     },
     {
       "name": "useKeyBindings",
       "description": "useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.",
-      "category": "ui"
+      "category": "keyboard"
     },
     {
       "name": "useKeyRef",
       "description": "Very similar useKey but it returns a ref",
-      "category": "ui"
+      "category": "keyboard"
     },
     {
       "name": "useKeys",
       "description": "A hook which allows to setup callbacks when a combination of keys are pressed at the same time.",
-      "category": "ui"
+      "category": "keyboard"
     },
     {
       "name": "useLifecycleLogger",
       "description": "A react hook that console logs parameters as component transitions through lifecycles.",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useLocalstorageState",
@@ -213,7 +213,7 @@
     {
       "name": "useLockBodyScroll",
       "description": "This hook locks the scroll of the body element when `isLocked` is set to `true`.",
-      "category": "effects"
+      "category": "animation"
     },
     {
       "name": "useMapState",
@@ -228,22 +228,22 @@
     {
       "name": "useMergeRefs",
       "description": "Merges any number of refs into a single ref",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useMouse",
       "description": "Mouse position hook for React.",
-      "category": "ui"
+      "category": "mouse"
     },
     {
       "name": "useMouseMoveDelta",
       "description": "Tracks delta of mouse move",
-      "category": "effects"
+      "category": "mouse"
     },
     {
       "name": "useMouseWheelDelta",
       "description": "Tracks delta of mouse move",
-      "category": "effects"
+      "category": "mouse"
     },
     {
       "name": "useMultiSelectableList",
@@ -268,7 +268,7 @@
     {
       "name": "useNavigatorLanguage",
       "description": "Navigator Language hook for React.",
-      "category": "navigator"
+      "category": "browser"
     },
     {
       "name": "useOnClickRef",
@@ -283,7 +283,7 @@
     {
       "name": "useOnline",
       "description": "Online status hook for React.",
-      "category": "navigator"
+      "category": "browser"
     },
     {
       "name": "useOnLongHover",
@@ -308,7 +308,7 @@
     {
       "name": "useOrientation",
       "description": "orientation hook for react",
-      "category": "misc"
+      "category": "browser"
     },
     {
       "name": "useOutsideClick",
@@ -348,22 +348,22 @@
     {
       "name": "useRaf",
       "description": "A continuously running requestAnimationFrame hook for React",
-      "category": "ui"
+      "category": "animation"
     },
     {
       "name": "useRefElement",
       "description": "Helps bridge gap between callback ref and state",
-      "category": "misc"
+      "category": "utilities"
     },
     {
       "name": "useRenderCount",
       "description": "Get the render count of a component",
-      "category": "misc"
+      "category": "dev"
     },
     {
       "name": "useResizeObserverRef",
       "description": "Resize Observer hook for React.",
-      "category": "ui"
+      "category": "animation"
     },
     {
       "name": "useSafeSetState",
@@ -373,7 +373,7 @@
     {
       "name": "useScreenDetailsApi",
       "description": "Hook for multi-screen information and management using Screen Details API",
-      "category": "navigator"
+      "category": "browser"
     },
     {
       "name": "useSelect",
@@ -398,7 +398,7 @@
     {
       "name": "useSpeech",
       "description": "Speech synthesis hook for React",
-      "category": "misc"
+      "category": "browser"
     },
     {
       "name": "useStackState",
@@ -408,37 +408,37 @@
     {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
-      "category": "misc"
+      "category": "performance"
     },
     {
       "name": "useTimeoutWhen",
       "description": "Takes a callback and fires it when a condition is true",
-      "category": "misc"
+      "category": "animation"
     },
     {
       "name": "useTimeTravelState",
       "description": "A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.",
-      "category": "state"
+      "category": "state-history"
     },
     {
       "name": "useToggle",
       "description": "Toggle (between booleans or custom data)hook for React.",
-      "category": "misc"
+      "category": "state-history"
     },
     {
       "name": "useUndoRedoState",
       "description": "Setstate but can also undo and redo ",
-      "category": "state"
+      "category": "state-history"
     },
     {
       "name": "useUndoState",
       "description": "Drop in replacement for useState hook but with undo functionality.",
-      "category": "state"
+      "category": "state-history"
     },
     {
       "name": "useVibrate",
       "description": "Vibration API hook for React",
-      "category": "misc"
+      "category": "browser"
     },
     {
       "name": "useVideo",
@@ -448,17 +448,17 @@
     {
       "name": "useWebLocksApi",
       "description": "Hook for coordinating operations across tabs/workers with Web Locks API",
-      "category": "misc"
+      "category": "browser"
     },
     {
       "name": "useWhyDidYouUpdate",
       "description": "A hook that can track which value change caused a rerender",
-      "category": "misc"
+      "category": "dev"
     },
     {
       "name": "useWillUnmount",
       "description": "componentWillUnmount lifecycle as hook for React.",
-      "category": "effects"
+      "category": "lifecycle"
     },
     {
       "name": "useWindowEventListener",
@@ -468,12 +468,12 @@
     {
       "name": "useWindowScrollPosition",
       "description": "A React hook to get the scroll position of the window",
-      "category": "ui"
+      "category": "viewport"
     },
     {
       "name": "useWindowSize",
       "description": "Window size hook for React.",
-      "category": "ui"
+      "category": "viewport"
     }
   ]
 }

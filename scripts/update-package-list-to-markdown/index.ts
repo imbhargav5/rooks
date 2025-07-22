@@ -44,13 +44,35 @@ interface HooksByCategory {
 }
 
 const emojiByCategory: Record<string, string> = {
-  state: "❇️",
-  effects: "🔥",
-  navigator: "🚃",
-  misc: "✨",
-  form: "📝",
-  events: "🚀",
-  ui: "⚛️",
+  // Core State Management
+  "state": "❇️",                    // State Management
+  "state-history": "🔄",            // State History & Time Travel
+  
+  // Component Lifecycle
+  "lifecycle": "🔥",                // Lifecycle & Effects
+  
+  // User Interactions
+  "events": "🚀",                   // Event Handling
+  "keyboard": "⌨️",                 // Keyboard & Input
+  "mouse": "🖱️",                   // Mouse & Touch
+  "form": "📝",                     // Form & File Handling
+  
+  // UI & Visual
+  "ui": "⚛️",                      // UI & Layout
+  "animation": "🎬",                // Animation & Timing
+  "viewport": "📱",                 // Window & Viewport
+  
+  // Performance & Optimization
+  "performance": "⚡",              // Performance & Optimization
+  
+  // Browser APIs
+  "browser": "🌐",                 // Browser APIs
+  
+  // Development Tools
+  "dev": "🛠️",                    // Development & Debugging
+  
+  // Utilities
+  "utilities": "🔧",               // Utilities & Refs
 };
 
 class PackageListUpdater {
@@ -133,13 +155,31 @@ class PackageListUpdater {
     };
   }
 
-  private createCategoryHeading(category: string): RootContent {
+  private createCategoryHeading(category: string, hookCount: number): RootContent {
     const emoji = emojiByCategory[category] ?? "✅";
-    const title = category === "ui" ? "UI" : lodash.startCase(category);
+    
+    // Special handling for specific categories
+    const categoryTitleMap: Record<string, string> = {
+      "ui": "UI",
+      "state-history": "State History & Time Travel",
+      "dev": "Development & Debugging",
+      "browser": "Browser APIs",
+      "performance": "Performance & Optimization",
+      "utilities": "Utilities & Refs",
+      "keyboard": "Keyboard & Input",
+      "mouse": "Mouse & Touch",
+      "form": "Form & File Handling",
+      "animation": "Animation & Timing",
+      "viewport": "Window & Viewport",
+      "lifecycle": "Lifecycle & Effects",
+    };
+    
+    const title = categoryTitleMap[category] || lodash.startCase(category);
+    const hookText = hookCount === 1 ? "hook" : "hooks";
     
     return {
       type: "html",
-      value: `<h3 align="center">${emoji} ${title}</h3>`,
+      value: `<h3 align="center">${emoji} ${title} - ${hookCount} ${hookText}</h3>`,
     };
   }
 
@@ -157,7 +197,7 @@ class PackageListUpdater {
         continue;
       }
 
-      const headingMDAST = this.createCategoryHeading(category);
+      const headingMDAST = this.createCategoryHeading(category, hooks.length);
       const hooksListMDAST = this.createHooksListMDAST(hooks);
 
       hooksListByCategoryMDAST.children.push(headingMDAST);
