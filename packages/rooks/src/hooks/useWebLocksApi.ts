@@ -173,15 +173,23 @@ function useWebLocksApi(
       setIsLocked(true);
       clearError();
 
-      // Create AbortController for this request
-      const controller = new AbortController();
-      abortControllerRef.current = controller;
+      // Create AbortController for this request only if signal is not provided and ifAvailable is not used
+      let controller: AbortController | null = null;
+      if (!lockOptions?.signal && !lockOptions?.ifAvailable) {
+        controller = new AbortController();
+        abortControllerRef.current = controller;
+      }
 
-      // Prepare lock options
-      const finalOptions = {
-        ...lockOptions,
-        signal: lockOptions?.signal || controller.signal,
-      };
+      // Prepare lock options - avoid combining signal and ifAvailable
+      const finalOptions: LockOptions = { ...lockOptions };
+      
+      // Only add signal if ifAvailable is not set and no custom signal provided
+      if (!lockOptions?.ifAvailable && !lockOptions?.signal && controller) {
+        finalOptions.signal = controller.signal;
+      } else if (lockOptions?.signal) {
+        // Use the provided signal
+        finalOptions.signal = lockOptions.signal;
+      }
 
       // Request the lock
       const result = await navigator.locks.request(

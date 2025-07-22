@@ -337,6 +337,7 @@ type LockOptions = {
   
   /**
    * If true, the lock request will only succeed if available immediately
+   * Note: Cannot be used together with the 'signal' option
    */
   ifAvailable?: boolean;
   
@@ -347,6 +348,7 @@ type LockOptions = {
   
   /**
    * AbortSignal to cancel the lock request
+   * Note: Cannot be used together with the 'ifAvailable' option
    */
   signal?: AbortSignal;
 };
@@ -371,6 +373,7 @@ The hook will detect support automatically and set `isSupported` accordingly.
 5. **Keep critical sections short** to minimize lock contention
 6. **Consider using `ifAvailable`** to avoid blocking operations
 7. **Enable periodic checking sparingly** as it can impact performance
+8. **Don't combine `signal` and `ifAvailable` options** - the Web Locks API doesn't allow both options together
 
 ## Use Cases
 
