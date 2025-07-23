@@ -72,7 +72,7 @@ const filesToRead = [
 const filesToWrite = [
   ({ name }) => `./packages/rooks/src/__tests__/${name}.spec.ts`,
   ({ name }) => `./packages/rooks/src/hooks/${name}.ts`,
-  ({ name }) => `./apps/website/content/docs/hooks/${name}.mdx`,
+  ({ name, category }) => `./apps/website/content/docs/hooks/(${category})/${name}.mdx`,
 ];
 
 function readFileAsString(relativeFilePath) {
@@ -167,14 +167,21 @@ function validateArgs({ packageName, name, description, category }) {
   }
 
   const validCategories = [
-    "ui",
-    "misc",
-    "state",
-    "effects",
-    "navigator",
-    "form",
+    "animation",
+    "browser",
+    "dev", 
     "events",
     "experimental",
+    "form",
+    "keyboard",
+    "lifecycle",
+    "mouse",
+    "performance",
+    "state",
+    "state-history",
+    "ui",
+    "utilities",
+    "viewport",
   ];
   if (!category) {
     errors.push("--category is required");
@@ -193,10 +200,10 @@ Arguments:
   --packageName   Name of the package in hyphen separated words starting with use (e.g., use-my-hook)
   --name          Name of the hook in camelCase starting with use (e.g., useMyHook)
   --description   Description of the hook
-  --category      Category of the hook (ui, misc, state, effects, navigator, form, events, experimental)
+  --category      Category of the hook (animation, browser, dev, events, experimental, form, keyboard, lifecycle, mouse, performance, state, state-history, ui, utilities, viewport)
 
 Example:
-  node scripts/create/cli.mjs --packageName use-idle --name useIdle --description "Hook to detect when user is idle" --category misc
+  node scripts/create/cli.mjs --packageName use-idle --name useIdle --description "Hook to detect when user is idle" --category utilities
 `);
 }
 

@@ -25,7 +25,7 @@ const filesToRead = [
 const filesToWrite = [
   ({ name }) => `./packages/rooks/src/__tests__/${name}.spec.ts`,
   ({ name }) => `./packages/rooks/src/hooks/${name}.ts`,
-  ({ name }) => `./apps/website/content/docs/hooks/${name}.mdx`,
+  ({ name, category }) => `./apps/website/content/docs/hooks/(${category})/${name}.mdx`,
 ];
 
 function readFileAsString(relativeFilePath) {
@@ -118,7 +118,23 @@ const questions = [
     type: "list",
     name: "category",
     message: "Category of the hook",
-    choices: ["ui", "misc", "state", "effects", "navigator", "form", "events", "experimental"],
+    choices: [
+      "animation",
+      "browser", 
+      "dev",
+      "events",
+      "experimental",
+      "form",
+      "keyboard",
+      "lifecycle",
+      "mouse",
+      "performance",
+      "state",
+      "state-history",
+      "ui",
+      "utilities",
+      "viewport"
+    ],
     default: "state",
   },
 ];

@@ -475,7 +475,7 @@ Returns an array with two elements:
 | Return value | Type                         | Description                                                        | Default   |
 | ------------ | ---------------------------- | ------------------------------------------------------------------ | --------- |
 | array        | T[]                          | The current array state                                            | []        |
-| controls     | UseArrayStateControls<T>     | An object containing all array manipulation methods                | {}        |
+| controls     | UseArrayStateControls&lt;T&gt;     | An object containing all array manipulation methods                | {}        |
 
 ### Control Methods
 
@@ -491,7 +491,7 @@ Returns an array with two elements:
 | clear               | () => void                                       | Removes all elements from the array                                |
 | setArray            | (value: T[]) => void                             | Replaces the entire array with a new array                         |
 | updateItemAtIndex   | (index: number, value: T) => void                | Updates the element at the specified index                          |
-| splice              | (...args: Parameters<Array<T>["splice"]>) => void | Changes array contents by removing/replacing existing elements     |
+| splice              | (...args: Parameters&lt;Array&lt;T&gt;["splice"]&gt;) => void | Changes array contents by removing/replacing existing elements     |
 | removeItemAtIndex   | (index: number) => void                          | Removes the element at the specified index                          |
 | replaceItemAtIndex  | (index: number, value: T) => void                | Replaces the element at the specified index with a new value       |
 | insertItemAtIndex   | (index: number, value: T) => void                | Inserts a new element at the specified index                       |
@@ -502,7 +502,7 @@ Returns an array with two elements:
 The hook is fully typed with TypeScript generics:
 
 ```typescript
-type UseArrayStateControls<T> = {
+type UseArrayStateControls&lt;T&gt; = {
   push: (...args: T[]) => void;
   pop: () => void;
   clear: () => void;
@@ -513,14 +513,14 @@ type UseArrayStateControls<T> = {
   fill: (value: T, start?: number, end?: number) => void;
   updateItemAtIndex: (index: number, value: T) => void;
   setArray: (value: T[]) => void;
-  splice: (...args: Parameters<Array<T>["splice"]>) => void;
+  splice: (...args: Parameters&lt;Array&lt;T&gt;["splice"]&gt;) => void;
   removeItemAtIndex: (index: number) => void;
   replaceItemAtIndex: (index: number, value: T) => void;
   insertItemAtIndex: (index: number, value: T) => void;
   sort: (compareFn?: (a: T, b: T) => number) => void;
 };
 
-type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
+type UseArrayStateReturnValue&lt;T&gt; = [T[], UseArrayStateControls&lt;T&gt;];
 ```
 
 ### Performance Notes
