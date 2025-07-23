@@ -189,8 +189,6 @@
 
 ✅ Standalone package with all the hooks at one place
 
-⚠️  **Experimental Hooks**: Some hooks are marked as experimental and may be removed or significantly changed in any release without notice. Use these hooks with caution in production applications. Import experimental hooks from `rooks/experimental`.
-
 ✅ CommonJS, UMD and ESM Support
 
 ## Installation
