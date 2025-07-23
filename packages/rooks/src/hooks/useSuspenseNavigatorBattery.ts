@@ -2,132 +2,123 @@
  * useSuspenseNavigatorBattery
  * @description Suspense-enabled hook for getting battery information from Navigator Battery API
  * @see {@link https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery}
+ * 
+ * ⚠️ WARNING: Limited Browser Support
+ * - Firefox: Removed in v52+ (2017) due to privacy concerns
+ * - Safari: Never implemented
+ * - Chrome/Edge: Requires HTTPS (secure context)
+ * - This API may not work in most environments
  */
 
-// Type definitions for BatteryManager based on the spec
-interface BatteryManager extends EventTarget {
-  readonly charging: boolean;
-  readonly chargingTime: number;
-  readonly dischargingTime: number;
-  readonly level: number;
-}
-
-// Extend Navigator interface to include getBattery
+// Minimal type augmentation for the deprecated Battery API
+// We don't define full types since this API is not standard and has limited support
 declare global {
   interface Navigator {
-    getBattery?(): Promise<BatteryManager>;
+    getBattery?(): Promise<{
+      charging: boolean;
+      chargingTime: number;
+      dischargingTime: number;
+      level: number;
+      addEventListener: (type: string, listener: EventListener) => void;
+      removeEventListener: (type: string, listener: EventListener) => void;
+    }>;
   }
 }
 
 // Cache entry interface
 interface CacheEntry {
-  promise: Promise<BatteryManager>;
+  promise: Promise<any>;
   status: 'pending' | 'resolved' | 'rejected';
-  result?: BatteryManager;
+  result?: any;
   error?: Error;
 }
 
-// Cache for storing promises and their results
+// Simple cache to store the battery promise
 const cache = new Map<string, CacheEntry>();
-
-// Cache key for battery (since there are no parameters, we use a constant key)
-const BATTERY_CACHE_KEY = "battery";
+const CACHE_KEY = 'navigator-battery';
 
 /**
- * Clear all cached entries - useful for testing
- * @internal
+ * Clear the battery cache - useful for testing
  */
-export function clearCache() {
+export function clearCache(): void {
   cache.clear();
 }
 
 /**
- * Suspense-enabled hook for getting battery information from Navigator Battery API
+ * Get battery information using Suspense pattern
  * 
- * This hook will suspend (throw a promise) while the Navigator Battery API
- * is fetching battery information. It should be wrapped in a Suspense boundary.
+ * ⚠️ WARNING: This API has very limited browser support:
+ * - Firefox: Removed in v52+ due to privacy concerns  
+ * - Safari: Never implemented
+ * - Chrome/Edge: Requires HTTPS (secure context)
  * 
- * @returns The BatteryManager object with battery status information
- * 
- * @throws {Error} When Navigator Battery API is not supported
- * @throws {Promise} When data is still loading (for Suspense)
- * 
- * @example
- * ```tsx
- * function MyComponent() {
- *   const battery = useSuspenseNavigatorBattery();
- *   
- *   return (
- *     <div>
- *       <div>Charging: {battery.charging ? 'Yes' : 'No'}</div>
- *       <div>Level: {Math.round(battery.level * 100)}%</div>
- *       <div>
- *         {battery.charging 
- *           ? `Time to full charge: ${battery.chargingTime}s`
- *           : `Time remaining: ${battery.dischargingTime}s`
- *         }
- *       </div>
- *     </div>
- *   );
- * }
- * 
- * function App() {
- *   return (
- *     <Suspense fallback={<div>Loading battery info...</div>}>
- *       <MyComponent />
- *     </Suspense>
- *   );
- * }
- * ```
+ * @throws {Error} When Battery API is not supported
+ * @throws {Promise} When battery data is loading (Suspense)
+ * @returns Battery manager object with charging status and level information
  */
-function useSuspenseNavigatorBattery(): BatteryManager {
-  // Check if Navigator Battery API is supported
-  if (typeof navigator === "undefined" || !navigator.getBattery) {
-    throw new Error(
-      "Navigator Battery API is not supported in this browser. " +
-      "This API requires a secure context (HTTPS) and is not available in all browsers."
-    );
+export function useSuspenseNavigatorBattery() {
+  // Check if we have a cached entry
+  const cachedEntry = cache.get(CACHE_KEY);
+  
+  if (cachedEntry) {
+    if (cachedEntry.status === 'resolved') {
+      return cachedEntry.result;
+    } else if (cachedEntry.status === 'rejected') {
+      throw cachedEntry.error;
+    } else {
+      // Still pending, throw the promise to suspend
+      throw cachedEntry.promise;
+    }
   }
 
-  // Check if we already have a cache entry
-  let entry = cache.get(BATTERY_CACHE_KEY);
-  
-  if (!entry) {
-    // Create new cache entry with promise
-    const promise = navigator.getBattery();
+  // Check if Battery API is available
+  if (!navigator.getBattery) {
+    const error = new Error(
+      'Battery API is not supported in this browser. ' +
+      'This API was removed from Firefox (v52+) due to privacy concerns, ' +
+      'never implemented in Safari, and requires HTTPS in Chrome/Edge.'
+    );
     
-    entry = {
-      promise,
-      status: 'pending'
+    const rejectedEntry: CacheEntry = {
+      promise: Promise.reject(error),
+      status: 'rejected',
+      error
     };
     
-    cache.set(BATTERY_CACHE_KEY, entry);
-    
-    // Handle promise resolution/rejection
-    promise
-      .then((result) => {
-        entry!.status = 'resolved';
-        entry!.result = result;
-      })
-      .catch((error) => {
-        entry!.status = 'rejected';
-        entry!.error = error instanceof Error ? error : new Error(String(error));
-      });
+    cache.set(CACHE_KEY, rejectedEntry);
+    throw error;
   }
-  
-  // Handle different cache entry states
-  if (entry.status === 'pending') {
-    // Suspend by throwing the promise
-    throw entry.promise;
-  }
-  
-  if (entry.status === 'rejected') {
-    // Re-throw the error to be caught by error boundary
-    throw entry.error;
-  }
-  
-  // Return the resolved result
-  return entry.result!;
-}
 
-export { useSuspenseNavigatorBattery };
+  // Create the promise to get battery information
+  const promise = navigator.getBattery()
+    .then((battery) => {
+      // Update cache with resolved value
+      const resolvedEntry: CacheEntry = {
+        promise,
+        status: 'resolved',
+        result: battery
+      };
+      cache.set(CACHE_KEY, resolvedEntry);
+      return battery;
+    })
+    .catch((error) => {
+      // Update cache with error
+      const rejectedEntry: CacheEntry = {
+        promise,
+        status: 'rejected',
+        error: error instanceof Error ? error : new Error(String(error))
+      };
+      cache.set(CACHE_KEY, rejectedEntry);
+      throw error;
+    });
+
+  // Cache the pending promise
+  const pendingEntry: CacheEntry = {
+    promise,
+    status: 'pending'
+  };
+  cache.set(CACHE_KEY, pendingEntry);
+
+  // Throw the promise to suspend
+  throw promise;
+}
