@@ -47,7 +47,7 @@ An object with the following optional properties:
 
 | Argument value                   | Type                       | Description                                                                                                                          |
 | -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| options.target                   | `React.RefObject<Element>` | React's ref to DOM node which should be present in fullscreen mode                                                                   |
+| options.target                   | `React.RefObject&lt;Element&gt;` | React's ref to DOM node which should be present in fullscreen mode                                                                   |
 | options.onChange                 | `(event: Event) => void`   | Callback function to be called on `fullscreenchange` event                                                                           |
 | options.onError                  | `(event: Event) => void`   | Callback function to be called on `fullscreenerror` event                                                                            |
 | options.requestFullscreenOptions | `FullscreenOptions`        | `requestFullscreen` options as defined [here](https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen#parameters) |
