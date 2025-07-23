@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
  * @param query The media query to signal on. Example, `"print"` will signal
  * `true` when previewing in print mode, and `false` otherwise.
  * @returns Whether or not the media query is currently matched.
- * @see https://rooks.vercel.app/docs/useMediaMatch
+ * @see https://rooks.vercel.app/docs/hooks/useMediaMatch
  */
 function useMediaMatch(query: string): boolean {
   const matchMedia = useMemo<MediaQueryList>(

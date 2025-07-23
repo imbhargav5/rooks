@@ -51,7 +51,7 @@ const noWindowReturnValue: UseDimensionsHook = [undefined, null, null];
  * @param updateOnScroll Whether to update on scroll
  * @param updateOnResize Whether to update on resize
  * @returns [React.Ref<HTMLDivElement>, UseDimensionsRefReturn, HTMLElement | null]
- * @see https://rooks.vercel.app/docs/useDimensionsRef
+ * @see https://rooks.vercel.app/docs/hooks/useDimensionsRef
  */
 export const useDimensionsRef = ({
   updateOnScroll = true,

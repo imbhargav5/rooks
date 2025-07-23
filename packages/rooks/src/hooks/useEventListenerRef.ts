@@ -16,7 +16,7 @@ import { noop } from "@/utils/noop";
  * @param {object} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {Function} A callback ref that can be used as ref prop
- * @see https://rooks.vercel.app/docs/useEventListenerRef
+ * @see https://rooks.vercel.app/docs/hooks/useEventListenerRef
  */
 function useEventListenerRef(
   eventName: string,

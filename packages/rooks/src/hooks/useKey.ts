@@ -37,7 +37,7 @@ const defaultOptions = {
  * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
  * @param {Callback} callback  Callback to fire on keyboard events
  * @param {Options} options Options
- * @see https://rooks.vercel.app/docs/useKey
+ * @see https://rooks.vercel.app/docs/hooks/useKey
  */
 function useKey(
   keys: Array<number | string> | number | string,

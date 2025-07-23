@@ -31,7 +31,7 @@ const defaultOptions: Required<Options> = {
  * @param {Function} callback Callback to fire on keyboard events
  * @param {Options} options Options
  * @returns {CallbackRef} CallbackRef
- * @see https://rooks.vercel.app/docs/useKeyRef
+ * @see https://rooks.vercel.app/docs/hooks/useKeyRef
  */
 function useKeyRef(
   keys: Array<number | string> | number | string,

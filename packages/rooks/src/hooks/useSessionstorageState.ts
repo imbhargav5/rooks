@@ -51,7 +51,7 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  * @param {string} key - Key of the sessionStorage object
  * @param {any} initialState - Default initial value
  * @returns {[any, Dispatch<SetStateAction<any>>, () => void]}
- * @see https://rooks.vercel.app/docs/useSessionstorageState
+ * @see https://rooks.vercel.app/docs/hooks/useSessionstorageState
  */
 function useSessionstorageState<S>(
   key: string,

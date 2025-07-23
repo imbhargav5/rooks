@@ -1,7 +1,7 @@
 /**
  * useMouseMoveDelta
  * @description Tracks delta of mouse move
- * @see {@link https://rooks.vercel.app/docs/useMouseMoveDelta}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useMouseMoveDelta}
  */
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useFreshCallback } from "./useFreshCallback";

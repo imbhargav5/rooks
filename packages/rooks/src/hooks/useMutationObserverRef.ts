@@ -17,7 +17,7 @@ const config: MutationObserverInit = {
  *
  * @param {MutationCallback} callback Function that needs to be fired on mutation
  * @param {MutationObserverInit} options
- * @see https://rooks.vercel.app/docs/useMutationObserverRef
+ * @see https://rooks.vercel.app/docs/hooks/useMutationObserverRef
  */
 function useMutationObserverRef(
   callback: MutationCallback,

@@ -7,7 +7,7 @@ import { useEffect } from "react";
  * This hook locks the scroll of the body element when `isLocked` is set to `true`.
  *
  * @param isLocked Whether or not to lock the body scroll
- * @see https://rooks.vercel.app/docs/useLockBodyScroll
+ * @see https://rooks.vercel.app/docs/hooks/useLockBodyScroll
  */
 function useLockBodyScroll(isLocked: boolean) {
   useEffect(() => {

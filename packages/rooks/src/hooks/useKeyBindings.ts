@@ -30,7 +30,7 @@ type KeyBindings = { [key: string]: (event: KeyboardEvent) => void };
  *
  * @param { KeyBindings } keyBindings
  * @param {Options} options
- * @see https://rooks.vercel.app/docs/useKeyBindings
+ * @see https://rooks.vercel.app/docs/hooks/useKeyBindings
  */
 const useKeyBindings = (keyBindings: KeyBindings, options?: Options) => {
   for (const key in keyBindings) {

@@ -1,7 +1,7 @@
 /**
  * useFileDropRef
  * @description Drop files easily
- * @see {@link https://rooks.vercel.app/docs/useFileDropRef}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useFileDropRef}
  */
 import { noop } from "@/utils/noop";
 import { useCallback, useState, useEffect } from "react";

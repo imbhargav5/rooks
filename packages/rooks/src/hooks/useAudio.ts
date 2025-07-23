@@ -1,7 +1,7 @@
 /**
  * useAudio
  * @description Enhanced audio hook with comprehensive controls and state management
- * @see {@link https://rooks.vercel.app/docs/useAudio}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useAudio}
  */
 import { useState, useEffect, RefCallback } from "react";
 import { useFreshCallback } from "@/hooks/useFreshCallback";

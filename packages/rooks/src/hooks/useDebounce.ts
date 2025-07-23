@@ -30,7 +30,7 @@ type CanAlsoReturnVoid<T extends AnyFunction> = T | (() => void);
  * @param options.maxWait The maximum time func is allowed to be delayed before it's invoked.
  * @param options.trailing Specify invoking on the trailing edge of the timeout.
  * @returns Returns the new debounced function.
- * @see https://rooks.vercel.app/docs/useDebounce
+ * @see https://rooks.vercel.app/docs/hooks/useDebounce
  */
 function useDebounce<T extends AnyFunction>(
   callback: T,

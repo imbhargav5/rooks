@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
  * A hook to manage state in the form of a map or object.
  *
  * @param initialValue Initial value of the map
- * @see https://rooks.vercel.app/docs/useMapState
+ * @see https://rooks.vercel.app/docs/hooks/useMapState
  */
 function useMapState<
   T extends {

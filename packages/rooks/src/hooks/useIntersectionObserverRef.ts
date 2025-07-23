@@ -16,7 +16,7 @@ const config: IntersectionObserverInit = {
  *
  * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
  * @param {IntersectionObserverInit} options
- * @see https://rooks.vercel.app/docs/useIntersectionObserverRef
+ * @see https://rooks.vercel.app/docs/hooks/useIntersectionObserverRef
  */
 function useIntersectionObserverRef(
   callback: IntersectionObserverCallback | undefined,

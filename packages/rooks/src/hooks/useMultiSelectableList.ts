@@ -42,7 +42,7 @@ type UseMultiSelectableListReturnType<T> = [
  * @param list - The list of values to select from
  * @param initialSelectIndices - The indices of the initial selections
  * @param allowUnselected - Whether or not to allow unselected values
- * @see https://rooks.vercel.app/docs/useMultiSelectableList
+ * @see https://rooks.vercel.app/docs/hooks/useMultiSelectableList
  */
 function useMultiSelectableList<T>(
   list: T[] = [],

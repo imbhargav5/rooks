@@ -1,7 +1,7 @@
 /**
  * useNativeMapState
  * @description Manage Map() object state in React
- * @see {@link https://rooks.vercel.app/docs/useNativeMapState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useNativeMapState}
  */
 import { useState, useCallback } from "react";
 

@@ -1,7 +1,7 @@
 /**
  * useSuspenseNavigatorUserAgentData
  * @description Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
- * @see {@link https://rooks.vercel.app/docs/useSuspenseNavigatorUserAgentData}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData}
  */
 
 // Type definitions for NavigatorUAData based on the spec

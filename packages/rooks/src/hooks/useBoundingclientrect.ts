@@ -16,7 +16,7 @@ function getBoundingClientRect(element: HTMLElement): DOMRect | null {
  *
  * @param ref The React ref whose ClientRect is needed
  * @returns DOMRect | null
- * @see https://rooks.vercel.app/docs/useBoundingclientRect
+ * @see https://rooks.vercel.app/docs/hooks/useBoundingclientRect
  */
 function useBoundingclientrect(
   ref: MutableRefObject<HTMLElement | null>

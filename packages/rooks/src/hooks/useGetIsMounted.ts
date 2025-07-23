@@ -7,7 +7,7 @@ type UseGetIsMounted = () => () => boolean;
  * Useful for async effects. Returns a callback that returns a boolean representing if the component
  * is mounted at the time.
  * @returns () => boolean
- * @see https://rooks.vercel.app/docs/useGetIsMounted
+ * @see https://rooks.vercel.app/docs/hooks/useGetIsMounted
  */
 export const useGetIsMounted: UseGetIsMounted = () => {
   const isMountedRef = useRef<boolean>(false);

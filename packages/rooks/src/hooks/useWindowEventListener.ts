@@ -11,7 +11,7 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @returns {undefined}
- * @see https://rooks.vercel.app/docs/useWindowEventListener
+ * @see https://rooks.vercel.app/docs/hooks/useWindowEventListener
  */
 function useWindowEventListener(
   eventName: keyof WindowEventMap,

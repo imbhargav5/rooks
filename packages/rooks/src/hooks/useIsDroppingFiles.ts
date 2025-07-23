@@ -1,7 +1,7 @@
 /**
  * useIsDroppingFiles
  * @description Check if any files are currently being dropped anywhere. Useful for highlighting drop areas.
- * @see {@link https://rooks.vercel.app/docs/useIsDroppingFiles}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useIsDroppingFiles}
  */
 import { CallbackRef, HTMLElementOrNull } from "@/utils/utils";
 import { useState, useEffect, useCallback } from "react";

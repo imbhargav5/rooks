@@ -11,7 +11,7 @@ import { useWillUnmount } from "./useWillUnmount";
  *
  * @param {Function} callback The callback to be called on update
  * @param {Array} conditions The list of variables which trigger update when they are changed
- * @see https://rooks.vercel.app/docs/useDidUpdate
+ * @see https://rooks.vercel.app/docs/hooks/useDidUpdate
  */
 function useDidUpdate(callback: () => void, conditions?: unknown[]): void {
   const hasMountedRef = useRef<boolean>(false);

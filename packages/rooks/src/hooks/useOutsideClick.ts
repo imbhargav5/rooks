@@ -9,7 +9,7 @@ import { noop } from "@/utils/noop";
  * @param ref Ref whose outside click needs to be listened to
  * @param handler Callback to fire on outside click
  * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
- * @see https://rooks.vercel.app/docs/useOutsideClick
+ * @see https://rooks.vercel.app/docs/hooks/useOutsideClick
  * @example
  * ```tsx
  * import { useOutsideClick } from "@/hooks/useOutsideClick";

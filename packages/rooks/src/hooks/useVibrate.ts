@@ -1,7 +1,7 @@
 /**
  * useVibrate
  * @description Vibration API hook for React
- * @see {@link https://rooks.vercel.app/docs/useVibrate}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useVibrate}
  */
 import { useEffect } from "react";
 

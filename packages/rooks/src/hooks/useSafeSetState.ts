@@ -1,7 +1,7 @@
 /**
  * useSafeSetState
  * @description set state but ignores if component has already unmounted
- * @see {@link https://rooks.vercel.app/docs/useSafeSetState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useSafeSetState}
  */
 import { useState, useCallback, SetStateAction, Dispatch } from "react";
 import { useGetIsMounted } from "./useGetIsMounted";

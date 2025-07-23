@@ -128,7 +128,7 @@ type CounterHandler = {
  *
  * @param {number} initialValue The initial value of the counter
  * @returns {handler} A handler to interact with the counter
- * @see https://rooks.vercel.app/docs/useCounter
+ * @see https://rooks.vercel.app/docs/hooks/useCounter
  */
 // 3. Hook Function
 function useCounter(initialValue: number): CounterHandler {
@@ -230,7 +230,7 @@ describe("useCounter", () => {
  * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
  * @param {Callback} callback  Callback to fire on keyboard events
  * @param {Options} options Options
- * @see https://rooks.vercel.app/docs/useKey
+ * @see https://rooks.vercel.app/docs/hooks/useKey
  */
 ```
 

@@ -30,7 +30,7 @@ function getVisibilityStateServerSnapshot(): UseDocumentVisibilityStateReturnTyp
  * useDocumentVisibilityState
  * @description Returns the visibility state of the document. Returns null on the server side.
  * @returns {UseDocumentVisibilityStateReturnType} The visibility state of the document. `null` on the server.
- * @see {@link https://rooks.vercel.app/docs/useDocumentVisibilityState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useDocumentVisibilityState}
  */
 function useDocumentVisibilityState(): UseDocumentVisibilityStateReturnType {
   return useSyncExternalStore(getVisibilityStateSubscription, getVisibilityStateSnapshot, getVisibilityStateServerSnapshot);

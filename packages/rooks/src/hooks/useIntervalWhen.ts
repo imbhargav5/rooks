@@ -9,7 +9,7 @@ import { noop } from "@/utils/noop";
  * @param intervalDurationMs Amount of time in ms after which to invoke
  * @param when The condition which when true, sets the interval
  * @param startImmediate If the callback should be invoked immediately
- * @see https://rooks.vercel.app/docs/useIntervalWhen
+ * @see https://rooks.vercel.app/docs/hooks/useIntervalWhen
  */
 function useIntervalWhen(
   callback: () => void,

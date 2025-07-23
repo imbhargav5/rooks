@@ -1,7 +1,7 @@
 /**
  * useOnLongPress
  * @description Fire a callback on long press
- * @see {@link https://rooks.vercel.app/docs/useOnLongPress}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useOnLongPress}
  */
 import { HTMLElementOrNull } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";

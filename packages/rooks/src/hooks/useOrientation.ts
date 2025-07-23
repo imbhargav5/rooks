@@ -1,7 +1,7 @@
 /**
  * useOrientation
  * @description orientation hook for react
- * @see {@link https://rooks.vercel.app/docs/useOrientation}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useOrientation}
  */
 import { useState, useEffect } from "react";
 

@@ -33,7 +33,7 @@ function subscribe(onStoreChange: () => void): () => void {
  * Returns true if navigator is online, false if not.
  *
  * @returns {boolean} The value of navigator.onLine
- * @see https://rooks.vercel.app/docs/useOnline
+ * @see https://rooks.vercel.app/docs/hooks/useOnline
  */
 function useOnline(): boolean | null {
   const isOnline = useSyncExternalStore<boolean | null>(subscribe, getSnapshot);

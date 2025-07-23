@@ -20,7 +20,7 @@ function setRef<T>(ref: PossibleRef<T> | null, value: T) {
  * @param refA
  * @param refB
  * @returns MutableRefObject
- * @see https://rooks.vercel.app/docs/useForkRef
+ * @see https://rooks.vercel.app/docs/hooks/useForkRef
  */
 function useForkRef<T>(
   refA: PossibleRef<T> | null,
