@@ -1,5 +1,11 @@
 # rooks
 
+## 8.3.1
+
+### Patch Changes
+
+- [`0ee8537`](https://github.com/imbhargav5/rooks/commit/0ee8537ea43addb1b98d1fcdbc8c69790316d078) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Fix docs links
+
 ## 8.3.0
 
 ### Minor Changes
