@@ -43,7 +43,7 @@ const defaultOptions = {
  * @param keysList - list of keys to listen to
  * @param callback  - callback to be called when a key is pressed
  * @param options - options to be passed to the event listener
- * @see https://rooks.vercel.app/docs/useKeys
+ * @see https://rooks.vercel.app/docs/hooks/useKeys
  */
 function useKeys(
   keysList: string[],

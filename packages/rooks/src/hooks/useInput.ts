@@ -42,7 +42,7 @@ const defaultOptions = {};
  * @param {unknown} [initialValue] Initial value of the input
  * @param {Options} [options] Options object
  * @returns {InputHandler} Input handler with value and onChange
- * @see https://rooks.vercel.app/docs/useInput
+ * @see https://rooks.vercel.app/docs/hooks/useInput
  */
 function useInput<
   T extends number | string | readonly string[] | undefined = string

@@ -33,7 +33,7 @@ function getLanguageServerSnapshot(): Language {
  * Returns the language of the navigator
  *
  * @returns {Language}
- * @see https://rooks.vercel.app/docs/useNavigatorLanguage
+ * @see https://rooks.vercel.app/docs/hooks/useNavigatorLanguage
  */
 export function useNavigatorLanguage(): Language {
   return useSyncExternalStore(getLanguageSubscription, getLanguageSnapshot, getLanguageServerSnapshot);

@@ -8,7 +8,7 @@ import { useWillUnmount } from "./useWillUnmount";
  *
  * @param componentName Name of the component
  * @param {...*} otherArgs Other arguments to log
- * @see https://rooks.vercel.app/docs/useLifecycleLogger
+ * @see https://rooks.vercel.app/docs/hooks/useLifecycleLogger
  */
 const useLifecycleLogger = (
   componentName = "Component",

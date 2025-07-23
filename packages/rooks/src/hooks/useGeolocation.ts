@@ -54,7 +54,7 @@ const defaultGeoLocationOptions: UseGeoLocationOptions = {
  * Gets the geolocation data as a hook
  *
  * @param {UseGeoLocationOptions} geoLocationOptions Geolocation options
- * @see {@link https://rooks.vercel.app/docs/useGeolocation}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useGeolocation}
  */
 const useGeolocation = (
   geoLocationOptions: UseGeoLocationOptions = defaultGeoLocationOptions

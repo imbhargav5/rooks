@@ -65,7 +65,7 @@ type UseTimeTravelStateReturnValue<T> = [
 /**
  * useTimeTravelState
  * @description A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
- * @see {@link https://rooks.vercel.app/docs/useTimeTravelState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useTimeTravelState}
  * @param initialValue The initial value of the state.
  * @returns {UseTimeTravelStateReturnValue}
  * @example

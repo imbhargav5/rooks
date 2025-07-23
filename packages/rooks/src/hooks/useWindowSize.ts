@@ -27,7 +27,7 @@ function getDimensions(): WindowDimensions {
  * A hook that provides information of the dimensions of the window
  *
  * @returns Dimensions of the window
- * @see https://rooks.vercel.app/docs/useWindowSize
+ * @see https://rooks.vercel.app/docs/hooks/useWindowSize
  */
 export function useWindowSize(): WindowDimensions {
   const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {

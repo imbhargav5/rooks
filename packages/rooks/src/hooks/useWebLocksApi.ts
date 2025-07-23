@@ -88,7 +88,7 @@ type UseWebLocksApiReturn = {
 /**
  * useWebLocksApi
  * @description Hook for coordinating operations across tabs/workers with Web Locks API
- * @see {@link https://rooks.vercel.app/docs/useWebLocksApi}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useWebLocksApi}
  */
 function useWebLocksApi(
   resourceName: string,

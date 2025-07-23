@@ -17,7 +17,7 @@ function setRef<T>(ref: PossibleRef<T>, value: T) {
  * Refs can be mutable refs or function refs.
  *
  * @param refs
- * @see https://rooks.vercel.app/docs/useMergeRefs
+ * @see https://rooks.vercel.app/docs/hooks/useMergeRefs
  */
 export function useMergeRefs<T>(
   ...refs: Array<PossibleRef<T>>

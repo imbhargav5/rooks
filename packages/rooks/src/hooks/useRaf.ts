@@ -9,7 +9,7 @@ import { noop } from "@/utils/noop";
  *
  * @param {Function} callback The callback function to be executed
  * @param {boolean} [isActive] The value which while true, keeps the raf running infinitely
- * @see https://rooks.vercel.app/docs/useRaf
+ * @see https://rooks.vercel.app/docs/hooks/useRaf
  */
 export function useRaf(
   callback: (timeElapsed: number) => void,

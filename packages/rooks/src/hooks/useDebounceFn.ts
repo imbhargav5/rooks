@@ -1,7 +1,7 @@
 /**
  * useDebounceFn
  * @description Powerful debounce function hook for React
- * @see {@link https://rooks.vercel.app/docs/useDebounceFn}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useDebounceFn}
  */
 import { useRef, useCallback, useState } from "react";
 import { useFreshCallback } from "./useFreshCallback";

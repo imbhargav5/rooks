@@ -16,7 +16,7 @@ function getBoundingClientRect(element: HTMLElement): DOMRect {
  * Tracks the boundingclientrect of a React Ref and fires a callback when the element's size changes.
  *
  * @returns [CallbackRef | null, DOMRect | null, () => void]
- * @see https://rooks.vercel.app/docs/useBoundingclientRectRef
+ * @see https://rooks.vercel.app/docs/hooks/useBoundingclientRectRef
  */
 function useBoundingclientrectRef(): [
   CallbackRef | null,

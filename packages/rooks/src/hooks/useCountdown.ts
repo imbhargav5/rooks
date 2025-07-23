@@ -14,7 +14,7 @@ type CountdownOptions = {
  *
  * @param endTime Time to countdown
  * @param options  Countdown options
- * @see https://rooks.vercel.app/docs/useCountdown
+ * @see https://rooks.vercel.app/docs/hooks/useCountdown
  */
 function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const { interval = 1_000, onDown, onEnd } = options;

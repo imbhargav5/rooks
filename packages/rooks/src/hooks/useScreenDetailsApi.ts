@@ -67,7 +67,7 @@ interface UseScreenDetailsApiReturn {
  * Hook for multi-screen information and management using Screen Details API
  * @param options Configuration options for the hook
  * @returns Object containing screen details and control functions
- * @see {@link https://rooks.vercel.app/docs/useScreenDetailsApi}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useScreenDetailsApi}
  */
 function useScreenDetailsApi(options: UseScreenDetailsApiOptions = {}): UseScreenDetailsApiReturn {
   const { requestOnMount = false, autoRefresh = true } = options;

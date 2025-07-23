@@ -39,7 +39,7 @@ type UseSelectableListReturnType<T> = [
  * @param list - The list of values to select from
  * @param initialIndex  - The index of the initial selection
  * @param allowUnselected
- * @see https://rooks.vercel.app/docs/useSelectableList
+ * @see https://rooks.vercel.app/docs/hooks/useSelectableList
  */
 function useSelectableList<T>(
   list: T[] = [],

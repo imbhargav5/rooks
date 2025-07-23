@@ -10,7 +10,7 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {Function} callback The callback to be called on event
  * @param {ListenerOptions} listenerOptions The options to be passed to the event listener
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
- * @see https://rooks.vercel.app/docs/useDocumentEventListener
+ * @see https://rooks.vercel.app/docs/hooks/useDocumentEventListener
  */
 function useDocumentEventListener(
   eventName: keyof DocumentEventMap,

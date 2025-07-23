@@ -1,7 +1,7 @@
 /**
  * useOnLongHover
  * @description Fires a callback when an element is hovered for a while
- * @see {@link https://rooks.vercel.app/docs/useOnLongHover}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useOnLongHover}
  */
 import { HTMLElementOrNull } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";

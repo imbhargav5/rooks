@@ -1,7 +1,7 @@
 /**
  * useWhyDidYouUpdate
  * @description A hook that can track which value change caused a rerender
- * @see {@link https://rooks.vercel.app/docs/useWhyDidYouUpdate}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useWhyDidYouUpdate}
  */
 import { useEffect, useRef } from "react";
 import { useDidUpdate } from "./useDidUpdate";

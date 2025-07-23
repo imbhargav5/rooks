@@ -41,7 +41,7 @@ export type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
  * @description Array state manager hook for React
  * @param {Array<T>} initialState Initial state of the array
  * @returns {UseArrayStateReturnValue<T>} Array state manager hook for React
- * @see {@link https://rooks.vercel.app/docs/useArrayState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useArrayState}
  *
  * @example
  *

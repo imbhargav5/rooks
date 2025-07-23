@@ -1,7 +1,7 @@
 /**
  * usePromise
  * @description Promise management hook for react
- * @see {@link https://rooks.vercel.app/docs/usePromise}
+ * @see {@link https://rooks.vercel.app/docs/hooks/usePromise}
  */
 import { useState, useEffect, DependencyList } from "react";
 import { useFreshCallback } from "./useFreshCallback";

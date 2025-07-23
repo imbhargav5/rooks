@@ -58,7 +58,7 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  *
  * @param {string} key - Key of the localStorage object
  * @param {any} initialState - Default initial value
- * @see https://rooks.vercel.app/docs/useLocalstorageState
+ * @see https://rooks.vercel.app/docs/hooks/useLocalstorageState
  */
 function useLocalstorageState<S>(
   key: string,

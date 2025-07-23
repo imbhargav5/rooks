@@ -15,7 +15,7 @@ type PictureInPictureApi = {
  *
  * @param videoRef - Reference to the video element
  * @returns Object containing PiP state and control functions
- * @see https://rooks.vercel.app/docs/usePictureInPictureApi
+ * @see https://rooks.vercel.app/docs/hooks/usePictureInPictureApi
  */
 function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureInPictureApi {
   const [isPiPActive, setIsPiPActive] = useState(false);

@@ -1,7 +1,7 @@
 /**
  * useDeepCompareEffect
  * @description Deep compare dependencies instead of shallow for useEffect
- * @see {@link https://rooks.vercel.app/docs/useDeepCompareEffect}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useDeepCompareEffect}
  */
 import { useEffect, useRef, DependencyList, EffectCallback } from "react";
 import isEqual from "fast-deep-equal";

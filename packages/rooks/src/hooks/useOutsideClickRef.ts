@@ -9,7 +9,7 @@ import { noop } from "@/utils/noop";
  * @param handler Callback to fire on outside click
  * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
  * @returns An array with first item being ref
- * @see https://rooks.vercel.app/docs/useOutsideClick
+ * @see https://rooks.vercel.app/docs/hooks/useOutsideClick
  */
 function useOutsideClickRef(
   handler: (event: MouseEvent | TouchEvent) => void,

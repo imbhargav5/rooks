@@ -1,7 +1,7 @@
 /**
  * useVideo
  * @description Video hook for react
- * @see {@link https://rooks.vercel.app/docs/useVideo}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useVideo}
  */
 import { useRef, useState, useEffect, RefObject } from "react";
 

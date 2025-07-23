@@ -19,7 +19,7 @@ type CounterHandler = {
  * @property {Function} incrementBy Increment counter by incrAmount
  * @property {Function} decrementBy Decrement counter by decrAmount
  * @property {Function} reset Reset counter to initialValue
- * @see {@link https://rooks.vercel.app/docs/useCounter}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useCounter}
  */
 
 /**
@@ -27,7 +27,7 @@ type CounterHandler = {
  *
  * @param {number} initialValue The initial value of the counter
  * @returns {handler} A handler to interact with the counter
- * @see https://rooks.vercel.app/docs/useCounter
+ * @see https://rooks.vercel.app/docs/hooks/useCounter
  */
 function useCounter(initialValue: number): CounterHandler {
   const [counter, setCounter] = useState(initialValue);

@@ -18,7 +18,7 @@ interface FocusWithinResult<T> {
 /**
  * useFocusWithin
  * @description Handles focus events for the target component.
- * @see {@link https://rooks.vercel.app/docs/useFocusWithin}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useFocusWithin}
  */
 const useFocusWithin = <T extends HTMLElement>(
   props: FocusWithinProps

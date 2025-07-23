@@ -5,7 +5,7 @@ import { useCallback, useMemo, useState } from "react";
  * @description Manages a stack with react hooks.
  * @param initialList Initial value of the list
  * @returns The list and controls to modify the stack
- * @see https://rooks.vercel.app/docs/useStackState
+ * @see https://rooks.vercel.app/docs/hooks/useStackState
  */
 function useStackState<T>(initialList: T[]): [
   T[],

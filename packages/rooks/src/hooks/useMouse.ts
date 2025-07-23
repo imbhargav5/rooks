@@ -65,7 +65,7 @@ function getMousePositionFromEvent(event: MouseEvent): MouseData {
  *
  * Retrieves current mouse position and information about the position like
  * screenX, pageX, clientX, movementX, offsetX
- * @see https://rooks.vercel.app/docs/useMouse
+ * @see https://rooks.vercel.app/docs/hooks/useMouse
  */
 export function useMouse(): MouseData {
   const [mousePosition, setMousePosition] =

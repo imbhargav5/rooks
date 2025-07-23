@@ -14,7 +14,7 @@ type SelectHandler<T> = {
  * @param list List of values to select a value from
  * @param {number} initialIndex Initial index which is selected
  * @returns handler
- * @see https://rooks.vercel.app/docs/useSelect
+ * @see https://rooks.vercel.app/docs/hooks/useSelect
  */
 function useSelect<T>(list: T[], initialIndex = 0): SelectHandler<T> {
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);

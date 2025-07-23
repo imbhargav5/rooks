@@ -1,7 +1,7 @@
 /**
  * useMouseWheelDelta
  * @description Tracks delta of mouse wheel
- * @see {@link https://rooks.vercel.app/docs/useMouseWheelDelta}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useMouseWheelDelta}
  */
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useFreshCallback } from "./useFreshCallback";

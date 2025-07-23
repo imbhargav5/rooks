@@ -6,7 +6,7 @@ import type { CallbackWithNoArguments } from "@/types/types";
  * @description Calls a function on mount
  *
  * @param {Function} callback Callback function to be called on mount
- * @see https://rooks.vercel.app/docs/useDidMount
+ * @see https://rooks.vercel.app/docs/hooks/useDidMount
  */
 function useDidMount(callback: CallbackWithNoArguments): void {
   useEffect(() => {

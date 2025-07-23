@@ -22,7 +22,7 @@ type UseDocumentTitleOptions = {
  *   useDocumentTitle("My App", { resetOnUnmount: true });
  *   return <div>Hello, world!</div>;
  * }
- * @see {@link https://rooks.vercel.app/docs/useDocumentTitle}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useDocumentTitle}
  */
 function useDocumentTitle(
   title: string,

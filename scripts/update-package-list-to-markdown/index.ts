@@ -141,7 +141,7 @@ class PackageListUpdater {
   }
 
   private createHookEntry(hook: Hook): string {
-    return `[${hook.name}](https://rooks.vercel.app/docs/${hook.name}) - ${hook.description}`;
+    return `[${hook.name}](https://rooks.vercel.app/docs/hooks/${hook.name}) - ${hook.description}`;
   }
 
   private createHooksListMDAST(hooks: Hook[]): RootContent {

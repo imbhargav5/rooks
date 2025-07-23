@@ -1,7 +1,7 @@
 /**
  * %name%
  * @description %description%
- * @see {@link https://rooks.vercel.app/docs/%name%}
+ * @see {@link https://rooks.vercel.app/docs/hooks/%name%}
 */
 function %name%() {
   return null;

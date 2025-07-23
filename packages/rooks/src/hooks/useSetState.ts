@@ -16,7 +16,7 @@ export type UseSetStateReturnValue<T> = [Set<T>, UseSetStateControls<T>];
  * @description Manage the state of a Set in React.
  * @param {Set<T>} initialSetValue The initial value of the set to manage.
  * @returns {UseSetStateReturnValue<T>} The state of the Set and the controls.
- * @see {@link https://rooks.vercel.app/docs/useSetState}
+ * @see {@link https://rooks.vercel.app/docs/hooks/useSetState}
  * @example
  * import { useSetState } from "@/hooks/useSetState";
  * const [set, setControls] = useSetState(new Set());

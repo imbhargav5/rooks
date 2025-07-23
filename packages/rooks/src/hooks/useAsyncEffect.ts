@@ -11,7 +11,7 @@ type CleanupFunction<T> = (result: T | void) => void;
  * @param {Effect<T>} effect Async function that can return a cleanup function and takes in an AbortSignal
  * @param {DependencyList} deps If present, effect will only activate if the values in the list change
  * @param {CleanupFunction} cleanup The destroy/cleanup function. Will be called with previous result if it exists. 
- * @see https://rooks.vercel.app/docs/useAsyncEffect
+ * @see https://rooks.vercel.app/docs/hooks/useAsyncEffect
  * @example 
  * ```jsx
  * useAsyncEffect(
