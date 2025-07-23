@@ -6,7 +6,7 @@ sidebar_label: useGetIsMounted
 
 ## About
 
-Checks if a component is mounted or not at the time. Useful for async effects
+A hook that provides a way to check if a component is currently mounted. This is particularly useful for preventing state updates on unmounted components, especially after asynchronous operations like API calls, timers, or promises. The hook returns a function that returns a boolean indicating the current mount status.
 
 [//]: # "Main"
 
@@ -17,11 +17,206 @@ Checks if a component is mounted or not at the time. Useful for async effects
 ```jsx
 import { useEffect } from "react";
 import { useGetIsMounted } from "rooks";
+
 export default function App() {
   const getIsMounted = useGetIsMounted();
+  
   useEffect(() => {
-    alert("Mounted " + String(getIsMounted()));
-  }, []);
-  return null;
+    console.log("Component mounted:", getIsMounted()); // true
+    
+    return () => {
+      console.log("Component unmounting:", getIsMounted()); // false
+    };
+  }, [getIsMounted]);
+  
+  return <div>Check console for mount status</div>;
 }
 ```
+
+### Preventing state updates after async operations
+
+```jsx
+import { useState, useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+
+export default function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const getIsMounted = useGetIsMounted();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Simulate API call
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setUser(userData);
+          setLoading(false);
+        }
+      } catch (err) {
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUser();
+  }, [userId, getIsMounted]);
+
+  if (loading) return <div>Loading user...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+}
+```
+
+### Using with timers and intervals
+
+```jsx
+import { useState, useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+
+export default function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const getIsMounted = useGetIsMounted();
+
+  useEffect(() => {
+    let intervalId;
+    
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setCount(prevCount => prevCount + 1);
+        } else {
+          // Clear interval if component is unmounted
+          clearInterval(intervalId);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [isRunning, getIsMounted]);
+
+  const handleStart = () => setIsRunning(true);
+  const handleStop = () => setIsRunning(false);
+  const handleReset = () => {
+    setIsRunning(false);
+    setCount(0);
+  };
+
+  return (
+    <div>
+      <h2>Timer: {count}s</h2>
+      <button onClick={handleStart} disabled={isRunning}>
+        Start
+      </button>
+      <button onClick={handleStop} disabled={!isRunning}>
+        Stop
+      </button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+}
+```
+
+### Alternative: Using useSafeSetState
+
+For a more convenient approach to safe state updates, you can use the [`useSafeSetState`](/docs/hooks/useSafeSetState) hook from our collection, which internally uses `useGetIsMounted` to provide a drop-in replacement for `useState` that automatically prevents updates on unmounted components:
+
+```jsx
+import { useEffect } from "react";
+import { useSafeSetState } from "rooks";
+
+export default function SafeUserProfile({ userId }) {
+  const [user, setUser] = useSafeSetState(null);
+  const [loading, setLoading] = useSafeSetState(true);
+  const [error, setError] = useSafeSetState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // These will automatically be ignored if component is unmounted
+        setUser(userData);
+        setLoading(false);
+      } catch (err) {
+        // These will automatically be ignored if component is unmounted
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [userId, setUser, setLoading, setError]);
+
+  if (loading) return <div>Loading user...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+This hook doesn't accept any arguments.
+
+### Returns
+
+| Return value | Type     | Description                                                                    | Default   |
+| ------------ | -------- | ------------------------------------------------------------------------------ | --------- |
+| getIsMounted | Function | A function that returns a boolean indicating if the component is currently mounted | undefined |
+
+### Return Function
+
+The returned `getIsMounted` function:
+
+| Return value | Type    | Description                                          |
+| ------------ | ------- | ---------------------------------------------------- |
+| isMounted    | Boolean | `true` if the component is mounted, `false` otherwise |
+
+## Use Cases
+
+- **Async Operations**: Prevent state updates after API calls, file uploads, or other async operations complete
+- **Timers and Intervals**: Avoid memory leaks and errors from timers that continue after component unmount
+- **Event Listeners**: Clean up event listeners and prevent handlers from running on unmounted components
+- **Promises and Callbacks**: Ensure promise resolutions and callback executions don't affect unmounted components
+- **Conditional Rendering**: Make decisions based on component mount status in complex scenarios
+
+## Notes
+
+- The hook uses a `useRef` to track mount status, which persists across re-renders
+- The mount status is set to `true` in `useEffect` and `false` in the cleanup function
+- This pattern helps prevent the common React warning: "Can't perform a React state update on an unmounted component"
+- For simpler use cases, consider using [`useSafeSetState`](/docs/hooks/useSafeSetState) which provides the same safety with a more convenient API
