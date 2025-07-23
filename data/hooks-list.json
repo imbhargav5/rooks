@@ -406,6 +406,11 @@
       "category": "state"
     },
     {
+      "name": "useSuspenseNavigatorBattery",
+      "description": "Suspense-enabled hook for getting battery information from Navigator Battery API",
+      "category": "browser"
+    },
+    {
       "name": "useSuspenseNavigatorUserAgentData",
       "description": "Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API",
       "category": "experimental"

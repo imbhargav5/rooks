@@ -1,0 +1,138 @@
+---
+id: useSuspenseNavigatorBattery
+title: useSuspenseNavigatorBattery
+sidebar_label: useSuspenseNavigatorBattery
+---
+
+## About
+
+Suspense-enabled hook for getting battery information from Navigator Battery API. This hook will suspend while the Battery API is fetching information and should be wrapped in a Suspense boundary.
+
+**Note:** This API requires a secure context (HTTPS) and is only supported in Chromium-based browsers.
+
+## Return Value
+
+Returns a `BatteryManager` object with the following properties:
+
+- `charging: boolean` - Whether the battery is currently charging
+- `chargingTime: number` - Time in seconds until the battery is fully charged (or `Infinity`)
+- `dischargingTime: number` - Time in seconds until the battery is fully discharged (or `Infinity`)
+- `level: number` - Battery charge level as a value between 0.0 and 1.0
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import React, { Suspense } from 'react';
+import { useSuspenseNavigatorBattery } from "rooks";
+
+function BatteryInfo() {
+  const battery = useSuspenseNavigatorBattery();
+  
+  return (
+    <div>
+      <h3>🔋 Battery Status</h3>
+      <p>Charging: {battery.charging ? '⚡ Yes' : '🔌 No'}</p>
+      <p>Level: {Math.round(battery.level * 100)}%</p>
+      <p>
+        {battery.charging 
+          ? `Time to full charge: ${Math.round(battery.chargingTime / 60)} minutes`
+          : `Time remaining: ${Math.round(battery.dischargingTime / 60)} minutes`
+        }
+      </p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading battery info...</div>}>
+      <BatteryInfo />
+    </Suspense>
+  );
+}
+```
+
+### With Error Boundary
+
+```tsx
+import React, { Suspense } from 'react';
+import { useSuspenseNavigatorBattery } from "rooks";
+
+class BatteryErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          ⚠️ Battery API not supported in this browser or context.
+          Requires HTTPS and a Chromium-based browser.
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+function BatteryDisplay() {
+  const battery = useSuspenseNavigatorBattery();
+  
+  const batteryColor = battery.level > 0.5 ? 'green' : 
+                      battery.level > 0.2 ? 'orange' : 'red';
+  
+  return (
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
+      <div style={{ fontSize: '2em', color: batteryColor }}>
+        {Math.round(battery.level * 100)}%
+      </div>
+      <div>
+        Status: {battery.charging ? 'Charging' : 'Discharging'}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BatteryErrorBoundary>
+      <Suspense fallback={<div>🔄 Loading battery information...</div>}>
+        <BatteryDisplay />
+      </Suspense>
+    </BatteryErrorBoundary>
+  );
+}
+```
+
+## Browser Support
+
+- ✅ Chrome 38+
+- ✅ Edge 79+
+- ❌ Firefox (removed due to privacy concerns)
+- ❌ Safari (not supported)
+
+## Important Notes
+
+1. **Secure Context Required**: This API only works over HTTPS
+2. **Limited Browser Support**: Only available in Chromium-based browsers
+3. **Privacy Considerations**: Some browsers have removed this API due to privacy concerns
+4. **Permissions**: May require user permission in some contexts
+5. **Caching**: Results are cached to avoid multiple API calls
+
+## Error Handling
+
+The hook will throw errors in the following cases:
+
+- `Error`: When the Navigator Battery API is not supported
+- `NotAllowedError`: When permission is denied
+- `SecurityError`: When called in an insecure context
+
+Always wrap the hook usage in both a Suspense boundary (for loading states) and an Error Boundary (for error handling).
