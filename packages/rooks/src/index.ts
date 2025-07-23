@@ -86,6 +86,7 @@ export { useSessionstorageState } from "@/hooks/useSessionstorageState";
 export { useSetState } from "@/hooks/useSetState";
 export { useStackState } from "@/hooks/useStackState";
 export { useSpeech } from "@/hooks/useSpeech";
+export { useSuspenseNavigatorBattery } from "@/hooks/useSuspenseNavigatorBattery";
 export { useTimeTravelState } from "@/hooks/useTimeTravelState";
 export { useThrottle } from "@/hooks/useThrottle";
 export { useTimeoutWhen } from "@/hooks/useTimeoutWhen";
