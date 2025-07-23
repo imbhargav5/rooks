@@ -6,30 +6,527 @@ sidebar_label: useArrayState
 
 ## About
 
-Array state manager hook for React. It exposes push**, **pop, unshift, shift, concat, fill and reverse methods to be able to easily modify the state of an array.
+A comprehensive array state manager hook for React that provides immutable array operations with full TypeScript support. It exposes 15 different methods to easily modify array state including push, pop, unshift, shift, concat, fill, reverse, splice, sort, and more advanced operations like insertItemAtIndex and replaceItemAtIndex.
+
+[//]: # "Main"
 
 ## Examples
 
+#### Basic array operations
+
 ```jsx
-import { useArrayState, useInput } from "rooks";
+import { useArrayState } from "rooks";
+
 export default function App() {
   const [array, controls] = useArrayState([1, 2, 3]);
-  const numberInput = useInput(0);
 
   return (
     <div>
-      <p> Array items are - {array.join(",")} </p>
-      <input {...numberInput} type="number" />
-      <button
-        onClick={() => {
-          controls.push(Number.parseInt(numberInput.value));
-          numberInput.onChange({ target: { value: 0 } });
-        }}
-      >
-        {" "}
-        Push value
-      </button>
+      <div>Current array: [{array.join(", ")}]</div>
+      <div>Length: {array.length}</div>
+      
+      <div style={{ margin: "20px 0", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button onClick={() => controls.push(Math.floor(Math.random() * 100))}>
+          Push Random
+        </button>
+        <button onClick={controls.pop} disabled={array.length === 0}>
+          Pop
+        </button>
+        <button onClick={() => controls.unshift(0)}>
+          Unshift 0
+        </button>
+        <button onClick={controls.shift} disabled={array.length === 0}>
+          Shift
+        </button>
+        <button onClick={controls.reverse}>
+          Reverse
+        </button>
+        <button onClick={() => controls.concat([10, 20, 30])}>
+          Concat [10, 20, 30]
+        </button>
+        <button onClick={() => controls.fill(7)}>
+          Fill with 7
+        </button>
+        <button onClick={controls.clear}>
+          Clear
+        </button>
+      </div>
     </div>
   );
 }
 ```
+
+#### Todo list manager
+
+```jsx
+import { useArrayState } from "rooks";
+import { useState } from "react";
+
+export default function TodoList() {
+  const [todos, todoControls] = useArrayState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build an app", completed: false },
+    { id: 3, text: "Deploy to production", completed: true }
+  ]);
+  
+  const [newTodo, setNewTodo] = useState("");
+  const [nextId, setNextId] = useState(4);
+
+  const addTodo = () => {
+    if (newTodo.trim()) {
+      todoControls.push({
+        id: nextId,
+        text: newTodo.trim(),
+        completed: false
+      });
+      setNewTodo("");
+      setNextId(prev => prev + 1);
+    }
+  };
+
+  const toggleTodo = (index) => {
+    const todo = todos[index];
+    todoControls.updateItemAtIndex(index, {
+      ...todo,
+      completed: !todo.completed
+    });
+  };
+
+  const removeTodo = (index) => {
+    todoControls.removeItemAtIndex(index);
+  };
+
+  const editTodo = (index, newText) => {
+    const todo = todos[index];
+    todoControls.replaceItemAtIndex(index, {
+      ...todo,
+      text: newText
+    });
+  };
+
+  const sortTodos = () => {
+    todoControls.sort((a, b) => {
+      // Sort by completion status, then by text
+      if (a.completed !== b.completed) {
+        return a.completed ? 1 : -1;
+      }
+      return a.text.localeCompare(b.text);
+    });
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "500px" }}>
+      <h2>Todo List ({todos.length} items)</h2>
+      
+      {/* Add new todo */}
+      <div style={{ marginBottom: "20px", display: "flex", gap: "10px" }}>
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && addTodo()}
+          placeholder="Add a new todo..."
+          style={{ flex: 1, padding: "8px" }}
+        />
+        <button onClick={addTodo}>Add</button>
+        <button onClick={sortTodos}>Sort</button>
+        <button onClick={todoControls.clear}>Clear All</button>
+      </div>
+
+      {/* Todo list */}
+      <div>
+        {todos.map((todo, index) => (
+          <div
+            key={todo.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "10px",
+              border: "1px solid #ddd",
+              marginBottom: "5px",
+              background: todo.completed ? "#f0f8f0" : "white"
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(index)}
+            />
+            <span
+              style={{
+                flex: 1,
+                textDecoration: todo.completed ? "line-through" : "none",
+                color: todo.completed ? "#666" : "black"
+              }}
+            >
+              {todo.text}
+            </span>
+            <button
+              onClick={() => {
+                const newText = prompt("Edit todo:", todo.text);
+                if (newText !== null && newText.trim()) {
+                  editTodo(index, newText.trim());
+                }
+              }}
+              style={{ fontSize: "12px" }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => removeTodo(index)}
+              style={{ fontSize: "12px", color: "red" }}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+        
+        {todos.length === 0 && (
+          <div style={{ textAlign: "center", color: "#666", padding: "20px" }}>
+            No todos yet. Add one above!
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+#### Advanced array operations
+
+```jsx
+import { useArrayState } from "rooks";
+import { useState } from "react";
+
+export default function AdvancedArrayOps() {
+  const [numbers, controls] = useArrayState(() => [5, 2, 8, 1, 9, 3]);
+  const [insertIndex, setInsertIndex] = useState(0);
+  const [insertValue, setInsertValue] = useState("");
+  const [spliceStart, setSpliceStart] = useState(0);
+  const [spliceCount, setSpliceCount] = useState(1);
+
+  const performSplice = () => {
+    if (spliceStart >= 0 && spliceStart < numbers.length) {
+      controls.splice(spliceStart, spliceCount, 999);
+    }
+  };
+
+  const insertAtIndex = () => {
+    const value = parseInt(insertValue);
+    if (!isNaN(value) && insertIndex >= 0 && insertIndex <= numbers.length) {
+      controls.insertItemAtIndex(insertIndex, value);
+      setInsertValue("");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Advanced Array Operations</h3>
+      <div>Current array: [{numbers.join(", ")}]</div>
+      <div>Sum: {numbers.reduce((a, b) => a + b, 0)}</div>
+      <div>Average: {(numbers.reduce((a, b) => a + b, 0) / numbers.length).toFixed(2)}</div>
+      
+      <div style={{ margin: "20px 0" }}>
+        <h4>Sorting Operations</h4>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button onClick={() => controls.sort((a, b) => a - b)}>
+            Sort Ascending
+          </button>
+          <button onClick={() => controls.sort((a, b) => b - a)}>
+            Sort Descending
+          </button>
+          <button onClick={() => controls.sort(() => Math.random() - 0.5)}>
+            Shuffle
+          </button>
+        </div>
+      </div>
+
+      <div style={{ margin: "20px 0" }}>
+        <h4>Insert at Index</h4>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <input
+            type="number"
+            value={insertIndex}
+            onChange={(e) => setInsertIndex(parseInt(e.target.value) || 0)}
+            placeholder="Index"
+            style={{ width: "80px" }}
+          />
+          <input
+            type="number"
+            value={insertValue}
+            onChange={(e) => setInsertValue(e.target.value)}
+            placeholder="Value"
+            style={{ width: "80px" }}
+          />
+          <button onClick={insertAtIndex}>Insert</button>
+        </div>
+      </div>
+
+      <div style={{ margin: "20px 0" }}>
+        <h4>Splice Operation</h4>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <label>Start:</label>
+          <input
+            type="number"
+            value={spliceStart}
+            onChange={(e) => setSpliceStart(parseInt(e.target.value) || 0)}
+            style={{ width: "60px" }}
+          />
+          <label>Count:</label>
+          <input
+            type="number"
+            value={spliceCount}
+            onChange={(e) => setSpliceCount(parseInt(e.target.value) || 1)}
+            style={{ width: "60px" }}
+          />
+          <button onClick={performSplice}>
+            Splice (replace with 999)
+          </button>
+        </div>
+      </div>
+
+      <div style={{ margin: "20px 0" }}>
+        <h4>Fill Operations</h4>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button onClick={() => controls.fill(0)}>
+            Fill All with 0
+          </button>
+          <button onClick={() => controls.fill(1, 0, 3)}>
+            Fill First 3 with 1
+          </button>
+          <button onClick={() => controls.fill(-1, -2)}>
+            Fill Last 2 with -1
+          </button>
+        </div>
+      </div>
+
+      <div style={{ margin: "20px 0" }}>
+        <h4>Array Operations</h4>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button onClick={() => controls.setArray([1, 2, 3, 4, 5])}>
+            Reset to [1,2,3,4,5]
+          </button>
+          <button onClick={() => controls.concat([100, 200])}>
+            Concat [100, 200]
+          </button>
+          <button onClick={controls.reverse}>
+            Reverse
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+#### Performance considerations with large arrays
+
+```jsx
+import { useArrayState } from "rooks";
+import { useState, useMemo } from "react";
+
+export default function LargeArrayExample() {
+  // Initialize with a large array using initializer function
+  const [items, controls] = useArrayState(() => 
+    Array.from({ length: 1000 }, (_, i) => ({
+      id: i,
+      name: `Item ${i}`,
+      value: Math.floor(Math.random() * 1000)
+    }))
+  );
+  
+  const [filter, setFilter] = useState("");
+  const [sortBy, setSortBy] = useState("id");
+
+  // Memoize expensive operations
+  const filteredAndSorted = useMemo(() => {
+    let result = items;
+    
+    // Filter
+    if (filter) {
+      result = result.filter(item => 
+        item.name.toLowerCase().includes(filter.toLowerCase()) ||
+        item.value.toString().includes(filter)
+      );
+    }
+    
+    // Sort
+    result = [...result].sort((a, b) => {
+      if (sortBy === "id") return a.id - b.id;
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "value") return a.value - b.value;
+      return 0;
+    });
+    
+    return result;
+  }, [items, filter, sortBy]);
+
+  const addRandomItem = () => {
+    const newId = Math.max(...items.map(item => item.id)) + 1;
+    controls.push({
+      id: newId,
+      name: `Item ${newId}`,
+      value: Math.floor(Math.random() * 1000)
+    });
+  };
+
+  const removeItem = (index) => {
+    // Find the actual index in the original array
+    const item = filteredAndSorted[index];
+    const originalIndex = items.findIndex(i => i.id === item.id);
+    if (originalIndex !== -1) {
+      controls.removeItemAtIndex(originalIndex);
+    }
+  };
+
+  const sortOriginalArray = () => {
+    controls.sort((a, b) => {
+      if (sortBy === "id") return a.id - b.id;
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "value") return a.value - b.value;
+      return 0;
+    });
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Large Array Performance Demo</h3>
+      <div>Total items: {items.length}</div>
+      <div>Filtered items: {filteredAndSorted.length}</div>
+      
+      <div style={{ margin: "20px 0", display: "flex", gap: "10px", alignItems: "center" }}>
+        <input
+          type="text"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          placeholder="Filter items..."
+          style={{ padding: "5px" }}
+        />
+        
+        <select 
+          value={sortBy} 
+          onChange={(e) => setSortBy(e.target.value)}
+          style={{ padding: "5px" }}
+        >
+          <option value="id">Sort by ID</option>
+          <option value="name">Sort by Name</option>
+          <option value="value">Sort by Value</option>
+        </select>
+        
+        <button onClick={sortOriginalArray}>
+          Sort Original Array
+        </button>
+        <button onClick={addRandomItem}>
+          Add Item
+        </button>
+        <button onClick={controls.clear}>
+          Clear All
+        </button>
+      </div>
+
+      <div style={{ 
+        maxHeight: "400px", 
+        overflowY: "auto", 
+        border: "1px solid #ddd",
+        padding: "10px"
+      }}>
+        {filteredAndSorted.slice(0, 100).map((item, index) => (
+          <div
+            key={item.id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "5px 0",
+              borderBottom: "1px solid #eee"
+            }}
+          >
+            <span>{item.name} (Value: {item.value})</span>
+            <button 
+              onClick={() => removeItem(index)}
+              style={{ fontSize: "12px", color: "red" }}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        {filteredAndSorted.length > 100 && (
+          <div style={{ textAlign: "center", padding: "10px", color: "#666" }}>
+            ... and {filteredAndSorted.length - 100} more items
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument value | Type                    | Description                                           | Default |
+| -------------- | ----------------------- | ----------------------------------------------------- | ------- |
+| initial        | T[] \| (() => T[])      | Initial array state or a function that returns the initial array | []      |
+
+### Returns
+
+Returns an array with two elements:
+
+| Return value | Type                         | Description                                                        | Default   |
+| ------------ | ---------------------------- | ------------------------------------------------------------------ | --------- |
+| array        | T[]                          | The current array state                                            | []        |
+| controls     | UseArrayStateControls<T>     | An object containing all array manipulation methods                | {}        |
+
+### Control Methods
+
+| Method              | Type                                              | Description                                                         |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| push                | (...args: T[]) => void                           | Adds one or more elements to the end of the array                  |
+| pop                 | () => void                                       | Removes the last element from the array                            |
+| unshift             | (...args: T[]) => void                           | Adds one or more elements to the beginning of the array            |
+| shift               | () => void                                       | Removes the first element from the array                           |
+| reverse             | () => void                                       | Reverses the order of elements in the array                        |
+| concat              | (value: T[]) => void                             | Concatenates the given array to the current array                  |
+| fill                | (value: T, start?: number, end?: number) => void | Fills array elements with a static value                           |
+| clear               | () => void                                       | Removes all elements from the array                                |
+| setArray            | (value: T[]) => void                             | Replaces the entire array with a new array                         |
+| updateItemAtIndex   | (index: number, value: T) => void                | Updates the element at the specified index                          |
+| splice              | (...args: Parameters<Array<T>["splice"]>) => void | Changes array contents by removing/replacing existing elements     |
+| removeItemAtIndex   | (index: number) => void                          | Removes the element at the specified index                          |
+| replaceItemAtIndex  | (index: number, value: T) => void                | Replaces the element at the specified index with a new value       |
+| insertItemAtIndex   | (index: number, value: T) => void                | Inserts a new element at the specified index                       |
+| sort                | (compareFn?: (a: T, b: T) => number) => void     | Sorts the array elements using an optional compare function        |
+
+### TypeScript Support
+
+The hook is fully typed with TypeScript generics:
+
+```typescript
+type UseArrayStateControls<T> = {
+  push: (...args: T[]) => void;
+  pop: () => void;
+  clear: () => void;
+  unshift: (...args: T[]) => void;
+  shift: () => void;
+  reverse: () => void;
+  concat: (value: T[]) => void;
+  fill: (value: T, start?: number, end?: number) => void;
+  updateItemAtIndex: (index: number, value: T) => void;
+  setArray: (value: T[]) => void;
+  splice: (...args: Parameters<Array<T>["splice"]>) => void;
+  removeItemAtIndex: (index: number) => void;
+  replaceItemAtIndex: (index: number, value: T) => void;
+  insertItemAtIndex: (index: number, value: T) => void;
+  sort: (compareFn?: (a: T, b: T) => number) => void;
+};
+
+type UseArrayStateReturnValue<T> = [T[], UseArrayStateControls<T>];
+```
+
+### Performance Notes
+
+- All operations are immutable and create new array instances
+- The hook uses `useCallback` for all control methods to prevent unnecessary re-renders
+- The return value is memoized with `useMemo` for optimal performance
+- For large arrays, consider implementing virtualization for rendering
+- Use the initializer function pattern for expensive initial computations
