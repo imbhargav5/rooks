@@ -152,6 +152,7 @@
     "terser": "^5.39.0",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "tsconfig": "^7.0.0",
     "tslib": "^2.8.1",
     "typescript": "^5.8.2",
