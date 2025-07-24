@@ -1,0 +1,176 @@
+# React Hook Creation Rule
+
+All react hooks are created in the packages/rooks/src/hooks folder.
+A hook must be exported by name.
+It should then be reexported from the packages/rooks/src/index.ts file.
+
+## Files to Create
+
+When creating a new hook, you must create the following 3 files:
+
+### 1. Test File: `packages/rooks/src/__tests__/{hookName}.spec.ts`
+
+```typescript
+import React from "react";
+import { {hookName} } from "@/hooks/{hookName}";
+
+
+describe("{hookName}", () => {
+  it("should be defined", () => {
+    expect.hasAssertions();
+    expect({hookName}).toBeDefined();
+  });
+});
+```
+
+### 2. Hook File: `packages/rooks/src/hooks/{hookName}.ts`
+
+```typescript
+/**
+ * {hookName}
+ * @description {description}
+ * @see {@link https://rooks.vercel.app/docs/hooks/{hookName}}
+*/
+function {hookName}() {
+  return null;
+}
+
+export {{hookName}};
+```
+
+### 3. Documentation File: `apps/website/content/docs/hooks/({category})/{hookName}.mdx`
+
+```markdown
+---
+id: {hookName}
+title: {hookName}
+sidebar_label: {hookName}
+---
+
+## About
+
+{description}
+
+## Examples
+
+```tsx
+import {{hookName}} from "rooks"
+export default function App() {
+  {hookName}();
+  return null
+}
+```
+```
+
+### 4. Update hooks list: `data/hooks-list.json`
+
+Add the new hook to the hooks array in alphabetical order:
+
+```json
+{
+  "name": "{hookName}",
+  "description": "{description}",
+  "category": "{category}"
+}
+```
+
+### 5. Update exports: `packages/rooks/src/index.ts`
+
+Add the hook export:
+
+```typescript
+export { {hookName} } from "./hooks/{hookName}";
+```
+
+## Valid Categories
+
+The category must be one of:
+- animation
+- browser
+- dev
+- events
+- experimental
+- form
+- keyboard
+- lifecycle
+- mouse
+- performance
+- state
+- state-history
+- ui
+- utilities
+- viewport
+
+## Development Process
+
+Hooks must be created in a TDD approach. First step is to always create tests with expected behaviour. Then you must ask me to confirm that the test suite is good or if it should be improved. After tests are approved by me, then you can continue with editing the hook.
+
+Do not proceed further without asking me for clarifying questions regarding the test cases you wrote and implementation details. Ask me at least 1-2 clarification questions on implementation.
+
+First ensure that the hook has a comprehensive test suite. If there are no tests yet, first add test cases in the packages/rooks/src/**tests** directory.
+
+When ran in the terminal within the packages/rooks directory with pnpm test-hooks hookName eg `pnpm test-hooks useWillUnmount`, all the tests should pass.
+
+If tests don't pass, update the hook until all the tests pass.
+
+This project is a mono repo, with rooks being the main package. The hooks are present in the src/hooks folder of the package. The tests are present in src/**tests** folder of the rooks package. The rooks package is in the packages folder.
+
+## Code Style Guide
+
+Follow the code style guide in [code-style-guide.md](mdc:code-style-guide.md)
+
+### Key Style Points:
+
+- **Strict Type Safety:** We leverage TypeScript's strongest features. Use of `any` / `unknown` is not allowed except in test cases for mocking situations.
+- **Prefer `type` over `interface`** for defining object shapes and function signatures
+- **Use generics** when a hook needs to work with variety of value types
+- **Use `const`** for variables that are not reassigned, `let` only when reassigned
+- **Use function declarations** for top-level functions, arrow functions for callbacks
+- **Use `async/await`** for asynchronous operations with proper `try...catch` blocks
+
+### Hook Structure:
+
+1. **Type Definitions:** Define `type` aliases for the hook's return value and complex parameter types
+2. **JSDoc:** Detailed JSDoc comment with purpose, parameters, return value, and documentation link
+3. **Hook Function:** Main function starting with `use`
+4. **Export:** Named export of the hook
+
+### JSDoc Standards:
+
+Every exported hook must have JSDoc with:
+- Brief description of the hook
+- `@param` for each parameter
+- `@returns` for the return value  
+- `@see` with link to documentation page
+
+Example:
+```typescript
+/**
+ * useKey hook
+ *
+ * Fires a callback on keyboard events like keyDown, keyPress and keyUp
+ *
+ * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
+ * @param {Callback} callback  Callback to fire on keyboard events
+ * @param {Options} options Options
+ * @see https://rooks.vercel.app/docs/hooks/useKey
+ */
+```
+
+## Examples
+
+See [useCounter.ts](mdc:packages/rooks/src/hooks/useCounter.ts) to understand how we write hooks.
+See [useCountdown.spec.tsx](mdc:packages/rooks/src/__tests__/useCountdown.spec.tsx) for inspiration on how to write tests for a hook.
+
+## Testing Guidelines
+
+- Tests use `@testing-library/react` and are located in `packages/rooks/__tests__`
+- Test files named `useMyHook.spec.ts`
+- Each test file starts with `/** @jest-environment jsdom */`
+- Use `renderHook` to test hooks in isolation
+- Wrap state updates in `act`
+- Use `expect.hasAssertions()` at beginning of each test
+- Use Jest mocking (`jest.fn()`, `jest.spyOn()`) for dependencies
+- Use `jest.useFakeTimers()` for hooks with timeouts/intervals
+
+Write fully typesafe code. Writing any / unknown is not allowed. Only in test cases mocking situations, you can use any/unknown, but only if there is no better option.
