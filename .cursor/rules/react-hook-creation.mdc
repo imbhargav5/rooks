@@ -74,13 +74,21 @@ Add the new hook to the hooks array in alphabetical order:
 }
 ```
 
-### 5. Update exports: `packages/rooks/src/index.ts`
+### 5. Update exports
 
-Add the hook export:
+**For regular hooks** - Add to `packages/rooks/src/index.ts`:
 
 ```typescript
 export { {hookName} } from "./hooks/{hookName}";
 ```
+
+**For experimental hooks** - Add to `packages/rooks/src/experimental.ts`:
+
+```typescript
+export { {hookName} } from "./hooks/{hookName}";
+```
+
+**Note:** Experimental hooks are NOT exported from the main index.ts file. They are only available through the experimental.ts file and imported as `import { hookName } from 'rooks/experimental'`.
 
 ## Valid Categories
 
@@ -100,6 +108,17 @@ The category must be one of:
 - ui
 - utilities
 - viewport
+
+## Experimental Hooks
+
+Experimental hooks have special handling:
+
+- **Export location:** Only exported from `packages/rooks/src/experimental.ts`, NOT from main `index.ts`
+- **Import syntax:** `import { hookName } from 'rooks/experimental'`
+- **Documentation:** Include warning that experimental hooks may be removed or significantly changed in any release without notice
+- **Use case:** For hooks that are still being tested, may have breaking changes, or use experimental browser APIs
+
+⚠️ **Warning:** Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production applications.
 
 ## Development Process
 
