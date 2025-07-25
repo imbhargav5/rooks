@@ -90,6 +90,8 @@ async function build() {
       }),
     ]);
 
+    // The dtsPlugin is configured to output to 'dist/types', but the declaration files
+    // are actually output to esbuild's outdir ('dist/esm'). This step processes them there.
     await replaceTscAliasPaths({
       configFile: path.resolve("./tsconfig.build.json"),
       outDir: path.resolve("./dist/esm"),
