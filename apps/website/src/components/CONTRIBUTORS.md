@@ -1,7 +1,7 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-77-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-82-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -109,6 +109,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://12bay.vn/"><img src="https://avatars.githubusercontent.com/u/4768095?v=4?s=100" width="100px;" alt="Nghiệp"/><br /><sub><b>Nghiệp</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nghiepdev" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/edoko"><img src="https://avatars.githubusercontent.com/u/1365682?v=4?s=100" width="100px;" alt="Seongmin Park"/><br /><sub><b>Seongmin Park</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=edoko" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nathggns"><img src="https://avatars.githubusercontent.com/u/719814?v=4?s=100" width="100px;" alt="Nate Higgins"/><br /><sub><b>Nate Higgins</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nathggns" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://oatmeal.gg/"><img src="https://avatars.githubusercontent.com/u/5983927?v=4?s=100" width="100px;" alt="Michael Moore"/><br /><sub><b>Michael Moore</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=oatmealproblem" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/John0x"><img src="https://avatars.githubusercontent.com/u/5455173?v=4?s=100" width="100px;" alt="Moritz Brandes"/><br /><sub><b>Moritz Brandes</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=John0x" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/som-sm"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt="Som Shekhar Mukherjee"/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=som-sm" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/cursor"><img src="https://avatars.githubusercontent.com/in/1210556?v=4?s=100" width="100px;" alt="cursor[bot]"/><br /><sub><b>cursor[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=cursor[bot]" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/JulianWielga"><img src="https://avatars.githubusercontent.com/u/965924?v=4?s=100" width="100px;" alt="JulianWielga"/><br /><sub><b>JulianWielga</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=JulianWielga" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
