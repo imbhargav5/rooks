@@ -4,6 +4,7 @@ const esbuild = require("esbuild");
 const { dtsPlugin } = require("esbuild-plugin-d.ts");
 const fs = require("fs");
 const path = require("path");
+const { replaceTscAliasPaths } = require("tsc-alias");
 
 const pkg = require("./package.json");
 
@@ -88,6 +89,13 @@ async function build() {
         },
       }),
     ]);
+
+    // The dtsPlugin is configured to output to 'dist/types', but the declaration files
+    // are actually output to esbuild's outdir ('dist/esm'). This step processes them there.
+    await replaceTscAliasPaths({
+      configFile: path.resolve("./tsconfig.build.json"),
+      outDir: path.resolve("./dist/esm"),
+    })
 
     console.log("Build completed successfully!");
   } catch (error) {
