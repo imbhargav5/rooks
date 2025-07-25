@@ -30,7 +30,7 @@ sidebar_label: Hooks List
 
 * [useRenderCount](https://rooks.vercel.app/docs/hooks/useRenderCount) - Get the render count of a component
 
-<h3 align="center">🚀 Events - 14 hooks</h3>
+<h3 align="center">🚀 Events - 15 hooks</h3>
 
 * [useDocumentEventListener](https://rooks.vercel.app/docs/hooks/useDocumentEventListener) - A react hook to an event listener to the document object
 * [useDocumentVisibilityState](https://rooks.vercel.app/docs/hooks/useDocumentVisibilityState) - Returns the visibility state of the document.
@@ -41,6 +41,7 @@ sidebar_label: Hooks List
 * [useOnHoverRef](https://rooks.vercel.app/docs/hooks/useOnHoverRef) - On hover callback hook
 * [useOnLongHover](https://rooks.vercel.app/docs/hooks/useOnLongHover) - Fires a callback when an element is hovered for a while
 * [useOnLongPress](https://rooks.vercel.app/docs/hooks/useOnLongPress) - Fire a callback on long press
+* [useOnStartTyping](https://rooks.vercel.app/docs/hooks/useOnStartTyping) - Fires a callback when the user starts typing outside editable fields (input, textarea, contenteditable). Supports filtering for a-z and 0-9 keys.
 * [useOnWindowResize](https://rooks.vercel.app/docs/hooks/useOnWindowResize) - A React hook for adding an event listener for window resize
 * [useOnWindowScroll](https://rooks.vercel.app/docs/hooks/useOnWindowScroll) - A React hook for adding an event listener for window scroll
 * [useOutsideClick](https://rooks.vercel.app/docs/hooks/useOutsideClick) - Outside click(for a ref) event as hook for React.

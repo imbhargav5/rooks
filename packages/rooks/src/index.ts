@@ -100,3 +100,4 @@ export { useWillUnmount } from "./hooks/useWillUnmount";
 export { useWindowEventListener } from "./hooks/useWindowEventListener";
 export { useWindowScrollPosition } from "./hooks/useWindowScrollPosition";
 export { useWindowSize } from "./hooks/useWindowSize";
+export { useOnStartTyping } from "./hooks/useOnStartTyping";

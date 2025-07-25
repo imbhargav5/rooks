@@ -311,6 +311,11 @@
       "category": "events"
     },
     {
+      "name": "useOnStartTyping",
+      "description": "Fires a callback when the user starts typing outside editable fields (input, textarea, contenteditable). Supports filtering for a-z and 0-9 keys.",
+      "category": "events"
+    },
+    {
       "name": "useOnWindowResize",
       "description": "A React hook for adding an event listener for window resize",
       "category": "events"

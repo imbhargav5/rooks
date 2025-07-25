@@ -1,0 +1,44 @@
+---
+id: useOnStartTyping
+title: useOnStartTyping
+sidebar_label: useOnStartTyping
+---
+
+## About
+
+`useOnStartTyping` fires a callback when the user starts typing (keydown) outside editable fields (input, textarea, or contenteditable). It supports filtering for a-z and 0-9 keys via options.
+
+Use this hook to detect when a user begins typing anywhere on the page, except when focused in an editable field. This is useful for global keyboard shortcuts, onboarding overlays, or search triggers.
+
+## Options
+
+- `includeAZ` (boolean, default: `true`): Trigger for a-z/A-Z keys.
+- `includeNumbers` (boolean, default: `false`): Trigger for 0-9 keys.
+
+## Examples
+
+```jsx
+import { useOnStartTyping } from "rooks";
+
+export default function App() {
+  useOnStartTyping((event) => {
+    alert(`You started typing: ${event.key}`);
+  });
+  return <div>Start typing anywhere (except in an input/textarea)!</div>;
+}
+```
+
+```jsx
+// Example with options
+import { useOnStartTyping } from "rooks";
+
+export default function NumbersOnly() {
+  useOnStartTyping(
+    (event) => {
+      alert(`Number key: ${event.key}`);
+    },
+    { includeAZ: false, includeNumbers: true }
+  );
+  return <div>Type a number key (0-9) outside inputs!</div>;
+}
+```
