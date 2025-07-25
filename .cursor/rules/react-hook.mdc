@@ -173,7 +173,7 @@ export default function AdvancedExample() {
    - Keep the array sorted alphabetically by name
 
 5. **Export from main index**:
-   - For regular hooks: Add `export { ${name} } from "@/hooks/${name}";` to `packages/rooks/src/index.ts`
+   - For regular hooks: Add `export { ${name} } from "./hooks/${name}";` to `packages/rooks/src/index.ts`
    - For experimental hooks: Add `export { ${name} } from "./hooks/${name}";` to `packages/rooks/src/experimental.ts`
 
 ### Experimental Hooks
