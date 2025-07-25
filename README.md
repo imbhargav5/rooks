@@ -47,14 +47,13 @@
 * [useOnline](https://rooks.vercel.app/docs/hooks/useOnline) - Online status hook for React.
 * [useOrientation](https://rooks.vercel.app/docs/hooks/useOrientation) - orientation hook for react
 * [useScreenDetailsApi](https://rooks.vercel.app/docs/hooks/useScreenDetailsApi) - Hook for multi-screen information and management using Screen Details API
+* [useWebLocksApi](https://rooks.vercel.app/docs/hooks/useWebLocksApi) - Hook for coordinating operations across tabs/workers with Web Locks API
 * [useSpeech](https://rooks.vercel.app/docs/hooks/useSpeech) - Speech synthesis hook for React
 * [useVibrate](https://rooks.vercel.app/docs/hooks/useVibrate) - Vibration API hook for React
-* [useWebLocksApi](https://rooks.vercel.app/docs/hooks/useWebLocksApi) - Hook for coordinating operations across tabs/workers with Web Locks API
 
-<h3 align="center">🛠️ Development & Debugging - 2 hooks</h3>
+<h3 align="center">🛠️ Development & Debugging - 1 hook</h3>
 
 * [useRenderCount](https://rooks.vercel.app/docs/hooks/useRenderCount) - Get the render count of a component
-* [useWhyDidYouUpdate](https://rooks.vercel.app/docs/hooks/useWhyDidYouUpdate) - A hook that can track which value change caused a rerender
 
 <h3 align="center">🚀 Events - 14 hooks</h3>
 
@@ -168,8 +167,9 @@
 * [useWindowScrollPosition](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) - A React hook to get the scroll position of the window
 * [useWindowSize](https://rooks.vercel.app/docs/hooks/useWindowSize) - Window size hook for React.
 
-<h3 align="center">🧪 Experimental Hooks - 1 hook</h3>
+<h3 align="center">🧪 Experimental Hooks - 2 hooks</h3>
 
+* [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
 
 <p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
@@ -232,14 +232,19 @@ MIT
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-82-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
+
 <table>
   <tbody>
     <tr>
@@ -352,6 +357,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 </table>
 
 <!-- markdownlint-restore -->
+
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
