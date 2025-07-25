@@ -9,3 +9,4 @@
  */
 
 export { useSuspenseNavigatorUserAgentData } from "./hooks/useSuspenseNavigatorUserAgentData";
+export { useSuspenseNavigatorBattery } from "./hooks/useSuspenseNavigatorBattery";

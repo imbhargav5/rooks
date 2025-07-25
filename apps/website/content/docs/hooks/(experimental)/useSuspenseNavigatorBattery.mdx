@@ -1,0 +1,239 @@
+---
+id: useSuspenseNavigatorBattery
+title: useSuspenseNavigatorBattery
+sidebar_label: useSuspenseNavigatorBattery
+---
+
+## About
+
+⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
+
+A Suspense-enabled hook for getting battery status information from the Navigator Battery API with real-time updates. This hook suspends while the API is fetching data and must be wrapped in a Suspense boundary. It automatically listens for battery status changes and updates the component accordingly.
+
+[//]: # "Main"
+
+## Examples
+
+#### Basic Usage
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+function BatteryInfo() {
+  const battery = useSuspenseNavigatorBattery();
+
+  return (
+    <div>
+      <h2>Battery Status</h2>
+      <p>Battery Level: {Math.round(battery.level * 100)}%</p>
+      <p>Charging: {battery.charging ? "Yes" : "No"}</p>
+      <p>
+        Charging Time:{" "}
+        {battery.chargingTime === Infinity ? "N/A" : `${battery.chargingTime}s`}
+      </p>
+      <p>
+        Discharging Time:{" "}
+        {battery.dischargingTime === Infinity
+          ? "N/A"
+          : `${battery.dischargingTime}s`}
+      </p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading battery info...</div>}>
+      <BatteryInfo />
+    </Suspense>
+  );
+}
+```
+
+#### With Error Boundary
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h2>Battery API Not Supported</h2>
+          <p>Your browser doesn't support the Battery Status API.</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+function BatteryStatus() {
+  const battery = useSuspenseNavigatorBattery();
+
+  return (
+    <div>
+      <h2>Live Battery Status</h2>
+      <div style={{ fontSize: "2em" }}>
+        🔋 {Math.round(battery.level * 100)}%
+      </div>
+      <p>{battery.charging ? "⚡ Charging" : "🔌 On Battery"}</p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Checking battery status...</div>}>
+        <BatteryStatus />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
+
+#### Battery Level Indicator with Real-time Updates
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+function BatteryIndicator() {
+  const battery = useSuspenseNavigatorBattery();
+
+  const formatTime = (seconds) => {
+    if (seconds === Infinity) return "∞";
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  };
+
+  const getBatteryColor = (level) => {
+    if (level > 0.5) return "#4CAF50"; // Green
+    if (level > 0.2) return "#FF9800"; // Orange
+    return "#F44336"; // Red
+  };
+
+  return (
+    <div
+      style={{
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        maxWidth: "300px",
+      }}
+    >
+      <h3>🔋 Battery Status</h3>
+
+      <div
+        style={{
+          width: "100%",
+          height: "20px",
+          backgroundColor: "#e0e0e0",
+          borderRadius: "10px",
+          overflow: "hidden",
+          marginBottom: "10px",
+        }}
+      >
+        <div
+          style={{
+            width: `${battery.level * 100}%`,
+            height: "100%",
+            backgroundColor: getBatteryColor(battery.level),
+            transition: "width 0.3s ease",
+          }}
+        />
+      </div>
+
+      <div style={{ display: "grid", gap: "8px", fontSize: "14px" }}>
+        <div>
+          <strong>Level:</strong> {Math.round(battery.level * 100)}%
+        </div>
+        <div>
+          <strong>Status:</strong>{" "}
+          {battery.charging ? "⚡ Charging" : "🔌 Discharging"}
+        </div>
+        {battery.charging && (
+          <div>
+            <strong>Time to Full:</strong> {formatTime(battery.chargingTime)}
+          </div>
+        )}
+        {!battery.charging && battery.dischargingTime !== Infinity && (
+          <div>
+            <strong>Time Remaining:</strong>{" "}
+            {formatTime(battery.dischargingTime)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading battery info...</div>}>
+      <BatteryIndicator />
+    </Suspense>
+  );
+}
+```
+
+## Real-time Updates
+
+The hook automatically listens for battery status changes using the `BatteryManager` event listeners:
+
+- `chargingchange` - Fired when the battery charging state changes
+- `levelchange` - Fired when the battery level changes
+- `chargingtimechange` - Fired when the battery charging time changes
+- `dischargingtimechange` - Fired when the battery discharging time changes
+
+Your components will automatically re-render when any of these events occur, providing live updates without any additional setup.
+
+## Arguments
+
+None. This hook takes no parameters.
+
+## Return Value
+
+Returns a `BatteryManager` object with the following properties:
+
+| Property          | Type      | Description                                                                     |
+| ----------------- | --------- | ------------------------------------------------------------------------------- |
+| `charging`        | `boolean` | Whether the battery is charging                                                 |
+| `chargingTime`    | `number`  | Time remaining in seconds until the battery is charged (Infinity if unknown)    |
+| `dischargingTime` | `number`  | Time remaining in seconds until the battery is discharged (Infinity if unknown) |
+| `level`           | `number`  | Battery charge level (0.0 to 1.0)                                               |
+
+## Browser Support
+
+- **Chrome/Edge**: ✅ Supported (with HTTPS requirement)
+- **Firefox**: ❌ Removed for privacy reasons
+- **Safari**: ❌ Not supported
+- **Mobile browsers**: Limited support
+
+⚠️ **Important Notes:**
+
+- Requires HTTPS in most browsers
+- API may be restricted or removed for privacy reasons
+- Always wrap in error boundaries for production use
+- Consider this an experimental API that may change or be removed
+
+## Import
+
+```javascript
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+```
