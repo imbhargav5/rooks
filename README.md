@@ -47,14 +47,13 @@
 * [useOnline](https://rooks.vercel.app/docs/hooks/useOnline) - Online status hook for React.
 * [useOrientation](https://rooks.vercel.app/docs/hooks/useOrientation) - orientation hook for react
 * [useScreenDetailsApi](https://rooks.vercel.app/docs/hooks/useScreenDetailsApi) - Hook for multi-screen information and management using Screen Details API
+* [useWebLocksApi](https://rooks.vercel.app/docs/hooks/useWebLocksApi) - Hook for coordinating operations across tabs/workers with Web Locks API
 * [useSpeech](https://rooks.vercel.app/docs/hooks/useSpeech) - Speech synthesis hook for React
 * [useVibrate](https://rooks.vercel.app/docs/hooks/useVibrate) - Vibration API hook for React
-* [useWebLocksApi](https://rooks.vercel.app/docs/hooks/useWebLocksApi) - Hook for coordinating operations across tabs/workers with Web Locks API
 
-<h3 align="center">🛠️ Development & Debugging - 2 hooks</h3>
+<h3 align="center">🛠️ Development & Debugging - 1 hook</h3>
 
 * [useRenderCount](https://rooks.vercel.app/docs/hooks/useRenderCount) - Get the render count of a component
-* [useWhyDidYouUpdate](https://rooks.vercel.app/docs/hooks/useWhyDidYouUpdate) - A hook that can track which value change caused a rerender
 
 <h3 align="center">🚀 Events - 14 hooks</h3>
 
@@ -168,8 +167,9 @@
 * [useWindowScrollPosition](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) - A React hook to get the scroll position of the window
 * [useWindowSize](https://rooks.vercel.app/docs/hooks/useWindowSize) - Window size hook for React.
 
-<h3 align="center">🧪 Experimental Hooks - 1 hook</h3>
+<h3 align="center">🧪 Experimental Hooks - 2 hooks</h3>
 
+* [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
 
 <p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
@@ -233,7 +233,7 @@ MIT
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-77-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-82-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -345,6 +345,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://12bay.vn/"><img src="https://avatars.githubusercontent.com/u/4768095?v=4?s=100" width="100px;" alt="Nghiệp"/><br /><sub><b>Nghiệp</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nghiepdev" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/edoko"><img src="https://avatars.githubusercontent.com/u/1365682?v=4?s=100" width="100px;" alt="Seongmin Park"/><br /><sub><b>Seongmin Park</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=edoko" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nathggns"><img src="https://avatars.githubusercontent.com/u/719814?v=4?s=100" width="100px;" alt="Nate Higgins"/><br /><sub><b>Nate Higgins</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=nathggns" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://oatmeal.gg/"><img src="https://avatars.githubusercontent.com/u/5983927?v=4?s=100" width="100px;" alt="Michael Moore"/><br /><sub><b>Michael Moore</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=oatmealproblem" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/John0x"><img src="https://avatars.githubusercontent.com/u/5455173?v=4?s=100" width="100px;" alt="Moritz Brandes"/><br /><sub><b>Moritz Brandes</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=John0x" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/som-sm"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt="Som Shekhar Mukherjee"/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=som-sm" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/cursor"><img src="https://avatars.githubusercontent.com/in/1210556?v=4?s=100" width="100px;" alt="cursor[bot]"/><br /><sub><b>cursor[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=cursor[bot]" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/JulianWielga"><img src="https://avatars.githubusercontent.com/u/965924?v=4?s=100" width="100px;" alt="JulianWielga"/><br /><sub><b>JulianWielga</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=JulianWielga" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
