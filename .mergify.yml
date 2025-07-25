@@ -4,7 +4,7 @@ queue_rules:
     # batch_size: 2
     conditions:
       - check-success=Build (test)
-      - check-success=Test (yarn test)
+      - check-success=Test (pnpm test)
 pull_request_rules:
   - name: update out-of-sync PR
     conditions:

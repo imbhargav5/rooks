@@ -9,22 +9,22 @@ First of all, thank you for considering contributing to our project! We apprecia
 To create a new hook, please follow these steps:
 
 1. Ensure you are in the root of the project.
-2. Run `yarn new` in your terminal. This command will start the process to create a new hook and set up the package for you.
+2. Run `pnpm new` in your terminal. This command will start the process to create a new hook and set up the package for you.
 
 ### Updating Existing Hooks or Fixing Issues
 
-In case you want to update an existing hook or fix any issues, please make sure you have Yarn package manager installed globally on your machine.
+In case you want to update an existing hook or fix any issues, please make sure you have pnpm package manager installed globally on your machine.
 
 From the root of the project, perform the following steps:
 
-1. Run `yarn install` to install all required dependencies.
-2. Run `yarn build` to compile the project.
+1. Run `pnpm install` to install all required dependencies.
+2. Run `pnpm build` to compile the project.
 
 ### Adding Changeset Information
 
 Adding changeset information is crucial when you are making a change to `rooks` (your change could be a new feature or a bug fix). To add a changeset:
 
-1. Run `yarn changeset` in the project root.
+1. Run `pnpm changeset` in the project root.
 2. The CLI will guide you through selecting which packages need to be bumped and to which version.
 3. After answering the questions, you will find your changeset information in the `.changeset` folder located in the root of the project.
 4. Create a commit after adding the changeset information.

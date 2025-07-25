@@ -33,7 +33,7 @@
     "contributors:update": "node scripts/update-all-contributors/index.mjs",
     "create": "node scripts/create/index.mjs",
     "create:cli": "node scripts/create/cli.mjs",
-    "new": "yarn run create",
+    "new": "pnpm run create",
     "prebuild": "rimraf dist",
     "update-package-list-to-markdown": "tsx scripts/update-package-list-to-markdown/index.ts"
   },

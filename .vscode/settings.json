@@ -13,7 +13,7 @@
     "cache": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.packageManager": "yarn",
+  "eslint.packageManager": "pnpm",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
