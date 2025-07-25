@@ -271,6 +271,26 @@
       "category": "browser"
     },
     {
+      "name": "useOnline",
+      "description": "Online status hook for React.",
+      "category": "browser"
+    },
+    {
+      "name": "useOrientation",
+      "description": "orientation hook for react",
+      "category": "browser"
+    },
+    {
+      "name": "useScreenDetailsApi",
+      "description": "Hook for multi-screen information and management using Screen Details API",
+      "category": "browser"
+    },
+    {
+      "name": "useWebLocksApi",
+      "description": "Hook for coordinating operations across tabs/workers with Web Locks API",
+      "category": "browser"
+    },
+    {
       "name": "useOnClickRef",
       "description": "Callback on click/tap events",
       "category": "events"
@@ -279,11 +299,6 @@
       "name": "useOnHoverRef",
       "description": "On hover callback hook",
       "category": "events"
-    },
-    {
-      "name": "useOnline",
-      "description": "Online status hook for React.",
-      "category": "browser"
     },
     {
       "name": "useOnLongHover",
@@ -304,11 +319,6 @@
       "name": "useOnWindowScroll",
       "description": "A React hook for adding an event listener for window scroll",
       "category": "events"
-    },
-    {
-      "name": "useOrientation",
-      "description": "orientation hook for react",
-      "category": "browser"
     },
     {
       "name": "useOutsideClick",
@@ -371,11 +381,6 @@
       "category": "state"
     },
     {
-      "name": "useScreenDetailsApi",
-      "description": "Hook for multi-screen information and management using Screen Details API",
-      "category": "browser"
-    },
-    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
@@ -404,6 +409,11 @@
       "name": "useStackState",
       "description": "A React hook that manages state in the form of a stack",
       "category": "state"
+    },
+    {
+      "name": "useSuspenseNavigatorBattery",
+      "description": "Suspense-enabled hook for getting battery status information from Navigator Battery API",
+      "category": "experimental"
     },
     {
       "name": "useSuspenseNavigatorUserAgentData",
@@ -449,16 +459,6 @@
       "name": "useVideo",
       "description": "Video hook for react",
       "category": "ui"
-    },
-    {
-      "name": "useWebLocksApi",
-      "description": "Hook for coordinating operations across tabs/workers with Web Locks API",
-      "category": "browser"
-    },
-    {
-      "name": "useWhyDidYouUpdate",
-      "description": "A hook that can track which value change caused a rerender",
-      "category": "dev"
     },
     {
       "name": "useWillUnmount",
