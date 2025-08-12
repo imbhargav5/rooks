@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-const esbuild = require("esbuild");
-const { dtsPlugin } = require("esbuild-plugin-d.ts");
-const fs = require("fs");
-const path = require("path");
-const { replaceTscAliasPaths } = require("tsc-alias");
+import esbuild from "esbuild";
+import fs from "fs";
+import path from "path";
+import { execa } from "execa";
+import tscAlias from "tsc-alias";
+import pkg from "./package.json" with { type: "json" };
 
-const pkg = require("./package.json");
+const { replaceTscAliasPaths } = tscAlias;
 
 // External packages that should not be bundled
 const external = [
@@ -21,81 +22,37 @@ async function build() {
       fs.mkdirSync("dist");
     }
 
-    // UMD Build banner content
-    const umdBannerContent = `/*
-* Rooks v${pkg.version}
-* https://github.com/imbhargav5/rooks
-* (c) ${new Date().getFullYear()} Bhargav Ponnapalli
-* Released under the MIT License
-*/
-(function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom')) :
-  typeof define === 'function' && define.amd ? define(['react', 'react-dom'], factory) :
-  (global = global || self, global.rooks = factory(global.React, global.ReactDOM));
-}(this, function(React, ReactDOM) {`;
+    // ESM Build only (JS)
+    await esbuild.build({
+      entryPoints: ["src/index.ts", "src/experimental.ts"],
+      outdir: "dist/esm",
+      bundle: true,
+      splitting: true,
+      format: "esm",
+      platform: "neutral",
+      external,
+      sourcemap: false,
+      minify: false,
+      outExtension: { ".js": ".js" },
+    });
 
-    // Run all builds in parallel
-    await Promise.all([
-      // ESM Build
-      esbuild.build({
-        entryPoints: ["src/index.ts", "src/experimental.ts"],
-        outdir: "dist/esm",
-        bundle: true,
-        splitting: true,
-        format: "esm",
-        platform: "neutral",
-        external,
-        sourcemap: false,
-        minify: false,
-        outExtension: { ".js": ".js" },
-        plugins: [
-          dtsPlugin({
-            outDir: "dist/types",
-          }),
-        ],
-      }),
+    // Generate type declarations via tsc
+    await execa("tsc", [
+      "--emitDeclarationOnly",
+      "--declaration",
+      "--declarationMap",
+      "false",
+      "--project",
+      "./tsconfig.build.json",
+      "--outDir",
+      "./dist/esm",
+    ], { stdio: "inherit" });
 
-      // CJS Build
-      esbuild.build({
-        entryPoints: ["src/index.ts", "src/experimental.ts"],
-        outdir: "dist/cjs",
-        bundle: true,
-        format: "cjs",
-        platform: "neutral",
-        external,
-        sourcemap: false,
-        minify: false,
-      }),
-
-      // UMD Build - using IIFE with UMD wrapper
-      esbuild.build({
-        entryPoints: ["src/index.ts"],
-        outfile: "dist/umd/rooks.umd.js",
-        bundle: true,
-        format: "iife",
-        globalName: "rooks",
-        platform: "browser",
-        external: ["react", "react-dom"],
-        sourcemap: false,
-        minify: true,
-        define: {
-          __VERSION__: `"${pkg.version}"`,
-        },
-        banner: {
-          js: umdBannerContent,
-        },
-        footer: {
-          js: "return rooks; }));",
-        },
-      }),
-    ]);
-
-    // The dtsPlugin is configured to output to 'dist/types', but the declaration files
-    // are actually output to esbuild's outdir ('dist/esm'). This step processes them there.
+    // Fix path aliases in emitted .d.ts files
     await replaceTscAliasPaths({
       configFile: path.resolve("./tsconfig.build.json"),
       outDir: path.resolve("./dist/esm"),
-    })
+    });
 
     console.log("Build completed successfully!");
   } catch (error) {

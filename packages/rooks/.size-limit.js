@@ -27,17 +27,5 @@ module.exports = [
   //   import: "{ useDebounce }",
   //   limit: "2KB",
   // },
-  {
-    name: "CJS Webpack (*)",
-    path: ["dist/cjs/index.js"],
-    webpack: true,
-    import: "*", // CJS does not tree-shake in webpack5.
-    limit: fullBundleMaxSize,
-  },
-  {
-    name: "UMD bundle size (*)",
-    path: ["dist/umd/rooks.umd.js"],
-    webpack: false,
-    limit: fullBundleMaxSize,
-  },
+
 ];
