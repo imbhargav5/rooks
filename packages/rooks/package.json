@@ -40,7 +40,7 @@
     "lint": "eslint src/**/*.ts",
     "format": "pnpm run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && pnpm run prettier --write \"./docs/*.+(md|mdxx)\"",
     "test": "jest",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck": "tsc -p ./tsconfig.build.json --noEmit",
     "check:dist": "es-check",
     "check:size": "size-limit --highlight-less",
     "sanity-check": "npx tsx scripts/sanity-check-all.ts",
