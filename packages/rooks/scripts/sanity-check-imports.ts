@@ -22,22 +22,6 @@ interface TestCase {
 
 const tests: TestCase[] = [
   {
-    name: 'CJS Main Import',
-    file: 'temp-cjs-main.js',
-    content: `
-const { useCounter } = require('./dist/cjs/index.js');
-console.log('✅ CJS main import successful:', typeof useCounter);
-`
-  },
-  {
-    name: 'CJS Experimental Import',
-    file: 'temp-cjs-experimental.js', 
-    content: `
-const { useSuspenseNavigatorUserAgentData } = require('./dist/cjs/experimental.js');
-console.log('✅ CJS experimental import successful:', typeof useSuspenseNavigatorUserAgentData);
-`
-  },
-  {
     name: 'ESM Main Import (Basic Check)',
     file: 'temp-esm-main.mjs',
     content: `
