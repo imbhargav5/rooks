@@ -22,22 +22,6 @@ interface TestCase {
 
 const tests: TestCase[] = [
   {
-    name: 'CJS Main Import',
-    file: 'temp-cjs-main.js',
-    content: `
-const { useCounter } = require('./dist/cjs/index.js');
-console.log('✅ CJS main import successful:', typeof useCounter);
-`
-  },
-  {
-    name: 'CJS Experimental Import',
-    file: 'temp-cjs-experimental.js', 
-    content: `
-const { useSuspenseNavigatorUserAgentData } = require('./dist/cjs/experimental.js');
-console.log('✅ CJS experimental import successful:', typeof useSuspenseNavigatorUserAgentData);
-`
-  },
-  {
     name: 'ESM Main Import (Basic Check)',
     file: 'temp-esm-main.mjs',
     content: `
@@ -72,29 +56,29 @@ const createdFiles: string[] = [];
 async function runTest(test: TestCase): Promise<void> {
   return new Promise((resolve, reject) => {
     console.log(`🔍 Testing ${test.name}...`);
-    
+
     try {
       // Write test file
       fs.writeFileSync(test.file, test.content);
       createdFiles.push(test.file);
-      
+
       // Run the test
-      const child = spawn('node', [test.file], { 
+      const child = spawn('node', [test.file], {
         stdio: ['pipe', 'pipe', 'pipe'],
         cwd: process.cwd()
       });
-      
+
       let stdout = '';
       let stderr = '';
-      
+
       child.stdout.on('data', (data) => {
         stdout += data.toString();
       });
-      
+
       child.stderr.on('data', (data) => {
         stderr += data.toString();
       });
-      
+
       child.on('close', (code) => {
         if (code === 0) {
           console.log(stdout.trim());
@@ -105,7 +89,7 @@ async function runTest(test: TestCase): Promise<void> {
           reject(new Error(`${test.name} failed with code ${code}`));
         }
       });
-      
+
     } catch (error) {
       console.error(`❌ ${test.name} failed:`, error.message);
       reject(error);

@@ -7,12 +7,13 @@ This directory contains TypeScript-based sanity check scripts to validate the bu
 ### Individual Checks
 
 - **`sanity-check-types.ts`** - Validates TypeScript definition files
+
   - Checks that `.d.ts` files exist
   - Tests TypeScript compilation and import resolution
   - Validates export structure
 
 - **`sanity-check-imports.ts`** - Tests import resolution
-  - Tests CJS imports from `dist/cjs/`
+
   - Tests ESM file structure from `dist/esm/`
   - Validates both main and experimental exports
 
@@ -36,7 +37,7 @@ pnpm sanity-check
 
 # Run individual checks
 pnpm sanity:types
-pnpm sanity:imports  
+pnpm sanity:imports
 pnpm sanity:eslint
 ```
 
@@ -51,7 +52,7 @@ pnpm sanity:eslint
 
 ✅ **ES Version Compliance** - Built files use correct ES syntax
 ✅ **TypeScript Definitions** - Generated `.d.ts` files are valid
-✅ **Import Resolution** - CJS/ESM imports work correctly
+✅ **Import Resolution** - ESM imports work correctly
 ✅ **ESLint Validation** - Code quality of built files
 ✅ **Experimental Path** - `rooks/experimental` imports work
 ✅ **Export Consistency** - All expected exports are available

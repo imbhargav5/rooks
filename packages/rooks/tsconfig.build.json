@@ -7,9 +7,10 @@
     "moduleResolution": "Bundler",
     "composite": false,
     "sourceMap": false,
-    "declaration": false,
+    "declaration": true,
     "declarationMap": false,
     "incremental": true,
+    "allowImportingTsExtensions": false,
     "paths": {
       "@/*": ["./*"]
     }

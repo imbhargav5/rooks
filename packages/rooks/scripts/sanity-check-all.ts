@@ -26,7 +26,7 @@ const checks: Check[] = [
   {
     name: 'Import Resolution',
     script: 'npx tsx scripts/sanity-check-imports.ts', 
-    description: 'Test that CJS and ESM imports work correctly'
+    description: 'Test that ESM imports work correctly'
   },
   {
     name: 'ESLint Validation',
