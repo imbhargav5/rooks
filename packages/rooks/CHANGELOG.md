@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.3
+
+### Patch Changes
+
+- [`345cd2b`](https://github.com/imbhargav5/rooks/commit/345cd2bf8557b9f255bf376a3ccce496a8e8a1b3) Thanks [@imbhargav5](https://github.com/imbhargav5)! - fix dist/esm path in npmignore
+
 ## 9.0.0-next.2
 
 ### Patch Changes

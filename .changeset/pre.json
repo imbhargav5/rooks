@@ -8,6 +8,7 @@
     "@repo/typescript-config": "0.1.0"
   },
   "changesets": [
+    "dirty-tables-sell",
     "fresh-schools-do",
     "full-socks-refuse",
     "violet-steaks-design"
