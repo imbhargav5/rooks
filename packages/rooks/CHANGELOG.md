@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.2
+
+### Patch Changes
+
+- [`31621fc`](https://github.com/imbhargav5/rooks/commit/31621fca88ba590e6d897ef5ae50445c0e5ff490) Thanks [@imbhargav5](https://github.com/imbhargav5)! - specific ignore tsconfig.build.tsbuildinfo
+
 ## 9.0.0-next.1
 
 ### Patch Changes
