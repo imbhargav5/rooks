@@ -1,9 +1,7 @@
 *
 !dist/**/*
 dist/esm/__tests__
-dist/cjs/__tests__
-dist/umd/__tests__
-dist/tsconfig.build.tsbuildinfo
+dist/esm/tsconfig.build.tsbuildinfo
 !CHANGELOG.md
 !README.md
 !LICENSE
