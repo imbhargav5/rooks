@@ -7,5 +7,7 @@
     "rooks": "8.4.0",
     "@repo/typescript-config": "0.1.0"
   },
-  "changesets": []
+  "changesets": [
+    "fresh-schools-do"
+  ]
 }

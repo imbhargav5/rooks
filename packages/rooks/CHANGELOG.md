@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.0
+
+### Major Changes
+
+- [`2b178af`](https://github.com/imbhargav5/rooks/commit/2b178afba2b8ece38bb29cc84a774ee146174861) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Move rooks to esm only
+
 ## 8.4.0
 
 ### Minor Changes
