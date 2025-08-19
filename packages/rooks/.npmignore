@@ -3,7 +3,7 @@
 dist/esm/__tests__
 dist/cjs/__tests__
 dist/umd/__tests__
-dist/*.tsbuildinfo
+dist/tsconfig.build.tsbuildinfo
 !CHANGELOG.md
 !README.md
 !LICENSE
