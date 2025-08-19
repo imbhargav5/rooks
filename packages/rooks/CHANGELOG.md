@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.1
+
+### Patch Changes
+
+- [`664fc93`](https://github.com/imbhargav5/rooks/commit/664fc93dc21bebb0f66905928c27189eaeaef559) Thanks [@imbhargav5](https://github.com/imbhargav5)! - remove tsbuildinfo from bundle
+
 ## 9.0.0-next.0
 
 ### Major Changes
