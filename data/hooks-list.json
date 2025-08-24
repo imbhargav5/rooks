@@ -426,6 +426,16 @@
       "category": "experimental"
     },
     {
+      "name": "useSuspenseLocalStorageState",
+      "description": "Suspense-enabled hook for localStorage state management with cross-tab synchronization",
+      "category": "experimental"
+    },
+    {
+      "name": "useSuspenseSessionStorageState",
+      "description": "Suspense-enabled hook for sessionStorage state management with proper serialization",
+      "category": "experimental"
+    },
+    {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "performance"

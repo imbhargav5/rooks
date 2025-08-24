@@ -1,0 +1,782 @@
+---
+id: useSuspenseSessionStorageState
+title: useSuspenseSessionStorageState
+sidebar_label: useSuspenseSessionStorageState
+---
+
+## About
+
+⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
+
+A Suspense-enabled hook for sessionStorage state management with proper serialization. This hook suspends during initialization and must be wrapped in a Suspense boundary. It provides full TypeScript generic support, proper JSON serialization/deserialization, error handling, and automatic state management for session-scoped data.
+
+Unlike localStorage, sessionStorage data is scoped to the current browser tab/session and doesn't persist across browser restarts.
+
+[//]: # "Main"
+
+## Examples
+
+#### Basic Usage with Numbers
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+
+function Counter() {
+  const [count, { setItem, deleteItem }] = useSuspenseSessionStorageState(
+    'counter',
+    (currentValue) => currentValue ? parseInt(currentValue, 10) : 0
+  );
+
+  return (
+    <div>
+      <h2>Session Counter: {count}</h2>
+      <button onClick={() => setItem(count + 1)}>
+        Increment
+      </button>
+      <button onClick={() => setItem(count - 1)}>
+        Decrement
+      </button>
+      <button onClick={deleteItem}>
+        Reset
+      </button>
+      <p style={{ fontSize: '12px', color: '#666' }}>
+        This counter will reset when you close the browser tab
+      </p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading counter...</div>}>
+      <Counter />
+    </Suspense>
+  );
+}
+```
+
+#### Working with Objects and TypeScript
+
+```tsx
+import React, { Suspense } from "react";
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+function ContactForm() {
+  const [formData, { setItem, getItem, deleteItem }] = useSuspenseSessionStorageState(
+    'contact-form-draft',
+    (currentValue): FormData => {
+      if (currentValue) {
+        try {
+          return JSON.parse(currentValue);
+        } catch {
+          return { name: '', email: '', message: '' };
+        }
+      }
+      return { name: '', email: '', message: '' };
+    }
+  );
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setItem({
+      ...formData,
+      [field]: value
+    });
+  };
+
+  const getCurrentData = () => {
+    const current = getItem();
+    console.log('Current form data:', current);
+  };
+
+  const clearDraft = () => {
+    if (confirm('Clear the form draft?')) {
+      deleteItem();
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: '400px', padding: '20px' }}>
+      <h2>Contact Form</h2>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '20px' }}>
+        Form data is automatically saved to sessionStorage as you type
+      </p>
+      
+      <div style={{ display: 'grid', gap: '15px' }}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => updateField('name', e.target.value)}
+            style={{ marginLeft: '10px', padding: '5px' }}
+          />
+        </label>
+        
+        <label>
+          Email:
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => updateField('email', e.target.value)}
+            style={{ marginLeft: '10px', padding: '5px' }}
+          />
+        </label>
+        
+        <label>
+          Message:
+          <textarea
+            value={formData.message}
+            onChange={(e) => updateField('message', e.target.value)}
+            rows={4}
+            style={{ padding: '5px' }}
+          />
+        </label>
+      </div>
+      
+      <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+        <button onClick={getCurrentData}>
+          Log Current Data
+        </button>
+        <button onClick={clearDraft}>
+          Clear Draft
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading form...</div>}>
+      <ContactForm />
+    </Suspense>
+  );
+}
+```
+
+#### Session-Scoped Shopping Cart
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+
+function ShoppingCart() {
+  const [cart, { setItem, deleteItem }] = useSuspenseSessionStorageState(
+    'shopping-cart',
+    (currentValue) => {
+      if (currentValue) {
+        try {
+          return JSON.parse(currentValue);
+        } catch {
+          return [];
+        }
+      }
+      return [];
+    }
+  );
+
+  const addItem = () => {
+    const name = prompt('Product name:');
+    const price = parseFloat(prompt('Price:') || '0');
+    
+    if (name && price > 0) {
+      setItem([
+        ...cart,
+        {
+          id: Date.now(),
+          name,
+          price,
+          quantity: 1
+        }
+      ]);
+    }
+  };
+
+  const updateQuantity = (id, quantity) => {
+    if (quantity <= 0) {
+      removeItem(id);
+      return;
+    }
+    
+    setItem(
+      cart.map(item =>
+        item.id === id
+          ? { ...item, quantity }
+          : item
+      )
+    );
+  };
+
+  const removeItem = (id) => {
+    setItem(cart.filter(item => item.id !== id));
+  };
+
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  return (
+    <div style={{ maxWidth: '500px', padding: '20px' }}>
+      <h2>Shopping Cart (Session Only)</h2>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '20px' }}>
+        Cart contents will be lost when you close this tab
+      </p>
+      
+      <button onClick={addItem} style={{ marginBottom: '20px' }}>
+        Add Item
+      </button>
+      
+      {cart.length === 0 ? (
+        <p>Your cart is empty</p>
+      ) : (
+        <>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {cart.map(item => (
+              <li
+                key={item.id}
+                style={{
+                  padding: '15px',
+                  margin: '10px 0',
+                  border: '1px solid #ddd',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}
+              >
+                <div>
+                  <strong>{item.name}</strong>
+                  <div style={{ color: '#666', fontSize: '14px' }}>
+                    ${item.price.toFixed(2)} each
+                  </div>
+                </div>
+                
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                    style={{ width: '60px', padding: '5px' }}
+                  />
+                  <button onClick={() => removeItem(item.id)}>
+                    Remove
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          
+          <div style={{ 
+            borderTop: '2px solid #333', 
+            paddingTop: '15px', 
+            marginTop: '20px',
+            fontSize: '18px',
+            fontWeight: 'bold'
+          }}>
+            Total: ${total.toFixed(2)}
+          </div>
+          
+          <button 
+            onClick={deleteItem} 
+            style={{ marginTop: '20px', backgroundColor: '#ff4444', color: 'white' }}
+          >
+            Clear Cart
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading cart...</div>}>
+      <ShoppingCart />
+    </Suspense>
+  );
+}
+```
+
+#### Multi-Step Form with Session Persistence
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+
+function MultiStepForm() {
+  const [formState, { setItem, deleteItem }] = useSuspenseSessionStorageState(
+    'multi-step-form',
+    (currentValue) => {
+      const defaults = {
+        step: 1,
+        personalInfo: { name: '', email: '' },
+        preferences: { newsletter: false, theme: 'light' },
+        review: { notes: '' }
+      };
+      
+      if (currentValue) {
+        try {
+          return { ...defaults, ...JSON.parse(currentValue) };
+        } catch {
+          return defaults;
+        }
+      }
+      return defaults;
+    }
+  );
+
+  const updateStep = (step) => {
+    setItem({ ...formState, step });
+  };
+
+  const updatePersonalInfo = (field, value) => {
+    setItem({
+      ...formState,
+      personalInfo: {
+        ...formState.personalInfo,
+        [field]: value
+      }
+    });
+  };
+
+  const updatePreferences = (field, value) => {
+    setItem({
+      ...formState,
+      preferences: {
+        ...formState.preferences,
+        [field]: value
+      }
+    });
+  };
+
+  const updateReview = (field, value) => {
+    setItem({
+      ...formState,
+      review: {
+        ...formState.review,
+        [field]: value
+      }
+    });
+  };
+
+  const resetForm = () => {
+    if (confirm('Reset the entire form?')) {
+      deleteItem();
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: '600px', padding: '20px' }}>
+      <h2>Multi-Step Form</h2>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '20px' }}>
+        Progress is saved in sessionStorage - refresh the page to see persistence
+      </p>
+      
+      {/* Progress indicator */}
+      <div style={{ display: 'flex', marginBottom: '30px' }}>
+        {[1, 2, 3].map(step => (
+          <div
+            key={step}
+            style={{
+              flex: 1,
+              height: '4px',
+              backgroundColor: step <= formState.step ? '#007bff' : '#e9ecef',
+              marginRight: step < 3 ? '5px' : '0'
+            }}
+          />
+        ))}
+      </div>
+      
+      {formState.step === 1 && (
+        <div>
+          <h3>Step 1: Personal Information</h3>
+          <div style={{ display: 'grid', gap: '15px', marginBottom: '20px' }}>
+            <label>
+              Name:
+              <input
+                type="text"
+                value={formState.personalInfo.name}
+                onChange={(e) => updatePersonalInfo('name', e.target.value)}
+                style={{ marginLeft: '10px', padding: '8px' }}
+              />
+            </label>
+            <label>
+              Email:
+              <input
+                type="email"
+                value={formState.personalInfo.email}
+                onChange={(e) => updatePersonalInfo('email', e.target.value)}
+                style={{ marginLeft: '10px', padding: '8px' }}
+              />
+            </label>
+          </div>
+        </div>
+      )}
+      
+      {formState.step === 2 && (
+        <div>
+          <h3>Step 2: Preferences</h3>
+          <div style={{ display: 'grid', gap: '15px', marginBottom: '20px' }}>
+            <label>
+              <input
+                type="checkbox"
+                checked={formState.preferences.newsletter}
+                onChange={(e) => updatePreferences('newsletter', e.target.checked)}
+              />
+              Subscribe to newsletter
+            </label>
+            <label>
+              Theme:
+              <select
+                value={formState.preferences.theme}
+                onChange={(e) => updatePreferences('theme', e.target.value)}
+                style={{ marginLeft: '10px', padding: '8px' }}
+              >
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      )}
+      
+      {formState.step === 3 && (
+        <div>
+          <h3>Step 3: Review</h3>
+          <div style={{ marginBottom: '20px' }}>
+            <h4>Personal Information:</h4>
+            <p>Name: {formState.personalInfo.name || 'Not provided'}</p>
+            <p>Email: {formState.personalInfo.email || 'Not provided'}</p>
+            
+            <h4>Preferences:</h4>
+            <p>Newsletter: {formState.preferences.newsletter ? 'Yes' : 'No'}</p>
+            <p>Theme: {formState.preferences.theme}</p>
+            
+            <label>
+              Additional notes:
+              <textarea
+                value={formState.review.notes}
+                onChange={(e) => updateReview('notes', e.target.value)}
+                rows={3}
+                style={{ width: '100%', padding: '8px', marginTop: '5px' }}
+              />
+            </label>
+          </div>
+        </div>
+      )}
+      
+      {/* Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
+        <div>
+          {formState.step > 1 && (
+            <button onClick={() => updateStep(formState.step - 1)}>
+              Previous
+            </button>
+          )}
+        </div>
+        
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={resetForm} style={{ backgroundColor: '#dc3545', color: 'white' }}>
+            Reset Form
+          </button>
+          
+          {formState.step < 3 ? (
+            <button onClick={() => updateStep(formState.step + 1)}>
+              Next
+            </button>
+          ) : (
+            <button onClick={() => alert('Form submitted!')}>
+              Submit
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading form...</div>}>
+      <MultiStepForm />
+    </Suspense>
+  );
+}
+```
+
+#### With Error Boundary for Production Use
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h2>Something went wrong</h2>
+          <p>Failed to initialize sessionStorage state.</p>
+          <button onClick={() => this.setState({ hasError: false })}>
+            Try Again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+function TabSettings() {
+  const [settings, { setItem, deleteItem }] = useSuspenseSessionStorageState(
+    'tab-settings',
+    (currentValue) => {
+      const defaults = {
+        fontSize: 16,
+        showSidebar: true,
+        language: 'en'
+      };
+      
+      if (currentValue) {
+        try {
+          return { ...defaults, ...JSON.parse(currentValue) };
+        } catch {
+          return defaults;
+        }
+      }
+      return defaults;
+    }
+  );
+
+  const updateSetting = (key, value) => {
+    setItem({
+      ...settings,
+      [key]: value
+    });
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>Tab-Specific Settings</h2>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '20px' }}>
+        These settings only apply to this browser tab and session
+      </p>
+      
+      <div style={{ display: 'grid', gap: '15px', maxWidth: '300px' }}>
+        <label>
+          Font Size: {settings.fontSize}px
+          <input
+            type="range"
+            min="12"
+            max="24"
+            value={settings.fontSize}
+            onChange={(e) => updateSetting('fontSize', parseInt(e.target.value))}
+            style={{ width: '100%' }}
+          />
+        </label>
+        
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.showSidebar}
+            onChange={(e) => updateSetting('showSidebar', e.target.checked)}
+          />
+          Show Sidebar
+        </label>
+        
+        <label>
+          Language:
+          <select
+            value={settings.language}
+            onChange={(e) => updateSetting('language', e.target.value)}
+            style={{ marginLeft: '10px' }}
+          >
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+          </select>
+        </label>
+      </div>
+      
+      <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
+        <h3>Preview</h3>
+        <div style={{ fontSize: `${settings.fontSize}px` }}>
+          Sample text at {settings.fontSize}px
+        </div>
+        {settings.showSidebar && (
+          <div style={{ marginTop: '10px', padding: '10px', backgroundColor: '#f8f9fa' }}>
+            Sidebar content (visible because showSidebar is enabled)
+          </div>
+        )}
+        <div style={{ marginTop: '10px' }}>
+          Language: {settings.language}
+        </div>
+      </div>
+      
+      <button onClick={deleteItem} style={{ marginTop: '20px' }}>
+        Reset to Defaults
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading settings...</div>}>
+        <TabSettings />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
+
+## SessionStorage vs LocalStorage
+
+Key differences between `useSuspenseSessionStorageState` and `useSuspenseLocalStorageState`:
+
+| Feature | SessionStorage | LocalStorage |
+|---------|----------------|--------------|
+| **Persistence** | Tab/session only | Survives browser restarts |
+| **Scope** | Single tab | All tabs of same origin |
+| **Cross-tab Sync** | No (tab-specific) | Yes |
+| **Use Cases** | Form drafts, tab settings, temporary data | User preferences, persistent app state |
+| **Data Lifetime** | Until tab is closed | Until explicitly deleted |
+
+## Arguments
+
+| Parameter     | Type                                          | Description                                                                           |
+| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `key`         | `string`                                      | The sessionStorage key to use for storing the data                                   |
+| `initializer` | `(currentValue: string \| null) => T`        | Function that transforms the raw sessionStorage value (string or null) into type T   |
+
+### Initializer Function
+
+The initializer function receives the raw string value from sessionStorage (or `null` if not present) and should return the properly typed initial state. This allows for:
+
+- **Type Conversion**: Convert strings to numbers, parse JSON objects, etc.
+- **Default Values**: Provide fallbacks when sessionStorage is empty
+- **Data Validation**: Validate and sanitize stored data
+- **Migration**: Handle changes in data structure over time
+
+## Return Value
+
+Returns a tuple `[value, controls]` where:
+
+| Property   | Type  | Description                        |
+| ---------- | ----- | ---------------------------------- |
+| `value`    | `T`   | The current state value            |
+| `controls` | `object` | Object containing control methods  |
+
+### Control Methods
+
+The `controls` object provides the following methods:
+
+| Method       | Type                | Description                                                |
+| ------------ | ------------------- | ---------------------------------------------------------- |
+| `getItem`    | `() => T`           | Returns the current state value                            |
+| `setItem`    | `(value: T) => void` | Updates the state and sessionStorage with the new value   |
+| `deleteItem` | `() => void`        | Removes the item from sessionStorage and resets to initial value |
+
+## Type Safety
+
+The hook provides full TypeScript generic support:
+
+```tsx
+// Number type
+const [count, controls] = useSuspenseSessionStorageState<number>(
+  'count',
+  (value) => value ? parseInt(value, 10) : 0
+);
+
+// controls.setItem expects number
+controls.setItem(42); // ✅ Valid
+controls.setItem('42'); // ❌ Type error
+
+// Object type
+interface FormData {
+  name: string;
+  email: string;
+}
+
+const [formData, formControls] = useSuspenseSessionStorageState<FormData>(
+  'form',
+  (value) => value ? JSON.parse(value) : { name: '', email: '' }
+);
+
+// formControls.setItem expects FormData object
+formControls.setItem({ name: 'John', email: 'john@example.com' }); // ✅ Valid
+formControls.setItem({ name: 'John' }); // ❌ Type error (missing email)
+```
+
+## Error Handling
+
+The hook handles various error scenarios gracefully:
+
+- **sessionStorage Unavailable**: Works in SSR environments or when sessionStorage is disabled
+- **Storage Quota Exceeded**: Continues to work even if sessionStorage writes fail
+- **JSON Parse Errors**: Lets the initializer handle malformed data
+- **Initializer Errors**: Throws errors to be caught by error boundaries
+
+Always wrap in error boundaries for production use.
+
+## Common Use Cases
+
+### Form Draft Auto-Save
+```jsx
+const [formDraft, { setItem }] = useSuspenseSessionStorageState(
+  'contact-form-draft',
+  (value) => value ? JSON.parse(value) : { name: '', email: '', message: '' }
+);
+
+// Auto-save as user types
+const handleFieldChange = (field, value) => {
+  setItem({ ...formDraft, [field]: value });
+};
+```
+
+### Temporary Shopping Cart
+```jsx
+const [cart, { setItem, deleteItem }] = useSuspenseSessionStorageState(
+  'temp-cart',
+  (value) => value ? JSON.parse(value) : []
+);
+
+// Cart persists during session but doesn't survive browser restart
+```
+
+### Tab-Specific UI State
+```jsx
+const [uiState, { setItem }] = useSuspenseSessionStorageState(
+  'ui-preferences',
+  (value) => value ? JSON.parse(value) : { sidebarOpen: true, theme: 'light' }
+);
+```
+
+## Browser Support
+
+- **Modern Browsers**: ✅ Full support
+- **Server-Side Rendering**: ✅ Works (uses initializer default when sessionStorage unavailable)
+- **Storage Disabled**: ✅ Graceful fallback (state works, but won't persist)
+
+## Import
+
+```javascript
+import { useSuspenseSessionStorageState } from "rooks/experimental";
+```
