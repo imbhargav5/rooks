@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.4
+
+### Patch Changes
+
+- [`a16db2b`](https://github.com/imbhargav5/rooks/commit/a16db2bec3762a8d720682da2c7a26b99d2d57ca) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add useSuspenseLocalstorageState experimental hook
+
 ## 9.0.0-next.3
 
 ### Patch Changes
