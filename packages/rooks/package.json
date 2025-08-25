@@ -1,6 +1,6 @@
 {
   "name": "rooks",
-  "version": "9.0.0-next.4",
+  "version": "9.0.0-next.5",
   "description": "Collection of awesome react hooks",
   "type": "module",
   "main": "dist/esm/index.js",
