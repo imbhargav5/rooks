@@ -1,7 +1,7 @@
 {
   "name": "rooks",
   "version": "9.0.0-next.4",
-  "description": "Essential React custom hooks ⚓ to super charge your components!",
+  "description": "Collection of awesome react hooks",
   "type": "module",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
