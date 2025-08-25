@@ -1,5 +1,12 @@
 # website
 
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`345cd2b`](https://github.com/imbhargav5/rooks/commit/345cd2bf8557b9f255bf376a3ccce496a8e8a1b3), [`a16db2b`](https://github.com/imbhargav5/rooks/commit/a16db2bec3762a8d720682da2c7a26b99d2d57ca), [`2b178af`](https://github.com/imbhargav5/rooks/commit/2b178afba2b8ece38bb29cc84a774ee146174861), [`31621fc`](https://github.com/imbhargav5/rooks/commit/31621fca88ba590e6d897ef5ae50445c0e5ff490), [`3496c0e`](https://github.com/imbhargav5/rooks/commit/3496c0e6034a3fef1cceaa341bc58f522688e23e), [`664fc93`](https://github.com/imbhargav5/rooks/commit/664fc93dc21bebb0f66905928c27189eaeaef559)]:
+  - rooks@9.0.0
+
 ## 1.1.8-next.5
 
 ### Patch Changes
