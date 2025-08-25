@@ -61,6 +61,7 @@ When creating a new React hook, you will:
      - `name`: Hook name (e.g., "useSuspenseLocalStorageState")
      - `description`: Brief description of what the hook does
      - `category`: One of the valid categories (see valid categories below)
+   - Finally run the update-package-list-to-markdown script to update the package list in the README.md file (this script uses the hooks-list.json file to update the package list)
 
 ### Valid HOok Categories:
 

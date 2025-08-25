@@ -143,10 +143,12 @@ sidebar_label: Hooks List
 * [useWindowScrollPosition](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) - A React hook to get the scroll position of the window
 * [useWindowSize](https://rooks.vercel.app/docs/hooks/useWindowSize) - Window size hook for React.
 
-<h3 align="center">🧪 Experimental Hooks - 2 hooks</h3>
+<h3 align="center">🧪 Experimental Hooks - 4 hooks</h3>
 
 * [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
+* [useSuspenseLocalStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseLocalStorageState) - Suspense-enabled hook for localStorage state management with cross-tab synchronization
+* [useSuspenseSessionStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseSessionStorageState) - Suspense-enabled hook for sessionStorage state management with proper serialization
 
 <p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
 
