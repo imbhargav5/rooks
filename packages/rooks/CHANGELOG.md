@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.0-next.5
+
+### Patch Changes
+
+- [`3496c0e`](https://github.com/imbhargav5/rooks/commit/3496c0e6034a3fef1cceaa341bc58f522688e23e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Update package json description
+
 ## 9.0.0-next.4
 
 ### Patch Changes
