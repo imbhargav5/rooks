@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.2
+
+### Patch Changes
+
+- [`e3b7f0a`](https://github.com/imbhargav5/rooks/commit/e3b7f0a718352f701adb913f26847bd0f0f62a3f) Thanks [@imbhargav5](https://github.com/imbhargav5)! - cross tab fix
+
 ## 9.0.1
 
 ### Patch Changes
