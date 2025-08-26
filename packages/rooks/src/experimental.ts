@@ -12,3 +12,4 @@ export { useSuspenseNavigatorUserAgentData } from "./hooks/useSuspenseNavigatorU
 export { useSuspenseNavigatorBattery } from "./hooks/useSuspenseNavigatorBattery";
 export { useSuspenseLocalStorageState } from "./hooks/useSuspenseLocalStorageState";
 export { useSuspenseSessionStorageState } from "./hooks/useSuspenseSessionStorageState";
+export { useSuspenseIndexedDBState } from "./hooks/useSuspenseIndexedDBState";

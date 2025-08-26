@@ -419,6 +419,9 @@ importers:
       execa:
         specifier: ^9.5.2
         version: 9.5.2
+      fake-indexeddb:
+        specifier: ^6.1.0
+        version: 6.1.0
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
@@ -5109,6 +5112,10 @@ packages:
   extsprintf@1.3.0:
     resolution: {integrity: sha512-11Ndz7Nv+mvAC1j0ktTa7fAb0vLyGGX+rMHNBYQviQDGU0Hw7lhctJANqbPhu9nV9/izT/IntTgZ7Im/9LJs9g==}
     engines: {'0': node >=0.6.0}
+
+  fake-indexeddb@6.1.0:
+    resolution: {integrity: sha512-gOzajWIhEug/CQHUIxigKT9Zilh5/I6WvUBez6/UdUtT/YVEHM9r572Os8wfvhp7TkmgBtRNdqSM7YoCXWMzZg==}
+    engines: {node: '>=18'}
 
   fancy-log@2.0.0:
     resolution: {integrity: sha512-9CzxZbACXMUXW13tS0tI8XsGGmxWzO2DmYrGuBJOJ8k8q2K7hwfJA5qHjuPPe8wtsco33YR9wc+Rlr5wYFvhSA==}
@@ -15079,6 +15086,8 @@ snapshots:
       - supports-color
 
   extsprintf@1.3.0: {}
+
+  fake-indexeddb@6.1.0: {}
 
   fancy-log@2.0.0:
     dependencies:
