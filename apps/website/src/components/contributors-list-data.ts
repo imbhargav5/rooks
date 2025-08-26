@@ -705,6 +705,51 @@ export const contributorsListData = {
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "oatmealproblem",
+      "name": "Michael Moore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5983927?v=4",
+      "profile": "https://oatmeal.gg/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "John0x",
+      "name": "Moritz Brandes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5455173?v=4",
+      "profile": "https://github.com/John0x",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "som-sm",
+      "name": "Som Shekhar Mukherjee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49264891?v=4",
+      "profile": "https://github.com/som-sm",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "cursor[bot]",
+      "name": "cursor[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/1210556?v=4",
+      "profile": "https://github.com/apps/cursor",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "JulianWielga",
+      "name": "JulianWielga",
+      "avatar_url": "https://avatars.githubusercontent.com/u/965924?v=4",
+      "profile": "https://github.com/JulianWielga",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
