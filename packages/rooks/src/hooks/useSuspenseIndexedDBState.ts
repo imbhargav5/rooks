@@ -6,7 +6,7 @@
 
 /// <reference lib="dom" />
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 
 // Cache entry interface for managing IndexedDB promises and results
 interface CacheEntry<T> {
@@ -406,6 +406,10 @@ function useSuspenseIndexedDBState<T>(
         return null;
     }, [channelName]);
 
+    // Store the initializer in a ref to avoid recreating the callback
+    const initializerRef = useRef(initializer);
+    initializerRef.current = initializer;
+
     // Handle broadcast messages from other tabs
     const handleBroadcastMessage = useCallback(
         (event: MessageEvent<BroadcastMessage<T>>) => {
@@ -416,37 +420,40 @@ function useSuspenseIndexedDBState<T>(
                 try {
                     if (type === 'SET' && messageValue !== undefined) {
                         setValue(messageValue);
+                        // Update cache with the new value to maintain consistency
+                        const entry = cache.get(cacheKey) as CacheEntry<T>;
+                        if (entry && entry.status === 'resolved') {
+                            entry.result = messageValue;
+                        }
                     } else if (type === 'DELETE') {
-                        const resetValue = initializer(null);
+                        const resetValue = initializerRef.current(null);
                         setValue(resetValue);
+                        // Update cache with the reset value
+                        const entry = cache.get(cacheKey) as CacheEntry<T>;
+                        if (entry && entry.status === 'resolved') {
+                            entry.result = resetValue;
+                        }
                     }
                 } catch (error) {
                     console.error(`Failed to handle broadcast message for key "${key}":`, error);
                 }
             }
         },
-        [dbName, storeName, key, initializer]
+        [dbName, storeName, key, cacheKey]
     );
 
-    // Set up broadcast channel listener
+    // Set up broadcast channel listener - only once per channel
     useEffect(() => {
         if (broadcastChannel) {
             broadcastChannel.addEventListener('message', handleBroadcastMessage);
 
             return () => {
                 broadcastChannel.removeEventListener('message', handleBroadcastMessage);
+                // Close the channel when the component unmounts or channel changes
+                broadcastChannel.close();
             };
         }
     }, [broadcastChannel, handleBroadcastMessage]);
-
-    // Cleanup broadcast channel on unmount
-    useEffect(() => {
-        return () => {
-            if (broadcastChannel) {
-                broadcastChannel.close();
-            }
-        };
-    }, [broadcastChannel]);
 
     // Broadcast value changes to other tabs
     const broadcastChange = useCallback(
@@ -492,7 +499,7 @@ function useSuspenseIndexedDBState<T>(
         deleteItem: async () => {
             try {
                 await removeValueFromIndexedDB(dbName, storeName, key, version);
-                const resetValue = initializer(null);
+                const resetValue = initializerRef.current(null);
                 setValue(resetValue);
                 broadcastChange('DELETE');
             } catch (error) {
@@ -500,7 +507,7 @@ function useSuspenseIndexedDBState<T>(
                 throw error;
             }
         }
-    }), [value, dbName, storeName, key, version, initializer, broadcastChange]);
+    }), [value, dbName, storeName, key, version, broadcastChange]);
 
     return [value, controls];
 }

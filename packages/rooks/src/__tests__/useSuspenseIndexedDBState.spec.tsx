@@ -26,28 +26,28 @@ if (typeof global.BroadcastChannel === "undefined") {
         name: string;
         onmessage: ((event: MessageEvent) => void) | null = null;
         onmessageerror: ((event: MessageEvent) => void) | null = null;
-        
+
         constructor(name: string) {
             this.name = name;
         }
-        
+
         postMessage(_message: unknown) {
             // Mock implementation - no cross-tab sync in tests
         }
-        
+
         addEventListener(_type: string, _listener: EventListener) {
             // Mock implementation
         }
-        
+
         removeEventListener(_type: string, _listener: EventListener) {
             // Mock implementation
         }
-        
+
         dispatchEvent(_event: Event): boolean {
             // Mock implementation
             return true;
         }
-        
+
         close() {
             // Mock implementation
         }
@@ -56,8 +56,8 @@ if (typeof global.BroadcastChannel === "undefined") {
 
 // Mock console methods to reduce test noise
 beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => { });
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
 });
 
 afterAll(() => {
@@ -181,10 +181,10 @@ function ObjectTestComponent({ storageKey }: { storageKey: string }) {
 }
 
 // Wrapper with Suspense and Error Boundary
-function SuspenseWrapper({ 
-    children, 
-    fallback = "Loading..." 
-}: { 
+function SuspenseWrapper({
+    children,
+    fallback = "Loading..."
+}: {
     children: React.ReactNode;
     fallback?: string;
 }) {
@@ -676,5 +676,282 @@ describe("useSuspenseIndexedDBState", () => {
 
         expect(screen.getByTestId("user-name").textContent).toBe("Updated User");
         expect(screen.getByTestId("items-count").textContent).toBe("3");
+    });
+
+    it("should handle broadcast channel messages correctly", async () => {
+        expect.hasAssertions();
+
+        // Create a working BroadcastChannel implementation for testing
+        const channels: Map<string, MockBroadcastChannel[]> = new Map();
+
+        class MockBroadcastChannel implements BroadcastChannel {
+            name: string;
+            onmessage: ((event: MessageEvent) => void) | null = null;
+            onmessageerror: ((event: MessageEvent) => void) | null = null;
+            private listeners: EventListener[] = [];
+
+            constructor(name: string) {
+                this.name = name;
+                if (!channels.has(name)) {
+                    channels.set(name, []);
+                }
+                channels.get(name)!.push(this);
+            }
+
+            postMessage(message: unknown) {
+                const channelInstances = channels.get(this.name) || [];
+                // Simulate async message delivery
+                setTimeout(() => {
+                    channelInstances.forEach(instance => {
+                        if (instance !== this) { // Don't send to self
+                            const event = new MessageEvent('message', { data: message });
+                            instance.listeners.forEach(listener => {
+                                listener(event);
+                            });
+                            if (instance.onmessage) {
+                                instance.onmessage(event);
+                            }
+                        }
+                    });
+                }, 0);
+            }
+
+            addEventListener(type: string, listener: EventListener) {
+                if (type === 'message') {
+                    this.listeners.push(listener);
+                }
+            }
+
+            removeEventListener(type: string, listener: EventListener) {
+                if (type === 'message') {
+                    const index = this.listeners.indexOf(listener);
+                    if (index > -1) {
+                        this.listeners.splice(index, 1);
+                    }
+                }
+            }
+
+            dispatchEvent(_event: Event): boolean {
+                return true;
+            }
+
+            close() {
+                const channelInstances = channels.get(this.name);
+                if (channelInstances) {
+                    const index = channelInstances.indexOf(this);
+                    if (index > -1) {
+                        channelInstances.splice(index, 1);
+                    }
+                }
+            }
+        }
+
+        // Temporarily replace the global BroadcastChannel
+        const originalBroadcastChannel = global.BroadcastChannel;
+        global.BroadcastChannel = MockBroadcastChannel as any;
+
+        let testChannel: MockBroadcastChannel | null = null;
+        testChannel = new MockBroadcastChannel("rooks-indexeddb-rooks-db-state");
+
+        const TestBroadcastComponent = () => {
+            const [value, { setItem }] = useSuspenseIndexedDBState(
+                "broadcast-test",
+                (current) => current || "initial"
+            );
+
+            return (
+                <div>
+                    <div data-testid="broadcast-value">{JSON.stringify(value)}</div>
+                    <button
+                        data-testid="set-broadcast-value"
+                        onClick={() => setItem("local-update")}
+                    >
+                        Set Value
+                    </button>
+                </div>
+            );
+        };
+
+        render(
+            <SuspenseWrapper>
+                <TestBroadcastComponent />
+            </SuspenseWrapper>
+        );
+
+        // Wait for component to load
+        await waitFor(() => {
+            expect(screen.getByTestId("broadcast-value")).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId("broadcast-value").textContent).toBe('"initial"');
+
+        // Simulate broadcast message from another tab
+        if (testChannel) {
+            await act(async () => {
+                testChannel.postMessage({
+                    type: 'SET',
+                    key: 'broadcast-test',
+                    value: 'broadcast-update',
+                    dbName: 'rooks-db',
+                    storeName: 'state'
+                });
+                await new Promise(resolve => setTimeout(resolve, 100));
+            });
+
+            // Value should be updated from broadcast message
+            expect(screen.getByTestId("broadcast-value").textContent).toBe('"broadcast-update"');
+
+            // Test DELETE broadcast message
+            await act(async () => {
+                testChannel.postMessage({
+                    type: 'DELETE',
+                    key: 'broadcast-test',
+                    dbName: 'rooks-db',
+                    storeName: 'state'
+                });
+                await new Promise(resolve => setTimeout(resolve, 100));
+            });
+
+            // Value should be reset to initial value
+            expect(screen.getByTestId("broadcast-value").textContent).toBe('"initial"');
+
+            testChannel.close();
+        }
+
+        // Restore original BroadcastChannel
+        global.BroadcastChannel = originalBroadcastChannel;
+    });
+
+    it("should not respond to broadcast messages for different keys/databases", async () => {
+        expect.hasAssertions();
+
+        // Create a working BroadcastChannel implementation for testing
+        const channels: Map<string, MockBroadcastChannel[]> = new Map();
+
+        class MockBroadcastChannel implements BroadcastChannel {
+            name: string;
+            onmessage: ((event: MessageEvent) => void) | null = null;
+            onmessageerror: ((event: MessageEvent) => void) | null = null;
+            private listeners: EventListener[] = [];
+
+            constructor(name: string) {
+                this.name = name;
+                if (!channels.has(name)) {
+                    channels.set(name, []);
+                }
+                channels.get(name)!.push(this);
+            }
+
+            postMessage(message: unknown) {
+                const channelInstances = channels.get(this.name) || [];
+                setTimeout(() => {
+                    channelInstances.forEach(instance => {
+                        if (instance !== this) {
+                            const event = new MessageEvent('message', { data: message });
+                            instance.listeners.forEach(listener => {
+                                listener(event);
+                            });
+                            if (instance.onmessage) {
+                                instance.onmessage(event);
+                            }
+                        }
+                    });
+                }, 0);
+            }
+
+            addEventListener(type: string, listener: EventListener) {
+                if (type === 'message') {
+                    this.listeners.push(listener);
+                }
+            }
+
+            removeEventListener(type: string, listener: EventListener) {
+                if (type === 'message') {
+                    const index = this.listeners.indexOf(listener);
+                    if (index > -1) {
+                        this.listeners.splice(index, 1);
+                    }
+                }
+            }
+
+            dispatchEvent(_event: Event): boolean {
+                return true;
+            }
+
+            close() {
+                const channelInstances = channels.get(this.name);
+                if (channelInstances) {
+                    const index = channelInstances.indexOf(this);
+                    if (index > -1) {
+                        channelInstances.splice(index, 1);
+                    }
+                }
+            }
+        }
+
+        // Temporarily replace the global BroadcastChannel
+        const originalBroadcastChannel = global.BroadcastChannel;
+        global.BroadcastChannel = MockBroadcastChannel as any;
+
+        let testChannel: MockBroadcastChannel | null = null;
+        testChannel = new MockBroadcastChannel("rooks-indexeddb-rooks-db-state");
+
+        const TestBroadcastComponent = () => {
+            const [value] = useSuspenseIndexedDBState(
+                "specific-key",
+                (current) => current || "original"
+            );
+
+            return <div data-testid="specific-value">{JSON.stringify(value)}</div>;
+        };
+
+        render(
+            <SuspenseWrapper>
+                <TestBroadcastComponent />
+            </SuspenseWrapper>
+        );
+
+        await waitFor(() => {
+            expect(screen.getByTestId("specific-value")).toBeInTheDocument();
+        });
+
+        expect(screen.getByTestId("specific-value").textContent).toBe('"original"');
+
+        if (testChannel) {
+            // Send message for different key - should not affect our component
+            await act(async () => {
+                testChannel.postMessage({
+                    type: 'SET',
+                    key: 'different-key',
+                    value: 'should-not-update',
+                    dbName: 'rooks-db',
+                    storeName: 'state'
+                });
+                await new Promise(resolve => setTimeout(resolve, 100));
+            });
+
+            // Value should remain unchanged
+            expect(screen.getByTestId("specific-value").textContent).toBe('"original"');
+
+            // Send message for different database - should not affect our component
+            await act(async () => {
+                testChannel.postMessage({
+                    type: 'SET',
+                    key: 'specific-key',
+                    value: 'should-not-update',
+                    dbName: 'different-db',
+                    storeName: 'state'
+                });
+                await new Promise(resolve => setTimeout(resolve, 100));
+            });
+
+            // Value should remain unchanged
+            expect(screen.getByTestId("specific-value").textContent).toBe('"original"');
+
+            testChannel.close();
+        }
+
+        // Restore original BroadcastChannel
+        global.BroadcastChannel = originalBroadcastChannel;
     });
 });
