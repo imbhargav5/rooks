@@ -55,15 +55,15 @@ function openDatabase(dbName: string, version: number, storeName: string): Promi
         }
 
         const request = indexedDB.open(dbName, version);
-        
+
         request.onerror = () => {
             reject(new Error(`Failed to open database "${dbName}": ${request.error?.message}`));
         };
-        
+
         request.onsuccess = () => {
             resolve(request.result);
         };
-        
+
         request.onupgradeneeded = () => {
             const db = request.result;
             if (!db.objectStoreNames.contains(storeName)) {
@@ -82,27 +82,27 @@ function openDatabase(dbName: string, version: number, storeName: string): Promi
  * @returns Promise that resolves to the value or null if not found
  */
 async function getValueFromIndexedDB<T>(
-    dbName: string, 
-    storeName: string, 
-    key: string, 
+    dbName: string,
+    storeName: string,
+    key: string,
     version: number
 ): Promise<T | null> {
     try {
         const db = await openDatabase(dbName, version, storeName);
-        
+
         return new Promise((resolve, reject) => {
             const transaction = db.transaction([storeName], 'readonly');
             const store = transaction.objectStore(storeName);
             const request = store.get(key);
-            
+
             request.onerror = () => {
                 reject(new Error(`Failed to get value for key "${key}": ${request.error?.message}`));
             };
-            
+
             request.onsuccess = () => {
                 resolve(request.result ?? null);
             };
-            
+
             transaction.oncomplete = () => {
                 db.close();
             };
@@ -122,28 +122,28 @@ async function getValueFromIndexedDB<T>(
  * @param version - The database version
  */
 async function saveValueToIndexedDB<T>(
-    dbName: string, 
-    storeName: string, 
-    key: string, 
-    value: T, 
+    dbName: string,
+    storeName: string,
+    key: string,
+    value: T,
     version: number
 ): Promise<void> {
     try {
         const db = await openDatabase(dbName, version, storeName);
-        
+
         return new Promise((resolve, reject) => {
             const transaction = db.transaction([storeName], 'readwrite');
             const store = transaction.objectStore(storeName);
             const request = store.put(value, key);
-            
+
             request.onerror = () => {
                 reject(new Error(`Failed to save value for key "${key}": ${request.error?.message}`));
             };
-            
+
             request.onsuccess = () => {
                 resolve();
             };
-            
+
             transaction.oncomplete = () => {
                 db.close();
             };
@@ -162,27 +162,27 @@ async function saveValueToIndexedDB<T>(
  * @param version - The database version
  */
 async function removeValueFromIndexedDB(
-    dbName: string, 
-    storeName: string, 
-    key: string, 
+    dbName: string,
+    storeName: string,
+    key: string,
     version: number
 ): Promise<void> {
     try {
         const db = await openDatabase(dbName, version, storeName);
-        
+
         return new Promise((resolve, reject) => {
             const transaction = db.transaction([storeName], 'readwrite');
             const store = transaction.objectStore(storeName);
             const request = store.delete(key);
-            
+
             request.onerror = () => {
                 reject(new Error(`Failed to remove value for key "${key}": ${request.error?.message}`));
             };
-            
+
             request.onsuccess = () => {
                 resolve();
             };
-            
+
             transaction.oncomplete = () => {
                 db.close();
             };
@@ -234,13 +234,13 @@ interface UseSuspenseIndexedDBStateControls<T> {
      * @returns The current state value
      */
     getItem: () => T;
-    
+
     /**
      * Set a new value in IndexedDB and update state
      * @param value - The new value to set
      */
     setItem: (value: T) => Promise<void>;
-    
+
     /**
      * Delete the item from IndexedDB and reset to initial value
      */
@@ -275,13 +275,13 @@ interface IndexedDBConfig {
      * @default "rooks-db"
      */
     dbName?: string;
-    
+
     /**
      * The object store name within the database
      * @default "state"
      */
     storeName?: string;
-    
+
     /**
      * The database version
      * @default 1
@@ -345,7 +345,7 @@ function useSuspenseIndexedDBState<T>(
 
     // Create a unique cache key combining database info and key
     const cacheKey = `${dbName}:${storeName}:${key}:${version}`;
-    
+
     // Check if we already have a cache entry for this key
     let cacheEntry = cache.get(cacheKey) as CacheEntry<T> | undefined;
 
@@ -410,7 +410,7 @@ function useSuspenseIndexedDBState<T>(
     const handleBroadcastMessage = useCallback(
         (event: MessageEvent<BroadcastMessage<T>>) => {
             const { type, key: messageKey, value: messageValue, dbName: msgDbName, storeName: msgStoreName } = event.data;
-            
+
             // Only handle messages for the same database, store, and key
             if (msgDbName === dbName && msgStoreName === storeName && messageKey === key) {
                 try {
@@ -452,14 +452,23 @@ function useSuspenseIndexedDBState<T>(
     const broadcastChange = useCallback(
         (type: 'SET' | 'DELETE', newValue?: T) => {
             if (broadcastChannel) {
-                const message: BroadcastMessage<T> = {
-                    type,
-                    key,
-                    value: newValue,
-                    dbName,
-                    storeName
-                };
-                broadcastChannel.postMessage(message);
+                try {
+                    const message: BroadcastMessage<T> = {
+                        type,
+                        key,
+                        value: newValue,
+                        dbName,
+                        storeName
+                    };
+                    broadcastChannel.postMessage(message);
+                } catch (error) {
+                    // Channel might be closed, ignore the error
+                    if (error instanceof Error && error.name === 'InvalidStateError') {
+                        console.warn(`BroadcastChannel is closed, cannot send message for key "${key}"`);
+                    } else {
+                        console.error(`Failed to broadcast message for key "${key}":`, error);
+                    }
+                }
             }
         },
         [broadcastChannel, key, dbName, storeName]
@@ -468,7 +477,7 @@ function useSuspenseIndexedDBState<T>(
     // Control methods
     const controls = useMemo<UseSuspenseIndexedDBStateControls<T>>(() => ({
         getItem: () => value,
-        
+
         setItem: async (newValue: T) => {
             try {
                 await saveValueToIndexedDB(dbName, storeName, key, newValue, version);
@@ -479,7 +488,7 @@ function useSuspenseIndexedDBState<T>(
                 throw error;
             }
         },
-        
+
         deleteItem: async () => {
             try {
                 await removeValueFromIndexedDB(dbName, storeName, key, version);
