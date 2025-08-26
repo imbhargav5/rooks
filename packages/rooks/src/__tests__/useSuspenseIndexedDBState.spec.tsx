@@ -22,9 +22,10 @@ if (typeof global.structuredClone === "undefined") {
 
 // Mock BroadcastChannel for testing
 if (typeof global.BroadcastChannel === "undefined") {
-    global.BroadcastChannel = class MockBroadcastChannel {
+    global.BroadcastChannel = class MockBroadcastChannel implements BroadcastChannel {
         name: string;
         onmessage: ((event: MessageEvent) => void) | null = null;
+        onmessageerror: ((event: MessageEvent) => void) | null = null;
         
         constructor(name: string) {
             this.name = name;
@@ -40,6 +41,11 @@ if (typeof global.BroadcastChannel === "undefined") {
         
         removeEventListener(_type: string, _listener: EventListener) {
             // Mock implementation
+        }
+        
+        dispatchEvent(_event: Event): boolean {
+            // Mock implementation
+            return true;
         }
         
         close() {
@@ -619,7 +625,12 @@ describe("useSuspenseIndexedDBState", () => {
         function ComplexTestComponent() {
             const [data, { setItem }] = useSuspenseIndexedDBState(
                 "complex-data",
-                (value): ComplexData => value || initialComplexData
+                (value): ComplexData => {
+                    if (value && typeof value === 'object' && 'user' in value) {
+                        return value as ComplexData;
+                    }
+                    return initialComplexData;
+                }
             );
 
             return (
