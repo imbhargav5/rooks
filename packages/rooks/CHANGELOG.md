@@ -1,5 +1,11 @@
 # rooks
 
+## 9.0.1
+
+### Patch Changes
+
+- [`06d0c69`](https://github.com/imbhargav5/rooks/commit/06d0c692034863b5d54dd2874ab3e80c42a659b6) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useSuspenseIndexedDBState hook
+
 ## 9.0.0
 
 ### Major Changes
