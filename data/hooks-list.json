@@ -26,6 +26,11 @@
       "category": "ui"
     },
     {
+      "name": "useBroadcastChannel",
+      "description": "A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication",
+      "category": "browser"
+    },
+    {
       "name": "useCountdown",
       "description": "Count down to a target timestamp and call callbacks every second (or provided peried)",
       "category": "state"

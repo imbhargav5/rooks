@@ -14,8 +14,9 @@ sidebar_label: Hooks List
 * [useResizeObserverRef](https://rooks.vercel.app/docs/hooks/useResizeObserverRef) - Resize Observer hook for React.
 * [useTimeoutWhen](https://rooks.vercel.app/docs/hooks/useTimeoutWhen) - Takes a callback and fires it when a condition is true
 
-<h3 align="center">🌐 Browser APIs - 9 hooks</h3>
+<h3 align="center">🌐 Browser APIs - 10 hooks</h3>
 
+* [useBroadcastChannel](https://rooks.vercel.app/docs/hooks/useBroadcastChannel) - A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication
 * [useGeolocation](https://rooks.vercel.app/docs/hooks/useGeolocation) - A hook to provide the geolocation info on client side.
 * [useIdleDetectionApi](https://rooks.vercel.app/docs/hooks/useIdleDetectionApi) - Hook to detect when user is idle using Idle Detection API with polyfill
 * [useNavigatorLanguage](https://rooks.vercel.app/docs/hooks/useNavigatorLanguage) - Navigator Language hook for React.
@@ -143,12 +144,13 @@ sidebar_label: Hooks List
 * [useWindowScrollPosition](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) - A React hook to get the scroll position of the window
 * [useWindowSize](https://rooks.vercel.app/docs/hooks/useWindowSize) - Window size hook for React.
 
-<h3 align="center">🧪 Experimental Hooks - 4 hooks</h3>
+<h3 align="center">🧪 Experimental Hooks - 5 hooks</h3>
 
 * [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
 * [useSuspenseLocalStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseLocalStorageState) - Suspense-enabled hook for localStorage state management with cross-tab synchronization
 * [useSuspenseSessionStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseSessionStorageState) - Suspense-enabled hook for sessionStorage state management with proper serialization
+* [useSuspenseIndexedDBState](https://rooks.vercel.app/docs/hooks/useSuspenseIndexedDBState) - Suspense-enabled hook for IndexedDB state management with structured data storage and cross-tab synchronization
 
 <p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
 

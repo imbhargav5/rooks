@@ -7,6 +7,7 @@ export { useAsyncEffect } from "./hooks/useAsyncEffect";
 export { useAudio } from "./hooks/useAudio";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
+export { useBroadcastChannel } from "./hooks/useBroadcastChannel";
 export { useCountdown } from "./hooks/useCountdown";
 export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";
