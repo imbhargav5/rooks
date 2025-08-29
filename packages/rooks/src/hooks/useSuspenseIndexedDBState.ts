@@ -6,7 +6,8 @@
 
 /// <reference lib="dom" />
 
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
+import { useBroadcastChannel } from "./useBroadcastChannel";
 
 // Cache entry interface for managing IndexedDB promises and results
 interface CacheEntry<T> {
@@ -398,22 +399,14 @@ function useSuspenseIndexedDBState<T>(
         return `rooks-indexeddb-${dbName}-${storeName}`;
     }, [dbName, storeName]);
 
-    // Cross-tab communication using BroadcastChannel
-    const broadcastChannel = useMemo(() => {
-        if (typeof BroadcastChannel !== "undefined") {
-            return new BroadcastChannel(channelName);
-        }
-        return null;
-    }, [channelName]);
-
     // Store the initializer in a ref to avoid recreating the callback
     const initializerRef = useRef(initializer);
     initializerRef.current = initializer;
 
     // Handle broadcast messages from other tabs
     const handleBroadcastMessage = useCallback(
-        (event: MessageEvent<BroadcastMessage<T>>) => {
-            const { type, key: messageKey, value: messageValue, dbName: msgDbName, storeName: msgStoreName } = event.data;
+        (data: BroadcastMessage<T>) => {
+            const { type, key: messageKey, value: messageValue, dbName: msgDbName, storeName: msgStoreName } = data;
 
             // Only handle messages for the same database, store, and key
             if (msgDbName === dbName && msgStoreName === storeName && messageKey === key) {
@@ -442,43 +435,32 @@ function useSuspenseIndexedDBState<T>(
         [dbName, storeName, key, cacheKey]
     );
 
-    // Set up broadcast channel listener - only once per channel
-    useEffect(() => {
-        if (broadcastChannel) {
-            broadcastChannel.addEventListener('message', handleBroadcastMessage);
-
-            return () => {
-                broadcastChannel.removeEventListener('message', handleBroadcastMessage);
-                // Close the channel when the component unmounts or channel changes
-                broadcastChannel.close();
-            };
+    // Use our useBroadcastChannel hook for cross-tab communication
+    const { postMessage: broadcastMessage, isSupported: isBroadcastSupported } = useBroadcastChannel<BroadcastMessage<T>>(
+        channelName,
+        {
+            onMessage: handleBroadcastMessage,
+            onError: (error) => {
+                console.error(`BroadcastChannel error for key "${key}":`, error);
+            }
         }
-    }, [broadcastChannel, handleBroadcastMessage]);
+    );
 
     // Broadcast value changes to other tabs
     const broadcastChange = useCallback(
         (type: 'SET' | 'DELETE', newValue?: T) => {
-            if (broadcastChannel) {
-                try {
-                    const message: BroadcastMessage<T> = {
-                        type,
-                        key,
-                        value: newValue,
-                        dbName,
-                        storeName
-                    };
-                    broadcastChannel.postMessage(message);
-                } catch (error) {
-                    // Channel might be closed, ignore the error
-                    if (error instanceof Error && error.name === 'InvalidStateError') {
-                        console.warn(`BroadcastChannel is closed, cannot send message for key "${key}"`);
-                    } else {
-                        console.error(`Failed to broadcast message for key "${key}":`, error);
-                    }
-                }
+            if (isBroadcastSupported) {
+                const message: BroadcastMessage<T> = {
+                    type,
+                    key,
+                    value: newValue,
+                    dbName,
+                    storeName
+                };
+                broadcastMessage(message);
             }
         },
-        [broadcastChannel, key, dbName, storeName]
+        [broadcastMessage, isBroadcastSupported, key, dbName, storeName]
     );
 
     // Control methods
