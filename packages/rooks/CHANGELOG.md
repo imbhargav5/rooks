@@ -1,5 +1,11 @@
 # rooks
 
+## 9.1.0
+
+### Minor Changes
+
+- [`9f9551e`](https://github.com/imbhargav5/rooks/commit/9f9551ed410c6471ff517fc3926a78a540c98865) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add new useBroadcastChannel hook
+
 ## 9.0.2
 
 ### Patch Changes

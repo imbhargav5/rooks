@@ -1,5 +1,12 @@
 # website
 
+## 1.1.11
+
+### Patch Changes
+
+- Updated dependencies [[`9f9551e`](https://github.com/imbhargav5/rooks/commit/9f9551ed410c6471ff517fc3926a78a540c98865)]:
+  - rooks@9.1.0
+
 ## 1.1.10
 
 ### Patch Changes
