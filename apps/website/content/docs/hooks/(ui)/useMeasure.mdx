@@ -1,0 +1,344 @@
+---
+id: useMeasure
+title: useMeasure
+sidebar_label: useMeasure
+---
+
+## About
+
+Measures both the inner and outer dimensions of any DOM element in a performant way and updates when dimensions change. Uses ResizeObserver for efficient size change detection, providing comprehensive measurement data including inner dimensions (clientWidth/clientHeight), outer dimensions (offsetWidth/offsetHeight), and scroll dimensions for both inner and outer measurements.
+
+## Examples
+
+### Basic usage
+
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function App() {
+  const [ref, measurements] = useMeasure();
+  
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: 200,
+        height: 150,
+        border: "5px solid #ccc",
+        overflow: "auto",
+        padding: "10px",
+        margin: "20px"
+      }}
+    >
+      <div style={{ width: 300, height: 200 }}>
+        <h4>Inner Measurements:</h4>
+        <p>Width: {measurements.innerWidth}, Height: {measurements.innerHeight}</p>
+        <p>Scroll: {measurements.innerScrollWidth} x {measurements.innerScrollHeight}</p>
+        
+        <h4>Outer Measurements:</h4>
+        <p>Width: {measurements.outerWidth}, Height: {measurements.outerHeight}</p>
+        <p>Scroll: {measurements.outerScrollWidth} x {measurements.outerScrollHeight}</p>
+        
+        <p>This content is larger than the container to demonstrate scroll measurements.</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### With callback and debouncing
+
+```jsx
+import React, { useState } from "react";
+import { useMeasure } from "rooks";
+
+export default function App() {
+  const [measurementHistory, setMeasurementHistory] = useState([]);
+  
+  const [ref, measurements] = useMeasure({
+    debounce: 100,
+    onMeasure: (newMeasurements) => {
+      setMeasurementHistory(prev => [
+        ...prev.slice(-4), // Keep last 5 measurements
+        newMeasurements
+      ]);
+    }
+  });
+  
+  return (
+    <div>
+      <textarea
+        ref={ref}
+        placeholder="Resize this textarea to see measurements change..."
+        style={{ 
+          width: "100%", 
+          minHeight: 100, 
+          resize: "both",
+          border: "3px solid #007acc",
+          padding: "8px"
+        }}
+      />
+      
+      <div>
+        <h3>Current Measurements:</h3>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <div>
+            <h4>Inner:</h4>
+            <p>{measurements.innerWidth} x {measurements.innerHeight}</p>
+            <p>Scroll: {measurements.innerScrollWidth} x {measurements.innerScrollHeight}</p>
+          </div>
+          <div>
+            <h4>Outer:</h4>
+            <p>{measurements.outerWidth} x {measurements.outerHeight}</p>
+            <p>Scroll: {measurements.outerScrollWidth} x {measurements.outerScrollHeight}</p>
+          </div>
+        </div>
+        
+        <h3>Measurement History:</h3>
+        {measurementHistory.map((measurement, index) => (
+          <div key={index}>
+            <small>
+              {index + 1}: Inner {measurement.innerWidth}x{measurement.innerHeight}, 
+              Outer {measurement.outerWidth}x{measurement.outerHeight}
+            </small>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Responsive component layout with inner/outer awareness
+
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function ResponsiveCard() {
+  const [ref, measurements] = useMeasure();
+  
+  // Adjust layout based on container size
+  const isCompact = measurements.innerWidth < 300;
+  const showDetails = measurements.innerHeight > 150;
+  const hasThickBorder = (measurements.outerWidth - measurements.innerWidth) > 10;
+  
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: "100%",
+        maxWidth: 400,
+        height: "100%",
+        maxHeight: 300,
+        border: hasThickBorder ? "8px solid #ddd" : "1px solid #ddd",
+        borderRadius: "8px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: isCompact ? "column" : "row",
+        gap: "12px"
+      }}
+    >
+      <div style={{ flex: 1 }}>
+        <h3>Responsive Card</h3>
+        <p>Inner: {measurements.innerWidth}x{measurements.innerHeight}</p>
+        <p>Outer: {measurements.outerWidth}x{measurements.outerHeight}</p>
+        <p>Layout: {isCompact ? "Compact" : "Wide"}</p>
+        <p>Border: {hasThickBorder ? "Thick" : "Thin"}</p>
+      </div>
+      
+      {showDetails && (
+        <div style={{ 
+          flex: isCompact ? "none" : 1,
+          backgroundColor: "#f5f5f5",
+          padding: "8px",
+          borderRadius: "4px"
+        }}>
+          <p>Additional details shown when height > 150px</p>
+          <small>
+            Border + padding: {measurements.outerWidth - measurements.innerWidth}px wide, 
+            {measurements.outerHeight - measurements.innerHeight}px tall
+          </small>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Comparing inner vs outer measurements
+
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function MeasurementComparison() {
+  const [ref, measurements] = useMeasure();
+  
+  const borderWidth = (measurements.outerWidth - measurements.innerWidth) / 2;
+  const borderHeight = (measurements.outerHeight - measurements.innerHeight) / 2;
+  
+  return (
+    <div style={{ padding: "20px" }}>
+      <div
+        ref={ref}
+        style={{
+          width: 300,
+          height: 200,
+          border: "15px solid #ff6b6b",
+          padding: "25px",
+          backgroundColor: "#4ecdc4",
+          overflow: "auto"
+        }}
+      >
+        <div style={{ width: 400, height: 250, backgroundColor: "#45b7d1" }}>
+          <h3>Measurement Breakdown</h3>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+            <div>
+              <h4>Inner (Content Area):</h4>
+              <p>Width: {measurements.innerWidth}px</p>
+              <p>Height: {measurements.innerHeight}px</p>
+              <p>Scroll Width: {measurements.innerScrollWidth}px</p>
+              <p>Scroll Height: {measurements.innerScrollHeight}px</p>
+            </div>
+            
+            <div>
+              <h4>Outer (Including Border/Padding):</h4>
+              <p>Width: {measurements.outerWidth}px</p>
+              <p>Height: {measurements.outerHeight}px</p>
+              <p>Scroll Width: {measurements.outerScrollWidth}px</p>
+              <p>Scroll Height: {measurements.outerScrollHeight}px</p>
+            </div>
+          </div>
+          
+          <div style={{ marginTop: "10px" }}>
+            <h4>Calculated Border + Padding:</h4>
+            <p>Horizontal: {borderWidth.toFixed(1)}px each side</p>
+            <p>Vertical: {borderHeight.toFixed(1)}px each side</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Disabled measurements
+
+```jsx
+import React, { useState } from "react";
+import { useMeasure } from "rooks";
+
+export default function ConditionalMeasurement() {
+  const [measurementEnabled, setMeasurementEnabled] = useState(true);
+  
+  const [ref, measurements] = useMeasure({
+    disabled: !measurementEnabled
+  });
+  
+  return (
+    <div>
+      <button onClick={() => setMeasurementEnabled(!measurementEnabled)}>
+        {measurementEnabled ? "Disable" : "Enable"} Measurements
+      </button>
+      
+      <div
+        ref={ref}
+        style={{
+          width: 250,
+          height: 150,
+          border: "2px solid #007acc",
+          margin: "20px 0",
+          padding: "10px"
+        }}
+      >
+        <p>Measurements {measurementEnabled ? "enabled" : "disabled"}</p>
+        <div>
+          <h4>Inner:</h4>
+          <p>{measurements.innerWidth} x {measurements.innerHeight}</p>
+          <h4>Outer:</h4>
+          <p>{measurements.outerWidth} x {measurements.outerHeight}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type | Description | Default value |
+| -------- | ---- | ----------- | ------------- |
+| options  | `UseMeasureOptions` | Configuration options object | `{}` |
+
+### UseMeasureOptions
+
+| Property  | Type | Description | Default value |
+| --------- | ---- | ----------- | ------------- |
+| debounce  | `number` | Number of milliseconds to debounce measurements | `0` |
+| disabled  | `boolean` | Whether measurements are disabled | `false` |
+| onMeasure | `(measurements: UseMeasureMeasurements) => void` | Callback function called when dimensions change | `undefined` |
+
+## Return
+
+Returns a tuple `[ref, measurements]` with the following structure:
+
+| Index | Property      | Type | Description |
+| ----- | ------------- | ---- | ----------- |
+| 0     | ref           | `CallbackRef` | Callback ref to attach to the DOM element you want to measure |
+| 1     | measurements  | `UseMeasureMeasurements` | Object containing all measurement data |
+
+### UseMeasureMeasurements
+
+| Property           | Type | Description |
+| ------------------ | ---- | ----------- |
+| innerWidth         | `number` | Inner width (clientWidth) - content area width excluding scrollbars |
+| innerHeight        | `number` | Inner height (clientHeight) - content area height excluding scrollbars |
+| innerScrollWidth   | `number` | Total scrollable width (scrollWidth) - width of the entire content area |
+| innerScrollHeight  | `number` | Total scrollable height (scrollHeight) - height of the entire content area |
+| outerWidth         | `number` | Outer width (offsetWidth) - total element width including borders, padding, and scrollbars |
+| outerHeight        | `number` | Outer height (offsetHeight) - total element height including borders, padding, and scrollbars |
+| outerScrollWidth   | `number` | Total scrollable outer width - outer width of the entire scrollable content |
+| outerScrollHeight  | `number` | Total scrollable outer height - outer height of the entire scrollable content |
+
+## Notes
+
+### Browser Compatibility
+
+- Requires ResizeObserver support (available in all modern browsers)
+- Falls back gracefully in SSR environments
+- Warns when ResizeObserver is not available
+
+### Performance Considerations
+
+- Uses ResizeObserver for efficient resize detection instead of polling
+- Supports debouncing to limit measurement frequency during rapid changes
+- Automatically cleans up observers when components unmount
+- Observes with multiple box types to track both inner and outer changes
+
+### Usage Tips
+
+- The hook returns `0` for all dimensions until a DOM element is attached via the `ref`
+- Use the `disabled` option to temporarily stop measurements without losing the ref
+- The `onMeasure` callback is called after state updates, useful for logging or external state management
+- Debouncing is especially useful for expensive operations triggered by dimension changes
+- Inner measurements exclude borders and padding, while outer measurements include them
+- Use outer measurements when you need to know the total space an element occupies
+- Use inner measurements when you need to know the available content area
+
+### Inner vs Outer Measurements
+
+- **Inner measurements** (`innerWidth`, `innerHeight`): Content area only, excludes borders, padding, and scrollbars
+- **Outer measurements** (`outerWidth`, `outerHeight`): Complete element size including borders, padding, and scrollbars
+- **Scroll measurements**: Available for both inner and outer, showing total scrollable content dimensions
+- **Practical use**: Outer measurements are useful for layout calculations, inner measurements for content positioning
+
+### SSR Compatibility
+
+- Safe to use in server-side rendering environments
+- Provides appropriate warnings when ResizeObserver or window is unavailable
+- Returns default values (0) for all measurements during SSR
+
+---

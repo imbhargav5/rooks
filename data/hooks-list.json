@@ -166,6 +166,11 @@
       "category": "keyboard"
     },
     {
+      "name": "useMeasure",
+      "description": "Measures both inner and outer dimensions of any DOM element in a performant way and updates when dimensions change",
+      "category": "ui"
+    },
+    {
       "name": "useIntersectionObserverRef",
       "description": "A hook to register an intersection observer listener.",
       "category": "ui"

@@ -76,7 +76,7 @@
 
 <h3 align="center">📝 Form & File Handling - 2 hooks</h3>
 
-* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Comprehensive state management for checkbox inputs with support for indeterminate state, controlled/uncontrolled modes, and child checkbox management
+* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element
 * [useFileDropRef](https://rooks.vercel.app/docs/hooks/useFileDropRef) - Drop files easily
 
 <h3 align="center">⌨️ Keyboard & Input - 5 hooks</h3>
@@ -140,13 +140,14 @@
 * [useUndoRedoState](https://rooks.vercel.app/docs/hooks/useUndoRedoState) - Setstate but can also undo and redo
 * [useUndoState](https://rooks.vercel.app/docs/hooks/useUndoState) - Drop in replacement for useState hook but with undo functionality.
 
-<h3 align="center">⚛️ UI - 12 hooks</h3>
+<h3 align="center">⚛️ UI - 13 hooks</h3>
 
 * [useAudio](https://rooks.vercel.app/docs/hooks/useAudio) - Audio hook
 * [useBoundingclientrect](https://rooks.vercel.app/docs/hooks/useBoundingclientrect) - getBoundingClientRect hook for React.
 * [useBoundingclientrectRef](https://rooks.vercel.app/docs/hooks/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
 * [useDimensionsRef](https://rooks.vercel.app/docs/hooks/useDimensionsRef) - Easily grab dimensions of an element with a ref using this hook
 * [useFullscreen](https://rooks.vercel.app/docs/hooks/useFullscreen) - Use full screen api for making beautiful and emersive experinces.
+* [useMeasure](https://rooks.vercel.app/docs/hooks/useMeasure) - Measures both inner and outer dimensions of any DOM element in a performant way and updates when dimensions change
 * [useIntersectionObserverRef](https://rooks.vercel.app/docs/hooks/useIntersectionObserverRef) - A hook to register an intersection observer listener.
 * [useInViewRef](https://rooks.vercel.app/docs/hooks/useInViewRef) - Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.
 * [useMediaMatch](https://rooks.vercel.app/docs/hooks/useMediaMatch) - Signal whether or not a media query is currently matched.
@@ -189,7 +190,7 @@
 
 <!--hookscount start-->
 
-✅ Collection of 102 hooks as standalone modules.
+✅ Collection of 103 hooks as standalone modules.
 
 <!--hookscount end-->
 

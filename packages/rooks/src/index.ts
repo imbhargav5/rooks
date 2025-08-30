@@ -35,6 +35,7 @@ export { useGetIsMounted } from "./hooks/useGetIsMounted";
 export { useGeolocation } from "./hooks/useGeolocation";
 export { useIdleDetectionApi } from "./hooks/useIdleDetectionApi";
 export { useInput } from "./hooks/useInput";
+export { useMeasure } from "./hooks/useMeasure";
 export { useIntervalWhen } from "./hooks/useIntervalWhen";
 export { useIntersectionObserverRef } from "./hooks/useIntersectionObserverRef";
 export { useInViewRef } from "./hooks/useInViewRef";
