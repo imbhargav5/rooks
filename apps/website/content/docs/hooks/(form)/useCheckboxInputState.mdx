@@ -23,16 +23,24 @@ export default function BasicCheckbox() {
   return (
     <div style={{ padding: "20px" }}>
       <h3>Basic Checkbox</h3>
-      
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          marginBottom: "20px",
+        }}
+      >
         <input type="checkbox" {...checkbox.inputProps} />
         <label>Accept Terms and Conditions</label>
       </div>
-      
+
       <div style={{ marginBottom: "10px" }}>
-        <strong>Status:</strong> {checkbox.checked ? "✓ Accepted" : "✗ Not Accepted"}
+        <strong>Status:</strong>{" "}
+        {checkbox.checked ? "✓ Accepted" : "✗ Not Accepted"}
       </div>
-      
+
       <button onClick={checkbox.toggle} style={{ padding: "8px 16px" }}>
         {checkbox.checked ? "Revoke" : "Accept"} Terms
       </button>
@@ -55,7 +63,7 @@ export default function MultipleCheckboxes() {
     const preferences = {
       newsletter: newsletter.checked,
       marketing: marketing.checked,
-      analytics: analytics.checked
+      analytics: analytics.checked,
     };
     alert(`Preferences: ${JSON.stringify(preferences, null, 2)}`);
   };
@@ -63,19 +71,40 @@ export default function MultipleCheckboxes() {
   return (
     <div style={{ padding: "20px", maxWidth: "400px" }}>
       <h3>Email Preferences</h3>
-      
+
       <div style={{ marginBottom: "20px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
           <input type="checkbox" {...newsletter.inputProps} />
           <label>Newsletter updates</label>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
           <input type="checkbox" {...marketing.inputProps} />
           <label>Marketing emails</label>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
           <input type="checkbox" {...analytics.inputProps} />
           <label>Analytics tracking</label>
         </div>
@@ -86,13 +115,15 @@ export default function MultipleCheckboxes() {
       </button>
 
       {/* Current State Display */}
-      <div style={{ 
-        marginTop: "20px", 
-        padding: "10px", 
-        background: "#f8f9fa",
-        borderRadius: "4px",
-        fontSize: "14px"
-      }}>
+      <div
+        style={{
+          marginTop: "20px",
+          padding: "10px",
+          background: "#f8f9fa",
+          borderRadius: "4px",
+          fontSize: "14px",
+        }}
+      >
         <strong>Current Selection:</strong>
         <div>Newsletter: {newsletter.checked ? "Yes" : "No"}</div>
         <div>Marketing: {marketing.checked ? "Yes" : "No"}</div>
@@ -114,46 +145,38 @@ export default function TodoList() {
     { id: 1, text: "Buy groceries", completed: false },
     { id: 2, text: "Walk the dog", completed: true },
     { id: 3, text: "Read a book", completed: false },
-    { id: 4, text: "Exercise", completed: false }
+    { id: 4, text: "Exercise", completed: false },
   ]);
 
   const [newTodo, setNewTodo] = useState("");
 
-  // Create checkbox state for each todo
-  const todoCheckboxes = todos.map(todo => ({
-    id: todo.id,
-    checkbox: useCheckboxInputState(todo.completed)
-  }));
-
   const addTodo = () => {
     if (newTodo.trim()) {
-      const newId = Math.max(...todos.map(t => t.id)) + 1;
-      setTodos(prev => [
+      const newId = Math.max(...todos.map((t) => t.id)) + 1;
+      setTodos((prev) => [
         ...prev,
-        { id: newId, text: newTodo.trim(), completed: false }
+        { id: newId, text: newTodo.trim(), completed: false },
       ]);
       setNewTodo("");
     }
   };
 
   const updateTodo = (id, completed) => {
-    setTodos(prev => 
-      prev.map(todo => 
-        todo.id === id ? { ...todo, completed } : todo
-      )
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === id ? { ...todo, completed } : todo))
     );
   };
 
   const deleteTodo = (id) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id));
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  const completedCount = todos.filter(todo => todo.completed).length;
+  const completedCount = todos.filter((todo) => todo.completed).length;
 
   return (
     <div style={{ padding: "20px", maxWidth: "500px" }}>
       <h3>Todo List</h3>
-      
+
       {/* Add New Todo */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <input
@@ -171,63 +194,26 @@ export default function TodoList() {
 
       {/* Todo List */}
       <div>
-        {todos.map((todo, index) => {
-          const todoCheckbox = todoCheckboxes.find(tc => tc.id === todo.id)?.checkbox;
-          
+        {todos.map((todo) => {
           return (
-            <div
+            <TodoItem
               key={todo.id}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                padding: "8px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                marginBottom: "5px",
-                backgroundColor: todo.completed ? "#f0f8f0" : "white"
-              }}
-            >
-              <input
-                type="checkbox"
-                {...todoCheckbox?.inputProps}
-                onChange={(e) => {
-                  updateTodo(todo.id, e.target.checked);
-                  todoCheckbox?.setChecked(e.target.checked);
-                }}
-              />
-              <span
-                style={{
-                  flex: 1,
-                  textDecoration: todo.completed ? "line-through" : "none",
-                  color: todo.completed ? "#666" : "black"
-                }}
-              >
-                {todo.text}
-              </span>
-              <button
-                onClick={() => deleteTodo(todo.id)}
-                style={{ 
-                  fontSize: "12px", 
-                  color: "red", 
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-                ✕
-              </button>
-            </div>
+              todo={todo}
+              onToggle={(completed) => updateTodo(todo.id, completed)}
+              onDelete={() => deleteTodo(todo.id)}
+            />
           );
         })}
-        
+
         {todos.length === 0 && (
-          <div style={{ 
-            textAlign: "center", 
-            color: "#666", 
-            padding: "20px",
-            fontStyle: "italic"
-          }}>
+          <div
+            style={{
+              textAlign: "center",
+              color: "#666",
+              padding: "20px",
+              fontStyle: "italic",
+            }}
+          >
             No todos yet. Add one above!
           </div>
         )}
@@ -235,16 +221,72 @@ export default function TodoList() {
 
       {/* Summary */}
       {todos.length > 0 && (
-        <div style={{ 
-          marginTop: "15px", 
-          padding: "10px", 
-          background: "#e9ecef",
-          borderRadius: "4px",
-          fontSize: "14px"
-        }}>
-          <strong>Progress:</strong> {completedCount} of {todos.length} completed
+        <div
+          style={{
+            marginTop: "15px",
+            padding: "10px",
+            background: "#e9ecef",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
+        >
+          <strong>Progress:</strong> {completedCount} of {todos.length}{" "}
+          completed
         </div>
       )}
+    </div>
+  );
+}
+
+function TodoItem({ todo, onToggle, onDelete }) {
+  // Each TodoItem component has its own checkbox hook instance
+  const checkbox = useCheckboxInputState(todo.completed);
+
+  // Sync the hook state with the parent state
+  const handleToggle = (completed) => {
+    checkbox.setChecked(completed);
+    onToggle(completed);
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        padding: "8px",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        marginBottom: "5px",
+        backgroundColor: checkbox.checked ? "#f0f8f0" : "white",
+      }}
+    >
+      <input
+        type="checkbox"
+        {...checkbox.inputProps}
+        onChange={(e) => handleToggle(e.target.checked)}
+      />
+      <span
+        style={{
+          flex: 1,
+          textDecoration: checkbox.checked ? "line-through" : "none",
+          color: checkbox.checked ? "#666" : "black",
+        }}
+      >
+        {todo.text}
+      </span>
+      <button
+        onClick={onDelete}
+        style={{
+          fontSize: "12px",
+          color: "red",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        ✕
+      </button>
     </div>
   );
 }
@@ -252,29 +294,29 @@ export default function TodoList() {
 
 ### Arguments
 
-| Argument     | Type    | Description                                           | Default |
-| ------------ | ------- | ----------------------------------------------------- | ------- |
-| initialValue | boolean | The initial boolean value for the checkbox           | -       |
+| Argument     | Type    | Description                                | Default |
+| ------------ | ------- | ------------------------------------------ | ------- |
+| initialValue | boolean | The initial boolean value for the checkbox | -       |
 
 ### Returns
 
 Returns an object with the following properties:
 
-| Return value | Type                           | Description                                                | Default |
-| ------------ | ------------------------------ | ---------------------------------------------------------- | ------- |
-| checked      | boolean                        | Whether the checkbox is currently checked                  | false   |
-| toggle       | () => void                     | Function to toggle the checkbox state                      | -       |
-| setChecked   | (checked: boolean) => void     | Function to explicitly set the checked state              | -       |
-| inputProps   | CheckboxInputProps             | Props to spread on the checkbox input element             | -       |
+| Return value | Type                       | Description                                   | Default |
+| ------------ | -------------------------- | --------------------------------------------- | ------- |
+| checked      | boolean                    | Whether the checkbox is currently checked     | false   |
+| toggle       | () => void                 | Function to toggle the checkbox state         | -       |
+| setChecked   | (checked: boolean) => void | Function to explicitly set the checked state  | -       |
+| inputProps   | CheckboxInputProps         | Props to spread on the checkbox input element | -       |
 
 ### InputProps
 
 The `inputProps` object contains:
 
-| Property | Type                                        | Description                                         |
-| -------- | ------------------------------------------- | --------------------------------------------------- |
-| checked  | boolean                                     | Whether the checkbox is checked                     |
-| onChange | (event: ChangeEvent&lt;HTMLInputElement&gt;) => void | Change event handler                          |
+| Property | Type                                                 | Description                     |
+| -------- | ---------------------------------------------------- | ------------------------------- |
+| checked  | boolean                                              | Whether the checkbox is checked |
+| onChange | (event: ChangeEvent&lt;HTMLInputElement&gt;) => void | Change event handler            |
 
 ### TypeScript Support
 
