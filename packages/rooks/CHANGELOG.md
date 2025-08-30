@@ -1,5 +1,11 @@
 # rooks
 
+## 9.2.0
+
+### Minor Changes
+
+- [`663f5bd`](https://github.com/imbhargav5/rooks/commit/663f5bd06ec5aa151e722f59c86dd6fdfb024e63) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add new useCheckboxInputState and useMeasure hooks
+
 ## 9.1.0
 
 ### Minor Changes
