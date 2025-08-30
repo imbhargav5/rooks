@@ -49,8 +49,9 @@ sidebar_label: Hooks List
 * [useOutsideClickRef](https://rooks.vercel.app/docs/hooks/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
 * [useWindowEventListener](https://rooks.vercel.app/docs/hooks/useWindowEventListener) - Adds an event listener to window
 
-<h3 align="center">📝 Form & File Handling - 1 hook</h3>
+<h3 align="center">📝 Form & File Handling - 2 hooks</h3>
 
+* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Comprehensive state management for checkbox inputs with support for indeterminate state, controlled/uncontrolled modes, and child checkbox management
 * [useFileDropRef](https://rooks.vercel.app/docs/hooks/useFileDropRef) - Drop files easily
 
 <h3 align="center">⌨️ Keyboard & Input - 5 hooks</h3>

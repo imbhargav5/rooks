@@ -8,6 +8,7 @@ export { useAudio } from "./hooks/useAudio";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
 export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
 export { useBroadcastChannel } from "./hooks/useBroadcastChannel";
+export { useCheckboxInputState } from "./hooks/useCheckboxInputState";
 export { useCountdown } from "./hooks/useCountdown";
 export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";

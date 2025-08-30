@@ -31,6 +31,11 @@
       "category": "browser"
     },
     {
+      "name": "useCheckboxInputState",
+      "description": "Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element",
+      "category": "form"
+    },
+    {
       "name": "useCountdown",
       "description": "Count down to a target timestamp and call callbacks every second (or provided peried)",
       "category": "state"
