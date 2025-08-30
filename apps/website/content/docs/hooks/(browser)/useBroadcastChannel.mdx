@@ -1,0 +1,424 @@
+---
+id: useBroadcastChannel
+title: useBroadcastChannel
+sidebar_label: useBroadcastChannel
+---
+
+## About
+
+A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication. This hook allows you to send and receive messages between different browser tabs, windows, or workers of the same origin, enabling real-time synchronization across multiple instances of your application.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic cross-tab communication
+
+```jsx
+import { useBroadcastChannel } from "rooks";
+import { useState } from "react";
+
+export default function CrossTabChat() {
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [username, setUsername] = useState("User1");
+
+  const { postMessage, isSupported } = useBroadcastChannel("chat-channel", {
+    onMessage: (data) => {
+      setMessages(prev => [...prev, { 
+        ...data, 
+        timestamp: new Date().toLocaleTimeString() 
+      }]);
+    },
+    onError: (error) => {
+      console.error("Broadcast channel error:", error);
+    }
+  });
+
+  const sendMessage = () => {
+    if (message.trim()) {
+      const messageData = {
+        username,
+        message: message.trim(),
+        id: Date.now()
+      };
+      postMessage(messageData);
+      setMessage("");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
+  if (!isSupported) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <h3>Cross-Tab Chat</h3>
+        <p style={{ color: "red" }}>
+          BroadcastChannel API is not supported in this browser.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "500px" }}>
+      <h3>Cross-Tab Chat</h3>
+      <p>Open this page in multiple tabs to test cross-tab communication!</p>
+      
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Your username"
+          style={{ padding: "5px", marginRight: "10px", width: "120px" }}
+        />
+      </div>
+
+      <div 
+        style={{ 
+          height: "200px", 
+          overflowY: "auto", 
+          border: "1px solid #ccc", 
+          padding: "10px",
+          marginBottom: "10px",
+          backgroundColor: "#f9f9f9"
+        }}
+      >
+        {messages.length === 0 ? (
+          <p style={{ color: "#666", textAlign: "center" }}>
+            No messages yet. Start typing!
+          </p>
+        ) : (
+          messages.map((msg) => (
+            <div key={msg.id} style={{ marginBottom: "8px" }}>
+              <strong>{msg.username}</strong> 
+              <span style={{ color: "#666", fontSize: "0.8em" }}>
+                {" "}({msg.timestamp})
+              </span>
+              <div>{msg.message}</div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div style={{ display: "flex", gap: "10px" }}>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Type a message..."
+          style={{ flex: 1, padding: "5px" }}
+        />
+        <button onClick={sendMessage} disabled={!message.trim()}>
+          Send
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Real-time counter synchronization
+
+```jsx
+import { useBroadcastChannel } from "rooks";
+import { useState, useEffect } from "react";
+
+export default function SyncedCounter() {
+  const [count, setCount] = useState(0);
+  const [tabId] = useState(() => `tab-${Date.now()}-${Math.random()}`);
+
+  const { postMessage, isSupported } = useBroadcastChannel("counter-sync", {
+    onMessage: (data) => {
+      if (data.type === "COUNTER_UPDATE" && data.tabId !== tabId) {
+        setCount(data.count);
+      }
+    }
+  });
+
+  const updateCounter = (newCount) => {
+    setCount(newCount);
+    postMessage({
+      type: "COUNTER_UPDATE",
+      count: newCount,
+      tabId
+    });
+  };
+
+  const increment = () => updateCounter(count + 1);
+  const decrement = () => updateCounter(count - 1);
+  const reset = () => updateCounter(0);
+
+  if (!isSupported) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <h3>Synced Counter</h3>
+        <p style={{ color: "red" }}>
+          BroadcastChannel API not supported
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h3>Synced Counter</h3>
+      <p>Open in multiple tabs - the counter stays synchronized!</p>
+      
+      <div style={{ fontSize: "48px", margin: "20px 0", color: "#2196F3" }}>
+        {count}
+      </div>
+      
+      <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+        <button onClick={decrement} style={{ padding: "10px 20px" }}>
+          - Decrement
+        </button>
+        <button onClick={reset} style={{ padding: "10px 20px" }}>
+          Reset
+        </button>
+        <button onClick={increment} style={{ padding: "10px 20px" }}>
+          + Increment
+        </button>
+      </div>
+      
+      <p style={{ color: "#666", fontSize: "0.9em", marginTop: "20px" }}>
+        Tab ID: {tabId}
+      </p>
+    </div>
+  );
+}
+```
+
+### Shopping cart synchronization
+
+```jsx
+import { useBroadcastChannel } from "rooks";
+import { useState } from "react";
+
+export default function SyncedShoppingCart() {
+  const [cart, setCart] = useState([]);
+  const [availableItems] = useState([
+    { id: 1, name: "Laptop", price: 999 },
+    { id: 2, name: "Mouse", price: 25 },
+    { id: 3, name: "Keyboard", price: 75 },
+    { id: 4, name: "Monitor", price: 299 }
+  ]);
+
+  const { postMessage, isSupported } = useBroadcastChannel("cart-sync", {
+    onMessage: (data) => {
+      if (data.type === "CART_UPDATE") {
+        setCart(data.cart);
+      }
+    }
+  });
+
+  const updateCart = (newCart) => {
+    setCart(newCart);
+    postMessage({
+      type: "CART_UPDATE",
+      cart: newCart
+    });
+  };
+
+  const addToCart = (item) => {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+      updateCart(cart.map(cartItem => 
+        cartItem.id === item.id 
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      ));
+    } else {
+      updateCart([...cart, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (itemId) => {
+    updateCart(cart.filter(item => item.id !== itemId));
+  };
+
+  const updateQuantity = (itemId, quantity) => {
+    if (quantity <= 0) {
+      removeFromCart(itemId);
+    } else {
+      updateCart(cart.map(item =>
+        item.id === itemId ? { ...item, quantity } : item
+      ));
+    }
+  };
+
+  const clearCart = () => updateCart([]);
+
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  if (!isSupported) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <h3>Synced Shopping Cart</h3>
+        <p style={{ color: "red" }}>BroadcastChannel API not supported</p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "800px" }}>
+      <h3>Synced Shopping Cart</h3>
+      <p>Add items to cart and see them sync across tabs!</p>
+      
+      <div style={{ display: "flex", gap: "20px" }}>
+        {/* Available Items */}
+        <div style={{ flex: 1 }}>
+          <h4>Available Items</h4>
+          {availableItems.map(item => (
+            <div 
+              key={item.id} 
+              style={{ 
+                display: "flex", 
+                justifyContent: "space-between", 
+                alignItems: "center",
+                padding: "10px",
+                border: "1px solid #ddd",
+                marginBottom: "5px"
+              }}
+            >
+              <div>
+                <div>{item.name}</div>
+                <div style={{ color: "#666" }}>${item.price}</div>
+              </div>
+              <button onClick={() => addToCart(item)}>
+                Add to Cart
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Shopping Cart */}
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h4>Shopping Cart ({cart.length} items)</h4>
+            <button onClick={clearCart} disabled={cart.length === 0}>
+              Clear Cart
+            </button>
+          </div>
+          
+          {cart.length === 0 ? (
+            <p style={{ color: "#666" }}>Cart is empty</p>
+          ) : (
+            <>
+              {cart.map(item => (
+                <div 
+                  key={item.id}
+                  style={{ 
+                    display: "flex", 
+                    justifyContent: "space-between", 
+                    alignItems: "center",
+                    padding: "10px",
+                    border: "1px solid #ddd",
+                    marginBottom: "5px"
+                  }}
+                >
+                  <div>
+                    <div>{item.name}</div>
+                    <div style={{ color: "#666" }}>
+                      ${item.price} × {item.quantity} = ${item.price * item.quantity}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+                    <button 
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button 
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
+                    <button 
+                      onClick={() => removeFromCart(item.id)}
+                      style={{ marginLeft: "10px", color: "red" }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+              
+              <div style={{ 
+                padding: "15px", 
+                background: "#f5f5f5", 
+                fontWeight: "bold",
+                fontSize: "1.2em"
+              }}>
+                Total: ${total}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument    | Type                                | Description                                           | Default |
+| ----------- | ----------------------------------- | ----------------------------------------------------- | ------- |
+| channelName | string                              | The name of the broadcast channel to connect to       | -       |
+| options     | UseBroadcastChannelOptions&lt;T&gt;      | Optional configuration object                         | {}      |
+
+### Options
+
+| Option    | Type                    | Description                                     | Default     |
+| --------- | ----------------------- | ----------------------------------------------- | ----------- |
+| onMessage | (data: T) => void       | Callback function called when a message is received | undefined |
+| onError   | (error: Event) => void  | Callback function called when an error occurs       | undefined |
+
+### Returns
+
+Returns an object with the following properties:
+
+| Return value | Type                        | Description                                                | Default     |
+| ------------ | --------------------------- | ---------------------------------------------------------- | ----------- |
+| postMessage  | (data: T) => void           | Function to send a message to the broadcast channel       | -           |
+| close        | () => void                  | Function to manually close the broadcast channel          | -           |
+| isSupported  | boolean                     | Whether the BroadcastChannel API is supported            | false       |
+
+### TypeScript Support
+
+```typescript
+type UseBroadcastChannelOptions<T = any> = {
+  onMessage?: (data: T) => void;
+  onError?: (error: Event) => void;
+};
+
+type UseBroadcastChannelReturn<T = any> = {
+  postMessage: (data: T) => void;
+  close: () => void;
+  isSupported: boolean;
+};
+```
+
+### Browser Support
+
+- Chrome: 54+
+- Firefox: 38+
+- Safari: 15.4+
+- Edge: 79+
+
+The hook includes built-in support detection and will gracefully handle unsupported browsers by setting `isSupported` to `false`.
+
+### Performance Notes
+
+- Messages are automatically serialized/deserialized using the structured clone algorithm
+- The hook automatically cleans up event listeners when the component unmounts
+- Multiple hooks with the same channel name will all receive the same messages
+- Consider using unique channel names for different features to avoid message conflicts

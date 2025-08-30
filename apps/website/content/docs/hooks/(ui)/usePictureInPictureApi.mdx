@@ -1,0 +1,553 @@
+---
+id: usePictureInPictureApi
+title: usePictureInPictureApi
+sidebar_label: usePictureInPictureApi
+---
+
+## About
+
+Hook for managing Picture-in-Picture video functionality. This hook provides a comprehensive interface to the Picture-in-Picture API, allowing you to control when videos enter and exit PiP mode, track the PiP state, and handle PiP window events. Perfect for creating immersive video experiences that can float above other content.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic video with PiP controls
+
+```jsx
+import { usePictureInPictureApi } from "rooks";
+import { useRef } from "react";
+
+export default function BasicPiPVideo() {
+  const videoRef = useRef(null);
+  const { 
+    isPiPActive, 
+    isSupported, 
+    error, 
+    pipWindow,
+    enterPiP, 
+    exitPiP, 
+    toggle 
+  } = usePictureInPictureApi(videoRef);
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px" }}>
+      <h3>Picture-in-Picture Video Player</h3>
+      
+      {!isSupported && (
+        <div style={{ 
+          background: "#ffebee", 
+          color: "#c62828", 
+          padding: "10px", 
+          borderRadius: "4px",
+          marginBottom: "20px"
+        }}>
+          Picture-in-Picture is not supported in this browser
+        </div>
+      )}
+
+      {error && (
+        <div style={{ 
+          background: "#ffebee", 
+          color: "#c62828", 
+          padding: "10px", 
+          borderRadius: "4px",
+          marginBottom: "20px"
+        }}>
+          Error: {error.message}
+        </div>
+      )}
+
+      <video
+        ref={videoRef}
+        width="100%"
+        height="300"
+        controls
+        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        style={{ 
+          borderRadius: "8px",
+          opacity: isPiPActive ? 0.7 : 1,
+          transition: "opacity 0.2s"
+        }}
+      >
+        Your browser does not support the video tag.
+      </video>
+
+      <div style={{ marginTop: "15px", display: "flex", gap: "10px", alignItems: "center" }}>
+        <button 
+          onClick={toggle} 
+          disabled={!isSupported}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: isPiPActive ? "#f44336" : "#2196F3",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: isSupported ? "pointer" : "not-allowed"
+          }}
+        >
+          {isPiPActive ? "Exit Picture-in-Picture" : "Enter Picture-in-Picture"}
+        </button>
+        
+        <div style={{ color: "#666" }}>
+          Status: {isPiPActive ? "In PiP Mode" : "Normal Mode"}
+        </div>
+      </div>
+
+      {pipWindow && (
+        <div style={{ 
+          marginTop: "15px", 
+          padding: "10px", 
+          background: "#e3f2fd",
+          borderRadius: "4px"
+        }}>
+          <strong>PiP Window Info:</strong>
+          <div>Width: {pipWindow.width}px</div>
+          <div>Height: {pipWindow.height}px</div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Video playlist with PiP
+
+```jsx
+import { usePictureInPictureApi } from "rooks";
+import { useRef, useState } from "react";
+
+export default function PiPVideoPlaylist() {
+  const videoRef = useRef(null);
+  const { 
+    isPiPActive, 
+    isSupported, 
+    error, 
+    enterPiP, 
+    exitPiP 
+  } = usePictureInPictureApi(videoRef);
+
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [videos] = useState([
+    {
+      id: 1,
+      title: "Big Buck Bunny",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
+    },
+    {
+      id: 2,
+      title: "Elephant Dream",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg"
+    },
+    {
+      id: 3,
+      title: "For Bigger Blazes",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg"
+    }
+  ]);
+
+  const currentVideo = videos[currentVideoIndex];
+
+  const changeVideo = async (index) => {
+    if (isPiPActive) {
+      await exitPiP();
+    }
+    setCurrentVideoIndex(index);
+  };
+
+  const nextVideo = () => {
+    const nextIndex = (currentVideoIndex + 1) % videos.length;
+    changeVideo(nextIndex);
+  };
+
+  const previousVideo = () => {
+    const prevIndex = currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1;
+    changeVideo(prevIndex);
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "800px" }}>
+      <h3>Video Playlist with Picture-in-Picture</h3>
+      
+      {error && (
+        <div style={{ 
+          background: "#ffebee", 
+          color: "#c62828", 
+          padding: "10px", 
+          borderRadius: "4px",
+          marginBottom: "20px"
+        }}>
+          Error: {error.message}
+        </div>
+      )}
+
+      <div style={{ display: "flex", gap: "20px" }}>
+        {/* Main Video Player */}
+        <div style={{ flex: 2 }}>
+          <video
+            ref={videoRef}
+            key={currentVideo.id}
+            width="100%"
+            height="300"
+            controls
+            src={currentVideo.url}
+            style={{ 
+              borderRadius: "8px",
+              opacity: isPiPActive ? 0.7 : 1,
+              transition: "opacity 0.2s"
+            }}
+          >
+            Your browser does not support the video tag.
+          </video>
+
+          <div style={{ marginTop: "10px" }}>
+            <h4>{currentVideo.title}</h4>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <button onClick={previousVideo}>⏮️ Previous</button>
+              <button onClick={nextVideo}>⏭️ Next</button>
+              <button 
+                onClick={() => isPiPActive ? exitPiP() : enterPiP()} 
+                disabled={!isSupported}
+                style={{
+                  backgroundColor: isPiPActive ? "#f44336" : "#2196F3",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px"
+                }}
+              >
+                {isPiPActive ? "📺 Exit PiP" : "🖼️ Enter PiP"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Playlist */}
+        <div style={{ flex: 1 }}>
+          <h4>Playlist</h4>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {videos.map((video, index) => (
+              <div
+                key={video.id}
+                onClick={() => changeVideo(index)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "10px",
+                  border: currentVideoIndex === index ? "2px solid #2196F3" : "1px solid #ddd",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  backgroundColor: currentVideoIndex === index ? "#e3f2fd" : "white"
+                }}
+              >
+                <img 
+                  src={video.thumbnail} 
+                  alt={video.title}
+                  style={{ width: "60px", height: "40px", objectFit: "cover", borderRadius: "2px" }}
+                />
+                <div>
+                  <div style={{ fontWeight: currentVideoIndex === index ? "bold" : "normal" }}>
+                    {video.title}
+                  </div>
+                  {currentVideoIndex === index && isPiPActive && (
+                    <div style={{ fontSize: "0.8em", color: "#2196F3" }}>
+                      🖼️ Playing in PiP
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Advanced PiP with custom controls
+
+```jsx
+import { usePictureInPictureApi } from "rooks";
+import { useRef, useState, useEffect } from "react";
+
+export default function AdvancedPiPPlayer() {
+  const videoRef = useRef(null);
+  const { 
+    isPiPActive, 
+    isSupported, 
+    error, 
+    pipWindow,
+    enterPiP, 
+    exitPiP 
+  } = usePictureInPictureApi(videoRef);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+
+  // Update video state
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const updateTime = () => setCurrentTime(video.currentTime);
+    const updateDuration = () => setDuration(video.duration);
+    const updatePlayState = () => setIsPlaying(!video.paused);
+
+    video.addEventListener('timeupdate', updateTime);
+    video.addEventListener('loadedmetadata', updateDuration);
+    video.addEventListener('play', updatePlayState);
+    video.addEventListener('pause', updatePlayState);
+
+    return () => {
+      video.removeEventListener('timeupdate', updateTime);
+      video.removeEventListener('loadedmetadata', updateDuration);
+      video.removeEventListener('play', updatePlayState);
+      video.removeEventListener('pause', updatePlayState);
+    };
+  }, []);
+
+  const playPause = () => {
+    const video = videoRef.current;
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  const handleSeek = (e) => {
+    const video = videoRef.current;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    video.currentTime = pos * duration;
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume;
+    }
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handlePiPToggle = async () => {
+    if (isPiPActive) {
+      await exitPiP();
+    } else {
+      await enterPiP();
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "700px" }}>
+      <h3>Advanced Picture-in-Picture Player</h3>
+      
+      {!isSupported && (
+        <div style={{ 
+          background: "#ffebee", 
+          color: "#c62828", 
+          padding: "10px", 
+          borderRadius: "4px",
+          marginBottom: "20px"
+        }}>
+          Picture-in-Picture is not supported in this browser
+        </div>
+      )}
+
+      {error && (
+        <div style={{ 
+          background: "#ffebee", 
+          color: "#c62828", 
+          padding: "10px", 
+          borderRadius: "4px",
+          marginBottom: "20px"
+        }}>
+          Error: {error.message}
+        </div>
+      )}
+
+      <div style={{ position: "relative" }}>
+        <video
+          ref={videoRef}
+          width="100%"
+          height="350"
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          style={{ 
+            borderRadius: "8px 8px 0 0",
+            opacity: isPiPActive ? 0.7 : 1,
+            transition: "opacity 0.2s",
+            display: "block"
+          }}
+        />
+
+        {/* Custom Controls */}
+        <div style={{ 
+          background: "#333", 
+          color: "white", 
+          padding: "15px",
+          borderRadius: "0 0 8px 8px"
+        }}>
+          {/* Progress Bar */}
+          <div 
+            style={{ 
+              width: "100%", 
+              height: "6px", 
+              background: "#666", 
+              borderRadius: "3px",
+              marginBottom: "15px",
+              cursor: "pointer"
+            }}
+            onClick={handleSeek}
+          >
+            <div style={{ 
+              width: `${(currentTime / duration) * 100}%`, 
+              height: "100%", 
+              background: "#2196F3",
+              borderRadius: "3px"
+            }} />
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            {/* Play/Pause */}
+            <button 
+              onClick={playPause}
+              style={{
+                background: "none",
+                border: "none",
+                color: "white",
+                fontSize: "20px",
+                cursor: "pointer"
+              }}
+            >
+              {isPlaying ? "⏸️" : "▶️"}
+            </button>
+
+            {/* Time Display */}
+            <div style={{ fontSize: "14px", minWidth: "100px" }}>
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </div>
+
+            {/* Volume Control */}
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <span>🔊</span>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value={volume}
+                onChange={handleVolumeChange}
+                style={{ width: "80px" }}
+              />
+              <span>{Math.round(volume * 100)}%</span>
+            </div>
+
+            {/* PiP Toggle */}
+            <button 
+              onClick={handlePiPToggle}
+              disabled={!isSupported}
+              style={{
+                background: isPiPActive ? "#f44336" : "#2196F3",
+                color: "white",
+                border: "none",
+                padding: "8px 12px",
+                borderRadius: "4px",
+                cursor: isSupported ? "pointer" : "not-allowed",
+                fontSize: "12px"
+              }}
+            >
+              {isPiPActive ? "Exit PiP" : "Enter PiP"}
+            </button>
+          </div>
+
+          {/* PiP Status */}
+          {isPiPActive && pipWindow && (
+            <div style={{ 
+              marginTop: "10px", 
+              fontSize: "12px", 
+              color: "#ccc",
+              display: "flex",
+              justifyContent: "space-between"
+            }}>
+              <span>🖼️ Playing in Picture-in-Picture mode</span>
+              <span>PiP Window: {pipWindow.width}×{pipWindow.height}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type                           | Description                              | Default |
+| -------- | ------------------------------ | ---------------------------------------- | ------- |
+| videoRef | RefObject&lt;HTMLVideoElement&gt; | React ref pointing to the video element | -       |
+
+### Returns
+
+Returns an object with the following properties:
+
+| Return value | Type                           | Description                                              | Default |
+| ------------ | ------------------------------ | -------------------------------------------------------- | ------- |
+| isPiPActive  | boolean                        | Whether the video is currently in Picture-in-Picture mode | false   |
+| isSupported  | boolean                        | Whether Picture-in-Picture is supported and available     | false   |
+| error        | Error \| null                  | Any error that occurred during PiP operations             | null    |
+| pipWindow    | PictureInPictureWindow \| null | The PiP window object (when active)                       | null    |
+| enterPiP     | () => Promise&lt;void&gt;          | Function to enter Picture-in-Picture mode                 | -       |
+| exitPiP      | () => Promise&lt;void&gt;          | Function to exit Picture-in-Picture mode                  | -       |
+| toggle       | () => Promise&lt;void&gt;          | Function to toggle Picture-in-Picture mode                | -       |
+
+### TypeScript Support
+
+```typescript
+type PictureInPictureApi = {
+  isPiPActive: boolean;
+  isSupported: boolean;
+  error: Error | null;
+  pipWindow: PictureInPictureWindow | null;
+  enterPiP: () => Promise<void>;
+  exitPiP: () => Promise<void>;
+  toggle: () => Promise<void>;
+};
+```
+
+### Browser Support
+
+- Chrome: 69+
+- Edge: 79+
+- Safari: 13.1+
+- Firefox: Not supported yet
+
+The hook includes built-in support detection and will gracefully handle unsupported browsers by setting `isSupported` to `false`.
+
+### Requirements
+
+For Picture-in-Picture to work, the following conditions must be met:
+
+1. The video element must have a valid video source
+2. `document.pictureInPictureEnabled` must be `true`
+3. The video element must not have `disablePictureInPicture` attribute
+4. The video element must support the `requestPictureInPicture()` method
+
+### Performance Notes
+
+- The hook automatically sets up and cleans up event listeners for PiP state changes
+- PiP operations are asynchronous and may fail (errors are captured in the `error` state)
+- Only one video can be in Picture-in-Picture mode at a time across the entire browser
+- The PiP window maintains its own controls and can be resized by the user
