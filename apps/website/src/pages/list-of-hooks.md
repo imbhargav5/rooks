@@ -51,7 +51,7 @@ sidebar_label: Hooks List
 
 <h3 align="center">📝 Form & File Handling - 2 hooks</h3>
 
-* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Comprehensive state management for checkbox inputs with support for indeterminate state, controlled/uncontrolled modes, and child checkbox management
+* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element
 * [useFileDropRef](https://rooks.vercel.app/docs/hooks/useFileDropRef) - Drop files easily
 
 <h3 align="center">⌨️ Keyboard & Input - 5 hooks</h3>
