@@ -1,5 +1,11 @@
 # rooks
 
+## 9.3.0
+
+### Minor Changes
+
+- [`c166915`](https://github.com/imbhargav5/rooks/commit/c16691546ed44132253abc92173224ebf34a3a87) Thanks [@imbhargav5](https://github.com/imbhargav5)! - added useFetch hook
+
 ## 9.2.0
 
 ### Minor Changes
