@@ -7,10 +7,17 @@ import { useEffect, useMemo, useState } from "react";
  *
  * @param query The media query to signal on. Example, `"print"` will signal
  * `true` when previewing in print mode, and `false` otherwise.
+ * @param defaultServerRenderedValue Optional value to return when window is undefined (server-side rendering). Defaults to false.
  * @returns Whether or not the media query is currently matched.
  * @see https://rooks.vercel.app/docs/hooks/useMediaMatch
  */
-function useMediaMatch(query: string): boolean {
+function useMediaMatch(query: string, defaultServerRenderedValue: boolean = false): boolean {
+  if (typeof window === "undefined") {
+    console.warn("useMediaMatch cannot function as window is undefined.");
+
+    return defaultServerRenderedValue;
+  }
+
   const matchMedia = useMemo<MediaQueryList>(
     () => window.matchMedia(query),
     [query]
@@ -30,12 +37,6 @@ function useMediaMatch(query: string): boolean {
       return () => matchMedia.removeListener(listener);
     }
   }, [matchMedia]);
-
-  if (typeof window === "undefined") {
-    console.warn("useMediaMatch cannot function as window is undefined.");
-
-    return false;
-  }
 
   return matches;
 }

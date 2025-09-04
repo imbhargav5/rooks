@@ -38,7 +38,7 @@ export const useDebouncedValue = <
   timeout: number,
   options: UseDebouncedValueOptions<TInitializeWithNull> = {}
 ): UseDebouncedValueReturnType<TValue, TInitializeWithNull> => {
-  // eslint-disable-next-line prefer-object-spread
+   
   const { initializeWithNull } = Object.assign(
     {},
     defaultUseDebounceValueOptions,

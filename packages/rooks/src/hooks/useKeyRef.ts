@@ -77,7 +77,7 @@ function useKeyRef(
   useEffect(() => {
     if (when && targetNode) {
       for (const eventType of eventTypes) {
-        // eslint-disable-next-line prefer-arrow-callback
+         
         targetNode.addEventListener(eventType, handle);
       }
 

@@ -24,7 +24,7 @@ function useTimeoutWhen(
       function internalCallback() {
         freshCallback();
       }
-      // eslint-disable-next-line no-negated-condition
+       
       if (typeof window !== "undefined") {
         const timeout = window.setTimeout(internalCallback, timeoutDelayMs);
 

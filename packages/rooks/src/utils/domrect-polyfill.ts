@@ -1,8 +1,8 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable id-length */
+ 
+ 
 
-/* eslint-disable no-eq-null */
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
+ 
+ 
 
 // Polyfill DOMRect
 // It's not available on Edge or IE11

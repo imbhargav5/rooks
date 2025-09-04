@@ -76,6 +76,65 @@ describe("useMediaMatch", () => {
     unmount();
     expect(removeEventListener).toHaveBeenCalledTimes(2);
   });
+
+  it("should return defaultServerRenderedValue when window is undefined", () => {
+    expect.hasAssertions();
+
+    // Store original window
+    const originalWindow = global.window;
+
+    // Mock console.warn to avoid noise in tests
+    const consoleSpy = jest.spyOn(console, "warn").mockImplementation(() => { });
+
+    try {
+      // Remove window to simulate server-side rendering
+      delete (global as any).window;
+
+      // Test with default value (false)
+      const { result: resultDefault } = renderHook(() => useMediaMatch("(max-width: 600px)"));
+      expect(resultDefault.current).toBe(false);
+
+      // Test with explicit false
+      const { result: resultFalse } = renderHook(() => useMediaMatch("(max-width: 600px)", false));
+      expect(resultFalse.current).toBe(false);
+
+      // Test with explicit true
+      const { result: resultTrue } = renderHook(() => useMediaMatch("(max-width: 600px)", true));
+      expect(resultTrue.current).toBe(true);
+
+      // Verify console.warn was called
+      expect(consoleSpy).toHaveBeenCalledWith("useMediaMatch cannot function as window is undefined.");
+    } finally {
+      // Restore window
+      global.window = originalWindow;
+      consoleSpy.mockRestore();
+    }
+  });
+
+  it("should work normally when window is defined", () => {
+    expect.hasAssertions();
+
+    const matchMedia = jest.fn<MediaQueryList, [string]>();
+    const addEventListener = jest.fn<
+      void,
+      [string, (event_: MediaQueryListEventMap["change"]) => void]
+    >();
+    const removeEventListener = jest.fn<void, [string, () => void]>();
+
+    matchMedia.mockReturnValue({
+      addEventListener,
+      matches: true,
+      removeEventListener,
+    } as any);
+
+    window.matchMedia = matchMedia;
+
+    // Test that defaultServerRenderedValue parameter doesn't affect behavior when window is defined
+    const { result } = renderHook(() => useMediaMatch("(max-width: 600px)", true));
+
+    expect(result.current).toBe(true);
+    expect(matchMedia).toHaveBeenCalledWith("(max-width: 600px)");
+  });
 });
 
 function expectDefined<T>(t: T | undefined): T {

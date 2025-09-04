@@ -215,7 +215,7 @@ function useFullscreen(props: UseFullscreenProps = {}) {
   }, []);
 
   const toggleFullscreen = useCallback(() => {
-    if (!!FullscreenApi.fullscreenElement) return disableFullscreen();
+    if (FullscreenApi.fullscreenElement) return disableFullscreen();
     return enableFullscreen();
   }, [enableFullscreen, disableFullscreen]);
 

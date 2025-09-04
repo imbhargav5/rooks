@@ -33,3 +33,6 @@ class SpeechSynthesisUtteranceMock {
 
 // Add the mock implementation to the global scope
 (global as any).SpeechSynthesisUtterance = SpeechSynthesisUtteranceMock;
+
+// Mock fetch globally
+(global as any).fetch = jest.fn();

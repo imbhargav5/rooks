@@ -456,6 +456,11 @@
       "category": "experimental"
     },
     {
+      "name": "useFetch",
+      "description": "Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing",
+      "category": "browser"
+    },
+    {
       "name": "useThrottle",
       "description": "Throttle custom hook for React",
       "category": "performance"

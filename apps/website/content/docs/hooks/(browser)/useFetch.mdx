@@ -1,0 +1,213 @@
+---
+title: useFetch
+description: Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing
+---
+
+# useFetch
+
+A hook for fetching data from URLs with proper TypeScript generics, error handling, and automatic JSON parsing. It manages loading states and provides a fetch function for manual data fetching.
+
+**Note:** This hook does not automatically fetch on mount. You must call the returned `startFetch` function to trigger the request.
+
+## Usage
+
+```tsx
+import { useFetch } from "rooks";
+import { useEffect } from "react";
+
+function UserProfile({ userId }: { userId: string }) {
+  const {
+    data: user,
+    loading,
+    error,
+    startFetch,
+  } = useFetch<User>(`https://api.example.com/users/${userId}`, {
+    headers: { Authorization: "Bearer token" },
+    onSuccess: (data) => console.log("User loaded:", data),
+    onError: (error) => console.error("Failed to load user:", error),
+    onFetch: () => console.log("Fetching user data..."),
+  });
+
+  // Fetch data when component mounts
+  useEffect(() => {
+    startFetch();
+  }, [startFetch]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!user) return <div>No user data</div>;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+      <button onClick={startFetch}>Refresh</button>
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### POST Request with Body
+
+```tsx
+function CreateUser() {
+  const {
+    data: newUser,
+    loading,
+    error,
+    startFetch,
+  } = useFetch<User>("https://api.example.com/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer token",
+    },
+    body: JSON.stringify({
+      name: "John Doe",
+      email: "john@example.com",
+    }),
+    onSuccess: (data) => {
+      console.log("User created successfully:", data);
+      // Navigate to user profile or show success message
+    },
+    onError: (error) => {
+      console.error("Failed to create user:", error);
+      // Show error notification
+    },
+    onFetch: () => {
+      console.log("Creating new user...");
+      // Show loading indicator
+    },
+  });
+
+  const handleCreateUser = () => {
+    startFetch();
+  };
+
+  if (loading) return <div>Creating user...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <button onClick={handleCreateUser}>Create User</button>
+      {newUser && (
+        <div>
+          <h1>User Created</h1>
+          <p>Name: {newUser.name}</p>
+          <p>Email: {newUser.email}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### DELETE Request
+
+```tsx
+function DeleteUser({ userId }: { userId: string }) {
+  const {
+    data: result,
+    loading,
+    error,
+    startFetch,
+  } = useFetch<{ success: boolean }>(
+    `https://api.example.com/users/${userId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer token",
+      },
+      onSuccess: (data) => {
+        if (data.success) {
+          console.log("User deleted successfully");
+          // Remove user from UI or navigate away
+        }
+      },
+      onError: (error) => {
+        console.error("Failed to delete user:", error);
+        // Show error notification
+      },
+    }
+  );
+
+  const handleDeleteUser = () => {
+    startFetch();
+  };
+
+  if (loading) return <div>Deleting user...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <button onClick={handleDeleteUser}>Delete User</button>
+      {result && (
+        <div>
+          <h1>User Deleted</h1>
+          <p>Success: {result.success ? "Yes" : "No"}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type              | Required | Description                  |
+| --------- | ----------------- | -------- | ---------------------------- |
+| `url`     | `string`          | Yes      | The URL to fetch data from   |
+| `options` | `UseFetchOptions` | No       | Optional fetch configuration |
+
+### Return Value
+
+| Property     | Type                  | Description                    |
+| ------------ | --------------------- | ------------------------------ |
+| `data`       | `T \| null`           | The fetched data or null       |
+| `loading`    | `boolean`             | Whether the request is loading |
+| `error`      | `Error \| null`       | Error object if request failed |
+| `startFetch` | `() => Promise<void>` | Function to trigger a fetch    |
+
+### Options
+
+The options object extends the standard `RequestInit` interface (excluding `signal` for compatibility):
+
+| Property         | Type                                    | Default         | Description           |
+| ---------------- | --------------------------------------- | --------------- | --------------------- |
+| `method`         | `string`                                | `'GET'`         | HTTP method           |
+| `headers`        | `Record<string, string>`                | `{}`            | Request headers       |
+| `body`           | `string \| FormData \| URLSearchParams` | -               | Request body          |
+| `cache`          | `RequestCache`                          | `'default'`     | Cache strategy        |
+| `credentials`    | `RequestCredentials`                    | `'same-origin'` | Credentials policy    |
+| `mode`           | `RequestMode`                           | `'cors'`        | Request mode          |
+| `redirect`       | `RequestRedirect`                       | `'follow'`      | Redirect policy       |
+| `referrer`       | `string`                                | -               | Referrer URL          |
+| `referrerPolicy` | `ReferrerPolicy`                        | -               | Referrer policy       |
+| `integrity`      | `string`                                | -               | Subresource integrity |
+| `keepalive`      | `boolean`                               | -               | Keep-alive flag       |
+| `onSuccess`      | `(data: any) => void`                   | -               | Success callback      |
+| `onError`        | `(error: Error) => void`                | -               | Error callback        |
+| `onFetch`        | `() => void`                            | -               | Fetch start callback  |
+
+## Notes
+
+- This hook does not cache requests - each call triggers a fresh fetch
+- The hook does not automatically fetch on mount - you must call the `startFetch` function
+- The hook automatically handles JSON parsing of responses
+- HTTP errors (4xx, 5xx) are thrown as `Error` objects with `status` and `statusText` properties
+- Network errors are properly caught and exposed through the `error` property
+- The `startFetch` function returns a Promise that resolves when the request completes
+- TypeScript generics provide full type safety for the fetched data
+- Callbacks are called at appropriate times during the fetch lifecycle:
+  - `onFetch`: Called when the fetch starts (before the request is made)
+  - `onSuccess`: Called when the request succeeds (with the fetched data)
+  - `onError`: Called when the request fails (with the error object)
+
+## Related Hooks
+
+- [`usePromise`](/docs/hooks/usePromise) - Handle promises without loading states
+- [`useAsyncEffect`](/docs/hooks/useAsyncEffect) - Async operations in effects

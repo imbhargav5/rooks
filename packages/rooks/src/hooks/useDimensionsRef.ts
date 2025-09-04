@@ -1,4 +1,4 @@
-/* eslint-disable id-length */
+ 
 /**
  *  Inspired from https://github.com/Swizec/useDimensions
  *
