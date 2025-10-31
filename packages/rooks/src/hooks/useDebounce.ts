@@ -5,7 +5,7 @@ import { useFreshRef } from "./useFreshRef";
 import { useWillUnmount } from "./useWillUnmount";
 
 // Define the types inline if we can't import them
-interface DebounceSettings {
+export interface DebounceSettings {
   leading?: boolean;
   maxWait?: number;
   trailing?: boolean;
