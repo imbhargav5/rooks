@@ -282,21 +282,23 @@ describe("useDebouncedAsyncEffect", () => {
             { initialProps: { value: 0 } }
         );
 
-        // First call
+        // The hook runs on mount, scheduling the first call.
+        // Let the first debounced effect trigger.
         jest.advanceTimersByTime(200);
-        await jest.runAllTimersAsync();
 
-        // Quickly change dependency before first async completes
+        // Before the first async operation (wait(100)) completes,
+        // trigger a second call.
         rerender({ value: 1 });
         jest.advanceTimersByTime(200);
+
+        // Now, let all pending async operations and timers complete.
         await jest.runAllTimersAsync();
 
         // Both async operations should have been called
         expect(mockAsyncEffect).toHaveBeenCalledTimes(2);
 
-        // But only the latest should have processed its result
-        // Note: Due to test timing, both might complete, but the logic prevents stale updates
-        expect(results.length).toBeGreaterThan(0);
+        // But only the result from the latest call should have been processed.
+        expect(results).toEqual(["call-2"]);
     });
 
     it("should handle errors in async effects", async () => {
