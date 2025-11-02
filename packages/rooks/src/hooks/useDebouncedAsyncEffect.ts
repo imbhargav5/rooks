@@ -68,16 +68,21 @@ function useDebouncedAsyncEffect<T>(
     // Debounce the async callback
     const debouncedAsyncCallback = useDebounce(asyncCallback, delay, options);
 
+    const cleanupRef = useFreshRef(cleanup);
+
     useEffect(() => {
         // Trigger the debounced async effect
         debouncedAsyncCallback();
+
+        // Capture cleanup function at effect time
+        const currentCleanup = cleanupRef.current;
 
         return () => {
             // Cancel any pending debounced calls
             debouncedAsyncCallback.cancel();
             // Call cleanup with the result
-            if (cleanup) {
-                cleanup(resultRef.current);
+            if (currentCleanup) {
+                currentCleanup(resultRef.current);
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
