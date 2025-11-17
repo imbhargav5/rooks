@@ -1,9 +1,10 @@
 name: All Contributors
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    # Run once a week on Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allow manual triggering
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
