@@ -16,11 +16,6 @@
       "category": "ui"
     },
     {
-      "name": "useBattery",
-      "description": "Battery status monitoring hook for React",
-      "category": "browser"
-    },
-    {
       "name": "useBoundingclientrect",
       "description": "getBoundingClientRect hook for React.",
       "category": "ui"

@@ -172,7 +172,6 @@ Here are some ideas for new hooks that could be added to the collection:
 - **Sensors:**
     - `useDeviceMotion`: A hook for tracking device motion.
     - `useDeviceOrientation`: A hook for tracking device orientation.
-    - `useBattery`: A hook for getting battery status.
 - **Network:**
     - `useFetch`: A hook for making fetch requests.
     - `useWebSocket`: A hook for working with WebSockets.
