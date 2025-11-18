@@ -200,7 +200,7 @@ describe("useFormState", () => {
   it("should handle async onSubmit", async () => {
     expect.hasAssertions();
     const onSubmit = jest.fn(
-      () => new Promise((resolve) => setTimeout(resolve, 100))
+      () => new Promise<void>((resolve) => setTimeout(resolve, 100))
     );
 
     const { result } = renderHook(() =>
@@ -352,7 +352,7 @@ describe("useFormState", () => {
 
     const event = {
       target: { name: "age", value: "25", type: "select" },
-    } as ChangeEvent<HTMLSelectElement>;
+    } as unknown as ChangeEvent<HTMLSelectElement>;
 
     act(() => {
       result.current.handleChange(event);

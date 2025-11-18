@@ -11,7 +11,7 @@ describe("useNotification", () => {
   let consoleErrorSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    mockNotification = jest.fn();
+    mockNotification = jest.fn() as any;
     mockRequestPermission = jest.fn();
 
     // Mock Notification API
@@ -21,8 +21,8 @@ describe("useNotification", () => {
       value: mockNotification,
     });
 
-    mockNotification.requestPermission = mockRequestPermission;
-    mockNotification.permission = "default";
+    (mockNotification as any).requestPermission = mockRequestPermission;
+    (mockNotification as any).permission = "default";
 
     consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation();
     consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
@@ -64,7 +64,7 @@ describe("useNotification", () => {
 
   it("should sync permission state from Notification.permission", () => {
     expect.hasAssertions();
-    mockNotification.permission = "granted";
+    (mockNotification as any).permission = "granted";
 
     const { result } = renderHook(() => useNotification());
 
@@ -144,7 +144,7 @@ describe("useNotification", () => {
 
   it("should show notification when permission is granted", async () => {
     expect.hasAssertions();
-    mockNotification.permission = "granted";
+    (mockNotification as any).permission = "granted";
     const mockNotificationInstance = { close: jest.fn() };
     mockNotification.mockReturnValue(mockNotificationInstance);
 
@@ -167,7 +167,7 @@ describe("useNotification", () => {
 
   it("should not show notification when permission is not granted", async () => {
     expect.hasAssertions();
-    mockNotification.permission = "default";
+    (mockNotification as any).permission = "default";
 
     const { result } = renderHook(() => useNotification());
 
@@ -186,7 +186,7 @@ describe("useNotification", () => {
 
   it("should not show notification when permission is denied", async () => {
     expect.hasAssertions();
-    mockNotification.permission = "denied";
+    (mockNotification as any).permission = "denied";
 
     const { result } = renderHook(() => useNotification());
 
@@ -227,7 +227,7 @@ describe("useNotification", () => {
 
   it("should handle errors when creating notification", async () => {
     expect.hasAssertions();
-    mockNotification.permission = "granted";
+    (mockNotification as any).permission = "granted";
     mockNotification.mockImplementation(() => {
       throw new Error("Notification error");
     });
@@ -248,7 +248,7 @@ describe("useNotification", () => {
 
   it("should show notification with all options", async () => {
     expect.hasAssertions();
-    mockNotification.permission = "granted";
+    (mockNotification as any).permission = "granted";
     const mockNotificationInstance = { close: jest.fn() };
     mockNotification.mockReturnValue(mockNotificationInstance);
 
@@ -276,7 +276,7 @@ describe("useNotification", () => {
   it("should update permission state after requesting permission", async () => {
     expect.hasAssertions();
     mockRequestPermission.mockResolvedValue("granted");
-    mockNotification.permission = "default";
+    (mockNotification as any).permission = "default";
 
     const { result } = renderHook(() => useNotification());
 
