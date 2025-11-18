@@ -16,6 +16,11 @@
       "category": "ui"
     },
     {
+      "name": "useBattery",
+      "description": "Battery status monitoring hook for React",
+      "category": "browser"
+    },
+    {
       "name": "useBoundingclientrect",
       "description": "getBoundingClientRect hook for React.",
       "category": "ui"
@@ -34,6 +39,11 @@
       "name": "useCheckboxInputState",
       "description": "Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element",
       "category": "form"
+    },
+    {
+      "name": "useClipboard",
+      "description": "Clipboard read/write operations hook for React",
+      "category": "browser"
     },
     {
       "name": "useCountdown",
@@ -124,6 +134,11 @@
       "name": "useForkRef",
       "description": "A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef",
       "category": "utilities"
+    },
+    {
+      "name": "useFormState",
+      "description": "Comprehensive form state management with validation",
+      "category": "form"
     },
     {
       "name": "useFreshCallback",
@@ -241,6 +256,11 @@
       "category": "ui"
     },
     {
+      "name": "useMediaRecorder",
+      "description": "Audio/video recording from MediaStream",
+      "category": "browser"
+    },
+    {
       "name": "useMergeRefs",
       "description": "Merges any number of refs into a single ref",
       "category": "utilities"
@@ -281,8 +301,18 @@
       "category": "state"
     },
     {
+      "name": "useNetworkInformation",
+      "description": "Network connection quality detection hook for React",
+      "category": "browser"
+    },
+    {
       "name": "useNavigatorLanguage",
       "description": "Navigator Language hook for React.",
+      "category": "browser"
+    },
+    {
+      "name": "useNotification",
+      "description": "Browser notifications with permission handling",
       "category": "browser"
     },
     {
@@ -351,6 +381,11 @@
       "category": "events"
     },
     {
+      "name": "usePageLeave",
+      "description": "Page leave detection with callbacks for beforeunload and visibility change",
+      "category": "events"
+    },
+    {
       "name": "usePictureInPictureApi",
       "description": "Hook for managing Picture-in-Picture video functionality",
       "category": "ui"
@@ -364,6 +399,11 @@
       "name": "usePreviousImmediate",
       "description": "usePreviousImmediate returns the previous value of a variable even if it was the same or different",
       "category": "state"
+    },
+    {
+      "name": "usePreferredColorScheme",
+      "description": "Color scheme preference detection (dark/light mode)",
+      "category": "ui"
     },
     {
       "name": "usePromise",
@@ -414,6 +454,11 @@
       "name": "useSessionstorageState",
       "description": "useState but syncs with sessionstorage",
       "category": "state"
+    },
+    {
+      "name": "useShare",
+      "description": "Web Share API for native sharing",
+      "category": "browser"
     },
     {
       "name": "useSetState",
@@ -499,6 +544,11 @@
       "name": "useVideo",
       "description": "Video hook for react",
       "category": "ui"
+    },
+    {
+      "name": "useWebWorker",
+      "description": "Web Worker management with message passing",
+      "category": "performance"
     },
     {
       "name": "useWillUnmount",
