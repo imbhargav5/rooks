@@ -160,7 +160,7 @@ class PackageListUpdater {
 
   private createCategoryHeading(category: string, hookCount: number): RootContent {
     const emoji = emojiByCategory[category] ?? "✅";
-    
+
     // Special handling for specific categories
     const categoryTitleMap: Record<string, string> = {
       "ui": "UI",
@@ -177,26 +177,43 @@ class PackageListUpdater {
       "lifecycle": "Lifecycle & Effects",
       "experimental": "Experimental Hooks",
     };
-    
+
     const title = categoryTitleMap[category] || lodash.startCase(category);
     const hookText = hookCount === 1 ? "hook" : "hooks";
-    
+
+    // Determine which categories should be open by default
+    const defaultOpenCategories = ['state', 'events', 'lifecycle', 'browser'];
+    const isOpen = defaultOpenCategories.includes(category);
+
     return {
       type: "html",
-      value: `<h3 align="center">${emoji} ${title} - ${hookCount} ${hookText}</h3>`,
+      value: `<details${isOpen ? ' open' : ''}>
+<summary><h3>${emoji} ${title} - ${hookCount} ${hookText}</h3></summary>
+
+`,
+    };
+  }
+
+  private createCategoryClosing(): RootContent {
+    return {
+      type: "html",
+      value: `
+</details>
+
+`,
     };
   }
 
   private createHooksListByCategoryMDAST(hooksByCategory: HooksByCategory): Root {
     const allCategories = Object.keys(hooksByCategory);
-    
+
     // Separate experimental hooks from regular categories
     const experimentalCategories = allCategories.filter(category => category === "experimental");
     const regularCategories = allCategories.filter(category => category !== "experimental").sort();
-    
+
     // Process regular categories first (alphabetically), then experimental categories at the end
     const orderedCategories = [...regularCategories, ...experimentalCategories];
-    
+
     const hooksListByCategoryMDAST: Root = {
       type: "root",
       children: [],
@@ -215,14 +232,20 @@ class PackageListUpdater {
       hooksListByCategoryMDAST.children.push(headingMDAST);
       hooksListByCategoryMDAST.children.push(hooksListMDAST);
 
-      // Add experimental hooks disclaimer
+      // Add experimental hooks disclaimer before closing
       if (category === "experimental") {
         const disclaimerMDAST: RootContent = {
           type: "html",
-          value: `<p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>`,
+          value: `
+<p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
+`,
         };
         hooksListByCategoryMDAST.children.push(disclaimerMDAST);
       }
+
+      // Close the details tag
+      const closingMDAST = this.createCategoryClosing();
+      hooksListByCategoryMDAST.children.push(closingMDAST);
     }
 
     return hooksListByCategoryMDAST;
