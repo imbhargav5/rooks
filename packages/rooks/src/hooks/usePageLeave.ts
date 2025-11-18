@@ -56,7 +56,7 @@ import { useFreshCallback } from "./useFreshCallback";
  *     }
  *   });
  *
- *   return <form>{/* form fields */}</form>;
+ *   return <form>Form fields here</form>;
  * }
  * ```
  *
@@ -73,7 +73,7 @@ function usePageLeave(onPageLeave: () => void | string): void {
 
     const handleBeforeUnload = (event: BeforeUnloadEvent): string | void => {
       isLeavingRef.current = true;
-      const result = freshCallback.current();
+      const result = freshCallback();
 
       // If callback returns a string, show confirmation dialog
       if (typeof result === "string") {
@@ -85,13 +85,13 @@ function usePageLeave(onPageLeave: () => void | string): void {
 
     const handleVisibilityChange = (): void => {
       if (document.visibilityState === "hidden" && !isLeavingRef.current) {
-        freshCallback.current();
+        freshCallback();
       }
     };
 
     const handlePageHide = (): void => {
       if (!isLeavingRef.current) {
-        freshCallback.current();
+        freshCallback();
       }
     };
 

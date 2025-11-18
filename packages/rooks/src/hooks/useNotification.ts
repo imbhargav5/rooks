@@ -18,7 +18,6 @@ interface NotificationOptions {
   silent?: boolean;
   vibrate?: number | number[];
   image?: string;
-  actions?: NotificationAction[];
 }
 
 /**
