@@ -1,0 +1,42 @@
+---
+title: usePrefersReducedMotion
+sidebar_label: usePrefersReducedMotion
+---
+
+# usePrefersReducedMotion
+
+A React hook that returns true if the user has enabled the "prefers-reduced-motion" setting in their system.
+
+## Usage
+
+```jsx
+import { usePrefersReducedMotion } from "rooks";
+
+function App() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  return (
+    <div>
+      <p>Prefers Reduced Motion: {prefersReducedMotion ? "Yes" : "No"}</p>
+      <div
+        style={{
+          transition: prefersReducedMotion ? "none" : "all 0.3s ease",
+          opacity: 1,
+        }}
+      >
+        Animated Content
+      </div>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+This hook takes no arguments.
+
+## Return Value
+
+| Type    | Description                                                                 |
+| ------- | --------------------------------------------------------------------------- |
+| boolean | True if the user prefers reduced motion, false otherwise. |

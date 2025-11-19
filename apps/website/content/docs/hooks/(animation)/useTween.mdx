@@ -1,0 +1,35 @@
+---
+title: "useTween"
+description: "A hook that returns a tweened value from 0 to 1 over a specified duration."
+---
+
+# useTween
+
+`useTween` is a hook that returns a tweened value from 0 to 1 over a specified duration. It uses `requestAnimationFrame` for smooth animations.
+
+## Usage
+
+```jsx
+import { useTween, Easing } from "rooks";
+
+function App() {
+  const value = useTween(1000, Easing.easeInOutQuad);
+
+  return (
+    <div style={{ opacity: value }}>
+      Fading In...
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type | Default | Description |
+| --- | --- | --- | --- |
+| duration | number | 200 | Duration of the tween in milliseconds. |
+| easing | (t: number) => number | Easing.linear | Easing function to use. |
+
+## Return Value
+
+Returns a number between 0 and 1.

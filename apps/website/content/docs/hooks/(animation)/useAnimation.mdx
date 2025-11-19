@@ -1,0 +1,49 @@
+---
+title: "useAnimation"
+description: "A hook that creates an animation with duration, easing, delay, and loop options."
+---
+
+# useAnimation
+
+`useAnimation` is a hook that creates an animation with duration, easing, delay, and loop options.
+
+## Usage
+
+```jsx
+import { useAnimation } from "rooks";
+
+function App() {
+  const value = useAnimation({
+      duration: 1000,
+      loop: true
+  });
+
+  return (
+    <div style={{ 
+        width: 100, 
+        height: 100, 
+        background: 'red',
+        transform: `rotate(${value * 360}deg)` 
+    }} />
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | AnimationOptions | - | Animation options. |
+
+### AnimationOptions
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| duration | number | - | Duration of the animation in milliseconds. |
+| easing | (t: number) => number | t => t | Easing function to use. |
+| delay | number | 0 | Delay before starting the animation in milliseconds. |
+| loop | boolean | false | Whether to loop the animation. |
+
+## Return Value
+
+Returns the current value of the animation (0 to 1).

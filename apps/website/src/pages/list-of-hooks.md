@@ -7,15 +7,19 @@ sidebar_label: Hooks List
 <!--hookslist start-->
 
 <details>
-<summary><h3>🎬 Animation & Timing - 5 hooks</h3></summary>
+<summary><h3>🎬 Animation & Timing - 9 hooks</h3></summary>
 
 
 
+* [useAnimation](https://rooks.vercel.app/docs/hooks/useAnimation) - Animation hook for React
 * [useIntervalWhen](https://rooks.vercel.app/docs/hooks/useIntervalWhen) - Sets an interval immediately when a condition is true
 * [useLockBodyScroll](https://rooks.vercel.app/docs/hooks/useLockBodyScroll) - This hook locks the scroll of the body element when `isLocked` is set to `true`.
+* [usePrefersReducedMotion](https://rooks.vercel.app/docs/hooks/usePrefersReducedMotion) - A React hook that returns true if the user has enabled the 'prefers-reduced-motion' setting in their system.
 * [useRaf](https://rooks.vercel.app/docs/hooks/useRaf) - A continuously running requestAnimationFrame hook for React
 * [useResizeObserverRef](https://rooks.vercel.app/docs/hooks/useResizeObserverRef) - Resize Observer hook for React.
+* [useSpring](https://rooks.vercel.app/docs/hooks/useSpring) - Spring animation hook for React
 * [useTimeoutWhen](https://rooks.vercel.app/docs/hooks/useTimeoutWhen) - Takes a callback and fires it when a condition is true
+* [useTween](https://rooks.vercel.app/docs/hooks/useTween) - Tween animation hook for React
 
 
 </details>

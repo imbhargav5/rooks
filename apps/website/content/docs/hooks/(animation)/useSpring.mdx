@@ -1,0 +1,54 @@
+---
+title: "useSpring"
+description: "A hook that animates a value using spring physics."
+---
+
+# useSpring
+
+`useSpring` is a hook that animates a value using spring physics. It simulates a spring force to move a value towards a target.
+
+## Usage
+
+```jsx
+import { useSpring } from "rooks";
+
+function App() {
+  const [target, setTarget] = useState(0);
+  const value = useSpring(target, {
+      stiffness: 170,
+      damping: 26,
+      mass: 1
+  });
+
+  return (
+    <div>
+        <button onClick={() => setTarget(target === 0 ? 100 : 0)}>
+            Toggle
+        </button>
+        <div style={{ transform: `translateX(${value}px)` }}>
+            Moving Box
+        </div>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type | Default | Description |
+| --- | --- | --- | --- |
+| targetValue | number | - | The value to animate towards. |
+| config | SpringConfig | {} | Configuration object for the spring. |
+
+### SpringConfig
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| stiffness | number | 170 | Spring stiffness. Higher values create a snappier spring. |
+| damping | number | 26 | Spring damping. Higher values reduce oscillation. |
+| mass | number | 1 | Mass of the object attached to the spring. |
+| precision | number | 0.01 | Precision threshold to stop the animation. |
+
+## Return Value
+
+Returns the current animated value.
