@@ -118,9 +118,9 @@ describe("useMergeRefs", () => {
     it("should call callbacks in order", () => {
       expect.hasAssertions();
       const callOrder: number[] = [];
-      const callback1 = jest.fn(() => callOrder.push(1));
-      const callback2 = jest.fn(() => callOrder.push(2));
-      const callback3 = jest.fn(() => callOrder.push(3));
+      const callback1 = jest.fn(() => { callOrder.push(1); });
+      const callback2 = jest.fn(() => { callOrder.push(2); });
+      const callback3 = jest.fn(() => { callOrder.push(3); });
       const element = document.createElement("div");
 
       const { result } = renderHook(() =>
@@ -304,7 +304,7 @@ describe("useMergeRefs", () => {
 
       function Component1() {
         const ref = useRef<HTMLDivElement>(null);
-        const callback = (el: HTMLDivElement | null) => ref1Values.push(el);
+        const callback = (el: HTMLDivElement | null) => { ref1Values.push(el); };
         const mergedRef = useMergeRefs(ref, callback);
 
         return <div ref={mergedRef} data-testid="comp1">Component 1</div>;
@@ -312,7 +312,7 @@ describe("useMergeRefs", () => {
 
       function Component2() {
         const ref = useRef<HTMLDivElement>(null);
-        const callback = (el: HTMLDivElement | null) => ref2Values.push(el);
+        const callback = (el: HTMLDivElement | null) => { ref2Values.push(el); };
         const mergedRef = useMergeRefs(ref, callback);
 
         return <div ref={mergedRef} data-testid="comp2">Component 2</div>;

@@ -19,7 +19,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback)
+        useGlobalObjectEventListener(window, "resize", callback, {}, true, false)
       );
 
       // Fire the event
@@ -33,7 +33,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(document, "click", callback)
+        useGlobalObjectEventListener(document, "click", callback, {}, true, false)
       );
 
       // Fire the event
@@ -50,7 +50,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback)
+        useGlobalObjectEventListener(window, "resize", callback, {}, true, false)
       );
 
       const event = new Event("resize");
@@ -64,7 +64,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "scroll", callback)
+        useGlobalObjectEventListener(window, "scroll", callback, {}, true, false)
       );
 
       window.dispatchEvent(new Event("scroll"));
@@ -80,11 +80,11 @@ describe("useGlobalObjectEventListener", () => {
       const keydownCallback = jest.fn();
 
       const { rerender: rerender1 } = renderHook(() =>
-        useGlobalObjectEventListener(document, "click", clickCallback)
+        useGlobalObjectEventListener(document, "click", clickCallback, {}, true, false)
       );
 
       const { rerender: rerender2 } = renderHook(() =>
-        useGlobalObjectEventListener(document, "keydown", keydownCallback)
+        useGlobalObjectEventListener(document, "keydown", keydownCallback, {}, true, false)
       );
 
       document.dispatchEvent(new Event("click"));
@@ -102,7 +102,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       const { unmount } = renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback)
+        useGlobalObjectEventListener(window, "resize", callback, {}, true, false)
       );
 
       // Event should trigger before unmount
@@ -122,7 +122,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       const { unmount } = renderHook(() =>
-        useGlobalObjectEventListener(document, "visibilitychange", callback)
+        useGlobalObjectEventListener(document, "visibilitychange", callback, {}, true, false)
       );
 
       unmount();
@@ -144,7 +144,9 @@ describe("useGlobalObjectEventListener", () => {
           document,
           "click",
           callback,
-          { capture: true }
+          { capture: true },
+          true,
+          false
         )
       );
 
@@ -164,7 +166,9 @@ describe("useGlobalObjectEventListener", () => {
           window,
           "resize",
           callback,
-          { once: false }
+          { once: false },
+          true,
+          false
         )
       );
 
@@ -184,7 +188,9 @@ describe("useGlobalObjectEventListener", () => {
           window,
           "scroll",
           callback,
-          { passive: true }
+          { passive: true },
+          true,
+          false
         )
       );
 
@@ -202,7 +208,7 @@ describe("useGlobalObjectEventListener", () => {
 
       const { rerender } = renderHook(
         ({ when }) =>
-          useGlobalObjectEventListener(window, "resize", callback, {}, when),
+          useGlobalObjectEventListener(window, "resize", callback, {}, when, false),
         { initialProps: { when: false } }
       );
 
@@ -223,7 +229,7 @@ describe("useGlobalObjectEventListener", () => {
 
       const { rerender } = renderHook(
         ({ when }) =>
-          useGlobalObjectEventListener(window, "resize", callback, {}, when),
+          useGlobalObjectEventListener(window, "resize", callback, {}, when, false),
         { initialProps: { when: true } }
       );
 
@@ -244,7 +250,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback)
+        useGlobalObjectEventListener(window, "resize", callback, {}, true, false)
       );
 
       window.dispatchEvent(new Event("resize"));
@@ -310,7 +316,10 @@ describe("useGlobalObjectEventListener", () => {
           "resize",
           () => {
             callbackValue = value;
-          }
+          },
+          {},
+          true,
+          false
         );
 
         return (
@@ -346,7 +355,10 @@ describe("useGlobalObjectEventListener", () => {
         useGlobalObjectEventListener(
           undefined as any,
           "resize",
-          callback
+          callback,
+          {},
+          true,
+          false
         )
       );
 
@@ -363,7 +375,7 @@ describe("useGlobalObjectEventListener", () => {
 
       const { rerender } = renderHook(
         ({ eventName }) =>
-          useGlobalObjectEventListener(window, eventName, callback),
+          useGlobalObjectEventListener(window, eventName, callback, {}, true, false),
         { initialProps: { eventName: "resize" as keyof WindowEventMap } }
       );
 
@@ -391,11 +403,11 @@ describe("useGlobalObjectEventListener", () => {
       const callback2 = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback1)
+        useGlobalObjectEventListener(window, "resize", callback1, {}, true, false)
       );
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", callback2)
+        useGlobalObjectEventListener(window, "resize", callback2, {}, true, false)
       );
 
       window.dispatchEvent(new Event("resize"));
@@ -410,11 +422,11 @@ describe("useGlobalObjectEventListener", () => {
       const documentCallback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(window, "resize", windowCallback)
+        useGlobalObjectEventListener(window, "resize", windowCallback, {}, true, false)
       );
 
       renderHook(() =>
-        useGlobalObjectEventListener(document, "click", documentCallback)
+        useGlobalObjectEventListener(document, "click", documentCallback, {}, true, false)
       );
 
       window.dispatchEvent(new Event("resize"));
@@ -432,7 +444,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(document, "keydown", callback)
+        useGlobalObjectEventListener(document, "keydown", callback, {}, true, false)
       );
 
       const event = new KeyboardEvent("keydown", { key: "Enter" });
@@ -446,7 +458,7 @@ describe("useGlobalObjectEventListener", () => {
       const callback = jest.fn();
 
       renderHook(() =>
-        useGlobalObjectEventListener(document, "mousemove", callback)
+        useGlobalObjectEventListener(document, "mousemove", callback, {}, true, false)
       );
 
       const event = new MouseEvent("mousemove", { clientX: 100, clientY: 200 });
@@ -465,7 +477,7 @@ describe("useGlobalObjectEventListener", () => {
         useGlobalObjectEventListener(window, "resize", () => {
           events.push("resize");
           setCount(c => c + 1);
-        });
+        }, {}, true, false);
 
         return <div data-testid="count">{count}</div>;
       }
