@@ -15,6 +15,8 @@ export { useCountdown } from "./hooks/useCountdown";
 export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";
 export { useDebounceFn } from "./hooks/useDebounceFn";
+export { useDebouncedAsyncEffect } from "./hooks/useDebouncedAsyncEffect";
+export { useDebouncedEffect } from "./hooks/useDebouncedEffect";
 export { useDebouncedValue } from "./hooks/useDebouncedValue";
 export { useDeepCompareEffect } from "./hooks/useDeepCompareEffect";
 export { useDidMount } from "./hooks/useDidMount";
