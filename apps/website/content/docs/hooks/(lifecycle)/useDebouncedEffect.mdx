@@ -1,0 +1,193 @@
+---
+id: useDebouncedEffect
+title: useDebouncedEffect
+sidebar_label: useDebouncedEffect
+---
+
+## About
+
+A version of `useEffect` that debounces the effect execution based on dependency changes. This hook is useful when you want to delay the execution of an effect until dependencies have stopped changing for a specified duration.
+
+Common use cases include:
+- Delaying API calls until the user stops typing in a search input
+- Waiting for resize events to settle before performing expensive calculations
+- Debouncing form validation
+
+[//]: # "Main"
+
+## Examples
+
+### Basic usage with search input
+
+```jsx
+import { useDebouncedEffect } from "rooks";
+import { useState } from "react";
+
+export default function SearchComponent() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  useDebouncedEffect(
+    () => {
+      if (searchQuery.trim()) {
+        // This will only run 500ms after the user stops typing
+        fetch(`/api/search?q=${searchQuery}`)
+          .then(res => res.json())
+          .then(data => setResults(data));
+      }
+    },
+    [searchQuery],
+    500
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      <ul>
+        {results.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### With cleanup function
+
+```jsx
+import { useDebouncedEffect } from "rooks";
+import { useState } from "react";
+
+export default function SubscriptionComponent({ topic }) {
+  const [messages, setMessages] = useState([]);
+
+  useDebouncedEffect(
+    () => {
+      const subscription = subscribeToTopic(topic, (message) => {
+        setMessages(prev => [...prev, message]);
+      });
+
+      // Return cleanup function
+      return () => {
+        subscription.unsubscribe();
+      };
+    },
+    [topic],
+    300
+  );
+
+  return (
+    <div>
+      {messages.map((msg, i) => (
+        <p key={i}>{msg}</p>
+      ))}
+    </div>
+  );
+}
+```
+
+### With leading option
+
+```jsx
+import { useDebouncedEffect } from "rooks";
+import { useState } from "react";
+
+export default function ImmediateSearchComponent() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useDebouncedEffect(
+    () => {
+      // With leading: true, this runs immediately on first change
+      // then debounces subsequent changes
+      console.log("Searching for:", searchQuery);
+    },
+    [searchQuery],
+    500,
+    { leading: true }
+  );
+
+  return (
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+  );
+}
+```
+
+### With multiple dependencies
+
+```jsx
+import { useDebouncedEffect } from "rooks";
+import { useState } from "react";
+
+export default function FilteredListComponent() {
+  const [category, setCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("name");
+  const [items, setItems] = useState([]);
+
+  useDebouncedEffect(
+    () => {
+      // Runs 300ms after either category or sortBy stops changing
+      fetch(`/api/items?category=${category}&sort=${sortBy}`)
+        .then(res => res.json())
+        .then(data => setItems(data));
+    },
+    [category, sortBy],
+    300
+  );
+
+  return (
+    <div>
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="books">Books</option>
+      </select>
+      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+      <ul>
+        {items.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type             | Description                                                        | Default   |
+| -------- | ---------------- | ------------------------------------------------------------------ | --------- |
+| effect   | EffectCallback   | The effect callback to run (can return a cleanup function)         | Required  |
+| deps     | DependencyList   | Array of dependencies that trigger effect re-execution             | Required  |
+| delay    | number           | The debounce delay in milliseconds                                 | 500       |
+| options  | DebounceSettings | Optional debounce settings                                         | undefined |
+
+## Options
+
+The `options` parameter accepts the following settings:
+
+| Option   | Type    | Description                                              | Default |
+| -------- | ------- | -------------------------------------------------------- | ------- |
+| leading  | boolean | Execute on the leading edge of the timeout               | false   |
+| trailing | boolean | Execute on the trailing edge of the timeout              | true    |
+| maxWait  | number  | Maximum time the effect can be delayed (milliseconds)    | -       |
+
+## Key Features
+
+- **Automatic Debouncing**: Effect execution is delayed until dependencies stop changing
+- **Cleanup Support**: Return a cleanup function from the effect, just like `useEffect`
+- **Configurable Timing**: Customize delay and leading/trailing execution
+- **Cancellation on Unmount**: Pending effects are cancelled when the component unmounts
+- **Dependency Tracking**: Works just like `useEffect` with dependency arrays
