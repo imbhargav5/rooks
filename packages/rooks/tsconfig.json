@@ -1,11 +1,10 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"],
+  "exclude": ["dist", "build", "node_modules", "src/__tests__"],
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"]
     }
