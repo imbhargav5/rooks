@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import {
@@ -22,7 +22,7 @@ describe("useSessionstorageState defined", () => {
 describe("useSessionstorageState basic", () => {
   let App = () => <div />;
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const [value, set, remove] = useSessionstorageState(
         "test-value",

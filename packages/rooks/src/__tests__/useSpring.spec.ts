@@ -1,25 +1,26 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useSpring } from "../hooks/useSpring";
 
-jest.mock("raf", () => {
+vi.mock("raf", () => {
     const raf = (cb: any) => {
         setTimeout(() => cb(performance.now()), 16);
         return 1;
     };
     raf.cancel = () => { };
-    return raf;
+    return { default: raf };
 });
 
 describe("useSpring", () => {
-    let nowSpy: jest.SpyInstance;
+    let nowSpy: vi.SpyInstance;
 
     beforeAll(() => {
-        jest.useFakeTimers();
-        nowSpy = jest.spyOn(performance, "now").mockImplementation(() => Date.now());
+        vi.useFakeTimers();
+        nowSpy = vi.spyOn(performance, "now").mockImplementation(() => Date.now());
     });
 
     afterAll(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
         nowSpy.mockRestore();
     });
 
@@ -40,7 +41,7 @@ describe("useSpring", () => {
 
         // Advance time to simulate animation frames
         act(() => {
-            jest.advanceTimersByTime(100);
+            vi.advanceTimersByTime(100);
         });
 
         // Should have moved from 0 towards 100

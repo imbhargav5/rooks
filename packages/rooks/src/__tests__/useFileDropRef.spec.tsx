@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import { useFileDropRef } from "@/hooks/useFileDropRef";
@@ -14,11 +15,11 @@ describe("useFileDropRef", () => {
     maxFiles: 3,
   };
   const callbacks: Parameters<typeof useFileDropRef>[1] = {
-    onDrop: jest.fn(),
-    onFileAccepted: jest.fn(),
-    onFileRejected: jest.fn(),
-    onDragEnter: jest.fn(),
-    onDragLeave: jest.fn(),
+    onDrop: vi.fn(),
+    onFileAccepted: vi.fn(),
+    onFileRejected: vi.fn(),
+    onDragEnter: vi.fn(),
+    onDragLeave: vi.fn(),
   };
 
   function TestComponent() {
@@ -27,7 +28,7 @@ describe("useFileDropRef", () => {
   }
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should handle drag enter and drag leave events", () => {

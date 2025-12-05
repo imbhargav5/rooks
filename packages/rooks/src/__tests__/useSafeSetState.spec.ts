@@ -1,4 +1,4 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useSafeSetState } from "@/hooks/useSafeSetState";
 
 describe("useSafeSetState", () => {

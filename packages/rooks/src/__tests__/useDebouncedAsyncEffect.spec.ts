@@ -1,8 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
-import { waitFor } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import { useState } from "react";
 import { useDebouncedAsyncEffect } from "@/hooks/useDebouncedAsyncEffect";
 
@@ -10,11 +9,11 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("useDebouncedAsyncEffect", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
     });
 
     afterEach(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
     });
 
     it("should be defined", () => {
@@ -24,7 +23,7 @@ describe("useDebouncedAsyncEffect", () => {
 
     it("should debounce async effect execution", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -38,8 +37,8 @@ describe("useDebouncedAsyncEffect", () => {
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
         // Advance timers
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
 
         // Change dependency
@@ -47,14 +46,14 @@ describe("useDebouncedAsyncEffect", () => {
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
 
         // Advance timers again
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(2);
     });
 
     it("should cancel pending async effect on rapid dependency changes", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -66,18 +65,18 @@ describe("useDebouncedAsyncEffect", () => {
 
         // Change dependency multiple times rapidly
         rerender({ value: 1 });
-        jest.advanceTimersByTime(100);
+        vi.advanceTimersByTime(100);
         rerender({ value: 2 });
-        jest.advanceTimersByTime(100);
+        vi.advanceTimersByTime(100);
         rerender({ value: 3 });
-        jest.advanceTimersByTime(100);
+        vi.advanceTimersByTime(100);
 
         // Effect should not have been called yet
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
         // Advance timers to complete the debounce (400ms more to reach 500ms from last change)
-        jest.advanceTimersByTime(400);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(400);
+        await vi.runAllTimersAsync();
 
         // Effect should be called only once
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
@@ -87,7 +86,7 @@ describe("useDebouncedAsyncEffect", () => {
         expect.hasAssertions();
         const shouldContinueChecks: boolean[] = [];
 
-        const mockAsyncEffect = jest.fn(async (shouldContinueEffect) => {
+        const mockAsyncEffect = vi.fn(async (shouldContinueEffect) => {
             await wait(10);
             shouldContinueChecks.push(shouldContinueEffect());
             return "result";
@@ -95,8 +94,8 @@ describe("useDebouncedAsyncEffect", () => {
 
         renderHook(() => useDebouncedAsyncEffect(mockAsyncEffect, [], 500));
 
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
 
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
         expect(shouldContinueChecks[0]).toBe(true);
@@ -104,8 +103,8 @@ describe("useDebouncedAsyncEffect", () => {
 
     it("should call cleanup function with result", async () => {
         expect.hasAssertions();
-        const mockCleanup = jest.fn();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockCleanup = vi.fn();
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "test-result";
         });
@@ -116,8 +115,8 @@ describe("useDebouncedAsyncEffect", () => {
             { initialProps: { value: 0 } }
         );
 
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
 
         // Change dependency to trigger cleanup
@@ -128,7 +127,7 @@ describe("useDebouncedAsyncEffect", () => {
 
     it("should cancel pending async effect on unmount", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -144,8 +143,8 @@ describe("useDebouncedAsyncEffect", () => {
         unmount();
 
         // Advance timers
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
 
         // Effect should not be called after unmount
         expect(mockAsyncEffect).not.toHaveBeenCalled();
@@ -153,7 +152,7 @@ describe("useDebouncedAsyncEffect", () => {
 
     it("should work with leading option", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -167,18 +166,18 @@ describe("useDebouncedAsyncEffect", () => {
         );
 
         // With leading option, effect should be called immediately
-        await jest.runAllTimersAsync();
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
 
         // Change dependency
         rerender({ value: 1 });
-        await jest.runAllTimersAsync();
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(2);
     });
 
     it("should work with trailing option set to false", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -193,21 +192,21 @@ describe("useDebouncedAsyncEffect", () => {
 
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         // With trailing: false, effect should not be called
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
         // Change dependency
         rerender({ value: 1 });
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).not.toHaveBeenCalled();
     });
 
     it("should respect default delay of 500ms", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             return "result";
         });
 
@@ -215,17 +214,17 @@ describe("useDebouncedAsyncEffect", () => {
 
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
-        jest.advanceTimersByTime(499);
+        vi.advanceTimersByTime(499);
         expect(mockAsyncEffect).not.toHaveBeenCalled();
 
-        jest.advanceTimersByTime(1);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(1);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
     });
 
     it("should handle multiple dependencies", async () => {
         expect.hasAssertions();
-        const mockAsyncEffect = jest.fn(async () => {
+        const mockAsyncEffect = vi.fn(async () => {
             await wait(10);
             return "result";
         });
@@ -236,26 +235,26 @@ describe("useDebouncedAsyncEffect", () => {
             { initialProps: { value1: 0, value2: "a" } }
         );
 
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(1);
 
         // Change first dependency
         rerender({ value1: 1, value2: "a" });
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(2);
 
         // Change second dependency
         rerender({ value1: 1, value2: "b" });
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(3);
 
         // Change both dependencies
         rerender({ value1: 2, value2: "c" });
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        vi.advanceTimersByTime(500);
+        await vi.runAllTimersAsync();
         expect(mockAsyncEffect).toHaveBeenCalledTimes(4);
     });
 
@@ -264,7 +263,7 @@ describe("useDebouncedAsyncEffect", () => {
         const results: string[] = [];
         let callCount = 0;
 
-        const mockAsyncEffect = jest.fn(
+        const mockAsyncEffect = vi.fn(
             async (shouldContinueEffect: () => boolean) => {
                 const thisCall = ++callCount;
                 await wait(100);
@@ -284,15 +283,15 @@ describe("useDebouncedAsyncEffect", () => {
 
         // The hook runs on mount, scheduling the first call.
         // Let the first debounced effect trigger.
-        jest.advanceTimersByTime(200);
+        vi.advanceTimersByTime(200);
 
         // Before the first async operation (wait(100)) completes,
         // trigger a second call.
         rerender({ value: 1 });
-        jest.advanceTimersByTime(200);
+        vi.advanceTimersByTime(200);
 
         // Now, let all pending async operations and timers complete.
-        await jest.runAllTimersAsync();
+        await vi.runAllTimersAsync();
 
         // Both async operations should have been called
         expect(mockAsyncEffect).toHaveBeenCalledTimes(2);
@@ -331,13 +330,15 @@ describe("useDebouncedAsyncEffect", () => {
 
         expect(result.current.error).toBe(null);
 
-        jest.advanceTimersByTime(500);
-        await jest.runAllTimersAsync();
+        await act(async () => {
+            await vi.advanceTimersByTimeAsync(500);
+        });
+        await act(async () => {
+            await vi.advanceTimersByTimeAsync(10);
+        });
 
-        await waitFor(() => expect(result.current.error).toBeTruthy());
-        await waitFor(() =>
-            expect((result.current.error as Error).message).toBe(ERROR_MESSAGE)
-        );
+        expect(result.current.error).toBeTruthy();
+        expect((result.current.error as Error).message).toBe(ERROR_MESSAGE);
     });
 });
 

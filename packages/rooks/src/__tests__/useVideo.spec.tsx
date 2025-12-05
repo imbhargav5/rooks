@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import { renderHook, act } from "@testing-library/react";
 import { useVideo } from "@/hooks/useVideo";
@@ -10,9 +10,9 @@ describe("useVideo", () => {
   beforeEach(() => {
     mockVideoElement = document.createElement("video");
     // Mock play and pause to return promises (as real video elements do)
-    mockVideoElement.play = jest.fn().mockResolvedValue(undefined);
-    mockVideoElement.pause = jest.fn();
-    mockVideoElement.requestFullscreen = jest.fn().mockResolvedValue(undefined);
+    mockVideoElement.play = vi.fn().mockResolvedValue(undefined);
+    mockVideoElement.pause = vi.fn();
+    mockVideoElement.requestFullscreen = vi.fn().mockResolvedValue(undefined);
 
     // Set initial properties
     Object.defineProperty(mockVideoElement, "currentTime", {
@@ -38,7 +38,7 @@ describe("useVideo", () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("is defined", () => {
@@ -239,7 +239,7 @@ describe("useVideo", () => {
       configurable: true,
     });
 
-    document.exitFullscreen = jest.fn().mockResolvedValue(undefined);
+    document.exitFullscreen = vi.fn().mockResolvedValue(undefined);
 
     act(() => {
       controls.toggleFullScreen();
@@ -299,8 +299,8 @@ describe("useVideo", () => {
 
   it("should handle event listeners correctly", () => {
     // Create a mock video element with event listener tracking
-    const addEventListenerSpy = jest.spyOn(mockVideoElement, "addEventListener");
-    const removeEventListenerSpy = jest.spyOn(mockVideoElement, "removeEventListener");
+    const addEventListenerSpy = vi.spyOn(mockVideoElement, "addEventListener");
+    const removeEventListenerSpy = vi.spyOn(mockVideoElement, "removeEventListener");
 
     const { unmount } = renderHook(() => {
       const [videoRef] = useVideo();

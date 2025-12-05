@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useGetIsMounted } from "@/hooks/useGetIsMounted";
 
 describe("useGetIsMounted", () => {

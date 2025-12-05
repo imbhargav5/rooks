@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useOnHoverRef } from "@/hooks/useOnHoverRef";
 import { cleanup, fireEvent } from "@testing-library/react";
 
@@ -9,11 +9,11 @@ describe("useOnHoverRef", () => {
   let onMouseEnter: () => void, onMouseLeave: () => void;
 
   beforeEach(() => {
-    onMouseEnter = jest.fn();
-    onMouseLeave = jest.fn();
+    onMouseEnter = vi.fn();
+    onMouseLeave = vi.fn();
   });
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     cleanup();
   });
 
@@ -68,8 +68,8 @@ describe("useOnHoverRef", () => {
       ref(target);
     });
 
-    const mouseEnterSpy = jest.spyOn(target, "removeEventListener");
-    const mouseLeaveSpy = jest.spyOn(target, "removeEventListener");
+    const mouseEnterSpy = vi.spyOn(target, "removeEventListener");
+    const mouseLeaveSpy = vi.spyOn(target, "removeEventListener");
 
     unmount();
 

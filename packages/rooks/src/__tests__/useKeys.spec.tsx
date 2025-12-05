@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import {
   render,
@@ -15,7 +15,7 @@ describe("useKeys", () => {
   let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const documentRef = useRef(document);
       const inputRef = useRef(null);
@@ -154,7 +154,7 @@ describe("useKeys: continuous mode", () => {
   let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const [testValue, setTestValue] = useState(0);
       useKeys(

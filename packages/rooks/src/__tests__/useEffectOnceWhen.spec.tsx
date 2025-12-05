@@ -1,7 +1,6 @@
 /**
- * @jest-environment jsdom
  */
-import { act, renderHook, cleanup } from "@testing-library/react-hooks";
+import { act, renderHook, cleanup } from "@testing-library/react";
 import { useState } from "react";
 import { useEffectOnceWhen } from "@/hooks/useEffectOnceWhen";
 

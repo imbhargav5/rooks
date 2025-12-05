@@ -1,23 +1,23 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import React, { useState } from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useIntersectionObserverRef } from "@/hooks/useIntersectionObserverRef";
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = {
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 };
 
-const mockIntersectionObserverConstructor = jest.fn();
+const mockIntersectionObserverConstructor = vi.fn();
 
 describe("useIntersectionObserverRef", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Mock IntersectionObserver
     mockIntersectionObserverConstructor.mockImplementation(() => mockIntersectionObserver);
@@ -25,7 +25,7 @@ describe("useIntersectionObserverRef", () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -36,7 +36,7 @@ describe("useIntersectionObserverRef", () => {
   describe("Basic Functionality", () => {
     it("should return a ref function", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -46,7 +46,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should create IntersectionObserver when element is set", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -84,7 +84,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should disconnect observer when element is set to null", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -109,7 +109,7 @@ describe("useIntersectionObserverRef", () => {
   describe("Options Handling", () => {
     it("should use default options when none provided", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -131,7 +131,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should use custom options when provided", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const options = {
         root: document.body,
         rootMargin: "10px 20px 30px 40px",
@@ -157,7 +157,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should recreate observer when options change", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const initialOptions = { threshold: [0] };
       const newOptions = { threshold: [0.5] };
       
@@ -188,7 +188,7 @@ describe("useIntersectionObserverRef", () => {
   describe("Callback Handling", () => {
     it("should call callback when intersection occurs", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -223,8 +223,8 @@ describe("useIntersectionObserverRef", () => {
 
     it("should update callback reference when callback changes", () => {
       expect.hasAssertions();
-      const callback1 = jest.fn();
-      const callback2 = jest.fn();
+      const callback1 = vi.fn();
+      const callback2 = vi.fn();
       
       const { result, rerender } = renderHook(
         ({ callback }) => useIntersectionObserverRef(callback),
@@ -290,7 +290,7 @@ describe("useIntersectionObserverRef", () => {
   describe("Cleanup", () => {
     it("should disconnect observer on unmount", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result, unmount } = renderHook(() => 
         useIntersectionObserverRef(callback)
       );
@@ -309,7 +309,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should disconnect observer when switching elements", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -341,7 +341,7 @@ describe("useIntersectionObserverRef", () => {
         const [isVisible, setIsVisible] = useState(false);
         const [intersectionCount, setIntersectionCount] = useState(0);
         
-        const callback = jest.fn((entries: IntersectionObserverEntry[]) => {
+        const callback = vi.fn((entries: IntersectionObserverEntry[]) => {
           setIntersectionCount(prev => prev + 1);
           entries.forEach(entry => {
             setIsVisible(entry.isIntersecting);
@@ -400,7 +400,7 @@ describe("useIntersectionObserverRef", () => {
   describe("Edge Cases", () => {
     it.skip("should handle rapid element changes", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;
@@ -423,7 +423,7 @@ describe("useIntersectionObserverRef", () => {
 
     it("should maintain stable ref function identity", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result, rerender } = renderHook(() => 
         useIntersectionObserverRef(callback)
       );
@@ -443,7 +443,7 @@ describe("useIntersectionObserverRef", () => {
         throw new Error("IntersectionObserver not supported");
       });
       
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
       
       const [ref] = result.current;

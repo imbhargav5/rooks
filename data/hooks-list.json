@@ -71,6 +71,16 @@
       "category": "performance"
     },
     {
+      "name": "useDebouncedAsyncEffect",
+      "description": "A version of useEffect that accepts an async function and debounces its execution based on dependency changes",
+      "category": "lifecycle"
+    },
+    {
+      "name": "useDebouncedEffect",
+      "description": "A version of useEffect that debounces the effect execution based on dependency changes",
+      "category": "lifecycle"
+    },
+    {
       "name": "useDeepCompareEffect",
       "description": "Deep compare dependencies instead of shallow for useEffect",
       "category": "lifecycle"

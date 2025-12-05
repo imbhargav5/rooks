@@ -1,9 +1,8 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { waitFor, renderHook } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import { useState } from "react";
-import { act } from "react-test-renderer";
 import { useAsyncEffect } from "@/hooks/useAsyncEffect";
 
 describe("useAsyncEffect", () => {
@@ -12,9 +11,9 @@ describe("useAsyncEffect", () => {
     expect(useAsyncEffect).toBeDefined();
   });
 
-  it("runs the callback", async () => {
+  it("runs the callback", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result } = renderHook(() => {
       const [value, setValue] = useState(false);
 
@@ -29,19 +28,17 @@ describe("useAsyncEffect", () => {
 
     expect(result.current).toBe(false);
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    await waitFor(() => {
-      expect(result.current).toBe(true);
-    });
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    expect(result.current).toBe(true);
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
-  it("runs the callback only once per deps change", async () => {
+  it("runs the callback only once per deps change", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
-    const effectSpy = jest.fn();
+    vi.useFakeTimers();
+    const effectSpy = vi.fn();
     const { result, unmount } = renderHook(() => {
       const [value, setValue] = useState(false);
       const [unrelatedDep, setUnrelatedDep] = useState(1);
@@ -62,28 +59,24 @@ describe("useAsyncEffect", () => {
 
     expect(result.current[0]).toBe(false);
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    await waitFor(() => {
-      expect(result.current[0]).toBe(true);
-    });
+    expect(result.current[0]).toBe(true);
     act(() => {
       const increment = result.current[2];
       typeof increment === "function" && increment();
     });
-    await waitFor(() => {
-      expect(result.current[1]).toBe(2);
-    });
+    expect(result.current[1]).toBe(2);
     unmount();
     expect(effectSpy).toHaveBeenCalledTimes(1);
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
-  it("runs the callback again if deps change", async () => {
+  it("runs the callback again if deps change", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
-    const effectSpy = jest.fn();
+    vi.useFakeTimers();
+    const effectSpy = vi.fn();
     const { result } = renderHook(() => {
       const [value, setValue] = useState(1);
       const [squareValue, setSquareValue] = useState<number>(0);
@@ -116,11 +109,9 @@ describe("useAsyncEffect", () => {
     expect(result.current.value).toBe(1);
     expect(result.current.squareValue).toBe(0);
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    await waitFor(() => {
-      expect(result.current.squareValue).toBe(1);
-    });
+    expect(result.current.squareValue).toBe(1);
     act(() => {
       const increment = result.current.increment;
       typeof increment === "function" && increment();
@@ -128,21 +119,19 @@ describe("useAsyncEffect", () => {
     expect(result.current.value).toBe(2);
     expect(result.current.squareValue).toBe(1);
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    await waitFor(() => {
-      expect(result.current.squareValue).toBe(4);
-    });
+    expect(result.current.squareValue).toBe(4);
     act(() => {
       const incrementUnrelated = result.current.incrementUnrelated;
       typeof incrementUnrelated === "function" && incrementUnrelated();
     });
     expect(effectSpy).toHaveBeenCalledTimes(2);
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
-  it("runs the cleanup function", async () => {
+  it("runs the cleanup function", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => {
       const [cleanupRan, setCleanupRan] = useState(false);
@@ -163,13 +152,13 @@ describe("useAsyncEffect", () => {
       result.current.setForceUnload((old) => old + 1);
     });
 
-    await waitFor(() => expect(result.current.cleanupRan).toBe(true));
+    expect(result.current.cleanupRan).toBe(true);
   });
 
-  it("it can help destroy the effect if the component unmounts", async () => {
+  it("it can help destroy the effect if the component unmounts", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
-    const cleanupFn = jest.fn();
+    vi.useFakeTimers();
+    const cleanupFn = vi.fn();
     const { result, unmount } = renderHook(() => {
       const [data, setData] = useState(0);
       useAsyncEffect(
@@ -191,20 +180,20 @@ describe("useAsyncEffect", () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
     });
     unmount();
 
     expect(result.current.data).toBe(0);
     expect(cleanupFn).toHaveBeenCalledWith(undefined);
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   it("it calls the cleanup with the previous result when effect changes ", async () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
-    const cleanupFn = jest.fn();
+    vi.useFakeTimers();
+    const cleanupFn = vi.fn();
     const { result } = renderHook(() => {
       const [input, setInput] = useState(1);
       const [output, setOutput] = useState<number>(0);
@@ -229,31 +218,31 @@ describe("useAsyncEffect", () => {
 
     expect(result.current.input).toBe(1);
     expect(result.current.output).toBe(0);
-    act(() => {
-      jest.advanceTimersByTime(3000);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
     });
 
-    await waitFor(() => expect(result.current.input).toBe(1));
-    await waitFor(() => expect(result.current.output).toBe(1));
+    expect(result.current.input).toBe(1);
+    expect(result.current.output).toBe(1);
     act(() => {
       result.current.setInput(2);
     });
-    await waitFor(() => expect(cleanupFn).toHaveBeenCalledWith(1));
-    await waitFor(() => expect(result.current.input).toBe(2));
-    await waitFor(() => expect(result.current.output).toBe(1));
-    act(() => {
-      jest.advanceTimersByTime(3000);
+    expect(cleanupFn).toHaveBeenCalledWith(1);
+    expect(result.current.input).toBe(2);
+    expect(result.current.output).toBe(1);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
     });
-    await waitFor(() => expect(result.current.output).toBe(4));
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    expect(result.current.output).toBe(4);
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   it("it forwards if the effect errors out ", async () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const ERROR_MESSAGE = "an error occurred";
-    const cleanupFn = jest.fn();
+    const cleanupFn = vi.fn();
     const { result } = renderHook(() => {
       const [input] = useState(1);
       const [error, setError] = useState<Error | null>(null);
@@ -280,17 +269,15 @@ describe("useAsyncEffect", () => {
     });
 
     expect(result.current.error).toBe(null);
-    act(() => {
-      jest.advanceTimersByTime(3000);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
     });
 
-    await waitFor(() => expect(result.current.error).toBeTruthy());
-    await waitFor(() =>
-      expect((result.current.error as unknown as Error).message).toBe(
-        ERROR_MESSAGE
-      )
+    expect(result.current.error).toBeTruthy();
+    expect((result.current.error as unknown as Error).message).toBe(
+      ERROR_MESSAGE
     );
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 });

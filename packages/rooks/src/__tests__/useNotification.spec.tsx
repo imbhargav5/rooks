@@ -1,18 +1,18 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useNotification } from "@/hooks/useNotification";
 
 describe("useNotification", () => {
-  let mockNotification: jest.Mock;
-  let mockRequestPermission: jest.Mock;
-  let consoleWarnSpy: jest.SpyInstance;
-  let consoleErrorSpy: jest.SpyInstance;
+  let mockNotification: vi.Mock;
+  let mockRequestPermission: vi.Mock;
+  let consoleWarnSpy: vi.SpyInstance;
+  let consoleErrorSpy: vi.SpyInstance;
 
   beforeEach(() => {
-    mockNotification = jest.fn() as any;
-    mockRequestPermission = jest.fn();
+    mockNotification = vi.fn() as any;
+    mockRequestPermission = vi.fn();
 
     // Mock Notification API
     Object.defineProperty(window, "Notification", {
@@ -24,12 +24,12 @@ describe("useNotification", () => {
     (mockNotification as any).requestPermission = mockRequestPermission;
     (mockNotification as any).permission = "default";
 
-    consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation();
-    consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+    consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation();
+    consoleErrorSpy = vi.spyOn(console, "error").mockImplementation();
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -145,7 +145,7 @@ describe("useNotification", () => {
   it("should show notification when permission is granted", async () => {
     expect.hasAssertions();
     (mockNotification as any).permission = "granted";
-    const mockNotificationInstance = { close: jest.fn() };
+    const mockNotificationInstance = { close: vi.fn() };
     mockNotification.mockReturnValue(mockNotificationInstance);
 
     const { result } = renderHook(() => useNotification());
@@ -249,7 +249,7 @@ describe("useNotification", () => {
   it("should show notification with all options", async () => {
     expect.hasAssertions();
     (mockNotification as any).permission = "granted";
-    const mockNotificationInstance = { close: jest.fn() };
+    const mockNotificationInstance = { close: vi.fn() };
     mockNotification.mockReturnValue(mockNotificationInstance);
 
     const { result } = renderHook(() => useNotification());

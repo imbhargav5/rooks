@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React, { useState } from "react";
 import {
@@ -18,10 +18,10 @@ describe("useResizeObserverRef", () => {
   });
   test("its observer should get called on resize", async () => {
     expect.hasAssertions();
-    const observerFn = jest.fn();
-    const unObserverFn = jest.fn();
-    const disconnetFn = jest.fn();
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
+    const observerFn = vi.fn();
+    const unObserverFn = vi.fn();
+    const disconnetFn = vi.fn();
+    global.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: observerFn,
       unobserve: unObserverFn,
       disconnect: disconnetFn,
@@ -50,6 +50,6 @@ describe("useResizeObserverRef", () => {
       unmount();
     });
     await waitFor(() => expect(disconnetFn).toHaveBeenCalled());
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 });

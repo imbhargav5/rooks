@@ -1,18 +1,18 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { usePageLeave } from "@/hooks/usePageLeave";
 
 describe("usePageLeave", () => {
-  let mockCallback: jest.Mock;
+  let mockCallback: vi.Mock;
 
   beforeEach(() => {
-    mockCallback = jest.fn();
+    mockCallback = vi.fn();
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -22,8 +22,8 @@ describe("usePageLeave", () => {
 
   it("should register event listeners on mount", () => {
     expect.hasAssertions();
-    const addEventListenerSpy = jest.spyOn(window, "addEventListener");
-    const documentAddEventListenerSpy = jest.spyOn(
+    const addEventListenerSpy = vi.spyOn(window, "addEventListener");
+    const documentAddEventListenerSpy = vi.spyOn(
       document,
       "addEventListener"
     );
@@ -46,8 +46,8 @@ describe("usePageLeave", () => {
 
   it("should remove event listeners on unmount", () => {
     expect.hasAssertions();
-    const removeEventListenerSpy = jest.spyOn(window, "removeEventListener");
-    const documentRemoveEventListenerSpy = jest.spyOn(
+    const removeEventListenerSpy = vi.spyOn(window, "removeEventListener");
+    const documentRemoveEventListenerSpy = vi.spyOn(
       document,
       "removeEventListener"
     );
@@ -124,31 +124,44 @@ describe("usePageLeave", () => {
 
   it("should return confirmation message from callback", () => {
     expect.hasAssertions();
-    const callbackWithMessage = jest.fn(() => "Are you sure you want to leave?");
+    const callbackWithMessage = vi.fn(() => "Are you sure you want to leave?");
 
     renderHook(() => usePageLeave(callbackWithMessage));
 
-    const event = new Event("beforeunload") as BeforeUnloadEvent;
-    event.preventDefault = jest.fn();
+    const event = new Event("beforeunload", { cancelable: true }) as BeforeUnloadEvent;
+    event.preventDefault = vi.fn();
+    // Define returnValue as a writable property to match real BeforeUnloadEvent
+    Object.defineProperty(event, "returnValue", {
+      writable: true,
+      value: "",
+    });
 
     window.dispatchEvent(event);
 
     expect(callbackWithMessage).toHaveBeenCalled();
+    expect(event.preventDefault).toHaveBeenCalled();
     expect(event.returnValue).toBe("Are you sure you want to leave?");
   });
 
   it("should not set returnValue if callback returns undefined", () => {
     expect.hasAssertions();
-    const callbackWithoutMessage = jest.fn(() => undefined);
+    const callbackWithoutMessage = vi.fn(() => undefined);
 
     renderHook(() => usePageLeave(callbackWithoutMessage));
 
-    const event = new Event("beforeunload") as BeforeUnloadEvent;
-    event.preventDefault = jest.fn();
+    const event = new Event("beforeunload", { cancelable: true }) as BeforeUnloadEvent;
+    event.preventDefault = vi.fn();
+    // Define returnValue as a writable property to match real BeforeUnloadEvent
+    Object.defineProperty(event, "returnValue", {
+      writable: true,
+      value: "",
+    });
 
     window.dispatchEvent(event);
 
     expect(callbackWithoutMessage).toHaveBeenCalled();
+    // preventDefault should NOT be called when callback returns undefined
+    expect(event.preventDefault).not.toHaveBeenCalled();
     expect(event.returnValue).toBe("");
   });
 
@@ -195,8 +208,8 @@ describe("usePageLeave", () => {
 
   it("should use fresh callback reference", () => {
     expect.hasAssertions();
-    const firstCallback = jest.fn();
-    const secondCallback = jest.fn();
+    const firstCallback = vi.fn();
+    const secondCallback = vi.fn();
 
     const { rerender } = renderHook(
       ({ callback }) => usePageLeave(callback),
@@ -223,14 +236,23 @@ describe("usePageLeave", () => {
 
   it("should handle callback that returns void", () => {
     expect.hasAssertions();
-    const voidCallback = jest.fn(() => {});
+    const voidCallback = vi.fn(() => {});
 
     renderHook(() => usePageLeave(voidCallback));
 
-    const event = new Event("beforeunload") as BeforeUnloadEvent;
+    const event = new Event("beforeunload", { cancelable: true }) as BeforeUnloadEvent;
+    event.preventDefault = vi.fn();
+    // Define returnValue as a writable property to match real BeforeUnloadEvent
+    Object.defineProperty(event, "returnValue", {
+      writable: true,
+      value: "",
+    });
+
     window.dispatchEvent(event);
 
     expect(voidCallback).toHaveBeenCalled();
+    // preventDefault should NOT be called when callback returns void
+    expect(event.preventDefault).not.toHaveBeenCalled();
     expect(event.returnValue).toBe("");
   });
 });

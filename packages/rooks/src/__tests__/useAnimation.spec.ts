@@ -1,25 +1,26 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useAnimation } from "../hooks/useAnimation";
 
-jest.mock("raf", () => {
+vi.mock("raf", () => {
     const raf = (cb: any) => {
         setTimeout(() => cb(performance.now()), 16);
         return 1;
     };
     raf.cancel = () => { };
-    return raf;
+    return { default: raf };
 });
 
 describe("useAnimation", () => {
-    let nowSpy: jest.SpyInstance;
+    let nowSpy: vi.SpyInstance;
 
     beforeAll(() => {
-        jest.useFakeTimers();
-        nowSpy = jest.spyOn(performance, "now").mockImplementation(() => Date.now());
+        vi.useFakeTimers();
+        nowSpy = vi.spyOn(performance, "now").mockImplementation(() => Date.now());
     });
 
     afterAll(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
         nowSpy.mockRestore();
     });
 
@@ -32,7 +33,7 @@ describe("useAnimation", () => {
         const { result } = renderHook(() => useAnimation({ duration: 1000 }));
 
         act(() => {
-            jest.advanceTimersByTime(500);
+            vi.advanceTimersByTime(500);
         });
 
         expect(result.current).toBeGreaterThan(0);

@@ -1,9 +1,9 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 
 import { useDimensionsRef } from "@/hooks/useDimensionsRef";
 import { DOMRectPolyfill } from "../utils/domrect-polyfill";
@@ -26,10 +26,10 @@ describe("useDimensionsRef", () => {
     let App = () => <div />;
 
     beforeEach(() => {
-      jest
+      vi
         .spyOn(Element.prototype, "getBoundingClientRect")
         .mockImplementation(() => new window.DOMRect(0, 0, 120, 300));
-      jest
+      vi
         .spyOn(window, "requestAnimationFrame")
         // eslint-disable-next-line @typescript-eslint/ban-types
         .mockImplementation((callback: Function) => callback());
@@ -53,7 +53,7 @@ describe("useDimensionsRef", () => {
       };
     });
     afterEach(() => {
-      (window.requestAnimationFrame as jest.Mock).mockRestore();
+      (window.requestAnimationFrame as vi.Mock).mockRestore();
       cleanup();
     });
 

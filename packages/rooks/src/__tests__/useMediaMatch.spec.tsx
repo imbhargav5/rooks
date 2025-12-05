@@ -1,4 +1,5 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook } from "@testing-library/react";
 import TestRenderer from "react-test-renderer";
 import { useMediaMatch } from "@/hooks/useMediaMatch";
 
@@ -15,12 +16,12 @@ describe("useMediaMatch", () => {
 
   it("should track a boolean", async () => {
     expect.hasAssertions();
-    const matchMedia = jest.fn<MediaQueryList, [string]>();
-    const addEventListener = jest.fn<
+    const matchMedia = vi.fn<MediaQueryList, [string]>();
+    const addEventListener = vi.fn<
       void,
       [string, (event_: MediaQueryListEventMap["change"]) => void]
     >();
-    const removeEventListener = jest.fn<void, [string, () => void]>();
+    const removeEventListener = vi.fn<void, [string, () => void]>();
     let listener: MediaQueryListListener | undefined;
 
     matchMedia.mockReturnValue({
@@ -77,49 +78,17 @@ describe("useMediaMatch", () => {
     expect(removeEventListener).toHaveBeenCalledTimes(2);
   });
 
-  it("should return defaultServerRenderedValue when window is undefined", () => {
-    expect.hasAssertions();
-
-    // Store original window
-    const originalWindow = global.window;
-
-    // Mock console.warn to avoid noise in tests
-    const consoleSpy = jest.spyOn(console, "warn").mockImplementation(() => { });
-
-    try {
-      // Remove window to simulate server-side rendering
-      delete (global as any).window;
-
-      // Test with default value (false)
-      const { result: resultDefault } = renderHook(() => useMediaMatch("(max-width: 600px)"));
-      expect(resultDefault.current).toBe(false);
-
-      // Test with explicit false
-      const { result: resultFalse } = renderHook(() => useMediaMatch("(max-width: 600px)", false));
-      expect(resultFalse.current).toBe(false);
-
-      // Test with explicit true
-      const { result: resultTrue } = renderHook(() => useMediaMatch("(max-width: 600px)", true));
-      expect(resultTrue.current).toBe(true);
-
-      // Verify console.warn was called
-      expect(consoleSpy).toHaveBeenCalledWith("useMediaMatch cannot function as window is undefined.");
-    } finally {
-      // Restore window
-      global.window = originalWindow;
-      consoleSpy.mockRestore();
-    }
-  });
+  // SSR tests are in ssr.spec.ts which runs in Node environment
 
   it("should work normally when window is defined", () => {
     expect.hasAssertions();
 
-    const matchMedia = jest.fn<MediaQueryList, [string]>();
-    const addEventListener = jest.fn<
+    const matchMedia = vi.fn<MediaQueryList, [string]>();
+    const addEventListener = vi.fn<
       void,
       [string, (event_: MediaQueryListEventMap["change"]) => void]
     >();
-    const removeEventListener = jest.fn<void, [string, () => void]>();
+    const removeEventListener = vi.fn<void, [string, () => void]>();
 
     matchMedia.mockReturnValue({
       addEventListener,

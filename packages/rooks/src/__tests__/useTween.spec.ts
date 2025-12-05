@@ -1,22 +1,23 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useTween } from "../hooks/useTween";
 
-jest.mock("raf", () => {
+vi.mock("raf", () => {
     const raf = (cb: any) => {
         setTimeout(() => cb(performance.now()), 16);
         return 1;
     };
     raf.cancel = () => { };
-    return raf;
+    return { default: raf };
 });
 
 describe("useTween", () => {
-    let nowSpy: jest.SpyInstance;
+    let nowSpy: vi.SpyInstance;
 
     beforeAll(() => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        nowSpy = jest.spyOn(performance, "now");
+        nowSpy = vi.spyOn(performance, "now");
 
         // We don't need to spy on requestAnimationFrame anymore since we mocked raf
         // But we need to make sure our raf mock updates the time
@@ -34,14 +35,14 @@ describe("useTween", () => {
         // Or we spy on setTimeout? No.
 
         // Let's make performance.now() return Date.now() which jest mocks!
-        // jest.useFakeTimers() mocks Date.
+        // vi.useFakeTimers() mocks Date.
         // So if we make performance.now() return Date.now(), it should work with advanceTimersByTime.
 
         nowSpy.mockImplementation(() => Date.now());
     });
 
     afterAll(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
         nowSpy.mockRestore();
     });
 
@@ -54,14 +55,14 @@ describe("useTween", () => {
         const { result } = renderHook(() => useTween(1000));
 
         act(() => {
-            jest.advanceTimersByTime(500);
+            vi.advanceTimersByTime(500);
         });
 
         expect(result.current).toBeGreaterThan(0);
         expect(result.current).toBeLessThan(1);
 
         act(() => {
-            jest.advanceTimersByTime(1000);
+            vi.advanceTimersByTime(1000);
         });
 
         expect(result.current).toBe(1);

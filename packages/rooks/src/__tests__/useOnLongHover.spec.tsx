@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
@@ -16,10 +16,10 @@ describe("useOnLongHover", () => {
 
 describe("useOnLongHover behavior", () => {
   const LONG_HOVER_DURATION = 300;
-  let callback: jest.Mock;
+  let callback: vi.Mock;
 
   beforeEach(() => {
-    callback = jest.fn();
+    callback = vi.fn();
   });
 
   it("triggers long hover callback when the element is hovered for the specified duration", async () => {

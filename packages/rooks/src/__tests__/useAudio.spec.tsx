@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useAudio } from "@/hooks/useAudio";
 
@@ -8,8 +9,8 @@ describe("useAudio", () => {
     mockAudioElement = document.createElement("audio");
 
     // Mock play to return promise
-    mockAudioElement.play = jest.fn().mockResolvedValue(undefined);
-    mockAudioElement.pause = jest.fn();
+    mockAudioElement.play = vi.fn().mockResolvedValue(undefined);
+    mockAudioElement.pause = vi.fn();
 
     // Set initial properties
     Object.defineProperty(mockAudioElement, "currentTime", {
@@ -60,7 +61,7 @@ describe("useAudio", () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should be defined", () => {
@@ -114,11 +115,11 @@ describe("useAudio", () => {
 
   it("should accept original callbacks format", () => {
     const originalCallbacks = {
-      onPlay: jest.fn(),
-      onPause: jest.fn(),
-      onMute: jest.fn(),
-      onUnmute: jest.fn(),
-      onLoadedMetadata: jest.fn(),
+      onPlay: vi.fn(),
+      onPause: vi.fn(),
+      onMute: vi.fn(),
+      onUnmute: vi.fn(),
+      onLoadedMetadata: vi.fn(),
     };
 
     const { result } = renderHook(() => useAudio({}, originalCallbacks));
@@ -183,15 +184,15 @@ describe("useAudio", () => {
   it("should support new callbacks while maintaining backward compatibility", () => {
     const enhancedCallbacks = {
       // Original callbacks
-      onPlay: jest.fn(),
-      onPause: jest.fn(),
-      onMute: jest.fn(),
-      onUnmute: jest.fn(),
-      onLoadedMetadata: jest.fn(),
+      onPlay: vi.fn(),
+      onPause: vi.fn(),
+      onMute: vi.fn(),
+      onUnmute: vi.fn(),
+      onLoadedMetadata: vi.fn(),
       // New callbacks
-      onTimeUpdate: jest.fn(),
-      onVolumeChange: jest.fn(),
-      onError: jest.fn(),
+      onTimeUpdate: vi.fn(),
+      onVolumeChange: vi.fn(),
+      onError: vi.fn(),
     };
 
     const { result } = renderHook(() => useAudio({}, enhancedCallbacks));
@@ -241,9 +242,9 @@ describe("useAudio", () => {
   });
 
   it("should handle play error", async () => {
-    const onError = jest.fn();
+    const onError = vi.fn();
     const error = new Error("Play failed");
-    mockAudioElement.play = jest.fn().mockRejectedValue(error);
+    mockAudioElement.play = vi.fn().mockRejectedValue(error);
 
     const { result } = renderHook(() => useAudio({}, { onError }));
     const [audioRef] = result.current;
@@ -263,8 +264,8 @@ describe("useAudio", () => {
   });
 
   it("should handle non-Error play rejection", async () => {
-    const onError = jest.fn();
-    mockAudioElement.play = jest.fn().mockRejectedValue("string error");
+    const onError = vi.fn();
+    mockAudioElement.play = vi.fn().mockRejectedValue("string error");
 
     const { result } = renderHook(() => useAudio({}, { onError }));
     const [audioRef] = result.current;
@@ -546,7 +547,7 @@ describe("useAudio", () => {
 
   // Event handler tests
   it("should handle loadstart event", () => {
-    const onLoadStart = jest.fn();
+    const onLoadStart = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onLoadStart }));
     const [audioRef] = result.current;
 
@@ -563,8 +564,8 @@ describe("useAudio", () => {
   });
 
   it("should handle loadedmetadata event", () => {
-    const onLoadedMetadata = jest.fn();
-    const onDurationChange = jest.fn();
+    const onLoadedMetadata = vi.fn();
+    const onDurationChange = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onLoadedMetadata, onDurationChange }));
     const [audioRef] = result.current;
 
@@ -583,7 +584,7 @@ describe("useAudio", () => {
   });
 
   it("should handle canplay event", () => {
-    const onCanPlay = jest.fn();
+    const onCanPlay = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onCanPlay }));
     const [audioRef] = result.current;
 
@@ -600,7 +601,7 @@ describe("useAudio", () => {
   });
 
   it("should handle waiting event", () => {
-    const onWaiting = jest.fn();
+    const onWaiting = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onWaiting }));
     const [audioRef] = result.current;
 
@@ -617,7 +618,7 @@ describe("useAudio", () => {
   });
 
   it("should handle play event", () => {
-    const onPlay = jest.fn();
+    const onPlay = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onPlay }));
     const [audioRef] = result.current;
 
@@ -634,7 +635,7 @@ describe("useAudio", () => {
   });
 
   it("should handle pause event", () => {
-    const onPause = jest.fn();
+    const onPause = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onPause }));
     const [audioRef] = result.current;
 
@@ -651,7 +652,7 @@ describe("useAudio", () => {
   });
 
   it("should handle ended event", () => {
-    const onEnded = jest.fn();
+    const onEnded = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onEnded }));
     const [audioRef] = result.current;
 
@@ -668,7 +669,7 @@ describe("useAudio", () => {
   });
 
   it("should handle timeupdate event", () => {
-    const onTimeUpdate = jest.fn();
+    const onTimeUpdate = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onTimeUpdate }));
     const [audioRef] = result.current;
 
@@ -686,7 +687,7 @@ describe("useAudio", () => {
   });
 
   it("should handle durationchange event", () => {
-    const onDurationChange = jest.fn();
+    const onDurationChange = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onDurationChange }));
     const [audioRef] = result.current;
 
@@ -708,9 +709,9 @@ describe("useAudio", () => {
   });
 
   it("should handle volumechange event with mute callback", () => {
-    const onMute = jest.fn();
-    const onUnmute = jest.fn();
-    const onVolumeChange = jest.fn();
+    const onMute = vi.fn();
+    const onUnmute = vi.fn();
+    const onVolumeChange = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onMute, onUnmute, onVolumeChange }));
     const [audioRef] = result.current;
 
@@ -739,7 +740,7 @@ describe("useAudio", () => {
   });
 
   it("should handle ratechange event", () => {
-    const onRateChange = jest.fn();
+    const onRateChange = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onRateChange }));
     const [audioRef] = result.current;
 
@@ -757,7 +758,7 @@ describe("useAudio", () => {
   });
 
   it("should handle error event with error object", () => {
-    const onError = jest.fn();
+    const onError = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onError }));
     const [audioRef] = result.current;
 
@@ -780,7 +781,7 @@ describe("useAudio", () => {
   });
 
   it("should handle error event without error object", () => {
-    const onError = jest.fn();
+    const onError = vi.fn();
     const { result } = renderHook(() => useAudio({}, { onError }));
     const [audioRef] = result.current;
 
@@ -823,7 +824,7 @@ describe("useAudio", () => {
     const { result, unmount } = renderHook(() => useAudio());
     const [audioRef] = result.current;
 
-    const removeEventListenerSpy = jest.spyOn(mockAudioElement, "removeEventListener");
+    const removeEventListenerSpy = vi.spyOn(mockAudioElement, "removeEventListener");
 
     act(() => {
       audioRef(mockAudioElement);

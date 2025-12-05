@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { renderHook, render } from "@testing-library/react";
 import { act } from "react";
 import { useOnStartTyping } from "../hooks/useOnStartTyping";
@@ -20,14 +21,14 @@ function fireKeydown(key: string, options: Partial<KeyboardEvent> = {}) {
 
 describe("useOnStartTyping", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         // Remove focus from any element
         (document.activeElement as HTMLElement)?.blur?.();
     });
 
     it("should trigger callback for a-z/A-Z when includeAZ is true (default)", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback));
         act(() => {
             fireKeydown("a");
@@ -40,7 +41,7 @@ describe("useOnStartTyping", () => {
 
     it("should not trigger callback for a-z/A-Z when includeAZ is false", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback, { includeAZ: false }));
         act(() => {
             fireKeydown("a");
@@ -51,7 +52,7 @@ describe("useOnStartTyping", () => {
 
     it("should trigger callback for 0-9 when includeNumbers is true", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback, { includeNumbers: true }));
         act(() => {
             fireKeydown("1");
@@ -64,7 +65,7 @@ describe("useOnStartTyping", () => {
 
     it("should not trigger callback for 0-9 when includeNumbers is false (default)", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback));
         act(() => {
             fireKeydown("1");
@@ -75,7 +76,7 @@ describe("useOnStartTyping", () => {
 
     it("should not trigger callback when focused element is input, textarea, or contenteditable", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback));
         // Input
         const input = document.createElement("input");
@@ -111,7 +112,7 @@ describe("useOnStartTyping", () => {
 
     it("should not trigger callback for meta/ctrl/alt key combinations", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         renderHook(() => useOnStartTyping(callback));
         act(() => {
             fireKeydown("a", { metaKey: true });
@@ -123,7 +124,7 @@ describe("useOnStartTyping", () => {
 
     it("should clean up event listeners on unmount", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         const { unmount } = renderHook(() => useOnStartTyping(callback));
         unmount();
         act(() => {
@@ -134,11 +135,11 @@ describe("useOnStartTyping", () => {
 
     it("should not recreate callback unnecessarily", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
         const { rerender } = renderHook(({ cb }) => useOnStartTyping(cb), {
             initialProps: { cb: callback },
         });
-        const cb2 = jest.fn();
+        const cb2 = vi.fn();
         rerender({ cb: cb2 });
         act(() => {
             fireKeydown("a");
@@ -150,7 +151,7 @@ describe("useOnStartTyping", () => {
 
     it("should allow all keys including first one to be entered into focused input via ref", () => {
         expect.hasAssertions();
-        const callback = jest.fn();
+        const callback = vi.fn();
 
         // Create a test component that uses the hook and renders an input
         function TestComponent() {

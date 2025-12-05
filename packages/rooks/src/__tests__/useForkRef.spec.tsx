@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import React from "react";
 import { render, getByTestId, fireEvent } from "@testing-library/react";
 
@@ -11,7 +12,7 @@ describe("useForkRef", () => {
   let mockCallback = () => {};
   let TestJSX = () => <div />;
   beforeEach(() => {
-    mockCallback = jest.fn(() => {});
+    mockCallback = vi.fn(() => {});
     TestJSX = () => {
       const mouseUpRef = useEventListenerRef("mouseup", mockCallback);
       const mouseDownRef = useEventListenerRef("mousedown", mockCallback);

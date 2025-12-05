@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import {
@@ -11,7 +11,7 @@ import {
   waitFor,
   screen,
 } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 
 import { useLocalstorageState } from "@/hooks/useLocalstorageState";
 
@@ -25,7 +25,7 @@ describe("useLocalstorageState defined", () => {
 describe("useLocalstorageState basic", () => {
   let App = () => <div />;
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const [value, set, remove] = useLocalstorageState("test-value", "hello");
 
@@ -138,14 +138,14 @@ describe("useLocalstorageState basic", () => {
 
 describe("useLocalstorageState localStorage", () => {
   beforeEach(() => {
-    jest.spyOn(Storage.prototype, "setItem");
-    jest.spyOn(Storage.prototype, "getItem");
-    jest.spyOn(Storage.prototype, "removeItem");
+    vi.spyOn(Storage.prototype, "setItem");
+    vi.spyOn(Storage.prototype, "getItem");
+    vi.spyOn(Storage.prototype, "removeItem");
   });
 
   afterEach(() => {
     localStorage.clear();
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("reads value from localStorage", () => {

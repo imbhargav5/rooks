@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import React, { Suspense } from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import { useSuspenseNavigatorBattery } from "@/hooks/useSuspenseNavigatorBattery";
@@ -12,7 +13,7 @@ interface BatteryManager extends EventTarget {
 }
 
 // Mock navigator.getBattery
-const mockGetBattery = jest.fn();
+const mockGetBattery = vi.fn();
 
 // Store event listeners for testing
 const eventListeners: { [key: string]: EventListener[] } = {};
@@ -23,13 +24,13 @@ const createMockBatteryManager = (): BatteryManager => {
         chargingTime: 0,
         dischargingTime: Infinity,
         level: 0.75,
-        addEventListener: jest.fn((event: string, listener: EventListener) => {
+        addEventListener: vi.fn((event: string, listener: EventListener) => {
             if (!eventListeners[event]) {
                 eventListeners[event] = [];
             }
             eventListeners[event].push(listener);
         }),
-        removeEventListener: jest.fn((event: string, listener: EventListener) => {
+        removeEventListener: vi.fn((event: string, listener: EventListener) => {
             if (eventListeners[event]) {
                 const index = eventListeners[event].indexOf(listener);
                 if (index > -1) {
@@ -37,7 +38,7 @@ const createMockBatteryManager = (): BatteryManager => {
                 }
             }
         }),
-        dispatchEvent: jest.fn(),
+        dispatchEvent: vi.fn(),
     } as BatteryManager;
 
     return mockBattery;
@@ -56,7 +57,7 @@ const triggerBatteryEvent = (eventType: string) => {
 const originalNavigator = global.navigator;
 
 beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     clearCache(); // Clear the hook's internal cache
     // Clear event listeners
     Object.keys(eventListeners).forEach(key => {

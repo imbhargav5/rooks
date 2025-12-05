@@ -1,11 +1,12 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useMultiSelectableList } from "@/hooks/useMultiSelectableList";
 
-jest.spyOn(console, "warn").mockImplementation(jest.fn);
+vi.spyOn(console, "warn").mockImplementation(vi.fn());
 
 describe("useMultiSelectableList", () => {
   afterEach(() => {
-    (console.warn as jest.Mock).mockReset();
+    (console.warn as vi.Mock).mockReset();
   });
 
   const { result } = renderHook(() => useMultiSelectableList([1, 2, 3]));
@@ -91,7 +92,7 @@ describe("useMultiSelectableList", () => {
         1,
         "updateSelections failed. Do the values exist in the list?"
       );
-      (console.warn as jest.Mock).mockReset();
+      (console.warn as vi.Mock).mockReset();
 
       // default
       expect(beforeIndices).toEqual(afterIndices);
@@ -149,7 +150,7 @@ describe("useMultiSelectableList", () => {
         1,
         "toggleSelection failed. Do the values exist in the list?"
       );
-      (console.warn as jest.Mock).mockReset();
+      (console.warn as vi.Mock).mockReset();
     });
     it("should toggle selected value", () => {
       expect.hasAssertions();

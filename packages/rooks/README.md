@@ -341,11 +341,13 @@ function App() {
 
 
 <details open>
-<summary><h3>🔥 Lifecycle & Effects - 9 hooks</h3></summary>
+<summary><h3>🔥 Lifecycle & Effects - 11 hooks</h3></summary>
 
 
 
 * [useAsyncEffect](https://rooks.vercel.app/docs/hooks/useAsyncEffect) - A version of useEffect that accepts an async function
+* [useDebouncedAsyncEffect](https://rooks.vercel.app/docs/hooks/useDebouncedAsyncEffect) - A version of useEffect that accepts an async function and debounces its execution based on dependency changes
+* [useDebouncedEffect](https://rooks.vercel.app/docs/hooks/useDebouncedEffect) - A version of useEffect that debounces the effect execution based on dependency changes
 * [useDeepCompareEffect](https://rooks.vercel.app/docs/hooks/useDeepCompareEffect) - Deep compare dependencies instead of shallow for useEffect
 * [useDidMount](https://rooks.vercel.app/docs/hooks/useDidMount) - componentDidMount hook for React
 * [useDidUpdate](https://rooks.vercel.app/docs/hooks/useDidUpdate) - componentDidUpdate hook for react
@@ -519,7 +521,7 @@ function App() {
 
 <!--hookscount start-->
 
-✅ Collection of 117 hooks as standalone modules.
+✅ Collection of 119 hooks as standalone modules.
 
 <!--hookscount end-->
 

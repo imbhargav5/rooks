@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import {
@@ -14,7 +14,7 @@ import { useWillUnmount } from "@/hooks/useWillUnmount";
 
 describe("useWillUnmount", () => {
   let App = () => <div />;
-  const mockCallback = jest.fn(() => null);
+  const mockCallback = vi.fn(() => null);
   // let firstCallback
   beforeEach(() => {
     const Child = () => {
@@ -23,7 +23,7 @@ describe("useWillUnmount", () => {
       return null;
     };
 
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const [isChildVisible, setIsChildVisible] = React.useState(false);
       const [value, setValue] = React.useState(0);

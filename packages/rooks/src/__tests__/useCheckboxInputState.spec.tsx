@@ -1,5 +1,4 @@
 /**
- * @jest-environment jsdom
  */
 import { renderHook, act } from "@testing-library/react";
 import { useCheckboxInputState } from "../hooks/useCheckboxInputState";

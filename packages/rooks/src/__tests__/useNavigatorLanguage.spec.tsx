@@ -1,14 +1,14 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useNavigatorLanguage } from "@/hooks/useNavigatorLanguage";
 
 describe("useNavigatorLanguage", () => {
-  let languageGetter = jest.spyOn(window.navigator, "language", "get");
+  let languageGetter = vi.spyOn(window.navigator, "language", "get");
 
   beforeEach(() => {
-    languageGetter = jest.spyOn(window.navigator, "language", "get");
+    languageGetter = vi.spyOn(window.navigator, "language", "get");
   });
 
   it("should be defined", () => {

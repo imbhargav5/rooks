@@ -1,41 +1,39 @@
+import { vi } from "vitest";
 // useSpeech.test.ts
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useSpeech } from "@/hooks/useSpeech";
-import { waitFor } from "@testing-library/react";
-
-jest.useFakeTimers();
 
 const originalSpeechSynthesis = window.speechSynthesis;
 
 describe("useSpeech", () => {
-  let mockSpeak: jest.Mock;
-  let mockCancel: jest.Mock;
-  let mockPause: jest.Mock;
-  let mockResume: jest.Mock;
-  let mockOnvoiceschanged: jest.Mock;
+  let mockSpeak: vi.Mock;
+  let mockCancel: vi.Mock;
+  let mockPause: vi.Mock;
+  let mockResume: vi.Mock;
+  let mockOnvoiceschanged: vi.Mock;
 
   beforeEach(() => {
-    mockSpeak = jest
+    mockSpeak = vi
       .fn()
       .mockImplementation((utterance: SpeechSynthesisUtterance) => {
         utterance?.onstart?.(new Event("start") as SpeechSynthesisEvent);
       });
-    mockCancel = jest
+    mockCancel = vi
       .fn()
       .mockImplementation((utterance: SpeechSynthesisUtterance) => {
         utterance?.onend?.(new Event("end") as SpeechSynthesisEvent);
       });
-    mockPause = jest
+    mockPause = vi
       .fn()
       .mockImplementation((utterance: SpeechSynthesisUtterance) => {
         utterance?.onpause?.(new Event("pause") as SpeechSynthesisEvent);
       });
-    mockResume = jest
+    mockResume = vi
       .fn()
       .mockImplementation((utterance: SpeechSynthesisUtterance) => {
         utterance?.onresume?.(new Event("resume") as SpeechSynthesisEvent);
       });
-    mockOnvoiceschanged = jest.fn();
+    mockOnvoiceschanged = vi.fn();
 
     (window as any).speechSynthesis = {
       speak: mockSpeak,
@@ -68,7 +66,7 @@ describe("useSpeech", () => {
     expect(mockSpeak).toHaveBeenCalled();
   });
 
-  it("should pause the speech when pause is called", async () => {
+  it("should pause the speech when pause is called", () => {
     expect.hasAssertions();
     const { result } = renderHook(() =>
       useSpeech({ text: "Hello, how are you?" })
@@ -82,9 +80,7 @@ describe("useSpeech", () => {
       result.current.pause();
     });
 
-    await waitFor(() => {
-      expect(mockPause).toHaveBeenCalled();
-    });
+    expect(mockPause).toHaveBeenCalled();
   });
 
   it("should resume the speech when resume is called", () => {

@@ -1,8 +1,8 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import type { DebouncedFunc } from "lodash";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -42,7 +42,7 @@ describe.skip("useDebounce behavior", () => {
   });
   it("should apply default options", async () => {
     expect.assertions(2);
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() => useDebounce(callback, 32));
     result.current();
     expect(callback).not.toHaveBeenCalled();
@@ -51,7 +51,7 @@ describe.skip("useDebounce behavior", () => {
   });
   it("should support a `leading` option", async () => {
     expect.assertions(2);
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() =>
       useDebounce(callback, 32, { leading: true })
     );
@@ -63,11 +63,11 @@ describe.skip("useDebounce behavior", () => {
   });
   it("should support a `trailing` option", async () => {
     expect.assertions(4);
-    const withTrailing = jest.fn();
+    const withTrailing = vi.fn();
     const { result: withTrailingResult } = renderHook(() =>
       useDebounce(withTrailing, 32, { trailing: true })
     );
-    const withoutTrailing = jest.fn();
+    const withoutTrailing = vi.fn();
     const { result: withoutTrailingResult } = renderHook(() =>
       useDebounce(withTrailing, 32, { trailing: false })
     );
@@ -82,7 +82,7 @@ describe.skip("useDebounce behavior", () => {
 
   it("should not have stale closure problems", async () => {
     expect.assertions(2);
-    const fn = jest.fn();
+    const fn = vi.fn();
     function App() {
       const [value, setValue] = useState(0);
       const [done, setDone] = useState(false);
@@ -125,7 +125,7 @@ describe.skip("useDebounce behavior", () => {
   it("should cancel on unmount", async () => {
     expect.assertions(1);
 
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     function Child() {
       const debounced = useDebounce(fn, 64);
@@ -174,7 +174,7 @@ describe.skip("useDebounce behavior", () => {
 
   it("should work with inline functions", async () => {
     expect.assertions(2);
-    const fn = jest.fn();
+    const fn = vi.fn();
     function App() {
       const [value, setValue] = useState(0);
       const [done, setDone] = useState(false);

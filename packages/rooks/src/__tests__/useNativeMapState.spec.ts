@@ -1,5 +1,5 @@
 import { useNativeMapState } from "@/hooks/useNativeMapState";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 
 describe("useNativeMapState", () => {
   it("should initialize with an empty map by default", () => {

@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import {
@@ -18,7 +18,7 @@ describe("useWhyDidYouUpdate", () => {
     enableLogging?: boolean;
   }>;
   beforeEach(() => {
-    jest.spyOn(global.console, "log").mockImplementation(jest.fn);
+    vi.spyOn(global.console, "log").mockImplementation(vi.fn());
   });
   beforeEach(() => {
     TestComponent = ({ enableLogging = true }) => {
@@ -29,7 +29,7 @@ describe("useWhyDidYouUpdate", () => {
   });
 
   afterEach(() => {
-    (console.log as jest.Mock).mockRestore();
+    (console.log as vi.Mock).mockRestore();
     cleanup();
   });
 

@@ -1,16 +1,17 @@
+import { vi } from "vitest";
 import { useDebounceFn } from "@/hooks/useDebounceFn";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 
 describe("useDebounceFn", () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   it("should call the debounced function only once after the delay when trailing is true", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -24,7 +25,7 @@ describe("useDebounceFn", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
 
     act(() => {
-      jest.advanceTimersByTime(delay);
+      vi.advanceTimersByTime(delay);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(1);
@@ -33,7 +34,7 @@ describe("useDebounceFn", () => {
 
   it("should call the debounced function immediately when leading is true", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -50,7 +51,7 @@ describe("useDebounceFn", () => {
 
   it("should call the debounced function both on leading and trailing edges when both leading and trailing are true", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -65,7 +66,7 @@ describe("useDebounceFn", () => {
     expect(mockFn).toHaveBeenCalledWith("test");
 
     act(() => {
-      jest.advanceTimersByTime(delay);
+      vi.advanceTimersByTime(delay);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(2);
@@ -74,7 +75,7 @@ describe("useDebounceFn", () => {
 
   it("should not call the debounced function when delay is not reached", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -86,14 +87,14 @@ describe("useDebounceFn", () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(delay - 50);
+      vi.advanceTimersByTime(delay - 50);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(0);
   });
   it("should call the debounced function with the latest arguments", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -108,7 +109,7 @@ describe("useDebounceFn", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
 
     act(() => {
-      jest.advanceTimersByTime(delay);
+      vi.advanceTimersByTime(delay);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(1);
@@ -117,7 +118,7 @@ describe("useDebounceFn", () => {
 
   it("should update isTimeoutEnabled correctly", () => {
     expect.hasAssertions();
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     const delay = 200;
 
     const { result } = renderHook(() =>
@@ -133,7 +134,7 @@ describe("useDebounceFn", () => {
     expect(result.current[1]).toBe(true);
 
     act(() => {
-      jest.advanceTimersByTime(delay);
+      vi.advanceTimersByTime(delay);
     });
 
     expect(result.current[1]).toBe(false);
@@ -141,15 +142,15 @@ describe("useDebounceFn", () => {
 });
 
 describe("useDebounceFn with maxWait", () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   it("should call the function after maxWait time for leading edge", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() =>
       useDebounceFn(callback, 300, { leading: true, maxWait: 500 })
     );
@@ -163,7 +164,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(result.current[1]).toBe(true);
     // runs immediately and sets timer
     act(() => {
-      jest.advanceTimersByTime(450);
+      vi.advanceTimersByTime(450);
     });
     expect(result.current[1]).toBe(false);
     act(() => {
@@ -173,7 +174,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(result.current[1]).toBe(true);
     // runs immediately since timer has been reset
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     expect(callback).toHaveBeenCalledTimes(2);
     expect(result.current[1]).toBe(true);
@@ -187,11 +188,11 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenNthCalledWith(1, 1);
     expect(callback).toHaveBeenNthCalledWith(2, 2);
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     expect(callback).toHaveBeenNthCalledWith(2, 2);
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     act(() => {
       debouncedFn(4);
@@ -201,7 +202,7 @@ describe("useDebounceFn with maxWait", () => {
 
   it("should call the function after maxWait time for trailing edge", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() =>
       useDebounceFn(callback, 300, { trailing: true, maxWait: 500 })
     );
@@ -213,7 +214,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenCalledTimes(0);
     expect(result.current[1]).toBe(true);
     act(() => {
-      jest.advanceTimersByTime(450);
+      vi.advanceTimersByTime(450);
     });
     expect(callback).toHaveBeenCalledTimes(1);
     expect(result.current[1]).toBe(false);
@@ -226,7 +227,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenCalledTimes(1);
     expect(result.current[1]).toBe(true);
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     expect(callback).toHaveBeenCalledTimes(1);
     expect(result.current[1]).toBe(true);
@@ -236,12 +237,12 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenCalledTimes(1);
     expect(result.current[1]).toBe(true);
     act(() => {
-      jest.advanceTimersByTime(200);
+      vi.advanceTimersByTime(200);
     });
     expect(result.current[1]).toBe(true);
     expect(callback).toHaveBeenCalledTimes(1);
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     expect(callback).toHaveBeenCalledTimes(2);
     expect(callback).toHaveBeenNthCalledWith(1, 1);
@@ -250,7 +251,7 @@ describe("useDebounceFn with maxWait", () => {
 
   it("should call the function after maxWait time for both leading and trailing edges", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() =>
       useDebounceFn(callback, 300, {
         leading: true,
@@ -264,7 +265,7 @@ describe("useDebounceFn with maxWait", () => {
       debouncedFn(1);
     });
     act(() => {
-      jest.advanceTimersByTime(450);
+      vi.advanceTimersByTime(450);
     });
     expect(callback).toHaveBeenCalledTimes(2);
 
@@ -274,7 +275,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenCalledTimes(3);
 
     act(() => {
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
     });
     expect(callback).toHaveBeenCalledTimes(3);
 
@@ -285,7 +286,7 @@ describe("useDebounceFn with maxWait", () => {
     expect(callback).toHaveBeenCalledTimes(3);
 
     act(() => {
-      jest.advanceTimersByTime(300);
+      vi.advanceTimersByTime(300);
     });
 
     expect(callback).toHaveBeenCalledTimes(4);

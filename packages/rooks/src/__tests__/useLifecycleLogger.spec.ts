@@ -1,7 +1,8 @@
-import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, cleanup } from "@testing-library/react";
 import { useLifecycleLogger } from "@/hooks/useLifecycleLogger";
 
-const logSpy = jest.spyOn(global.console, "log").mockImplementation(() => {});
+const logSpy = vi.spyOn(global.console, "log").mockImplementation(() => {});
 describe("useLifecycleLogger", () => {
   afterEach(() => {
     logSpy.mockClear();

@@ -1,7 +1,8 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useBroadcastChannel } from "@/hooks/useBroadcastChannel";
 
 // Mock BroadcastChannel
@@ -72,7 +73,7 @@ describe("useBroadcastChannel", () => {
   afterEach(() => {
     // Restore original BroadcastChannel
     (global as any).BroadcastChannel = originalBroadcastChannel;
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should be defined", () => {
@@ -103,26 +104,13 @@ describe("useBroadcastChannel", () => {
       expect(result.current.close).toBeInstanceOf(Function);
     });
 
-    it("should detect when window is undefined (SSR)", () => {
-      expect.hasAssertions();
-      
-      // Mock window as undefined
-      const originalWindow = global.window;
-      delete (global as any).window;
-
-      const { result } = renderHook(() => useBroadcastChannel("test-channel"));
-
-      expect(result.current.isSupported).toBe(false);
-
-      // Restore window
-      (global as any).window = originalWindow;
-    });
+    // SSR tests are in ssr.spec.ts which runs in Node environment
   });
 
   describe("Message Handling", () => {
     it("should receive messages through onMessage callback", async () => {
       expect.hasAssertions();
-      const onMessageSpy = jest.fn();
+      const onMessageSpy = vi.fn();
       const testData = { message: "Hello", timestamp: Date.now() };
 
       const { result } = renderHook(() => 
@@ -144,7 +132,7 @@ describe("useBroadcastChannel", () => {
 
     it("should handle different data types", async () => {
       expect.hasAssertions();
-      const onMessageSpy = jest.fn();
+      const onMessageSpy = vi.fn();
 
       const { result } = renderHook(() => 
         useBroadcastChannel("test-channel", { onMessage: onMessageSpy })
@@ -199,7 +187,7 @@ describe("useBroadcastChannel", () => {
   describe("Error Handling", () => {
     it("should handle errors through onError callback", async () => {
       expect.hasAssertions();
-      const onErrorSpy = jest.fn();
+      const onErrorSpy = vi.fn();
 
       // Create a mock that can simulate errors
       class ErroringBroadcastChannel extends MockBroadcastChannel {
@@ -233,7 +221,7 @@ describe("useBroadcastChannel", () => {
 
     it("should warn when posting message on unsupported browser", () => {
       expect.hasAssertions();
-      const consoleSpy = jest.spyOn(console, "warn").mockImplementation();
+      const consoleSpy = vi.spyOn(console, "warn").mockImplementation();
 
       // Mock undefined BroadcastChannel
       (global as any).BroadcastChannel = undefined;
@@ -253,8 +241,8 @@ describe("useBroadcastChannel", () => {
 
     it("should handle postMessage errors gracefully", () => {
       expect.hasAssertions();
-      const onErrorSpy = jest.fn();
-      const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+      const onErrorSpy = vi.fn();
+      const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation();
 
       // Mock BroadcastChannel that throws on postMessage
       class ThrowingBroadcastChannel extends MockBroadcastChannel {
@@ -297,7 +285,7 @@ describe("useBroadcastChannel", () => {
 
     it("should recreate channel when channel name changes", () => {
       expect.hasAssertions();
-      const closeSpy = jest.fn();
+      const closeSpy = vi.fn();
       
       // Mock BroadcastChannel with close spy
       class SpyBroadcastChannel extends MockBroadcastChannel {
@@ -354,7 +342,7 @@ describe("useBroadcastChannel", () => {
 
     it("should clean up on unmount", () => {
       expect.hasAssertions();
-      const closeSpy = jest.fn();
+      const closeSpy = vi.fn();
       
       // Mock BroadcastChannel with close spy
       class SpyBroadcastChannel extends MockBroadcastChannel {
@@ -378,14 +366,14 @@ describe("useBroadcastChannel", () => {
     it("should maintain stable postMessage reference", () => {
       expect.hasAssertions();
       const { result, rerender } = renderHook(
-        ({ onMessage }: { onMessage: jest.Mock }) => useBroadcastChannel("test-channel", { onMessage }),
-        { initialProps: { onMessage: jest.fn() } }
+        ({ onMessage }: { onMessage: vi.Mock }) => useBroadcastChannel("test-channel", { onMessage }),
+        { initialProps: { onMessage: vi.fn() } }
       );
 
       const firstPostMessage = result.current.postMessage;
 
       // Rerender with same channel name but different callback
-      rerender({ onMessage: jest.fn() });
+      rerender({ onMessage: vi.fn() });
 
       // postMessage should remain stable for same channel
       expect(result.current.postMessage).toBe(firstPostMessage);
@@ -394,14 +382,14 @@ describe("useBroadcastChannel", () => {
     it("should maintain stable close reference", () => {
       expect.hasAssertions();
       const { result, rerender } = renderHook(
-        ({ onMessage }: { onMessage: jest.Mock }) => useBroadcastChannel("test-channel", { onMessage }),
-        { initialProps: { onMessage: jest.fn() } }
+        ({ onMessage }: { onMessage: vi.Mock }) => useBroadcastChannel("test-channel", { onMessage }),
+        { initialProps: { onMessage: vi.fn() } }
       );
 
       const firstClose = result.current.close;
 
       // Rerender with different callback
-      rerender({ onMessage: jest.fn() });
+      rerender({ onMessage: vi.fn() });
 
       expect(result.current.close).toBe(firstClose);
     });
@@ -417,7 +405,7 @@ describe("useBroadcastChannel", () => {
         timestamp: number;
       }
 
-      const onMessageSpy = jest.fn<void, [TestMessage]>();
+      const onMessageSpy = vi.fn<void, [TestMessage]>();
 
       const { result } = renderHook(() => 
         useBroadcastChannel<TestMessage>("typed-channel", { onMessage: onMessageSpy })

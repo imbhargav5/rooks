@@ -1,0 +1,296 @@
+---
+id: useDebouncedAsyncEffect
+title: useDebouncedAsyncEffect
+sidebar_label: useDebouncedAsyncEffect
+---
+
+## About
+
+A version of `useEffect` that accepts an async function and debounces its execution based on dependency changes. This hook combines the debouncing behavior of `useDebouncedEffect` with the async handling capabilities of `useAsyncEffect`.
+
+This hook is particularly useful when you need to:
+- Debounce API calls until the user stops typing
+- Prevent race conditions in async operations
+- Handle cleanup of async resources with debounced triggers
+
+The hook provides a `shouldContinueEffect` callback that helps prevent race conditions by allowing you to check if the current effect is still valid before updating state.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic async data fetching with debounce
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function SearchComponent() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      if (!searchQuery.trim()) {
+        setResults([]);
+        return;
+      }
+
+      setLoading(true);
+
+      const response = await fetch(`/api/search?q=${searchQuery}`);
+      const data = await response.json();
+
+      // Only update state if this effect is still valid
+      if (shouldContinueEffect()) {
+        setResults(data);
+        setLoading(false);
+      }
+    },
+    [searchQuery],
+    500
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      {loading && <p>Loading...</p>}
+      <ul>
+        {results.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Preventing race conditions
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      // First API call
+      const userResponse = await fetch(`/api/users/${userId}`);
+      const userData = await userResponse.json();
+
+      // Check if we should continue before making the second call
+      if (!shouldContinueEffect()) return;
+
+      // Second API call
+      const postsResponse = await fetch(`/api/users/${userId}/posts`);
+      const postsData = await postsResponse.json();
+
+      // Final check before updating state
+      if (shouldContinueEffect()) {
+        setUser(userData);
+        setPosts(postsData);
+      }
+    },
+    [userId],
+    300
+  );
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### With cleanup function
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataFetcher({ endpoint }) {
+  const [data, setData] = useState(null);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      const controller = new AbortController();
+
+      try {
+        const response = await fetch(endpoint, {
+          signal: controller.signal
+        });
+        const result = await response.json();
+
+        if (shouldContinueEffect()) {
+          setData(result);
+        }
+
+        return controller; // Return for cleanup
+      } catch (error) {
+        if (error.name !== 'AbortError' && shouldContinueEffect()) {
+          console.error('Fetch error:', error);
+        }
+        return controller;
+      }
+    },
+    [endpoint],
+    500,
+    (controller) => {
+      // Cleanup: abort any in-flight requests
+      if (controller) {
+        controller.abort();
+      }
+    }
+  );
+
+  return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
+}
+```
+
+### With leading option for immediate first execution
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function AutoSave({ documentId, content }) {
+  const [saveStatus, setSaveStatus] = useState('saved');
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      setSaveStatus('saving');
+
+      await fetch(`/api/documents/${documentId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      });
+
+      if (shouldContinueEffect()) {
+        setSaveStatus('saved');
+      }
+    },
+    [content],
+    1000,
+    undefined, // no cleanup
+    { leading: true } // Save immediately on first change
+  );
+
+  return <span>{saveStatus}</span>;
+}
+```
+
+### Error handling
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataComponent({ query }) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      try {
+        const response = await fetch(`/api/data?q=${query}`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (shouldContinueEffect()) {
+          setData(result);
+          setError(null);
+        }
+      } catch (err) {
+        if (shouldContinueEffect()) {
+          setError(err.message);
+          setData(null);
+        }
+      }
+    },
+    [query],
+    500
+  );
+
+  if (error) return <div>Error: {error}</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return <div>{JSON.stringify(data)}</div>;
+}
+```
+
+## Arguments
+
+| Argument | Type             | Description                                                        | Default   |
+| -------- | ---------------- | ------------------------------------------------------------------ | --------- |
+| effect   | AsyncEffect      | Async function that receives `shouldContinueEffect` callback       | Required  |
+| deps     | DependencyList   | Array of dependencies that trigger effect re-execution             | Required  |
+| delay    | number           | The debounce delay in milliseconds                                 | 500       |
+| cleanup  | CleanupFunction  | Optional cleanup function that receives the previous result        | undefined |
+| options  | DebounceSettings | Optional debounce settings                                         | undefined |
+
+## Effect Function
+
+The effect function receives a `shouldContinueEffect` callback that should be used to check if the effect is still valid before updating state or performing side effects. This prevents race conditions and memory leaks.
+
+### Effect Function Parameters
+
+| Parameter           | Type     | Description                                                      |
+| ------------------- | -------- | ---------------------------------------------------------------- |
+| shouldContinueEffect| Function | Returns `true` if the effect is still valid and should continue |
+
+### Effect Function Return Value
+
+The effect function can optionally return a value that will be passed to the cleanup function when the effect is cleaned up or re-run.
+
+## Cleanup Function
+
+The cleanup function is called when:
+- The component unmounts
+- The dependencies change and the effect needs to re-run
+
+### Cleanup Function Parameters
+
+| Parameter | Type | Description                                              |
+| --------- | ---- | -------------------------------------------------------- |
+| result    | T    | The value returned by the previous effect function       |
+
+## Options
+
+The `options` parameter accepts the following settings:
+
+| Option   | Type    | Description                                              | Default |
+| -------- | ------- | -------------------------------------------------------- | ------- |
+| leading  | boolean | Execute on the leading edge of the timeout               | false   |
+| trailing | boolean | Execute on the trailing edge of the timeout              | true    |
+| maxWait  | number  | Maximum time the effect can be delayed (milliseconds)    | -       |
+
+## Key Features
+
+- **Automatic Debouncing**: Effect execution is delayed until dependencies stop changing
+- **Race Condition Prevention**: The `shouldContinueEffect` callback prevents state updates from cancelled effects
+- **Memory Leak Prevention**: Automatic cleanup when components unmount or dependencies change
+- **Flexible Cleanup**: Cleanup function receives the result from the previous effect execution
+- **Error Handling**: Errors in async effects are properly propagated
+- **Configurable Timing**: Customize delay and leading/trailing execution

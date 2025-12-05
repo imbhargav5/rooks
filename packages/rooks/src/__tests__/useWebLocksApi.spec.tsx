@@ -1,10 +1,11 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useWebLocksApi } from "@/hooks/useWebLocksApi";
 
 // Mock the Web Locks API
 const mockNavigatorLocks = {
-  request: jest.fn(),
-  query: jest.fn(),
+  request: vi.fn(),
+  query: vi.fn(),
 };
 
 // Mock navigator.locks
@@ -16,7 +17,7 @@ Object.defineProperty(navigator, 'locks', {
 
 describe("useWebLocksApi", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockNavigatorLocks.request.mockClear();
     mockNavigatorLocks.query.mockClear();
   });
@@ -128,7 +129,7 @@ describe("useWebLocksApi", () => {
   describe("Lock Acquisition", () => {
     it("should acquire lock successfully", async () => {
       expect.hasAssertions();
-      const mockCallback = jest.fn().mockResolvedValue("success");
+      const mockCallback = vi.fn().mockResolvedValue("success");
       
       // Mock the request method to call the callback with correct parameters
       mockNavigatorLocks.request.mockImplementation(
@@ -157,7 +158,7 @@ describe("useWebLocksApi", () => {
 
     it("should handle lock options", async () => {
       expect.hasAssertions();
-      const mockCallback = jest.fn().mockResolvedValue("success");
+      const mockCallback = vi.fn().mockResolvedValue("success");
       
       mockNavigatorLocks.request.mockImplementation(
         (name: string, options: any, callback: Function) => {
@@ -180,7 +181,7 @@ describe("useWebLocksApi", () => {
 
     it("should not combine signal and ifAvailable options", async () => {
       expect.hasAssertions();
-      const mockCallback = jest.fn().mockResolvedValue("success");
+      const mockCallback = vi.fn().mockResolvedValue("success");
       
       mockNavigatorLocks.request.mockImplementation(
         (name: string, options: any, callback: Function) => {
@@ -210,7 +211,7 @@ describe("useWebLocksApi", () => {
 
     it("should use custom signal when provided", async () => {
       expect.hasAssertions();
-      const mockCallback = jest.fn().mockResolvedValue("success");
+      const mockCallback = vi.fn().mockResolvedValue("success");
       const customController = new AbortController();
       
       mockNavigatorLocks.request.mockImplementation(
@@ -298,7 +299,7 @@ describe("useWebLocksApi", () => {
     it("should handle lock acquisition errors", async () => {
       expect.hasAssertions();
       const mockError = new Error("Lock acquisition failed");
-      const mockCallback = jest.fn().mockRejectedValue(mockError);
+      const mockCallback = vi.fn().mockRejectedValue(mockError);
       
       mockNavigatorLocks.request.mockImplementation(
         (name: string, callbackOrOptions: any, callback?: Function) => {
@@ -367,7 +368,7 @@ describe("useWebLocksApi", () => {
   describe("Periodic Checking", () => {
     it("should NOT enable periodic checks by default", () => {
       expect.hasAssertions();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       
       mockNavigatorLocks.query.mockResolvedValue({
         held: [],
@@ -380,17 +381,17 @@ describe("useWebLocksApi", () => {
       expect(mockNavigatorLocks.query).toHaveBeenCalledTimes(1);
       
       // Fast forward time
-      jest.advanceTimersByTime(5000);
+      vi.advanceTimersByTime(5000);
       
       // Should not be called again
       expect(mockNavigatorLocks.query).toHaveBeenCalledTimes(1);
       
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it("should enable periodic checks when configured", () => {
       expect.hasAssertions();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       
       const mockQueryResult = {
         held: [{ name: "test-resource", mode: "exclusive" }],
@@ -407,12 +408,12 @@ describe("useWebLocksApi", () => {
       expect(mockNavigatorLocks.query).toHaveBeenCalledTimes(1);
       
       // Fast forward time
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
       
       // Query should be called again
       expect(mockNavigatorLocks.query).toHaveBeenCalledTimes(2);
       
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
   });
 
@@ -420,13 +421,13 @@ describe("useWebLocksApi", () => {
     it("should release lock correctly via AbortController", () => {
       expect.hasAssertions();
       const mockAbortController = {
-        abort: jest.fn(),
+        abort: vi.fn(),
         signal: { aborted: false },
       };
       
       // Mock AbortController globally
       const originalAbortController = global.AbortController;
-      global.AbortController = jest.fn(() => mockAbortController) as any;
+      global.AbortController = vi.fn(() => mockAbortController) as any;
       
       const { result } = renderHook(() => useWebLocksApi("test-resource"));
       
@@ -458,12 +459,12 @@ describe("useWebLocksApi", () => {
     it("should clean up AbortController on unmount", () => {
       expect.hasAssertions();
       const mockAbortController = {
-        abort: jest.fn(),
+        abort: vi.fn(),
         signal: { aborted: false },
       };
       
       const originalAbortController = global.AbortController;
-      global.AbortController = jest.fn(() => mockAbortController) as any;
+      global.AbortController = vi.fn(() => mockAbortController) as any;
       
       const { result, unmount } = renderHook(() => useWebLocksApi("test-resource"));
       

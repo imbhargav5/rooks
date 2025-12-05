@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import React, { useState } from "react";
@@ -114,7 +114,7 @@ describe("useDidUpdate tests", () => {
 
   it("warns if conditionals is empty array", () => {
     expect.hasAssertions();
-    const spy = jest.spyOn(global.console, "warn");
+    const spy = vi.spyOn(global.console, "warn");
     render(<App />);
     // eslint-disable-next-line jest/prefer-called-with
     expect(spy).toHaveBeenCalled();

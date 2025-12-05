@@ -1,27 +1,27 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useMediaRecorder } from "@/hooks/useMediaRecorder";
 
 describe("useMediaRecorder", () => {
   let mockMediaRecorder: any;
-  let mockMediaRecorderConstructor: jest.Mock;
+  let mockMediaRecorderConstructor: vi.Mock;
   let mockStream: MediaStream;
 
   beforeEach(() => {
     mockMediaRecorder = {
       state: "inactive",
-      start: jest.fn(),
-      stop: jest.fn(),
-      pause: jest.fn(),
-      resume: jest.fn(),
+      start: vi.fn(),
+      stop: vi.fn(),
+      pause: vi.fn(),
+      resume: vi.fn(),
       ondataavailable: null,
       onstop: null,
       onerror: null,
     };
 
-    mockMediaRecorderConstructor = jest.fn(() => mockMediaRecorder);
+    mockMediaRecorderConstructor = vi.fn(() => mockMediaRecorder);
 
     Object.defineProperty(window, "MediaRecorder", {
       writable: true,
@@ -30,16 +30,16 @@ describe("useMediaRecorder", () => {
     });
 
     mockStream = {
-      getTracks: jest.fn(() => []),
+      getTracks: vi.fn(() => []),
     } as unknown as MediaStream;
 
     // Mock URL.createObjectURL
-    global.URL.createObjectURL = jest.fn(() => "blob:mock-url");
-    global.URL.revokeObjectURL = jest.fn();
+    global.URL.createObjectURL = vi.fn(() => "blob:mock-url");
+    global.URL.revokeObjectURL = vi.fn();
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
