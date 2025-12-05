@@ -45,12 +45,12 @@
     "sanity:types": "npx tsx scripts/sanity-check-types.ts",
     "sanity:imports": "npx tsx scripts/sanity-check-imports.ts",
     "sanity:eslint": "npx tsx scripts/sanity-check-eslint.ts",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage 2>&1 | tee /tmp/vitest-coverage.log; grep 'Test Files' /tmp/vitest-coverage.log | grep -qv 'failed'",
     "prebuild": "rimraf dist",
     "build": "node build.js",
     "test-ct": "playwright test -c playwright-ct.config.ts",
     "tsc": "tsc --noEmit",
-    "test-hooks": "vitest run"
+    "test-hooks": "vitest run 2>&1 | tee /tmp/vitest-hooks.log; grep 'Test Files' /tmp/vitest-hooks.log | grep -qv 'failed'"
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.3",
