@@ -1,5 +1,11 @@
 # rooks
 
+## 9.4.0
+
+### Minor Changes
+
+- [`6b700a1`](https://github.com/imbhargav5/rooks/commit/6b700a17dd20689c019741ec4ac6074504214e56) Thanks [@imbhargav5](https://github.com/imbhargav5)! - What's New
+
 ## 9.3.0
 
 ### Minor Changes
