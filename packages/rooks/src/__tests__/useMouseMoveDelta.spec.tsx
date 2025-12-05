@@ -1,4 +1,4 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react";
 import { useMouseMoveDelta } from "@/hooks/useMouseMoveDelta";
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

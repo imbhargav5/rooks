@@ -1,8 +1,9 @@
+import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useFetch } from "../hooks/useFetch";
 
 // Mock fetch globally
-const mockFetch = jest.fn();
+const mockFetch = vi.fn();
 Object.defineProperty(global, 'fetch', {
     value: mockFetch,
     writable: true,
@@ -130,7 +131,7 @@ describe("useFetch", () => {
             json: async () => mockResponse,
         } as Response);
 
-        const onFetch = jest.fn();
+        const onFetch = vi.fn();
         const { result } = renderHook(() =>
             useFetch("https://api.example.com/users/1", { onFetch })
         );
@@ -149,7 +150,7 @@ describe("useFetch", () => {
             json: async () => mockResponse,
         } as Response);
 
-        const onSuccess = jest.fn();
+        const onSuccess = vi.fn();
         const { result } = renderHook(() =>
             useFetch<User>("https://api.example.com/users/1", { onSuccess })
         );
@@ -166,7 +167,7 @@ describe("useFetch", () => {
         const networkError = new Error("Network error");
         mockFetch.mockRejectedValueOnce(networkError);
 
-        const onError = jest.fn();
+        const onError = vi.fn();
         const { result } = renderHook(() =>
             useFetch("https://api.example.com/users/1", { onError })
         );
@@ -186,7 +187,7 @@ describe("useFetch", () => {
             statusText: "Internal Server Error",
         } as Response);
 
-        const onError = jest.fn();
+        const onError = vi.fn();
         const { result } = renderHook(() =>
             useFetch("https://api.example.com/users/1", { onError })
         );
@@ -211,9 +212,9 @@ describe("useFetch", () => {
 
         mockFetch.mockReturnValueOnce(promise);
 
-        const onSuccess = jest.fn();
-        const onError = jest.fn();
-        const onFetch = jest.fn();
+        const onSuccess = vi.fn();
+        const onError = vi.fn();
+        const onFetch = vi.fn();
 
         const { result, unmount } = renderHook(() =>
             useFetch("https://api.example.com/users/1", { onSuccess, onError, onFetch })

@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useOnClickRef } from "@/hooks/useOnClickRef";
 import { cleanup } from "@testing-library/react";
 
@@ -9,11 +9,11 @@ describe("useOnClickRef", () => {
   let onClick: () => void;
 
   beforeEach(() => {
-    onClick = jest.fn();
+    onClick = vi.fn();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     cleanup();
   });
 
@@ -69,7 +69,7 @@ describe("useOnClickRef", () => {
     });
 
     // Check if event listeners are removed on unmount
-    const removeEventListenerSpy = jest.spyOn(element, "removeEventListener");
+    const removeEventListenerSpy = vi.spyOn(element, "removeEventListener");
     unmount();
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       "click",

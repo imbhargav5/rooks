@@ -1,38 +1,38 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { usePreferredColorScheme } from "@/hooks/usePreferredColorScheme";
 
 describe("usePreferredColorScheme", () => {
-  let mockMatchMedia: jest.Mock;
+  let mockMatchMedia: vi.Mock;
   let darkModeQuery: any;
   let lightModeQuery: any;
-  let consoleWarnSpy: jest.SpyInstance;
+  let consoleWarnSpy: vi.SpyInstance;
 
   beforeEach(() => {
     darkModeQuery = {
       matches: false,
       media: "(prefers-color-scheme: dark)",
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     };
 
     lightModeQuery = {
       matches: true,
       media: "(prefers-color-scheme: light)",
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     };
 
-    mockMatchMedia = jest.fn((query: string) => {
+    mockMatchMedia = vi.fn((query: string) => {
       if (query === "(prefers-color-scheme: dark)") {
         return darkModeQuery;
       }
       if (query === "(prefers-color-scheme: light)") {
         return lightModeQuery;
       }
-      return { matches: false, addEventListener: jest.fn(), removeEventListener: jest.fn() };
+      return { matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() };
     });
 
     Object.defineProperty(window, "matchMedia", {
@@ -41,11 +41,11 @@ describe("usePreferredColorScheme", () => {
       value: mockMatchMedia,
     });
 
-    consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation();
+    consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation();
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -148,10 +148,10 @@ describe("usePreferredColorScheme", () => {
     expect.hasAssertions();
     delete darkModeQuery.addEventListener;
     delete lightModeQuery.addEventListener;
-    darkModeQuery.addListener = jest.fn();
-    lightModeQuery.addListener = jest.fn();
-    darkModeQuery.removeListener = jest.fn();
-    lightModeQuery.removeListener = jest.fn();
+    darkModeQuery.addListener = vi.fn();
+    lightModeQuery.addListener = vi.fn();
+    darkModeQuery.removeListener = vi.fn();
+    lightModeQuery.removeListener = vi.fn();
 
     const { unmount } = renderHook(() => usePreferredColorScheme());
 

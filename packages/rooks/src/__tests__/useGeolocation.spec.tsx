@@ -1,6 +1,4 @@
-/**
- * @jest-environment jsdom
- */
+import { vi } from "vitest";
 import React from "react";
 import {
   act,
@@ -50,7 +48,7 @@ describe("useGeolocation", () => {
   it("click on get geolocation gives geolocation", async () => {
     expect.assertions(4);
     const mockGeolocation = {
-      getCurrentPosition: jest
+      getCurrentPosition: vi
         .fn()
         .mockImplementationOnce((successCallback) =>
           successCallback({ coords: { latitude: 51.1, longitude: 45.3 } })
@@ -105,7 +103,7 @@ describe("useGeolocation", () => {
     };
 
     const mockGeolocation = {
-      getCurrentPosition: jest
+      getCurrentPosition: vi
         .fn()
         .mockImplementationOnce((successCallback, errorCallback) =>
           errorCallback(PERMISSION_DENIED_ERROR)

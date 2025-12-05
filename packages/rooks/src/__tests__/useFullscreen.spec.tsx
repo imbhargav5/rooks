@@ -1,16 +1,16 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useFullscreen } from "@/hooks/useFullscreen";
 
 // Mock fullscreen API methods
-const mockRequestFullscreen = jest.fn();
-const mockExitFullscreen = jest.fn();
-const mockAddEventListener = jest.fn();
-const mockRemoveEventListener = jest.fn();
+const mockRequestFullscreen = vi.fn();
+const mockExitFullscreen = vi.fn();
+const mockAddEventListener = vi.fn();
+const mockRemoveEventListener = vi.fn();
 
 // Mock element for testing
 const mockElement = {
@@ -22,7 +22,7 @@ const mockElement = {
 
 describe("useFullscreen", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Mock document properties
     Object.defineProperty(document, 'fullscreenEnabled', {
@@ -179,7 +179,7 @@ describe("useFullscreen", () => {
 
     it("should call onChange callback when fullscreen changes", () => {
       expect.hasAssertions();
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       renderHook(() => useFullscreen({ onChange }));
       
       // Get the change handler that was registered

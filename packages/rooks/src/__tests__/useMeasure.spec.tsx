@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import {
@@ -9,25 +9,25 @@ import {
   waitFor,
   cleanup,
 } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useMeasure } from "@/hooks/useMeasure";
 
 // Mock console methods to avoid spam during tests
 const originalConsoleWarn = console.warn;
 
 describe("useMeasure", () => {
-  let mockObserve: jest.Mock;
-  let mockUnobserve: jest.Mock;
-  let mockDisconnect: jest.Mock;
+  let mockObserve: vi.Mock;
+  let mockUnobserve: vi.Mock;
+  let mockDisconnect: vi.Mock;
   let resizeObserverCallback: ResizeObserverCallback | null = null;
 
   beforeEach(() => {
     // Setup ResizeObserver mock
-    mockObserve = jest.fn();
-    mockUnobserve = jest.fn();
-    mockDisconnect = jest.fn();
+    mockObserve = vi.fn();
+    mockUnobserve = vi.fn();
+    mockDisconnect = vi.fn();
 
-    const MockResizeObserver = jest.fn().mockImplementation((callback) => {
+    const MockResizeObserver = vi.fn().mockImplementation((callback) => {
       resizeObserverCallback = callback;
       return {
         observe: mockObserve,
@@ -82,12 +82,12 @@ describe("useMeasure", () => {
     });
 
     // Suppress console warnings during tests
-    console.warn = jest.fn();
+    console.warn = vi.fn();
   });
 
   afterEach(() => {
     cleanup();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     console.warn = originalConsoleWarn;
     resizeObserverCallback = null;
   });
@@ -183,7 +183,7 @@ describe("useMeasure", () => {
 
     test("should call onMeasure callback when dimensions change", async () => {
       expect.hasAssertions();
-      const onMeasure = jest.fn();
+      const onMeasure = vi.fn();
 
       function TestComponent() {
         const [ref] = useMeasure({ onMeasure });
@@ -217,7 +217,7 @@ describe("useMeasure", () => {
 
     test("should trigger measurements on ResizeObserver callback", async () => {
       expect.hasAssertions();
-      const onMeasure = jest.fn();
+      const onMeasure = vi.fn();
 
       function TestComponent() {
         const [ref, { innerWidth, innerHeight }] = useMeasure({ onMeasure });
@@ -280,7 +280,7 @@ describe("useMeasure", () => {
 
     test("should not call onMeasure when disabled", async () => {
       expect.hasAssertions();
-      const onMeasure = jest.fn();
+      const onMeasure = vi.fn();
 
       function TestComponent() {
         const [ref] = useMeasure({ disabled: true, onMeasure });
@@ -301,7 +301,7 @@ describe("useMeasure", () => {
   describe("debounce functionality", () => {
     test("should debounce measurements", async () => {
       expect.hasAssertions();
-      const onMeasure = jest.fn();
+      const onMeasure = vi.fn();
 
       function TestComponent() {
         const [ref] = useMeasure({ 
@@ -421,23 +421,7 @@ describe("useMeasure", () => {
       global.ResizeObserver = originalResizeObserver;
     });
 
-    test("should warn about SSR environment", () => {
-      expect.hasAssertions();
-      
-      // Mock window as undefined (SSR)
-      const originalWindow = global.window;
-      // @ts-expect-error - Testing SSR case
-      delete global.window;
-
-      renderHook(() => useMeasure());
-
-      expect(console.warn).toHaveBeenCalledWith(
-        "useMeasure: window is undefined (SSR environment)"
-      );
-
-      // Restore window
-      global.window = originalWindow;
-    });
+    // SSR tests are in ssr.spec.ts which runs in Node environment
   });
 
   describe("edge cases", () => {

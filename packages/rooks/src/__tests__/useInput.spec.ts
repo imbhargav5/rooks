@@ -1,5 +1,6 @@
+import { vi } from "vitest";
 import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import type { ChangeEvent } from "react";
 import { useInput } from "../hooks/useInput";
 
@@ -150,7 +151,7 @@ describe("useInput", () => {
   describe("validation option", () => {
     it("should allow changes when validate returns true", () => {
       expect.hasAssertions();
-      const validate = jest.fn().mockReturnValue(true);
+      const validate = vi.fn().mockReturnValue(true);
       const { result } = renderHook(() => 
         useInput("initial", { validate })
       );
@@ -170,7 +171,7 @@ describe("useInput", () => {
 
     it("should prevent changes when validate returns false", () => {
       expect.hasAssertions();
-      const validate = jest.fn().mockReturnValue(false);
+      const validate = vi.fn().mockReturnValue(false);
       const { result } = renderHook(() => 
         useInput("initial", { validate })
       );
@@ -190,7 +191,7 @@ describe("useInput", () => {
 
     it("should validate with correct parameters", () => {
       expect.hasAssertions();
-      const validate = jest.fn().mockReturnValue(true);
+      const validate = vi.fn().mockReturnValue(true);
       const { result } = renderHook(() => 
         useInput("original", { validate })
       );
@@ -210,7 +211,7 @@ describe("useInput", () => {
 
     it("should handle validation with changing values", () => {
       expect.hasAssertions();
-      const validate = jest.fn((newValue: string, currentValue: string) => {
+      const validate = vi.fn((newValue: string, currentValue: string) => {
         return newValue.length <= 5; // Only allow strings of 5 characters or less
       });
       
@@ -244,7 +245,7 @@ describe("useInput", () => {
 
     it("should handle validate function that throws", () => {
       expect.hasAssertions();
-      const validate = jest.fn(() => {
+      const validate = vi.fn(() => {
         throw new Error("Validation error");
       });
       
@@ -320,7 +321,7 @@ describe("useInput", () => {
 
     it("should validate number inputs correctly", () => {
       expect.hasAssertions();
-      const validate = jest.fn((newValue: string | number, currentValue: string | number) => {
+      const validate = vi.fn((newValue: string | number, currentValue: string | number) => {
         const num = typeof newValue === 'string' ? parseFloat(newValue) : newValue;
         return !isNaN(num) && num >= 0;
       });
@@ -405,7 +406,7 @@ describe("useInput", () => {
   describe("function reference stability", () => {
     it("should maintain stable onChange reference when validation doesn't change", () => {
       expect.hasAssertions();
-      const validate = jest.fn().mockReturnValue(true);
+      const validate = vi.fn().mockReturnValue(true);
       const { result, rerender } = renderHook(() => 
         useInput("test", { validate })
       );
@@ -420,14 +421,14 @@ describe("useInput", () => {
 
     it("should update onChange reference when validation changes", () => {
       expect.hasAssertions();
-      let validate = jest.fn().mockReturnValue(true);
+      let validate = vi.fn().mockReturnValue(true);
       const { result, rerender } = renderHook(() => 
         useInput("test", { validate })
       );
 
       const initialOnChange = result.current.onChange;
 
-      validate = jest.fn().mockReturnValue(false);
+      validate = vi.fn().mockReturnValue(false);
       rerender();
 
       expect(result.current.onChange).not.toBe(initialOnChange);
@@ -503,7 +504,7 @@ describe("useInput", () => {
     it("should handle validation during rapid changes", () => {
       expect.hasAssertions();
       let callCount = 0;
-      const validate = jest.fn(() => {
+      const validate = vi.fn(() => {
         callCount++;
         return callCount % 2 === 1; // Only allow odd numbered calls
       });

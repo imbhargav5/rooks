@@ -1,6 +1,7 @@
+import { vi } from "vitest";
 import { useCountdown } from "@/hooks/useCountdown";
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe("useCountdown", () => {
   it("is defined", () => {
@@ -16,7 +17,7 @@ describe("useCountdown", () => {
   //   const advanceTimersInsideAct = time => {
   //     advancedTime += time;
   //     act(() => {
-  //       jest.advanceTimersByTime(time)
+  //       vi.advanceTimersByTime(time)
   //     });
   //   };
 
@@ -59,7 +60,7 @@ describe("useCountdown", () => {
 
   // it('should call onDown after every interval', () => {
   //   const endTime = new Date(now + 3000);
-  //   const onDown = jest.fn();
+  //   const onDown = vi.fn();
 
   //   renderHook(() => useCountdown(endTime, { onDown }));
 
@@ -76,7 +77,7 @@ describe("useCountdown", () => {
 
   // it('should call onEnd after it ends', () => {
   //   const endTime = new Date(now + 3000);
-  //   const onEnd = jest.fn();
+  //   const onEnd = vi.fn();
   //   renderHook(() => useCountdown(endTime, { interval: 1000, onEnd }));
   //   expect(onEnd).toHaveBeenCalledTimes(0);
   //   advanceTimersInsideAct(2000);

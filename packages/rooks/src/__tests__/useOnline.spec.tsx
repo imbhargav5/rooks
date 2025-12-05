@@ -1,14 +1,14 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useOnline } from "@/hooks/useOnline";
 
 describe("useOnline", () => {
-  let onlineGetter = jest.spyOn(window.navigator, "onLine", "get");
+  let onlineGetter = vi.spyOn(window.navigator, "onLine", "get");
 
   beforeEach(() => {
-    onlineGetter = jest.spyOn(window.navigator, "onLine", "get");
+    onlineGetter = vi.spyOn(window.navigator, "onLine", "get");
   });
 
   it("should be defined", () => {

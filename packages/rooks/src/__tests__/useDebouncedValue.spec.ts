@@ -1,5 +1,6 @@
-import type { RenderResult } from "@testing-library/react-hooks";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import type { RenderResult } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
@@ -14,10 +15,10 @@ const doNotExecute = (_func: () => void) => true;
 
 describe("useDebouncedValue", () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
   it("should be defined", () => {
     expect.hasAssertions();
@@ -62,7 +63,7 @@ describe("useDebouncedValue", () => {
         .current[0]
     ).toBeNull();
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
     expect(
       (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
@@ -80,7 +81,7 @@ describe("useDebouncedValue", () => {
     );
 
     act(() => {
-      jest.advanceTimersByTime(mockTimeout - 5);
+      vi.advanceTimersByTime(mockTimeout - 5);
     });
     expect(
       (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
@@ -89,7 +90,7 @@ describe("useDebouncedValue", () => {
 
     act(() => {
       // accounting for timing issues as it's not exactly accurate
-      jest.advanceTimersByTime(5);
+      vi.advanceTimersByTime(5);
     });
     expect(result.current[0]).toBe(mockValue);
   });
@@ -106,7 +107,7 @@ describe("useDebouncedValue", () => {
     );
 
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
     expect(result.current[0]).toBe(mockValue);
   });

@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { cleanup, render, act, fireEvent } from "@testing-library/react";
 import React, { useState } from "react";
 import { useThrottle } from "@/hooks/useThrottle";
@@ -11,7 +12,7 @@ describe("useThrottle hook", () => {
   // There's a ticket here - https://github.com/facebook/react/issues/14769
   // Tests are passing correctly, so that's just for clean console.
   beforeAll(() => {
-    jest.spyOn(console, "error").mockImplementation((...args) => {
+    vi.spyOn(console, "error").mockImplementation((...args) => {
       if (
         !args[0].includes(
           "Warning: An update to %s inside a test was not wrapped in act"
@@ -102,7 +103,7 @@ describe("useThrottle hook", () => {
 
   it("should update value twice when clicked twice, with 300ms break between them", async () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { getByTestId } = render(<App />);
     const throttleButton = getByTestId("throttle-button");
     const throttleValue = getByTestId("throttle-value");
@@ -112,7 +113,7 @@ describe("useThrottle hook", () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(TIMEOUT);
+      vi.advanceTimersByTime(TIMEOUT);
     });
 
     act(() => {
@@ -120,7 +121,7 @@ describe("useThrottle hook", () => {
     });
     expect(Number.parseInt(throttleValue.innerHTML)).toBe(2);
     act(() => {
-      jest.advanceTimersByTime(TIMEOUT);
+      vi.advanceTimersByTime(TIMEOUT);
     });
 
     act(() => {
@@ -131,7 +132,7 @@ describe("useThrottle hook", () => {
     });
     expect(Number.parseInt(throttleValue.innerHTML)).toBe(3);
 
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
   it("should update value of state according to argument passed in callback", async () => {
     expect.hasAssertions();

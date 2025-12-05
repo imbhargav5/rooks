@@ -1,8 +1,7 @@
 /* eslint-disable jest/no-disabled-tests */
 /**
- * @jest-environment jsdom
  */
-import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { renderHook, cleanup } from "@testing-library/react";
 import { useMouse } from "@/hooks/useMouse";
 
 describe.skip("useMouse", () => {

@@ -1,22 +1,22 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import React, { useState } from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useMutationObserverRef } from "@/hooks/useMutationObserverRef";
 
 // Mock MutationObserver
 const mockMutationObserver = {
-  observe: jest.fn(),
-  disconnect: jest.fn(),
+  observe: vi.fn(),
+  disconnect: vi.fn(),
 };
 
-const mockMutationObserverConstructor = jest.fn();
+const mockMutationObserverConstructor = vi.fn();
 
 describe("useMutationObserverRef", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Mock MutationObserver
     mockMutationObserverConstructor.mockImplementation(() => mockMutationObserver);
@@ -24,7 +24,7 @@ describe("useMutationObserverRef", () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -35,7 +35,7 @@ describe("useMutationObserverRef", () => {
   describe("Basic Functionality", () => {
     it("should return a ref function", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -45,7 +45,7 @@ describe("useMutationObserverRef", () => {
 
     it("should create MutationObserver when element is set", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -66,7 +66,7 @@ describe("useMutationObserverRef", () => {
 
     it("should not create MutationObserver when element is null", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -81,7 +81,7 @@ describe("useMutationObserverRef", () => {
 
     it("should disconnect observer when element is set to null", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -106,7 +106,7 @@ describe("useMutationObserverRef", () => {
   describe("Options Handling", () => {
     it("should use default options when none provided", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -126,7 +126,7 @@ describe("useMutationObserverRef", () => {
 
     it("should use custom options when provided", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const customOptions = {
         attributes: false,
         characterData: false,
@@ -151,7 +151,7 @@ describe("useMutationObserverRef", () => {
 
     it("should recreate observer when options change", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const initialOptions = { childList: true };
       const newOptions = { childList: false, attributes: true };
       
@@ -182,7 +182,7 @@ describe("useMutationObserverRef", () => {
   describe("Callback Handling", () => {
     it("should call callback when mutations occur", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -228,8 +228,8 @@ describe("useMutationObserverRef", () => {
 
     it("should update callback when callback changes", () => {
       expect.hasAssertions();
-      const callback1 = jest.fn();
-      const callback2 = jest.fn();
+      const callback1 = vi.fn();
+      const callback2 = vi.fn();
       
       const { result, rerender } = renderHook(
         ({ callback }) => useMutationObserverRef(callback),
@@ -255,7 +255,7 @@ describe("useMutationObserverRef", () => {
   describe("Cleanup", () => {
     it("should disconnect observer on unmount", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result, unmount } = renderHook(() => 
         useMutationObserverRef(callback)
       );
@@ -274,7 +274,7 @@ describe("useMutationObserverRef", () => {
 
     it("should disconnect observer when switching elements", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -306,7 +306,7 @@ describe("useMutationObserverRef", () => {
         const [mutationCount, setMutationCount] = useState(0);
         const [lastMutationType, setLastMutationType] = useState<string>('none');
         
-        const callback = jest.fn((mutations: MutationRecord[]) => {
+        const callback = vi.fn((mutations: MutationRecord[]) => {
           setMutationCount(prev => prev + mutations.length);
           if (mutations.length > 0) {
             setLastMutationType(mutations[0]?.type || 'none');
@@ -389,7 +389,7 @@ describe("useMutationObserverRef", () => {
   describe("Edge Cases", () => {
     it("should handle rapid element changes", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result } = renderHook(() => useMutationObserverRef(callback));
       
       const [ref] = result.current;
@@ -424,7 +424,7 @@ describe("useMutationObserverRef", () => {
 
     it("should maintain stable ref function identity", () => {
       expect.hasAssertions();
-      const callback = jest.fn();
+      const callback = vi.fn();
       const { result, rerender } = renderHook(() => 
         useMutationObserverRef(callback)
       );
@@ -444,7 +444,7 @@ describe("useMutationObserverRef", () => {
         throw new Error("MutationObserver not supported");
       });
       
-      const callback = jest.fn();
+      const callback = vi.fn();
       
       expect(() => {
         renderHook(() => useMutationObserverRef(callback));

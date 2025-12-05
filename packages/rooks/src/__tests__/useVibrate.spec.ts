@@ -1,13 +1,14 @@
+import { vi } from "vitest";
 import { useVibrate } from "@/hooks/useVibrate";
 import { waitFor } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 
 describe.skip("useVibrate", () => {
   let originalVibrate: typeof navigator.vibrate;
 
   beforeEach(() => {
     originalVibrate = navigator.vibrate;
-    navigator.vibrate = jest.fn();
+    navigator.vibrate = vi.fn();
   });
 
   afterEach(() => {
@@ -72,7 +73,7 @@ describe.skip("useVibrate", () => {
   it("should warn when the Vibration API is not supported", async () => {
     expect.hasAssertions();
     const oldVibrate = navigator.vibrate;
-    const warnSpy = jest.spyOn(console, "warn").mockImplementation();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation();
 
     // Temporarily remove the vibrate function to simulate unsupported API
     Object.defineProperty(navigator, "vibrate", {

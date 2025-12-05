@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useNetworkInformation } from "@/hooks/useNetworkInformation";
 
 describe("useNetworkInformation", () => {
@@ -15,8 +15,8 @@ describe("useNetworkInformation", () => {
       downlinkMax: 20,
       rtt: 50,
       saveData: false,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     };
 
     Object.defineProperty(navigator, "connection", {
@@ -27,7 +27,7 @@ describe("useNetworkInformation", () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -111,8 +111,8 @@ describe("useNetworkInformation", () => {
   it("should handle connection with missing properties", () => {
     expect.hasAssertions();
     const minimalConnection = {
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     };
 
     Object.defineProperty(navigator, "connection", {

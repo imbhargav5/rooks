@@ -1,4 +1,5 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook } from "@testing-library/react";
 import { act } from "@testing-library/react";
 import { useDocumentVisibilityState } from "@/hooks/useDocumentVisibilityState";
 
@@ -7,21 +8,21 @@ describe("useDocumentVisibilityState", () => {
   let visibilityChangeCallback: (() => void) | null = null;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     visibilityChangeCallback = null;
 
     // Mock document.addEventListener to capture the callback
-    jest.spyOn(document, 'addEventListener').mockImplementation((event, callback) => {
+    vi.spyOn(document, 'addEventListener').mockImplementation((event, callback) => {
       if (event === 'visibilitychange') {
         visibilityChangeCallback = callback as () => void;
       }
     });
 
-    jest.spyOn(document, 'removeEventListener');
+    vi.spyOn(document, 'removeEventListener');
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
 
     // Restore original visibility state
     Object.defineProperty(document, 'visibilityState', {

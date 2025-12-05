@@ -1,4 +1,5 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook } from "@testing-library/react";
 import TestRenderer from "react-test-renderer";
 import { useScreenDetailsApi } from "@/hooks/useScreenDetailsApi";
 
@@ -22,8 +23,8 @@ const mockScreenDetails = {
       isPrimary: true,
       isInternal: true,
       label: "Built-in Display",
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     },
     {
       availLeft: 1920,
@@ -40,8 +41,8 @@ const mockScreenDetails = {
       isPrimary: false,
       isInternal: false,
       label: "External Display",
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     },
   ],
   currentScreen: {
@@ -59,15 +60,15 @@ const mockScreenDetails = {
     isPrimary: true,
     isInternal: true,
     label: "Built-in Display",
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
   },
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
 };
 
-const mockPermissionsQuery = jest.fn();
-const mockGetScreenDetails = jest.fn();
+const mockPermissionsQuery = vi.fn();
+const mockGetScreenDetails = vi.fn();
 
 // Mock global objects
 const originalGetScreenDetails = (window as any).getScreenDetails;
@@ -87,7 +88,7 @@ Object.defineProperty(navigator, 'permissions', {
 
 describe("useScreenDetailsApi", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Ensure window.getScreenDetails is properly mocked before each test
     // Delete the property first, then redefine it
@@ -103,13 +104,13 @@ describe("useScreenDetailsApi", () => {
     mockPermissionsQuery.mockResolvedValue({ 
       state: 'granted',
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     });
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should be defined", () => {
@@ -174,8 +175,8 @@ describe("useScreenDetailsApi", () => {
     mockPermissionsQuery.mockResolvedValue({ 
       state: 'prompt',
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     });
 
     const { result } = renderHook(() => useScreenDetailsApi());
@@ -194,8 +195,8 @@ describe("useScreenDetailsApi", () => {
     mockPermissionsQuery.mockResolvedValue({ 
       state: 'denied',
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     });
 
     const { result } = renderHook(() => useScreenDetailsApi());
@@ -230,8 +231,8 @@ describe("useScreenDetailsApi", () => {
     mockPermissionsQuery.mockResolvedValue({ 
       state: 'granted',
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     });
 
     const { result } = renderHook(() => useScreenDetailsApi());
@@ -255,8 +256,8 @@ describe("useScreenDetailsApi", () => {
     mockPermissionsQuery.mockResolvedValue({ 
       state: 'granted',
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     });
 
     const { result } = renderHook(() => useScreenDetailsApi());
@@ -306,8 +307,8 @@ describe("useScreenDetailsApi", () => {
         isPrimary: false,
         isInternal: false,
         label: "Third Display",
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       }],
     };
 
@@ -554,12 +555,12 @@ describe("useScreenDetailsApi", () => {
     const mockPermissionStatus = {
       state: 'granted',
       onchange: null,
-      addEventListener: jest.fn((event, handler) => {
+      addEventListener: vi.fn((event, handler) => {
         if (event === 'change') {
           permissionChangeHandler = handler;
         }
       }),
-      removeEventListener: jest.fn(),
+      removeEventListener: vi.fn(),
     };
 
     mockPermissionsQuery.mockResolvedValue(mockPermissionStatus);

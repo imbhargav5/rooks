@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React, { Suspense } from "react";
 import {
@@ -14,13 +14,13 @@ import { useSuspenseSessionStorageState, clearCache } from "@/hooks/useSuspenseS
 
 // Mock console methods to reduce test noise
 beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
 
 afterAll(() => {
-    (console.error as jest.Mock).mockRestore();
-    (console.warn as jest.Mock).mockRestore();
+    (console.error as vi.Mock).mockRestore();
+    (console.warn as vi.Mock).mockRestore();
 });
 
 // Test component that uses the hook
@@ -512,7 +512,7 @@ describe("useSuspenseSessionStorageState", () => {
 
         // Mock sessionStorage to throw errors
         const originalSetItem = Storage.prototype.setItem;
-        Storage.prototype.setItem = jest.fn(() => {
+        Storage.prototype.setItem = vi.fn(() => {
             throw new Error("Storage quota exceeded");
         });
 

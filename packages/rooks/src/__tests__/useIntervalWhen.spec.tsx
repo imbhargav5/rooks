@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { renderHook, cleanup } from "@testing-library/react";
 import { useState } from "react";
 import TestRenderer from "react-test-renderer";
 import { useIntervalWhen } from "@/hooks/useIntervalWhen";
@@ -21,8 +21,8 @@ describe.skip("useIntervalWhen", () => {
   const EAGER = true;
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.spyOn(global, "setInterval");
+    vi.useFakeTimers();
+    vi.spyOn(global, "setInterval");
     useHook = function (when: boolean, eager = false) {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
@@ -44,8 +44,8 @@ describe.skip("useIntervalWhen", () => {
 
   afterEach(() => {
     void cleanup();
-    jest.useRealTimers();
-    jest.clearAllTimers();
+    vi.useRealTimers();
+    vi.clearAllTimers();
   });
 
   it("should be defined", () => {
@@ -54,84 +54,84 @@ describe.skip("useIntervalWhen", () => {
   });
   it("should start timer when started with start function", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result } = renderHook(() => useHook(true));
     void act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
     expect(result.current.currentValue).toBe(1);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("should call the callback eagerly", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result } = renderHook(() => useHook(true, EAGER));
     // The value was already incremented because we use useIntervalWhen in EAGER mode
     expect(result.current.currentValue).toBe(1);
     void act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
     // The value was incremented twice: one time by the setInterval and one time due to the EAGER
     expect(result.current.currentValue).toBe(2);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("should not start the timer when the condition is false", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result } = renderHook(() => useHook(false));
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(0);
     expect(result.current.currentValue).toBe(0);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
   it("should stop the timer when the condition becomes false", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result, rerender } = renderHook(({ when }) => useHook(when), {
       initialProps: { when: true },
     });
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
     expect(result.current.currentValue).toBe(1);
 
     rerender({ when: false });
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(result.current.currentValue).toBe(1);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
   it("should resume the timer when the condition becomes true again", () => {
     expect.hasAssertions();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { result, rerender } = renderHook(({ when }) => useHook(when), {
       initialProps: { when: true },
     });
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
     expect(result.current.currentValue).toBe(1);
 
     rerender({ when: false });
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(result.current.currentValue).toBe(1);
 
     rerender({ when: true });
     act(() => {
-      jest.advanceTimersByTime(1_000);
+      vi.advanceTimersByTime(1_000);
     });
     expect(result.current.currentValue).toBe(2);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 });

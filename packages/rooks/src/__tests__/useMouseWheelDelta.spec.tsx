@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useMouseWheelDelta } from "@/hooks/useMouseWheelDelta";
 
 async function wait(ms: number) {

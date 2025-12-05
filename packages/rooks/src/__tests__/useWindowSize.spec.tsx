@@ -1,17 +1,17 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { act } from "@testing-library/react";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 describe("useWindowSize", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -35,7 +35,7 @@ describe("useWindowSize", () => {
 
   it("should add event listener on mount", () => {
     expect.hasAssertions();
-    const addEventListenerSpy = jest.spyOn(window, 'addEventListener');
+    const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
 
     renderHook(() => useWindowSize());
 
@@ -44,7 +44,7 @@ describe("useWindowSize", () => {
 
   it("should remove event listener on unmount", () => {
     expect.hasAssertions();
-    const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener');
+    const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
 
     const { unmount } = renderHook(() => useWindowSize());
     unmount();
@@ -56,7 +56,7 @@ describe("useWindowSize", () => {
     expect.hasAssertions();
     let resizeCallback: (() => void) | undefined;
 
-    jest.spyOn(window, 'addEventListener').mockImplementation((event, callback) => {
+    vi.spyOn(window, 'addEventListener').mockImplementation((event, callback) => {
       if (event === 'resize') {
         resizeCallback = callback as () => void;
       }

@@ -1,5 +1,6 @@
+import { vi } from "vitest";
 import { fireEvent } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useOnWindowResize } from "@/hooks/useOnWindowResize";
 
 describe("useOnWindowResize", () => {
@@ -9,7 +10,7 @@ describe("useOnWindowResize", () => {
   });
 
   describe("basic", () => {
-    const mockCallback = jest.fn(() => {});
+    const mockCallback = vi.fn(() => {});
     it("should call callback after resize", () => {
       expect.hasAssertions();
       renderHook(() => useOnWindowResize(mockCallback));

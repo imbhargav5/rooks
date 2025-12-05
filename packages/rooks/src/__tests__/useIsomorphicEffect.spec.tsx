@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import React, { useLayoutEffect, useEffect } from "react";
 import { useIsomorphicEffect } from "@/hooks/useIsomorphicEffect";
 
@@ -135,7 +135,7 @@ describe("useIsomorphicEffect", () => {
       delete (global as any).window;
       
       // Re-import the hook to get the server version
-      jest.resetModules();
+      vi.resetModules();
       const { useIsomorphicEffect: serverUseIsomorphicEffect } = require("@/hooks/useIsomorphicEffect");
       
       expect(serverUseIsomorphicEffect).toBe(useEffect);
@@ -188,7 +188,7 @@ describe("useIsomorphicEffect", () => {
     it.skip("should handle effect that throws an error", () => {
       expect.hasAssertions();
       
-      const errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
       
       expect(() => {
         renderHook(() => {
@@ -204,7 +204,7 @@ describe("useIsomorphicEffect", () => {
     it("should handle cleanup that throws an error", () => {
       expect.hasAssertions();
       
-      const errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
       
       const { unmount } = renderHook(() => {
         useIsomorphicEffect(() => {

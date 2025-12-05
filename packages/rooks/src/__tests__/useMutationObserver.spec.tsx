@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React, { useRef } from "react";
 import { useMutationObserver } from "@/hooks/useMutationObserver";
@@ -45,8 +46,8 @@ describe("useMutationObserver", () => {
 
   it("should observe the same DOM node multiple times when provide multiple listeners", async () => {
     expect.hasAssertions();
-    const listener1 = jest.fn();
-    const listener2 = jest.fn();
+    const listener1 = vi.fn();
+    const listener2 = vi.fn();
     const TestComp = () => {
       const ref = useRef<HTMLDivElement>(null);
       useMutationObserver(ref, listener1);

@@ -1,11 +1,12 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook } from "@testing-library/react";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 describe("usePrefersReducedMotion", () => {
-    let matchMediaMock: jest.Mock;
+    let matchMediaMock: vi.Mock;
 
     beforeEach(() => {
-        matchMediaMock = jest.fn();
+        matchMediaMock = vi.fn();
         Object.defineProperty(window, "matchMedia", {
             writable: true,
             value: matchMediaMock,
@@ -13,16 +14,16 @@ describe("usePrefersReducedMotion", () => {
     });
 
     afterEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     it("should return true if prefers-reduced-motion is reduce", () => {
         matchMediaMock.mockReturnValue({
             matches: true,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
+            addListener: vi.fn(),
+            removeListener: vi.fn(),
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
         });
 
         const { result } = renderHook(() => usePrefersReducedMotion());
@@ -33,10 +34,10 @@ describe("usePrefersReducedMotion", () => {
     it("should return false if prefers-reduced-motion is not reduce", () => {
         matchMediaMock.mockReturnValue({
             matches: false,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
+            addListener: vi.fn(),
+            removeListener: vi.fn(),
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
         });
 
         const { result } = renderHook(() => usePrefersReducedMotion());

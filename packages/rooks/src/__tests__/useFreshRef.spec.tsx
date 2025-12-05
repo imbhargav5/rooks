@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, cleanup, act } from "@testing-library/react-hooks";
+import { renderHook, cleanup, act } from "@testing-library/react";
 import { useCallback, useEffect, useState } from "react";
 import { useFreshRef } from "@/hooks/useFreshRef";
 
@@ -10,8 +10,8 @@ describe.skip("useFreshRef", () => {
   let useHook: () => { currentValue: number };
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.spyOn(global, "setInterval");
+    vi.useFakeTimers();
+    vi.spyOn(global, "setInterval");
     useHook = function () {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
@@ -37,7 +37,7 @@ describe.skip("useFreshRef", () => {
 
   afterEach(() => {
     cleanup();
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("should be defined", () => {
@@ -48,7 +48,7 @@ describe.skip("useFreshRef", () => {
     expect.hasAssertions();
     const { result } = renderHook(useHook);
     act(() => {
-      jest.advanceTimersByTime(5_000);
+      vi.advanceTimersByTime(5_000);
     });
     expect(setInterval).toHaveBeenCalledTimes(1);
     expect(result.current.currentValue).toBe(5);

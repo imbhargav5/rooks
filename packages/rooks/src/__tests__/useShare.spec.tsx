@@ -1,19 +1,19 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useShare } from "@/hooks/useShare";
 
 describe("useShare", () => {
-  let mockShare: jest.Mock;
+  let mockShare: vi.Mock;
 
   beforeEach(() => {
-    mockShare = jest.fn();
+    mockShare = vi.fn();
     Object.assign(navigator, { share: mockShare });
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -134,12 +134,16 @@ describe("useShare", () => {
 
     const { result } = renderHook(() => useShare());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.share({ title: "Test" });
-      })
-    ).rejects.toThrow("Share failed");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
+    expect(thrownError?.message).toBe("Share failed");
     expect(result.current.error).toEqual(shareError);
     expect(result.current.isSharing).toBe(false);
   });
@@ -150,12 +154,16 @@ describe("useShare", () => {
 
     const { result } = renderHook(() => useShare());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.share({ title: "Test" });
-      })
-    ).rejects.toThrow("Failed to share");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
+    expect(thrownError?.message).toBe("Failed to share");
     expect(result.current.error?.message).toBe("Failed to share");
   });
 
@@ -167,15 +175,17 @@ describe("useShare", () => {
 
     const { result } = renderHook(() => useShare());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.share({ title: "Test" });
-      })
-    ).rejects.toThrow("Web Share API is not supported");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
-    expect(result.current.error?.message).toBe(
-      "Web Share API is not supported"
-    );
+    expect(thrownError?.message).toBe("Web Share API is not supported");
+    expect(result.current.error?.message).toBe("Web Share API is not supported");
 
     // Restore
     Object.assign(navigator, { share: originalShare });
@@ -190,11 +200,13 @@ describe("useShare", () => {
     const { result } = renderHook(() => useShare());
 
     // First share fails
-    await expect(
-      act(async () => {
+    await act(async () => {
+      try {
         await result.current.share({ title: "Test 1" });
-      })
-    ).rejects.toThrow("First error");
+      } catch {
+        // Expected to throw
+      }
+    });
 
     expect(result.current.error).not.toBe(null);
 

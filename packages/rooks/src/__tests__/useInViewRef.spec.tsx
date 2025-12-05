@@ -1,17 +1,18 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useInViewRef } from "@/hooks/useInViewRef";
 
 describe("useInViewRef", () => {
-  let mockIntersectionObserver: jest.Mock;
+  let mockIntersectionObserver: vi.Mock;
   let observerInstances: any[];
 
   beforeEach(() => {
     observerInstances = [];
-    mockIntersectionObserver = jest.fn((callback, options) => {
+    mockIntersectionObserver = vi.fn((callback, options) => {
       const instance = {
-        observe: jest.fn(),
-        unobserve: jest.fn(),
-        disconnect: jest.fn(),
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
         callback,
         options,
       };
@@ -30,7 +31,7 @@ describe("useInViewRef", () => {
 
   it("should call IntersectionObserver with correct options", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const options: IntersectionObserverInit = {
       root: null,
       rootMargin: "0px 0px 0px 0px",
@@ -52,7 +53,7 @@ describe("useInViewRef", () => {
 
   it("should update inView value when the element enters or leaves the viewport", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() => useInViewRef(callback));
 
     act(() => {
@@ -91,7 +92,7 @@ describe("useInViewRef", () => {
 
   it("should call the provided callback when the element enters or leaves the viewport", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const { result } = renderHook(() => useInViewRef(callback));
 
     act(() => {
@@ -143,7 +144,7 @@ describe("useInViewRef", () => {
 
   it("should work with both callback and options as arguments", () => {
     expect.hasAssertions();
-    const callback = jest.fn();
+    const callback = vi.fn();
     const options: IntersectionObserverInit = {
       root: null,
       rootMargin: "0px 0px 0px 0px",

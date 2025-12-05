@@ -1,7 +1,7 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, cleanup } from "@testing-library/react-hooks";
+import { renderHook, cleanup } from "@testing-library/react";
 import { useEffect, useState } from "react";
 import TestRenderer from "react-test-renderer";
 import { useFreshTick } from "@/hooks/useFreshTick";
@@ -10,7 +10,7 @@ const { act } = TestRenderer;
 
 // eslint-disable-next-line jest/no-disabled-tests
 describe.skip("useFreshTick", () => {
-  const intervalCallback = jest.fn();
+  const intervalCallback = vi.fn();
   let useHook = function () {
     const [currentValue, setCurrentValue] = useState(0);
     function increment() {
@@ -32,8 +32,8 @@ describe.skip("useFreshTick", () => {
   };
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.spyOn(global, "setInterval");
+    vi.useFakeTimers();
+    vi.spyOn(global, "setInterval");
     useHook = function () {
       const [currentValue, setCurrentValue] = useState(0);
       function increment() {
@@ -56,7 +56,7 @@ describe.skip("useFreshTick", () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
     void cleanup();
   });
 
@@ -68,7 +68,7 @@ describe.skip("useFreshTick", () => {
     expect.hasAssertions();
     const { result, unmount } = renderHook(() => useHook());
     void act(() => {
-      jest.advanceTimersByTime(5_000);
+      vi.advanceTimersByTime(5_000);
     });
     unmount();
     expect(setInterval).toHaveBeenCalledTimes(1);

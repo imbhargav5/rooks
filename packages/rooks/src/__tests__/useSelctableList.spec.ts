@@ -1,11 +1,12 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
 import { useSelectableList } from "@/hooks/useSelectableList";
 
-jest.spyOn(console, "warn").mockImplementation(jest.fn);
+vi.spyOn(console, "warn").mockImplementation(vi.fn());
 
 describe("useSelctableList", () => {
   afterEach(() => {
-    (console.warn as jest.Mock).mockReset();
+    (console.warn as vi.Mock).mockReset();
   });
   const { result } = renderHook(() => useSelectableList([1, 2, 3]));
 
@@ -90,7 +91,7 @@ describe("useSelctableList", () => {
         1,
         "updateSelection failed. Does the value 22 exist in the list?"
       );
-      (console.warn as jest.Mock).mockReset();
+      (console.warn as vi.Mock).mockReset();
 
       // default
       expect(beforeIndex).toBe(afterIndex);
@@ -148,7 +149,7 @@ describe("useSelctableList", () => {
         1,
         "allowUnselected is false. Cannot unselect item"
       );
-      (console.warn as jest.Mock).mockReset();
+      (console.warn as vi.Mock).mockReset();
     });
     it("should toggle selected value", () => {
       expect.hasAssertions();
@@ -183,7 +184,7 @@ describe("useSelctableList", () => {
       // default
       expect(beforeIndex).toBe(afterIndex);
       expect(beforeValue).toBe(afterValue);
-      (console.warn as jest.Mock).mockReset();
+      (console.warn as vi.Mock).mockReset();
     });
 
     it("console.warn", () => {

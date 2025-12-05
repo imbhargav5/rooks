@@ -1,5 +1,4 @@
 /**
- * @jest-environment jsdom
  */
 import {
   render,

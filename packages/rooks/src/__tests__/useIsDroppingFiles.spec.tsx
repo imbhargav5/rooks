@@ -21,7 +21,7 @@ describe("useIsDroppingFiles", () => {
     const { getByTestId } = render(<TestComponent />);
     const dropZone = getByTestId("drop-zone");
 
-    expect(dropZone).toHaveStyle("background-color: white");
+    expect(dropZone).toHaveStyle("background-color: rgb(255, 255, 255)");
 
     act(() => {
       fireEvent.dragEnter(dropZone, {
@@ -41,14 +41,14 @@ describe("useIsDroppingFiles", () => {
       });
     });
 
-    await waitFor(() => expect(dropZone).toHaveStyle("background-color: red"));
+    await waitFor(() => expect(dropZone).toHaveStyle("background-color: rgb(255, 0, 0)"));
 
     act(() => {
       fireEvent.dragLeave(dropZone);
     });
 
     await waitFor(() =>
-      expect(dropZone).toHaveStyle("background-color: white")
+      expect(dropZone).toHaveStyle("background-color: rgb(255, 255, 255)")
     );
   });
 
@@ -69,7 +69,7 @@ describe("useIsDroppingFiles", () => {
     const { getByTestId } = render(<TestComponent />);
     const windowDropZone = getByTestId("window-drop-zone");
 
-    expect(windowDropZone).toHaveStyle("background-color: white");
+    expect(windowDropZone).toHaveStyle("background-color: rgb(255, 255, 255)");
 
     act(() => {
       fireEvent.dragEnter(window, {
@@ -90,7 +90,7 @@ describe("useIsDroppingFiles", () => {
     });
 
     await waitFor(() =>
-      expect(windowDropZone).toHaveStyle("background-color: red")
+      expect(windowDropZone).toHaveStyle("background-color: rgb(255, 0, 0)")
     );
 
     act(() => {
@@ -98,7 +98,7 @@ describe("useIsDroppingFiles", () => {
     });
 
     await waitFor(() =>
-      expect(windowDropZone).toHaveStyle("background-color: white")
+      expect(windowDropZone).toHaveStyle("background-color: rgb(255, 255, 255)")
     );
   });
 });

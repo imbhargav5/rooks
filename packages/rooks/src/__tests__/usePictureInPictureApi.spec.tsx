@@ -1,21 +1,22 @@
+import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { usePictureInPictureApi } from "@/hooks/usePictureInPictureApi";
 import { RefObject } from "react";
 
 // Mock the Picture-in-Picture API
-const mockRequestPictureInPicture = jest.fn();
-const mockExitPictureInPicture = jest.fn();
-const mockAddEventListener = jest.fn();
-const mockRemoveEventListener = jest.fn();
+const mockRequestPictureInPicture = vi.fn();
+const mockExitPictureInPicture = vi.fn();
+const mockAddEventListener = vi.fn();
+const mockRemoveEventListener = vi.fn();
 
 // Mock PictureInPictureWindow
 const mockPictureInPictureWindow = {
   width: 640,
   height: 360,
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
   onresize: null,
-  dispatchEvent: jest.fn(),
+  dispatchEvent: vi.fn(),
 } as unknown as PictureInPictureWindow;
 
 // Mock video element
@@ -55,7 +56,7 @@ Object.defineProperty(document, 'exitPictureInPicture', {
 
 describe("usePictureInPictureApi", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     (document as any).pictureInPictureElement = null;
     (document as any).pictureInPictureEnabled = true;
     mockVideoElement.disablePictureInPicture = false;
@@ -551,9 +552,9 @@ describe("usePictureInPictureApi", () => {
   describe("Video Element Changes", () => {
     it("should handle video element changing during hook lifetime", () => {
       const newVideoElement = {
-        requestPictureInPicture: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        requestPictureInPicture: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
         disablePictureInPicture: false,
       } as unknown as HTMLVideoElement;
 
@@ -579,9 +580,9 @@ describe("usePictureInPictureApi", () => {
 
     it("should clean up event listeners when video element changes", () => {
       const newVideoElement = {
-        requestPictureInPicture: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        requestPictureInPicture: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
         disablePictureInPicture: false,
       } as unknown as HTMLVideoElement;
 

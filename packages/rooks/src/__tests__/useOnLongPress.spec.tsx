@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
@@ -16,12 +16,12 @@ describe("useOnLongPress", () => {
 
 describe("useOnLongPress behavior", () => {
   const LONG_PRESS_DURATION = 300;
-  let callback: jest.Mock;
-  let onClick: jest.Mock;
+  let callback: vi.Mock;
+  let onClick: vi.Mock;
 
   beforeEach(() => {
-    callback = jest.fn();
-    onClick = jest.fn();
+    callback = vi.fn();
+    onClick = vi.fn();
   });
 
   it("triggers long press callback when the button is pressed for the specified duration", async () => {

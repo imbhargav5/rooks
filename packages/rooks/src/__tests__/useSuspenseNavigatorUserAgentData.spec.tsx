@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import React, { Suspense } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { useSuspenseNavigatorUserAgentData } from "@/hooks/useSuspenseNavigatorUserAgentData";
@@ -15,11 +16,11 @@ type HighEntropyHint =
   | "wow64";
 
 // Mock navigator.userAgentData
-const mockGetHighEntropyValues = jest.fn();
+const mockGetHighEntropyValues = vi.fn();
 
 // Mock NavigatorUAData interface
 interface MockNavigatorUAData {
-  getHighEntropyValues: jest.MockedFunction<any>;
+  getHighEntropyValues: vi.MockedFunction<any>;
   brands: Array<{ brand: string; version: string }>;
   mobile: boolean;
   platform: string;
@@ -36,7 +37,7 @@ const createMockUserAgentData = (): MockNavigatorUAData => ({
 const originalNavigator = global.navigator;
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   clearCache(); // Clear the hook's internal cache
   // Reset navigator mock
   Object.defineProperty(global, "navigator", {

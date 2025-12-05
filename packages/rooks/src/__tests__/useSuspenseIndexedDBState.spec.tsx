@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React, { Suspense } from "react";
 import {
@@ -56,13 +56,13 @@ if (typeof global.BroadcastChannel === "undefined") {
 
 // Mock console methods to reduce test noise
 beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => { });
-    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    vi.spyOn(console, 'error').mockImplementation(() => { });
+    vi.spyOn(console, 'warn').mockImplementation(() => { });
 });
 
 afterAll(() => {
-    (console.error as jest.Mock).mockRestore();
-    (console.warn as jest.Mock).mockRestore();
+    (console.error as vi.Mock).mockRestore();
+    (console.warn as vi.Mock).mockRestore();
 });
 
 // Test component that uses the hook

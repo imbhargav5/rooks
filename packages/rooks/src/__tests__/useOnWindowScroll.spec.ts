@@ -1,5 +1,6 @@
+import { vi } from "vitest";
 import { fireEvent } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useOnWindowScroll } from "@/hooks/useOnWindowScroll";
 
 describe("useOnWindowScroll", () => {
@@ -9,7 +10,7 @@ describe("useOnWindowScroll", () => {
   });
 
   describe("basic", () => {
-    const mockCallback = jest.fn(() => {});
+    const mockCallback = vi.fn(() => {});
     it("should call callback after resize", () => {
       expect.hasAssertions();
       renderHook(() => useOnWindowScroll(mockCallback));

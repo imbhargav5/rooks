@@ -1,30 +1,30 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useBoundingclientrectRef } from "@/hooks/useBoundingclientrectRef";
 
 // Mock getBoundingClientRect
-const mockGetBoundingClientRect = jest.fn();
+const mockGetBoundingClientRect = vi.fn();
 
 // Mock ResizeObserver
 const mockResizeObserver = {
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 };
 
 // Mock MutationObserver
 const mockMutationObserver = {
-  observe: jest.fn(),
-  disconnect: jest.fn(),
+  observe: vi.fn(),
+  disconnect: vi.fn(),
 };
 
 describe("useBoundingclientrectRef", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Mock getBoundingClientRect on HTMLElement prototype
     mockGetBoundingClientRect.mockReturnValue({
@@ -46,14 +46,14 @@ describe("useBoundingclientrectRef", () => {
     });
     
     // Mock ResizeObserver
-    global.ResizeObserver = jest.fn().mockImplementation(() => mockResizeObserver);
+    global.ResizeObserver = vi.fn().mockImplementation(() => mockResizeObserver);
     
     // Mock MutationObserver
-    global.MutationObserver = jest.fn().mockImplementation(() => mockMutationObserver);
+    global.MutationObserver = vi.fn().mockImplementation(() => mockMutationObserver);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {

@@ -1,4 +1,4 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useSelect } from "@/hooks/useSelect";
 
 describe("useSelect", () => {

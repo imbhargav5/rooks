@@ -1,16 +1,16 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 import { useClipboard } from "@/hooks/useClipboard";
 
 describe("useClipboard", () => {
-  let clipboardWriteText: jest.Mock;
-  let clipboardReadText: jest.Mock;
+  let clipboardWriteText: vi.Mock;
+  let clipboardReadText: vi.Mock;
 
   beforeEach(() => {
-    clipboardWriteText = jest.fn();
-    clipboardReadText = jest.fn();
+    clipboardWriteText = vi.fn();
+    clipboardReadText = vi.fn();
 
     Object.assign(navigator, {
       clipboard: {
@@ -21,7 +21,7 @@ describe("useClipboard", () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should be defined", () => {
@@ -83,12 +83,16 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.copy("Test");
-      })
-    ).rejects.toThrow("Permission denied");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
+    expect(thrownError?.message).toBe("Permission denied");
     expect(result.current.error).toEqual(copyError);
   });
 
@@ -98,12 +102,16 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.copy("Test");
-      })
-    ).rejects.toThrow("Failed to copy to clipboard");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
+    expect(thrownError?.message).toBe("Failed to copy to clipboard");
     expect(result.current.error?.message).toBe("Failed to copy to clipboard");
   });
 
@@ -115,15 +123,17 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.copy("Test");
-      })
-    ).rejects.toThrow("Clipboard API is not supported");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
-    expect(result.current.error?.message).toBe(
-      "Clipboard API is not supported"
-    );
+    expect(thrownError?.message).toBe("Clipboard API is not supported");
+    expect(result.current.error?.message).toBe("Clipboard API is not supported");
 
     // Restore
     Object.assign(navigator, { clipboard: originalClipboard });
@@ -151,12 +161,16 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.paste();
-      })
-    ).rejects.toThrow("Permission denied");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
+    expect(thrownError?.message).toBe("Permission denied");
     expect(result.current.error).toEqual(pasteError);
   });
 
@@ -166,15 +180,17 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.paste();
-      })
-    ).rejects.toThrow("Failed to read from clipboard");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
-    expect(result.current.error?.message).toBe(
-      "Failed to read from clipboard"
-    );
+    expect(thrownError?.message).toBe("Failed to read from clipboard");
+    expect(result.current.error?.message).toBe("Failed to read from clipboard");
   });
 
   it("should throw error when pasting without clipboard support", async () => {
@@ -185,15 +201,17 @@ describe("useClipboard", () => {
 
     const { result } = renderHook(() => useClipboard());
 
-    await expect(
-      act(async () => {
+    let thrownError: Error | null = null;
+    await act(async () => {
+      try {
         await result.current.paste();
-      })
-    ).rejects.toThrow("Clipboard API is not supported");
+      } catch (e) {
+        thrownError = e as Error;
+      }
+    });
 
-    expect(result.current.error?.message).toBe(
-      "Clipboard API is not supported"
-    );
+    expect(thrownError?.message).toBe("Clipboard API is not supported");
+    expect(result.current.error?.message).toBe("Clipboard API is not supported");
 
     // Restore
     Object.assign(navigator, { clipboard: originalClipboard });
@@ -208,11 +226,13 @@ describe("useClipboard", () => {
     const { result } = renderHook(() => useClipboard());
 
     // First copy fails
-    await expect(
-      act(async () => {
+    await act(async () => {
+      try {
         await result.current.copy("Test 1");
-      })
-    ).rejects.toThrow("First error");
+      } catch {
+        // Expected to throw
+      }
+    });
 
     expect(result.current.error).not.toBe(null);
 
@@ -234,11 +254,13 @@ describe("useClipboard", () => {
     const { result } = renderHook(() => useClipboard());
 
     // First paste fails
-    await expect(
-      act(async () => {
+    await act(async () => {
+      try {
         await result.current.paste();
-      })
-    ).rejects.toThrow("First error");
+      } catch {
+        // Expected to throw
+      }
+    });
 
     expect(result.current.error).not.toBe(null);
 

@@ -1,5 +1,6 @@
+import { vi } from "vitest";
 import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useToggle } from "../hooks/useToggle";
 
 describe("useToggle", () => {
@@ -230,7 +231,7 @@ describe("useToggle", () => {
 
     it("should pass action parameter to custom toggle function", () => {
       expect.hasAssertions();
-      const toggleFunction = jest.fn((value: string, action?: unknown) => 
+      const toggleFunction = vi.fn((value: string, action?: unknown) => 
         action === "force-on" ? "on" : (value === "on" ? "off" : "on")
       );
       

@@ -1,5 +1,5 @@
+import { vi } from "vitest";
 /**
- * @jest-environment jsdom
  */
 import React, { RefObject } from "react";
 import {
@@ -16,7 +16,7 @@ describe("useKey", () => {
   let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const inputRef = React.useRef<HTMLInputElement>(null);
       const [value, setValue] = React.useState(0);
@@ -77,7 +77,7 @@ describe("non array input", () => {
   let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const inputRef = React.useRef<HTMLInputElement>(null);
       const [value, setValue] = React.useState(0);
@@ -138,7 +138,7 @@ describe("when", () => {
   let App = () => <div />;
   // let firstCallback
   beforeEach(() => {
-    // firstCallback = jest.fn()
+    // firstCallback = vi.fn()
     App = () => {
       const inputRef = React.useRef<HTMLInputElement>(null);
       const [when, setWhen] = React.useState(true);

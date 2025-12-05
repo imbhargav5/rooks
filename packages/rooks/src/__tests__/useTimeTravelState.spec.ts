@@ -1,8 +1,7 @@
 /**
- * @jest-environment jsdom
  */
 import { cleanup } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import TestRenderer from "react-test-renderer";
 import { useTimeTravelState } from "@/hooks/useTimeTravelState";
 

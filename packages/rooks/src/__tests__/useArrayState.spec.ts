@@ -1,5 +1,5 @@
 import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useArrayState } from "../hooks/useArrayState";
 
 describe("useArrayState", () => {
