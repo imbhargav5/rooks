@@ -80,4 +80,36 @@ describe("SSR Environment Detection", () => {
       expect(() => useMeasure()).not.toThrow();
     });
   });
+
+  describe("useWindowEventListener SSR", () => {
+    it("should not throw when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useWindowEventListener } = await import("@/hooks/useWindowEventListener");
+      expect(() => useWindowEventListener("click", vi.fn())).not.toThrow();
+    });
+  });
+
+  describe("useDocumentEventListener SSR", () => {
+    it("should not throw when document is undefined", async () => {
+      expect.hasAssertions();
+      const { useDocumentEventListener } = await import("@/hooks/useDocumentEventListener");
+      expect(() => useDocumentEventListener("click", vi.fn())).not.toThrow();
+    });
+  });
+
+  describe("useOnWindowScroll SSR", () => {
+    it("should not throw when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useOnWindowScroll } = await import("@/hooks/useOnWindowScroll");
+      expect(() => useOnWindowScroll(vi.fn())).not.toThrow();
+    });
+  });
+
+  describe("useOnWindowResize SSR", () => {
+    it("should not throw when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useOnWindowResize } = await import("@/hooks/useOnWindowResize");
+      expect(() => useOnWindowResize(vi.fn())).not.toThrow();
+    });
+  });
 });
