@@ -5,7 +5,7 @@ import { warning } from "./warning";
 import type { ListenerOptions } from "@/types/utils";
 
 function useGlobalObjectEventListener(
-  globalObject: Document,
+  globalObject: Document | undefined,
   eventName: keyof DocumentEventMap,
   callback: EventListener,
   listenerOptions: ListenerOptions,
@@ -14,7 +14,7 @@ function useGlobalObjectEventListener(
 ): void;
 
 function useGlobalObjectEventListener(
-  globalObject: Window,
+  globalObject: Window | undefined,
   eventName: keyof WindowEventMap,
   callback: EventListener,
   listenerOptions: ListenerOptions,
@@ -35,7 +35,7 @@ function useGlobalObjectEventListener(
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://rooks.vercel.app/docs/hooks/useGlobalObjectEventListener
  */
-function useGlobalObjectEventListener<GlobalObject extends Window | Document>(
+function useGlobalObjectEventListener<GlobalObject extends Window | Document | undefined>(
   globalObject: GlobalObject,
   eventName: keyof DocumentEventMap | keyof WindowEventMap,
   callback: EventListener,
