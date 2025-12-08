@@ -20,7 +20,7 @@ function useWindowEventListener(
   isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
-    global.window,
+    typeof window !== "undefined" ? window : undefined,
     eventName,
     callback,
     listenerOptions,

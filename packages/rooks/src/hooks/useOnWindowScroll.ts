@@ -17,7 +17,7 @@ function useOnWindowScroll(
   isLayoutEffect = false
 ): void {
   useGlobalObjectEventListener(
-    global.window,
+    typeof window !== "undefined" ? window : undefined,
     "scroll",
     callback,
     { passive: true },
