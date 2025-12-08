@@ -1,5 +1,11 @@
 # rooks
 
+## 9.4.1
+
+### Patch Changes
+
+- [`b2cd9aa`](https://github.com/imbhargav5/rooks/commit/b2cd9aaec6aebaaaced9b6ef7b41b25ebdba90e9) Thanks [@imbhargav5](https://github.com/imbhargav5)! - remove "global" usage and use "window" directly
+
 ## 9.4.0
 
 ### Minor Changes
