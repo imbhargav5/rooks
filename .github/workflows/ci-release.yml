@@ -9,8 +9,9 @@ on:
       - alpha
       - next
 permissions:
-  id-token: write  # Required for OIDC
-  contents: read
+  id-token: write      # Required for OIDC
+  contents: write      # Required for changesets action to push version commits
+  pull-requests: write # Required for changesets action to create release PRs
 jobs:
   test:
     name: Build (production)
