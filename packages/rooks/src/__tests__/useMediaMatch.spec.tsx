@@ -16,20 +16,21 @@ describe("useMediaMatch", () => {
 
   it("should track a boolean", async () => {
     expect.hasAssertions();
-    const matchMedia = vi.fn<MediaQueryList, [string]>();
     const addEventListener = vi.fn<
       void,
-      [string, (event_: MediaQueryListEventMap["change"]) => void]
+      [string, () => void]
     >();
     const removeEventListener = vi.fn<void, [string, () => void]>();
-    let listener: MediaQueryListListener | undefined;
+    let listener: (() => void) | undefined;
+    let currentMatches = true;
 
-    matchMedia.mockReturnValue({
+    const matchMedia = vi.fn<MediaQueryList, [string]>().mockImplementation(() => ({
       addEventListener,
-      matches: true,
+      matches: currentMatches,
       removeEventListener,
-    } as any);
-    addEventListener.mockImplementationOnce((_, l) => (listener = l));
+    } as any));
+
+    addEventListener.mockImplementation((_, l) => (listener = l));
 
     window.matchMedia = matchMedia;
 
@@ -40,8 +41,8 @@ describe("useMediaMatch", () => {
       }
     );
 
-    // We call once for the memo initialization
-    expect(matchMedia).toHaveBeenCalledTimes(1);
+    // useSyncExternalStore calls matchMedia for both subscribe and getSnapshot
+    expect(matchMedia).toHaveBeenCalled();
     expect(matchMedia.mock.calls[0]![0]).toBe("print");
     expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
@@ -51,23 +52,17 @@ describe("useMediaMatch", () => {
     expect(result.current).toBe(true);
 
     // Invoking the listener changes the value
-    const l =
-      expectDefined<(event_: MediaQueryListEventMap["change"]) => void>(
-        listener
-      );
-    act(() => l({ matches: false } as any));
+    const l = expectDefined<() => void>(listener);
+    currentMatches = false;
+    act(() => l());
     expect(result.current).toBe(false);
 
     // Changing the query instantiates a new matchMedia and resets the match value to true
     expect(removeEventListener).not.toHaveBeenCalled();
-    matchMedia.mockReturnValue({
-      addEventListener,
-      matches: true,
-      removeEventListener,
-    } as any);
+    currentMatches = true;
     rerender({ query: "(max-width: 640px)" });
-    expect(matchMedia).toHaveBeenCalledTimes(2);
-    expect(matchMedia.mock.calls[1]![0]).toBe("(max-width: 640px)");
+    // matchMedia is called again for the new query
+    expect(matchMedia).toHaveBeenCalledWith("(max-width: 640px)");
     expect(result.current).toBe(true);
     // We should have also cleaned up the old event listener and bound a new one
     expect(removeEventListener).toHaveBeenCalledTimes(1);
@@ -83,14 +78,13 @@ describe("useMediaMatch", () => {
   it("should work normally when window is defined", () => {
     expect.hasAssertions();
 
-    const matchMedia = vi.fn<MediaQueryList, [string]>();
     const addEventListener = vi.fn<
       void,
-      [string, (event_: MediaQueryListEventMap["change"]) => void]
+      [string, () => void]
     >();
     const removeEventListener = vi.fn<void, [string, () => void]>();
 
-    matchMedia.mockReturnValue({
+    const matchMedia = vi.fn<MediaQueryList, [string]>().mockReturnValue({
       addEventListener,
       matches: true,
       removeEventListener,

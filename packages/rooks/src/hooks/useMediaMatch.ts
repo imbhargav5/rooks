@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 /**
  * useMediaMatch
@@ -11,34 +11,29 @@ import { useEffect, useMemo, useState } from "react";
  * @returns Whether or not the media query is currently matched.
  * @see https://rooks.vercel.app/docs/hooks/useMediaMatch
  */
-function useMediaMatch(query: string, defaultServerRenderedValue: boolean = false): boolean {
-  if (typeof window === "undefined") {
-    console.warn("useMediaMatch cannot function as window is undefined.");
-
-    return defaultServerRenderedValue;
-  }
-
-  const matchMedia = useMemo<MediaQueryList>(
-    () => window.matchMedia(query),
+function useMediaMatch(
+  query: string,
+  defaultServerRenderedValue: boolean = false
+): boolean {
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      const mediaQueryList = window.matchMedia(query);
+      mediaQueryList.addEventListener("change", onStoreChange);
+      return () => mediaQueryList.removeEventListener("change", onStoreChange);
+    },
     [query]
   );
-  const [matches, setMatches] = useState<boolean>(() => matchMedia.matches);
 
-  useEffect(() => {
-    setMatches(matchMedia.matches);
-    const listener = (event: MediaQueryListEventMap["change"]) =>
-      setMatches(event.matches);
+  const getSnapshot = useCallback(() => {
+    return window.matchMedia(query).matches;
+  }, [query]);
 
-    if (matchMedia.addEventListener) {
-      matchMedia.addEventListener("change", listener);
-      return () => matchMedia.removeEventListener("change", listener);
-    } else {
-      matchMedia.addListener(listener);
-      return () => matchMedia.removeListener(listener);
-    }
-  }, [matchMedia]);
+  const getServerSnapshot = useCallback(
+    () => defaultServerRenderedValue,
+    [defaultServerRenderedValue]
+  );
 
-  return matches;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export { useMediaMatch };

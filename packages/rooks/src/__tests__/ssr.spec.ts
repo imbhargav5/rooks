@@ -60,18 +60,16 @@ describe("SSR Environment Detection", () => {
 
       const { useMediaMatch } = await import("@/hooks/useMediaMatch");
 
-      // Default value is false
+      // Default value is false (via getServerSnapshot)
       const result1 = useMediaMatch("(max-width: 600px)");
       expect(result1).toBe(false);
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        "useMediaMatch cannot function as window is undefined."
-      );
-
-      consoleWarnSpy.mockClear();
 
       // Custom default value
       const result2 = useMediaMatch("(max-width: 600px)", true);
       expect(result2).toBe(true);
+
+      // No console warning with useSyncExternalStore approach
+      expect(consoleWarnSpy).not.toHaveBeenCalled();
     });
   });
 
