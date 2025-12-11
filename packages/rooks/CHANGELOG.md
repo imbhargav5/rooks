@@ -1,5 +1,11 @@
 # rooks
 
+## 9.4.2
+
+### Patch Changes
+
+- [#1892](https://github.com/imbhargav5/rooks/pull/1892) [`ea8fa8a`](https://github.com/imbhargav5/rooks/commit/ea8fa8a3ce31ab6d7319ff3d26e370d6f8bfd636) Thanks [@imbhargav5](https://github.com/imbhargav5)! - modernize useMediaMatch
+
 ## 9.4.1
 
 ### Patch Changes
