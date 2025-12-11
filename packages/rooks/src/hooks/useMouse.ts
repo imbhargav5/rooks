@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type MouseData = {
   clientX: number | null;
@@ -30,6 +30,9 @@ const initialMouseState: MouseData = {
   y: null,
 };
 
+// Module-level state to store the current mouse position
+let currentMouseData: MouseData = initialMouseState;
+
 function getMousePositionFromEvent(event: MouseEvent): MouseData {
   const {
     screenX,
@@ -60,6 +63,47 @@ function getMousePositionFromEvent(event: MouseEvent): MouseData {
   };
 }
 
+// Set of listeners to notify on mouse move
+const listeners = new Set<() => void>();
+
+function handleMouseMove(event: MouseEvent): void {
+  currentMouseData = getMousePositionFromEvent(event);
+  listeners.forEach((listener) => listener());
+}
+
+// Track if we've added the global listener
+let isListening = false;
+
+function subscribe(onStoreChange: () => void): () => void {
+  listeners.add(onStoreChange);
+
+  // Add global listener only once when first subscriber connects
+  if (!isListening && typeof document !== "undefined") {
+    document.addEventListener("mousemove", handleMouseMove);
+    isListening = true;
+  }
+
+  return () => {
+    listeners.delete(onStoreChange);
+
+    // Remove global listener when last subscriber disconnects
+    if (listeners.size === 0 && isListening && typeof document !== "undefined") {
+      document.removeEventListener("mousemove", handleMouseMove);
+      isListening = false;
+      // Reset state when no subscribers
+      currentMouseData = initialMouseState;
+    }
+  };
+}
+
+function getSnapshot(): MouseData {
+  return currentMouseData;
+}
+
+function getServerSnapshot(): MouseData {
+  return initialMouseState;
+}
+
 /**
  * useMouse hook
  *
@@ -68,20 +112,5 @@ function getMousePositionFromEvent(event: MouseEvent): MouseData {
  * @see https://rooks.vercel.app/docs/hooks/useMouse
  */
 export function useMouse(): MouseData {
-  const [mousePosition, setMousePosition] =
-    useState<MouseData>(initialMouseState);
-
-  function updateMousePosition(event: MouseEvent) {
-    setMousePosition(getMousePositionFromEvent(event));
-  }
-
-  useEffect(() => {
-    document.addEventListener("mousemove", updateMousePosition);
-
-    return () => {
-      document.removeEventListener("mousemove", updateMousePosition);
-    };
-  }, []);
-
-  return mousePosition;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

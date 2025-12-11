@@ -1,40 +1,34 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 
-function getValueFromSessionStorage(key: string) {
+// Gets value from sessionStorage
+function getValueFromSessionStorage<S>(key: string): S | null {
   if (typeof sessionStorage === "undefined") {
     return null;
   }
 
   const storedValue = sessionStorage.getItem(key) ?? "null";
   try {
-    return JSON.parse(storedValue);
+    return JSON.parse(storedValue) as S;
   } catch (error) {
     console.error(error);
   }
 
-  return storedValue;
+  return storedValue as S;
 }
 
-function saveValueToSessionStorage<S>(key: string, value: S) {
+// Saves value to sessionStorage
+function saveValueToSessionStorage<S>(key: string, value: S): void {
   if (typeof sessionStorage === "undefined") {
-    return null;
+    return;
   }
 
-  return sessionStorage.setItem(key, JSON.stringify(value));
-}
-
-/**
- * @param key Key of the sessionStorage object
- * @param initialState Default initial value
- */
-function initialize<S>(key: string, initialState: S) {
-  const valueLoadedFromSessionStorage = getValueFromSessionStorage(key);
-  if (valueLoadedFromSessionStorage === null) {
-    return initialState;
-  } else {
-    return valueLoadedFromSessionStorage;
+  if (value === undefined) {
+    sessionStorage.removeItem(key);
+    return;
   }
+
+  sessionStorage.setItem(key, JSON.stringify(value));
 }
 
 type UseSessionstorateStateReturnValue<S> = [
@@ -42,7 +36,90 @@ type UseSessionstorateStateReturnValue<S> = [
   Dispatch<SetStateAction<S>>,
   () => void
 ];
-type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
+
+// Per-key store management for sessionStorage
+type StoreData<S> = {
+  value: S;
+  listeners: Set<() => void>;
+  initialized: boolean;
+};
+
+const stores = new Map<string, StoreData<unknown>>();
+
+function getOrCreateStore<S>(key: string, initialState: S | (() => S) | undefined): StoreData<S> {
+  if (!stores.has(key)) {
+    // Initialize with value from sessionStorage or initialState
+    const valueFromStorage = getValueFromSessionStorage<S>(key);
+    const value = valueFromStorage !== null
+      ? valueFromStorage
+      : typeof initialState === "function"
+        ? (initialState as () => S)()
+        : (initialState as S);
+
+    stores.set(key, {
+      value,
+      listeners: new Set(),
+      initialized: true,
+    });
+  }
+  return stores.get(key) as StoreData<S>;
+}
+
+function notifyListeners(key: string): void {
+  const store = stores.get(key);
+  if (store) {
+    store.listeners.forEach((listener) => listener());
+  }
+}
+
+// Handle storage events from other documents/tabs
+function handleStorageEvent(event: StorageEvent): void {
+  if (event.storageArea === sessionStorage && event.key !== null) {
+    const store = stores.get(event.key);
+    if (store) {
+      try {
+        const newValue = JSON.parse(event.newValue ?? "null");
+        store.value = newValue;
+        notifyListeners(event.key);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+// Track global storage event listener
+let isStorageListenerAttached = false;
+
+function attachStorageListener(): void {
+  if (!isStorageListenerAttached && typeof window !== "undefined") {
+    window.addEventListener("storage", handleStorageEvent);
+    isStorageListenerAttached = true;
+  }
+}
+
+function detachStorageListenerIfNeeded(): void {
+  // Check if any stores have listeners
+  let hasListeners = false;
+  stores.forEach((store) => {
+    if (store.listeners.size > 0) {
+      hasListeners = true;
+    }
+  });
+
+  if (!hasListeners && isStorageListenerAttached && typeof window !== "undefined") {
+    window.removeEventListener("storage", handleStorageEvent);
+    isStorageListenerAttached = false;
+  }
+}
+
+// Clean up store when no longer needed
+function cleanupStore(key: string): void {
+  const store = stores.get(key);
+  if (store && store.listeners.size === 0) {
+    stores.delete(key);
+  }
+}
 
 /**
  * useSessionstorageState hook
@@ -57,108 +134,59 @@ function useSessionstorageState<S>(
   key: string,
   initialState?: S | (() => S)
 ): UseSessionstorateStateReturnValue<S> {
-  const [value, setValue] = useState(() => initialize(key, initialState));
-  const isUpdateFromCrossDocumentListener = useRef(false);
-  const isUpdateFromWithinDocumentListener = useRef(false);
+  // Track if we need to write initial value to sessionStorage
+  const needsInitialWrite = useRef(true);
+
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      const store = getOrCreateStore<S>(key, initialState);
+      store.listeners.add(onStoreChange);
+      attachStorageListener();
+
+      return () => {
+        store.listeners.delete(onStoreChange);
+        detachStorageListenerIfNeeded();
+        cleanupStore(key);
+      };
+    },
+    [key, initialState]
+  );
+
+  const getSnapshot = useCallback(() => {
+    const store = getOrCreateStore<S>(key, initialState);
+    return store.value;
+  }, [key, initialState]);
+
+  const getServerSnapshot = useCallback(() => {
+    return typeof initialState === "function"
+      ? (initialState as () => S)()
+      : (initialState as S);
+  }, [initialState]);
+
+  const value = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  // Write initial value to sessionStorage (matching old behavior)
+  useEffect(() => {
+    if (needsInitialWrite.current) {
+      needsInitialWrite.current = false;
+      const store = getOrCreateStore<S>(key, initialState);
+      if (store.value !== undefined) {
+        saveValueToSessionStorage(key, store.value);
+      }
+    }
+  }, [key, initialState]);
+
   const customEventTypeName = useMemo(() => {
     return `rooks-${key}-sessionstorage-update`;
   }, [key]);
-  useEffect(() => {
-    /**
-     * We need to ensure there is no loop of
-     * storage events fired. Hence we are using a ref
-     * to keep track of whether setValue is from another
-     * storage event
-     */
-    if (!isUpdateFromCrossDocumentListener.current) {
-      saveValueToSessionStorage(key, value);
-    }
-  }, [key, value]);
-
-  const listenToCrossDocumentStorageEvents = useCallback(
-    (event: StorageEvent) => {
-      if (event.storageArea === sessionStorage && event.key === key) {
-        try {
-          isUpdateFromCrossDocumentListener.current = true;
-          const newValue = JSON.parse(event.newValue ?? "null");
-          if (value !== newValue) {
-            setValue(newValue);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    },
-    [key, value]
-  );
-
-  // check for changes across windows
-  useEffect(() => {
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("storage", listenToCrossDocumentStorageEvents);
-
-      return () => {
-        window.removeEventListener(
-          "storage",
-          listenToCrossDocumentStorageEvents
-        );
-      };
-    } else {
-      console.warn("[useSessionstorageState] window is undefined.");
-
-      return () => { };
-    }
-  }, [listenToCrossDocumentStorageEvents]);
-
-  const listenToCustomEventWithinDocument = useCallback(
-    (event: BroadcastCustomEvent<S>) => {
-      try {
-        isUpdateFromWithinDocumentListener.current = true;
-        const { newValue } = event.detail;
-        if (value !== newValue) {
-          setValue(newValue);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [value]
-  );
-
-  // check for changes within document
-  useEffect(() => {
-
-    if (typeof document !== "undefined") {
-      document.addEventListener(
-        customEventTypeName,
-        listenToCustomEventWithinDocument as EventListener
-      );
-
-      return () => {
-        document.removeEventListener(
-          customEventTypeName,
-          listenToCustomEventWithinDocument as EventListener
-        );
-      };
-    } else {
-      console.warn("[useSessionstorageState] document is undefined.");
-
-      return () => { };
-    }
-  }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
     (newValue: S) => {
-
       if (typeof document !== "undefined") {
-        const event: BroadcastCustomEvent<S> = new CustomEvent(
-          customEventTypeName,
-          { detail: { newValue } }
-        );
+        const event = new CustomEvent(customEventTypeName, {
+          detail: { newValue },
+        });
         document.dispatchEvent(event);
-      } else {
-        console.warn("[useSessionstorageState] document is undefined.");
       }
     },
     [customEventTypeName]
@@ -166,20 +194,58 @@ function useSessionstorageState<S>(
 
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
-      const resolvedNewValue = typeof newValue === "function"
-        ? (newValue as (prevState: S) => S)(value)
-        : newValue;
-      isUpdateFromCrossDocumentListener.current = false;
-      isUpdateFromWithinDocumentListener.current = false;
-      setValue(resolvedNewValue);
+      const store = getOrCreateStore<S>(key, initialState);
+      const resolvedNewValue =
+        typeof newValue === "function"
+          ? (newValue as (prevState: S) => S)(store.value)
+          : newValue;
+
+      // Update store and sessionStorage
+      store.value = resolvedNewValue;
+      saveValueToSessionStorage(key, resolvedNewValue);
+
+      // Notify all listeners (within this document)
+      notifyListeners(key);
+
+      // Broadcast to other hook instances in the same document
       broadcastValueWithinDocument(resolvedNewValue);
     },
-    [broadcastValueWithinDocument, value]
+    [key, initialState, broadcastValueWithinDocument]
   );
 
   const remove = useCallback(() => {
-    sessionStorage.removeItem(key);
-  }, [key]);
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.removeItem(key);
+      const store = getOrCreateStore<S>(key, initialState);
+      const resetValue =
+        typeof initialState === "function"
+          ? (initialState as () => S)()
+          : (initialState as S);
+      store.value = resetValue;
+      notifyListeners(key);
+    }
+  }, [key, initialState]);
+
+  // Listen for custom events from other hook instances in the same document
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const handler = (event: Event) => {
+      const customEvent = event as CustomEvent<{ newValue: S }>;
+      const store = getOrCreateStore<S>(key, initialState);
+      if (store.value !== customEvent.detail.newValue) {
+        store.value = customEvent.detail.newValue;
+        notifyListeners(key);
+      }
+    };
+
+    document.addEventListener(customEventTypeName, handler);
+    return () => {
+      document.removeEventListener(customEventTypeName, handler);
+    };
+  }, [key, initialState, customEventTypeName]);
 
   return [value, set, remove];
 }

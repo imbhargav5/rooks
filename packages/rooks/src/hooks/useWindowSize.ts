@@ -1,5 +1,4 @@
-import { useState, useCallback } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useSyncExternalStore } from "react";
 import type { DeepNullable } from "@/types/utils";
 
 type WindowDimensions = DeepNullable<
@@ -13,6 +12,9 @@ const nullDimensions: WindowDimensions = {
   outerWidth: null,
 };
 
+// Cache the current dimensions to ensure referential stability
+let cachedDimensions: WindowDimensions | null = null;
+
 function getDimensions(): WindowDimensions {
   return {
     innerHeight: window.innerHeight,
@@ -20,6 +22,50 @@ function getDimensions(): WindowDimensions {
     outerHeight: window.outerHeight,
     outerWidth: window.outerWidth,
   };
+}
+
+// Set of listeners to notify on resize
+const listeners = new Set<() => void>();
+
+function handleResize(): void {
+  cachedDimensions = getDimensions();
+  listeners.forEach((listener) => listener());
+}
+
+function subscribe(onStoreChange: () => void): () => void {
+  // Add listener to the resize event on first subscription
+  if (listeners.size === 0 && typeof window !== "undefined") {
+    window.addEventListener("resize", handleResize);
+  }
+
+  listeners.add(onStoreChange);
+
+  return () => {
+    listeners.delete(onStoreChange);
+
+    // Clean up when last subscriber disconnects
+    if (listeners.size === 0 && typeof window !== "undefined") {
+      window.removeEventListener("resize", handleResize);
+      cachedDimensions = null;
+    }
+  };
+}
+
+function getSnapshot(): WindowDimensions {
+  if (typeof window === "undefined") {
+    return nullDimensions;
+  }
+
+  // Initialize cache on first call if needed
+  if (cachedDimensions === null) {
+    cachedDimensions = getDimensions();
+  }
+
+  return cachedDimensions;
+}
+
+function getServerSnapshot(): WindowDimensions {
+  return nullDimensions;
 }
 
 /**
@@ -30,30 +76,5 @@ function getDimensions(): WindowDimensions {
  * @see https://rooks.vercel.app/docs/hooks/useWindowSize
  */
 export function useWindowSize(): WindowDimensions {
-  const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if (typeof window === "undefined") {
-      return nullDimensions;
-    } else {
-      return getDimensions();
-    }
-  });
-
-
-  // set resize handler once on mount and clean before unmount
-  useIsomorphicEffect(() => {
-    if (typeof window === "undefined") {
-      return () => { };
-    } else {
-      function handleResize() {
-        setWindowSize(getDimensions());
-      }
-      window.addEventListener("resize", handleResize);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
-  }, []);
-
-  return windowSize;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
