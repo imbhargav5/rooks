@@ -1,0 +1,156 @@
+---
+title: "useEasing"
+description: "A hook for creating controlled easing animations with start/stop/reset capabilities."
+---
+
+# useEasing
+
+`useEasing` is a hook for creating controlled easing animations with start/stop/reset capabilities. It returns a progress value (0 to 1) along with controls for managing the animation state.
+
+## Usage
+
+### Basic Usage
+
+```jsx
+import { useEasing } from "rooks";
+
+function App() {
+  const [progress] = useEasing(1000);
+
+  return (
+    <div style={{ opacity: progress }}>
+      Fading In...
+    </div>
+  );
+}
+```
+
+### With Controls
+
+```jsx
+import { useEasing, Easing } from "rooks";
+
+function App() {
+  const [progress, { start, stop, reset, state }] = useEasing(1000, {
+    easing: Easing.easeInOutQuad,
+    autoStart: false,
+  });
+
+  return (
+    <div>
+      <div style={{
+        width: 100,
+        height: 100,
+        background: 'blue',
+        transform: `translateX(${progress * 200}px)`
+      }} />
+      <button onClick={start} disabled={state === "running"}>Start</button>
+      <button onClick={stop} disabled={state === "idle"}>Stop</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+### Looping Animation
+
+```jsx
+import { useEasing, Easing } from "rooks";
+
+function App() {
+  const [progress] = useEasing(1000, {
+    loop: true,
+    alternate: true,
+    easing: Easing.easeInOutQuad,
+  });
+
+  return (
+    <div style={{
+      width: 50,
+      height: 50,
+      background: 'red',
+      opacity: 0.3 + progress * 0.7
+    }} />
+  );
+}
+```
+
+### Tracking Iterations
+
+```jsx
+import { useEasing } from "rooks";
+
+function App() {
+  const [progress, { endCount, restart }] = useEasing(2000, {
+    onEnd: () => console.log('Animation ended'),
+  });
+
+  return (
+    <div>
+      <div>Progress: {(progress * 100).toFixed(0)}%</div>
+      <div>Completed: {endCount} times</div>
+      <button onClick={restart}>Restart</button>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type | Default | Description |
+| --- | --- | --- | --- |
+| duration | number | - | Duration of the animation in milliseconds. |
+| options | UseEasingOptions | {} | Configuration options. |
+
+### UseEasingOptions
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| easing | (t: number) => number | Easing.linear | Easing function to use. |
+| autoStart | boolean | true | Whether to start animation on mount. |
+| loop | boolean | false | Whether to loop the animation. |
+| alternate | boolean | false | Whether to alternate direction on each loop (ping-pong). |
+| delay | number | 0 | Delay before starting animation in milliseconds. |
+| onEnd | () => void | undefined | Callback fired each time animation reaches the end. |
+
+## Return Value
+
+Returns a tuple `[progress, controls]`:
+
+### progress
+
+A number between 0 and 1 representing the current eased progress of the animation.
+
+### controls
+
+| Property | Type | Description |
+| --- | --- | --- |
+| start | () => void | Start or resume the animation. |
+| stop | () => void | Stop/pause the animation at current position. |
+| reset | () => void | Reset to initial state (progress=0, direction=forward, endCount=0). |
+| restart | () => void | Reset and start (convenience method). |
+| state | "idle" \| "running" | Current animation state. |
+| direction | "forward" \| "backward" | Current animation direction. |
+| endCount | number | Number of times animation has reached the end. |
+
+## Easing Presets
+
+The `Easing` object provides common easing functions:
+
+| Function | Description |
+| --- | --- |
+| Easing.linear | Linear interpolation (no easing). |
+| Easing.easeInQuad | Quadratic ease-in (accelerating). |
+| Easing.easeOutQuad | Quadratic ease-out (decelerating). |
+| Easing.easeInOutQuad | Quadratic ease-in-out. |
+| Easing.easeInCubic | Cubic ease-in. |
+| Easing.easeOutCubic | Cubic ease-out. |
+| Easing.easeInOutCubic | Cubic ease-in-out. |
+
+You can also provide your own easing function:
+
+```jsx
+const customEasing = (t) => 1 - Math.pow(1 - t, 3);
+
+const [progress] = useEasing(1000, { easing: customEasing });
+```

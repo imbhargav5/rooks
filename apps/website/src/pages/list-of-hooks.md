@@ -7,11 +7,12 @@ sidebar_label: Hooks List
 <!--hookslist start-->
 
 <details>
-<summary><h3>🎬 Animation & Timing - 9 hooks</h3></summary>
+<summary><h3>🎬 Animation & Timing - 10 hooks</h3></summary>
 
 
 
 * [useAnimation](https://rooks.vercel.app/docs/hooks/useAnimation) - Animation hook for React
+* [useEasing](https://rooks.vercel.app/docs/hooks/useEasing) - A hook for creating controlled easing animations with start/stop/reset capabilities.
 * [useIntervalWhen](https://rooks.vercel.app/docs/hooks/useIntervalWhen) - Sets an interval immediately when a condition is true
 * [useLockBodyScroll](https://rooks.vercel.app/docs/hooks/useLockBodyScroll) - This hook locks the scroll of the body element when `isLocked` is set to `true`.
 * [usePrefersReducedMotion](https://rooks.vercel.app/docs/hooks/usePrefersReducedMotion) - A React hook that returns true if the user has enabled the 'prefers-reduced-motion' setting in their system.

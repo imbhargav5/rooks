@@ -116,6 +116,11 @@
       "category": "events"
     },
     {
+      "name": "useEasing",
+      "description": "A hook for creating controlled easing animations with start/stop/reset capabilities.",
+      "category": "animation"
+    },
+    {
       "name": "useEffectOnceWhen",
       "description": "Runs a callback effect atmost one time when a condition becomes true",
       "category": "lifecycle"
