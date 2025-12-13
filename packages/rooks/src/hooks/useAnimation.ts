@@ -16,14 +16,26 @@ interface AnimationOptions {
     loop?: boolean;
 }
 
+let hasWarnedDeprecation = false;
+
 /**
  * useAnimation hook
  *
+ * @deprecated useAnimation is deprecated and will be removed in a future major version.
+ * Please migrate to useEasing for better control and features.
  * @param options Animation options
  * @returns The current value of the animation (0 to 1)
- * @see https://rooks.vercel.app/docs/hooks/useAnimation
+ * @see https://rooks.vercel.app/docs/hooks/useEasing
  */
 function useAnimation(options: AnimationOptions): number {
+    if (process.env.NODE_ENV === "development" && !hasWarnedDeprecation) {
+        console.warn(
+            "[rooks] useAnimation is deprecated and will be removed in a future major version. " +
+                "Please migrate to useEasing for better control and features. " +
+                "See: https://rooks.vercel.app/docs/hooks/useEasing"
+        );
+        hasWarnedDeprecation = true;
+    }
     const { duration, easing = (t) => t, delay = 0, loop = false } = options;
     const [value, setValue] = useState(0);
     const startTimeRef = useRef<number | null>(null);
