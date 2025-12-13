@@ -1,5 +1,15 @@
 # rooks
 
+## 9.5.0
+
+### Minor Changes
+
+- [#1896](https://github.com/imbhargav5/rooks/pull/1896) [`3ec5dd0`](https://github.com/imbhargav5/rooks/commit/3ec5dd0bf0e93294af6be355060a247e5695521e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add useEasing hook
+
+### Patch Changes
+
+- [#1895](https://github.com/imbhargav5/rooks/pull/1895) [`83aada2`](https://github.com/imbhargav5/rooks/commit/83aada2185453ba86c3f3ea86f2b85db057ba1f2) Thanks [@imbhargav5](https://github.com/imbhargav5)! - modernize hooks with useSyncExternalstore
+
 ## 9.4.2
 
 ### Patch Changes
