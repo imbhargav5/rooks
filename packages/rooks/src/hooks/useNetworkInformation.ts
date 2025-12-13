@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
 /**
  * Network connection types
@@ -87,6 +87,49 @@ interface UseNetworkInformationReturnValue extends NetworkInfo {
   isSupported: boolean;
 }
 
+function getConnection(): NetworkInformation | null {
+  if (typeof navigator === "undefined") {
+    return null;
+  }
+
+  const nav = navigator as NavigatorWithConnection;
+  return nav.connection || nav.mozConnection || nav.webkitConnection || null;
+}
+
+function getNetworkInfo(): NetworkInfo {
+  const connection = getConnection();
+
+  if (!connection) {
+    return {
+      type: null,
+      effectiveType: null,
+      downlink: null,
+      downlinkMax: null,
+      rtt: null,
+      saveData: false,
+    };
+  }
+
+  return {
+    type: connection.type || null,
+    effectiveType: connection.effectiveType || null,
+    downlink: connection.downlink ?? null,
+    downlinkMax: connection.downlinkMax ?? null,
+    rtt: connection.rtt ?? null,
+    saveData: connection.saveData ?? false,
+  };
+}
+
+const defaultNetworkInfo: UseNetworkInformationReturnValue = {
+  type: null,
+  effectiveType: null,
+  downlink: null,
+  downlinkMax: null,
+  rtt: null,
+  saveData: false,
+  isSupported: false,
+};
+
 /**
  * useNetworkInformation hook
  *
@@ -121,65 +164,48 @@ interface UseNetworkInformationReturnValue extends NetworkInfo {
  * @see https://rooks.vercel.app/docs/hooks/useNetworkInformation
  */
 function useNetworkInformation(): UseNetworkInformationReturnValue {
-  const getConnection = (): NetworkInformation | null => {
-    if (typeof navigator === "undefined") {
-      return null;
-    }
+  const cacheRef = useRef<UseNetworkInformationReturnValue>(defaultNetworkInfo);
 
-    const nav = navigator as NavigatorWithConnection;
-    return nav.connection || nav.mozConnection || nav.webkitConnection || null;
-  };
-
-  const isSupported = getConnection() !== null;
-
-  const getNetworkInfo = (): NetworkInfo => {
+  const subscribe = useCallback((onStoreChange: () => void) => {
     const connection = getConnection();
 
     if (!connection) {
-      return {
-        type: null,
-        effectiveType: null,
-        downlink: null,
-        downlinkMax: null,
-        rtt: null,
-        saveData: false,
-      };
+      return () => {};
     }
 
-    return {
-      type: connection.type || null,
-      effectiveType: connection.effectiveType || null,
-      downlink: connection.downlink ?? null,
-      downlinkMax: connection.downlinkMax ?? null,
-      rtt: connection.rtt ?? null,
-      saveData: connection.saveData ?? false,
-    };
-  };
-
-  const [networkInfo, setNetworkInfo] = useState<NetworkInfo>(getNetworkInfo());
-
-  useEffect(() => {
-    const connection = getConnection();
-
-    if (!connection) {
-      return;
-    }
-
-    const handleChange = () => {
-      setNetworkInfo(getNetworkInfo());
-    };
-
-    connection.addEventListener("change", handleChange);
-
+    connection.addEventListener("change", onStoreChange);
     return () => {
-      connection.removeEventListener("change", handleChange);
+      connection.removeEventListener("change", onStoreChange);
     };
   }, []);
 
-  return {
-    ...networkInfo,
-    isSupported,
-  };
+  const getSnapshot = useCallback(() => {
+    const networkInfo = getNetworkInfo();
+    const isSupported = getConnection() !== null;
+
+    // Only update cache if values changed to maintain referential equality
+    if (
+      cacheRef.current.type !== networkInfo.type ||
+      cacheRef.current.effectiveType !== networkInfo.effectiveType ||
+      cacheRef.current.downlink !== networkInfo.downlink ||
+      cacheRef.current.downlinkMax !== networkInfo.downlinkMax ||
+      cacheRef.current.rtt !== networkInfo.rtt ||
+      cacheRef.current.saveData !== networkInfo.saveData ||
+      cacheRef.current.isSupported !== isSupported
+    ) {
+      cacheRef.current = {
+        ...networkInfo,
+        isSupported,
+      };
+    }
+    return cacheRef.current;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return defaultNetworkInfo;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export { useNetworkInformation };

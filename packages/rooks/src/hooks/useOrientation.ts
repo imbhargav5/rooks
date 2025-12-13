@@ -3,32 +3,25 @@
  * @description orientation hook for react
  * @see {@link https://rooks.vercel.app/docs/hooks/useOrientation}
  */
-import { useState, useEffect } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const useOrientation = (): ScreenOrientation | null => {
-  const [orientation, setOrientation] = useState<ScreenOrientation | null>(
-    typeof window !== "undefined" ? window.screen.orientation : null
-  );
-
-  useEffect(() => {
-    const handleOrientationChange = () => {
-      setOrientation(window.screen.orientation);
-    };
-
-    window.screen.orientation.addEventListener(
-      "change",
-      handleOrientationChange
-    );
-
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    window.screen.orientation.addEventListener("change", onStoreChange);
     return () => {
-      window.screen.orientation.removeEventListener(
-        "change",
-        handleOrientationChange
-      );
+      window.screen.orientation.removeEventListener("change", onStoreChange);
     };
   }, []);
 
-  return orientation;
+  const getSnapshot = useCallback(() => {
+    return window.screen.orientation;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return null;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 };
 
 export { useOrientation };
