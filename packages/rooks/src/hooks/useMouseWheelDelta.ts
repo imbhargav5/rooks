@@ -3,80 +3,76 @@
  * @description Tracks delta of mouse wheel
  * @see {@link https://rooks.vercel.app/docs/hooks/useMouseWheelDelta}
  */
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { useFreshCallback } from "./useFreshCallback";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
-type MouseWheelDelta = {
+type InternalState = {
   delta: number;
   velocity: number;
   timeStamp: number;
 };
 
-type ReturnValue = Omit<MouseWheelDelta, "timeStamp">;
+type ReturnValue = {
+  delta: number;
+  velocity: number;
+};
 
-const initialDelta: MouseWheelDelta = {
+const initialReturnValue: ReturnValue = {
   delta: 0,
   velocity: 0,
-  timeStamp: Date.now(),
 };
 
 function useMouseWheelDelta(): ReturnValue {
-  const [deltaState, setDeltaState] = useState<MouseWheelDelta>(() => {
-    return {
-      ...initialDelta,
-      timeStamp: Date.now(),
-    };
-  });
+  const stateRef = useRef<InternalState | null>(null);
+  const returnValueRef = useRef<ReturnValue>(initialReturnValue);
 
-  const lastDeltaRef = useRef<MouseWheelDelta | null>(null);
-
-  const handleWheel = useCallback(
-    (event: WheelEvent) => {
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    const handleWheel = (event: WheelEvent) => {
       const currentTimestamp = event.timeStamp;
-      const lastDelta = lastDeltaRef.current;
-      if (lastDelta) {
-        const delta = event.deltaY;
+      const lastState = stateRef.current;
 
-        const timeDelta = currentTimestamp - lastDelta.timeStamp;
-        console.log(timeDelta);
+      if (lastState !== null) {
+        const delta = event.deltaY;
+        const timeDelta = currentTimestamp - lastState.timeStamp;
         const velocity = timeDelta === 0 ? 0 : delta / timeDelta;
-        console.log("delta", delta);
-        console.log("timedelta", timeDelta);
-        console.log("velocity", velocity);
-        lastDeltaRef.current = deltaState;
-        setDeltaState({
+
+        stateRef.current = {
           delta,
           velocity,
           timeStamp: currentTimestamp,
-        });
-      } else {
-        lastDeltaRef.current = {
-          velocity: 0,
-          delta: 0,
-          timeStamp: event.timeStamp,
         };
-        setDeltaState({
+
+        returnValueRef.current = { delta, velocity };
+      } else {
+        stateRef.current = {
           delta: event.deltaY,
           velocity: 0,
           timeStamp: event.timeStamp,
-        });
-      }
-    },
-    [deltaState]
-  );
+        };
 
-  const freshWheel = useFreshCallback(handleWheel);
-  useEffect(() => {
-    document.addEventListener("wheel", freshWheel);
-    return () => {
-      document.removeEventListener("wheel", freshWheel);
+        returnValueRef.current = {
+          delta: event.deltaY,
+          velocity: 0,
+        };
+      }
+
+      onStoreChange();
     };
-  }, [freshWheel]);
-  console.log(deltaState);
-  return useMemo(() => {
-    const { delta, velocity } = deltaState;
-    return { delta, velocity };
-  }, [deltaState]);
+
+    document.addEventListener("wheel", handleWheel);
+    return () => {
+      document.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
+  const getSnapshot = useCallback(() => {
+    return returnValueRef.current;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return initialReturnValue;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export { useMouseWheelDelta };

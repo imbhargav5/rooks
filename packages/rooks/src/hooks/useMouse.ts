@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
 type MouseData = {
   clientX: number | null;
@@ -68,20 +68,27 @@ function getMousePositionFromEvent(event: MouseEvent): MouseData {
  * @see https://rooks.vercel.app/docs/hooks/useMouse
  */
 export function useMouse(): MouseData {
-  const [mousePosition, setMousePosition] =
-    useState<MouseData>(initialMouseState);
+  const cacheRef = useRef<MouseData>(initialMouseState);
 
-  function updateMousePosition(event: MouseEvent) {
-    setMousePosition(getMousePositionFromEvent(event));
-  }
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    const handleMouseMove = (event: MouseEvent) => {
+      cacheRef.current = getMousePositionFromEvent(event);
+      onStoreChange();
+    };
 
-  useEffect(() => {
-    document.addEventListener("mousemove", updateMousePosition);
-
+    document.addEventListener("mousemove", handleMouseMove);
     return () => {
-      document.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  return mousePosition;
+  const getSnapshot = useCallback(() => {
+    return cacheRef.current;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return initialMouseState;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

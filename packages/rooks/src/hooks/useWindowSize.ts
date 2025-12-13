@@ -1,5 +1,4 @@
-import { useState, useCallback } from "react";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 import type { DeepNullable } from "@/types/utils";
 
 type WindowDimensions = DeepNullable<
@@ -30,30 +29,32 @@ function getDimensions(): WindowDimensions {
  * @see https://rooks.vercel.app/docs/hooks/useWindowSize
  */
 export function useWindowSize(): WindowDimensions {
-  const [windowSize, setWindowSize] = useState<WindowDimensions>(() => {
-    if (typeof window === "undefined") {
-      return nullDimensions;
-    } else {
-      return getDimensions();
-    }
-  });
+  const cacheRef = useRef<WindowDimensions>(nullDimensions);
 
-
-  // set resize handler once on mount and clean before unmount
-  useIsomorphicEffect(() => {
-    if (typeof window === "undefined") {
-      return () => { };
-    } else {
-      function handleResize() {
-        setWindowSize(getDimensions());
-      }
-      window.addEventListener("resize", handleResize);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    window.addEventListener("resize", onStoreChange);
+    return () => {
+      window.removeEventListener("resize", onStoreChange);
+    };
   }, []);
 
-  return windowSize;
+  const getSnapshot = useCallback(() => {
+    const newDimensions = getDimensions();
+    // Only update cache if values changed to maintain referential equality
+    if (
+      cacheRef.current.innerHeight !== newDimensions.innerHeight ||
+      cacheRef.current.innerWidth !== newDimensions.innerWidth ||
+      cacheRef.current.outerHeight !== newDimensions.outerHeight ||
+      cacheRef.current.outerWidth !== newDimensions.outerWidth
+    ) {
+      cacheRef.current = newDimensions;
+    }
+    return cacheRef.current;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return nullDimensions;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

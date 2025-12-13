@@ -3,10 +3,9 @@
  * @description Tracks delta of mouse move
  * @see {@link https://rooks.vercel.app/docs/hooks/useMouseMoveDelta}
  */
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { useFreshCallback } from "./useFreshCallback";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
-type Delta = {
+type InternalState = {
   deltaX: number;
   deltaY: number;
   clientX: number | null;
@@ -16,91 +15,92 @@ type Delta = {
   timeStamp: number;
 };
 
-type ReturnValue = Omit<Delta, "timeStamp" | "clientX" | "clientY">;
+type ReturnValue = {
+  deltaX: number;
+  deltaY: number;
+  velocityX: number;
+  velocityY: number;
+};
 
-const initialDelta: Delta = {
+const initialReturnValue: ReturnValue = {
   deltaX: 0,
   deltaY: 0,
-  clientX: null,
-  clientY: null,
   velocityX: 0,
   velocityY: 0,
-  timeStamp: Date.now(),
 };
 
 function useMouseMoveDelta(): ReturnValue {
-  const [delta, setDelta] = useState<Delta>(() => {
-    return {
-      ...initialDelta,
-      timeStamp: Date.now(),
-    };
+  const stateRef = useRef<InternalState>({
+    deltaX: 0,
+    deltaY: 0,
+    clientX: null,
+    clientY: null,
+    velocityX: 0,
+    velocityY: 0,
+    timeStamp: Date.now(),
   });
+  const returnValueRef = useRef<ReturnValue>(initialReturnValue);
 
-  const lastDeltaRef = useRef<Delta | null>(null);
-
-  const handleMouseMove = useCallback(
-    (event: MouseEvent) => {
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    const handleMouseMove = (event: MouseEvent) => {
       const currentTimestamp = event.timeStamp;
-      const lastDelta = lastDeltaRef.current;
-      if (
-        lastDelta &&
-        lastDelta.clientX !== null &&
-        lastDelta.clientY !== null
-      ) {
-        const deltaX = event.clientX - lastDelta.clientX;
-        const deltaY = event.clientY - lastDelta.clientY;
+      const lastState = stateRef.current;
 
-        const timeDelta = currentTimestamp - lastDelta.timeStamp;
-        // velocity doesnt make sense if timeDelta is 0 or if lastMousePosition is null
-        // because it means that the mouse has not moved since the last time this callback was called
+      if (lastState.clientX !== null && lastState.clientY !== null) {
+        const deltaX = event.clientX - lastState.clientX;
+        const deltaY = event.clientY - lastState.clientY;
+        const timeDelta = currentTimestamp - lastState.timeStamp;
         const velocityX = timeDelta === 0 ? 0 : deltaX / timeDelta;
         const velocityY = timeDelta === 0 ? 0 : deltaY / timeDelta;
-        lastDeltaRef.current = delta;
-        setDelta({
+
+        stateRef.current = {
           deltaX,
+          deltaY,
           clientX: event.clientX,
           clientY: event.clientY,
-          deltaY,
           velocityX,
           velocityY,
           timeStamp: currentTimestamp,
-        });
+        };
+
+        returnValueRef.current = { deltaX, deltaY, velocityX, velocityY };
       } else {
-        // backfill lastMousePosition reasonably
-        lastDeltaRef.current = {
-          ...delta,
+        stateRef.current = {
+          deltaX: 0,
+          deltaY: 0,
           clientX: event.clientX,
           clientY: event.clientY,
+          velocityX: 0,
+          velocityY: 0,
           timeStamp: event.timeStamp,
         };
-        setDelta({
-          clientX: event.clientX,
-          clientY: event.clientY,
+
+        returnValueRef.current = {
           deltaX: 0,
           deltaY: 0,
           velocityX: 0,
           velocityY: 0,
-          timeStamp: event.timeStamp,
-        });
+        };
       }
-    },
-    [delta]
-  );
 
-  const freshMouseMove = useFreshCallback(handleMouseMove);
-  useEffect(() => {
-    document.addEventListener("mousemove", freshMouseMove, {
-      passive: true,
-    });
-    return () => {
-      document.removeEventListener("mousemove", freshMouseMove);
+      onStoreChange();
     };
-  }, [freshMouseMove]);
 
-  return useMemo(() => {
-    const { deltaX, deltaY, velocityX, velocityY } = delta;
-    return { deltaX, deltaY, velocityX, velocityY };
-  }, [delta]);
+    document.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  const getSnapshot = useCallback(() => {
+    return returnValueRef.current;
+  }, []);
+
+  const getServerSnapshot = useCallback(() => {
+    return initialReturnValue;
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export { useMouseMoveDelta };
