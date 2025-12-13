@@ -128,13 +128,13 @@ function useWebWorker<T = any>(
         return;
       }
 
-      if (!workerRef.current) {
-        console.warn("Worker not initialized");
+      if (status === "terminated") {
+        console.warn("Cannot post message to terminated worker");
         return;
       }
 
-      if (status === "terminated") {
-        console.warn("Cannot post message to terminated worker");
+      if (!workerRef.current) {
+        console.warn("Worker not initialized");
         return;
       }
 
