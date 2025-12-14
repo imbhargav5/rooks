@@ -581,6 +581,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/965924?v=4",
       "profile": "https://github.com/JulianWielga",
       "contributions": ["code"]
+    },
+    {
+      "login": "aminya",
+      "name": "Amin Ya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16418197?v=4",
+      "profile": "https://aminya.github.io/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7
