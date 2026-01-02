@@ -2,6 +2,7 @@ import type { MutableRefObject } from "react";
 import { useState, useCallback } from "react";
 import { useDidMount } from "./useDidMount";
 import { useMutationObserver } from "./useMutationObserver";
+import { useResizeObserver } from './useResizeObserver';
 
 /**
  * @param element HTML element whose boundingclientrect is needed
@@ -32,6 +33,7 @@ function useBoundingclientrect(
   });
 
   useMutationObserver(ref, update);
+  useResizeObserver(ref, update);
 
   return domRect;
 }

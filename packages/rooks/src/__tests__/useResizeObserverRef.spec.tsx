@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 /**
  */
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   render,
   act,
@@ -9,12 +9,12 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react";
-import { useResizeObserver } from "@/hooks/useResizeObserver";
+import { useResizeObserverRef } from "@/hooks/useResizeObserverRef";
 
-describe("useResizeObserver", () => {
+describe("useResizeObserverRef", () => {
   test("should be defined", () => {
     expect.hasAssertions();
-    expect(useResizeObserver).toBeDefined();
+    expect(useResizeObserverRef).toBeDefined();
   });
   test("its observer should get called on resize", async () => {
     expect.hasAssertions();
@@ -28,9 +28,8 @@ describe("useResizeObserver", () => {
     }));
 
     function App() {
-      const ref = useRef<HTMLDivElement>(null);
       const [value, setValue] = useState(0);
-      useResizeObserver(ref, () => {
+      const [ref] = useResizeObserverRef(() => {
         setValue(1);
       });
       return (

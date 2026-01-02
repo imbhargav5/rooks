@@ -97,6 +97,7 @@ export { usePreviousImmediate } from "./hooks/usePreviousImmediate";
 export { usePromise } from "./hooks/usePromise";
 export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
+export { useResizeObserver } from "./hooks/useResizeObserver";
 export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
 export { useRenderCount } from "./hooks/useRenderCount";
 export { useRefElement } from "./hooks/useRefElement";
