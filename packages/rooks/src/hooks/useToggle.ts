@@ -29,7 +29,7 @@ export function useToggle<S = boolean>(): [S, () => void];
  * toggle();
  * // value === false
  */
-export function useToggle<S extends boolean>(initialValue: S): [S, () => void];
+export function useToggle<S extends boolean>(initialValue: S): [boolean, () => void];
 
 /**
  * Use toggle hook helps you easily toggle a value
