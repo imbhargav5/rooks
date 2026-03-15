@@ -19,7 +19,7 @@ describe("useMutationObserverRef", () => {
     vi.clearAllMocks();
     
     // Mock MutationObserver
-    mockMutationObserverConstructor.mockImplementation(() => mockMutationObserver);
+    mockMutationObserverConstructor.mockImplementation(function () { return mockMutationObserver; });
     global.MutationObserver = mockMutationObserverConstructor;
   });
 

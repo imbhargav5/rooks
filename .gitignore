@@ -43,3 +43,7 @@ i18n/*
 .content-collections/
 
 .jest-cache
+
+# ralph loop
+.ralph/progress.txt
+.ralph/learnings.txt

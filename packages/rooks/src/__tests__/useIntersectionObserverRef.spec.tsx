@@ -20,7 +20,7 @@ describe("useIntersectionObserverRef", () => {
     vi.clearAllMocks();
     
     // Mock IntersectionObserver
-    mockIntersectionObserverConstructor.mockImplementation(() => mockIntersectionObserver);
+    mockIntersectionObserverConstructor.mockImplementation(function () { return mockIntersectionObserver; });
     global.IntersectionObserver = mockIntersectionObserverConstructor;
   });
 

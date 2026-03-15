@@ -11,7 +11,7 @@ describe("useNotification", () => {
   let consoleErrorSpy: vi.SpyInstance;
 
   beforeEach(() => {
-    mockNotification = vi.fn() as any;
+    mockNotification = vi.fn(function () {}) as any;
     mockRequestPermission = vi.fn();
 
     // Mock Notification API
@@ -146,7 +146,7 @@ describe("useNotification", () => {
     expect.hasAssertions();
     (mockNotification as any).permission = "granted";
     const mockNotificationInstance = { close: vi.fn() };
-    mockNotification.mockReturnValue(mockNotificationInstance);
+    mockNotification.mockImplementation(function () { return mockNotificationInstance; });
 
     const { result } = renderHook(() => useNotification());
 
@@ -228,7 +228,7 @@ describe("useNotification", () => {
   it("should handle errors when creating notification", async () => {
     expect.hasAssertions();
     (mockNotification as any).permission = "granted";
-    mockNotification.mockImplementation(() => {
+    mockNotification.mockImplementation(function () {
       throw new Error("Notification error");
     });
 
@@ -250,7 +250,7 @@ describe("useNotification", () => {
     expect.hasAssertions();
     (mockNotification as any).permission = "granted";
     const mockNotificationInstance = { close: vi.fn() };
-    mockNotification.mockReturnValue(mockNotificationInstance);
+    mockNotification.mockImplementation(function () { return mockNotificationInstance; });
 
     const { result } = renderHook(() => useNotification());
 

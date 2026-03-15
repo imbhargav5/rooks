@@ -46,33 +46,33 @@
     "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.28.1",
-    "@manypkg/cli": "^0.23.0",
-    "@manypkg/get-packages": "^2.2.2",
-    "@types/inquirer": "^9.0.7",
-    "@types/lodash": "^4.17.16",
-    "@types/node": "^22.0.0",
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
+    "@manypkg/cli": "^0.25.1",
+    "@manypkg/get-packages": "^3.1.0",
+    "@types/inquirer": "^9.0.9",
+    "@types/lodash": "^4.17.24",
+    "@types/node": "^25.5.0",
     "all-contributors-cli": "^6.26.1",
     "conventional-changelog-cli": "^5.0.0",
     "cz-conventional-changelog": "3.3.0",
-    "lint-staged": "^15.5.0",
-    "lodash": "^4.17.21",
-    "mdast-util-from-markdown": "^2.0.2",
+    "lint-staged": "^16.4.0",
+    "lodash": "^4.17.23",
+    "mdast-util-from-markdown": "^2.0.3",
     "mdast-zone": "^6.1.0",
-    "pkg-dir": "^8.0.0",
-    "prettier": "^3.5.3",
+    "pkg-dir": "^9.0.0",
+    "prettier": "^3.8.1",
     "remark": "^15.0.1",
     "remark-frontmatter": "^5.0.0",
-    "tsx": "^4.19.2",
-    "turbo": "^2.5.4",
-    "typescript": "^5.8.2"
+    "tsx": "^4.21.0",
+    "turbo": "^2.8.17",
+    "typescript": "^5.9.3"
   },
   "resolutions": {
-    "prettier": "^2.8.7"
+    "prettier": "^3.8.1"
   },
   "packageManager": "pnpm@10.6.4+sha512.da3d715bfd22a9a105e6e8088cfc7826699332ded60c423b14ec613a185f1602206702ff0fe4c438cb15c979081ce4cb02568e364b15174503a63c7a8e2a5f6c",
   "dependencies": {
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   }
 }

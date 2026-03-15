@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 
 /**
  * Recording state
@@ -148,13 +148,17 @@ function useMediaRecorder(
   const isSupported =
     typeof window !== "undefined" && "MediaRecorder" in window;
 
+  // Memoize options to prevent infinite useEffect re-renders when
+  // options is passed as a default empty object literal
+  const stableOptions = useMemo(() => options, [JSON.stringify(options)]);
+
   useEffect(() => {
     if (!isSupported || !stream) {
       return;
     }
 
     try {
-      const mediaRecorder = new MediaRecorder(stream, options);
+      const mediaRecorder = new MediaRecorder(stream, stableOptions);
       mediaRecorderRef.current = mediaRecorder;
 
       mediaRecorder.ondataavailable = (event: BlobEvent) => {
@@ -191,7 +195,7 @@ function useMediaRecorder(
         err instanceof Error ? err : new Error("Failed to create MediaRecorder");
       setError(error);
     }
-  }, [stream, options, isSupported]);
+  }, [stream, stableOptions, isSupported]);
 
   const startRecording = useCallback(() => {
     if (!isSupported) {

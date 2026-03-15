@@ -1,0 +1,60 @@
+{
+  "project": "rooks-package-upgrade",
+  "description": "Upgrade all packages to latest versions and ensure all builds including docs pass",
+  "stories": [
+    {
+      "id": "UPGRADE-1",
+      "title": "Upgrade root monorepo dependencies",
+      "priority": 1,
+      "passes": true
+    },
+    {
+      "id": "UPGRADE-2",
+      "title": "Upgrade rooks package dependencies",
+      "priority": 2,
+      "passes": true
+    },
+    {
+      "id": "UPGRADE-3",
+      "title": "Upgrade website/docs dependencies",
+      "priority": 3,
+      "passes": true
+    },
+    {
+      "id": "FIX-1",
+      "title": "Fix rooks package build",
+      "priority": 4,
+      "passes": true
+    },
+    {
+      "id": "FIX-2",
+      "title": "Fix rooks package tests",
+      "priority": 5,
+      "passes": true
+    },
+    {
+      "id": "FIX-3",
+      "title": "Fix typecheck across monorepo",
+      "priority": 6,
+      "passes": true
+    },
+    {
+      "id": "FIX-4",
+      "title": "Fix lint across monorepo",
+      "priority": 7,
+      "passes": true
+    },
+    {
+      "id": "FIX-5",
+      "title": "Fix website/docs build",
+      "priority": 8,
+      "passes": true
+    },
+    {
+      "id": "VERIFY-1",
+      "title": "Verify all-checks pass end-to-end",
+      "priority": 9,
+      "passes": true
+    }
+  ]
+}

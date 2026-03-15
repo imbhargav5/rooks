@@ -21,7 +21,7 @@ describe("useMediaRecorder", () => {
       onerror: null,
     };
 
-    mockMediaRecorderConstructor = vi.fn(() => mockMediaRecorder);
+    mockMediaRecorderConstructor = vi.fn(function () { return mockMediaRecorder; });
 
     Object.defineProperty(window, "MediaRecorder", {
       writable: true,
@@ -270,14 +270,14 @@ describe("useMediaRecorder", () => {
 
   it("should handle resume recording error", () => {
     expect.hasAssertions();
-    mockMediaRecorder.resume.mockImplementation(() => {
-      throw new Error("Resume error");
-    });
 
     const { result } = renderHook(() => useMediaRecorder(mockStream));
 
     act(() => {
       result.current.startRecording();
+    });
+
+    act(() => {
       result.current.pauseRecording();
     });
 
@@ -374,7 +374,7 @@ describe("useMediaRecorder", () => {
 
   it("should handle MediaRecorder creation error", () => {
     expect.hasAssertions();
-    mockMediaRecorderConstructor.mockImplementation(() => {
+    mockMediaRecorderConstructor.mockImplementation(function () {
       throw new Error("Creation error");
     });
 

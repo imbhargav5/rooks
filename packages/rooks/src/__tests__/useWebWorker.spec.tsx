@@ -17,7 +17,7 @@ describe("useWebWorker", () => {
       onerror: null,
     };
 
-    mockWorkerConstructor = vi.fn(() => mockWorker);
+    mockWorkerConstructor = vi.fn(function () { return mockWorker; });
 
     Object.defineProperty(window, "Worker", {
       writable: true,
@@ -176,7 +176,7 @@ describe("useWebWorker", () => {
 
   it("should handle worker creation error", () => {
     expect.hasAssertions();
-    mockWorkerConstructor.mockImplementation(() => {
+    mockWorkerConstructor.mockImplementation(function () {
       throw new Error("Failed to create worker");
     });
 
@@ -189,7 +189,7 @@ describe("useWebWorker", () => {
 
   it("should handle worker creation error with non-Error", () => {
     expect.hasAssertions();
-    mockWorkerConstructor.mockImplementation(() => {
+    mockWorkerConstructor.mockImplementation(function () {
       throw "String error";
     });
 

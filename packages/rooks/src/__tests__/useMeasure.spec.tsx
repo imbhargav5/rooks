@@ -27,7 +27,7 @@ describe("useMeasure", () => {
     mockUnobserve = vi.fn();
     mockDisconnect = vi.fn();
 
-    const MockResizeObserver = vi.fn().mockImplementation((callback) => {
+    const MockResizeObserver = vi.fn().mockImplementation(function (callback: ResizeObserverCallback) {
       resizeObserverCallback = callback;
       return {
         observe: mockObserve,

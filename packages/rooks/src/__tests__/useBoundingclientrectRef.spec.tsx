@@ -46,10 +46,10 @@ describe("useBoundingclientrectRef", () => {
     });
     
     // Mock ResizeObserver
-    global.ResizeObserver = vi.fn().mockImplementation(() => mockResizeObserver);
-    
+    global.ResizeObserver = vi.fn().mockImplementation(function () { return mockResizeObserver; }) as any;
+
     // Mock MutationObserver
-    global.MutationObserver = vi.fn().mockImplementation(() => mockMutationObserver);
+    global.MutationObserver = vi.fn().mockImplementation(function () { return mockMutationObserver; }) as any;
   });
 
   afterEach(() => {

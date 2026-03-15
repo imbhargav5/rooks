@@ -427,10 +427,10 @@ describe("useWebLocksApi", () => {
       
       // Mock AbortController globally
       const originalAbortController = global.AbortController;
-      global.AbortController = vi.fn(() => mockAbortController) as any;
-      
+      global.AbortController = vi.fn(function () { return mockAbortController; }) as any;
+
       const { result } = renderHook(() => useWebLocksApi("test-resource"));
-      
+
       // First, trigger the creation of an AbortController by calling acquire
       mockNavigatorLocks.request.mockImplementation(
         (name: string, callbackOrOptions: any, callback?: Function) => {
@@ -451,7 +451,7 @@ describe("useWebLocksApi", () => {
       });
 
       expect(mockAbortController.abort).toHaveBeenCalled();
-      
+
       // Restore
       global.AbortController = originalAbortController;
     });
@@ -462,9 +462,9 @@ describe("useWebLocksApi", () => {
         abort: vi.fn(),
         signal: { aborted: false },
       };
-      
+
       const originalAbortController = global.AbortController;
-      global.AbortController = vi.fn(() => mockAbortController) as any;
+      global.AbortController = vi.fn(function () { return mockAbortController; }) as any;
       
       const { result, unmount } = renderHook(() => useWebLocksApi("test-resource"));
       

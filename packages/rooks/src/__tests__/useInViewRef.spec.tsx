@@ -8,7 +8,7 @@ describe("useInViewRef", () => {
 
   beforeEach(() => {
     observerInstances = [];
-    mockIntersectionObserver = vi.fn((callback, options) => {
+    mockIntersectionObserver = vi.fn(function (callback: any, options: any) {
       const instance = {
         observe: vi.fn(),
         unobserve: vi.fn(),
