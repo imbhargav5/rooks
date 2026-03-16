@@ -1,5 +1,11 @@
 # rooks
 
+## 9.6.0
+
+### Minor Changes
+
+- [`ba6f38b`](https://github.com/imbhargav5/rooks/commit/ba6f38b6ac0d3f421cfa0fe8009642b33301f5ea) Thanks [@imbhargav5](https://github.com/imbhargav5)! - useTemporalNow hook
+
 ## 9.5.0
 
 ### Minor Changes
@@ -117,7 +123,6 @@
 ### Minor Changes
 
 - [`6dc62d2`](https://github.com/imbhargav5/rooks/commit/6dc62d28a801e135cf4ee5468947599f087be41d) Thanks [@imbhargav5](https://github.com/imbhargav5)! - - [926f423e](https://github.com/imbhargav5/rooks/commit/926f423e): Added new React hooks to `data/hooks-list.json`.
-
   - [a3e09c57](https://github.com/imbhargav5/rooks/commit/a3e09c57): Fixed type aliasing in package build output using `tsc-alias` (`packages/rooks`).
   - [a8eed151](https://github.com/imbhargav5/rooks/commit/a8eed151): Updated import paths in documentation for regular hooks to use relative paths.
   - [ed4924f9](https://github.com/imbhargav5/rooks/commit/ed4924f9): Refactored imports in `index.ts` to use relative paths for hooks.
@@ -130,7 +135,6 @@
   - [f1963051](https://github.com/imbhargav5/rooks/commit/f1963051): General `README.md` update.
 
   **Areas affected:**
-
   - `data/hooks-list.json`
   - `packages/rooks` (build, package.json, index.ts, experimental.ts, tests)
   - `apps/website/content/docs/hooks/` (many .mdx and meta.json files)
@@ -148,7 +152,6 @@
 ### Minor Changes
 
 - [#1841](https://github.com/imbhargav5/rooks/pull/1841) [`a70de17`](https://github.com/imbhargav5/rooks/commit/a70de1748201a9067d85acad29c251c992fcf1ff) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Enhance useAudio hook, add unit tests, and update documentation
-
   - **useAudio Enhancement**: Significantly enhanced the useAudio hook with improved functionality and comprehensive documentation (679 additions, 80 deletions across hook implementation, tests, and docs)
   - **Unit Tests**: Add unit tests for useBoundingclientrectRef, useFullscreen, useIntersectionObserverRef, useIsomorphicEffect, and useMutationObserverRef hooks
   - **Documentation**: Update README image source to use raw GitHub URL for better accessibility
@@ -158,7 +161,6 @@
 ### Patch Changes
 
 - [#1841](https://github.com/imbhargav5/rooks/pull/1841) [`a70de17`](https://github.com/imbhargav5/rooks/commit/a70de1748201a9067d85acad29c251c992fcf1ff) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add unit tests for several hooks and update README image source
-
   - Add unit tests for useBoundingclientrectRef, useFullscreen, useIntersectionObserverRef, useIsomorphicEffect, and useMutationObserverRef hooks
   - Update README image source to use raw GitHub URL for better accessibility
 
@@ -171,17 +173,14 @@
 - [#1835](https://github.com/imbhargav5/rooks/pull/1835) [`825e69a`](https://github.com/imbhargav5/rooks/commit/825e69a1148e181b7d8fbd9a7c23069fbb11d64e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - ## New Features and Improvements
 
   ### New Hooks
-
   - Add experimental `useSuspenseNavigatorUserAgentData` hook for enhanced user agent detection capabilities
 
   ### Bug Fixes and Enhancements
-
   - Fix `useWebLocksApi` hook to prevent combining its internal `signal` with the `ifAvailable` parameter, improving API reliability
   - Refactor `useWindowSize` hook for improved clarity and performance with additional tests
   - Enhance `useAudio` hook documentation for better clarity and examples
 
   ### Documentation Improvements
-
   - Update README image source to local path for better reliability
   - Refactor hooks list with improved categorization and markdown structure
   - Comprehensive documentation updates for multiple hooks including:
@@ -199,7 +198,6 @@
   - Add `lucide-react` dependency and update icon handling
 
   ### Developer Experience
-
   - Improved code formatting and structure across multiple hook documentations
   - Enhanced examples and use cases for better developer understanding
   - Better categorization and organization of hooks documentation
