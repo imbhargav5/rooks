@@ -1,0 +1,75 @@
+---
+id: useTemporalNow
+title: useTemporalNow
+sidebar_label: useTemporalNow
+---
+
+## About
+
+Returns the current time as a Temporal value and updates it on aligned second, minute, or day boundaries.
+
+On the server this hook returns `null`, then hydrates to the current Temporal value on the client.
+
+## Examples
+
+### Get the current instant
+
+```jsx
+import { useTemporalNow } from "rooks";
+
+export default function Clock() {
+  const now = useTemporalNow();
+
+  if (now === null) {
+    return <span>Loading current time...</span>;
+  }
+
+  return <time>{now.toString()}</time>;
+}
+```
+
+### Get the current date in a specific time zone
+
+```jsx
+import { useTemporalNow } from "rooks";
+
+export default function Today() {
+  const today = useTemporalNow({
+    kind: "plainDate",
+    precision: "day",
+    timeZone: "America/New_York",
+  });
+
+  return <span>{today?.toString() ?? "Loading date..."}</span>;
+}
+```
+
+### Get a zoned date-time that updates every minute
+
+```jsx
+import { useTemporalNow } from "rooks";
+
+export default function MeetingTime() {
+  const dateTime = useTemporalNow({
+    kind: "zoned",
+    precision: "minute",
+    timeZone: "UTC",
+  });
+
+  return <span>{dateTime?.toString() ?? "Loading schedule..."}</span>;
+}
+```
+
+### Arguments
+
+| Argument          | Type                                                     | Description                                                           | Default value   |
+| ----------------- | -------------------------------------------------------- | --------------------------------------------------------------------- | --------------- |
+| options.kind      | `"instant" \| "zoned" \| "plainDateTime" \| "plainDate"` | Which Temporal value to return                                        | `"instant"`     |
+| options.precision | `"second" \| "minute" \| "day"`                          | Update cadence aligned to the next second, minute, or day boundary    | `"second"`      |
+| options.timeZone  | string                                                   | IANA time zone used for zoned, plainDateTime, plainDate, and day mode | local time zone |
+
+### Return Value
+
+| Type                                                                                                 | Description                                                                      |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Temporal.Instant \| Temporal.ZonedDateTime \| Temporal.PlainDateTime \| Temporal.PlainDate \| null` | Returns the requested Temporal value. `null` during SSR and first client render. |

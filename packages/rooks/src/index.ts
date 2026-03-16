@@ -26,11 +26,11 @@ export { useDocumentEventListener } from "./hooks/useDocumentEventListener";
 export { useDocumentTitle } from "./hooks/useDocumentTitle";
 export { useEasing, Easing } from "./hooks/useEasing";
 export type {
-    EasingFunction,
-    EasingState,
-    EasingDirection,
-    UseEasingOptions,
-    EasingControls,
+  EasingFunction,
+  EasingState,
+  EasingDirection,
+  UseEasingOptions,
+  EasingControls,
 } from "./hooks/useEasing";
 export { useDocumentVisibilityState } from "./hooks/useDocumentVisibilityState";
 export { useEffectOnceWhen } from "./hooks/useEffectOnceWhen";
@@ -110,6 +110,7 @@ export { useSetState } from "./hooks/useSetState";
 export { useSpring } from "./hooks/useSpring";
 export { useStackState } from "./hooks/useStackState";
 export { useSpeech } from "./hooks/useSpeech";
+export { useTemporalNow } from "./hooks/useTemporalNow";
 export { useTimeTravelState } from "./hooks/useTimeTravelState";
 export { useFetch } from "./hooks/useFetch";
 export { useThrottle } from "./hooks/useThrottle";
@@ -128,3 +129,8 @@ export { useWindowEventListener } from "./hooks/useWindowEventListener";
 export { useWindowScrollPosition } from "./hooks/useWindowScrollPosition";
 export { useWindowSize } from "./hooks/useWindowSize";
 export { useOnStartTyping } from "./hooks/useOnStartTyping";
+export type {
+  TemporalNowKind,
+  TemporalNowOptions,
+  TemporalNowPrecision,
+} from "./hooks/useTemporalNow";

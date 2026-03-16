@@ -541,6 +541,11 @@
       "category": "animation"
     },
     {
+      "name": "useTemporalNow",
+      "description": "Returns the current time as a Temporal value with aligned updates",
+      "category": "state"
+    },
+    {
       "name": "useTimeTravelState",
       "description": "A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.",
       "category": "state-history"

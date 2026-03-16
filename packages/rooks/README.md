@@ -394,7 +394,7 @@ function App() {
 
 
 <details open>
-<summary><h3>❇️ State - 18 hooks</h3></summary>
+<summary><h3>❇️ State - 19 hooks</h3></summary>
 
 
 
@@ -416,6 +416,7 @@ function App() {
 * [useSessionstorageState](https://rooks.vercel.app/docs/hooks/useSessionstorageState) - useState but syncs with sessionstorage
 * [useSetState](https://rooks.vercel.app/docs/hooks/useSetState) - Manage the state of a Set in React.
 * [useStackState](https://rooks.vercel.app/docs/hooks/useStackState) - A React hook that manages state in the form of a stack
+* [useTemporalNow](https://rooks.vercel.app/docs/hooks/useTemporalNow) - Returns the current time as a Temporal value with aligned updates
 
 
 </details>
@@ -522,7 +523,7 @@ function App() {
 
 <!--hookscount start-->
 
-✅ Collection of 120 hooks as standalone modules.
+✅ Collection of 121 hooks as standalone modules.
 
 <!--hookscount end-->
 
