@@ -416,6 +416,9 @@ function App() {
 * [useSessionstorageState](https://rooks.vercel.app/docs/hooks/useSessionstorageState) - useState but syncs with sessionstorage
 * [useSetState](https://rooks.vercel.app/docs/hooks/useSetState) - Manage the state of a Set in React.
 * [useStackState](https://rooks.vercel.app/docs/hooks/useStackState) - A React hook that manages state in the form of a stack
+* [useTemporalAge](https://rooks.vercel.app/docs/hooks/useTemporalAge) - Returns the calendar age from a birth date, updating at each day boundary
+* [useTemporalCountdown](https://rooks.vercel.app/docs/hooks/useTemporalCountdown) - Returns the remaining duration until a target instant with aligned updates
+* [useTemporalElapsed](https://rooks.vercel.app/docs/hooks/useTemporalElapsed) - Returns the elapsed duration since a start instant with aligned updates
 * [useTemporalNow](https://rooks.vercel.app/docs/hooks/useTemporalNow) - Returns the current time as a Temporal value with aligned updates
 
 
