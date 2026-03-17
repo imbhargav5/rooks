@@ -1,5 +1,11 @@
 # rooks
 
+## 9.7.0
+
+### Minor Changes
+
+- [`5c36dc2`](https://github.com/imbhargav5/rooks/commit/5c36dc2c8c62f6b3dba81c763d8addfc2728455e) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add new hooks
+
 ## 9.6.0
 
 ### Minor Changes
