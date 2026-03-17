@@ -541,6 +541,21 @@
       "category": "animation"
     },
     {
+      "name": "useTemporalAge",
+      "description": "Returns the calendar age from a birth date, updating at each day boundary",
+      "category": "state"
+    },
+    {
+      "name": "useTemporalCountdown",
+      "description": "Returns the remaining duration until a target instant with aligned updates",
+      "category": "state"
+    },
+    {
+      "name": "useTemporalElapsed",
+      "description": "Returns the elapsed duration since a start instant with aligned updates",
+      "category": "state"
+    },
+    {
       "name": "useTemporalNow",
       "description": "Returns the current time as a Temporal value with aligned updates",
       "category": "state"

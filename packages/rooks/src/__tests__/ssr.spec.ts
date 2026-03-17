@@ -101,6 +101,48 @@ describe("SSR Environment Detection", () => {
     });
   });
 
+  describe("useTemporalCountdown SSR", () => {
+    it("should return null when rendered on the server", async () => {
+      expect.hasAssertions();
+
+      const { useTemporalCountdown } = await import(
+        "@/hooks/useTemporalCountdown"
+      );
+
+      const result = useTemporalCountdown({
+        target: "2099-01-01T00:00:00Z",
+      });
+      expect(result).toBe(null);
+    });
+  });
+
+  describe("useTemporalElapsed SSR", () => {
+    it("should return null when rendered on the server", async () => {
+      expect.hasAssertions();
+
+      const { useTemporalElapsed } = await import(
+        "@/hooks/useTemporalElapsed"
+      );
+
+      expect(() => useTemporalElapsed()).not.toThrow();
+      expect(useTemporalElapsed()).toBe(null);
+    });
+  });
+
+  describe("useTemporalAge SSR", () => {
+    it("should return null when rendered on the server", async () => {
+      expect.hasAssertions();
+
+      const { useTemporalAge } = await import("@/hooks/useTemporalAge");
+
+      const result = useTemporalAge({
+        date: "1990-01-01",
+        timeZone: "UTC",
+      });
+      expect(result).toBe(null);
+    });
+  });
+
   describe("useMeasure SSR", () => {
     it("should handle SSR gracefully", async () => {
       expect.hasAssertions();
