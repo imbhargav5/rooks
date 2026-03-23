@@ -1,5 +1,21 @@
 # rooks
 
+## 9.7.1
+
+### Patch Changes
+
+- [`93c25b1`](https://github.com/imbhargav5/rooks/commit/93c25b13e8e71be39023bbf9b2842dcdd887e5f0) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Fix `TypeError: e.BigInt is not a function` crash caused by `@js-temporal/polyfill` being eagerly loaded for all imports.
+
+  Temporal hooks (`useTemporalNow`, `useTemporalAge`, `useTemporalCountdown`, `useTemporalElapsed`) are now available via a separate entry point:
+
+  ```js
+  import { useTemporalNow } from "rooks/temporal";
+  ```
+
+  `@js-temporal/polyfill` moved to `optionalDependencies` — install it explicitly if using temporal hooks.
+
+- [#1905](https://github.com/imbhargav5/rooks/pull/1905) [`eab42e2`](https://github.com/imbhargav5/rooks/commit/eab42e22745aa9f87f7995a496a4944b50eaffd7) Thanks [@imbhargav5](https://github.com/imbhargav5)! - patch update
+
 ## 9.7.0
 
 ### Minor Changes
