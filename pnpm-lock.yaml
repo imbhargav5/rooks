@@ -259,9 +259,6 @@ importers:
 
   packages/rooks:
     dependencies:
-      '@js-temporal/polyfill':
-        specifier: ^0.5.1
-        version: 0.5.1
       fast-deep-equal:
         specifier: ^3.1.3
         version: 3.1.3
@@ -581,6 +578,10 @@ importers:
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
+    optionalDependencies:
+      '@js-temporal/polyfill':
+        specifier: ^0.5.1
+        version: 0.5.1
 
   packages/typescript-config: {}
 
@@ -10969,6 +10970,7 @@ snapshots:
   '@js-temporal/polyfill@0.5.1':
     dependencies:
       jsbi: 4.3.2
+    optional: true
 
   '@lezer/common@1.5.1': {}
 
@@ -15310,7 +15312,8 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsbi@4.3.2: {}
+  jsbi@4.3.2:
+    optional: true
 
   jsbn@0.1.1: {}
 
