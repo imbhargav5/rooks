@@ -1,5 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
+import type { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { getTemporalApi, useLoadTemporal } from "./useLoadTemporal";
 
 type TemporalElapsedPrecision = "second" | "minute";
 
@@ -22,38 +23,28 @@ type Snapshot = {
   instant: Temporal.Instant;
 };
 
-type TemporalGlobal = typeof globalThis & {
-  Temporal?: typeof Temporal;
-};
-
-function getTemporalApi(): typeof Temporal {
-  const temporalGlobal = globalThis as TemporalGlobal;
-
-  return temporalGlobal.Temporal ?? Temporal;
-}
-
 function getCurrentInstant(): Temporal.Instant {
-  const temporal = getTemporalApi();
-
-  return temporal.Instant.fromEpochMilliseconds(Date.now());
+  return getTemporalApi()!.Instant.fromEpochMilliseconds(Date.now());
 }
 
 function resolveSince(
   since: Temporal.Instant | string | number | undefined
 ): Temporal.Instant {
+  const T = getTemporalApi()!;
+
   if (since === undefined) {
     return getCurrentInstant();
   }
 
-  if (since instanceof Temporal.Instant) {
+  if (since instanceof T.Instant) {
     return since;
   }
 
   if (typeof since === "number") {
-    return Temporal.Instant.fromEpochMilliseconds(since);
+    return T.Instant.fromEpochMilliseconds(since);
   }
 
-  return Temporal.Instant.from(since);
+  return T.Instant.from(since);
 }
 
 function computeDelay(
@@ -148,10 +139,11 @@ function deriveElapsed(
     return null;
   }
 
-  const comparison = Temporal.Instant.compare(snapshot.instant, sinceInstant);
+  const T = getTemporalApi()!;
+  const comparison = T.Instant.compare(snapshot.instant, sinceInstant);
 
   if (comparison <= 0) {
-    return new Temporal.Duration();
+    return new T.Duration();
   }
 
   return sinceInstant.until(snapshot.instant);
@@ -161,12 +153,16 @@ function getServerSnapshot(): null {
   return null;
 }
 
+const noopSubscribe = () => () => {};
+const noopGetSnapshot = () => null;
+
 /**
  * useTemporalElapsed
  * Returns the elapsed duration since a given start instant, ticking at
  * the requested precision boundary.
  *
  * On the server this hook returns null so hydration remains deterministic.
+ * Returns null while the Temporal polyfill is loading.
  *
  * @param options Configuration with an optional start instant and precision
  * @see https://rooks.vercel.app/docs/hooks/useTemporalElapsed
@@ -174,27 +170,33 @@ function getServerSnapshot(): null {
 function useTemporalElapsed(
   options: TemporalElapsedOptions = {}
 ): Temporal.Duration | null {
+  const temporalApi = useLoadTemporal();
   const { since, precision = "second" } = options;
 
-  const sinceInstant = useMemo(() => resolveSince(since), [since]);
+  const sinceInstant = useMemo(
+    () => (temporalApi ? resolveSince(since) : null),
+    [since, temporalApi]
+  );
 
   const store = useMemo(() => {
+    if (!temporalApi) return null;
     return new ElapsedStore(precision);
-  }, [precision]);
+  }, [precision, temporalApi]);
 
   useEffect(() => {
     return () => {
-      store.dispose();
+      store?.dispose();
     };
   }, [store]);
 
   const snapshot = useSyncExternalStore(
-    store.subscribe,
-    store.getSnapshot,
+    store?.subscribe ?? noopSubscribe,
+    store?.getSnapshot ?? noopGetSnapshot,
     getServerSnapshot
   );
 
   return useMemo(() => {
+    if (!sinceInstant) return null;
     return deriveElapsed(snapshot, sinceInstant);
   }, [snapshot, sinceInstant]);
 }

@@ -1,5 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
+import type { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { getTemporalApi, useLoadTemporal } from "./useLoadTemporal";
 
 type TemporalAgeOptions = {
   /**
@@ -37,32 +38,22 @@ type Snapshot = {
   instant: Temporal.Instant;
 };
 
-type TemporalGlobal = typeof globalThis & {
-  Temporal?: typeof Temporal;
-};
-
-function getTemporalApi(): typeof Temporal {
-  const temporalGlobal = globalThis as TemporalGlobal;
-
-  return temporalGlobal.Temporal ?? Temporal;
-}
-
 function getCurrentInstant(): Temporal.Instant {
-  const temporal = getTemporalApi();
-
-  return temporal.Instant.fromEpochMilliseconds(Date.now());
+  return getTemporalApi()!.Instant.fromEpochMilliseconds(Date.now());
 }
 
 function getCurrentTimeZoneId(): string {
-  return getTemporalApi().Now.timeZoneId();
+  return getTemporalApi()!.Now.timeZoneId();
 }
 
 function resolveDate(date: Temporal.PlainDate | string): Temporal.PlainDate {
-  if (date instanceof Temporal.PlainDate) {
+  const T = getTemporalApi()!;
+
+  if (date instanceof T.PlainDate) {
     return date;
   }
 
-  return Temporal.PlainDate.from(date);
+  return T.PlainDate.from(date);
 }
 
 function computeDayBoundaryDelay(
@@ -174,12 +165,16 @@ function getServerSnapshot(): null {
   return null;
 }
 
+const noopSubscribe = () => () => {};
+const noopGetSnapshot = () => null;
+
 /**
  * useTemporalAge
  * Returns the calendar age (years, months, days) from a given birth or
  * start date, updating automatically at each day boundary.
  *
  * On the server this hook returns null so hydration remains deterministic.
+ * Returns null while the Temporal polyfill is loading.
  *
  * @param options Configuration with a date and optional time zone
  * @see https://rooks.vercel.app/docs/hooks/useTemporalAge
@@ -187,32 +182,38 @@ function getServerSnapshot(): null {
 function useTemporalAge(
   options: TemporalAgeOptions
 ): TemporalAgeResult | null {
+  const temporalApi = useLoadTemporal();
   const { date, timeZone } = options;
 
   const resolvedTimeZone = useMemo(
-    () => timeZone ?? getCurrentTimeZoneId(),
-    [timeZone]
+    () => (temporalApi ? (timeZone ?? getCurrentTimeZoneId()) : "UTC"),
+    [timeZone, temporalApi]
   );
 
-  const birthDate = useMemo(() => resolveDate(date), [date]);
+  const birthDate = useMemo(
+    () => (temporalApi ? resolveDate(date) : null),
+    [date, temporalApi]
+  );
 
   const store = useMemo(() => {
+    if (!temporalApi) return null;
     return new AgeStore(resolvedTimeZone);
-  }, [resolvedTimeZone]);
+  }, [resolvedTimeZone, temporalApi]);
 
   useEffect(() => {
     return () => {
-      store.dispose();
+      store?.dispose();
     };
   }, [store]);
 
   const snapshot = useSyncExternalStore(
-    store.subscribe,
-    store.getSnapshot,
+    store?.subscribe ?? noopSubscribe,
+    store?.getSnapshot ?? noopGetSnapshot,
     getServerSnapshot
   );
 
   return useMemo(() => {
+    if (!birthDate) return null;
     return deriveAge(snapshot, birthDate, resolvedTimeZone);
   }, [snapshot, birthDate, resolvedTimeZone]);
 }

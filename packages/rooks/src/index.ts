@@ -110,10 +110,6 @@ export { useSetState } from "./hooks/useSetState";
 export { useSpring } from "./hooks/useSpring";
 export { useStackState } from "./hooks/useStackState";
 export { useSpeech } from "./hooks/useSpeech";
-export { useTemporalAge } from "./hooks/useTemporalAge";
-export { useTemporalCountdown } from "./hooks/useTemporalCountdown";
-export { useTemporalElapsed } from "./hooks/useTemporalElapsed";
-export { useTemporalNow } from "./hooks/useTemporalNow";
 export { useTimeTravelState } from "./hooks/useTimeTravelState";
 export { useFetch } from "./hooks/useFetch";
 export { useThrottle } from "./hooks/useThrottle";
@@ -132,21 +128,3 @@ export { useWindowEventListener } from "./hooks/useWindowEventListener";
 export { useWindowScrollPosition } from "./hooks/useWindowScrollPosition";
 export { useWindowSize } from "./hooks/useWindowSize";
 export { useOnStartTyping } from "./hooks/useOnStartTyping";
-export type {
-  TemporalAgeOptions,
-  TemporalAgeResult,
-} from "./hooks/useTemporalAge";
-export type {
-  TemporalCountdownOptions,
-  TemporalCountdownPrecision,
-  TemporalCountdownResult,
-} from "./hooks/useTemporalCountdown";
-export type {
-  TemporalElapsedOptions,
-  TemporalElapsedPrecision,
-} from "./hooks/useTemporalElapsed";
-export type {
-  TemporalNowKind,
-  TemporalNowOptions,
-  TemporalNowPrecision,
-} from "./hooks/useTemporalNow";

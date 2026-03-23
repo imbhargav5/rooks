@@ -14,6 +14,7 @@ const pkg = require("./package.json");
 const external = [
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
+  ...Object.keys(pkg.optionalDependencies || {}),
 ];
 
 async function build() {
@@ -25,7 +26,7 @@ async function build() {
 
     // ESM Build only
     await esbuild.build({
-      entryPoints: ["src/index.ts", "src/experimental.ts"],
+      entryPoints: ["src/index.ts", "src/experimental.ts", "src/temporal.ts"],
       outdir: "dist/esm",
       bundle: true,
       splitting: true,

@@ -1,5 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
+import type { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { getTemporalApi, useLoadTemporal } from "./useLoadTemporal";
 
 type TemporalCountdownPrecision = "second" | "minute";
 
@@ -28,34 +29,24 @@ type Snapshot = {
   instant: Temporal.Instant;
 };
 
-type TemporalGlobal = typeof globalThis & {
-  Temporal?: typeof Temporal;
-};
-
-function getTemporalApi(): typeof Temporal {
-  const temporalGlobal = globalThis as TemporalGlobal;
-
-  return temporalGlobal.Temporal ?? Temporal;
-}
-
 function getCurrentInstant(): Temporal.Instant {
-  const temporal = getTemporalApi();
-
-  return temporal.Instant.fromEpochMilliseconds(Date.now());
+  return getTemporalApi()!.Instant.fromEpochMilliseconds(Date.now());
 }
 
 function resolveTarget(
   target: Temporal.Instant | string | number
 ): Temporal.Instant {
-  if (target instanceof Temporal.Instant) {
+  const T = getTemporalApi()!;
+
+  if (target instanceof T.Instant) {
     return target;
   }
 
   if (typeof target === "number") {
-    return Temporal.Instant.fromEpochMilliseconds(target);
+    return T.Instant.fromEpochMilliseconds(target);
   }
 
-  return Temporal.Instant.from(target);
+  return T.Instant.from(target);
 }
 
 function computeDelay(
@@ -123,9 +114,10 @@ class CountdownStore {
       return;
     }
 
+    const T = getTemporalApi()!;
     const now = this.snapshot?.instant ?? getCurrentInstant();
 
-    if (Temporal.Instant.compare(now, this.targetInstant) >= 0) {
+    if (T.Instant.compare(now, this.targetInstant) >= 0) {
       return;
     }
 
@@ -141,11 +133,12 @@ class CountdownStore {
   }
 
   private tick = () => {
+    const T = getTemporalApi()!;
     const now = getCurrentInstant();
     this.snapshot = { instant: now };
     this.emit();
 
-    if (Temporal.Instant.compare(now, this.targetInstant) >= 0) {
+    if (T.Instant.compare(now, this.targetInstant) >= 0) {
       this.stop();
       return;
     }
@@ -163,14 +156,12 @@ function deriveResult(
     return null;
   }
 
-  const comparison = Temporal.Instant.compare(
-    snapshot.instant,
-    targetInstant
-  );
+  const T = getTemporalApi()!;
+  const comparison = T.Instant.compare(snapshot.instant, targetInstant);
 
   if (comparison >= 0) {
     return {
-      remaining: new Temporal.Duration(),
+      remaining: new T.Duration(),
       done: true,
     };
   }
@@ -187,6 +178,9 @@ function getServerSnapshot(): null {
   return null;
 }
 
+const noopSubscribe = () => () => {};
+const noopGetSnapshot = () => null;
+
 /**
  * useTemporalCountdown
  * Returns the remaining duration until a target instant, ticking at
@@ -194,6 +188,7 @@ function getServerSnapshot(): null {
  * target is reached.
  *
  * On the server this hook returns null so hydration remains deterministic.
+ * Returns null while the Temporal polyfill is loading.
  *
  * @param options Configuration with a target instant and optional precision
  * @see https://rooks.vercel.app/docs/hooks/useTemporalCountdown
@@ -201,27 +196,33 @@ function getServerSnapshot(): null {
 function useTemporalCountdown(
   options: TemporalCountdownOptions
 ): TemporalCountdownResult | null {
+  const temporalApi = useLoadTemporal();
   const { target, precision = "second" } = options;
 
-  const targetInstant = useMemo(() => resolveTarget(target), [target]);
+  const targetInstant = useMemo(
+    () => (temporalApi ? resolveTarget(target) : null),
+    [target, temporalApi]
+  );
 
   const store = useMemo(() => {
+    if (!temporalApi || !targetInstant) return null;
     return new CountdownStore(targetInstant, precision);
-  }, [targetInstant, precision]);
+  }, [targetInstant, precision, temporalApi]);
 
   useEffect(() => {
     return () => {
-      store.dispose();
+      store?.dispose();
     };
   }, [store]);
 
   const snapshot = useSyncExternalStore(
-    store.subscribe,
-    store.getSnapshot,
+    store?.subscribe ?? noopSubscribe,
+    store?.getSnapshot ?? noopGetSnapshot,
     getServerSnapshot
   );
 
   return useMemo(() => {
+    if (!targetInstant) return null;
     return deriveResult(snapshot, targetInstant);
   }, [snapshot, targetInstant]);
 }

@@ -1,5 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
+import type { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { getTemporalApi, useLoadTemporal } from "./useLoadTemporal";
 
 type TemporalNowPrecision = "day" | "minute" | "second";
 
@@ -41,10 +42,6 @@ type TemporalNowOptions =
 
 type Snapshot = {
   instant: Temporal.Instant;
-};
-
-type TemporalGlobal = typeof globalThis & {
-  Temporal?: typeof Temporal;
 };
 
 class ClockStore {
@@ -121,20 +118,12 @@ class ClockStore {
   };
 }
 
-function getTemporalApi(): typeof Temporal {
-  const temporalGlobal = globalThis as TemporalGlobal;
-
-  return temporalGlobal.Temporal ?? Temporal;
-}
-
 function getCurrentInstant(): Temporal.Instant {
-  const temporal = getTemporalApi();
-
-  return temporal.Instant.fromEpochMilliseconds(Date.now());
+  return getTemporalApi()!.Instant.fromEpochMilliseconds(Date.now());
 }
 
 function getCurrentTimeZoneId(): string {
-  return getTemporalApi().Now.timeZoneId();
+  return getTemporalApi()!.Now.timeZoneId();
 }
 
 function computeDelayFromInstant(
@@ -198,12 +187,16 @@ function getServerSnapshot(): null {
   return null;
 }
 
+const noopSubscribe = () => () => {};
+const noopGetSnapshot = () => null;
+
 /**
  * useTemporalNow
  * Returns the current time as Temporal values and keeps it aligned to
  * the requested precision boundary.
  *
  * On the server this hook returns null so hydration remains deterministic.
+ * Returns null while the Temporal polyfill is loading.
  *
  * @param options Configuration options for the current Temporal value
  * @see https://rooks.vercel.app/docs/hooks/useTemporalNow
@@ -222,21 +215,23 @@ function useTemporalNow(
   | Temporal.PlainDateTime
   | Temporal.PlainDate
   | null {
+  const temporalApi = useLoadTemporal();
   const { kind = "instant", precision = "second", timeZone } = options;
 
   const store = useMemo(() => {
+    if (!temporalApi) return null;
     return new ClockStore(precision, timeZone);
-  }, [precision, timeZone]);
+  }, [precision, timeZone, temporalApi]);
 
   useEffect(() => {
     return () => {
-      store.dispose();
+      store?.dispose();
     };
   }, [store]);
 
   const snapshot = useSyncExternalStore(
-    store.subscribe,
-    store.getSnapshot,
+    store?.subscribe ?? noopSubscribe,
+    store?.getSnapshot ?? noopGetSnapshot,
     getServerSnapshot
   );
 
