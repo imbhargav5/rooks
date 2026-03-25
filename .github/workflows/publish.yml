@@ -1,0 +1,46 @@
+name: Publish to NPM
+
+on:
+  workflow_call:
+    inputs:
+      hasChangesets:
+        description: "Whether there are pending changesets"
+        required: true
+        type: string
+
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish To NPM
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || inputs.hasChangesets == 'false' }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ CI Setup
+        uses: ./.github/actions/ci-setup
+
+      - name: 📦 Setup Node.js with npm registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install latest npm (>=11.5.1 for OIDC)
+        run: npm install -g npm@latest
+
+      - name: 🏗 Run build script
+        run: pnpm turbo prepare-publish
+
+      - name: 🚀 Publish to npm
+        run: npm publish --access public
+        working-directory: packages/rooks
