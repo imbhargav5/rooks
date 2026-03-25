@@ -58,6 +58,10 @@
 
 <br/>
 
+## ⚠️ Contributing Notice
+
+We are currently only accepting contributions from verified contributors. If you wish to contribute, please [open an issue](https://github.com/imbhargav5/rooks/issues/new) first to discuss your proposed changes.
+
 ## 📚 Table of Contents
 
 * [Quick Start](#-quick-start)

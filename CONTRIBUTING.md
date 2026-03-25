@@ -1,5 +1,7 @@
 # Contributing to Our Project
 
+> **⚠️ Important:** We are currently only accepting contributions from verified contributors. If you wish to contribute, please [open an issue](https://github.com/imbhargav5/rooks/issues/new) first to discuss your proposed changes and get approval before submitting a pull request.
+
 First of all, thank you for considering contributing to our project! We appreciate your time and effort. Here's a more elaborate guide on how to contribute effectively to our project.
 
 ## Creating a New Hook
