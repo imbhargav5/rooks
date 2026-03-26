@@ -1,137 +1,318 @@
 import { vi } from "vitest";
-/**
- */
-import { renderHook, cleanup } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import { useState } from "react";
-import TestRenderer from "react-test-renderer";
 import { useIntervalWhen } from "@/hooks/useIntervalWhen";
 
-const { act } = TestRenderer;
-type UseHook = (
-  when: boolean,
-  eager?: boolean
-) => {
-  currentValue: number;
-};
-describe.skip("useIntervalWhen", () => {
-  let useHook: UseHook = () => ({
-    currentValue: 5,
-  });
-
-  const EAGER = true;
-
+describe("useIntervalWhen", () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    vi.spyOn(global, "setInterval");
-    useHook = function (when: boolean, eager = false) {
-      const [currentValue, setCurrentValue] = useState(0);
-      function increment() {
-        setCurrentValue(currentValue + 1);
-      }
-
-      useIntervalWhen(
-        () => {
-          increment();
-        },
-        1_000,
-        when,
-        eager
-      );
-
-      return { currentValue };
-    };
   });
 
   afterEach(() => {
-    void cleanup();
     vi.useRealTimers();
-    vi.clearAllTimers();
   });
 
   it("should be defined", () => {
     expect.hasAssertions();
     expect(useIntervalWhen).toBeDefined();
   });
-  it("should start timer when started with start function", () => {
-    expect.hasAssertions();
-    vi.useFakeTimers();
-    const { result } = renderHook(() => useHook(true));
-    void act(() => {
-      vi.advanceTimersByTime(1_000);
+
+  describe("basic interval behavior", () => {
+    it("should call callback after interval duration when condition is true", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true));
+
+      expect(callback).not.toHaveBeenCalled();
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(2);
     });
-    expect(setInterval).toHaveBeenCalledTimes(1);
-    expect(result.current.currentValue).toBe(1);
-    vi.useRealTimers();
+
+    it("should call callback multiple times over multiple intervals", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 500, true));
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+      expect(callback).toHaveBeenCalledTimes(2);
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+      expect(callback).toHaveBeenCalledTimes(3);
+    });
+
+    it("should not call callback before interval elapses", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true));
+
+      act(() => {
+        vi.advanceTimersByTime(999);
+      });
+      expect(callback).not.toHaveBeenCalled();
+
+      act(() => {
+        vi.advanceTimersByTime(1);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it("should call the callback eagerly", () => {
-    expect.hasAssertions();
-    vi.useFakeTimers();
-    const { result } = renderHook(() => useHook(true, EAGER));
-    // The value was already incremented because we use useIntervalWhen in EAGER mode
-    expect(result.current.currentValue).toBe(1);
-    void act(() => {
-      vi.advanceTimersByTime(1_000);
+  describe("when condition", () => {
+    it("should not start interval when condition is false", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, false));
+
+      act(() => {
+        vi.advanceTimersByTime(5_000);
+      });
+      expect(callback).not.toHaveBeenCalled();
     });
-    expect(setInterval).toHaveBeenCalledTimes(1);
-    // The value was incremented twice: one time by the setInterval and one time due to the EAGER
-    expect(result.current.currentValue).toBe(2);
-    vi.useRealTimers();
+
+    it("should stop interval when condition becomes false", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      const { rerender } = renderHook(
+        ({ when }) => useIntervalWhen(callback, 1_000, when),
+        { initialProps: { when: true } }
+      );
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      rerender({ when: false });
+
+      act(() => {
+        vi.advanceTimersByTime(3_000);
+      });
+      // Should not have been called again
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("should resume interval when condition becomes true again", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      const { rerender } = renderHook(
+        ({ when }) => useIntervalWhen(callback, 1_000, when),
+        { initialProps: { when: true } }
+      );
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      // Pause
+      rerender({ when: false });
+      act(() => {
+        vi.advanceTimersByTime(3_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      // Resume
+      rerender({ when: true });
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(2);
+    });
   });
 
-  it("should not start the timer when the condition is false", () => {
-    expect.hasAssertions();
-    vi.useFakeTimers();
-    const { result } = renderHook(() => useHook(false));
-    act(() => {
-      vi.advanceTimersByTime(1_000);
+  describe("startImmediate", () => {
+    it("should call callback immediately when startImmediate is true", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true, true));
+
+      // Should have been called immediately, before any timer advance
+      expect(callback).toHaveBeenCalledTimes(1);
     });
-    expect(setInterval).toHaveBeenCalledTimes(0);
-    expect(result.current.currentValue).toBe(0);
-    vi.useRealTimers();
+
+    it("should not call callback immediately when startImmediate is false", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true, false));
+
+      expect(callback).not.toHaveBeenCalled();
+    });
+
+    it("should call immediately and then on interval when startImmediate is true", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true, true));
+
+      // Immediate call
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      // Interval call
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(2);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(3);
+    });
+
+    it("should not call immediately when condition is false even if startImmediate is true", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, false, true));
+
+      expect(callback).not.toHaveBeenCalled();
+
+      act(() => {
+        vi.advanceTimersByTime(5_000);
+      });
+      expect(callback).not.toHaveBeenCalled();
+    });
   });
-  it("should stop the timer when the condition becomes false", () => {
-    expect.hasAssertions();
-    vi.useFakeTimers();
-    const { result, rerender } = renderHook(({ when }) => useHook(when), {
-      initialProps: { when: true },
-    });
-    act(() => {
-      vi.advanceTimersByTime(1_000);
-    });
-    expect(setInterval).toHaveBeenCalledTimes(1);
-    expect(result.current.currentValue).toBe(1);
 
-    rerender({ when: false });
-    act(() => {
-      vi.advanceTimersByTime(1_000);
+  describe("cleanup", () => {
+    it("should clear interval on unmount", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      const { unmount } = renderHook(() =>
+        useIntervalWhen(callback, 1_000, true)
+      );
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      unmount();
+
+      act(() => {
+        vi.advanceTimersByTime(5_000);
+      });
+      // No more calls after unmount
+      expect(callback).toHaveBeenCalledTimes(1);
     });
-    expect(result.current.currentValue).toBe(1);
-    vi.useRealTimers();
   });
-  it("should resume the timer when the condition becomes true again", () => {
-    expect.hasAssertions();
-    vi.useFakeTimers();
-    const { result, rerender } = renderHook(({ when }) => useHook(when), {
-      initialProps: { when: true },
-    });
-    act(() => {
-      vi.advanceTimersByTime(1_000);
-    });
-    expect(setInterval).toHaveBeenCalledTimes(1);
-    expect(result.current.currentValue).toBe(1);
 
-    rerender({ when: false });
-    act(() => {
-      vi.advanceTimersByTime(1_000);
-    });
-    expect(result.current.currentValue).toBe(1);
+  describe("callback freshness", () => {
+    it("should always call the latest callback", () => {
+      expect.hasAssertions();
+      const callback1 = vi.fn();
+      const callback2 = vi.fn();
 
-    rerender({ when: true });
-    act(() => {
-      vi.advanceTimersByTime(1_000);
+      const { rerender } = renderHook(
+        ({ cb }) => useIntervalWhen(cb, 1_000, true),
+        { initialProps: { cb: callback1 } }
+      );
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback1).toHaveBeenCalledTimes(1);
+      expect(callback2).not.toHaveBeenCalled();
+
+      rerender({ cb: callback2 });
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback1).toHaveBeenCalledTimes(1);
+      expect(callback2).toHaveBeenCalledTimes(1);
     });
-    expect(result.current.currentValue).toBe(2);
-    vi.useRealTimers();
+
+    it("should use fresh state in callback via functional updater", () => {
+      expect.hasAssertions();
+      const { result } = renderHook(() => {
+        const [count, setCount] = useState(0);
+        useIntervalWhen(() => setCount((c) => c + 1), 1_000, true);
+        return count;
+      });
+
+      expect(result.current).toBe(0);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(result.current).toBe(1);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(result.current).toBe(2);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(result.current).toBe(3);
+    });
+  });
+
+  describe("interval duration changes", () => {
+    it("should reset interval when duration changes", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      const { rerender } = renderHook(
+        ({ ms }) => useIntervalWhen(callback, ms, true),
+        { initialProps: { ms: 1_000 } }
+      );
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      // Change to 500ms interval
+      rerender({ ms: 500 });
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+      expect(callback).toHaveBeenCalledTimes(2);
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+      expect(callback).toHaveBeenCalledTimes(3);
+    });
+  });
+
+  describe("defaults", () => {
+    it("should default when to true", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000));
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("should default startImmediate to false", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+      renderHook(() => useIntervalWhen(callback, 1_000, true));
+
+      // Should not have been called immediately
+      expect(callback).not.toHaveBeenCalled();
+    });
   });
 });
