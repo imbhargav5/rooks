@@ -1,87 +1,288 @@
 import { vi } from "vitest";
-/**
- */
-import React from "react";
-import { renderHook } from "@testing-library/react";
-import type { DebouncedFunc } from "lodash";
-import { useState } from "react";
+import React, { useState } from "react";
+import { renderHook, act, render, fireEvent, waitFor } from "@testing-library/react";
 import { useDebounce } from "@/hooks/useDebounce";
-import { act, fireEvent, render, waitFor } from "@testing-library/react";
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-describe.skip("useDebounce", () => {
+describe("useDebounce", () => {
   it("should be defined", () => {
     expect.hasAssertions();
     expect(useDebounce).toBeDefined();
   });
+
+  it("should return a function", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useDebounce(() => {}, 100));
+    expect(typeof result.current).toBe("function");
+  });
 });
 
-describe.skip("useDebounce behavior", () => {
-  const DEBOUNCE_WAIT = 500;
-  let useCustomDebounce: () => { cb: DebouncedFunc<() => void>; value: number };
+describe("useDebounce behavior", () => {
   beforeEach(() => {
-    useCustomDebounce = function () {
-      const [value, setValue] = useState(0);
-      function log() {
-        setValue(value + 1);
-      }
-      const callback = useDebounce(log, DEBOUNCE_WAIT);
+    vi.useFakeTimers();
+  });
 
-      return { cb: callback, value };
-    };
+  afterEach(() => {
+    vi.useRealTimers();
   });
-  it("runs only once if cb is called repeatedly in wait period", async () => {
-    expect.assertions(1);
-    const { result, waitForNextUpdate } = renderHook(useCustomDebounce);
-    result.current.cb();
-    result.current.cb();
-    result.current.cb();
-    await waitForNextUpdate();
-    expect(result.current.value).toBe(1);
-  });
-  it("should apply default options", async () => {
-    expect.assertions(2);
+
+  it("should not call callback immediately", () => {
+    expect.hasAssertions();
     const callback = vi.fn();
-    const { result } = renderHook(() => useDebounce(callback, 32));
-    result.current();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+
     expect(callback).not.toHaveBeenCalled();
-    await wait(64);
+  });
+
+  it("should call callback after wait period", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+    expect(callback).not.toHaveBeenCalled();
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
     expect(callback).toHaveBeenCalledTimes(1);
   });
-  it("should support a `leading` option", async () => {
-    expect.assertions(2);
+
+  it("should only call once if invoked repeatedly within wait period", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+      result.current();
+      result.current();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("should reset the timer on repeated calls", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(300);
+    });
+    expect(callback).not.toHaveBeenCalled();
+
+    // Call again — should reset the 500ms wait
+    act(() => {
+      result.current();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(300);
+    });
+    // Still not called because timer was reset
+    expect(callback).not.toHaveBeenCalled();
+
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("should support the leading option", () => {
+    expect.hasAssertions();
     const callback = vi.fn();
     const { result } = renderHook(() =>
-      useDebounce(callback, 32, { leading: true })
+      useDebounce(callback, 500, { leading: true })
     );
-    result.current();
+
+    // Should fire immediately on first call
+    act(() => {
+      result.current();
+    });
     expect(callback).toHaveBeenCalledTimes(1);
-    await wait(64);
-    result.current();
+
+    // Should not fire again during wait period
+    act(() => {
+      result.current();
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    // After wait, trailing call fires
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
     expect(callback).toHaveBeenCalledTimes(2);
   });
-  it("should support a `trailing` option", async () => {
-    expect.assertions(4);
-    const withTrailing = vi.fn();
-    const { result: withTrailingResult } = renderHook(() =>
-      useDebounce(withTrailing, 32, { trailing: true })
+
+  it("should support trailing: false option", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() =>
+      useDebounce(callback, 500, { leading: true, trailing: false })
     );
-    const withoutTrailing = vi.fn();
-    const { result: withoutTrailingResult } = renderHook(() =>
-      useDebounce(withTrailing, 32, { trailing: false })
-    );
-    withTrailingResult.current();
-    expect(withTrailing).toHaveBeenCalledTimes(0);
-    withoutTrailingResult.current();
-    expect(withoutTrailing).toHaveBeenCalledTimes(0);
-    await wait(64);
-    expect(withTrailing).toHaveBeenCalledTimes(1);
-    expect(withoutTrailing).toHaveBeenCalledTimes(0);
+
+    // Should fire immediately on leading edge
+    act(() => {
+      result.current();
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    // Call again during wait
+    act(() => {
+      result.current();
+    });
+
+    // After wait period, no trailing call
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
+  it("should support the maxWait option", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() =>
+      useDebounce(callback, 500, { maxWait: 1_000 })
+    );
+
+    // Keep calling repeatedly to reset the debounce timer
+    act(() => {
+      result.current();
+    });
+    act(() => {
+      vi.advanceTimersByTime(400);
+    });
+    act(() => {
+      result.current();
+    });
+    act(() => {
+      vi.advanceTimersByTime(400);
+    });
+    act(() => {
+      result.current();
+    });
+
+    // Not yet at maxWait
+    expect(callback).not.toHaveBeenCalled();
+
+    // Advance past maxWait — should force invocation
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("should have cancel method", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+
+    act(() => {
+      result.current.cancel();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it("should have flush method that forces immediate execution", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+    expect(callback).not.toHaveBeenCalled();
+
+    act(() => {
+      result.current.flush();
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("should cancel pending calls on unmount", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result, unmount } = renderHook(() => useDebounce(callback, 500));
+
+    act(() => {
+      result.current();
+    });
+
+    unmount();
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it("should forward arguments to the callback", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() =>
+      useDebounce(callback, 500)
+    );
+
+    act(() => {
+      result.current("hello", 42);
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).toHaveBeenCalledWith("hello", 42);
+  });
+
+  it("should use the latest arguments when called multiple times", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+    const { result } = renderHook(() =>
+      useDebounce(callback, 500)
+    );
+
+    act(() => {
+      result.current("first");
+    });
+    act(() => {
+      result.current("second");
+    });
+    act(() => {
+      result.current("third");
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith("third");
+  });
+});
+
+describe("useDebounce with components", () => {
   it("should not have stale closure problems", async () => {
-    expect.assertions(2);
+    expect.hasAssertions();
     const fn = vi.fn();
     function App() {
       const [value, setValue] = useState(0);
@@ -119,42 +320,28 @@ describe.skip("useDebounce behavior", () => {
     await waitFor(() => rendered.getByText("done: true"));
 
     expect(fn).toHaveBeenCalledTimes(1);
+    // useFreshRef ensures the callback sees the latest state (100, not 0)
     expect(fn).toHaveBeenCalledWith(100);
   });
 
-  it("should cancel on unmount", async () => {
-    expect.assertions(1);
-
+  it("should cancel on component unmount", async () => {
+    expect.hasAssertions();
     const fn = vi.fn();
 
     function Child() {
       const debounced = useDebounce(fn, 64);
-
       return (
         <div>
-          <button
-            onClick={() => {
-              debounced();
-            }}
-          >
-            debounce
-          </button>
+          <button onClick={() => debounced()}>debounce</button>
         </div>
       );
     }
 
     function App() {
       const [mounted, setMounted] = useState(true);
-
       return (
         <div>
-          <button
-            onClick={() => {
-              setMounted(false);
-            }}
-          >
-            unmount
-          </button>
+          <button onClick={() => setMounted(false)}>unmount</button>
           {mounted && <Child />}
         </div>
       );
@@ -167,54 +354,9 @@ describe.skip("useDebounce behavior", () => {
     act(() => {
       fireEvent.click(rendered.getByRole("button", { name: /unmount/i }));
     });
-    await wait(100);
+    // Wait past debounce period
+    await new Promise((r) => setTimeout(r, 100));
 
     expect(fn).not.toHaveBeenCalled();
-  });
-
-  it("should work with inline functions", async () => {
-    expect.assertions(2);
-    const fn = vi.fn();
-    function App() {
-      const [value, setValue] = useState(0);
-      const [done, setDone] = useState(false);
-
-      const debounced = useDebounce(() => {
-        fn(value);
-        setValue(value + 1);
-        setDone(true);
-      }, 64);
-
-      return (
-        <div>
-          <button
-            onClick={() => {
-              debounced();
-              setValue(value + 100);
-            }}
-          >
-            inc
-          </button>
-          <h1>value: {String(value)}</h1>
-          <h2>done: {String(done)}</h2>
-        </div>
-      );
-    }
-
-    const rendered = render(<App />);
-    await waitFor(() => rendered.getByText("value: 0"));
-    act(() => {
-      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
-    });
-    act(() => {
-      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
-    });
-    act(() => {
-      fireEvent.click(rendered.getByRole("button", { name: /inc/i }));
-    });
-    await waitFor(() => rendered.getByText("done: true"));
-
-    expect(fn).toHaveBeenCalledTimes(1);
-    expect(fn).toHaveBeenCalledWith(300);
   });
 });
