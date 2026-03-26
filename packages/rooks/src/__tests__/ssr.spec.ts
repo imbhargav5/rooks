@@ -378,6 +378,16 @@ describe("SSR Environment Detection", () => {
     });
   });
 
+  describe("useSuspenseFavicon SSR", () => {
+    it("should throw a browser-only error in SSR", async () => {
+      expect.hasAssertions();
+      const { useSuspenseFavicon } = await import("@/hooks/useSuspenseFavicon");
+      expect(() => useSuspenseFavicon()).toThrow(
+        "useSuspenseFavicon can only be used in a browser environment."
+      );
+    });
+  });
+
   describe("useSuspenseNavigatorUserAgentData SSR", () => {
     it("should throw (Promise or Error) in SSR", async () => {
       expect.hasAssertions();

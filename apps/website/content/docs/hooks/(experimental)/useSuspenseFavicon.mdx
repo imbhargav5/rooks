@@ -1,0 +1,200 @@
+---
+id: useSuspenseFavicon
+title: useSuspenseFavicon
+sidebar_label: useSuspenseFavicon
+---
+
+## About
+
+⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
+
+A Suspense-enabled hook for reading and updating the current document favicon. It resolves the current explicit favicon from the DOM, classifies it as same-origin or external, and returns controls for switching to a new favicon using an explicit config object.
+
+If the document does not declare a favicon link, the current value is `null`.
+
+[//]: # "Main"
+
+## Examples
+
+#### Basic Usage
+
+```tsx
+import React, { Suspense } from "react";
+import { useSuspenseFavicon } from "rooks/experimental";
+
+function FaviconPreview() {
+  const [favicon, { updateFaviconURL }] = useSuspenseFavicon();
+
+  return (
+    <div>
+      <pre>{JSON.stringify(favicon, null, 2)}</pre>
+
+      <button
+        onClick={() =>
+          updateFaviconURL({
+            kind: "same-origin",
+            relativeHref: "/favicon-light.svg?v=2",
+          })
+        }
+      >
+        Use same-origin favicon
+      </button>
+
+      <button
+        onClick={() =>
+          updateFaviconURL({
+            kind: "external",
+            url: "https://cdn.example.com/brand/favicon-dark.ico",
+          })
+        }
+      >
+        Use external favicon
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Reading favicon...</div>}>
+      <FaviconPreview />
+    </Suspense>
+  );
+}
+```
+
+#### Same-origin Updates With Cache-busting Query Strings
+
+```tsx
+import React, { Suspense } from "react";
+import { useSuspenseFavicon } from "rooks/experimental";
+
+function BrandSwitcher() {
+  const [favicon, { updateFaviconURL }] = useSuspenseFavicon();
+
+  return (
+    <div>
+      <p>Current kind: {favicon?.kind ?? "none"}</p>
+
+      <button
+        onClick={() =>
+          updateFaviconURL({
+            kind: "same-origin",
+            relativeHref: "/favicons/workspace-a.svg?v=12",
+          })
+        }
+      >
+        Workspace A
+      </button>
+
+      <button
+        onClick={() =>
+          updateFaviconURL({
+            kind: "same-origin",
+            relativeHref: "../favicons/workspace-b.svg?v=3#active",
+          })
+        }
+      >
+        Workspace B
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading favicon state...</div>}>
+      <BrandSwitcher />
+    </Suspense>
+  );
+}
+```
+
+#### Persisting The Managed Favicon After Unmount
+
+```tsx
+import React, { Suspense, useState } from "react";
+import { useSuspenseFavicon } from "rooks/experimental";
+
+function ManagedFavicon() {
+  const [, { updateFaviconURL }] = useSuspenseFavicon({
+    unmountStrategy: "leave-as-is",
+  });
+
+  return (
+    <button
+      onClick={() =>
+        updateFaviconURL({
+          kind: "external",
+          url: "https://cdn.example.com/persistent/favicon.ico",
+        })
+      }
+    >
+      Apply persistent favicon
+    </button>
+  );
+}
+
+export default function App() {
+  const [showManager, setShowManager] = useState(true);
+
+  return (
+    <Suspense fallback={<div>Preparing favicon manager...</div>}>
+      <button onClick={() => setShowManager((current) => !current)}>
+        Toggle hook
+      </button>
+      {showManager ? <ManagedFavicon /> : null}
+    </Suspense>
+  );
+}
+```
+
+## Arguments
+
+### `options`
+
+| Property          | Type                                      | Default               | Description |
+| ----------------- | ----------------------------------------- | --------------------- | ----------- |
+| `unmountStrategy` | `"restore-originals" \| "leave-as-is"` | `"restore-originals"` | Controls what happens when the last mounted `useSuspenseFavicon` instance unmounts. |
+
+## Return Value
+
+The hook returns a tuple with two items:
+
+```ts
+[
+  currentFavicon,
+  {
+    updateFaviconURL,
+  },
+]
+```
+
+### `currentFavicon`
+
+| Shape | Description |
+| ----- | ----------- |
+| `null` | No explicit favicon link was found during initialization. |
+| `{ kind: "same-origin", relativeHref, href }` | The current favicon resolves to the same origin as the current page. `relativeHref` is the same-origin value you can reuse with `updateFaviconURL`. |
+| `{ kind: "external", url, href }` | The current favicon resolves to a different origin. |
+
+### `controls.updateFaviconURL`
+
+```ts
+updateFaviconURL(
+  | { kind: "same-origin"; relativeHref: string }
+  | { kind: "external"; url: string }
+): void
+```
+
+#### Config Rules
+
+- `same-origin` updates must use a relative href string such as `/favicon.svg?v=2` or `../icons/favicon.svg`.
+- `external` updates must resolve to a different origin than the current page.
+- Invalid configs throw synchronously with a descriptive error.
+
+## Notes
+
+- The hook suspends only while it discovers the current explicit favicon from the DOM.
+- When multiple favicon links are present, the last explicit `rel~="icon"` link in DOM order is treated as current.
+- The hook does not observe arbitrary third-party favicon mutations after mount. It tracks the initial DOM state plus updates made through `updateFaviconURL`.

@@ -506,6 +506,11 @@
       "category": "experimental"
     },
     {
+      "name": "useSuspenseFavicon",
+      "description": "Suspense-enabled hook for reading and updating the current favicon with same-origin and external URL support",
+      "category": "experimental"
+    },
+    {
       "name": "useSuspenseNavigatorUserAgentData",
       "description": "Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API",
       "category": "experimental"

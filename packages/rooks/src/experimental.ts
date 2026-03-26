@@ -10,6 +10,7 @@
 
 export { useSuspenseNavigatorUserAgentData } from "./hooks/useSuspenseNavigatorUserAgentData";
 export { useSuspenseNavigatorBattery } from "./hooks/useSuspenseNavigatorBattery";
+export { useSuspenseFavicon } from "./hooks/useSuspenseFavicon";
 export { useSuspenseLocalStorageState } from "./hooks/useSuspenseLocalStorageState";
 export { useSuspenseSessionStorageState } from "./hooks/useSuspenseSessionStorageState";
 export { useSuspenseIndexedDBState } from "./hooks/useSuspenseIndexedDBState";

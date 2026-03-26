@@ -398,7 +398,7 @@ function App() {
 
 
 <details open>
-<summary><h3>❇️ State - 19 hooks</h3></summary>
+<summary><h3>❇️ State - 22 hooks</h3></summary>
 
 
 
@@ -502,11 +502,12 @@ function App() {
 
 
 <details>
-<summary><h3>🧪 Experimental Hooks - 5 hooks</h3></summary>
+<summary><h3>🧪 Experimental Hooks - 6 hooks</h3></summary>
 
 
 
 * [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
+* [useSuspenseFavicon](https://rooks.vercel.app/docs/hooks/useSuspenseFavicon) - Suspense-enabled hook for reading and updating the current favicon with same-origin and external URL support
 * [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
 * [useSuspenseLocalStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseLocalStorageState) - Suspense-enabled hook for localStorage state management with cross-tab synchronization
 * [useSuspenseSessionStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseSessionStorageState) - Suspense-enabled hook for sessionStorage state management with proper serialization
@@ -530,7 +531,7 @@ function App() {
 
 <!--hookscount start-->
 
-✅ Collection of 121 hooks as standalone modules.
+✅ Collection of 125 hooks as standalone modules.
 
 <!--hookscount end-->
 
