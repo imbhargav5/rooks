@@ -1,5 +1,13 @@
 # rooks
 
+## 9.8.0
+
+### Minor Changes
+
+- [`506a6bd`](https://github.com/imbhargav5/rooks/commit/506a6bd42160f4335755c654bfd93eb373b2b512) Thanks [@imbhargav5](https://github.com/imbhargav5)! - add a new useSuspenseFavicon hook.
+
+- [`8cf649e`](https://github.com/imbhargav5/rooks/commit/8cf649e15ecc2406a3699753504ac8c353a0d9f7) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add the experimental `useSuspenseFavicon` hook for reading and updating the current favicon with same-origin and external URL support.
+
 ## 9.7.1
 
 ### Patch Changes
