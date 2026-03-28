@@ -43,6 +43,22 @@ interface HooksByCategory {
   [category: string]: Hook[];
 }
 
+const CATEGORY_TITLES: Record<string, string> = {
+  "ui": "UI",
+  "state-history": "State History & Time Travel",
+  "dev": "Development & Debugging",
+  "browser": "Browser APIs",
+  "performance": "Performance & Optimization",
+  "utilities": "Utilities & Refs",
+  "keyboard": "Keyboard & Input",
+  "mouse": "Mouse & Touch",
+  "form": "Form & File Handling",
+  "animation": "Animation & Timing",
+  "viewport": "Window & Viewport",
+  "lifecycle": "Lifecycle & Effects",
+  "experimental": "Experimental Hooks",
+};
+
 const emojiByCategory: Record<string, string> = {
   // Core State Management
   "state": "❇️",                    // State Management
@@ -140,47 +156,21 @@ class PackageListUpdater {
     }, {});
   }
 
-  private createHookEntry(hook: Hook): string {
-    return `[${hook.name}](https://rooks.vercel.app/docs/hooks/${hook.name}) - ${hook.description}`;
-  }
+  private createHooksTableMDAST(hooks: Hook[]): RootContent {
+    const header = `| Hook | Description |\n|------|-------------|`;
+    const rows = hooks
+      .map(
+        (hook) =>
+          `| [**${hook.name}**](https://rooks.vercel.app/docs/hooks/${hook.name}) | ${hook.description} |`
+      )
+      .join("\n");
 
-  private createHooksListMDAST(hooks: Hook[]): RootContent {
-    return {
-      children: hooks.map((hook) => ({
-        children: [fromMarkdown(this.createHookEntry(hook))],
-        spread: false,
-        type: "listItem",
-      })),
-      ordered: false,
-      spread: false,
-      start: 1,
-      type: "list",
-    };
+    return fromMarkdown(`${header}\n${rows}`) as unknown as RootContent;
   }
 
   private createCategoryHeading(category: string, hookCount: number): RootContent {
     const emoji = emojiByCategory[category] ?? "✅";
-
-    // Special handling for specific categories
-    const categoryTitleMap: Record<string, string> = {
-      "ui": "UI",
-      "state-history": "State History & Time Travel",
-      "dev": "Development & Debugging",
-      "browser": "Browser APIs",
-      "performance": "Performance & Optimization",
-      "utilities": "Utilities & Refs",
-      "keyboard": "Keyboard & Input",
-      "mouse": "Mouse & Touch",
-      "form": "Form & File Handling",
-      "animation": "Animation & Timing",
-      "viewport": "Window & Viewport",
-      "lifecycle": "Lifecycle & Effects",
-      "experimental": "Experimental Hooks",
-    };
-
-    const title = categoryTitleMap[category] || lodash.startCase(category);
-    const hookText = hookCount === 1 ? "hook" : "hooks";
-
+    const title = CATEGORY_TITLES[category] || lodash.startCase(category);
     // Determine which categories should be open by default
     const defaultOpenCategories = ['state', 'events', 'lifecycle', 'browser'];
     const isOpen = defaultOpenCategories.includes(category);
@@ -188,7 +178,7 @@ class PackageListUpdater {
     return {
       type: "html",
       value: `<details${isOpen ? ' open' : ''}>
-<summary><h3>${emoji} ${title} - ${hookCount} ${hookText}</h3></summary>
+<summary><h3>${emoji} ${title} <sup>${hookCount}</sup></h3></summary>
 
 `,
     };
@@ -227,10 +217,10 @@ class PackageListUpdater {
       }
 
       const headingMDAST = this.createCategoryHeading(category, hooks.length);
-      const hooksListMDAST = this.createHooksListMDAST(hooks);
+      const hooksTableMDAST = this.createHooksTableMDAST(hooks);
 
       hooksListByCategoryMDAST.children.push(headingMDAST);
-      hooksListByCategoryMDAST.children.push(hooksListMDAST);
+      hooksListByCategoryMDAST.children.push(hooksTableMDAST);
 
       // Add experimental hooks disclaimer before closing
       if (category === "experimental") {
@@ -263,7 +253,7 @@ class PackageListUpdater {
     };
   }
 
-  private updateMarkdownFile(filePath: string, hooksListMDAST: Root, hooksCountMDAST: RootContent): void {
+  private updateMarkdownFile(filePath: string, hooksListMDAST: Root, hooksCountMDAST: RootContent, dryRun = false): void {
     if (!this.projectRoot) {
       throw new Error("Project root not initialized");
     }
@@ -271,12 +261,17 @@ class PackageListUpdater {
     try {
       const fullPath = join(this.projectRoot, filePath);
       const fileContent = readFileSync(fullPath, "utf8");
-      
+
       const processedFile = remark()
         .use(frontmatter)
         .use(this.createZoneReplacePlugin("hookslist", hooksListMDAST))
         .use(this.createZoneReplacePlugin("hookscount", hooksCountMDAST))
         .processSync(fileContent);
+
+      if (dryRun) {
+        console.log(`[DRY RUN] Would update ${filePath}`);
+        return;
+      }
 
       writeFileSync(fullPath, String(processedFile), "utf8");
       console.log(`✅ Updated ${filePath}`);
@@ -288,21 +283,23 @@ class PackageListUpdater {
     }
   }
 
-  async updatePackageListToMarkdown(): Promise<void> {
+  async updatePackageListToMarkdown(options: { dryRun?: boolean } = {}): Promise<void> {
+    const { dryRun = false } = options;
+
     try {
-      console.log("🚀 Starting package list update...");
-      
+      console.log(`🚀 Starting package list update...${dryRun ? ' (DRY RUN)' : ''}`);
+
       await this.initialize();
-      
+
       console.log("📖 Loading hooks data...");
       const { hooks: hooksList } = this.loadHooksData();
-      
+
       if (!hooksList || hooksList.length === 0) {
         throw new Error("No hooks found in the hooks list");
       }
-      
+
       console.log(`📦 Found ${hooksList.length} hooks`);
-      
+
       const hooksByCategory = this.groupHooksByCategory(hooksList);
       const hooksListByCategoryMDAST = this.createHooksListByCategoryMDAST(hooksByCategory);
       const hooksCountMDAST = this.createHooksCountMDAST(hooksList.length);
@@ -314,17 +311,17 @@ class PackageListUpdater {
       ];
 
       console.log("📝 Updating markdown files...");
-      
+
       for (const filePath of filesToUpdate) {
         try {
-          this.updateMarkdownFile(filePath, hooksListByCategoryMDAST, hooksCountMDAST);
+          this.updateMarkdownFile(filePath, hooksListByCategoryMDAST, hooksCountMDAST, dryRun);
         } catch (error) {
           console.error(`⚠️  Failed to update ${filePath}:`, error instanceof Error ? error.message : String(error));
           // Continue with other files even if one fails
         }
       }
 
-      console.log("✅ Package list update completed successfully!");
+      console.log(`✅ Package list update completed successfully!${dryRun ? ' (no files were modified)' : ''}`);
     } catch (error) {
       console.error("❌ Failed to update package list:", error instanceof Error ? error.message : String(error));
       process.exit(1);
@@ -333,8 +330,9 @@ class PackageListUpdater {
 }
 
 const updatePackageListToMarkdown = async (): Promise<void> => {
+  const dryRun = process.argv.includes('--dry-run');
   const updater = new PackageListUpdater();
-  await updater.updatePackageListToMarkdown();
+  await updater.updatePackageListToMarkdown({ dryRun });
 };
 
 export default updatePackageListToMarkdown;

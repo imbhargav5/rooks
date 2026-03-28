@@ -1,50 +1,40 @@
 <br/>
-<br/>
 <p align="center">
   <img src="https://i.ibb.co/KpJRdjvj/rooks-graphic.png" height="auto" width="100%" />
 </p>
-<br/>
 
 <p align="center">
   <img src="https://i.ibb.co/3YkzXHgb/rooks-graphic-1.png" alt="Why Rooks ?" height="auto" width="100%" />
 </p>
-<br/>
 
 <p align="center">
-
-  <!-- Build & Quality -->
-
-[![CI and Semantic Release](https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml/badge.svg)](https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/imbhargav5/rooks)
-![GitHub](https://img.shields.io/github/license/imbhargav5/rooks)
-![Codecov branch](https://img.shields.io/codecov/c/github/imbhargav5/rooks/main)
-
-  <br/>
-
-  <!-- Package Info -->
-
-![npm](https://img.shields.io/npm/dm/rooks)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/rooks)
-![Module](https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen)
-![node-lts](https://img.shields.io/node/v-lts/rooks)
-
-  <br/>
-
-  <!-- Community -->
-
-[![GitHub contributors](https://img.shields.io/github/contributors/imbhargav5/rooks)](#contributors)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-hooks.org)](https://rooks.vercel.app)
-![GitHub stars](https://img.shields.io/github/stars/imbhargav5/rooks?style=social)
-
+  <a href="https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml"><img src="https://img.shields.io/github/actions/workflow/status/imbhargav5/rooks/ci-release.yml?style=for-the-badge&logo=github&label=CI" alt="CI" /></a>
+  <a href="https://www.npmjs.com/package/rooks"><img src="https://img.shields.io/npm/v/rooks?style=for-the-badge&logo=npm&color=cb3837" alt="npm version" /></a>
+  <a href="https://bundlephobia.com/package/rooks"><img src="https://img.shields.io/bundlephobia/minzip/rooks?style=for-the-badge&logo=webpack&label=size" alt="bundle size" /></a>
+  <a href="https://codecov.io/gh/imbhargav5/rooks"><img src="https://img.shields.io/codecov/c/github/imbhargav5/rooks/main?style=for-the-badge&logo=codecov" alt="coverage" /></a>
+  <a href="https://github.com/imbhargav5/rooks/blob/main/LICENSE"><img src="https://img.shields.io/github/license/imbhargav5/rooks?style=for-the-badge" alt="license" /></a>
 </p>
 
-<br/>
-<br/>
-<br/>
+<p align="center">
+  <a href="https://www.npmjs.com/package/rooks"><img src="https://img.shields.io/npm/dm/rooks?style=for-the-badge&logo=npm" alt="npm downloads" /></a>
+  <img src="https://img.shields.io/badge/module-umd%2Ccjs%2Cesm-brightgreen?style=for-the-badge" alt="module formats" />
+  <img src="https://img.shields.io/node/v-lts/rooks?style=for-the-badge&logo=node.js" alt="node version" />
+  <a href="#contributors-"><img src="https://img.shields.io/github/contributors/imbhargav5/rooks?style=for-the-badge&logo=github" alt="contributors" /></a>
+  <a href="https://github.com/imbhargav5/rooks"><img src="https://img.shields.io/github/stars/imbhargav5/rooks?style=for-the-badge&logo=github" alt="stars" /></a>
+</p>
 
 <h2 align="center">Collection of awesome react hooks</h2>
 
-<br/>
+<p align="center">
+  <strong>125+ essential React hooks — tree-shakeable, SSR-ready, TypeScript-first.</strong>
+</p>
+
+<p align="center">
+  <a href="https://rooks.vercel.app">📖 Documentation</a> &nbsp;·&nbsp;
+  <a href="#-quick-start">🚀 Quick Start</a> &nbsp;·&nbsp;
+  <a href="https://codesandbox.io/s/rooks-quick-start-example">🎮 Playground</a> &nbsp;·&nbsp;
+  <a href="https://github.com/imbhargav5/rooks/issues">🐛 Report Bug</a>
+</p>
 
 <p align="center">
   <a
@@ -52,11 +42,9 @@
     rel="noopener noreferrer"
     href="https://vercel.com?utm_source=rooks&utm_campaign=oss"
   >
-  <img src="../../.github/powered-by-vercel.svg"  />
+  <img src="https://raw.githubusercontent.com/imbhargav5/rooks/main/.github/powered-by-vercel.svg" />
   </a>
 </p>
-
-<br/>
 
 ## 📚 Table of Contents
 
@@ -225,59 +213,22 @@ function App() {
 <!--hookslist start-->
 
 <details>
-<summary><h3>🎬 Animation & Timing - 10 hooks</h3></summary>
+<summary><h3>🎬 Animation & Timing <sup>10</sup></h3></summary>
 
 
 
-* [useAnimation](https://rooks.vercel.app/docs/hooks/useAnimation) - Animation hook for React
-* [useEasing](https://rooks.vercel.app/docs/hooks/useEasing) - A hook for creating controlled easing animations with start/stop/reset capabilities.
-* [useIntervalWhen](https://rooks.vercel.app/docs/hooks/useIntervalWhen) - Sets an interval immediately when a condition is true
-* [useLockBodyScroll](https://rooks.vercel.app/docs/hooks/useLockBodyScroll) - This hook locks the scroll of the body element when `isLocked` is set to `true`.
-* [usePrefersReducedMotion](https://rooks.vercel.app/docs/hooks/usePrefersReducedMotion) - A React hook that returns true if the user has enabled the 'prefers-reduced-motion' setting in their system.
-* [useRaf](https://rooks.vercel.app/docs/hooks/useRaf) - A continuously running requestAnimationFrame hook for React
-* [useResizeObserverRef](https://rooks.vercel.app/docs/hooks/useResizeObserverRef) - Resize Observer hook for React.
-* [useSpring](https://rooks.vercel.app/docs/hooks/useSpring) - Spring animation hook for React
-* [useTimeoutWhen](https://rooks.vercel.app/docs/hooks/useTimeoutWhen) - Takes a callback and fires it when a condition is true
-* [useTween](https://rooks.vercel.app/docs/hooks/useTween) - Tween animation hook for React
-
-
-</details>
-
-
-
-<details open>
-<summary><h3>🌐 Browser APIs - 16 hooks</h3></summary>
-
-
-
-* [useBroadcastChannel](https://rooks.vercel.app/docs/hooks/useBroadcastChannel) - A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication
-* [useClipboard](https://rooks.vercel.app/docs/hooks/useClipboard) - Clipboard read/write operations hook for React
-* [useGeolocation](https://rooks.vercel.app/docs/hooks/useGeolocation) - A hook to provide the geolocation info on client side.
-* [useIdleDetectionApi](https://rooks.vercel.app/docs/hooks/useIdleDetectionApi) - Hook to detect when user is idle using Idle Detection API with polyfill
-* [useMediaRecorder](https://rooks.vercel.app/docs/hooks/useMediaRecorder) - Audio/video recording from MediaStream
-* [useNetworkInformation](https://rooks.vercel.app/docs/hooks/useNetworkInformation) - Network connection quality detection hook for React
-* [useNavigatorLanguage](https://rooks.vercel.app/docs/hooks/useNavigatorLanguage) - Navigator Language hook for React.
-* [useNotification](https://rooks.vercel.app/docs/hooks/useNotification) - Browser notifications with permission handling
-* [useOnline](https://rooks.vercel.app/docs/hooks/useOnline) - Online status hook for React.
-* [useOrientation](https://rooks.vercel.app/docs/hooks/useOrientation) - orientation hook for react
-* [useScreenDetailsApi](https://rooks.vercel.app/docs/hooks/useScreenDetailsApi) - Hook for multi-screen information and management using Screen Details API
-* [useWebLocksApi](https://rooks.vercel.app/docs/hooks/useWebLocksApi) - Hook for coordinating operations across tabs/workers with Web Locks API
-* [useShare](https://rooks.vercel.app/docs/hooks/useShare) - Web Share API for native sharing
-* [useSpeech](https://rooks.vercel.app/docs/hooks/useSpeech) - Speech synthesis hook for React
-* [useFetch](https://rooks.vercel.app/docs/hooks/useFetch) - Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing
-* [useVibrate](https://rooks.vercel.app/docs/hooks/useVibrate) - Vibration API hook for React
-
-
-</details>
-
-
-
-<details>
-<summary><h3>🛠️ Development & Debugging - 1 hook</h3></summary>
-
-
-
-* [useRenderCount](https://rooks.vercel.app/docs/hooks/useRenderCount) - Get the render count of a component
+| Hook | Description |
+|------|-------------|
+| [**useAnimation**](https://rooks.vercel.app/docs/hooks/useAnimation) | Animation hook for React |
+| [**useEasing**](https://rooks.vercel.app/docs/hooks/useEasing) | A hook for creating controlled easing animations with start/stop/reset capabilities. |
+| [**useIntervalWhen**](https://rooks.vercel.app/docs/hooks/useIntervalWhen) | Sets an interval immediately when a condition is true |
+| [**useLockBodyScroll**](https://rooks.vercel.app/docs/hooks/useLockBodyScroll) | This hook locks the scroll of the body element when `isLocked` is set to `true`. |
+| [**usePrefersReducedMotion**](https://rooks.vercel.app/docs/hooks/usePrefersReducedMotion) | A React hook that returns true if the user has enabled the 'prefers-reduced-motion' setting in their system. |
+| [**useRaf**](https://rooks.vercel.app/docs/hooks/useRaf) | A continuously running requestAnimationFrame hook for React |
+| [**useResizeObserverRef**](https://rooks.vercel.app/docs/hooks/useResizeObserverRef) | Resize Observer hook for React. |
+| [**useSpring**](https://rooks.vercel.app/docs/hooks/useSpring) | Spring animation hook for React |
+| [**useTimeoutWhen**](https://rooks.vercel.app/docs/hooks/useTimeoutWhen) | Takes a callback and fires it when a condition is true |
+| [**useTween**](https://rooks.vercel.app/docs/hooks/useTween) | Tween animation hook for React |
 
 
 </details>
@@ -285,40 +236,28 @@ function App() {
 
 
 <details open>
-<summary><h3>🚀 Events - 16 hooks</h3></summary>
+<summary><h3>🌐 Browser APIs <sup>16</sup></h3></summary>
 
 
 
-* [useDocumentEventListener](https://rooks.vercel.app/docs/hooks/useDocumentEventListener) - A react hook to an event listener to the document object
-* [useDocumentVisibilityState](https://rooks.vercel.app/docs/hooks/useDocumentVisibilityState) - Returns the visibility state of the document.
-* [useFocus](https://rooks.vercel.app/docs/hooks/useFocus) - Handles focus events for the immediate target element.
-* [useFocusWithin](https://rooks.vercel.app/docs/hooks/useFocusWithin) - Handles focus events for the target component.
-* [useIsDroppingFiles](https://rooks.vercel.app/docs/hooks/useIsDroppingFiles) - Check if any files are currently being dropped anywhere. Useful for highlighting drop areas.
-* [useOnClickRef](https://rooks.vercel.app/docs/hooks/useOnClickRef) - Callback on click/tap events
-* [useOnHoverRef](https://rooks.vercel.app/docs/hooks/useOnHoverRef) - On hover callback hook
-* [useOnLongHover](https://rooks.vercel.app/docs/hooks/useOnLongHover) - Fires a callback when an element is hovered for a while
-* [useOnLongPress](https://rooks.vercel.app/docs/hooks/useOnLongPress) - Fire a callback on long press
-* [useOnStartTyping](https://rooks.vercel.app/docs/hooks/useOnStartTyping) - Fires a callback when the user starts typing outside editable fields (input, textarea, contenteditable). Supports filtering for a-z and 0-9 keys.
-* [useOnWindowResize](https://rooks.vercel.app/docs/hooks/useOnWindowResize) - A React hook for adding an event listener for window resize
-* [useOnWindowScroll](https://rooks.vercel.app/docs/hooks/useOnWindowScroll) - A React hook for adding an event listener for window scroll
-* [useOutsideClick](https://rooks.vercel.app/docs/hooks/useOutsideClick) - Outside click(for a ref) event as hook for React.
-* [useOutsideClickRef](https://rooks.vercel.app/docs/hooks/useOutsideClickRef) - A hook that can track a click event outside a ref. Returns a callbackRef.
-* [usePageLeave](https://rooks.vercel.app/docs/hooks/usePageLeave) - Page leave detection with callbacks for beforeunload and visibility change
-* [useWindowEventListener](https://rooks.vercel.app/docs/hooks/useWindowEventListener) - Adds an event listener to window
-
-
-</details>
-
-
-
-<details>
-<summary><h3>📝 Form & File Handling - 3 hooks</h3></summary>
-
-
-
-* [useCheckboxInputState](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) - Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element
-* [useFileDropRef](https://rooks.vercel.app/docs/hooks/useFileDropRef) - Drop files easily
-* [useFormState](https://rooks.vercel.app/docs/hooks/useFormState) - Comprehensive form state management with validation
+| Hook | Description |
+|------|-------------|
+| [**useBroadcastChannel**](https://rooks.vercel.app/docs/hooks/useBroadcastChannel) | A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication |
+| [**useClipboard**](https://rooks.vercel.app/docs/hooks/useClipboard) | Clipboard read/write operations hook for React |
+| [**useGeolocation**](https://rooks.vercel.app/docs/hooks/useGeolocation) | A hook to provide the geolocation info on client side. |
+| [**useIdleDetectionApi**](https://rooks.vercel.app/docs/hooks/useIdleDetectionApi) | Hook to detect when user is idle using Idle Detection API with polyfill |
+| [**useMediaRecorder**](https://rooks.vercel.app/docs/hooks/useMediaRecorder) | Audio/video recording from MediaStream |
+| [**useNetworkInformation**](https://rooks.vercel.app/docs/hooks/useNetworkInformation) | Network connection quality detection hook for React |
+| [**useNavigatorLanguage**](https://rooks.vercel.app/docs/hooks/useNavigatorLanguage) | Navigator Language hook for React. |
+| [**useNotification**](https://rooks.vercel.app/docs/hooks/useNotification) | Browser notifications with permission handling |
+| [**useOnline**](https://rooks.vercel.app/docs/hooks/useOnline) | Online status hook for React. |
+| [**useOrientation**](https://rooks.vercel.app/docs/hooks/useOrientation) | orientation hook for react |
+| [**useScreenDetailsApi**](https://rooks.vercel.app/docs/hooks/useScreenDetailsApi) | Hook for multi-screen information and management using Screen Details API |
+| [**useWebLocksApi**](https://rooks.vercel.app/docs/hooks/useWebLocksApi) | Hook for coordinating operations across tabs/workers with Web Locks API |
+| [**useShare**](https://rooks.vercel.app/docs/hooks/useShare) | Web Share API for native sharing |
+| [**useSpeech**](https://rooks.vercel.app/docs/hooks/useSpeech) | Speech synthesis hook for React |
+| [**useFetch**](https://rooks.vercel.app/docs/hooks/useFetch) | Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing |
+| [**useVibrate**](https://rooks.vercel.app/docs/hooks/useVibrate) | Vibration API hook for React |
 
 
 </details>
@@ -326,15 +265,13 @@ function App() {
 
 
 <details>
-<summary><h3>⌨️ Keyboard & Input - 5 hooks</h3></summary>
+<summary><h3>🛠️ Development & Debugging <sup>1</sup></h3></summary>
 
 
 
-* [useInput](https://rooks.vercel.app/docs/hooks/useInput) - Input hook for React.
-* [useKey](https://rooks.vercel.app/docs/hooks/useKey) - keypress, keyup and keydown event handlers as hooks for react.
-* [useKeyBindings](https://rooks.vercel.app/docs/hooks/useKeyBindings) - useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press.
-* [useKeyRef](https://rooks.vercel.app/docs/hooks/useKeyRef) - Very similar useKey but it returns a ref
-* [useKeys](https://rooks.vercel.app/docs/hooks/useKeys) - A hook which allows to setup callbacks when a combination of keys are pressed at the same time.
+| Hook | Description |
+|------|-------------|
+| [**useRenderCount**](https://rooks.vercel.app/docs/hooks/useRenderCount) | Get the render count of a component |
 
 
 </details>
@@ -342,35 +279,28 @@ function App() {
 
 
 <details open>
-<summary><h3>🔥 Lifecycle & Effects - 11 hooks</h3></summary>
+<summary><h3>🚀 Events <sup>16</sup></h3></summary>
 
 
 
-* [useAsyncEffect](https://rooks.vercel.app/docs/hooks/useAsyncEffect) - A version of useEffect that accepts an async function
-* [useDebouncedAsyncEffect](https://rooks.vercel.app/docs/hooks/useDebouncedAsyncEffect) - A version of useEffect that accepts an async function and debounces its execution based on dependency changes
-* [useDebouncedEffect](https://rooks.vercel.app/docs/hooks/useDebouncedEffect) - A version of useEffect that debounces the effect execution based on dependency changes
-* [useDeepCompareEffect](https://rooks.vercel.app/docs/hooks/useDeepCompareEffect) - Deep compare dependencies instead of shallow for useEffect
-* [useDidMount](https://rooks.vercel.app/docs/hooks/useDidMount) - componentDidMount hook for React
-* [useDidUpdate](https://rooks.vercel.app/docs/hooks/useDidUpdate) - componentDidUpdate hook for react
-* [useDocumentTitle](https://rooks.vercel.app/docs/hooks/useDocumentTitle) - A hook to easily update document title with React
-* [useEffectOnceWhen](https://rooks.vercel.app/docs/hooks/useEffectOnceWhen) - Runs a callback effect atmost one time when a condition becomes true
-* [useIsomorphicEffect](https://rooks.vercel.app/docs/hooks/useIsomorphicEffect) - A hook that resolves to useEffect on the server and useLayoutEffect on the client.
-* [useLifecycleLogger](https://rooks.vercel.app/docs/hooks/useLifecycleLogger) - A react hook that console logs parameters as component transitions through lifecycles.
-* [useWillUnmount](https://rooks.vercel.app/docs/hooks/useWillUnmount) - componentWillUnmount lifecycle as hook for React.
-
-
-</details>
-
-
-
-<details>
-<summary><h3>🖱️ Mouse & Touch - 3 hooks</h3></summary>
-
-
-
-* [useMouse](https://rooks.vercel.app/docs/hooks/useMouse) - Mouse position hook for React.
-* [useMouseMoveDelta](https://rooks.vercel.app/docs/hooks/useMouseMoveDelta) - Tracks delta of mouse move
-* [useMouseWheelDelta](https://rooks.vercel.app/docs/hooks/useMouseWheelDelta) - Tracks delta of mouse move
+| Hook | Description |
+|------|-------------|
+| [**useDocumentEventListener**](https://rooks.vercel.app/docs/hooks/useDocumentEventListener) | A react hook to an event listener to the document object |
+| [**useDocumentVisibilityState**](https://rooks.vercel.app/docs/hooks/useDocumentVisibilityState) | Returns the visibility state of the document. |
+| [**useFocus**](https://rooks.vercel.app/docs/hooks/useFocus) | Handles focus events for the immediate target element. |
+| [**useFocusWithin**](https://rooks.vercel.app/docs/hooks/useFocusWithin) | Handles focus events for the target component. |
+| [**useIsDroppingFiles**](https://rooks.vercel.app/docs/hooks/useIsDroppingFiles) | Check if any files are currently being dropped anywhere. Useful for highlighting drop areas.  |
+| [**useOnClickRef**](https://rooks.vercel.app/docs/hooks/useOnClickRef) | Callback on click/tap events |
+| [**useOnHoverRef**](https://rooks.vercel.app/docs/hooks/useOnHoverRef) | On hover callback hook |
+| [**useOnLongHover**](https://rooks.vercel.app/docs/hooks/useOnLongHover) | Fires a callback when an element is hovered for a while |
+| [**useOnLongPress**](https://rooks.vercel.app/docs/hooks/useOnLongPress) | Fire a callback on long press |
+| [**useOnStartTyping**](https://rooks.vercel.app/docs/hooks/useOnStartTyping) | Fires a callback when the user starts typing outside editable fields (input, textarea, contenteditable). Supports filtering for a-z and 0-9 keys. |
+| [**useOnWindowResize**](https://rooks.vercel.app/docs/hooks/useOnWindowResize) | A React hook for adding an event listener for window resize |
+| [**useOnWindowScroll**](https://rooks.vercel.app/docs/hooks/useOnWindowScroll) | A React hook for adding an event listener for window scroll |
+| [**useOutsideClick**](https://rooks.vercel.app/docs/hooks/useOutsideClick) | Outside click(for a ref) event as hook for React. |
+| [**useOutsideClickRef**](https://rooks.vercel.app/docs/hooks/useOutsideClickRef) | A hook that can track a click event outside a ref. Returns a callbackRef. |
+| [**usePageLeave**](https://rooks.vercel.app/docs/hooks/usePageLeave) | Page leave detection with callbacks for beforeunload and visibility change |
+| [**useWindowEventListener**](https://rooks.vercel.app/docs/hooks/useWindowEventListener) | Adds an event listener to window |
 
 
 </details>
@@ -378,15 +308,33 @@ function App() {
 
 
 <details>
-<summary><h3>⚡ Performance & Optimization - 5 hooks</h3></summary>
+<summary><h3>📝 Form & File Handling <sup>3</sup></h3></summary>
 
 
 
-* [useDebounce](https://rooks.vercel.app/docs/hooks/useDebounce) - Debounce hook for react
-* [useDebouncedValue](https://rooks.vercel.app/docs/hooks/useDebouncedValue) - Tracks another value and gets updated in a debounced way.
-* [useDebounceFn](https://rooks.vercel.app/docs/hooks/useDebounceFn) - Powerful debounce function hook for React
-* [useThrottle](https://rooks.vercel.app/docs/hooks/useThrottle) - Throttle custom hook for React
-* [useWebWorker](https://rooks.vercel.app/docs/hooks/useWebWorker) - Web Worker management with message passing
+| Hook | Description |
+|------|-------------|
+| [**useCheckboxInputState**](https://rooks.vercel.app/docs/hooks/useCheckboxInputState) | Simple checkbox state management hook that provides a boolean state and props that can be spread directly onto a checkbox input element |
+| [**useFileDropRef**](https://rooks.vercel.app/docs/hooks/useFileDropRef) | Drop files easily |
+| [**useFormState**](https://rooks.vercel.app/docs/hooks/useFormState) | Comprehensive form state management with validation |
+
+
+</details>
+
+
+
+<details>
+<summary><h3>⌨️ Keyboard & Input <sup>5</sup></h3></summary>
+
+
+
+| Hook | Description |
+|------|-------------|
+| [**useInput**](https://rooks.vercel.app/docs/hooks/useInput) | Input hook for React. |
+| [**useKey**](https://rooks.vercel.app/docs/hooks/useKey) | keypress, keyup and keydown event handlers as hooks for react. |
+| [**useKeyBindings**](https://rooks.vercel.app/docs/hooks/useKeyBindings) | useKeyBindings can bind multiple keys to multiple callbacks and fire the callbacks on key press. |
+| [**useKeyRef**](https://rooks.vercel.app/docs/hooks/useKeyRef) | Very similar useKey but it returns a ref |
+| [**useKeys**](https://rooks.vercel.app/docs/hooks/useKeys) | A hook which allows to setup callbacks when a combination of keys are pressed at the same time. |
 
 
 </details>
@@ -394,32 +342,23 @@ function App() {
 
 
 <details open>
-<summary><h3>❇️ State - 22 hooks</h3></summary>
+<summary><h3>🔥 Lifecycle & Effects <sup>11</sup></h3></summary>
 
 
 
-* [useArrayState](https://rooks.vercel.app/docs/hooks/useArrayState) - Array state manager hook for React
-* [useCountdown](https://rooks.vercel.app/docs/hooks/useCountdown) - Count down to a target timestamp and call callbacks every second (or provided peried)
-* [useCounter](https://rooks.vercel.app/docs/hooks/useCounter) - Counter hook for React.
-* [useGetIsMounted](https://rooks.vercel.app/docs/hooks/useGetIsMounted) - Checks if a component is mounted or not at the time. Useful for async effects
-* [useLocalstorageState](https://rooks.vercel.app/docs/hooks/useLocalstorageState) - UseState but auto updates values to localStorage
-* [useMapState](https://rooks.vercel.app/docs/hooks/useMapState) - A react hook to manage state in a key value pair map.
-* [useMultiSelectableList](https://rooks.vercel.app/docs/hooks/useMultiSelectableList) - A custom hook to easily select multiple values from a list
-* [useNativeMapState](https://rooks.vercel.app/docs/hooks/useNativeMapState) - Manage Map() object state in React
-* [usePreviousDifferent](https://rooks.vercel.app/docs/hooks/usePreviousDifferent) - usePreviousDifferent returns the last different value of a variable
-* [usePreviousImmediate](https://rooks.vercel.app/docs/hooks/usePreviousImmediate) - usePreviousImmediate returns the previous value of a variable even if it was the same or different
-* [usePromise](https://rooks.vercel.app/docs/hooks/usePromise) - Promise management hook for react
-* [useQueueState](https://rooks.vercel.app/docs/hooks/useQueueState) - A React hook that manages state in the form of a queue
-* [useSafeSetState](https://rooks.vercel.app/docs/hooks/useSafeSetState) - set state but ignores if component has already unmounted
-* [useSelect](https://rooks.vercel.app/docs/hooks/useSelect) - Select values from a list easily. List selection hook for react.
-* [useSelectableList](https://rooks.vercel.app/docs/hooks/useSelectableList) - Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
-* [useSessionstorageState](https://rooks.vercel.app/docs/hooks/useSessionstorageState) - useState but syncs with sessionstorage
-* [useSetState](https://rooks.vercel.app/docs/hooks/useSetState) - Manage the state of a Set in React.
-* [useStackState](https://rooks.vercel.app/docs/hooks/useStackState) - A React hook that manages state in the form of a stack
-* [useTemporalAge](https://rooks.vercel.app/docs/hooks/useTemporalAge) - Returns the calendar age from a birth date, updating at each day boundary
-* [useTemporalCountdown](https://rooks.vercel.app/docs/hooks/useTemporalCountdown) - Returns the remaining duration until a target instant with aligned updates
-* [useTemporalElapsed](https://rooks.vercel.app/docs/hooks/useTemporalElapsed) - Returns the elapsed duration since a start instant with aligned updates
-* [useTemporalNow](https://rooks.vercel.app/docs/hooks/useTemporalNow) - Returns the current time as a Temporal value with aligned updates
+| Hook | Description |
+|------|-------------|
+| [**useAsyncEffect**](https://rooks.vercel.app/docs/hooks/useAsyncEffect) | A version of useEffect that accepts an async function |
+| [**useDebouncedAsyncEffect**](https://rooks.vercel.app/docs/hooks/useDebouncedAsyncEffect) | A version of useEffect that accepts an async function and debounces its execution based on dependency changes |
+| [**useDebouncedEffect**](https://rooks.vercel.app/docs/hooks/useDebouncedEffect) | A version of useEffect that debounces the effect execution based on dependency changes |
+| [**useDeepCompareEffect**](https://rooks.vercel.app/docs/hooks/useDeepCompareEffect) | Deep compare dependencies instead of shallow for useEffect |
+| [**useDidMount**](https://rooks.vercel.app/docs/hooks/useDidMount) | componentDidMount hook for React |
+| [**useDidUpdate**](https://rooks.vercel.app/docs/hooks/useDidUpdate) | componentDidUpdate hook for react |
+| [**useDocumentTitle**](https://rooks.vercel.app/docs/hooks/useDocumentTitle) | A hook to easily update document title with React |
+| [**useEffectOnceWhen**](https://rooks.vercel.app/docs/hooks/useEffectOnceWhen) | Runs a callback effect atmost one time when a condition becomes true |
+| [**useIsomorphicEffect**](https://rooks.vercel.app/docs/hooks/useIsomorphicEffect) | A hook that resolves to useEffect on the server and useLayoutEffect on the client. |
+| [**useLifecycleLogger**](https://rooks.vercel.app/docs/hooks/useLifecycleLogger) | A react hook that console logs parameters as component transitions through lifecycles. |
+| [**useWillUnmount**](https://rooks.vercel.app/docs/hooks/useWillUnmount) | componentWillUnmount lifecycle as hook for React. |
 
 
 </details>
@@ -427,39 +366,15 @@ function App() {
 
 
 <details>
-<summary><h3>🔄 State History & Time Travel - 4 hooks</h3></summary>
+<summary><h3>🖱️ Mouse & Touch <sup>3</sup></h3></summary>
 
 
 
-* [useTimeTravelState](https://rooks.vercel.app/docs/hooks/useTimeTravelState) - A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
-* [useToggle](https://rooks.vercel.app/docs/hooks/useToggle) - Toggle (between booleans or custom data)hook for React.
-* [useUndoRedoState](https://rooks.vercel.app/docs/hooks/useUndoRedoState) - Setstate but can also undo and redo
-* [useUndoState](https://rooks.vercel.app/docs/hooks/useUndoState) - Drop in replacement for useState hook but with undo functionality.
-
-
-</details>
-
-
-
-<details>
-<summary><h3>⚛️ UI - 14 hooks</h3></summary>
-
-
-
-* [useAudio](https://rooks.vercel.app/docs/hooks/useAudio) - Audio hook
-* [useBoundingclientrect](https://rooks.vercel.app/docs/hooks/useBoundingclientrect) - getBoundingClientRect hook for React.
-* [useBoundingclientrectRef](https://rooks.vercel.app/docs/hooks/useBoundingclientrectRef) - A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked.
-* [useDimensionsRef](https://rooks.vercel.app/docs/hooks/useDimensionsRef) - Easily grab dimensions of an element with a ref using this hook
-* [useFullscreen](https://rooks.vercel.app/docs/hooks/useFullscreen) - Use full screen api for making beautiful and emersive experinces.
-* [useMeasure](https://rooks.vercel.app/docs/hooks/useMeasure) - Measures both inner and outer dimensions of any DOM element in a performant way and updates when dimensions change
-* [useIntersectionObserverRef](https://rooks.vercel.app/docs/hooks/useIntersectionObserverRef) - A hook to register an intersection observer listener.
-* [useInViewRef](https://rooks.vercel.app/docs/hooks/useInViewRef) - Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.
-* [useMediaMatch](https://rooks.vercel.app/docs/hooks/useMediaMatch) - Signal whether or not a media query is currently matched.
-* [useMutationObserver](https://rooks.vercel.app/docs/hooks/useMutationObserver) - Mutation Observer hook for React.
-* [useMutationObserverRef](https://rooks.vercel.app/docs/hooks/useMutationObserverRef) - A hook that tracks mutations of an element. It returns a callbackRef.
-* [usePictureInPictureApi](https://rooks.vercel.app/docs/hooks/usePictureInPictureApi) - Hook for managing Picture-in-Picture video functionality
-* [usePreferredColorScheme](https://rooks.vercel.app/docs/hooks/usePreferredColorScheme) - Color scheme preference detection (dark/light mode)
-* [useVideo](https://rooks.vercel.app/docs/hooks/useVideo) - Video hook for react
+| Hook | Description |
+|------|-------------|
+| [**useMouse**](https://rooks.vercel.app/docs/hooks/useMouse) | Mouse position hook for React. |
+| [**useMouseMoveDelta**](https://rooks.vercel.app/docs/hooks/useMouseMoveDelta) | Tracks delta of mouse move |
+| [**useMouseWheelDelta**](https://rooks.vercel.app/docs/hooks/useMouseWheelDelta) | Tracks delta of mouse move |
 
 
 </details>
@@ -467,17 +382,52 @@ function App() {
 
 
 <details>
-<summary><h3>🔧 Utilities & Refs - 7 hooks</h3></summary>
+<summary><h3>⚡ Performance & Optimization <sup>5</sup></h3></summary>
 
 
 
-* [useEventListenerRef](https://rooks.vercel.app/docs/hooks/useEventListenerRef) - A react hook to add an event listener to a ref
-* [useForkRef](https://rooks.vercel.app/docs/hooks/useForkRef) - A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
-* [useFreshCallback](https://rooks.vercel.app/docs/hooks/useFreshCallback) - Avoid stale closures and keep your callback fresh
-* [useFreshRef](https://rooks.vercel.app/docs/hooks/useFreshRef) - Avoid stale state in callbacks with this hook. Auto updates values using a ref.
-* [useFreshTick](https://rooks.vercel.app/docs/hooks/useFreshTick) - Like use-fresh-ref but specifically for functions
-* [useMergeRefs](https://rooks.vercel.app/docs/hooks/useMergeRefs) - Merges any number of refs into a single ref
-* [useRefElement](https://rooks.vercel.app/docs/hooks/useRefElement) - Helps bridge gap between callback ref and state
+| Hook | Description |
+|------|-------------|
+| [**useDebounce**](https://rooks.vercel.app/docs/hooks/useDebounce) | Debounce hook for react |
+| [**useDebouncedValue**](https://rooks.vercel.app/docs/hooks/useDebouncedValue) | Tracks another value and gets updated in a debounced way. |
+| [**useDebounceFn**](https://rooks.vercel.app/docs/hooks/useDebounceFn) | Powerful debounce function hook for React |
+| [**useThrottle**](https://rooks.vercel.app/docs/hooks/useThrottle) | Throttle custom hook for React |
+| [**useWebWorker**](https://rooks.vercel.app/docs/hooks/useWebWorker) | Web Worker management with message passing |
+
+
+</details>
+
+
+
+<details open>
+<summary><h3>❇️ State <sup>22</sup></h3></summary>
+
+
+
+| Hook | Description |
+|------|-------------|
+| [**useArrayState**](https://rooks.vercel.app/docs/hooks/useArrayState) | Array state manager hook for React |
+| [**useCountdown**](https://rooks.vercel.app/docs/hooks/useCountdown) | Count down to a target timestamp and call callbacks every second (or provided peried) |
+| [**useCounter**](https://rooks.vercel.app/docs/hooks/useCounter) | Counter hook for React. |
+| [**useGetIsMounted**](https://rooks.vercel.app/docs/hooks/useGetIsMounted) | Checks if a component is mounted or not at the time. Useful for async effects |
+| [**useLocalstorageState**](https://rooks.vercel.app/docs/hooks/useLocalstorageState) | UseState but auto updates values to localStorage |
+| [**useMapState**](https://rooks.vercel.app/docs/hooks/useMapState) | A react hook to manage state in a key value pair map. |
+| [**useMultiSelectableList**](https://rooks.vercel.app/docs/hooks/useMultiSelectableList) | A custom hook to easily select multiple values from a list |
+| [**useNativeMapState**](https://rooks.vercel.app/docs/hooks/useNativeMapState) | Manage Map() object state in React |
+| [**usePreviousDifferent**](https://rooks.vercel.app/docs/hooks/usePreviousDifferent) | usePreviousDifferent returns the last different value of a variable |
+| [**usePreviousImmediate**](https://rooks.vercel.app/docs/hooks/usePreviousImmediate) | usePreviousImmediate returns the previous value of a variable even if it was the same or different |
+| [**usePromise**](https://rooks.vercel.app/docs/hooks/usePromise) | Promise management hook for react |
+| [**useQueueState**](https://rooks.vercel.app/docs/hooks/useQueueState) | A React hook that manages state in the form of a queue |
+| [**useSafeSetState**](https://rooks.vercel.app/docs/hooks/useSafeSetState) | set state but ignores if component has already unmounted |
+| [**useSelect**](https://rooks.vercel.app/docs/hooks/useSelect) | Select values from a list easily. List selection hook for react. |
+| [**useSelectableList**](https://rooks.vercel.app/docs/hooks/useSelectableList) | Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc. |
+| [**useSessionstorageState**](https://rooks.vercel.app/docs/hooks/useSessionstorageState) | useState but syncs with sessionstorage |
+| [**useSetState**](https://rooks.vercel.app/docs/hooks/useSetState) | Manage the state of a Set in React.  |
+| [**useStackState**](https://rooks.vercel.app/docs/hooks/useStackState) | A React hook that manages state in the form of a stack |
+| [**useTemporalAge**](https://rooks.vercel.app/docs/hooks/useTemporalAge) | Returns the calendar age from a birth date, updating at each day boundary |
+| [**useTemporalCountdown**](https://rooks.vercel.app/docs/hooks/useTemporalCountdown) | Returns the remaining duration until a target instant with aligned updates |
+| [**useTemporalElapsed**](https://rooks.vercel.app/docs/hooks/useTemporalElapsed) | Returns the elapsed duration since a start instant with aligned updates |
+| [**useTemporalNow**](https://rooks.vercel.app/docs/hooks/useTemporalNow) | Returns the current time as a Temporal value with aligned updates |
 
 
 </details>
@@ -485,12 +435,16 @@ function App() {
 
 
 <details>
-<summary><h3>📱 Window & Viewport - 2 hooks</h3></summary>
+<summary><h3>🔄 State History & Time Travel <sup>4</sup></h3></summary>
 
 
 
-* [useWindowScrollPosition](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) - A React hook to get the scroll position of the window
-* [useWindowSize](https://rooks.vercel.app/docs/hooks/useWindowSize) - Window size hook for React.
+| Hook | Description |
+|------|-------------|
+| [**useTimeTravelState**](https://rooks.vercel.app/docs/hooks/useTimeTravelState) | A hook that manages state which can undo and redo. A more powerful version of useUndoState hook. |
+| [**useToggle**](https://rooks.vercel.app/docs/hooks/useToggle) | Toggle (between booleans or custom data)hook for React. |
+| [**useUndoRedoState**](https://rooks.vercel.app/docs/hooks/useUndoRedoState) | Setstate but can also undo and redo  |
+| [**useUndoState**](https://rooks.vercel.app/docs/hooks/useUndoState) | Drop in replacement for useState hook but with undo functionality. |
 
 
 </details>
@@ -498,16 +452,80 @@ function App() {
 
 
 <details>
-<summary><h3>🧪 Experimental Hooks - 6 hooks</h3></summary>
+<summary><h3>⚛️ UI <sup>14</sup></h3></summary>
 
 
 
-* [useSuspenseNavigatorBattery](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) - Suspense-enabled hook for getting battery status information from Navigator Battery API
-* [useSuspenseFavicon](https://rooks.vercel.app/docs/hooks/useSuspenseFavicon) - Suspense-enabled hook for reading and updating the current favicon with same-origin and external URL support
-* [useSuspenseNavigatorUserAgentData](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) - Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API
-* [useSuspenseLocalStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseLocalStorageState) - Suspense-enabled hook for localStorage state management with cross-tab synchronization
-* [useSuspenseSessionStorageState](https://rooks.vercel.app/docs/hooks/useSuspenseSessionStorageState) - Suspense-enabled hook for sessionStorage state management with proper serialization
-* [useSuspenseIndexedDBState](https://rooks.vercel.app/docs/hooks/useSuspenseIndexedDBState) - Suspense-enabled hook for IndexedDB state management with structured data storage and cross-tab synchronization
+| Hook | Description |
+|------|-------------|
+| [**useAudio**](https://rooks.vercel.app/docs/hooks/useAudio) | Audio hook |
+| [**useBoundingclientrect**](https://rooks.vercel.app/docs/hooks/useBoundingclientrect) | getBoundingClientRect hook for React. |
+| [**useBoundingclientrectRef**](https://rooks.vercel.app/docs/hooks/useBoundingclientrectRef) | A hook that tracks the boundingclientrect of an element. It returns a callbackRef so that the element node if changed is easily tracked. |
+| [**useDimensionsRef**](https://rooks.vercel.app/docs/hooks/useDimensionsRef) | Easily grab dimensions of an element with a ref using this hook |
+| [**useFullscreen**](https://rooks.vercel.app/docs/hooks/useFullscreen) | Use full screen api for making beautiful and emersive experinces. |
+| [**useMeasure**](https://rooks.vercel.app/docs/hooks/useMeasure) | Measures both inner and outer dimensions of any DOM element in a performant way and updates when dimensions change |
+| [**useIntersectionObserverRef**](https://rooks.vercel.app/docs/hooks/useIntersectionObserverRef) | A hook to register an intersection observer listener. |
+| [**useInViewRef**](https://rooks.vercel.app/docs/hooks/useInViewRef) | Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.  |
+| [**useMediaMatch**](https://rooks.vercel.app/docs/hooks/useMediaMatch) | Signal whether or not a media query is currently matched. |
+| [**useMutationObserver**](https://rooks.vercel.app/docs/hooks/useMutationObserver) | Mutation Observer hook for React. |
+| [**useMutationObserverRef**](https://rooks.vercel.app/docs/hooks/useMutationObserverRef) | A hook that tracks mutations of an element. It returns a callbackRef. |
+| [**usePictureInPictureApi**](https://rooks.vercel.app/docs/hooks/usePictureInPictureApi) | Hook for managing Picture-in-Picture video functionality |
+| [**usePreferredColorScheme**](https://rooks.vercel.app/docs/hooks/usePreferredColorScheme) | Color scheme preference detection (dark/light mode) |
+| [**useVideo**](https://rooks.vercel.app/docs/hooks/useVideo) | Video hook for react |
+
+
+</details>
+
+
+
+<details>
+<summary><h3>🔧 Utilities & Refs <sup>7</sup></h3></summary>
+
+
+
+| Hook | Description |
+|------|-------------|
+| [**useEventListenerRef**](https://rooks.vercel.app/docs/hooks/useEventListenerRef) | A react hook to add an event listener to a ref |
+| [**useForkRef**](https://rooks.vercel.app/docs/hooks/useForkRef) | A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef |
+| [**useFreshCallback**](https://rooks.vercel.app/docs/hooks/useFreshCallback) | Avoid stale closures and keep your callback fresh |
+| [**useFreshRef**](https://rooks.vercel.app/docs/hooks/useFreshRef) | Avoid stale state in callbacks with this hook. Auto updates values using a ref. |
+| [**useFreshTick**](https://rooks.vercel.app/docs/hooks/useFreshTick) | Like use-fresh-ref but specifically for functions |
+| [**useMergeRefs**](https://rooks.vercel.app/docs/hooks/useMergeRefs) | Merges any number of refs into a single ref |
+| [**useRefElement**](https://rooks.vercel.app/docs/hooks/useRefElement) | Helps bridge gap between callback ref and state |
+
+
+</details>
+
+
+
+<details>
+<summary><h3>📱 Window & Viewport <sup>2</sup></h3></summary>
+
+
+
+| Hook | Description |
+|------|-------------|
+| [**useWindowScrollPosition**](https://rooks.vercel.app/docs/hooks/useWindowScrollPosition) | A React hook to get the scroll position of the window |
+| [**useWindowSize**](https://rooks.vercel.app/docs/hooks/useWindowSize) | Window size hook for React. |
+
+
+</details>
+
+
+
+<details>
+<summary><h3>🧪 Experimental Hooks <sup>6</sup></h3></summary>
+
+
+
+| Hook | Description |
+|------|-------------|
+| [**useSuspenseNavigatorBattery**](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) | Suspense-enabled hook for getting battery status information from Navigator Battery API |
+| [**useSuspenseFavicon**](https://rooks.vercel.app/docs/hooks/useSuspenseFavicon) | Suspense-enabled hook for reading and updating the current favicon with same-origin and external URL support |
+| [**useSuspenseNavigatorUserAgentData**](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) | Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API |
+| [**useSuspenseLocalStorageState**](https://rooks.vercel.app/docs/hooks/useSuspenseLocalStorageState) | Suspense-enabled hook for localStorage state management with cross-tab synchronization |
+| [**useSuspenseSessionStorageState**](https://rooks.vercel.app/docs/hooks/useSuspenseSessionStorageState) | Suspense-enabled hook for sessionStorage state management with proper serialization |
+| [**useSuspenseIndexedDBState**](https://rooks.vercel.app/docs/hooks/useSuspenseIndexedDBState) | Suspense-enabled hook for IndexedDB state management with structured data storage and cross-tab synchronization |
 
 
 <p align="center"><em>⚠️ Experimental hooks may be removed or significantly changed in any release without notice. Use with caution in production.</em></p>
@@ -520,7 +538,6 @@ function App() {
 
 <!--hookslist end-->
 
-<br/>
 <br/>
 
 ## Features
@@ -537,19 +554,23 @@ function App() {
 
 ## Installation
 
-```
-npm i -s rooks
+```bash
+npm install rooks
+# or
+yarn add rooks
+# or
+pnpm add rooks
 ```
 
 Import any hook from "rooks" and start using them!
 
-```jsx
+```tsx
 import { useDidMount } from "rooks";
 ```
 
 ## Usage
 
-```jsx
+```tsx
 function App() {
   useDidMount(() => {
     alert("mounted");
@@ -566,8 +587,6 @@ function App() {
 ## Standalone Package
 
 Package containing all the hooks is over here. - [Docs](https://github.com/imbhargav5/rooks/tree/master/packages/rooks) and [Npm Install](https://npmjs.com/package/rooks)
-
-<br/>
 
 ## License
 
