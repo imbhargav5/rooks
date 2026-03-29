@@ -1,7 +1,7 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-82-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-83-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -116,6 +116,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/som-sm"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt="Som Shekhar Mukherjee"/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=som-sm" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/cursor"><img src="https://avatars.githubusercontent.com/in/1210556?v=4?s=100" width="100px;" alt="cursor[bot]"/><br /><sub><b>cursor[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=cursor[bot]" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/JulianWielga"><img src="https://avatars.githubusercontent.com/u/965924?v=4?s=100" width="100px;" alt="JulianWielga"/><br /><sub><b>JulianWielga</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=JulianWielga" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://aminya.github.io/"><img src="https://avatars.githubusercontent.com/u/16418197?v=4?s=100" width="100px;" alt="Amin Ya"/><br /><sub><b>Amin Ya</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=aminya" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
