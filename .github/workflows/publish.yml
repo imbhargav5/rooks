@@ -1,12 +1,11 @@
 name: Publish to NPM
 
 on:
-  workflow_call:
-    inputs:
-      hasChangesets:
-        description: "Whether there are pending changesets"
-        required: true
-        type: string
+  push:
+    branches:
+      - main
+      - alpha
+      - next
 
   workflow_dispatch:
 
@@ -18,9 +17,9 @@ jobs:
   publish:
     name: Publish To NPM
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || inputs.hasChangesets == 'false' }}
+    if: ${{ github.repository == 'imbhargav5/rooks' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - name: ⬇️ Checkout repo
@@ -41,6 +40,64 @@ jobs:
       - name: 🏗 Run build script
         run: pnpm turbo prepare-publish
 
+      - name: Resolve package metadata
+        id: package
+        run: |
+          package_name=$(node -p "require('./packages/rooks/package.json').name")
+          package_version=$(node -p "require('./packages/rooks/package.json').version")
+          {
+            echo "name=$package_name"
+            echo "version=$package_version"
+            echo "tag=$package_name@$package_version"
+
+            if [[ "$package_version" == *-* ]]; then
+              echo "is_prerelease=true"
+            else
+              echo "is_prerelease=false"
+            fi
+          } >> "$GITHUB_OUTPUT"
+
       - name: 🚀 Publish to npm
-        run: npm publish --access public
+        env:
+          PACKAGE_NAME: ${{ steps.package.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version >/dev/null 2>&1; then
+            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is already published on npm; skipping publish."
+            exit 0
+          fi
+
+          npm publish --access public
         working-directory: packages/rooks
+
+      - name: 🏷 Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_DIR: packages/rooks
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+          TAG_NAME: ${{ steps.package.outputs.tag }}
+          IS_PRERELEASE: ${{ steps.package.outputs.is_prerelease }}
+        run: |
+          release_notes_file="$(mktemp)"
+
+          awk -v version="$PACKAGE_VERSION" '
+            $0 == "## " version { printing=1; next }
+            printing && /^## / { exit }
+            printing && !started && $0 == "" { next }
+            printing { started=1; print }
+          ' "$PACKAGE_DIR/CHANGELOG.md" > "$release_notes_file"
+
+          if ! grep -q '[^[:space:]]' "$release_notes_file"; then
+            printf 'Published %s to npm.\n' "$TAG_NAME" > "$release_notes_file"
+          fi
+
+          release_args=(--title "$TAG_NAME" --notes-file "$release_notes_file" --target "$GITHUB_SHA")
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            release_args+=(--prerelease)
+          fi
+
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            gh release edit "$TAG_NAME" "${release_args[@]}"
+          else
+            gh release create "$TAG_NAME" "${release_args[@]}"
+          fi

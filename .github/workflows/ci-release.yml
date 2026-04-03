@@ -60,14 +60,3 @@ jobs:
           version: pnpm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  publish:
-    name: Publish
-    needs: version
-    if: needs.version.outputs.hasChangesets == 'false'
-    uses: ./.github/workflows/publish.yml
-    with:
-      hasChangesets: ${{ needs.version.outputs.hasChangesets }}
-    permissions:
-      contents: read
-      id-token: write
