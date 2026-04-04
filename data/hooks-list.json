@@ -11,6 +11,11 @@
       "category": "state"
     },
     {
+      "name": "useAsyncDisposable",
+      "description": "Bridges TC39 Explicit Resource Management (Symbol.asyncDispose) with React lifecycles — creates an async disposable resource and disposes it on unmount or deps change",
+      "category": "lifecycle"
+    },
+    {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
       "category": "lifecycle"
@@ -88,6 +93,11 @@
     {
       "name": "useDidMount",
       "description": "componentDidMount hook for React",
+      "category": "lifecycle"
+    },
+    {
+      "name": "useDisposable",
+      "description": "Bridges TC39 Explicit Resource Management (Symbol.dispose) with React lifecycles — creates a synchronous disposable resource (guaranteed non-null) and disposes it on unmount or deps change",
       "category": "lifecycle"
     },
     {
