@@ -7,8 +7,8 @@ import { useDisposable } from "@/hooks/useDisposable";
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeResource() {
-  const dispose = vi.fn();
+function makeResource(disposeImpl?: () => void) {
+  const dispose = vi.fn(disposeImpl ?? (() => undefined));
   const resource: Disposable & { dispose: typeof dispose } = {
     [Symbol.dispose]: dispose,
     dispose,
@@ -64,15 +64,18 @@ describe("useDisposable", () => {
     const resource = makeResource();
     const factory = vi.fn(() => resource);
 
-    const { rerender } = renderHook(() => useDisposable(factory));
+    const { result, rerender } = renderHook(() => useDisposable(factory));
+
+    expect(result.current).toBe(resource);
     rerender();
     rerender();
 
     expect(factory).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(resource);
     expect(resource.dispose).not.toHaveBeenCalled();
   });
 
-  it("disposes the old resource and creates a new one when deps change", async () => {
+  it("keeps the previous resource alive until a dep change recreates it exactly once", async () => {
     expect.hasAssertions();
     let callCount = 0;
     const resources = [makeResource(), makeResource()];
@@ -89,6 +92,7 @@ describe("useDisposable", () => {
 
     expect(result.current).toBe(resources[0]);
 
+    const previousResource = result.current;
     rerender({ dep: 2 });
 
     // After the deps change the old resource should have been disposed and the
@@ -99,8 +103,71 @@ describe("useDisposable", () => {
     });
 
     expect(resources[0]!.dispose).toHaveBeenCalledTimes(1);
+    expect(factory).toHaveBeenCalledTimes(2);
     expect(result.current).toBe(resources[1]);
+    expect(result.current).not.toBe(previousResource);
+    expect(resources[0]!.dispose).toHaveBeenCalledTimes(1);
     expect(resources[1]!.dispose).not.toHaveBeenCalled();
+  });
+
+  it("throws when the factory fails on the initial render", () => {
+    expect.hasAssertions();
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const error = new Error("factory failed");
+    const factory = vi.fn(() => {
+      throw error;
+    });
+
+    try {
+      expect(() => renderHook(() => useDisposable(factory))).toThrow(error);
+      expect(factory).toHaveBeenCalled();
+    } finally {
+      errorSpy.mockRestore();
+    }
+  });
+
+  it("throws when the factory fails during dep-driven recreation", () => {
+    expect.hasAssertions();
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const firstResource = makeResource();
+    const error = new Error("recreation failed");
+    const factory = vi
+      .fn()
+      .mockReturnValueOnce(firstResource)
+      .mockImplementationOnce(() => {
+        throw error;
+      });
+
+    const { rerender } = renderHook(
+      ({ dep }: { dep: number }) => useDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    try {
+      expect(firstResource.dispose).not.toHaveBeenCalled();
+      expect(() => rerender({ dep: 2 })).toThrow(error);
+      expect(firstResource.dispose).toHaveBeenCalledTimes(1);
+      expect(factory).toHaveBeenCalledTimes(2);
+    } finally {
+      errorSpy.mockRestore();
+    }
+  });
+
+  it("throws when Symbol.dispose throws during cleanup", () => {
+    expect.hasAssertions();
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const error = new Error("dispose failed");
+    const resource = makeResource(() => {
+      throw error;
+    });
+
+    const { unmount } = renderHook(() => useDisposable(() => resource));
+
+    try {
+      expect(() => unmount()).toThrow(error);
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it("disposes the final resource on unmount after a deps change", async () => {

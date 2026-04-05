@@ -48,16 +48,26 @@ function useAsyncDisposable<T extends AsyncDisposable>(
     // discarded rather than handed to the component.
     let disposed = false;
 
-    factory().then((newResource) => {
-      if (disposed) {
-        // Cleanup already ran — dispose immediately; the component never sees
-        // this resource.
-        void newResource[Symbol.asyncDispose]();
-      } else {
-        resourceRef.current = newResource;
-        setResource(newResource);
-      }
-    });
+    const disposeAsyncResource = (asyncResource: T) => {
+      void asyncResource[Symbol.asyncDispose]().catch(() => {});
+    };
+
+    factory()
+      .then((newResource) => {
+        if (disposed) {
+          // Cleanup already ran — dispose immediately; the component never sees
+          // this resource.
+          disposeAsyncResource(newResource);
+        } else {
+          resourceRef.current = newResource;
+          setResource(newResource);
+        }
+      })
+      .catch(() => {
+        // Rejected factories leave the hook in the loading state. The hook does
+        // not expose an error channel, so we intentionally swallow the rejection
+        // to avoid unhandled promise noise.
+      });
 
     return () => {
       disposed = true;
@@ -67,7 +77,7 @@ function useAsyncDisposable<T extends AsyncDisposable>(
       resourceRef.current = null;
       setResource(null);
       if (toDispose !== null) {
-        void toDispose[Symbol.asyncDispose]();
+        disposeAsyncResource(toDispose);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
