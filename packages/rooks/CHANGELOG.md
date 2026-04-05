@@ -1,5 +1,12 @@
 # rooks
 
+## Unreleased
+
+### Minor Changes
+
+- Add the experimental `useDisposable` and `useAsyncDisposable` hooks behind the `rooks/experimental` entrypoint.
+- These hooks depend on explicit resource management symbols (`Symbol.dispose` and `Symbol.asyncDispose`). Unsupported browsers such as Safari need an app-provided polyfill like `core-js/proposals/explicit-resource-management`.
+
 ## 9.8.0
 
 ### Minor Changes

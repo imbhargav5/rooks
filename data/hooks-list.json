@@ -16,6 +16,11 @@
       "category": "lifecycle"
     },
     {
+      "name": "useAsyncDisposable",
+      "description": "Experimental hook that bridges Symbol.asyncDispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers",
+      "category": "experimental"
+    },
+    {
       "name": "useAudio",
       "description": "Audio hook",
       "category": "ui"
@@ -89,6 +94,11 @@
       "name": "useDidMount",
       "description": "componentDidMount hook for React",
       "category": "lifecycle"
+    },
+    {
+      "name": "useDisposable",
+      "description": "Experimental hook that bridges Symbol.dispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers",
+      "category": "experimental"
     },
     {
       "name": "useDidUpdate",

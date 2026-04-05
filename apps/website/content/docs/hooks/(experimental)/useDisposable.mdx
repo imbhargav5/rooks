@@ -1,0 +1,56 @@
+---
+id: useDisposable
+title: useDisposable
+sidebar_label: useDisposable
+---
+
+## About
+
+⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
+
+Bridges TC39 Explicit Resource Management (`Symbol.dispose`) with React lifecycles. It creates a disposable resource synchronously so the resource is available on the first render, and disposes it when the component unmounts or when the dependency array changes.
+
+This hook requires `Symbol.dispose` support at runtime. Browsers such as Safari currently need a polyfill. Load one like `core-js/proposals/explicit-resource-management` before using this hook.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic usage
+
+```tsx
+import { useDisposable } from "rooks/experimental";
+
+class ManagedWebSocket {
+  socket = new WebSocket("wss://example.com");
+
+  [Symbol.dispose]() {
+    this.socket.close();
+  }
+}
+
+function ChatRoom() {
+  const socket = useDisposable(() => new ManagedWebSocket(), []);
+
+  return <button onClick={() => socket.socket.send("hello")}>Send</button>;
+}
+```
+
+## Arguments
+
+| Argument | Type | Description | Default value |
+| -------- | ---- | ----------- | ------------- |
+| `factory` | `() => T` | Function that creates the disposable resource | required |
+| `deps` | `DependencyList` | Dependency array controlling when the resource is replaced | `[]` |
+
+## Return value
+
+| Return value | Type | Description |
+| ------------ | ---- | ----------- |
+| `resource` | `T` | The disposable resource, available synchronously on every render |
+
+## Notes
+
+- Import from `rooks/experimental`, not `rooks`.
+- `rooks` does not polyfill `Symbol.dispose` for you.
+- If the returned resource does not implement `[Symbol.dispose]()`, the hook throws a descriptive runtime error.
