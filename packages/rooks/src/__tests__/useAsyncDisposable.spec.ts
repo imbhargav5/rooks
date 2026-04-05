@@ -26,6 +26,12 @@ function createDeferred<T>() {
   return { promise, resolve, reject };
 }
 
+function captureNextUnhandledRejection() {
+  return new Promise<unknown>((resolve) => {
+    process.once("unhandledRejection", resolve);
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
@@ -68,6 +74,24 @@ describe("useAsyncDisposable", () => {
     expect(result.current).toBe(resource);
   });
 
+  it("stays null when the factory rejects", async () => {
+    expect.hasAssertions();
+    const error = new Error("factory rejection");
+    const rejectedPromise = Promise.reject(error);
+    const unhandledRejection = captureNextUnhandledRejection();
+    const factory = vi.fn(() => rejectedPromise);
+
+    const { result } = renderHook(() => useAsyncDisposable(factory));
+
+    expect(result.current).toBeNull();
+
+    await act(async () => {});
+
+    await expect(unhandledRejection).resolves.toBe(error);
+    expect(factory).toHaveBeenCalledTimes(1);
+    expect(result.current).toBeNull();
+  });
+
   it("disposes the resource when the component unmounts", async () => {
     expect.hasAssertions();
     const resource = makeAsyncResource();
@@ -107,9 +131,38 @@ describe("useAsyncDisposable", () => {
 
     await act(async () => {});
 
+    expect(factory).toHaveBeenCalledTimes(2);
     expect(resources[0]!.asyncDispose).toHaveBeenCalledTimes(1);
     expect(result.current).toBe(resources[1]);
     expect(resources[1]!.asyncDispose).not.toHaveBeenCalled();
+  });
+
+  it("continues dep-driven replacement when Symbol.asyncDispose rejects during cleanup", async () => {
+    expect.hasAssertions();
+    const disposeError = new Error("async dispose rejection");
+    const disposeRejection = Promise.reject(disposeError);
+    void disposeRejection.catch(() => {});
+    const resources = [makeAsyncResource(), makeAsyncResource()];
+    resources[0]!.asyncDispose.mockReturnValueOnce(disposeRejection);
+    let callCount = 0;
+    const factory = vi.fn(() => Promise.resolve(resources[callCount++]!));
+
+    const { result, rerender } = renderHook(
+      ({ dep }: { dep: number }) => useAsyncDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    await act(async () => {});
+    expect(result.current).toBe(resources[0]);
+
+    rerender({ dep: 2 });
+    expect(result.current).toBeNull();
+
+    await act(async () => {});
+
+    await expect(disposeRejection).rejects.toBe(disposeError);
+    expect(resources[0]!.asyncDispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(resources[1]);
   });
 
   it("returns null between a deps change and the new factory resolving", async () => {
@@ -212,6 +265,88 @@ describe("useAsyncDisposable", () => {
     });
     expect(result.current).toBe(resource2);
     expect(resource2.asyncDispose).not.toHaveBeenCalled();
+  });
+
+  it("only commits the latest resource across three rapid dep changes with out-of-order resolutions", async () => {
+    expect.hasAssertions();
+    const deferreds = [
+      createDeferred<ReturnType<typeof makeAsyncResource>>(),
+      createDeferred<ReturnType<typeof makeAsyncResource>>(),
+      createDeferred<ReturnType<typeof makeAsyncResource>>(),
+      createDeferred<ReturnType<typeof makeAsyncResource>>(),
+    ];
+    let callCount = 0;
+    const factory = vi.fn(() => deferreds[callCount++]!.promise);
+
+    const { result, rerender } = renderHook(
+      ({ dep }: { dep: number }) => useAsyncDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    rerender({ dep: 2 });
+    rerender({ dep: 3 });
+    rerender({ dep: 4 });
+    expect(result.current).toBeNull();
+
+    const resource1 = makeAsyncResource();
+    const resource2 = makeAsyncResource();
+    const resource3 = makeAsyncResource();
+    const resource4 = makeAsyncResource();
+
+    await act(async () => {
+      deferreds[1]!.resolve(resource2);
+    });
+    expect(resource2.asyncDispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBeNull();
+
+    await act(async () => {
+      deferreds[0]!.resolve(resource1);
+    });
+    expect(resource1.asyncDispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBeNull();
+
+    await act(async () => {
+      deferreds[3]!.resolve(resource4);
+    });
+    expect(result.current).toBe(resource4);
+    expect(resource4.asyncDispose).not.toHaveBeenCalled();
+
+    await act(async () => {
+      deferreds[2]!.resolve(resource3);
+    });
+    expect(resource3.asyncDispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(resource4);
+    expect(factory).toHaveBeenCalledTimes(4);
+  });
+
+  it("does not let a stale async result overwrite a newer resolved resource", async () => {
+    expect.hasAssertions();
+    const deferred1 = createDeferred<ReturnType<typeof makeAsyncResource>>();
+    const deferred2 = createDeferred<ReturnType<typeof makeAsyncResource>>();
+    let callCount = 0;
+    const deferreds = [deferred1, deferred2];
+    const factory = vi.fn(() => deferreds[callCount++]!.promise);
+
+    const { result, rerender } = renderHook(
+      ({ dep }: { dep: number }) => useAsyncDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    rerender({ dep: 2 });
+
+    const newerResource = makeAsyncResource();
+    await act(async () => {
+      deferred2.resolve(newerResource);
+    });
+    expect(result.current).toBe(newerResource);
+
+    const staleResource = makeAsyncResource();
+    await act(async () => {
+      deferred1.resolve(staleResource);
+    });
+
+    expect(staleResource.asyncDispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(newerResource);
   });
 
   it("handles React Strict Mode: disposes Strict Mode resource and keeps live resource", async () => {

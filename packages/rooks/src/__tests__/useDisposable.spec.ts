@@ -64,10 +64,12 @@ describe("useDisposable", () => {
     const resource = makeResource();
     const factory = vi.fn(() => resource);
 
-    const { rerender } = renderHook(() => useDisposable(factory));
+    const { result, rerender } = renderHook(() => useDisposable(factory));
+    const initialResource = result.current;
     rerender();
     rerender();
 
+    expect(result.current).toBe(initialResource);
     expect(factory).toHaveBeenCalledTimes(1);
     expect(resource.dispose).not.toHaveBeenCalled();
   });
@@ -98,9 +100,82 @@ describe("useDisposable", () => {
       // flush the forceUpdate microtask
     });
 
+    expect(factory).toHaveBeenCalledTimes(2);
     expect(resources[0]!.dispose).toHaveBeenCalledTimes(1);
     expect(result.current).toBe(resources[1]);
     expect(resources[1]!.dispose).not.toHaveBeenCalled();
+  });
+
+  it("throws if the factory fails on initial render", () => {
+    expect.hasAssertions();
+    const error = new Error("initial factory failure");
+    const factory = vi.fn(() => {
+      throw error;
+    });
+
+    expect(() => renderHook(() => useDisposable(factory))).toThrow(error);
+    expect(factory).toHaveBeenCalled();
+  });
+
+  it("disposes the previous resource before surfacing a dep-driven factory failure", () => {
+    expect.hasAssertions();
+    const resource = makeResource();
+    const error = new Error("replacement factory failure");
+    const factory = vi
+      .fn<() => ReturnType<typeof makeResource>>()
+      .mockReturnValueOnce(resource)
+      .mockImplementationOnce(() => {
+        throw error;
+      });
+
+    const { result, rerender } = renderHook(
+      ({ dep }: { dep: number }) => useDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    expect(result.current).toBe(resource);
+
+    expect(() => rerender({ dep: 2 })).toThrow(error);
+    expect(factory).toHaveBeenCalledTimes(2);
+    expect(resource.dispose).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(resource);
+  });
+
+  it("propagates Symbol.dispose errors during dep changes and keeps the old resource", () => {
+    expect.hasAssertions();
+    const disposeError = new Error("dispose failure");
+    const resource = {
+      [Symbol.dispose]: vi.fn(() => {
+        throw disposeError;
+      }),
+    } as Disposable;
+    const replacement = makeResource();
+    const factory = vi
+      .fn<() => Disposable>()
+      .mockReturnValueOnce(resource)
+      .mockReturnValueOnce(replacement);
+
+    const { result, rerender } = renderHook(
+      ({ dep }: { dep: number }) => useDisposable(factory, [dep]),
+      { initialProps: { dep: 1 } }
+    );
+
+    expect(result.current).toBe(resource);
+
+    let thrown: unknown;
+    try {
+      rerender({ dep: 2 });
+    } catch (error) {
+      thrown = error;
+    }
+
+    expect(thrown).toBeInstanceOf(AggregateError);
+    expect((thrown as AggregateError).errors).toEqual([
+      disposeError,
+      disposeError,
+    ]);
+    expect(factory).toHaveBeenCalledTimes(1);
+    expect(result.current).toBe(resource);
   });
 
   it("disposes the final resource on unmount after a deps change", async () => {
