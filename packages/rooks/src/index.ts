@@ -4,6 +4,7 @@ import { useMapState } from "./hooks/useMapState";
 
 export { useAnimation } from "./hooks/useAnimation";
 export { useArrayState } from "./hooks/useArrayState";
+export { useAsyncDisposable } from "./hooks/useAsyncDisposable";
 export { useAsyncEffect } from "./hooks/useAsyncEffect";
 export { useAudio } from "./hooks/useAudio";
 export { useBoundingclientrect } from "./hooks/useBoundingclientrect";
@@ -20,6 +21,7 @@ export { useDebouncedEffect } from "./hooks/useDebouncedEffect";
 export { useDebouncedValue } from "./hooks/useDebouncedValue";
 export { useDeepCompareEffect } from "./hooks/useDeepCompareEffect";
 export { useDidMount } from "./hooks/useDidMount";
+export { useDisposable } from "./hooks/useDisposable";
 export { useDidUpdate } from "./hooks/useDidUpdate";
 export { useDimensionsRef } from "./hooks/useDimensionsRef";
 export { useDocumentEventListener } from "./hooks/useDocumentEventListener";
