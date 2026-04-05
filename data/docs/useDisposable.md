@@ -6,7 +6,11 @@ sidebar_label: useDisposable
 
 ## About
 
+⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
+
 Bridges TC39 [Explicit Resource Management](https://github.com/tc39/proposal-explicit-resource-management) (`Symbol.dispose`) with React component lifecycles.
+
+This hook requires explicit resource management symbol support at runtime. Browsers such as Safari need a polyfill like `core-js/proposals/explicit-resource-management`.
 
 ### The problem
 
@@ -36,7 +40,7 @@ Unlike `useAsyncDisposable`, this hook returns the resource **synchronously** (g
 ### WebSocket wrapper
 
 ```tsx
-import { useDisposable } from "rooks";
+import { useDisposable } from "rooks/experimental";
 
 class ManagedWebSocket implements Disposable {
   private socket: WebSocket;
@@ -69,7 +73,7 @@ function Chat({ roomUrl }: { roomUrl: string }) {
 ### Event emitter with automatic listener cleanup
 
 ```tsx
-import { useDisposable } from "rooks";
+import { useDisposable } from "rooks/experimental";
 import { EventEmitter } from "events";
 
 class ScopedEmitter implements Disposable {
@@ -106,7 +110,7 @@ function Dashboard({ emitter }: { emitter: EventEmitter }) {
 ### Managed lock (Web Locks API)
 
 ```tsx
-import { useDisposable } from "rooks";
+import { useDisposable } from "rooks/experimental";
 
 class ManagedLock implements Disposable {
   private release?: () => void;

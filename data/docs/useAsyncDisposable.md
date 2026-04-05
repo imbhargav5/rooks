@@ -6,7 +6,11 @@ sidebar_label: useAsyncDisposable
 
 ## About
 
+⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
+
 Bridges TC39 [Explicit Resource Management](https://github.com/tc39/proposal-explicit-resource-management) (`Symbol.asyncDispose`) with React component lifecycles.
+
+This hook requires explicit resource management symbol support at runtime. Browsers such as Safari need a polyfill like `core-js/proposals/explicit-resource-management`.
 
 ### The problem
 
@@ -53,7 +57,7 @@ if (db === null) return <Spinner />;
 ### IndexedDB connection
 
 ```tsx
-import { useAsyncDisposable } from "rooks";
+import { useAsyncDisposable } from "rooks/experimental";
 
 class ManagedIDBConnection implements AsyncDisposable {
   private db: IDBDatabase;
@@ -101,7 +105,7 @@ function UserStore({ userId }: { userId: string }) {
 ### WebGPU device
 
 ```tsx
-import { useAsyncDisposable } from "rooks";
+import { useAsyncDisposable } from "rooks/experimental";
 
 class ManagedGPUDevice implements AsyncDisposable {
   constructor(
@@ -133,7 +137,7 @@ function Renderer() {
 ### Scoped document lock with deps (Web Locks API)
 
 ```tsx
-import { useAsyncDisposable } from "rooks";
+import { useAsyncDisposable } from "rooks/experimental";
 
 class ScopedLock implements AsyncDisposable {
   private release?: () => void;

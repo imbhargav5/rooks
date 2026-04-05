@@ -1,0 +1,62 @@
+---
+id: useAsyncDisposable
+title: useAsyncDisposable
+sidebar_label: useAsyncDisposable
+---
+
+## About
+
+⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
+
+Bridges TC39 Explicit Resource Management (`Symbol.asyncDispose`) with React lifecycles. It asynchronously creates a disposable resource and disposes it when the component unmounts or when the dependency array changes.
+
+This hook requires `Symbol.asyncDispose` support at runtime. Browsers such as Safari currently need a polyfill. Load one like `core-js/proposals/explicit-resource-management` before using this hook.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic usage
+
+```tsx
+import { useAsyncDisposable } from "rooks/experimental";
+
+class ManagedConnection {
+  async [Symbol.asyncDispose]() {
+    // close the resource
+  }
+}
+
+async function openConnection() {
+  return new ManagedConnection();
+}
+
+function Screen() {
+  const connection = useAsyncDisposable(() => openConnection(), []);
+
+  if (connection === null) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>Ready</div>;
+}
+```
+
+## Arguments
+
+| Argument | Type | Description | Default value |
+| -------- | ---- | ----------- | ------------- |
+| `factory` | `() => Promise<T>` | Async function that creates the resource | required |
+| `deps` | `DependencyList` | Dependency array controlling when the resource is replaced | `[]` |
+
+## Return value
+
+| Return value | Type | Description |
+| ------------ | ---- | ----------- |
+| `resource` | `T \| null` | The resource, or `null` while the factory is still resolving |
+
+## Notes
+
+- Import from `rooks/experimental`, not `rooks`.
+- `rooks` does not polyfill `Symbol.asyncDispose` for you.
+- If deps change before the factory resolves, the stale resource is disposed immediately when it arrives.

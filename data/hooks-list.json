@@ -11,14 +11,14 @@
       "category": "state"
     },
     {
-      "name": "useAsyncDisposable",
-      "description": "Bridges TC39 Explicit Resource Management (Symbol.asyncDispose) with React lifecycles — creates an async disposable resource and disposes it on unmount or deps change",
-      "category": "lifecycle"
-    },
-    {
       "name": "useAsyncEffect",
       "description": "A version of useEffect that accepts an async function",
       "category": "lifecycle"
+    },
+    {
+      "name": "useAsyncDisposable",
+      "description": "Experimental hook that bridges Symbol.asyncDispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers",
+      "category": "experimental"
     },
     {
       "name": "useAudio",
@@ -97,8 +97,8 @@
     },
     {
       "name": "useDisposable",
-      "description": "Bridges TC39 Explicit Resource Management (Symbol.dispose) with React lifecycles — creates a synchronous disposable resource (guaranteed non-null) and disposes it on unmount or deps change",
-      "category": "lifecycle"
+      "description": "Experimental hook that bridges Symbol.dispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers",
+      "category": "experimental"
     },
     {
       "name": "useDidUpdate",
