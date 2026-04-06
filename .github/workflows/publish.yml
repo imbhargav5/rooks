@@ -91,7 +91,7 @@ jobs:
             printf 'Published %s to npm.\n' "$TAG_NAME" > "$release_notes_file"
           fi
 
-          release_args=(--title "$TAG_NAME" --notes-file "$release_notes_file" --target "$GITHUB_SHA")
+          release_args=(--title "$TAG_NAME" --notes-file "$release_notes_file")
           if [[ "$IS_PRERELEASE" == "true" ]]; then
             release_args+=(--prerelease)
           fi
@@ -99,5 +99,5 @@ jobs:
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
             gh release edit "$TAG_NAME" "${release_args[@]}"
           else
-            gh release create "$TAG_NAME" "${release_args[@]}"
+            gh release create "$TAG_NAME" --target "$GITHUB_SHA" "${release_args[@]}"
           fi
