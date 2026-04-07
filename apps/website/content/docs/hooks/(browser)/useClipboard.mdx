@@ -17,6 +17,7 @@ npm install rooks
 ## Usage
 
 ```jsx
+import { useState } from "react";
 import { useClipboard } from "rooks";
 
 function ClipboardDemo() {
@@ -72,17 +73,43 @@ function ClipboardDemo() {
 }
 ```
 
+## Another Example
+
+```jsx
+import { useClipboard } from "rooks";
+
+function ClipboardStatus() {
+  const { copy, paste, text, error, isSupported } = useClipboard();
+
+  if (!isSupported) {
+    return <p>Clipboard access is unavailable in this browser.</p>;
+  }
+
+  return (
+    <div>
+      <button onClick={() => copy("rooks is on the clipboard")}>
+        Copy preset text
+      </button>
+      <button onClick={paste}>Read clipboard</button>
+
+      {text ? <p>Clipboard value: {text}</p> : <p>Clipboard is empty.</p>}
+      {error ? <p>Error: {error.message}</p> : null}
+    </div>
+  );
+}
+```
+
 ## Return Value
 
 Returns an object with the following properties:
 
-| Property      | Type                              | Description                                         |
-| ------------- | --------------------------------- | --------------------------------------------------- |
-| text          | `string \| null`                  | The current text content from the clipboard         |
-| copy          | `(value: string) => Promise<void>`| Copy text to the clipboard                          |
-| paste         | `() => Promise<void>`             | Read text from the clipboard                        |
-| isSupported   | `boolean`                         | Whether the Clipboard API is supported              |
-| error         | `Error \| null`                   | Any error that occurred during clipboard operations |
+| Property    | Type                               | Description                                         |
+| ----------- | ---------------------------------- | --------------------------------------------------- |
+| text        | `string \| null`                   | The current text content from the clipboard         |
+| copy        | `(value: string) => Promise<void>` | Copy text to the clipboard                          |
+| paste       | `() => Promise<void>`              | Read text from the clipboard                        |
+| isSupported | `boolean`                          | Whether the Clipboard API is supported              |
+| error       | `Error \| null`                    | Any error that occurred during clipboard operations |
 
 ## Features
 
@@ -95,6 +122,7 @@ Returns an object with the following properties:
 ## Browser Support
 
 The Clipboard API requires:
+
 - HTTPS context (or localhost for development)
 - User permission for clipboard access
 - Modern browsers (Chrome 66+, Firefox 63+, Safari 13.1+, Edge 79+)
