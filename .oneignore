@@ -1,0 +1,49 @@
+node_modules
+/.package.json
+package-lock.json
+lib
+yarn-error.log
+.next
+out
+dist
+lerna-debug.log
+.cache
+coverage
+/*.tsbuildinfo
+.out
+.DS_Store
+yarn-error*
+.rpt2_cache
+.github/actions/**/node_modules
+!.github/actions/**/package-lock.json
+*.d.ts
+.changelog
+**/tsconfig.tsbuildinfo
+src/declarations
+
+
+.docusaurus/*
+translated_docs
+build/
+yarn.lock
+i18n/*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
+.vercel
+
+
+# content-collections
+.content-collections/
+
+.jest-cache
+
+# ralph loop
+.ralph/progress.txt
+.ralph/learnings.txt
