@@ -6,14 +6,49 @@ sidebar_label: useFreshCallback
 
 ## About
 
-Avoid stale closures and keep your callback fresh
+Avoid stale closures and keep your callback fresh.
 
 ## Examples
 
+### Call the latest callback after state changes
+
 ```tsx
-import {useFreshCallback} from "rooks"
+import { useState } from "react";
+import { useFreshCallback } from "rooks";
+
 export default function App() {
-  useFreshCallback();
-  return null
+  const [count, setCount] = useState(0);
+  const logLatestCount = useFreshCallback(() => {
+    console.log(`Latest count: ${count}`);
+  });
+
+  return (
+    <div>
+      <button onClick={() => setCount((current) => current + 1)}>
+        Increment
+      </button>
+      <button onClick={logLatestCount}>Log latest count</button>
+    </div>
+  );
+}
+```
+
+### Keep an event handler in sync with changing props
+
+```tsx
+import { useEffect } from "react";
+import { useFreshCallback } from "rooks";
+
+function ResizeLogger({ label }: { label: string }) {
+  const handleResize = useFreshCallback(() => {
+    console.log(`${label}: ${window.innerWidth}`);
+  });
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  return null;
 }
 ```

@@ -10,20 +10,16 @@ Handles focus events for the immediate target element.
 
 ## Examples
 
+### Track focus on a single input
+
 ```tsx
+import { useState } from "react";
 import { useFocus } from "rooks";
+
 export default function App() {
-  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState(false);
   const { focusProps } = useFocus<HTMLInputElement>({
-    onFocus: () => {
-      console.log("focus");
-    },
-    onBlur: () => {
-      console.log("blur");
-    },
-    onFocusChange: (isFocused) => {
-      setIsFocus(isFocused);
-    },
+    onFocusChange: setIsFocused,
   });
 
   return (
@@ -32,10 +28,39 @@ export default function App() {
       <input
         {...focusProps}
         style={{
-          border: isFocus ? "3px solid orange" : "1px solid gray",
+          border: isFocused ? "3px solid orange" : "1px solid gray",
         }}
       />
     </label>
+  );
+}
+```
+
+### Ignore focus from nested children
+
+```tsx
+import { useState } from "react";
+import { useFocus } from "rooks";
+
+export default function App() {
+  const [message, setMessage] = useState("Container is idle");
+  const { focusProps } = useFocus<HTMLDivElement>({
+    onFocus: () => setMessage("Container focused directly"),
+    onBlur: () => setMessage("Container blurred"),
+  });
+
+  return (
+    <div>
+      <div
+        {...focusProps}
+        tabIndex={0}
+        style={{ padding: 12, border: "1px solid #999" }}
+      >
+        Focus this container directly
+        <button type="button">Nested button</button>
+      </div>
+      <p>{message}</p>
+    </div>
   );
 }
 ```
