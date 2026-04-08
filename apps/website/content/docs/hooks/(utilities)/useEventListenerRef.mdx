@@ -21,7 +21,7 @@ import "./styles.css";
 
 export default function App() {
   const [value, setValue] = useState(0);
-  const ref = useEventListenerRef("click", function() {
+  const ref = useEventListenerRef("click", function () {
     setValue(value + 1);
   });
   return (
@@ -37,6 +37,22 @@ export default function App() {
       <p> Value is {value}</p>
     </div>
   );
+}
+```
+
+### Attach a listener to a specific interactive element
+
+```jsx
+import { useState } from "react";
+import { useEventListenerRef } from "rooks";
+
+export default function ClickTracker() {
+  const [clicks, setClicks] = useState(0);
+  const ref = useEventListenerRef("click", () => {
+    setClicks((current) => current + 1);
+  });
+
+  return <button ref={ref}>Button clicks tracked by the hook: {clicks}</button>;
 }
 ```
 

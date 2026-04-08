@@ -36,18 +36,45 @@ function ChatRoom() {
 }
 ```
 
+### Recreate a disposable resource when dependencies change
+
+```tsx
+import { useState } from "react";
+import { useDisposable } from "rooks/experimental";
+
+class UserScopedStore {
+  constructor(public userId: string) {}
+
+  [Symbol.dispose]() {
+    // clean up user-specific resources
+  }
+}
+
+export default function UserStorePanel() {
+  const [userId, setUserId] = useState("alice");
+  const store = useDisposable(() => new UserScopedStore(userId), [userId]);
+
+  return (
+    <div>
+      <button onClick={() => setUserId("bob")}>Switch user</button>
+      <p>Active store: {store.userId}</p>
+    </div>
+  );
+}
+```
+
 ## Arguments
 
-| Argument | Type | Description | Default value |
-| -------- | ---- | ----------- | ------------- |
-| `factory` | `() => T` | Function that creates the disposable resource | required |
-| `deps` | `DependencyList` | Dependency array controlling when the resource is replaced | `[]` |
+| Argument  | Type             | Description                                                | Default value |
+| --------- | ---------------- | ---------------------------------------------------------- | ------------- |
+| `factory` | `() => T`        | Function that creates the disposable resource              | required      |
+| `deps`    | `DependencyList` | Dependency array controlling when the resource is replaced | `[]`          |
 
 ## Return value
 
-| Return value | Type | Description |
-| ------------ | ---- | ----------- |
-| `resource` | `T` | The disposable resource, available synchronously on every render |
+| Return value | Type | Description                                                      |
+| ------------ | ---- | ---------------------------------------------------------------- |
+| `resource`   | `T`  | The disposable resource, available synchronously on every render |
 
 ## Notes
 

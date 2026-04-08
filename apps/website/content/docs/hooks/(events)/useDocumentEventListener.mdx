@@ -12,6 +12,8 @@ A react hook to an event listener to the document object
 
 ## Examples
 
+### Track document clicks
+
 ```jsx
 import { useDocumentEventListener } from "rooks";
 import { useState, useEffect } from "react";
@@ -19,7 +21,7 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [myState, setMyState] = useState(0);
 
-  useDocumentEventListener("click", function() {
+  useDocumentEventListener("click", function () {
     setMyState(myState + 1);
   });
 
@@ -30,6 +32,25 @@ export default function App() {
       <h1>Clicked {myState} times</h1>
     </div>
   );
+}
+```
+
+### Use a document-level listener to close a surface
+
+```jsx
+import { useState } from "react";
+import { useDocumentEventListener } from "rooks";
+
+export default function DismissibleNotice() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  useDocumentEventListener("click", () => {
+    setIsOpen(false);
+  });
+
+  return isOpen ? (
+    <div>Click anywhere in the document to dismiss me.</div>
+  ) : null;
 }
 ```
 
