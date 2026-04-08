@@ -13,7 +13,6 @@ Select values from a list easily. List selection hook for react.
 ### Basic usage
 
 ```jsx
-import "./styles.css";
 import { useSelect } from "rooks";
 
 const list = [
@@ -57,6 +56,28 @@ export default function App() {
         </button>
       ))}
       <p>{item.content}</p>
+    </div>
+  );
+}
+```
+
+### Keep the selected item in sync with external controls
+
+```jsx
+import { useSelect } from "rooks";
+
+const filters = ["all", "open", "done"];
+
+export default function FilterPicker() {
+  const { index, item, setIndex, setItem } = useSelect(filters, 0);
+
+  return (
+    <div>
+      <p>
+        Selected filter: {item} (index {index})
+      </p>
+      <button onClick={() => setIndex(1)}>Open</button>
+      <button onClick={() => setItem("done")}>Done</button>
     </div>
   );
 }

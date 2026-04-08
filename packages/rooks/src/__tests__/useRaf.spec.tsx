@@ -1,6 +1,16 @@
-import { render } from "@testing-library/react";
+import { act, render, renderHook } from "@testing-library/react";
 import React, { useRef } from "react";
 import { useRaf } from "@/hooks/useRaf";
+import { vi } from "vitest";
+
+vi.mock("raf", () => {
+  const raf = (cb: (time: number) => void) => {
+    setTimeout(() => cb(Date.now()), 16);
+    return 1;
+  };
+  raf.cancel = vi.fn();
+  return { default: raf };
+});
 
 describe("useRaf", () => {
   let TestJSX = () => <canvas />;
@@ -44,6 +54,11 @@ describe("useRaf", () => {
 
   beforeEach(() => {
     TestJSX = App;
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("should be defined", () => {
@@ -55,5 +70,31 @@ describe("useRaf", () => {
     expect.hasAssertions();
     const { container } = render(<TestJSX />);
     expect(container).toBeDefined();
+  });
+
+  it("should call the callback while active", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+
+    renderHook(() => useRaf(callback, true));
+
+    act(() => {
+      vi.advanceTimersByTime(50);
+    });
+
+    expect(callback).toHaveBeenCalled();
+  });
+
+  it("should not call the callback when inactive", () => {
+    expect.hasAssertions();
+    const callback = vi.fn();
+
+    renderHook(() => useRaf(callback, false));
+
+    act(() => {
+      vi.advanceTimersByTime(50);
+    });
+
+    expect(callback).not.toHaveBeenCalled();
   });
 });

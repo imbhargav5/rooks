@@ -10,10 +10,11 @@ Helps bridge gap between callback ref and state. Manages the element called with
 
 ## Examples
 
+### Attach an event listener to the current element
+
 ```jsx
 import { useEffect, useState } from "react";
 import { useRefElement } from "rooks";
-import "./styles.css";
 
 function useEventListenerRef(eventName, callback) {
   const [ref, element] = useRefElement();
@@ -33,7 +34,7 @@ function useEventListenerRef(eventName, callback) {
 
 export default function App() {
   const [value, setValue] = useState(0);
-  const ref = useEventListenerRef("click", function() {
+  const ref = useEventListenerRef("click", function () {
     setValue(value + 1);
   });
 
@@ -54,6 +55,23 @@ export default function App() {
 }
 ```
 
+### Read the current element from the callback ref
+
+```jsx
+import { useRefElement } from "rooks";
+
+export default function CurrentElementPreview() {
+  const [ref, element] = useRefElement();
+
+  return (
+    <div>
+      <button ref={ref}>Focusable trigger</button>
+      <p>Current tag: {element?.tagName ?? "none"}</p>
+    </div>
+  );
+}
+```
+
 ### Arguments
 
 No arguments.
@@ -63,4 +81,4 @@ No arguments.
 | Returned items | Type                                        | Description                   |
 | -------------- | ------------------------------------------- | ----------------------------- |
 | ref            | `(refElement: RefElementOrNull<T>) => void` | The callback ref              |
-| element        | `RefElementOrNull&lt;T&gt;`                       | The element linked to the ref |
+| element        | `RefElementOrNull&lt;T&gt;`                 | The element linked to the ref |

@@ -12,9 +12,10 @@ Easily select a single value from a list of values. very useful for radio button
 
 ## Examples
 
+### Pizza topping selector
+
 ```jsx
 import { useEffect, useState } from "react";
-import "./styles.css";
 import { useSelectableList } from "rooks";
 import { createGlobalStyle } from "styled-components";
 
@@ -106,10 +107,8 @@ export const toppings = [
 
 export default function App() {
   const [total, setTotal] = useState(0);
-  const [
-    selection,
-    { matchSelection, toggleSelection, updateSelection },
-  ] = useSelectableList(toppings, 0);
+  const [selection, { matchSelection, toggleSelection, updateSelection }] =
+    useSelectableList(toppings, 0);
 
   useEffect(() => {
     setTotal(selection[1].price);
@@ -146,6 +145,39 @@ export default function App() {
           </div>
         </li>
       </ul>
+    </div>
+  );
+}
+```
+
+### Allow clearing the current selection
+
+```jsx
+import { useSelectableList } from "rooks";
+
+const statuses = ["draft", "review", "published"];
+
+export default function StatusPicker() {
+  const [selection, { toggleSelection, matchSelection }] = useSelectableList(
+    statuses,
+    0,
+    true
+  );
+
+  return (
+    <div>
+      {statuses.map((status) => (
+        <button
+          key={status}
+          onClick={toggleSelection({ value: status })}
+          style={{
+            fontWeight: matchSelection({ value: status }) ? "bold" : "normal",
+          }}
+        >
+          {status}
+        </button>
+      ))}
+      <p>Current selection: {selection[1] ?? "none"}</p>
     </div>
   );
 }
