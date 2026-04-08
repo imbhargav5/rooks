@@ -20,5 +20,15 @@ describe("useOnWindowResize", () => {
       fireEvent(window, new Event("resize"));
       expect(mockCallback.mock.calls).toHaveLength(3);
     });
+
+    it("should not call callback when disabled", () => {
+      expect.hasAssertions();
+      const disabledCallback = vi.fn(() => {});
+      renderHook(() => useOnWindowResize(disabledCallback, false));
+
+      fireEvent(window, new Event("resize"));
+
+      expect(disabledCallback).not.toHaveBeenCalled();
+    });
   });
 });

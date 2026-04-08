@@ -33,6 +33,29 @@ function App() {
 export default App;
 ```
 
+```jsx
+import { useOnline } from "rooks";
+
+function ConnectionBanner() {
+  const isOnline = useOnline();
+
+  return (
+    <div
+      style={{
+        padding: "12px 16px",
+        borderRadius: 8,
+        background: isOnline ? "#dcfce7" : "#fee2e2",
+        color: isOnline ? "#166534" : "#991b1b",
+      }}
+    >
+      {isOnline
+        ? "Connected. Changes will sync normally."
+        : "Offline mode. Changes will sync when you reconnect."}
+    </div>
+  );
+}
+```
+
 ### Return value
 
 Offline status (boolean) is returned.

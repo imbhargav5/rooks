@@ -7,7 +7,8 @@ sidebar_label: useOnWindowScroll
 ## About
 
 A React hook for adding an event listener for window scroll
-<br/>
+
+<br />
 
 ## Examples
 
@@ -46,6 +47,29 @@ function App() {
 }
 
 export default App;
+```
+
+```jsx
+import { useState } from "react";
+import { useOnWindowScroll } from "rooks";
+
+function ScrollTracker() {
+  const [events, setEvents] = useState(0);
+  const [enabled, setEnabled] = useState(true);
+
+  useOnWindowScroll(() => {
+    setEvents((current) => current + 1);
+  }, enabled);
+
+  return (
+    <div>
+      <button onClick={() => setEnabled((current) => !current)}>
+        {enabled ? "Pause scroll tracking" : "Resume scroll tracking"}
+      </button>
+      <p>Scroll events recorded: {events}</p>
+    </div>
+  );
+}
 ```
 
 ### Arguments

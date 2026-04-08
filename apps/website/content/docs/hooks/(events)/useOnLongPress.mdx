@@ -43,9 +43,13 @@ export default function App() {
     console.log("Long press detected");
   };
 
+  const handleClick = () => {
+    console.log("Regular click detected");
+  };
+
   const longPressRef = useOnLongPress(handleLongPress, {
     duration: 1000,
-    onClick: handleTouchEnd,
+    onClick: handleClick,
   });
 
   return (

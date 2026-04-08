@@ -20,5 +20,15 @@ describe("useOnWindowScroll", () => {
       fireEvent(window, new Event("scroll"));
       expect(mockCallback.mock.calls).toHaveLength(3);
     });
+
+    it("should not call callback when disabled", () => {
+      expect.hasAssertions();
+      const disabledCallback = vi.fn(() => {});
+      renderHook(() => useOnWindowScroll(disabledCallback, false));
+
+      fireEvent(window, new Event("scroll"));
+
+      expect(disabledCallback).not.toHaveBeenCalled();
+    });
   });
 });
