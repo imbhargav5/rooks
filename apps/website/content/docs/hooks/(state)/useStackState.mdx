@@ -69,7 +69,7 @@ export function StackDiv({ children, ...props }) {
   );
 }
 
-export const StackItem = styled(motion.div).attrs(props => ({
+export const StackItem = styled(motion.div).attrs((props) => ({
   variants,
   initial: "appear",
   animate: "visible",
@@ -156,7 +156,7 @@ export default function App() {
     <Root>
       <div>
         <StackDiv>
-          {listInReverse.map(item => {
+          {listInReverse.map((item) => {
             return <StackItem key={item}>{item}</StackItem>;
           })}
         </StackDiv>
@@ -168,6 +168,42 @@ export default function App() {
         </ActionButtons>
       </div>
     </Root>
+  );
+}
+```
+
+### Inspect the top item and render newest-first
+
+```jsx
+import { useStackState } from "rooks";
+
+export default function UploadQueue() {
+  const [queue, controls, newestFirst] = useStackState([
+    "draft.pdf",
+    "brief.png",
+  ]);
+
+  return (
+    <div>
+      <p>Next upload: {controls.peek() ?? "Nothing queued"}</p>
+      <p>Items queued: {controls.length}</p>
+
+      <button onClick={() => controls.push(`file-${controls.length + 1}.txt`)}>
+        Add file
+      </button>
+      <button onClick={controls.pop} disabled={controls.isEmpty()}>
+        Remove latest
+      </button>
+      <button onClick={controls.clear} disabled={controls.isEmpty()}>
+        Clear queue
+      </button>
+
+      <ul>
+        {newestFirst.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 ```
