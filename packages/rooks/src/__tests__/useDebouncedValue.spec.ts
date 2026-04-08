@@ -3,11 +3,10 @@ import type { RenderResult } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 
-type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
-  ? 1
-  : 2
-  ? true
-  : false;
+type Equal<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+    ? true
+    : false;
 
 type Expect<T extends true> = T;
 
@@ -112,6 +111,21 @@ describe("useDebouncedValue", () => {
     expect(result.current[0]).toBe(mockValue);
   });
 
+  it("lets callers update the debounced value immediately", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useDebouncedValue("initial", 200, { initializeWithNull: true })
+    );
+
+    expect(result.current[0]).toBeNull();
+
+    act(() => {
+      result.current[1]("manual");
+    });
+
+    expect(result.current[0]).toBe("manual");
+  });
+
   describe("types", () => {
     it("should return a union with null when initializeWithNull is true", () => {
       doNotExecute(() => {
@@ -119,7 +133,7 @@ describe("useDebouncedValue", () => {
           useDebouncedValue("mock_value", 200, { initializeWithNull: true })
         );
         const result: Expect<
-          Equal<string | null, typeof hookResult.result.current[0]>
+          Equal<string | null, (typeof hookResult.result.current)[0]>
         > = true;
         return result;
       });
@@ -131,7 +145,7 @@ describe("useDebouncedValue", () => {
           useDebouncedValue("mock_value", 200)
         );
         const result: Expect<
-          Equal<string, typeof hookResult.result.current[0]>
+          Equal<string, (typeof hookResult.result.current)[0]>
         > = true;
         return result;
       });
@@ -143,7 +157,7 @@ describe("useDebouncedValue", () => {
           useDebouncedValue("mock_value", 200, { initializeWithNull: false })
         );
         const result: Expect<
-          Equal<string, typeof hookResult.result.current[0]>
+          Equal<string, (typeof hookResult.result.current)[0]>
         > = true;
         return result;
       });

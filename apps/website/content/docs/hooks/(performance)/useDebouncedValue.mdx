@@ -12,8 +12,10 @@ Tracks another value and gets updated in a debounced way.
 
 ## Examples
 
+### Debounce what the user types
+
 ```jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDebouncedValue } from "rooks";
 
 export default function App() {
@@ -27,10 +29,32 @@ export default function App() {
   return (
     <div>
       <input
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         placeholder="Please type here"
       />
       <div>{debouncedValue}</div>
+    </div>
+  );
+}
+```
+
+### Update the debounced value immediately when needed
+
+```jsx
+import { useState } from "react";
+import { useDebouncedValue } from "rooks";
+
+export default function SubmitSearch() {
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useDebouncedValue(query, 400, {
+    initializeWithNull: true,
+  });
+
+  return (
+    <div>
+      <input value={query} onChange={(event) => setQuery(event.target.value)} />
+      <button onClick={() => setDebouncedQuery(query)}>Search now</button>
+      <div>Searching for: {debouncedQuery ?? "nothing yet"}</div>
     </div>
   );
 }

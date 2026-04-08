@@ -7,23 +7,19 @@ sidebar_label: useCounter
 ## About
 
 Counter hook for React.
-<br/>
+
+<br />
 
 ## Examples
 
+### Basic counter controls
+
 ```jsx
-import React from "react";
-import { useCounter, useDidMount } from "rooks";
+import { useCounter } from "rooks";
 
 export default function App() {
-  const {
-    value,
-    increment,
-    decrement,
-    incrementBy,
-    decrementBy,
-    reset,
-  } = useCounter(3);
+  const { value, increment, decrement, incrementBy, decrementBy, reset } =
+    useCounter(3);
 
   function incrementBy5() {
     incrementBy(5);
@@ -43,6 +39,25 @@ export default function App() {
       <hr />
       <button onClick={reset}>reset</button>
     </>
+  );
+}
+```
+
+### Reset back to the initial value
+
+```jsx
+import { useCounter } from "rooks";
+
+export default function CounterWithReset() {
+  const { value, incrementBy, decrementBy, reset } = useCounter(10);
+
+  return (
+    <div>
+      <div>Current value: {value}</div>
+      <button onClick={() => incrementBy(10)}>Add 10</button>
+      <button onClick={() => decrementBy(4)}>Subtract 4</button>
+      <button onClick={reset}>Reset to 10</button>
+    </div>
   );
 }
 ```
