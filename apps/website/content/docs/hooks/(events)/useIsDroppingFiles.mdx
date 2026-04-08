@@ -6,14 +6,47 @@ sidebar_label: useIsDroppingFiles
 
 ## About
 
-Check if any files are currently being dropped anywhere. Useful for highlighting drop areas.
+Check if files are currently being dragged over an element or the window.
 
 ## Examples
 
+### Highlight a local drop zone
+
 ```tsx
 import { useIsDroppingFiles } from "rooks";
+
 export default function App() {
-  useIsDroppingFiles();
-  return null;
+  const [ref, isDropping] = useIsDroppingFiles();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        padding: 24,
+        border: "2px dashed #999",
+        background: isDropping ? "#fee2e2" : "#fff",
+      }}
+    >
+      {isDropping ? "Release files to upload" : "Drag files here"}
+    </div>
+  );
+}
+```
+
+### Track file drags anywhere in the window
+
+```tsx
+import { useIsDroppingFiles } from "rooks";
+
+export default function App() {
+  const isDroppingOnWindow = useIsDroppingFiles(true);
+
+  return (
+    <p>
+      {isDroppingOnWindow
+        ? "Files are hovering over the window"
+        : "No files are being dragged right now"}
+    </p>
+  );
 }
 ```
