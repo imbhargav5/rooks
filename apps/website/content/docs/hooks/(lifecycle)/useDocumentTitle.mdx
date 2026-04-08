@@ -6,78 +6,58 @@ sidebar_label: useDocumentTitle
 
 ## About
 
-Sets the document title and optionally resets the title on unmount
+Sets the document title and can optionally restore the previous title on unmount.
 
 [//]: # "Main"
 
 ## Examples
 
-### Basic example
-
-````jsx
-import { useDocumentTitle } from "rooks";
-
-function App() {
-  useDocumentTitle("New document title");
-
-  return (
-    <div>
-      <h1>Document title is now "New document title"</h1>
-    </div>
-  );
-}
-
-export default App;
-
-
-## Examples
-
-### Basic example
+### Set a page title on mount
 
 ```jsx
 import { useDocumentTitle } from "rooks";
 
 function App() {
-  useDocumentTitle("New document title");
+  useDocumentTitle("Project dashboard");
 
-  return (
-    <div>
-      <h1>Document title is now "New document title"</h1>
-    </div>
-  );
-}
-
-export default App;
-
-````
-
-### Example with reset
-
-```jsx
-import { useDocumentTitle } from "rooks";
-
-function App() {
-  useDocumentTitle("New document title", { resetOnUnmount: true });
-
-  return (
-    <div>
-      <h1>
-        Document title is now "New document title" and will be reset on unmount
-      </h1>
-    </div>
-  );
+  return <h1>Project dashboard</h1>;
 }
 
 export default App;
 ```
 
+### Restore the previous title when the component unmounts
+
+```jsx
+import { useState } from "react";
+import { useDocumentTitle } from "rooks";
+
+function PreviewPanel() {
+  useDocumentTitle("Preview mode", { resetOnUnmount: true });
+
+  return <p>Close this panel to restore the previous document title.</p>;
+}
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div>
+      <button onClick={() => setIsOpen((current) => !current)}>
+        Toggle preview panel
+      </button>
+      {isOpen ? <PreviewPanel /> : <p>Preview closed.</p>}
+    </div>
+  );
+}
+```
+
 ## Arguments
 
-| Argument               | Type      | Description                                    |
-| :--------------------- | :-------- | :--------------------------------------------- |
-| title                  | `string`  | The new document title                         |
-| options                | `object`  | Options object                                 |
-| options.resetOnUnmount | `boolean` | Whether to reset the document title on unmount |
+| Argument  | Type                           | Description                 |
+| --------- | ------------------------------ | --------------------------- |
+| `title`   | `string`                       | The document title to apply |
+| `options` | `{ resetOnUnmount?: boolean }` | Optional behavior flags     |
 
 ## Return
 

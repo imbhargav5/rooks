@@ -10,10 +10,50 @@ Drop files easily
 
 ## Examples
 
+### Handle accepted files in a drop area
+
 ```tsx
 import { useFileDropRef } from "rooks";
 export default function App() {
-  useFileDropRef();
-  return null;
+  const dropRef = useFileDropRef(
+    {
+      accept: ["image/png", "image/jpeg"],
+      maxFiles: 2,
+    },
+    {
+      onDrop: (files) => console.log(files),
+    }
+  );
+
+  return <div ref={dropRef}>Drop files here</div>;
+}
+```
+
+### Reject files that do not match your rules
+
+```tsx
+import { useState } from "react";
+import { useFileDropRef } from "rooks";
+
+export default function App() {
+  const [message, setMessage] = useState("Drop an image file");
+
+  const dropRef = useFileDropRef(
+    {
+      accept: ["image/png"],
+      maxFileSize: 500_000,
+    },
+    {
+      onFileAccepted: (file) => setMessage(`Accepted ${file.name}`),
+      onFileRejected: (file) => setMessage(`Rejected ${file.name}`),
+    }
+  );
+
+  return (
+    <div>
+      <div ref={dropRef}>Drop a PNG under 500 KB</div>
+      <p>{message}</p>
+    </div>
+  );
 }
 ```
