@@ -1,94 +1,74 @@
 import { vi } from "vitest";
+import { act, renderHook } from "@testing-library/react";
 import { useCountdown } from "@/hooks/useCountdown";
 
-vi.useFakeTimers();
-
 describe("useCountdown", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-01-01T00:00:00.000Z"));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("is defined", () => {
     expect.hasAssertions();
     expect(useCountdown).toBeDefined();
   });
-  // it('works', () => {
-  //   const OriginalDate = global.Date;
-  //   const now = Date.now();
 
-  //   let advancedTime;
+  it("counts down at the configured interval", () => {
+    expect.hasAssertions();
+    const endTime = new Date(Date.now() + 3_000);
 
-  //   const advanceTimersInsideAct = time => {
-  //     advancedTime += time;
-  //     act(() => {
-  //       vi.advanceTimersByTime(time)
-  //     });
-  //   };
+    const { result } = renderHook(() => useCountdown(endTime));
 
-  // beforeEach(() => {
-  //   advancedTime = 0;
-  //   global.Date = class extends Date {
-  //     constructor(time) {
-  //       super(time);
-  //       return new OriginalDate(time || now + advancedTime);
-  //     }
-  //   };
-  // });
+    expect(result.current).toBe(3);
 
-  // afterEach(() => {
-  //   global.Date = OriginalDate;
-  // });
+    act(() => {
+      vi.advanceTimersByTime(1_000);
+    });
+    expect(result.current).toBe(2);
 
-  // it('should run interval and clear it after unmount', () => {
-  //   const now = Date.now();
-  //   const endTime = new Date(now + 3000);
+    act(() => {
+      vi.advanceTimersByTime(1_000);
+    });
+    expect(result.current).toBe(1);
 
-  //   global.Date = class extends Date {
-  //     constructor(time) {
-  //       return new OriginalDate(time || now);
-  //     }
-  //   };
-  //   const { result, unmount } = renderHook(() => useCountdown(endTime));
-  //   const countdown = result.current;
+    act(() => {
+      vi.advanceTimersByTime(1_000);
+    });
+    expect(result.current).toBe(0);
+  });
 
-  //   expect(countdown).toEqual(3);
-  //   expect(setInterval).toHaveBeenCalledTimes(1);
+  it("calls onDown on each tick and onEnd when the countdown finishes", () => {
+    expect.hasAssertions();
+    const onDown = vi.fn();
+    const onEnd = vi.fn();
+    const endTime = new Date(Date.now() + 2_000);
 
-  //   unmount();
+    renderHook(() =>
+      useCountdown(endTime, {
+        interval: 1_000,
+        onDown,
+        onEnd,
+      })
+    );
 
-  //   expect(clearInterval).toHaveBeenCalledTimes(1);
-  //   expect(clearInterval).toHaveBeenCalledWith(
-  //     setInterval.mock.results[0].value,
-  //   );
-  // });
+    expect(onDown).toHaveBeenCalledTimes(1);
+    expect(onEnd).not.toHaveBeenCalled();
 
-  // it('should call onDown after every interval', () => {
-  //   const endTime = new Date(now + 3000);
-  //   const onDown = vi.fn();
+    act(() => {
+      vi.advanceTimersByTime(1_000);
+    });
 
-  //   renderHook(() => useCountdown(endTime, { onDown }));
+    expect(onDown.mock.calls.length).toBeGreaterThanOrEqual(2);
+    expect(onEnd).not.toHaveBeenCalled();
 
-  //   expect(onDown).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(1);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(2);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(3);
-  //   advanceTimersInsideAct(1000);
-  //   expect(onDown).toHaveBeenCalledTimes(3);
-  // });
+    act(() => {
+      vi.advanceTimersByTime(3_000);
+    });
 
-  // it('should call onEnd after it ends', () => {
-  //   const endTime = new Date(now + 3000);
-  //   const onEnd = vi.fn();
-  //   renderHook(() => useCountdown(endTime, { interval: 1000, onEnd }));
-  //   expect(onEnd).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(2000);
-  //   expect(onEnd).toHaveBeenCalledTimes(0);
-  //   advanceTimersInsideAct(2000);
-  //   expect(onEnd).toHaveBeenCalledTimes(1);
-  //   expect(clearInterval).toHaveBeenCalledWith(
-  //     setInterval.mock.results[0].value,
-  //   );
-  // });
-  // })
+    expect(onEnd.mock.calls.length).toBeGreaterThanOrEqual(1);
+  });
 });
-
-// figure out tests

@@ -10,6 +10,8 @@ componentDidUpdate hook for react
 
 ## Examples
 
+### React to any update after mount
+
 ```jsx
 import React, { useState } from "react";
 import { useDidUpdate } from "rooks";
@@ -25,6 +27,34 @@ export default function App() {
       <p> Current value is {value}</p>
       <p> Open the sandbox in codesandbox to view the console </p>
       <button onClick={() => setValue(value + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### React only when a specific dependency changes
+
+```jsx
+import { useState } from "react";
+import { useDidUpdate } from "rooks";
+
+export default function FilterStatus() {
+  const [filter, setFilter] = useState("all");
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("No updates yet");
+
+  useDidUpdate(() => {
+    setMessage(`Filter changed to ${filter}`);
+  }, [filter]);
+
+  return (
+    <div>
+      <button onClick={() => setFilter("active")}>Set active filter</button>
+      <button onClick={() => setCount((current) => current + 1)}>
+        Increment unrelated count
+      </button>
+      <p>Count: {count}</p>
+      <p>{message}</p>
     </div>
   );
 }

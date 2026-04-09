@@ -6,22 +6,47 @@ sidebar_label: useCountdown
 
 ## About
 
-Count down to a target timestamp and call callbacks every second (or provided peried)
+Count down to a target timestamp and call callbacks at a configurable interval.
 
 ## Examples
 
 ### Basic example
 
 ```jsx
-const endTime = new Date(Date.now() + 10000);
 import { useCountdown } from "rooks";
+
 export default function App() {
-  const count = useCountdown(endTime, {
-    interval: 1000,
-    onDown: time => console.log("onDown", time),
-    onEnd: time => console.log("onEnd", time),
+  const endTime = new Date(Date.now() + 10_000);
+  const count = useCountdown(endTime);
+
+  return <div>{count} seconds remaining</div>;
+}
+```
+
+### Use callbacks for progress and completion
+
+```jsx
+import { useState } from "react";
+import { useCountdown } from "rooks";
+
+export default function AutoDismissNotice() {
+  const [events, setEvents] = useState([]);
+  const count = useCountdown(new Date(Date.now() + 3_000), {
+    interval: 1_000,
+    onDown: (remaining) => {
+      setEvents((current) => [...current, `tick:${remaining}`]);
+    },
+    onEnd: () => {
+      setEvents((current) => [...current, "ended"]);
+    },
   });
-  return count;
+
+  return (
+    <div>
+      <p>{count === 0 ? "Dismissed" : `${count} seconds remaining`}</p>
+      <pre>{JSON.stringify(events, null, 2)}</pre>
+    </div>
+  );
 }
 ```
 
@@ -30,8 +55,8 @@ export default function App() {
 | Argument         | Type     | Description                                                         | Default value |
 | ---------------- | -------- | ------------------------------------------------------------------- | ------------- |
 | endTime          | Date     | the time when the countdown should end                              | undefined     |
-| options.interval | number   | milliseconds that it takes count down once                          | 1000          |
-| options.onDown   | function | (time) => {}, callback that would be called every interval          | undefined     |
+| options.interval | number   | milliseconds between countdown ticks                                | 1000          |
+| options.onDown   | function | `(restTime, newTime) => {}` callback called every interval          | undefined     |
 | options.onEnd    | function | (time) => {}, callback that would be called when the countdown ends | undefined     |
 
 ### Return Value

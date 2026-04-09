@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { useState } from "react";
 import { useDidMount } from "@/hooks/useDidMount";
@@ -28,6 +29,22 @@ describe("useDidMount", () => {
       expect.hasAssertions();
       const { result } = renderHook(() => useHook());
       expect(result.current.value).toBe(9_000);
+    });
+
+    it("does not run again on rerender", () => {
+      expect.hasAssertions();
+      const callback = vi.fn();
+
+      const { rerender } = renderHook(() => {
+        useDidMount(callback);
+        return null;
+      });
+
+      expect(callback).toHaveBeenCalledTimes(1);
+
+      rerender();
+
+      expect(callback).toHaveBeenCalledTimes(1);
     });
   });
 });
