@@ -6,30 +6,59 @@ sidebar_label: useKeyBindings
 
 ## About
 
-useKeyBindings can bind pairs of keyboard events and handlers.
+Bind keys to callbacks on the document or a specific target element.
 
 [//]: # "Main"
 
 ## Examples
 
+### Bind shortcuts on the document
+
 ```jsx
-import "./styles.css";
 import { useKeyBindings, useCounter } from "rooks";
 
 export default function App() {
-  const { value, increment, incrementBy, decrementBy, reset } = useCounter(0);
-  const cb1 = () => increment();
-  const cb2 = () => decrementBy(3);
-  const cb3 = () => incrementBy(5);
-  const cb4 = () => reset();
+  const { value, increment, decrementBy, incrementBy, reset } = useCounter(0);
 
-  useKeyBindings({ a: cb1, b: cb2, Enter: cb3, Escape: cb4 });
+  useKeyBindings({
+    a: increment,
+    b: () => decrementBy(3),
+    Enter: () => incrementBy(5),
+    Escape: reset,
+  });
 
   return (
     <div>
       <p>
-        Counter value is : <strong>{value}</strong>
+        Counter value is: <strong>{value}</strong>
       </p>
+    </div>
+  );
+}
+```
+
+### Scope key bindings to a specific input
+
+```jsx
+import { useRef, useState } from "react";
+import { useKeyBindings } from "rooks";
+
+export default function App() {
+  const inputRef = useRef(null);
+  const [value, setValue] = useState(0);
+
+  useKeyBindings(
+    {
+      r: () => setValue((current) => current + 1),
+      v: () => setValue((current) => current + 1),
+    },
+    { target: inputRef }
+  );
+
+  return (
+    <div>
+      <input ref={inputRef} placeholder="Focus me and press R or V" />
+      <p>Scoped key presses handled: {value}</p>
     </div>
   );
 }
@@ -37,7 +66,7 @@ export default function App() {
 
 ### Arguments
 
-| Argument    | Type    | Description                           | Default value |
-| ----------- | ------- | ------------------------------------- | ------------- |
-| keyBindings | Object  | pairs of keyboard events and handlers | {}            |
-| options     | Options | refer to useKey                       | {}            |
+| Argument      | Type      | Description                            | Default value |
+| ------------- | --------- | -------------------------------------- | ------------- |
+| `keyBindings` | `Object`  | Pairs of keyboard events and handlers  | `{}`          |
+| `options`     | `Options` | Listener options forwarded to `useKey` | `{}`          |

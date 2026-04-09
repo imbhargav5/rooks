@@ -1,0 +1,57 @@
+---
+id: useGlobalObjectEventListener
+title: useGlobalObjectEventListener
+sidebar_label: useGlobalObjectEventListener
+---
+
+## About
+
+Attach an event listener to `window` or `document` and keep the callback fresh across rerenders.
+
+## Examples
+
+### Listen for window resize events
+
+```tsx
+import { useState } from "react";
+import { useGlobalObjectEventListener } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useGlobalObjectEventListener(window, "resize", () =>
+    setCount((current) => current + 1)
+  );
+
+  return <p>Resize events handled: {count}</p>;
+}
+```
+
+### Conditionally subscribe to document visibility changes
+
+```tsx
+import { useState } from "react";
+import { useGlobalObjectEventListener } from "rooks";
+
+export default function App() {
+  const [enabled, setEnabled] = useState(true);
+  const [message, setMessage] = useState("Waiting for visibility changes");
+
+  useGlobalObjectEventListener(
+    document,
+    "visibilitychange",
+    () => setMessage(`Document is ${document.visibilityState}`),
+    {},
+    enabled
+  );
+
+  return (
+    <div>
+      <button onClick={() => setEnabled((current) => !current)}>
+        Toggle listener
+      </button>
+      <p>{message}</p>
+    </div>
+  );
+}
+```
