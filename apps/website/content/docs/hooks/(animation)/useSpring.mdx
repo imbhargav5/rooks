@@ -10,24 +10,64 @@ description: "A hook that animates a value using spring physics."
 ## Usage
 
 ```jsx
+import { useState } from "react";
 import { useSpring } from "rooks";
 
 function App() {
   const [target, setTarget] = useState(0);
   const value = useSpring(target, {
-      stiffness: 170,
-      damping: 26,
-      mass: 1
+    stiffness: 170,
+    damping: 26,
+    mass: 1,
   });
 
   return (
     <div>
-        <button onClick={() => setTarget(target === 0 ? 100 : 0)}>
-            Toggle
-        </button>
-        <div style={{ transform: `translateX(${value}px)` }}>
-            Moving Box
-        </div>
+      <button onClick={() => setTarget(target === 0 ? 100 : 0)}>Toggle</button>
+      <div style={{ transform: `translateX(${value}px)` }}>Moving Box</div>
+    </div>
+  );
+}
+```
+
+## Another Example
+
+```jsx
+import { useState } from "react";
+import { useSpring } from "rooks";
+
+function SpringProgress() {
+  const [target, setTarget] = useState(25);
+  const animated = useSpring(target, {
+    stiffness: 120,
+    damping: 18,
+    mass: 1.2,
+  });
+
+  return (
+    <div>
+      <button onClick={() => setTarget(25)}>Quarter</button>
+      <button onClick={() => setTarget(75)}>Three quarters</button>
+
+      <div
+        style={{
+          marginTop: 12,
+          width: 240,
+          height: 10,
+          background: "#e5e7eb",
+          borderRadius: 999,
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            width: `${animated}%`,
+            height: "100%",
+            background: "#0f766e",
+          }}
+        />
+      </div>
+      <p>Animated value: {animated.toFixed(1)}</p>
     </div>
   );
 }
@@ -35,19 +75,19 @@ function App() {
 
 ## Arguments
 
-| Argument | Type | Default | Description |
-| --- | --- | --- | --- |
-| targetValue | number | - | The value to animate towards. |
-| config | SpringConfig | {} | Configuration object for the spring. |
+| Argument    | Type         | Default | Description                          |
+| ----------- | ------------ | ------- | ------------------------------------ |
+| targetValue | number       | -       | The value to animate towards.        |
+| config      | SpringConfig | {}      | Configuration object for the spring. |
 
 ### SpringConfig
 
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| stiffness | number | 170 | Spring stiffness. Higher values create a snappier spring. |
-| damping | number | 26 | Spring damping. Higher values reduce oscillation. |
-| mass | number | 1 | Mass of the object attached to the spring. |
-| precision | number | 0.01 | Precision threshold to stop the animation. |
+| Property  | Type   | Default | Description                                               |
+| --------- | ------ | ------- | --------------------------------------------------------- |
+| stiffness | number | 170     | Spring stiffness. Higher values create a snappier spring. |
+| damping   | number | 26      | Spring damping. Higher values reduce oscillation.         |
+| mass      | number | 1       | Mass of the object attached to the spring.                |
+| precision | number | 0.01    | Precision threshold to stop the animation.                |
 
 ## Return Value
 
