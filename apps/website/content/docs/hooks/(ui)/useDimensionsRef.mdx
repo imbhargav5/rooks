@@ -12,6 +12,8 @@ Easily grab dimensions of an element with a ref using this hook
 
 ## Examples
 
+### Basic measurement
+
 ```jsx
 import { useDimensionsRef } from "rooks";
 
@@ -33,6 +35,29 @@ export default function App() {
         <br />
         dimensions.width: {dimensions?.width}px
       </div>
+    </div>
+  );
+}
+```
+
+### Access the tracked node as well as its dimensions
+
+```jsx
+import { useDimensionsRef } from "rooks";
+
+export default function PreviewCard() {
+  const [ref, dimensions, node] = useDimensionsRef();
+
+  return (
+    <div>
+      <div
+        ref={ref}
+        style={{ width: 240, padding: 16, border: "1px solid #ccc" }}
+      >
+        Preview
+      </div>
+      <p>Width: {dimensions?.width ?? 0}px</p>
+      <p>Tracking node: {node ? node.tagName.toLowerCase() : "none"}</p>
     </div>
   );
 }

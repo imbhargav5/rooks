@@ -26,6 +26,29 @@ export default function App() {
 }
 ```
 
+```jsx
+import { useState } from "react";
+import { useOnWindowResize } from "rooks";
+
+export default function ResponsivePreview() {
+  const [count, setCount] = useState(0);
+  const [enabled, setEnabled] = useState(true);
+
+  useOnWindowResize(() => {
+    setCount((current) => current + 1);
+  }, enabled);
+
+  return (
+    <div>
+      <button onClick={() => setEnabled((current) => !current)}>
+        {enabled ? "Pause resize tracking" : "Resume resize tracking"}
+      </button>
+      <p>Resize events recorded: {count}</p>
+    </div>
+  );
+}
+```
+
 ### Arguments
 
 | Arguments      | Type     | Description                                     | Default value |

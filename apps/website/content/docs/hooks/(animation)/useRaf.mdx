@@ -65,6 +65,31 @@ export default function App() {
 }
 ```
 
+### Pause and resume a frame counter
+
+```jsx
+import { useState } from "react";
+import { useRaf, useToggle } from "rooks";
+
+export default function FrameCounter() {
+  const [frames, setFrames] = useState(0);
+  const [isActive, toggleActive] = useToggle(true);
+
+  useRaf(() => {
+    setFrames((current) => current + 1);
+  }, isActive);
+
+  return (
+    <div>
+      <p>Frames processed: {frames}</p>
+      <button onClick={toggleActive}>
+        {isActive ? "Pause" : "Resume"} RAF loop
+      </button>
+    </div>
+  );
+}
+```
+
 ### Arguments
 
 | Argument value | Type                            | Description                                                                                  | Default value |

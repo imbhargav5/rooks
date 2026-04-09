@@ -12,6 +12,8 @@ Runs a callback effect atmost one time when a condition becomes true
 
 ## Examples
 
+### Run once when a condition becomes true
+
 ```jsx
 import { useState } from "react";
 import { useEffectOnceWhen } from "rooks";
@@ -40,6 +42,29 @@ const App = () => {
 };
 
 export default App;
+```
+
+### Trigger one-time setup after a feature is enabled
+
+```jsx
+import { useState } from "react";
+import { useEffectOnceWhen } from "rooks";
+
+export default function WelcomeToast() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [toast, setToast] = useState("Not enabled");
+
+  useEffectOnceWhen(() => {
+    setToast("Feature enabled for the first time");
+  }, isEnabled);
+
+  return (
+    <div>
+      <button onClick={() => setIsEnabled(true)}>Enable feature</button>
+      <p>{toast}</p>
+    </div>
+  );
+}
 ```
 
 ### Arguments

@@ -7,7 +7,8 @@ sidebar_label: useOrientation
 ## About
 
 Hook to detect and track device orientation changes in React applications.
-<br/>
+
+<br />
 
 ## Examples
 
@@ -31,21 +32,49 @@ export default function App() {
       <div>
         <strong>Type:</strong> {orientation.type}
       </div>
-      
-      <div style={{ marginTop: '20px' }}>
+
+      <div style={{ marginTop: "20px" }}>
         <p>Try rotating your device to see the orientation change!</p>
-        
-        {orientation.type.includes('portrait') && (
-          <div style={{ color: 'blue' }}>
-            📱 Portrait mode detected
-          </div>
+
+        {orientation.type.includes("portrait") && (
+          <div style={{ color: "blue" }}>📱 Portrait mode detected</div>
         )}
-        
-        {orientation.type.includes('landscape') && (
-          <div style={{ color: 'green' }}>
-            🔄 Landscape mode detected
-          </div>
+
+        {orientation.type.includes("landscape") && (
+          <div style={{ color: "green" }}>🔄 Landscape mode detected</div>
         )}
+      </div>
+    </div>
+  );
+}
+```
+
+```jsx
+import { useOrientation } from "rooks";
+
+function OrientationCard() {
+  const orientation = useOrientation();
+
+  if (!orientation) {
+    return null;
+  }
+
+  return (
+    <div>
+      <p>Current orientation: {orientation.type}</p>
+      <p>Angle: {orientation.angle}°</p>
+      <div
+        style={{
+          width: 120,
+          height: 120,
+          display: "grid",
+          placeItems: "center",
+          border: "1px solid #d1d5db",
+          transform: `rotate(${orientation.angle}deg)`,
+          transition: "transform 150ms ease",
+        }}
+      >
+        Preview
       </div>
     </div>
   );
@@ -58,15 +87,15 @@ This hook takes no arguments.
 
 ### Return value
 
-| Return value | Type                        | Description                                                                                   |
-| ------------ | --------------------------- | --------------------------------------------------------------------------------------------- |
-| orientation  | ScreenOrientation \| null   | Current orientation object with `angle` and `type` properties, or null if not supported     |
+| Return value | Type                      | Description                                                                             |
+| ------------ | ------------------------- | --------------------------------------------------------------------------------------- |
+| orientation  | ScreenOrientation \| null | Current orientation object with `angle` and `type` properties, or null if not supported |
 
 ### ScreenOrientation Properties
 
-| Property | Type   | Description                                                                                        |
-| -------- | ------ | -------------------------------------------------------------------------------------------------- |
-| angle    | number | The orientation angle in degrees (0, 90, 180, or 270)                                             |
+| Property | Type   | Description                                                                                      |
+| -------- | ------ | ------------------------------------------------------------------------------------------------ |
+| angle    | number | The orientation angle in degrees (0, 90, 180, or 270)                                            |
 | type     | string | The orientation type (e.g., "portrait-primary", "landscape-primary", "portrait-secondary", etc.) |
 
 ---

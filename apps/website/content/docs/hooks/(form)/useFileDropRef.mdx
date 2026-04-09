@@ -10,10 +10,46 @@ Drop files easily
 
 ## Examples
 
+### Basic usage
+
 ```tsx
 import { useFileDropRef } from "rooks";
+
 export default function App() {
   useFileDropRef();
   return null;
+}
+```
+
+### Validate files before accepting them
+
+```tsx
+import { useState } from "react";
+import { useFileDropRef } from "rooks";
+
+export default function ImageDropZone() {
+  const [accepted, setAccepted] = useState([]);
+  const [rejected, setRejected] = useState([]);
+
+  const ref = useFileDropRef(
+    {
+      accept: ["image/png", "image/jpeg"],
+      maxFiles: 3,
+    },
+    {
+      onFileAccepted: (file) =>
+        setAccepted((current) => [...current, file.name]),
+      onFileRejected: (file) =>
+        setRejected((current) => [...current, file.name]),
+    }
+  );
+
+  return (
+    <div ref={ref}>
+      <p>Drop images here</p>
+      <p>Accepted: {accepted.join(", ") || "none"}</p>
+      <p>Rejected: {rejected.join(", ") || "none"}</p>
+    </div>
+  );
 }
 ```

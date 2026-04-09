@@ -7,7 +7,8 @@ sidebar_label: useResizeObserverRef
 ## About
 
 Resize Observer hook for React.
-<br/>
+
+<br />
 
 ## Examples
 
@@ -71,6 +72,37 @@ export default function App() {
 }
 ```
 
+### Measure the latest width and height
+
+```jsx
+import { useState } from "react";
+import { useResizeObserverRef } from "rooks";
+
+export default function SizeReadout() {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  const [ref] = useResizeObserverRef((entries) => {
+    const entry = entries[0];
+    if (entry) {
+      setSize({
+        width: entry.contentRect.width,
+        height: entry.contentRect.height,
+      });
+    }
+  });
+
+  return (
+    <div>
+      <div ref={ref} style={{ resize: "both", overflow: "auto", width: 200 }}>
+        Resize me
+      </div>
+      <p>
+        Current size: {size.width} x {size.height}
+      </p>
+    </div>
+  );
+}
+```
+
 ### Arguments
 
 | Argument | Type                   | Description                                                       | Default value            |
@@ -85,11 +117,3 @@ Returns an array with one element
 | Return value | Type        | Description                             |
 | ------------ | ----------- | --------------------------------------- |
 | ref          | CallbackRef | Ref which should be observed for Resize |
-
-## Codesandbox Example
-
-### Basic Usage
-
-## Join Bhargav's discord server
-
-You can click on the floating discord icon at the bottom right of the screen and talk to us in our server.

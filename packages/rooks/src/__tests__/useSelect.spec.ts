@@ -31,4 +31,16 @@ describe("useSelect", () => {
     expect(result.current.index).toBe(2);
     expect(result.current.item).toBe(5);
   });
+
+  it("should update the selected index directly", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useSelect(["all", "open", "done"], 0));
+
+    act(() => {
+      result.current.setIndex(1);
+    });
+
+    expect(result.current.index).toBe(1);
+    expect(result.current.item).toBe("open");
+  });
 });

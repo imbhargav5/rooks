@@ -17,10 +17,12 @@ npm install rooks
 ## Usage
 
 ```jsx
+import { useState } from "react";
 import { useNotification } from "rooks";
 
 function NotificationDemo() {
-  const { show, permission, requestPermission, isSupported } = useNotification();
+  const { show, permission, requestPermission, isSupported } =
+    useNotification();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -51,7 +53,9 @@ function NotificationDemo() {
   return (
     <div>
       <h2>Browser Notifications</h2>
-      <p>Current permission: <strong>{permission}</strong></p>
+      <p>
+        Current permission: <strong>{permission}</strong>
+      </p>
 
       {permission === "default" && (
         <div>
@@ -77,8 +81,42 @@ function NotificationDemo() {
       )}
 
       {permission === "denied" && (
-        <p>Permission denied. Please enable notifications in browser settings.</p>
+        <p>
+          Permission denied. Please enable notifications in browser settings.
+        </p>
       )}
+    </div>
+  );
+}
+```
+
+## Another Example
+
+```jsx
+import { useNotification } from "rooks";
+
+function PresetNotification() {
+  const { permission, requestPermission, show, isSupported } =
+    useNotification();
+
+  if (!isSupported) {
+    return <p>Your browser does not support notifications.</p>;
+  }
+
+  return (
+    <div>
+      <p>Permission: {permission}</p>
+      <button onClick={requestPermission}>Enable notifications</button>
+      <button
+        onClick={() =>
+          show("Build finished", {
+            body: "Your latest batch of examples is ready for review.",
+            tag: "batch-ready",
+          })
+        }
+      >
+        Send preset notification
+      </button>
     </div>
   );
 }
@@ -88,28 +126,28 @@ function NotificationDemo() {
 
 Returns an object with the following properties:
 
-| Property          | Type                                                           | Description                                  |
-| ----------------- | -------------------------------------------------------------- | -------------------------------------------- |
-| show              | `(title: string, options?: NotificationOptions) => Promise<Notification \| null>` | Show a notification |
-| permission        | `"default" \| "granted" \| "denied"`                           | Current permission state                     |
-| requestPermission | `() => Promise<NotificationPermission>`                        | Request notification permission from user    |
-| isSupported       | `boolean`                                                      | Whether the Notification API is supported    |
+| Property          | Type                                                                              | Description                               |
+| ----------------- | --------------------------------------------------------------------------------- | ----------------------------------------- |
+| show              | `(title: string, options?: NotificationOptions) => Promise<Notification \| null>` | Show a notification                       |
+| permission        | `"default" \| "granted" \| "denied"`                                              | Current permission state                  |
+| requestPermission | `() => Promise<NotificationPermission>`                                           | Request notification permission from user |
+| isSupported       | `boolean`                                                                         | Whether the Notification API is supported |
 
 ## Notification Options
 
 The `show` function accepts an options object with the following properties:
 
-| Option              | Type                | Description                                           |
-| ------------------- | ------------------- | ----------------------------------------------------- |
-| body                | `string`            | The body text of the notification                     |
-| icon                | `string`            | URL of an icon to display in the notification         |
-| badge               | `string`            | URL of a badge image                                  |
-| tag                 | `string`            | Unique tag to identify the notification               |
-| data                | `any`               | Custom data to associate with the notification        |
-| requireInteraction  | `boolean`           | Whether notification should remain active until clicked|
-| silent              | `boolean`           | Whether notification should be silent                 |
-| vibrate             | `number \| number[]`| Vibration pattern for devices that support it         |
-| image               | `string`            | URL of an image to display in the notification        |
+| Option             | Type                 | Description                                             |
+| ------------------ | -------------------- | ------------------------------------------------------- |
+| body               | `string`             | The body text of the notification                       |
+| icon               | `string`             | URL of an icon to display in the notification           |
+| badge              | `string`             | URL of a badge image                                    |
+| tag                | `string`             | Unique tag to identify the notification                 |
+| data               | `any`                | Custom data to associate with the notification          |
+| requireInteraction | `boolean`            | Whether notification should remain active until clicked |
+| silent             | `boolean`            | Whether notification should be silent                   |
+| vibrate            | `number \| number[]` | Vibration pattern for devices that support it           |
+| image              | `string`             | URL of an image to display in the notification          |
 
 ## Features
 
@@ -122,6 +160,7 @@ The `show` function accepts an options object with the following properties:
 ## Browser Support
 
 The Notifications API is supported in:
+
 - Chrome 22+
 - Firefox 22+
 - Safari 7+
