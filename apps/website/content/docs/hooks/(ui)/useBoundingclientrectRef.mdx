@@ -10,6 +10,8 @@ A hook that tracks the boundingclientrect of an element. It returns a callbackRe
 
 ## Examples
 
+### Basic callback-ref usage
+
 ```jsx
 import { useState } from "react";
 import { useBoundingclientrectRef } from "rooks";
@@ -60,6 +62,37 @@ export default function App() {
         <pre>{displayString}</pre>
       </div>
     </>
+  );
+}
+```
+
+### Force a manual re-measure
+
+```jsx
+import { useState } from "react";
+import { useBoundingclientrectRef } from "rooks";
+
+function ManualMeasureCard() {
+  const [ref, rect, update] = useBoundingclientrectRef();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setIsExpanded((current) => !current);
+          update();
+        }}
+      >
+        Toggle content
+      </button>
+
+      <div ref={ref} style={{ width: isExpanded ? 280 : 180, padding: 16 }}>
+        {isExpanded ? "Expanded card content" : "Compact card"}
+      </div>
+
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
+    </div>
   );
 }
 ```

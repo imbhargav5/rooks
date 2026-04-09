@@ -7,7 +7,8 @@ sidebar_label: useBoundingclientrect
 ## About
 
 getBoundingClientRect hook for React.
-<br/>
+
+<br />
 
 ## Examples
 
@@ -68,6 +69,41 @@ function App() {
 }
 
 export default App;
+```
+
+### Read position and size together
+
+```jsx
+import { useRef } from "react";
+import { useBoundingclientrect } from "rooks";
+
+function PositionedCard() {
+  const cardRef = useRef(null);
+  const rect = useBoundingclientrect(cardRef);
+
+  return (
+    <div>
+      <div
+        ref={cardRef}
+        style={{
+          position: "absolute",
+          top: 24,
+          left: 32,
+          width: 260,
+          padding: 16,
+          border: "1px solid #d1d5db",
+        }}
+      >
+        Measure my size and position.
+      </div>
+
+      <p>Width: {rect?.width ?? 0}px</p>
+      <p>Height: {rect?.height ?? 0}px</p>
+      <p>Top: {rect?.top ?? 0}px</p>
+      <p>Left: {rect?.left ?? 0}px</p>
+    </div>
+  );
+}
 ```
 
 ### Arguments
