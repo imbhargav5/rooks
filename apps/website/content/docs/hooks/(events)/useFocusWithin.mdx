@@ -6,26 +6,20 @@ sidebar_label: useFocusWithin
 
 ## About
 
-Handles focus events for the target component.
+Handles focus events for the target component and any focusable descendants.
 
 ## Examples
+
+### Highlight a group when any child receives focus
 
 ```tsx
 import { useState } from "react";
 import { useFocusWithin } from "rooks";
 
-const Page = () => {
-  const [isFocusWithin, setIsFocusWithin] = useState<boolean>(false);
+export default function App() {
+  const [isFocusWithin, setIsFocusWithin] = useState(false);
   const { focusWithinProps } = useFocusWithin<HTMLDivElement>({
-    onFocusWithin: () => {
-      console.log("focus within");
-    },
-    onBlurWithin: () => {
-      console.log("blur within");
-    },
-    onFocusWithinChange: (isFocusWithin) => {
-      setIsFocusWithin(isFocusWithin);
-    },
+    onFocusWithinChange: setIsFocusWithin,
   });
 
   return (
@@ -35,7 +29,6 @@ const Page = () => {
         display: "inline-block",
         border: "1px solid gray",
         padding: 10,
-        margin: "auto",
         background: isFocusWithin ? "goldenrod" : "gray",
         color: isFocusWithin ? "black" : "white",
       }}
@@ -48,6 +41,30 @@ const Page = () => {
       </label>
     </div>
   );
-};
-export default Page;
+}
+```
+
+### Show group-level help text while focus stays inside
+
+```tsx
+import { useState } from "react";
+import { useFocusWithin } from "rooks";
+
+export default function App() {
+  const [message, setMessage] = useState(
+    "Focus a field to see keyboard hints."
+  );
+  const { focusWithinProps } = useFocusWithin<HTMLDivElement>({
+    onFocusWithin: () => setMessage("Tip: press Enter to submit this section."),
+    onBlurWithin: () => setMessage("Focus a field to see keyboard hints."),
+  });
+
+  return (
+    <section {...focusWithinProps}>
+      <input placeholder="Email" />
+      <input placeholder="Phone" />
+      <p>{message}</p>
+    </section>
+  );
+}
 ```
