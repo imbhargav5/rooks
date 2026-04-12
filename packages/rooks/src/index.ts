@@ -117,6 +117,8 @@ export { useFetch } from "./hooks/useFetch";
 export { useThrottle } from "./hooks/useThrottle";
 export { useTimeoutWhen } from "./hooks/useTimeoutWhen";
 export { useToggle } from "./hooks/useToggle";
+export { useTrackedEffect } from "./hooks/useTrackedEffect";
+export type { DepChange, TrackedEffectCallback } from "./hooks/useTrackedEffect";
 export { useUndoState } from "./hooks/useUndoState";
 export { useTween } from "./hooks/useTween";
 export { useUndoRedoState } from "./hooks/useUndoRedoState";

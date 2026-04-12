@@ -1,0 +1,158 @@
+---
+id: useTrackedEffect
+title: useTrackedEffect
+sidebar_label: useTrackedEffect
+---
+
+## About
+
+Like `useEffect`, but the callback receives detailed information about **which dependencies changed**, their previous values, and their current values. Designed for debugging effects and writing conditional logic inside an effect based on what actually triggered the re-run.
+
+## Examples
+
+### Log which dependency triggered the effect
+
+```jsx
+import { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function DebugEffect() {
+  const [userId, setUserId] = useState(1);
+  const [filter, setFilter] = useState("all");
+
+  useTrackedEffect(
+    (changes, previousDeps, currentDeps) => {
+      changes.forEach(({ index, previousValue, currentValue }) => {
+        console.log(`dep[${index}] changed: ${String(previousValue)} → ${String(currentValue)}`);
+      });
+    },
+    [userId, filter]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setUserId((id) => id + 1)}>Change user</button>
+      <button onClick={() => setFilter("active")}>Set active filter</button>
+    </div>
+  );
+}
+```
+
+### Run conditional logic based on which dep changed
+
+```jsx
+import { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function SmartFetch() {
+  const [userId, setUserId] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  useTrackedEffect(
+    (changes) => {
+      const userChanged = changes.some((c) => c.index === 0);
+      const pageSizeChanged = changes.some((c) => c.index === 1);
+
+      if (userChanged) {
+        // Full reload needed when the user changes
+        console.log("Fetching all data for new user:", userId);
+      } else if (pageSizeChanged) {
+        // Only re-paginate when page size changes
+        console.log("Re-paginating with page size:", pageSize);
+      }
+    },
+    [userId, pageSize]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setUserId((id) => id + 1)}>Next user</button>
+      <button onClick={() => setPageSize((s) => s + 5)}>Increase page size</button>
+    </div>
+  );
+}
+```
+
+### Inspect the full previous and current snapshots
+
+```jsx
+import { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function SnapshotInspector() {
+  const [name, setName] = useState("Alice");
+  const [age, setAge] = useState(30);
+
+  useTrackedEffect(
+    (changes, previousDeps, currentDeps) => {
+      if (changes.length === 0) return;
+      console.log("Previous snapshot:", previousDeps);
+      console.log("Current snapshot:", currentDeps);
+      console.log("Changed indices:", changes.map((c) => c.index));
+    },
+    [name, age]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setName("Bob")}>Change name</button>
+      <button onClick={() => setAge(31)}>Change age</button>
+    </div>
+  );
+}
+```
+
+### Return a cleanup function
+
+```jsx
+import { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function SubscriptionExample() {
+  const [channelId, setChannelId] = useState("general");
+
+  useTrackedEffect(
+    (changes) => {
+      const sub = subscribeToChannel(channelId);
+      console.log("Subscribed to:", channelId);
+      if (changes.length > 0) {
+        console.log("Re-subscribed because channelId changed from", changes[0].previousValue);
+      }
+      return () => {
+        sub.unsubscribe();
+        console.log("Unsubscribed from:", channelId);
+      };
+    },
+    [channelId]
+  );
+
+  return (
+    <button onClick={() => setChannelId("random")}>Switch channel</button>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type                       | Description                                                                                                  |
+| -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| effect   | `TrackedEffectCallback`    | Callback invoked after each render where deps changed. Receives `changes`, `previousDeps`, and `currentDeps`. May return an optional cleanup function. |
+| deps     | `readonly unknown[]`       | Dependency array — same semantics as the second argument of `useEffect`.                                     |
+
+### `changes` array entries (`DepChange`)
+
+| Field           | Type      | Description                                                                     |
+| --------------- | --------- | ------------------------------------------------------------------------------- |
+| `index`         | `number`  | Zero-based position of this dependency in the `deps` array.                     |
+| `previousValue` | `unknown` | Value of the dependency on the previous render. `undefined` on initial mount.   |
+| `currentValue`  | `unknown` | Value of the dependency on the current render.                                  |
+
+## Returns
+
+`void` — this hook does not return a value.
+
+## Notes
+
+- On the **initial mount**, every dependency is included in `changes` (with `previousValue: undefined`) because there is no prior run to compare with. `previousDeps` is `[]`.
+- Uses `Object.is` for equality checks, matching React's own dep-comparison behaviour.
+- SSR: behaves identically to `useEffect` — the callback is not invoked on the server.
