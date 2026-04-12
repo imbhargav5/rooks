@@ -1,0 +1,119 @@
+---
+id: useRafFn
+title: useRafFn
+sidebar_label: useRafFn
+---
+
+## About
+
+A `requestAnimationFrame` loop hook for React with pause/resume controls. The callback receives the current `DOMHighResTimeStamp` and the milliseconds elapsed since the loop was last started or resumed.
+
+## Examples
+
+### Frame counter with pause and resume
+
+```jsx
+import { useState } from "react";
+import { useRafFn } from "rooks";
+
+export default function FrameCounter() {
+  const [frames, setFrames] = useState(0);
+  const [isActive, { resume, pause }] = useRafFn(() => {
+    setFrames((f) => f + 1);
+  });
+
+  return (
+    <div>
+      <p>Frames: {frames}</p>
+      <p>Loop is {isActive ? "running" : "paused"}</p>
+      <button onClick={resume} disabled={isActive}>Resume</button>
+      <button onClick={pause} disabled={!isActive}>Pause</button>
+    </div>
+  );
+}
+```
+
+### Start immediately on mount
+
+```jsx
+import { useRef } from "react";
+import { useRafFn } from "rooks";
+
+export default function Spinner() {
+  const canvasRef = useRef(null);
+
+  const [isActive, { pause }] = useRafFn(
+    ({ timestamp }) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const angle = (timestamp / 1000) * Math.PI * 2;
+      ctx.clearRect(0, 0, 100, 100);
+      ctx.save();
+      ctx.translate(50, 50);
+      ctx.rotate(angle);
+      ctx.fillRect(-20, -5, 40, 10);
+      ctx.restore();
+    },
+    { immediate: true }
+  );
+
+  return (
+    <>
+      <canvas ref={canvasRef} width={100} height={100} />
+      <button onClick={pause} disabled={!isActive}>Stop</button>
+    </>
+  );
+}
+```
+
+### Track elapsed time
+
+```jsx
+import { useState } from "react";
+import { useRafFn } from "rooks";
+
+export default function Stopwatch() {
+  const [elapsed, setElapsed] = useState(0);
+  const [isActive, { resume, pause }] = useRafFn(({ elapsed }) => {
+    setElapsed(elapsed);
+  });
+
+  return (
+    <div>
+      <p>{(elapsed / 1000).toFixed(2)}s</p>
+      <button onClick={resume} disabled={isActive}>Start</button>
+      <button onClick={pause} disabled={!isActive}>Stop</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument value | Type                                                                         | Description                                                         | Default value |
+| -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------- |
+| fn             | `(params: { timestamp: DOMHighResTimeStamp, elapsed: number }) => void`      | Callback invoked on each animation frame                            | undefined     |
+| options        | `UseRafFnOptions`                                                            | Configuration options                                               | `{}`          |
+
+### UseRafFnOptions
+
+| Option    | Type      | Description                               | Default value |
+| --------- | --------- | ----------------------------------------- | ------------- |
+| immediate | `boolean` | Start the loop immediately on mount       | `false`       |
+
+### Returns
+
+Returns a tuple `[isActive, controls]`:
+
+| Item     | Type               | Description                               |
+| -------- | ------------------ | ----------------------------------------- |
+| isActive | `boolean`          | Whether the loop is currently running     |
+| controls | `UseRafFnControls` | Object with `resume` and `pause` functions |
+
+### UseRafFnControls
+
+| Property | Type         | Description                       |
+| -------- | ------------ | --------------------------------- |
+| resume   | `() => void` | Start or resume the RAF loop      |
+| pause    | `() => void` | Pause the RAF loop                |
