@@ -1,0 +1,67 @@
+---
+id: useResponsive
+title: useResponsive
+sidebar_label: useResponsive
+---
+
+## About
+
+Responsive breakpoint detection hook for React. Returns a record whose keys are breakpoint names and whose values are `true` when the viewport is at least as wide as that breakpoint. Uses `window.matchMedia` for instant updates without polling. Returns all `false` during SSR. The returned object is referentially stable — it only changes when a boolean value changes.
+
+## Examples
+
+### Basic usage
+
+```jsx
+import { useResponsive } from "rooks";
+
+function App() {
+  const { sm, md, lg } = useResponsive();
+
+  return (
+    <div>
+      {lg && <Sidebar />}
+      <main style={{ width: md ? "70%" : "100%" }}>
+        {sm ? <FullNav /> : <HamburgerMenu />}
+      </main>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Custom breakpoints
+
+```jsx
+import { useMemo } from "react";
+import { useResponsive } from "rooks";
+
+export default function App() {
+  const breakpoints = useMemo(
+    () => ({ mobile: 0, tablet: 768, desktop: 1280 }),
+    []
+  );
+  const { mobile, tablet, desktop } = useResponsive(breakpoints);
+
+  return (
+    <div>
+      <p>mobile: {String(mobile)}</p>
+      <p>tablet: {String(tablet)}</p>
+      <p>desktop: {String(desktop)}</p>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument    | Type                      | Description                                                                                         | Default value                                                  |
+| ----------- | ------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| breakpoints | `Record<string, number>` | Map of breakpoint names to minimum viewport widths in pixels. Pass a stable/memoized reference. | `{ xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1600 }` |
+
+### Returns
+
+| Return value | Type                      | Description                                                                     |
+| ------------ | ------------------------- | ------------------------------------------------------------------------------- |
+| breakpoints  | `Record<string, boolean>` | Each key is a breakpoint name; value is `true` if viewport width ≥ that breakpoint. All `false` on the server. |

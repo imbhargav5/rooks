@@ -114,6 +114,7 @@ export { usePromise } from "./hooks/usePromise";
 export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
 export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
+export { useResponsive } from "./hooks/useResponsive";
 export { useRenderCount } from "./hooks/useRenderCount";
 export { useRefElement } from "./hooks/useRefElement";
 export { useSafeSetState } from "./hooks/useSafeSetState";
