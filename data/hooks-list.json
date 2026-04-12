@@ -271,6 +271,11 @@
       "category": "animation"
     },
     {
+      "name": "useLockFn",
+      "description": "Wraps an async function to prevent concurrent execution. Useful for preventing double-submits on forms or API calls.",
+      "category": "utilities"
+    },
+    {
       "name": "useMapState",
       "description": "A react hook to manage state in a key value pair map.",
       "category": "state"
