@@ -1,0 +1,90 @@
+---
+id: useRafState
+title: useRafState
+sidebar_label: useRafState
+---
+
+## About
+
+A drop-in replacement for `useState` that batches updates through `requestAnimationFrame`. Ideal for high-frequency event handlers (mouse move, scroll, resize) where calling `setState` on every event would cause layout thrashing. If `setState` is called multiple times before the browser paints the next frame, only the last value is applied. Pending frames are cancelled on unmount. SSR-safe: falls back to synchronous state updates when `requestAnimationFrame` is unavailable.
+
+[//]: # "Main"
+
+## Examples
+
+#### Basic usage — tracking mouse position
+
+```jsx
+import { useEffect } from "react";
+import { useRafState } from "rooks";
+
+export default function App() {
+  const [position, setPosition] = useRafState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [setPosition]);
+
+  return (
+    <p>
+      Mouse: {position.x}, {position.y}
+    </p>
+  );
+}
+```
+
+#### With a lazy initializer
+
+```jsx
+import { useRafState } from "rooks";
+
+export default function App() {
+  const [value, setValue] = useRafState(() => expensiveComputation());
+
+  return <button onClick={() => setValue((prev) => prev + 1)}>{value}</button>;
+}
+```
+
+#### Scroll progress indicator
+
+```jsx
+import { useEffect } from "react";
+import { useRafState } from "rooks";
+
+export default function ScrollProgress() {
+  const [progress, setProgress] = useRafState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const total = scrollHeight - clientHeight;
+      setProgress(total > 0 ? (scrollTop / total) * 100 : 0);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [setProgress]);
+
+  return (
+    <div style={{ width: `${progress}%`, height: 4, background: "blue" }} />
+  );
+}
+```
+
+### Arguments
+
+| Argument     | Type             | Description                                    | Default   |
+| ------------ | ---------------- | ---------------------------------------------- | --------- |
+| initialState | `T \| (() => T)` | Initial state value or lazy initializer function | undefined |
+
+### Returns
+
+Returns a tuple identical in shape to `React.useState`:
+
+| Index | Type                        | Description                                                                      |
+| ----- | --------------------------- | -------------------------------------------------------------------------------- |
+| 0     | `T`                         | Current state value                                                              |
+| 1     | `Dispatch<SetStateAction<T>>` | Setter that queues the update via `requestAnimationFrame`; multiple calls before the next frame apply only the last value |
