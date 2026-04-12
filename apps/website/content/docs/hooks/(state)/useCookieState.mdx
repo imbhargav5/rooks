@@ -1,0 +1,119 @@
+---
+id: useCookieState
+title: useCookieState
+sidebar_label: useCookieState
+---
+
+## About
+
+useState but backed by a browser cookie. Values are JSON-serialised automatically. The hook is SSR-safe — on the server it returns the default value and a no-op setter. Changes are synced across same-origin tabs via the BroadcastChannel API and across multiple hook instances in the same document via custom events.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic example
+
+```jsx
+import { useCookieState } from "rooks";
+
+export default function App() {
+  const [theme, setTheme] = useCookieState("app-theme", {
+    defaultValue: "light",
+    expires: 30,
+    path: "/",
+  });
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button onClick={() => setTheme("dark")}>Dark</button>
+      <button onClick={() => setTheme("light")}>Light</button>
+    </div>
+  );
+}
+```
+
+### Using an updater function
+
+```jsx
+import { useCookieState } from "rooks";
+
+export default function Counter() {
+  const [count, setCount] = useCookieState("visit-count", {
+    defaultValue: 0,
+    expires: 365,
+  });
+
+  return (
+    <div>
+      <p>Visits: {count}</p>
+      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+### Storing an object
+
+```jsx
+import { useCookieState } from "rooks";
+
+const defaultPrefs = { fontSize: 16, language: "en" };
+
+export default function Settings() {
+  const [prefs, setPrefs] = useCookieState("user-prefs", {
+    defaultValue: defaultPrefs,
+    expires: 90,
+    sameSite: "lax",
+    secure: true,
+  });
+
+  return (
+    <div>
+      <p>Font size: {prefs.fontSize}</p>
+      <button
+        onClick={() =>
+          setPrefs((prev) => ({ ...prev, fontSize: prev.fontSize + 2 }))
+        }
+      >
+        Increase font size
+      </button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument     | Type                          | Description                    | Default     |
+| ------------ | ----------------------------- | ------------------------------ | ----------- |
+| cookieName   | `string`                      | Name of the cookie             | _required_  |
+| options      | `UseCookieStateOptions<T>`    | Cookie attributes and defaults | `{}`        |
+
+#### options
+
+| Option         | Type                               | Description                                                                                       | Default     |
+| -------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------- | ----------- |
+| defaultValue   | `T \| (() => T)`                   | Value (or factory) used when the cookie does not exist yet                                        | `undefined` |
+| expires        | `number \| Date`                   | Expiry as days from now (number) or an explicit `Date`. Omit for a session cookie.                | `undefined` |
+| path           | `string`                           | Cookie `path` attribute                                                                           | `"/"`       |
+| domain         | `string`                           | Cookie `domain` attribute                                                                         | `undefined` |
+| secure         | `boolean`                          | Sets the `Secure` flag                                                                            | `undefined` |
+| sameSite       | `"strict" \| "lax" \| "none"`      | `SameSite` cookie attribute                                                                       | `undefined` |
+
+### Returns
+
+Returns a tuple of two items:
+
+| Return value     | Type                         | Description                                                              |
+| ---------------- | ---------------------------- | ------------------------------------------------------------------------ |
+| cookieValue      | `T`                          | The current cookie value (deserialised from JSON)                        |
+| setCookieValue   | `Dispatch<SetStateAction<T>>`| Set a new value directly or via an updater function `(prev: T) => T`     |
+
+### Notes
+
+- Values are stored as JSON, so any JSON-serialisable type works (string, number, boolean, object, array).
+- Cookies do not fire the native `storage` event. Cross-tab synchronisation is handled via **BroadcastChannel** (supported in all modern browsers). In environments where `BroadcastChannel` is unavailable, changes made in another tab will only be visible after a page reload.
+- The hook is fully SSR-safe. When `document` is undefined (server-side rendering), the initial state is the resolved `defaultValue` and the setter is a no-op.
