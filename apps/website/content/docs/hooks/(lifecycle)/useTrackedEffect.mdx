@@ -1,0 +1,81 @@
+---
+id: useTrackedEffect
+title: useTrackedEffect
+sidebar_label: useTrackedEffect
+---
+
+## About
+
+A useEffect hook that tracks which dependencies changed between renders. The effect callback receives an array of indices indicating which dependencies changed. On the initial render the callback is invoked with an empty array.
+
+## Examples
+
+### Log which dependency triggered an effect
+
+```jsx
+import React, { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function App() {
+  const [a, setA] = useState(0);
+  const [b, setB] = useState(0);
+
+  useTrackedEffect(
+    (changedIndices) => {
+      if (changedIndices.includes(0)) {
+        console.log("a changed to", a);
+      }
+      if (changedIndices.includes(1)) {
+        console.log("b changed to", b);
+      }
+    },
+    [a, b]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setA((v) => v + 1)}>Increment a ({a})</button>
+      <button onClick={() => setB((v) => v + 1)}>Increment b ({b})</button>
+    </div>
+  );
+}
+```
+
+### Run different logic depending on which dep changed
+
+```jsx
+import React, { useState } from "react";
+import { useTrackedEffect } from "rooks";
+
+export default function SmartSync() {
+  const [userId, setUserId] = useState(1);
+  const [filter, setFilter] = useState("all");
+
+  useTrackedEffect(
+    (changedIndices) => {
+      if (changedIndices.length === 0) {
+        // Initial mount — fetch everything
+        console.log("Initial load");
+        return;
+      }
+      if (changedIndices.includes(0)) {
+        console.log("User changed, re-fetching profile and data");
+      } else if (changedIndices.includes(1)) {
+        console.log("Filter changed, re-fetching filtered data only");
+      }
+    },
+    [userId, filter]
+  );
+
+  return (
+    <div>
+      <button onClick={() => setUserId((id) => id + 1)}>
+        Switch user (current: {userId})
+      </button>
+      <button onClick={() => setFilter(filter === "all" ? "active" : "all")}>
+        Toggle filter (current: {filter})
+      </button>
+    </div>
+  );
+}
+```
