@@ -1,0 +1,99 @@
+---
+id: useUpdate
+title: useUpdate
+sidebar_label: useUpdate
+---
+
+## About
+
+Returns a stable function that forces the component to re-render when called.
+Intended for **imperative integrations** — cases where state lives outside React
+(e.g. MobX observables, `EventEmitter` callbacks, WebSocket handlers, canvas
+animation loops) and you need to tell React to pull fresh data without lifting
+that state into `useState`.
+
+:::warning
+Calling the update function schedules an extra render. Overuse can cause
+unnecessary re-renders and hurt performance. Prefer `useState` or `useReducer`
+when the data you are syncing _can_ live in React state. Reserve `useUpdate`
+for truly external, non-serialisable sources that cannot be wrapped in React
+state.
+:::
+
+<br />
+
+## Examples
+
+### Syncing with an external store
+
+```jsx
+import { useEffect } from "react";
+import { useUpdate } from "rooks";
+
+// An external store that lives outside React
+const store = {
+  count: 0,
+  listeners: new Set(),
+  increment() {
+    this.count++;
+    this.listeners.forEach((fn) => fn());
+  },
+  subscribe(fn) {
+    this.listeners.add(fn);
+    return () => this.listeners.delete(fn);
+  },
+};
+
+export default function App() {
+  const update = useUpdate();
+
+  useEffect(() => {
+    // Re-render whenever the external store changes
+    const unsubscribe = store.subscribe(update);
+    return unsubscribe;
+  }, [update]);
+
+  return (
+    <div>
+      <p>External store count: {store.count}</p>
+      <button onClick={() => store.increment()}>Increment store</button>
+    </div>
+  );
+}
+```
+
+### Forcing a re-read of a mutable ref
+
+```jsx
+import { useRef } from "react";
+import { useUpdate } from "rooks";
+
+export default function MutableRefDisplay() {
+  const update = useUpdate();
+  const valueRef = useRef(0);
+
+  function handleClick() {
+    valueRef.current += 1;
+    update(); // React won't see the mutation unless we re-render manually
+  }
+
+  return (
+    <div>
+      <p>Ref value: {valueRef.current}</p>
+      <button onClick={handleClick}>Increment ref</button>
+    </div>
+  );
+}
+```
+
+## Arguments
+
+_No arguments._
+
+## Return value
+
+| Return value | Type         | Description                                                                               |
+| ------------ | ------------ | ----------------------------------------------------------------------------------------- |
+| update       | `() => void` | A stable callback (via `useCallback`) that increments a dummy counter to force a re-render. The reference is stable across renders. |
+
+---
