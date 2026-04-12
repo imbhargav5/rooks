@@ -1,0 +1,196 @@
+---
+id: useInfiniteScroll
+title: useInfiniteScroll
+sidebar_label: useInfiniteScroll
+---
+
+## About
+
+`useInfiniteScroll` manages paginated / infinite-scroll data loading. It calls
+a `service` function on mount and accumulates pages of data as the user scrolls.
+When a `target` element is provided the hook wires up an
+[IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+so that the next page loads automatically the moment the sentinel element enters
+the viewport. SSR-safe — no `window` or `document` access at module level.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic example — manual load more
+
+```jsx
+import { useInfiniteScroll } from "rooks";
+
+async function fetchUsers({ page, pageSize }) {
+  const res = await fetch(`/api/users?page=${page}&pageSize=${pageSize}`);
+  return res.json(); // { list: User[], total: number }
+}
+
+export default function UserList() {
+  const [data, { loading, loadingMore, noMore, loadMore, reload }] =
+    useInfiniteScroll(
+      async (prev) => {
+        const page = Math.floor((prev?.list.length ?? 0) / 10) + 1;
+        const result = await fetchUsers({ page, pageSize: 10 });
+        return {
+          list: [...(prev?.list ?? []), ...result.list],
+          total: result.total,
+        };
+      },
+      {
+        isNoMore: (d) => (d?.list.length ?? 0) >= (d?.total ?? 0),
+      }
+    );
+
+  if (loading) return <p>Loading…</p>;
+
+  return (
+    <div>
+      {data?.list.map((user) => (
+        <div key={user.id}>{user.name}</div>
+      ))}
+
+      {!noMore && (
+        <button onClick={loadMore} disabled={loadingMore}>
+          {loadingMore ? "Loading…" : "Load more"}
+        </button>
+      )}
+      {noMore && <p>No more users.</p>}
+
+      <button onClick={reload}>Reload</button>
+    </div>
+  );
+}
+```
+
+### Automatic scroll detection with IntersectionObserver
+
+Attach a `target` ref to a sentinel element at the bottom of the list. The hook
+observes it and calls `loadMore` automatically when it scrolls into view.
+
+```jsx
+import { useRef } from "react";
+import { useInfiniteScroll } from "rooks";
+
+export default function AutoScrollList() {
+  const sentinelRef = useRef(null);
+
+  const [data, { loading, loadingMore, noMore }] = useInfiniteScroll(
+    async (prev) => {
+      const page = Math.floor((prev?.list.length ?? 0) / 20) + 1;
+      const res = await fetch(`/api/items?page=${page}`);
+      const json = await res.json();
+      return { list: [...(prev?.list ?? []), ...json.items], total: json.total };
+    },
+    {
+      target: sentinelRef,
+      isNoMore: (d) => (d?.list.length ?? 0) >= (d?.total ?? 0),
+      threshold: 0.1,
+    }
+  );
+
+  if (loading) return <p>Loading…</p>;
+
+  return (
+    <div>
+      {data?.list.map((item) => (
+        <div key={item.id}>{item.title}</div>
+      ))}
+
+      {/* Sentinel — entering the viewport triggers the next load */}
+      <div ref={sentinelRef}>
+        {loadingMore && <p>Loading more…</p>}
+        {noMore && <p>You've reached the end!</p>}
+      </div>
+    </div>
+  );
+}
+```
+
+### Manual mode with reloadDeps
+
+Skip the initial fetch and drive loading yourself. Use `reloadDeps` to reset the
+list whenever a search query changes.
+
+```jsx
+import { useState } from "react";
+import { useInfiniteScroll } from "rooks";
+
+export default function SearchableList() {
+  const [query, setQuery] = useState("");
+
+  const [data, { loading, loadingMore, noMore, loadMore }] = useInfiniteScroll(
+    async (prev) => {
+      const page = Math.floor((prev?.list.length ?? 0) / 10) + 1;
+      const res = await fetch(`/api/search?q=${query}&page=${page}`);
+      const json = await res.json();
+      return { list: [...(prev?.list ?? []), ...json.results], total: json.total };
+    },
+    {
+      // Reset list whenever `query` changes; don't fetch on mount.
+      reloadDeps: [query],
+      isNoMore: (d) => (d?.list.length ?? 0) >= (d?.total ?? 0),
+    }
+  );
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search…"
+      />
+
+      {loading && <p>Searching…</p>}
+
+      {data?.list.map((item) => (
+        <div key={item.id}>{item.title}</div>
+      ))}
+
+      {!noMore && !loading && (
+        <button onClick={loadMore} disabled={loadingMore}>
+          {loadingMore ? "Loading…" : "Load more"}
+        </button>
+      )}
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument  | Type                                        | Description                                         | Default value | Required |
+| --------- | ------------------------------------------- | --------------------------------------------------- | ------------- | -------- |
+| `service` | `(data?: TData) => Promise<TData>`          | Async loader; receives previous accumulation        | —             | yes      |
+| `options` | `UseInfiniteScrollOptions<TData>`           | Configuration (see Options table below)             | `{}`          | no       |
+
+#### Options
+
+| Option        | Type                                | Description                                                                   | Default   |
+| ------------- | ----------------------------------- | ----------------------------------------------------------------------------- | --------- |
+| `target`      | `RefObject<Element \| null> \| Element \| null` | Element (or ref) to observe; triggers `loadMore` on intersection | `null`    |
+| `isNoMore`    | `(data?: TData) => boolean`         | Returns `true` when there are no more pages to load                           | —         |
+| `threshold`   | `number`                            | IntersectionObserver threshold (0–1)                                          | `0.1`     |
+| `manual`      | `boolean`                           | Skip automatic load on mount                                                  | `false`   |
+| `reloadDeps`  | `DependencyList`                    | Reload all data when any of these values change                               | `[]`      |
+| `onBefore`    | `() => void`                        | Called before each service invocation                                         | —         |
+| `onSuccess`   | `(data: TData) => void`             | Called when service resolves                                                  | —         |
+| `onError`     | `(error: Error) => void`            | Called when service rejects                                                   | —         |
+| `onFinally`   | `() => void`                        | Called after service, regardless of outcome                                   | —         |
+
+### Return
+
+Returns a tuple `[data, controls]`.
+
+| Return value         | Type                             | Description                                                              | Default value |
+| -------------------- | -------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `data`               | `TData \| undefined`             | Current accumulated data                                                 | `undefined`   |
+| `controls.loading`   | `boolean`                        | `true` during the initial / reload fetch                                 | `true`        |
+| `controls.loadingMore` | `boolean`                      | `true` while an incremental "load more" fetch is in flight               | `false`       |
+| `controls.noMore`    | `boolean`                        | `true` when `isNoMore` returns `true` for current data                   | `false`       |
+| `controls.loadMore`  | `() => void`                     | Fire-and-forget: fetch the next page                                     | —             |
+| `controls.loadMoreAsync` | `() => Promise<TData \| undefined>` | Fetch the next page and return the updated data                   | —             |
+| `controls.reload`    | `() => Promise<void>`            | Clear data and re-fetch from the first page                              | —             |
+| `controls.cancel`    | `() => void`                     | Abandon the current in-flight fetch                                      | —             |
+| `controls.mutate`    | `(data?: TData) => void`         | Directly replace the accumulated data                                    | —             |
