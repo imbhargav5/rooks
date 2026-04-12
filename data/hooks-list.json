@@ -471,6 +471,11 @@
       "category": "state"
     },
     {
+      "name": "useScroll",
+      "description": "Tracks scroll position of a scrollable element or window",
+      "category": "viewport"
+    },
+    {
       "name": "useSelect",
       "description": "Select values from a list easily. List selection hook for react.",
       "category": "state"
