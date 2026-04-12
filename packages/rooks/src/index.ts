@@ -58,6 +58,7 @@ export { useKey } from "./hooks/useKey";
 export { useKeyBindings } from "./hooks/useKeyBindings";
 export { useKeyRef } from "./hooks/useKeyRef";
 export { useKeys } from "./hooks/useKeys";
+export { useLatest } from "./hooks/useLatest";
 export { useLifecycleLogger } from "./hooks/useLifecycleLogger";
 export { useLockBodyScroll } from "./hooks/useLockBodyScroll";
 export { useLocalstorageState } from "./hooks/useLocalstorageState";

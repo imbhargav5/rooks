@@ -1,0 +1,113 @@
+---
+id: useLatest
+title: useLatest
+sidebar_label: useLatest
+---
+
+## About
+
+Returns a ref that always holds the latest value, solving the stale closure problem. The ref is updated synchronously during render, so `ref.current` is always up-to-date—even in callbacks and effects that were set up long ago.
+
+<br />
+
+## Why useLatest?
+
+React closures capture the value of state and props at the time the function is created. This causes **stale closures**: an interval or event listener created once will keep reading the old value forever.
+
+`useLatest` solves this by storing the value in a ref. Refs are mutable objects whose identity never changes, so any callback that holds a reference to the ref will always read the latest value via `.current`.
+
+```
+Stale closure:           With useLatest:
+render #1 → count = 0   render #1 → ref.current = 0
+render #2 → count = 1   render #2 → ref.current = 1
+                                        ↑ always fresh
+interval callback reads 0 forever    interval callback reads ref.current ✓
+```
+
+<br />
+
+## Examples
+
+### Keep an interval in sync with state
+
+```jsx
+import { useState, useEffect } from "react";
+import { useLatest } from "rooks";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  const latestCount = useLatest(count);
+
+  useEffect(() => {
+    // Registered once — no stale closure because we read latestCount.current
+    const id = setInterval(() => {
+      setCount(latestCount.current + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []); // empty deps intentional
+
+  return <h1>Count: {count}</h1>;
+}
+```
+
+### Use latest value inside an event handler
+
+```jsx
+import { useState, useEffect } from "react";
+import { useLatest } from "rooks";
+
+export default function SearchLogger() {
+  const [query, setQuery] = useState("");
+  const latestQuery = useLatest(query);
+
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key === "Enter") {
+        // Always logs the current query, not the one captured at mount
+        console.log("Searching for:", latestQuery.current);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []); // add listener once, always reads fresh query
+
+  return (
+    <input
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Type and press Enter"
+    />
+  );
+}
+```
+
+### Difference from useFreshRef
+
+`useFreshRef` updates its ref inside a `useEffect`, meaning the ref holds the previous value during the current render. `useLatest` updates synchronously during render, so the ref is always current.
+
+```jsx
+import { useLatest, useFreshRef } from "rooks";
+
+function Example({ value }) {
+  const latest = useLatest(value);      // ref.current === value right now
+  const fresh = useFreshRef(value);     // ref.current === previous value until after paint
+
+  // ...
+}
+```
+
+Use `useLatest` when you need the value to be current during the render itself (e.g. to pass into an immediately-invoked callback). Use `useFreshRef` when you need the update to be deferred (e.g. in layout effects that depend on paint timing).
+
+## Arguments
+
+| Argument | Type | Description                                     |
+| -------- | ---- | ----------------------------------------------- |
+| value    | T    | The value to keep fresh inside the returned ref |
+
+## Returns
+
+| Return value | Type                | Description                                              |
+| ------------ | ------------------- | -------------------------------------------------------- |
+| ref          | MutableRefObject\<T\> | A ref whose `.current` always equals the latest `value` |
+
+---
