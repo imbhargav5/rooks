@@ -361,6 +361,11 @@
       "category": "browser"
     },
     {
+      "name": "useWebSocket",
+      "description": "Manages a WebSocket connection with auto-reconnect, message handling, ready state tracking, and manual connect/disconnect control",
+      "category": "browser"
+    },
+    {
       "name": "useOnClickRef",
       "description": "Callback on click/tap events",
       "category": "events"
