@@ -1,4 +1,4 @@
-import { source } from '../../../../source';
+import { source, getPageImage } from '../../../../source';
 import type { Metadata } from 'next';
 import {
     DocsPage,
@@ -67,5 +67,12 @@ export async function generateMetadata(props: {
     return {
         title: page.data.title,
         description: page.data.description,
+        openGraph: {
+            images: getPageImage(page).url,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            images: getPageImage(page).url,
+        },
     } satisfies Metadata;
 }
