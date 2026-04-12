@@ -118,6 +118,8 @@ export { useToggle } from "./hooks/useToggle";
 export { useUndoState } from "./hooks/useUndoState";
 export { useTween } from "./hooks/useTween";
 export { useUndoRedoState } from "./hooks/useUndoRedoState";
+export { useUpdateEffect } from "./hooks/useUpdateEffect";
+export { useUpdateLayoutEffect } from "./hooks/useUpdateLayoutEffect";
 export { useVibrate } from "./hooks/useVibrate";
 export { useVideo } from "./hooks/useVideo";
 export { useWebLocksApi } from "./hooks/useWebLocksApi";

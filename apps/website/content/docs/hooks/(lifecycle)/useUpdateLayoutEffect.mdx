@@ -1,0 +1,87 @@
+---
+id: useUpdateLayoutEffect
+title: useUpdateLayoutEffect
+sidebar_label: useUpdateLayoutEffect
+---
+
+## About
+
+Like `useLayoutEffect`, but skips the callback on the initial mount. The effect only runs on subsequent re-renders when dependencies change. Uses the isomorphic effect pattern internally, so it is safe to use in SSR environments. Accepts the same arguments and return value as React's built-in `useLayoutEffect`.
+
+## Examples
+
+### Measure DOM element on update
+
+```jsx
+import React, { useRef, useState } from "react";
+import { useUpdateLayoutEffect } from "rooks";
+
+export default function App() {
+  const ref = useRef(null);
+  const [text, setText] = useState("Hello");
+  const [width, setWidth] = useState(null);
+
+  useUpdateLayoutEffect(() => {
+    if (ref.current) {
+      setWidth(ref.current.offsetWidth);
+    }
+  }, [text]);
+
+  return (
+    <div>
+      <p ref={ref} style={{ display: "inline-block" }}>{text}</p>
+      {width !== null && <p>Width after update: {width}px</p>}
+      <button onClick={() => setText((t) => t + "!")}>Add !</button>
+    </div>
+  );
+}
+```
+
+### Synchronize scroll position on content change
+
+```jsx
+import React, { useRef, useState } from "react";
+import { useUpdateLayoutEffect } from "rooks";
+
+export default function ScrollSync() {
+  const containerRef = useRef(null);
+  const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
+
+  useUpdateLayoutEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [items]);
+
+  return (
+    <div>
+      <div
+        ref={containerRef}
+        style={{ height: 120, overflowY: "auto", border: "1px solid #ccc" }}
+      >
+        {items.map((item) => (
+          <p key={item}>{item}</p>
+        ))}
+      </div>
+      <button
+        onClick={() =>
+          setItems((prev) => [...prev, `Item ${prev.length + 1}`])
+        }
+      >
+        Add item
+      </button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type             | Description                                                      |
+| -------- | ---------------- | ---------------------------------------------------------------- |
+| effect   | `EffectCallback` | Imperative function that can optionally return a cleanup function |
+| deps     | `DependencyList` | Optional array of dependencies that control when the effect runs |
+
+### Returns
+
+`void`
