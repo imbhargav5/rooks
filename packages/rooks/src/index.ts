@@ -113,10 +113,17 @@ export { usePreviousImmediate } from "./hooks/usePreviousImmediate";
 export { usePromise } from "./hooks/usePromise";
 export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
+export { useRefElement } from "./hooks/useRefElement";
+export { useRenderCount } from "./hooks/useRenderCount";
+export { useRequest } from "./hooks/useRequest";
+export type {
+  UseRequestOptions,
+  UseRequestControls,
+  UseRequestReturn,
+} from "./hooks/useRequest";
 export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
 export { useResponsive } from "./hooks/useResponsive";
-export { useRenderCount } from "./hooks/useRenderCount";
-export { useRefElement } from "./hooks/useRefElement";
+export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
 export { useSafeSetState } from "./hooks/useSafeSetState";
 export { useScreenDetailsApi } from "./hooks/useScreenDetailsApi";
 export { useSelect } from "./hooks/useSelect";

@@ -1,0 +1,243 @@
+---
+title: useRequest
+description: Advanced data-fetching hook with loading state, cancellation, retries, polling, and lifecycle callbacks.
+---
+
+# useRequest
+
+An advanced data-fetching hook that wraps any `(...args) => Promise<TData>` service with:
+
+- **Loading / error state** managed automatically
+- **Cancellation** — invalidate in-flight requests on demand or on unmount
+- **Retries** — configurable count and interval
+- **Polling** — re-run on a fixed interval, optionally paused when the tab is hidden
+- **Lifecycle callbacks** — `onBefore`, `onSuccess`, `onError`, `onFinally`
+- **Loading delay** — suppress flicker for fast requests
+- **Optimistic updates** via `mutate`
+- **SSR-safe** — no `window`/`document` access at module level; returns `loading=false` on the server
+
+Returns a **tuple** `[data, controls]`.
+
+## Usage
+
+### Basic auto-fetch
+
+```tsx
+import { useRequest } from "rooks";
+
+type User = { id: number; name: string };
+
+function UserCard({ id }: { id: number }) {
+  const [user, { loading, error, refresh }] = useRequest(
+    () => fetch(`/api/users/${id}`).then((r) => r.json() as Promise<User>)
+  );
+
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!user) return null;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <button onClick={refresh}>Reload</button>
+    </div>
+  );
+}
+```
+
+### Manual trigger with typed params
+
+```tsx
+import { useRequest } from "rooks";
+
+async function searchUsers(query: string, page: number) {
+  const res = await fetch(`/api/users?q=${query}&page=${page}`);
+  return res.json() as Promise<User[]>;
+}
+
+function UserSearch() {
+  const [results, { loading, run }] = useRequest(searchUsers, {
+    manual: true,
+  });
+
+  return (
+    <div>
+      <button onClick={() => run("alice", 1)}>Search</button>
+      {loading && <p>Searching…</p>}
+      <ul>
+        {results?.map((u) => <li key={u.id}>{u.name}</li>)}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Polling every 5 seconds
+
+```tsx
+import { useRequest } from "rooks";
+
+function MetricsDashboard() {
+  const [metrics, { cancel }] = useRequest(fetchMetrics, {
+    pollingInterval: 5000,
+    pollingWhenHidden: false, // pause when the tab is not visible
+  });
+
+  return (
+    <div>
+      <pre>{JSON.stringify(metrics, null, 2)}</pre>
+      <button onClick={cancel}>Stop polling</button>
+    </div>
+  );
+}
+```
+
+### Retries on failure
+
+```tsx
+import { useRequest } from "rooks";
+
+function ReliableFetch() {
+  const [data, { loading, error }] = useRequest(fetchUnreliableApi, {
+    retryCount: 3,
+    retryInterval: 2000, // wait 2 s between attempts
+  });
+
+  if (loading) return <p>Trying…</p>;
+  if (error) return <p>Gave up after 4 attempts: {error.message}</p>;
+  return <pre>{JSON.stringify(data)}</pre>;
+}
+```
+
+### Optimistic update with mutate
+
+```tsx
+import { useRequest } from "rooks";
+
+type Post = { id: number; likes: number };
+
+function LikeButton({ postId }: { postId: number }) {
+  const [post, { mutate }] = useRequest(
+    () => fetch(`/api/posts/${postId}`).then((r) => r.json() as Promise<Post>)
+  );
+
+  const handleLike = () => {
+    // Immediately update the UI…
+    mutate((prev) => prev ? { ...prev, likes: prev.likes + 1 } : prev);
+    // …then persist
+    fetch(`/api/posts/${postId}/like`, { method: "POST" });
+  };
+
+  return (
+    <button onClick={handleLike}>
+      ♥ {post?.likes ?? 0}
+    </button>
+  );
+}
+```
+
+### Refresh when deps change
+
+```tsx
+import { useState } from "react";
+import { useRequest } from "rooks";
+
+function FilteredList() {
+  const [filter, setFilter] = useState("all");
+
+  const [items, { loading }] = useRequest(
+    () => fetch(`/api/items?filter=${filter}`).then((r) => r.json()),
+    { refreshDeps: [filter] }
+  );
+
+  return (
+    <div>
+      <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+        <option value="all">All</option>
+        <option value="active">Active</option>
+      </select>
+      {loading ? <p>Loading…</p> : <pre>{JSON.stringify(items)}</pre>}
+    </div>
+  );
+}
+```
+
+### Loading delay (suppress flicker)
+
+```tsx
+import { useRequest } from "rooks";
+
+function QuickData() {
+  // Only show a spinner if the request takes longer than 300 ms.
+  const [data, { loading }] = useRequest(fetchFastEndpoint, {
+    loadingDelay: 300,
+  });
+
+  return (
+    <div>
+      {loading && <Spinner />}
+      {data && <DataView data={data} />}
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type                                                    | Required | Description                  |
+| --------- | ------------------------------------------------------- | -------- | ---------------------------- |
+| `service` | `(...args: TParams) => Promise<TData>`                  | Yes      | The async function to call   |
+| `options` | [`UseRequestOptions<TData, TParams>`](#options-object) | No       | Configuration (see below)    |
+
+### Options object
+
+| Property            | Type                                                                                     | Default   | Description                                                                                      |
+| ------------------- | ---------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------ |
+| `manual`            | `boolean`                                                                                | `false`   | When `true`, the service does **not** run automatically on mount                                 |
+| `defaultParams`     | `TParams`                                                                                | —         | Params used for the automatic mount-time run                                                     |
+| `onBefore`          | `(params: TParams) => void`                                                              | —         | Called just before each request                                                                  |
+| `onSuccess`         | `(data: TData, params: TParams) => void`                                                 | —         | Called on success                                                                                |
+| `onError`           | `(error: Error, params: TParams) => void`                                                | —         | Called after all retries are exhausted                                                           |
+| `onFinally`         | `(params: TParams, data: TData \| undefined, error: Error \| undefined) => void`         | —         | Called after every request (success or failure)                                                  |
+| `pollingInterval`   | `number`                                                                                 | —         | Milliseconds between automatic re-runs after each success                                        |
+| `pollingWhenHidden` | `boolean`                                                                                | `true`    | When `false`, polling pauses while `document.visibilityState === "hidden"`                       |
+| `retryCount`        | `number`                                                                                 | `0`       | How many times to retry a failed request before giving up                                        |
+| `retryInterval`     | `number`                                                                                 | `1000`    | Milliseconds to wait between retry attempts                                                      |
+| `refreshDeps`       | `unknown[]`                                                                              | —         | Re-runs with the last params whenever any value in this array changes (skips the initial mount)  |
+| `loadingDelay`      | `number`                                                                                 | `0`       | Milliseconds to wait before setting `loading = true`; requests that finish faster never show a spinner |
+
+### Return value — `[data, controls]`
+
+| Element    | Type                                                        | Description                              |
+| ---------- | ----------------------------------------------------------- | ---------------------------------------- |
+| `data`     | `TData \| undefined`                                        | The most-recently resolved data          |
+| `controls` | [`UseRequestControls<TData, TParams>`](#controls-reference) | Object of state and control functions    |
+
+### Controls reference
+
+| Property       | Type                                                                                       | Description                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| `loading`      | `boolean`                                                                                  | `true` while a request is in flight (subject to `loadingDelay`)                    |
+| `error`        | `Error \| undefined`                                                                       | The error from the most recent failed request                                      |
+| `run`          | `(...params: TParams) => void`                                                             | Fire-and-forget call; errors surface via `error` state and `onError`               |
+| `runAsync`     | `(...params: TParams) => Promise<TData>`                                                   | Imperative call; returns a promise that resolves/rejects                           |
+| `refresh`      | `() => void`                                                                               | Re-runs with the last params (fire-and-forget)                                     |
+| `refreshAsync` | `() => Promise<TData>`                                                                     | Re-runs with the last params; returns a promise                                    |
+| `cancel`       | `() => void`                                                                               | Cancels any in-flight request; clears `loading` and stops polling                  |
+| `mutate`       | `(value: TData \| undefined \| ((prev: TData \| undefined) => TData \| undefined)) => void` | Directly set `data` without triggering a new request (useful for optimistic UI)   |
+
+## Notes
+
+- **No external dependencies** — implemented with `useRef`, `useCallback`, and `useEffect` only.
+- **Cancellation** is cooperative: each `runAsync` call stamps an ID; stale responses are silently dropped when the ID no longer matches.
+- **Unmount safety**: all timers and listeners are cleaned up; no state updates occur after the component unmounts.
+- **`run` vs `runAsync`**: prefer `run` for event-handler callbacks; use `runAsync` when you need to `await` the result or chain `.then`/`.catch`.
+- **`mutate` and function data**: if `TData` is itself a function type, the updater-function overload is ambiguous. In that case, wrap the value in a thunk: `mutate(() => myFunction)`.
+
+## Related Hooks
+
+- [`useAsyncEffect`](/docs/hooks/useAsyncEffect) — Async operations inside `useEffect`
+- [`usePromise`](/docs/hooks/usePromise) — Lightweight promise state without fetching logic
+- [`useFetch`](/docs/hooks/useFetch) — Simple URL fetching with JSON parsing
