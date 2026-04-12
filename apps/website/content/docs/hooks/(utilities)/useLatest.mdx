@@ -1,0 +1,83 @@
+---
+id: useLatest
+title: useLatest
+sidebar_label: useLatest
+---
+
+## About
+
+Returns a ref that always holds the latest value of the argument. Useful for reading the most recent value of a prop or state inside an async callback, event handler, or interval without causing the effect to re-run.
+
+[//]: # "Main"
+
+## Examples
+
+### Read latest state value inside an interval
+
+```jsx
+import { useState, useEffect } from "react";
+import { useLatest } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const latestCount = useLatest(count);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      // Always reads the current count without adding it to deps
+      console.log("latest count:", latestCount.current);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Avoid stale closures in event handlers
+
+```jsx
+import { useState } from "react";
+import { useLatest } from "rooks";
+
+export default function App() {
+  const [value, setValue] = useState("");
+  const latestValue = useLatest(value);
+
+  function handleSubmit() {
+    // latestValue.current is always up-to-date even if this function
+    // was created in a render where value was different
+    alert(`Submitted: ${latestValue.current}`);
+  }
+
+  return (
+    <div>
+      <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type something"
+      />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type | Description                             |
+| -------- | ---- | --------------------------------------- |
+| value    | T    | The value to keep up-to-date in the ref |
+
+### Returns
+
+| Return value | Type                    | Description                                           |
+| ------------ | ----------------------- | ----------------------------------------------------- |
+| ref          | MutableRefObject&lt;T&gt; | A ref whose `.current` always equals the latest value |
+
+---
