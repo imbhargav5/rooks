@@ -1,0 +1,137 @@
+---
+id: useCookieState
+title: useCookieState
+sidebar_label: useCookieState
+---
+
+## About
+
+useState but auto updates values to browser cookies. Supports cookie options like `expires`, `path`, `domain`, `secure`, and `sameSite`.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic example
+
+```jsx
+import React from "react";
+import { useCookieState } from "rooks";
+
+export default function App() {
+  const [username, setUsername, removeUsername] = useCookieState("app:username", "");
+
+  return (
+    <div>
+      <h1>useCookieState</h1>
+      <input
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter username"
+      />
+      <button onClick={() => removeUsername()}>Clear</button>
+      <p>Stored username: {username}</p>
+    </div>
+  );
+}
+```
+
+### With expiry (7 days)
+
+```jsx
+import React from "react";
+import { useCookieState } from "rooks";
+
+export default function App() {
+  const [token, setToken, removeToken] = useCookieState(
+    "app:auth-token",
+    null,
+    { expires: 7 }
+  );
+
+  return (
+    <div>
+      <button onClick={() => setToken("my-secret-token")}>Login</button>
+      <button onClick={() => removeToken()}>Logout</button>
+      <p>Token: {token ?? "not set"}</p>
+    </div>
+  );
+}
+```
+
+### With all cookie options
+
+```jsx
+import React from "react";
+import { useCookieState } from "rooks";
+
+export default function App() {
+  const [preferences, setPreferences] = useCookieState(
+    "app:preferences",
+    { theme: "light", lang: "en" },
+    {
+      expires: 365,
+      path: "/",
+      domain: "example.com",
+      secure: true,
+      sameSite: "Lax",
+    }
+  );
+
+  return (
+    <div>
+      <p>Theme: {preferences.theme}</p>
+      <button onClick={() => setPreferences({ ...preferences, theme: "dark" })}>
+        Switch to dark
+      </button>
+    </div>
+  );
+}
+```
+
+### Using a function setter (like useState)
+
+```jsx
+import React from "react";
+import { useCookieState } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useCookieState("app:count", 0, { expires: 1 });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument     | Type                  | Description                                        | Default   |
+| ------------ | --------------------- | -------------------------------------------------- | --------- |
+| key          | string                | Name of the cookie                                 | undefined |
+| initialState | any \| (() => any)    | Default initial value (or a function returning it) | undefined |
+| options      | CookieOptions         | Cookie attributes (see below)                      | `{}`      |
+
+### CookieOptions
+
+| Option    | Type                         | Description                                                  | Default     |
+| --------- | ---------------------------- | ------------------------------------------------------------ | ----------- |
+| expires   | number \| Date               | Days until expiry (number) or exact expiry date (Date)       | session     |
+| path      | string                       | Cookie path                                                  | `"/"`       |
+| domain    | string                       | Cookie domain                                                | undefined   |
+| secure    | boolean                      | Send only over HTTPS                                         | `false`     |
+| sameSite  | `"Strict"` \| `"Lax"` \| `"None"` | SameSite policy                                        | undefined   |
+
+### Returns
+
+Returns an array of the following items:
+
+| Return value | Type     | Description                       |
+| ------------ | -------- | --------------------------------- |
+| value        | any      | Current value stored in cookie    |
+| set          | Function | Set a new value for the cookie    |
+| remove       | Function | Remove the cookie                 |
