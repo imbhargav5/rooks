@@ -1,0 +1,234 @@
+---
+id: useWebSocket
+title: useWebSocket
+sidebar_label: useWebSocket
+---
+
+## About
+
+A React hook for managing a WebSocket connection. Handles the full connection lifecycle — connecting on mount, emitting messages, auto-reconnecting on abnormal closure, and cleaning up on unmount. Fully safe in SSR environments: `readyState` defaults to `CLOSED` and all control functions are no-ops on the server.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic real-time chat
+
+```jsx
+import { useWebSocket } from "rooks";
+import { useState } from "react";
+
+export default function Chat() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  const [, { readyState, sendMessage }] = useWebSocket("wss://echo.websocket.org", {
+    onMessage: (event) => {
+      setMessages((prev) => [...prev, event.data]);
+    },
+    reconnect: true,
+    reconnectLimit: 5,
+  });
+
+  const isOpen = readyState === 1;
+
+  const handleSend = () => {
+    if (isOpen && input.trim()) {
+      sendMessage(input.trim());
+      setInput("");
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: 480, padding: 16 }}>
+      <p>Status: <strong>{isOpen ? "Connected" : "Disconnected"}</strong></p>
+
+      <div
+        style={{
+          height: 200,
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          padding: 8,
+          marginBottom: 12,
+        }}
+      >
+        {messages.map((msg, i) => (
+          <div key={i}>{msg}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", gap: 8 }}>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          placeholder="Type a message…"
+          style={{ flex: 1, padding: 4 }}
+        />
+        <button onClick={handleSend} disabled={!isOpen}>
+          Send
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Manual connect / disconnect
+
+```jsx
+import { useWebSocket } from "rooks";
+
+export default function ManualSocket() {
+  const [latestMessage, { readyState, connect, disconnect, sendMessage }] =
+    useWebSocket("wss://echo.websocket.org", {
+      manual: true,
+      onOpen: () => console.log("connected"),
+      onClose: () => console.log("disconnected"),
+    });
+
+  const label = ["Connecting", "Open", "Closing", "Closed"][readyState] ?? "Unknown";
+
+  return (
+    <div style={{ padding: 16 }}>
+      <p>Ready state: <strong>{label}</strong></p>
+      <p>Last message: {latestMessage?.data ?? "—"}</p>
+
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={connect} disabled={readyState !== 3}>
+          Connect
+        </button>
+        <button onClick={disconnect} disabled={readyState !== 1}>
+          Disconnect
+        </button>
+        <button onClick={() => sendMessage("ping")} disabled={readyState !== 1}>
+          Ping
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Live stock-price ticker
+
+```jsx
+import { useWebSocket } from "rooks";
+import { useState } from "react";
+
+const SYMBOLS = ["AAPL", "GOOGL", "TSLA"];
+
+export default function StockTicker() {
+  const [prices, setPrices] = useState({});
+
+  const [, { readyState, sendMessage }] = useWebSocket(
+    "wss://ws.example-market.com/v1",
+    {
+      onOpen: () => {
+        // Subscribe to symbols once the socket is open.
+        sendMessage(JSON.stringify({ action: "subscribe", symbols: SYMBOLS }));
+      },
+      onMessage: (event) => {
+        try {
+          const { symbol, price } = JSON.parse(event.data);
+          setPrices((prev) => ({ ...prev, [symbol]: price }));
+        } catch {}
+      },
+      reconnect: true,
+      reconnectInterval: 2000,
+    }
+  );
+
+  return (
+    <div style={{ padding: 16 }}>
+      <h3>Live Prices {readyState !== 1 && <span>(reconnecting…)</span>}</h3>
+      <ul>
+        {SYMBOLS.map((sym) => (
+          <li key={sym}>
+            {sym}: {prices[sym] != null ? `$${prices[sym]}` : "—"}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type                   | Description                                       | Default |
+| -------- | ---------------------- | ------------------------------------------------- | ------- |
+| url      | `string`               | WebSocket server URL (e.g. `"wss://example.com"`) | —       |
+| options  | `UseWebSocketOptions`  | Optional configuration object                     | `{}`    |
+
+### Options
+
+| Option             | Type                                   | Description                                                                    | Default |
+| ------------------ | -------------------------------------- | ------------------------------------------------------------------------------ | ------- |
+| protocols          | `string \| string[]`                   | WebSocket sub-protocols to negotiate with the server                           | —       |
+| reconnect          | `boolean`                              | Automatically reconnect on abnormal closure                                    | `true`  |
+| reconnectLimit     | `number`                               | Maximum number of reconnect attempts before giving up                          | `3`     |
+| reconnectInterval  | `number`                               | Milliseconds to wait between reconnect attempts                                | `3000`  |
+| manual             | `boolean`                              | Skip auto-connect on mount — call `connect()` to open the connection manually  | `false` |
+| onOpen             | `(event: Event) => void`               | Fired when the connection is successfully opened                               | —       |
+| onClose            | `(event: CloseEvent) => void`          | Fired when the connection is closed                                            | —       |
+| onMessage          | `(event: MessageEvent) => void`        | Fired when a message is received                                               | —       |
+| onError            | `(event: Event) => void`               | Fired when a connection error occurs                                           | —       |
+
+### Returns
+
+Returns a tuple `[latestMessage, controls]`:
+
+| Index | Name             | Type                                                                             | Description                                                                 |
+| ----- | ---------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 0     | latestMessage    | `MessageEvent \| null`                                                           | The most recent message event, or `null` if none has been received yet      |
+| 1     | controls         | `UseWebSocketControls`                                                           | Object containing `readyState`, `sendMessage`, `connect`, and `disconnect`  |
+
+#### `controls` properties
+
+| Property      | Type                                                                 | Description                                                                                       |
+| ------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| readyState    | `0 \| 1 \| 2 \| 3`                                                  | Mirrors `WebSocket.readyState` — 0 CONNECTING, 1 OPEN, 2 CLOSING, 3 CLOSED (SSR returns 3)       |
+| sendMessage   | `(data: string \| ArrayBufferLike \| Blob \| ArrayBufferView) => void` | Sends data over the connection; no-op if not OPEN or during SSR                                   |
+| connect       | `() => void`                                                         | Opens the connection (resets reconnect counter). Use after `disconnect()` or when `manual: true`  |
+| disconnect    | `() => void`                                                         | Closes the connection with code 1000 and suppresses auto-reconnect                               |
+
+### TypeScript Support
+
+```typescript
+import { useWebSocket, ReadyState } from "rooks";
+import type {
+  UseWebSocketOptions,
+  UseWebSocketControls,
+  UseWebSocketReturn,
+  ReadyStateValue,
+} from "rooks";
+
+// ReadyState constants mirror the WebSocket API:
+// ReadyState.CONNECTING === 0
+// ReadyState.OPEN       === 1
+// ReadyState.CLOSING    === 2
+// ReadyState.CLOSED     === 3
+
+function MyComponent() {
+  const [message, { readyState, sendMessage }] = useWebSocket(
+    "wss://example.com/ws"
+  );
+
+  return (
+    <div>
+      {readyState === ReadyState.OPEN && (
+        <button onClick={() => sendMessage("hello")}>Send</button>
+      )}
+    </div>
+  );
+}
+```
+
+### Notes
+
+- **SSR Safety**: On the server `window` is undefined. `readyState` is always `CLOSED` (3) and `sendMessage`, `connect`, `disconnect` are all no-ops.
+- **Callback stability**: `onOpen`, `onClose`, `onMessage`, and `onError` are stored in refs internally, so passing a new function reference on re-render does **not** cause the socket to reconnect.
+- **URL changes**: Changing the `url` prop tears down the existing connection and opens a fresh one to the new URL.
+- **Abnormal close codes**: Reconnect is only triggered for close codes other than `1000` (Normal Closure) and `1001` (Going Away).
+- **Cleanup**: All event handlers are removed and the socket is closed when the component unmounts, preventing memory leaks.
