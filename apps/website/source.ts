@@ -3,6 +3,7 @@ import { loader } from 'fumadocs-core/source';
 import { createMDXSource } from '@fumadocs/content-collections';
 import { icons } from 'lucide-react'
 import { createElement } from 'react';
+import type { InferPageType } from 'fumadocs-core/source';
 
 export const source = loader({
     baseUrl: '/docs',
@@ -17,3 +18,11 @@ export const source = loader({
         return;
     }
 });
+
+export function getPageImage(page: InferPageType<typeof source>) {
+    const segments = [...page.slugs, 'image.png'];
+    return {
+        segments,
+        url: `/og/docs/${segments.join('/')}`,
+    };
+}
