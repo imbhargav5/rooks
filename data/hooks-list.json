@@ -256,6 +256,11 @@
       "category": "keyboard"
     },
     {
+      "name": "useLatest",
+      "description": "Returns a ref whose current value is always up-to-date with the latest value passed in, useful for avoiding stale closures in callbacks and effects.",
+      "category": "utilities"
+    },
+    {
       "name": "useLifecycleLogger",
       "description": "A react hook that console logs parameters as component transitions through lifecycles.",
       "category": "lifecycle"
