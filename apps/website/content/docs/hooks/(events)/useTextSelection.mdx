@@ -1,0 +1,116 @@
+---
+id: useTextSelection
+title: useTextSelection
+sidebar_label: useTextSelection
+---
+
+## About
+
+Tracks the currently selected text on the page or within a scoped element. Listens to the native `selectionchange` event and clears the selection state when the user clicks outside a scoped target. Returns empty state during SSR.
+
+## Examples
+
+### Track selection anywhere on the page
+
+```tsx
+import { useTextSelection } from "rooks";
+
+export default function App() {
+  const [{ text, rect }] = useTextSelection();
+
+  return (
+    <div>
+      <p>Select any text on this page.</p>
+      {text && (
+        <p>
+          You selected: <strong>{text}</strong>
+        </p>
+      )}
+    </div>
+  );
+}
+```
+
+### Scope tracking to a specific element
+
+```tsx
+import { useRef } from "react";
+import { useTextSelection } from "rooks";
+
+export default function Article() {
+  const articleRef = useRef<HTMLDivElement>(null);
+  const [{ text, startOffset, endOffset }] = useTextSelection(articleRef);
+
+  return (
+    <>
+      <div ref={articleRef}>
+        <p>
+          Only selections within this article are tracked. Try selecting
+          some of this text, or the paragraph below.
+        </p>
+        <p>Another paragraph inside the article.</p>
+      </div>
+      <p>Selection outside is ignored.</p>
+      {text && (
+        <pre>
+          {JSON.stringify({ text, startOffset, endOffset }, null, 2)}
+        </pre>
+      )}
+    </>
+  );
+}
+```
+
+### Show a floating tooltip at the selection position
+
+```tsx
+import { useRef } from "react";
+import { useTextSelection } from "rooks";
+
+export default function FloatingTooltip() {
+  const [{ text, rect }] = useTextSelection();
+
+  return (
+    <div style={{ position: "relative" }}>
+      <p>Select any text to see a tooltip appear.</p>
+      {text && rect && (
+        <div
+          style={{
+            position: "fixed",
+            top: rect.top - 40,
+            left: rect.left + rect.width / 2,
+            transform: "translateX(-50%)",
+            background: "#333",
+            color: "#fff",
+            padding: "4px 8px",
+            borderRadius: 4,
+            pointerEvents: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {text.length} character{text.length !== 1 ? "s" : ""} selected
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Arguments
+
+| Argument | Type                    | Description                                                              | Default     |
+| -------- | ----------------------- | ------------------------------------------------------------------------ | ----------- |
+| target   | `RefObject<HTMLElement>` | Optional ref to scope selection tracking to a specific element.         | `undefined` |
+
+## Return value
+
+Returns a tuple `[selectionState]`.
+
+| Attribute     | Type            | Description                                                      |
+| ------------- | --------------- | ---------------------------------------------------------------- |
+| text          | `string`        | The selected text. Empty string when nothing is selected.        |
+| rect          | `DOMRect \| null` | Bounding rect of the selection range, or `null`.               |
+| startOffset   | `number`        | Character offset within `anchorNode` where the selection starts. |
+| endOffset     | `number`        | Character offset within `focusNode` where the selection ends.    |
+| anchorNode    | `Node \| null`  | The node at which the selection begins.                          |
+| focusNode     | `Node \| null`  | The node at which the selection ends (the drag point).           |
