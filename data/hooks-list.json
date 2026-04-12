@@ -61,6 +61,11 @@
       "category": "state"
     },
     {
+      "name": "useCreation",
+      "description": "A stable alternative to useMemo backed by useRef, guaranteeing the factory is only called when deps change.",
+      "category": "performance"
+    },
+    {
       "name": "useDebounce",
       "description": "Debounce hook for react",
       "category": "performance"
