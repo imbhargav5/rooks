@@ -201,6 +201,11 @@
       "category": "browser"
     },
     {
+      "name": "useInfiniteScroll",
+      "description": "Infinite scroll hook that triggers a callback when a sentinel element enters the viewport, enabling automatic content loading as the user scrolls",
+      "category": "ui"
+    },
+    {
       "name": "useInput",
       "description": "Input hook for React.",
       "category": "keyboard"
