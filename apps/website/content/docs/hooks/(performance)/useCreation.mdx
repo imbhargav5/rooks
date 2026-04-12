@@ -1,0 +1,94 @@
+---
+id: useCreation
+title: useCreation
+sidebar_label: useCreation
+---
+
+## About
+
+A stable alternative to `useMemo`. Unlike `useMemo`, `useCreation` guarantees that React will **never** silently discard your cached value.
+
+React's documentation explicitly notes that `useMemo` is a *performance hint* — future versions may choose to forget memoised values (e.g. to free memory during off-screen rendering). `useCreation` stores the value in a `useRef`, which React cannot reclaim, so the factory is called **only** when the dependency array actually changes.
+
+Use `useCreation` when:
+- The created value must remain **referentially stable** (e.g. class instances, event emitters, WebSocket connections).
+- Downstream hooks or components rely on reference equality and a silent recompute would cause subtle bugs.
+- You are building an expensive object whose recreation must be strictly controlled.
+
+For pure performance hints where occasional silent re-computation is acceptable, prefer the built-in `useMemo`.
+
+[//]: # "Main"
+
+## Examples
+
+### Stable class instance
+
+```jsx
+import { useCreation } from "rooks";
+
+class ExpensiveParser {
+  constructor(config) {
+    this.config = config;
+    // ... expensive initialisation
+  }
+  parse(input) {
+    return input.toUpperCase();
+  }
+}
+
+export default function App({ config }) {
+  // Guaranteed: only a new ExpensiveParser is created when `config` changes.
+  // React will never silently recreate it.
+  const parser = useCreation(() => new ExpensiveParser(config), [config]);
+
+  return <div>{parser.parse("hello world")}</div>;
+}
+```
+
+### Stable event emitter
+
+```jsx
+import { useCreation } from "rooks";
+import EventEmitter from "eventemitter3";
+
+export default function App() {
+  // The same EventEmitter instance is used for the entire component lifetime.
+  const emitter = useCreation(() => new EventEmitter(), []);
+
+  return (
+    <button onClick={() => emitter.emit("click", Date.now())}>
+      Emit event
+    </button>
+  );
+}
+```
+
+### Guarding against useMemo's non-guarantee
+
+```jsx
+import { useCreation } from "rooks";
+
+export default function ChartComponent({ data }) {
+  // If useMemo silently recomputed this, downstream effects keyed on
+  // `processedData` would re-run unnecessarily. useCreation prevents that.
+  const processedData = useCreation(
+    () => data.map((point) => ({ ...point, y: point.y * 2 })),
+    [data]
+  );
+
+  return <Chart data={processedData} />;
+}
+```
+
+### Arguments
+
+| Argument | Type                  | Description                                                                                      |
+| -------- | --------------------- | ------------------------------------------------------------------------------------------------ |
+| factory  | `() => T`             | A function that produces the value. Called once on mount, then again only when `deps` change.    |
+| deps     | `readonly unknown[]`  | Dependency array. The factory is re-run whenever any element changes (compared with `Object.is`). |
+
+### Return Value
+
+| Return value | Type | Description                                                         |
+| ------------ | ---- | ------------------------------------------------------------------- |
+| value        | `T`  | The stable cached value. Only a new value is returned when deps change. |
