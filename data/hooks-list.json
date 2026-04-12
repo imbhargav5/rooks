@@ -451,6 +451,11 @@
       "category": "animation"
     },
     {
+      "name": "useRafFn",
+      "description": "Runs a callback function on every requestAnimationFrame with start/stop controls",
+      "category": "animation"
+    },
+    {
       "name": "useRefElement",
       "description": "Helps bridge gap between callback ref and state",
       "category": "utilities"
