@@ -61,6 +61,7 @@ export { useKeys } from "./hooks/useKeys";
 export { useLatest } from "./hooks/useLatest";
 export { useLifecycleLogger } from "./hooks/useLifecycleLogger";
 export { useLockBodyScroll } from "./hooks/useLockBodyScroll";
+export { useLockFn } from "./hooks/useLockFn";
 export { useLocalstorageState } from "./hooks/useLocalstorageState";
 export { useMapState };
 export { useNativeMapState } from "./hooks/useNativeMapState";
