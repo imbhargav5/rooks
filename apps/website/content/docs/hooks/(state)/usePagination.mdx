@@ -1,0 +1,102 @@
+---
+id: usePagination
+title: usePagination
+sidebar_label: usePagination
+---
+
+## About
+
+Manages pagination state including current page, page size, and total items. Provides helpers for navigation (`next`, `previous`, `goTo`) and computed values like `totalPages` and `offset`.
+
+## Examples
+
+### Basic pagination
+
+```jsx
+import { usePagination } from "rooks";
+
+export default function App() {
+  const {
+    currentPage,
+    totalPages,
+    offset,
+    pageSize,
+    isFirstPage,
+    isLastPage,
+    next,
+    previous,
+    goTo,
+  } = usePagination({ totalItems: 100, initialPageSize: 10 });
+
+  return (
+    <div>
+      <p>
+        Page {currentPage} of {totalPages}
+      </p>
+      <p>
+        Showing items {offset + 1}–{Math.min(offset + pageSize, 100)}
+      </p>
+      <button onClick={previous} disabled={isFirstPage}>
+        Previous
+      </button>
+      <button onClick={next} disabled={isLastPage}>
+        Next
+      </button>
+      <button onClick={() => goTo(1)}>First</button>
+      <button onClick={() => goTo(totalPages)}>Last</button>
+    </div>
+  );
+}
+```
+
+### Custom initial page and page size
+
+```jsx
+import { usePagination } from "rooks";
+
+export default function CustomPagination() {
+  const { currentPage, totalPages, next, previous, setPageSize } =
+    usePagination({ totalItems: 200, initialPage: 5, initialPageSize: 20 });
+
+  return (
+    <div>
+      <p>
+        Page {currentPage} of {totalPages}
+      </p>
+      <button onClick={previous}>Prev</button>
+      <button onClick={next}>Next</button>
+      <select onChange={(e) => setPageSize(Number(e.target.value))}>
+        <option value={10}>10 per page</option>
+        <option value={20} selected>
+          20 per page
+        </option>
+        <option value={50}>50 per page</option>
+      </select>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument        | Type   | Description                                        |
+| --------------- | ------ | -------------------------------------------------- |
+| totalItems      | number | Total number of items to paginate (required)       |
+| initialPage     | number | Starting page (1-indexed), defaults to `1`         |
+| initialPageSize | number | Number of items per page, defaults to `10`         |
+
+### Return
+
+| Return value | Type     | Description                                          |
+| ------------ | -------- | ---------------------------------------------------- |
+| currentPage  | number   | The current active page (1-indexed)                  |
+| pageSize     | number   | Number of items displayed per page                   |
+| totalItems   | number   | Total number of items passed in                      |
+| totalPages   | number   | Total number of pages computed from items/page size  |
+| offset       | number   | Zero-based index of the first item on the current page |
+| isFirstPage  | boolean  | `true` when on the first page                        |
+| isLastPage   | boolean  | `true` when on the last page                         |
+| next         | Function | Advance to the next page (no-op on last page)        |
+| previous     | Function | Go back to the previous page (no-op on first page)   |
+| goTo         | Function | Navigate to a specific page number                   |
+| setPageSize  | Function | Update the page size and recompute pagination state   |
