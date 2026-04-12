@@ -411,6 +411,11 @@
       "category": "events"
     },
     {
+      "name": "usePagination",
+      "description": "Manages pagination state with current page, page size, total items, and helpers for navigation and computed values like totalPages and offset",
+      "category": "state"
+    },
+    {
       "name": "usePictureInPictureApi",
       "description": "Hook for managing Picture-in-Picture video functionality",
       "category": "ui"
