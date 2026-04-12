@@ -466,6 +466,11 @@
       "category": "animation"
     },
     {
+      "name": "useResponsive",
+      "description": "Returns current responsive breakpoint info (xs, sm, md, lg, xl, xxl) based on window width",
+      "category": "viewport"
+    },
+    {
       "name": "useSafeSetState",
       "description": "set state but ignores if component has already unmounted",
       "category": "state"
