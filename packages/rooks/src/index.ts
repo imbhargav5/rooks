@@ -95,6 +95,14 @@ export { useOnLongHover as useOnLongHoverRef };
 export { useOnLongPress as useOnLongPressRef };
 export { useOrientation } from "./hooks/useOrientation";
 export { usePageLeave } from "./hooks/usePageLeave";
+export { usePagination } from "./hooks/usePagination";
+export type {
+  PaginationService,
+  UsePaginationOptions,
+  PaginationData,
+  PaginationControls,
+  UsePaginationReturn,
+} from "./hooks/usePagination";
 export { usePictureInPictureApi } from "./hooks/usePictureInPictureApi";
 export { usePreferredColorScheme } from "./hooks/usePreferredColorScheme";
 export { useOutsideClick } from "./hooks/useOutsideClick";

@@ -1,0 +1,238 @@
+---
+title: usePagination
+description: Pagination state tied to an async data source, with loading, error, and stale-request cancellation
+---
+
+# usePagination
+
+Manages pagination state for an async data source. Fetches the first page automatically on mount, tracks loading and error states, and discards stale responses when page/size changes race with in-flight requests.
+
+SSR-safe — no `window` or `document` access; the auto-fetch is deferred to `useEffect`.
+
+## Usage
+
+```tsx
+import { usePagination } from "rooks";
+
+type User = { id: number; name: string };
+
+async function fetchUsers({
+  current,
+  pageSize,
+}: {
+  current: number;
+  pageSize: number;
+}) {
+  const res = await fetch(`/api/users?page=${current}&size=${pageSize}`);
+  return res.json() as Promise<{ total: number; list: User[] }>;
+}
+
+export default function UserTable() {
+  const [
+    { data, total, current, pageSize, totalPage, loading, error },
+    { changeCurrent, changePageSize, reload },
+  ] = usePagination<User>(fetchUsers, { defaultPageSize: 20 });
+
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <>
+      <p>
+        {total} results — page {current} of {totalPage}
+      </p>
+      <table>
+        <tbody>
+          {data.map((u) => (
+            <tr key={u.id}>
+              <td>{u.name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Page navigation */}
+      <button disabled={current <= 1} onClick={() => changeCurrent(current - 1)}>
+        ← Prev
+      </button>
+      <button
+        disabled={current >= totalPage}
+        onClick={() => changeCurrent(current + 1)}
+      >
+        Next →
+      </button>
+
+      {/* Page size selector */}
+      <select
+        value={pageSize}
+        onChange={(e) => changePageSize(Number(e.target.value))}
+      >
+        {[10, 20, 50].map((s) => (
+          <option key={s} value={s}>
+            {s} / page
+          </option>
+        ))}
+      </select>
+
+      <button onClick={reload}>Refresh</button>
+    </>
+  );
+}
+```
+
+## Manual mode
+
+Set `manual: true` to skip the automatic mount fetch. Call `run()` yourself when ready — useful for search results that should only load after a user action.
+
+```tsx
+import { useState } from "react";
+import { usePagination } from "rooks";
+
+type Product = { id: number; name: string; price: number };
+
+async function searchProducts({
+  current,
+  pageSize,
+  query,
+}: {
+  current: number;
+  pageSize: number;
+  query: string;
+}) {
+  const res = await fetch(
+    `/api/products?q=${encodeURIComponent(query)}&page=${current}&size=${pageSize}`
+  );
+  return res.json() as Promise<{ total: number; list: Product[] }>;
+}
+
+export default function ProductSearch() {
+  const [query, setQuery] = useState("");
+
+  const [{ data, total, current, totalPage, loading, error }, { run, changeCurrent }] =
+    usePagination<Product>(
+      (params) => searchProducts({ ...params, query }),
+      { manual: true, defaultPageSize: 12 }
+    );
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    run({ current: 1 }); // reset to first page on new search
+  }
+
+  return (
+    <>
+      <form onSubmit={handleSearch}>
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
+        <button type="submit">Search</button>
+      </form>
+
+      {loading && <p>Searching…</p>}
+      {error && <p>Error: {error.message}</p>}
+
+      {!loading && data.length > 0 && (
+        <>
+          <p>{total} products found</p>
+          <ul>
+            {data.map((p) => (
+              <li key={p.id}>
+                {p.name} — ${p.price}
+              </li>
+            ))}
+          </ul>
+          <button disabled={current <= 1} onClick={() => changeCurrent(current - 1)}>
+            Prev
+          </button>
+          <span>
+            {current} / {totalPage}
+          </span>
+          <button
+            disabled={current >= totalPage}
+            onClick={() => changeCurrent(current + 1)}
+          >
+            Next
+          </button>
+        </>
+      )}
+    </>
+  );
+}
+```
+
+## Cancelling in-flight requests
+
+Call `cancel()` to discard any pending fetch and immediately clear the loading state. Useful for "Cancel" buttons or when a component needs to abort before unmounting.
+
+```tsx
+import { usePagination } from "rooks";
+
+type Log = { id: number; message: string };
+
+async function fetchLogs({ current, pageSize }: { current: number; pageSize: number }) {
+  const res = await fetch(`/api/logs?page=${current}&size=${pageSize}`);
+  return res.json() as Promise<{ total: number; list: Log[] }>;
+}
+
+export default function LogViewer() {
+  const [{ data, loading }, { reload, cancel }] = usePagination<Log>(fetchLogs);
+
+  return (
+    <>
+      {loading ? (
+        <>
+          <p>Loading logs…</p>
+          <button onClick={cancel}>Cancel</button>
+        </>
+      ) : (
+        <>
+          <ul>
+            {data.map((log) => (
+              <li key={log.id}>{log.message}</li>
+            ))}
+          </ul>
+          <button onClick={reload}>Refresh</button>
+        </>
+      )}
+    </>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter              | Type                                           | Required | Default | Description                                             |
+| ---------------------- | ---------------------------------------------- | -------- | ------- | ------------------------------------------------------- |
+| `service`              | `(params: { current, pageSize }) => Promise<{ total, list }>` | Yes | — | Async function that returns one page of data |
+| `options.defaultPageSize` | `number`                                    | No       | `10`    | Initial page size                                       |
+| `options.defaultCurrent`  | `number`                                    | No       | `1`     | Initial page number                                     |
+| `options.manual`          | `boolean`                                   | No       | `false` | Skip auto-fetch on mount; call `run()` manually         |
+
+### Return value — `paginationData`
+
+| Field       | Type           | Description                                      |
+| ----------- | -------------- | ------------------------------------------------ |
+| `data`      | `TData[]`      | Records on the current page                      |
+| `total`     | `number`       | Total number of records across all pages         |
+| `current`   | `number`       | Current page number (1-based)                    |
+| `pageSize`  | `number`       | Records per page                                 |
+| `totalPage` | `number`       | Total pages (`Math.ceil(total / pageSize)`)      |
+| `loading`   | `boolean`      | `true` while a fetch is in progress              |
+| `error`     | `Error \| null` | Error thrown by the last failed fetch, or `null` |
+
+### Return value — `controls`
+
+| Method            | Signature                                             | Description                                                    |
+| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| `onChange`        | `(current: number, pageSize: number) => void`         | Set both page number and page size, then re-fetch              |
+| `changeCurrent`   | `(current: number) => void`                           | Navigate to a specific page and re-fetch                       |
+| `changePageSize`  | `(pageSize: number) => void`                          | Change page size, reset to page 1, then re-fetch               |
+| `reload`          | `() => void`                                          | Re-fetch the current page with unchanged params                |
+| `run`             | `(params?: { current?, pageSize? }) => void`          | Manually trigger a fetch, optionally overriding current/pageSize |
+| `cancel`          | `() => void`                                          | Discard the current in-flight request and clear loading state  |
+
+## Related hooks
+
+- [`useFetch`](/docs/hooks/useFetch) — single-request fetch with loading / error state
+- [`usePromise`](/docs/hooks/usePromise) — minimal promise state without pagination
+- [`useAsyncEffect`](/docs/hooks/useAsyncEffect) — async operations inside effects
