@@ -1,0 +1,132 @@
+---
+id: useLockFn
+title: useLockFn
+sidebar_label: useLockFn
+---
+
+## About
+
+Wraps an async function to prevent concurrent execution. Useful for preventing double-submits on form submissions, API calls, or any async operation that should not be triggered again while already running.
+
+[//]: # "Main"
+
+## Examples
+
+#### Prevent double form submission
+
+```jsx
+import { useLockFn } from "rooks";
+
+async function submitForm(data) {
+  await fetch("/api/submit", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export default function App() {
+  const [lockedSubmit, isSubmitting] = useLockFn(submitForm);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        lockedSubmit({ name: "Alice" });
+      }}
+    >
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Submitting…" : "Submit"}
+      </button>
+    </form>
+  );
+}
+```
+
+#### Prevent concurrent API calls
+
+```jsx
+import { useState } from "react";
+import { useLockFn } from "rooks";
+
+export default function App() {
+  const [data, setData] = useState(null);
+
+  const [fetchData, isFetching] = useLockFn(async () => {
+    const response = await fetch("https://api.example.com/data");
+    const json = await response.json();
+    setData(json);
+  });
+
+  return (
+    <div>
+      <button onClick={fetchData} disabled={isFetching}>
+        {isFetching ? "Loading…" : "Fetch Data"}
+      </button>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+```
+
+#### Multiple locked actions
+
+```jsx
+import { useState } from "react";
+import { useLockFn } from "rooks";
+
+export default function App() {
+  const [log, setLog] = useState([]);
+
+  const addLog = (msg) => setLog((prev) => [...prev, msg]);
+
+  const [save, isSaving] = useLockFn(async () => {
+    addLog("Save started");
+    await new Promise((r) => setTimeout(r, 1500));
+    addLog("Save complete");
+  });
+
+  const [publish, isPublishing] = useLockFn(async () => {
+    addLog("Publish started");
+    await new Promise((r) => setTimeout(r, 2000));
+    addLog("Publish complete");
+  });
+
+  return (
+    <div>
+      <button onClick={save} disabled={isSaving}>
+        {isSaving ? "Saving…" : "Save"}
+      </button>
+      <button onClick={publish} disabled={isPublishing}>
+        {isPublishing ? "Publishing…" : "Publish"}
+      </button>
+      <ul>
+        {log.map((entry, i) => (
+          <li key={i}>{entry}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type          | Description                          |
+| -------- | ------------- | ------------------------------------ |
+| fn       | AsyncFunction | The async function to wrap with a lock |
+
+### Returns
+
+Returns an array with two elements:
+
+| Return value | Type          | Description                                                               |
+| ------------ | ------------- | ------------------------------------------------------------------------- |
+| lockedFn     | AsyncFunction | Wrapped version of `fn` that is a no-op while a call is already running  |
+| isLocked     | boolean       | `true` while the async function is executing, `false` otherwise          |
+
+### Notes
+
+- While `isLocked` is `true`, calling `lockedFn` does nothing — it returns immediately without invoking the original function.
+- The lock is released automatically after the async function resolves **or** rejects, so errors will never leave the hook permanently locked.
+- `lockedFn` always returns `Promise<void>`. The return value of the original function is not forwarded.
+- Each `useLockFn` call manages an independent lock. Multiple hooks in the same component each have their own `isLocked` state.
