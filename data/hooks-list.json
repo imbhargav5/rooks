@@ -601,6 +601,11 @@
       "category": "state-history"
     },
     {
+      "name": "useUpdate",
+      "description": "Returns a function that forces the component to re-render",
+      "category": "utilities"
+    },
+    {
       "name": "useVibrate",
       "description": "Vibration API hook for React",
       "category": "browser"
