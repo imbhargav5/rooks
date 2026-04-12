@@ -124,6 +124,12 @@ export { useUndoRedoState } from "./hooks/useUndoRedoState";
 export { useVibrate } from "./hooks/useVibrate";
 export { useVideo } from "./hooks/useVideo";
 export { useWebLocksApi } from "./hooks/useWebLocksApi";
+export { useWebSocket } from "./hooks/useWebSocket";
+export type {
+  UseWebSocketOptions,
+  UseWebSocketReturn,
+  WebSocketReadyState,
+} from "./hooks/useWebSocket";
 export { useWebWorker } from "./hooks/useWebWorker";
 export { useWhyDidYouUpdate } from "./hooks/useWhyDidYouUpdate";
 export { useWillUnmount } from "./hooks/useWillUnmount";
