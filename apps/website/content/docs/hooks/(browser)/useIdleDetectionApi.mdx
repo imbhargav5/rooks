@@ -39,30 +39,6 @@ export default function App() {
 }
 ```
 
-<LiveExample code={`import { useIdleDetectionApi } from "rooks";
-
-export default function App() {
-  const { isIdle, userState, screenState, isSupported, start, stop } = useIdleDetectionApi({
-    threshold: 60000, // 60 seconds
-    autoStart: true,
-    requestPermission: true
-  });
-
-  return (
-    <div>
-      <h3>Idle Detection Status</h3>
-      <p>API Supported: {isSupported ? "Yes" : "No"}</p>
-      <p>User State: <strong>{userState}</strong></p>
-      <p>Screen State: <strong>{screenState}</strong></p>
-      <p>Is Idle: <strong>{isIdle ? "Yes" : "No"}</strong></p>
-      
-      <button onClick={start}>Start Detection</button>
-      <button onClick={stop}>Stop Detection</button>
-    </div>
-  );
-}
-`} />
-
 ### With state change callbacks
 
 ```jsx
@@ -118,59 +94,6 @@ export default function App() {
   );
 }
 ```
-
-<LiveExample code={`import { useIdleDetectionApi } from "rooks";
-import { useState } from "react";
-
-export default function App() {
-  const [lastChange, setLastChange] = useState(null);
-  const [errors, setErrors] = useState([]);
-
-  const { isIdle, userState, screenState, isPermissionGranted } = useIdleDetectionApi({
-    threshold: 120000, // 2 minutes
-    autoStart: true,
-    requestPermission: true,
-    onIdleChange: (state) => {
-      setLastChange({
-        timestamp: new Date().toLocaleTimeString(),
-        ...state
-      });
-    },
-    onError: (error) => {
-      setErrors(prev => [...prev, error.message]);
-    }
-  });
-
-  return (
-    <div>
-      <h3>Idle Detection with Callbacks</h3>
-      <p>Current State: {isIdle ? "Idle" : "Active"}</p>
-      <p>User State: {userState}</p>
-      <p>Screen State: {screenState}</p>
-      <p>Permission Granted: {isPermissionGranted ? "Yes" : "No"}</p>
-      
-      {lastChange && (
-        <div>
-          <h4>Last Change:</h4>
-          <p>Time: {lastChange.timestamp}</p>
-          <p>Was Idle: {lastChange.isIdle ? "Yes" : "No"}</p>
-          <p>User State: {lastChange.userState}</p>
-          <p>Screen State: {lastChange.screenState}</p>
-        </div>
-      )}
-      
-      {errors.length > 0 && (
-        <div>
-          <h4>Errors:</h4>
-          {errors.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>{error}</p>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-`} />
 
 ### Manual control with custom threshold
 
@@ -249,81 +172,6 @@ export default function App() {
   );
 }
 ```
-
-<LiveExample code={`import { useIdleDetectionApi } from "rooks";
-import { useState } from "react";
-
-export default function App() {
-  const [customThreshold, setCustomThreshold] = useState(60000);
-  const [isStarted, setIsStarted] = useState(false);
-
-  const { 
-    isIdle, 
-    userState, 
-    screenState, 
-    isSupported, 
-    isPermissionGranted, 
-    start, 
-    stop 
-  } = useIdleDetectionApi({
-    threshold: customThreshold,
-    autoStart: false, // Manual control
-    requestPermission: true
-  });
-
-  const handleStart = async () => {
-    await start();
-    setIsStarted(true);
-  };
-
-  const handleStop = () => {
-    stop();
-    setIsStarted(false);
-  };
-
-  const handleThresholdChange = (e) => {
-    setCustomThreshold(parseInt(e.target.value) * 1000);
-  };
-
-  return (
-    <div>
-      <h3>Manual Idle Detection Control</h3>
-      
-      <div>
-        <label>
-          Threshold (seconds): 
-          <input 
-            type="number" 
-            min="60" 
-            value={customThreshold / 1000} 
-            onChange={handleThresholdChange}
-            disabled={isStarted}
-          />
-        </label>
-      </div>
-      
-      <div>
-        <button onClick={handleStart} disabled={isStarted || !isSupported}>
-          Start Detection
-        </button>
-        <button onClick={handleStop} disabled={!isStarted}>
-          Stop Detection
-        </button>
-      </div>
-      
-      <div>
-        <h4>Status:</h4>
-        <p>API Supported: {isSupported ? "Yes" : "No"}</p>
-        <p>Permission Granted: {isPermissionGranted ? "Yes" : "No"}</p>
-        <p>Detection Active: {isStarted ? "Yes" : "No"}</p>
-        <p>Current State: {isIdle ? "Idle" : "Active"}</p>
-        <p>User State: {userState}</p>
-        <p>Screen State: {screenState}</p>
-      </div>
-    </div>
-  );
-}
-`} />
 
 ### Arguments
 

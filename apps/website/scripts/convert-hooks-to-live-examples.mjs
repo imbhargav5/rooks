@@ -12,9 +12,11 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { EXCLUDED_HOOKS } from './live-example-exclusions.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const HOOKS_DIR = path.resolve(__dirname, '../content/docs/hooks');
+const EXCLUDED_SET = new Set(EXCLUDED_HOOKS);
 
 function escapeForTemplateLiteral(code) {
     return code
@@ -57,6 +59,8 @@ async function main() {
     let totalFiles = 0;
     let totalBlocks = 0;
     for (const file of files) {
+        const rel = path.relative(HOOKS_DIR, file);
+        if (EXCLUDED_SET.has(rel)) continue;
         const count = await augmentFile(file);
         if (count > 0) {
             totalFiles += 1;
