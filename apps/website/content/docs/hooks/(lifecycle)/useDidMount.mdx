@@ -15,6 +15,18 @@ componentDidMount hook for React
 
 ### Run setup code once
 
+```jsx
+import { useDidMount } from "rooks";
+
+export default function App() {
+  useDidMount(function () {
+    console.log("mounted");
+  });
+
+  return null;
+}
+```
+
 <LiveExample code={`import { useDidMount } from "rooks";
 
 export default function App() {
@@ -27,6 +39,21 @@ export default function App() {
 `} />
 
 ### Set state after the component mounts
+
+```jsx
+import { useState } from "react";
+import { useDidMount } from "rooks";
+
+export default function MountedMessage() {
+  const [message, setMessage] = useState("Preparing…");
+
+  useDidMount(() => {
+    setMessage("Ready");
+  });
+
+  return <div>{message}</div>;
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useDidMount } from "rooks";

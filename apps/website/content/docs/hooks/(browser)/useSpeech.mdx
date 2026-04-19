@@ -15,6 +15,29 @@ Speech synthesis hook for React that provides an easy-to-use interface for the W
 
 ### Basic example
 
+```jsx
+import { useSpeech } from "rooks";
+
+export default function App() {
+  const { start, stop, isPlaying } = useSpeech({
+    text: "Hello, welcome to our application!",
+  });
+
+  return (
+    <div>
+      <h3>Basic Text to Speech</h3>
+      <p>Text: "Hello, welcome to our application!"</p>
+      <button onClick={start} disabled={isPlaying}>
+        {isPlaying ? "Speaking..." : "Start Speaking"}
+      </button>
+      <button onClick={stop} disabled={!isPlaying}>
+        Stop
+      </button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useSpeech } from "rooks";
 
 export default function App() {
@@ -38,6 +61,117 @@ export default function App() {
 `} />
 
 ### Advanced settings example
+
+```jsx
+import { useSpeech } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [text, setText] = useState("This is a customizable speech example.");
+  const [language, setLanguage] = useState("en-US");
+  const [rate, setRate] = useState(1);
+  const [pitch, setPitch] = useState(1);
+  const [volume, setVolume] = useState(1);
+
+  const { start, pause, resume, stop, isPlaying } = useSpeech({
+    text,
+    language,
+    rate,
+    pitch,
+    volume,
+  });
+
+  return (
+    <div>
+      <h3>Advanced Speech Settings</h3>
+      
+      <div>
+        <label>
+          Text:
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows={3}
+            cols={50}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Language:
+          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+          </select>
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Rate: {rate}
+          <input
+            type="range"
+            min="0.1"
+            max="2"
+            step="0.1"
+            value={rate}
+            onChange={(e) => setRate(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Pitch: {pitch}
+          <input
+            type="range"
+            min="0"
+            max="2"
+            step="0.1"
+            value={pitch}
+            onChange={(e) => setPitch(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Volume: {volume}
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <button onClick={start} disabled={isPlaying}>
+          Start
+        </button>
+        <button onClick={pause} disabled={!isPlaying}>
+          Pause
+        </button>
+        <button onClick={resume} disabled={isPlaying}>
+          Resume
+        </button>
+        <button onClick={stop} disabled={!isPlaying}>
+          Stop
+        </button>
+      </div>
+      
+      <p>Status: {isPlaying ? "Speaking" : "Stopped"}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSpeech } from "rooks";
 import { useState } from "react";
@@ -150,6 +284,99 @@ export default function App() {
 `} />
 
 ### Voice selection and callbacks example
+
+```jsx
+import { useSpeech } from "rooks";
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [text, setText] = useState("Choose a voice and listen to this text.");
+  const [selectedVoice, setSelectedVoice] = useState("");
+  const [voices, setVoices] = useState([]);
+  const [speechCount, setSpeechCount] = useState(0);
+
+  const { start, pause, resume, stop, isPlaying } = useSpeech({
+    text,
+    voiceURI: selectedVoice,
+    onEnd: () => {
+      setSpeechCount(prev => prev + 1);
+      console.log("Speech finished!");
+    },
+  });
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+      if (availableVoices.length > 0 && !selectedVoice) {
+        setSelectedVoice(availableVoices[0].voiceURI);
+      }
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, [selectedVoice]);
+
+  const handleVoiceChange = (e) => {
+    setSelectedVoice(e.target.value);
+  };
+
+  return (
+    <div>
+      <h3>Voice Selection & Callbacks</h3>
+      
+      <div>
+        <label>
+          Text:
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ width: "100%", marginTop: "5px" }}
+          />
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          Voice:
+          <select value={selectedVoice} onChange={handleVoiceChange}>
+            {voices.map((voice) => (
+              <option key={voice.voiceURI} value={voice.voiceURI}>
+                {voice.name} ({voice.lang})
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      
+      <div>
+        <button onClick={start} disabled={isPlaying}>
+          Start Speaking
+        </button>
+        <button onClick={pause} disabled={!isPlaying}>
+          Pause
+        </button>
+        <button onClick={resume} disabled={isPlaying}>
+          Resume
+        </button>
+        <button onClick={stop} disabled={!isPlaying}>
+          Stop
+        </button>
+      </div>
+      
+      <div>
+        <p>Status: {isPlaying ? "🔊 Speaking" : "🔇 Stopped"}</p>
+        <p>Speech completed {speechCount} times</p>
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSpeech } from "rooks";
 import { useState, useEffect } from "react";

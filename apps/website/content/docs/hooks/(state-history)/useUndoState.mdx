@@ -13,6 +13,26 @@ Drop in replacement for useState hook but with undo functionality.
 
 ### Basic usage
 
+```jsx
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
+  const [value, setValue, undo] = useUndoState(0);
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <br />
+      <button onClick={() => setValue(value + 1)}>Increment</button>
+      <button onClick={undo}>Undo</button>
+    </div>
+  );
+};
+
+export default App;
+```
+
 <LiveExample code={`import "./styles.css";
 import { useUndoState } from "rooks";
 
@@ -35,6 +55,28 @@ export default App;
 ### Any kind of value
 
 You can pass any kind of value to hook just like React's own useState.
+
+```jsx
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
+  const [value, setValue, undo] = useUndoState({ data: 42 });
+
+  return (
+    <div>
+      <span>Current value: {JSON.stringify(value)}</span>
+      <br />
+      <button onClick={() => setValue({ data: value.data + 1 })}>
+        Increment object data
+      </button>
+      <button onClick={undo}>Undo</button>
+    </div>
+  );
+};
+
+export default App;
+```
 
 <LiveExample code={`import "./styles.css";
 import { useUndoState } from "rooks";
@@ -60,6 +102,28 @@ export default App;
 ### Setter function is still the same
 
 Setter function can also be used with callback just like React's own useState.
+
+```jsx
+import "./styles.css";
+import { useUndoState } from "rooks";
+
+const App = () => {
+  const [value, setValue, undo] = useUndoState(0);
+
+  return (
+    <div>
+      <span>Current value: {value}</span>
+      <br />
+      <button onClick={() => setValue(current => current + 1)}>
+        Increment
+      </button>
+      <button onClick={undo}>Undo</button>
+    </div>
+  );
+};
+
+export default App;
+```
 
 <LiveExample code={`import "./styles.css";
 import { useUndoState } from "rooks";

@@ -15,6 +15,25 @@ A hook that provides state management synchronized with sessionStorage. It autom
 
 #### Basic example
 
+```jsx
+import { useSessionstorageState } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useSessionstorageState("my-app:count", 0);
+
+  return (
+    <div className="App">
+      <h1>Session Storage Counter</h1>
+      <p>Count: {count}</p>
+      <p>Refresh the page to see the value persisted!</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useSessionstorageState } from "rooks";
 
 export default function App() {
@@ -34,6 +53,69 @@ export default function App() {
 `} />
 
 #### Complex object storage
+
+```jsx
+import { useSessionstorageState } from "rooks";
+
+export default function UserProfile() {
+  const [user, setUser] = useSessionstorageState("user-profile", {
+    name: "",
+    email: "",
+    preferences: {
+      theme: "light",
+      notifications: true,
+    },
+  });
+
+  const updateUser = (field, value) => {
+    setUser((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const updatePreferences = (pref, value) => {
+    setUser((prev) => ({
+      ...prev,
+      preferences: {
+        ...prev.preferences,
+        [pref]: value,
+      },
+    }));
+  };
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <input
+        placeholder="Name"
+        value={user.name}
+        onChange={(e) => updateUser("name", e.target.value)}
+      />
+      <input
+        placeholder="Email"
+        value={user.email}
+        onChange={(e) => updateUser("email", e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={user.preferences.notifications}
+          onChange={(e) => updatePreferences("notifications", e.target.checked)}
+        />
+        Enable notifications
+      </label>
+      <select
+        value={user.preferences.theme}
+        onChange={(e) => updatePreferences("theme", e.target.value)}
+      >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSessionstorageState } from "rooks";
 
@@ -98,6 +180,63 @@ export default function UserProfile() {
 `} />
 
 #### Cross-window synchronization for shared drafts
+
+```jsx
+import { useSessionstorageState } from "rooks";
+
+export default function SyncDemo() {
+  const [message, setMessage] = useSessionstorageState(
+    "sync-message",
+    "Hello World"
+  );
+  const [lastUpdated, setLastUpdated] = useSessionstorageState(
+    "last-updated",
+    Date.now()
+  );
+
+  const updateMessage = (newMessage) => {
+    setMessage(newMessage);
+    setLastUpdated(Date.now());
+  };
+
+  const clearDraft = () => {
+    setMessage("");
+    setLastUpdated(Date.now());
+  };
+
+  return (
+    <div>
+      <h2>Cross-Window Sync Demo</h2>
+      <p>Open this page in multiple tabs to see real-time synchronization!</p>
+
+      <div>
+        <strong>Current Message:</strong> {message || "No message"}
+      </div>
+      <div>
+        <strong>Last Updated:</strong>{" "}
+        {new Date(lastUpdated).toLocaleTimeString()}
+      </div>
+
+      <input
+        value={message || ""}
+        onChange={(e) => updateMessage(e.target.value)}
+        placeholder="Type a message..."
+      />
+
+      <button onClick={() => updateMessage("Updated from tab!")}>
+        Update Message
+      </button>
+      <button onClick={clearDraft}>Clear Draft</button>
+
+      <p>
+        <em>
+          Try changing the draft in one tab and watch it update in others!
+        </em>
+      </p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSessionstorageState } from "rooks";
 

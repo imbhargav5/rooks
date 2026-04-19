@@ -13,6 +13,39 @@ Merges any number of refs into a single ref
 
 ## Examples
 
+```jsx
+import "./styles.css";
+import { useMergeRefs, useEventListenerRef } from "rooks";
+
+function App() {
+  const mousedownRef = useEventListenerRef("mousedown", () => {
+    console.log("mouse down");
+  });
+  const mouseupRef = useEventListenerRef("mouseup", () => {
+    console.log("mouse up");
+  });
+  const refs = useMergeRefs(mousedownRef, mouseupRef);
+
+  return (
+    <div>
+      <h1>Rooks : useMergeRefs Example</h1>
+      <hr></hr>
+      <div
+        ref={refs}
+        style={{
+          width: 250,
+          height: 200,
+          border: "blue 1px solid",
+        }}
+      >
+        A div with multiple refs. Click me!!
+      </div>
+    </div>
+  );
+}
+export default App;
+```
+
 <LiveExample code={`import "./styles.css";
 import { useMergeRefs, useEventListenerRef } from "rooks";
 

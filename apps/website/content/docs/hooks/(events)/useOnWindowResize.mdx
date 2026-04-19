@@ -11,6 +11,22 @@ A React hook for adding an event listener for window resize
 
 ## Examples
 
+```jsx
+import "./styles.css";
+import { useOnWindowResize } from "rooks";
+
+export default function App() {
+  useOnWindowResize(() => console.log("window resized"));
+
+  return (
+    <div className="App">
+      <h1>useOnWindowResize example</h1>
+      <h2>Resize the window and see the logs</h2>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import "./styles.css";
 import { useOnWindowResize } from "rooks";
 
@@ -25,6 +41,29 @@ export default function App() {
   );
 }
 `} />
+
+```jsx
+import { useState } from "react";
+import { useOnWindowResize } from "rooks";
+
+export default function ResponsivePreview() {
+  const [count, setCount] = useState(0);
+  const [enabled, setEnabled] = useState(true);
+
+  useOnWindowResize(() => {
+    setCount((current) => current + 1);
+  }, enabled);
+
+  return (
+    <div>
+      <button onClick={() => setEnabled((current) => !current)}>
+        {enabled ? "Pause resize tracking" : "Resume resize tracking"}
+      </button>
+      <p>Resize events recorded: {count}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useOnWindowResize } from "rooks";

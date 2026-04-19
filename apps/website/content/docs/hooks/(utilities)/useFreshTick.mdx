@@ -13,6 +13,38 @@ Like useFreshRef but specifically for functions
 
 ## Examples
 
+```jsx
+import { useFreshTick } from "rooks";
+import { useEffect, useState } from "react";
+
+/* eslint-disable */
+
+export default function App() {
+  const [currentValue, setCurrentValue] = useState(0);
+
+  function Increment() {
+    setCurrentValue(currentValue + 1);
+  }
+
+  const freshTick = useFreshTick(Increment);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      freshTick();
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+  return (
+    <div className="App">
+      <h1> Rooks : useFreshTick example</h1>
+      <h3>
+        current value : <i>{currentValue} </i>
+      </h3>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useFreshTick } from "rooks";
 import { useEffect, useState } from "react";
 

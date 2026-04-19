@@ -13,6 +13,37 @@ Signal whether or not a media query is currently matched.
 
 ## Examples
 
+```jsx
+import "./styles.css";
+import { useMediaMatch } from "rooks";
+
+function App() {
+  const Component = useMediaMatch("(max-width: 600px)");
+
+  return (
+    <div>
+      <h1>Rooks : useMediaMatch example</h1>
+      <hr></hr>
+
+      <div
+        style={{
+          backgroundColor: "lightblue",
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span>Your screen is {Component ? "narrow" : "wide"}</span>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
 <LiveExample code={`import "./styles.css";
 import { useMediaMatch } from "rooks";
 

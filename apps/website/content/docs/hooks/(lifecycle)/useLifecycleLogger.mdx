@@ -15,6 +15,29 @@ A react hook that console logs parameters as component transitions through lifec
 
 ## Examples
 
+```jsx
+import "./styles.css";
+import { useLifecycleLogger } from "rooks";
+import { useEffect, useState } from "react";
+
+export default function App() {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    setValue(1);
+  }, []);
+
+  useLifecycleLogger("Demo", value);
+
+  return (
+    <div className="App">
+      <h1>useLifecycleLogger example</h1>
+      <h2>See console for logs</h2>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import "./styles.css";
 import { useLifecycleLogger } from "rooks";
 import { useEffect, useState } from "react";

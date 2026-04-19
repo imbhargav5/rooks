@@ -17,6 +17,41 @@ A Suspense-enabled hook for getting battery status information from the Navigato
 
 #### Basic Usage
 
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+function BatteryInfo() {
+  const battery = useSuspenseNavigatorBattery();
+
+  return (
+    <div>
+      <h2>Battery Status</h2>
+      <p>Battery Level: {Math.round(battery.level * 100)}%</p>
+      <p>Charging: {battery.charging ? "Yes" : "No"}</p>
+      <p>
+        Charging Time:{" "}
+        {battery.chargingTime === Infinity ? "N/A" : `${battery.chargingTime}s`}
+      </p>
+      <p>
+        Discharging Time:{" "}
+        {battery.dischargingTime === Infinity
+          ? "N/A"
+          : `${battery.dischargingTime}s`}
+      </p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading battery info...</div>}>
+      <BatteryInfo />
+    </Suspense>
+  );
+}
+```
+
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 
@@ -52,6 +87,59 @@ export default function App() {
 `} />
 
 #### With Error Boundary
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h2>Battery API Not Supported</h2>
+          <p>Your browser doesn't support the Battery Status API.</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+function BatteryStatus() {
+  const battery = useSuspenseNavigatorBattery();
+
+  return (
+    <div>
+      <h2>Live Battery Status</h2>
+      <div style={{ fontSize: "2em" }}>
+        🔋 {Math.round(battery.level * 100)}%
+      </div>
+      <p>{battery.charging ? "⚡ Charging" : "🔌 On Battery"}</p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Checking battery status...</div>}>
+        <BatteryStatus />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
 
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
@@ -106,6 +194,90 @@ export default function App() {
 `} />
 
 #### Battery Level Indicator with Real-time Updates
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseNavigatorBattery } from "rooks/experimental";
+
+function BatteryIndicator() {
+  const battery = useSuspenseNavigatorBattery();
+
+  const formatTime = (seconds) => {
+    if (seconds === Infinity) return "∞";
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  };
+
+  const getBatteryColor = (level) => {
+    if (level > 0.5) return "#4CAF50"; // Green
+    if (level > 0.2) return "#FF9800"; // Orange
+    return "#F44336"; // Red
+  };
+
+  return (
+    <div
+      style={{
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        maxWidth: "300px",
+      }}
+    >
+      <h3>🔋 Battery Status</h3>
+
+      <div
+        style={{
+          width: "100%",
+          height: "20px",
+          backgroundColor: "#e0e0e0",
+          borderRadius: "10px",
+          overflow: "hidden",
+          marginBottom: "10px",
+        }}
+      >
+        <div
+          style={{
+            width: `${battery.level * 100}%`,
+            height: "100%",
+            backgroundColor: getBatteryColor(battery.level),
+            transition: "width 0.3s ease",
+          }}
+        />
+      </div>
+
+      <div style={{ display: "grid", gap: "8px", fontSize: "14px" }}>
+        <div>
+          <strong>Level:</strong> {Math.round(battery.level * 100)}%
+        </div>
+        <div>
+          <strong>Status:</strong>{" "}
+          {battery.charging ? "⚡ Charging" : "🔌 Discharging"}
+        </div>
+        {battery.charging && (
+          <div>
+            <strong>Time to Full:</strong> {formatTime(battery.chargingTime)}
+          </div>
+        )}
+        {!battery.charging && battery.dischargingTime !== Infinity && (
+          <div>
+            <strong>Time Remaining:</strong>{" "}
+            {formatTime(battery.dischargingTime)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading battery info...</div>}>
+      <BatteryIndicator />
+    </Suspense>
+  );
+}
+```
 
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";

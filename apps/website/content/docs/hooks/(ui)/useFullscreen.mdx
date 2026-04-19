@@ -13,6 +13,25 @@ Use the [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullsc
 
 ### Toggle fullscreen for the document
 
+```tsx
+import { useFullscreen } from "rooks";
+
+export default function App() {
+  const { isFullscreenAvailable, isFullscreenEnabled, toggleFullscreen } =
+    useFullscreen();
+
+  if (!isFullscreenAvailable) {
+    return <p>Fullscreen API is not available.</p>;
+  }
+
+  return (
+    <button onClick={() => void toggleFullscreen()}>
+      {isFullscreenEnabled ? "Exit fullscreen" : "Enter fullscreen"}
+    </button>
+  );
+}
+```
+
 <LiveExample lang="tsx" code={`import { useFullscreen } from "rooks";
 
 export default function App() {
@@ -32,6 +51,38 @@ export default function App() {
 `} />
 
 ### Toggle fullscreen for a specific panel and react to changes
+
+```tsx
+import { useRef, useState } from "react";
+import { useFullscreen } from "rooks";
+
+export default function App() {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState("Windowed");
+  const { enableFullscreen, disableFullscreen, isFullscreenEnabled } =
+    useFullscreen({
+      target: panelRef,
+      onChange: () => {
+        setStatus(document.fullscreenElement ? "Fullscreen" : "Windowed");
+      },
+    });
+
+  return (
+    <div>
+      <div ref={panelRef} style={{ padding: 24, border: "1px solid #999" }}>
+        <p>Status: {status}</p>
+        <button onClick={() => void enableFullscreen()}>Open panel</button>
+        <button
+          onClick={() => void disableFullscreen()}
+          disabled={!isFullscreenEnabled}
+        >
+          Close panel
+        </button>
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample lang="tsx" code={`import { useRef, useState } from "react";
 import { useFullscreen } from "rooks";

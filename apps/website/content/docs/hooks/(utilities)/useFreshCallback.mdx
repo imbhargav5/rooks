@@ -13,6 +13,27 @@ Avoid stale closures and keep your callback fresh.
 
 ### Call the latest callback after state changes
 
+```tsx
+import { useState } from "react";
+import { useFreshCallback } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const logLatestCount = useFreshCallback(() => {
+    console.log(`Latest count: ${count}`);
+  });
+
+  return (
+    <div>
+      <button onClick={() => setCount((current) => current + 1)}>
+        Increment
+      </button>
+      <button onClick={logLatestCount}>Log latest count</button>
+    </div>
+  );
+}
+```
+
 <LiveExample lang="tsx" code={`import { useState } from "react";
 import { useFreshCallback } from "rooks";
 

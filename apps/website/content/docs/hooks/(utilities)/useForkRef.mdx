@@ -11,6 +11,48 @@ A hook that can combine two refs(mutable or callbackRefs) into a single callback
 
 ## Examples
 
+```jsx
+import "./styles.css";
+import {
+  useBoundingclientrectRef,
+  useForkRef,
+  useOutsideClickRef,
+} from "rooks";
+
+function App() {
+  const [outsideClickRef] = useOutsideClickRef(() => {
+    console.log("clicked outside");
+  });
+  const [
+    myBoundingclientrectRef,
+    boundingclientrect,
+  ] = useBoundingclientrectRef();
+  const myRef = useForkRef(outsideClickRef, myBoundingclientrectRef);
+  return (
+    <div>
+      <h1>Rooks : useForkRef example </h1>
+      <div
+        ref={myRef}
+        style={{
+          background: "teal",
+          color: "white",
+          padding: 8,
+          margin: 4,
+          marginTop: 20,
+        }}
+      >
+        <p>
+          Click outside the box to see logs{" "}
+          {JSON.stringify(boundingclientrect, 1, 2)}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
 <LiveExample code={`import "./styles.css";
 import {
   useBoundingclientrectRef,

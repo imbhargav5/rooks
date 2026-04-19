@@ -15,6 +15,25 @@ A hook that provides a way to check if a component is currently mounted. This is
 
 ### Basic usage
 
+```jsx
+import { useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+
+export default function App() {
+  const getIsMounted = useGetIsMounted();
+  
+  useEffect(() => {
+    console.log("Component mounted:", getIsMounted()); // true
+    
+    return () => {
+      console.log("Component unmounting:", getIsMounted()); // false
+    };
+  }, [getIsMounted]);
+  
+  return <div>Check console for mount status</div>;
+}
+```
+
 <LiveExample code={`import { useEffect } from "react";
 import { useGetIsMounted } from "rooks";
 
@@ -34,6 +53,56 @@ export default function App() {
 `} />
 
 ### Preventing state updates after async operations
+
+```jsx
+import { useState, useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+
+export default function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const getIsMounted = useGetIsMounted();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Simulate API call
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setUser(userData);
+          setLoading(false);
+        }
+      } catch (err) {
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUser();
+  }, [userId, getIsMounted]);
+
+  if (loading) return <div>Loading user...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState, useEffect } from "react";
 import { useGetIsMounted } from "rooks";
@@ -85,6 +154,59 @@ export default function UserProfile({ userId }) {
 `} />
 
 ### Using with timers and intervals
+
+```jsx
+import { useState, useEffect } from "react";
+import { useGetIsMounted } from "rooks";
+
+export default function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const getIsMounted = useGetIsMounted();
+
+  useEffect(() => {
+    let intervalId;
+    
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        // Only update state if component is still mounted
+        if (getIsMounted()) {
+          setCount(prevCount => prevCount + 1);
+        } else {
+          // Clear interval if component is unmounted
+          clearInterval(intervalId);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [isRunning, getIsMounted]);
+
+  const handleStart = () => setIsRunning(true);
+  const handleStop = () => setIsRunning(false);
+  const handleReset = () => {
+    setIsRunning(false);
+    setCount(0);
+  };
+
+  return (
+    <div>
+      <h2>Timer: {count}s</h2>
+      <button onClick={handleStart} disabled={isRunning}>
+        Start
+      </button>
+      <button onClick={handleStop} disabled={!isRunning}>
+        Stop
+      </button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState, useEffect } from "react";
 import { useGetIsMounted } from "rooks";
@@ -141,6 +263,50 @@ export default function Timer() {
 ### Alternative: Using useSafeSetState
 
 For a more convenient approach to safe state updates, you can use the [`useSafeSetState`](/docs/hooks/useSafeSetState) hook from our collection, which internally uses `useGetIsMounted` to provide a drop-in replacement for `useState` that automatically prevents updates on unmounted components:
+
+```jsx
+import { useEffect } from "react";
+import { useSafeSetState } from "rooks";
+
+export default function SafeUserProfile({ userId }) {
+  const [user, setUser] = useSafeSetState(null);
+  const [loading, setLoading] = useSafeSetState(true);
+  const [error, setError] = useSafeSetState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // These will automatically be ignored if component is unmounted
+        setUser(userData);
+        setLoading(false);
+      } catch (err) {
+        // These will automatically be ignored if component is unmounted
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [userId, setUser, setLoading, setError]);
+
+  if (loading) return <div>Loading user...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useEffect } from "react";
 import { useSafeSetState } from "rooks";

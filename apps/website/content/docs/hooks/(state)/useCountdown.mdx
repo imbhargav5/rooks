@@ -13,6 +13,17 @@ Count down to a target timestamp and call callbacks at a configurable interval.
 
 ### Basic example
 
+```jsx
+import { useCountdown } from "rooks";
+
+export default function App() {
+  const endTime = new Date(Date.now() + 10_000);
+  const count = useCountdown(endTime);
+
+  return <div>{count} seconds remaining</div>;
+}
+```
+
 <LiveExample code={`import { useCountdown } from "rooks";
 
 export default function App() {
@@ -24,6 +35,31 @@ export default function App() {
 `} />
 
 ### Use callbacks for progress and completion
+
+```jsx
+import { useState } from "react";
+import { useCountdown } from "rooks";
+
+export default function AutoDismissNotice() {
+  const [events, setEvents] = useState([]);
+  const count = useCountdown(new Date(Date.now() + 3_000), {
+    interval: 1_000,
+    onDown: (remaining) => {
+      setEvents((current) => [...current, `tick:${remaining}`]);
+    },
+    onEnd: () => {
+      setEvents((current) => [...current, "ended"]);
+    },
+  });
+
+  return (
+    <div>
+      <p>{count === 0 ? "Dismissed" : `${count} seconds remaining`}</p>
+      <pre>{JSON.stringify(events, null, 2)}</pre>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useCountdown } from "rooks";

@@ -13,6 +13,25 @@ Toggle (between booleans or custom data)hook for React.
 
 ### Basic usage
 
+```jsx
+import "./styles.css";
+import { useToggle } from "rooks";
+
+export default function App() {
+  const [state, toggle] = useToggle();
+
+  return (
+    <div className="App">
+      <h1>Rooks: useToggle Example </h1>
+      <br></br>
+      <button onClick={toggle} style={{ cursor: "pointer" }}>
+        {state ? <span>Yes! 👍</span> : <span>No! 👎</span>}
+      </button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import "./styles.css";
 import { useToggle } from "rooks";
 
@@ -33,6 +52,25 @@ export default function App() {
 
 ### With a Start value
 
+```jsx
+import "./styles.css";
+import { useToggle } from "rooks";
+
+export default function App() {
+  const [state, toggle] = useToggle(true);
+
+  return (
+    <div className="App">
+      <h1>Rooks: useToggle Example </h1>
+      <br></br>
+      <button onClick={toggle} style={{ cursor: "pointer" }}>
+        {state ? <span>Yes! 👍</span> : <span>No! 👎</span>}
+      </button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import "./styles.css";
 import { useToggle } from "rooks";
 
@@ -52,6 +90,27 @@ export default function App() {
 `} />
 
 ### Custom toggle values
+
+```jsx
+import "./styles.css";
+import { useToggle } from "rooks";
+
+export default function App() {
+  const [state, toggle] = useToggle("on", value =>
+    value === "on" ? "off" : "on"
+  );
+
+  return (
+    <div className="App">
+      <h1>Rooks: useToggle Example </h1>
+      <br></br>
+      <button onClick={toggle} style={{ cursor: "pointer" }}>
+        {state}
+      </button>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import "./styles.css";
 import { useToggle } from "rooks";

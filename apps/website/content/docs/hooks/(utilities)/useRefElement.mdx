@@ -13,6 +13,49 @@ Helps bridge gap between callback ref and state. Manages the element called with
 
 ### Attach an event listener to the current element
 
+```jsx
+import { useEffect, useState } from "react";
+import { useRefElement } from "rooks";
+
+function useEventListenerRef(eventName, callback) {
+  const [ref, element] = useRefElement();
+
+  useEffect(() => {
+    if (!(element && element.addEventListener)) {
+      return;
+    }
+    element.addEventListener(eventName, callback);
+    return () => {
+      element.removeEventListener(eventName, callback);
+    };
+  }, [element, eventName, callback]);
+
+  return ref;
+}
+
+export default function App() {
+  const [value, setValue] = useState(0);
+  const ref = useEventListenerRef("click", function () {
+    setValue(value + 1);
+  });
+
+  return (
+    <div
+      ref={ref}
+      className="App"
+      style={{
+        padding: "20px",
+        border: "5px solid dodgerblue",
+      }}
+    >
+      <h1>useRefElement Example</h1>
+      <h2>Click in this box</h2>
+      <p> Value is {value}</p>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useEffect, useState } from "react";
 import { useRefElement } from "rooks";
 
@@ -56,6 +99,21 @@ export default function App() {
 `} />
 
 ### Read the current element from the callback ref
+
+```jsx
+import { useRefElement } from "rooks";
+
+export default function CurrentElementPreview() {
+  const [ref, element] = useRefElement();
+
+  return (
+    <div>
+      <button ref={ref}>Focusable trigger</button>
+      <p>Current tag: {element?.tagName ?? "none"}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useRefElement } from "rooks";
 

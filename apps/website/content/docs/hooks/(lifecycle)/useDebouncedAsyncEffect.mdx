@@ -22,6 +22,56 @@ The hook provides a `shouldContinueEffect` callback that helps prevent race cond
 
 ### Basic async data fetching with debounce
 
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function SearchComponent() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      if (!searchQuery.trim()) {
+        setResults([]);
+        return;
+      }
+
+      setLoading(true);
+
+      const response = await fetch(`/api/search?q=${searchQuery}`);
+      const data = await response.json();
+
+      // Only update state if this effect is still valid
+      if (shouldContinueEffect()) {
+        setResults(data);
+        setLoading(false);
+      }
+    },
+    [searchQuery],
+    500
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      {loading && <p>Loading...</p>}
+      <ul>
+        {results.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
@@ -73,6 +123,52 @@ export default function SearchComponent() {
 
 ### Preventing race conditions
 
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      // First API call
+      const userResponse = await fetch(`/api/users/${userId}`);
+      const userData = await userResponse.json();
+
+      // Check if we should continue before making the second call
+      if (!shouldContinueEffect()) return;
+
+      // Second API call
+      const postsResponse = await fetch(`/api/users/${userId}/posts`);
+      const postsData = await postsResponse.json();
+
+      // Final check before updating state
+      if (shouldContinueEffect()) {
+        setUser(userData);
+        setPosts(postsData);
+      }
+    },
+    [userId],
+    300
+  );
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
@@ -120,6 +216,49 @@ export default function UserProfile({ userId }) {
 
 ### With cleanup function
 
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataFetcher({ endpoint }) {
+  const [data, setData] = useState(null);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      const controller = new AbortController();
+
+      try {
+        const response = await fetch(endpoint, {
+          signal: controller.signal
+        });
+        const result = await response.json();
+
+        if (shouldContinueEffect()) {
+          setData(result);
+        }
+
+        return controller; // Return for cleanup
+      } catch (error) {
+        if (error.name !== 'AbortError' && shouldContinueEffect()) {
+          console.error('Fetch error:', error);
+        }
+        return controller;
+      }
+    },
+    [endpoint],
+    500,
+    (controller) => {
+      // Cleanup: abort any in-flight requests
+      if (controller) {
+        controller.abort();
+      }
+    }
+  );
+
+  return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
+}
+```
+
 <LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
@@ -164,6 +303,37 @@ export default function DataFetcher({ endpoint }) {
 
 ### With leading option for immediate first execution
 
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function AutoSave({ documentId, content }) {
+  const [saveStatus, setSaveStatus] = useState('saved');
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      setSaveStatus('saving');
+
+      await fetch(`/api/documents/${documentId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      });
+
+      if (shouldContinueEffect()) {
+        setSaveStatus('saved');
+      }
+    },
+    [content],
+    1000,
+    undefined, // no cleanup
+    { leading: true } // Save immediately on first change
+  );
+
+  return <span>{saveStatus}</span>;
+}
+```
+
 <LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
@@ -195,6 +365,47 @@ export default function AutoSave({ documentId, content }) {
 `} />
 
 ### Error handling
+
+```jsx
+import { useDebouncedAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataComponent({ query }) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useDebouncedAsyncEffect(
+    async (shouldContinueEffect) => {
+      try {
+        const response = await fetch(`/api/data?q=${query}`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (shouldContinueEffect()) {
+          setData(result);
+          setError(null);
+        }
+      } catch (err) {
+        if (shouldContinueEffect()) {
+          setError(err.message);
+          setData(null);
+        }
+      }
+    },
+    [query],
+    500
+  );
+
+  if (error) return <div>Error: {error}</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return <div>{JSON.stringify(data)}</div>;
+}
+```
 
 <LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";

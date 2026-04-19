@@ -17,6 +17,41 @@ A Suspense-enabled hook for localStorage state management with cross-tab synchro
 
 #### Basic Usage with Numbers
 
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseLocalStorageState } from "rooks/experimental";
+
+function Counter() {
+  const [count, { setItem, deleteItem }] = useSuspenseLocalStorageState(
+    'counter',
+    (currentValue) => currentValue ? parseInt(currentValue, 10) : 0
+  );
+
+  return (
+    <div>
+      <h2>Counter: {count}</h2>
+      <button onClick={() => setItem(count + 1)}>
+        Increment
+      </button>
+      <button onClick={() => setItem(count - 1)}>
+        Decrement
+      </button>
+      <button onClick={deleteItem}>
+        Reset
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading counter...</div>}>
+      <Counter />
+    </Suspense>
+  );
+}
+```
+
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
@@ -52,6 +87,73 @@ export default function App() {
 `} />
 
 #### Working with Objects and TypeScript
+
+```tsx
+import React, { Suspense } from "react";
+import { useSuspenseLocalStorageState } from "rooks/experimental";
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function UserProfile() {
+  const [user, { setItem, getItem, deleteItem }] = useSuspenseLocalStorageState(
+    'user-profile',
+    (currentValue): User => {
+      if (currentValue) {
+        try {
+          return JSON.parse(currentValue);
+        } catch {
+          return { id: 0, name: 'Guest', email: '' };
+        }
+      }
+      return { id: 0, name: 'Guest', email: '' };
+    }
+  );
+
+  const updateUser = () => {
+    setItem({
+      id: 123,
+      name: 'John Doe',
+      email: 'john@example.com'
+    });
+  };
+
+  const getCurrentUser = () => {
+    const current = getItem();
+    alert(`Current user: ${current.name} (${current.email})`);
+  };
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>ID: {user.id}</p>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
+      
+      <button onClick={updateUser}>
+        Update User
+      </button>
+      <button onClick={getCurrentUser}>
+        Show Current User
+      </button>
+      <button onClick={deleteItem}>
+        Clear Profile
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading user profile...</div>}>
+      <UserProfile />
+    </Suspense>
+  );
+}
+```
 
 <LiveExample lang="tsx" code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
@@ -121,6 +223,49 @@ export default function App() {
 
 #### Cross-tab Synchronization Demo
 
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseLocalStorageState } from "rooks/experimental";
+
+function SharedCounter() {
+  const [count, { setItem, deleteItem }] = useSuspenseLocalStorageState(
+    'shared-counter',
+    (currentValue) => currentValue ? parseInt(currentValue, 10) : 0
+  );
+
+  return (
+    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+      <h3>Shared Counter</h3>
+      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>
+        Count: {count}
+      </p>
+      <div style={{ gap: '10px', display: 'flex' }}>
+        <button onClick={() => setItem(count + 1)}>
+          +1
+        </button>
+        <button onClick={() => setItem(count + 10)}>
+          +10
+        </button>
+        <button onClick={deleteItem}>
+          Reset
+        </button>
+      </div>
+      <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
+        Open this page in multiple tabs to see real-time synchronization!
+      </p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Initializing shared state...</div>}>
+      <SharedCounter />
+    </Suspense>
+  );
+}
+```
+
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
@@ -164,6 +309,110 @@ export default function App() {
 `} />
 
 #### Complex State with Arrays
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseLocalStorageState } from "rooks/experimental";
+
+function TodoList() {
+  const [todos, { setItem, deleteItem }] = useSuspenseLocalStorageState(
+    'todo-list',
+    (currentValue) => {
+      if (currentValue) {
+        try {
+          return JSON.parse(currentValue);
+        } catch {
+          return [];
+        }
+      }
+      return [];
+    }
+  );
+
+  const addTodo = () => {
+    const text = prompt('Enter todo:');
+    if (text) {
+      setItem([
+        ...todos,
+        {
+          id: Date.now(),
+          text,
+          completed: false
+        }
+      ]);
+    }
+  };
+
+  const toggleTodo = (id) => {
+    setItem(
+      todos.map(todo =>
+        todo.id === id
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      )
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setItem(todos.filter(todo => todo.id !== id));
+  };
+
+  return (
+    <div>
+      <h2>Todo List ({todos.length} items)</h2>
+      
+      <button onClick={addTodo} style={{ marginBottom: '20px' }}>
+        Add Todo
+      </button>
+      
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        {todos.map(todo => (
+          <li
+            key={todo.id}
+            style={{
+              padding: '10px',
+              margin: '5px 0',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <span
+              onClick={() => toggleTodo(todo.id)}
+              style={{
+                textDecoration: todo.completed ? 'line-through' : 'none',
+                cursor: 'pointer',
+                flex: 1
+              }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      
+      {todos.length > 0 && (
+        <button onClick={deleteItem} style={{ marginTop: '20px' }}>
+          Clear All Todos
+        </button>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading todos...</div>}>
+      <TodoList />
+    </Suspense>
+  );
+}
+```
 
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
@@ -269,6 +518,119 @@ export default function App() {
 `} />
 
 #### With Error Boundary for Production Use
+
+```jsx
+import React, { Suspense } from "react";
+import { useSuspenseLocalStorageState } from "rooks/experimental";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h2>Something went wrong</h2>
+          <p>Failed to initialize localStorage state.</p>
+          <button onClick={() => this.setState({ hasError: false })}>
+            Try Again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+function Settings() {
+  const [settings, { setItem, deleteItem }] = useSuspenseLocalStorageState(
+    'app-settings',
+    (currentValue) => {
+      const defaults = {
+        theme: 'light',
+        notifications: true,
+        autoSave: false
+      };
+      
+      if (currentValue) {
+        try {
+          return { ...defaults, ...JSON.parse(currentValue) };
+        } catch {
+          return defaults;
+        }
+      }
+      return defaults;
+    }
+  );
+
+  const updateSetting = (key, value) => {
+    setItem({
+      ...settings,
+      [key]: value
+    });
+  };
+
+  return (
+    <div>
+      <h2>Application Settings</h2>
+      
+      <div style={{ display: 'grid', gap: '15px', maxWidth: '300px' }}>
+        <label>
+          Theme:
+          <select
+            value={settings.theme}
+            onChange={(e) => updateSetting('theme', e.target.value)}
+            style={{ marginLeft: '10px' }}
+          >
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+        
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.notifications}
+            onChange={(e) => updateSetting('notifications', e.target.checked)}
+          />
+          Enable Notifications
+        </label>
+        
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.autoSave}
+            onChange={(e) => updateSetting('autoSave', e.target.checked)}
+          />
+          Auto Save
+        </label>
+      </div>
+      
+      <button onClick={deleteItem} style={{ marginTop: '20px' }}>
+        Reset to Defaults
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading settings...</div>}>
+        <Settings />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
 
 <LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";

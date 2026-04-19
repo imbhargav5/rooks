@@ -15,6 +15,34 @@ A hook that provides a safe version of `useState` that prevents state updates af
 
 #### Basic example
 
+```jsx
+import { useSafeSetState } from "rooks";
+
+export default function App() {
+  const [count, setSafeCount] = useSafeSetState(0);
+
+  const handleAsyncIncrement = async () => {
+    // Simulate an async operation
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // This will only update state if the component is still mounted
+    setSafeCount(prev => prev + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleAsyncIncrement}>
+        Async Increment (2s delay)
+      </button>
+      <button onClick={() => setSafeCount(0)}>
+        Reset
+      </button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useSafeSetState } from "rooks";
 
 export default function App() {
@@ -43,6 +71,45 @@ export default function App() {
 `} />
 
 #### Example with fetch operation
+
+```jsx
+import { useSafeSetState } from "rooks";
+import { useEffect } from "react";
+
+export default function UserProfile({ userId }) {
+  const [user, setSafeUser] = useSafeSetState(null);
+  const [loading, setSafeLoading] = useSafeSetState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setSafeLoading(true);
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // Safe to call even if component unmounts during fetch
+        setSafeUser(userData);
+        setSafeLoading(false);
+      } catch (error) {
+        console.error('Failed to fetch user:', error);
+        setSafeLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [userId, setSafeUser, setSafeLoading]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSafeSetState } from "rooks";
 import { useEffect } from "react";
@@ -83,6 +150,43 @@ export default function UserProfile({ userId }) {
 `} />
 
 #### Example with functional state updates
+
+```jsx
+import { useSafeSetState } from "rooks";
+
+export default function Counter() {
+  const [state, setSafeState] = useSafeSetState({
+    count: 0,
+    lastUpdated: Date.now()
+  });
+
+  const increment = () => {
+    setSafeState(prevState => ({
+      count: prevState.count + 1,
+      lastUpdated: Date.now()
+    }));
+  };
+
+  const delayedIncrement = () => {
+    setTimeout(() => {
+      // This update will be ignored if component unmounts
+      setSafeState(prevState => ({
+        ...prevState,
+        count: prevState.count + 1
+      }));
+    }, 3000);
+  };
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <p>Last updated: {new Date(state.lastUpdated).toLocaleTimeString()}</p>
+      <button onClick={increment}>Increment Now</button>
+      <button onClick={delayedIncrement}>Increment in 3s</button>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSafeSetState } from "rooks";
 

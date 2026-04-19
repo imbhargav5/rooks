@@ -15,6 +15,40 @@ A React hook that works like `useEffect` but performs deep comparison on depende
 
 #### Basic example with object dependencies
 
+```jsx
+import { useDeepCompareEffect } from "rooks";
+import { useState } from "react";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const [user, setUser] = useState({ name: "John", age: 30 });
+
+  // This effect will only run when the user object's content actually changes
+  useDeepCompareEffect(() => {
+    console.log("User data changed:", user);
+    // Perform some side effect based on user data
+  }, [user]);
+
+  const updateUserName = () => {
+    // Even though this creates a new object reference, 
+    // the effect won't run if the content is the same
+    setUser({ name: "John", age: 30 });
+  };
+
+  const actuallyChangeUser = () => {
+    setUser({ name: "Jane", age: 25 });
+  };
+
+  return (
+    <div>
+      <p>User: {user.name}, Age: {user.age}</p>
+      <button onClick={updateUserName}>Update with same data</button>
+      <button onClick={actuallyChangeUser}>Actually change user</button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";
 
@@ -49,6 +83,45 @@ export default function App() {
 `} />
 
 #### Example with array dependencies
+
+```jsx
+import { useDeepCompareEffect } from "rooks";
+import { useState } from "react";
+
+export default function TodoApp() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build an app", completed: false }
+  ]);
+
+  // Effect runs only when todo array content actually changes
+  useDeepCompareEffect(() => {
+    console.log("Todos updated, saving to localStorage");
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  return (
+    <div>
+      {todos.map(todo => (
+        <div key={todo.id}>
+          <input 
+            type="checkbox" 
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
+          />
+          {todo.text}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";
@@ -89,6 +162,64 @@ export default function TodoApp() {
 `} />
 
 #### Example with cleanup function
+
+```jsx
+import { useDeepCompareEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataFetcher() {
+  const [filters, setFilters] = useState({
+    category: "electronics",
+    minPrice: 100,
+    maxPrice: 500
+  });
+  const [data, setData] = useState(null);
+
+  useDeepCompareEffect(() => {
+    const controller = new AbortController();
+    
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `/api/products?${new URLSearchParams(filters)}`,
+          { signal: controller.signal }
+        );
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        // Ignore fetch abort errors, as they are expected on cleanup
+        if (error.name !== "AbortError") {
+
+          console.error("Fetch failed:", error);
+        }
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function to abort the fetch request if dependencies change
+    return () => {
+      controller.abort();
+
+    };
+  }, [filters]);
+
+  const updateFilters = () => {
+    setFilters({
+      category: "electronics",
+      minPrice: 100,
+      maxPrice: 500
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={updateFilters}>Update filters (same values)</button>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";

@@ -13,6 +13,35 @@ Throttle custom hook for React
 
 ### Basic usage
 
+```jsx
+import React, { useState } from "react";
+import { useThrottle } from "rooks";
+
+function App() {
+  const [text, setText] = useState("");
+  const [throttleValue, setThrottleValue] = useState("");
+  const [throttledFunction, isReady] = useThrottle(setThrottleValue, 1000);
+
+  return (
+    <div>
+      <h1>Rooks : useThrottle example</h1>
+      <input
+        onChange={e => {
+          setText(e.target.value);
+          throttledFunction(e.target.value);
+        }}
+      />
+      <p>Actual value: {text}</p>
+      <p>
+        Throttled value (being updated at most once per second): {throttleValue}
+      </p>
+    </div>
+  );
+}
+
+export default App;
+```
+
 <LiveExample code={`import React, { useState } from "react";
 import { useThrottle } from "rooks";
 

@@ -15,6 +15,46 @@ A hook that tracks which props or values changed to cause a component rerender. 
 
 #### Basic example with component props
 
+```jsx
+import { useState } from "react";
+import { useWhyDidYouUpdate } from "rooks";
+
+function ExpensiveComponent({ name, age, hobbies, settings }) {
+  // Track all props to see which ones are causing rerenders
+  useWhyDidYouUpdate("ExpensiveComponent", {
+    name,
+    age,
+    hobbies,
+    settings
+  });
+
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Hobbies: {hobbies.join(", ")}</p>
+    </div>
+  );
+}
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const user = {
+    name: "John",
+    age: 30,
+    hobbies: ["reading", "coding"], // This creates a new array on every render!
+    settings: { theme: "dark" }
+  };
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>Count: {count}</button>
+      <ExpensiveComponent {...user} />
+    </>
+  );
+}
+```
+
 <LiveExample code={`import { useState } from "react";
 import { useWhyDidYouUpdate } from "rooks";
 

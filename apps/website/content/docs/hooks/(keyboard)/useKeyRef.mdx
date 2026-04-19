@@ -15,6 +15,23 @@ Very similar useKey but it returns a ref
 
 #### Basic example with keydown
 
+```jsx
+import { useKeyRef } from "rooks";
+export default function App() {
+  function vowelsEntered(e) {
+    console.log("[Demo 1] You typed a vowel");
+  }
+  // window is the target
+  const inputRef = useKeyRef(["a", "e", "i", "o", "u"], vowelsEntered);
+  return (
+    <>
+      <p>Press a,e,i,o,u in the input to trigger a console.log statement</p>
+      <input ref={inputRef} />
+    </>
+  );
+}
+```
+
 <LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {
   function vowelsEntered(e) {
@@ -32,6 +49,28 @@ export default function App() {
 `} />
 
 #### Multiple handlers on the same element
+
+```jsx
+import { useKeyRef, useMergeRefs } from "rooks";
+export default function App() {
+  function vowelsEntered(e) {
+    console.log("[Demo 1] You typed a vowel");
+  }
+  function capitalVowelsEntered(e) {
+    console.log("[Demo 1] You typed a capital vowel");
+  }
+  // window is the target
+  const keyRef1 = useKeyRef(["a", "e", "i", "o", "u"], vowelsEntered);
+  const keyRef2 = useKeyRef(["A", "E", "I", "O", "U"], capitalVowelsEntered);
+  const inputRef = useMergeRefs(keyRef1, keyRef2);
+  return (
+    <>
+      <p>Press a,e,i,o,u in the input to trigger a console.log statement</p>
+      <input ref={inputRef} />
+    </>
+  );
+}
+```
 
 <LiveExample code={`import { useKeyRef, useMergeRefs } from "rooks";
 export default function App() {
@@ -56,6 +95,29 @@ export default function App() {
 
 #### Multiple kinds of events
 
+```jsx
+import { useKeyRef } from "rooks";
+export default function App() {
+  function onKeyInteraction(e) {
+    console.log("[Demo 2]Enter key", e.type);
+  }
+
+  const inputRef = useKeyRef(["Enter"], onKeyInteraction, {
+    eventTypes: ["keypress", "keydown", "keyup"],
+  });
+  return (
+    <>
+      <p>Try "Enter" Keypress keydown and keyup </p>
+      <p>
+        It will log 3 events on this input. Since you can listen to multiple
+        types of events on a keyboard key.
+      </p>
+      <input ref={inputRef} />
+    </>
+  );
+}
+```
+
 <LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {
   function onKeyInteraction(e) {
@@ -79,6 +141,43 @@ export default function App() {
 `} />
 
 #### Conditionally setting handlers
+
+```jsx
+import { useKeyRef } from "rooks";
+export default function App() {
+  const [shouldListen, setShouldListen] = useState(false);
+
+  function toggleShouldListen() {
+    setShouldListen(!shouldListen);
+  }
+  function onKeyInteraction(e) {
+    console.log("[Demo 3] Enter key", e.type);
+  }
+
+  const inputRef = useKeyRef(["Enter"], onKeyInteraction, {
+    eventTypes: ["keypress", "keydown", "keyup"],
+    when: shouldListen,
+  });
+  return (
+    <>
+      <p>
+        Enter key events will only be logged when the listening state is true.
+        Click on the button to toggle between listening and not listening
+        states.{" "}
+      </p>
+      <p>
+        Handy for adding and removing event handlers only when certain
+        conditions are met.
+      </p>
+      <input ref={inputRef} />
+      <br />
+      <button onClick={toggleShouldListen}>
+        <b>{shouldListen ? "Listening" : "Not listening"}</b> - Toggle{" "}
+      </button>
+    </>
+  );
+}
+```
 
 <LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {

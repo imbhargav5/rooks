@@ -15,6 +15,29 @@ A drop-in replacement for `useState` that batches updates through `requestAnimat
 
 #### Basic usage — tracking mouse position
 
+```jsx
+import { useEffect } from "react";
+import { useRafState } from "rooks";
+
+export default function App() {
+  const [position, setPosition] = useRafState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [setPosition]);
+
+  return (
+    <p>
+      Mouse: {position.x}, {position.y}
+    </p>
+  );
+}
+```
+
 <LiveExample code={`import { useEffect } from "react";
 import { useRafState } from "rooks";
 
@@ -39,6 +62,16 @@ export default function App() {
 
 #### With a lazy initializer
 
+```jsx
+import { useRafState } from "rooks";
+
+export default function App() {
+  const [value, setValue] = useRafState(() => expensiveComputation());
+
+  return <button onClick={() => setValue((prev) => prev + 1)}>{value}</button>;
+}
+```
+
 <LiveExample code={`import { useRafState } from "rooks";
 
 export default function App() {
@@ -49,6 +82,29 @@ export default function App() {
 `} />
 
 #### Scroll progress indicator
+
+```jsx
+import { useEffect } from "react";
+import { useRafState } from "rooks";
+
+export default function ScrollProgress() {
+  const [progress, setProgress] = useRafState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const total = scrollHeight - clientHeight;
+      setProgress(total > 0 ? (scrollTop / total) * 100 : 0);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [setProgress]);
+
+  return (
+    <div style={{ width: `${progress}%`, height: 4, background: "blue" }} />
+  );
+}
+```
 
 <LiveExample code={`import { useEffect } from "react";
 import { useRafState } from "rooks";

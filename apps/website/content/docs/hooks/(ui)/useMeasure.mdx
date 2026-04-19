@@ -13,6 +13,41 @@ Measures both the inner and outer dimensions of any DOM element in a performant 
 
 ### Basic usage
 
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function App() {
+  const [ref, measurements] = useMeasure();
+  
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: 200,
+        height: 150,
+        border: "5px solid #ccc",
+        overflow: "auto",
+        padding: "10px",
+        margin: "20px"
+      }}
+    >
+      <div style={{ width: 300, height: 200 }}>
+        <h4>Inner Measurements:</h4>
+        <p>Width: {measurements.innerWidth}, Height: {measurements.innerHeight}</p>
+        <p>Scroll: {measurements.innerScrollWidth} x {measurements.innerScrollHeight}</p>
+        
+        <h4>Outer Measurements:</h4>
+        <p>Width: {measurements.outerWidth}, Height: {measurements.outerHeight}</p>
+        <p>Scroll: {measurements.outerScrollWidth} x {measurements.outerScrollHeight}</p>
+        
+        <p>This content is larger than the container to demonstrate scroll measurements.</p>
+      </div>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import React from "react";
 import { useMeasure } from "rooks";
 
@@ -48,6 +83,67 @@ export default function App() {
 `} />
 
 ### With callback and debouncing
+
+```jsx
+import React, { useState } from "react";
+import { useMeasure } from "rooks";
+
+export default function App() {
+  const [measurementHistory, setMeasurementHistory] = useState([]);
+  
+  const [ref, measurements] = useMeasure({
+    debounce: 100,
+    onMeasure: (newMeasurements) => {
+      setMeasurementHistory(prev => [
+        ...prev.slice(-4), // Keep last 5 measurements
+        newMeasurements
+      ]);
+    }
+  });
+  
+  return (
+    <div>
+      <textarea
+        ref={ref}
+        placeholder="Resize this textarea to see measurements change..."
+        style={{ 
+          width: "100%", 
+          minHeight: 100, 
+          resize: "both",
+          border: "3px solid #007acc",
+          padding: "8px"
+        }}
+      />
+      
+      <div>
+        <h3>Current Measurements:</h3>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <div>
+            <h4>Inner:</h4>
+            <p>{measurements.innerWidth} x {measurements.innerHeight}</p>
+            <p>Scroll: {measurements.innerScrollWidth} x {measurements.innerScrollHeight}</p>
+          </div>
+          <div>
+            <h4>Outer:</h4>
+            <p>{measurements.outerWidth} x {measurements.outerHeight}</p>
+            <p>Scroll: {measurements.outerScrollWidth} x {measurements.outerScrollHeight}</p>
+          </div>
+        </div>
+        
+        <h3>Measurement History:</h3>
+        {measurementHistory.map((measurement, index) => (
+          <div key={index}>
+            <small>
+              {index + 1}: Inner {measurement.innerWidth}x{measurement.innerHeight}, 
+              Outer {measurement.outerWidth}x{measurement.outerHeight}
+            </small>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import React, { useState } from "react";
 import { useMeasure } from "rooks";
@@ -111,6 +207,61 @@ export default function App() {
 
 ### Responsive component layout with inner/outer awareness
 
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function ResponsiveCard() {
+  const [ref, measurements] = useMeasure();
+  
+  // Adjust layout based on container size
+  const isCompact = measurements.innerWidth < 300;
+  const showDetails = measurements.innerHeight > 150;
+  const hasThickBorder = (measurements.outerWidth - measurements.innerWidth) > 10;
+  
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: "100%",
+        maxWidth: 400,
+        height: "100%",
+        maxHeight: 300,
+        border: hasThickBorder ? "8px solid #ddd" : "1px solid #ddd",
+        borderRadius: "8px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: isCompact ? "column" : "row",
+        gap: "12px"
+      }}
+    >
+      <div style={{ flex: 1 }}>
+        <h3>Responsive Card</h3>
+        <p>Inner: {measurements.innerWidth}x{measurements.innerHeight}</p>
+        <p>Outer: {measurements.outerWidth}x{measurements.outerHeight}</p>
+        <p>Layout: {isCompact ? "Compact" : "Wide"}</p>
+        <p>Border: {hasThickBorder ? "Thick" : "Thin"}</p>
+      </div>
+      
+      {showDetails && (
+        <div style={{ 
+          flex: isCompact ? "none" : 1,
+          backgroundColor: "#f5f5f5",
+          padding: "8px",
+          borderRadius: "4px"
+        }}>
+          <p>Additional details shown when height > 150px</p>
+          <small>
+            Border + padding: {measurements.outerWidth - measurements.innerWidth}px wide, 
+            {measurements.outerHeight - measurements.innerHeight}px tall
+          </small>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import React from "react";
 import { useMeasure } from "rooks";
 
@@ -166,6 +317,62 @@ export default function ResponsiveCard() {
 `} />
 
 ### Comparing inner vs outer measurements
+
+```jsx
+import React from "react";
+import { useMeasure } from "rooks";
+
+export default function MeasurementComparison() {
+  const [ref, measurements] = useMeasure();
+  
+  const borderWidth = (measurements.outerWidth - measurements.innerWidth) / 2;
+  const borderHeight = (measurements.outerHeight - measurements.innerHeight) / 2;
+  
+  return (
+    <div style={{ padding: "20px" }}>
+      <div
+        ref={ref}
+        style={{
+          width: 300,
+          height: 200,
+          border: "15px solid #ff6b6b",
+          padding: "25px",
+          backgroundColor: "#4ecdc4",
+          overflow: "auto"
+        }}
+      >
+        <div style={{ width: 400, height: 250, backgroundColor: "#45b7d1" }}>
+          <h3>Measurement Breakdown</h3>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+            <div>
+              <h4>Inner (Content Area):</h4>
+              <p>Width: {measurements.innerWidth}px</p>
+              <p>Height: {measurements.innerHeight}px</p>
+              <p>Scroll Width: {measurements.innerScrollWidth}px</p>
+              <p>Scroll Height: {measurements.innerScrollHeight}px</p>
+            </div>
+            
+            <div>
+              <h4>Outer (Including Border/Padding):</h4>
+              <p>Width: {measurements.outerWidth}px</p>
+              <p>Height: {measurements.outerHeight}px</p>
+              <p>Scroll Width: {measurements.outerScrollWidth}px</p>
+              <p>Scroll Height: {measurements.outerScrollHeight}px</p>
+            </div>
+          </div>
+          
+          <div style={{ marginTop: "10px" }}>
+            <h4>Calculated Border + Padding:</h4>
+            <p>Horizontal: {borderWidth.toFixed(1)}px each side</p>
+            <p>Vertical: {borderHeight.toFixed(1)}px each side</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import React from "react";
 import { useMeasure } from "rooks";
@@ -223,6 +430,46 @@ export default function MeasurementComparison() {
 `} />
 
 ### Disabled measurements
+
+```jsx
+import React, { useState } from "react";
+import { useMeasure } from "rooks";
+
+export default function ConditionalMeasurement() {
+  const [measurementEnabled, setMeasurementEnabled] = useState(true);
+  
+  const [ref, measurements] = useMeasure({
+    disabled: !measurementEnabled
+  });
+  
+  return (
+    <div>
+      <button onClick={() => setMeasurementEnabled(!measurementEnabled)}>
+        {measurementEnabled ? "Disable" : "Enable"} Measurements
+      </button>
+      
+      <div
+        ref={ref}
+        style={{
+          width: 250,
+          height: 150,
+          border: "2px solid #007acc",
+          margin: "20px 0",
+          padding: "10px"
+        }}
+      >
+        <p>Measurements {measurementEnabled ? "enabled" : "disabled"}</p>
+        <div>
+          <h4>Inner:</h4>
+          <p>{measurements.innerWidth} x {measurements.innerHeight}</p>
+          <h4>Outer:</h4>
+          <p>{measurements.outerWidth} x {measurements.outerHeight}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import React, { useState } from "react";
 import { useMeasure } from "rooks";

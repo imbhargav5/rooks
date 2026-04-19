@@ -15,6 +15,36 @@ Runs a callback effect atmost one time when a condition becomes true
 
 ### Run once when a condition becomes true
 
+```jsx
+import { useState } from "react";
+import { useEffectOnceWhen } from "rooks";
+
+const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffectOnceWhen(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Countdown for 3 sec
+  }, loading);
+
+  return (
+    <div>
+      <h1>Rooks: useEffectOnceWhen Example</h1>
+      <hr></hr>
+
+      <p style={{ fontSize: "20px" }}>
+        {loading
+          ? "Loading Component (will be gone in 3 secs)...."
+          : "Counter Component"}
+      </p>
+    </div>
+  );
+};
+
+export default App;
+```
+
 <LiveExample code={`import { useState } from "react";
 import { useEffectOnceWhen } from "rooks";
 
@@ -45,6 +75,27 @@ export default App;
 `} />
 
 ### Trigger one-time setup after a feature is enabled
+
+```jsx
+import { useState } from "react";
+import { useEffectOnceWhen } from "rooks";
+
+export default function WelcomeToast() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [toast, setToast] = useState("Not enabled");
+
+  useEffectOnceWhen(() => {
+    setToast("Feature enabled for the first time");
+  }, isEnabled);
+
+  return (
+    <div>
+      <button onClick={() => setIsEnabled(true)}>Enable feature</button>
+      <p>{toast}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useEffectOnceWhen } from "rooks";

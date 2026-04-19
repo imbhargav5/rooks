@@ -14,6 +14,21 @@ Input hook for React.
 
 ### Simple example
 
+```jsx
+import { useInput } from "rooks";
+export default function App() {
+  const myInput = useInput("hello");
+  return (
+    <div>
+      <input {...myInput} />
+      <p>
+        Value is <b>{myInput.value}</b>
+      </p>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useInput } from "rooks";
 export default function App() {
   const myInput = useInput("hello");
@@ -29,6 +44,24 @@ export default function App() {
 `} />
 
 ### With optional validator
+
+```jsx
+import { useInput } from "rooks";
+export default function App() {
+  const myInput = useInput("hello", {
+    validate: newValue => newValue.length < 15,
+  });
+  return (
+    <div>
+      <p> Max length 15 </p>
+      <input {...myInput} />
+      <p>
+        Value is <b>{myInput.value}</b>
+      </p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useInput } from "rooks";
 export default function App() {

@@ -13,6 +13,26 @@ Debounce hook for react. Internally, it uses lodash debounce.
 
 ### Debounce a text input
 
+```jsx
+import { useState } from "react";
+import { useDebounce } from "rooks";
+
+export default function App() {
+  const [value, setValue] = useState("");
+  const setValueDebounced = useDebounce(setValue, 500);
+
+  return (
+    <div>
+      <input
+        onChange={(e) => setValueDebounced(e.target.value)}
+        placeholder="Please type here"
+      />
+      <div>{value}</div>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useState } from "react";
 import { useDebounce } from "rooks";
 
@@ -33,6 +53,29 @@ export default function App() {
 `} />
 
 ### Trigger immediately on the leading edge
+
+```jsx
+import { useState } from "react";
+import { useDebounce } from "rooks";
+
+export default function LeadingSearch() {
+  const [logs, setLogs] = useState([]);
+  const logSearch = useDebounce(
+    (value) => {
+      setLogs((current) => [...current, `search:${value}`]);
+    },
+    500,
+    { leading: true }
+  );
+
+  return (
+    <div>
+      <button onClick={() => logSearch("react hooks")}>Run search</button>
+      <pre>{JSON.stringify(logs, null, 2)}</pre>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useDebounce } from "rooks";

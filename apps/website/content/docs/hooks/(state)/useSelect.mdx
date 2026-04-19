@@ -13,6 +13,55 @@ Select values from a list easily. List selection hook for react.
 
 ### Basic usage
 
+```jsx
+import { useSelect } from "rooks";
+
+const list = [
+  {
+    heading: "Awesome",
+    content: "Great, tell me about it!",
+  },
+  {
+    heading: "I don't know",
+    content: "That's okay.",
+  },
+  {
+    heading: "Worst",
+    content: "The day is young.",
+  },
+];
+
+export default function App() {
+  const { index, setIndex, item } = useSelect(list, 0);
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "20px",
+      }}
+    >
+      <h1>Rooks: useSelect Example</h1>
+      <h3>How're you feeling today?</h3>
+      {list.map((listItem, listItemIndex) => (
+        <button
+          key={listItemIndex}
+          style={{
+            background: index === listItemIndex ? "Teal" : "inherit",
+          }}
+          onClick={() => setIndex(listItemIndex)}
+        >
+          {listItem.heading}
+        </button>
+      ))}
+      <p>{item.content}</p>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useSelect } from "rooks";
 
 const list = [
@@ -62,6 +111,26 @@ export default function App() {
 `} />
 
 ### Keep the selected item in sync with external controls
+
+```jsx
+import { useSelect } from "rooks";
+
+const filters = ["all", "open", "done"];
+
+export default function FilterPicker() {
+  const { index, item, setIndex, setItem } = useSelect(filters, 0);
+
+  return (
+    <div>
+      <p>
+        Selected filter: {item} (index {index})
+      </p>
+      <button onClick={() => setIndex(1)}>Open</button>
+      <button onClick={() => setItem("done")}>Done</button>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useSelect } from "rooks";
 

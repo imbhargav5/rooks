@@ -15,6 +15,41 @@ Simple checkbox state management hook that provides a boolean state and props th
 
 ### Basic checkbox usage
 
+```jsx
+import { useCheckboxInputState } from "rooks";
+
+export default function BasicCheckbox() {
+  const checkbox = useCheckboxInputState(false);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Basic Checkbox</h3>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          marginBottom: "20px",
+        }}
+      >
+        <input type="checkbox" {...checkbox.inputProps} />
+        <label>Accept Terms and Conditions</label>
+      </div>
+
+      <div style={{ marginBottom: "10px" }}>
+        <strong>Status:</strong>{" "}
+        {checkbox.checked ? "✓ Accepted" : "✗ Not Accepted"}
+      </div>
+
+      <button onClick={checkbox.toggle} style={{ padding: "8px 16px" }}>
+        {checkbox.checked ? "Revoke" : "Accept"} Terms
+      </button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useCheckboxInputState } from "rooks";
 
 export default function BasicCheckbox() {
@@ -50,6 +85,89 @@ export default function BasicCheckbox() {
 `} />
 
 ### Multiple checkboxes
+
+```jsx
+import { useCheckboxInputState } from "rooks";
+
+export default function MultipleCheckboxes() {
+  const newsletter = useCheckboxInputState(false);
+  const marketing = useCheckboxInputState(true);
+  const analytics = useCheckboxInputState(false);
+
+  const handleSubmit = () => {
+    const preferences = {
+      newsletter: newsletter.checked,
+      marketing: marketing.checked,
+      analytics: analytics.checked,
+    };
+    alert(`Preferences: ${JSON.stringify(preferences, null, 2)}`);
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "400px" }}>
+      <h3>Email Preferences</h3>
+
+      <div style={{ marginBottom: "20px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
+          <input type="checkbox" {...newsletter.inputProps} />
+          <label>Newsletter updates</label>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
+          <input type="checkbox" {...marketing.inputProps} />
+          <label>Marketing emails</label>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "10px",
+          }}
+        >
+          <input type="checkbox" {...analytics.inputProps} />
+          <label>Analytics tracking</label>
+        </div>
+      </div>
+
+      <button onClick={handleSubmit} style={{ padding: "8px 16px" }}>
+        Save Preferences
+      </button>
+
+      {/* Current State Display */}
+      <div
+        style={{
+          marginTop: "20px",
+          padding: "10px",
+          background: "#f8f9fa",
+          borderRadius: "4px",
+          fontSize: "14px",
+        }}
+      >
+        <strong>Current Selection:</strong>
+        <div>Newsletter: {newsletter.checked ? "Yes" : "No"}</div>
+        <div>Marketing: {marketing.checked ? "Yes" : "No"}</div>
+        <div>Analytics: {analytics.checked ? "Yes" : "No"}</div>
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useCheckboxInputState } from "rooks";
 
@@ -134,6 +252,162 @@ export default function MultipleCheckboxes() {
 `} />
 
 ### Todo list with checkboxes
+
+```jsx
+import { useCheckboxInputState } from "rooks";
+import { useState } from "react";
+
+export default function TodoList() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Buy groceries", completed: false },
+    { id: 2, text: "Walk the dog", completed: true },
+    { id: 3, text: "Read a book", completed: false },
+    { id: 4, text: "Exercise", completed: false },
+  ]);
+
+  const [newTodo, setNewTodo] = useState("");
+
+  const addTodo = () => {
+    if (newTodo.trim()) {
+      const newId = Math.max(...todos.map((t) => t.id)) + 1;
+      setTodos((prev) => [
+        ...prev,
+        { id: newId, text: newTodo.trim(), completed: false },
+      ]);
+      setNewTodo("");
+    }
+  };
+
+  const updateTodo = (id, completed) => {
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === id ? { ...todo, completed } : todo))
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const completedCount = todos.filter((todo) => todo.completed).length;
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "500px" }}>
+      <h3>Todo List</h3>
+
+      {/* Add New Todo */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && addTodo()}
+          placeholder="Add a new todo..."
+          style={{ flex: 1, padding: "8px" }}
+        />
+        <button onClick={addTodo} disabled={!newTodo.trim()}>
+          Add
+        </button>
+      </div>
+
+      {/* Todo List */}
+      <div>
+        {todos.map((todo) => {
+          return (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={(completed) => updateTodo(todo.id, completed)}
+              onDelete={() => deleteTodo(todo.id)}
+            />
+          );
+        })}
+
+        {todos.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              color: "#666",
+              padding: "20px",
+              fontStyle: "italic",
+            }}
+          >
+            No todos yet. Add one above!
+          </div>
+        )}
+      </div>
+
+      {/* Summary */}
+      {todos.length > 0 && (
+        <div
+          style={{
+            marginTop: "15px",
+            padding: "10px",
+            background: "#e9ecef",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
+        >
+          <strong>Progress:</strong> {completedCount} of {todos.length}{" "}
+          completed
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TodoItem({ todo, onToggle, onDelete }) {
+  // Each TodoItem component has its own checkbox hook instance
+  const checkbox = useCheckboxInputState(todo.completed);
+
+  // Sync the hook state with the parent state
+  const handleToggle = (completed) => {
+    checkbox.setChecked(completed);
+    onToggle(completed);
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        padding: "8px",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        marginBottom: "5px",
+        backgroundColor: checkbox.checked ? "#f0f8f0" : "white",
+      }}
+    >
+      <input
+        type="checkbox"
+        {...checkbox.inputProps}
+        onChange={(e) => handleToggle(e.target.checked)}
+      />
+      <span
+        style={{
+          flex: 1,
+          textDecoration: checkbox.checked ? "line-through" : "none",
+          color: checkbox.checked ? "#666" : "black",
+        }}
+      >
+        {todo.text}
+      </span>
+      <button
+        onClick={onDelete}
+        style={{
+          fontSize: "12px",
+          color: "red",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        ✕
+      </button>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useCheckboxInputState } from "rooks";
 import { useState } from "react";

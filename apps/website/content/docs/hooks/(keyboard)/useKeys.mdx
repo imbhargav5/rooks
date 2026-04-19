@@ -15,6 +15,60 @@ An important difference between `useKey` and `useKeys` is that `useKey` checks i
 
 ## Examples
 
+```jsx
+import * as React from "react";
+import { useKeys } from "rooks";
+export default function App() {
+  const containerRef = React.useRef(document);
+  const inputRef = React.useRef(null);
+  const [isEventActive, setIsEventActive] = React.useState(true);
+  const [firstCallbackCallCount, setFirstCallbackCallCount] = React.useState(0);
+  useKeys(
+    ["ControlLeft", "KeyS"],
+    () => {
+      alert("you presses ctrlLeft + s");
+      setFirstCallbackCallCount(curr => curr + 1);
+    },
+    {
+      target: containerRef,
+      when: isEventActive,
+      preventLostKeyup: true,
+    }
+  );
+  useKeys(
+    ["m", "r"],
+    event => {
+      // event.stopPropagation();
+      console.log("here you go m and r");
+    },
+    {
+      when: isEventActive,
+      target: inputRef,
+    }
+  );
+  return (
+    <div data-testid="container">
+      <p data-testid="first-callback">
+        Callback Run Count:
+        {firstCallbackCallCount}
+      </p>
+      <p>Is events enabled ? ==> {isEventActive ? "Yes" : "No"}</p>
+      <p>Press CtrlLeft + s to see update in count</p>
+      <button
+        onClick={() => {
+          setIsEventActive(!isEventActive);
+        }}
+      >
+        Toggle event enabled
+      </button>
+      <div className="grid-container">
+        <input ref={inputRef} className="box1" tabIndex={1} />
+      </div>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import * as React from "react";
 import { useKeys } from "rooks";
 export default function App() {

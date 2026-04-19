@@ -15,8 +15,8 @@ Counter hook for React.
 
 ### Basic counter controls
 
-<LiveExample
-  code={`import { useCounter } from "rooks";
+```jsx
+import { useCounter } from "rooks";
 
 export default function App() {
   const { value, increment, decrement, incrementBy, decrementBy, reset } =
@@ -42,13 +42,40 @@ export default function App() {
     </>
   );
 }
-`}
-/>
+```
+
+<LiveExample code={`import { useCounter } from "rooks";
+
+export default function App() {
+  const { value, increment, decrement, incrementBy, decrementBy, reset } =
+    useCounter(3);
+
+  function incrementBy5() {
+    incrementBy(5);
+  }
+  function decrementBy7() {
+    decrementBy(7);
+  }
+
+  return (
+    <>
+      Current value is {value}
+      <hr />
+      <button onClick={increment}>increment</button>
+      <button onClick={decrement}>decrement</button>
+      <button onClick={incrementBy5}>incrementBy5</button>
+      <button onClick={decrementBy7}>decrementBy7</button>
+      <hr />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+}
+`} />
 
 ### Reset back to the initial value
 
-<LiveExample
-  code={`import { useCounter } from "rooks";
+```jsx
+import { useCounter } from "rooks";
 
 export default function CounterWithReset() {
   const { value, incrementBy, decrementBy, reset } = useCounter(10);
@@ -62,8 +89,23 @@ export default function CounterWithReset() {
     </div>
   );
 }
-`}
-/>
+```
+
+<LiveExample code={`import { useCounter } from "rooks";
+
+export default function CounterWithReset() {
+  const { value, incrementBy, decrementBy, reset } = useCounter(10);
+
+  return (
+    <div>
+      <div>Current value: {value}</div>
+      <button onClick={() => incrementBy(10)}>Add 10</button>
+      <button onClick={() => decrementBy(4)}>Subtract 4</button>
+      <button onClick={reset}>Reset to 10</button>
+    </div>
+  );
+}
+`} />
 
 ### Arguments
 

@@ -17,6 +17,31 @@ It returns a ref to observed element, as well as boolean flag - `inView` that wi
 
 ### Basic example
 
+```jsx
+import "./styles.css";
+import { useInViewRef } from "rooks";
+
+export default function App() {
+  const [myRef, inView] = useInViewRef();
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <h1>Is rectangle visible - {String(inView)}</h1>
+      </div>
+      <div style={{ height: 2000 }}></div>
+      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
+      <div style={{ height: 2000 }}></div>
+    </>
+  );
+}
+```
+
 <LiveExample code={`import "./styles.css";
 import { useInViewRef } from "rooks";
 

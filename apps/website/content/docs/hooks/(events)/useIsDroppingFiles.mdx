@@ -13,6 +13,27 @@ Check if files are currently being dragged over an element or the window.
 
 ### Highlight a local drop zone
 
+```tsx
+import { useIsDroppingFiles } from "rooks";
+
+export default function App() {
+  const [ref, isDropping] = useIsDroppingFiles();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        padding: 24,
+        border: "2px dashed #999",
+        background: isDropping ? "#fee2e2" : "#fff",
+      }}
+    >
+      {isDropping ? "Release files to upload" : "Drag files here"}
+    </div>
+  );
+}
+```
+
 <LiveExample lang="tsx" code={`import { useIsDroppingFiles } from "rooks";
 
 export default function App() {
@@ -34,6 +55,22 @@ export default function App() {
 `} />
 
 ### Track file drags anywhere in the window
+
+```tsx
+import { useIsDroppingFiles } from "rooks";
+
+export default function App() {
+  const isDroppingOnWindow = useIsDroppingFiles(true);
+
+  return (
+    <p>
+      {isDroppingOnWindow
+        ? "Files are hovering over the window"
+        : "No files are being dragged right now"}
+    </p>
+  );
+}
+```
 
 <LiveExample lang="tsx" code={`import { useIsDroppingFiles } from "rooks";
 

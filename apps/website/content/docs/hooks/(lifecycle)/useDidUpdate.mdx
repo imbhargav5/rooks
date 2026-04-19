@@ -13,6 +13,26 @@ componentDidUpdate hook for react
 
 ### React to any update after mount
 
+```jsx
+import React, { useState } from "react";
+import { useDidUpdate } from "rooks";
+
+export default function App() {
+  const [value, setValue] = useState(0);
+  useDidUpdate(() => {
+    console.log("This message was logged on update.");
+  });
+  return (
+    <div>
+      <p> Update this value by clicking on the button</p>
+      <p> Current value is {value}</p>
+      <p> Open the sandbox in codesandbox to view the console </p>
+      <button onClick={() => setValue(value + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import React, { useState } from "react";
 import { useDidUpdate } from "rooks";
 
@@ -33,6 +53,32 @@ export default function App() {
 `} />
 
 ### React only when a specific dependency changes
+
+```jsx
+import { useState } from "react";
+import { useDidUpdate } from "rooks";
+
+export default function FilterStatus() {
+  const [filter, setFilter] = useState("all");
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("No updates yet");
+
+  useDidUpdate(() => {
+    setMessage(`Filter changed to ${filter}`);
+  }, [filter]);
+
+  return (
+    <div>
+      <button onClick={() => setFilter("active")}>Set active filter</button>
+      <button onClick={() => setCount((current) => current + 1)}>
+        Increment unrelated count
+      </button>
+      <p>Count: {count}</p>
+      <p>{message}</p>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useDidUpdate } from "rooks";

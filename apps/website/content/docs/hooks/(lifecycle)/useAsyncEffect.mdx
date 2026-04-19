@@ -17,6 +17,49 @@ The standard `useEffect` hook only works with synchronous effect functions. Whil
 
 ### Basic async data fetching
 
+```jsx
+import { useAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useAsyncEffect(
+    async (shouldContinueEffect) => {
+      setLoading(true);
+      
+      try {
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        
+        // Only update state if the effect hasn't been cancelled
+        if (shouldContinueEffect()) {
+          setUser(userData);
+          setLoading(false);
+        }
+      } catch (error) {
+        if (shouldContinueEffect()) {
+          console.error("Failed to fetch user:", error);
+          setLoading(false);
+        }
+      }
+    },
+    [userId] // Re-run when userId changes
+  );
+
+  if (loading) return <div>Loading...</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useAsyncEffect } from "rooks";
 import { useState } from "react";
 
@@ -60,6 +103,62 @@ export default function UserProfile({ userId }) {
 `} />
 
 ### Preventing race conditions with multiple async calls
+
+```jsx
+import { useAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useAsyncEffect(
+    async (shouldContinueEffect) => {
+      if (!query.trim()) {
+        setResults([]);
+        return;
+      }
+
+      setLoading(true);
+
+      // First API call
+      const searchResponse = await fetch(`/api/search?q=${query}`);
+      const searchData = await searchResponse.json();
+      
+      // Check if we should continue before making the second call
+      if (!shouldContinueEffect()) return;
+
+      // Second API call to get detailed information
+      const detailsPromises = searchData.results.map(item =>
+        fetch(`/api/details/${item.id}`).then(res => res.json())
+      );
+      
+      const detailedResults = await Promise.all(detailsPromises);
+      
+      // Final check before updating state
+      if (shouldContinueEffect()) {
+        setResults(detailedResults);
+        setLoading(false);
+      }
+    },
+    [query]
+  );
+
+  return (
+    <div>
+      {loading && <div>Searching...</div>}
+      <div>
+        {results.map(result => (
+          <div key={result.id}>
+            <h3>{result.title}</h3>
+            <p>{result.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useAsyncEffect } from "rooks";
 import { useState } from "react";
@@ -117,6 +216,73 @@ export default function SearchResults({ query }) {
 `} />
 
 ### Using cleanup function for resource management
+
+```jsx
+import { useAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataStream({ endpoint }) {
+  const [data, setData] = useState([]);
+  const [status, setStatus] = useState('disconnected');
+
+  useAsyncEffect(
+    async (shouldContinueEffect) => {
+      // Create WebSocket connection
+      const ws = new WebSocket(endpoint);
+      setStatus('connecting');
+
+      return new Promise((resolve) => {
+        ws.onopen = () => {
+          if (shouldContinueEffect()) {
+            setStatus('connected');
+          }
+        };
+
+        ws.onmessage = (event) => {
+          if (shouldContinueEffect()) {
+            const newData = JSON.parse(event.data);
+            setData(prev => [...prev, newData]);
+          }
+        };
+
+        ws.onclose = () => {
+          if (shouldContinueEffect()) {
+            setStatus('disconnected');
+          }
+          resolve(ws); // Return the WebSocket for cleanup
+        };
+
+        ws.onerror = (error) => {
+          if (shouldContinueEffect()) {
+            console.error('WebSocket error:', error);
+            setStatus('error');
+          }
+          resolve(ws);
+        };
+      });
+    },
+    [endpoint],
+    (webSocket) => {
+      // Cleanup function: close the WebSocket connection
+      if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+        webSocket.close();
+      }
+      setStatus('disconnected');
+    }
+  );
+
+  return (
+    <div>
+      <div>Status: {status}</div>
+      <div>
+        {data.map((item, index) => (
+          <div key={index}>{JSON.stringify(item)}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useAsyncEffect } from "rooks";
 import { useState } from "react";
@@ -185,6 +351,107 @@ export default function DataStream({ endpoint }) {
 `} />
 
 ### Advanced example with error handling and conditional execution
+
+```jsx
+import { useAsyncEffect } from "rooks";
+import { useState } from "react";
+
+export default function DataDashboard({ filters, refreshInterval }) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
+
+  useAsyncEffect(
+    async (shouldContinueEffect) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Fetch initial data
+        const response = await fetch('/api/dashboard', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(filters)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const initialData = await response.json();
+        
+        if (!shouldContinueEffect()) return;
+
+        setData(initialData);
+        setLastUpdated(new Date());
+        setLoading(false);
+
+        // Set up periodic refresh if refreshInterval is provided
+        if (refreshInterval > 0) {
+          const intervalId = setInterval(async () => {
+            if (!shouldContinueEffect()) {
+              clearInterval(intervalId);
+              return;
+            }
+
+            try {
+              const refreshResponse = await fetch('/api/dashboard', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(filters)
+              });
+
+              if (refreshResponse.ok && shouldContinueEffect()) {
+                const refreshedData = await refreshResponse.json();
+                setData(refreshedData);
+                setLastUpdated(new Date());
+              }
+            } catch (refreshError) {
+              if (shouldContinueEffect()) {
+                console.warn('Failed to refresh data:', refreshError);
+              }
+            }
+          }, refreshInterval);
+
+          // Return the interval ID for cleanup
+          return intervalId;
+        }
+      } catch (err) {
+        if (shouldContinueEffect()) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    },
+    [filters, refreshInterval],
+    (intervalId) => {
+      // Cleanup function: clear the interval if it exists
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    }
+  );
+
+  if (loading && !data) return <div>Loading dashboard...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div>
+      {lastUpdated && (
+        <div>Last updated: {lastUpdated.toLocaleTimeString()}</div>
+      )}
+      {loading && <div>Refreshing...</div>}
+      {data && (
+        <div>
+          <h2>Dashboard Data</h2>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
+    </div>
+  );
+}
+```
 
 <LiveExample code={`import { useAsyncEffect } from "rooks";
 import { useState } from "react";

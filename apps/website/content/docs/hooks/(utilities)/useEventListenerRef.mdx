@@ -15,6 +15,32 @@ A react hook to add an event listener to a ref
 
 ### Basic usage
 
+```jsx
+import { useState } from "react";
+import { useEventListenerRef } from "rooks";
+import "./styles.css";
+
+export default function App() {
+  const [value, setValue] = useState(0);
+  const ref = useEventListenerRef("click", function () {
+    setValue(value + 1);
+  });
+  return (
+    <div
+      ref={ref}
+      className="App"
+      style={{
+        padding: "20px",
+        border: "5px solid dodgerblue",
+      }}
+    >
+      <h2>Click in this box</h2>
+      <p> Value is {value}</p>
+    </div>
+  );
+}
+```
+
 <LiveExample code={`import { useState } from "react";
 import { useEventListenerRef } from "rooks";
 import "./styles.css";
@@ -41,6 +67,20 @@ export default function App() {
 `} />
 
 ### Attach a listener to a specific interactive element
+
+```jsx
+import { useState } from "react";
+import { useEventListenerRef } from "rooks";
+
+export default function ClickTracker() {
+  const [clicks, setClicks] = useState(0);
+  const ref = useEventListenerRef("click", () => {
+    setClicks((current) => current + 1);
+  });
+
+  return <button ref={ref}>Button clicks tracked by the hook: {clicks}</button>;
+}
+```
 
 <LiveExample code={`import { useState } from "react";
 import { useEventListenerRef } from "rooks";
