@@ -15,8 +15,8 @@ Counter hook for React.
 
 ### Basic counter controls
 
-```jsx
-import { useCounter } from "rooks";
+<LiveExample
+  code={`import { useCounter } from "rooks";
 
 export default function App() {
   const { value, increment, decrement, incrementBy, decrementBy, reset } =
@@ -42,12 +42,13 @@ export default function App() {
     </>
   );
 }
-```
+`}
+/>
 
 ### Reset back to the initial value
 
-```jsx
-import { useCounter } from "rooks";
+<LiveExample
+  code={`import { useCounter } from "rooks";
 
 export default function CounterWithReset() {
   const { value, incrementBy, decrementBy, reset } = useCounter(10);
@@ -61,7 +62,8 @@ export default function CounterWithReset() {
     </div>
   );
 }
-```
+`}
+/>
 
 ### Arguments
 

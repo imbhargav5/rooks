@@ -8,9 +8,9 @@ import {
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { Contributors } from '../../../components/Contributors';
+import { LiveExampleClient } from '../../../components/LiveExampleClient';
 import { MDXContent } from '@content-collections/mdx/react';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import dynamic from 'next/dynamic';
 import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
 
 
@@ -28,7 +28,8 @@ export default async function Page(props: {
     // Add custom components to the MDX components
     const mdxComponents = Object.assign({}, defaultMdxComponents, {
         Contributors,
-        // Code block rendering through ClientHighlight
+        LiveExample: LiveExampleClient,
+        // Code block rendering through fumadocs-ui CodeBlock
         // @ts-ignore - Type mismatch but works at runtime
         pre: ({ ref: _ref, ...props }) => (
             <CodeBlock {...props}>
