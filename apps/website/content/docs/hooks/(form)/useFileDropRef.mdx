@@ -13,19 +13,17 @@ Drop files easily
 
 ### Basic usage
 
-```tsx
-import { useFileDropRef } from "rooks";
+<LiveExample lang="tsx" code={`import { useFileDropRef } from "rooks";
 
 export default function App() {
   useFileDropRef();
   return null;
 }
-```
+`} />
 
 ### Validate files before accepting them
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useFileDropRef } from "rooks";
 
 export default function ImageDropZone() {
@@ -53,4 +51,4 @@ export default function ImageDropZone() {
     </div>
   );
 }
-```
+`} />

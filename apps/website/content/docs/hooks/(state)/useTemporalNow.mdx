@@ -15,8 +15,7 @@ On the server this hook returns `null`, then hydrates to the current Temporal va
 
 ### Get the current instant
 
-```jsx
-import { useTemporalNow } from "rooks";
+<LiveExample code={`import { useTemporalNow } from "rooks";
 
 export default function Clock() {
   const now = useTemporalNow();
@@ -27,12 +26,11 @@ export default function Clock() {
 
   return <time>{now.toString()}</time>;
 }
-```
+`} />
 
 ### Get the current date in a specific time zone
 
-```jsx
-import { useTemporalNow } from "rooks";
+<LiveExample code={`import { useTemporalNow } from "rooks";
 
 export default function Today() {
   const today = useTemporalNow({
@@ -43,12 +41,11 @@ export default function Today() {
 
   return <span>{today?.toString() ?? "Loading date..."}</span>;
 }
-```
+`} />
 
 ### Get a zoned date-time that updates every minute
 
-```jsx
-import { useTemporalNow } from "rooks";
+<LiveExample code={`import { useTemporalNow } from "rooks";
 
 export default function MeetingTime() {
   const dateTime = useTemporalNow({
@@ -59,7 +56,7 @@ export default function MeetingTime() {
 
   return <span>{dateTime?.toString() ?? "Loading schedule..."}</span>;
 }
-```
+`} />
 
 ### Arguments
 

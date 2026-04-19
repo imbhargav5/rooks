@@ -15,8 +15,7 @@ Hook for managing Picture-in-Picture video functionality. This hook provides a c
 
 ### Basic video with PiP controls
 
-```jsx
-import { usePictureInPictureApi } from "rooks";
+<LiveExample code={`import { usePictureInPictureApi } from "rooks";
 import { useRef } from "react";
 
 export default function BasicPiPVideo() {
@@ -110,12 +109,11 @@ export default function BasicPiPVideo() {
     </div>
   );
 }
-```
+`} />
 
 ### Video playlist with PiP
 
-```jsx
-import { usePictureInPictureApi } from "rooks";
+<LiveExample code={`import { usePictureInPictureApi } from "rooks";
 import { useRef, useState } from "react";
 
 export default function PiPVideoPlaylist() {
@@ -268,12 +266,11 @@ export default function PiPVideoPlaylist() {
     </div>
   );
 }
-```
+`} />
 
 ### Advanced PiP with custom controls
 
-```jsx
-import { usePictureInPictureApi } from "rooks";
+<LiveExample code={`import { usePictureInPictureApi } from "rooks";
 import { useRef, useState, useEffect } from "react";
 
 export default function AdvancedPiPPlayer() {
@@ -341,7 +338,7 @@ export default function AdvancedPiPPlayer() {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return \`\${minutes}:\${seconds.toString().padStart(2, '0')}\`;
   };
 
   const handlePiPToggle = async () => {
@@ -414,7 +411,7 @@ export default function AdvancedPiPPlayer() {
             onClick={handleSeek}
           >
             <div style={{ 
-              width: `${(currentTime / duration) * 100}%`, 
+              width: \`\${(currentTime / duration) * 100}%\`, 
               height: "100%", 
               background: "#2196F3",
               borderRadius: "3px"
@@ -492,7 +489,7 @@ export default function AdvancedPiPPlayer() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

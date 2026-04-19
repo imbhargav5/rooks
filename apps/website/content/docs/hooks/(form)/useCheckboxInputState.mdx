@@ -15,8 +15,7 @@ Simple checkbox state management hook that provides a boolean state and props th
 
 ### Basic checkbox usage
 
-```jsx
-import { useCheckboxInputState } from "rooks";
+<LiveExample code={`import { useCheckboxInputState } from "rooks";
 
 export default function BasicCheckbox() {
   const checkbox = useCheckboxInputState(false);
@@ -48,12 +47,11 @@ export default function BasicCheckbox() {
     </div>
   );
 }
-```
+`} />
 
 ### Multiple checkboxes
 
-```jsx
-import { useCheckboxInputState } from "rooks";
+<LiveExample code={`import { useCheckboxInputState } from "rooks";
 
 export default function MultipleCheckboxes() {
   const newsletter = useCheckboxInputState(false);
@@ -66,7 +64,7 @@ export default function MultipleCheckboxes() {
       marketing: marketing.checked,
       analytics: analytics.checked,
     };
-    alert(`Preferences: ${JSON.stringify(preferences, null, 2)}`);
+    alert(\`Preferences: \${JSON.stringify(preferences, null, 2)}\`);
   };
 
   return (
@@ -133,12 +131,11 @@ export default function MultipleCheckboxes() {
     </div>
   );
 }
-```
+`} />
 
 ### Todo list with checkboxes
 
-```jsx
-import { useCheckboxInputState } from "rooks";
+<LiveExample code={`import { useCheckboxInputState } from "rooks";
 import { useState } from "react";
 
 export default function TodoList() {
@@ -291,7 +288,7 @@ function TodoItem({ todo, onToggle, onDelete }) {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

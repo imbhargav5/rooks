@@ -17,8 +17,7 @@ A Suspense-enabled hook for localStorage state management with cross-tab synchro
 
 #### Basic Usage with Numbers
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function Counter() {
@@ -50,12 +49,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Working with Objects and TypeScript
 
-```tsx
-import React, { Suspense } from "react";
+<LiveExample lang="tsx" code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 interface User {
@@ -89,7 +87,7 @@ function UserProfile() {
 
   const getCurrentUser = () => {
     const current = getItem();
-    alert(`Current user: ${current.name} (${current.email})`);
+    alert(\`Current user: \${current.name} (\${current.email})\`);
   };
 
   return (
@@ -119,12 +117,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Cross-tab Synchronization Demo
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function SharedCounter() {
@@ -164,12 +161,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Complex State with Arrays
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function TodoList() {
@@ -270,12 +266,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### With Error Boundary for Production Use
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 class ErrorBoundary extends React.Component {
@@ -385,7 +380,7 @@ export default function App() {
     </ErrorBoundary>
   );
 }
-```
+`} />
 
 ## Cross-tab Synchronization
 

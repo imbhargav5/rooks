@@ -15,8 +15,7 @@ componentDidMount hook for React
 
 ### Run setup code once
 
-```jsx
-import { useDidMount } from "rooks";
+<LiveExample code={`import { useDidMount } from "rooks";
 
 export default function App() {
   useDidMount(function () {
@@ -25,12 +24,11 @@ export default function App() {
 
   return null;
 }
-```
+`} />
 
 ### Set state after the component mounts
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDidMount } from "rooks";
 
 export default function MountedMessage() {
@@ -42,7 +40,7 @@ export default function MountedMessage() {
 
   return <div>{message}</div>;
 }
-```
+`} />
 
 ## Arguments
 

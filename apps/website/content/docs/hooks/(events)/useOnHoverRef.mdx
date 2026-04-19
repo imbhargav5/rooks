@@ -15,8 +15,7 @@ A hook that returns a ref callback to easily attach hover event listeners (mouse
 
 #### Basic example
 
-```jsx
-import { useOnHoverRef } from "rooks";
+<LiveExample code={`import { useOnHoverRef } from "rooks";
 
 export default function App() {
   const hoverRef = useOnHoverRef(
@@ -37,12 +36,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Hover state management
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useOnHoverRef } from "rooks";
 
 export default function App() {
@@ -73,12 +71,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Advanced example with event details
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useOnHoverRef } from "rooks";
 
 export default function App() {
@@ -132,7 +129,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

@@ -15,8 +15,7 @@ A comprehensive hook to control and manage audio elements in your React applicat
 
 #### Basic example
 
-```jsx
-import { useAudio } from "rooks";
+<LiveExample code={`import { useAudio } from "rooks";
 
 export default function App() {
   const audioSrc =
@@ -44,12 +43,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 #### Advanced audio player with controls
 
-```jsx
-import { useAudio } from "rooks";
+<LiveExample code={`import { useAudio } from "rooks";
 
 export default function AudioPlayer() {
   const audioSrc =
@@ -72,7 +70,7 @@ export default function AudioPlayer() {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    return \`\${minutes}:\${seconds.toString().padStart(2, "0")}\`;
   };
 
   const handleSeek = (e) => {
@@ -102,7 +100,7 @@ export default function AudioPlayer() {
       >
         <div
           style={{
-            width: `${(audioState.currentTime / audioState.duration) * 100}%`,
+            width: \`\${(audioState.currentTime / audioState.duration) * 100}%\`,
             height: "100%",
             background: "#007bff",
           }}
@@ -167,12 +165,11 @@ export default function AudioPlayer() {
     </div>
   );
 }
-```
+`} />
 
 #### Audio player with playlist
 
-```jsx
-import { useAudio } from "rooks";
+<LiveExample code={`import { useAudio } from "rooks";
 import { useState } from "react";
 
 export default function PlaylistPlayer() {
@@ -254,7 +251,7 @@ export default function PlaylistPlayer() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

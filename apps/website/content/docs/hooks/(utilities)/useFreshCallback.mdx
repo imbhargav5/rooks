@@ -13,14 +13,13 @@ Avoid stale closures and keep your callback fresh.
 
 ### Call the latest callback after state changes
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useFreshCallback } from "rooks";
 
 export default function App() {
   const [count, setCount] = useState(0);
   const logLatestCount = useFreshCallback(() => {
-    console.log(`Latest count: ${count}`);
+    console.log(\`Latest count: \${count}\`);
   });
 
   return (
@@ -32,7 +31,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Keep an event handler in sync with changing props
 

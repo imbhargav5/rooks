@@ -15,8 +15,7 @@ Speech synthesis hook for React that provides an easy-to-use interface for the W
 
 ### Basic example
 
-```jsx
-import { useSpeech } from "rooks";
+<LiveExample code={`import { useSpeech } from "rooks";
 
 export default function App() {
   const { start, stop, isPlaying } = useSpeech({
@@ -36,12 +35,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Advanced settings example
 
-```jsx
-import { useSpeech } from "rooks";
+<LiveExample code={`import { useSpeech } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -149,12 +147,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Voice selection and callbacks example
 
-```jsx
-import { useSpeech } from "rooks";
+<LiveExample code={`import { useSpeech } from "rooks";
 import { useState, useEffect } from "react";
 
 export default function App() {
@@ -244,7 +241,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

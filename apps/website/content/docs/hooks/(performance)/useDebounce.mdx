@@ -13,8 +13,7 @@ Debounce hook for react. Internally, it uses lodash debounce.
 
 ### Debounce a text input
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDebounce } from "rooks";
 
 export default function App() {
@@ -31,19 +30,18 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Trigger immediately on the leading edge
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDebounce } from "rooks";
 
 export default function LeadingSearch() {
   const [logs, setLogs] = useState([]);
   const logSearch = useDebounce(
     (value) => {
-      setLogs((current) => [...current, `search:${value}`]);
+      setLogs((current) => [...current, \`search:\${value}\`]);
     },
     500,
     { leading: true }
@@ -56,7 +54,7 @@ export default function LeadingSearch() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

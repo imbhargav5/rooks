@@ -15,8 +15,7 @@ A hook that provides state management with undo and redo capabilities. It mainta
 
 #### Basic counter example
 
-```jsx
-import { useUndoRedoState } from "rooks";
+<LiveExample code={`import { useUndoRedoState } from "rooks";
 
 export default function App() {
   const [count, setCount, controls] = useUndoRedoState(0);
@@ -37,12 +36,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Text editor with function updater
 
-```jsx
-import { useUndoRedoState } from "rooks";
+<LiveExample code={`import { useUndoRedoState } from "rooks";
 
 export default function TextEditor() {
   const [text, setText, controls] = useUndoRedoState("");
@@ -80,12 +78,11 @@ export default function TextEditor() {
     </div>
   );
 }
-```
+`} />
 
 #### Advanced example with limited history
 
-```jsx
-import { useUndoRedoState } from "rooks";
+<LiveExample code={`import { useUndoRedoState } from "rooks";
 
 export default function DrawingApp() {
   const [shapes, setShapes, controls] = useUndoRedoState([], { maxDepth: 5 });
@@ -150,7 +147,7 @@ export default function DrawingApp() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

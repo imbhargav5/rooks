@@ -15,8 +15,7 @@ A hook that creates a callback ref for handling both click and touch events on D
 
 #### Basic example
 
-```jsx
-import { useOnClickRef } from "rooks";
+<LiveExample code={`import { useOnClickRef } from "rooks";
 
 export default function App() {
   const handleClick = () => {
@@ -31,12 +30,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Touch-friendly button example
 
-```jsx
-import { useOnClickRef } from "rooks";
+<LiveExample code={`import { useOnClickRef } from "rooks";
 import { useState } from "react";
 
 export default function TouchButton() {
@@ -68,12 +66,11 @@ export default function TouchButton() {
     </div>
   );
 }
-```
+`} />
 
 #### Multiple elements example
 
-```jsx
-import { useOnClickRef } from "rooks";
+<LiveExample code={`import { useOnClickRef } from "rooks";
 import { useState } from "react";
 
 export default function MultipleElements() {
@@ -141,7 +138,7 @@ export default function MultipleElements() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

@@ -22,8 +22,7 @@ The hook provides a `shouldContinueEffect` callback that helps prevent race cond
 
 ### Basic async data fetching with debounce
 
-```jsx
-import { useDebouncedAsyncEffect } from "rooks";
+<LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
 export default function SearchComponent() {
@@ -40,7 +39,7 @@ export default function SearchComponent() {
 
       setLoading(true);
 
-      const response = await fetch(`/api/search?q=${searchQuery}`);
+      const response = await fetch(\`/api/search?q=\${searchQuery}\`);
       const data = await response.json();
 
       // Only update state if this effect is still valid
@@ -70,12 +69,11 @@ export default function SearchComponent() {
     </div>
   );
 }
-```
+`} />
 
 ### Preventing race conditions
 
-```jsx
-import { useDebouncedAsyncEffect } from "rooks";
+<LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
 export default function UserProfile({ userId }) {
@@ -85,14 +83,14 @@ export default function UserProfile({ userId }) {
   useDebouncedAsyncEffect(
     async (shouldContinueEffect) => {
       // First API call
-      const userResponse = await fetch(`/api/users/${userId}`);
+      const userResponse = await fetch(\`/api/users/\${userId}\`);
       const userData = await userResponse.json();
 
       // Check if we should continue before making the second call
       if (!shouldContinueEffect()) return;
 
       // Second API call
-      const postsResponse = await fetch(`/api/users/${userId}/posts`);
+      const postsResponse = await fetch(\`/api/users/\${userId}/posts\`);
       const postsData = await postsResponse.json();
 
       // Final check before updating state
@@ -118,12 +116,11 @@ export default function UserProfile({ userId }) {
     </div>
   );
 }
-```
+`} />
 
 ### With cleanup function
 
-```jsx
-import { useDebouncedAsyncEffect } from "rooks";
+<LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
 export default function DataFetcher({ endpoint }) {
@@ -163,12 +160,11 @@ export default function DataFetcher({ endpoint }) {
 
   return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
 }
-```
+`} />
 
 ### With leading option for immediate first execution
 
-```jsx
-import { useDebouncedAsyncEffect } from "rooks";
+<LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
 export default function AutoSave({ documentId, content }) {
@@ -178,7 +174,7 @@ export default function AutoSave({ documentId, content }) {
     async (shouldContinueEffect) => {
       setSaveStatus('saving');
 
-      await fetch(`/api/documents/${documentId}`, {
+      await fetch(\`/api/documents/\${documentId}\`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content })
@@ -196,12 +192,11 @@ export default function AutoSave({ documentId, content }) {
 
   return <span>{saveStatus}</span>;
 }
-```
+`} />
 
 ### Error handling
 
-```jsx
-import { useDebouncedAsyncEffect } from "rooks";
+<LiveExample code={`import { useDebouncedAsyncEffect } from "rooks";
 import { useState } from "react";
 
 export default function DataComponent({ query }) {
@@ -211,10 +206,10 @@ export default function DataComponent({ query }) {
   useDebouncedAsyncEffect(
     async (shouldContinueEffect) => {
       try {
-        const response = await fetch(`/api/data?q=${query}`);
+        const response = await fetch(\`/api/data?q=\${query}\`);
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(\`HTTP error! status: \${response.status}\`);
         }
 
         const result = await response.json();
@@ -239,7 +234,7 @@ export default function DataComponent({ query }) {
 
   return <div>{JSON.stringify(data)}</div>;
 }
-```
+`} />
 
 ## Arguments
 

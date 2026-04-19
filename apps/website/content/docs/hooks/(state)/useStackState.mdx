@@ -15,8 +15,7 @@ A React hook that manages state in the form of a stack
 
 ### Basic usage
 
-```jsx
-import React, { useRef } from "react";
+<LiveExample code={`import React, { useRef } from "react";
 import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStackState } from "rooks";
@@ -52,7 +51,7 @@ const variants = {
   },
 };
 
-const StackInner = styled(motion.div)`
+const StackInner = styled(motion.div)\`
   border-bottom: 5px solid black;
   padding: 0 12px 3px;
   width: 300px;
@@ -60,7 +59,7 @@ const StackInner = styled(motion.div)`
     margin: 0;
     padding: 12px 16px;
   }
-`;
+\`;
 
 export function StackDiv({ children, ...props }) {
   return (
@@ -75,7 +74,7 @@ export const StackItem = styled(motion.div).attrs((props) => ({
   initial: "appear",
   animate: "visible",
   exit: "disappear",
-}))`
+}))\`
   width: 100%;
   background-color: rgba(254, 243, 199, 1);
   margin: 0;
@@ -89,9 +88,9 @@ export const StackItem = styled(motion.div).attrs((props) => ({
   border-radius: 0.375rem;
   place-content: center;
   display: flex;
-`;
+\`;
 
-export const ActionButton = styled(motion.button)`
+export const ActionButton = styled(motion.button)\`
     width: 100%;
   font-weight: 500;
   color: rgba(67,56,202,1);
@@ -108,9 +107,9 @@ export const ActionButton = styled(motion.button)`
   border-color: transparent;
   background-color: rgba(224,231,255,1);
 }
-`;
+\`;
 
-export const ActionButton2 = styled(motion.button)`
+export const ActionButton2 = styled(motion.button)\`
   width: 100%;
   font-weight: 500;
   font-size: 1rem;
@@ -125,16 +124,16 @@ export const ActionButton2 = styled(motion.button)`
   border-radius: 0.375rem;
   border-color: transparent;
   background-color: rgba(254, 226, 226, 1);
-`;
+\`;
 
-export const ActionButtons = styled.div`
+export const ActionButtons = styled.div\`
   margin: 12px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-`;
+\`;
 
-export const Root = styled.div`
+export const Root = styled.div\`
   height: 100vh;
   padding-bottom: 100px;
   width: 300px;
@@ -142,7 +141,7 @@ export const Root = styled.div`
   align-items: flex-end;
   margin: auto;
   box-sizing: border-box;
-`;
+\`;
 
 export default function App() {
   const numberToPushRef = useRef(3);
@@ -171,12 +170,11 @@ export default function App() {
     </Root>
   );
 }
-```
+`} />
 
 ### Inspect the top item and render newest-first
 
-```jsx
-import { useStackState } from "rooks";
+<LiveExample code={`import { useStackState } from "rooks";
 
 export default function UploadQueue() {
   const [queue, controls, newestFirst] = useStackState([
@@ -189,7 +187,7 @@ export default function UploadQueue() {
       <p>Next upload: {controls.peek() ?? "Nothing queued"}</p>
       <p>Items queued: {controls.length}</p>
 
-      <button onClick={() => controls.push(`file-${controls.length + 1}.txt`)}>
+      <button onClick={() => controls.push(\`file-\${controls.length + 1}.txt\`)}>
         Add file
       </button>
       <button onClick={controls.pop} disabled={controls.isEmpty()}>
@@ -207,7 +205,7 @@ export default function UploadQueue() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

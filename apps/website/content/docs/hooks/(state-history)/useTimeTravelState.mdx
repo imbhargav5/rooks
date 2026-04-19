@@ -13,8 +13,7 @@ A hook that manages state which can undo and redo. A more powerful version of us
 
 ### Basic example
 
-```tsx
-import { useTimeTravelState } from "rooks";
+<LiveExample lang="tsx" code={`import { useTimeTravelState } from "rooks";
 export default function App() {
   const [value, setValue, controls] = useTimeTravelState(0);
 
@@ -33,4 +32,4 @@ export default function App() {
     </div>
   );
 }
-```
+`} />

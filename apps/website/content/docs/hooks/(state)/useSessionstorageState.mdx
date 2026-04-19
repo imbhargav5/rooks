@@ -15,8 +15,7 @@ A hook that provides state management synchronized with sessionStorage. It autom
 
 #### Basic example
 
-```jsx
-import { useSessionstorageState } from "rooks";
+<LiveExample code={`import { useSessionstorageState } from "rooks";
 
 export default function App() {
   const [count, setCount] = useSessionstorageState("my-app:count", 0);
@@ -32,12 +31,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Complex object storage
 
-```jsx
-import { useSessionstorageState } from "rooks";
+<LiveExample code={`import { useSessionstorageState } from "rooks";
 
 export default function UserProfile() {
   const [user, setUser] = useSessionstorageState("user-profile", {
@@ -97,12 +95,11 @@ export default function UserProfile() {
     </div>
   );
 }
-```
+`} />
 
 #### Cross-window synchronization for shared drafts
 
-```jsx
-import { useSessionstorageState } from "rooks";
+<LiveExample code={`import { useSessionstorageState } from "rooks";
 
 export default function SyncDemo() {
   const [message, setMessage] = useSessionstorageState(
@@ -156,7 +153,7 @@ export default function SyncDemo() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

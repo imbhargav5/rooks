@@ -15,8 +15,7 @@ Hook to manage native JavaScript Map() object state in React with a comprehensiv
 
 ### Basic usage
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { useNativeMapState } from "rooks";
 
 export default function App() {
@@ -65,12 +64,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Individual operations
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { useNativeMapState } from "rooks";
 
 export default function App() {
@@ -87,7 +85,7 @@ export default function App() {
 
   const handleGet = () => {
     const value = get(lookupKey);
-    setResult(value ? `Value: ${value}` : "Key not found");
+    setResult(value ? \`Value: \${value}\` : "Key not found");
   };
 
   const handleHas = () => {
@@ -134,12 +132,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Bulk operations
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { useNativeMapState } from "rooks";
 
 export default function App() {
@@ -173,13 +170,13 @@ export default function App() {
   const checkSomeKeys = () => {
     const keys = ["user1", "theme", "nonexistent"];
     const result = hasSome(keys);
-    setCheckResult(`Has some of [${keys.join(", ")}]: ${result}`);
+    setCheckResult(\`Has some of [\${keys.join(", ")}]: \${result}\`);
   };
 
   const checkAllKeys = () => {
     const keys = ["theme", "language", "notifications"];
     const result = hasEvery(keys);
-    setCheckResult(`Has all of [${keys.join(", ")}]: ${result}`);
+    setCheckResult(\`Has all of [\${keys.join(", ")}]: \${result}\`);
   };
 
   return (
@@ -214,7 +211,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

@@ -15,8 +15,7 @@ A hook that tracks which props or values changed to cause a component rerender. 
 
 #### Basic example with component props
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useWhyDidYouUpdate } from "rooks";
 
 function ExpensiveComponent({ name, age, hobbies, settings }) {
@@ -53,7 +52,7 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 #### Advanced example with specific values
 

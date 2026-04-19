@@ -14,8 +14,7 @@ Hook to detect when user is idle using the native Idle Detection API with polyfi
 
 ### Basic idle detection
 
-```jsx
-import { useIdleDetectionApi } from "rooks";
+<LiveExample code={`import { useIdleDetectionApi } from "rooks";
 
 export default function App() {
   const { isIdle, userState, screenState, isSupported, start, stop } = useIdleDetectionApi({
@@ -37,12 +36,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### With state change callbacks
 
-```jsx
-import { useIdleDetectionApi } from "rooks";
+<LiveExample code={`import { useIdleDetectionApi } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -93,12 +91,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Manual control with custom threshold
 
-```jsx
-import { useIdleDetectionApi } from "rooks";
+<LiveExample code={`import { useIdleDetectionApi } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -171,7 +168,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

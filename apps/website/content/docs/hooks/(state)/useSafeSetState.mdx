@@ -15,8 +15,7 @@ A hook that provides a safe version of `useState` that prevents state updates af
 
 #### Basic example
 
-```jsx
-import { useSafeSetState } from "rooks";
+<LiveExample code={`import { useSafeSetState } from "rooks";
 
 export default function App() {
   const [count, setSafeCount] = useSafeSetState(0);
@@ -41,12 +40,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Example with fetch operation
 
-```jsx
-import { useSafeSetState } from "rooks";
+<LiveExample code={`import { useSafeSetState } from "rooks";
 import { useEffect } from "react";
 
 export default function UserProfile({ userId }) {
@@ -57,7 +55,7 @@ export default function UserProfile({ userId }) {
     const fetchUser = async () => {
       try {
         setSafeLoading(true);
-        const response = await fetch(`/api/users/${userId}`);
+        const response = await fetch(\`/api/users/\${userId}\`);
         const userData = await response.json();
         
         // Safe to call even if component unmounts during fetch
@@ -82,12 +80,11 @@ export default function UserProfile({ userId }) {
     </div>
   );
 }
-```
+`} />
 
 #### Example with functional state updates
 
-```jsx
-import { useSafeSetState } from "rooks";
+<LiveExample code={`import { useSafeSetState } from "rooks";
 
 export default function Counter() {
   const [state, setSafeState] = useSafeSetState({
@@ -121,7 +118,7 @@ export default function Counter() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

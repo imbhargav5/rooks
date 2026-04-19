@@ -19,8 +19,7 @@ Unlike localStorage, sessionStorage data is scoped to the current browser tab/se
 
 #### Basic Usage with Numbers
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseSessionStorageState } from "rooks/experimental";
 
 function Counter() {
@@ -55,12 +54,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Working with Objects and TypeScript
 
-```tsx
-import React, { Suspense } from "react";
+<LiveExample lang="tsx" code={`import React, { Suspense } from "react";
 import { useSuspenseSessionStorageState } from "rooks/experimental";
 
 interface FormData {
@@ -160,12 +158,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Session-Scoped Shopping Cart
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseSessionStorageState } from "rooks/experimental";
 
 function ShoppingCart() {
@@ -253,7 +250,7 @@ function ShoppingCart() {
                 <div>
                   <strong>{item.name}</strong>
                   <div style={{ color: '#666', fontSize: '14px' }}>
-                    ${item.price.toFixed(2)} each
+                    \${item.price.toFixed(2)} each
                   </div>
                 </div>
                 
@@ -280,7 +277,7 @@ function ShoppingCart() {
             fontSize: '18px',
             fontWeight: 'bold'
           }}>
-            Total: ${total.toFixed(2)}
+            Total: \${total.toFixed(2)}
           </div>
           
           <button 
@@ -302,12 +299,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Multi-Step Form with Session Persistence
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseSessionStorageState } from "rooks/experimental";
 
 function MultiStepForm() {
@@ -509,12 +505,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### With Error Boundary for Production Use
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseSessionStorageState } from "rooks/experimental";
 
 class ErrorBoundary extends React.Component {
@@ -617,7 +612,7 @@ function TabSettings() {
       
       <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
         <h3>Preview</h3>
-        <div style={{ fontSize: `${settings.fontSize}px` }}>
+        <div style={{ fontSize: \`\${settings.fontSize}px\` }}>
           Sample text at {settings.fontSize}px
         </div>
         {settings.showSidebar && (
@@ -646,7 +641,7 @@ export default function App() {
     </ErrorBoundary>
   );
 }
-```
+`} />
 
 ## SessionStorage vs LocalStorage
 

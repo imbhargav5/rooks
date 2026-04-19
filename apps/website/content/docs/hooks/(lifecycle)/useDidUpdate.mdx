@@ -13,8 +13,7 @@ componentDidUpdate hook for react
 
 ### React to any update after mount
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { useDidUpdate } from "rooks";
 
 export default function App() {
@@ -31,12 +30,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### React only when a specific dependency changes
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDidUpdate } from "rooks";
 
 export default function FilterStatus() {
@@ -45,7 +43,7 @@ export default function FilterStatus() {
   const [message, setMessage] = useState("No updates yet");
 
   useDidUpdate(() => {
-    setMessage(`Filter changed to ${filter}`);
+    setMessage(\`Filter changed to \${filter}\`);
   }, [filter]);
 
   return (
@@ -59,4 +57,4 @@ export default function FilterStatus() {
     </div>
   );
 }
-```
+`} />

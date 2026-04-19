@@ -13,8 +13,7 @@ Handles focus events for the immediate target element.
 
 ### Track focus on a single input
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useFocus } from "rooks";
 
 export default function App() {
@@ -35,12 +34,11 @@ export default function App() {
     </label>
   );
 }
-```
+`} />
 
 ### Ignore focus from nested children
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useFocus } from "rooks";
 
 export default function App() {
@@ -64,4 +62,4 @@ export default function App() {
     </div>
   );
 }
-```
+`} />

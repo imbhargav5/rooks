@@ -13,8 +13,7 @@ Tracks the currently selected text on the page or within a scoped element. Liste
 
 ### Track selection anywhere on the page
 
-```tsx
-import { useTextSelection } from "rooks";
+<LiveExample lang="tsx" code={`import { useTextSelection } from "rooks";
 
 export default function App() {
   const [{ text, rect }] = useTextSelection();
@@ -30,12 +29,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Scope tracking to a specific element
 
-```tsx
-import { useRef } from "react";
+<LiveExample lang="tsx" code={`import { useRef } from "react";
 import { useTextSelection } from "rooks";
 
 export default function Article() {
@@ -60,12 +58,11 @@ export default function Article() {
     </>
   );
 }
-```
+`} />
 
 ### Show a floating tooltip at the selection position
 
-```tsx
-import { useRef } from "react";
+<LiveExample lang="tsx" code={`import { useRef } from "react";
 import { useTextSelection } from "rooks";
 
 export default function FloatingTooltip() {
@@ -95,7 +92,7 @@ export default function FloatingTooltip() {
     </div>
   );
 }
-```
+`} />
 
 ## Arguments
 

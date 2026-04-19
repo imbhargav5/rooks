@@ -15,8 +15,7 @@ Very similar useKey but it returns a ref
 
 #### Basic example with keydown
 
-```jsx
-import { useKeyRef } from "rooks";
+<LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {
   function vowelsEntered(e) {
     console.log("[Demo 1] You typed a vowel");
@@ -30,12 +29,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 #### Multiple handlers on the same element
 
-```jsx
-import { useKeyRef, useMergeRefs } from "rooks";
+<LiveExample code={`import { useKeyRef, useMergeRefs } from "rooks";
 export default function App() {
   function vowelsEntered(e) {
     console.log("[Demo 1] You typed a vowel");
@@ -54,12 +52,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 #### Multiple kinds of events
 
-```jsx
-import { useKeyRef } from "rooks";
+<LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {
   function onKeyInteraction(e) {
     console.log("[Demo 2]Enter key", e.type);
@@ -79,12 +76,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 #### Conditionally setting handlers
 
-```jsx
-import { useKeyRef } from "rooks";
+<LiveExample code={`import { useKeyRef } from "rooks";
 export default function App() {
   const [shouldListen, setShouldListen] = useState(false);
 
@@ -118,7 +114,7 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 ### Arguments
 

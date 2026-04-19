@@ -15,8 +15,7 @@ A React hook that provides a clean interface to the Broadcast Channel API for cr
 
 ### Basic cross-tab communication
 
-```jsx
-import { useBroadcastChannel } from "rooks";
+<LiveExample code={`import { useBroadcastChannel } from "rooks";
 import { useState } from "react";
 
 export default function CrossTabChat() {
@@ -123,17 +122,16 @@ export default function CrossTabChat() {
     </div>
   );
 }
-```
+`} />
 
 ### Real-time counter synchronization
 
-```jsx
-import { useBroadcastChannel } from "rooks";
+<LiveExample code={`import { useBroadcastChannel } from "rooks";
 import { useState, useEffect } from "react";
 
 export default function SyncedCounter() {
   const [count, setCount] = useState(0);
-  const [tabId] = useState(() => `tab-${Date.now()}-${Math.random()}`);
+  const [tabId] = useState(() => \`tab-\${Date.now()}-\${Math.random()}\`);
 
   const { postMessage, isSupported } = useBroadcastChannel("counter-sync", {
     onMessage: (data) => {
@@ -194,12 +192,11 @@ export default function SyncedCounter() {
     </div>
   );
 }
-```
+`} />
 
 ### Shopping cart synchronization
 
-```jsx
-import { useBroadcastChannel } from "rooks";
+<LiveExample code={`import { useBroadcastChannel } from "rooks";
 import { useState } from "react";
 
 export default function SyncedShoppingCart() {
@@ -290,7 +287,7 @@ export default function SyncedShoppingCart() {
             >
               <div>
                 <div>{item.name}</div>
-                <div style={{ color: "#666" }}>${item.price}</div>
+                <div style={{ color: "#666" }}>\${item.price}</div>
               </div>
               <button onClick={() => addToCart(item)}>
                 Add to Cart
@@ -327,7 +324,7 @@ export default function SyncedShoppingCart() {
                   <div>
                     <div>{item.name}</div>
                     <div style={{ color: "#666" }}>
-                      ${item.price} × {item.quantity} = ${item.price * item.quantity}
+                      \${item.price} × {item.quantity} = \${item.price * item.quantity}
                     </div>
                   </div>
                   <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
@@ -358,7 +355,7 @@ export default function SyncedShoppingCart() {
                 fontWeight: "bold",
                 fontSize: "1.2em"
               }}>
-                Total: ${total}
+                Total: \${total}
               </div>
             </>
           )}
@@ -367,7 +364,7 @@ export default function SyncedShoppingCart() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

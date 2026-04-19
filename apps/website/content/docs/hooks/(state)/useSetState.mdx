@@ -15,8 +15,7 @@ Manage the state of a Set in React. Exposes add, delete and clear methods along 
 
 #### Basic example with numbers
 
-```jsx
-import { useSetState } from "rooks";
+<LiveExample code={`import { useSetState } from "rooks";
 
 export default function App() {
   const [numberSet, setControls] = useSetState(new Set([1, 2, 3]));
@@ -33,12 +32,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Working with strings and membership checking
 
-```jsx
-import { useSetState } from "rooks";
+<LiveExample code={`import { useSetState } from "rooks";
 
 export default function App() {
   const [fruits, fruitControls] = useSetState(new Set(["apple", "banana"]));
@@ -61,12 +59,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Managing selected items
 
-```jsx
-import { useSetState } from "rooks";
+<LiveExample code={`import { useSetState } from "rooks";
 
 export default function App() {
   const [selectedItems, itemControls] = useSetState(new Set());
@@ -100,7 +97,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

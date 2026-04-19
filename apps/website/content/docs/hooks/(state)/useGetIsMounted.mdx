@@ -15,8 +15,7 @@ A hook that provides a way to check if a component is currently mounted. This is
 
 ### Basic usage
 
-```jsx
-import { useEffect } from "react";
+<LiveExample code={`import { useEffect } from "react";
 import { useGetIsMounted } from "rooks";
 
 export default function App() {
@@ -32,12 +31,11 @@ export default function App() {
   
   return <div>Check console for mount status</div>;
 }
-```
+`} />
 
 ### Preventing state updates after async operations
 
-```jsx
-import { useState, useEffect } from "react";
+<LiveExample code={`import { useState, useEffect } from "react";
 import { useGetIsMounted } from "rooks";
 
 export default function UserProfile({ userId }) {
@@ -53,7 +51,7 @@ export default function UserProfile({ userId }) {
         setError(null);
         
         // Simulate API call
-        const response = await fetch(`/api/users/${userId}`);
+        const response = await fetch(\`/api/users/\${userId}\`);
         const userData = await response.json();
         
         // Only update state if component is still mounted
@@ -84,12 +82,11 @@ export default function UserProfile({ userId }) {
     </div>
   );
 }
-```
+`} />
 
 ### Using with timers and intervals
 
-```jsx
-import { useState, useEffect } from "react";
+<LiveExample code={`import { useState, useEffect } from "react";
 import { useGetIsMounted } from "rooks";
 
 export default function Timer() {
@@ -139,14 +136,13 @@ export default function Timer() {
     </div>
   );
 }
-```
+`} />
 
 ### Alternative: Using useSafeSetState
 
 For a more convenient approach to safe state updates, you can use the [`useSafeSetState`](/docs/hooks/useSafeSetState) hook from our collection, which internally uses `useGetIsMounted` to provide a drop-in replacement for `useState` that automatically prevents updates on unmounted components:
 
-```jsx
-import { useEffect } from "react";
+<LiveExample code={`import { useEffect } from "react";
 import { useSafeSetState } from "rooks";
 
 export default function SafeUserProfile({ userId }) {
@@ -160,7 +156,7 @@ export default function SafeUserProfile({ userId }) {
         setLoading(true);
         setError(null);
         
-        const response = await fetch(`/api/users/${userId}`);
+        const response = await fetch(\`/api/users/\${userId}\`);
         const userData = await response.json();
         
         // These will automatically be ignored if component is unmounted
@@ -187,7 +183,7 @@ export default function SafeUserProfile({ userId }) {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

@@ -13,8 +13,7 @@ A continuously running requestAnimationFrame hook for React
 
 ### Basic example
 
-```jsx
-import React, { useRef } from "react";
+<LiveExample code={`import React, { useRef } from "react";
 import "./styles.css";
 import { useRaf, useToggle } from "rooks";
 
@@ -59,17 +58,16 @@ export default function App() {
       </p>
       <canvas
         ref={canvasRef}
-        style={{ height: `100px`, width: `100%`, background: "grey" }}
+        style={{ height: \`100px\`, width: \`100%\`, background: "grey" }}
       />
     </>
   );
 }
-```
+`} />
 
 ### Pause and resume a frame counter
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useRaf, useToggle } from "rooks";
 
 export default function FrameCounter() {
@@ -89,7 +87,7 @@ export default function FrameCounter() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

@@ -13,8 +13,7 @@ Returns the visibility state of the document. Returns `null` on the server.
 
 ### Read the current visibility state
 
-```tsx
-import { useEffect } from "react";
+<LiveExample lang="tsx" code={`import { useEffect } from "react";
 import { useDocumentVisibilityState } from "rooks";
 
 export default function App() {
@@ -24,12 +23,11 @@ export default function App() {
   }, [isDocumentVisible]);
   return <p>Try switching to a different tab and check console </p>;
 }
-```
+`} />
 
 ### Pause work when the tab becomes hidden
 
-```tsx
-import { useEffect, useState } from "react";
+<LiveExample lang="tsx" code={`import { useEffect, useState } from "react";
 import { useDocumentVisibilityState } from "rooks";
 
 export default function PollingStatus() {
@@ -42,4 +40,4 @@ export default function PollingStatus() {
 
   return <p>Polling is currently {status}</p>;
 }
-```
+`} />

@@ -13,8 +13,7 @@ usePreviousImmediate returns the previous value of a variable even if it was the
 
 ## Examples
 
-```jsx
-import { usePreviousImmediate, useCounter } from "rooks";
+<LiveExample code={`import { usePreviousImmediate, useCounter } from "rooks";
 
 function App() {
   const { value: counter1Value, increment: incrementCounter1 } = useCounter(0);
@@ -43,7 +42,7 @@ function App() {
 }
 
 export default App;
-```
+`} />
 
 ---
 

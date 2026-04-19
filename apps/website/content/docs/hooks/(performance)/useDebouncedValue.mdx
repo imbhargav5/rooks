@@ -15,8 +15,7 @@ Tracks another value and gets updated in a debounced way.
 
 ### Debounce what the user types
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDebouncedValue } from "rooks";
 
 export default function App() {
@@ -25,7 +24,7 @@ export default function App() {
     value,
     500
   );
-  // use `immediatelyUpdateDebouncedValue` if you want to update `debouncedValue` immediately
+  // use \`immediatelyUpdateDebouncedValue\` if you want to update \`debouncedValue\` immediately
 
   return (
     <div>
@@ -37,12 +36,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Update the debounced value immediately when needed
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useDebouncedValue } from "rooks";
 
 export default function SubmitSearch() {
@@ -59,7 +57,7 @@ export default function SubmitSearch() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

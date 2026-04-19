@@ -15,8 +15,7 @@ Bind keys to callbacks on the document or a specific target element.
 
 ### Bind shortcuts on the document
 
-```jsx
-import { useKeyBindings, useCounter } from "rooks";
+<LiveExample code={`import { useKeyBindings, useCounter } from "rooks";
 
 export default function App() {
   const { value, increment, decrementBy, incrementBy, reset } = useCounter(0);
@@ -36,12 +35,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Scope key bindings to a specific input
 
-```jsx
-import { useRef, useState } from "react";
+<LiveExample code={`import { useRef, useState } from "react";
 import { useKeyBindings } from "rooks";
 
 export default function App() {
@@ -63,7 +61,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

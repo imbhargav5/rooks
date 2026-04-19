@@ -13,8 +13,7 @@ Attach an event listener to `window` or `document` and keep the callback fresh a
 
 ### Listen for window resize events
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useGlobalObjectEventListener } from "rooks";
 
 export default function App() {
@@ -26,12 +25,11 @@ export default function App() {
 
   return <p>Resize events handled: {count}</p>;
 }
-```
+`} />
 
 ### Conditionally subscribe to document visibility changes
 
-```tsx
-import { useState } from "react";
+<LiveExample lang="tsx" code={`import { useState } from "react";
 import { useGlobalObjectEventListener } from "rooks";
 
 export default function App() {
@@ -41,7 +39,7 @@ export default function App() {
   useGlobalObjectEventListener(
     document,
     "visibilitychange",
-    () => setMessage(`Document is ${document.visibilityState}`),
+    () => setMessage(\`Document is \${document.visibilityState}\`),
     {},
     enabled
   );
@@ -55,4 +53,4 @@ export default function App() {
     </div>
   );
 }
-```
+`} />

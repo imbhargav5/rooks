@@ -15,8 +15,7 @@ A powerful debounce function hook that wraps any function with debounce function
 
 #### Basic trailing debounce
 
-```jsx
-import { useDebounceFn } from "rooks";
+<LiveExample code={`import { useDebounceFn } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -24,7 +23,7 @@ export default function App() {
   const [logs, setLogs] = useState([]);
 
   const addLog = (message) => {
-    setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+    setLogs(prev => [...prev, \`\${new Date().toLocaleTimeString()}: \${message}\`]);
   };
 
   const [debouncedIncrement, isDebouncing] = useDebounceFn(
@@ -51,12 +50,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Leading edge debounce
 
-```jsx
-import { useDebounceFn } from "rooks";
+<LiveExample code={`import { useDebounceFn } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -80,12 +78,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Search input with debounce
 
-```jsx
-import { useDebounceFn } from "rooks";
+<LiveExample code={`import { useDebounceFn } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -103,9 +100,9 @@ export default function App() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500));
     setSearchResults([
-      `Result 1 for "${term}"`,
-      `Result 2 for "${term}"`,
-      `Result 3 for "${term}"`
+      \`Result 1 for "\${term}"\`,
+      \`Result 2 for "\${term}"\`,
+      \`Result 3 for "\${term}"\`
     ]);
     setIsSearching(false);
   };
@@ -140,19 +137,18 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Advanced usage with maxWait
 
-```jsx
-import { useDebounceFn } from "rooks";
+<LiveExample code={`import { useDebounceFn } from "rooks";
 import { useState } from "react";
 
 export default function App() {
   const [logs, setLogs] = useState([]);
 
   const addLog = (message) => {
-    setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+    setLogs(prev => [...prev, \`\${new Date().toLocaleTimeString()}: \${message}\`]);
   };
 
   const [debouncedLog, isDebouncing] = useDebounceFn(
@@ -180,7 +176,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

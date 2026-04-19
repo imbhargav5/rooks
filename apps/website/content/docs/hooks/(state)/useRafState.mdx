@@ -15,8 +15,7 @@ A drop-in replacement for `useState` that batches updates through `requestAnimat
 
 #### Basic usage — tracking mouse position
 
-```jsx
-import { useEffect } from "react";
+<LiveExample code={`import { useEffect } from "react";
 import { useRafState } from "rooks";
 
 export default function App() {
@@ -36,24 +35,22 @@ export default function App() {
     </p>
   );
 }
-```
+`} />
 
 #### With a lazy initializer
 
-```jsx
-import { useRafState } from "rooks";
+<LiveExample code={`import { useRafState } from "rooks";
 
 export default function App() {
   const [value, setValue] = useRafState(() => expensiveComputation());
 
   return <button onClick={() => setValue((prev) => prev + 1)}>{value}</button>;
 }
-```
+`} />
 
 #### Scroll progress indicator
 
-```jsx
-import { useEffect } from "react";
+<LiveExample code={`import { useEffect } from "react";
 import { useRafState } from "rooks";
 
 export default function ScrollProgress() {
@@ -70,10 +67,10 @@ export default function ScrollProgress() {
   }, [setProgress]);
 
   return (
-    <div style={{ width: `${progress}%`, height: 4, background: "blue" }} />
+    <div style={{ width: \`\${progress}%\`, height: 4, background: "blue" }} />
   );
 }
-```
+`} />
 
 ### Arguments
 

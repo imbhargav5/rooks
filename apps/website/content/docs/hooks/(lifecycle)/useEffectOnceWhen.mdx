@@ -15,8 +15,7 @@ Runs a callback effect atmost one time when a condition becomes true
 
 ### Run once when a condition becomes true
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useEffectOnceWhen } from "rooks";
 
 const App = () => {
@@ -43,12 +42,11 @@ const App = () => {
 };
 
 export default App;
-```
+`} />
 
 ### Trigger one-time setup after a feature is enabled
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useEffectOnceWhen } from "rooks";
 
 export default function WelcomeToast() {
@@ -66,7 +64,7 @@ export default function WelcomeToast() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

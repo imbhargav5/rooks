@@ -13,8 +13,7 @@ Helps bridge gap between callback ref and state. Manages the element called with
 
 ### Attach an event listener to the current element
 
-```jsx
-import { useEffect, useState } from "react";
+<LiveExample code={`import { useEffect, useState } from "react";
 import { useRefElement } from "rooks";
 
 function useEventListenerRef(eventName, callback) {
@@ -54,12 +53,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Read the current element from the callback ref
 
-```jsx
-import { useRefElement } from "rooks";
+<LiveExample code={`import { useRefElement } from "rooks";
 
 export default function CurrentElementPreview() {
   const [ref, element] = useRefElement();
@@ -71,7 +69,7 @@ export default function CurrentElementPreview() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

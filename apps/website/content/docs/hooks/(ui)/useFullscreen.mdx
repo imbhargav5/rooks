@@ -13,8 +13,7 @@ Use the [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullsc
 
 ### Toggle fullscreen for the document
 
-```tsx
-import { useFullscreen } from "rooks";
+<LiveExample lang="tsx" code={`import { useFullscreen } from "rooks";
 
 export default function App() {
   const { isFullscreenAvailable, isFullscreenEnabled, toggleFullscreen } =
@@ -30,12 +29,11 @@ export default function App() {
     </button>
   );
 }
-```
+`} />
 
 ### Toggle fullscreen for a specific panel and react to changes
 
-```tsx
-import { useRef, useState } from "react";
+<LiveExample lang="tsx" code={`import { useRef, useState } from "react";
 import { useFullscreen } from "rooks";
 
 export default function App() {
@@ -64,7 +62,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ## Arguments
 

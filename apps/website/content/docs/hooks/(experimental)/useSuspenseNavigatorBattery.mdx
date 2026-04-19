@@ -17,8 +17,7 @@ A Suspense-enabled hook for getting battery status information from the Navigato
 
 #### Basic Usage
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 
 function BatteryInfo() {
@@ -31,13 +30,13 @@ function BatteryInfo() {
       <p>Charging: {battery.charging ? "Yes" : "No"}</p>
       <p>
         Charging Time:{" "}
-        {battery.chargingTime === Infinity ? "N/A" : `${battery.chargingTime}s`}
+        {battery.chargingTime === Infinity ? "N/A" : \`\${battery.chargingTime}s\`}
       </p>
       <p>
         Discharging Time:{" "}
         {battery.dischargingTime === Infinity
           ? "N/A"
-          : `${battery.dischargingTime}s`}
+          : \`\${battery.dischargingTime}s\`}
       </p>
     </div>
   );
@@ -50,12 +49,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### With Error Boundary
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 
 class ErrorBoundary extends React.Component {
@@ -105,12 +103,11 @@ export default function App() {
     </ErrorBoundary>
   );
 }
-```
+`} />
 
 #### Battery Level Indicator with Real-time Updates
 
-```jsx
-import React, { Suspense } from "react";
+<LiveExample code={`import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 
 function BatteryIndicator() {
@@ -120,7 +117,7 @@ function BatteryIndicator() {
     if (seconds === Infinity) return "∞";
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}h ${minutes}m`;
+    return \`\${hours}h \${minutes}m\`;
   };
 
   const getBatteryColor = (level) => {
@@ -152,7 +149,7 @@ function BatteryIndicator() {
       >
         <div
           style={{
-            width: `${battery.level * 100}%`,
+            width: \`\${battery.level * 100}%\`,
             height: "100%",
             backgroundColor: getBatteryColor(battery.level),
             transition: "width 0.3s ease",
@@ -191,7 +188,7 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 ## Real-time Updates
 

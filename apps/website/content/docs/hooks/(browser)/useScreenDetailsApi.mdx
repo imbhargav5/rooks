@@ -17,8 +17,7 @@ Hook for multi-screen information and management using the Screen Details API. T
 
 ### Basic Usage
 
-```jsx
-import React from "react";
+<LiveExample code={`import React from "react";
 import { useScreenDetailsApi } from "rooks";
 
 export default function ScreenInfo() {
@@ -75,12 +74,11 @@ export default function ScreenInfo() {
     </div>
   );
 }
-```
+`} />
 
 ### Multi-Screen Window Management
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { useScreenDetailsApi } from "rooks";
 
 export default function MultiScreenManager() {
@@ -96,16 +94,16 @@ export default function MultiScreenManager() {
   const [openWindows, setOpenWindows] = useState([]);
 
   const openWindowOnScreen = (screen) => {
-    const windowFeatures = `
-      left=${screen.availLeft},
-      top=${screen.availTop},
-      width=${screen.availWidth},
-      height=${screen.availHeight}
-    `;
+    const windowFeatures = \`
+      left=\${screen.availLeft},
+      top=\${screen.availTop},
+      width=\${screen.availWidth},
+      height=\${screen.availHeight}
+    \`;
     
     const newWindow = window.open(
       '/demo-page',
-      `_blank_${screen.label}`,
+      \`_blank_\${screen.label}\`,
       windowFeatures
     );
     
@@ -173,12 +171,11 @@ export default function MultiScreenManager() {
     </div>
   );
 }
-```
+`} />
 
 ### Screen Layout Visualization
 
-```jsx
-import React from "react";
+<LiveExample code={`import React from "react";
 import { useScreenDetailsApi } from "rooks";
 
 export default function ScreenLayout() {
@@ -298,7 +295,7 @@ export default function ScreenLayout() {
     </div>
   );
 }
-```
+`} />
 
 ### Options
 

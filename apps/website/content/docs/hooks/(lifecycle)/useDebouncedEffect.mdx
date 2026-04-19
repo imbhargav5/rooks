@@ -20,8 +20,7 @@ Common use cases include:
 
 ### Basic usage with search input
 
-```jsx
-import { useDebouncedEffect } from "rooks";
+<LiveExample code={`import { useDebouncedEffect } from "rooks";
 import { useState } from "react";
 
 export default function SearchComponent() {
@@ -32,7 +31,7 @@ export default function SearchComponent() {
     () => {
       if (searchQuery.trim()) {
         // This will only run 500ms after the user stops typing
-        fetch(`/api/search?q=${searchQuery}`)
+        fetch(\`/api/search?q=\${searchQuery}\`)
           .then(res => res.json())
           .then(data => setResults(data));
       }
@@ -57,12 +56,11 @@ export default function SearchComponent() {
     </div>
   );
 }
-```
+`} />
 
 ### With cleanup function
 
-```jsx
-import { useDebouncedEffect } from "rooks";
+<LiveExample code={`import { useDebouncedEffect } from "rooks";
 import { useState } from "react";
 
 export default function SubscriptionComponent({ topic }) {
@@ -91,12 +89,11 @@ export default function SubscriptionComponent({ topic }) {
     </div>
   );
 }
-```
+`} />
 
 ### With leading option
 
-```jsx
-import { useDebouncedEffect } from "rooks";
+<LiveExample code={`import { useDebouncedEffect } from "rooks";
 import { useState } from "react";
 
 export default function ImmediateSearchComponent() {
@@ -121,12 +118,11 @@ export default function ImmediateSearchComponent() {
     />
   );
 }
-```
+`} />
 
 ### With multiple dependencies
 
-```jsx
-import { useDebouncedEffect } from "rooks";
+<LiveExample code={`import { useDebouncedEffect } from "rooks";
 import { useState } from "react";
 
 export default function FilteredListComponent() {
@@ -137,7 +133,7 @@ export default function FilteredListComponent() {
   useDebouncedEffect(
     () => {
       // Runs 300ms after either category or sortBy stops changing
-      fetch(`/api/items?category=${category}&sort=${sortBy}`)
+      fetch(\`/api/items?category=\${category}&sort=\${sortBy}\`)
         .then(res => res.json())
         .then(data => setItems(data));
     },
@@ -164,7 +160,7 @@ export default function FilteredListComponent() {
     </div>
   );
 }
-```
+`} />
 
 ## Arguments
 

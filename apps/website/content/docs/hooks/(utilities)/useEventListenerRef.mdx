@@ -15,8 +15,7 @@ A react hook to add an event listener to a ref
 
 ### Basic usage
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useEventListenerRef } from "rooks";
 import "./styles.css";
 
@@ -39,12 +38,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Attach a listener to a specific interactive element
 
-```jsx
-import { useState } from "react";
+<LiveExample code={`import { useState } from "react";
 import { useEventListenerRef } from "rooks";
 
 export default function ClickTracker() {
@@ -55,7 +53,7 @@ export default function ClickTracker() {
 
   return <button ref={ref}>Button clicks tracked by the hook: {clicks}</button>;
 }
-```
+`} />
 
 ### Arguments
 

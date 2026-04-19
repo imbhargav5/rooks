@@ -19,8 +19,7 @@ If the document does not declare a favicon link, the current value is `null`.
 
 #### Basic Usage
 
-```tsx
-import React, { Suspense } from "react";
+<LiveExample lang="tsx" code={`import React, { Suspense } from "react";
 import { useSuspenseFavicon } from "rooks/experimental";
 
 function FaviconPreview() {
@@ -62,12 +61,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Same-origin Updates With Cache-busting Query Strings
 
-```tsx
-import React, { Suspense } from "react";
+<LiveExample lang="tsx" code={`import React, { Suspense } from "react";
 import { useSuspenseFavicon } from "rooks/experimental";
 
 function BrandSwitcher() {
@@ -109,12 +107,11 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 #### Persisting The Managed Favicon After Unmount
 
-```tsx
-import React, { Suspense, useState } from "react";
+<LiveExample lang="tsx" code={`import React, { Suspense, useState } from "react";
 import { useSuspenseFavicon } from "rooks/experimental";
 
 function ManagedFavicon() {
@@ -148,7 +145,7 @@ export default function App() {
     </Suspense>
   );
 }
-```
+`} />
 
 ## Arguments
 

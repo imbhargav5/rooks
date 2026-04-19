@@ -15,8 +15,7 @@ A React hook that works like `useEffect` but performs deep comparison on depende
 
 #### Basic example with object dependencies
 
-```jsx
-import { useDeepCompareEffect } from "rooks";
+<LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";
 
 export default function App() {
@@ -47,12 +46,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Example with array dependencies
 
-```jsx
-import { useDeepCompareEffect } from "rooks";
+<LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";
 
 export default function TodoApp() {
@@ -88,12 +86,11 @@ export default function TodoApp() {
     </div>
   );
 }
-```
+`} />
 
 #### Example with cleanup function
 
-```jsx
-import { useDeepCompareEffect } from "rooks";
+<LiveExample code={`import { useDeepCompareEffect } from "rooks";
 import { useState } from "react";
 
 export default function DataFetcher() {
@@ -110,7 +107,7 @@ export default function DataFetcher() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/api/products?${new URLSearchParams(filters)}`,
+          \`/api/products?\${new URLSearchParams(filters)}\`,
           { signal: controller.signal }
         );
         const result = await response.json();
@@ -148,7 +145,7 @@ export default function DataFetcher() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

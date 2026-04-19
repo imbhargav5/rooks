@@ -15,8 +15,7 @@ A comprehensive array state manager hook for React that provides immutable array
 
 #### Basic array operations
 
-```jsx
-import { useArrayState } from "rooks";
+<LiveExample code={`import { useArrayState } from "rooks";
 
 export default function App() {
   const [array, controls] = useArrayState([1, 2, 3]);
@@ -55,12 +54,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 #### Todo list manager
 
-```jsx
-import { useArrayState } from "rooks";
+<LiveExample code={`import { useArrayState } from "rooks";
 import { useState } from "react";
 
 export default function TodoList() {
@@ -192,12 +190,11 @@ export default function TodoList() {
     </div>
   );
 }
-```
+`} />
 
 #### Advanced array operations
 
-```jsx
-import { useArrayState } from "rooks";
+<LiveExample code={`import { useArrayState } from "rooks";
 import { useState } from "react";
 
 export default function AdvancedArrayOps() {
@@ -319,12 +316,11 @@ export default function AdvancedArrayOps() {
     </div>
   );
 }
-```
+`} />
 
 #### Performance considerations with large arrays
 
-```jsx
-import { useArrayState } from "rooks";
+<LiveExample code={`import { useArrayState } from "rooks";
 import { useState, useMemo } from "react";
 
 export default function LargeArrayExample() {
@@ -332,7 +328,7 @@ export default function LargeArrayExample() {
   const [items, controls] = useArrayState(() => 
     Array.from({ length: 1000 }, (_, i) => ({
       id: i,
-      name: `Item ${i}`,
+      name: \`Item \${i}\`,
       value: Math.floor(Math.random() * 1000)
     }))
   );
@@ -367,7 +363,7 @@ export default function LargeArrayExample() {
     const newId = Math.max(...items.map(item => item.id)) + 1;
     controls.push({
       id: newId,
-      name: `Item ${newId}`,
+      name: \`Item \${newId}\`,
       value: Math.floor(Math.random() * 1000)
     });
   };
@@ -461,7 +457,7 @@ export default function LargeArrayExample() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

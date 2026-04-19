@@ -13,8 +13,7 @@ keypress, keyup and keydown event handlers as hooks for react.
 
 ## Basic example with keydown
 
-```jsx
-import React, { useRef, useState } from "react";
+<LiveExample code={`import React, { useRef, useState } from "react";
 import "./styles.css";
 import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
 
@@ -46,12 +45,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 ### Multiple kinds of events
 
-```jsx
-import React, { useRef, useState } from "react";
+<LiveExample code={`import React, { useRef, useState } from "react";
 import "./styles.css";
 import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
 
@@ -76,12 +74,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 ### Conditionally setting handlers
 
-```jsx
-import React, { useRef, useState } from "react";
+<LiveExample code={`import React, { useRef, useState } from "react";
 import "./styles.css";
 import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
 
@@ -119,12 +116,11 @@ export default function App() {
     </>
   );
 }
-```
+`} />
 
 ### Fun little game
 
-```jsx
-import React, { useRef, useState } from "react";
+<LiveExample code={`import React, { useRef, useState } from "react";
 import "./styles.css";
 import { useDebounce, useKey, useThrottle, useTimeoutWhen } from "rooks";
 import random from "random";
@@ -141,13 +137,13 @@ const colors = [
   "##BE185D",
 ];
 
-export const Root = styled.div`
+export const Root = styled.div\`
   position: fixed;
   top: 0;
   height: 100%;
   left: 0;
   width: 100%;
-`;
+\`;
 
 export function useMapState(initialValue) {
   const [map, setMap] = useState(initialValue);
@@ -200,7 +196,7 @@ export function useMapState(initialValue) {
   return [map, controls];
 }
 
-const KeyWrapper = styled(motion.div)`
+const KeyWrapper = styled(motion.div)\`
   height: 60px;
   width: 60px;
   position: absolute;
@@ -211,14 +207,14 @@ const KeyWrapper = styled(motion.div)`
   border-radius: 6px;
   border: 1px solid dodgerblue;
   place-items: center;
-  ${props => {
-    return `
-      background: ${props.background};
-      transform: rotateZ(${props.rotation}deg);
-      left: ${props.leftOffset}%;
-    `;
+  \${props => {
+    return \`
+      background: \${props.background};
+      transform: rotateZ(\${props.rotation}deg);
+      left: \${props.leftOffset}%;
+    \`;
   }}
-`;
+\`;
 
 function getVariants(topOffset) {
   return {
@@ -228,7 +224,7 @@ function getVariants(topOffset) {
       scale: 0.5,
     },
     visible: {
-      top: `${topOffset}%`,
+      top: \`\${topOffset}%\`,
       opacity: 1,
       scale: 1,
       rotate: 720 + random.int(-45, 45),
@@ -314,7 +310,7 @@ const Alphabets = [
   "Z",
 ];
 
-const allKeysToHandle = Alphabets.map(key => `Key${key}`);
+const allKeysToHandle = Alphabets.map(key => \`Key\${key}\`);
 
 function createKeyData(alphabetKeyCode) {
   return {
@@ -374,7 +370,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

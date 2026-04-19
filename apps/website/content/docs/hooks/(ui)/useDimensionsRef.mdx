@@ -15,8 +15,7 @@ Easily grab dimensions of an element with a ref using this hook
 
 ### Basic measurement
 
-```jsx
-import { useDimensionsRef } from "rooks";
+<LiveExample code={`import { useDimensionsRef } from "rooks";
 
 export default function App() {
   const [ref, dimensions, node] = useDimensionsRef();
@@ -39,12 +38,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Access the tracked node as well as its dimensions
 
-```jsx
-import { useDimensionsRef } from "rooks";
+<LiveExample code={`import { useDimensionsRef } from "rooks";
 
 export default function PreviewCard() {
   const [ref, dimensions, node] = useDimensionsRef();
@@ -62,7 +60,7 @@ export default function PreviewCard() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 

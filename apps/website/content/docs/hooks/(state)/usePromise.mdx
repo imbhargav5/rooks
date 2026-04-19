@@ -14,8 +14,7 @@ Promise management hook for React that handles async operations with automatic l
 
 ### Basic usage
 
-```jsx
-import React from "react";
+<LiveExample code={`import React from "react";
 import { usePromise } from "rooks";
 
 function fetchUserData() {
@@ -35,16 +34,15 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### With dependencies
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { usePromise } from "rooks";
 
 function fetchUserPosts(userId) {
-  return fetch(`/api/users/${userId}/posts`).then(res => res.json());
+  return fetch(\`/api/users/\${userId}/posts\`).then(res => res.json());
 }
 
 export default function App() {
@@ -74,12 +72,11 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Error handling
 
-```jsx
-import React, { useState } from "react";
+<LiveExample code={`import React, { useState } from "react";
 import { usePromise } from "rooks";
 
 function fetchData(shouldFail = false) {
@@ -122,7 +119,7 @@ export default function App() {
     </div>
   );
 }
-```
+`} />
 
 ### Arguments
 
