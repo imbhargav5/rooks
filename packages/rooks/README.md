@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img src="https://i.ibb.co/3YkzXHgb/rooks-graphic-1.png" alt="Why Rooks ?" height="auto" width="100%" />
+  <img src="https://raw.githubusercontent.com/imbhargav5/rooks/main/.github/assets/why-rooks.png" alt="Why Rooks ?" height="auto" width="100%" />
 </p>
 
 <p align="center">
