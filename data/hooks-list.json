@@ -446,6 +446,11 @@
       "category": "state"
     },
     {
+      "name": "useRequest",
+      "description": "Async data-fetching hook with loading, error, and data states, supporting manual and automatic triggers, caching, polling, debounce, and retry",
+      "category": "state"
+    },
+    {
       "name": "useRaf",
       "description": "A continuously running requestAnimationFrame hook for React",
       "category": "animation"
