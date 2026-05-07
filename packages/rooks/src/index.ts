@@ -115,6 +115,7 @@ export { useTimeTravelState } from "./hooks/useTimeTravelState";
 export { useFetch } from "./hooks/useFetch";
 export { useThrottle } from "./hooks/useThrottle";
 export { useTimeoutWhen } from "./hooks/useTimeoutWhen";
+export { useTrackedEffect } from "./hooks/useTrackedEffect";
 export { useTextSelection } from "./hooks/useTextSelection";
 export type { TextSelectionState } from "./hooks/useTextSelection";
 export { useToggle } from "./hooks/useToggle";

@@ -586,6 +586,11 @@
       "category": "state-history"
     },
     {
+      "name": "useTrackedEffect",
+      "description": "A useEffect hook that tracks which dependencies changed between renders and passes their indices to the effect callback",
+      "category": "lifecycle"
+    },
+    {
       "name": "useTween",
       "description": "Tween animation hook for React",
       "category": "animation"
