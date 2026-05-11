@@ -99,6 +99,8 @@ export { useQueueState } from "./hooks/useQueueState";
 export { useRaf } from "./hooks/useRaf";
 export { useRafState } from "./hooks/useRafState";
 export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
+export { useResponsive } from "./hooks/useResponsive";
+export type { Breakpoint, ResponsiveState } from "./hooks/useResponsive";
 export { useRenderCount } from "./hooks/useRenderCount";
 export { useRefElement } from "./hooks/useRefElement";
 export { useSafeSetState } from "./hooks/useSafeSetState";

@@ -1,0 +1,97 @@
+---
+id: useResponsive
+title: useResponsive
+sidebar_label: useResponsive
+---
+
+## About
+
+Returns current responsive breakpoint info based on window width. Uses standard breakpoints:
+
+| Breakpoint | Width          |
+| ---------- | -------------- |
+| `xs`       | < 576px        |
+| `sm`       | >= 576px       |
+| `md`       | >= 768px       |
+| `lg`       | >= 992px       |
+| `xl`       | >= 1200px      |
+| `xxl`      | >= 1400px      |
+
+<br />
+
+## Examples
+
+### Basic usage
+
+```jsx
+import { useResponsive } from "rooks";
+
+export default function App() {
+  const { breakpoint, isXs, isSm, isMd, isLg, isXl, isXxl, width } =
+    useResponsive();
+
+  return (
+    <div>
+      <p>Window width: {width}px</p>
+      <p>Current breakpoint: <strong>{breakpoint}</strong></p>
+      <ul>
+        <li>isXs: {String(isXs)}</li>
+        <li>isSm: {String(isSm)}</li>
+        <li>isMd: {String(isMd)}</li>
+        <li>isLg: {String(isLg)}</li>
+        <li>isXl: {String(isXl)}</li>
+        <li>isXxl: {String(isXxl)}</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+### Conditional rendering based on breakpoint
+
+```jsx
+import { useResponsive } from "rooks";
+
+export default function ResponsiveLayout() {
+  const { isMd, isLg, isXl, isXxl } = useResponsive();
+  const isDesktop = isLg || isXl || isXxl;
+
+  return (
+    <div>
+      {isMd || isDesktop ? (
+        <nav style={{ display: "flex", gap: "16px" }}>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      ) : (
+        <button>☰ Menu</button>
+      )}
+      <main>
+        {isDesktop ? (
+          <p>Full desktop layout</p>
+        ) : (
+          <p>Mobile / tablet layout</p>
+        )}
+      </main>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+This hook accepts no arguments.
+
+### Returned Object keys
+
+| Return value  | Type       | Description                                          |
+| ------------- | ---------- | ---------------------------------------------------- |
+| `breakpoint`  | `Breakpoint` | The active breakpoint name (`xs`, `sm`, `md`, `lg`, `xl`, or `xxl`) |
+| `isXs`        | `boolean`  | `true` when window width is less than 576px          |
+| `isSm`        | `boolean`  | `true` when window width is between 576px and 767px  |
+| `isMd`        | `boolean`  | `true` when window width is between 768px and 991px  |
+| `isLg`        | `boolean`  | `true` when window width is between 992px and 1199px |
+| `isXl`        | `boolean`  | `true` when window width is between 1200px and 1399px |
+| `isXxl`       | `boolean`  | `true` when window width is 1400px or wider          |
+| `width`       | `number`   | The current `window.innerWidth` in pixels            |
