@@ -1,0 +1,71 @@
+---
+id: useUpdateEffect
+title: useUpdateEffect
+sidebar_label: useUpdateEffect
+---
+
+## About
+
+Like `useEffect`, but skips the callback on the initial mount. The effect only runs on subsequent re-renders when dependencies change. Accepts the same arguments and return value as React's built-in `useEffect`.
+
+## Examples
+
+### Log a value change after mount
+
+```jsx
+import React, { useState } from "react";
+import { useUpdateEffect } from "rooks";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useUpdateEffect(() => {
+    console.log("count changed to", count);
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Open the console and click the button to see logs (nothing on first render).</p>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Run cleanup on dependency change
+
+```jsx
+import React, { useState } from "react";
+import { useUpdateEffect } from "rooks";
+
+export default function SubscriptionExample() {
+  const [topic, setTopic] = useState("general");
+
+  useUpdateEffect(() => {
+    const subscription = subscribe(topic);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [topic]);
+
+  return (
+    <div>
+      <p>Subscribed to: {topic}</p>
+      <button onClick={() => setTopic("sports")}>Switch to sports</button>
+      <button onClick={() => setTopic("tech")}>Switch to tech</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type             | Description                                                      |
+| -------- | ---------------- | ---------------------------------------------------------------- |
+| effect   | `EffectCallback` | Imperative function that can optionally return a cleanup function |
+| deps     | `DependencyList` | Optional array of dependencies that control when the effect runs |
+
+### Returns
+
+`void`
