@@ -1,0 +1,71 @@
+---
+id: useCreation
+title: useCreation
+sidebar_label: useCreation
+---
+
+## About
+
+A stable alternative to `useMemo` backed by `useRef`. React is allowed to discard memoized values from `useMemo` and recompute them for performance reasons, which can break object identity. `useCreation` guarantees the factory function is called exactly once on mount and only re-runs when the dependency array actually changes — making it safe for expensive object or class instance creation.
+
+[//]: # "Main"
+
+## Examples
+
+### Create a stable class instance
+
+```jsx
+import { useCreation } from "rooks";
+
+class AudioEngine {
+  constructor(sampleRate) {
+    this.sampleRate = sampleRate;
+    this.buffer = new Float32Array(sampleRate);
+  }
+}
+
+export default function Player({ sampleRate }) {
+  const engine = useCreation(() => new AudioEngine(sampleRate), [sampleRate]);
+
+  return <div>Engine buffer length: {engine.buffer.length}</div>;
+}
+```
+
+### Stable object reference that only recreates on dependency change
+
+```jsx
+import { useState } from "react";
+import { useCreation } from "rooks";
+
+export default function App() {
+  const [userId, setUserId] = useState(1);
+
+  const config = useCreation(
+    () => ({
+      endpoint: `/api/users/${userId}`,
+      headers: { "X-User-Id": String(userId) },
+    }),
+    [userId]
+  );
+
+  return (
+    <div>
+      <p>Endpoint: {config.endpoint}</p>
+      <button onClick={() => setUserId((id) => id + 1)}>Next user</button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type            | Description                                                     | Default value |
+| -------- | --------------- | --------------------------------------------------------------- | ------------- |
+| factory  | () => T         | Factory function that produces the value to memoize             | undefined     |
+| deps     | DependencyList  | Dependency array — factory re-runs only when a dep changes      | undefined     |
+
+### Return Value
+
+| Type | Description                                        |
+| ---- | -------------------------------------------------- |
+| T    | The stable memoized value returned by the factory  |
