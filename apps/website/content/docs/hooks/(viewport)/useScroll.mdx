@@ -1,0 +1,77 @@
+---
+id: useScroll
+title: useScroll
+sidebar_label: useScroll
+---
+
+## About
+
+Tracks the scroll position of any scrollable element. Unlike `useWindowScrollPosition`, this hook works with any DOM element, not just the window.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic Usage
+
+```jsx
+import { useRef } from "react";
+import { useScroll } from "rooks";
+
+function App() {
+  const ref = useRef(null);
+  const [{ left, top }, isScrolling] = useScroll(ref);
+
+  return (
+    <div
+      ref={ref}
+      style={{ overflow: "auto", height: 200, border: "1px solid #ccc" }}
+    >
+      <div style={{ height: 1000, width: 1000, padding: 16 }}>
+        <p>Scroll left: {left}</p>
+        <p>Scroll top: {top}</p>
+        <p>{isScrolling ? "Scrolling…" : "Idle"}</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Tracking a Window or Document
+
+```jsx
+import { useScroll } from "rooks";
+
+function App() {
+  const [{ left, top }, isScrolling] = useScroll(
+    typeof window !== "undefined" ? window : null
+  );
+
+  return (
+    <div style={{ height: 2000 }}>
+      <p style={{ position: "fixed", top: 0 }}>
+        Window scroll — left: {left}, top: {top} {isScrolling ? "(scrolling)" : ""}
+      </p>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Arguments
+
+| Argument | Type | Description | Default value |
+| -------- | ---- | ----------- | ------------- |
+| target | `RefObject<HTMLElement> \| HTMLElement \| (() => HTMLElement) \| Window \| Document \| null` | The scrollable element to observe | — |
+
+### Returns
+
+Returns a tuple `[scrollPosition, isScrolling]`.
+
+| Return value | Type | Description | Default value |
+| ------------ | ---- | ----------- | ------------- |
+| scrollPosition | `{ left: number; top: number }` | Current scroll offsets of the target element | `{ left: 0, top: 0 }` |
+| isScrolling | `boolean` | `true` while the element is being scrolled; resets to `false` 100 ms after the last scroll event | `false` |
