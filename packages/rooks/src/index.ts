@@ -51,6 +51,12 @@ export { useInput } from "./hooks/useInput";
 export { useMeasure } from "./hooks/useMeasure";
 export { useIntervalWhen } from "./hooks/useIntervalWhen";
 export { useIntersectionObserverRef } from "./hooks/useIntersectionObserverRef";
+export { useInfiniteScroll } from "./hooks/useInfiniteScroll";
+export type {
+  UseInfiniteScrollOptions,
+  UseInfiniteScrollControls,
+  InfiniteScrollData,
+} from "./hooks/useInfiniteScroll";
 export { useInViewRef } from "./hooks/useInViewRef";
 export { useIsDroppingFiles } from "./hooks/useIsDroppingFiles";
 export { useIsomorphicEffect } from "./hooks/useIsomorphicEffect";
