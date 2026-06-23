@@ -4,7 +4,7 @@ import { useSelectableList } from "@/hooks/useSelectableList";
 
 vi.spyOn(console, "warn").mockImplementation(vi.fn());
 
-describe("useSelctableList", () => {
+describe("useSelectableList", () => {
   afterEach(() => {
     (console.warn as vi.Mock).mockReset();
   });
