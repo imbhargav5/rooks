@@ -4,14 +4,14 @@ import { useRef, useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
 import { useWillUnmount } from "./useWillUnmount";
 
-// Define the types inline if we can't import them
+// Subset of lodash debounce options used by this hook.
 export interface DebounceSettings {
   leading?: boolean;
   maxWait?: number;
   trailing?: boolean;
 }
 
-// This is a simpler version that matches what we're using
+// Lodash's debounced callback shape used internally.
 type DebouncedFunction<T extends (...args: any[]) => any> = T & {
   cancel(): void;
   flush(): ReturnType<T> | undefined;
