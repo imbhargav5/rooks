@@ -6,6 +6,11 @@ import { noop } from "@/utils/noop";
  */
 type ColorScheme = "light" | "dark" | "no-preference";
 
+type LegacyMediaQueryList = MediaQueryList & {
+  addListener: (listener: () => void) => void;
+  removeListener: (listener: () => void) => void;
+};
+
 /**
  * Return value for the usePreferredColorScheme hook
  */
@@ -66,16 +71,15 @@ function subscribe(onStoreChange: () => void): () => void {
     };
   } else {
     // Fallback for older browsers using addListener
-    // @ts-ignore - addListener exists in older browsers
-    darkModeQuery.addListener(onStoreChange);
-    // @ts-ignore
-    lightModeQuery.addListener(onStoreChange);
+    const legacyDarkModeQuery = darkModeQuery as LegacyMediaQueryList;
+    const legacyLightModeQuery = lightModeQuery as LegacyMediaQueryList;
+
+    legacyDarkModeQuery.addListener(onStoreChange);
+    legacyLightModeQuery.addListener(onStoreChange);
 
     return () => {
-      // @ts-ignore
-      darkModeQuery.removeListener(onStoreChange);
-      // @ts-ignore
-      lightModeQuery.removeListener(onStoreChange);
+      legacyDarkModeQuery.removeListener(onStoreChange);
+      legacyLightModeQuery.removeListener(onStoreChange);
     };
   }
 }
