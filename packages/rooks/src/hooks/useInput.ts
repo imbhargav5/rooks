@@ -23,8 +23,8 @@ type Options<T> = {
    *
    * Validator function which can be used to prevent updates
    *
-   * @param {any} New value
-   * @param {any} Current value
+   * @param newValue New value
+   * @param currentValue Current value
    * @returns {boolean} Whether an update should happen or not
    */
   validate?: (newValue: T, currentValue: T) => boolean;
