@@ -1,6 +1,4 @@
 import { vi } from "vitest";
-/**
- */
 import { renderHook, act } from "@testing-library/react";
 import { useMediaRecorder } from "@/hooks/useMediaRecorder";
 
@@ -65,8 +63,7 @@ describe("useMediaRecorder", () => {
   it("should detect when MediaRecorder is not supported", () => {
     expect.hasAssertions();
     const originalMediaRecorder = window.MediaRecorder;
-    // @ts-ignore
-    delete window.MediaRecorder;
+    Reflect.deleteProperty(window, "MediaRecorder");
 
     const { result } = renderHook(() => useMediaRecorder(mockStream));
 
@@ -355,8 +352,7 @@ describe("useMediaRecorder", () => {
   it("should not start recording without support", () => {
     expect.hasAssertions();
     const originalMediaRecorder = window.MediaRecorder;
-    // @ts-ignore
-    delete window.MediaRecorder;
+    Reflect.deleteProperty(window, "MediaRecorder");
 
     const { result } = renderHook(() => useMediaRecorder(mockStream));
 
