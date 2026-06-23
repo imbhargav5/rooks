@@ -27,6 +27,10 @@ interface ScreenDetails {
   removeEventListener: (event: string, handler: (event: Event) => void) => void;
 }
 
+type ScreenDetailsWindow = Window & {
+  getScreenDetails?: () => Promise<ScreenDetails>;
+};
+
 interface UseScreenDetailsApiOptions {
   /**
    * Whether to automatically request permission on mount
@@ -83,7 +87,13 @@ function useScreenDetailsApi(options: UseScreenDetailsApiOptions = {}): UseScree
   
   // Check if Screen Details API is supported
   const isSupported = useMemo(() => {
-    return typeof window !== "undefined" && typeof (window as any).getScreenDetails === "function";
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    const screenDetailsWindow = window as ScreenDetailsWindow;
+
+    return typeof screenDetailsWindow.getScreenDetails === "function";
   }, []);
   
   // Computed properties
@@ -103,7 +113,13 @@ function useScreenDetailsApi(options: UseScreenDetailsApiOptions = {}): UseScree
     setError(null);
     
     try {
-      const screenDetails = await (window as any).getScreenDetails();
+      const screenDetailsWindow = window as ScreenDetailsWindow;
+      const screenDetails = await screenDetailsWindow.getScreenDetails?.();
+
+      if (!screenDetails) {
+        throw new Error("Screen Details API is not supported");
+      }
+
       screenDetailsRef.current = screenDetails;
       setScreens(screenDetails.screens);
       setCurrentScreen(screenDetails.currentScreen);
