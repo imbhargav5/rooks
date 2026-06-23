@@ -7,7 +7,7 @@ import { noop } from "@/utils/noop";
  * Checks if a click happened outside a Ref. Handy for dropdowns, modals and popups etc.
  *
  * @param handler Callback to fire on outside click
- * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
+ * @param when A boolean which activates the hook only when it is true. Useful for conditionally enabling the outside click
  * @returns An array with first item being ref
  * @see https://rooks.vercel.app/docs/hooks/useOutsideClick
  */
