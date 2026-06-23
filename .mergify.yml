@@ -2,7 +2,7 @@ queue_rules:
   - name: default
     # speculative_checks: 3
     # batch_size: 2
-    conditions:
+    merge_conditions:
       - check-success=Build (test)
       - check-success=Test (pnpm test)
 pull_request_rules:
