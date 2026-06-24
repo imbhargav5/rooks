@@ -24,17 +24,17 @@ describe("useTween", () => {
         // Wait, the raf mock defined above uses performance.now().
         // But we need to increment currentTime inside the timeout?
         // We can't access currentTime from the top-level mock easily.
-        // We can rely on jest.advanceTimersByTime to fire the timeout.
+        // We can rely on vi.advanceTimersByTime to fire the timeout.
         // But we need a way to increment currentTime.
 
         // Maybe we can just use a variable in the scope if we define mock inside?
-        // No, jest.mock is hoisted.
+        // No, vi.mock is hoisted.
 
         // Alternative: Mock raf to use setTimeout.
         // And in the test, we use an interval to increment time?
         // Or we spy on setTimeout? No.
 
-        // Let's make performance.now() return Date.now() which jest mocks!
+        // Let's make performance.now() return Date.now() which Vitest mocks.
         // vi.useFakeTimers() mocks Date.
         // So if we make performance.now() return Date.now(), it should work with advanceTimersByTime.
 
