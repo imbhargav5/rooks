@@ -1,8 +1,5 @@
 import { vi } from "vitest";
-/**
- */
-import { renderHook } from "@testing-library/react";
-import { act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 describe("useWindowSize", () => {
@@ -23,44 +20,52 @@ describe("useWindowSize", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useWindowSize());
 
-    expect(result.current).toHaveProperty('innerHeight');
-    expect(result.current).toHaveProperty('innerWidth');
-    expect(result.current).toHaveProperty('outerHeight');
-    expect(result.current).toHaveProperty('outerWidth');
-    expect(typeof result.current.innerHeight).toBe('number');
-    expect(typeof result.current.innerWidth).toBe('number');
-    expect(typeof result.current.outerHeight).toBe('number');
-    expect(typeof result.current.outerWidth).toBe('number');
+    expect(result.current).toHaveProperty("innerHeight");
+    expect(result.current).toHaveProperty("innerWidth");
+    expect(result.current).toHaveProperty("outerHeight");
+    expect(result.current).toHaveProperty("outerWidth");
+    expect(typeof result.current.innerHeight).toBe("number");
+    expect(typeof result.current.innerWidth).toBe("number");
+    expect(typeof result.current.outerHeight).toBe("number");
+    expect(typeof result.current.outerWidth).toBe("number");
   });
 
   it("should add event listener on mount", () => {
     expect.hasAssertions();
-    const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+    const addEventListenerSpy = vi.spyOn(window, "addEventListener");
 
     renderHook(() => useWindowSize());
 
-    expect(addEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      "resize",
+      expect.any(Function)
+    );
   });
 
   it("should remove event listener on unmount", () => {
     expect.hasAssertions();
-    const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+    const removeEventListenerSpy = vi.spyOn(window, "removeEventListener");
 
     const { unmount } = renderHook(() => useWindowSize());
     unmount();
 
-    expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      "resize",
+      expect.any(Function)
+    );
   });
 
   it("should update when window resize event is triggered", () => {
     expect.hasAssertions();
-    let resizeCallback: (() => void) | undefined;
+    let resizeCallback: EventListenerOrEventListenerObject | undefined;
 
-    vi.spyOn(window, 'addEventListener').mockImplementation((event, callback) => {
-      if (event === 'resize') {
-        resizeCallback = callback as () => void;
+    vi.spyOn(window, "addEventListener").mockImplementation(
+      (event, callback) => {
+        if (event === "resize") {
+          resizeCallback = callback;
+        }
       }
-    });
+    );
 
     const { result } = renderHook(() => useWindowSize());
     const initialDimensions = result.current;
@@ -72,7 +77,11 @@ describe("useWindowSize", () => {
     // Trigger resize event
     act(() => {
       if (resizeCallback) {
-        resizeCallback();
+        if (typeof resizeCallback === "function") {
+          resizeCallback(new Event("resize"));
+        } else {
+          resizeCallback.handleEvent(new Event("resize"));
+        }
       }
     });
 
