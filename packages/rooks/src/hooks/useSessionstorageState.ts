@@ -37,7 +37,7 @@ function initialize<S>(key: string, initialState: S) {
   }
 }
 
-type UseSessionstorateStateReturnValue<S> = [
+type UseSessionstorageStateReturnValue<S> = [
   S,
   Dispatch<SetStateAction<S>>,
   () => void
@@ -49,14 +49,14 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  * Tracks a value within sessionStorage and updates it
  *
  * @param {string} key - Key of the sessionStorage object
- * @param {any} initialState - Default initial value
- * @returns {[any, Dispatch<SetStateAction<any>>, () => void]}
+ * @param initialState - Default initial value
+ * @returns The current value, a setter, and a remove callback
  * @see https://rooks.vercel.app/docs/hooks/useSessionstorageState
  */
 function useSessionstorageState<S>(
   key: string,
   initialState?: S | (() => S)
-): UseSessionstorateStateReturnValue<S> {
+): UseSessionstorageStateReturnValue<S> {
   const [value, setValue] = useState(() => initialize(key, initialState));
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
