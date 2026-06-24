@@ -20,8 +20,7 @@ type Options = {
   | MutableRefObject<Document>
   | MutableRefObject<HTMLElement | null | undefined>;
   /**
-   * when boolean to enable and disable events, when passed false
-   * remove the eventlistener if any
+   * When false, disables events and removes any active event listener.
    */
   when?: boolean;
   /**
