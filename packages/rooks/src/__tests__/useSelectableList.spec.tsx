@@ -233,7 +233,6 @@ describe("useSelectableList", () => {
     it("should warn when toggling a value that does not exist in list", () => {
       expect.hasAssertions();
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      // Also suppress the console.log("as") debug statement in the hook
       const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
       const { result } = renderHook(() => useSelectableList(list));
 
@@ -247,6 +246,7 @@ describe("useSelectableList", () => {
       expect(warnSpy).toHaveBeenCalledWith(
         expect.stringContaining("toggleSelection failed")
       );
+      expect(logSpy).not.toHaveBeenCalled();
       warnSpy.mockRestore();
       logSpy.mockRestore();
     });

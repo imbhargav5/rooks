@@ -99,8 +99,6 @@ function useSelectableList<T>(
               setCurrentIndex(valueIndex);
             }
           } else {
-            console.log("as");
-
             console.warn(
               `toggleSelection failed. Does the value ${value} exist in the list?`
             );
