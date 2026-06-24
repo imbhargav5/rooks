@@ -21,11 +21,11 @@ type Options = {
   | MutableRefObject<HTMLElement | null | undefined>;
   /**
    * when boolean to enable and disable events, when passed false
-   * remove the eventlistener if any
+   * remove the event listener if any
    */
   when?: boolean;
   /**
-   * opt-in to prevent alert, confirm and prompt from causing the eventlistener to lose track of keyup events.
+   * opt-in to prevent alert, confirm and prompt from causing the event listener to lose track of keyup events.
    */
   preventLostKeyup?: boolean;
 };
