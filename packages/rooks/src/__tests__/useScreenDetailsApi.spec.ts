@@ -455,8 +455,8 @@ describe("useScreenDetailsApi", () => {
   it("should handle loading state correctly", async () => {
     expect.hasAssertions();
     
-    let resolveGetScreenDetails: (value: any) => void;
-    const screenDetailsPromise = new Promise(resolve => {
+    let resolveGetScreenDetails: (value: typeof mockScreenDetails) => void;
+    const screenDetailsPromise = new Promise<typeof mockScreenDetails>(resolve => {
       resolveGetScreenDetails = resolve;
     });
     
