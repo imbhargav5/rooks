@@ -82,7 +82,7 @@ type UseWebLocksApiReturn = {
   /**
    * Query the current lock state
    */
-  query: () => Promise<any>;
+  query: () => Promise<LockManagerSnapshot>;
 };
 
 /**
@@ -129,7 +129,7 @@ function useWebLocksApi(
   /**
    * Query the current lock state
    */
-  const query = useCallback(async (): Promise<any> => {
+  const query = useCallback(async (): Promise<LockManagerSnapshot> => {
     if (!isSupported) {
       const err = new Error("Web Locks API is not supported");
       setErrorState(err);
