@@ -68,7 +68,7 @@ export function StackDiv({ children, ...props }) {
   );
 }
 
-export const StackItem = styled(motion.div).attrs(props => ({
+export const StackItem = styled(motion.div).attrs((props) => ({
   variants,
   initial: "appear",
   animate: "visible",
@@ -155,7 +155,7 @@ export default function App() {
     <Root>
       <div>
         <StackDiv>
-          {list.map(item => {
+          {list.map((item) => {
             return <StackItem key={item}>{item}</StackItem>;
           })}
         </StackDiv>
@@ -175,7 +175,7 @@ export default function App() {
 
 | Arguments   | Type  | Description | Default value |
 | ----------- | ----- | ----------- | ------------- |
-| initialList | any[] | An array    | undefind      |
+| initialList | any[] | An array    | undefined     |
 
 ### Returned array items
 
