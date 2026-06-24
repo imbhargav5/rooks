@@ -20,7 +20,7 @@ type UseBroadcastChannelOptions<T = any> = {
   /**
    * Callback function called when an error occurs
    */
-  onError?: (error: Event) => void;
+  onError?: (error: Event | Error) => void;
 };
 
 /**
@@ -112,7 +112,7 @@ function useBroadcastChannel<T = any>(
     } catch (error) {
       // Handle any errors during channel creation
       if (onError && isEventLike(error)) {
-        onError(error as Event);
+        onError(error);
       }
     }
   }, [channelName, isSupported, stableOnMessage, stableOnError, onError]);
@@ -135,7 +135,7 @@ function useBroadcastChannel<T = any>(
       } catch (error) {
         console.error("useBroadcastChannel: Failed to post message", error);
         if (onError && isEventLike(error)) {
-          onError(error as Event);
+          onError(error);
         }
       }
     },
