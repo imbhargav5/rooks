@@ -37,7 +37,7 @@ function initialize<S>(key: string, initialState: S) {
   }
 }
 
-type UseSessionstorateStateReturnValue<S> = [
+type UseSessionstorageStateReturnValue<S> = [
   S,
   Dispatch<SetStateAction<S>>,
   () => void
@@ -56,7 +56,7 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
 function useSessionstorageState<S>(
   key: string,
   initialState?: S | (() => S)
-): UseSessionstorateStateReturnValue<S> {
+): UseSessionstorageStateReturnValue<S> {
   const [value, setValue] = useState(() => initialize(key, initialState));
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
