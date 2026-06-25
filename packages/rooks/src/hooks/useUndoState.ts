@@ -15,7 +15,7 @@ const defaultOptions: UseUndoStateOptions = { maxSize: 100 };
  * @typedef UndoStateOptions
  * @type {object}
  * @property {number} maxSize - Maximum number of states to keep in the undo stack.
- * @param {any} defaultValue - Default value to use for the state. This will be the first value in the undo stack.
+ * @param {T} defaultValue - Default value to use for the state. This will be the first value in the undo stack.
  * @param {UseUndoStateOptions} options - Options for the undo state. Currently takes the maxSize option.
  * @returns {UseUndoStateReturnValue}
  * @see https://rooks.vercel.app/docs/hooks/useUndoState
