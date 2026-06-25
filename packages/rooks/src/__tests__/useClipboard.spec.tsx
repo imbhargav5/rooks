@@ -50,7 +50,7 @@ describe("useClipboard", () => {
   it("should detect when clipboard API is not supported", () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-ignore
+    // @ts-expect-error - simulating a browser without clipboard support
     delete navigator.clipboard;
 
     const { result } = renderHook(() => useClipboard());
@@ -118,7 +118,7 @@ describe("useClipboard", () => {
   it("should throw error when copying without clipboard support", async () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-ignore
+    // @ts-expect-error - simulating a browser without clipboard support
     delete navigator.clipboard;
 
     const { result } = renderHook(() => useClipboard());
@@ -196,7 +196,7 @@ describe("useClipboard", () => {
   it("should throw error when pasting without clipboard support", async () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-ignore
+    // @ts-expect-error - simulating a browser without clipboard support
     delete navigator.clipboard;
 
     const { result } = renderHook(() => useClipboard());
