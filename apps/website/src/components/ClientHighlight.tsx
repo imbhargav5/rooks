@@ -9,7 +9,6 @@ type ClientHighlightProps = {
 };
 
 export function ClientHighlight({ code, language }: ClientHighlightProps) {
-    console.log('ClientHighlight', code, language);
     // Ensure code is a non-empty string
     const safeCode = typeof code === 'string' ? code : '';
     // Ensure language is valid
