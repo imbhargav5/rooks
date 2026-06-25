@@ -50,8 +50,7 @@ describe("useNotification", () => {
   it("should detect when Notification API is not supported", () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
@@ -123,8 +122,7 @@ describe("useNotification", () => {
   it("should return denied when requesting permission without support", async () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
@@ -206,8 +204,7 @@ describe("useNotification", () => {
   it("should return null when showing notification without support", async () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
