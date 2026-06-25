@@ -28,10 +28,12 @@ function saveValueToSessionStorage<S>(key: string, value: S) {
  * @param key Key of the sessionStorage object
  * @param initialState Default initial value
  */
-function initialize<S>(key: string, initialState: S) {
+function initialize<S>(key: string, initialState: S | (() => S)) {
   const valueLoadedFromSessionStorage = getValueFromSessionStorage(key);
   if (valueLoadedFromSessionStorage === null) {
-    return initialState;
+    return typeof initialState === "function"
+      ? (initialState as () => S)()
+      : initialState;
   } else {
     return valueLoadedFromSessionStorage;
   }
