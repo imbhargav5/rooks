@@ -144,8 +144,7 @@ function useKeys(
     if (preventLostKeyup !== true) return noop;
     if (typeof window !== "undefined") {
       const originalAlert = window.alert;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      window.alert = (message?: any) => {
+      window.alert = (message?: Parameters<typeof window.alert>[0]) => {
         for (const identifier of keysList) {
           PressedKeyMapping[identifier] = undefined;
         }
