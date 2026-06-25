@@ -90,7 +90,7 @@ function createFetchPromise<T>(
  * @example
  * ```tsx
  * function UserProfile({ userId }: { userId: string }) {
- *   const { data: user, loading, error, fetch } = useFetch<User>(
+ *   const { data: user, loading, error, startFetch } = useFetch<User>(
  *     `https://api.example.com/users/${userId}`,
  *     {
  *       headers: { 'Authorization': 'Bearer token' },
@@ -102,8 +102,8 @@ function createFetchPromise<T>(
  *
  *   // Fetch data when component mounts or when needed
  *   useEffect(() => {
- *     fetch();
- *   }, [fetch]);
+ *     startFetch();
+ *   }, [startFetch]);
  *
  *   if (loading) return <div>Loading...</div>;
  *   if (error) return <div>Error: {error.message}</div>;
@@ -113,7 +113,7 @@ function createFetchPromise<T>(
  *     <div>
  *       <h1>{user.name}</h1>
  *       <p>{user.email}</p>
- *       <button onClick={fetch}>Refresh</button>
+ *       <button onClick={startFetch}>Refresh</button>
  *     </div>
  *   );
  * }
