@@ -82,7 +82,7 @@ type UseWebLocksApiReturn = {
   /**
    * Query the current lock state
    */
-  query: () => Promise<any>;
+  query: () => Promise<LockManagerSnapshot>;
 };
 
 /**
@@ -129,7 +129,7 @@ function useWebLocksApi(
   /**
    * Query the current lock state
    */
-  const query = useCallback(async (): Promise<any> => {
+  const query = useCallback(async (): Promise<LockManagerSnapshot> => {
     if (!isSupported) {
       const err = new Error("Web Locks API is not supported");
       setErrorState(err);
@@ -140,8 +140,8 @@ function useWebLocksApi(
       const result = await navigator.locks.query();
 
       // Update state based on query results with null checks
-      const resourceLocks = result.held?.filter((lock: any) => lock.name === resourceName) || [];
-      const pendingLocks = result.pending?.filter((lock: any) => lock.name === resourceName) || [];
+      const resourceLocks = result.held?.filter((lock: LockInfo) => lock.name === resourceName) || [];
+      const pendingLocks = result.pending?.filter((lock: LockInfo) => lock.name === resourceName) || [];
 
       setIsLocked(resourceLocks.length > 0);
       setWaitingCount(pendingLocks.length);
