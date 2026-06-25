@@ -59,6 +59,23 @@ describe("useSessionstorageState basic", () => {
     expect(valueElement.innerHTML).toBe("hello");
   });
 
+  it("initializes correctly with a function initializer", () => {
+    expect.hasAssertions();
+
+    const AppWithFunctionInitializer = () => {
+      const [value] = useSessionstorageState(
+        "test-value-function",
+        () => "hello"
+      );
+
+      return <p data-testid="value-function">{value}</p>;
+    };
+
+    const { getByTestId } = render(<AppWithFunctionInitializer />);
+    const valueElement = getByTestId("value-function");
+    expect(valueElement.innerHTML).toBe("hello");
+  });
+
   it("setting the new value", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
