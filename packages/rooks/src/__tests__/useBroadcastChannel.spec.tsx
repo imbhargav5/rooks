@@ -10,7 +10,7 @@ class MockBroadcastChannel {
   public name: string;
   public onmessage: ((this: BroadcastChannel, ev: MessageEvent) => any) | null = null;
   public onmessageerror: ((this: BroadcastChannel, ev: MessageEvent) => any) | null = null;
-  private listeners: Map<string, Set<EventListener>> = new Map();
+  protected listeners: Map<string, Set<EventListener>> = new Map();
 
   constructor(name: string) {
     this.name = name;
@@ -37,7 +37,7 @@ class MockBroadcastChannel {
       const listeners = this.listeners.get("message");
       if (listeners) {
         listeners.forEach((listener) => {
-          (listener as any)(messageEvent);
+          listener(messageEvent);
         });
       }
     }, 0);
@@ -54,7 +54,7 @@ class MockBroadcastChannel {
       const listeners = this.listeners.get("messageerror");
       if (listeners) {
         listeners.forEach((listener) => {
-          (listener as any)(errorEvent);
+          listener(errorEvent);
         });
       }
     }, 0);
@@ -196,9 +196,9 @@ describe("useBroadcastChannel", () => {
           // Simulate error after construction
           setTimeout(() => {
             const errorEvent = new Event("messageerror");
-            const listeners = (this as any).listeners.get("messageerror");
+            const listeners = this.listeners.get("messageerror");
             if (listeners) {
-              listeners.forEach((listener: any) => {
+              listeners.forEach((listener) => {
                 listener(errorEvent);
               });
             }
