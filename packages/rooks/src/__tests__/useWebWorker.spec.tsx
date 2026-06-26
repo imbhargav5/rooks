@@ -52,8 +52,7 @@ describe("useWebWorker", () => {
   it("should detect when Web Workers are not supported", () => {
     expect.hasAssertions();
     const originalWorker = window.Worker;
-    // @ts-ignore
-    delete window.Worker;
+    Reflect.deleteProperty(window, "Worker");
 
     const { result } = renderHook(() => useWebWorker("/worker.js"));
 
@@ -139,8 +138,7 @@ describe("useWebWorker", () => {
   it("should not post message without support", () => {
     expect.hasAssertions();
     const originalWorker = window.Worker;
-    // @ts-ignore
-    delete window.Worker;
+    Reflect.deleteProperty(window, "Worker");
 
     const { result } = renderHook(() => useWebWorker("/worker.js"));
 
