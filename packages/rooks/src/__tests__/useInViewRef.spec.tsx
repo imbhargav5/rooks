@@ -2,13 +2,24 @@ import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useInViewRef } from "@/hooks/useInViewRef";
 
+type MockIntersectionObserverInstance = Pick<
+  IntersectionObserver,
+  "observe" | "unobserve" | "disconnect"
+> & {
+  callback: IntersectionObserverCallback;
+  options?: IntersectionObserverInit;
+};
+
 describe("useInViewRef", () => {
   let mockIntersectionObserver: vi.Mock;
-  let observerInstances: any[];
+  let observerInstances: MockIntersectionObserverInstance[];
 
   beforeEach(() => {
     observerInstances = [];
-    mockIntersectionObserver = vi.fn(function (callback: any, options: any) {
+    mockIntersectionObserver = vi.fn(function (
+      callback: IntersectionObserverCallback,
+      options?: IntersectionObserverInit
+    ) {
       const instance = {
         observe: vi.fn(),
         unobserve: vi.fn(),
