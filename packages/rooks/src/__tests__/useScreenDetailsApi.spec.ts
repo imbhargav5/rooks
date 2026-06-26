@@ -5,6 +5,10 @@ import { useScreenDetailsApi } from "@/hooks/useScreenDetailsApi";
 
 const { act } = TestRenderer;
 
+type TestScreenDetailsWindow = Window & {
+  getScreenDetails?: ReturnType<typeof vi.fn>;
+};
+
 // Mock the Window Management API
 const mockScreenDetails = {
   screens: [
@@ -67,11 +71,14 @@ const mockScreenDetails = {
   removeEventListener: vi.fn(),
 };
 
+type TestScreenDetails = typeof mockScreenDetails;
+
 const mockPermissionsQuery = vi.fn();
 const mockGetScreenDetails = vi.fn();
 
 // Mock global objects
-const originalGetScreenDetails = (window as any).getScreenDetails;
+const screenDetailsWindow = window as TestScreenDetailsWindow;
+const originalGetScreenDetails = screenDetailsWindow.getScreenDetails;
 
 // Replace global window and navigator
 Object.defineProperty(window, 'getScreenDetails', {
@@ -92,7 +99,7 @@ describe("useScreenDetailsApi", () => {
     
     // Ensure window.getScreenDetails is properly mocked before each test
     // Delete the property first, then redefine it
-    delete (window as any).getScreenDetails;
+    delete screenDetailsWindow.getScreenDetails;
     Object.defineProperty(window, 'getScreenDetails', {
       value: mockGetScreenDetails,
       writable: true,
@@ -150,7 +157,7 @@ describe("useScreenDetailsApi", () => {
     expect.hasAssertions();
     
     // Test when API is not supported
-    delete (window as any).getScreenDetails;
+    delete screenDetailsWindow.getScreenDetails;
     Object.defineProperty(window, 'getScreenDetails', {
       value: undefined,
       writable: true,
@@ -161,7 +168,7 @@ describe("useScreenDetailsApi", () => {
     expect(result.current.isSupported).toBe(false);
     
     // Clean up and restore for next test
-    delete (window as any).getScreenDetails;
+    delete screenDetailsWindow.getScreenDetails;
     Object.defineProperty(window, 'getScreenDetails', {
       value: mockGetScreenDetails,
       writable: true,
@@ -455,7 +462,7 @@ describe("useScreenDetailsApi", () => {
   it("should handle loading state correctly", async () => {
     expect.hasAssertions();
     
-    let resolveGetScreenDetails: (value: any) => void;
+    let resolveGetScreenDetails: (value: TestScreenDetails) => void;
     const screenDetailsPromise = new Promise(resolve => {
       resolveGetScreenDetails = resolve;
     });
