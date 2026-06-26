@@ -13,7 +13,7 @@ interface NotificationOptions {
   icon?: string;
   badge?: string;
   tag?: string;
-  data?: any;
+  data?: unknown;
   requireInteraction?: boolean;
   silent?: boolean;
   vibrate?: number | number[];
