@@ -21,13 +21,14 @@ describe("useResizeObserverRef", () => {
     const observerFn = vi.fn();
     const unObserverFn = vi.fn();
     const disconnetFn = vi.fn();
-    global.ResizeObserver = vi.fn().mockImplementation(function () {
+    const ResizeObserverMock = vi.fn().mockImplementation(function () {
       return {
         observe: observerFn,
         unobserve: unObserverFn,
         disconnect: disconnetFn,
-      };
-    }) as any;
+      } as ResizeObserver;
+    }) as unknown as typeof ResizeObserver;
+    global.ResizeObserver = ResizeObserverMock;
 
     function App() {
       const [value, setValue] = useState(0);
