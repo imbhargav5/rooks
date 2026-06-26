@@ -4,7 +4,7 @@ import { useForkRef } from "./useForkRef";
 import { useMutationObserverRef } from "./useMutationObserverRef";
 
 /**
- * @param element HTML element whose boundingclientrect is needed
+ * @param element HTML element whose bounding client rect is needed
  * @returns DOMRect
  */
 function getBoundingClientRect(element: HTMLElement): DOMRect {
@@ -13,10 +13,10 @@ function getBoundingClientRect(element: HTMLElement): DOMRect {
 
 /**
  * useBoundingclientrectRef hook
- * Tracks the boundingclientrect of a React Ref and fires a callback when the element's size changes.
+ * Tracks the bounding client rect of a React ref and fires a callback when the element's size changes.
  *
  * @returns [CallbackRef | null, DOMRect | null, () => void]
- * @see https://rooks.vercel.app/docs/hooks/useBoundingclientRectRef
+ * @see https://rooks.vercel.app/docs/hooks/useBoundingclientrectRef
  */
 function useBoundingclientrectRef(): [
   CallbackRef | null,
