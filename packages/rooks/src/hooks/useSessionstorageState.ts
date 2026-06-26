@@ -51,8 +51,8 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  * Tracks a value within sessionStorage and updates it
  *
  * @param {string} key - Key of the sessionStorage object
- * @param {any} initialState - Default initial value
- * @returns {[any, Dispatch<SetStateAction<any>>, () => void]}
+ * @param initialState - Default initial value
+ * @returns Tuple containing the stored value, setter, and remove callback
  * @see https://rooks.vercel.app/docs/hooks/useSessionstorageState
  */
 function useSessionstorageState<S>(
