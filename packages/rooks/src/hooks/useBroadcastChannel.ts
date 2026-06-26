@@ -11,7 +11,7 @@ function isEventLike(error: unknown): error is Event | Error {
 /**
  * Options for the useBroadcastChannel hook
  */
-type UseBroadcastChannelOptions<T = any> = {
+type UseBroadcastChannelOptions<T = unknown> = {
   /**
    * Callback function called when a message is received
    */
@@ -26,7 +26,7 @@ type UseBroadcastChannelOptions<T = any> = {
 /**
  * Return type for the useBroadcastChannel hook
  */
-type UseBroadcastChannelReturn<T = any> = {
+type UseBroadcastChannelReturn<T = unknown> = {
   /**
    * Function to send a message to the broadcast channel
    */
@@ -52,7 +52,7 @@ type UseBroadcastChannelReturn<T = any> = {
  * @returns Object with postMessage function, close function, and isSupported flag
  * @see {@link https://rooks.vercel.app/docs/hooks/useBroadcastChannel}
  */
-function useBroadcastChannel<T = any>(
+function useBroadcastChannel<T = unknown>(
   channelName: string,
   options?: UseBroadcastChannelOptions<T>
 ): UseBroadcastChannelReturn<T> {
