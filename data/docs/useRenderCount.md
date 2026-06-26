@@ -10,4 +10,17 @@ Get the render count of a component
 
 ## Examples
 
-TODO: Add an example here.
+```jsx
+import { useRenderCount } from "rooks";
+
+export default function App() {
+  const renderCount = useRenderCount();
+
+  return (
+    <div>
+      <h1>Component render count</h1>
+      <p>This component has rendered {renderCount} times.</p>
+    </div>
+  );
+}
+```
