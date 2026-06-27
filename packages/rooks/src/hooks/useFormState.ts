@@ -5,7 +5,7 @@ import { useState, useCallback, ChangeEvent, FormEvent } from "react";
  */
 type ValidatorFunction<T> = (
   name: keyof T,
-  value: any,
+  value: T[keyof T],
   values: T
 ) => string | undefined;
 
@@ -55,7 +55,9 @@ interface UseFormStateReturnValue<T> {
    * Handle input change events
    */
   handleChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => void;
   /**
    * Handle form submit events
@@ -64,7 +66,7 @@ interface UseFormStateReturnValue<T> {
   /**
    * Set a specific field value
    */
-  setFieldValue: (name: keyof T, value: any) => void;
+  setFieldValue: <K extends keyof T>(name: K, value: T[K]) => void;
   /**
    * Set a specific field error
    */
@@ -161,7 +163,7 @@ function useFormState<T extends Record<string, any>>({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateField = useCallback(
-    (name: keyof T, value: any): string | undefined => {
+    (name: keyof T, value: T[keyof T]): string | undefined => {
       if (validate) {
         return validate(name, value, values);
       }
@@ -194,7 +196,9 @@ function useFormState<T extends Record<string, any>>({
 
   const handleChange = useCallback(
     (
-      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      event: ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
     ): void => {
       const { name, value, type } = event.target;
       const fieldName = name as keyof T;
@@ -205,11 +209,11 @@ function useFormState<T extends Record<string, any>>({
           ? (event.target as HTMLInputElement).checked
           : value;
 
-      setValues((prev) => ({ ...prev, [fieldName]: fieldValue }));
+      setValues((prev) => ({ ...prev, [fieldName]: fieldValue as T[keyof T] }));
       setTouched((prev) => ({ ...prev, [fieldName]: true }));
 
       // Validate field
-      const error = validateField(fieldName, fieldValue);
+      const error = validateField(fieldName, fieldValue as T[keyof T]);
       setErrors((prev) => {
         const newErrors = { ...prev };
         if (error) {
@@ -247,9 +251,12 @@ function useFormState<T extends Record<string, any>>({
     [values, validateForm, onSubmit]
   );
 
-  const setFieldValue = useCallback((name: keyof T, value: any): void => {
-    setValues((prev) => ({ ...prev, [name]: value }));
-  }, []);
+  const setFieldValue = useCallback(
+    <K extends keyof T>(name: K, value: T[K]): void => {
+      setValues((prev) => ({ ...prev, [name]: value }));
+    },
+    []
+  );
 
   const setFieldError = useCallback((name: keyof T, error: string): void => {
     setErrors((prev) => ({ ...prev, [name]: error }));
@@ -285,8 +292,4 @@ function useFormState<T extends Record<string, any>>({
 }
 
 export { useFormState };
-export type {
-  UseFormStateOptions,
-  UseFormStateReturnValue,
-  ValidatorFunction,
-};
+export type { UseFormStateOptions, UseFormStateReturnValue, ValidatorFunction };
