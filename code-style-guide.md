@@ -1,4 +1,3 @@
-
 # Rooks Code Style Guide
 
 This document provides a comprehensive guide to the coding style, conventions, and best practices used in the Rooks project. Adhering to these guidelines ensures consistency, readability, and maintainability of the codebase.
@@ -168,25 +167,25 @@ We use `@testing-library/react` for testing our hooks.
 
 ### Test Structure
 
-- Tests are located in the `packages/rooks/__tests__` directory.
+- Tests are located in the `packages/rooks/src/__tests__` directory.
 - Test files are named `useMyHook.spec.ts`.
-- Each test file starts with `/** @jest-environment jsdom */`.
+- Use `/** @vitest-environment jsdom */` when a test needs an explicit jsdom environment.
 
 ### Writing Tests
 
 - **`renderHook`:** Use the `renderHook` function from `@testing-library/react` to test hooks in isolation.
 - **`act`:** Wrap any state updates in `act` to ensure that React has processed the updates before you make assertions.
 - **Assertions:**
-    - Use `expect.hasAssertions()` at the beginning of each test to ensure that at least one assertion is called.
-    - Write clear and concise assertions.
-- **Mocking:** Use Jest's mocking capabilities (`jest.fn()`, `jest.spyOn()`, etc.) to mock dependencies and track function calls.
-- **Fake Timers:** Use `jest.useFakeTimers()` for hooks that involve timeouts or intervals.
+  - Use `expect.hasAssertions()` at the beginning of each test to ensure that at least one assertion is called.
+  - Write clear and concise assertions.
+- **Mocking:** Use Vitest's mocking capabilities (`vi.fn()`, `vi.spyOn()`, etc.) to mock dependencies and track function calls.
+- **Fake Timers:** Use `vi.useFakeTimers()` for hooks that involve timeouts or intervals.
 
 ### Example Test: `useCounter.spec.ts`
 
 ```typescript
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 import { renderHook, act } from "@testing-library/react";
 import { useCounter } from "@/hooks/useCounter";
@@ -214,10 +213,10 @@ describe("useCounter", () => {
 
 - Every exported hook must have a JSDoc comment.
 - The comment should include:
-    - A brief description of the hook.
-    - `@param` for each parameter.
-    - `@returns` for the return value.
-    - `@see` with a link to the official documentation page.
+  - A brief description of the hook.
+  - `@param` for each parameter.
+  - `@returns` for the return value.
+  - `@see` with a link to the official documentation page.
 
 **Example:**
 
