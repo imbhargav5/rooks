@@ -57,7 +57,7 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  * Tracks a value within localStorage and updates it
  *
  * @param {string} key - Key of the localStorage object
- * @param {any} initialState - Default initial value
+ * @param initialState - Default initial value or initializer function
  * @see https://rooks.vercel.app/docs/hooks/useLocalstorageState
  */
 function useLocalstorageState<S>(
@@ -105,7 +105,6 @@ function useLocalstorageState<S>(
 
   // check for changes across documents
   useEffect(() => {
-
     if (typeof window !== "undefined") {
       window.addEventListener("storage", listenToCrossDocumentStorageEvents);
 
@@ -118,7 +117,7 @@ function useLocalstorageState<S>(
     } else {
       console.warn("useLocalstorageState: window is undefined.");
 
-      return () => { };
+      return () => {};
     }
   }, [listenToCrossDocumentStorageEvents]);
 
@@ -139,7 +138,6 @@ function useLocalstorageState<S>(
 
   // check for changes within document
   useEffect(() => {
-
     if (typeof document !== "undefined") {
       document.addEventListener(
         customEventTypeName,
@@ -155,13 +153,12 @@ function useLocalstorageState<S>(
     } else {
       console.warn("[useLocalstorageState] document is undefined.");
 
-      return () => { };
+      return () => {};
     }
   }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
     (newValue: S) => {
-
       if (typeof document !== "undefined") {
         const event: BroadcastCustomEvent<S> = new CustomEvent(
           customEventTypeName,
