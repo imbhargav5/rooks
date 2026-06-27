@@ -176,7 +176,7 @@ export default function App() {
 
 | Arguments   | Type  | Description | Default value |
 | ----------- | ----- | ----------- | ------------- |
-| initialList | any[] | An array    | undefind      |
+| initialList | any[] | An array    | undefined     |
 
 ### Returned array items
 
