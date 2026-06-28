@@ -80,9 +80,7 @@ function useMapState<
     setMap((currentMap) => {
       const nextMap = { ...currentMap };
       for (const key in nextMap) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (nextMap.hasOwnProperty(key)) {
-
+        if (Object.prototype.hasOwnProperty.call(nextMap, key)) {
           delete nextMap[key];
         }
       }
