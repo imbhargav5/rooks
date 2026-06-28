@@ -308,12 +308,14 @@ sidebar_label: Hooks List
 
 
 <details>
-<summary><h3>🧪 Experimental Hooks <sup>6</sup></h3></summary>
+<summary><h3>🧪 Experimental Hooks <sup>8</sup></h3></summary>
 
 
 
 | Hook | Description |
 |------|-------------|
+| [**useAsyncDisposable**](https://rooks.vercel.app/docs/hooks/useAsyncDisposable) | Experimental hook that bridges Symbol.asyncDispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers |
+| [**useDisposable**](https://rooks.vercel.app/docs/hooks/useDisposable) | Experimental hook that bridges Symbol.dispose with React lifecycles; import from rooks/experimental and polyfill unsupported browsers |
 | [**useSuspenseNavigatorBattery**](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorBattery) | Suspense-enabled hook for getting battery status information from Navigator Battery API |
 | [**useSuspenseFavicon**](https://rooks.vercel.app/docs/hooks/useSuspenseFavicon) | Suspense-enabled hook for reading and updating the current favicon with same-origin and external URL support |
 | [**useSuspenseNavigatorUserAgentData**](https://rooks.vercel.app/docs/hooks/useSuspenseNavigatorUserAgentData) | Suspense-enabled hook for getting high entropy values from Navigator User Agent Data API |
