@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-warning-comments
-// TODO: deprecate this hook in favor of useForm
+// Regression coverage for the public useInput hook.
 import React from "react";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import { renderHook, act as actHook } from "@testing-library/react";
@@ -211,5 +210,3 @@ describe("useInput", () => {
     });
   });
 });
-
-// figure out tests
