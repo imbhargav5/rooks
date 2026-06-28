@@ -6,7 +6,7 @@
 import { useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
 
-type CallbackType<T, R> = (...args: T[]) => R;
+type CallbackType<Args extends unknown[], R> = (...args: Args) => R;
 
 /**
  * useFreshCallback
@@ -14,11 +14,11 @@ type CallbackType<T, R> = (...args: T[]) => R;
  * @returns A fresh callback.
  * @see https://rooks.vercel.app/docs/hooks/useFreshCallback
  */
-function useFreshCallback<T, R = void>(
-  callback: CallbackType<T, R>
-): CallbackType<T, R> {
+function useFreshCallback<Args extends unknown[], R = void>(
+  callback: CallbackType<Args, R>
+): CallbackType<Args, R> {
   const freshRef = useFreshRef(callback);
-  const tick = useCallback<(...args: T[]) => R>(
+  const tick = useCallback<(...args: Args) => R>(
     (...args) => {
       return freshRef.current(...args);
     },

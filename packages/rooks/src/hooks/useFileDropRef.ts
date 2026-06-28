@@ -38,15 +38,11 @@ function useFileDropRef(
 
   const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
 
-  const freshOnDrop = useFreshCallback(onDrop as any);
-  const freshOnFileAccepted = useFreshCallback(onFileAccepted as any);
-  const freshOnFileRejected = useFreshCallback(onFileRejected as any);
-  const freshOnDragEnter = useFreshCallback(onDragEnter as any);
-  const freshOnDragLeave = useFreshCallback(onDragLeave as any);
-
-  useCallback((node: HTMLElement | null) => {
-    setTargetNode(node);
-  }, []);
+  const freshOnDrop = useFreshCallback(onDrop);
+  const freshOnFileAccepted = useFreshCallback(onFileAccepted);
+  const freshOnFileRejected = useFreshCallback(onFileRejected);
+  const freshOnDragEnter = useFreshCallback(onDragEnter);
+  const freshOnDragLeave = useFreshCallback(onDragLeave);
 
   const fileIsValid = useCallback(
     (file: File): { valid: boolean; reason?: string } => {
