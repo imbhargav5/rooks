@@ -6,7 +6,7 @@ import { useGlobalObjectEventListener } from "./useGlobalObjectEventListener";
  *
  * Fires a callback when window resizes
  *
- * @param {Function} callback Callback to be called before unmount
+ * @param {Function} callback Callback to be called when the window resizes
  * @param {boolean} when When the handler should be applied
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://rooks.vercel.app/docs/hooks/useOnWindowResize
