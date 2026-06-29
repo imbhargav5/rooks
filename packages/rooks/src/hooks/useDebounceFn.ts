@@ -127,7 +127,7 @@ function useDebounceFn<F extends AnyFunction>(
     key
   );
 
-  const freshDebouncedFn = useFreshCallback(debouncedFn as any);
+  const freshDebouncedFn = useFreshCallback(debouncedFn);
 
   return [freshDebouncedFn, isTimeoutEnabled];
 }
