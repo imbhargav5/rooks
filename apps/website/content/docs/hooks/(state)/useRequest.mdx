@@ -1,0 +1,239 @@
+---
+title: useRequest
+description: Async data-fetching hook with loading/error/data states, manual and auto triggers, caching, polling, debounce, and retry
+---
+
+# useRequest
+
+A hook that manages async service calls with loading, error, and data states. Supports automatic and manual triggers, in-memory caching, polling, debounce, and automatic retry on failure.
+
+## Usage
+
+### Automatic fetch on mount
+
+```tsx
+import { useRequest } from "rooks";
+
+async function fetchUser(id: number) {
+  const res = await fetch(`/api/users/${id}`);
+  return res.json();
+}
+
+export default function UserProfile({ id }: { id: number }) {
+  const { data, loading, error } = useRequest(() => fetchUser(id));
+
+  if (loading) return <div>Loading…</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{data?.name}</div>;
+}
+```
+
+### Manual trigger
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function SaveButton() {
+  const { loading, run } = useRequest(
+    () => fetch("/api/save", { method: "POST" }),
+    { manual: true }
+  );
+
+  return (
+    <button onClick={() => run()} disabled={loading}>
+      {loading ? "Saving…" : "Save"}
+    </button>
+  );
+}
+```
+
+### With parameters
+
+```tsx
+import { useRequest } from "rooks";
+
+async function searchUsers(query: string, page: number) {
+  const res = await fetch(`/api/users?q=${query}&page=${page}`);
+  return res.json();
+}
+
+export default function Search() {
+  const { data, loading, run } = useRequest(searchUsers, { manual: true });
+
+  return (
+    <div>
+      <button onClick={() => run("alice", 1)}>Search</button>
+      {loading && <span>Searching…</span>}
+      {data?.users.map((u) => <div key={u.id}>{u.name}</div>)}
+    </div>
+  );
+}
+```
+
+### Polling
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function LivePrice({ symbol }: { symbol: string }) {
+  const { data } = useRequest(() => fetchPrice(symbol), {
+    pollingInterval: 5000, // re-fetch every 5 seconds
+  });
+
+  return <div>Price: {data?.price}</div>;
+}
+```
+
+### Debounce
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function AutoComplete({ query }: { query: string }) {
+  const { data, loading, run } = useRequest(fetchSuggestions, {
+    manual: true,
+    debounceWait: 300,
+  });
+
+  // Rapid calls are batched; only the last fires after 300 ms
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    run(e.target.value);
+  };
+
+  return (
+    <div>
+      <input onChange={handleChange} />
+      {loading && <span>Loading…</span>}
+      {data?.map((s) => <div key={s}>{s}</div>)}
+    </div>
+  );
+}
+```
+
+### Retry on error
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function ReliableFetch() {
+  const { data, error, loading } = useRequest(fetchData, {
+    retryCount: 3,      // retry up to 3 times
+    retryInterval: 500, // wait 500 ms between retries
+  });
+
+  if (loading) return <div>Loading (with retries)…</div>;
+  if (error) return <div>Failed after retries: {error.message}</div>;
+  return <div>{JSON.stringify(data)}</div>;
+}
+```
+
+### Caching
+
+```tsx
+import { useRequest } from "rooks";
+
+// Both components share the same cached response for 30 seconds
+function ComponentA() {
+  const { data } = useRequest(fetchConfig, {
+    cacheKey: "app-config",
+    staleTime: 30_000,
+  });
+  return <pre>{JSON.stringify(data)}</pre>;
+}
+
+function ComponentB() {
+  const { data } = useRequest(fetchConfig, {
+    cacheKey: "app-config",
+    staleTime: 30_000,
+  });
+  return <pre>{JSON.stringify(data)}</pre>;
+}
+```
+
+### Cancel
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function CancellableFetch() {
+  const { data, loading, run, cancel } = useRequest(fetchLargeDataset, {
+    manual: true,
+  });
+
+  return (
+    <div>
+      <button onClick={() => run()}>Fetch</button>
+      <button onClick={cancel} disabled={!loading}>
+        Cancel
+      </button>
+      {loading && <span>Loading…</span>}
+      {data && <pre>{JSON.stringify(data)}</pre>}
+    </div>
+  );
+}
+```
+
+### Mutate (optimistic update)
+
+```tsx
+import { useRequest } from "rooks";
+
+export default function Counter() {
+  const { data, mutate, run } = useRequest(fetchCount);
+
+  const increment = () => {
+    mutate((current = 0) => current + 1); // optimistic
+    run(); // sync with server in background
+  };
+
+  return <button onClick={increment}>Count: {data}</button>;
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type                                                 | Required | Description                        |
+| --------- | ---------------------------------------------------- | -------- | ---------------------------------- |
+| `service` | `(...params: TParams) => Promise<TData>`             | Yes      | Async function that fetches data   |
+| `options` | [`UseRequestOptions<TData, TParams>`](#options)      | No       | Configuration options              |
+
+### Options
+
+| Option            | Type                                                    | Default       | Description                                                                     |
+| ----------------- | ------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------- |
+| `manual`          | `boolean`                                               | `false`       | When true, the request is not triggered automatically on mount                  |
+| `defaultParams`   | `TParams`                                               | `[]`          | Parameters forwarded to `service` on the initial auto-trigger                   |
+| `onSuccess`       | `(data: TData, params: TParams) => void`                | —             | Called after a successful response                                              |
+| `onError`         | `(error: Error, params: TParams) => void`               | —             | Called after all retry attempts are exhausted                                   |
+| `onFinally`       | `(params: TParams, data?: TData, error?: Error) => void`| —             | Called when the request settles regardless of outcome                           |
+| `cacheKey`        | `string`                                                | —             | When provided, successful responses are stored in a global in-memory cache      |
+| `cacheTime`       | `number`                                                | `300000`      | Duration (ms) before a cache entry is evicted                                   |
+| `staleTime`       | `number`                                                | `0`           | Duration (ms) a cached response is considered fresh (0 = always refetch)        |
+| `pollingInterval` | `number`                                                | —             | Automatically re-runs the request at this interval (ms). Omit to disable        |
+| `debounceWait`    | `number`                                                | —             | Debounce delay (ms) for `run()`. Omit or set 0 to disable                       |
+| `retryCount`      | `number`                                                | `0`           | Number of extra attempts after a failure                                        |
+| `retryInterval`   | `number`                                                | `1000`        | Delay (ms) between consecutive retry attempts                                   |
+
+### Return Value
+
+| Property       | Type                                                                      | Description                                                      |
+| -------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `loading`      | `boolean`                                                                 | True while a request (including retries) is in-flight            |
+| `data`         | `TData \| undefined`                                                      | The most recent successful response                              |
+| `error`        | `Error \| undefined`                                                      | Error from the most recent failure (cleared when the next run starts) |
+| `params`       | `TParams \| undefined`                                                    | Parameters from the most recent invocation                       |
+| `run`          | `(...params: TParams) => void`                                            | Trigger the request (fire-and-forget). Respects `debounceWait`   |
+| `runAsync`     | `(...params: TParams) => Promise<TData>`                                  | Trigger the request and return the promise                       |
+| `refresh`      | `() => void`                                                              | Re-trigger using the last-used parameters                        |
+| `refreshAsync` | `() => Promise<TData>`                                                    | Re-trigger using the last-used parameters, returns a promise     |
+| `mutate`       | `(data: TData \| ((current: TData \| undefined) => TData \| undefined)) => void` | Directly set the data without making a request           |
+| `cancel`       | `() => void`                                                              | Cancel the in-flight request and clear pending debounce/retry    |
+
+## Related Hooks
+
+- [`usePromise`](/docs/hooks/usePromise) — lightweight promise state without extra features
+- [`useFetch`](/docs/hooks/useFetch) — fetch-specific hook for simple URL fetching
+- [`useIntervalWhen`](/docs/hooks/useIntervalWhen) — conditional interval primitive used internally by polling

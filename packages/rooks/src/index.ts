@@ -96,6 +96,12 @@ export { usePreviousDifferent } from "./hooks/usePreviousDifferent";
 export { usePreviousImmediate } from "./hooks/usePreviousImmediate";
 export { usePromise } from "./hooks/usePromise";
 export { useQueueState } from "./hooks/useQueueState";
+export { useRequest } from "./hooks/useRequest";
+export type {
+  UseRequestOptions,
+  UseRequestResult,
+  UseRequestService,
+} from "./hooks/useRequest";
 export { useRaf } from "./hooks/useRaf";
 export { useRafState } from "./hooks/useRafState";
 export { useResizeObserverRef } from "./hooks/useResizeObserverRef";
