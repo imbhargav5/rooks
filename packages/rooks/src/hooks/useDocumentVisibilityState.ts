@@ -11,15 +11,16 @@ function getVisibilityStateSnapshot(): UseDocumentVisibilityStateReturnType {
 }
 
 function getVisibilityStateSubscription(callback: () => void) {
-  // subscription function is only called on the client side
+  // useSyncExternalStore only subscribes on the client.
   if (typeof document !== "undefined") {
     document.addEventListener("visibilitychange", callback);
     return () => {
       document.removeEventListener("visibilitychange", callback);
     };
   }
-  // unreachable
-  return () => { };
+
+  // SSR fallback: no-op unsubscribe.
+  return () => {};
 }
 
 function getVisibilityStateServerSnapshot(): UseDocumentVisibilityStateReturnType {
