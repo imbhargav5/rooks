@@ -37,4 +37,21 @@ describe("useFreshCallback", () => {
     expect(spy).toHaveBeenNthCalledWith(1, 0);
     expect(spy).toHaveBeenNthCalledWith(2, 2);
   });
+
+  it("should forward multiple arguments", () => {
+    expect.hasAssertions();
+    const spy = vi.fn();
+
+    const { result } = renderHook(() => {
+      return useFreshCallback((count: number, label: string) => {
+        spy(count, label);
+      });
+    });
+
+    act(() => {
+      result.current(3, "files");
+    });
+
+    expect(spy).toHaveBeenCalledWith(3, "files");
+  });
 });
