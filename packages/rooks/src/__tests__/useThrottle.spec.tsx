@@ -23,6 +23,10 @@ describe("useThrottle hook", () => {
     });
   });
 
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   beforeEach(() => {
     App = () => {
       const [number, setNumber] = useState(0);
