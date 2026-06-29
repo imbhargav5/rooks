@@ -1,0 +1,247 @@
+---
+id: useWebSocket
+title: useWebSocket
+sidebar_label: useWebSocket
+---
+
+## About
+
+A React hook that manages a WebSocket connection with auto-reconnect, message handling, ready state tracking, and manual connect/disconnect control. Provides a clean interface to the WebSocket API with exponential backoff reconnection, SSR safety, and TypeScript support.
+
+[//]: # "Main"
+
+## Examples
+
+### Basic real-time chat
+
+```jsx
+import { useWebSocket } from "rooks";
+import { useState } from "react";
+
+export default function Chat() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  const { readyState, lastMessage, send } = useWebSocket("wss://echo.websocket.org", {
+    onMessage: (event) => {
+      setMessages((prev) => [...prev, event.data]);
+    },
+    onOpen: () => console.log("Connected"),
+    onClose: () => console.log("Disconnected"),
+  });
+
+  const handleSend = () => {
+    if (input.trim()) {
+      send(input);
+      setInput("");
+    }
+  };
+
+  const statusLabels = {
+    0: "Connecting…",
+    1: "Connected",
+    2: "Closing…",
+    3: "Disconnected",
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "500px" }}>
+      <h3>WebSocket Chat</h3>
+      <p>Status: <strong>{statusLabels[readyState]}</strong></p>
+
+      <div
+        style={{
+          height: "200px",
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          padding: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        {messages.map((msg, i) => (
+          <div key={i}>{msg}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", gap: "10px" }}>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          placeholder="Type a message…"
+          style={{ flex: 1, padding: "5px" }}
+          disabled={readyState !== 1}
+        />
+        <button onClick={handleSend} disabled={readyState !== 1}>
+          Send
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Auto-reconnect with status display
+
+```jsx
+import { useWebSocket } from "rooks";
+
+export default function AutoReconnect() {
+  const { readyState, lastMessage, disconnect, connect } = useWebSocket(
+    "wss://example.com/ws",
+    {
+      reconnect: true,
+      reconnectInterval: 1000,
+      reconnectAttempts: 5,
+      onOpen: () => console.log("Connected!"),
+      onClose: (event) => console.log("Closed:", event.code),
+      onError: (event) => console.error("Error:", event),
+    }
+  );
+
+  const statusColor = {
+    0: "orange",
+    1: "green",
+    2: "orange",
+    3: "red",
+  };
+
+  const statusLabel = {
+    0: "CONNECTING",
+    1: "OPEN",
+    2: "CLOSING",
+    3: "CLOSED",
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Auto-Reconnect Demo</h3>
+      <p>
+        Status:{" "}
+        <span style={{ color: statusColor[readyState], fontWeight: "bold" }}>
+          {statusLabel[readyState]}
+        </span>
+      </p>
+      <p>Last message: {lastMessage?.data ?? "none"}</p>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <button onClick={connect}>Reconnect</button>
+        <button onClick={disconnect}>Disconnect</button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Binary data with subprotocols
+
+```jsx
+import { useWebSocket } from "rooks";
+
+export default function BinaryExample() {
+  const { readyState, send, lastMessage } = useWebSocket(
+    "wss://example.com/binary",
+    {
+      protocols: ["binary", "base64"],
+      onMessage: (event) => {
+        if (event.data instanceof Blob) {
+          event.data.arrayBuffer().then((buffer) => {
+            console.log("Received binary buffer:", buffer.byteLength, "bytes");
+          });
+        }
+      },
+    }
+  );
+
+  const sendBinary = () => {
+    const buffer = new ArrayBuffer(4);
+    const view = new Uint8Array(buffer);
+    view.set([1, 2, 3, 4]);
+    send(buffer);
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h3>Binary WebSocket</h3>
+      <p>Ready state: {readyState}</p>
+      <button onClick={sendBinary} disabled={readyState !== 1}>
+        Send Binary
+      </button>
+    </div>
+  );
+}
+```
+
+### Arguments
+
+| Argument | Type                    | Description                                         | Default |
+| -------- | ----------------------- | --------------------------------------------------- | ------- |
+| url      | `string \| null`        | WebSocket URL to connect to, or null to skip        | -       |
+| options  | `UseWebSocketOptions`   | Optional configuration object                       | `{}`    |
+
+### Options
+
+| Option             | Type                            | Description                                                          | Default |
+| ------------------ | ------------------------------- | -------------------------------------------------------------------- | ------- |
+| onOpen             | `(event: Event) => void`        | Callback fired when the connection opens                             | -       |
+| onMessage          | `(event: MessageEvent) => void` | Callback fired when a message is received                            | -       |
+| onClose            | `(event: CloseEvent) => void`   | Callback fired when the connection closes                            | -       |
+| onError            | `(event: Event) => void`        | Callback fired when a socket error occurs                            | -       |
+| reconnect          | `boolean`                       | Whether to automatically reconnect on connection loss                | `false` |
+| reconnectInterval  | `number`                        | Base interval in ms between reconnection attempts (exponential backoff) | `1000` |
+| reconnectAttempts  | `number`                        | Maximum number of reconnection attempts                              | `3`     |
+| protocols          | `string \| string[]`            | WebSocket sub-protocol(s) to use                                     | -       |
+
+### Returns
+
+Returns an object with the following properties:
+
+| Return value | Type                                                        | Description                                              |
+| ------------ | ----------------------------------------------------------- | -------------------------------------------------------- |
+| readyState   | `0 \| 1 \| 2 \| 3`                                         | Current WebSocket state (CONNECTING/OPEN/CLOSING/CLOSED) |
+| lastMessage  | `MessageEvent \| null`                                      | The most recently received message event                 |
+| send         | `(data: string \| ArrayBufferLike \| Blob \| ArrayBufferView) => void` | Send data through the open connection     |
+| connect      | `() => void`                                                | Manually (re-)establish the connection                   |
+| disconnect   | `() => void`                                                | Manually close and disable auto-reconnect                |
+| isSupported  | `boolean`                                                   | Whether the WebSocket API is supported                   |
+
+### TypeScript Support
+
+```typescript
+import { useWebSocket } from "rooks";
+import type { UseWebSocketOptions, UseWebSocketReturn, WebSocketReadyState } from "rooks";
+
+const { readyState, lastMessage, send, connect, disconnect, isSupported } =
+  useWebSocket("wss://example.com/ws", {
+    onMessage: (event: MessageEvent) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+    },
+    reconnect: true,
+  });
+```
+
+### Ready State Values
+
+| Value | Constant             | Meaning                                   |
+| ----- | -------------------- | ----------------------------------------- |
+| `0`   | `WebSocket.CONNECTING` | Connection is being established           |
+| `1`   | `WebSocket.OPEN`       | Connection is open and ready              |
+| `2`   | `WebSocket.CLOSING`    | Connection is in the process of closing   |
+| `3`   | `WebSocket.CLOSED`     | Connection is closed or could not be opened |
+
+### Browser Support
+
+- Chrome: 4+
+- Firefox: 4+
+- Safari: 5+
+- Edge: 12+
+
+The hook includes built-in support detection and will set `isSupported` to `false` in environments without the WebSocket API (e.g., server-side rendering).
+
+### Notes
+
+- Passing `null` as the URL prevents any connection from being established — useful for conditional connections.
+- Auto-reconnect uses **exponential backoff**: the delay between attempts doubles each time (`reconnectInterval * 2^attempt`).
+- Calling `disconnect()` permanently stops auto-reconnect until `connect()` is called manually.
+- All callbacks are kept fresh via refs, so you can safely pass inline functions without causing reconnects.
+- The hook cleans up the WebSocket connection automatically when the component unmounts.
