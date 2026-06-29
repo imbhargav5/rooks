@@ -11,6 +11,8 @@ export { useBoundingclientrectRef } from "./hooks/useBoundingclientrectRef";
 export { useBroadcastChannel } from "./hooks/useBroadcastChannel";
 export { useCheckboxInputState } from "./hooks/useCheckboxInputState";
 export { useClipboard } from "./hooks/useClipboard";
+export { useCookieState } from "./hooks/useCookieState";
+export type { CookieOptions } from "./hooks/useCookieState";
 export { useCountdown } from "./hooks/useCountdown";
 export { useCounter } from "./hooks/useCounter";
 export { useDebounce } from "./hooks/useDebounce";

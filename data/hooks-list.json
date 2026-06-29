@@ -51,6 +51,11 @@
       "category": "browser"
     },
     {
+      "name": "useCookieState",
+      "description": "useState but auto updates values to browser cookies, with support for expires, path, domain, secure, and sameSite options",
+      "category": "state"
+    },
+    {
       "name": "useCountdown",
       "description": "Count down to a target timestamp and call callbacks every second (or provided peried)",
       "category": "state"
