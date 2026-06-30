@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-warning-comments
-// TODO: deprecate this hook in favor of useForm
+// TODO: deprecate this hook in favor of useFormState
 import React from "react";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import { renderHook, act as actHook } from "@testing-library/react";
