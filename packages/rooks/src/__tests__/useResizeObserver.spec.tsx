@@ -20,12 +20,12 @@ describe("useResizeObserverRef", () => {
     expect.hasAssertions();
     const observerFn = vi.fn();
     const unObserverFn = vi.fn();
-    const disconnetFn = vi.fn();
+    const disconnectFn = vi.fn();
     global.ResizeObserver = vi.fn().mockImplementation(function () {
       return {
         observe: observerFn,
         unobserve: unObserverFn,
-        disconnect: disconnetFn,
+        disconnect: disconnectFn,
       };
     }) as any;
 
@@ -51,7 +51,7 @@ describe("useResizeObserverRef", () => {
     act(() => {
       unmount();
     });
-    await waitFor(() => expect(disconnetFn).toHaveBeenCalled());
+    await waitFor(() => expect(disconnectFn).toHaveBeenCalled());
     vi.restoreAllMocks();
   });
 });
