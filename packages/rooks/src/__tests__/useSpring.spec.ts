@@ -3,7 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useSpring } from "../hooks/useSpring";
 
 vi.mock("raf", () => {
-  const raf = (cb: any) => {
+  const raf = (cb: FrameRequestCallback) => {
     setTimeout(() => cb(performance.now()), 16);
     return 1;
   };
