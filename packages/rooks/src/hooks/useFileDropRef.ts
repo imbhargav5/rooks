@@ -44,10 +44,6 @@ function useFileDropRef(
   const freshOnDragEnter = useFreshCallback(onDragEnter);
   const freshOnDragLeave = useFreshCallback(onDragLeave);
 
-  useCallback((node: HTMLElement | null) => {
-    setTargetNode(node);
-  }, []);
-
   const fileIsValid = useCallback(
     (file: File): { valid: boolean; reason?: string } => {
       if (accept && !accept.includes(file.type)) {
