@@ -105,9 +105,11 @@ describe("useRafState", () => {
 
   it("should fall back to synchronous setState when requestAnimationFrame is undefined (SSR)", () => {
     expect.hasAssertions();
-    const originalRaf = globalThis.requestAnimationFrame;
-    // @ts-expect-error — simulating SSR environment
-    delete globalThis.requestAnimationFrame;
+    const globalWithOptionalRaf = globalThis as typeof globalThis & {
+      requestAnimationFrame?: typeof globalThis.requestAnimationFrame;
+    };
+    const originalRaf = globalWithOptionalRaf.requestAnimationFrame;
+    delete globalWithOptionalRaf.requestAnimationFrame;
 
     try {
       const { result } = renderHook(() => useRafState(0));
@@ -119,7 +121,7 @@ describe("useRafState", () => {
       // No rAF needed — state should be updated synchronously
       expect(result.current[0]).toBe(77);
     } finally {
-      globalThis.requestAnimationFrame = originalRaf;
+      globalWithOptionalRaf.requestAnimationFrame = originalRaf;
     }
   });
 
