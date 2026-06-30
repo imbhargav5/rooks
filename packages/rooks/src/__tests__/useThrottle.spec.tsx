@@ -8,13 +8,13 @@ describe("useThrottle hook", () => {
   const TIMEOUT = 300;
   const consoleError = console.error;
 
-  // This is a temporary fix for weird error in testing library. It has something to do with react-dom.
-  // There's a ticket here - https://github.com/facebook/react/issues/14769
-  // Tests are passing correctly, so that's just for clean console.
+  // Suppress the expected act warning from this legacy throttle test setup.
   beforeAll(() => {
     vi.spyOn(console, "error").mockImplementation((...args) => {
+      const [message] = args;
       if (
-        !args[0].includes(
+        typeof message !== "string" ||
+        !message.includes(
           "Warning: An update to %s inside a test was not wrapped in act"
         )
       ) {
