@@ -2,10 +2,5 @@
 
 ## Commands for maintaining
 
-1. To build custom github actions in ./.github/actions folder
-
-Run this in the root folder of the project
-
-```sh
-yarn build:custom-github-actions
-```
+1. Custom GitHub actions live in `./.github/actions`.
+2. Edit them from the repository root so relative paths stay correct.
