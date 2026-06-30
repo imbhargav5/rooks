@@ -12,13 +12,20 @@ const mockExitFullscreen = vi.fn();
 const mockAddEventListener = vi.fn();
 const mockRemoveEventListener = vi.fn();
 
+type MockFullscreenElement = {
+  requestFullscreen: typeof mockRequestFullscreen;
+  webkitRequestFullscreen: typeof mockRequestFullscreen;
+  mozRequestFullScreen: typeof mockRequestFullscreen;
+  msRequestFullscreen: typeof mockRequestFullscreen;
+};
+
 // Mock element for testing
-const mockElement = {
+const mockElement: MockFullscreenElement = {
   requestFullscreen: mockRequestFullscreen,
   webkitRequestFullscreen: mockRequestFullscreen,
   mozRequestFullScreen: mockRequestFullscreen,
   msRequestFullscreen: mockRequestFullscreen,
-} as any;
+};
 
 describe("useFullscreen", () => {
   beforeEach(() => {
