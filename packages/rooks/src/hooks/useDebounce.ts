@@ -4,7 +4,6 @@ import { useRef, useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
 import { useWillUnmount } from "./useWillUnmount";
 
-// Define the types inline if we can't import them
 export interface DebounceSettings {
   leading?: boolean;
   maxWait?: number;
@@ -12,7 +11,7 @@ export interface DebounceSettings {
 }
 
 // This is a simpler version that matches what we're using
-type DebouncedFunction<T extends (...args: any[]) => any> = T & {
+type DebouncedFunction<T extends AnyFunction> = T & {
   cancel(): void;
   flush(): ReturnType<T> | undefined;
 };
