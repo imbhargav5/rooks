@@ -1,6 +1,4 @@
 import { vi } from "vitest";
-/**
- */
 import { renderHook, act } from "@testing-library/react";
 import { useMediaRecorder } from "@/hooks/useMediaRecorder";
 
