@@ -211,5 +211,3 @@ describe("useInput", () => {
     });
   });
 });
-
-// figure out tests
