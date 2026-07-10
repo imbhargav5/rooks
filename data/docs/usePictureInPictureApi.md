@@ -334,3 +334,7 @@ export default function CustomVideoControls() {
 | toggle       | () => Promise\<void\>               | Function to toggle Picture-in-Picture mode                        |
 
 ---
+
+## Robustness and lifecycle
+
+Support is evaluated after the video ref attaches, so a normal `useRef(null)` flow becomes supported without an unrelated rerender. The hook remains unsupported while no video element is attached or the browser API is unavailable.
