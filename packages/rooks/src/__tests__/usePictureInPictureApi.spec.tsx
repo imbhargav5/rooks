@@ -1,7 +1,7 @@
 import { vi } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { renderHook, act, render, screen } from "@testing-library/react";
 import { usePictureInPictureApi } from "@/hooks/usePictureInPictureApi";
-import { RefObject } from "react";
+import { RefObject, useRef } from "react";
 
 // Mock the Picture-in-Picture API
 const mockRequestPictureInPicture = vi.fn();
@@ -641,4 +641,37 @@ describe("usePictureInPictureApi", () => {
       expect(result.current.isSupported).toBe(false);
     });
   });
+
+  it("detects support after a normal React ref is attached", () => {
+    expect.hasAssertions();
+    Object.defineProperty(
+      HTMLVideoElement.prototype,
+      "requestPictureInPicture",
+      {
+        configurable: true,
+        value: mockRequestPictureInPicture,
+      }
+    );
+
+    function TestComponent() {
+      const videoRef = useRef<HTMLVideoElement>(null);
+      const { isSupported } = usePictureInPictureApi(videoRef);
+
+      return (
+        <>
+          <video ref={videoRef} />
+          <span data-testid="pip-supported">{String(isSupported)}</span>
+        </>
+      );
+    }
+
+    render(<TestComponent />);
+
+    expect(screen.getByTestId("pip-supported")).toHaveTextContent("true");
+
+    delete (
+      HTMLVideoElement.prototype as Partial<HTMLVideoElement>
+    ).requestPictureInPicture;
+  });
+
 });
