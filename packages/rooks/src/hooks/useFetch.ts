@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { useFreshRef } from "./useFreshRef";
 
 /**
  * HTTP error interface extending Error with status information
@@ -44,33 +45,26 @@ interface UseFetchReturnValue<T> {
  * @param options - The fetch options
  * @returns A promise that resolves with the parsed JSON data or rejects with an error
  */
-function createFetchPromise<T>(
+async function createFetchPromise<T>(
     url: string,
-    options: UseFetchOptions<T> = {}
+    options: UseFetchOptions<T> = {},
+    signal?: AbortSignal
 ): Promise<T> {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch(url, {
-                ...options,
-                signal: new AbortController().signal, // Add signal for compatibility
-            });
-
-            // Throw error for non-2xx responses
-            if (!response.ok) {
-                const errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-                const httpError = new Error(errorMessage) as HttpError;
-                httpError.status = response.status;
-                httpError.statusText = response.statusText;
-                throw httpError;
-            }
-
-            // Parse JSON response
-            const result = await response.json();
-            resolve(result);
-        } catch (err) {
-            reject(err instanceof Error ? err : new Error(String(err)));
-        }
+    const { onSuccess, onError, onFetch, ...requestOptions } = options;
+    const response = await fetch(url, {
+        ...requestOptions,
+        signal,
     });
+
+    if (!response.ok) {
+        const errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+        const httpError = new Error(errorMessage) as HttpError;
+        httpError.status = response.status;
+        httpError.statusText = response.statusText;
+        throw httpError;
+    }
+
+    return await response.json() as T;
 }
 
 /**
@@ -127,41 +121,64 @@ function useFetch<T = unknown>(
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
     const mountedRef = useRef(true);
+    const requestIdRef = useRef(0);
+    const abortControllerRef = useRef<AbortController | null>(null);
+    const optionsRef = useFreshRef(options, true);
 
     const fetchData = useCallback(async () => {
         if (!mountedRef.current) return;
 
+        const requestId = ++requestIdRef.current;
+        abortControllerRef.current?.abort();
+
+        const abortController = new AbortController();
+        const currentOptions = optionsRef.current;
+        abortControllerRef.current = abortController;
+
         setLoading(true);
         setError(null);
-
-        // Call onFetch callback
-        options.onFetch?.();
+        currentOptions.onFetch?.();
 
         try {
-            const result = await createFetchPromise<T>(url, options);
-            if (mountedRef.current) {
+            const result = await createFetchPromise<T>(
+                url,
+                currentOptions,
+                abortController.signal
+            );
+
+            if (mountedRef.current && requestId === requestIdRef.current) {
                 setData(result);
-                // Call onSuccess callback
-                options.onSuccess?.(result);
+                currentOptions.onSuccess?.(result);
             }
         } catch (err) {
-            const error = err instanceof Error ? err : new Error(String(err));
-            if (mountedRef.current) {
-                setError(error);
-                // Call onError callback
-                options.onError?.(error);
+            const fetchError = err instanceof Error
+                ? err
+                : new Error(String(err));
+
+            if (
+                mountedRef.current &&
+                requestId === requestIdRef.current &&
+                fetchError.name !== "AbortError"
+            ) {
+                setError(fetchError);
+                currentOptions.onError?.(fetchError);
             }
         } finally {
-            if (mountedRef.current) {
+            if (mountedRef.current && requestId === requestIdRef.current) {
                 setLoading(false);
+                abortControllerRef.current = null;
             }
         }
-    }, [url, options]);
+    }, [optionsRef, url]);
 
-    // Cleanup on unmount
     useEffect(() => {
+        mountedRef.current = true;
+
         return () => {
             mountedRef.current = false;
+            requestIdRef.current += 1;
+            abortControllerRef.current?.abort();
+            abortControllerRef.current = null;
         };
     }, []);
 
