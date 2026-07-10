@@ -36,7 +36,11 @@ function subscribe(onStoreChange: () => void): () => void {
  * @see https://rooks.vercel.app/docs/hooks/useOnline
  */
 function useOnline(): boolean | null {
-  const isOnline = useSyncExternalStore<boolean | null>(subscribe, getSnapshot);
+  const isOnline = useSyncExternalStore<boolean | null>(
+    subscribe,
+    getSnapshot,
+    () => null
+  );
 
   return isOnline;
 }
