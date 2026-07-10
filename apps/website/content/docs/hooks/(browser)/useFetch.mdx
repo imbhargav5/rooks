@@ -189,13 +189,15 @@ The options object extends the standard `RequestInit` interface (excluding `sign
 | `referrerPolicy` | `ReferrerPolicy`                        | -               | Referrer policy       |
 | `integrity`      | `string`                                | -               | Subresource integrity |
 | `keepalive`      | `boolean`                               | -               | Keep-alive flag       |
-| `onSuccess`      | `(data: any) => void`                   | -               | Success callback      |
+| `onSuccess`      | `(data: T) => void`                   | -               | Success callback      |
 | `onError`        | `(error: Error) => void`                | -               | Error callback        |
 | `onFetch`        | `() => void`                            | -               | Fetch start callback  |
 
 ## Notes
 
 - This hook does not cache requests - each call triggers a fresh fetch
+- Starting a request aborts any request already in progress; only the newest request may update state or invoke callbacks
+- Unmounting aborts the active request and prevents callbacks or state updates after unmount
 - The hook does not automatically fetch on mount - you must call the `startFetch` function
 - The hook automatically handles JSON parsing of responses
 - HTTP errors (4xx, 5xx) are thrown as `Error` objects with `status` and `statusText` properties
