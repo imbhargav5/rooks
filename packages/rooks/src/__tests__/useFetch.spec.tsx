@@ -1,5 +1,6 @@
 import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
+import { StrictMode } from "react";
 import { useFetch } from "../hooks/useFetch";
 
 // Mock fetch globally
@@ -252,6 +253,142 @@ describe("useFetch", () => {
         expect(onSuccess).not.toHaveBeenCalled();
         expect(onError).not.toHaveBeenCalled();
     });
+
+    it("should keep startFetch stable while using the latest options", async () => {
+        const firstOnSuccess = vi.fn();
+        const latestOnSuccess = vi.fn();
+        mockFetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({ name: "Latest" }),
+        } as Response);
+
+        const { result, rerender } = renderHook(
+            ({ onSuccess }) =>
+                useFetch<{ name: string }>("https://api.example.com/user", {
+                    headers: { "X-Render": "inline" },
+                    onSuccess,
+                }),
+            { initialProps: { onSuccess: firstOnSuccess } }
+        );
+        const initialStartFetch = result.current.startFetch;
+
+        rerender({ onSuccess: latestOnSuccess });
+
+        expect(result.current.startFetch).toBe(initialStartFetch);
+
+        await act(async () => {
+            await initialStartFetch();
+        });
+
+        expect(firstOnSuccess).not.toHaveBeenCalled();
+        expect(latestOnSuccess).toHaveBeenCalledWith({ name: "Latest" });
+    });
+
+    it("should abort an older request and ignore its stale result", async () => {
+        let resolveFirst!: (response: Response) => void;
+        let resolveSecond!: (response: Response) => void;
+        let firstSignal: AbortSignal | undefined;
+
+        mockFetch
+            .mockImplementationOnce((_url: string, init: RequestInit) => {
+                firstSignal = init.signal ?? undefined;
+                return new Promise<Response>((resolve) => {
+                    resolveFirst = resolve;
+                });
+            })
+            .mockImplementationOnce(
+                () =>
+                    new Promise<Response>((resolve) => {
+                        resolveSecond = resolve;
+                    })
+            );
+
+        const { result } = renderHook(() =>
+            useFetch<{ request: number }>("https://api.example.com/user")
+        );
+        let firstRequest!: Promise<void>;
+        let secondRequest!: Promise<void>;
+
+        act(() => {
+            firstRequest = result.current.startFetch();
+            secondRequest = result.current.startFetch();
+        });
+
+        expect(firstSignal?.aborted).toBe(true);
+
+        await act(async () => {
+            resolveSecond({
+                ok: true,
+                json: async () => ({ request: 2 }),
+            } as Response);
+            await secondRequest;
+        });
+        expect(result.current.data).toEqual({ request: 2 });
+
+        await act(async () => {
+            resolveFirst({
+                ok: true,
+                json: async () => ({ request: 1 }),
+            } as Response);
+            await firstRequest;
+        });
+
+        expect(result.current.data).toEqual({ request: 2 });
+        expect(result.current.error).toBeNull();
+        expect(result.current.loading).toBe(false);
+    });
+
+    it("should abort the active request on unmount", async () => {
+        let resolveRequest!: (response: Response) => void;
+        let signal: AbortSignal | undefined;
+        mockFetch.mockImplementationOnce((_url: string, init: RequestInit) => {
+            signal = init.signal ?? undefined;
+            return new Promise<Response>((resolve) => {
+                resolveRequest = resolve;
+            });
+        });
+
+        const onSuccess = vi.fn();
+        const { result, unmount } = renderHook(() =>
+            useFetch("https://api.example.com/user", { onSuccess })
+        );
+        let request!: Promise<void>;
+
+        act(() => {
+            request = result.current.startFetch();
+        });
+        unmount();
+
+        expect(signal?.aborted).toBe(true);
+
+        await act(async () => {
+            resolveRequest({
+                ok: true,
+                json: async () => ({ ignored: true }),
+            } as Response);
+            await request;
+        });
+        expect(onSuccess).not.toHaveBeenCalled();
+    });
+
+    it("should remain usable during StrictMode effect replay", async () => {
+        mockFetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({ ready: true }),
+        } as Response);
+
+        const { result } = renderHook(
+            () => useFetch<{ ready: boolean }>("https://api.example.com/user"),
+            { wrapper: StrictMode }
+        );
+
+        await act(async () => {
+            await result.current.startFetch();
+        });
+
+        expect(result.current.data).toEqual({ ready: true });
+    });
+
 });
 
 interface User {
