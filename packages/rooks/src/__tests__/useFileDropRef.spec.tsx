@@ -145,4 +145,32 @@ describe("useFileDropRef", () => {
     expect(callbacks.onFileAccepted).toHaveBeenCalledTimes(1);
     expect(callbacks.onFileRejected).toHaveBeenCalledTimes(2);
   });
+
+  it("treats maxFiles zero as rejecting every dropped file", () => {
+    expect.hasAssertions();
+    const onDrop = vi.fn();
+    const onFileRejected = vi.fn();
+
+    function ZeroFileDropZone() {
+      const ref = useFileDropRef(
+        { maxFiles: 0 },
+        { onDrop, onFileRejected }
+      );
+      return <div ref={ref} data-testid="zero-file-drop-area" />;
+    }
+
+    const { getByTestId } = render(<ZeroFileDropZone />);
+    const file = createFileWithSize("file.txt", "text/plain", 1);
+
+    fireEvent.drop(getByTestId("zero-file-drop-area"), {
+      dataTransfer: { files: [file] },
+    });
+
+    expect(onDrop).toHaveBeenCalledWith([], [file]);
+    expect(onFileRejected).toHaveBeenCalledWith(
+      file,
+      "Exceeded maximum number of files"
+    );
+  });
+
 });
