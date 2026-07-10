@@ -552,3 +552,7 @@ For Picture-in-Picture to work, the following conditions must be met:
 - PiP operations are asynchronous and may fail (errors are captured in the `error` state)
 - Only one video can be in Picture-in-Picture mode at a time across the entire browser
 - The PiP window maintains its own controls and can be resized by the user
+
+## Robustness and lifecycle
+
+Support is evaluated after the video ref attaches, so a normal `useRef(null)` flow becomes supported without an unrelated rerender. The hook remains unsupported while no video element is attached or the browser API is unavailable.
