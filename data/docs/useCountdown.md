@@ -39,3 +39,7 @@ export default function App() {
 | Type   | Description                                                    |
 | ------ | -------------------------------------------------------------- |
 | number | rest amount of intervals it takes to count down to the endTime |
+
+## Robustness and lifecycle
+
+`onDown` receives the remaining milliseconds calculated at each tick. `onEnd` fires exactly once when a tick reaches or passes `endTime`, including an exact boundary.
