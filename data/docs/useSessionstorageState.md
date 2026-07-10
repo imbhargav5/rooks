@@ -30,3 +30,7 @@ export default function App() {
   );
 }
 ```
+
+## Robustness and lifecycle
+
+Changing `key` reloads that key before persistence, synchronized updates do not echo-write, and rapid functional setters compose correctly. If storage access is denied or exceeds quota, the hook keeps its in-memory state without crashing.
