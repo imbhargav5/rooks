@@ -280,4 +280,28 @@ describe("useAsyncEffect", () => {
     vi.useRealTimers();
     vi.clearAllMocks();
   });
+
+  it("does not restart when an inline cleanup callback changes identity", () => {
+    expect.hasAssertions();
+    const effectSpy = vi.fn(async () => 1);
+    const cleanupSpy = vi.fn();
+    const { rerender, unmount } = renderHook(
+      ({ renderValue }) => {
+        useAsyncEffect(effectSpy, [], (result) => {
+          cleanupSpy(renderValue, result);
+        });
+      },
+      { initialProps: { renderValue: 1 } }
+    );
+
+    rerender({ renderValue: 2 });
+
+    expect(effectSpy).toHaveBeenCalledTimes(1);
+    expect(cleanupSpy).not.toHaveBeenCalled();
+
+    unmount();
+    expect(cleanupSpy).toHaveBeenCalledTimes(1);
+    expect(cleanupSpy).toHaveBeenCalledWith(2, undefined);
+  });
+
 });
