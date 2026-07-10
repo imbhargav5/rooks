@@ -112,9 +112,15 @@ describe("useFileDropRef", () => {
       },
     });
 
-    expect(callbacks.onDrop).toHaveBeenCalled();
-    expect(callbacks.onFileAccepted).toHaveBeenCalledTimes(0);
+    expect(callbacks.onDrop).toHaveBeenCalledWith([], files);
+    expect(callbacks.onFileAccepted).not.toHaveBeenCalled();
     expect(callbacks.onFileRejected).toHaveBeenCalledTimes(files.length);
+    for (const file of files) {
+      expect(callbacks.onFileRejected).toHaveBeenCalledWith(
+        file,
+        "Exceeded maximum number of files"
+      );
+    }
   });
 
   it("should handle drop event with a mix of valid and rejected files", () => {
