@@ -8,7 +8,7 @@ type CleanupFunction<T> = (result: T | void) => void;
 /**
  * A version of useEffect that accepts an async function
  *
- * @param {Effect<T>} effect Async function that can return a cleanup function and takes in an AbortSignal
+ * @param {Effect<T>} effect Async function that receives a callback indicating whether its result is still current
  * @param {DependencyList} deps If present, effect will only activate if the values in the list change
  * @param {CleanupFunction} cleanup The destroy/cleanup function. Will be called with previous result if it exists. 
  * @see https://rooks.vercel.app/docs/hooks/useAsyncEffect
@@ -39,6 +39,7 @@ function useAsyncEffect<T>(
   const lastCallId = useRef(0);
   const getIsMounted = useGetIsMounted();
   const effectRef = useFreshRef(effect);
+  const cleanupRef = useFreshRef(cleanup);
   const callback = useCallback(async (): Promise<void | T> => {
     const callId = ++lastCallId.current;
     const shouldContinueEffect = () => {
@@ -59,9 +60,9 @@ function useAsyncEffect<T>(
       result = value;
     });
     return () => {
-      cleanup?.(result);
+      cleanupRef.current?.(result);
     };
-  }, [callback, cleanup]);
+  }, [callback, cleanupRef]);
 }
 
 export { useAsyncEffect };
