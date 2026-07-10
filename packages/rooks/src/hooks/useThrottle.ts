@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { noop } from "@/utils/noop";
+import { useFreshRef } from "./useFreshRef";
 
 type Callback<T> = (...args: T[]) => void;
 
@@ -18,23 +19,27 @@ function useThrottle<T>(
   timeout = 300
 ): [Callback<T>, boolean] {
   const [ready, setReady] = useState(true);
+  const readyRef = useRef(true);
   const timerRef = useRef<number | undefined>(undefined);
+  const callbackRef = useFreshRef(callback, true);
 
   const throttledFunction = useCallback(
     (...args: T[]) => {
-      if (!ready) {
+      if (!readyRef.current) {
         return;
       }
 
+      readyRef.current = false;
       setReady(false);
-      callback(...args);
+      callbackRef.current(...args);
     },
-    [ready, callback]
+    [callbackRef]
   );
 
   useEffect(() => {
     if (!ready) {
       timerRef.current = window.setTimeout(() => {
+        readyRef.current = true;
         setReady(true);
       }, timeout);
 
