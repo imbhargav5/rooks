@@ -8,6 +8,7 @@ import {
   getByTestId,
   fireEvent,
   act,
+  renderHook,
 } from "@testing-library/react";
 
 import { useSessionstorageState } from "@/hooks/useSessionstorageState";
@@ -89,4 +90,56 @@ describe("useSessionstorageState basic", () => {
     const valueElement = getByTestId(container as HTMLElement, "value");
     expect(valueElement.innerHTML).toBe("new value");
   });
+
+  it("applies rapid functional updates without losing state", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useSessionstorageState("rapid-sessionstorage", 0)
+    );
+
+    act(() => {
+      const setValue = result.current[1];
+      setValue((current) => current + 1);
+      setValue((current) => current + 1);
+    });
+
+    expect(result.current[0]).toBe(2);
+    expect(sessionStorage.getItem("rapid-sessionstorage")).toBe("2");
+  });
+
+  it("keeps the setter stable after state updates", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useSessionstorageState("stable-sessionstorage", 0)
+    );
+    const setValue = result.current[1];
+
+    act(() => {
+      setValue(1);
+    });
+
+    expect(result.current[1]).toBe(setValue);
+  });
+
+  it("does not write a same-document synchronized value back to storage", () => {
+    expect.hasAssertions();
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+    const { result } = renderHook(() =>
+      useSessionstorageState("shared-sessionstorage", "initial")
+    );
+    setItem.mockClear();
+
+    act(() => {
+      document.dispatchEvent(
+        new CustomEvent("rooks-shared-sessionstorage-sessionstorage-update", {
+          detail: { newValue: "external" },
+        })
+      );
+    });
+
+    expect(result.current[0]).toBe("external");
+    expect(setItem).not.toHaveBeenCalled();
+    setItem.mockRestore();
+  });
+
 });
