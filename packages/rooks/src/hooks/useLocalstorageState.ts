@@ -195,6 +195,7 @@ function useLocalstorageState<S>(
           : newValue;
       isUpdateFromCrossDocumentListener.current = false;
       isUpdateFromWithinDocumentListener.current = false;
+      currentValue.current = resolvedNewValue;
       setValue(resolvedNewValue);
       broadcastValueWithinDocument(resolvedNewValue);
     },
