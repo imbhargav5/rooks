@@ -36,7 +36,7 @@ function useMapState<
 
   const has = useCallback(
     (key: K) => {
-      return typeof map[key] !== "undefined";
+      return Object.prototype.hasOwnProperty.call(map, key);
     },
     [map]
   );
@@ -79,12 +79,8 @@ function useMapState<
   const removeAll = useCallback(() => {
     setMap((currentMap) => {
       const nextMap = { ...currentMap };
-      for (const key in nextMap) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (nextMap.hasOwnProperty(key)) {
-
-          delete nextMap[key];
-        }
+      for (const key of Object.keys(nextMap)) {
+        delete nextMap[key];
       }
 
       return nextMap;
