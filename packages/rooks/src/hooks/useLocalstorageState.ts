@@ -8,14 +8,19 @@ function getValueFromLocalStorage(key: string) {
     return null;
   }
 
-  const storedValue = localStorage.getItem(key) ?? "null";
   try {
-    return JSON.parse(storedValue);
+    const storedValue = localStorage.getItem(key) ?? "null";
+
+    try {
+      return JSON.parse(storedValue);
+    } catch (error) {
+      console.error(error);
+      return storedValue;
+    }
   } catch (error) {
     console.error(error);
+    return null;
   }
-
-  return storedValue;
 }
 
 // Saves value to localstorage
@@ -24,11 +29,16 @@ function saveValueToLocalStorage<S>(key: string, value: S) {
     return null;
   }
 
-  if (value === undefined) {
-    return localStorage.removeItem(key);
-  }
+  try {
+    if (value === undefined) {
+      return localStorage.removeItem(key);
+    }
 
-  return localStorage.setItem(key, JSON.stringify(value));
+    return localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 /**
@@ -79,11 +89,14 @@ function useLocalstorageState<S>(
      * storage event
      */
     if (
-      !isUpdateFromCrossDocumentListener.current ||
+      !isUpdateFromCrossDocumentListener.current &&
       !isUpdateFromWithinDocumentListener.current
     ) {
       saveValueToLocalStorage<S>(key, value);
     }
+
+    isUpdateFromCrossDocumentListener.current = false;
+    isUpdateFromWithinDocumentListener.current = false;
   }, [key, value]);
 
   const listenToCrossDocumentStorageEvents = useCallback(
@@ -92,15 +105,15 @@ function useLocalstorageState<S>(
         try {
           isUpdateFromCrossDocumentListener.current = true;
           const newValue = JSON.parse(event.newValue ?? "null");
-          if (value !== newValue) {
-            setValue(newValue);
-          }
+          setValue((currentValue) =>
+            Object.is(currentValue, newValue) ? currentValue : newValue
+          );
         } catch (error) {
           console.log(error);
         }
       }
     },
-    [key, value]
+    [key]
   );
 
   // check for changes across documents
@@ -126,14 +139,14 @@ function useLocalstorageState<S>(
       try {
         isUpdateFromWithinDocumentListener.current = true;
         const { newValue } = event.detail;
-        if (value !== newValue) {
-          setValue(newValue);
-        }
+        setValue((currentValue) =>
+          Object.is(currentValue, newValue) ? currentValue : newValue
+        );
       } catch (error) {
         console.log(error);
       }
     },
-    [value]
+    []
   );
 
   // check for changes within document
@@ -189,7 +202,11 @@ function useLocalstorageState<S>(
   );
 
   const remove = useCallback(() => {
-    localStorage.removeItem(key);
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
   }, [key]);
 
   return [value, set, remove];
