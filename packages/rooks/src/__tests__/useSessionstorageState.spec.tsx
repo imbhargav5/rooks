@@ -163,4 +163,25 @@ describe("useSessionstorageState basic", () => {
     );
   });
 
+
+  it("removes the persisted value when set to undefined", () => {
+    expect.hasAssertions();
+    const removeItem = vi.spyOn(Storage.prototype, "removeItem");
+    const { result } = renderHook(() =>
+      useSessionstorageState<string | undefined>(
+        "undefined-sessionstorage",
+        "initial"
+      )
+    );
+
+    act(() => {
+      result.current[1](undefined);
+    });
+
+    expect(result.current[0]).toBeUndefined();
+    expect(removeItem).toHaveBeenCalledWith("undefined-sessionstorage");
+    expect(sessionStorage.getItem("undefined-sessionstorage")).toBeNull();
+    removeItem.mockRestore();
+  });
+
 });
