@@ -202,8 +202,9 @@ function useSessionstorageState<S>(
         ? (newValue as (prevState: S) => S)(currentValue.current)
         : newValue;
       isUpdateFromCrossDocumentListener.current = false;
-      isUpdateFromWithinDocumentListener.current = false;
+      isUpdateFromWithinDocumentListener.current = true;
       currentValue.current = resolvedNewValue;
+      saveValueToSessionStorage<S>(key, resolvedNewValue);
       setValue(resolvedNewValue);
       broadcastValueWithinDocument(resolvedNewValue);
     },
