@@ -251,4 +251,40 @@ describe("useLocalstorageState localStorage", () => {
     );
     expect(result.current[0]).toBeUndefined();
   });
+
+  it("applies rapid functional updates without losing state", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useLocalstorageState("rapid-localstorage", 0)
+    );
+
+    act(() => {
+      const setValue = result.current[1];
+      setValue((current) => current + 1);
+      setValue((current) => current + 1);
+    });
+
+    expect(result.current[0]).toBe(2);
+    expect(localStorage.getItem("rapid-localstorage")).toBe("2");
+  });
+
+  it("does not write a same-document synchronized value back to storage", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useLocalstorageState("shared-localstorage", "initial")
+    );
+    vi.mocked(localStorage.setItem).mockClear();
+
+    act(() => {
+      document.dispatchEvent(
+        new CustomEvent("rooks-shared-localstorage-localstorage-update", {
+          detail: { newValue: "external" },
+        })
+      );
+    });
+
+    expect(result.current[0]).toBe("external");
+    expect(localStorage.setItem).not.toHaveBeenCalled();
+  });
+
 });
