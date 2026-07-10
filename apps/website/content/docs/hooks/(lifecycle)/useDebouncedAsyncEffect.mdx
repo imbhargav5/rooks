@@ -295,3 +295,7 @@ The `options` parameter accepts the following settings:
 - **Flexible Cleanup**: Cleanup function receives the result from the previous effect execution
 - **Error Handling**: Errors in async effects are properly propagated
 - **Configurable Timing**: Customize delay and leading/trailing execution
+
+## Robustness and lifecycle
+
+A dependency change or unmount invalidates running work immediately, including during the next debounce window. Cleanup receives a resolved generation result at most once; it receives `undefined` when that generation did not resolve while current.
