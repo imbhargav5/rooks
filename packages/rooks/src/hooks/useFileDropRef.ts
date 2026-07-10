@@ -50,7 +50,7 @@ function useFileDropRef(
         return { valid: false, reason: "File type not allowed" };
       }
 
-      if (maxFileSize && file.size > maxFileSize) {
+      if (maxFileSize !== undefined && file.size > maxFileSize) {
         return { valid: false, reason: "File size exceeds the limit" };
       }
 
@@ -66,7 +66,7 @@ function useFileDropRef(
       const acceptedFiles: File[] = [];
       const rejectedFiles: File[] = [];
 
-      if (maxFiles && files.length > maxFiles) {
+      if (maxFiles !== undefined && files.length > maxFiles) {
         for (const file of files) {
           rejectedFiles.push(file);
           freshOnFileRejected(file, "Exceeded maximum number of files");
