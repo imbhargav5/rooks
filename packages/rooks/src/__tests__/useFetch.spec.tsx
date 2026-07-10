@@ -254,12 +254,12 @@ describe("useFetch", () => {
         expect(onError).not.toHaveBeenCalled();
     });
 
-    it("should keep startFetch stable while using the latest options", async () => {
+    it("should keep startFetch tied to the render options it was created with", async () => {
         const firstOnSuccess = vi.fn();
         const latestOnSuccess = vi.fn();
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: async () => ({ name: "Latest" }),
+            json: async () => ({ name: "First" }),
         } as Response);
 
         const { result, rerender } = renderHook(
@@ -274,20 +274,21 @@ describe("useFetch", () => {
 
         rerender({ onSuccess: latestOnSuccess });
 
-        expect(result.current.startFetch).toBe(initialStartFetch);
+        expect(result.current.startFetch).not.toBe(initialStartFetch);
 
         await act(async () => {
             await initialStartFetch();
         });
 
-        expect(firstOnSuccess).not.toHaveBeenCalled();
-        expect(latestOnSuccess).toHaveBeenCalledWith({ name: "Latest" });
+        expect(firstOnSuccess).toHaveBeenCalledWith({ name: "First" });
+        expect(latestOnSuccess).not.toHaveBeenCalled();
     });
 
-    it("should abort an older request and ignore its stale result", async () => {
+    it("should allow overlapping requests to complete", async () => {
         let resolveFirst!: (response: Response) => void;
         let resolveSecond!: (response: Response) => void;
         let firstSignal: AbortSignal | undefined;
+        let secondSignal: AbortSignal | undefined;
 
         mockFetch
             .mockImplementationOnce((_url: string, init: RequestInit) => {
@@ -296,12 +297,12 @@ describe("useFetch", () => {
                     resolveFirst = resolve;
                 });
             })
-            .mockImplementationOnce(
-                () =>
-                    new Promise<Response>((resolve) => {
-                        resolveSecond = resolve;
-                    })
-            );
+            .mockImplementationOnce((_url: string, init: RequestInit) => {
+                secondSignal = init.signal ?? undefined;
+                return new Promise<Response>((resolve) => {
+                    resolveSecond = resolve;
+                });
+            });
 
         const { result } = renderHook(() =>
             useFetch<{ request: number }>("https://api.example.com/user")
@@ -314,7 +315,8 @@ describe("useFetch", () => {
             secondRequest = result.current.startFetch();
         });
 
-        expect(firstSignal?.aborted).toBe(true);
+        expect(firstSignal?.aborted).toBe(false);
+        expect(secondSignal?.aborted).toBe(false);
 
         await act(async () => {
             resolveSecond({
@@ -333,7 +335,7 @@ describe("useFetch", () => {
             await firstRequest;
         });
 
-        expect(result.current.data).toEqual({ request: 2 });
+        expect(result.current.data).toEqual({ request: 1 });
         expect(result.current.error).toBeNull();
         expect(result.current.loading).toBe(false);
     });

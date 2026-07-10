@@ -1,5 +1,4 @@
 import { useState, useCallback, useRef, useEffect } from "react";
-import { useFreshRef } from "./useFreshRef";
 
 /**
  * HTTP error interface extending Error with status information
@@ -50,7 +49,11 @@ async function createFetchPromise<T>(
     options: UseFetchOptions<T> = {},
     signal?: AbortSignal
 ): Promise<T> {
-    const { onSuccess, onError, onFetch, ...requestOptions } = options;
+    const requestOptions = { ...options };
+    delete requestOptions.onSuccess;
+    delete requestOptions.onError;
+    delete requestOptions.onFetch;
+
     const response = await fetch(url, {
         ...requestOptions,
         signal,
@@ -75,8 +78,8 @@ async function createFetchPromise<T>(
  * provides a fetch function for manual data fetching.
  *
  * Note: This hook does not cache requests - each call triggers a fresh fetch.
- * Starting a new request aborts the previous request, and unmounting aborts any
- * active request. The hook does not automatically fetch on mount.
+ * Unmounting aborts active requests. The hook does not automatically fetch on
+ * mount.
  *
  * @param url - The URL to fetch data from
  * @param options - Optional fetch configuration including callbacks
@@ -122,34 +125,28 @@ function useFetch<T = unknown>(
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
     const mountedRef = useRef(true);
-    const requestIdRef = useRef(0);
-    const abortControllerRef = useRef<AbortController | null>(null);
-    const optionsRef = useFreshRef(options, true);
+    const abortControllersRef = useRef<Set<AbortController>>(new Set());
 
     const fetchData = useCallback(async () => {
         if (!mountedRef.current) return;
 
-        const requestId = ++requestIdRef.current;
-        abortControllerRef.current?.abort();
-
         const abortController = new AbortController();
-        const currentOptions = optionsRef.current;
-        abortControllerRef.current = abortController;
+        abortControllersRef.current.add(abortController);
 
         setLoading(true);
         setError(null);
-        currentOptions.onFetch?.();
+        options.onFetch?.();
 
         try {
             const result = await createFetchPromise<T>(
                 url,
-                currentOptions,
+                options,
                 abortController.signal
             );
 
-            if (mountedRef.current && requestId === requestIdRef.current) {
+            if (mountedRef.current) {
                 setData(result);
-                currentOptions.onSuccess?.(result);
+                options.onSuccess?.(result);
             }
         } catch (err) {
             const fetchError = err instanceof Error
@@ -158,28 +155,30 @@ function useFetch<T = unknown>(
 
             if (
                 mountedRef.current &&
-                requestId === requestIdRef.current &&
                 fetchError.name !== "AbortError"
             ) {
                 setError(fetchError);
-                currentOptions.onError?.(fetchError);
+                options.onError?.(fetchError);
             }
         } finally {
-            if (mountedRef.current && requestId === requestIdRef.current) {
+            abortControllersRef.current.delete(abortController);
+
+            if (mountedRef.current) {
                 setLoading(false);
-                abortControllerRef.current = null;
             }
         }
-    }, [optionsRef, url]);
+    }, [options, url]);
 
     useEffect(() => {
         mountedRef.current = true;
+        const abortControllers = abortControllersRef.current;
 
         return () => {
             mountedRef.current = false;
-            requestIdRef.current += 1;
-            abortControllerRef.current?.abort();
-            abortControllerRef.current = null;
+            for (const abortController of abortControllers) {
+                abortController.abort();
+            }
+            abortControllers.clear();
         };
     }, []);
 
