@@ -88,3 +88,7 @@ map methods:
 | removeAll      | `() => void`                     | remove all key value pair in map      |
 
 ---
+
+## Robustness and lifecycle
+
+`has` checks own-key presence, so a key containing `undefined` still exists. Removal also works for maps that contain a key named `hasOwnProperty`.
