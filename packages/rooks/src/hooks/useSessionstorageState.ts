@@ -1,19 +1,25 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useFreshRef } from "./useFreshRef";
 
 function getValueFromSessionStorage(key: string) {
   if (typeof sessionStorage === "undefined") {
     return null;
   }
 
-  const storedValue = sessionStorage.getItem(key) ?? "null";
   try {
-    return JSON.parse(storedValue);
+    const storedValue = sessionStorage.getItem(key) ?? "null";
+
+    try {
+      return JSON.parse(storedValue);
+    } catch (error) {
+      console.error(error);
+      return storedValue;
+    }
   } catch (error) {
     console.error(error);
+    return null;
   }
-
-  return storedValue;
 }
 
 function saveValueToSessionStorage<S>(key: string, value: S) {
@@ -21,7 +27,12 @@ function saveValueToSessionStorage<S>(key: string, value: S) {
     return null;
   }
 
-  return sessionStorage.setItem(key, JSON.stringify(value));
+  try {
+    return sessionStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 /**
@@ -72,9 +83,15 @@ function useSessionstorageState<S>(
      * to keep track of whether setValue is from another
      * storage event
      */
-    if (!isUpdateFromCrossDocumentListener.current) {
+    if (
+      !isUpdateFromCrossDocumentListener.current &&
+      !isUpdateFromWithinDocumentListener.current
+    ) {
       saveValueToSessionStorage(key, value);
     }
+
+    isUpdateFromCrossDocumentListener.current = false;
+    isUpdateFromWithinDocumentListener.current = false;
   }, [key, value]);
 
   const listenToCrossDocumentStorageEvents = useCallback(
@@ -83,15 +100,15 @@ function useSessionstorageState<S>(
         try {
           isUpdateFromCrossDocumentListener.current = true;
           const newValue = JSON.parse(event.newValue ?? "null");
-          if (value !== newValue) {
-            setValue(newValue);
-          }
+          setValue((currentValue) =>
+            Object.is(currentValue, newValue) ? currentValue : newValue
+          );
         } catch (error) {
           console.log(error);
         }
       }
     },
-    [key, value]
+    [key]
   );
 
   // check for changes across windows
@@ -118,14 +135,14 @@ function useSessionstorageState<S>(
       try {
         isUpdateFromWithinDocumentListener.current = true;
         const { newValue } = event.detail;
-        if (value !== newValue) {
-          setValue(newValue);
-        }
+        setValue((currentValue) =>
+          Object.is(currentValue, newValue) ? currentValue : newValue
+        );
       } catch (error) {
         console.log(error);
       }
     },
-    [value]
+    []
   );
 
   // check for changes within document
@@ -166,21 +183,27 @@ function useSessionstorageState<S>(
     [customEventTypeName]
   );
 
+  const currentValue = useFreshRef(value, true);
+
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
       const resolvedNewValue = typeof newValue === "function"
-        ? (newValue as (prevState: S) => S)(value)
+        ? (newValue as (prevState: S) => S)(currentValue.current)
         : newValue;
       isUpdateFromCrossDocumentListener.current = false;
       isUpdateFromWithinDocumentListener.current = false;
       setValue(resolvedNewValue);
       broadcastValueWithinDocument(resolvedNewValue);
     },
-    [broadcastValueWithinDocument, value]
+    [broadcastValueWithinDocument, currentValue]
   );
 
   const remove = useCallback(() => {
-    sessionStorage.removeItem(key);
+    try {
+      sessionStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
   }, [key]);
 
   return [value, set, remove];
