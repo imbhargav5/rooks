@@ -142,4 +142,25 @@ describe("useSessionstorageState basic", () => {
     setItem.mockRestore();
   });
 
+
+  it("loads the new storage value when the key changes", () => {
+    expect.hasAssertions();
+    sessionStorage.setItem("session-key-a", JSON.stringify("value-a"));
+    sessionStorage.setItem("session-key-b", JSON.stringify("value-b"));
+
+    const { result, rerender } = renderHook(
+      ({ storageKey }) => useSessionstorageState(storageKey, "fallback"),
+      { initialProps: { storageKey: "session-key-a" } }
+    );
+
+    expect(result.current[0]).toBe("value-a");
+
+    rerender({ storageKey: "session-key-b" });
+
+    expect(result.current[0]).toBe("value-b");
+    expect(sessionStorage.getItem("session-key-b")).toBe(
+      JSON.stringify("value-b")
+    );
+  });
+
 });
