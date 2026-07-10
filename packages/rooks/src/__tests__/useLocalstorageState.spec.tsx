@@ -287,4 +287,25 @@ describe("useLocalstorageState localStorage", () => {
     expect(localStorage.setItem).not.toHaveBeenCalled();
   });
 
+
+  it("loads the new storage value when the key changes", () => {
+    expect.hasAssertions();
+    localStorage.setItem("local-key-a", JSON.stringify("value-a"));
+    localStorage.setItem("local-key-b", JSON.stringify("value-b"));
+
+    const { result, rerender } = renderHook(
+      ({ storageKey }) => useLocalstorageState(storageKey, "fallback"),
+      { initialProps: { storageKey: "local-key-a" } }
+    );
+
+    expect(result.current[0]).toBe("value-a");
+
+    rerender({ storageKey: "local-key-b" });
+
+    expect(result.current[0]).toBe("value-b");
+    expect(localStorage.getItem("local-key-b")).toBe(
+      JSON.stringify("value-b")
+    );
+  });
+
 });
