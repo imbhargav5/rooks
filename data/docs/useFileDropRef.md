@@ -17,3 +17,7 @@ export default function App() {
   return null;
 }
 ```
+
+## Robustness and lifecycle
+
+When a drop exceeds `maxFiles`, every file is rejected. `onDrop` receives an empty accepted array and the complete rejected array, while `onFileRejected` is invoked once per file.
