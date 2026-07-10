@@ -109,7 +109,7 @@ function useSessionstorageState<S>(
         try {
           isUpdateFromCrossDocumentListener.current = true;
           const newValue = JSON.parse(event.newValue ?? "null");
-          setValue((currentValue) =>
+          setValue((currentValue: S) =>
             Object.is(currentValue, newValue) ? currentValue : newValue
           );
         } catch (error) {
@@ -144,7 +144,7 @@ function useSessionstorageState<S>(
       try {
         isUpdateFromWithinDocumentListener.current = true;
         const { newValue } = event.detail;
-        setValue((currentValue) =>
+        setValue((currentValue: S) =>
           Object.is(currentValue, newValue) ? currentValue : newValue
         );
       } catch (error) {
