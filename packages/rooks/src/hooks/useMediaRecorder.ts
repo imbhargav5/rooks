@@ -5,6 +5,10 @@ import { useState, useCallback, useRef, useEffect, useMemo } from "react";
  */
 type RecordingState = "idle" | "recording" | "paused" | "stopped";
 
+type MediaRecorderErrorEvent = Event & {
+  error?: Error | DOMException;
+};
+
 /**
  * Options for media recording
  */
@@ -177,9 +181,9 @@ function useMediaRecorder(
         chunksRef.current = [];
       };
 
-      mediaRecorder.onerror = (event: Event) => {
+      mediaRecorder.onerror = (event: MediaRecorderErrorEvent) => {
         const err = new Error(
-          `MediaRecorder error: ${(event as any).error?.message || "Unknown error"}`
+          `MediaRecorder error: ${event.error?.message || "Unknown error"}`
         );
         setError(err);
         setRecordingState("idle");
