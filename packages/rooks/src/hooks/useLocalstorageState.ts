@@ -75,6 +75,15 @@ function useLocalstorageState<S>(
   initialState?: S | (() => S)
 ): UseLocalstorageStateReturnValue<S> {
   const [value, setValue] = useState(() => initialize(key, initialState));
+  const currentValue = useFreshRef(value, true);
+  const currentKey = useRef(key);
+
+  if (currentKey.current !== key) {
+    currentKey.current = key;
+    const nextValue = initialize(key, initialState);
+    currentValue.current = nextValue;
+    setValue(nextValue);
+  }
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
   const customEventTypeName = useMemo(() => {
@@ -184,8 +193,6 @@ function useLocalstorageState<S>(
     },
     [customEventTypeName]
   );
-
-  const currentValue = useFreshRef(value, true);
 
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
