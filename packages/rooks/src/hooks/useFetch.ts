@@ -75,7 +75,8 @@ async function createFetchPromise<T>(
  * provides a fetch function for manual data fetching.
  *
  * Note: This hook does not cache requests - each call triggers a fresh fetch.
- * The hook does not automatically fetch on mount - use the returned fetch function.
+ * Starting a new request aborts the previous request, and unmounting aborts any
+ * active request. The hook does not automatically fetch on mount.
  *
  * @param url - The URL to fetch data from
  * @param options - Optional fetch configuration including callbacks
