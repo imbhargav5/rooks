@@ -22,13 +22,15 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
   const restTime = endTime.getTime() - time.getTime();
   const count = restTime > 0 ? Math.ceil(restTime / interval) : 0;
 
-  useIntervalWhen(onTick, count ? interval : undefined, true, true);
+  useIntervalWhen(onTick, interval, count > 0, true);
 
   return count;
 
   function onTick() {
     const newTime = new Date();
-    if (newTime > endTime) {
+    const newRestTime = endTime.getTime() - newTime.getTime();
+
+    if (newRestTime <= 0) {
       if (onEnd) {
         onEnd(newTime);
       }
@@ -39,7 +41,7 @@ function useCountdown(endTime: Date, options: CountdownOptions = {}): number {
     }
 
     if (onDown) {
-      onDown(restTime, newTime);
+      onDown(newRestTime, newTime);
     }
 
     setTime(newTime);
