@@ -199,4 +199,33 @@ describe("useMapState", () => {
     });
     expect(result.current[0]).toEqual({});
   });
+
+  it("reports own keys whose value is undefined", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useMapState<Map, keyof Map>({ a: undefined })
+    );
+
+    expect(result.current[1].has("a")).toBe(true);
+    expect(result.current[1].has("b")).toBe(false);
+  });
+
+  it("removes all keys even when hasOwnProperty is shadowed", () => {
+    expect.hasAssertions();
+    const initial = {
+      a: 1,
+      hasOwnProperty: "shadowed",
+    } as unknown as Map;
+    const { result } = renderHook(() =>
+      useMapState<Map, keyof Map>(initial)
+    );
+
+    expect(() => {
+      act(() => {
+        result.current[1].removeAll();
+      });
+    }).not.toThrow();
+    expect(result.current[0]).toEqual({});
+  });
+
 });
