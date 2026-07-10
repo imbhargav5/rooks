@@ -55,3 +55,7 @@ export default App;
 | ----------------- | -------- | ---------------------------------------------------------------------- |
 | throttledFunction | Function | A throttled function that will run at most once per timeout ms         |
 | isReady           | Boolean  | Tells whether calling throttledFunction at that point will fire or not |
+
+## Robustness and lifecycle
+
+The throttle gate closes synchronously before invoking the callback, so repeated calls in the same event or React batch still execute at most once. The returned function remains stable and invokes the latest callback.
