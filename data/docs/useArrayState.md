@@ -27,3 +27,7 @@ export default function App() {
 }
 
 ```
+
+## Robustness and lifecycle
+
+Array operations use immutable functional updates, so multiple controls called in the same React batch compose in call order. `push` and `unshift` accept one or more values, matching the native array methods.
