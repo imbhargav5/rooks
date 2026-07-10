@@ -28,6 +28,10 @@ function saveValueToSessionStorage<S>(key: string, value: S) {
   }
 
   try {
+    if (value === undefined) {
+      return sessionStorage.removeItem(key);
+    }
+
     return sessionStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.error(error);
