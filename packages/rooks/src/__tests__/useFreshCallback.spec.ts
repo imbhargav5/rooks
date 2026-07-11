@@ -37,4 +37,21 @@ describe("useFreshCallback", () => {
     expect(spy).toHaveBeenNthCalledWith(1, 0);
     expect(spy).toHaveBeenNthCalledWith(2, 2);
   });
+
+  it("should preserve the full argument list", () => {
+    expect.hasAssertions();
+    const spy = vi.fn();
+
+    const { result } = renderHook(() =>
+      useFreshCallback((query: string, page: number) => {
+        spy(query, page);
+      })
+    );
+
+    act(() => {
+      result.current("search", 3);
+    });
+
+    expect(spy).toHaveBeenCalledWith("search", 3);
+  });
 });
