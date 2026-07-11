@@ -176,11 +176,9 @@ describe("useSetState", () => {
 
     rerender();
 
-    // Due to the dependency on setValue, these might not be stable
-    // This test documents the current behavior
-    expect(typeof result.current[1].add).toBe("function");
-    expect(typeof result.current[1].delete).toBe("function");
-    expect(typeof result.current[1].clear).toBe("function");
+    expect(result.current[1].add).toBe(initialAdd);
+    expect(result.current[1].delete).toBe(initialDelete);
+    expect(result.current[1].clear).toBe(initialClear);
   });
 
   it("should return correct structure", () => {

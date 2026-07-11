@@ -37,16 +37,17 @@ function useThrottle<T>(
   );
 
   useEffect(() => {
-    if (!ready) {
-      timerRef.current = window.setTimeout(() => {
-        readyRef.current = true;
-        setReady(true);
-      }, timeout);
+    if (ready) {
+      readyRef.current = true;
 
-      return () => window.clearTimeout(timerRef.current);
+      return noop;
     }
 
-    return noop;
+    timerRef.current = window.setTimeout(() => {
+      setReady(true);
+    }, timeout);
+
+    return () => window.clearTimeout(timerRef.current);
   }, [ready, timeout]);
 
   return [throttledFunction, ready];

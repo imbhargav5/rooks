@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState, RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, RefObject } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 type PictureInPictureApi = {
   isPiPActive: boolean;
@@ -22,6 +23,7 @@ function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureI
   const [isSupported, setIsSupported] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [pipWindow, setPipWindow] = useState<PictureInPictureWindow | null>(null);
+  const attachedVideoRef = useRef<HTMLVideoElement | null>(null);
 
   // Check if Picture-in-Picture is supported (reactive)
   const getIsSupported = useCallback((): boolean => {
@@ -94,36 +96,53 @@ function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureI
     setIsPiPActive(false);
   }, []);
 
-  // Set up event listeners and handle video element changes
-  useEffect(() => {
+  // Reconcile after refs have been committed. RefObject.current can change
+  // without the RefObject identity changing.
+  useIsomorphicEffect(() => {
     const video = videoRef.current;
-    if (!video) {
-      setIsSupported(false);
+    const nextIsSupported = getIsSupported();
+    setIsSupported((current) =>
+      current === nextIsSupported ? current : nextIsSupported
+    );
+
+    if (attachedVideoRef.current === video) {
       return;
     }
 
-    setIsSupported(getIsSupported());
-    video.addEventListener("enterpictureinpicture", handleEnterPiP);
-    video.addEventListener("leavepictureinpicture", handleLeavePiP);
+    attachedVideoRef.current?.removeEventListener(
+      "enterpictureinpicture",
+      handleEnterPiP
+    );
+    attachedVideoRef.current?.removeEventListener(
+      "leavepictureinpicture",
+      handleLeavePiP
+    );
+    attachedVideoRef.current = video;
 
-    // Initialize PiP state
-    updatePiPState();
+    if (video) {
+      video.addEventListener("enterpictureinpicture", handleEnterPiP);
+      video.addEventListener("leavepictureinpicture", handleLeavePiP);
+      updatePiPState();
+    }
+  });
 
+  useEffect(() => {
     return () => {
-      video.removeEventListener("enterpictureinpicture", handleEnterPiP);
-      video.removeEventListener("leavepictureinpicture", handleLeavePiP);
+      attachedVideoRef.current?.removeEventListener(
+        "enterpictureinpicture",
+        handleEnterPiP
+      );
+      attachedVideoRef.current?.removeEventListener(
+        "leavepictureinpicture",
+        handleLeavePiP
+      );
+      attachedVideoRef.current = null;
     };
-  }, [
-    videoRef.current,
-    getIsSupported,
-    handleEnterPiP,
-    handleLeavePiP,
-    updatePiPState,
-  ]);
+  }, [handleEnterPiP, handleLeavePiP]);
 
   return {
     isPiPActive,
-    isSupported: isSupported && getIsSupported(),
+    isSupported,
     error,
     pipWindow,
     enterPiP,

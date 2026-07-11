@@ -139,6 +139,38 @@ describe("usePictureInPictureApi", () => {
       // Should now be unsupported
       expect(result.current.isSupported).toBe(false);
     });
+
+    it("should recover when the same video element becomes supported", () => {
+      mockVideoElement.disablePictureInPicture = true;
+      const { result, rerender } = renderHook(() =>
+        usePictureInPictureApi(mockVideoRef)
+      );
+
+      expect(result.current.isSupported).toBe(false);
+
+      act(() => {
+        mockVideoElement.disablePictureInPicture = false;
+      });
+      rerender();
+
+      expect(result.current.isSupported).toBe(true);
+    });
+
+    it("should recover when document Picture-in-Picture support becomes available", () => {
+      (document as any).pictureInPictureEnabled = false;
+      const { result, rerender } = renderHook(() =>
+        usePictureInPictureApi(mockVideoRef)
+      );
+
+      expect(result.current.isSupported).toBe(false);
+
+      act(() => {
+        (document as any).pictureInPictureEnabled = true;
+      });
+      rerender();
+
+      expect(result.current.isSupported).toBe(true);
+    });
   });
 
   describe("Enter PiP Functionality", () => {
@@ -642,8 +674,12 @@ describe("usePictureInPictureApi", () => {
     });
   });
 
-  it("detects support after a normal React ref is attached", () => {
+  it("tracks support after normal React ref attachment and replacement", () => {
     expect.hasAssertions();
+    const originalDescriptor = Object.getOwnPropertyDescriptor(
+      HTMLVideoElement.prototype,
+      "requestPictureInPicture"
+    );
     Object.defineProperty(
       HTMLVideoElement.prototype,
       "requestPictureInPicture",
@@ -653,25 +689,64 @@ describe("usePictureInPictureApi", () => {
       }
     );
 
-    function TestComponent() {
-      const videoRef = useRef<HTMLVideoElement>(null);
-      const { isSupported } = usePictureInPictureApi(videoRef);
+    function TestComponent({ disabled = false }: { disabled?: boolean }) {
+      const videoRef = useRef<HTMLVideoElement | null>(null);
+      const { isPiPActive, isSupported } = usePictureInPictureApi(videoRef);
 
       return (
         <>
-          <video ref={videoRef} />
+          <video
+            data-testid="pip-video"
+            key={String(disabled)}
+            ref={(video) => {
+              if (video) {
+                video.disablePictureInPicture = disabled;
+              }
+              videoRef.current = video;
+            }}
+          />
+          <span data-testid="pip-active">{String(isPiPActive)}</span>
           <span data-testid="pip-supported">{String(isSupported)}</span>
         </>
       );
     }
 
-    render(<TestComponent />);
+    try {
+      const { rerender } = render(<TestComponent />);
 
-    expect(screen.getByTestId("pip-supported")).toHaveTextContent("true");
+      expect(screen.getByTestId("pip-supported")).toHaveTextContent("true");
+      const firstVideo = screen.getByTestId("pip-video");
 
-    delete (
-      HTMLVideoElement.prototype as Partial<HTMLVideoElement>
-    ).requestPictureInPicture;
+      rerender(<TestComponent disabled />);
+      expect(screen.getByTestId("pip-supported")).toHaveTextContent("false");
+      const replacementVideo = screen.getByTestId("pip-video");
+      expect(replacementVideo).not.toBe(firstVideo);
+
+      act(() => {
+        firstVideo.dispatchEvent(new Event("enterpictureinpicture"));
+      });
+      expect(screen.getByTestId("pip-active")).toHaveTextContent("false");
+
+      act(() => {
+        replacementVideo.dispatchEvent(new Event("enterpictureinpicture"));
+      });
+      expect(screen.getByTestId("pip-active")).toHaveTextContent("true");
+
+      rerender(<TestComponent />);
+      expect(screen.getByTestId("pip-supported")).toHaveTextContent("true");
+    } finally {
+      if (originalDescriptor) {
+        Object.defineProperty(
+          HTMLVideoElement.prototype,
+          "requestPictureInPicture",
+          originalDescriptor
+        );
+      } else {
+        delete (
+          HTMLVideoElement.prototype as Partial<HTMLVideoElement>
+        ).requestPictureInPicture;
+      }
+    }
   });
 
 });

@@ -200,14 +200,25 @@ describe("useMapState", () => {
     expect(result.current[0]).toEqual({});
   });
 
-  it("reports own keys whose value is undefined", () => {
+  it("preserves undefined values as absent", () => {
     expect.hasAssertions();
     const { result } = renderHook(() =>
       useMapState<Map, keyof Map>({ a: undefined })
     );
 
-    expect(result.current[1].has("a")).toBe(true);
+    expect(result.current[1].has("a")).toBe(false);
     expect(result.current[1].has("b")).toBe(false);
+  });
+
+  it("preserves inherited property lookup behavior", () => {
+    expect.hasAssertions();
+    const initialValue = Object.create({ inherited: 1 }) as Record<
+      string,
+      number
+    >;
+    const { result } = renderHook(() => useMapState(initialValue));
+
+    expect(result.current[1].has("inherited")).toBe(true);
   });
 
   it("removes all keys even when hasOwnProperty is shadowed", () => {

@@ -178,6 +178,32 @@ describe("useThrottle hook", () => {
     vi.useRealTimers();
   });
 
+  it("does not reopen until the ready state has committed", () => {
+    expect.hasAssertions();
+    vi.useFakeTimers();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useThrottle(callback, TIMEOUT));
+
+    act(() => {
+      result.current[0]();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(TIMEOUT);
+      result.current[0]();
+    });
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(result.current[1]).toBe(true);
+
+    act(() => {
+      result.current[0]();
+    });
+
+    expect(callback).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
+  });
+
   it("keeps the throttled function stable and calls the latest callback", () => {
     expect.hasAssertions();
     vi.useFakeTimers();
@@ -199,5 +225,4 @@ describe("useThrottle hook", () => {
     expect(latestCallback).toHaveBeenCalledTimes(1);
     vi.useRealTimers();
   });
-
 });

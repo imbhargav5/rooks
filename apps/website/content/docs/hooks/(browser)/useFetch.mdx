@@ -13,20 +13,28 @@ A hook for fetching data from URLs with proper TypeScript generics, error handli
 
 ```tsx
 import { useFetch } from "rooks";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 function UserProfile({ userId }: { userId: string }) {
+  const fetchOptions = useMemo(
+    () => ({
+      headers: { Authorization: "Bearer token" },
+      onSuccess: (data: User) => console.log("User loaded:", data),
+      onError: (error: Error) => console.error("Failed to load user:", error),
+      onFetch: () => console.log("Fetching user data..."),
+    }),
+    []
+  );
+
   const {
     data: user,
     loading,
     error,
     startFetch,
-  } = useFetch<User>(`https://api.example.com/users/${userId}`, {
-    headers: { Authorization: "Bearer token" },
-    onSuccess: (data) => console.log("User loaded:", data),
-    onError: (error) => console.error("Failed to load user:", error),
-    onFetch: () => console.log("Fetching user data..."),
-  });
+  } = useFetch<User>(
+    `https://api.example.com/users/${userId}`,
+    fetchOptions
+  );
 
   // Fetch data when component mounts
   useEffect(() => {
@@ -189,7 +197,7 @@ The options object extends the standard `RequestInit` interface (excluding `sign
 | `referrerPolicy` | `ReferrerPolicy`                        | -               | Referrer policy       |
 | `integrity`      | `string`                                | -               | Subresource integrity |
 | `keepalive`      | `boolean`                               | -               | Keep-alive flag       |
-| `onSuccess`      | `(data: T) => void`                   | -               | Success callback      |
+| `onSuccess`      | `(data: T) => void`                     | -               | Success callback      |
 | `onError`        | `(error: Error) => void`                | -               | Error callback        |
 | `onFetch`        | `() => void`                            | -               | Fetch start callback  |
 
@@ -198,6 +206,7 @@ The options object extends the standard `RequestInit` interface (excluding `sign
 - This hook does not cache requests - each call triggers a fresh fetch
 - Starting another request does not cancel earlier calls; overlapping requests may still complete and update state
 - Unmounting aborts active requests and prevents callbacks or state updates after unmount
+- `startFetch` is bound to the URL and options object from its render; memoize `options` before using `startFetch` as an effect dependency
 - The hook does not automatically fetch on mount - you must call the `startFetch` function
 - The hook automatically handles JSON parsing of responses
 - HTTP errors (4xx, 5xx) are thrown as `Error` objects with `status` and `statusText` properties

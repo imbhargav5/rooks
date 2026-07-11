@@ -36,7 +36,7 @@ function useMapState<
 
   const has = useCallback(
     (key: K) => {
-      return Object.prototype.hasOwnProperty.call(map, key);
+      return typeof map[key] !== "undefined";
     },
     [map]
   );

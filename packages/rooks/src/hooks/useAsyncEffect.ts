@@ -1,5 +1,6 @@
 import { type DependencyList, useEffect, useRef, useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
+import { useFreshCallback } from "./useFreshCallback";
 import { useGetIsMounted } from "./useGetIsMounted";
 
 type Effect<T> = (shouldContinueEffect: () => boolean) => Promise<T>;
@@ -39,17 +40,15 @@ function useAsyncEffect<T>(
   const lastCallId = useRef(0);
   const getIsMounted = useGetIsMounted();
   const effectRef = useFreshRef(effect);
-  const cleanupRef = useFreshRef(cleanup);
+  const cleanupCallback = useFreshCallback((result: void | T) => {
+    cleanup?.(result);
+  });
   const callback = useCallback(async (): Promise<void | T> => {
     const callId = ++lastCallId.current;
     const shouldContinueEffect = () => {
       return getIsMounted() && callId === lastCallId.current;
     };
-    try {
-      return await effectRef.current(shouldContinueEffect);
-    } catch (error) {
-      throw error;
-    }
+    return await effectRef.current(shouldContinueEffect);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getIsMounted, ...deps]);
@@ -60,9 +59,9 @@ function useAsyncEffect<T>(
       result = value;
     });
     return () => {
-      cleanupRef.current?.(result);
+      cleanupCallback(result);
     };
-  }, [callback, cleanupRef]);
+  }, [callback, cleanupCallback]);
 }
 
 export { useAsyncEffect };

@@ -173,4 +173,34 @@ describe("useFileDropRef", () => {
     );
   });
 
+  it("treats maxFileSize zero as an exact byte-size boundary", () => {
+    expect.hasAssertions();
+    const onDrop = vi.fn();
+    const onFileAccepted = vi.fn();
+    const onFileRejected = vi.fn();
+
+    function ZeroByteDropZone() {
+      const ref = useFileDropRef(
+        { maxFileSize: 0 },
+        { onDrop, onFileAccepted, onFileRejected }
+      );
+      return <div ref={ref} data-testid="zero-byte-drop-area" />;
+    }
+
+    const { getByTestId } = render(<ZeroByteDropZone />);
+    const emptyFile = createFileWithSize("empty.txt", "text/plain", 0);
+    const nonEmptyFile = createFileWithSize("non-empty.txt", "text/plain", 1);
+
+    fireEvent.drop(getByTestId("zero-byte-drop-area"), {
+      dataTransfer: { files: [emptyFile, nonEmptyFile] },
+    });
+
+    expect(onDrop).toHaveBeenCalledWith([emptyFile], [nonEmptyFile]);
+    expect(onFileAccepted).toHaveBeenCalledWith(emptyFile);
+    expect(onFileRejected).toHaveBeenCalledWith(
+      nonEmptyFile,
+      "File size exceeds the limit"
+    );
+  });
+
 });

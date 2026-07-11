@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { useFetch } from "../hooks/useFetch";
 
 // Mock fetch globally
@@ -122,6 +122,62 @@ describe("useFetch", () => {
 
         expect(result.current.error).toBe(networkError);
         expect(result.current.data).toBe(null);
+        expect(result.current.loading).toBe(false);
+    });
+
+    it("should recover when AbortController construction fails", async () => {
+        expect.hasAssertions();
+        const descriptor = Object.getOwnPropertyDescriptor(
+            globalThis,
+            "AbortController"
+        );
+        const onError = vi.fn();
+
+        Object.defineProperty(globalThis, "AbortController", {
+            configurable: true,
+            value: undefined,
+        });
+
+        try {
+            const { result } = renderHook(() =>
+                useFetch("https://api.example.com/users/1", { onError })
+            );
+
+            await act(async () => {
+                await result.current.startFetch();
+            });
+
+            expect(mockFetch).not.toHaveBeenCalled();
+            expect(result.current.error).toBeInstanceOf(TypeError);
+            expect(onError).toHaveBeenCalledWith(result.current.error);
+            expect(result.current.loading).toBe(false);
+        } finally {
+            if (descriptor) {
+                Object.defineProperty(
+                    globalThis,
+                    "AbortController",
+                    descriptor
+                );
+            }
+        }
+    });
+
+    it("should preserve AbortError reporting while the hook is mounted", async () => {
+        expect.hasAssertions();
+        const abortError = new DOMException("Request aborted", "AbortError");
+        const onError = vi.fn();
+        mockFetch.mockRejectedValueOnce(abortError);
+
+        const { result } = renderHook(() =>
+            useFetch("https://api.example.com/users/1", { onError })
+        );
+
+        await act(async () => {
+            await result.current.startFetch();
+        });
+
+        expect(result.current.error?.message).toContain("Request aborted");
+        expect(onError).toHaveBeenCalledWith(result.current.error);
         expect(result.current.loading).toBe(false);
     });
 
@@ -389,6 +445,61 @@ describe("useFetch", () => {
         });
 
         expect(result.current.data).toEqual({ ready: true });
+    });
+
+    it("should isolate requests started by StrictMode mount-effect replay", async () => {
+        expect.hasAssertions();
+        let resolveLiveRequest!: (response: Response) => void;
+        const stableOptions = {};
+
+        mockFetch
+            .mockImplementationOnce((_url: string, init: RequestInit) => {
+                return new Promise<Response>((_resolve, reject) => {
+                    init.signal?.addEventListener("abort", () => {
+                        reject(new DOMException("Request aborted", "AbortError"));
+                    });
+                });
+            })
+            .mockImplementationOnce(() => {
+                return new Promise<Response>((resolve) => {
+                    resolveLiveRequest = resolve;
+                });
+            });
+
+        const { result } = renderHook(
+            () => {
+                const request = useFetch<{ generation: number }>(
+                    "https://api.example.com/strict-replay",
+                    stableOptions
+                );
+                const { startFetch } = request;
+                useEffect(() => {
+                    void startFetch();
+                }, [startFetch]);
+                return request;
+            },
+            { wrapper: StrictMode }
+        );
+
+        await act(async () => {
+            await Promise.resolve();
+        });
+
+        expect(mockFetch).toHaveBeenCalledTimes(2);
+        expect(result.current.loading).toBe(true);
+        expect(result.current.error).toBeNull();
+
+        await act(async () => {
+            resolveLiveRequest({
+                ok: true,
+                json: async () => ({ generation: 2 }),
+            } as Response);
+            await Promise.resolve();
+        });
+
+        expect(result.current.data).toEqual({ generation: 2 });
+        expect(result.current.loading).toBe(false);
+        expect(result.current.error).toBeNull();
     });
 
 });
