@@ -17,3 +17,7 @@ export default function App() {
   return null;
 }
 ```
+
+## Robustness and lifecycle
+
+Every operation creates a new Set before mutation. Previously returned snapshots and the caller's initial Set remain unchanged, and multiple operations in one React batch compose safely.

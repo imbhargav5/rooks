@@ -15,3 +15,7 @@ This is a version of `useEffect` that accepts an async function.
 ## Examples
 
 ### Basic example
+
+## Robustness and lifecycle
+
+Only changes to `deps` restart the async effect. The latest cleanup callback is used when that generation ends, and `shouldContinueEffect()` becomes false for stale or unmounted generations.

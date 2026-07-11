@@ -176,11 +176,9 @@ describe("useSetState", () => {
 
     rerender();
 
-    // Due to the dependency on setValue, these might not be stable
-    // This test documents the current behavior
-    expect(typeof result.current[1].add).toBe("function");
-    expect(typeof result.current[1].delete).toBe("function");
-    expect(typeof result.current[1].clear).toBe("function");
+    expect(result.current[1].add).toBe(initialAdd);
+    expect(result.current[1].delete).toBe(initialDelete);
+    expect(result.current[1].clear).toBe(initialClear);
   });
 
   it("should return correct structure", () => {
@@ -207,4 +205,47 @@ describe("useSetState", () => {
     expect(result.current[0]).toEqual(new Set());
     expect(result.current[0].size).toBe(0);
   });
+
+  it("does not mutate previously returned snapshots", () => {
+    expect.hasAssertions();
+    const initial = new Set([1, 2]);
+    const { result } = renderHook(() => useSetState(initial));
+    const previousSnapshot = result.current[0];
+
+    act(() => {
+      result.current[1].add(3);
+    });
+
+    expect(initial).toEqual(new Set([1, 2]));
+    expect(previousSnapshot).toEqual(new Set([1, 2]));
+    expect(result.current[0]).toEqual(new Set([1, 2, 3]));
+  });
+
+  it("preserves multiple operations in the same batch", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useSetState(new Set([1])));
+
+    act(() => {
+      result.current[1].add(2);
+      result.current[1].add(3);
+      result.current[1].delete(1);
+    });
+
+    expect(result.current[0]).toEqual(new Set([2, 3]));
+  });
+
+  it("keeps control functions stable after state changes", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useSetState(new Set([1])));
+    const controls = result.current[1];
+
+    act(() => {
+      controls.add(2);
+    });
+
+    expect(result.current[1].add).toBe(controls.add);
+    expect(result.current[1].delete).toBe(controls.delete);
+    expect(result.current[1].clear).toBe(controls.clear);
+  });
+
 });

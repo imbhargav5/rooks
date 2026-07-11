@@ -340,3 +340,7 @@ The cleanup function is called when:
 - **Periodic Updates**: Setting up intervals or timeouts with automatic cleanup
 - **Complex Async Workflows**: Multi-step async operations with conditional execution
 - **Resource Management**: Managing any async resources that need cleanup
+
+## Robustness and lifecycle
+
+Only changes to `deps` restart the async effect. The latest cleanup callback is used when that generation ends, and `shouldContinueEffect()` becomes false for stale or unmounted generations.

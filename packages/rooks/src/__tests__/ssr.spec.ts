@@ -3,6 +3,33 @@
  */
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 
+// Mock React hooks for SSR testing. These mocks must be declared at module
+// scope because Vitest hoists vi.mock calls before test setup.
+vi.mock("react", () => ({
+  useState: vi.fn((init) => [
+    typeof init === "function" ? init() : init,
+    vi.fn(),
+  ]),
+  useEffect: vi.fn(),
+  useInsertionEffect: vi.fn(),
+  useLayoutEffect: vi.fn(),
+  useMemo: vi.fn((fn) => fn()),
+  useCallback: vi.fn((fn) => fn),
+  useRef: vi.fn((init) => ({ current: init })),
+  useReducer: vi.fn((reducer, init) => [init, vi.fn()]),
+  useSyncExternalStore: vi.fn(
+    (subscribe, getSnapshot, getServerSnapshot) =>
+      getServerSnapshot ? getServerSnapshot() : null
+  ),
+}));
+
+vi.mock("use-sync-external-store/shim", () => ({
+  useSyncExternalStore: vi.fn(
+    (subscribe, getSnapshot, getServerSnapshot) =>
+      getServerSnapshot ? getServerSnapshot() : getSnapshot()
+  ),
+}));
+
 /**
  * SSR Environment Tests
  *
@@ -16,32 +43,6 @@ describe("SSR Environment Detection", () => {
 
   beforeEach(() => {
     consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-
-    // Mock React hooks for SSR testing
-    vi.mock("react", () => ({
-      useState: vi.fn((init) => [
-        typeof init === "function" ? init() : init,
-        vi.fn(),
-      ]),
-      useEffect: vi.fn(),
-      useLayoutEffect: vi.fn(),
-      useMemo: vi.fn((fn) => fn()),
-      useCallback: vi.fn((fn) => fn),
-      useRef: vi.fn((init) => ({ current: init })),
-      useReducer: vi.fn((reducer, init) => [init, vi.fn()]),
-      useSyncExternalStore: vi.fn(
-        (subscribe, getSnapshot, getServerSnapshot) =>
-          getServerSnapshot ? getServerSnapshot() : null
-      ),
-    }));
-
-    // Mock use-sync-external-store/shim
-    vi.mock("use-sync-external-store/shim", () => ({
-      useSyncExternalStore: vi.fn(
-        (subscribe, getSnapshot, getServerSnapshot) =>
-          getServerSnapshot ? getServerSnapshot() : getSnapshot()
-      ),
-    }));
   });
 
   afterEach(() => {

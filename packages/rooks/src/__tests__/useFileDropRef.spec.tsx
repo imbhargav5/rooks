@@ -112,9 +112,15 @@ describe("useFileDropRef", () => {
       },
     });
 
-    expect(callbacks.onDrop).toHaveBeenCalled();
-    expect(callbacks.onFileAccepted).toHaveBeenCalledTimes(0);
+    expect(callbacks.onDrop).toHaveBeenCalledWith([], files);
+    expect(callbacks.onFileAccepted).not.toHaveBeenCalled();
     expect(callbacks.onFileRejected).toHaveBeenCalledTimes(files.length);
+    for (const file of files) {
+      expect(callbacks.onFileRejected).toHaveBeenCalledWith(
+        file,
+        "Exceeded maximum number of files"
+      );
+    }
   });
 
   it("should handle drop event with a mix of valid and rejected files", () => {
@@ -139,4 +145,62 @@ describe("useFileDropRef", () => {
     expect(callbacks.onFileAccepted).toHaveBeenCalledTimes(1);
     expect(callbacks.onFileRejected).toHaveBeenCalledTimes(2);
   });
+
+  it("treats maxFiles zero as rejecting every dropped file", () => {
+    expect.hasAssertions();
+    const onDrop = vi.fn();
+    const onFileRejected = vi.fn();
+
+    function ZeroFileDropZone() {
+      const ref = useFileDropRef(
+        { maxFiles: 0 },
+        { onDrop, onFileRejected }
+      );
+      return <div ref={ref} data-testid="zero-file-drop-area" />;
+    }
+
+    const { getByTestId } = render(<ZeroFileDropZone />);
+    const file = createFileWithSize("file.txt", "text/plain", 1);
+
+    fireEvent.drop(getByTestId("zero-file-drop-area"), {
+      dataTransfer: { files: [file] },
+    });
+
+    expect(onDrop).toHaveBeenCalledWith([], [file]);
+    expect(onFileRejected).toHaveBeenCalledWith(
+      file,
+      "Exceeded maximum number of files"
+    );
+  });
+
+  it("treats maxFileSize zero as an exact byte-size boundary", () => {
+    expect.hasAssertions();
+    const onDrop = vi.fn();
+    const onFileAccepted = vi.fn();
+    const onFileRejected = vi.fn();
+
+    function ZeroByteDropZone() {
+      const ref = useFileDropRef(
+        { maxFileSize: 0 },
+        { onDrop, onFileAccepted, onFileRejected }
+      );
+      return <div ref={ref} data-testid="zero-byte-drop-area" />;
+    }
+
+    const { getByTestId } = render(<ZeroByteDropZone />);
+    const emptyFile = createFileWithSize("empty.txt", "text/plain", 0);
+    const nonEmptyFile = createFileWithSize("non-empty.txt", "text/plain", 1);
+
+    fireEvent.drop(getByTestId("zero-byte-drop-area"), {
+      dataTransfer: { files: [emptyFile, nonEmptyFile] },
+    });
+
+    expect(onDrop).toHaveBeenCalledWith([emptyFile], [nonEmptyFile]);
+    expect(onFileAccepted).toHaveBeenCalledWith(emptyFile);
+    expect(onFileRejected).toHaveBeenCalledWith(
+      nonEmptyFile,
+      "File size exceeds the limit"
+    );
+  });
+
 });

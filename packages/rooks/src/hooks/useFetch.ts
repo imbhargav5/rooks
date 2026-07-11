@@ -44,33 +44,30 @@ interface UseFetchReturnValue<T> {
  * @param options - The fetch options
  * @returns A promise that resolves with the parsed JSON data or rejects with an error
  */
-function createFetchPromise<T>(
+async function createFetchPromise<T>(
     url: string,
-    options: UseFetchOptions<T> = {}
+    options: UseFetchOptions<T> = {},
+    signal?: AbortSignal
 ): Promise<T> {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch(url, {
-                ...options,
-                signal: new AbortController().signal, // Add signal for compatibility
-            });
+    const requestOptions = { ...options };
+    delete requestOptions.onSuccess;
+    delete requestOptions.onError;
+    delete requestOptions.onFetch;
 
-            // Throw error for non-2xx responses
-            if (!response.ok) {
-                const errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-                const httpError = new Error(errorMessage) as HttpError;
-                httpError.status = response.status;
-                httpError.statusText = response.statusText;
-                throw httpError;
-            }
-
-            // Parse JSON response
-            const result = await response.json();
-            resolve(result);
-        } catch (err) {
-            reject(err instanceof Error ? err : new Error(String(err)));
-        }
+    const response = await fetch(url, {
+        ...requestOptions,
+        signal,
     });
+
+    if (!response.ok) {
+        const errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+        const httpError = new Error(errorMessage) as HttpError;
+        httpError.status = response.status;
+        httpError.statusText = response.statusText;
+        throw httpError;
+    }
+
+    return await response.json() as T;
 }
 
 /**
@@ -81,7 +78,10 @@ function createFetchPromise<T>(
  * provides a fetch function for manual data fetching.
  *
  * Note: This hook does not cache requests - each call triggers a fresh fetch.
- * The hook does not automatically fetch on mount - use the returned fetch function.
+ * Unmounting aborts active requests. The hook does not automatically fetch on
+ * mount. The returned startFetch function is bound to the URL and options
+ * object from its render, so memoize options before using startFetch as an
+ * effect dependency.
  *
  * @param url - The URL to fetch data from
  * @param options - Optional fetch configuration including callbacks
@@ -90,14 +90,16 @@ function createFetchPromise<T>(
  * @example
  * ```tsx
  * function UserProfile({ userId }: { userId: string }) {
+ *   const fetchOptions = useMemo(() => ({
+ *     headers: { 'Authorization': 'Bearer token' },
+ *     onSuccess: (data: User) => console.log('User loaded:', data),
+ *     onError: (error: Error) => console.error('Failed to load user:', error),
+ *     onFetch: () => console.log('Fetching user data...')
+ *   }), []);
+ *
  *   const { data: user, loading, error, startFetch } = useFetch<User>(
  *     `https://api.example.com/users/${userId}`,
- *     {
- *       headers: { 'Authorization': 'Bearer token' },
- *       onSuccess: (data) => console.log('User loaded:', data),
- *       onError: (error) => console.error('Failed to load user:', error),
- *       onFetch: () => console.log('Fetching user data...')
- *     }
+ *     fetchOptions
  *   );
  *
  *   // Fetch data when component mounts or when needed
@@ -127,41 +129,74 @@ function useFetch<T = unknown>(
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
     const mountedRef = useRef(true);
+    const mountGenerationRef = useRef(0);
+    const abortControllersRef = useRef<Set<AbortController>>(new Set());
 
     const fetchData = useCallback(async () => {
         if (!mountedRef.current) return;
+        const mountGeneration = mountGenerationRef.current;
 
         setLoading(true);
         setError(null);
-
-        // Call onFetch callback
         options.onFetch?.();
 
+        if (
+            !mountedRef.current ||
+            mountGeneration !== mountGenerationRef.current
+        ) {
+            return;
+        }
+
+        let abortController: AbortController | null = null;
+        const canCommitResult = () =>
+            mountedRef.current &&
+            mountGeneration === mountGenerationRef.current &&
+            !abortController?.signal.aborted;
+
         try {
-            const result = await createFetchPromise<T>(url, options);
-            if (mountedRef.current) {
+            abortController = new AbortController();
+            abortControllersRef.current.add(abortController);
+            const result = await createFetchPromise<T>(
+                url,
+                options,
+                abortController.signal
+            );
+
+            if (canCommitResult()) {
                 setData(result);
-                // Call onSuccess callback
                 options.onSuccess?.(result);
             }
         } catch (err) {
-            const error = err instanceof Error ? err : new Error(String(err));
-            if (mountedRef.current) {
-                setError(error);
-                // Call onError callback
-                options.onError?.(error);
+            const fetchError = err instanceof Error
+                ? err
+                : new Error(String(err));
+
+            if (canCommitResult()) {
+                setError(fetchError);
+                options.onError?.(fetchError);
             }
         } finally {
-            if (mountedRef.current) {
+            if (abortController) {
+                abortControllersRef.current.delete(abortController);
+            }
+
+            if (canCommitResult()) {
                 setLoading(false);
             }
         }
-    }, [url, options]);
+    }, [options, url]);
 
-    // Cleanup on unmount
     useEffect(() => {
+        mountedRef.current = true;
+        const abortControllers = abortControllersRef.current;
+
         return () => {
             mountedRef.current = false;
+            mountGenerationRef.current += 1;
+            for (const abortController of abortControllers) {
+                abortController.abort();
+            }
+            abortControllers.clear();
         };
     }, []);
 

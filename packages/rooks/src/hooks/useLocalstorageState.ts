@@ -1,34 +1,50 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
-import { useFreshRef } from "./useFreshRef";
+import {
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+  useInsertionEffect,
+  useRef,
+} from "react";
 
 // Gets value from localstorage
 function getValueFromLocalStorage(key: string) {
-  if (typeof localStorage === "undefined") {
-    return null;
-  }
-
-  const storedValue = localStorage.getItem(key) ?? "null";
   try {
-    return JSON.parse(storedValue);
+    if (typeof localStorage === "undefined") {
+      return null;
+    }
+
+    const storedValue = localStorage.getItem(key) ?? "null";
+
+    try {
+      return JSON.parse(storedValue);
+    } catch (error) {
+      console.error(error);
+      return storedValue;
+    }
   } catch (error) {
     console.error(error);
+    return null;
   }
-
-  return storedValue;
 }
 
 // Saves value to localstorage
 function saveValueToLocalStorage<S>(key: string, value: S) {
-  if (typeof localStorage === "undefined") {
+  try {
+    if (typeof localStorage === "undefined") {
+      return null;
+    }
+
+    if (value === undefined) {
+      return localStorage.removeItem(key);
+    }
+
+    return localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(error);
     return null;
   }
-
-  if (value === undefined) {
-    return localStorage.removeItem(key);
-  }
-
-  return localStorage.setItem(key, JSON.stringify(value));
 }
 
 /**
@@ -65,8 +81,22 @@ function useLocalstorageState<S>(
   initialState?: S | (() => S)
 ): UseLocalstorageStateReturnValue<S> {
   const [value, setValue] = useState(() => initialize(key, initialState));
+  const [stateKey, setStateKey] = useState(key);
+  const currentValueRef = useRef(value);
+  const currentKeyRef = useRef(key);
+
+  useInsertionEffect(() => {
+    currentValueRef.current = value;
+    currentKeyRef.current = key;
+  }, [key, value]);
+
+  if (stateKey !== key) {
+    setStateKey(key);
+    setValue(initialize(key, initialState));
+  }
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
+  const updateSourceKeyRef = useRef<string | null>(null);
   const customEventTypeName = useMemo(() => {
     return `rooks-${key}-localstorage-update`;
   }, [key]);
@@ -78,29 +108,39 @@ function useLocalstorageState<S>(
      * to keep track of whether setValue is from another
      * storage event
      */
-    if (
-      !isUpdateFromCrossDocumentListener.current ||
-      !isUpdateFromWithinDocumentListener.current
-    ) {
+    const cameFromSynchronizedUpdate =
+      (isUpdateFromCrossDocumentListener.current ||
+        isUpdateFromWithinDocumentListener.current) &&
+      updateSourceKeyRef.current === key;
+
+    if (!cameFromSynchronizedUpdate) {
       saveValueToLocalStorage<S>(key, value);
     }
+
+    isUpdateFromCrossDocumentListener.current = false;
+    isUpdateFromWithinDocumentListener.current = false;
+    updateSourceKeyRef.current = null;
   }, [key, value]);
 
   const listenToCrossDocumentStorageEvents = useCallback(
     (event: StorageEvent) => {
-      if (event.storageArea === localStorage && event.key === key) {
-        try {
-          isUpdateFromCrossDocumentListener.current = true;
+      try {
+        if (event.storageArea === localStorage && event.key === key) {
           const newValue = JSON.parse(event.newValue ?? "null");
-          if (value !== newValue) {
-            setValue(newValue);
-          }
-        } catch (error) {
-          console.log(error);
+          isUpdateFromCrossDocumentListener.current = true;
+          updateSourceKeyRef.current = key;
+          currentValueRef.current = newValue;
+          setValue((currentValue: S) =>
+            Object.is(currentValue, newValue) ? currentValue : newValue
+          );
         }
+      } catch (error) {
+        isUpdateFromCrossDocumentListener.current = false;
+        updateSourceKeyRef.current = null;
+        console.log(error);
       }
     },
-    [key, value]
+    [currentValueRef, key]
   );
 
   // check for changes across documents
@@ -124,16 +164,20 @@ function useLocalstorageState<S>(
   const listenToCustomEventWithinDocument = useCallback(
     (event: BroadcastCustomEvent<S>) => {
       try {
-        isUpdateFromWithinDocumentListener.current = true;
         const { newValue } = event.detail;
-        if (value !== newValue) {
-          setValue(newValue);
-        }
+        isUpdateFromWithinDocumentListener.current = true;
+        updateSourceKeyRef.current = key;
+        currentValueRef.current = newValue;
+        setValue((currentValue: S) =>
+          Object.is(currentValue, newValue) ? currentValue : newValue
+        );
       } catch (error) {
+        isUpdateFromWithinDocumentListener.current = false;
+        updateSourceKeyRef.current = null;
         console.log(error);
       }
     },
-    [value]
+    [currentValueRef, key]
   );
 
   // check for changes within document
@@ -158,10 +202,10 @@ function useLocalstorageState<S>(
   }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
-    (newValue: S) => {
+    (storageKey: string, newValue: S) => {
       if (typeof document !== "undefined") {
         const event: BroadcastCustomEvent<S> = new CustomEvent(
-          customEventTypeName,
+          `rooks-${storageKey}-localstorage-update`,
           { detail: { newValue } }
         );
         document.dispatchEvent(event);
@@ -169,27 +213,33 @@ function useLocalstorageState<S>(
         console.warn("[useLocalstorageState] document is undefined.");
       }
     },
-    [customEventTypeName]
+    []
   );
-
-  const currentValue = useFreshRef(value, true);
 
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
       const resolvedNewValue =
         typeof newValue === "function"
-          ? (newValue as (prevState: S) => S)(currentValue.current)
+          ? (newValue as (prevState: S) => S)(currentValueRef.current)
           : newValue;
+      const storageKey = currentKeyRef.current;
       isUpdateFromCrossDocumentListener.current = false;
-      isUpdateFromWithinDocumentListener.current = false;
+      isUpdateFromWithinDocumentListener.current = true;
+      updateSourceKeyRef.current = storageKey;
+      currentValueRef.current = resolvedNewValue;
+      saveValueToLocalStorage<S>(storageKey, resolvedNewValue);
       setValue(resolvedNewValue);
-      broadcastValueWithinDocument(resolvedNewValue);
+      broadcastValueWithinDocument(storageKey, resolvedNewValue);
     },
-    [broadcastValueWithinDocument, currentValue]
+    [broadcastValueWithinDocument, currentKeyRef, currentValueRef]
   );
 
   const remove = useCallback(() => {
-    localStorage.removeItem(key);
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
   }, [key]);
 
   return [value, set, remove];

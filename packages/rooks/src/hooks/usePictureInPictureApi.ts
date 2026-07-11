@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState, RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, RefObject } from "react";
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 type PictureInPictureApi = {
   isPiPActive: boolean;
@@ -19,11 +20,13 @@ type PictureInPictureApi = {
  */
 function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureInPictureApi {
   const [isPiPActive, setIsPiPActive] = useState(false);
+  const [isSupported, setIsSupported] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [pipWindow, setPipWindow] = useState<PictureInPictureWindow | null>(null);
+  const attachedVideoRef = useRef<HTMLVideoElement | null>(null);
 
   // Check if Picture-in-Picture is supported (reactive)
-  const isSupported = useCallback((): boolean => {
+  const getIsSupported = useCallback((): boolean => {
     if (!videoRef.current) return false;
     if (!document.pictureInPictureEnabled) return false;
     if (!videoRef.current.requestPictureInPicture) return false;
@@ -43,7 +46,7 @@ function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureI
 
   // Enter Picture-in-Picture mode
   const enterPiP = useCallback(async (): Promise<void> => {
-    if (!isSupported() || !videoRef.current) {
+    if (!getIsSupported() || !videoRef.current) {
       return;
     }
 
@@ -54,7 +57,7 @@ function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureI
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
     }
-  }, [isSupported, videoRef]);
+  }, [getIsSupported, videoRef]);
 
   // Exit Picture-in-Picture mode
   const exitPiP = useCallback(async (): Promise<void> => {
@@ -93,26 +96,53 @@ function usePictureInPictureApi(videoRef: RefObject<HTMLVideoElement>): PictureI
     setIsPiPActive(false);
   }, []);
 
-  // Set up event listeners and handle video element changes
-  useEffect(() => {
+  // Reconcile after refs have been committed. RefObject.current can change
+  // without the RefObject identity changing.
+  useIsomorphicEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const nextIsSupported = getIsSupported();
+    setIsSupported((current) =>
+      current === nextIsSupported ? current : nextIsSupported
+    );
 
-    video.addEventListener("enterpictureinpicture", handleEnterPiP);
-    video.addEventListener("leavepictureinpicture", handleLeavePiP);
+    if (attachedVideoRef.current === video) {
+      return;
+    }
 
-    // Initialize PiP state
-    updatePiPState();
+    attachedVideoRef.current?.removeEventListener(
+      "enterpictureinpicture",
+      handleEnterPiP
+    );
+    attachedVideoRef.current?.removeEventListener(
+      "leavepictureinpicture",
+      handleLeavePiP
+    );
+    attachedVideoRef.current = video;
 
+    if (video) {
+      video.addEventListener("enterpictureinpicture", handleEnterPiP);
+      video.addEventListener("leavepictureinpicture", handleLeavePiP);
+      updatePiPState();
+    }
+  });
+
+  useEffect(() => {
     return () => {
-      video.removeEventListener("enterpictureinpicture", handleEnterPiP);
-      video.removeEventListener("leavepictureinpicture", handleLeavePiP);
+      attachedVideoRef.current?.removeEventListener(
+        "enterpictureinpicture",
+        handleEnterPiP
+      );
+      attachedVideoRef.current?.removeEventListener(
+        "leavepictureinpicture",
+        handleLeavePiP
+      );
+      attachedVideoRef.current = null;
     };
-  }, [videoRef.current, handleEnterPiP, handleLeavePiP, updatePiPState]);
+  }, [handleEnterPiP, handleLeavePiP]);
 
   return {
     isPiPActive,
-    isSupported: isSupported(),
+    isSupported,
     error,
     pipWindow,
     enterPiP,

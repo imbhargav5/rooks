@@ -124,3 +124,7 @@ Returns an array with two elements:
 | add    | Function | Add one or more values to the set        |
 | delete | Function | Delete one or more values from the set   |
 | clear  | Function | Remove all values from the set           |
+
+## Robustness and lifecycle
+
+Every operation creates a new Set before mutation. Previously returned snapshots and the caller's initial Set remain unchanged, and multiple operations in one React batch compose safely.

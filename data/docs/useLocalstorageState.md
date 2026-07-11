@@ -84,4 +84,6 @@ Returns an array of following items:
 | set          | Function | set value stored in localStorage    |
 | remove       | Function | remove value stored in localStorage |
 
+## Robustness and lifecycle
 
+Changing `key` reloads that key before persistence, same-document and cross-document updates do not echo-write, and rapid functional setters compose correctly. If storage access is denied or exceeds quota, the hook keeps its in-memory state without crashing.

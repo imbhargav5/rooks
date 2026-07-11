@@ -1,5 +1,11 @@
 import { vi } from "vitest";
-import { cleanup, render, act, fireEvent } from "@testing-library/react";
+import {
+  cleanup,
+  render,
+  renderHook,
+  act,
+  fireEvent,
+} from "@testing-library/react";
 import React, { useState } from "react";
 import { useThrottle } from "@/hooks/useThrottle";
 
@@ -153,5 +159,70 @@ describe("useThrottle hook", () => {
 
     expect(Number.parseInt(throttleValue.innerHTML)).toBe(1);
     expect(Number.parseInt(throttleValueWithParameter.innerHTML)).toBe(7);
+  });
+
+  it("runs at most once for synchronous calls in the same batch", () => {
+    expect.hasAssertions();
+    vi.useFakeTimers();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useThrottle(callback, TIMEOUT));
+
+    act(() => {
+      result.current[0]();
+      result.current[0]();
+      result.current[0]();
+    });
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(result.current[1]).toBe(false);
+    vi.useRealTimers();
+  });
+
+  it("does not reopen until the ready state has committed", () => {
+    expect.hasAssertions();
+    vi.useFakeTimers();
+    const callback = vi.fn();
+    const { result } = renderHook(() => useThrottle(callback, TIMEOUT));
+
+    act(() => {
+      result.current[0]();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(TIMEOUT);
+      result.current[0]();
+    });
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(result.current[1]).toBe(true);
+
+    act(() => {
+      result.current[0]();
+    });
+
+    expect(callback).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
+  });
+
+  it("keeps the throttled function stable and calls the latest callback", () => {
+    expect.hasAssertions();
+    vi.useFakeTimers();
+    const firstCallback = vi.fn();
+    const latestCallback = vi.fn();
+    const { result, rerender } = renderHook(
+      ({ callback }) => useThrottle(callback, TIMEOUT),
+      { initialProps: { callback: firstCallback } }
+    );
+    const throttled = result.current[0];
+
+    rerender({ callback: latestCallback });
+
+    expect(result.current[0]).toBe(throttled);
+    act(() => {
+      throttled();
+    });
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(latestCallback).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
   });
 });

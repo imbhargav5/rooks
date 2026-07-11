@@ -1,5 +1,6 @@
 import { type DependencyList, useEffect, useRef, useCallback } from "react";
 import { useFreshRef } from "./useFreshRef";
+import { useFreshCallback } from "./useFreshCallback";
 import { useGetIsMounted } from "./useGetIsMounted";
 
 type Effect<T> = (shouldContinueEffect: () => boolean) => Promise<T>;
@@ -8,7 +9,7 @@ type CleanupFunction<T> = (result: T | void) => void;
 /**
  * A version of useEffect that accepts an async function
  *
- * @param {Effect<T>} effect Async function that can return a cleanup function and takes in an AbortSignal
+ * @param {Effect<T>} effect Async function that receives a callback indicating whether its result is still current
  * @param {DependencyList} deps If present, effect will only activate if the values in the list change
  * @param {CleanupFunction} cleanup The destroy/cleanup function. Will be called with previous result if it exists. 
  * @see https://rooks.vercel.app/docs/hooks/useAsyncEffect
@@ -39,16 +40,15 @@ function useAsyncEffect<T>(
   const lastCallId = useRef(0);
   const getIsMounted = useGetIsMounted();
   const effectRef = useFreshRef(effect);
+  const cleanupCallback = useFreshCallback((result: void | T) => {
+    cleanup?.(result);
+  });
   const callback = useCallback(async (): Promise<void | T> => {
     const callId = ++lastCallId.current;
     const shouldContinueEffect = () => {
       return getIsMounted() && callId === lastCallId.current;
     };
-    try {
-      return await effectRef.current(shouldContinueEffect);
-    } catch (error) {
-      throw error;
-    }
+    return await effectRef.current(shouldContinueEffect);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getIsMounted, ...deps]);
@@ -59,9 +59,9 @@ function useAsyncEffect<T>(
       result = value;
     });
     return () => {
-      cleanup?.(result);
+      cleanupCallback(result);
     };
-  }, [callback, cleanup]);
+  }, [callback, cleanupCallback]);
 }
 
 export { useAsyncEffect };
