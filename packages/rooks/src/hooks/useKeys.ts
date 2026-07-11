@@ -24,7 +24,7 @@ type Options = {
    */
   when?: boolean;
   /**
-   * opt-in to prevent alert, confirm and prompt from causing the eventlistener to lose track of keyup events.
+   * opt-in to prevent alert, confirm and prompt from causing the event listener to lose track of keyup events.
    */
   preventLostKeyup?: boolean;
 };
