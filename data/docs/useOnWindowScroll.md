@@ -52,7 +52,7 @@ export default App;
 
 | Arguments      | Type     | Description                                     | Default value |
 | -------------- | -------- | ----------------------------------------------- | ------------- |
-| callback       | function | Callback function which needs to run on unmount | undefined     |
+| callback       | function | Callback function which runs on window scroll   | undefined     |
 | when           | boolean  | When the event handler should be active         | true          |
 | isLayoutEffect | boolean  | Should it use layout effect.                    | false         |
 
