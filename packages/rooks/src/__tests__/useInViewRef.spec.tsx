@@ -26,7 +26,7 @@ describe("useInViewRef", () => {
         disconnect: vi.fn(),
         callback,
         options,
-      };
+      } as MockIntersectionObserverInstance;
       observerInstances.push(instance);
       return instance;
     });
