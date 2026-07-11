@@ -1,6 +1,4 @@
 import { vi } from "vitest";
-/**
- */
 import { renderHook, act } from "@testing-library/react";
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
@@ -12,13 +10,19 @@ const mockExitFullscreen = vi.fn();
 const mockAddEventListener = vi.fn();
 const mockRemoveEventListener = vi.fn();
 
+type FullscreenMockElement = Element & {
+  webkitRequestFullscreen: Element["requestFullscreen"];
+  mozRequestFullScreen: Element["requestFullscreen"];
+  msRequestFullscreen: Element["requestFullscreen"];
+};
+
 // Mock element for testing
 const mockElement = {
   requestFullscreen: mockRequestFullscreen,
   webkitRequestFullscreen: mockRequestFullscreen,
   mozRequestFullScreen: mockRequestFullscreen,
   msRequestFullscreen: mockRequestFullscreen,
-} as any;
+} as FullscreenMockElement;
 
 describe("useFullscreen", () => {
   beforeEach(() => {
