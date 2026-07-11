@@ -6,6 +6,10 @@ describe("useClipboard", () => {
   let clipboardWriteText: vi.Mock;
   let clipboardReadText: vi.Mock;
 
+  function deleteClipboard() {
+    Reflect.deleteProperty(navigator, "clipboard");
+  }
+
   beforeEach(() => {
     clipboardWriteText = vi.fn();
     clipboardReadText = vi.fn();
@@ -48,8 +52,7 @@ describe("useClipboard", () => {
   it("should detect when clipboard API is not supported", () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-expect-error - Simulate browsers without the Clipboard API.
-    delete navigator.clipboard;
+    deleteClipboard();
 
     const { result } = renderHook(() => useClipboard());
 
@@ -116,8 +119,7 @@ describe("useClipboard", () => {
   it("should throw error when copying without clipboard support", async () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-expect-error - Simulate browsers without the Clipboard API.
-    delete navigator.clipboard;
+    deleteClipboard();
 
     const { result } = renderHook(() => useClipboard());
 
@@ -194,8 +196,7 @@ describe("useClipboard", () => {
   it("should throw error when pasting without clipboard support", async () => {
     expect.hasAssertions();
     const originalClipboard = navigator.clipboard;
-    // @ts-expect-error - Simulate browsers without the Clipboard API.
-    delete navigator.clipboard;
+    deleteClipboard();
 
     const { result } = renderHook(() => useClipboard());
 
