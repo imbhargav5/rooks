@@ -4,15 +4,19 @@ import { useSelectableList } from "@/hooks/useSelectableList";
 
 vi.spyOn(console, "warn").mockImplementation(vi.fn());
 
+function renderSelectableList() {
+  return renderHook(() => useSelectableList([1, 2, 3]));
+}
+
 describe("useSelectableList", () => {
   afterEach(() => {
     (console.warn as vi.Mock).mockReset();
   });
-  const { result } = renderHook(() => useSelectableList([1, 2, 3]));
 
   describe("matchSelection", () => {
     it("console.warn", () => {
       expect.hasAssertions();
+      const { result } = renderSelectableList();
       act(() => {
         result.current[1].matchSelection({ index: 1, value: 2 });
       });
@@ -82,6 +86,7 @@ describe("useSelectableList", () => {
 
     it("set by value fail", () => {
       expect.hasAssertions();
+      const { result } = renderSelectableList();
       const [beforeIndex, beforeValue] = result.current[0];
       act(() => {
         result.current[1].updateSelection({ value: 22 })();
@@ -100,6 +105,7 @@ describe("useSelectableList", () => {
 
     it("console.warn", () => {
       expect.hasAssertions();
+      const { result } = renderSelectableList();
       act(() => {
         result.current[1].updateSelection({ index: 1, value: 2 })();
       });
@@ -189,6 +195,7 @@ describe("useSelectableList", () => {
 
     it("console.warn", () => {
       expect.hasAssertions();
+      const { result } = renderSelectableList();
       act(() => {
         result.current[1].toggleSelection({ index: 1, value: 2 })();
       });
