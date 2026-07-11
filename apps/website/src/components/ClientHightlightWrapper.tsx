@@ -1,6 +1,6 @@
 'use client';
 import dynamic from "next/dynamic";
-import { ComponentProps, PropsWithoutRef } from "react";
+import { ComponentProps } from "react";
 
 const ClientHighlight = dynamic(
     () => import('./ClientHighlight').then(mod => mod.ClientHighlight),
