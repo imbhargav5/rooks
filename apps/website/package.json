@@ -36,7 +36,7 @@
     "start": "next start",
     "build": "content-collections build && next build",
     "dev": "NODE_OPTIONS='--no-warnings' concurrently \"content-collections watch\" \"next dev --turbo\"",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "content-collections build && tsc --noEmit",
     "docs:check": "tsx ../../scripts/docs/check.ts && pnpm typecheck && tsx ../../scripts/docs/build.ts"
   }
 }
