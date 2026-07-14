@@ -1,5 +1,17 @@
 # rooks
 
+## 9.9.0
+
+### Minor Changes
+
+- [#2092](https://github.com/imbhargav5/rooks/pull/2092) [`cfe7d0a`](https://github.com/imbhargav5/rooks/commit/cfe7d0ae5a50b796090c31a05d341cf617df3763) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Add 17 documented hooks to `rooks/experimental`, covering browser events, location state, responsive UI, network requests, WebSockets, and virtual lists.
+
+### Patch Changes
+
+- [#2089](https://github.com/imbhargav5/rooks/pull/2089) [`ca59af8`](https://github.com/imbhargav5/rooks/commit/ca59af86fb40b3055dadcdfc779b8fbeaf756c92) Thanks [@imbhargav5](https://github.com/imbhargav5)! - Harden hook lifecycle behavior across async requests, browser APIs, storage synchronization, timers, and collection state without adding or changing public exports, parameters, or return fields.
+
+  Preserve established `useFetch` overlap and render-bound callback behavior while isolating unmounted and Strict Mode request generations. Correct storage key/synchronization races, immutable batched collection updates, Picture-in-Picture ref attachment, zero-valued file limits, and exactly-once countdown completion.
+
 ## Unreleased
 
 ### Minor Changes
