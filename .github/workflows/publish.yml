@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - alpha
-      - next
 
   workflow_dispatch:
 
@@ -17,7 +15,7 @@ jobs:
   publish:
     name: Publish To NPM
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'imbhargav5/rooks' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
+    if: ${{ github.repository == 'imbhargav5/rooks' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
     permissions:
       contents: write
       id-token: write

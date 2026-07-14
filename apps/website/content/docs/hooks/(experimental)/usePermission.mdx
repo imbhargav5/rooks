@@ -1,0 +1,53 @@
+---
+title: usePermission
+description: "Query and optionally watch browser permission state."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Query the Permissions API, expose loading and error state, and optionally watch `PermissionStatus.change`.
+
+## Example
+
+```tsx
+import { usePermission } from "rooks/experimental";
+
+function Example() {
+  const permission = usePermission({ name: "notifications" });
+
+  return <div>Permission: {permission.state}</div>;
+}
+```
+
+## Parameters
+
+| Argument     | Type                                     | Description                                               |
+| ------------ | ---------------------------------------- | --------------------------------------------------------- |
+| `descriptor` | `PermissionDescriptor \| null`           | Permission to query                                       |
+| `options`    | `{ watch?: boolean; enabled?: boolean }` | `watch` defaults to `true`; `enabled` defaults to `true`. |
+
+## Return value
+
+| Property      | Type                                                 | Description                                   |
+| ------------- | ---------------------------------------------------- | --------------------------------------------- |
+| `state`       | `"granted" \| "denied" \| "prompt" \| "unsupported"` | Current query state.                          |
+| `isSupported` | `boolean`                                            | Whether `navigator.permissions.query` exists. |
+| `isLoading`   | `boolean`                                            | Whether the latest query is pending.          |
+| `error`       | `Error \| null`                                      | Error from the latest failed query.           |
+| `refresh`     | `() => Promise<void>`                                | Re-query the current descriptor.              |
+
+## Behavior and lifecycle
+
+The hook queries automatically when the descriptor, support, or `enabled` state changes. Starting a query immediately invalidates the prior descriptor generation, so stale status events and asynchronous results cannot update state. With `watch: true`, it follows `PermissionStatus.change` and removes the old listener during rebinding, when disabled, or on unmount. A `null` descriptor, disabled hook, unsupported API, or failed query produces `"unsupported"`; a failed query also exposes its error.
+
+## Compatibility and accessibility
+
+Permission names and query behavior differ by browser, and a successful query does not itself request access. Server rendering is safe and reports unsupported. Request the underlying capability from a clear user action, explain denials, and provide a functional fallback rather than treating `"prompt"` as granted. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

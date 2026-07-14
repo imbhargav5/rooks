@@ -1,61 +1,61 @@
 ---
-id: useThrottle
 title: useThrottle
-sidebar_label: useThrottle
-description: "Throttles a callback so it executes at most once per specified time interval."
+description: Executes a callback immediately at most once per timeout window.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDebounce, useDebounceFn, useIntervalWhen]
 ---
 
 ## About
 
-Throttle custom hook for React
+`useThrottle` provides a leading-edge throttle. The first call runs immediately, the gate closes synchronously, and calls made before the timeout ends are dropped rather than queued.
 
 ## Examples
 
-### Basic usage
-
-```jsx
-import React, { useState } from "react";
+```tsx
+import { useState } from "react";
 import { useThrottle } from "rooks";
 
-function App() {
-  const [text, setText] = useState("");
-  const [throttleValue, setThrottleValue] = useState("");
-  const [throttledFunction, isReady] = useThrottle(setThrottleValue, 1000);
+export default function ThrottledCounter() {
+  const [count, setCount] = useState(0);
+  const [increment, isReady] = useThrottle(
+    () => setCount((value) => value + 1),
+    500
+  );
 
   return (
-    <div>
-      <h1>Rooks : useThrottle example</h1>
-      <input
-        onChange={e => {
-          setText(e.target.value);
-          throttledFunction(e.target.value);
-        }}
-      />
-      <p>Actual value: {text}</p>
-      <p>
-        Throttled value (being updated at most once per second): {throttleValue}
-      </p>
-    </div>
+    <section>
+      <p>Count: {count}</p>
+      <button type="button" onClick={() => increment()} disabled={!isReady}>
+        {isReady ? "Increment" : "Cooling down"}
+      </button>
+    </section>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument            | Type     | Description                         | Default value |
-| ------------------- | -------- | ----------------------------------- | ------------- |
-| callback (required) | Function | Function that needs to be throttled | undefined     |
-| timeout (optional)  | Number   | Time to throttle the callback in ms | 300           |
+| Argument   | Type                     | Default  | Meaning                            |
+| ---------- | ------------------------ | -------- | ---------------------------------- |
+| `callback` | `(...args: T[]) => void` | required | Latest callback to invoke.         |
+| `timeout`  | `number`                 | `300`    | Cooldown duration in milliseconds. |
 
-### Return value
+## Return value
 
-| Return value      | Type     | Description                                                            |
-| ----------------- | -------- | ---------------------------------------------------------------------- |
-| throttledFunction | Function | A throttled function that will run at most once per timeout ms         |
-| isReady           | Boolean  | Tells whether calling throttledFunction at that point will fire or not |
+`[throttledFunction, isReady]`. The function is stable and forwards arguments. `isReady` is `true` when a call will execute.
 
-## Robustness and lifecycle
+## Behavior and lifecycle
 
-The throttle gate closes synchronously before invoking the callback, so repeated calls in the same event or React batch still execute at most once. The returned function remains stable and invokes the latest callback.
+The gate closes through a ref before the callback runs, so several synchronous calls still invoke once. A timeout reopens the gate; no trailing call is saved. Changing `timeout` while closed clears the old timer and starts a full new timeout. Unmount clears the timer. Callback errors propagate, but the gate has already closed.
+
+## Compatibility and accessibility
+
+The cooldown timer uses `window` from an effect, so server rendering schedules nothing. If readiness disables a control, the changed label should remain clear and the timeout should not trap users who need more time to complete an action.
+
+## Related
+
+- [useDebounce](/docs/hooks/useDebounce)
+- [useDebounceFn](/docs/hooks/useDebounceFn)
+- [useIntervalWhen](/docs/hooks/useIntervalWhen)

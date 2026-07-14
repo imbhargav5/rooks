@@ -1,42 +1,61 @@
 ---
-id: useLockBodyScroll
 title: useLockBodyScroll
-sidebar_label: useLockBodyScroll
-description: "Locks the document body scroll, preventing the user from scrolling the page."
+description: Sets document.body overflow to hidden while a condition is true.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIsomorphicEffect]
 ---
 
 ## About
 
-Locks or unlocks body scroll
+`useLockBodyScroll` prevents the document body from scrolling while `isLocked` is true. It is commonly used while a modal or drawer is open.
 
 ## Examples
-
-### Basic
 
 ```tsx
 import { useState } from "react";
 import { useLockBodyScroll } from "rooks";
 
-export default function App() {
-  const [isLocked, setIsLocked] = useState(false);
-
-  // Lock body scroll when isLocked is true
-  useLockBodyScroll(isLocked);
+export default function ScrollLockDemo() {
+  const [open, setOpen] = useState(false);
+  useLockBodyScroll(open);
 
   return (
-    <div>
-      <button onClick={() => setIsLocked(!isLocked)}>
-        {isLocked ? "Unlock scroll" : "Lock scroll"}
+    <section>
+      <button type="button" onClick={() => setOpen(true)}>
+        Open dialog
       </button>
-    </div>
+      {open && (
+        <div role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+          <h2 id="dialog-title">Example dialog</h2>
+          <button type="button" onClick={() => setOpen(false)}>
+            Close
+          </button>
+        </div>
+      )}
+    </section>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument | Type    | Description                                      |
-| -------- | ------- | ------------------------------------------------ |
-| isLocked | boolean | Whether to lock or unlock scroll on the body tag |
+`isLocked: boolean` is required.
 
----
+## Return value
+
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+When locked, the effect reads the body's computed `overflow`, writes inline `overflow: hidden`, and restores the computed value when unlocked or unmounted. Multiple simultaneous hook owners can restore over one another, so coordinate scroll locking at one layer. The hook does not preserve the exact prior inline declaration separately and does not compensate for scrollbar-width layout shifts.
+
+## Compatibility and accessibility
+
+Effects do not run on the server, but the client effect requires `window` and `document.body`. Scroll locking alone does not make a modal accessible: move focus into it, contain focus, restore focus on close, label it, and make the background inert or otherwise unavailable.
+
+## Related
+
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)
+- [useIsomorphicEffect](/docs/hooks/useIsomorphicEffect)

@@ -1,35 +1,36 @@
 ---
-id: useLocalstorageState
 title: useLocalstorageState
-sidebar_label: useLocalstorageState
-description: "Synchronizes React state with a localStorage key across tabs."
+description: Persists React state in localStorage and synchronizes matching hook instances.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useSessionstorageState, useBrowserCookieState]
 ---
 
 ## About
 
-UseState but auto updates values to localStorage
-
-[//]: # "Main"
+`useLocalstorageState` reads a JSON value from `localStorage`, falls back to an initial value, and keeps hook instances using the same key synchronized within and across documents.
 
 ## Examples
 
 ### Basic example
 
-```jsx
-import "./styles.css";
-import React from "react";
+```tsx
 import { useLocalstorageState } from "rooks";
 
-export default function App() {
-  const [count, setCount] = useLocalstorageState("my-app:count", 0);
+export default function PersistentCounter() {
+  const [count, setCount, remove] = useLocalstorageState("my-app:count", 0);
 
   return (
-    <div className="App">
-      <h1>Rooks : useLocalstorageState</h1>
-      <p> Refresh the page to see the previous value in tact</p>
-      <button onClick={() => setCount(0)}>clear</button>
-      <button onClick={() => setCount(count + 1)}>Click me {count}</button>
-    </div>
+    <section>
+      <p>Persistent count: {count}</p>
+      <button type="button" onClick={() => setCount((value) => value + 1)}>
+        Increment
+      </button>
+      <button type="button" onClick={remove}>
+        Remove stored value
+      </button>
+    </section>
   );
 }
 ```
@@ -37,14 +38,10 @@ export default function App() {
 ### Using a boolean value to toggle a sidebar
 
 ```jsx
-import "./styles.css";
 import { useLocalstorageState } from "rooks";
 
 export default function App() {
-  const [
-    showSidebar,
-    setShowSidebar
-  ] = useLocalstorageState(
+  const [showSidebar, setShowSidebar] = useLocalstorageState(
     "my-app:showSidebar",
     false
   );
@@ -53,38 +50,43 @@ export default function App() {
     <div className="App">
       {showSidebar ? <aside></aside> : null}
       <main>
-        <button
-          onClick={() =>
-            setShowSidebar(!showSidebar)
-          }
-        >
+        <button onClick={() => setShowSidebar(!showSidebar)}>
           Toggle sidebar
         </button>
       </main>
     </div>
   );
 }
-
 ```
 
+## Parameters
 
-### Arguments
+| Argument     | Type             | Description                                                | Default     |
+| ------------ | ---------------- | ---------------------------------------------------------- | ----------- |
+| key          | `string`         | Required `localStorage` key                                | —           |
+| initialState | `S \| (() => S)` | Value or lazy initializer used when no stored value exists | `undefined` |
 
-| Argument value | Type   | Description                    | Defualt   |
-| -------------- | ------ | ------------------------------ | --------- |
-| key            | string | Key of the localStorage object | undefined |
-| defaultValue   | any    | Default initial value          | null      |
-
-### Returns
+## Return value
 
 Returns an array of following items:
 
-| Return value | Type     | Description                         |
-| ------------ | -------- | ----------------------------------- |
-| value        | any      | value stored in localStorage        |
-| set          | Function | set value stored in localStorage    |
-| remove       | Function | remove value stored in localStorage |
+| Return value | Type                          | Description                                            |
+| ------------ | ----------------------------- | ------------------------------------------------------ |
+| value        | `S`                           | Current in-memory value                                |
+| set          | `Dispatch<SetStateAction<S>>` | Resolves and persists a value, then broadcasts it      |
+| remove       | `() => void`                  | Removes the stored item; it does not reset local state |
 
-## Robustness and lifecycle
+## Behavior and lifecycle
 
-Changing `key` reloads that key before persistence, same-document and cross-document updates do not echo-write, and rapid functional setters compose correctly. If storage access is denied or exceeds quota, the hook keeps its in-memory state without crashing.
+Values are JSON encoded. Changing `key` reloads that key before persistence. Custom document events synchronize hook instances in one document, while the browser `storage` event synchronizes other same-origin documents; synchronized updates are not written back in a loop. Listeners are replaced when the key changes and removed on unmount. Rapid functional setters resolve against a ref holding the latest value.
+
+Setting `undefined` removes the storage entry and leaves the in-memory value as `undefined`. Calling `remove()` only deletes storage; it does not update or broadcast the current value. Storage and serialization failures are logged, while the in-memory update continues.
+
+## Compatibility and accessibility
+
+On the server, storage is unavailable and the initial value is returned. A stored client value can therefore differ during hydration; defer storage-dependent UI or use a client boundary when the markup can change. `localStorage` may be disabled by privacy settings and only supports JSON-serializable data. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useSessionstorageState](/docs/hooks/useSessionstorageState) uses tab-scoped session storage.
+- [useBrowserCookieState](/docs/hooks/useBrowserCookieState) persists experimental state in a browser cookie.

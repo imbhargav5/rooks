@@ -1,0 +1,64 @@
+---
+title: useScript
+description: "Load and share external script state across multiple consumers."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Load a script tag once, dedupe by `id` or `src`, and expose shared loading state to every hook instance using that script.
+
+## Example
+
+```tsx
+import { useScript } from "rooks/experimental";
+
+function Example() {
+  const { status, error } = useScript("https://example.com/widget.js", {
+    id: "example-widget",
+  });
+
+  if (status === "error") {
+    return <div>{error?.message}</div>;
+  }
+
+  return <div>Script status: {status}</div>;
+}
+```
+
+## Parameters
+
+| Argument  | Type                          | Default  | Description                                            |
+| --------- | ----------------------------- | -------- | ------------------------------------------------------ |
+| `src`     | `string \| null \| undefined` | required | Script URL; `null` or `undefined` keeps the hook idle. |
+| `options` | object                        | `{}`     | Script identity, attributes, and lifecycle flags.      |
+
+`options` supports `id`, `removeOnUnmount` (`false`), `shouldPreventLoad` (`false`), `type` (`"text/javascript"`), `async` (`true`), `defer` (`false`), `noModule` (`false`), `nonce`, `crossOrigin`, `integrity`, `referrerPolicy`, and an `attrs` string map.
+
+## Return value
+
+| Property | Type                                        | Description            |
+| -------- | ------------------------------------------- | ---------------------- |
+| `status` | `"idle" \| "loading" \| "ready" \| "error"` | Current script status  |
+| `error`  | `Error \| null`                             | Loading error, if any  |
+| `script` | `HTMLScriptElement \| null`                 | Backing script element |
+
+## Notes
+
+- `removeOnUnmount` defaults to `false` and only removes scripts created by the hook.
+- `shouldPreventLoad` keeps the hook idle without creating a script tag.
+
+## Behavior and lifecycle
+
+Instances with the same `id` (preferred) or normalized absolute `src` share a registry record and load state. The hook adopts a matching existing script instead of duplicating it, including when one caller uses a relative URL. Load/error listeners detach when loading finishes. When the last consumer unmounts, the registry entry is removed; the DOM element is removed only when it was created by the hook and at least one consumer requested `removeOnUnmount: true`.
+
+## Compatibility and accessibility
+
+No script element is created during SSR, where status is `idle`; a non-empty source transitions to `loading` from the client effect. A failed load produces `Error("Failed to load script: …")`. Use HTTPS, a restrictive Content Security Policy, `integrity` for fixed third-party assets, and never load a URL derived from untrusted input.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

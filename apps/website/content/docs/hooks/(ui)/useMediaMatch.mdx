@@ -1,59 +1,57 @@
 ---
-id: useMediaMatch
 title: useMediaMatch
-sidebar_label: useMediaMatch
-description: "Returns whether a CSS media query matches the current viewport."
+description: Subscribes to a CSS media query with a deterministic server-rendered fallback.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [usePreferredColorScheme, usePrefersReducedMotion, useWindowSize]
 ---
 
 ## About
 
-Signal whether or not a media query is currently matched.
+`useMediaMatch` returns whether `window.matchMedia()` currently matches a CSS media query. It uses `useSyncExternalStore` so query changes, subscription cleanup, server snapshots, and hydration follow React's external-store model.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-```jsx
-import "./styles.css";
+```tsx
 import { useMediaMatch } from "rooks";
 
-function App() {
-  const Component = useMediaMatch("(max-width: 600px)");
+export default function ResponsiveMessage() {
+  const hasWideViewport = useMediaMatch("(min-width: 48rem)");
 
   return (
-    <div>
-      <h1>Rooks : useMediaMatch example</h1>
-      <hr></hr>
-
-      <div
-        style={{
-          backgroundColor: "lightblue",
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span>Your screen is {Component ? "narrow" : "wide"}</span>
-      </div>
-    </div>
+    <p style={{ padding: 12, border: "1px solid" }}>
+      {hasWideViewport ? "Wide layout is active" : "Compact layout is active"}
+    </p>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type   | Description                                                                                                              |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| query          | string | The media query to signal on. Example, `"print"` will signal `true` when previewing in print mode, and `false` otherwise |
+| Parameter                    | Type      | Default  | Description                                           |
+| ---------------------------- | --------- | -------- | ----------------------------------------------------- |
+| `query`                      | `string`  | required | Any query accepted by `window.matchMedia()`.          |
+| `defaultServerRenderedValue` | `boolean` | `false`  | Snapshot returned on the server and during hydration. |
 
-### Returns
+## Return value
 
-| Return value | Type    | Description                                         |
-| ------------ | ------- | --------------------------------------------------- |
-| isMatch      | Boolean | Whether or not the media query is currently matched |
+Returns a single `boolean`: the server fallback when no client store is available, otherwise the current `MediaQueryList.matches` value.
 
----
+## Behavior and lifecycle
+
+The hook creates a `MediaQueryList` for the query, subscribes to its `change` event, and removes that listener when the query changes or the component unmounts. A query change creates and reads a new list. The server fallback does not override the value in a browser.
+
+Choose a server value that produces safe, deterministic markup. React hydrates from that snapshot and then reconciles to the real client match; rendering structurally different trees for the two values can still produce a visible layout shift.
+
+## Compatibility and accessibility
+
+The hook requires `window.matchMedia` and the modern `MediaQueryList.addEventListener` API. It does not contain a legacy `addListener` fallback. Server rendering itself does not access `window`.
+
+Media queries can support responsive presentation, but DOM order and meaning should remain coherent at every result. For user preferences, prefer focused hooks such as `usePrefersReducedMotion` and preserve the corresponding accessible behavior in CSS as well. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [usePreferredColorScheme](/docs/hooks/usePreferredColorScheme) tracks light and dark preferences with a legacy-listener fallback.
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion) targets the reduced-motion preference.
+- [useWindowSize](/docs/hooks/useWindowSize) returns viewport dimensions rather than a query result.

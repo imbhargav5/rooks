@@ -1,69 +1,56 @@
 ---
-id: useInput
 title: useInput
-sidebar_label: useInput
-description: "Manages the value of an input field with a controlled state and onChange handler."
+description: Returns controlled input value and change props with optional validation.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useCheckboxInputState, useFormState]
 ---
 
 ## About
 
-Input hook for React.
-<br/>
+`useInput` manages the `value` and `onChange` props for one controlled HTML input. An optional validator can reject a proposed value before state changes.
 
-## Examples
+## Example
 
-### Simple example
-
-```jsx
+```tsx
 import { useInput } from "rooks";
-export default function App() {
-  const myInput = useInput("hello");
-  return (
-    <div>
-      <input {...myInput} />
-      <p>
-        Value is <b>{myInput.value}</b>
-      </p>
-    </div>
-  );
-}
-```
 
-### With optional validator
-
-```jsx
-import { useInput } from "rooks";
-export default function App() {
-  const myInput = useInput("hello", {
-    validate: newValue => newValue.length < 15,
+export default function ShortNameInput() {
+  const name = useInput("", {
+    validate: (nextValue) => nextValue.length <= 12,
   });
+
   return (
-    <div>
-      <p> Max length 15 </p>
-      <input {...myInput} />
-      <p>
-        Value is <b>{myInput.value}</b>
-      </p>
-    </div>
+    <label>
+      Short name
+      <input {...name} />
+      <span>{name.value.length}/12 characters</span>
+    </label>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument     | Type   | Description                 | Default value |
-| ------------ | ------ | --------------------------- | ------------- |
-| initialValue | string | Initial value of the string | ""            |
-| opts         | object | Options                     | \{\}          |
+- `initialValue`: `number | string | readonly string[] | undefined`; defaults to `""`.
+- `options.validate(nextValue, currentValue)`: optional predicate. Returning `false` rejects the change; returning `true` accepts it.
 
-### Options
+The private options shape is shown inline and is not an importable package type.
 
-| Option key | Type     | Description                                                                                                             | Default value          |
-| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| validate   | function | Validator function which receives changed valued before update as well as current value and should return true or false | <mark>undefined</mark> |
+## Return value
 
-### Return value
+The hook returns `{ value, onChange }`, ready to spread onto an `<input>`. The change handler receives a React input change event.
 
-| Return value                     | Type   | Description                                                                                                            |
-| -------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-| <mark>\{value, onChange\}</mark> | Object | Object containing \{value : "String", onChange: "function that accepts an event and updates the value of the string"\} |
+## Behavior and lifecycle
+
+The handler reads `event.target.value`, which is a string at runtime, and casts it to the selected generic type. A numeric initial value therefore does not parse later text into a number. Validator exceptions are not caught and propagate from the change handler. When `initialValue` changes, an effect resets the managed value to it, overwriting intervening user input after that render.
+
+## Compatibility and accessibility
+
+The hook uses React state and effects and is safe during server rendering. It does not supply a label, input type, parsing, error message, or ARIA attributes; the consuming form must provide them.
+
+## Related
+
+- [useCheckboxInputState](/docs/hooks/useCheckboxInputState) handles controlled checkbox state.
+- [useFormState](/docs/hooks/useFormState) coordinates multiple named fields and validation.

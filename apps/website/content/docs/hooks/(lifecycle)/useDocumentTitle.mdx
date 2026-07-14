@@ -1,64 +1,57 @@
 ---
-id: useDocumentTitle
 title: useDocumentTitle
-sidebar_label: useDocumentTitle
-description: "Sets the document title and restores the previous title on unmount."
+description: Updates document.title and can restore its original value during cleanup.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIsomorphicEffect]
 ---
 
 ## About
 
-Sets the document title and optionally resets the title on unmount
-
-[//]: # "Main"
+`useDocumentTitle` writes a page title after the component commits. It can restore the title that existed when this hook instance first rendered.
 
 ## Examples
 
-### Basic example
-
-```jsx
+```tsx
+import { useState } from "react";
 import { useDocumentTitle } from "rooks";
 
-function App() {
-  useDocumentTitle("New document title");
+export default function TitledCounter() {
+  const [count, setCount] = useState(0);
+  useDocumentTitle(`Messages (${count})`, { resetOnUnmount: true });
 
   return (
-    <div>
-      <h1>Document title is now "New document title"</h1>
-    </div>
+    <button type="button" onClick={() => setCount((value) => value + 1)}>
+      Messages: {count}
+    </button>
   );
 }
-
-export default App;
 ```
 
-### Example with reset
+## Parameters
 
-```jsx
-import { useDocumentTitle } from "rooks";
+| Argument                 | Type                           | Default  | Meaning                                                         |
+| ------------------------ | ------------------------------ | -------- | --------------------------------------------------------------- |
+| `title`                  | `string`                       | required | Next value for `document.title`.                                |
+| `options`                | `{ resetOnUnmount?: boolean }` | `{}`     | Controls restoration behavior.                                  |
+| `options.resetOnUnmount` | `boolean`                      | `false`  | Restores the title captured on the first render during cleanup. |
 
-function App() {
-  useDocumentTitle("New document title", { resetOnUnmount: true });
+The options shape is shown inline because it is not a public type export.
 
-  return (
-    <div>
-      <h1>
-        Document title is now "New document title" and will be reset on unmount
-      </h1>
-    </div>
-  );
-}
+## Return value
 
-export default App;
-```
+The hook returns `void`.
 
-## Arguments
+## Behavior and lifecycle
 
-| Argument               | Type      | Description                                    |
-| :--------------------- | :-------- | :--------------------------------------------- |
-| title                  | `string`  | The new document title                         |
-| options                | `object`  | Options object                                 |
-| options.resetOnUnmount | `boolean` | Whether to reset the document title on unmount |
+The title is written in a normal effect. With restoration enabled, cleanup runs before a changed `title` or option is applied and on unmount, restoring the original captured title. Multiple mounted owners of `document.title` can overwrite one another, so keep a single clear owner for a page.
 
-## Return
+## Compatibility and accessibility
 
-`void`
+Server rendering is a no-op. The server HTML title does not change until the client effect runs, so set framework-level metadata for the initial response when possible. Titles should be concise, unique, and place the most specific page name first for screen-reader and browser-tab users.
+
+## Related
+
+- [useIsomorphicEffect](/docs/hooks/useIsomorphicEffect)
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)

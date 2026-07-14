@@ -1,51 +1,66 @@
 ---
-id: useTimeoutWhen
 title: useTimeoutWhen
-sidebar_label: useTimeoutWhen
-description: "Fires a callback after a timeout delay when a condition is true."
+description: Runs the latest callback once after a delay while a condition remains true.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIntervalWhen, useDebouncedEffect]
 ---
 
 ## About
 
-Takes a callback and fires it when a condition is true
-
-[//]: # "Main"
+`useTimeoutWhen` schedules one browser timeout while a condition is true. A separate key lets callers deliberately restart an otherwise unchanged timeout.
 
 ## Examples
 
-### Basic usage
-
-```jsx
-import "./styles.css";
-import { useTimeoutWhen } from "rooks";
+```tsx
 import { useState } from "react";
+import { useTimeoutWhen } from "rooks";
 
-function App() {
-  const [start, setStart] = useState(false);
-  useTimeoutWhen(() => setStart(false), 2000, start);
+export default function DelayedNotice() {
+  const [key, setKey] = useState(0);
+  const [message, setMessage] = useState("Waiting…");
+  useTimeoutWhen(() => setMessage("Ready"), 1000, true, key);
+
   return (
-    <>
-      <h1>Rooks: useTimeoutWhen example</h1>
-      <hr></hr>
-      <p>Click the button below to disable it for 2 seconds</p>
-      <button onClick={() => setStart(true)} disabled={start}>
-        Start timeout
+    <section>
+      <p role="status">{message}</p>
+      <button
+        type="button"
+        onClick={() => {
+          setMessage("Waiting…");
+          setKey((value) => value + 1);
+        }}
+      >
+        Restart
       </button>
-    </>
+    </section>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Arguments | Type     | Description                                              | Default value |
-| --------- | -------- | -------------------------------------------------------- | ------------- |
-| callback  | function | Function to be executed in timeout                       | undefined     |
-| delay     | Number   | Number in milliseconds after which callback is to be run | 0             |
-| when      | boolean  | The condition which when true, sets the timeout          | true          |
+| Argument         | Type               | Default  | Meaning                                      |
+| ---------------- | ------------------ | -------- | -------------------------------------------- |
+| `callback`       | `() => void`       | required | Latest function invoked by the timeout.      |
+| `timeoutDelayMs` | `number`           | `0`      | Delay in milliseconds.                       |
+| `when`           | `boolean`          | `true`   | Schedules while true.                        |
+| `key`            | `string \| number` | `0`      | Changing it clears and restarts the timeout. |
 
-### Returned
+## Return value
 
-No return value.
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+Changing the delay, condition, or key clears the pending timeout and evaluates scheduling again. Callback changes do not reset it because a fresh callback wrapper is used. Disabling or unmounting clears pending work. If an effect runs without `window`, the hook warns and schedules nothing. Callback exceptions are not caught.
+
+## Compatibility and accessibility
+
+Effects do not run in server-rendered HTML. Browsers can clamp delayed timers and pause them in background tabs, so do not use this as a precise clock. Make delayed status changes perceivable, and give users control over time limits where accessibility requirements call for it.
+
+## Related
+
+- [useIntervalWhen](/docs/hooks/useIntervalWhen)
+- [useDebouncedEffect](/docs/hooks/useDebouncedEffect)

@@ -1,96 +1,60 @@
 ---
-id: useIntervalWhen
 title: useIntervalWhen
-sidebar_label: useIntervalWhen
-description: "Runs a callback at a set interval when a condition is true, and pauses when it is false."
+description: Runs the latest callback on an interval while a condition is true.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useTimeoutWhen, useRaf]
 ---
 
 ## About
 
-Sets an interval immediately when a condition is true
-
-[//]: # "Main"
+`useIntervalWhen` manages a browser interval whose lifetime follows a boolean condition. The interval keeps its schedule when only the callback changes and invokes the latest callback.
 
 ## Examples
 
-### Basic example
-
-```jsx
-import { useIntervalWhen } from "rooks";
+```tsx
 import { useState } from "react";
+import { useIntervalWhen } from "rooks";
 
-function App() {
-  const [value, setValue] = useState(0);
-  const [when, setWhen] = useState(false);
-
-  useIntervalWhen(
-    () => {
-      setValue(value + 1);
-    },
-    1000, // run callback every 1 second
-    when // start the timer when it's true
-  );
+export default function IntervalCounter() {
+  const [running, setRunning] = useState(false);
+  const [count, setCount] = useState(0);
+  useIntervalWhen(() => setCount((value) => value + 1), 1000, running, true);
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <h1>Rooks: useIntervalWhen example</h1>
-      <h2>Value: {value}</h2>
-      <button onClick={() => setWhen(true)}> Start interval </button>
-    </div>
+    <section>
+      <p role="timer">Ticks: {count}</p>
+      <button type="button" onClick={() => setRunning((value) => !value)}>
+        {running ? "Pause" : "Start"}
+      </button>
+    </section>
   );
 }
-
-export default App;
 ```
 
-### Fire callback instantly and not wait for first interval to finish
+## Parameters
 
-```jsx
-import { useIntervalWhen } from "rooks";
-import { useState } from "react";
+| Argument             | Type         | Default  | Meaning                                          |
+| -------------------- | ------------ | -------- | ------------------------------------------------ |
+| `callback`           | `() => void` | required | Latest function invoked on each tick.            |
+| `intervalDurationMs` | `number`     | `0`      | Browser interval duration in milliseconds.       |
+| `when`               | `boolean`    | `true`   | Creates the interval while true.                 |
+| `startImmediate`     | `boolean`    | `false`  | Invokes once when an active interval is created. |
 
-function App() {
-  const [value, setValue] = useState(0);
-  const [when, setWhen] = useState(false);
+## Return value
 
-  useIntervalWhen(
-    () => {
-      setValue(value + 1);
-    },
-    1000, // run callback every 1 second
-    when, // start the timer when it's true
-    true // no need to wait for the first interval
-  );
+The hook returns `void`.
 
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <h1>Rooks: useIntervalWhen example</h1>
-      <p>
-        Notice how the first increment is instantly after interval is enabled.
-        If n intervals run, the callback fires n+1 times.
-      </p>
-      <h2>Value: {value}</h2>
-      <button onClick={() => setWhen(true)}> Start interval </button>
-    </div>
-  );
-}
+## Behavior and lifecycle
 
-export default App;
-```
+Changing `when`, duration, or `startImmediate` clears the current interval and, when enabled, creates a new one. An immediate call occurs on each such activation before the first timed tick. Callback identity changes do not reset the schedule. Cleanup clears the interval on disable and unmount. Exceptions thrown by the callback are not caught.
 
-### Arguments
+## Compatibility and accessibility
 
-| Argument         | Type     | Description                                              | Default value |
-| ---------------- | -------- | -------------------------------------------------------- | ------------- |
-| callback         | function | Function be invoked after each interval duration         | undefined     |
-| intervalDuration | number   | Duration in milliseconds after which callback is invoked | 0             |
-| when             | boolean  | Only start timer when `when` is true                     | true          |
-| startImmediate   | boolean  | Should the timer start immediately or no                 | false         |
+The interval is created in an effect, so server rendering schedules nothing. It requires `window` when the effect runs. Browsers may clamp or pause background timers. Avoid overly frequent visual or live-region updates, and provide a pause control for moving or auto-updating content when applicable.
 
-### Returned Object
+## Related
 
-No return value.
+- [useTimeoutWhen](/docs/hooks/useTimeoutWhen)
+- [useRaf](/docs/hooks/useRaf)

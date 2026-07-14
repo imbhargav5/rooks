@@ -18,7 +18,11 @@ if (!fs.existsSync(".eslintrc.dist.js")) {
   process.exit(1);
 }
 
-const filesToLint: string[] = ["dist/esm/index.js", "dist/esm/experimental.js"];
+const filesToLint: string[] = [
+  "dist/esm/index.js",
+  "dist/esm/experimental.js",
+  "dist/esm/temporal.js",
+];
 
 const missingFiles = filesToLint.filter((file) => !fs.existsSync(file));
 if (missingFiles.length > 0) {

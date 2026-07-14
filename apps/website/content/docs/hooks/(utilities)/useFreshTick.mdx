@@ -1,58 +1,54 @@
 ---
-id: useFreshTick
 title: useFreshTick
-sidebar_label: useFreshTick
-description: "Returns a stable tick function that calls the latest version of a callback."
+description: Returns a function that invokes the latest void callback after effects run.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useFreshCallback, useFreshRef]
 ---
 
 ## About
 
-Like useFreshRef but specifically for functions
+`useFreshTick` lets an existing callback call the latest committed version of another void callback. Unlike `useFreshCallback`, the returned wrapper is recreated on each render.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-```jsx
-import { useFreshTick } from "rooks";
+```tsx
 import { useEffect, useState } from "react";
+import { useFreshTick } from "rooks";
 
-/* eslint-disable */
-
-export default function App() {
-  const [currentValue, setCurrentValue] = useState(0);
-
-  function Increment() {
-    setCurrentValue(currentValue + 1);
-  }
-
-  const freshTick = useFreshTick(Increment);
+export default function IncrementingTimer() {
+  const [count, setCount] = useState(0);
+  const increment = useFreshTick(() => setCount((current) => current + 1));
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      freshTick();
-    }, 1000);
-    return () => clearInterval(intervalId);
+    const timer = window.setInterval(increment, 1_000);
+    return () => window.clearInterval(timer);
+    // The first wrapper keeps calling the same fresh callback ref.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return (
-    <div className="App">
-      <h1> Rooks : useFreshTick example</h1>
-      <h3>
-        current value : <i>{currentValue} </i>
-      </h3>
-    </div>
-  );
+
+  return <p>Count: {count}</p>;
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type     | Description                                            |
-| -------------- | -------- | ------------------------------------------------------ |
-| callback       | function | The function call which needs to be fresh at all times |
+- `callback: (...args: T[]) => void` — required callback. All argument positions share the inferred `T` type.
 
-### Returns
+## Return value
 
-| Return value | Type     | Description                | Default value |
-| ------------ | -------- | -------------------------- | ------------- |
-| ref          | function | A function with fresh args | undefined     |
+Returns `(...args: T[]) => void`. It forwards arguments to the callback stored after the latest passive effect. It does not return the callback's result.
+
+## Behavior and lifecycle
+
+The wrapper function has a new identity each render, but wrappers from earlier renders share the stable ref and continue to reach its current callback. Before the passive effect for a commit runs, calls can reach the preceding callback. Exceptions propagate to the caller.
+
+## Compatibility and accessibility
+
+The hook is platform-independent and SSR-safe. Clear any timer or subscription that invokes the wrapper; the hook does not own those resources.
+
+## Related
+
+- [useFreshCallback](/docs/hooks/useFreshCallback) is preferable when stable function identity or a return value is required.
+- [useFreshRef](/docs/hooks/useFreshRef) exposes the underlying fresh-value pattern.

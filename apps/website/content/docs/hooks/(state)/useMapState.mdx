@@ -1,95 +1,72 @@
 ---
-id: useMapState
 title: useMapState
-sidebar_label: useMapState
-description: "Manages a Map data structure as React state with set, delete, and clear helpers."
+description: "Manages a record-like object as React state with keyed update and removal helpers."
+entrypoint: rooks
+status: stable
+aliases: [useObjectState]
+related: [useNativeMapState]
 ---
 
 ## About
 
-A react hook to manage state in a key value pair map.
-
-[//]: # "Main"
+`useMapState` manages a string-keyed object with stable helpers for reading, merging, and removing properties. Despite the historical name, it does not store or return a JavaScript `Map`; use [`useNativeMapState`](/docs/hooks/useNativeMapState) when you need that data structure.
 
 ## Examples
 
-```jsx
-import "./styles.css";
+```tsx
 import { useMapState } from "rooks";
-import { useState } from "react";
 
-export default function App() {
-  const [
-    map,
-    { set, setMultiple, has, remove, removeMultiple, removeAll },
-  ] = useMapState({ a: 1, b: 2 });
-  const [setInputKey, setSetInputKey] = useState("");
-  const [setInputValue, setSetInputValue] = useState("");
-  const [removeInputKey, setRemoveInputKey] = useState("");
+const initialLabels: Record<string, string> = { primary: "blue" };
+
+export default function Labels() {
+  const [labels, { remove, set }] = useMapState(initialLabels);
 
   return (
-    <div className="App">
-      <h1>useMapState CodeSandbox</h1>
-
-      <div className="input">
-        <input
-          value={setInputKey}
-          onChange={e => setSetInputKey(e.target.value)}
-          placeholder="key"
-        />
-        <input
-          value={setInputValue}
-          onChange={e => setSetInputValue(e.target.value)}
-          placeholder="value"
-        />
-        <button onClick={() => set(setInputKey, setInputValue)}>set</button>
-      </div>
-
-      <div className="input">
-        <input
-          value={removeInputKey}
-          onChange={e => setRemoveInputKey(e.target.value)}
-          placeholder="key"
-        />
-        <button onClick={() => remove(removeInputKey)}>remove</button>
-      </div>
-
-      {Object.entries(map).map(item => {
-        return <div>{item.join(": ")}</div>;
-      })}
-    </div>
+    <section>
+      <p>{JSON.stringify(labels)}</p>
+      <button type="button" onClick={() => set("accent", "violet")}>
+        Set accent
+      </button>
+      <button type="button" onClick={() => remove("accent")}>
+        Remove accent
+      </button>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type   | Description              | Defualt   |
-| -------------- | ------ | ------------------------ | --------- |
-| initialValue   | Object | Initial value of the map | undefined |
+| Parameter      | Type                                | Default  | Description                                                                |
+| -------------- | ----------------------------------- | -------- | -------------------------------------------------------------------------- |
+| `initialValue` | `T extends Record<string, unknown>` | Required | Object used for the initial state. The hook keeps the same property types. |
 
-### Returns
+## Return value
 
-Returns an array of following items:
+Returns `[value, methods]`. `value` has the same object type as `initialValue`.
 
-| Return value | Type   | Description                                    |
-| ------------ | ------ | ---------------------------------------------- |
-| map          | any    | value of the map                               |
-| methods      | Object | methods to modify the map, see the table below |
+| Method           | Type                            | Behavior                                                          |
+| ---------------- | ------------------------------- | ----------------------------------------------------------------- |
+| `set`            | `(key: K, value: T[K]) => void` | Replaces one property.                                            |
+| `has`            | `(key: K) => boolean`           | Reports whether the current property value is not `undefined`.    |
+| `setMultiple`    | `(next: Partial<T>) => void`    | Shallow-merges several properties in one state update.            |
+| `remove`         | `(key: K) => void`              | Deletes one property.                                             |
+| `removeMultiple` | `(...keys: K[]) => void`        | Deletes each supplied property in one state update.               |
+| `removeAll`      | `() => void`                    | Deletes every own enumerable property and leaves an empty object. |
 
-map methods:
+## Behavior and lifecycle
 
-| Return value   | Type                             | Description                           |
-| -------------- | -------------------------------- | ------------------------------------- |
-| set            | `(key: any, value: any) => void` | set a key value pair in map           |
-| has            | `(key: any) => boolean`          | if `key` exists in map                |
-| setMultiple    | `(...keys: any[]) => void`       | set multiple key value pair in map    |
-| remove         | `(key: any) => void`             | remove a key value pair in map        |
-| removeMultiple | `(...keys: any[]) => void`       | remove multiple key value pair in map |
-| removeAll      | `() => void`                     | remove all key value pair in map      |
+- Updates use React functional state setters, so consecutive helper calls merge against the latest committed state.
+- Every update creates a new object with a shallow spread; nested values are not cloned.
+- Helper functions other than `has` are stable. `has` is recreated when the object changes because it reads the latest value.
+- `has` is value-based: a property whose value is `undefined` is reported as absent. Removal works even when the object contains a key named `hasOwnProperty`.
 
----
+## Compatibility and accessibility
 
-## Robustness and lifecycle
+The hook uses only React state and is safe to render on the server. It has no browser API or permission requirement. Accessibility depends on the controls that consume the state; label those controls and announce state changes when users need immediate feedback.
 
-`has` retains its existing value-based behavior, where an `undefined` value is treated as absent. Removal also works for maps that contain a key named `hasOwnProperty`.
+## Related
+
+`useObjectState` is a supported alias of this hook.
+
+- [useNativeMapState](/docs/hooks/useNativeMapState)

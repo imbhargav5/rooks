@@ -1,103 +1,59 @@
 ---
-id: useRaf
 title: useRaf
-sidebar_label: useRaf
-description: "Runs a callback on every animation frame using requestAnimationFrame."
+description: Runs the latest callback every animation frame while active.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useRafState, useIntervalWhen, usePrefersReducedMotion]
 ---
 
 ## About
 
-A continuously running requestAnimationFrame hook for React
+`useRaf` manages a recurring frame loop using the `raf` package's `requestAnimationFrame` polyfill. Use it for visual updates that should align with browser painting.
 
 ## Examples
 
-### Basic example
-
-```jsx
-import React, { useRef } from "react";
-import "./styles.css";
-import { useRaf, useToggle } from "rooks";
-
-let angle = 0;
-function updateAngle() {
-  angle = (angle + 2) % 360;
-  return (angle * Math.PI) / 180;
-}
-
-export default function App() {
-  const [shouldRun, toggleShouldRun] = useToggle(true);
-  const canvasRef = useRef();
-  useRaf(() => {
-    if (canvasRef && canvasRef.current) {
-      const screenRatio = window.devicePixelRatio || 1;
-      let angle = updateAngle();
-      const canvas = canvasRef.current;
-      var ctx = canvas.getContext("2d");
-      ctx.save();
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      ctx.scale(screenRatio, screenRatio);
-      ctx.fillStyle = "midnightblue";
-      ctx.globalAlpha = 1;
-      ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      ctx.fillStyle = "yellow";
-      ctx.lineWidth = 2;
-      ctx.translate(50, 50);
-      ctx.rotate(angle);
-      ctx.fillRect(-20, -20, 40, 40);
-      ctx.restore();
-    }
-  }, shouldRun);
-
-  return (
-    <>
-      <h2>
-        Request animation frame is now {shouldRun ? "" : "in"}active. Click to
-        toggle.
-      </h2>
-      <p>
-        <button onClick={toggleShouldRun}>Toggle Raf</button>{" "}
-      </p>
-      <canvas
-        ref={canvasRef}
-        style={{ height: `100px`, width: `100%`, background: "grey" }}
-      />
-    </>
-  );
-}
-```
-
-### Pause and resume a frame counter
-
-```jsx
+```tsx
 import { useState } from "react";
-import { useRaf, useToggle } from "rooks";
+import { useRaf } from "rooks";
 
-export default function FrameCounter() {
-  const [frames, setFrames] = useState(0);
-  const [isActive, toggleActive] = useToggle(true);
-
-  useRaf(() => {
-    setFrames((current) => current + 1);
-  }, isActive);
+export default function FrameClock() {
+  const [active, setActive] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
+  useRaf((frameMs) => setElapsed((value) => value + frameMs), active);
 
   return (
-    <div>
-      <p>Frames processed: {frames}</p>
-      <button onClick={toggleActive}>
-        {isActive ? "Pause" : "Resume"} RAF loop
+    <section>
+      <p>Elapsed while active: {Math.round(elapsed)}ms</p>
+      <button type="button" onClick={() => setActive((value) => !value)}>
+        {active ? "Stop" : "Start"}
       </button>
-    </div>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type                            | Description                                                                                  | Default value |
-| -------------- | ------------------------------- | -------------------------------------------------------------------------------------------- | ------------- |
-| callback       | `(timeElapsed: number) => void` | The callback function to be executed. timeElapsed is the time in ms since the last raf call. | undefined     |
-| isActive       | boolean                         | The value which while true, keeps the raf running infinitely                                 | undefined     |
+| Argument   | Type                            | Default  | Meaning                                                                 |
+| ---------- | ------------------------------- | -------- | ----------------------------------------------------------------------- |
+| `callback` | `(timeElapsed: number) => void` | required | Latest callback, with wall-clock milliseconds since the previous frame. |
+| `isActive` | `boolean`                       | required | Keeps the frame loop running while true.                                |
 
-### Returns
+## Return value
 
-No return value.
+The hook returns `void`. Callback return values do not control the loop.
+
+## Behavior and lifecycle
+
+When activated, the effect schedules one frame. Each tick schedules the next frame before invoking the callback and uses `Date.now()` to compute elapsed time. Changing only the callback does not restart the loop. Deactivation or unmount cancels the most recently scheduled frame. Exceptions are not caught; because the next frame is scheduled first, throwing is not a supported way to stop the loop.
+
+## Compatibility and accessibility
+
+No frame is scheduled during server rendering. The `raf` package supplies its environment fallback, but visible animation still belongs on the client. Check reduced-motion preferences and avoid using frame-by-frame state updates for information that could be represented with native CSS or static content.
+
+## Related
+
+- [useRafState](/docs/hooks/useRafState)
+- [useIntervalWhen](/docs/hooks/useIntervalWhen)
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion)

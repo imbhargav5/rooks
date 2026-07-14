@@ -1,0 +1,32 @@
+---
+title: Design and stability
+description: Why Rooks favors focused hooks, separate entrypoints, and explicit stability levels.
+---
+
+## Focused hooks compose better
+
+Rooks hooks are intentionally narrow: each one should own one concern, expose a typed React-facing interface, and clean up the resources it creates. Small hooks are easier to test and combine than a single abstraction that mixes state, browser access, timing, and presentation.
+
+This focus also keeps application policy in the application. A hook can report online state, permission state, or elapsed time; the product still decides what to show, when to ask, and how to recover.
+
+## Entrypoints isolate risk and dependencies
+
+The stable `rooks` entrypoint is the default surface. `rooks/experimental` makes instability visible in every import and prevents an experimental name from appearing stable by proximity. `rooks/temporal` keeps the optional Temporal implementation and its `BigInt` requirement out of applications that do not use those hooks.
+
+Entrypoints are therefore design boundaries, not alternate spellings. Importing a source file or an internal helper bypasses those boundaries and is unsupported.
+
+## Stability levels
+
+| Status       | Meaning                                                                                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stable       | The hook is part of a public package entrypoint and compatibility changes follow the package's versioning and release process.                        |
+| Experimental | The API is being evaluated and can change substantially or be removed without stable-surface guarantees. Production users should isolate and test it. |
+| Deprecated   | The API remains available for migration but should not be used for new code. Follow its documented replacement and release notes.                     |
+
+Deprecated does not mean an internal symbol becomes public, and experimental does not mean a source-file import is supported. Public status always starts with the package export map and its TypeScript barrels.
+
+## Aliases do not create duplicate implementations
+
+`useObjectState`, `useOnLongHoverRef`, and `useOnLongPressRef` are supported aliases of canonical hooks. They remain searchable and importable, but their documentation points to the canonical implementation so behavior, signatures, and migration notes cannot drift.
+
+See [Entrypoints and compatibility](/docs/reference/entrypoints-and-compatibility) for the exact package surface and [Experimental hooks](/docs/guides/experimental-hooks) before opting into unstable APIs.

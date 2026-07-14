@@ -1,8 +1,10 @@
 ---
-id: useCountdown
 title: useCountdown
-sidebar_label: useCountdown
-description: "Manages a countdown timer with start, stop, and reset controls."
+description: Counts the intervals remaining until a target Date and reports progress or completion.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIntervalWhen, useTemporalCountdown]
 ---
 
 ## About
@@ -13,14 +15,15 @@ Count down to a target timestamp and call callbacks at a configurable interval.
 
 ### Basic example
 
-```jsx
+```tsx
+import { useState } from "react";
 import { useCountdown } from "rooks";
 
-export default function App() {
-  const endTime = new Date(Date.now() + 10_000);
+export default function TenSecondCountdown() {
+  const [endTime] = useState(() => new Date(Date.now() + 10_000));
   const count = useCountdown(endTime);
 
-  return <div>{count} seconds remaining</div>;
+  return <p>{count === 0 ? "Finished" : `${count} seconds remaining`}</p>;
 }
 ```
 
@@ -51,21 +54,30 @@ export default function AutoDismissNotice() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument         | Type     | Description                                                         | Default value |
-| ---------------- | -------- | ------------------------------------------------------------------- | ------------- |
-| endTime          | Date     | the time when the countdown should end                              | undefined     |
-| options.interval | number   | milliseconds between countdown ticks                                | 1000          |
-| options.onDown   | function | `(restTime, newTime) => {}` callback called every interval          | undefined     |
-| options.onEnd    | function | (time) => {}, callback that would be called when the countdown ends | undefined     |
+| Argument         | Type                                        | Description                                                         | Default value |
+| ---------------- | ------------------------------------------- | ------------------------------------------------------------------- | ------------- |
+| endTime          | `Date`                                      | Required target instant                                             | —             |
+| options.interval | `number`                                    | Positive milliseconds per tick                                      | `1000`        |
+| options.onDown   | `(restTime: number, newTime: Date) => void` | Called on positive-remaining-time ticks; `restTime` is milliseconds | —             |
+| options.onEnd    | `(newTime: Date) => void`                   | Called once when this target is observed at or past its end         | —             |
 
-### Return Value
+## Return value
 
-| Type   | Description                                                    |
-| ------ | -------------------------------------------------------------- |
-| number | rest amount of intervals it takes to count down to the endTime |
+| Type   | Description                                                                            |
+| ------ | -------------------------------------------------------------------------------------- |
+| number | Number of whole configured intervals remaining, rounded up; `0` at or after the target |
 
-## Robustness and lifecycle
+## Behavior and lifecycle
 
-`onDown` receives the remaining milliseconds calculated at each tick. `onEnd` fires exactly once when a tick reaches or passes `endTime`, including an exact boundary or a target that has already elapsed.
+The first tick runs immediately while time remains. Each tick reads the current clock, invokes `onDown` before updating rendered state, and stops the interval at zero. `onEnd` fires once per `endTime` timestamp, including for an already elapsed target. Changing the callback does not restart the interval; changing the target or interval recalculates the count.
+
+## Compatibility and accessibility
+
+Date arithmetic is SSR-safe and timers start only through React effects in the browser. Use a target supplied consistently to server and client when the initial count is rendered during hydration. Announce urgent countdown changes sparingly so screen readers are not interrupted every second.
+
+## Related
+
+- [useIntervalWhen](/docs/hooks/useIntervalWhen) is the interval primitive used by this hook.
+- [useTemporalCountdown](/docs/hooks/useTemporalCountdown) provides Temporal-based duration and precision controls.

@@ -1,77 +1,54 @@
 ---
-id: useOnLongHover
 title: useOnLongHover
-sidebar_label: useOnLongHover
-description: "Fires a callback when the user hovers over an element for a prolonged duration."
+description: Calls a callback after an element remains hovered for a duration.
+entrypoint: rooks
+status: stable
+aliases: [useOnLongHoverRef]
+related: [useOnHoverRef, useOnLongPress]
 ---
 
 ## About
 
-A hook to detect long hover on an element.
+`useOnLongHover` starts a timer on `mouseenter` and calls a callback if the pointer remains over the element for the full delay. `useOnLongHoverRef` is a supported alias of the same implementation.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-#### Basic example
-
-```jsx
+```tsx
+import { useState } from "react";
 import { useOnLongHover } from "rooks";
-export default function App() {
-  const handleLongHover = () => {
-    console.log("Long hover detected");
-  };
 
-  const longHoverRef = useOnLongHover(handleLongHover);
+export default function HoverPreview() {
+  const [ready, setReady] = useState(false);
+  const longHoverRef = useOnLongHover(() => setReady(true), { duration: 300 });
 
   return (
-    <>
-      <p>Hover on the button for 500ms to trigger a console.log statement</p>
-      <button ref={longHoverRef}>Long hover me</button>
-    </>
+    <button ref={longHoverRef} onMouseLeave={() => setReady(false)}>
+      {ready ? "Preview ready" : "Hover for 300 ms"}
+    </button>
   );
 }
 ```
 
-#### Custom duration and mouse leave behavior
+## Parameters
 
-```jsx
-import { useOnLongHover } from "rooks";
-export default function App() {
-  const handleLongHover = () => {
-    console.log("Long hover detected");
-  };
+- `callback`: called once after a qualifying hover. The timer uses the latest callback.
+- `options.duration`: delay in milliseconds; defaults to `300`.
 
-  const handleMouseLeave = () => {
-    console.log("Mouse left before long hover completed");
-  };
+The option type is private and is shown inline rather than exported from the package.
 
-  const longHoverRef = useOnLongHover(handleLongHover, {
-    duration: 1000,
-  });
+## Return value
 
-  return (
-    <>
-      <p>Hover on the button for 1000ms to trigger a console.log statement</p>
-      <button ref={longHoverRef}>Long hover me</button>
-    </>
-  );
-}
-```
+The hook returns a callback ref that accepts an `HTMLElement | null`.
 
-### Arguments
+## Behavior and lifecycle
 
-| Argument value | Type     | Description                                                | Default   |
-| -------------- | -------- | ---------------------------------------------------------- | --------- |
-| callback       | Function | Callback function to be called when long hover is detected | undefined |
-| options        | Object   | See table below                                            | undefined |
+A native `mouseenter` starts the timer. `mouseleave`, a duration change, target replacement, or unmount clears a pending timer. Remaining hovered after the callback fires does not repeatedly call it; leaving and entering again starts a new attempt. Native listeners are removed when the target changes or the component unmounts.
 
-| Options value | Type   | Description                                             | Default |
-| ------------- | ------ | ------------------------------------------------------- | ------- |
-| duration      | Number | The duration (in ms) after which long hover is detected | 500     |
+## Compatibility and accessibility
 
-### Returns
+The hook has no keyboard or touch equivalent. Do not make required information depend on a long hover; provide focus and explicit activation paths. The timer and listeners start only in the browser.
 
-| Return value | Type         | Description                                                            | Default   |
-| ------------ | ------------ | ---------------------------------------------------------------------- | --------- |
-| ref          | Callback Ref | A ref that can be used on the element you want to detect long hover on | undefined |
+## Related
+
+- [useOnHoverRef](/docs/hooks/useOnHoverRef) reports immediate mouse entry and exit.
+- [useOnLongPress](/docs/hooks/useOnLongPress) handles timed mouse or touch presses.

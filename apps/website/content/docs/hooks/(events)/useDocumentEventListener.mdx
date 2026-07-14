@@ -1,69 +1,54 @@
 ---
-id: useDocumentEventListener
 title: useDocumentEventListener
-sidebar_label: useDocumentEventListener
-description: "Attaches and cleans up an event listener on the document."
+description: Attaches a document event listener and removes it when the component unmounts.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useWindowEventListener, useEventListenerRef]
 ---
 
 ## About
 
-A react hook to an event listener to the document object
+`useDocumentEventListener` listens for a named event on the browser `document`. Use it for document-wide events such as `selectionchange` or `visibilitychange`; use an element-scoped listener when a local target is sufficient.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Track document clicks
-
-```jsx
-import { useDocumentEventListener } from "rooks";
-import { useState, useEffect } from "react";
-
-export default function App() {
-  const [myState, setMyState] = useState(0);
-
-  useDocumentEventListener("click", function () {
-    setMyState(myState + 1);
-  });
-
-  return (
-    <div className="App">
-      <h1>useDocumentEventListener Example</h1>
-      <br></br>
-      <h1>Clicked {myState} times</h1>
-    </div>
-  );
-}
-```
-
-### Use a document-level listener to close a surface
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useDocumentEventListener } from "rooks";
 
-export default function DismissibleNotice() {
-  const [isOpen, setIsOpen] = useState(true);
+export default function SelectionCounter() {
+  const [changes, setChanges] = useState(0);
 
-  useDocumentEventListener("click", () => {
-    setIsOpen(false);
+  useDocumentEventListener("selectionchange", () => {
+    setChanges((count) => count + 1);
   });
 
-  return isOpen ? (
-    <div>Click anywhere in the document to dismiss me.</div>
-  ) : null;
+  return <p>Selection changes observed: {changes}</p>;
 }
 ```
 
-### Arguments
+## Parameters
 
-| Arguments      | Type     | Description                                    | Default value |
-| -------------- | -------- | ---------------------------------------------- | ------------- |
-| eventName      | string   | The event to track                             | undefined     |
-| callback       | function | The callback to be called on event             | undefined     |
-| conditions     | object   | The options to be passed to the event listener | {}            |
-| isLayoutEffect | boolean  | Should it use layout effect. Defaults to false | false         |
+- `eventName`: a key from `DocumentEventMap`.
+- `callback`: called with the native document event. The hook always invokes the latest callback.
+- `listenerOptions`: optional `boolean | AddEventListenerOptions`; defaults to `{}`. It supports `capture`, `once`, `passive`, `signal`, or the capture boolean shorthand.
+- `isLayoutEffect`: optional boolean; defaults to `false`. Set it to `true` only when the listener must be synchronized during the layout-effect phase.
 
-### Return
+## Return value
 
-No return value.
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+The listener is attached after commit, or during the layout-effect phase when `isLayoutEffect` is true. A changed target, event name, or listener option replaces the existing subscription. Callback changes do not require a new native listener. Cleanup removes the active listener when the configuration changes or the component unmounts.
+
+## Compatibility and accessibility
+
+During server rendering there is no document target, so the hook performs no subscription. Browser support and event semantics depend on the chosen document event. Global listeners do not provide user feedback by themselves; expose any resulting state through appropriate visible text or ARIA semantics.
+
+## Related
+
+- [useWindowEventListener](/docs/hooks/useWindowEventListener) listens on `window`.
+- [useEventListenerRef](/docs/hooks/useEventListenerRef) targets an element through a callback ref.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) covers client boundaries and fallbacks.

@@ -1,0 +1,155 @@
+name: Feature request
+description: Describe a user problem and a proposed Rooks capability
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with the user problem, not only an API name. If you want to implement the feature, use this issue to obtain explicit maintainer approval for a concrete scope before opening a pull request.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What are users trying to accomplish, and what is difficult or unsafe today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the observable behavior, not only the internal implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior_reproduction
+    attributes:
+      label: Current behavior or reproduction
+      description: Link a minimal reproduction or describe the current workflow that demonstrates the need. Enter N/A when the request is purely conceptual.
+      placeholder: |
+        Reproduction URL or current steps:
+        1. ...
+        2. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed API or documentation change
+      description: Show an import and usage sketch when the proposal changes package API.
+      placeholder: |
+        import { useExample } from "rooks";
+
+        const result = useExample(...);
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Explain current hooks, platform APIs, or application-level approaches you tried.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entrypoint
+    attributes:
+      label: Proposed entrypoint
+      options:
+        - rooks
+        - rooks/experimental
+        - rooks/temporal
+        - Website or documentation only
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: rooks_version
+    attributes:
+      label: Current Rooks version
+      description: Which version are you using while encountering this need?
+      placeholder: 9.8.0
+    validations:
+      required: true
+
+  - type: input
+    id: react_version
+    attributes:
+      label: React version
+      placeholder: 19.2.4 or N/A
+    validations:
+      required: true
+
+  - type: input
+    id: typescript_version
+    attributes:
+      label: TypeScript version
+      placeholder: 5.9.3 or N/A
+    validations:
+      required: true
+
+  - type: textarea
+    id: browser_ssr_context
+    attributes:
+      label: Browser, permission, and server-rendering context
+      description: Describe browser support, permissions, server rendering, hydration, framework, or accessibility constraints. Enter N/A when none apply.
+    validations:
+      required: true
+
+  - type: input
+    id: regression_version
+    attributes:
+      label: Last version with the requested behavior
+      description: If this capability previously existed, provide the last version where it worked.
+      placeholder: Version or Not applicable
+    validations:
+      required: false
+
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility expectation
+      options:
+        - Backwards-compatible addition
+        - Changes existing behavior
+        - Removes or renames public behavior
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: approval_state
+    attributes:
+      label: Contribution approval state
+      description: Filing or assignment is not approval; a maintainer must explicitly approve the scope.
+      options:
+        - Idea only; I am not proposing an implementation
+        - I am requesting approval to implement the described scope
+        - I am requesting renewed approval after a material scope change
+        - A maintainer explicitly approved this exact scope
+    validations:
+      required: true
+
+  - type: input
+    id: approval_link
+    attributes:
+      label: Approval comment link
+      description: If approved, link the maintainer comment.
+      placeholder: https://github.com/imbhargav5/rooks/issues/123#issuecomment-...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I searched existing issues and discussions for this request.
+          required: true
+        - label: I understand that external implementation work requires explicit maintainer scope approval.
+          required: true

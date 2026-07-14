@@ -1,20 +1,56 @@
 ---
-id: useVibrate
 title: useVibrate
-sidebar_label: useVibrate
 description: "Triggers device vibration patterns using the Vibration API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
 
-Vibration API hook for React
+Controls a device vibration pattern through the browser Vibration API.
 
 ## Examples
 
 ```tsx
-import {useVibrate} from "rooks"
+import { useState } from "react";
+import { useVibrate } from "rooks";
+
+const notificationPattern = [100, 50, 100];
+
 export default function App() {
-  useVibrate();
-  return null
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  useVibrate({ isEnabled, pattern: notificationPattern });
+
+  return (
+    <button type="button" onClick={() => setIsEnabled((value) => !value)}>
+      {isEnabled ? "Stop vibration" : "Vibrate"}
+    </button>
+  );
 }
 ```
+
+## Parameters
+
+| Option      | Type                 | Default  | Description                                                                        |
+| ----------- | -------------------- | -------- | ---------------------------------------------------------------------------------- |
+| `isEnabled` | `boolean`            | Required | Starts the pattern when `true`; requests cancellation when `false`.                |
+| `pattern`   | `number \| number[]` | Required | Vibration and pause durations in milliseconds, as accepted by `navigator.vibrate`. |
+
+## Return value
+
+Returns `void`.
+
+## Behavior and lifecycle
+
+The effect calls `navigator.vibrate(pattern)` when enabled. Disabling the hook, changing its inputs, or unmounting requests cancellation with `navigator.vibrate(0)`. Keep array patterns referentially stable when their contents have not changed to avoid restarting the effect.
+
+## Compatibility and accessibility
+
+The hook warns and does nothing when the Vibration API is unavailable. Browser policy can require a user interaction and may ignore vibration settings. Never use vibration as the only way to communicate information; provide visible text or another accessible cue. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

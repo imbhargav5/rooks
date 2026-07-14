@@ -1,19 +1,17 @@
 ---
-id: useAsyncDisposable
 title: useAsyncDisposable
-sidebar_label: useAsyncDisposable
 description: "Manages async disposable resources using the TC39 Explicit Resource Management proposal."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
-
 Bridges TC39 Explicit Resource Management (`Symbol.asyncDispose`) with React lifecycles. It asynchronously creates a disposable resource and disposes it when the component unmounts or when the dependency array changes.
 
 This hook requires `Symbol.asyncDispose` support at runtime. Browsers such as Safari currently need a polyfill. Load one like `core-js/proposals/explicit-resource-management` before using this hook.
-
-[//]: # "Main"
 
 ## Examples
 
@@ -77,7 +75,7 @@ function UserConnectionPanel() {
 }
 ```
 
-## Arguments
+## Parameters
 
 | Argument  | Type               | Description                                                | Default value |
 | --------- | ------------------ | ---------------------------------------------------------- | ------------- |
@@ -95,3 +93,15 @@ function UserConnectionPanel() {
 - Import from `rooks/experimental`, not `rooks`.
 - `rooks` does not polyfill `Symbol.asyncDispose` for you.
 - If deps change before the factory resolves, the stale resource is disposed immediately when it arrives.
+
+## Behavior and lifecycle
+
+The factory starts from an effect and the hook returns `null` until it resolves. A dependency change or unmount clears the published resource and invokes `[Symbol.asyncDispose]()` without blocking React cleanup. If an obsolete factory resolves later, its resource is disposed immediately instead of being published. Development Strict Mode can create and dispose more than once, so both operations must be safe to repeat.
+
+## Compatibility and accessibility
+
+SSR returns `null` because the factory runs only on the client. Missing `Symbol.asyncDispose` support throws from the effect. Factory rejections are not converted into hook state, and asynchronous disposal failures are intentionally ignored; handle or report failures inside those functions. Load the polyfill before React mounts when the runtime lacks the symbol.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

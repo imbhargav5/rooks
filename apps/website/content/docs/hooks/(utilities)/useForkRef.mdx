@@ -1,73 +1,55 @@
 ---
-id: useForkRef
 title: useForkRef
-sidebar_label: useForkRef
-description: "Merges two refs into one so both receive the same DOM node."
+description: Sends one ref value to two mutable or callback refs.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMergeRefs]
 ---
 
 ## About
 
-A hook that can combine two refs(mutable or callbackRefs) into a single callbackRef
+`useForkRef` combines two refs so a single element can satisfy an internal ref and a consumer-provided ref. Both mutable refs and callback refs are supported.
 
-## Examples
+## Example
 
-```jsx
-import "./styles.css";
-import {
-  useBoundingclientrectRef,
-  useForkRef,
-  useOutsideClickRef,
-} from "rooks";
+```tsx
+import { useCallback, useRef, useState } from "react";
+import { useForkRef } from "rooks";
 
-function App() {
-  const [outsideClickRef] = useOutsideClickRef(() => {
-    console.log("clicked outside");
-  });
-  const [
-    myBoundingclientrectRef,
-    boundingclientrect,
-  ] = useBoundingclientrectRef();
-  const myRef = useForkRef(outsideClickRef, myBoundingclientrectRef);
+export default function SharedInputRef() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [connected, setConnected] = useState(false);
+  const reportRef = useCallback((node: HTMLInputElement | null) => {
+    setConnected(node !== null);
+  }, []);
+  const sharedRef = useForkRef(inputRef, reportRef);
+
   return (
-    <div>
-      <h1>Rooks : useForkRef example </h1>
-      <div
-        ref={myRef}
-        style={{
-          background: "teal",
-          color: "white",
-          padding: 8,
-          margin: 4,
-          marginTop: 20,
-        }}
-      >
-        <p>
-          Click outside the box to see logs{" "}
-          {JSON.stringify(boundingclientrect, 1, 2)}
-        </p>
-      </div>
-    </div>
+    <label>
+      Name <input ref={sharedRef} />
+      <span>{connected ? " connected" : " disconnected"}</span>
+    </label>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type                 | Description |
-| -------------- | -------------------- | ----------- |
-| ref2           | Callback/Mutable ref | First ref   |
-| ref1           | Callback/Mutable ref | Second ref  |
+- `refA`, `refB` — a React mutable ref, callback ref, `null`, or `undefined`, both receiving the same value.
 
-### Returns
+## Return value
 
-| Return value | Type         | Description                                                                           | Default value |
-| ------------ | ------------ | ------------------------------------------------------------------------------------- | ------------- |
-| ref          | Callback ref | A callback ref function that can internally combines both the refs from the arguments | () => null    |
+Returns a memoized callback ref, or `null` when both inputs are `null`. React supplies the element on attachment and `null` on detachment.
 
-## Original source
+## Behavior and lifecycle
 
-_Note_: Credit of this hook goes to [material-ui](https://github.com/mui-org/material-ui/)
+The combined ref is stable while both input refs are stable. If either input changes, React calls the old combined ref with `null` before attaching through the new one, naturally cleaning up both destinations. Callback refs are invoked in argument order; an exception from the first prevents the second from being updated.
 
-[Source](https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/utils/useForkRef.js)
+## Compatibility and accessibility
+
+The hook is SSR-safe and performs work only when React attaches a ref. It does not change the element's semantics, focus behavior, or accessible name.
+
+## Related
+
+- [useMergeRefs](/docs/hooks/useMergeRefs) combines any number of refs.

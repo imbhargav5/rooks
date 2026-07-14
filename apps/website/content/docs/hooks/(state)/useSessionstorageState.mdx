@@ -1,219 +1,68 @@
 ---
-id: useSessionstorageState
 title: useSessionstorageState
-sidebar_label: useSessionstorageState
-description: "Synchronizes React state with a sessionStorage key."
+description: Persists React state in sessionStorage and synchronizes matching hook instances.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useLocalstorageState]
 ---
 
 ## About
 
-A hook that provides state management synchronized with sessionStorage. It automatically persists state changes to sessionStorage and provides real-time synchronization across browser windows and tabs. The hook handles JSON serialization/deserialization automatically and provides a clean API similar to React's useState.
+`useSessionstorageState` reads and writes JSON data in `sessionStorage`. It persists reloads for the lifetime of a tab and synchronizes mounted hook instances that use the same key and storage area.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-#### Basic example
-
-```jsx
+```tsx
 import { useSessionstorageState } from "rooks";
 
-export default function App() {
-  const [count, setCount] = useSessionstorageState("my-app:count", 0);
+export default function SessionDraft() {
+  const [draft, setDraft, remove] = useSessionstorageState("message-draft", "");
 
   return (
-    <div className="App">
-      <h1>Session Storage Counter</h1>
-      <p>Count: {count}</p>
-      <p>Refresh the page to see the value persisted!</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
-    </div>
-  );
-}
-```
-
-#### Complex object storage
-
-```jsx
-import { useSessionstorageState } from "rooks";
-
-export default function UserProfile() {
-  const [user, setUser] = useSessionstorageState("user-profile", {
-    name: "",
-    email: "",
-    preferences: {
-      theme: "light",
-      notifications: true,
-    },
-  });
-
-  const updateUser = (field, value) => {
-    setUser((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const updatePreferences = (pref, value) => {
-    setUser((prev) => ({
-      ...prev,
-      preferences: {
-        ...prev.preferences,
-        [pref]: value,
-      },
-    }));
-  };
-
-  return (
-    <div>
-      <h2>User Profile</h2>
-      <input
-        placeholder="Name"
-        value={user.name}
-        onChange={(e) => updateUser("name", e.target.value)}
+    <section>
+      <label htmlFor="draft">Draft message</label>
+      <textarea
+        id="draft"
+        value={draft}
+        onChange={(event) => setDraft(event.currentTarget.value)}
       />
-      <input
-        placeholder="Email"
-        value={user.email}
-        onChange={(e) => updateUser("email", e.target.value)}
-      />
-      <label>
-        <input
-          type="checkbox"
-          checked={user.preferences.notifications}
-          onChange={(e) => updatePreferences("notifications", e.target.checked)}
-        />
-        Enable notifications
-      </label>
-      <select
-        value={user.preferences.theme}
-        onChange={(e) => updatePreferences("theme", e.target.value)}
-      >
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
-  );
-}
-```
-
-#### Cross-window synchronization for shared drafts
-
-```jsx
-import { useSessionstorageState } from "rooks";
-
-export default function SyncDemo() {
-  const [message, setMessage] = useSessionstorageState(
-    "sync-message",
-    "Hello World"
-  );
-  const [lastUpdated, setLastUpdated] = useSessionstorageState(
-    "last-updated",
-    Date.now()
-  );
-
-  const updateMessage = (newMessage) => {
-    setMessage(newMessage);
-    setLastUpdated(Date.now());
-  };
-
-  const clearDraft = () => {
-    setMessage("");
-    setLastUpdated(Date.now());
-  };
-
-  return (
-    <div>
-      <h2>Cross-Window Sync Demo</h2>
-      <p>Open this page in multiple tabs to see real-time synchronization!</p>
-
-      <div>
-        <strong>Current Message:</strong> {message || "No message"}
-      </div>
-      <div>
-        <strong>Last Updated:</strong>{" "}
-        {new Date(lastUpdated).toLocaleTimeString()}
-      </div>
-
-      <input
-        value={message || ""}
-        onChange={(e) => updateMessage(e.target.value)}
-        placeholder="Type a message..."
-      />
-
-      <button onClick={() => updateMessage("Updated from tab!")}>
-        Update Message
+      <button type="button" onClick={() => setDraft("")}>
+        Clear editor
       </button>
-      <button onClick={clearDraft}>Clear Draft</button>
-
-      <p>
-        <em>
-          Try changing the draft in one tab and watch it update in others!
-        </em>
-      </p>
-    </div>
+      <button type="button" onClick={remove}>
+        Remove stored draft
+      </button>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument     | Type           | Description                                                | Default |
-| ------------ | -------------- | ---------------------------------------------------------- | ------- |
-| key          | string         | The sessionStorage key to use for persistence              | -       |
-| initialState | S \| (() => S) | Initial state value or function that returns initial state | -       |
+- `key: string` — required `sessionStorage` key.
+- `initialState?: S | (() => S)` — direct or lazily computed fallback when the key is absent or storage cannot be read. It defaults to `undefined`.
 
-### Returns
+## Return value
 
-Returns an array with three elements:
+The hook returns `[value, setValue, remove]`:
 
-| Return value | Type                          | Description                                           |
-| ------------ | ----------------------------- | ----------------------------------------------------- |
-| value        | S                             | Current state value, synchronized with sessionStorage |
-| setValue     | `Dispatch<SetStateAction<S>>` | Function to update the state (similar to useState)    |
-| remove       | () => void                    | Function to remove the item from sessionStorage       |
+- `value: S` — the current in-memory value.
+- `setValue: Dispatch<SetStateAction<S>>` — resolves a value or functional updater, persists it, and broadcasts it to same-key hook instances in the document.
+- `remove(): void` — removes the storage item. It does not change or broadcast the current in-memory value.
 
-### Features
+## Behavior and lifecycle
 
-#### Automatic Persistence
+Values are serialized with `JSON.stringify` and parsed with `JSON.parse`. Changing `key` loads the new key before it is persisted. Same-document custom events and browser `storage` events update matching instances without echo-writing the synchronized value. Event listeners follow the key and are removed on unmount. Rapid functional setters resolve against the most recently stored value.
 
-- State changes are automatically saved to sessionStorage
-- Values are JSON serialized/deserialized automatically
-- Handles complex objects, arrays, and primitive values
+Setting the value to `undefined` removes the storage item while leaving the in-memory value `undefined`. Storage, parsing, and quota failures are logged; state continues in memory when possible.
 
-#### Cross-Window Synchronization
+`sessionStorage` is partitioned by origin and top-level browsing context. Separate tabs generally do not share live session state; same-origin frames that share the storage area can receive `storage` events.
 
-- Changes in one browser tab/window automatically sync to other tabs/windows
-- Uses native `storage` events for cross-document communication
-- Real-time updates without page refresh
+## Compatibility and accessibility
 
-#### Within-Document Synchronization
+On the server, the initializer supplies the value because storage is unavailable. A stored browser value can therefore produce different hydration markup; use a client boundary or defer storage-dependent output when needed. Privacy settings can deny access, and persisted values must be JSON-serializable. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
 
-- Multiple instances of the same hook with the same key stay synchronized
-- Uses custom events for efficient within-document communication
-- Prevents infinite update loops
+## Related
 
-#### Error Handling
-
-- Gracefully handles JSON parsing errors
-- Safe fallback when sessionStorage is unavailable (SSR)
-- Console warnings for debugging in non-browser environments
-
-#### Memory Management
-
-- Automatically cleans up event listeners on unmount
-- Optimized re-renders using useCallback and useRef
-- No memory leaks from event listeners
-
-### Notes
-
-- The hook is SSR-safe and handles cases where `window` or `sessionStorage` are undefined
-- Values are stored as JSON strings, so only JSON-serializable values are supported
-- sessionStorage data persists until the browser tab is closed (unlike localStorage which persists indefinitely)
-- Cross-window synchronization only works within the same domain and browser session
-
-## Robustness and lifecycle
-
-Changing `key` reloads that key before persistence, synchronized updates do not echo-write, and rapid functional setters compose correctly. If storage access is denied or exceeds quota, the hook keeps its in-memory state without crashing.
+- [useLocalstorageState](/docs/hooks/useLocalstorageState) shares persisted state across same-origin tabs and browser sessions.

@@ -1,346 +1,60 @@
 ---
-id: useAsyncEffect
 title: useAsyncEffect
-sidebar_label: useAsyncEffect
-description: "Runs an async function inside a useEffect with proper cleanup support."
+description: Runs asynchronous effect work with a current-generation guard and optional cleanup.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDebouncedAsyncEffect, useGetIsMounted]
 ---
 
 ## About
 
-A version of `useEffect` that accepts an async function and provides safe handling of asynchronous operations in React components. This hook solves the common problem of race conditions and memory leaks that occur when using async functions directly inside `useEffect`.
+`useAsyncEffect` starts a promise-returning function after React commits an effect. The function receives `shouldContinueEffect`, which reports whether its component is still mounted and this invocation is still the newest one. Check it after each `await` before updating state.
 
-The standard `useEffect` hook only works with synchronous effect functions. While you can run async functions inside `useEffect`, this approach has several gotchas involving React state manipulation, race conditions, and cleanup. `useAsyncEffect` provides a safer alternative with built-in race condition prevention and proper cleanup handling.
-
-[//]: # "Main"
+The guard prevents stale work from committing results; it does not abort the underlying request or promise.
 
 ## Examples
 
-### Basic async data fetching
-
-```jsx
-import { useAsyncEffect } from "rooks";
+```tsx
 import { useState } from "react";
+import { useAsyncEffect } from "rooks";
 
-export default function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+export default function AsyncGreeting() {
+  const [message, setMessage] = useState("Waiting…");
 
-  useAsyncEffect(
-    async (shouldContinueEffect) => {
-      setLoading(true);
-      
-      try {
-        const response = await fetch(`/api/users/${userId}`);
-        const userData = await response.json();
-        
-        // Only update state if the effect hasn't been cancelled
-        if (shouldContinueEffect()) {
-          setUser(userData);
-          setLoading(false);
-        }
-      } catch (error) {
-        if (shouldContinueEffect()) {
-          console.error("Failed to fetch user:", error);
-          setLoading(false);
-        }
-      }
-    },
-    [userId] // Re-run when userId changes
-  );
+  useAsyncEffect(async (shouldContinueEffect) => {
+    const value = await Promise.resolve("Hello from async work");
+    if (shouldContinueEffect()) setMessage(value);
+  }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (!user) return <div>User not found</div>;
-
-  return (
-    <div>
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
-    </div>
-  );
+  return <p role="status">{message}</p>;
 }
 ```
 
-### Preventing race conditions with multiple async calls
+## Parameters
 
-```jsx
-import { useAsyncEffect } from "rooks";
-import { useState } from "react";
+| Argument  | Type                                                  | Default     | Meaning                                                     |
+| --------- | ----------------------------------------------------- | ----------- | ----------------------------------------------------------- |
+| `effect`  | `(shouldContinueEffect: () => boolean) => Promise<T>` | required    | Starts the asynchronous work.                               |
+| `deps`    | `DependencyList`                                      | required    | Uses React dependency comparison to start a new invocation. |
+| `cleanup` | `(result: T \| void) => void`                         | `undefined` | Runs before the next invocation and on unmount.             |
 
-export default function SearchResults({ query }) {
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
+## Return value
 
-  useAsyncEffect(
-    async (shouldContinueEffect) => {
-      if (!query.trim()) {
-        setResults([]);
-        return;
-      }
+The hook returns `void`.
 
-      setLoading(true);
+## Behavior and lifecycle
 
-      // First API call
-      const searchResponse = await fetch(`/api/search?q=${query}`);
-      const searchData = await searchResponse.json();
-      
-      // Check if we should continue before making the second call
-      if (!shouldContinueEffect()) return;
+Each new invocation receives a new call identifier. `shouldContinueEffect()` becomes `false` after a newer invocation starts or the component unmounts. Cleanup receives the resolved value only if the promise finished before cleanup; otherwise it receives `undefined`. The cleanup callback itself is kept fresh without restarting the effect.
 
-      // Second API call to get detailed information
-      const detailsPromises = searchData.results.map(item =>
-        fetch(`/api/details/${item.id}`).then(res => res.json())
-      );
-      
-      const detailedResults = await Promise.all(detailsPromises);
-      
-      // Final check before updating state
-      if (shouldContinueEffect()) {
-        setResults(detailedResults);
-        setLoading(false);
-      }
-    },
-    [query]
-  );
+The hook does not catch rejected promises. Catch expected failures inside `effect` to avoid an unhandled rejection. In development, React Strict Mode may replay effects, so async work must tolerate more than one start.
 
-  return (
-    <div>
-      {loading && <div>Searching...</div>}
-      <div>
-        {results.map(result => (
-          <div key={result.id}>
-            <h3>{result.title}</h3>
-            <p>{result.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-```
+## Compatibility and accessibility
 
-### Using cleanup function for resource management
+The hook itself is server-safe because React effects do not run during server rendering. Browser APIs used inside `effect`, such as `fetch` or `AbortController`, still need their own support and cancellation strategy. Expose loading and error changes through an appropriate live region when users need feedback.
 
-```jsx
-import { useAsyncEffect } from "rooks";
-import { useState } from "react";
+## Related
 
-export default function DataStream({ endpoint }) {
-  const [data, setData] = useState([]);
-  const [status, setStatus] = useState('disconnected');
-
-  useAsyncEffect(
-    async (shouldContinueEffect) => {
-      // Create WebSocket connection
-      const ws = new WebSocket(endpoint);
-      setStatus('connecting');
-
-      return new Promise((resolve) => {
-        ws.onopen = () => {
-          if (shouldContinueEffect()) {
-            setStatus('connected');
-          }
-        };
-
-        ws.onmessage = (event) => {
-          if (shouldContinueEffect()) {
-            const newData = JSON.parse(event.data);
-            setData(prev => [...prev, newData]);
-          }
-        };
-
-        ws.onclose = () => {
-          if (shouldContinueEffect()) {
-            setStatus('disconnected');
-          }
-          resolve(ws); // Return the WebSocket for cleanup
-        };
-
-        ws.onerror = (error) => {
-          if (shouldContinueEffect()) {
-            console.error('WebSocket error:', error);
-            setStatus('error');
-          }
-          resolve(ws);
-        };
-      });
-    },
-    [endpoint],
-    (webSocket) => {
-      // Cleanup function: close the WebSocket connection
-      if (webSocket && webSocket.readyState === WebSocket.OPEN) {
-        webSocket.close();
-      }
-      setStatus('disconnected');
-    }
-  );
-
-  return (
-    <div>
-      <div>Status: {status}</div>
-      <div>
-        {data.map((item, index) => (
-          <div key={index}>{JSON.stringify(item)}</div>
-        ))}
-      </div>
-    </div>
-  );
-}
-```
-
-### Advanced example with error handling and conditional execution
-
-```jsx
-import { useAsyncEffect } from "rooks";
-import { useState } from "react";
-
-export default function DataDashboard({ filters, refreshInterval }) {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState(null);
-
-  useAsyncEffect(
-    async (shouldContinueEffect) => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        // Fetch initial data
-        const response = await fetch('/api/dashboard', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(filters)
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const initialData = await response.json();
-        
-        if (!shouldContinueEffect()) return;
-
-        setData(initialData);
-        setLastUpdated(new Date());
-        setLoading(false);
-
-        // Set up periodic refresh if refreshInterval is provided
-        if (refreshInterval > 0) {
-          const intervalId = setInterval(async () => {
-            if (!shouldContinueEffect()) {
-              clearInterval(intervalId);
-              return;
-            }
-
-            try {
-              const refreshResponse = await fetch('/api/dashboard', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(filters)
-              });
-
-              if (refreshResponse.ok && shouldContinueEffect()) {
-                const refreshedData = await refreshResponse.json();
-                setData(refreshedData);
-                setLastUpdated(new Date());
-              }
-            } catch (refreshError) {
-              if (shouldContinueEffect()) {
-                console.warn('Failed to refresh data:', refreshError);
-              }
-            }
-          }, refreshInterval);
-
-          // Return the interval ID for cleanup
-          return intervalId;
-        }
-      } catch (err) {
-        if (shouldContinueEffect()) {
-          setError(err.message);
-          setLoading(false);
-        }
-      }
-    },
-    [filters, refreshInterval],
-    (intervalId) => {
-      // Cleanup function: clear the interval if it exists
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    }
-  );
-
-  if (loading && !data) return <div>Loading dashboard...</div>;
-  if (error) return <div>Error: {error}</div>;
-
-  return (
-    <div>
-      {lastUpdated && (
-        <div>Last updated: {lastUpdated.toLocaleTimeString()}</div>
-      )}
-      {loading && <div>Refreshing...</div>}
-      {data && (
-        <div>
-          <h2>Dashboard Data</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
-    </div>
-  );
-}
-```
-
-## Arguments
-
-| Argument | Type             | Description                                                        | Default   |
-| -------- | ---------------- | ------------------------------------------------------------------ | --------- |
-| effect   | Function         | Async function that receives `shouldContinueEffect` callback      | Required  |
-| deps     | DependencyList   | Array of dependencies that trigger effect re-execution            | Required  |
-| cleanup  | Function         | Optional cleanup function called with the previous effect result   | undefined |
-
-## Effect Function
-
-The effect function receives a `shouldContinueEffect` callback that should be used to check if the effect is still valid before updating state or performing side effects. This prevents race conditions and memory leaks.
-
-### Effect Function Parameters
-
-| Parameter           | Type     | Description                                                      |
-| ------------------- | -------- | ---------------------------------------------------------------- |
-| shouldContinueEffect| Function | Returns `true` if the effect is still valid and should continue |
-
-### Effect Function Return Value
-
-The effect function can optionally return a value that will be passed to the cleanup function when the effect is cleaned up or re-run.
-
-## Cleanup Function
-
-The cleanup function is called when:
-- The component unmounts
-- The dependencies change and the effect needs to re-run
-- The component re-renders and the effect is cancelled
-
-### Cleanup Function Parameters
-
-| Parameter | Type | Description                                              |
-| --------- | ---- | -------------------------------------------------------- |
-| result    | Any  | The value returned by the previous effect function      |
-
-## Key Features
-
-- **Race Condition Prevention**: The `shouldContinueEffect` callback prevents state updates from cancelled effects
-- **Memory Leak Prevention**: Automatic cleanup when components unmount or dependencies change
-- **Flexible Cleanup**: Cleanup function receives the result from the previous effect execution
-- **Error Handling**: Errors in async effects are properly propagated
-- **Dependency Tracking**: Works just like `useEffect` with dependency arrays
-
-## Common Use Cases
-
-- **Data Fetching**: Safe async data loading with race condition prevention
-- **WebSocket Connections**: Managing persistent connections with proper cleanup
-- **Periodic Updates**: Setting up intervals or timeouts with automatic cleanup
-- **Complex Async Workflows**: Multi-step async operations with conditional execution
-- **Resource Management**: Managing any async resources that need cleanup
-
-## Robustness and lifecycle
-
-Only changes to `deps` restart the async effect. The latest cleanup callback is used when that generation ends, and `shouldContinueEffect()` becomes false for stale or unmounted generations.
+- [useDebouncedAsyncEffect](/docs/hooks/useDebouncedAsyncEffect)
+- [useGetIsMounted](/docs/hooks/useGetIsMounted)
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)

@@ -1,21 +1,40 @@
 ---
-id: useQueueState
 title: useQueueState
-sidebar_label: useQueueState
 description: "Manages queue (FIFO) state with enqueue, dequeue, and peek operations."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useStackState, useArrayState]
 ---
 
 ## About
 
 A React hook that manages state in the form of a queue
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useQueueState } from "rooks";
+
+export default function TaskQueue() {
+  const [tasks, { dequeue, enqueue }] = useQueueState(["Review docs"]);
+
+  return (
+    <section>
+      <p>Next: {tasks[0] ?? "Queue empty"}</p>
+      <button type="button" onClick={() => enqueue("Publish release")}>
+        Enqueue
+      </button>
+      <button type="button" onClick={() => void dequeue()}>
+        Dequeue
+      </button>
+    </section>
+  );
+}
+```
 
 ```jsx
 import React, { useRef } from "react";
-import "./styles.css";
 import { useQueueState } from "rooks";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
@@ -171,11 +190,11 @@ export default function App() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Arguments   | Type  | Description | Default value |
-| ----------- | ----- | ----------- | ------------- |
-| initialList | any[] | An array    | undefined     |
+| Parameter     | Type  | Default  | Description                          |
+| ------------- | ----- | -------- | ------------------------------------ |
+| `initialList` | `T[]` | Required | Items copied into the initial queue. |
 
 ### Returned array items
 
@@ -186,4 +205,19 @@ export default function App() {
 | peek           | function | Return the item at the front of the queue |
 | length         | number   | Number of items in the queue              |
 
----
+## Return value
+
+Returns `[list, controls]`. `list` is the current queue in first-in-first-out order. `controls` contains `enqueue(item)`, `dequeue()`, `peek()`, and the current numeric `length`. `enqueue` returns the new length; `dequeue` returns the removed front item or `undefined`; `peek` returns the front item or `undefined` without removing it.
+
+## Behavior and lifecycle
+
+The initial array is shallow-copied. Queue operations create new arrays, but their callbacks close over the current rendered list instead of using functional updates. Do not call several queue operations from the same stale render and expect them to compose; sequence them across renders or combine the intended update in application state. The hook creates no effects.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and has no browser requirement. When a visible queue changes, preserve focus and announce insertions/removals only when users need that feedback.
+
+## Related
+
+- [useStackState](/docs/hooks/useStackState)
+- [useArrayState](/docs/hooks/useArrayState)

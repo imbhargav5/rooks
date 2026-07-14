@@ -1,33 +1,27 @@
 ---
-id: useOnline
 title: useOnline
-sidebar_label: useOnline
-description: "Tracks whether the browser has an active internet connection."
+description: "Tracks the browser's navigator.onLine connectivity hint."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
 
-Online status hook for React.
+Track the browser's `navigator.onLine` hint and update after `online` and `offline` events.
 
-### Examples
+## Examples
 
-```jsx
-import "./styles.css";
+```tsx
 import { useOnline } from "rooks";
 
 function App() {
   const online = useOnline();
-  console.log("I'm online");
-
   return (
-    <div>
-      <h1>Rooks: useOnline example</h1>
-
-      <hr></hr>
-      <div style={{ backgroundColor: "lightblue" }}>
-        Status:You are {online ? "Online" : "Offline"}
-      </div>
-    </div>
+    <p role="status">
+      {online === null ? "Checking connection…" : online ? "Online" : "Offline"}
+    </p>
   );
 }
 
@@ -57,10 +51,22 @@ function ConnectionBanner() {
 }
 ```
 
-### Return value
+## Return value
 
-Offline status (boolean) is returned.
+Returns `boolean | null`: `null` for the server snapshot, then the current value of `navigator.onLine` in the browser.
 
-## Robustness and lifecycle
+## Behavior and lifecycle
 
-The hook returns `null` during server rendering, then reports `navigator.onLine` after hydration. Online and offline listeners are removed when the last component instance unmounts.
+All instances share a `useSyncExternalStore` subscription. The first subscriber adds `online` and `offline` listeners; the last unsubscribe removes them. The browser value is read again for each event rather than inferred from the event name.
+
+## Parameters
+
+This hook takes no parameters.
+
+## Compatibility and accessibility
+
+`navigator.onLine` reports whether the browser believes it has a network connection, not whether the internet or your service is reachable. Confirm important operations with the actual request and handle failures. Render a neutral `null` fallback during hydration and announce meaningful connection changes without relying only on color. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

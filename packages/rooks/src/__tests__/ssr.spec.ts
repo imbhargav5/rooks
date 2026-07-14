@@ -173,6 +173,30 @@ describe("SSR Environment Detection", () => {
     });
   });
 
+  describe("useEventListener SSR", () => {
+    it("should not throw when target is null", async () => {
+      expect.hasAssertions();
+      const { useEventListener } = await import("@/hooks/useEventListener");
+      expect(() =>
+        useEventListener("click", vi.fn(), { target: null })
+      ).not.toThrow();
+    });
+  });
+
+  describe("useBrowserCookieState SSR", () => {
+    it("should throw when document is undefined", async () => {
+      expect.hasAssertions();
+      const {
+        BROWSER_COOKIE_STATE_ERROR_MESSAGE,
+        useBrowserCookieState,
+      } = await import("@/hooks/useBrowserCookieState");
+
+      expect(() =>
+        useBrowserCookieState("theme", "light", { path: "/" })
+      ).toThrow(BROWSER_COOKIE_STATE_ERROR_MESSAGE);
+    });
+  });
+
   describe("useOnWindowScroll SSR", () => {
     it("should not throw when window is undefined", async () => {
       expect.hasAssertions();
@@ -551,6 +575,14 @@ describe("SSR Environment Detection", () => {
     });
   });
 
+  describe("useBeforeUnload SSR", () => {
+    it("should not throw in SSR", async () => {
+      expect.hasAssertions();
+      const { useBeforeUnload } = await import("@/hooks/useBeforeUnload");
+      expect(() => useBeforeUnload()).not.toThrow();
+    });
+  });
+
   // ============================================
   // Observer Hooks
   // ============================================
@@ -917,6 +949,39 @@ describe("SSR Environment Detection", () => {
       const { useInput } = await import("@/hooks/useInput");
       const result = useInput("initial");
       expect(result.value).toBe("initial");
+    });
+  });
+
+  describe("useIsClient SSR", () => {
+    it("should return false when rendered on the server", async () => {
+      expect.hasAssertions();
+      const { useIsClient } = await import("@/hooks/useIsClient");
+      expect(useIsClient()).toBe(false);
+    });
+  });
+
+  describe("useLocationSnapshot SSR", () => {
+    it("should return null when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useLocationSnapshot } = await import("@/hooks/useLocationSnapshot");
+      expect(useLocationSnapshot()).toBe(null);
+    });
+  });
+
+  describe("useLocationHash SSR", () => {
+    it("should return null when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useLocationHash } = await import("@/hooks/useLocationHash");
+      expect(useLocationHash()).toBe(null);
+    });
+  });
+
+  describe("useLocationSearchParam SSR", () => {
+    it("should return null when window is undefined", async () => {
+      expect.hasAssertions();
+      const { useLocationSearchParam } =
+        await import("@/hooks/useLocationSearchParam");
+      expect(useLocationSearchParam("test")).toBe(null);
     });
   });
 

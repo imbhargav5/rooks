@@ -1,83 +1,75 @@
 ---
-id: useDimensionsRef
 title: useDimensionsRef
-sidebar_label: useDimensionsRef
-description: "Returns a ref and the width/height dimensions of the attached element."
+description: Measures an attached div after layout and optionally on window resize and scroll.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMeasure, useBoundingclientrectRef, useWindowSize]
 ---
 
 ## About
 
-Easily grab dimensions of an element with a ref using this hook
+`useDimensionsRef` returns a callback ref and a simplified bounding-rect snapshot. It schedules measurement in `requestAnimationFrame` after layout, on attachment, and—by default—after window resize and scroll events.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Basic measurement
-
-```jsx
+```tsx
 import { useDimensionsRef } from "rooks";
 
-export default function App() {
-  const [ref, dimensions, node] = useDimensionsRef();
+export default function PositionedPanel() {
+  const [panelRef, dimensions] = useDimensionsRef();
 
   return (
-    <div className="App">
-      <h1>useDimensionsRef example</h1>
+    <section>
       <div
-        ref={ref}
-        style={{
-          border: "2px solid black",
-          width: "200px",
-          height: "200px",
-        }}
+        ref={panelRef}
+        style={{ width: "50%", padding: 16, border: "1px solid" }}
       >
-        dimensions.height: {dimensions?.height}px
-        <br />
-        dimensions.width: {dimensions?.width}px
+        Resize or scroll the window.
       </div>
-    </div>
+      <p aria-live="polite">
+        {dimensions
+          ? `${Math.round(dimensions.width)} × ${Math.round(dimensions.height)} at ${Math.round(dimensions.left)}, ${Math.round(dimensions.top)}`
+          : "Waiting for a client-side measurement"}
+      </p>
+    </section>
   );
 }
 ```
 
-### Access the tracked node as well as its dimensions
+## Parameters
 
-```jsx
-import { useDimensionsRef } from "rooks";
+The optional object contains:
 
-export default function PreviewCard() {
-  const [ref, dimensions, node] = useDimensionsRef();
+| Option           | Type      | Default | Description                           |
+| ---------------- | --------- | ------- | ------------------------------------- |
+| `updateOnResize` | `boolean` | `true`  | Remeasure after window resize events. |
+| `updateOnScroll` | `boolean` | `true`  | Remeasure after window scroll events. |
 
-  return (
-    <div>
-      <div
-        ref={ref}
-        style={{ width: 240, padding: 16, border: "1px solid #ccc" }}
-      >
-        Preview
-      </div>
-      <p>Width: {dimensions?.width ?? 0}px</p>
-      <p>Tracking node: {node ? node.tagName.toLowerCase() : "none"}</p>
-    </div>
-  );
-}
-```
+## Return value
 
-### Arguments
+Returns `[ref, dimensions, element]`.
 
-| Arguments | Type                                                     | Description                                             | Default value                                      |
-| --------- | -------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------- |
-| options   | \{ updateOnScroll?: boolean, updateOnResize?: boolean \} | Whether to update dimension on window resize and scroll | \{ updateOnScroll = true, updateOnResize = true \} |
+- `ref` attaches to an `HTMLDivElement`.
+- `dimensions` is `null` before the first measurement, then contains `top`, `right`, `bottom`, `left`, `width`, `height`, `x`, and `y`. The `x` and `y` fields mirror `left` and `top`.
+- `element` is the currently attached `HTMLElement`, or `null`.
 
-### Returns
+During server rendering the tuple is `[undefined, null, null]`.
 
-Returns an array of 3 items:
+## Behavior and lifecycle
 
-| Return item | Type                   | Description                                                                          | Default value |
-| ----------- | ---------------------- | ------------------------------------------------------------------------------------ | ------------- |
-| ref         | Callback ref           | A callback ref function to be used as a ref for the element that needs to be tracked | undefined     |
-| dimensions  | UseDimensionsRefReturn | An object with dimensions of the ref element                                         | null          |
-| node        | HTMLElement            | The element being tracked by ref                                                     | null          |
+Node attachment changes schedule a measurement from a layout effect. Enabled resize and scroll listeners schedule the same work through `requestAnimationFrame`; their listeners are cleaned up by the underlying window-event hooks. This coalesces reads with a browser frame but does not cancel an already queued frame when the component unmounts.
 
----
+The hook reads `getBoundingClientRect()`, so positions are relative to the viewport and change with scrolling. Disable either listener when that signal is unnecessary.
+
+## Compatibility and accessibility
+
+The hook explicitly detects a missing `window`, logs a warning, and returns its server tuple. Client and server markup should not depend on a non-null first measurement. Browsers must provide `requestAnimationFrame()` and `getBoundingClientRect()`.
+
+Use dimensions for progressive layout enhancements rather than hiding essential content. Verify behavior at high zoom and with larger text. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useMeasure](/docs/hooks/useMeasure) observes element-size changes rather than window events.
+- [useBoundingclientrectRef](/docs/hooks/useBoundingclientrectRef) exposes a manual bounding-rect update.
+- [useWindowSize](/docs/hooks/useWindowSize) reports viewport dimensions.

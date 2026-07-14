@@ -1,0 +1,84 @@
+---
+title: useWebSocket
+description: "Manage a WebSocket connection with parsing, sending, and reconnection helpers."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Open a WebSocket connection, track connection state, parse incoming messages, and optionally reconnect after unexpected closes.
+
+## Example
+
+```tsx
+import { useWebSocket } from "rooks/experimental";
+
+function Example() {
+  const { status, lastMessage, sendJson } = useWebSocket(
+    "ws://localhost:3001",
+    {
+      parseMessage: (event) =>
+        JSON.parse(String(event.data)) as { text: string },
+    }
+  );
+
+  return (
+    <div>
+      <button
+        type="button"
+        disabled={status !== "open"}
+        onClick={() => sendJson({ type: "ping" })}
+      >
+        Ping
+      </button>
+      <p role="status">Status: {status}</p>
+      <pre>{JSON.stringify(lastMessage, null, 2)}</pre>
+    </div>
+  );
+}
+```
+
+## Return value
+
+| Property           | Type/behavior                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| `socket`           | Active `WebSocket`, or `null`.                                                               |
+| `status`           | `"idle" \| "connecting" \| "open" \| "closing" \| "closed" \| "unsupported"`.                |
+| `lastMessage`      | Latest parsed value, or `null`.                                                              |
+| `lastMessageEvent` | Latest raw `MessageEvent`, or `null`.                                                        |
+| `error`            | Latest socket event or parsing `Error`, or `null`.                                           |
+| `send`             | Sends strings/binary data only while the socket is open; otherwise it is a silent no-op.     |
+| `sendJson`         | JSON-stringifies then delegates to `send`; serialization errors throw synchronously.         |
+| `connect`          | Opens a connection unless one is already connecting/open.                                    |
+| `disconnect`       | Cancels pending reconnection and explicitly closes the socket.                               |
+| `reconnect`        | Closes the active socket and opens a replacement, or connects immediately if none is active. |
+
+## Parameters
+
+`url` is required. The optional configuration object accepts:
+
+| Option         | Type                                                                             | Default         | Description                                                                       |
+| -------------- | -------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------- |
+| `protocols`    | `string \| string[]`                                                             | `undefined`     | WebSocket subprotocols.                                                           |
+| `autoConnect`  | `boolean`                                                                        | `true`          | Connect from an effect.                                                           |
+| `reconnect`    | `boolean \| { attempts?: number; intervalMs?: number \| ((attempt) => number) }` | `false`         | Reconnect after unexpected closes; `true` retries without a limit every 1,000 ms. |
+| `parseMessage` | `(event: MessageEvent) => TIncoming`                                             | `event.data`    | Converts incoming messages.                                                       |
+| `binaryType`   | `"blob" \| "arraybuffer"`                                                        | browser default | Applied to each new socket.                                                       |
+| callbacks      | functions                                                                        | `undefined`     | `onOpen`, `onMessage`, `onClose`, and `onError`.                                  |
+
+Object reconnection also defaults to a 1,000 ms interval; omitted `attempts` means unlimited retries. Attempt numbers start at 1.
+
+## Behavior and lifecycle
+
+URL, protocol, binary-type, or `autoConnect` changes clean up the prior effect and socket. Events from a replaced socket are ignored. Unexpected closes follow the reconnection policy; an explicit `disconnect` never does. Parse failures set `error` and call `onError` without closing the connection. Unmount clears the reconnect timer, closes through effect cleanup, and prevents stale events from updating React state.
+
+## Compatibility and accessibility
+
+SSR and the first hydration render report `idle` and do not connect. After mount, a runtime without `WebSocket` reports `unsupported`. Use `wss://` from secure pages, authenticate and validate every message, cap retries when endless reconnection would be harmful, and show connection/errors in an accessible status region when they affect the user. Browser WebSockets do not expose custom handshake headers.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

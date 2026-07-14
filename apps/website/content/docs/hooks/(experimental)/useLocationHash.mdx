@@ -1,0 +1,44 @@
+---
+title: useLocationHash
+description: "Read the current location hash, including the leading #."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Subscribe to the current `location.hash` value without wiring your own `hashchange` listener.
+
+## Example
+
+```tsx
+import { useLocationHash } from "rooks/experimental";
+
+function Example() {
+  const hash = useLocationHash();
+
+  return <div>Current hash: {hash ?? "(none)"}</div>;
+}
+```
+
+## Return value
+
+Returns the current hash as `string | null`. Browser values include the leading `#`; an empty hash is `""`, while the server snapshot is `null`.
+
+## Parameters
+
+This hook takes no parameters.
+
+## Behavior and lifecycle
+
+All location hooks share one external store. The first subscriber listens for `hashchange` and `popstate` and patches `history.pushState` and `history.replaceState` so same-page navigation also publishes a snapshot. The last unsubscribe restores the original history methods and removes the listeners.
+
+## Compatibility and accessibility
+
+The server snapshot is `null`; do not render structurally different markup from the hash until after hydration. Changing a hash can move focus or scroll position only when the browser and page markup support it, so manage focus explicitly for client-side navigation.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

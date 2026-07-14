@@ -1,60 +1,77 @@
 ---
-id: useFileDropRef
 title: useFileDropRef
-sidebar_label: useFileDropRef
-description: "Returns a ref and a list of dropped files when files are dropped onto the element."
+description: Returns a ref that validates dropped files and reports accepted and rejected files.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIsDroppingFiles]
 ---
 
 ## About
 
-Drop files easily
+`useFileDropRef` attaches drag-and-drop listeners to an element, validates the dropped files, and reports accepted and rejected groups.
 
-## Examples
-
-### Basic usage
-
-```tsx
-import { useFileDropRef } from "rooks";
-
-export default function App() {
-  useFileDropRef();
-  return null;
-}
-```
-
-### Validate files before accepting them
+## Example
 
 ```tsx
 import { useState } from "react";
 import { useFileDropRef } from "rooks";
 
 export default function ImageDropZone() {
-  const [accepted, setAccepted] = useState([]);
-  const [rejected, setRejected] = useState([]);
-
-  const ref = useFileDropRef(
+  const [result, setResult] = useState("No files dropped");
+  const dropRef = useFileDropRef(
     {
       accept: ["image/png", "image/jpeg"],
+      maxFileSize: 2_000_000,
       maxFiles: 3,
     },
     {
-      onFileAccepted: (file) =>
-        setAccepted((current) => [...current, file.name]),
-      onFileRejected: (file) =>
-        setRejected((current) => [...current, file.name]),
+      onDrop: (accepted, rejected) => {
+        setResult(
+          accepted.length + " accepted, " + rejected.length + " rejected"
+        );
+      },
     }
   );
 
   return (
-    <div ref={ref}>
-      <p>Drop images here</p>
-      <p>Accepted: {accepted.join(", ") || "none"}</p>
-      <p>Rejected: {rejected.join(", ") || "none"}</p>
-    </div>
+    <section
+      ref={dropRef}
+      style={{ border: "2px dashed currentColor", padding: 24 }}
+    >
+      <p>Drop up to three PNG or JPEG files here.</p>
+      <p>{result}</p>
+      <label>
+        Or choose files
+        <input type="file" accept="image/png,image/jpeg" multiple />
+      </label>
+    </section>
   );
 }
 ```
 
-## Robustness and lifecycle
+## Parameters
 
-When a drop exceeds `maxFiles`, every file is rejected. `onDrop` receives an empty accepted array and the complete rejected array, while `onFileRejected` is invoked once per file.
+The first parameter is an optional options object:
+
+- `accept?: string[]`: exact MIME types accepted by `file.type`. Extensions and wildcard patterns are not expanded.
+- `maxFileSize?: number`: maximum bytes per file; a file is rejected only when `size > maxFileSize`.
+- `maxFiles?: number`: maximum count for the entire drop.
+
+The second parameter is an optional callbacks object with `onDrop(acceptedFiles, rejectedFiles)`, `onFileAccepted(file)`, `onFileRejected(file, reason)`, `onDragEnter(event)`, and `onDragLeave(event)`. These option types are private and not importable from `rooks`.
+
+## Return value
+
+The hook returns a callback ref accepting an `HTMLElement | null`.
+
+## Behavior and lifecycle
+
+`drop` and `dragover` prevent their default browser actions. If the total count exceeds `maxFiles`, every file is rejected with `"Exceeded maximum number of files"`; individual type and size validation is skipped. Otherwise, each accepted/rejected callback runs before the final `onDrop`. The listeners always use fresh callbacks and are removed when the target changes or the component unmounts. The hook does not expose drag-active state.
+
+## Compatibility and accessibility
+
+The listeners attach in an effect and do not run during server rendering. File drag and drop is not keyboard- or touch-complete. Pair the target with a labeled file input and apply the same validation to files selected through that input.
+
+## Related
+
+- [useIsDroppingFiles](/docs/hooks/useIsDroppingFiles) reports whether a file drag is active.

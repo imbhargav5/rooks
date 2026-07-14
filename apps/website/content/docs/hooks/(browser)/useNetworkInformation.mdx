@@ -1,8 +1,10 @@
 ---
-id: useNetworkInformation
 title: useNetworkInformation
-sidebar_label: useNetworkInformation
 description: "Exposes network connectivity and speed information from the Network Information API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -21,14 +23,8 @@ npm install rooks
 import { useNetworkInformation } from "rooks";
 
 function NetworkStatus() {
-  const {
-    effectiveType,
-    downlink,
-    rtt,
-    saveData,
-    type,
-    isSupported
-  } = useNetworkInformation();
+  const { effectiveType, downlink, rtt, saveData, type, isSupported } =
+    useNetworkInformation();
 
   if (!isSupported) {
     return <div>Network Information API not supported</div>;
@@ -47,19 +43,19 @@ function NetworkStatus() {
 }
 ```
 
-## Return Value
+## Return value
 
 Returns an object with the following properties:
 
-| Property      | Type                              | Description                                   |
-| ------------- | --------------------------------- | --------------------------------------------- |
-| type          | `ConnectionType \| null`          | Network connection type (wifi, cellular, etc.)|
-| effectiveType | `EffectiveConnectionType \| null` | Effective connection type (4g, 3g, 2g, slow-2g)|
-| downlink      | `number \| null`                  | Downlink speed in Mbps                        |
-| downlinkMax   | `number \| null`                  | Maximum downlink speed in Mbps                |
-| rtt           | `number \| null`                  | Round trip time in milliseconds               |
-| saveData      | `boolean`                         | Whether data saver mode is enabled            |
-| isSupported   | `boolean`                         | Whether Network Information API is supported  |
+| Property      | Type                              | Description                                     |
+| ------------- | --------------------------------- | ----------------------------------------------- |
+| type          | `ConnectionType \| null`          | Network connection type (wifi, cellular, etc.)  |
+| effectiveType | `EffectiveConnectionType \| null` | Effective connection type (4g, 3g, 2g, slow-2g) |
+| downlink      | `number \| null`                  | Downlink speed in Mbps                          |
+| downlinkMax   | `number \| null`                  | Maximum downlink speed in Mbps                  |
+| rtt           | `number \| null`                  | Round trip time in milliseconds                 |
+| saveData      | `boolean`                         | Whether data saver mode is enabled              |
+| isSupported   | `boolean`                         | Whether Network Information API is supported    |
 
 ## Connection Types
 
@@ -80,6 +76,20 @@ Returns an object with the following properties:
 - `"4g"` - Fast connection (≥700 Kbps)
 
 ## Examples
+
+```tsx
+import { useNetworkInformation } from "rooks";
+
+export default function ConnectionSummary() {
+  const { effectiveType, saveData } = useNetworkInformation();
+  return (
+    <p>
+      Connection: {effectiveType ?? "unknown"}; data saver:{" "}
+      {saveData ? "on" : "off"}
+    </p>
+  );
+}
+```
 
 ### Adaptive Content Loading
 
@@ -152,6 +162,7 @@ function NetworkAwareApp() {
 ## Browser Support
 
 The Network Information API is supported in:
+
 - Chrome 61+
 - Edge 79+
 - Opera 48+
@@ -167,3 +178,19 @@ The Network Information API is supported in:
 - Connection information updates automatically when network changes
 - Use this for adaptive loading, not for tracking users
 - Respecting `saveData` provides better user experience
+
+## Parameters
+
+This hook takes no parameters.
+
+## Behavior and lifecycle
+
+The hook reads `navigator.connection` (including `mozConnection` and `webkitConnection` fallbacks) and subscribes to its `change` event. It removes the old listener when the connection object changes or the component unmounts. Missing fields remain `null`; `saveData` defaults to `false`.
+
+## Compatibility and accessibility
+
+SSR and unsupported browsers return null metrics with `isSupported: false`. The API has limited availability and its values are rounded estimates, not a reachability or bandwidth guarantee. Use it to reduce optional work, respect `saveData`, and keep a user-controlled path to full-quality content.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

@@ -1,50 +1,55 @@
 ---
-id: useLifecycleLogger
 title: useLifecycleLogger
-sidebar_label: useLifecycleLogger
-description: "Logs component mount, update, and unmount events for debugging."
+description: Logs a component's mount, update, and unmount lifecycle to the console.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDidMount, useDidUpdate, useWillUnmount]
 ---
 
 ## About
 
-A react hook that console logs parameters as component transitions through lifecycles.
-
-[//]: # "Main"
-
-## Installation
+`useLifecycleLogger` is a development aid that writes mount, update, and unmount messages to `console.log`, together with optional values.
 
 ## Examples
 
-```jsx
-import "./styles.css";
+```tsx
+import { useState } from "react";
 import { useLifecycleLogger } from "rooks";
-import { useEffect, useState } from "react";
 
-export default function App() {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    setValue(1);
-  }, []);
-
-  useLifecycleLogger("Demo", value);
+export default function LoggedCounter() {
+  const [count, setCount] = useState(0);
+  useLifecycleLogger("LoggedCounter", { count });
 
   return (
-    <div className="App">
-      <h1>useLifecycleLogger example</h1>
-      <h2>See console for logs</h2>
-    </div>
+    <button type="button" onClick={() => setCount((value) => value + 1)}>
+      Count: {count}
+    </button>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type   | Description                                               | Defualt     |
-| -------------- | ------ | --------------------------------------------------------- | ----------- |
-| componentName  | String | The name of component to be shown in the log              | "Component" |
-| rest           | Array  | An array of variables to be logged in component lifecycle | undefined   |
+| Argument        | Type        | Default       | Meaning                                    |
+| --------------- | ----------- | ------------- | ------------------------------------------ |
+| `componentName` | `string`    | `"Component"` | Prefix for each message.                   |
+| `...otherArgs`  | `unknown[]` | `[]`          | Values forwarded to mount and update logs. |
 
-### Returns
+## Return value
 
-No return value
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+Mount logs `"<name> mounted"` with the initial arguments. Every committed update logs `"<name> updated"` with that render's arguments. Unmount logs `"<name> unmounted"`; its callback is captured on the first render, so it uses the initial component name. React Strict Mode may replay lifecycle effects and therefore produce extra development logs.
+
+## Compatibility and accessibility
+
+No browser API is required, but console output may expose application data. Avoid passing secrets or personal information and remove or disable noisy diagnostics in production. The hook does not change rendered accessibility.
+
+## Related
+
+- [useDidMount](/docs/hooks/useDidMount)
+- [useDidUpdate](/docs/hooks/useDidUpdate)
+- [useWillUnmount](/docs/hooks/useWillUnmount)

@@ -1,53 +1,46 @@
 ---
-id: useDidMount
 title: useDidMount
-sidebar_label: useDidMount
-description: "Fires a callback once when the component mounts."
+description: Runs a callback from an effect when a component mounts.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDidUpdate, useWillUnmount]
 ---
 
 ## About
 
-componentDidMount hook for React
-
-<br />
+`useDidMount` is a small `useEffect` wrapper for one-time setup that does not need cleanup.
 
 ## Examples
 
-### Run setup code once
-
-```jsx
-import { useDidMount } from "rooks";
-
-export default function App() {
-  useDidMount(function () {
-    console.log("mounted");
-  });
-
-  return null;
-}
-```
-
-### Set state after the component mounts
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useDidMount } from "rooks";
 
-export default function MountedMessage() {
-  const [message, setMessage] = useState("Preparing…");
-
-  useDidMount(() => {
-    setMessage("Ready");
-  });
-
-  return <div>{message}</div>;
+export default function MountStatus() {
+  const [status, setStatus] = useState("Rendering");
+  useDidMount(() => setStatus("Mounted"));
+  return <p role="status">{status}</p>;
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument | Type     | Description                    |
-| -------- | -------- | ------------------------------ |
-| callback | function | function to be called on mount |
+`callback: () => void` is required. The callback captured by the first render runs after the component commits.
 
----
+## Return value
+
+The hook returns `void`. A value returned by `callback` is ignored; use `useEffect` or pair setup with [useWillUnmount](/docs/hooks/useWillUnmount) when cleanup is required.
+
+## Behavior and lifecycle
+
+The hook uses an empty dependency array. Ordinary rerenders do not invoke the callback again. A real unmount followed by a new mount creates a new hook instance and runs it again. React Strict Mode may replay mount effects in development, so the callback must be safe to run more than once.
+
+## Compatibility and accessibility
+
+No browser API is required, and the callback is skipped during server rendering. If mount work changes user-visible status, expose the result through semantic content or a live region.
+
+## Related
+
+- [useDidUpdate](/docs/hooks/useDidUpdate)
+- [useWillUnmount](/docs/hooks/useWillUnmount)
