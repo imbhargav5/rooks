@@ -1,55 +1,62 @@
 ---
-id: useFreshCallback
 title: useFreshCallback
-sidebar_label: useFreshCallback
-description: "Returns a stable callback reference that always calls the latest version of the function."
+description: Returns a stable function that delegates to the latest callback after effects run.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useFreshRef, useFreshTick]
 ---
 
 ## About
 
-Avoid stale closures and keep your callback fresh.
+`useFreshCallback` avoids stale closures without changing function identity on every render. It is useful for subscriptions and timers that should stay installed while their callback reads current props or state.
 
-## Examples
-
-### Call the latest callback after state changes
+## Example
 
 ```tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFreshCallback } from "rooks";
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  const logLatestCount = useFreshCallback(() => {
-    console.log(`Latest count: ${count}`);
+export default function WindowWidthLogger() {
+  const [label, setLabel] = useState("Window");
+  const reportWidth = useFreshCallback(() => {
+    console.log(`${label}: ${window.innerWidth}px`);
   });
 
+  useEffect(() => {
+    window.addEventListener("resize", reportWidth);
+    return () => window.removeEventListener("resize", reportWidth);
+  }, [reportWidth]);
+
   return (
-    <div>
-      <button onClick={() => setCount((current) => current + 1)}>
-        Increment
-      </button>
-      <button onClick={logLatestCount}>Log latest count</button>
-    </div>
+    <label>
+      Log label{" "}
+      <input
+        value={label}
+        onChange={(event) => setLabel(event.currentTarget.value)}
+      />
+    </label>
   );
 }
 ```
 
-### Keep an event handler in sync with changing props
+## Parameters
 
-```tsx
-import { useEffect } from "react";
-import { useFreshCallback } from "rooks";
+- `callback: (...args: Args) => R` — required function to keep fresh.
 
-function ResizeLogger({ label }: { label: string }) {
-  const handleResize = useFreshCallback(() => {
-    console.log(`${label}: ${window.innerWidth}`);
-  });
+## Return value
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [handleResize]);
+Returns `(...args: Args) => R`. Its identity stays stable, it forwards arguments and return values, and it calls the callback stored by the latest completed passive effect.
 
-  return null;
-}
-```
+## Behavior and lifecycle
+
+The internal ref initially contains the first callback and is updated after every render in a passive effect. A call before that effect finishes can therefore reach the callback from the previous committed render. Errors are not intercepted; they propagate to the caller.
+
+## Compatibility and accessibility
+
+The hook itself is platform-independent and SSR-safe. Browser access in the callback occurs only when the returned function is invoked. Accessibility depends on the event or control using it.
+
+## Related
+
+- [useFreshRef](/docs/hooks/useFreshRef) exposes the current value through `.current`.
+- [useFreshTick](/docs/hooks/useFreshTick) calls the latest void callback but does not preserve wrapper identity.

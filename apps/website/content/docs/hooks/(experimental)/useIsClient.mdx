@@ -1,0 +1,44 @@
+---
+title: useIsClient
+description: "Tell whether the component has mounted on the client."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Return `false` during SSR and the first render, then flip to `true` after mount.
+
+## Example
+
+```tsx
+import { useIsClient } from "rooks/experimental";
+
+function Example() {
+  const isClient = useIsClient();
+
+  return <div>{isClient ? "Browser ready" : "Server render"}</div>;
+}
+```
+
+## Return value
+
+Returns `false` during server rendering and the first client render, then `true` after the mount effect runs.
+
+## Parameters
+
+This hook takes no parameters.
+
+## Behavior and lifecycle
+
+One effect changes the value to `true` after mount. The hook creates no browser subscription or resource and has no cleanup.
+
+## Compatibility and accessibility
+
+The matching `false` server and initial-client values avoid hydration mismatch. Content shown only after `true` appears after hydration, so reserve space or use an equivalent fallback when layout shift would be disruptive. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

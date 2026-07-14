@@ -1,8 +1,10 @@
 ---
-id: useSelect
 title: useSelect
-sidebar_label: useSelect
 description: "Manages a selection state from a list of options with helpers."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useSelectableList, useMultiSelectableList]
 ---
 
 ## About
@@ -13,7 +15,7 @@ Select values from a list easily. List selection hook for react.
 
 ### Basic usage
 
-```jsx
+```tsx
 import { useSelect } from "rooks";
 
 const list = [
@@ -84,7 +86,7 @@ export default function FilterPicker() {
 }
 ```
 
-### Arguments
+## Parameters
 
 | Argument     | Type   | Description                                   | Default value |
 | ------------ | ------ | --------------------------------------------- | ------------- |
@@ -99,3 +101,20 @@ export default function FilterPicker() {
 | item                       | any      | Currently selected item           |
 | setIndex                   | function | Update selected index             |
 | setItem                    | function | Update selected item              |
+
+## Return value
+
+Returns `{ index, item, setIndex, setItem }`. `item` is `list[index]`; the public type is `T`, but an out-of-range index produces `undefined` at runtime. `setItem(value)` selects the first strict-equality match and sets the index to `-1` when the value is absent.
+
+## Behavior and lifecycle
+
+The selected index is initialized once and is not automatically reset when `list` or `initialIndex` changes. `setItem` is recreated when the list reference changes. The hook performs no bounds validation, warnings, effects, or cleanup.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe. Prefer a native `<select>`, radio group, or another control with explicit selected state; validate indices before using them to render user-facing content.
+
+## Related
+
+- [useSelectableList](/docs/hooks/useSelectableList)
+- [useMultiSelectableList](/docs/hooks/useMultiSelectableList)

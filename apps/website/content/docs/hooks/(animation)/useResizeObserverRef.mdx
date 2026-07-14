@@ -1,120 +1,60 @@
 ---
-id: useResizeObserverRef
 title: useResizeObserverRef
-sidebar_label: useResizeObserverRef
-description: "Observes element resize events using ResizeObserver and fires a callback on size changes."
+description: Observes the size of the element attached to a callback ref.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDimensionsRef, useOnWindowResize]
 ---
 
 ## About
 
-Resize Observer hook for React.
-
-<br />
+`useResizeObserverRef` returns a callback ref that connects a `ResizeObserver` to its current element and forwards entries to the latest callback.
 
 ## Examples
 
-### Basic usage
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useResizeObserverRef } from "rooks";
 
-export default function App() {
-  const [resizeCount, setResizeCount] = useState(0);
-  const incrementResizeCount = () => {
-    return setResizeCount(resizeCount + 1);
-  };
-  const [myRef] = useResizeObserverRef(incrementResizeCount);
-  const [XOffset, setXOffset] = useState(0);
-  const [YOffset, setYOffset] = useState(300);
-  return (
-    <>
-      <div
-        style={{
-          width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
-          left: XOffset,
-          top: YOffset,
-        }}
-      >
-        <div
-          style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%",
-          }}
-          ref={myRef}
-          data-testid="app"
-        >
-          <p>
-            Resize this div as you see fit. To demonstrate that it also updates
-            on child dom nodes resize
-          </p>
-        </div>
-        <h2>Bounds</h2>
-        <p>
-          <button onClick={() => setXOffset(XOffset - 5)}> Move Left </button>
-          <button onClick={() => setXOffset(XOffset + 5)}> Move Right </button>
-        </p>
-        <p>
-          <button onClick={() => setYOffset(YOffset - 5)}> Move Up </button>
-          <button onClick={() => setYOffset(YOffset + 5)}> Move Down </button>
-        </p>
-      </div>
-      <div style={{ height: 500 }}>
-        <pre data-testid="message">Resize count: {resizeCount}</pre>
-      </div>
-    </>
-  );
-}
-```
-
-### Measure the latest width and height
-
-```jsx
-import { useState } from "react";
-import { useResizeObserverRef } from "rooks";
-
-export default function SizeReadout() {
-  const [size, setSize] = useState({ width: 0, height: 0 });
+export default function ObservedPanel() {
+  const [width, setWidth] = useState(0);
   const [ref] = useResizeObserverRef((entries) => {
-    const entry = entries[0];
-    if (entry) {
-      setSize({
-        width: entry.contentRect.width,
-        height: entry.contentRect.height,
-      });
-    }
+    setWidth(entries[0]?.contentRect.width ?? 0);
   });
 
   return (
-    <div>
-      <div ref={ref} style={{ resize: "both", overflow: "auto", width: 200 }}>
-        Resize me
-      </div>
-      <p>
-        Current size: {size.width} x {size.height}
-      </p>
+    <div
+      ref={ref}
+      style={{ resize: "horizontal", overflow: "auto", width: 240 }}
+    >
+      Observed width: {Math.round(width)}px
     </div>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument | Type                   | Description                                                       | Default value            |
-| -------- | ---------------------- | ----------------------------------------------------------------- | ------------------------ |
-| callback | ResizeObserverCallback | Function that needs to be fired on resize                         | undefined                |
-| options  | ResizeObserverOptions  | An options object allowing you to set options for the observation | \{ box: "content-box" \} |
+| Argument   | Type                                  | Default                  | Meaning                                             |
+| ---------- | ------------------------------------- | ------------------------ | --------------------------------------------------- |
+| `callback` | `ResizeObserverCallback \| undefined` | required                 | Latest callback for observer notifications.         |
+| `options`  | `ResizeObserverOptions`               | `{ box: "content-box" }` | Observation box; the hook reads its `box` property. |
 
-### Return value
+## Return value
 
-Returns an array with one element
+A one-item tuple containing a stable callback ref. Attach it to an `HTMLElement`.
 
-| Return value | Type        | Description                             |
-| ------------ | ----------- | --------------------------------------- |
-| ref          | CallbackRef | Ref which should be observed for Resize |
+## Behavior and lifecycle
+
+Attaching a node creates an observer and calls `observe(node, { box })`. Detaching, changing the node or box, and unmounting disconnect the current observer. Callback changes are forwarded through a ref and do not recreate the observer. Observer construction errors are not caught.
+
+## Compatibility and accessibility
+
+Server rendering is safe because no node is attached and effects do not run. Clients need `ResizeObserver`; add a polyfill or fallback for unsupported browsers. Size observation is not itself accessible, so ensure any layout response preserves reading order, focus visibility, and zoom support.
+
+## Related
+
+- [useDimensionsRef](/docs/hooks/useDimensionsRef)
+- [useOnWindowResize](/docs/hooks/useOnWindowResize)
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)

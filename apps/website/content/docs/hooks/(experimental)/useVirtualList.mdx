@@ -1,0 +1,84 @@
+---
+title: useVirtualList
+description: "Render a fixed-size virtual list with ready-to-use item styles."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Virtualize large fixed-size lists for vertical or horizontal scrolling. The hook exposes a container ref, total size, scroll helpers, and positioned virtual items ready to render.
+
+## Example
+
+```tsx
+import { useVirtualList } from "rooks/experimental";
+
+function Example() {
+  const virtual = useVirtualList({
+    items: Array.from({ length: 1_000 }, (_, index) => `Row ${index}`),
+    itemSize: 36,
+  });
+
+  return (
+    <div
+      ref={virtual.containerRef}
+      aria-label="Rows"
+      style={{ height: 240, overflow: "auto", position: "relative" }}
+    >
+      <div role="list" style={virtual.innerStyle}>
+        {virtual.items.map((row) => (
+          <div
+            key={row.key}
+            role="listitem"
+            aria-posinset={row.index + 1}
+            aria-setsize={1_000}
+            style={row.style}
+          >
+            {row.item}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## Return value
+
+| Property         | Description                                                                       |
+| ---------------- | --------------------------------------------------------------------------------- |
+| `containerRef`   | Callback ref for the scroll container.                                            |
+| `innerStyle`     | Relative-positioned spacer style with the full list size.                         |
+| `items`          | Visible plus overscan items: `{ item, index, key, start, size, end, style }`.     |
+| `totalSize`      | `items.length * itemSize`.                                                        |
+| `startIndex`     | First visible item index before overscan.                                         |
+| `endIndex`       | Last visible item index before overscan.                                          |
+| `scrollOffset`   | Current `scrollTop` or `scrollLeft`.                                              |
+| `scrollToIndex`  | Clamps an index to the list and scrolls to `index * itemSize`.                    |
+| `scrollToOffset` | Sets the container's scroll offset; it is a no-op before the element is attached. |
+
+## Parameters
+
+| Option         | Type                                | Default      | Description                                                   |
+| -------------- | ----------------------------------- | ------------ | ------------------------------------------------------------- |
+| `items`        | `TItem[]`                           | required     | Full data set.                                                |
+| `itemSize`     | `number`                            | required     | Fixed pixel size for every item; use a positive finite value. |
+| `overscan`     | `number`                            | `4`          | Extra items rendered before and after the visible range.      |
+| `orientation`  | `"vertical" \| "horizontal"`        | `"vertical"` | Selects height/top or width/left calculations.                |
+| `initialIndex` | `number`                            | `0`          | Index scrolled into position after the container attaches.    |
+| `getItemKey`   | `(item, index) => string \| number` | item index   | Stable React key for each virtual item.                       |
+
+## Behavior and lifecycle
+
+The hook composes `useScroll` and `useSize`, computes a fixed-size visible range, and renders that range plus normalized non-negative overscan with absolute positioning. Before measurement it treats the viewport as one item and starts at `initialIndex`. It scrolls to that index when the element attaches or the option changes. The composed listeners, observers, and scheduled measurements are cleaned up when the container changes or unmounts.
+
+## Compatibility and accessibility
+
+The container needs a constrained size and `overflow: auto`; horizontal lists also need a width. SSR returns the deterministic one-item initial slice plus overscan. `itemSize` must be positive and finite or the hook throws; variable-size rows remain unsupported. Preserve list semantics (`role`, positions, set size, labels, and focus behavior as appropriate) because off-screen DOM items do not exist.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

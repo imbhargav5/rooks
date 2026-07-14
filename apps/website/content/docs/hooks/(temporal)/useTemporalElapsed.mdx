@@ -1,0 +1,59 @@
+---
+title: useTemporalElapsed
+description: Measures elapsed time from an instant and updates on aligned boundaries.
+entrypoint: rooks/temporal
+status: stable
+aliases: []
+related: [useTemporalCountdown, useTemporalNow]
+---
+
+## About
+
+`useTemporalElapsed` returns the elapsed duration since an instant. If `since` is omitted, it starts when the hook first resolves Temporal on the client.
+
+## Example
+
+```tsx
+import { useMemo } from "react";
+import { useTemporalElapsed } from "rooks/temporal";
+
+export default function SessionTimer() {
+  const sessionStartedAt = useMemo(() => Date.now(), []);
+  const elapsed = useTemporalElapsed({ since: sessionStartedAt });
+
+  return (
+    <p>
+      Session length:{" "}
+      {elapsed ? `${Math.floor(elapsed.total("seconds"))} seconds` : "Loading…"}
+    </p>
+  );
+}
+```
+
+## Parameters
+
+| Option      | Type                                   | Default                       | Description                                                                                            |
+| ----------- | -------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `since`     | `Temporal.Instant \| string \| number` | First resolved client instant | Start as an instant, ISO 8601 instant string, or epoch milliseconds. Strings must identify an instant. |
+| `precision` | `"second" \| "minute"`                 | `"second"`                    | Aligns updates to second or minute boundaries.                                                         |
+
+The options object is optional.
+
+## Return value
+
+Returns a non-negative `Temporal.Duration`, or `null` during SSR and while Temporal is loading. A future `since` value produces a zero duration until that instant is reached.
+
+## Behavior and lifecycle
+
+The hook schedules aligned updates for as long as it has subscribers. Changing `since` recalculates the origin; changing precision recreates the timer store. Timers are stopped during cleanup.
+
+## Compatibility and accessibility
+
+Install `@js-temporal/polyfill`, target a runtime with `BigInt`, and render a deterministic `null` fallback. Do not put a per-second value in an assertive live region.
+
+See [Temporal hooks](/docs/guides/temporal-hooks) for setup and SSR guidance.
+
+## Related
+
+- [useTemporalCountdown](/docs/hooks/useTemporalCountdown)
+- [useTemporalNow](/docs/hooks/useTemporalNow)

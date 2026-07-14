@@ -1,12 +1,55 @@
 ---
-title: Rooks.js
-description: "A collection of powerful React hooks for supercharging your React apps."
+title: Rooks documentation
+description: Focused, typed React hooks for state, browser APIs, events, timing, and more.
 ---
 
-## Introduction
+Rooks is a collection of focused React hooks for React 18 and 19. Import stable hooks from the main package, opt into experimental hooks deliberately, and keep Temporal's optional dependency isolated behind its own entrypoint.
 
-Collection of awesome react hooks
+## Install
 
-## Contributors
+```bash
+pnpm add rooks
+```
 
-<Contributors />
+```tsx
+import { useCounter } from "rooks";
+
+export default function Counter() {
+  const { value, increment, decrement, reset } = useCounter(0);
+
+  return (
+    <section aria-labelledby="counter-title">
+      <h2 id="counter-title">Count: {value}</h2>
+      <button type="button" onClick={decrement}>
+        Decrease
+      </button>
+      <button type="button" onClick={increment}>
+        Increase
+      </button>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
+    </section>
+  );
+}
+```
+
+## Choose an entrypoint
+
+| Entrypoint           | Use it for                      | Stability and dependencies                                                                            |
+| -------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `rooks`              | Stable hooks                    | Public stable surface; no Temporal polyfill.                                                          |
+| `rooks/experimental` | APIs still being refined        | May change or be removed without the guarantees of the stable surface.                                |
+| `rooks/temporal`     | Calendar and precise time hooks | Requires `@js-temporal/polyfill` in environments without native Temporal and a runtime with `BigInt`. |
+
+Rooks is published as ESM. See [Entrypoints and compatibility](/docs/reference/entrypoints-and-compatibility) for package and runtime details.
+
+## Where to go next
+
+- [Get a working component in three steps](/docs/getting-started).
+- [Browse all hooks](/docs/hooks) by category, status, or entrypoint.
+- Read the [SSR and browser APIs guide](/docs/guides/ssr-and-browser-apis) before using DOM, permission, or device APIs.
+- Read the [experimental hooks guide](/docs/guides/experimental-hooks) before adopting an unstable API.
+- Read the [Temporal hooks guide](/docs/guides/temporal-hooks) for polyfill and time-zone setup.
+
+For project work, see [Contributing](https://github.com/imbhargav5/rooks/blob/main/CONTRIBUTING.md), [Support](https://github.com/imbhargav5/rooks/blob/main/SUPPORT.md), and [Security](https://github.com/imbhargav5/rooks/blob/main/SECURITY.md).

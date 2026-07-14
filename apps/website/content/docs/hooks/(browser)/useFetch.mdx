@@ -1,17 +1,44 @@
 ---
 title: useFetch
 description: Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
-# useFetch
+## About
+
+Hook for fetching data from URLs with loading states, error handling, and automatic JSON parsing
 
 A hook for fetching data from URLs with proper TypeScript generics, error handling, and automatic JSON parsing. It manages loading states and provides a fetch function for manual data fetching.
 
 **Note:** This hook does not automatically fetch on mount. You must call the returned `startFetch` function to trigger the request.
 
-## Usage
+## Examples
 
 ```tsx
+import { useFetch } from "rooks";
+
+type User = { id: number; name: string };
+
+export default function UserCard() {
+  const { data, error, loading, startFetch } = useFetch<User>("/api/user/1");
+
+  return (
+    <section>
+      <p>
+        {loading ? "Loading…" : (error?.message ?? data?.name ?? "Not loaded")}
+      </p>
+      <button type="button" onClick={startFetch}>
+        Load user
+      </button>
+    </section>
+  );
+}
+```
+
+```jsx
 import { useFetch } from "rooks";
 import { useEffect, useMemo } from "react";
 
@@ -59,7 +86,7 @@ function UserProfile({ userId }: { userId: string }) {
 
 ### POST Request with Body
 
-```tsx
+```text
 function CreateUser() {
   const {
     data: newUser,
@@ -114,7 +141,7 @@ function CreateUser() {
 
 ### DELETE Request
 
-```tsx
+```text
 function DeleteUser({ userId }: { userId: string }) {
   const {
     data: result,
@@ -164,14 +191,14 @@ function DeleteUser({ userId }: { userId: string }) {
 
 ## API Reference
 
-### Parameters
+## Parameters
 
-| Parameter | Type              | Required | Description                  |
-| --------- | ----------------- | -------- | ---------------------------- |
-| `url`     | `string`          | Yes      | The URL to fetch data from   |
-| `options` | `UseFetchOptions` | No       | Optional fetch configuration |
+| Parameter | Type                                                   | Required | Description                                   |
+| --------- | ------------------------------------------------------ | -------- | --------------------------------------------- |
+| `url`     | `string`                                               | Yes      | The URL to fetch data from                    |
+| `options` | `Omit<RequestInit, "signal">` plus the callbacks below | No       | Fetch options; the hook owns its abort signal |
 
-### Return Value
+## Return value
 
 | Property     | Type                  | Description                    |
 | ------------ | --------------------- | ------------------------------ |
@@ -218,7 +245,15 @@ The options object extends the standard `RequestInit` interface (excluding `sign
   - `onSuccess`: Called when the request succeeds (with the fetched data)
   - `onError`: Called when the request fails (with the error object)
 
-## Related Hooks
+## Related
 
 - [`usePromise`](/docs/hooks/usePromise) - Handle promises without loading states
 - [`useAsyncEffect`](/docs/hooks/useAsyncEffect) - Async operations in effects
+
+## Behavior and lifecycle
+
+Requests start only when `startFetch` is called. Each call gets its own `AbortController`; calls may overlap, and whichever response finishes later can overwrite an earlier result. `loading` is a single boolean, so one completed call can clear it while another is still pending. Operation failures are stored and passed to `onError` rather than rethrown by `startFetch`. Unmount aborts every active request and prevents all later state updates and callbacks.
+
+## Compatibility and accessibility
+
+The hook does not fetch during SSR. It always parses successful bodies as JSON; empty or non-JSON responses therefore become errors. HTTP failures include `status` and `statusText`; network, CORS, parsing, and abort failures use their platform errors. Present loading and failure states accessibly, and use a request layer with deduplication/caching when concurrency semantics matter.

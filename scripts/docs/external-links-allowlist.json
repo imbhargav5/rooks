@@ -1,0 +1,7 @@
+{
+  "ignore": [
+    "^https://localhost",
+    "^http://localhost",
+    "^https?://(?:www\\.)?(?:twitter\\.com|x\\.com)/"
+  ]
+}

@@ -1,79 +1,67 @@
 ---
-id: useDebouncedValue
 title: useDebouncedValue
-sidebar_label: useDebouncedValue
-description: "Returns a debounced version of a value that updates after a specified delay."
+description: Returns a value that follows its input after a delay, plus an immediate setter.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDebounce, useDebounceFn, useThrottle]
 ---
 
 ## About
 
-Tracks another value and gets updated in a debounced way.
-
-[//]: # "Main"
+`useDebouncedValue` keeps a local value and updates it only after the input stops changing for the configured timeout. It can initially return `null` and also exposes the underlying state setter for an immediate override.
 
 ## Examples
 
-### Debounce what the user types
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useDebouncedValue } from "rooks";
 
-export default function App() {
-  const [value, setValue] = useState("");
-  const [debouncedValue, immediatelyUpdateDebouncedValue] = useDebouncedValue(
-    value,
-    500
-  );
-  // use `immediatelyUpdateDebouncedValue` if you want to update `debouncedValue` immediately
-
-  return (
-    <div>
-      <input
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Please type here"
-      />
-      <div>{debouncedValue}</div>
-    </div>
-  );
-}
-```
-
-### Update the debounced value immediately when needed
-
-```jsx
-import { useState } from "react";
-import { useDebouncedValue } from "rooks";
-
-export default function SubmitSearch() {
+export default function DebouncedQuery() {
   const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useDebouncedValue(query, 400, {
+  const [settledQuery, setSettledQuery] = useDebouncedValue(query, 400, {
     initializeWithNull: true,
   });
 
   return (
-    <div>
+    <label>
+      Query
       <input value={query} onChange={(event) => setQuery(event.target.value)} />
-      <button onClick={() => setDebouncedQuery(query)}>Search now</button>
-      <div>Searching for: {debouncedQuery ?? "nothing yet"}</div>
-    </div>
+      <span>Settled: {settledQuery ?? "waiting"}</span>
+      <button type="button" onClick={() => setSettledQuery(query)}>
+        Apply now
+      </button>
+    </label>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument                   | Type    | Description                                                     | Default value |
-| -------------------------- | ------- | --------------------------------------------------------------- | ------------- |
-| value                      | Date    | the value to be debounced                                       | undefined     |
-| timeout                    | number  | milliseconds that it takes count down once                      | 1000          |
-| options.initializeWithNull | boolean | Should the debouncedValue start off as null in the first render | false         |
+| Argument                     | Type      | Default  | Meaning                                             |
+| ---------------------------- | --------- | -------- | --------------------------------------------------- |
+| `value`                      | `T`       | required | Input value to follow.                              |
+| `timeout`                    | `number`  | required | Debounce delay in milliseconds.                     |
+| `options.initializeWithNull` | `boolean` | `false`  | Starts at `null`, then schedules the initial value. |
 
-### Return Value
+The options and tuple types are not public package exports.
 
-An array is returned with the following items in it
+## Return value
 
-| Name                            | Type         | Description                                                   |
-| ------------------------------- | ------------ | ------------------------------------------------------------- |
-| debouncedValue                  | typeof value | The debouncedValue                                            |
-| immediatelyUpdateDebouncedValue | function     | Handy utility function to update the debouncedValue instantly |
+`[debouncedValue, immediatelyUpdateDebouncedValue]`. The first item is `T`, or `T | null` when `initializeWithNull: true`. The second is a React state dispatcher, so it accepts a value or functional update.
+
+## Behavior and lifecycle
+
+Without null initialization, the first input is returned immediately. With it, the first input is scheduled after mount. Later input changes reset the pending trailing update. The timeout and initialization mode are captured for the mounted hook instance; changing them later does not recreate the underlying debounced function or reinitialize state.
+
+The immediate setter does not cancel a pending debounced input, so that pending update can later replace a manual value. Pending work is cancelled on unmount.
+
+## Compatibility and accessibility
+
+No DOM API is required. Server output is the immediate initial value or `null`, matching the selected option. When debounce delays search results or validation, communicate the pending state and keep error text programmatically associated with its input.
+
+## Related
+
+- [useDebounce](/docs/hooks/useDebounce)
+- [useDebounceFn](/docs/hooks/useDebounceFn)
+- [useThrottle](/docs/hooks/useThrottle)

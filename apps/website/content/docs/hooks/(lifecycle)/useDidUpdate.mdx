@@ -1,62 +1,62 @@
 ---
-id: useDidUpdate
 title: useDidUpdate
-sidebar_label: useDidUpdate
-description: "Fires a callback on every update, skipping the initial mount."
+description: Runs a callback after updates while skipping the initial mount.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDidMount, useWillUnmount, useDeepCompareEffect]
 ---
 
 ## About
 
-componentDidUpdate hook for react
+`useDidUpdate` runs an effect callback after updates but not after the initial render. Supply dependencies to limit updates, or omit them to run after every committed rerender.
 
 ## Examples
 
-### React to any update after mount
-
-```jsx
-import React, { useState } from "react";
-import { useDidUpdate } from "rooks";
-
-export default function App() {
-  const [value, setValue] = useState(0);
-  useDidUpdate(() => {
-    console.log("This message was logged on update.");
-  });
-  return (
-    <div>
-      <p> Update this value by clicking on the button</p>
-      <p> Current value is {value}</p>
-      <p> Open the sandbox in codesandbox to view the console </p>
-      <button onClick={() => setValue(value + 1)}>Increment</button>
-    </div>
-  );
-}
-```
-
-### React only when a specific dependency changes
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useDidUpdate } from "rooks";
 
-export default function FilterStatus() {
-  const [filter, setFilter] = useState("all");
+export default function UpdateStatus() {
   const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("No updates yet");
+  const [message, setMessage] = useState("Not updated yet");
 
-  useDidUpdate(() => {
-    setMessage(`Filter changed to ${filter}`);
-  }, [filter]);
+  useDidUpdate(() => setMessage(`Count changed to ${count}`), [count]);
 
   return (
-    <div>
-      <button onClick={() => setFilter("active")}>Set active filter</button>
-      <button onClick={() => setCount((current) => current + 1)}>
-        Increment unrelated count
+    <section>
+      <p role="status">{message}</p>
+      <button type="button" onClick={() => setCount((value) => value + 1)}>
+        Count: {count}
       </button>
-      <p>Count: {count}</p>
-      <p>{message}</p>
-    </div>
+    </section>
   );
 }
 ```
+
+## Parameters
+
+| Argument     | Type         | Default     | Meaning                                                       |
+| ------------ | ------------ | ----------- | ------------------------------------------------------------- |
+| `callback`   | `() => void` | required    | Runs after an eligible update.                                |
+| `conditions` | `unknown[]`  | `undefined` | Uses React dependency comparison; omitted means every update. |
+
+An empty array makes the hook a no-op and emits a warning. Although the implementation wraps a non-array runtime value in an array, TypeScript callers should pass an array.
+
+## Return value
+
+The hook returns `void`; callback return values are ignored.
+
+## Behavior and lifecycle
+
+A mount flag is set by a separate mount effect. The update effect skips its first pass, then calls the render's callback after matching updates. The flag is reset on unmount. There is no cleanup callback. React Strict Mode development replay can affect lifecycle observations, so do not use this hook as an exactly-once transaction boundary.
+
+## Compatibility and accessibility
+
+No browser API is required. Effects do not run on the server. Keep update-triggered focus, announcements, and network work intentional; the hook itself adds no accessibility behavior.
+
+## Related
+
+- [useDidMount](/docs/hooks/useDidMount)
+- [useWillUnmount](/docs/hooks/useWillUnmount)
+- [useDeepCompareEffect](/docs/hooks/useDeepCompareEffect)

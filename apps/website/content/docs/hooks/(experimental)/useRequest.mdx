@@ -1,0 +1,89 @@
+---
+title: useRequest
+description: "Generic promise-request lifecycle hook with retries, polling, and mutation."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Manage a promise-returning service with manual or automatic execution, retries, debounce or throttle behavior, polling, mutation, and cancellation.
+
+## Example
+
+```tsx
+import { useRequest } from "rooks/experimental";
+
+async function fetchUser(id: string) {
+  const response = await fetch(`/api/users/${id}`);
+  return response.json() as Promise<{ name: string }>;
+}
+
+function Example({ userId }: { userId: string }) {
+  const { data, loading, refresh } = useRequest(fetchUser, {
+    defaultParams: [userId],
+  });
+
+  return (
+    <div>
+      <button onClick={refresh}>Refresh</button>
+      <p>{loading ? "Loading..." : data?.name}</p>
+    </div>
+  );
+}
+```
+
+## Return value
+
+| Property       | Type                                                  | Description                                                                |
+| -------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| `data`         | `TData \| undefined`                                  | Latest successful result, initialized from `initialData`.                  |
+| `error`        | `Error \| null`                                       | Latest terminal request error.                                             |
+| `loading`      | `boolean`                                             | Loading state, optionally delayed by `loadingDelay`.                       |
+| `params`       | `TParams \| undefined`                                | Parameters used by the latest execution.                                   |
+| `run`          | `(...params: TParams) => void`                        | Schedule/execute a request and discard its returned promise.               |
+| `runAsync`     | `(...params: TParams) => Promise<TData>`              | Schedule/execute a request and return its promise.                         |
+| `refresh`      | `() => void`                                          | Repeat the latest params, then `defaultParams`, or call with no arguments. |
+| `refreshAsync` | `() => Promise<TData \| undefined>`                   | Async form of `refresh`.                                                   |
+| `cancel`       | `() => void`                                          | Invalidate the active result and clear hook-managed timers.                |
+| `mutate`       | `(value: SetStateAction<TData \| undefined>) => void` | Replace or derive `data` locally without calling the service.              |
+
+## Notes
+
+- `useFetch` remains the narrower fetch-specific alternative when you only need URL fetching.
+
+## Parameters
+
+`service` is a required `(...params: TParams) => Promise<TData>`. The optional configuration object accepts:
+
+| Option              | Type                                     | Default     | Effect                                                                                    |
+| ------------------- | ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `manual`            | `boolean`                                | `false`     | Disable automatic execution when `true`.                                                  |
+| `defaultParams`     | `TParams`                                | `undefined` | Parameters for automatic execution/refresh; omission calls the service with no arguments. |
+| `ready`             | `boolean`                                | `true`      | Gate automatic execution.                                                                 |
+| `initialData`       | `TData`                                  | `undefined` | Initial `data`.                                                                           |
+| `refreshDeps`       | `DependencyList`                         | `[]`        | Re-run automatically when an entry changes and the hook is ready.                         |
+| `debounceWait`      | `number`                                 | `undefined` | Debounce scheduled calls by this many milliseconds.                                       |
+| `throttleWait`      | `number`                                 | `undefined` | Throttle scheduled calls by this many milliseconds.                                       |
+| `loadingDelay`      | `number`                                 | `0`         | Delay showing `loading: true`.                                                            |
+| `pollingInterval`   | `number`                                 | `undefined` | Re-run after success or terminal failure when positive.                                   |
+| `pollingWhenHidden` | `boolean`                                | `false`     | Continue scheduling while `document.hidden`.                                              |
+| `retryCount`        | `number`                                 | `0`         | Number of retries after the initial attempt.                                              |
+| `retryInterval`     | `number \| ((attempt, error) => number)` | `0`         | Delay before each retry; attempts passed to the callback start at 1.                      |
+| callbacks           | functions                                | `undefined` | `onBefore`, `onSuccess`, `onError`, and `onFinally`.                                      |
+
+Positive `debounceWait` and `throttleWait` values are mutually exclusive; providing both throws during render.
+
+## Behavior and lifecycle
+
+Only the newest execution may commit data, errors, loading state, or callbacks. Debounced calls with the same pending slot share its eventual result; throttled calls execute at the edge selected by the hook. Retry delays are cancellable, and polling pauses while the document is hidden before resuming on visibility. `cancel` rejects pending hook promises with `Error("Request cancelled")` and ignores a late service result, but it cannot abort the underlying service; pass cancellation into the service itself when network or CPU work must stop. Exceptions from lifecycle callbacks do not change request success, failure, or retry decisions.
+
+## Compatibility and accessibility
+
+Automatic execution starts from an effect, so SSR returns `initialData` without invoking the service. Timer-based features require a browser-like `window`. Announce meaningful loading and errors in the UI, keep retry loops bounded for user-triggered work, and avoid polling endpoints while a page is hidden unless the product needs it.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

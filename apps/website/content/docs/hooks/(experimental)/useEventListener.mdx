@@ -1,0 +1,73 @@
+---
+title: useEventListener
+description: "Strongly typed event-listener primitive for browser EventTargets."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Attach a listener to `window`, `document`, DOM elements, `MediaQueryList`, or any `EventTarget`, with overloads for the common browser event maps.
+
+## Example
+
+```tsx
+import { useEventListener } from "rooks/experimental";
+import { useRef, useState } from "react";
+
+function Example() {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  const [count, setCount] = useState(0);
+
+  useEventListener(
+    "click",
+    () => {
+      setCount((value) => value + 1);
+    },
+    {
+      target: ref,
+    }
+  );
+
+  return (
+    <button ref={ref} type="button">
+      Clicked {count} times
+    </button>
+  );
+}
+```
+
+## Parameters
+
+| Argument    | Type              | Default  | Description                                        |
+| ----------- | ----------------- | -------- | -------------------------------------------------- |
+| `eventName` | `string`          | required | Event name supported by the selected target.       |
+| `callback`  | `(event) => void` | required | Listener; the latest callback is invoked.          |
+| `options`   | object            | required | Must include `target`; fields are described below. |
+
+`options.target` accepts a `Window`, `Document`, HTML/SVG element, `MediaQueryList`, other `EventTarget`, a ref containing one of those targets, or `null`. `listenerOptions` defaults to `{}`, `when` to `true`, and `isLayoutEffect` to `false`.
+
+## Return value
+
+Returns `void`.
+
+## Notes
+
+- `options.target` may be a direct target, a ref object, or `null`.
+- `when` defaults to `true`.
+- `isLayoutEffect` defaults to `false`.
+- Existing stable hooks such as `useWindowEventListener` still work and now reuse this primitive internally.
+
+## Behavior and lifecycle
+
+The listener is attached only while `when` is true and the resolved target exists. Changing the event name, target, listener options, or enablement removes the old listener before attaching the new one; unmount removes it as well. Callback changes do not require a rebind. Set `isLayoutEffect` only when the listener must be ready before paint.
+
+## Compatibility and accessibility
+
+A `null` target and server rendering are safe no-ops. Browser support depends on the target and event. `passive: true` means the callback cannot cancel the event, and an externally aborted `signal` can remove the listener before React cleanup. Event listeners should complement native controls and keyboard semantics rather than replace them. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

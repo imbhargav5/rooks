@@ -1,0 +1,164 @@
+name: Contribution proposal and approval request
+description: Request maintainer approval for a concrete external contribution scope
+title: "[Contribution proposal]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        External pull requests, including documentation fixes, need a linked issue where a maintainer explicitly approved the proposed scope. Describe the exact change below. Opening this issue is a request for approval, not approval itself.
+
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Change type
+      options:
+        - Bug fix
+        - New hook or feature
+        - Existing hook behavior or API
+        - Documentation
+        - Tests or internal tooling
+        - Release or repository maintenance
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entrypoint
+    attributes:
+      label: Entrypoint or surface
+      options:
+        - rooks
+        - rooks/experimental
+        - rooks/temporal
+        - Website or documentation only
+        - Repository tooling or workflow only
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problem and user impact
+      description: Explain the current behavior, who it affects, and why the change is needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior_reproduction
+    attributes:
+      label: Current behavior or reproduction
+      description: Link a minimal reproduction or describe the current repository behavior that motivates this scope. Enter N/A when no runtime reproduction applies.
+      placeholder: |
+        Reproduction URL or current steps:
+        1. ...
+        2. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Proposed scope
+      description: List the files, public behavior, tests, and documentation you intend to change.
+      placeholder: |
+        In scope:
+        - ...
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Explicitly out of scope
+      description: Name related changes you will not include so approval has a clear boundary.
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed approach
+      description: Describe the implementation and any compatibility, cleanup, or error-handling decisions.
+    validations:
+      required: true
+
+  - type: input
+    id: rooks_version
+    attributes:
+      label: Rooks version
+      placeholder: 9.8.0 or N/A
+    validations:
+      required: true
+
+  - type: input
+    id: react_version
+    attributes:
+      label: React version
+      placeholder: 19.2.4 or N/A
+    validations:
+      required: true
+
+  - type: input
+    id: typescript_version
+    attributes:
+      label: TypeScript version
+      placeholder: 5.9.3 or N/A
+    validations:
+      required: true
+
+  - type: input
+    id: regression_version
+    attributes:
+      label: Last known working version
+      description: Complete this for a regression; otherwise enter Not applicable.
+      placeholder: 9.7.0 or Not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: browser_ssr_context
+    attributes:
+      label: Browser, permission, and server-rendering context
+      description: Include relevant browsers, frameworks, permissions, server rendering, hydration, and accessibility behavior. Enter N/A when none apply.
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Planned tests and documentation
+      description: List focused tests, docs/examples, and repository commands that will verify the change.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: approval_state
+    attributes:
+      label: Approval state
+      options:
+        - Requesting initial maintainer approval
+        - Requesting renewed approval after a material scope change
+        - A maintainer already approved this exact scope in a linked comment
+    validations:
+      required: true
+
+  - type: input
+    id: approval_link
+    attributes:
+      label: Existing approval comment link
+      description: If approval already exists, link the exact maintainer comment.
+      placeholder: https://github.com/imbhargav5/rooks/issues/123#issuecomment-...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Scope agreement
+      options:
+        - label: I understand that opening or being assigned this issue is not maintainer approval.
+          required: true
+        - label: I will obtain renewed approval before including a material scope change.
+          required: true
+        - label: I will link the approval comment in every external pull request, including a documentation-only pull request.
+          required: true

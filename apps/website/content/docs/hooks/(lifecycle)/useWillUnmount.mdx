@@ -1,57 +1,60 @@
 ---
-id: useWillUnmount
 title: useWillUnmount
-sidebar_label: useWillUnmount
-description: "Fires a callback just before the component unmounts."
+description: Runs the initial callback as an effect cleanup when a component unmounts.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDidMount, useDidUpdate]
 ---
 
-### About
+## About
 
-A React hook for componentWillUnmount lifecycle method.
+`useWillUnmount` registers cleanup-only work such as releasing an imperative resource or recording that a component has left the tree.
 
-### Examples
+## Examples
 
-```jsx
-import "./styles.css";
+```tsx
 import { useState } from "react";
 import { useWillUnmount } from "rooks";
 
-function Message() {
-  useWillUnmount(function(props) {
-    console.log("UNMOUNT", props);
-  });
-  return <p> This component will unmount </p>;
+function Session({ onClose }: { onClose: () => void }) {
+  useWillUnmount(onClose);
+  return <p>Session is open</p>;
 }
 
-const App = () => {
-  const [shouldRender, enableRender] = useState(true);
+export default function SessionDemo() {
+  const [open, setOpen] = useState(true);
+  const [status, setStatus] = useState("Open");
+
   return (
-    <div>
-      <h1>Rook: useWillUnmount Example</h1>
-      <hr></hr>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <br></br>
-        <p> Check or Uncheck the box</p>
-        <input onClick={() => enableRender(!shouldRender)} type="checkBox" />
-
-        {shouldRender && <Message />}
-      </div>
-    </div>
+    <section>
+      {open && <Session onClose={() => setStatus("Closed")} />}
+      <p role="status">{status}</p>
+      <button type="button" onClick={() => setOpen(false)}>
+        Close session
+      </button>
+    </section>
   );
-};
-
-export default App;
+}
 ```
 
-#### Arguments
+## Parameters
 
-| Arguments | Type     | Description                                     | Default value |
-| --------- | -------- | ----------------------------------------------- | ------------- |
-| callback  | function | Callback function which needs to run on unmount | undefined     |
+`callback: () => void` is required.
+
+## Return value
+
+The hook returns `void`; the callback's return value is ignored.
+
+## Behavior and lifecycle
+
+The initial callback is returned from an empty-dependency effect and is not refreshed on later renders. If cleanup needs current values, provide a stable callback that reads a ref. React Strict Mode replays effect cleanup during development, so the callback can run before the final physical unmount and must be safe to repeat.
+
+## Compatibility and accessibility
+
+No browser API is required, and cleanup does not run during server rendering because the effect never starts there. Avoid relying on unmount cleanup for guaranteed network delivery or critical persistence; browsers and processes can terminate without running React cleanup.
+
+## Related
+
+- [useDidMount](/docs/hooks/useDidMount)
+- [useDidUpdate](/docs/hooks/useDidUpdate)

@@ -1,0 +1,27 @@
+[
+  {
+    "source": "/",
+    "destination": "/docs",
+    "permanent": false
+  },
+  {
+    "source": "/docs/hooks/useGlobalObjectEventListener",
+    "destination": "/docs/guides/ssr-and-browser-apis#choose-the-supported-event-listener-hook",
+    "permanent": true
+  },
+  {
+    "source": "/docs/hooks/useObjectState",
+    "destination": "/docs/hooks/useMapState",
+    "permanent": true
+  },
+  {
+    "source": "/docs/hooks/useOnLongHoverRef",
+    "destination": "/docs/hooks/useOnLongHover",
+    "permanent": true
+  },
+  {
+    "source": "/docs/hooks/useOnLongPressRef",
+    "destination": "/docs/hooks/useOnLongPress",
+    "permanent": true
+  }
+]

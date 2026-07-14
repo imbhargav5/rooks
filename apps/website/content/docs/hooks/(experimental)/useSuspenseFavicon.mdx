@@ -1,19 +1,17 @@
 ---
-id: useSuspenseFavicon
 title: useSuspenseFavicon
-sidebar_label: useSuspenseFavicon
 description: "Loads a favicon and suspends the component until the resource is ready."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
-
 A Suspense-enabled hook for reading and updating the current document favicon. It resolves the current explicit favicon from the DOM, classifies it as same-origin or external, and returns controls for switching to a new favicon using an explicit config object.
 
 If the document does not declare a favicon link, the current value is `null`.
-
-[//]: # "Main"
 
 ## Examples
 
@@ -150,19 +148,19 @@ export default function App() {
 }
 ```
 
-## Arguments
+## Parameters
 
 ### `options`
 
-| Property          | Type                                      | Default               | Description |
-| ----------------- | ----------------------------------------- | --------------------- | ----------- |
+| Property          | Type                                   | Default               | Description                                                                         |
+| ----------------- | -------------------------------------- | --------------------- | ----------------------------------------------------------------------------------- |
 | `unmountStrategy` | `"restore-originals" \| "leave-as-is"` | `"restore-originals"` | Controls what happens when the last mounted `useSuspenseFavicon` instance unmounts. |
 
-## Return Value
+## Return value
 
 The hook returns a tuple with two items:
 
-```ts
+```text
 [
   currentFavicon,
   {
@@ -173,15 +171,15 @@ The hook returns a tuple with two items:
 
 ### `currentFavicon`
 
-| Shape | Description |
-| ----- | ----------- |
-| `null` | No explicit favicon link was found during initialization. |
+| Shape                                         | Description                                                                                                                                         |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `null`                                        | No explicit favicon link was found during initialization.                                                                                           |
 | `{ kind: "same-origin", relativeHref, href }` | The current favicon resolves to the same origin as the current page. `relativeHref` is the same-origin value you can reuse with `updateFaviconURL`. |
-| `{ kind: "external", url, href }` | The current favicon resolves to a different origin. |
+| `{ kind: "external", url, href }`             | The current favicon resolves to a different origin.                                                                                                 |
 
 ### `controls.updateFaviconURL`
 
-```ts
+```text
 updateFaviconURL(
   | { kind: "same-origin"; relativeHref: string }
   | { kind: "external"; url: string }
@@ -199,3 +197,15 @@ updateFaviconURL(
 - The hook suspends only while it discovers the current explicit favicon from the DOM.
 - When multiple favicon links are present, the last explicit `rel~="icon"` link in DOM order is treated as current.
 - The hook does not observe arbitrary third-party favicon mutations after mount. It tracks the initial DOM state plus updates made through `updateFaviconURL`.
+
+## Behavior and lifecycle
+
+Initial discovery suspends once while the shared resource finds the last valid `<link rel="icon">`. The first update snapshots and removes the original icon links, then all mounted instances share one managed link and receive subsequent updates. After the last instance unmounts, `"restore-originals"` removes the managed link and restores the snapshot; `"leave-as-is"` keeps the current DOM link and discards the snapshot.
+
+## Compatibility and accessibility
+
+The hook throws outside a browser or when `document.head` is unavailable, so place it behind a client boundary as well as Suspense and an error boundary. Same-origin updates reject empty, absolute, protocol-relative, or cross-origin values; external updates reject empty or same-origin URLs. A favicon is decorative and must not be the only indication of unread, error, or status state.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

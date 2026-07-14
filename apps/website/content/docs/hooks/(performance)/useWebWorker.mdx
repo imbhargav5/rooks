@@ -1,140 +1,88 @@
 ---
-id: useWebWorker
 title: useWebWorker
-sidebar_label: useWebWorker
-description: "Runs a function in a Web Worker to offload heavy computation off the main thread."
+description: Creates and manages a classic Web Worker with message, status, and error state.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useAsyncEffect, useGetIsMounted]
 ---
 
 ## About
 
-React hook for simplified Web Worker management with message passing. Offload heavy computations to background threads without blocking the UI.
+`useWebWorker` creates a classic `Worker` from a URL after mount and exposes message passing, termination, and the last response or error. It does not turn a function into worker code; the worker script remains a separate browser program.
 
-## Installation
+## Examples
 
-```bash
-npm install rooks
-```
+```tsx
+"use client";
 
-## Usage
-
-First, create a worker file (e.g., `public/worker.js`):
-
-```javascript
-// worker.js
-self.onmessage = function(e) {
-  const { type, value } = e.data;
-
-  if (type === 'compute') {
-    // Perform heavy computation
-    let result = 0;
-    for (let i = 0; i < value; i++) {
-      result += i;
-    }
-    // Send result back to main thread
-    self.postMessage(result);
-  }
-};
-```
-
-Then use the hook in your React component:
-
-```jsx
+import { useEffect, useState } from "react";
 import { useWebWorker } from "rooks";
 
-function HeavyComputationComponent() {
-  const { postMessage, data, status, error, terminate, isSupported } =
-    useWebWorker<number>("/worker.js");
-  const [inputValue, setInputValue] = useState(1000000);
+const source = "self.onmessage = (event) => self.postMessage(event.data * 2);";
 
-  const handleCompute = () => {
-    postMessage({ type: "compute", value: inputValue });
-  };
-
-  const handleTerminate = () => {
-    terminate();
-  };
-
-  if (!isSupported) {
-    return <div>Web Workers are not supported in this browser</div>;
-  }
+export default function WorkerDemo() {
+  const [workerUrl, setWorkerUrl] = useState("");
+  useEffect(() => {
+    const url = URL.createObjectURL(
+      new Blob([source], { type: "text/javascript" })
+    );
+    setWorkerUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, []);
+  const worker = useWebWorker<number, number>(workerUrl);
 
   return (
-    <div>
-      <h2>Web Worker Demo</h2>
-      <input
-        type="number"
-        value={inputValue}
-        onChange={(e) => setInputValue(Number(e.target.value))}
-      />
-      <button onClick={handleCompute} disabled={status === "running"}>
-        {status === "running" ? "Computing..." : "Start Computation"}
+    <section>
+      <button type="button" onClick={() => worker.postMessage(21)}>
+        Double 21
       </button>
-      <button onClick={handleTerminate}>Terminate Worker</button>
-
-      <div>
-        <p>Status: <strong>{status}</strong></p>
-        {data !== null && <p>Result: {data}</p>}
-        {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
-      </div>
-    </div>
+      <button type="button" onClick={worker.terminate}>
+        Terminate
+      </button>
+      <p role="status">
+        {!workerUrl
+          ? "Preparing worker"
+          : worker.isSupported
+            ? `${worker.status}: ${worker.data ?? "no result"}`
+            : "Workers unavailable"}
+      </p>
+      {worker.error && <p role="alert">{worker.error.message}</p>}
+    </section>
   );
 }
 ```
 
-## Return Value
+## Parameters
 
-Returns an object with the following properties:
+`workerUrl: string` is required. An empty string leaves the hook idle. The hook calls `new Worker(workerUrl)` without module-worker options.
 
-| Property    | Type                      | Description                              |
-| ----------- | ------------------------- | ---------------------------------------- |
-| postMessage | `(message: any) => void`  | Post a message to the web worker         |
-| terminate   | `() => void`              | Terminate the web worker                 |
-| status      | `WorkerStatus`            | Current status of the worker             |
-| data        | `T \| null`               | Last data received from the worker       |
-| error       | `Error \| null`           | Any error that occurred                  |
-| isSupported | `boolean`                 | Whether Web Workers are supported        |
+## Return value
 
-## Worker Status
+The returned object has this inline shape:
 
-The `status` property can have the following values:
+| Property      | Type                                                          | Meaning                                           |
+| ------------- | ------------------------------------------------------------- | ------------------------------------------------- |
+| `postMessage` | `(message: TMessage) => void`                                 | Sends a structured-cloneable message.             |
+| `terminate`   | `() => void`                                                  | Stops the current worker and marks it terminated. |
+| `status`      | `"idle" \| "running" \| "success" \| "error" \| "terminated"` | Latest lifecycle status.                          |
+| `data`        | `TData \| null`                                               | Last message data received.                       |
+| `error`       | `Error \| null`                                               | Last creation, post, or worker error.             |
+| `isSupported` | `boolean`                                                     | Whether `window.Worker` exists.                   |
 
-- `"idle"` - Worker initialized but no messages sent
-- `"running"` - Worker is currently processing a message
-- `"success"` - Worker successfully completed processing
-- `"error"` - An error occurred
-- `"terminated"` - Worker has been terminated
+These result and status types are not public type exports from the package barrel.
 
-## Features
+## Behavior and lifecycle
 
-- **Background processing** - Offload heavy computations without blocking UI
-- **Message passing** - Simple API for communication with workers
-- **Status tracking** - Monitor worker state throughout its lifecycle
-- **Error handling** - Comprehensive error handling and reporting
-- **Automatic cleanup** - Workers are automatically terminated on unmount
-- **TypeScript support** - Full type definitions with generics for data typing
+The effect creates one worker per non-empty URL. A URL change terminates the old worker and constructs another, but existing `data` and status are not reset first. Posting marks status running and clears the error. Any received message marks success; the hook does not count multiple outstanding tasks. Worker errors mark error. Creation and structured-clone errors become `Error` state.
 
-## Use Cases
+Explicit termination nulls the worker ref, so later posts warn `"Worker not initialized"`; restarting requires a URL change or remount. Unmount terminates the worker without setting component state.
 
-- Heavy mathematical computations
-- Data processing and parsing
-- Image/video manipulation
-- Cryptographic operations
-- Any CPU-intensive tasks that would block the main thread
+## Compatibility and accessibility
 
-## Browser Support
+Server rendering reports unsupported. Rendering that branch directly can differ from the first client render, so use a client boundary or hydration-safe placeholder. Worker URLs must satisfy origin and Content Security Policy rules, workers cannot access the DOM, and messages use structured cloning. Give long-running work visible progress, a useful error, and a keyboard-operable cancellation control.
 
-Web Workers are supported in:
-- Chrome 4+
-- Firefox 3.5+
-- Safari 4+
-- Edge 12+
-- Opera 10.6+
+## Related
 
-## Notes
-
-- Worker scripts must be served from the same origin or use CORS
-- Workers cannot access the DOM directly
-- Workers have their own global scope and cannot access window objects
-- Communication with workers is done via message passing
-- Workers are automatically terminated when the component unmounts
-- Large data transfers can be optimized using Transferable Objects
+- [useAsyncEffect](/docs/hooks/useAsyncEffect)
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)

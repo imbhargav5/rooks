@@ -1,0 +1,58 @@
+---
+title: Temporal hooks
+description: Configure the Temporal polyfill, time zones, precision, and SSR fallbacks for Rooks time hooks.
+---
+
+Temporal hooks live in `rooks/temporal` so the main package does not load the optional Temporal implementation for applications that do not use it.
+
+## Install and import
+
+Install both packages explicitly:
+
+```bash
+pnpm add rooks @js-temporal/polyfill
+```
+
+```tsx
+import { useTemporalNow } from "rooks/temporal";
+```
+
+The hooks prefer `globalThis.Temporal` when the runtime supplies it. Otherwise they lazily import `@js-temporal/polyfill` on the client. The polyfill and Temporal epoch fields require `BigInt`, so include `BigInt` support in your browser/runtime target and build pipeline.
+
+## Choose a hook
+
+| Hook                                                       | Choose it when                                                                                                 |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`useTemporalNow`](/docs/hooks/useTemporalNow)             | You need the current instant or calendar representation, updated on aligned second, minute, or day boundaries. |
+| [`useTemporalAge`](/docs/hooks/useTemporalAge)             | You need calendar years, months, and days from a date to today in a time zone.                                 |
+| [`useTemporalCountdown`](/docs/hooks/useTemporalCountdown) | You need remaining time to a target instant and a terminal `done` state.                                       |
+| [`useTemporalElapsed`](/docs/hooks/useTemporalElapsed)     | You need elapsed time since an instant.                                                                        |
+
+Age is calendar arithmetic; countdown and elapsed are instant-based durations. Do not substitute one for the other when daylight-saving or month boundaries matter.
+
+## Pick a time zone deliberately
+
+Use an IANA time-zone identifier such as `"America/New_York"` or `"Asia/Kolkata"` when a value represents a user's calendar. Omitting it uses the runtime's system time zone where the hook accepts one, which can differ between a deployment server and a user's browser.
+
+ISO strings used as countdown targets or elapsed origins must identify an instant by including `Z` or a numeric offset. Date-only strings belong to `useTemporalAge`.
+
+## Choose precision for the UI
+
+Second and minute updates align to real clock boundaries. Day precision aligns to the next start of day in the selected time zone. Choose the coarsest precision that communicates the required information; it produces fewer rerenders and less assistive-technology noise.
+
+## SSR and hydration
+
+All four hooks return `null` on the server and while the Temporal API loads on the client. Render the same fallback for both states:
+
+```tsx
+import { useTemporalNow } from "rooks/temporal";
+
+export function UpdatedAt() {
+  const now = useTemporalNow({ precision: "minute" });
+  return (
+    <time dateTime={now?.toString()}>{now?.toString() ?? "Loading time…"}</time>
+  );
+}
+```
+
+Timers start only when the client store has subscribers and are cleared when the component unsubscribes. Invalid dates, instant strings, or time-zone identifiers are rejected by Temporal; validate user-provided values before passing them into a hook.

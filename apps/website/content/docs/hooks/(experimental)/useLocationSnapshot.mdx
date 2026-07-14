@@ -1,0 +1,54 @@
+---
+title: useLocationSnapshot
+description: "Read the current browser location as a stable snapshot."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Read a location snapshot that updates on `popstate`, `hashchange`, `history.pushState`, and `history.replaceState`.
+
+## Example
+
+```tsx
+import { useLocationSnapshot } from "rooks/experimental";
+
+function Example() {
+  const location = useLocationSnapshot();
+
+  return <pre>{JSON.stringify(location, null, 2)}</pre>;
+}
+```
+
+## Return value
+
+Returns `null` on the server or this inline browser shape:
+
+```text
+{
+  href: string; origin: string; protocol: string; host: string;
+  hostname: string; port: string; pathname: string;
+  search: string; hash: string;
+}
+```
+
+The source-only snapshot type is not a public import.
+
+## Parameters
+
+This hook takes no parameters.
+
+## Behavior and lifecycle
+
+All location hooks share one `useSyncExternalStore` source. It publishes stable snapshots for `popstate`, `hashchange`, `history.pushState`, and `history.replaceState`. The final unsubscribe removes the browser listeners and restores the original history methods.
+
+## Compatibility and accessibility
+
+Server rendering returns `null`; render an equivalent fallback until hydration. URL fields are untrusted application input, and a location update does not announce navigation or move focus automatically.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

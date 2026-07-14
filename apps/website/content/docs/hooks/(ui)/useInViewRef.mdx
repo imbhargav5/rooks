@@ -1,59 +1,71 @@
 ---
-id: useInViewRef
 title: useInViewRef
-sidebar_label: useInViewRef
-description: "Returns a ref that tracks whether the element is visible in the viewport."
+description: Returns a callback ref and whether its element currently intersects an observer root.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useIntersectionObserverRef, useMeasure]
 ---
 
 ## About
 
-Simple hook that monitors element enters or leave the viewport that's using Intersection Observer API.
-<br/>
-It returns a ref to observed element, as well as boolean flag - `inView` that will tell if the element is inside of the viewport / parent element or not. You can also pass a callback that will be fired everytime the Observer will be triggered. To understand the Intersection Observer API better, please check its [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+`useInViewRef` is the state-oriented Intersection Observer hook. Attach its callback ref to one element to receive a boolean, and optionally provide a raw observer callback for entry details.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Basic example
-
-```jsx
-import "./styles.css";
+```tsx
+import { useMemo } from "react";
 import { useInViewRef } from "rooks";
 
-export default function App() {
-  const [myRef, inView] = useInViewRef();
+export default function VisibilityStatus() {
+  const options = useMemo(() => ({ threshold: 0.5 }), []);
+  const [targetRef, inView] = useInViewRef(options);
+
   return (
-    <>
+    <section>
+      <p aria-live="polite">
+        The panel is {inView ? "at least half visible" : "not half visible"}.
+      </p>
       <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-        }}
+        ref={targetRef}
+        style={{ minHeight: 160, border: "1px solid", padding: 16 }}
       >
-        <h1>Is rectangle visible - {String(inView)}</h1>
+        Scroll this panel through the viewport.
       </div>
-      <div style={{ height: 2000 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "red" }}></div>
-      <div style={{ height: 2000 }}></div>
-    </>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument | Type                         | Description                                                                                                                  | Default Value                                                    | Required |
-| -------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------- |
-| callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        | no       |
-| options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` | no       |
+The supported overloads are:
 
-### Return
+- no arguments;
+- an `IntersectionObserverInit` object; or
+- an `IntersectionObserverCallback` followed by an optional options object.
 
-Returns an array with the first element in the array being the callback ref for the React component/element that needs to be observed and a second being the boolean flag that indicates if the element is in viewport.
+With no arguments, the defaults are `root: null`, `rootMargin: "0px 0px 0px 0px"`, and `threshold: [0, 1]`. A supplied options object is passed through rather than merged with that object; omitted fields then use the browser's defaults.
 
-| Return value | Type        | Description                                                    | Default value |
-| ------------ | ----------- | -------------------------------------------------------------- | ------------- |
-| ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
-| inView       | boolean     | flag that will indicate if the element is in viewport          | false         |
+## Return value
+
+Returns `[ref, inView]`. `ref` is a stable callback ref for an `HTMLElement`. `inView` starts as `false` and becomes the latest observed entry's `isIntersecting` value.
+
+## Behavior and lifecycle
+
+An observer is created after the ref receives a node. Each notification updates `inView` and then invokes the optional callback with the original entries and observer. The observer disconnects when the node, callback, or relevant options change and on unmount.
+
+Memoize a custom options object and callback when their semantic values are stable. A new object or callback identity can disconnect and recreate the observer on every render.
+
+The hook does not catch constructor errors from invalid roots, margins, or threshold values.
+
+## Compatibility and accessibility
+
+Effects do not run during server rendering, so the server value is `false`. Attaching the ref in a browser without `IntersectionObserver` throws when the effect creates the observer; load a polyfill or provide a product-level fallback for such browsers.
+
+Do not withhold essential or focusable content solely because `inView` is false: assistive technologies and search/indexing do not navigate like a visual viewport. Reserve lazy behavior for enhancements and preserve a usable no-observer experience. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useIntersectionObserverRef](/docs/hooks/useIntersectionObserverRef) exposes callback notifications without React visibility state.
+- [useMeasure](/docs/hooks/useMeasure) observes element dimensions instead of intersection.

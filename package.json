@@ -31,11 +31,16 @@
     "contributors:generate": "all-contributors generate",
     "contributors:check": "all-contributors check",
     "contributors:update": "node scripts/update-all-contributors/index.mjs",
-    "create": "node scripts/create/index.mjs",
-    "create:cli": "node scripts/create/cli.mjs",
+    "create": "tsx scripts/create/index.mjs",
+    "create:cli": "tsx scripts/create/cli.mjs",
     "new": "pnpm run create",
+    "docs:dev": "pnpm --filter website dev",
+    "docs:generate": "tsx scripts/docs/generate.ts",
+    "docs:build": "tsx scripts/docs/build.ts",
+    "docs:test": "tsx --test scripts/docs/manifest.test.ts scripts/docs/generate.test.ts scripts/docs/validate.test.ts && tsx --test scripts/create/generator.test.mjs",
+    "docs:check": "pnpm docs:test && pnpm --filter website docs:check",
     "prebuild": "rimraf dist",
-    "update-package-list-to-markdown": "tsx scripts/update-package-list-to-markdown/index.ts"
+    "docs:links:external": "tsx scripts/docs/check-external-links.ts"
   },
   "husky": {
     "hooks": {
@@ -66,7 +71,8 @@
     "remark-frontmatter": "^5.0.0",
     "tsx": "^4.21.0",
     "turbo": "^2.8.17",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "yaml": "^2.8.2"
   },
   "resolutions": {
     "prettier": "^3.8.1"

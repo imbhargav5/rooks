@@ -1,23 +1,21 @@
 ---
-id: useSuspenseNavigatorUserAgentData
 title: useSuspenseNavigatorUserAgentData
-sidebar_label: useSuspenseNavigatorUserAgentData
 description: "Reads User-Agent Client Hints with Suspense support."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
-
 A Suspense-enabled hook for getting high entropy values from the Navigator User Agent Data API. This hook suspends while the API is fetching data and must be wrapped in a Suspense boundary. It provides access to detailed browser and platform information that requires user permission.
-
-[//]: # "Main"
 
 ## Examples
 
 #### Basic Usage with All Hints
 
-```jsx
+```tsx
 import React, { Suspense } from "react";
 import { useSuspenseNavigatorUserAgentData } from "rooks/experimental";
 
@@ -92,13 +90,18 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useSuspenseNavigatorUserAgentData } from "rooks/experimental";
 
 function DeviceInfo() {
-  const userAgentData = useSuspenseNavigatorUserAgentData(["model", "formFactors"]);
+  const userAgentData = useSuspenseNavigatorUserAgentData([
+    "model",
+    "formFactors",
+  ]);
 
   return (
     <div>
       <h2>Device Information</h2>
       <p>Model: {userAgentData.model || "Not available"}</p>
-      <p>Form Factors: {userAgentData.formFactors?.join(", ") || "Not available"}</p>
+      <p>
+        Form Factors: {userAgentData.formFactors?.join(", ") || "Not available"}
+      </p>
     </div>
   );
 }
@@ -124,26 +127,26 @@ export default function App() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument | Type     | Description                                                                                       | Default      |
-| -------- | -------- | ------------------------------------------------------------------------------------------------- | ------------ |
-| hints    | string[] | Array of high entropy hints to request. See available hints below.                               | All hints    |
+| Argument | Type     | Description                                                        | Default   |
+| -------- | -------- | ------------------------------------------------------------------ | --------- |
+| hints    | string[] | Array of high entropy hints to request. See available hints below. | All hints |
 
 ### Available High Entropy Hints
 
-| Hint             | Type     | Description                                                                 |
-| ---------------- | -------- | --------------------------------------------------------------------------- |
-| architecture     | string   | The underlying platform architecture (e.g., "x64", "arm")                 |
-| bitness          | string   | The architecture bitness (e.g., "32", "64")                               |
-| formFactors      | string[] | The form factors of the device (e.g., ["Desktop"], ["Mobile", "Tablet"])  |
-| fullVersionList  | object[] | Array of browser brands and their full versions                            |
-| model            | string   | The device model name (mainly for mobile devices)                          |
-| platformVersion  | string   | The platform version (e.g., "10.0" for Windows)                          |
-| uaFullVersion    | string   | Full browser version (deprecated, use fullVersionList instead)             |
-| wow64            | boolean  | Whether the browser is running in 32-bit mode on 64-bit Windows           |
+| Hint            | Type     | Description                                                              |
+| --------------- | -------- | ------------------------------------------------------------------------ |
+| architecture    | string   | The underlying platform architecture (e.g., "x64", "arm")                |
+| bitness         | string   | The architecture bitness (e.g., "32", "64")                              |
+| formFactors     | string[] | The form factors of the device (e.g., ["Desktop"], ["Mobile", "Tablet"]) |
+| fullVersionList | object[] | Array of browser brands and their full versions                          |
+| model           | string   | The device model name (mainly for mobile devices)                        |
+| platformVersion | string   | The platform version (e.g., "10.0" for Windows)                          |
+| uaFullVersion   | string   | Full browser version (deprecated, use fullVersionList instead)           |
+| wow64           | boolean  | Whether the browser is running in 32-bit mode on 64-bit Windows          |
 
-### Returns
+## Return value
 
 Returns an object containing the requested high entropy values.
 
@@ -151,20 +154,21 @@ Returns an object containing the requested high entropy values.
 
 The returned object may contain any of the following properties based on the hints requested:
 
-| Property         | Type     | Description                                                                 |
-| ---------------- | -------- | --------------------------------------------------------------------------- |
-| architecture     | string   | The underlying platform architecture                                        |
-| bitness          | string   | The architecture bitness                                                    |
-| formFactors      | string[] | Array of device form factors                                               |
-| fullVersionList  | object[] | Array of objects with `brand` and `version` properties                    |
-| model            | string   | The device model name                                                       |
-| platformVersion  | string   | The platform version                                                        |
-| uaFullVersion    | string   | Full browser version (deprecated)                                          |
-| wow64            | boolean  | Whether running in WoW64 mode                                              |
+| Property        | Type     | Description                                            |
+| --------------- | -------- | ------------------------------------------------------ |
+| architecture    | string   | The underlying platform architecture                   |
+| bitness         | string   | The architecture bitness                               |
+| formFactors     | string[] | Array of device form factors                           |
+| fullVersionList | object[] | Array of objects with `brand` and `version` properties |
+| model           | string   | The device model name                                  |
+| platformVersion | string   | The platform version                                   |
+| uaFullVersion   | string   | Full browser version (deprecated)                      |
+| wow64           | boolean  | Whether running in WoW64 mode                          |
 
 ### Browser Support
 
 This hook uses the Navigator User Agent Data API, which is currently only supported in:
+
 - Chrome 90+
 - Edge 90+
 - Opera 76+
@@ -178,3 +182,15 @@ The hook will throw an error in unsupported browsers.
 - **Suspense Required**: This hook must be wrapped in a React Suspense boundary
 - **Error Boundaries**: Consider using error boundaries to handle unsupported browsers
 - **Caching**: Results are cached to prevent duplicate API calls with the same hints
+
+## Behavior and lifecycle
+
+The hook sorts the supplied hint array to form a module-level cache key, calls `getHighEntropyValues` once per unique set, and suspends until that promise settles. Resolved results remain cached; the hook creates no event listener or cleanup resource. Because sorting is in place, pass a disposable or already-sorted array if caller-owned order matters.
+
+## Compatibility and accessibility
+
+The hook throws when `navigator.userAgentData` is absent, including during SSR, and rethrows request failures to an error boundary. Availability is primarily Chromium-based and high-entropy values may be reduced by browser privacy policy. Use feature detection for behavior; user-agent data is not a reliable authorization, identity, or accessibility signal.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

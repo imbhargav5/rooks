@@ -1,1 +1,0 @@
-export { %name% as default } from "shared/%name%";

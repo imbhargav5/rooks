@@ -1,91 +1,84 @@
 ---
-id: useToggle
 title: useToggle
-sidebar_label: useToggle
-description: "Toggles a boolean state between true and false."
+description: Toggles a boolean or applies a custom reducer to another state type.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useCounter]
 ---
 
 ## About
 
-Toggle (between booleans or custom data)hook for React.
+`useToggle` is a small `useReducer` wrapper. With no custom reducer it flips a boolean-like value; with a reducer it can model any repeated state transition or dispatch typed actions.
 
-## Examples
+## Example
 
-### Basic usage
-
-```jsx
-import "./styles.css";
+```tsx
 import { useToggle } from "rooks";
 
-export default function App() {
-  const [state, toggle] = useToggle();
+export default function Disclosure() {
+  const [isOpen, toggle] = useToggle(false);
 
   return (
-    <div className="App">
-      <h1>Rooks: useToggle Example </h1>
-      <br></br>
-      <button onClick={toggle} style={{ cursor: "pointer" }}>
-        {state ? <span>Yes! 👍</span> : <span>No! 👎</span>}
+    <section>
+      <button type="button" aria-expanded={isOpen} onClick={toggle}>
+        {isOpen ? "Hide" : "Show"} details
+      </button>
+      {isOpen && <p>The details are now visible.</p>}
+    </section>
+  );
+}
+```
+
+### Custom reducer
+
+```tsx
+import { useToggle } from "rooks";
+
+type Action = "next" | "reset";
+
+export default function ThreeStateControl() {
+  const [value, dispatch] = useToggle<number, Action>(0, (current, action) => {
+    if (action === "reset") return 0;
+    return (current + 1) % 3;
+  });
+
+  return (
+    <div>
+      <p>State: {value}</p>
+      <button type="button" onClick={() => dispatch("next")}>
+        Next
+      </button>
+      <button type="button" onClick={() => dispatch("reset")}>
+        Reset
       </button>
     </div>
   );
 }
 ```
 
-### With a Start value
+## Parameters
 
-```jsx
-import "./styles.css";
-import { useToggle } from "rooks";
+The hook has three call forms:
 
-export default function App() {
-  const [state, toggle] = useToggle(true);
+- `useToggle()` starts at `false` and returns a no-argument toggle function.
+- `useToggle(initialValue)` starts at the supplied value and returns a no-argument function that applies JavaScript logical negation. Boolean values are the intended use for this form.
+- `useToggle(initialValue, reducer)` calls `reducer(currentValue, action)` for each dispatch and returns a typed React dispatch function.
 
-  return (
-    <div className="App">
-      <h1>Rooks: useToggle Example </h1>
-      <br></br>
-      <button onClick={toggle} style={{ cursor: "pointer" }}>
-        {state ? <span>Yes! 👍</span> : <span>No! 👎</span>}
-      </button>
-    </div>
-  );
-}
-```
+The initial value is read when the reducer is initialized. Later prop changes do not replace the current state.
 
-### Custom toggle values
+## Return value
 
-```jsx
-import "./styles.css";
-import { useToggle } from "rooks";
+Without a custom reducer, the result is `[value, toggle]`, where `toggle(): void` negates the current value. With a custom reducer, it is `[value, dispatch]`, where `dispatch(action)` supplies the reducer's second argument.
 
-export default function App() {
-  const [state, toggle] = useToggle("on", value =>
-    value === "on" ? "off" : "on"
-  );
+## Behavior and lifecycle
 
-  return (
-    <div className="App">
-      <h1>Rooks: useToggle Example </h1>
-      <br></br>
-      <button onClick={toggle} style={{ cursor: "pointer" }}>
-        {state}
-      </button>
-    </div>
-  );
-}
-```
+Transitions follow React reducer semantics and are safe to call repeatedly without reading a possibly stale value from the render that created the callback. The hook creates no effects, subscriptions, or cleanup work.
 
-## Arguments
+## Compatibility and accessibility
 
-| Arguments      | Type     | Description                                     | Default value |
-| -------------- | -------- | ----------------------------------------------- | ------------- |
-| initialValue   | boolean  | Initial value of the state                      | false         |
-| toggleFunction | function | Function which determines how to toggle a value | v => !v       |
+The hook has no browser dependency and can render during SSR. When it controls visibility, expose the state with native semantics or attributes such as `aria-expanded`; a generic toggle should still have a label that explains what is being changed.
 
-### Returned array items
+## Related
 
-| Returned Array items | Type     | Description                                                                                                           |
-| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| value                | Any      | Current value                                                                                                         |
-| toggleValue          | function | Toggle function which changes the value to the other value in the list of 2 acceptable values. (Mostly true or false) |
+- [useCounter](/docs/hooks/useCounter) provides named increment, decrement, and reset operations for numeric state.

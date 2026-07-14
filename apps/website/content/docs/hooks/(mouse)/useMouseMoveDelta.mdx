@@ -1,20 +1,50 @@
 ---
-id: useMouseMoveDelta
 title: useMouseMoveDelta
-sidebar_label: useMouseMoveDelta
-description: "Tracks the delta (change) in mouse position between consecutive mousemove events."
+description: Returns movement and velocity between consecutive document mousemove events.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMouse]
 ---
 
 ## About
 
-Tracks delta of mouse move
+`useMouseMoveDelta` compares consecutive document-level mouse positions. It reports changes in client coordinates and velocity based on native event timestamps.
 
-## Examples
+## Example
 
 ```tsx
-import {useMouseMoveDelta} from "rooks"
-export default function App() {
-  useMouseMoveDelta();
-  return null
+import { useMouseMoveDelta } from "rooks";
+
+export default function MouseMotion() {
+  const { deltaX, deltaY, velocityX, velocityY } = useMouseMoveDelta();
+
+  return (
+    <p>
+      Delta: {deltaX}, {deltaY}; velocity: {velocityX.toFixed(2)},{" "}
+      {velocityY.toFixed(2)} px/ms
+    </p>
+  );
 }
 ```
+
+## Parameters
+
+This hook has no parameters.
+
+## Return value
+
+It returns `{ deltaX, deltaY, velocityX, velocityY }`, with numeric fields. Deltas use client-coordinate pixels. Velocity divides each delta by elapsed native-event timestamp milliseconds.
+
+## Behavior and lifecycle
+
+The initial snapshot and the first mouse move report zeros because no previous position exists. Later moves compare against the immediately preceding `clientX` and `clientY`; an elapsed time of zero produces zero velocity. Values remain at the last event's result while the mouse is stationary. The passive document listener is removed on unmount.
+
+## Compatibility and accessibility
+
+The server snapshot is all zeros. Only mouse movement is observed; pointer, touch, keyboard, and programmatic movement are not. Do not use velocity as the only way to expose or operate a feature.
+
+## Related
+
+- [useMouse](/docs/hooks/useMouse) exposes the latest absolute mouse coordinates.
+- [useMouseWheelDelta](/docs/hooks/useMouseWheelDelta) reports vertical wheel motion.

@@ -1,15 +1,14 @@
 #!/usr/bin/env tsx
 
-import { execSync, spawn } from 'child_process';
-import fs from 'fs';
-import path from 'path';
+import { spawn } from "child_process";
+import fs from "fs";
 
-console.log('🔍 Sanity Check: Import Resolution');
-console.log('='.repeat(40));
+console.log("🔍 Sanity Check: Import Resolution");
+console.log("=".repeat(40));
 
 // Check if dist directory exists
-if (!fs.existsSync('dist')) {
-  console.error('❌ Error: dist directory not found. Run `pnpm build` first.');
+if (!fs.existsSync("dist")) {
+  console.error("❌ Error: dist directory not found. Run `pnpm build` first.");
   process.exit(1);
 }
 
@@ -22,33 +21,38 @@ interface TestCase {
 
 const tests: TestCase[] = [
   {
-    name: 'ESM Main Import (Basic Check)',
-    file: 'temp-esm-main.mjs',
+    name: "ESM Main Import",
+    file: "temp-esm-main.mjs",
     content: `
-// Basic check that the ESM file can be parsed and has exports
-import fs from 'fs';
-const content = fs.readFileSync('./dist/esm/index.js', 'utf8');
-if (content.includes('export') && content.includes('useCounter')) {
-  console.log('✅ ESM main file has proper exports structure');
-} else {
-  throw new Error('ESM main file missing expected exports');
+import { useCounter } from './dist/esm/index.js';
+if (typeof useCounter !== 'function') {
+  throw new Error('ESM main entrypoint did not export useCounter');
 }
-`
+console.log('✅ ESM main entrypoint imported useCounter');
+`,
   },
   {
-    name: 'ESM Experimental Import (Basic Check)',
-    file: 'temp-esm-experimental.mjs',
+    name: "ESM Experimental Import",
+    file: "temp-esm-experimental.mjs",
     content: `
-// Basic check that the ESM experimental file can be parsed and has exports  
-import fs from 'fs';
-const content = fs.readFileSync('./dist/esm/experimental.js', 'utf8');
-if (content.includes('export') && content.includes('useSuspenseNavigatorUserAgentData')) {
-  console.log('✅ ESM experimental file has proper exports structure');
-} else {
-  throw new Error('ESM experimental file missing expected exports');
+import { useVirtualList } from './dist/esm/experimental.js';
+if (typeof useVirtualList !== 'function') {
+  throw new Error('ESM experimental entrypoint did not export useVirtualList');
 }
-`
-  }
+console.log('✅ ESM experimental entrypoint imported useVirtualList');
+`,
+  },
+  {
+    name: "ESM Temporal Import",
+    file: "temp-esm-temporal.mjs",
+    content: `
+import { useTemporalNow } from './dist/esm/temporal.js';
+if (typeof useTemporalNow !== 'function') {
+  throw new Error('ESM Temporal entrypoint did not export useTemporalNow');
+}
+console.log('✅ ESM Temporal entrypoint imported useTemporalNow');
+`,
+  },
 ];
 
 const createdFiles: string[] = [];
@@ -63,23 +67,23 @@ async function runTest(test: TestCase): Promise<void> {
       createdFiles.push(test.file);
 
       // Run the test
-      const child = spawn('node', [test.file], {
-        stdio: ['pipe', 'pipe', 'pipe'],
-        cwd: process.cwd()
+      const child = spawn("node", [test.file], {
+        stdio: ["pipe", "pipe", "pipe"],
+        cwd: process.cwd(),
       });
 
-      let stdout = '';
-      let stderr = '';
+      let stdout = "";
+      let stderr = "";
 
-      child.stdout.on('data', (data) => {
+      child.stdout.on("data", (data) => {
         stdout += data.toString();
       });
 
-      child.stderr.on('data', (data) => {
+      child.stderr.on("data", (data) => {
         stderr += data.toString();
       });
 
-      child.on('close', (code) => {
+      child.on("close", (code) => {
         if (code === 0) {
           console.log(stdout.trim());
           resolve();
@@ -89,7 +93,6 @@ async function runTest(test: TestCase): Promise<void> {
           reject(new Error(`${test.name} failed with code ${code}`));
         }
       });
-
     } catch (error) {
       console.error(`❌ ${test.name} failed:`, error.message);
       reject(error);
@@ -102,13 +105,13 @@ async function runAllTests(): Promise<void> {
     for (const test of tests) {
       await runTest(test);
     }
-    console.log('🎉 All import resolution tests passed!');
+    console.log("🎉 All import resolution tests passed!");
   } catch (error) {
-    console.error('❌ Import resolution tests failed');
+    console.error("❌ Import resolution tests failed");
     process.exit(1);
   } finally {
     // Clean up test files
-    createdFiles.forEach(file => {
+    createdFiles.forEach((file) => {
       if (fs.existsSync(file)) {
         fs.unlinkSync(file);
       }

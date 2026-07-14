@@ -1,19 +1,17 @@
 ---
-id: useDisposable
 title: useDisposable
-sidebar_label: useDisposable
 description: "Manages synchronous disposable resources using the TC39 Explicit Resource Management proposal."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: Import this hook from `rooks/experimental`. It may change or be removed without notice.
-
 Bridges TC39 Explicit Resource Management (`Symbol.dispose`) with React lifecycles. It creates a disposable resource synchronously so the resource is available on the first render, and disposes it when the component unmounts or when the dependency array changes.
 
 This hook requires `Symbol.dispose` support at runtime. Browsers such as Safari currently need a polyfill. Load one like `core-js/proposals/explicit-resource-management` before using this hook.
-
-[//]: # "Main"
 
 ## Examples
 
@@ -64,7 +62,7 @@ export default function UserStorePanel() {
 }
 ```
 
-## Arguments
+## Parameters
 
 | Argument  | Type             | Description                                                | Default value |
 | --------- | ---------------- | ---------------------------------------------------------- | ------------- |
@@ -82,3 +80,15 @@ export default function UserStorePanel() {
 - Import from `rooks/experimental`, not `rooks`.
 - `rooks` does not polyfill `Symbol.dispose` for you.
 - If the returned resource does not implement `[Symbol.dispose]()`, the hook throws a descriptive runtime error.
+
+## Behavior and lifecycle
+
+The factory runs synchronously during render so the resource is immediately available. A dependency change disposes the old resource during effect cleanup, creates its replacement in the next effect, and forces a render; unmount invokes `[Symbol.dispose]()` once for the current resource. Development Strict Mode can create and dispose more than once, so the factory and disposer must tolerate replay.
+
+## Compatibility and accessibility
+
+Because creation happens during render, the factory also runs during SSR and must not access browser globals unless guarded. Missing `Symbol.dispose`, a resource without the required method, a factory failure, or a disposal failure throws to the nearest error boundary. Load the polyfill before rendering in unsupported runtimes.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

@@ -1,236 +1,84 @@
-# Rooks Code Style Guide
+# Rooks code style guide
 
-This document provides a comprehensive guide to the coding style, conventions, and best practices used in the Rooks project. Adhering to these guidelines ensures consistency, readability, and maintainability of the codebase.
+This guide records conventions that match the repository's current TypeScript, React, and Vitest configuration. Prefer the pattern used by neighboring hooks when the guide does not cover a choice.
 
-## Guiding Principles
+## TypeScript
 
-- **Clarity and Readability:** Code should be easy to understand. Prioritize clear naming and a logical structure.
-- **Strict Type Safety:** We leverage TypeScript's strongest features to catch errors at compile time.
-- **Consistency:** Following a consistent style across the project makes the code easier to read and maintain.
-- **Thorough Testing:** Every hook must have comprehensive tests to ensure it is robust and reliable.
+Production source extends the shared strict configuration. `strict` and `noUncheckedIndexedAccess` are enabled, the target is ES2022, and browser library types are available.
 
-## File Structure
+- Use precise parameter and return types at public boundaries.
+- Avoid `any`. Use a generic, a union, `unknown` plus narrowing, or a browser platform type.
+- Let TypeScript infer local values when the inferred type is clear.
+- Use `type` for unions, tuples, mapped types, and aliases. Use either `type` or `interface` for object shapes; both are established repository patterns.
+- Keep implementation-only option and result shapes local unless they are intentionally part of the package API.
+- Do not add a type to an entrypoint barrel merely to make a documentation example importable. Only explicitly barrel-exported types are public.
 
-Each new hook should have the following file structure:
+Hook implementations live at `packages/rooks/src/hooks/useName.ts` and use named exports. Public availability is controlled by one of the entrypoint barrels:
 
-```
-packages/rooks/
-├── src/
-│   └── hooks/
-│       └── useMyNewHook.ts
-└── __tests__/
-    └── useMyNewHook.spec.ts
-```
+| Entrypoint           | Barrel                               | Contract                                                        |
+| -------------------- | ------------------------------------ | --------------------------------------------------------------- |
+| `rooks`              | `packages/rooks/src/index.ts`        | Stable hooks and explicitly supported aliases                   |
+| `rooks/experimental` | `packages/rooks/src/experimental.ts` | APIs that may change or be removed between releases             |
+| `rooks/temporal`     | `packages/rooks/src/temporal.ts`     | Temporal hooks isolated with their optional polyfill dependency |
 
-## TypeScript Style
+Do not export the same implementation from multiple entrypoints unless the public API explicitly calls for an alias.
 
-We enforce a high level of type safety. The TypeScript configuration has `strict` and `noUncheckedIndexedAccess` set to `true`.
+## React hook behavior
 
-### `type` vs. `interface`
+- Start public hook names with `use` and obey the Rules of Hooks.
+- Make default parameter values explicit in the function signature when they are part of the contract.
+- Include every reactive value used by an effect or memoized callback in its dependency list. When a long-lived subscription should call the latest callback without being recreated, use the repository's fresh-ref/fresh-callback patterns.
+- Return a cleanup function from effects that install event listeners, timers, observers, subscriptions, or other resources.
+- Clear or replace resources before installing a new one when dependencies change.
+- For asynchronous work, prevent stale completions from replacing newer state. Use cancellation when the platform supports it or a request/generation identifier when it does not.
+- Do not update state after unmount. Tests should cover cleanup and overlapping work when those risks exist.
 
-Prefer `type` over `interface` for defining object shapes and function signatures. This helps maintain consistency across the codebase.
+## Browser APIs and server rendering
 
-**Example:**
+Browser globals do not exist during server rendering. Guard access with checks such as `typeof window !== "undefined"`, `typeof document !== "undefined"`, or `typeof navigator !== "undefined"` before using the corresponding API.
 
-```typescript
-// Good
-type CounterHandler = {
-  decrement: () => void;
-  increment: () => void;
-  reset: () => void;
-  value: number;
-};
+- Keep the initial server snapshot deterministic.
+- Avoid a different first client render that would produce a hydration mismatch. Hydration is React attaching behavior to server-rendered markup; the first client output must agree with that markup.
+- Install browser listeners and request permissions in an effect unless the API contract requires another lifecycle.
+- Report unsupported browser features through the hook's documented fallback instead of throwing accidentally.
+- Use `useIsomorphicEffect` only when layout timing is required. A normal effect is easier to render on the server.
+- Cover browser-only hooks in jsdom tests and add or extend `packages/rooks/src/__tests__/ssr.spec.ts` when server safety is part of the contract.
 
-// Bad
-interface CounterHandler {
-  decrement: () => void;
-  increment: () => void;
-  reset: () => void;
-  value: number;
-}
-```
+## Tests
 
-### Avoiding `any`
+Tests live in `packages/rooks/src/__tests__`. Existing hook tests and the generator use `*.spec.ts` or `*.spec.tsx`; follow that convention for new hook tests and use `.tsx` when the file contains JSX. Vitest is configured to discover `*.test.ts` and `*.test.tsx` as well for existing or specialized tests.
 
-The use of `any` is strictly discouraged. When a hook needs to work with a variety of value types, use generics.
+- Vitest globals such as `describe`, `it`, `expect`, and lifecycle hooks are configured by the test project.
+- The default environment is jsdom. Add `/** @vitest-environment node */` when a test must prove behavior without browser globals.
+- Use `renderHook` for isolated hooks and React Testing Library rendering for component-visible behavior.
+- Wrap state-changing calls and timer advancement in `act`.
+- Use `vi.fn`, `vi.spyOn`, and `vi.useFakeTimers` for observable dependencies. Restore mocks, real timers, and patched globals after each test.
+- Assert initial behavior, updates, cleanup, dependency changes, unsupported-platform behavior, and error paths that are part of the hook's contract.
+- Keep tests deterministic. Do not depend on the network, wall-clock time, browser permissions, or test order.
+- Follow the existing convention of `expect.hasAssertions()` when a test contains asynchronous or callback-driven assertions that could otherwise be skipped.
 
-**Example:**
+Run one test directly while iterating:
 
-```typescript
-function useMyHook<T>(initialValue: T) {
-  const [value, setValue] = useState<T>(initialValue);
-  // ...
-}
-```
-
-### Type Guards
-
-For complex types, especially when dealing with unions, use type guards to narrow down the type.
-
-**Example:**
-
-```typescript
-function isKeyboardEvent(event: Event): event is KeyboardEvent {
-  return "key" in event;
-}
+```bash
+pnpm --filter rooks exec vitest run src/__tests__/useArrayState.spec.ts
 ```
 
-### Variable and Function Declarations
+## Documentation
 
-- Use `const` for variables that are not reassigned.
-- Use `let` only when a variable needs to be reassigned.
-- Use function declarations (`function myFunction() {}`) for top-level functions.
-- Use arrow functions for callbacks and when preserving the `this` context.
+Every canonical public hook needs one page under `apps/website/content/docs/hooks/(category)`. The page must use the public entrypoint, describe exact defaults and cleanup behavior, and contain a self-contained TypeScript/TSX example with visible output.
 
-### Async/Await
+Aliases belong on the canonical page. Internal helpers do not get public reference pages. Follow [Authoring documentation](./docs/authoring-documentation.md) for frontmatter, required sections, examples, and validation commands.
 
-- Use `async/await` for handling asynchronous operations.
-- Always wrap `await` calls in `try...catch` blocks to handle potential errors gracefully.
+## Formatting and checks
 
-**Example from `useAsyncEffect`:**
+Prettier owns formatting. ESLint and TypeScript own mechanical correctness; this guide does not override them.
 
-```typescript
-try {
-  return await effectRef.current(shouldContinueEffect);
-} catch (error) {
-  throw error;
-}
+```bash
+pnpm --filter rooks lint
+pnpm --filter rooks typecheck
+pnpm --filter rooks exec vitest run src/__tests__/useArrayState.spec.ts
+pnpm docs:check
+pnpm all-checks
 ```
 
-## React Hook Structure
-
-A typical hook in this project has the following structure:
-
-1.  **Type Definitions:** Define `type` aliases for the hook's return value and any complex parameter types.
-2.  **JSDoc:** A detailed JSDoc comment explaining the hook's purpose, parameters, return value, and a link to the documentation.
-3.  **Hook Function:** The main function, starting with `use`.
-4.  **Export:** The hook is exported using a named export.
-
-### Example: `useCounter`
-
-```typescript
-import { useCallback, useState } from "react";
-
-// 1. Type Definition
-type CounterHandler = {
-  decrement: () => void;
-  decrementBy: (amount: number) => void;
-  increment: () => void;
-  incrementBy: (amount: number) => void;
-  reset: () => void;
-  value: number;
-};
-
-// 2. JSDoc
-/**
- * Counter hook
- *
- * @param {number} initialValue The initial value of the counter
- * @returns {handler} A handler to interact with the counter
- * @see https://rooks.vercel.app/docs/hooks/useCounter
- */
-// 3. Hook Function
-function useCounter(initialValue: number): CounterHandler {
-  const [counter, setCounter] = useState(initialValue);
-
-  const incrementBy = useCallback((incrAmount: number) => {
-    setCounter((currentCounter) => currentCounter + incrAmount);
-  }, []);
-
-  // ... other functions
-
-  return {
-    decrement,
-    decrementBy,
-    increment,
-    incrementBy,
-    reset,
-    value: counter,
-  };
-}
-
-// 4. Export
-export { useCounter };
-```
-
-### Commonly Used React Hooks
-
-- **`useState`:** For managing simple state.
-- **`useEffect`:** For side effects. Remember to provide a dependency array.
-- **`useCallback`:** To memoize functions, especially those passed down to child components.
-- **`useMemo`:** To memoize expensive calculations.
-- **`useRef`:** To create mutable ref objects.
-
-## Testing
-
-We use `@testing-library/react` for testing our hooks.
-
-### Test Structure
-
-- Tests are located in the `packages/rooks/src/__tests__` directory.
-- Test files are named `useMyHook.spec.ts`.
-- Use `/** @vitest-environment jsdom */` when a test needs an explicit jsdom environment.
-
-### Writing Tests
-
-- **`renderHook`:** Use the `renderHook` function from `@testing-library/react` to test hooks in isolation.
-- **`act`:** Wrap any state updates in `act` to ensure that React has processed the updates before you make assertions.
-- **Assertions:**
-  - Use `expect.hasAssertions()` at the beginning of each test to ensure that at least one assertion is called.
-  - Write clear and concise assertions.
-- **Mocking:** Use Vitest's mocking capabilities (`vi.fn()`, `vi.spyOn()`, etc.) to mock dependencies and track function calls.
-- **Fake Timers:** Use `vi.useFakeTimers()` for hooks that involve timeouts or intervals.
-
-### Example Test: `useCounter.spec.ts`
-
-```typescript
-/**
- * @vitest-environment jsdom
- */
-import { renderHook, act } from "@testing-library/react";
-import { useCounter } from "@/hooks/useCounter";
-
-describe("useCounter", () => {
-  it("should be defined", () => {
-    expect.hasAssertions();
-    expect(useCounter).toBeDefined();
-  });
-
-  it("should increment the value", () => {
-    expect.hasAssertions();
-    const { result } = renderHook(() => useCounter(0));
-    act(() => {
-      result.current.increment();
-    });
-    expect(result.current.value).toBe(1);
-  });
-
-  // ... other tests
-});
-```
-
-## JSDoc Standards
-
-- Every exported hook must have a JSDoc comment.
-- The comment should include:
-  - A brief description of the hook.
-  - `@param` for each parameter.
-  - `@returns` for the return value.
-  - `@see` with a link to the official documentation page.
-
-**Example:**
-
-```typescript
-/**
- * useKey hook
- *
- * Fires a callback on keyboard events like keyDown, keyPress and keyUp
- *
- * @param {TrackedKeyEvents} keys List of keys to listen for. Eg: ["a", "b"]
- * @param {Callback} callback  Callback to fire on keyboard events
- * @param {Options} options Options
- * @see https://rooks.vercel.app/docs/hooks/useKey
- */
-```
-
-By following these guidelines, we can maintain a high-quality, consistent, and easy-to-contribute-to codebase.
+Run the focused commands for the files you changed, then the full gate before review.

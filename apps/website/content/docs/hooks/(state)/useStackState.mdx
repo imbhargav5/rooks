@@ -1,23 +1,50 @@
 ---
-id: useStackState
 title: useStackState
-sidebar_label: useStackState
 description: "Manages stack (LIFO) state with push, pop, and peek operations."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useQueueState, useArrayState]
 ---
 
 ## About
 
 A React hook that manages state in the form of a stack
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useStackState } from "rooks";
+
+export default function NavigationStack() {
+  const [, { peek, pop, push }, newestFirst] = useStackState(["Home"]);
+
+  return (
+    <section>
+      <p>Top: {peek() ?? "Empty"}</p>
+      <ol>
+        {newestFirst.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ol>
+      <button
+        type="button"
+        onClick={() => push(`Page ${newestFirst.length + 1}`)}
+      >
+        Push
+      </button>
+      <button type="button" onClick={() => void pop()}>
+        Pop
+      </button>
+    </section>
+  );
+}
+```
 
 ### Basic usage
 
 ```jsx
 import React, { useRef } from "react";
-import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStackState } from "rooks";
 import styled from "styled-components";
@@ -209,11 +236,11 @@ export default function UploadQueue() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Arguments   | Type  | Description | Default value |
-| ----------- | ----- | ----------- | ------------- |
-| initialList | any[] | An array    | undefined     |
+| Parameter     | Type  | Default  | Description                          |
+| ------------- | ----- | -------- | ------------------------------------ |
+| `initialList` | `T[]` | Required | Items copied into the initial stack. |
 
 ### Returned array items
 
@@ -224,4 +251,19 @@ export default function UploadQueue() {
 | peek           | function | Return the item on the top of the stack |
 | length         | number   | Number of items in the stack            |
 
----
+## Return value
+
+Returns `[list, controls, listInReverse]`. `list` is ordered from bottom to top; `listInReverse` is a memoized copy ordered top to bottom. Controls include `push`, `pop`, `peek`, `clear`, `isEmpty`, and the current numeric `length`. Empty `pop` and `peek` return `undefined`; `push` returns the new length.
+
+## Behavior and lifecycle
+
+The initial array and reversed view are shallow copies. `push` and `pop` callbacks close over the current rendered list rather than using functional updates, so several operations from one stale render do not reliably compose. `clear` is recreated on every render; other query/mutation callbacks are recreated when the list changes. No effects or external resources are created.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and has no browser requirement. Render stack contents with semantic list markup, and manage focus or announcements if push/pop actions change content users are actively reviewing.
+
+## Related
+
+- [useQueueState](/docs/hooks/useQueueState)
+- [useArrayState](/docs/hooks/useArrayState)

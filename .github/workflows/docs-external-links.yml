@@ -1,0 +1,23 @@
+name: Documentation external links
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/ci-setup
+      - name: Check external documentation links
+        id: links
+        run: pnpm exec tsx scripts/docs/check-external-links.ts
+      - name: Summarize external link failures
+        if: failure() && steps.links.outcome == 'failure'
+        run: |
+          echo "External documentation links failed. Review the previous step and update the allowlist only for intentionally unavailable URLs." >> "$GITHUB_STEP_SUMMARY"

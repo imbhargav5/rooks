@@ -1,0 +1,74 @@
+---
+title: useTemporalNow
+description: Returns the current time as a Temporal value and updates on aligned time boundaries.
+entrypoint: rooks/temporal
+status: stable
+aliases: []
+related: [useTemporalAge, useTemporalCountdown, useTemporalElapsed]
+---
+
+## About
+
+`useTemporalNow` returns the current instant, zoned date-time, plain date-time, or plain date. Updates are aligned to the next second, minute, or day boundary rather than scheduled from the component's render time.
+
+## Examples
+
+```tsx
+import { useTemporalNow } from "rooks/temporal";
+
+export default function Clock() {
+  const now = useTemporalNow({ precision: "second" });
+
+  return (
+    <time dateTime={now?.toString()}>
+      {now?.toString() ?? "Loading current time…"}
+    </time>
+  );
+}
+```
+
+Choose a time zone when the displayed calendar date matters:
+
+```tsx
+import { useTemporalNow } from "rooks/temporal";
+
+export default function TodayInTokyo() {
+  const today = useTemporalNow({
+    kind: "plainDate",
+    precision: "day",
+    timeZone: "Asia/Tokyo",
+  });
+
+  return <p>Today in Tokyo: {today?.toString() ?? "Loading…"}</p>;
+}
+```
+
+## Parameters
+
+| Option      | Type                                                     | Default          | Description                                                                          |
+| ----------- | -------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------ |
+| `kind`      | `"instant" \| "zoned" \| "plainDateTime" \| "plainDate"` | `"instant"`      | Selects the Temporal value returned.                                                 |
+| `precision` | `"second" \| "minute" \| "day"`                          | `"second"`       | Aligns updates to the next boundary of this precision.                               |
+| `timeZone`  | `string`                                                 | System time zone | Used for zoned/calendar values and day boundaries. Use an IANA time-zone identifier. |
+
+The options object is optional.
+
+## Return value
+
+Returns the Temporal type selected by `kind`, or `null` during server rendering and while the Temporal API is loading.
+
+## Behavior and lifecycle
+
+The hook prefers a native `globalThis.Temporal` implementation and otherwise loads `@js-temporal/polyfill` on the client. It owns one aligned timer while subscribed, recreates that timer when precision or time zone changes, and clears it during cleanup.
+
+## Compatibility and accessibility
+
+Install `@js-temporal/polyfill` and ensure the target runtime supports `BigInt`. Render a deterministic fallback for `null` so server output and the first client render match. A time value should use `<time>` with a machine-readable `dateTime` when appropriate.
+
+See [Temporal hooks](/docs/guides/temporal-hooks) for setup, time-zone, precision, and SSR guidance.
+
+## Related
+
+- [useTemporalAge](/docs/hooks/useTemporalAge)
+- [useTemporalCountdown](/docs/hooks/useTemporalCountdown)
+- [useTemporalElapsed](/docs/hooks/useTemporalElapsed)

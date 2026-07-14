@@ -1,21 +1,21 @@
 ---
-id: useSetState
 title: useSetState
-sidebar_label: useSetState
 description: "Manages a Set data structure as React state with add, delete, and clear helpers."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useNativeMapState, useArrayState]
 ---
 
 ## About
 
 Manage the state of a Set in React. Exposes add, delete and clear methods along with the current set to easily manipulate values in a set.
 
-[//]: # "Main"
-
 ## Examples
 
 #### Basic example with numbers
 
-```jsx
+```tsx
 import { useSetState } from "rooks";
 
 export default function App() {
@@ -45,7 +45,8 @@ export default function App() {
 
   const addRandomFruit = () => {
     const randomFruits = ["orange", "grape", "mango", "pear"];
-    const randomFruit = randomFruits[Math.floor(Math.random() * randomFruits.length)];
+    const randomFruit =
+      randomFruits[Math.floor(Math.random() * randomFruits.length)];
     fruitControls.add(randomFruit);
   };
 
@@ -56,7 +57,9 @@ export default function App() {
       <div>Has orange: {fruits.has("orange") ? "Yes" : "No"}</div>
       <br />
       <button onClick={addRandomFruit}>Add Random Fruit</button>
-      <button onClick={() => fruitControls.delete("apple")}>Remove Apple</button>
+      <button onClick={() => fruitControls.delete("apple")}>
+        Remove Apple
+      </button>
       <button onClick={() => fruitControls.clear()}>Clear All</button>
     </div>
   );
@@ -102,29 +105,38 @@ export default function App() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value   | Type   | Description                      | Default |
-| ---------------- | ------ | -------------------------------- | ------- |
-| initialSetValue  | `Set&lt;T&gt;` | The initial value of the set to manage | Required |
+| Argument value  | Type     | Description                                | Default |
+| --------------- | -------- | ------------------------------------------ | ------- |
+| initialSetValue | `Set<T>` | Required Set copied into the initial state | —       |
 
-### Returns
+## Return value
 
 Returns an array with two elements:
 
-| Return value | Type                    | Description                                    | Default   |
-| ------------ | ----------------------- | ---------------------------------------------- | --------- |
-| set          | `Set&lt;T&gt;`                  | The current state of the Set                   | new Set() |
-| controls     | `UseSetStateControls&lt;T&gt;`  | An object containing set manipulation methods   | {}        |
+| Return value | Type                     | Description                        | Default |
+| ------------ | ------------------------ | ---------------------------------- | ------- |
+| set          | `Set<T>`                 | The current immutable Set snapshot | —       |
+| controls     | `UseSetStateControls<T>` | Memoized Set manipulation methods  | —       |
 
 ### Control Methods
 
-| Method | Type     | Description                              |
-| ------ | -------- | ---------------------------------------- |
-| add    | Function | Add one or more values to the set        |
-| delete | Function | Delete one or more values from the set   |
-| clear  | Function | Remove all values from the set           |
+| Method | Type                 | Description                    |
+| ------ | -------------------- | ------------------------------ |
+| add    | `(value: T) => void` | Add one value to the set       |
+| delete | `(value: T) => void` | Delete one value from the set  |
+| clear  | Function             | Remove all values from the set |
 
-## Robustness and lifecycle
+## Behavior and lifecycle
 
 Every operation creates a new Set before mutation. Previously returned snapshots and the caller's initial Set remain unchanged, and multiple operations in one React batch compose safely.
+
+## Compatibility and accessibility
+
+The hook has no browser dependency and is SSR-safe. When a Set represents selected UI items, keep checkbox or option state synchronized with `set.has(value)` and provide a visible label for the group.
+
+## Related
+
+- [useNativeMapState](/docs/hooks/useNativeMapState) manages keyed values in a native `Map`.
+- [useArrayState](/docs/hooks/useArrayState) offers ordered collection helpers.

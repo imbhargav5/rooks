@@ -1,19 +1,19 @@
 ---
-id: usePreviousDifferent
 title: usePreviousDifferent
-sidebar_label: usePreviousDifferent
 description: "Returns the most recent previous value that was different from the current one."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [usePreviousImmediate]
 ---
 
 ## About
 
-usePreviousDifferent returns the last different value of a variable
-
-[//]: # "Main"
+`usePreviousDifferent` remembers the most recent committed value that is not strictly equal (`===`) to the current value. It is useful when repeated equal renders should not replace the comparison value.
 
 ## Examples
 
-```jsx
+```tsx
 import { usePreviousDifferent, useCounter } from "rooks";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <h1>Rooks : usePreviousDifferent example </h1>
+      <h2>Previous different values</h2>
       <p>
         Notice how previously different values are tracked across rerenders and
         when other values change.
@@ -46,16 +46,24 @@ function App() {
 export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Arguments    | Type | Description                                                    | Default value |
-| ------------ | ---- | -------------------------------------------------------------- | ------------- |
-| currentValue | T    | The variable whose previously different value is to be tracked | undefined     |
+| Parameter      | Type | Default  | Description                     |
+| -------------- | ---- | -------- | ------------------------------- |
+| `currentValue` | `T`  | Required | Value whose history is tracked. |
 
-### Return
+## Return value
 
-| Returned value | Type | Description                                                     |
-| -------------- | ---- | --------------------------------------------------------------- |
-| previousValue  | T    | returns the past value which was different from the current one |
+Returns `T | null`. It is `null` before a different committed value exists.
 
----
+## Behavior and lifecycle
+
+History refs update after commit in an effect keyed by `currentValue`. During render, the hook compares with strict equality and returns the last committed different value. Object values are compared by reference, not deeply. The history is local to the component and is discarded on unmount.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and uses no browser APIs. If the previous value is shown to users, label it clearly so it is not confused with the current value.
+
+## Related
+
+- [usePreviousImmediate](/docs/hooks/usePreviousImmediate)

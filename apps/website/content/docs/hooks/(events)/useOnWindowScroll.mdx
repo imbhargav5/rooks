@@ -1,86 +1,52 @@
 ---
-id: useOnWindowScroll
 title: useOnWindowScroll
-sidebar_label: useOnWindowScroll
-description: "Fires a callback whenever the browser window is scrolled."
+description: Calls a callback for passive window scroll events.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useWindowScrollPosition, useWindowEventListener]
 ---
 
 ## About
 
-A React hook for adding an event listener for window scroll
+`useOnWindowScroll` runs a callback when the window scrolls. It is an event hook; use `useWindowScrollPosition` when render output needs the current coordinates.
 
-<br />
+## Example
 
-## Examples
-
-```jsx
-import "./styles.css";
-import { useOnWindowScroll } from "rooks";
-
-function App() {
-  useOnWindowScroll(() => console.log("window scrolled"));
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <h1>Rooks : useOnWindowScroll example</h1>
-      <p>Scroll Down</p>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "200px",
-            height: "800px",
-            backgroundColor: "teal",
-            marginTop: "20px",
-          }}
-        ></div>
-      </div>
-      <p>Scroll Up</p>
-    </div>
-  );
-}
-
-export default App;
-```
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useOnWindowScroll } from "rooks";
 
-function ScrollTracker() {
-  const [events, setEvents] = useState(0);
-  const [enabled, setEnabled] = useState(true);
+export default function ScrollReporter() {
+  const [lastY, setLastY] = useState(0);
 
   useOnWindowScroll(() => {
-    setEvents((current) => current + 1);
-  }, enabled);
+    setLastY(window.scrollY);
+  });
 
-  return (
-    <div>
-      <button onClick={() => setEnabled((current) => !current)}>
-        {enabled ? "Pause scroll tracking" : "Resume scroll tracking"}
-      </button>
-      <p>Scroll events recorded: {events}</p>
-    </div>
-  );
+  return <p>Last reported vertical scroll: {lastY}px</p>;
 }
 ```
 
-### Arguments
+## Parameters
 
-| Arguments      | Type     | Description                                     | Default value |
-| -------------- | -------- | ----------------------------------------------- | ------------- |
-| callback       | function | Callback function which needs to run on unmount | undefined     |
-| when           | boolean  | When the event handler should be active         | true          |
-| isLayoutEffect | boolean  | Should it use layout effect.                    | false         |
+- `callback(event)`: receives the native scroll `Event`.
+- `when`: enables the listener; defaults to `true`.
+- `isLayoutEffect`: subscribes during the layout-effect phase when `true`; defaults to `false`.
 
-### Returns
+## Return value
 
-No return value.
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+The hook attaches a passive `scroll` listener to `window`. Changing `when` to `false` detaches it. It keeps the callback fresh, replaces the subscription when its configuration changes, and removes the listener on unmount.
+
+## Compatibility and accessibility
+
+There is no window subscription during server rendering. Scroll events can be frequent and the hook does not throttle callbacks. Avoid scroll-driven motion that ignores reduced-motion preferences, and do not hide focusable content only because it moved outside a visual threshold.
+
+## Related
+
+- [useWindowScrollPosition](/docs/hooks/useWindowScrollPosition) returns reactive scroll coordinates.
+- [useWindowEventListener](/docs/hooks/useWindowEventListener) handles arbitrary window events.

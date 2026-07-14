@@ -1,83 +1,61 @@
 ---
-id: useOnLongPress
 title: useOnLongPress
-sidebar_label: useOnLongPress
-description: "Fires a callback when the user presses and holds a pointer on an element."
+description: Calls a callback after an element remains pressed for a duration.
+entrypoint: rooks
+status: stable
+aliases: [useOnLongPressRef]
+related: [useOnLongHover]
 ---
 
 ## About
 
-A hook to detect long press on an element.
+`useOnLongPress` starts a timer for mouse or touch presses. `useOnLongPressRef` is a supported alias of the same implementation.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-#### Basic example
-
-```jsx
+```tsx
+import { useState } from "react";
 import { useOnLongPress } from "rooks";
-export default function App() {
-  const handleLongPress = () => {
-    console.log("Long press detected");
-  };
 
-  const longPressRef = useOnLongPress(handleLongPress);
+export default function PressStatus() {
+  const [longPresses, setLongPresses] = useState(0);
+  const [releases, setReleases] = useState(0);
+  const longPressRef = useOnLongPress(
+    () => setLongPresses((count) => count + 1),
+    {
+      duration: 300,
+      onClick: () => setReleases((count) => count + 1),
+    }
+  );
 
   return (
-    <>
-      <p>
-        Press and hold the button for 500ms to trigger a console.log statement
-      </p>
-      <button ref={longPressRef}>Long press me</button>
-    </>
+    <button ref={longPressRef}>
+      Long presses: {longPresses}; releases: {releases}
+    </button>
   );
 }
 ```
 
-#### Custom duration and touch end behavior
+## Parameters
 
-```jsx
-import { useOnLongPress } from "rooks";
-export default function App() {
-  const handleLongPress = () => {
-    console.log("Long press detected");
-  };
+- `callback`: called when the press remains active for the full duration.
+- `options.duration`: delay in milliseconds; defaults to `300`.
+- `options.onClick(event)`: optional release callback receiving a native `MouseEvent | TouchEvent`.
 
-  const handleClick = () => {
-    console.log("Regular click detected");
-  };
+The option type is private and is shown inline rather than exported from the package.
 
-  const longPressRef = useOnLongPress(handleLongPress, {
-    duration: 1000,
-    onClick: handleClick,
-  });
+## Return value
 
-  return (
-    <>
-      <p>
-        Press and hold the button for 1000ms to trigger a console.log statement
-      </p>
-      <button ref={longPressRef}>Long press me</button>
-    </>
-  );
-}
-```
+The hook returns a callback ref that accepts an `HTMLElement | null`.
 
-### Arguments
+## Behavior and lifecycle
 
-| Argument value | Type     | Description                                                | Defualt   |
-| -------------- | -------- | ---------------------------------------------------------- | --------- |
-| callback       | Function | Callback function to be called when long press is detected | undefined |
-| options        | Object   | See table below                                            | undefined |
+`mousedown` and `touchstart` begin the timer. `mouseup`, `mouseleave`, `touchend`, and `touchcancel` stop it and invoke `onClick`. That release callback also runs after a completed long press and on leave or cancellation; it is not limited to short clicks. Timer and event listeners are cleaned up when the target changes or the component unmounts.
 
-| Options value | Type     | Description                                             | Default   |
-| ------------- | -------- | ------------------------------------------------------- | --------- |
-| duration      | Number   | The duration (in ms) after which long press is detected | 300       |
-| onClick       | Function | Fires on click                                          | undefined |
+## Compatibility and accessibility
 
-### Returns
+The native listeners do not implement keyboard long-press behavior. Use a semantic control and provide an equivalent click or keyboard action. Touch devices can synthesize mouse events after touch events, so make callbacks safe if the platform reports both sequences.
 
-| Return value | Type         | Description                                                            | Defualt   |
-| ------------ | ------------ | ---------------------------------------------------------------------- | --------- |
-| ref          | Callback Ref | A ref that can be used on the element you want to detect long press on | undefined |
+## Related
+
+- [useOnLongHover](/docs/hooks/useOnLongHover) waits for sustained mouse hover.

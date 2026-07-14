@@ -1,175 +1,69 @@
 ---
-id: useWhyDidYouUpdate
 title: useWhyDidYouUpdate
-sidebar_label: useWhyDidYouUpdate
-description: "Logs the props or state values that caused a component to re-render."
+description: Logs tracked values whose identity changed between committed renders.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useRenderCount, useDidUpdate]
 ---
 
 ## About
 
-A hook that tracks which props or values changed to cause a component rerender. This is extremely useful for debugging performance issues and understanding why your component is re-rendering unnecessarily.
-
-[//]: # "Main"
+`useWhyDidYouUpdate` compares named values with their previous committed values and logs the differences. It is intended for finding unstable props and avoidable rerenders during development.
 
 ## Examples
 
-#### Basic example with component props
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useWhyDidYouUpdate } from "rooks";
 
-function ExpensiveComponent({ name, age, hobbies, settings }) {
-  // Track all props to see which ones are causing rerenders
-  useWhyDidYouUpdate("ExpensiveComponent", {
-    name,
-    age,
-    hobbies,
-    settings
-  });
-
+function Profile(props: { name: string; active: boolean }) {
+  useWhyDidYouUpdate("Profile", props);
   return (
-    <div>
-      <h2>{name}</h2>
-      <p>Age: {age}</p>
-      <p>Hobbies: {hobbies.join(", ")}</p>
-    </div>
+    <p>
+      {props.name}: {props.active ? "active" : "inactive"}
+    </p>
   );
 }
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  const user = {
-    name: "John",
-    age: 30,
-    hobbies: ["reading", "coding"], // This creates a new array on every render!
-    settings: { theme: "dark" }
-  };
-
+export default function UpdateDebugger() {
+  const [active, setActive] = useState(false);
   return (
-    <>
-      <button onClick={() => setCount(count + 1)}>Count: {count}</button>
-      <ExpensiveComponent {...user} />
-    </>
+    <section>
+      <Profile name="Ada" active={active} />
+      <button type="button" onClick={() => setActive((value) => !value)}>
+        Toggle profile
+      </button>
+    </section>
   );
 }
 ```
 
-#### Advanced example with specific values
+## Parameters
 
-```jsx
-import { useState, useMemo, useEffect } from "react";
-import { useWhyDidYouUpdate } from "rooks";
+| Argument        | Type                      | Default  | Meaning                                |
+| --------------- | ------------------------- | -------- | -------------------------------------- |
+| `componentName` | `string`                  | required | Label included in the console message. |
+| `currentProps`  | `Record<string, unknown>` | required | Named values to compare.               |
+| `enableLogging` | `boolean`                 | `true`   | Suppresses output while false.         |
 
-function DataVisualization({ data, filters }) {
-  const [processedData, setProcessedData] = useState([]);
-  const expensiveComputation = useMemo(() => {
-    return data.filter(filters.filterFn).map(filters.mapFn);
-  }, [data, filters]);
+The record type is shown inline because it is not a public type export from the package barrel.
 
-  // Track specific values that might cause expensive recalculations
-  useWhyDidYouUpdate("DataVisualization", {
-    dataLength: data.length,
-    filterType: filters.type,
-    hasFilterFn: !!filters.filterFn,
-    expensiveComputationResult: expensiveComputation
-  });
+## Return value
 
-  useEffect(() => {
-    setProcessedData(expensiveComputation);
-  }, [expensiveComputation]);
+The hook returns `void`.
 
-  return <Chart data={processedData} />;
-}
-```
+## Behavior and lifecycle
 
-#### Example with conditional logging
+The first render stores values without logging. After later commits, the hook builds the union of previous and current keys and compares each value with `Object.is`. Changed keys are logged as `{ from, to }` in one `console.log("[why-did-you-update]", componentName, changedProps)` call. Removed keys have `to: undefined`; added keys have `from: undefined`.
 
-```jsx
-import { useWhyDidYouUpdate } from "rooks";
+The previous snapshot updates after every commit even when logging is disabled. Object and array contents are not compared deeply, so a new reference counts as a change. React Strict Mode and concurrent rendering can produce development behavior that differs from production; use this as a clue, not a correctness signal.
 
-function ProductionComponent({ userId, preferences, theme }) {
-  // Only enable logging in development
-  useWhyDidYouUpdate(
-    "ProductionComponent",
-    { userId, preferences, theme },
-    process.env.NODE_ENV === "development"
-  );
+## Compatibility and accessibility
 
-  return (
-    <div className={theme}>
-      <UserProfile userId={userId} preferences={preferences} />
-    </div>
-  );
-}
-```
+No browser-only API is required, though the output depends on `console.log`. Do not include secrets or personal information in tracked records. The hook does not affect the accessibility tree.
 
-### Arguments
+## Related
 
-| Argument      | Type        | Description                                                           | Default |
-| ------------- | ----------- | --------------------------------------------------------------------- | ------- |
-| componentName | string      | Name of the component for identification in console logs              | -       |
-| currentProps  | PropsRecord | Object containing the current props/values you want to track         | -       |
-| enableLogging | boolean     | Whether to enable console logging (useful to disable in production)  | true    |
-
-### PropsRecord Type
-
-```typescript
-export type PropsRecord = Record<string, unknown>;
-```
-
-A record object where keys are strings and values can be any type.
-
-### Returns
-
-This hook doesn't return anything. It performs side effects by logging to the console when tracked values change.
-
-### Console Output
-
-When props change, the hook logs information in the following format:
-
-```
-[why-did-you-update] ComponentName {
-  propName: {
-    from: previousValue,
-    to: newValue
-  },
-  anotherProp: {
-    from: oldValue,
-    to: currentValue
-  }
-}
-```
-
-### Usage Tips
-
-1. **Performance Debugging**: Use this hook to identify which props are causing unnecessary rerenders in expensive components.
-
-2. **Object and Array Props**: Pay special attention to object and array props that might be recreated on every render:
-   ```jsx
-   import { useMemo } from "react";
-   
-   // ❌ Bad - creates new array every render
-   <Component items={data.map(transform)} />
-   
-   // ✅ Good - memoize the transformation
-   const transformedItems = useMemo(() => data.map(transform), [data]);
-   <Component items={transformedItems} />
-   ```
-
-3. **Production Usage**: Consider disabling logging in production builds to avoid console pollution:
-   ```jsx
-   useWhyDidYouUpdate("MyComponent", props, __DEV__);
-   ```
-
-4. **Selective Tracking**: Instead of tracking all props, focus on the ones you suspect are causing issues:
-   ```jsx
-   // Instead of tracking all props
-   useWhyDidYouUpdate("Component", props);
-   
-   // Track only suspicious ones
-   useWhyDidYouUpdate("Component", {
-     expensiveData: props.data,
-     computedValue: props.computed
-   });
-   ```
+- [useRenderCount](/docs/hooks/useRenderCount)
+- [useDidUpdate](/docs/hooks/useDidUpdate)

@@ -1,0 +1,60 @@
+---
+title: useMediaDevices
+description: "Enumerate and refresh available media input and output devices."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Read `navigator.mediaDevices`, split the result into input and output groups, and optionally request access so labels are populated.
+
+## Example
+
+```tsx
+import { useMediaDevices } from "rooks/experimental";
+
+function Example() {
+  const { videoInputs, requestAccess } = useMediaDevices();
+
+  return (
+    <div>
+      <button onClick={() => void requestAccess({ video: true })}>
+        Enable camera labels
+      </button>
+      <ul>
+        {videoInputs.map((device) => (
+          <li key={device.deviceId}>{device.label || device.deviceId}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Return value
+
+Returns `{ devices, audioInputs, audioOutputs, videoInputs, isSupported, isLoading, error, refresh, requestAccess }`. The four lists contain `MediaDeviceInfo` objects; `refresh` and `requestAccess` return `Promise<void>`.
+
+## Parameters
+
+| Option                 | Type                              | Default | Description                                                                 |
+| ---------------------- | --------------------------------- | ------- | --------------------------------------------------------------------------- |
+| `watch`                | `boolean`                         | `true`  | Refresh after the browser emits `devicechange`.                             |
+| `requestAccessOnMount` | `false \| MediaStreamConstraints` | `false` | Request media access on mount with these constraints, then stop the tracks. |
+
+Calling `requestAccess()` without constraints requests both audio and video. Calling it with `{ video: true }`, for example, limits the prompt to video.
+
+## Behavior and lifecycle
+
+The hook enumerates devices on mount. With `watch: true`, it refreshes after `devicechange` and removes that listener on cleanup. `requestAccess` immediately stops every acquired track before refreshing, so this hook never retains a camera or microphone stream. Failed enumeration clears the lists and stores the error; a failed access request preserves the current lists and stores the error.
+
+## Compatibility and accessibility
+
+Server and unsupported environments return empty lists with `isSupported: false`. Semantically identical inline `requestAccessOnMount` constraints are requested once, including during StrictMode replay, and stale enumerations cannot replace newer permission-backed results. Device labels are often blank until permission is granted, and access generally requires HTTPS and a user gesture. Avoid an automatic prompt unless it is essential; explain why access is needed and keep the triggering control accessible. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

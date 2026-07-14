@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage questions and integration help
+    url: https://github.com/imbhargav5/rooks/discussions
+    about: Ask how to use a hook or integrate Rooks with your application.
+  - name: Report a security vulnerability privately
+    url: https://github.com/imbhargav5/rooks/security/advisories/new
+    about: Do not disclose a suspected vulnerability in a public issue.
+  - name: Support routing guide
+    url: https://github.com/imbhargav5/rooks/blob/main/SUPPORT.md
+    about: Choose the right place for bugs, questions, proposals, and security reports.

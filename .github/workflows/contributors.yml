@@ -3,7 +3,7 @@ name: All Contributors
 on:
   schedule:
     # Run once a week on Sunday at midnight UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch: # Allow manual triggering
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
@@ -29,9 +29,8 @@ jobs:
         run: |
           pnpm contributors:update
           pnpm contributors:generate
-      - name: Auto update Readme
-        run: |
-          pnpm update-package-list-to-markdown
+      - name: Refresh generated documentation data
+        run: pnpm docs:generate
       - name: Create or Update Pull request
         id: cpr
         uses: peter-evans/create-pull-request@v4

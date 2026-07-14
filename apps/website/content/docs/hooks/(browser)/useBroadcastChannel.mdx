@@ -1,17 +1,42 @@
 ---
-id: useBroadcastChannel
 title: useBroadcastChannel
-sidebar_label: useBroadcastChannel
 description: "Enables cross-tab/window communication via the BroadcastChannel API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
 
 A React hook that provides a clean interface to the Broadcast Channel API for cross-tab/window communication. This hook allows you to send and receive messages between different browser tabs, windows, or workers of the same origin, enabling real-time synchronization across multiple instances of your application.
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useState } from "react";
+import { useBroadcastChannel } from "rooks";
+
+export default function CrossTabStatus() {
+  const [lastMessage, setLastMessage] = useState("No messages yet");
+  const { isSupported, postMessage } = useBroadcastChannel<string>(
+    "rooks-docs",
+    { onMessage: setLastMessage }
+  );
+
+  return (
+    <section>
+      <p>{isSupported ? lastMessage : "BroadcastChannel is unavailable"}</p>
+      <button
+        type="button"
+        onClick={() => postMessage("Hello from another tab")}
+      >
+        Broadcast message
+      </button>
+    </section>
+  );
+}
+```
 
 ### Basic cross-tab communication
 
@@ -26,14 +51,17 @@ export default function CrossTabChat() {
 
   const { postMessage, isSupported } = useBroadcastChannel("chat-channel", {
     onMessage: (data) => {
-      setMessages(prev => [...prev, { 
-        ...data, 
-        timestamp: new Date().toLocaleTimeString() 
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          ...data,
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ]);
     },
     onError: (error) => {
       console.error("Broadcast channel error:", error);
-    }
+    },
   });
 
   const sendMessage = () => {
@@ -41,7 +69,7 @@ export default function CrossTabChat() {
       const messageData = {
         username,
         message: message.trim(),
-        id: Date.now()
+        id: Date.now(),
       };
       postMessage(messageData);
       setMessage("");
@@ -69,7 +97,7 @@ export default function CrossTabChat() {
     <div style={{ padding: "20px", maxWidth: "500px" }}>
       <h3>Cross-Tab Chat</h3>
       <p>Open this page in multiple tabs to test cross-tab communication!</p>
-      
+
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -80,14 +108,14 @@ export default function CrossTabChat() {
         />
       </div>
 
-      <div 
-        style={{ 
-          height: "200px", 
-          overflowY: "auto", 
-          border: "1px solid #ccc", 
+      <div
+        style={{
+          height: "200px",
+          overflowY: "auto",
+          border: "1px solid #ccc",
           padding: "10px",
           marginBottom: "10px",
-          backgroundColor: "#f9f9f9"
+          backgroundColor: "#f9f9f9",
         }}
       >
         {messages.length === 0 ? (
@@ -97,9 +125,10 @@ export default function CrossTabChat() {
         ) : (
           messages.map((msg) => (
             <div key={msg.id} style={{ marginBottom: "8px" }}>
-              <strong>{msg.username}</strong> 
+              <strong>{msg.username}</strong>
               <span style={{ color: "#666", fontSize: "0.8em" }}>
-                {" "}({msg.timestamp})
+                {" "}
+                ({msg.timestamp})
               </span>
               <div>{msg.message}</div>
             </div>
@@ -140,7 +169,7 @@ export default function SyncedCounter() {
       if (data.type === "COUNTER_UPDATE" && data.tabId !== tabId) {
         setCount(data.count);
       }
-    }
+    },
   });
 
   const updateCounter = (newCount) => {
@@ -148,7 +177,7 @@ export default function SyncedCounter() {
     postMessage({
       type: "COUNTER_UPDATE",
       count: newCount,
-      tabId
+      tabId,
     });
   };
 
@@ -160,9 +189,7 @@ export default function SyncedCounter() {
     return (
       <div style={{ padding: "20px" }}>
         <h3>Synced Counter</h3>
-        <p style={{ color: "red" }}>
-          BroadcastChannel API not supported
-        </p>
+        <p style={{ color: "red" }}>BroadcastChannel API not supported</p>
       </div>
     );
   }
@@ -171,11 +198,11 @@ export default function SyncedCounter() {
     <div style={{ padding: "20px", textAlign: "center" }}>
       <h3>Synced Counter</h3>
       <p>Open in multiple tabs - the counter stays synchronized!</p>
-      
+
       <div style={{ fontSize: "48px", margin: "20px 0", color: "#2196F3" }}>
         {count}
       </div>
-      
+
       <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
         <button onClick={decrement} style={{ padding: "10px 20px" }}>
           - Decrement
@@ -187,7 +214,7 @@ export default function SyncedCounter() {
           + Increment
         </button>
       </div>
-      
+
       <p style={{ color: "#666", fontSize: "0.9em", marginTop: "20px" }}>
         Tab ID: {tabId}
       </p>
@@ -208,7 +235,7 @@ export default function SyncedShoppingCart() {
     { id: 1, name: "Laptop", price: 999 },
     { id: 2, name: "Mouse", price: 25 },
     { id: 3, name: "Keyboard", price: 75 },
-    { id: 4, name: "Monitor", price: 299 }
+    { id: 4, name: "Monitor", price: 299 },
   ]);
 
   const { postMessage, isSupported } = useBroadcastChannel("cart-sync", {
@@ -216,47 +243,49 @@ export default function SyncedShoppingCart() {
       if (data.type === "CART_UPDATE") {
         setCart(data.cart);
       }
-    }
+    },
   });
 
   const updateCart = (newCart) => {
     setCart(newCart);
     postMessage({
       type: "CART_UPDATE",
-      cart: newCart
+      cart: newCart,
     });
   };
 
   const addToCart = (item) => {
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
-      updateCart(cart.map(cartItem => 
-        cartItem.id === item.id 
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem
-      ));
+      updateCart(
+        cart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
     } else {
       updateCart([...cart, { ...item, quantity: 1 }]);
     }
   };
 
   const removeFromCart = (itemId) => {
-    updateCart(cart.filter(item => item.id !== itemId));
+    updateCart(cart.filter((item) => item.id !== itemId));
   };
 
   const updateQuantity = (itemId, quantity) => {
     if (quantity <= 0) {
       removeFromCart(itemId);
     } else {
-      updateCart(cart.map(item =>
-        item.id === itemId ? { ...item, quantity } : item
-      ));
+      updateCart(
+        cart.map((item) => (item.id === itemId ? { ...item, quantity } : item))
+      );
     }
   };
 
   const clearCart = () => updateCart([]);
 
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!isSupported) {
     return (
@@ -271,78 +300,89 @@ export default function SyncedShoppingCart() {
     <div style={{ padding: "20px", maxWidth: "800px" }}>
       <h3>Synced Shopping Cart</h3>
       <p>Add items to cart and see them sync across tabs!</p>
-      
+
       <div style={{ display: "flex", gap: "20px" }}>
         {/* Available Items */}
         <div style={{ flex: 1 }}>
           <h4>Available Items</h4>
-          {availableItems.map(item => (
-            <div 
-              key={item.id} 
-              style={{ 
-                display: "flex", 
-                justifyContent: "space-between", 
+          {availableItems.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
                 alignItems: "center",
                 padding: "10px",
                 border: "1px solid #ddd",
-                marginBottom: "5px"
+                marginBottom: "5px",
               }}
             >
               <div>
                 <div>{item.name}</div>
                 <div style={{ color: "#666" }}>${item.price}</div>
               </div>
-              <button onClick={() => addToCart(item)}>
-                Add to Cart
-              </button>
+              <button onClick={() => addToCart(item)}>Add to Cart</button>
             </div>
           ))}
         </div>
 
         {/* Shopping Cart */}
         <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <h4>Shopping Cart ({cart.length} items)</h4>
             <button onClick={clearCart} disabled={cart.length === 0}>
               Clear Cart
             </button>
           </div>
-          
+
           {cart.length === 0 ? (
             <p style={{ color: "#666" }}>Cart is empty</p>
           ) : (
             <>
-              {cart.map(item => (
-                <div 
+              {cart.map((item) => (
+                <div
                   key={item.id}
-                  style={{ 
-                    display: "flex", 
-                    justifyContent: "space-between", 
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
                     alignItems: "center",
                     padding: "10px",
                     border: "1px solid #ddd",
-                    marginBottom: "5px"
+                    marginBottom: "5px",
                   }}
                 >
                   <div>
                     <div>{item.name}</div>
                     <div style={{ color: "#666" }}>
-                      ${item.price} × {item.quantity} = ${item.price * item.quantity}
+                      ${item.price} × {item.quantity} = $
+                      {item.price * item.quantity}
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-                    <button 
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "5px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                     >
                       -
                     </button>
                     <span>{item.quantity}</span>
-                    <button 
+                    <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                     >
                       +
                     </button>
-                    <button 
+                    <button
                       onClick={() => removeFromCart(item.id)}
                       style={{ marginLeft: "10px", color: "red" }}
                     >
@@ -351,13 +391,15 @@ export default function SyncedShoppingCart() {
                   </div>
                 </div>
               ))}
-              
-              <div style={{ 
-                padding: "15px", 
-                background: "#f5f5f5", 
-                fontWeight: "bold",
-                fontSize: "1.2em"
-              }}>
+
+              <div
+                style={{
+                  padding: "15px",
+                  background: "#f5f5f5",
+                  fontWeight: "bold",
+                  fontSize: "1.2em",
+                }}
+              >
                 Total: ${total}
               </div>
             </>
@@ -369,44 +411,29 @@ export default function SyncedShoppingCart() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument    | Type                                | Description                                           | Default |
-| ----------- | ----------------------------------- | ----------------------------------------------------- | ------- |
-| channelName | string                              | The name of the broadcast channel to connect to       | -       |
-| options     | UseBroadcastChannelOptions&lt;T&gt;      | Optional configuration object                         | {}      |
+| Argument      | Type                                                                           | Description                                     | Default  |
+| ------------- | ------------------------------------------------------------------------------ | ----------------------------------------------- | -------- |
+| `channelName` | `string`                                                                       | The name of the broadcast channel to connect to | required |
+| `options`     | `{ onMessage?: (data: T) => void; onError?: (error: Event \| Error) => void }` | Message and error callbacks                     | `{}`     |
 
 ### Options
 
-| Option    | Type                    | Description                                     | Default     |
-| --------- | ----------------------- | ----------------------------------------------- | ----------- |
-| onMessage | (data: T) => void       | Callback function called when a message is received | undefined |
-| onError   | (error: Event) => void  | Callback function called when an error occurs       | undefined |
+| Option    | Type                            | Description                                                      | Default   |
+| --------- | ------------------------------- | ---------------------------------------------------------------- | --------- |
+| onMessage | (data: T) => void               | Callback function called when a message is received              | undefined |
+| onError   | (error: Event \| Error) => void | Called for message deserialization, construction, or send errors | undefined |
 
-### Returns
+## Return value
 
 Returns an object with the following properties:
 
-| Return value | Type                        | Description                                                | Default     |
-| ------------ | --------------------------- | ---------------------------------------------------------- | ----------- |
-| postMessage  | (data: T) => void           | Function to send a message to the broadcast channel       | -           |
-| close        | () => void                  | Function to manually close the broadcast channel          | -           |
-| isSupported  | boolean                     | Whether the BroadcastChannel API is supported            | false       |
-
-### TypeScript Support
-
-```typescript
-type UseBroadcastChannelOptions<T = any> = {
-  onMessage?: (data: T) => void;
-  onError?: (error: Event) => void;
-};
-
-type UseBroadcastChannelReturn<T = any> = {
-  postMessage: (data: T) => void;
-  close: () => void;
-  isSupported: boolean;
-};
-```
+| Return value | Type              | Description                                         | Default |
+| ------------ | ----------------- | --------------------------------------------------- | ------- |
+| postMessage  | (data: T) => void | Function to send a message to the broadcast channel | -       |
+| close        | () => void        | Function to manually close the broadcast channel    | -       |
+| isSupported  | boolean           | Whether the BroadcastChannel API is supported       | false   |
 
 ### Browser Support
 
@@ -421,5 +448,17 @@ The hook includes built-in support detection and will gracefully handle unsuppor
 
 - Messages are automatically serialized/deserialized using the structured clone algorithm
 - The hook automatically cleans up event listeners when the component unmounts
-- Multiple hooks with the same channel name will all receive the same messages
+- Other open channel objects with the same name receive the messages; the sending object does not receive its own post
 - Consider using unique channel names for different features to avoid message conflicts
+
+## Behavior and lifecycle
+
+The effect creates one channel, listens for `message` and `messageerror`, and closes it when the name or callbacks change or the component unmounts. `postMessage` uses the structured-clone algorithm. Calling `close` closes the current channel immediately; it is not reopened until an effect dependency changes or the hook remounts. A sender does not receive its own message through the same channel object.
+
+## Compatibility and accessibility
+
+SSR and unsupported browsers set `isSupported: false`; send/close calls then do nothing, with send warnings in development consoles. Creation and structured-clone failures are reported to `onError` when they are `Event` or `Error` objects. Validate received data as untrusted same-origin-context input and provide an in-page status when synchronization matters.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)
