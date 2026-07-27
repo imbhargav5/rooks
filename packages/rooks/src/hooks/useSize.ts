@@ -16,6 +16,16 @@ export type UseSizeOptions = {
   onChange?: (size: Size) => void;
 };
 
+type ResizeObserverSizeValue =
+  | ReadonlyArray<ResizeObserverSize>
+  | ResizeObserverSize;
+
+function isSingleResizeObserverSize(
+  value: ResizeObserverSizeValue
+): value is ResizeObserverSize {
+  return !Array.isArray(value);
+}
+
 const defaultSize: Size = {
   width: 0,
   height: 0,
@@ -38,12 +48,10 @@ function readFallbackContentSize(node: HTMLElement): Size {
 }
 
 function readBoxSize(
-  sizes: ReadonlyArray<ResizeObserverSize> | undefined,
+  sizes: ResizeObserverSizeValue | undefined,
   node: HTMLElement
 ): Size | null {
-  const size = Array.isArray(sizes)
-    ? sizes[0]
-    : (sizes as unknown as ResizeObserverSize | undefined);
+  const size = sizes && isSingleResizeObserverSize(sizes) ? sizes : sizes?.[0];
   if (!size) {
     return null;
   }
