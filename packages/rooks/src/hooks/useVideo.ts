@@ -93,8 +93,10 @@ const useVideo = (): [
   };
 
   useEffect(() => {
+    // Keep handlers and cleanup tied to the same element if the ref changes.
     const video = videoRef.current;
 
+    // The ref may still be unattached during the hook's initial effect.
     if (!video) {
       return;
     }
