@@ -1,5 +1,6 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
+import { vi } from "vitest";
 import { useFocusWithin } from "../hooks/useFocusWithin";
 
 describe("useFocusWithin", () => {
@@ -72,6 +73,28 @@ describe("useFocusWithin", () => {
       { type: "focus", target: child },
       { type: "focuschange", isFocused: true },
       { type: "blur", target: child },
+      { type: "focuschange", isFocused: false },
+    ]);
+  });
+
+  it("treats a non-Node related target as focus leaving the subtree", () => {
+    expect.hasAssertions();
+    const tree = render(<App />);
+    const el = tree.getByTestId("example");
+    const contains = vi.spyOn(el, "contains");
+
+    act(() => {
+      fireEvent.focus(el);
+    });
+    act(() => {
+      fireEvent.blur(el, { relatedTarget: new EventTarget() });
+    });
+
+    expect(contains).not.toHaveBeenCalled();
+    expect(events).toEqual([
+      { type: "focus", target: el },
+      { type: "focuschange", isFocused: true },
+      { type: "blur", target: el },
       { type: "focuschange", isFocused: false },
     ]);
   });
