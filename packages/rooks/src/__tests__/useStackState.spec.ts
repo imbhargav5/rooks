@@ -1,8 +1,5 @@
-import { renderHook } from "@testing-library/react";
-import TestRenderer from "react-test-renderer";
+import { act, renderHook } from "@testing-library/react";
 import { useStackState } from "@/hooks/useStackState";
-
-const { act } = TestRenderer;
 
 describe("useStackState", () => {
   it("should be defined", () => {
