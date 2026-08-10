@@ -5,6 +5,7 @@
 <p align="center">
   <a href="https://github.com/imbhargav5/rooks/actions/workflows/ci-release.yml"><img src="https://img.shields.io/github/actions/workflow/status/imbhargav5/rooks/ci-release.yml?style=for-the-badge&logo=github&label=CI" alt="CI" /></a>
   <a href="https://www.npmjs.com/package/rooks"><img src="https://img.shields.io/npm/v/rooks?style=for-the-badge&logo=npm&color=cb3837" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/rooks"><img src="https://img.shields.io/npm/dm/rooks?style=for-the-badge&logo=npm&color=cb3837" alt="npm monthly downloads" /></a>
   <a href="https://bundlephobia.com/package/rooks"><img src="https://img.shields.io/bundlephobia/minzip/rooks?style=for-the-badge&logo=webpack&label=size" alt="bundle size" /></a>
   <a href="https://codecov.io/gh/imbhargav5/rooks"><img src="https://img.shields.io/codecov/c/github/imbhargav5/rooks/main?style=for-the-badge&logo=codecov" alt="coverage" /></a>
   <a href="https://github.com/imbhargav5/rooks/blob/main/LICENSE"><img src="https://img.shields.io/github/license/imbhargav5/rooks?style=for-the-badge" alt="license" /></a>
