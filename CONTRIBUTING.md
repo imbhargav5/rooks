@@ -15,7 +15,7 @@ If an existing bug or feature issue describes the exact scope, request approval 
 
 ## Set up the repository
 
-Rooks uses Node.js 22.14.0 and pnpm 10.6.4. From a clone of your fork:
+Rooks uses Node.js 24 and pnpm 10.6.4. From a clone of your fork:
 
 ```bash
 nvm use
