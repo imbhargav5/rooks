@@ -185,6 +185,20 @@ describe("useBroadcastChannel", () => {
   });
 
   describe("Error Handling", () => {
+    it("forwards constructor failures through the legacy error callback", () => {
+      expect.hasAssertions();
+      const constructionError = new Error("BroadcastChannel unavailable");
+      const onError = vi.fn();
+
+      (global as any).BroadcastChannel = vi.fn(function () {
+        throw constructionError;
+      });
+
+      renderHook(() => useBroadcastChannel("test-channel", { onError }));
+
+      expect(onError).toHaveBeenCalledWith(constructionError);
+    });
+
     it("should handle errors through onError callback", async () => {
       expect.hasAssertions();
       const onErrorSpy = vi.fn();
