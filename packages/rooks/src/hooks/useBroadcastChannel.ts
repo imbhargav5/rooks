@@ -11,7 +11,7 @@ function isEventLike(error: unknown): error is Event | Error {
 /**
  * Options for the useBroadcastChannel hook
  */
-type UseBroadcastChannelOptions<T = unknown> = {
+type UseBroadcastChannelOptions<T = any> = {
   /**
    * Callback function called when a message is received
    */
@@ -20,13 +20,13 @@ type UseBroadcastChannelOptions<T = unknown> = {
   /**
    * Callback function called when an error occurs
    */
-  onError?: (error: Event | Error) => void;
+  onError?: (error: Event) => void;
 };
 
 /**
  * Return type for the useBroadcastChannel hook
  */
-type UseBroadcastChannelReturn<T = unknown> = {
+type UseBroadcastChannelReturn<T = any> = {
   /**
    * Function to send a message to the broadcast channel
    */
@@ -52,7 +52,7 @@ type UseBroadcastChannelReturn<T = unknown> = {
  * @returns Object with postMessage function, close function, and isSupported flag
  * @see {@link https://rooks.vercel.app/docs/hooks/useBroadcastChannel}
  */
-function useBroadcastChannel<T = unknown>(
+function useBroadcastChannel<T = any>(
   channelName: string,
   options?: UseBroadcastChannelOptions<T>
 ): UseBroadcastChannelReturn<T> {
@@ -112,7 +112,7 @@ function useBroadcastChannel<T = unknown>(
     } catch (error) {
       // Handle any errors during channel creation
       if (onError && isEventLike(error)) {
-        onError(error);
+        onError(error as Event);
       }
     }
   }, [channelName, isSupported, stableOnMessage, stableOnError, onError]);
@@ -135,7 +135,7 @@ function useBroadcastChannel<T = unknown>(
       } catch (error) {
         console.error("useBroadcastChannel: Failed to post message", error);
         if (onError && isEventLike(error)) {
-          onError(error);
+          onError(error as Event);
         }
       }
     },

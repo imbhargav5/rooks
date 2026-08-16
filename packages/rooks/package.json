@@ -41,8 +41,8 @@
     "commit": "cz",
     "lint": "eslint src/**/*.ts",
     "format": "pnpm run prettier --write \"./src/*.+(js|jsx|ts|tsx)\" && pnpm run prettier --write \"./docs/*.+(md|mdxx)\"",
-    "test": "vitest run 2>&1 | tee /tmp/vitest-output.log; grep 'Test Files' /tmp/vitest-output.log | grep -qv 'failed'",
-    "test:watch": "vitest",
+    "test": "NODE_OPTIONS=--no-experimental-webstorage vitest run 2>&1 | tee /tmp/vitest-output.log; grep 'Test Files' /tmp/vitest-output.log | grep -qv 'failed'",
+    "test:watch": "NODE_OPTIONS=--no-experimental-webstorage vitest",
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "check:dist": "es-check",
     "check:size": "size-limit --highlight-less",
@@ -50,12 +50,12 @@
     "sanity:types": "npx tsx scripts/sanity-check-types.ts",
     "sanity:imports": "npx tsx scripts/sanity-check-imports.ts",
     "sanity:eslint": "npx tsx scripts/sanity-check-eslint.ts",
-    "coverage": "vitest run --coverage 2>&1 | tee /tmp/vitest-coverage.log; grep 'Test Files' /tmp/vitest-coverage.log | grep -qv 'failed'",
+    "coverage": "NODE_OPTIONS=--no-experimental-webstorage vitest run --coverage 2>&1 | tee /tmp/vitest-coverage.log; grep 'Test Files' /tmp/vitest-coverage.log | grep -qv 'failed'",
     "prebuild": "rimraf dist",
     "build": "node build.js",
     "test-ct": "playwright test -c playwright-ct.config.ts",
     "tsc": "tsc --noEmit",
-    "test-hooks": "vitest run 2>&1 | tee /tmp/vitest-hooks.log; grep 'Test Files' /tmp/vitest-hooks.log | grep -qv 'failed'"
+    "test-hooks": "NODE_OPTIONS=--no-experimental-webstorage vitest run 2>&1 | tee /tmp/vitest-hooks.log; grep 'Test Files' /tmp/vitest-hooks.log | grep -qv 'failed'"
   },
   "optionalDependencies": {
     "@js-temporal/polyfill": "^0.5.1"

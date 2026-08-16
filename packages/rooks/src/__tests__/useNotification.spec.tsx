@@ -270,6 +270,25 @@ describe("useNotification", () => {
     expect(mockNotification).toHaveBeenCalledWith("Test Title", options);
   });
 
+  it("keeps legacy numeric vibration options compatible", async () => {
+    expect.hasAssertions();
+    (mockNotification as any).permission = "granted";
+    const mockNotificationInstance = { close: vi.fn() };
+    mockNotification.mockImplementation(function () {
+      return mockNotificationInstance;
+    });
+
+    const { result } = renderHook(() => useNotification());
+
+    await act(async () => {
+      await result.current.show("Test Title", { vibrate: 200 });
+    });
+
+    expect(mockNotification).toHaveBeenCalledWith("Test Title", {
+      vibrate: 200,
+    });
+  });
+
   it("should update permission state after requesting permission", async () => {
     expect.hasAssertions();
     mockRequestPermission.mockResolvedValue("granted");

@@ -30,7 +30,7 @@ export default function WorkerDemo() {
     setWorkerUrl(url);
     return () => URL.revokeObjectURL(url);
   }, []);
-  const worker = useWebWorker<number, number>(workerUrl);
+  const worker = useWebWorker<number>(workerUrl);
 
   return (
     <section>

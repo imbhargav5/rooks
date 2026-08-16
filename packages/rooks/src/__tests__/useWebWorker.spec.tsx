@@ -97,6 +97,17 @@ describe("useWebWorker", () => {
     expect(result.current.error).toBe(null);
   });
 
+  it("keeps untyped worker message data compatible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useWebWorker("/worker.js"));
+
+    act(() => {
+      mockWorker.onmessage({ data: { status: "ready" } });
+    });
+
+    expect(result.current.data?.status).toBe("ready");
+  });
+
   it("should handle worker errors", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useWebWorker("/worker.js"));

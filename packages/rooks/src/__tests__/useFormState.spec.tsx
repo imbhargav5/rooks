@@ -237,6 +237,19 @@ describe("useFormState", () => {
     expect(result.current.values.email).toBe("test@example.com");
   });
 
+  it("keeps legacy programmatic field values compatible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useFormState({ initialValues })
+    );
+
+    act(() => {
+      result.current.setFieldValue("age", "42");
+    });
+
+    expect(result.current.values.age).toBe("42");
+  });
+
   it("should set field error programmatically", () => {
     expect.hasAssertions();
     const { result } = renderHook(() =>

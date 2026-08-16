@@ -220,6 +220,26 @@ describe("useFetch", () => {
         expect(onSuccess).toHaveBeenCalledWith(mockResponse);
     });
 
+    it("keeps untyped onSuccess callbacks compatible without a response generic", async () => {
+        expect.hasAssertions();
+        const mockResponse = { name: "John Doe" };
+        mockFetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => mockResponse,
+        } as Response);
+        const onSuccess = vi.fn((data) => data.name);
+
+        const { result } = renderHook(() =>
+            useFetch("https://api.example.com/users/1", { onSuccess })
+        );
+
+        await act(async () => {
+            await result.current.startFetch();
+        });
+
+        expect(onSuccess).toHaveReturnedWith("John Doe");
+    });
+
     it("should call onError callback when fetch fails", async () => {
         const networkError = new Error("Network error");
         mockFetch.mockRejectedValueOnce(networkError);

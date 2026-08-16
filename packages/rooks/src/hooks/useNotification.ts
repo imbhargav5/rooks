@@ -5,7 +5,17 @@ import { useState, useCallback, useEffect } from "react";
  */
 type NotificationPermission = "default" | "granted" | "denied";
 
-type NotificationOptions = globalThis.NotificationOptions;
+interface NotificationOptions {
+  body?: string;
+  icon?: string;
+  badge?: string;
+  tag?: string;
+  data?: any;
+  requireInteraction?: boolean;
+  silent?: boolean;
+  vibrate?: number | number[];
+  image?: string;
+}
 
 /**
  * Return value for the useNotification hook

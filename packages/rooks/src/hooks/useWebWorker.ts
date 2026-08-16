@@ -8,12 +8,12 @@ type WorkerStatus = "idle" | "running" | "success" | "error" | "terminated";
 /**
  * Return value for the useWebWorker hook
  */
-interface UseWebWorkerReturnValue<TData = unknown, TMessage = unknown> {
+interface UseWebWorkerReturnValue<T = any> {
   /**
    * Post a message to the web worker
    * @param message - The message to send to the worker
    */
-  postMessage: (message: TMessage) => void;
+  postMessage: (message: any) => void;
   /**
    * Terminate the web worker
    */
@@ -25,7 +25,7 @@ interface UseWebWorkerReturnValue<TData = unknown, TMessage = unknown> {
   /**
    * The last data received from the worker
    */
-  data: TData | null;
+  data: T | null;
   /**
    * Any error that occurred
    */
@@ -78,11 +78,11 @@ interface UseWebWorkerReturnValue<TData = unknown, TMessage = unknown> {
  *
  * @see https://rooks.vercel.app/docs/hooks/useWebWorker
  */
-function useWebWorker<TData = unknown, TMessage = unknown>(
+function useWebWorker<T = any>(
   workerUrl: string
-): UseWebWorkerReturnValue<TData, TMessage> {
+): UseWebWorkerReturnValue<T> {
   const [status, setStatus] = useState<WorkerStatus>("idle");
-  const [data, setData] = useState<TData | null>(null);
+  const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const workerRef = useRef<Worker | null>(null);
 
@@ -97,7 +97,7 @@ function useWebWorker<TData = unknown, TMessage = unknown>(
       const worker = new Worker(workerUrl);
       workerRef.current = worker;
 
-      worker.onmessage = (event: MessageEvent<TData>) => {
+      worker.onmessage = (event: MessageEvent<T>) => {
         setData(event.data);
         setStatus("success");
         setError(null);
@@ -122,7 +122,7 @@ function useWebWorker<TData = unknown, TMessage = unknown>(
   }, [workerUrl, isSupported]);
 
   const postMessage = useCallback(
-    (message: TMessage): void => {
+    (message: any): void => {
       if (!isSupported) {
         console.warn("Web Workers are not supported");
         return;

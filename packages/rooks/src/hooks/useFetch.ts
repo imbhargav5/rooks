@@ -11,7 +11,7 @@ interface HttpError extends Error {
 /**
  * Options for the useFetch hook
  */
-interface UseFetchOptions<T = unknown> extends Omit<RequestInit, 'signal'> {
+interface UseFetchOptions extends Omit<RequestInit, 'signal'> {
     method?: string;
     headers?: Record<string, string>;
     body?: string | FormData | URLSearchParams;
@@ -23,7 +23,7 @@ interface UseFetchOptions<T = unknown> extends Omit<RequestInit, 'signal'> {
     referrerPolicy?: ReferrerPolicy;
     integrity?: string;
     keepalive?: boolean;
-    onSuccess?: (data: T) => void;
+    onSuccess?: (data: any) => void;
     onError?: (error: Error) => void;
     onFetch?: () => void;
 }
@@ -46,7 +46,7 @@ interface UseFetchReturnValue<T> {
  */
 async function createFetchPromise<T>(
     url: string,
-    options: UseFetchOptions<T> = {},
+    options: UseFetchOptions = {},
     signal?: AbortSignal
 ): Promise<T> {
     const requestOptions = { ...options };
@@ -123,7 +123,7 @@ async function createFetchPromise<T>(
  */
 function useFetch<T = unknown>(
     url: string,
-    options: UseFetchOptions<T> = {}
+    options: UseFetchOptions = {}
 ): UseFetchReturnValue<T> {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(false);

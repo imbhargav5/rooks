@@ -5,7 +5,7 @@ import { useState, useCallback, ChangeEvent, FormEvent } from "react";
  */
 type ValidatorFunction<T> = (
   name: keyof T,
-  value: T[keyof T],
+  value: any,
   values: T
 ) => string | undefined;
 
@@ -66,7 +66,7 @@ interface UseFormStateReturnValue<T> {
   /**
    * Set a specific field value
    */
-  setFieldValue: <K extends keyof T>(name: K, value: T[K]) => void;
+  setFieldValue: (name: keyof T, value: any) => void;
   /**
    * Set a specific field error
    */
@@ -163,7 +163,7 @@ function useFormState<T extends Record<string, any>>({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateField = useCallback(
-    (name: keyof T, value: T[keyof T]): string | undefined => {
+    (name: keyof T, value: any): string | undefined => {
       if (validate) {
         return validate(name, value, values);
       }
@@ -209,11 +209,11 @@ function useFormState<T extends Record<string, any>>({
           ? (event.target as HTMLInputElement).checked
           : value;
 
-      setValues((prev) => ({ ...prev, [fieldName]: fieldValue as T[keyof T] }));
+      setValues((prev) => ({ ...prev, [fieldName]: fieldValue }));
       setTouched((prev) => ({ ...prev, [fieldName]: true }));
 
       // Validate field
-      const error = validateField(fieldName, fieldValue as T[keyof T]);
+      const error = validateField(fieldName, fieldValue);
       setErrors((prev) => {
         const newErrors = { ...prev };
         if (error) {
@@ -251,12 +251,9 @@ function useFormState<T extends Record<string, any>>({
     [values, validateForm, onSubmit]
   );
 
-  const setFieldValue = useCallback(
-    <K extends keyof T>(name: K, value: T[K]): void => {
-      setValues((prev) => ({ ...prev, [name]: value }));
-    },
-    []
-  );
+  const setFieldValue = useCallback((name: keyof T, value: any): void => {
+    setValues((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
   const setFieldError = useCallback((name: keyof T, error: string): void => {
     setErrors((prev) => ({ ...prev, [name]: error }));
