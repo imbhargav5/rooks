@@ -6,7 +6,7 @@ This guide takes a fresh clone through installation, one focused hook test, a lo
 
 - Git
 - `nvm` or another Node version manager that honors `.nvmrc`
-- Node.js 22.14.0
+- Node.js 24
 - Corepack, included with the supported Node.js release
 
 Run all commands from the repository root unless a step says otherwise.
@@ -113,7 +113,7 @@ pnpm all-checks
 
 ### Corepack cannot activate pnpm
 
-Confirm that `node --version` reports `v22.14.0`, then rerun:
+Confirm that `node --version` reports a `v24` release, then rerun:
 
 ```bash
 corepack enable
