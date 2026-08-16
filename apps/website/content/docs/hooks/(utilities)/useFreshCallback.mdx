@@ -19,7 +19,7 @@ import { useFreshCallback } from "rooks";
 
 export default function WindowWidthLogger() {
   const [label, setLabel] = useState("Window");
-  const reportWidth = useFreshCallback(() => {
+  const reportWidth = useFreshCallback((_event: UIEvent) => {
     console.log(`${label}: ${window.innerWidth}px`);
   });
 
