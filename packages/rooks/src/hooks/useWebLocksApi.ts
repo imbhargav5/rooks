@@ -82,7 +82,7 @@ type UseWebLocksApiReturn = {
   /**
    * Query the current lock state
    */
-  query: () => Promise<LockManagerSnapshot>;
+  query: () => Promise<any>;
 };
 
 /**
