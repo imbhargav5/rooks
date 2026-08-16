@@ -11,14 +11,15 @@ concurrency:
   group: publish-${{ github.ref }}
   cancel-in-progress: false
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+
 jobs:
   publish:
     name: Publish To NPM
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'imbhargav5/rooks' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
-    permissions:
-      contents: write
-      id-token: write
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
@@ -66,7 +67,7 @@ jobs:
             exit 0
           fi
 
-          npm publish --access public --provenance
+          npm stage publish --access public
         working-directory: packages/rooks
 
       - name: 🏷 Create or update GitHub release
