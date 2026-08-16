@@ -54,4 +54,13 @@ describe("useFreshCallback", () => {
 
     expect(spy).toHaveBeenCalledWith("search", 3);
   });
+
+  it("keeps legacy homogeneous explicit generics compatible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() =>
+      useFreshCallback<string, number>((value) => value.length)
+    );
+
+    expect(result.current("rooks")).toBe(5);
+  });
 });
