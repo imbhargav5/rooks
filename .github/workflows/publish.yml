@@ -65,7 +65,7 @@ jobs:
             exit 0
           fi
 
-          npm publish --access public
+          npm publish --access public --provenance
         working-directory: packages/rooks
 
       - name: 🏷 Create or update GitHub release
