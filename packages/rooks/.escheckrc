@@ -1,5 +1,5 @@
 {
-  "ecmaVersion": "es2022",
+  "ecmaVersion": "es2020",
   "module": true,
   "files": "./dist/esm/**/*.js"
 }
