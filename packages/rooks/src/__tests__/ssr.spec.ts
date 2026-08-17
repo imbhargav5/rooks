@@ -17,16 +17,8 @@ vi.mock("react", () => ({
   useCallback: vi.fn((fn) => fn),
   useRef: vi.fn((init) => ({ current: init })),
   useReducer: vi.fn((reducer, init) => [init, vi.fn()]),
-  useSyncExternalStore: vi.fn(
-    (subscribe, getSnapshot, getServerSnapshot) =>
-      getServerSnapshot ? getServerSnapshot() : null
-  ),
-}));
-
-vi.mock("use-sync-external-store/shim", () => ({
-  useSyncExternalStore: vi.fn(
-    (subscribe, getSnapshot, getServerSnapshot) =>
-      getServerSnapshot ? getServerSnapshot() : getSnapshot()
+  useSyncExternalStore: vi.fn((subscribe, getSnapshot, getServerSnapshot) =>
+    getServerSnapshot ? getServerSnapshot() : null
   ),
 }));
 
