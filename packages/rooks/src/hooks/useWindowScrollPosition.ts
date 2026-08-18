@@ -15,8 +15,8 @@ function computeScrollPosition(): ScrollPosition {
     };
   } else {
     return {
-      scrollX: window.scrollX || window.pageXOffset,
-      scrollY: window.scrollY || window.pageYOffset,
+      scrollX: window.scrollX ?? window.pageXOffset,
+      scrollY: window.scrollY ?? window.pageYOffset,
     };
   }
 }
