@@ -15,17 +15,37 @@ describe("useWindowScrollPosition", () => {
       expect(result.current.scrollX).toBe(0);
       expect(result.current.scrollY).toBe(0);
       act(() => {
-        fireEvent.scroll(window, { target: { pageYOffset: 100 } });
+        fireEvent.scroll(window, {
+          target: { pageYOffset: 100, scrollY: 100 },
+        });
       });
       expect(result.current.scrollX).toBe(0);
       expect(result.current.scrollY).toBe(100);
       act(() => {
-        fireEvent.scroll(window, { target: { pageXOffset: 300 } });
+        fireEvent.scroll(window, {
+          target: { pageXOffset: 300, scrollX: 300 },
+        });
       });
       expect(result.current.scrollX).toBe(300);
       expect(result.current.scrollY).toBe(100);
     });
+
+    it("preserves zero scroll coordinates instead of using legacy offsets", () => {
+      expect.hasAssertions();
+      const { result } = renderHook(() => useWindowScrollPosition());
+
+      act(() => {
+        fireEvent.scroll(window, {
+          target: {
+            pageXOffset: 300,
+            pageYOffset: 100,
+            scrollX: 0,
+            scrollY: 0,
+          },
+        });
+      });
+
+      expect(result.current).toEqual({ scrollX: 0, scrollY: 0 });
+    });
   });
 });
-
-// figure out tests
