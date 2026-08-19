@@ -116,7 +116,9 @@ describe("useSetState", () => {
 
   it("should work with different data types", () => {
     expect.hasAssertions();
-    const { result } = renderHook(() => useSetState(new Set<any>()));
+    const { result } = renderHook(() =>
+      useSetState(new Set<string | number | boolean>())
+    );
 
     act(() => {
       result.current[1].add("string");
