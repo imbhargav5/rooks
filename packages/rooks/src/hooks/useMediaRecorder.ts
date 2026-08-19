@@ -177,9 +177,13 @@ function useMediaRecorder(
         chunksRef.current = [];
       };
 
-      mediaRecorder.onerror = (event: Event) => {
+      mediaRecorder.onerror = (event: ErrorEvent) => {
+        const mediaRecorderError = event.error as
+          | { message?: string }
+          | null
+          | undefined;
         const err = new Error(
-          `MediaRecorder error: ${(event as any).error?.message || "Unknown error"}`
+          `MediaRecorder error: ${mediaRecorderError?.message || "Unknown error"}`
         );
         setError(err);
         setRecordingState("idle");
