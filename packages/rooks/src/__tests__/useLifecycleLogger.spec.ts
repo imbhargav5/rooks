@@ -61,5 +61,3 @@ describe("useLifecycleLogger", () => {
     expect(logSpy).toHaveBeenLastCalledWith("Test3 unmounted");
   });
 });
-
-// figure out tests
