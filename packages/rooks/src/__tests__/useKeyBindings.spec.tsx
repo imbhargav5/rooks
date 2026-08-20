@@ -62,7 +62,7 @@ describe("useKeyBindings", () => {
     expect(useKeyBindings).toBeDefined();
   });
 
-  it("should trigger the calback when pressed on document or target", () => {
+  it("should trigger the callback when pressed on document or target", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
     const valueElement = getByTestId(container as HTMLElement, "value");
