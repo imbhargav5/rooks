@@ -24,7 +24,7 @@ function isFocusedElementEditable(): boolean {
     if (activeElement === body) return false;
     const tag = activeElement.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA") return true;
-    return (activeElement as HTMLElement).hasAttribute("contenteditable");
+    return activeElement.hasAttribute("contenteditable");
 }
 
 /**
