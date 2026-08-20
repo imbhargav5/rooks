@@ -26,15 +26,11 @@ function useEventListenerRef(
 ): (refElement: RefElementOrNull<HTMLElement>) => void {
   const [ref, element] = useRefElement<HTMLElement>();
 
-  useEventListener<EventTarget, string>(
-    eventName,
-    callback as (event: Event) => void,
-    {
-      target: element as EventTarget | null,
-      listenerOptions,
-      isLayoutEffect,
-    }
-  );
+  useEventListener<EventTarget, string>(eventName, callback, {
+    target: element,
+    listenerOptions,
+    isLayoutEffect,
+  });
 
   return ref;
 }
