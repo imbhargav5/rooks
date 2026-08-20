@@ -205,8 +205,8 @@ function useFormState<T extends Record<string, any>>({
 
       // Handle checkbox inputs
       const fieldValue =
-        type === "checkbox"
-          ? (event.target as HTMLInputElement).checked
+        type === "checkbox" && "checked" in event.target
+          ? event.target.checked
           : value;
 
       setValues((prev) => ({ ...prev, [fieldName]: fieldValue }));
