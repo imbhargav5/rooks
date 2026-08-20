@@ -48,7 +48,7 @@ describe("useEventListenerRef jsx", () => {
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 
-  it("should not call callback when event fires", () => {
+  it("should call callback when event fires", () => {
     expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
@@ -115,7 +115,7 @@ describe("useEventListenerRef state variables", () => {
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
-  it("should not call callback when event fires", () => {
+  it("should call callback when event fires", () => {
     expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const displayElement = getByTestId(container as HTMLElement, "element");
