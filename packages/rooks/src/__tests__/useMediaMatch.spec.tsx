@@ -43,7 +43,7 @@ describe("useMediaMatch", () => {
 
     // useSyncExternalStore calls matchMedia for both subscribe and getSnapshot
     expect(matchMedia).toHaveBeenCalled();
-    expect(matchMedia.mock.calls[0]![0]).toBe("print");
+    expect(expectDefined(matchMedia.mock.calls[0])[0]).toBe("print");
     expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
       "change",
@@ -101,7 +101,9 @@ describe("useMediaMatch", () => {
 });
 
 function expectDefined<T>(t: T | undefined): T {
-  expect(t).toBeDefined();
+  if (t === undefined) {
+    throw new Error("Expected value to be defined");
+  }
 
-  return t as T;
+  return t;
 }
