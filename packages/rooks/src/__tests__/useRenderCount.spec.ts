@@ -1,5 +1,4 @@
-import { renderHook } from "@testing-library/react";
-import { act } from "react-test-renderer";
+import { act, renderHook } from "@testing-library/react";
 import { useCounter } from "..";
 import { useRenderCount } from "@/hooks/useRenderCount";
 
