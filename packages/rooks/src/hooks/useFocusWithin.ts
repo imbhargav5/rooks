@@ -6,7 +6,7 @@ interface FocusWithinProps {
   onFocusWithin?: (e: React.FocusEvent) => void;
   /** Handler that is called when the target element and all descendants lose focus. */
   onBlurWithin?: (e: React.FocusEvent) => void;
-  /** Handler that is called when the the focus within state changes. */
+  /** Handler that is called when the focus within state changes. */
   onFocusWithinChange?: (isFocusWithin: boolean) => void;
 }
 
