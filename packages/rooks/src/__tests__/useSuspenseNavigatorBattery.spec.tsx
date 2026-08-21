@@ -115,8 +115,8 @@ describe("useSuspenseNavigatorBattery", () => {
         const mockBattery = createMockBatteryManager();
 
         // Create a promise that doesn't resolve immediately
-        let resolvePromise: (value: any) => void;
-        const promise = new Promise((resolve) => {
+        let resolvePromise: ((value: BatteryManager) => void) | undefined;
+        const promise = new Promise<BatteryManager>((resolve) => {
             resolvePromise = resolve;
         });
 
@@ -133,7 +133,10 @@ describe("useSuspenseNavigatorBattery", () => {
 
         // Resolve the promise
         await act(async () => {
-            resolvePromise!(mockBattery);
+            if (!resolvePromise) {
+                throw new Error("Promise resolver was not initialized");
+            }
+            resolvePromise(mockBattery);
         });
 
         await waitFor(() => {
