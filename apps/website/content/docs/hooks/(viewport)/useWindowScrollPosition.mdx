@@ -1,37 +1,50 @@
 ---
-id: useWindowScrollPosition
 title: useWindowScrollPosition
-sidebar_label: useWindowScrollPosition
-description: "Returns the current horizontal and vertical scroll position of the window."
+description: Returns reactive horizontal and vertical window scroll coordinates.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useOnWindowScroll, useWindowSize]
 ---
 
 ## About
 
-A React hook to get the scroll position of the window
+`useWindowScrollPosition` reads the current window scroll coordinates and refreshes them after window `scroll` and `resize` events.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Basic Usage
-
-```jsx
-import "./styles.css";
+```tsx
 import { useWindowScrollPosition } from "rooks";
 
-function App() {
-  const position = useWindowScrollPosition(); // default config: { wait = 100, passive = true }
-  console.log(position); // {x: ..., y: ...}
-  return (
-    <div style={{ height: 800 }}>
-      <h1>Rooks : useWindowScrollPosition Example </h1>
-      <br></br>
+export default function ScrollPosition() {
+  const { scrollX, scrollY } = useWindowScrollPosition();
 
-      <p>Scroll </p>
-      <p> {JSON.stringify(position)} </p>
-    </div>
+  return (
+    <p>
+      Window scroll position: {scrollX}px horizontally, {scrollY}px vertically
+    </p>
   );
 }
-
-export default App;
 ```
+
+## Parameters
+
+This hook has no parameters.
+
+## Return value
+
+It returns `{ scrollX: number, scrollY: number }`. Each field uses the corresponding modern window property and falls back to `pageXOffset` or `pageYOffset`.
+
+## Behavior and lifecycle
+
+Initial state is read during render. Scroll and resize callbacks recompute both coordinates; their listeners are passive and synchronized during the layout-effect phase. The hook does not throttle updates. Both subscriptions are removed on unmount.
+
+## Compatibility and accessibility
+
+During server rendering both coordinates are `0`. A client rendering at a nonzero scroll position can therefore differ from server output; avoid using the first coordinates for hydration-sensitive markup or layout. Scroll position is visual context, so do not use it to remove the only keyboard-accessible route to content.
+
+## Related
+
+- [useOnWindowScroll](/docs/hooks/useOnWindowScroll) runs a callback without storing coordinates.
+- [useWindowSize](/docs/hooks/useWindowSize) returns inner and outer window dimensions.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) covers hydration-safe fallbacks.

@@ -69,48 +69,39 @@ function useArrayState<T>(
 ): UseArrayStateReturnValue<T> {
   const [array, setArray] = useState(initial ?? []);
 
-  const push = useCallback<Push<T>>(
-    (value) => {
-      setArray([...array, value]);
-    },
-    [array]
-  );
+  const push = useCallback<Push<T>>((...values) => {
+    setArray((currentArray) => [...currentArray, ...values]);
+  }, []);
 
   const pop = useCallback<Pop>(() => {
-    setArray(array.slice(0, array.length - 1));
-  }, [array]);
+    setArray((currentArray) => currentArray.slice(0, -1));
+  }, []);
 
   const clear = useCallback<Clear>(() => {
     setArray([]);
   }, []);
 
-  const unshift = useCallback<Unshift<T>>(
-    (value) => {
-      setArray([value, ...array]);
-    },
-    [array]
-  );
+  const unshift = useCallback<Unshift<T>>((...values) => {
+    setArray((currentArray) => [...values, ...currentArray]);
+  }, []);
 
   const shift = useCallback<Shift>(() => {
-    setArray(array.slice(1));
-  }, [array]);
+    setArray((currentArray) => currentArray.slice(1));
+  }, []);
 
   const reverse = useCallback<Reverse>(() => {
-    setArray([...array].reverse());
-  }, [array]);
+    setArray((currentArray) => [...currentArray].reverse());
+  }, []);
 
-  const concat = useCallback<Concat<T>>(
-    (value: T[]) => {
-      setArray([...array, ...value]);
-    },
-    [array]
-  );
+  const concat = useCallback<Concat<T>>((value: T[]) => {
+    setArray((currentArray) => [...currentArray, ...value]);
+  }, []);
 
   const fill = useCallback<Fill<T>>(
     (value: T, start?: number, end?: number) => {
-      setArray([...array].fill(value, start, end));
+      setArray((currentArray) => [...currentArray].fill(value, start, end));
     },
-    [array]
+    []
   );
 
   const updateItemAtIndex = useCallback(
@@ -168,12 +159,9 @@ function useArrayState<T>(
     [setArray]
   );
 
-  const sort = useCallback<Sort<T>>(
-    (compareFn) => {
-      setArray([...array].sort(compareFn));
-    },
-    [array]
-  );
+  const sort = useCallback<Sort<T>>((compareFn) => {
+    setArray((currentArray) => [...currentArray].sort(compareFn));
+  }, []);
 
   const controls = useMemo<UseArrayStateControls<T>>(() => {
     return {

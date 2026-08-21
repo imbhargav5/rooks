@@ -17,5 +17,7 @@ class SpeechSynthesisUtteranceMock {
   onboundary: (() => void) | null = null;
 }
 
-(global as any).SpeechSynthesisUtterance = SpeechSynthesisUtteranceMock;
-(global as any).fetch = vi.fn();
+const testGlobal = globalThis as Record<string, unknown>;
+
+testGlobal.SpeechSynthesisUtterance = SpeechSynthesisUtteranceMock;
+testGlobal.fetch = vi.fn();

@@ -12,9 +12,9 @@ const config: IntersectionObserverInit = {
  *
  * useIntersectionObserverRef hook
  *
- * Returns a mutation observer for a React Ref and fires a callback
+ * Returns an intersection observer for a React Ref and fires a callback
  *
- * @param {IntersectionObserverCallback} callback Function that needs to be fired on mutation
+ * @param {IntersectionObserverCallback} callback Function that needs to be fired on intersection changes
  * @param {IntersectionObserverInit} options
  * @see https://rooks.vercel.app/docs/hooks/useIntersectionObserverRef
  */
@@ -47,7 +47,7 @@ function useIntersectionObserverRef(
         threshold,
       });
 
-      // Start observing the target node for configured mutations
+      // Start observing the target node for configured intersections
       observer.observe(node);
 
       return () => {

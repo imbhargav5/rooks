@@ -20,12 +20,11 @@ type Options = {
   | MutableRefObject<Document>
   | MutableRefObject<HTMLElement | null | undefined>;
   /**
-   * when boolean to enable and disable events, when passed false
-   * remove the eventlistener if any
+   * When false, disables events and removes any active event listener.
    */
   when?: boolean;
   /**
-   * opt-in to prevent alert, confirm and prompt from causing the eventlistener to lose track of keyup events.
+   * opt-in to prevent alert, confirm and prompt from causing the event listener to lose track of keyup events.
    */
   preventLostKeyup?: boolean;
 };
@@ -145,8 +144,7 @@ function useKeys(
     if (preventLostKeyup !== true) return noop;
     if (typeof window !== "undefined") {
       const originalAlert = window.alert;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      window.alert = (message?: any) => {
+      window.alert = (message?: Parameters<typeof window.alert>[0]) => {
         for (const identifier of keysList) {
           PressedKeyMapping[identifier] = undefined;
         }

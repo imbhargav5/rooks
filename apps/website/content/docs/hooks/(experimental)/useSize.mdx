@@ -1,0 +1,53 @@
+---
+title: useSize
+description: "Measure an element with ResizeObserver using a callback ref."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Observe an element's width and height with `ResizeObserver`. The hook is element-only and returns a callback ref plus the latest measured size.
+
+## Example
+
+```tsx
+import { useSize } from "rooks/experimental";
+
+function Example() {
+  const [ref, size] = useSize();
+
+  return (
+    <div ref={ref}>
+      {size.width} x {size.height}
+    </div>
+  );
+}
+```
+
+## Parameters
+
+| Option     | Type                                | Default         | Description                                                           |
+| ---------- | ----------------------------------- | --------------- | --------------------------------------------------------------------- |
+| `box`      | `ResizeObserverBoxOptions`          | `"content-box"` | Selects content, border, or device-pixel content box measurements.    |
+| `debounce` | `number`                            | `0`             | Trailing debounce in milliseconds; non-positive values are immediate. |
+| `disabled` | `boolean`                           | `false`         | Disconnect observation and reset the size to zero.                    |
+| `onChange` | `(size: { width; height }) => void` | `undefined`     | Runs only when a measured dimension changes.                          |
+
+## Return value
+
+Returns `[ref, size]`. Attach the callback `ref` to one `HTMLElement`; `size` is `{ width: number, height: number }` and starts at `{ width: 0, height: 0 }`.
+
+## Behavior and lifecycle
+
+The hook measures immediately after an element is attached and reads the selected box from each `ResizeObserverEntry`, with DOM fallbacks when a box is unavailable. Changing the element, `box`, or disabled state disconnects the prior observer; the debounced callback cancels its pending timer on cleanup. Identical measurements do not update state or call `onChange`.
+
+## Compatibility and accessibility
+
+SSR and a missing element return zeroes. If `ResizeObserver` is unavailable, the hook performs one measurement but cannot follow later resizes. Measurements should enhance presentation, not remove information or controls solely at a particular pixel size; CSS container queries are often a better fit for layout.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

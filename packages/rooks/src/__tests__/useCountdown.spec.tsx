@@ -1,5 +1,6 @@
 import { vi } from "vitest";
 import { act, renderHook } from "@testing-library/react";
+import { StrictMode } from "react";
 import { useCountdown } from "@/hooks/useCountdown";
 
 describe("useCountdown", () => {
@@ -71,4 +72,82 @@ describe("useCountdown", () => {
 
     expect(onEnd.mock.calls.length).toBeGreaterThanOrEqual(1);
   });
+
+  it("ends once when a tick lands exactly on the target", () => {
+    expect.hasAssertions();
+    const onDown = vi.fn();
+    const onEnd = vi.fn();
+    const endTime = new Date(Date.now() + 2_000);
+    const { result } = renderHook(() =>
+      useCountdown(endTime, { interval: 1_000, onDown, onEnd })
+    );
+
+    expect(onDown).toHaveBeenLastCalledWith(2_000, expect.any(Date));
+
+    act(() => {
+      vi.advanceTimersByTime(2_000);
+    });
+
+    expect(result.current).toBe(0);
+    expect(onEnd).toHaveBeenCalledTimes(1);
+    expect(onDown).toHaveBeenLastCalledWith(1_000, expect.any(Date));
+
+    act(() => {
+      vi.advanceTimersByTime(5_000);
+    });
+    expect(onEnd).toHaveBeenCalledTimes(1);
+  });
+
+  it("ends once when several due ticks flush in the same batch", () => {
+    expect.hasAssertions();
+    const onEnd = vi.fn();
+    const endTime = new Date(Date.now() + 2_000);
+    const { result } = renderHook(() =>
+      useCountdown(endTime, { interval: 1_000, onEnd })
+    );
+
+    act(() => {
+      vi.advanceTimersByTime(5_000);
+    });
+
+    expect(result.current).toBe(0);
+    expect(onEnd).toHaveBeenCalledTimes(1);
+  });
+
+  it("ends once when the target is already elapsed during Strict Mode replay", () => {
+    expect.hasAssertions();
+    const onEnd = vi.fn();
+    const endTime = new Date(Date.now() - 1);
+    const { result } = renderHook(() => useCountdown(endTime, { onEnd }), {
+      wrapper: StrictMode,
+    });
+
+    expect(result.current).toBe(0);
+    expect(onEnd).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      vi.advanceTimersByTime(5_000);
+    });
+    expect(onEnd).toHaveBeenCalledTimes(1);
+  });
+
+  it("reports the remaining time calculated for each tick", () => {
+    expect.hasAssertions();
+    const onDown = vi.fn();
+    const endTime = new Date(Date.now() + 2_500);
+    renderHook(() =>
+      useCountdown(endTime, { interval: 1_000, onDown })
+    );
+
+    act(() => {
+      vi.advanceTimersByTime(2_000);
+    });
+
+    expect(onDown.mock.calls.map(([remaining]) => remaining)).toEqual([
+      2_500,
+      1_500,
+      500,
+    ]);
+  });
+
 });

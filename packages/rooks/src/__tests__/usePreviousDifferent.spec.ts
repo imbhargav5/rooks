@@ -81,5 +81,72 @@ describe("usePreviousDifferent", () => {
     expect(result.current.value).toBe(2);
     expect(result.current.previousValue).toBe(1);
   });
+
+  it("tracks the last different value across multiple increments", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useHook());
+
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.value).toBe(1);
+    expect(result.current.previousValue).toBe(0);
+
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.value).toBe(2);
+    expect(result.current.previousValue).toBe(1);
+
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.value).toBe(3);
+    expect(result.current.previousValue).toBe(2);
+  });
+
+  it("returns the value before the last change when value is unchanged on re-render", () => {
+    expect.hasAssertions();
+    const { result, rerender } = renderHook(
+      ({ val }) => {
+        const previousValue = usePreviousDifferent(val);
+        return { previousValue, val };
+      },
+      { initialProps: { val: 10 } }
+    );
+
+    // First render: previousRef is null, so returns null
+    expect(result.current.previousValue).toBeNull();
+
+    // Change to 20 — previous different value is 10
+    rerender({ val: 20 });
+    expect(result.current.previousValue).toBe(10);
+
+    // Re-render with same value (20) — should return the value before 20, which is 10
+    rerender({ val: 20 });
+    expect(result.current.previousValue).toBe(10);
+
+    // Change to 30 — previous different value is 20
+    rerender({ val: 30 });
+    expect(result.current.previousValue).toBe(20);
+  });
+
+  it("works with string values", () => {
+    expect.hasAssertions();
+    const { result, rerender } = renderHook(
+      ({ val }) => {
+        const previousValue = usePreviousDifferent(val);
+        return { previousValue, val };
+      },
+      { initialProps: { val: "alpha" } }
+    );
+
+    expect(result.current.previousValue).toBeNull();
+
+    rerender({ val: "beta" });
+    expect(result.current.previousValue).toBe("alpha");
+
+    rerender({ val: "gamma" });
+    expect(result.current.previousValue).toBe("beta");
+  });
 });
-// figure out tests

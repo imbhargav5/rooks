@@ -52,8 +52,7 @@ describe("useWebWorker", () => {
   it("should detect when Web Workers are not supported", () => {
     expect.hasAssertions();
     const originalWorker = window.Worker;
-    // @ts-ignore
-    delete window.Worker;
+    Reflect.deleteProperty(window, "Worker");
 
     const { result } = renderHook(() => useWebWorker("/worker.js"));
 
@@ -98,6 +97,17 @@ describe("useWebWorker", () => {
     expect(result.current.error).toBe(null);
   });
 
+  it("keeps untyped worker message data compatible", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useWebWorker("/worker.js"));
+
+    act(() => {
+      mockWorker.onmessage({ data: { status: "ready" } });
+    });
+
+    expect(result.current.data?.status).toBe("ready");
+  });
+
   it("should handle worker errors", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useWebWorker("/worker.js"));
@@ -139,8 +149,7 @@ describe("useWebWorker", () => {
   it("should not post message without support", () => {
     expect.hasAssertions();
     const originalWorker = window.Worker;
-    // @ts-ignore
-    delete window.Worker;
+    Reflect.deleteProperty(window, "Worker");
 
     const { result } = renderHook(() => useWebWorker("/worker.js"));
 

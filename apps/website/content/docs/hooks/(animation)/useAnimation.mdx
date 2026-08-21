@@ -1,98 +1,60 @@
 ---
-title: "useAnimation"
-description: "A hook that creates an animation with duration, easing, delay, and loop options."
+title: useAnimation
+description: Deprecated progress animation hook; use useEasing for new code.
+entrypoint: rooks
+status: deprecated
+aliases: []
+related: [useEasing, useTween, usePrefersReducedMotion]
 ---
 
-# useAnimation
+## About
 
-<Callout type="warn">
-  **Deprecated:** This hook is deprecated and will be removed in a future major
-  version. Please migrate to [useEasing](/docs/hooks/useEasing) for better
-  control and features.
-</Callout>
+`useAnimation` produces an eased progress value for a duration, optional delay, and optional loop. It is deprecated and will be removed in a future major release. Use [useEasing](/docs/hooks/useEasing) for start, stop, reset, and direction controls.
 
-`useAnimation` is a hook that creates an animation with duration, easing, delay, and loop options.
+## Examples
 
-## Usage
-
-```jsx
+```tsx
 import { useAnimation } from "rooks";
 
-function App() {
-  const value = useAnimation({
-    duration: 1000,
-    loop: true,
-  });
-
+export default function LegacyProgress() {
+  const progress = useAnimation({ duration: 1000, delay: 100 });
   return (
-    <div
-      style={{
-        width: 100,
-        height: 100,
-        background: "red",
-        transform: `rotate(${value * 360}deg)`,
-      }}
-    />
+    <progress max={1} value={progress}>
+      Progress: {progress}
+    </progress>
   );
 }
 ```
 
-### Delayed animation with custom easing
+## Parameters
 
-```jsx
-import { useAnimation } from "rooks";
+`options` is required and has this inline shape:
 
-function easeOutQuad(t) {
-  return 1 - (1 - t) * (1 - t);
-}
+| Property   | Type                           | Default  | Meaning                                             |
+| ---------- | ------------------------------ | -------- | --------------------------------------------------- |
+| `duration` | `number`                       | required | Duration in milliseconds; use a positive value.     |
+| `easing`   | `(progress: number) => number` | identity | Maps raw progress from `0` through `1`.             |
+| `delay`    | `number`                       | `0`      | Delay before the first pass.                        |
+| `loop`     | `boolean`                      | `false`  | Restarts at completion; later passes have no delay. |
 
-function DelayedProgress() {
-  const progress = useAnimation({
-    duration: 1200,
-    delay: 300,
-    easing: easeOutQuad,
-  });
+The options type is not a public type export.
 
-  return (
-    <div>
-      <div>Progress: {(progress * 100).toFixed(0)}%</div>
-      <div
-        style={{
-          height: 8,
-          width: 240,
-          background: "#e5e7eb",
-          borderRadius: 999,
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            width: `${progress * 100}%`,
-            height: "100%",
-            background: "#2563eb",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-```
+## Return value
 
-## Arguments
+A `number` containing the easing function's output. The hook clamps raw progress, but it does not clamp a custom easing function's return value.
 
-| Argument | Type             | Default | Description        |
-| -------- | ---------------- | ------- | ------------------ |
-| options  | AnimationOptions | -       | Animation options. |
+## Behavior and lifecycle
 
-### AnimationOptions
+The first animation frame establishes the clock. Changing duration, easing identity, delay, or loop resets that clock, but does not synchronously reset the rendered value. Looping resets the clock after each completed pass. The underlying frame loop stays scheduled while the component is mounted, even after a non-looping animation reaches its final value, and is cancelled on unmount.
 
-| Property | Type                  | Default | Description                                          |
-| -------- | --------------------- | ------- | ---------------------------------------------------- |
-| duration | number                | -       | Duration of the animation in milliseconds.           |
-| easing   | (t: number) => number | t => t  | Easing function to use.                              |
-| delay    | number                | 0       | Delay before starting the animation in milliseconds. |
-| loop     | boolean               | false   | Whether to loop the animation.                       |
+In development, the hook emits one process-wide deprecation warning.
 
-## Return Value
+## Compatibility and accessibility
 
-Returns the current value of the animation (0 to 1).
+Server output starts at `0`; animation begins after client effects run. Respect [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion) in new code and do not rely on motion alone to communicate state. Native `<progress>` or visible text gives users a non-motion equivalent.
+
+## Related
+
+- [useEasing](/docs/hooks/useEasing)
+- [useTween](/docs/hooks/useTween)
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion)

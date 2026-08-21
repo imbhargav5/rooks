@@ -1,62 +1,54 @@
 ---
-id: useIsomorphicEffect
 title: useIsomorphicEffect
-sidebar_label: useIsomorphicEffect
-description: "Uses useLayoutEffect on the client and useEffect on the server for SSR safety."
+description: Uses a layout effect in the browser and a passive effect during server rendering.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDidMount, useDocumentTitle]
 ---
 
 ## About
 
-A hook that resolves to useEffect on the server and useLayoutEffect on the client.
-
-[//]: # "Main"
+`useIsomorphicEffect` is selected when the module loads: it is `useLayoutEffect` when `window` exists and `useEffect` otherwise. Use it for layout-sensitive client work in code that can also be imported by a server renderer.
 
 ## Examples
 
-```jsx
-import "./styles.css";
-import { useState } from "react";
+```tsx
+import { useRef, useState } from "react";
 import { useIsomorphicEffect } from "rooks";
 
-function Component() {
+export default function MeasuredLabel() {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [width, setWidth] = useState(0);
+
   useIsomorphicEffect(() => {
-    console.log("Rendered");
+    setWidth(ref.current?.getBoundingClientRect().width ?? 0);
   }, []);
-  return null;
+
+  return <span ref={ref}>Measured width: {Math.round(width)}px</span>;
 }
-
-const App = () => {
-  const [shouldRender, enableRender] = useState(true);
-  return (
-    <div>
-      <h1>Rook: useIsomorphicEffect Example</h1>
-      <hr></hr>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <br></br>
-        <button onClick={() => enableRender(!shouldRender)}> Click me! </button>
-        <p>Explore console</p>
-        {shouldRender && <Component />}
-      </div>
-    </div>
-  );
-};
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type     | Description                             |
-| -------------- | -------- | --------------------------------------- |
-| callback       | function | Callback function to be called on mount |
+It accepts the same `effect` callback and optional dependency list as React's `useEffect` and `useLayoutEffect`. The effect may return a cleanup function.
 
-### Returns
+## Return value
 
-Returns `useEffect` when "window" is not in scope and `useLayoutEffect` in the browser
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+In a browser bundle, setup runs synchronously after DOM mutations and before paint; cleanup runs before changed setup and on unmount. On the server-selected path it has passive-effect semantics and does not execute during HTML rendering. Dependency comparison and error propagation are React's own.
+
+Because selection happens at module evaluation, changing `window` later does not switch an already imported binding.
+
+## Compatibility and accessibility
+
+The hook avoids the server warning associated with `useLayoutEffect`, but it does not make browser-only code safe: access DOM globals only inside the effect. Keep layout work short to avoid blocking paint, and avoid visual measurement that causes content to jump after hydration.
+
+## Related
+
+- [useDidMount](/docs/hooks/useDidMount)
+- [useDocumentTitle](/docs/hooks/useDocumentTitle)
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis)

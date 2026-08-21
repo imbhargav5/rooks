@@ -30,10 +30,11 @@ const useFocusWithin = <T extends HTMLElement>(
 
   const onBlur = useCallback(
     (e: React.FocusEvent) => {
-      if (
-        state.current.isFocusWithin &&
-        !(e.currentTarget as Element).contains(e.relatedTarget as Element)
-      ) {
+      const isFocusMovingWithin =
+        e.relatedTarget instanceof Node &&
+        e.currentTarget.contains(e.relatedTarget);
+
+      if (state.current.isFocusWithin && !isFocusMovingWithin) {
         state.current.isFocusWithin = false;
         if (onBlurWithin) onBlurWithin(e);
         if (onFocusWithinChange) onFocusWithinChange(false);

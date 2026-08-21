@@ -1,6 +1,6 @@
 /**
  * useUndoRedoState
- * @description Setstate but can also undo and redo
+ * @description useState but can also undo and redo
  * @see {@link https://rooks.vercel.app/docs/hooks/useUndoRedoState}
  */
 import {

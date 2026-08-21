@@ -3,7 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useAnimation } from "../hooks/useAnimation";
 
 vi.mock("raf", () => {
-  const raf = (cb: any) => {
+  const raf = (cb: FrameRequestCallback) => {
     setTimeout(() => cb(performance.now()), 16);
     return 1;
   };

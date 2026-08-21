@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - alpha
-      - next
 
   workflow_dispatch:
 
@@ -13,14 +11,15 @@ concurrency:
   group: publish-${{ github.ref }}
   cancel-in-progress: false
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+
 jobs:
   publish:
     name: Publish To NPM
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'imbhargav5/rooks' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
-    permissions:
-      contents: write
-      id-token: write
+    if: ${{ github.repository == 'imbhargav5/rooks' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'Version Packages')) }}
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
@@ -31,7 +30,7 @@ jobs:
       - name: 📦 Setup Node.js with npm registry
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 24.x
           registry-url: "https://registry.npmjs.org"
 
       - name: Install latest npm (>=11.5.1 for OIDC)
@@ -59,6 +58,7 @@ jobs:
 
       - name: 🚀 Publish to npm
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           PACKAGE_NAME: ${{ steps.package.outputs.name }}
           PACKAGE_VERSION: ${{ steps.package.outputs.version }}
         run: |
@@ -67,7 +67,7 @@ jobs:
             exit 0
           fi
 
-          npm publish --access public
+          npm stage publish --access public
         working-directory: packages/rooks
 
       - name: 🏷 Create or update GitHub release

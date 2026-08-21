@@ -1,35 +1,35 @@
 ---
-id: useGetIsMounted
 title: useGetIsMounted
-sidebar_label: useGetIsMounted
 description: "Returns a function that reports whether the component is currently mounted."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useSafeSetState]
 ---
 
 ## About
 
 A hook that provides a way to check if a component is currently mounted. This is particularly useful for preventing state updates on unmounted components, especially after asynchronous operations like API calls, timers, or promises. The hook returns a function that returns a boolean indicating the current mount status.
 
-[//]: # "Main"
-
 ## Examples
 
 ### Basic usage
 
-```jsx
+```tsx
 import { useEffect } from "react";
 import { useGetIsMounted } from "rooks";
 
 export default function App() {
   const getIsMounted = useGetIsMounted();
-  
+
   useEffect(() => {
     console.log("Component mounted:", getIsMounted()); // true
-    
+
     return () => {
       console.log("Component unmounting:", getIsMounted()); // false
     };
   }, [getIsMounted]);
-  
+
   return <div>Check console for mount status</div>;
 }
 ```
@@ -51,11 +51,11 @@ export default function UserProfile({ userId }) {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Simulate API call
         const response = await fetch(`/api/users/${userId}`);
         const userData = await response.json();
-        
+
         // Only update state if component is still mounted
         if (getIsMounted()) {
           setUser(userData);
@@ -99,12 +99,12 @@ export default function Timer() {
 
   useEffect(() => {
     let intervalId;
-    
+
     if (isRunning) {
       intervalId = setInterval(() => {
         // Only update state if component is still mounted
         if (getIsMounted()) {
-          setCount(prevCount => prevCount + 1);
+          setCount((prevCount) => prevCount + 1);
         } else {
           // Clear interval if component is unmounted
           clearInterval(intervalId);
@@ -159,10 +159,10 @@ export default function SafeUserProfile({ userId }) {
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await fetch(`/api/users/${userId}`);
         const userData = await response.json();
-        
+
         // These will automatically be ignored if component is unmounted
         setUser(userData);
         setLoading(false);
@@ -189,22 +189,22 @@ export default function SafeUserProfile({ userId }) {
 }
 ```
 
-### Arguments
+## Parameters
 
 This hook doesn't accept any arguments.
 
-### Returns
+## Return value
 
-| Return value | Type     | Description                                                                    | Default   |
-| ------------ | -------- | ------------------------------------------------------------------------------ | --------- |
+| Return value | Type     | Description                                                                        | Default   |
+| ------------ | -------- | ---------------------------------------------------------------------------------- | --------- |
 | getIsMounted | Function | A function that returns a boolean indicating if the component is currently mounted | undefined |
 
 ### Return Function
 
 The returned `getIsMounted` function:
 
-| Return value | Type    | Description                                          |
-| ------------ | ------- | ---------------------------------------------------- |
+| Return value | Type    | Description                                           |
+| ------------ | ------- | ----------------------------------------------------- |
 | isMounted    | Boolean | `true` if the component is mounted, `false` otherwise |
 
 ## Use Cases
@@ -221,3 +221,15 @@ The returned `getIsMounted` function:
 - The mount status is set to `true` in `useEffect` and `false` in the cleanup function
 - This pattern helps prevent the common React warning: "Can't perform a React state update on an unmounted component"
 - For simpler use cases, consider using [`useSafeSetState`](/docs/hooks/useSafeSetState) which provides the same safety with a more convenient API
+
+## Behavior and lifecycle
+
+The returned function has a stable identity and reads a ref. It returns `false` during render and server rendering, becomes `true` after the hook's effect commits, and returns `false` after effect cleanup. It does not cancel async work; use `AbortController` or an API-specific cancellation mechanism when the operation itself should stop.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and has no browser or permission requirement. It does not render UI, so accessibility depends on how the guarded async result is presented.
+
+## Related
+
+- [useSafeSetState](/docs/hooks/useSafeSetState)

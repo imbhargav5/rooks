@@ -1,44 +1,36 @@
 ---
-id: useSuspenseLocalStorageState
 title: useSuspenseLocalStorageState
-sidebar_label: useSuspenseLocalStorageState
 description: "Reads and writes localStorage state with Suspense support."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
-
 A Suspense-enabled hook for localStorage state management with cross-tab synchronization. This hook suspends during initialization and must be wrapped in a Suspense boundary. It provides full TypeScript generic support, proper JSON serialization/deserialization, error handling, and automatic synchronization across browser tabs.
-
-[//]: # "Main"
 
 ## Examples
 
 #### Basic Usage with Numbers
 
-```jsx
+```tsx
 import React, { Suspense } from "react";
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function Counter() {
   const [count, { setItem, deleteItem }] = useSuspenseLocalStorageState(
-    'counter',
-    (currentValue) => currentValue ? parseInt(currentValue, 10) : 0
+    "counter",
+    (currentValue) => (currentValue ? parseInt(currentValue, 10) : 0)
   );
 
   return (
     <div>
       <h2>Counter: {count}</h2>
-      <button onClick={() => setItem(count + 1)}>
-        Increment
-      </button>
-      <button onClick={() => setItem(count - 1)}>
-        Decrement
-      </button>
-      <button onClick={deleteItem}>
-        Reset
-      </button>
+      <button onClick={() => setItem(count + 1)}>Increment</button>
+      <button onClick={() => setItem(count - 1)}>Decrement</button>
+      <button onClick={deleteItem}>Reset</button>
     </div>
   );
 }
@@ -66,24 +58,24 @@ interface User {
 
 function UserProfile() {
   const [user, { setItem, getItem, deleteItem }] = useSuspenseLocalStorageState(
-    'user-profile',
+    "user-profile",
     (currentValue): User => {
       if (currentValue) {
         try {
           return JSON.parse(currentValue);
         } catch {
-          return { id: 0, name: 'Guest', email: '' };
+          return { id: 0, name: "Guest", email: "" };
         }
       }
-      return { id: 0, name: 'Guest', email: '' };
+      return { id: 0, name: "Guest", email: "" };
     }
   );
 
   const updateUser = () => {
     setItem({
       id: 123,
-      name: 'John Doe',
-      email: 'john@example.com'
+      name: "John Doe",
+      email: "john@example.com",
     });
   };
 
@@ -98,16 +90,10 @@ function UserProfile() {
       <p>ID: {user.id}</p>
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
-      
-      <button onClick={updateUser}>
-        Update User
-      </button>
-      <button onClick={getCurrentUser}>
-        Show Current User
-      </button>
-      <button onClick={deleteItem}>
-        Clear Profile
-      </button>
+
+      <button onClick={updateUser}>Update User</button>
+      <button onClick={getCurrentUser}>Show Current User</button>
+      <button onClick={deleteItem}>Clear Profile</button>
     </div>
   );
 }
@@ -129,28 +115,22 @@ import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function SharedCounter() {
   const [count, { setItem, deleteItem }] = useSuspenseLocalStorageState(
-    'shared-counter',
-    (currentValue) => currentValue ? parseInt(currentValue, 10) : 0
+    "shared-counter",
+    (currentValue) => (currentValue ? parseInt(currentValue, 10) : 0)
   );
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+    <div
+      style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}
+    >
       <h3>Shared Counter</h3>
-      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>
-        Count: {count}
-      </p>
-      <div style={{ gap: '10px', display: 'flex' }}>
-        <button onClick={() => setItem(count + 1)}>
-          +1
-        </button>
-        <button onClick={() => setItem(count + 10)}>
-          +10
-        </button>
-        <button onClick={deleteItem}>
-          Reset
-        </button>
+      <p style={{ fontSize: "24px", fontWeight: "bold" }}>Count: {count}</p>
+      <div style={{ gap: "10px", display: "flex" }}>
+        <button onClick={() => setItem(count + 1)}>+1</button>
+        <button onClick={() => setItem(count + 10)}>+10</button>
+        <button onClick={deleteItem}>Reset</button>
       </div>
-      <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
+      <p style={{ fontSize: "12px", color: "#666", marginTop: "10px" }}>
         Open this page in multiple tabs to see real-time synchronization!
       </p>
     </div>
@@ -174,7 +154,7 @@ import { useSuspenseLocalStorageState } from "rooks/experimental";
 
 function TodoList() {
   const [todos, { setItem, deleteItem }] = useSuspenseLocalStorageState(
-    'todo-list',
+    "todo-list",
     (currentValue) => {
       if (currentValue) {
         try {
@@ -188,74 +168,70 @@ function TodoList() {
   );
 
   const addTodo = () => {
-    const text = prompt('Enter todo:');
+    const text = prompt("Enter todo:");
     if (text) {
       setItem([
         ...todos,
         {
           id: Date.now(),
           text,
-          completed: false
-        }
+          completed: false,
+        },
       ]);
     }
   };
 
   const toggleTodo = (id) => {
     setItem(
-      todos.map(todo =>
-        todo.id === id
-          ? { ...todo, completed: !todo.completed }
-          : todo
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
 
   const deleteTodo = (id) => {
-    setItem(todos.filter(todo => todo.id !== id));
+    setItem(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <div>
       <h2>Todo List ({todos.length} items)</h2>
-      
-      <button onClick={addTodo} style={{ marginBottom: '20px' }}>
+
+      <button onClick={addTodo} style={{ marginBottom: "20px" }}>
         Add Todo
       </button>
-      
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {todos.map(todo => (
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {todos.map((todo) => (
           <li
             key={todo.id}
             style={{
-              padding: '10px',
-              margin: '5px 0',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
+              padding: "10px",
+              margin: "5px 0",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <span
               onClick={() => toggleTodo(todo.id)}
               style={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer',
-                flex: 1
+                textDecoration: todo.completed ? "line-through" : "none",
+                cursor: "pointer",
+                flex: 1,
               }}
             >
               {todo.text}
             </span>
-            <button onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
-      
+
       {todos.length > 0 && (
-        <button onClick={deleteItem} style={{ marginTop: '20px' }}>
+        <button onClick={deleteItem} style={{ marginTop: "20px" }}>
           Clear All Todos
         </button>
       )}
@@ -307,14 +283,14 @@ class ErrorBoundary extends React.Component {
 
 function Settings() {
   const [settings, { setItem, deleteItem }] = useSuspenseLocalStorageState(
-    'app-settings',
+    "app-settings",
     (currentValue) => {
       const defaults = {
-        theme: 'light',
+        theme: "light",
         notifications: true,
-        autoSave: false
+        autoSave: false,
       };
-      
+
       if (currentValue) {
         try {
           return { ...defaults, ...JSON.parse(currentValue) };
@@ -329,47 +305,47 @@ function Settings() {
   const updateSetting = (key, value) => {
     setItem({
       ...settings,
-      [key]: value
+      [key]: value,
     });
   };
 
   return (
     <div>
       <h2>Application Settings</h2>
-      
-      <div style={{ display: 'grid', gap: '15px', maxWidth: '300px' }}>
+
+      <div style={{ display: "grid", gap: "15px", maxWidth: "300px" }}>
         <label>
           Theme:
           <select
             value={settings.theme}
-            onChange={(e) => updateSetting('theme', e.target.value)}
-            style={{ marginLeft: '10px' }}
+            onChange={(e) => updateSetting("theme", e.target.value)}
+            style={{ marginLeft: "10px" }}
           >
             <option value="light">Light</option>
             <option value="dark">Dark</option>
           </select>
         </label>
-        
+
         <label>
           <input
             type="checkbox"
             checked={settings.notifications}
-            onChange={(e) => updateSetting('notifications', e.target.checked)}
+            onChange={(e) => updateSetting("notifications", e.target.checked)}
           />
           Enable Notifications
         </label>
-        
+
         <label>
           <input
             type="checkbox"
             checked={settings.autoSave}
-            onChange={(e) => updateSetting('autoSave', e.target.checked)}
+            onChange={(e) => updateSetting("autoSave", e.target.checked)}
           />
           Auto Save
         </label>
       </div>
-      
-      <button onClick={deleteItem} style={{ marginTop: '20px' }}>
+
+      <button onClick={deleteItem} style={{ marginTop: "20px" }}>
         Reset to Defaults
       </button>
     </div>
@@ -397,12 +373,12 @@ The hook automatically synchronizes state across browser tabs and windows throug
 
 This means if you have the same hook with the same key in multiple tabs or multiple components, they will all stay in sync automatically.
 
-## Arguments
+## Parameters
 
-| Parameter     | Type                                          | Description                                                                           |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `key`         | `string`                                      | The localStorage key to use for storing the data                                      |
-| `initializer` | `(currentValue: string \| null) => T`        | Function that transforms the raw localStorage value (string or null) into type T      |
+| Parameter     | Type                                  | Description                                                                      |
+| ------------- | ------------------------------------- | -------------------------------------------------------------------------------- |
+| `key`         | `string`                              | The localStorage key to use for storing the data                                 |
+| `initializer` | `(currentValue: string \| null) => T` | Function that transforms the raw localStorage value (string or null) into type T |
 
 ### Initializer Function
 
@@ -413,30 +389,30 @@ The initializer function receives the raw string value from localStorage (or `nu
 - **Data Validation**: Validate and sanitize stored data
 - **Migration**: Handle changes in data structure over time
 
-## Return Value
+## Return value
 
 Returns a tuple `[value, controls]` where:
 
-| Property   | Type  | Description                        |
-| ---------- | ----- | ---------------------------------- |
-| `value`    | `T`   | The current state value            |
-| `controls` | `object` | Object containing control methods  |
+| Property   | Type     | Description                       |
+| ---------- | -------- | --------------------------------- |
+| `value`    | `T`      | The current state value           |
+| `controls` | `object` | Object containing control methods |
 
 ### Control Methods
 
 The `controls` object provides the following methods:
 
-| Method       | Type                | Description                                                |
-| ------------ | ------------------- | ---------------------------------------------------------- |
-| `getItem`    | `() => T`           | Returns the current state value                            |
-| `setItem`    | `(value: T) => void` | Updates the state and localStorage with the new value     |
-| `deleteItem` | `() => void`        | Removes the item from localStorage and resets to initial value |
+| Method       | Type                 | Description                                                    |
+| ------------ | -------------------- | -------------------------------------------------------------- |
+| `getItem`    | `() => T`            | Returns the current state value                                |
+| `setItem`    | `(value: T) => void` | Updates the state and localStorage with the new value          |
+| `deleteItem` | `() => void`         | Removes the item from localStorage and resets to initial value |
 
 ## Type Safety
 
 The hook provides full TypeScript generic support:
 
-```tsx
+```text
 // Number type
 const [count, controls] = useSuspenseLocalStorageState<number>(
   'count',
@@ -485,3 +461,15 @@ Always wrap in error boundaries for production use.
 ```javascript
 import { useSuspenseLocalStorageState } from "rooks/experimental";
 ```
+
+## Behavior and lifecycle
+
+The first use of a key creates a module-level initialization promise and suspends until `initializer` returns. State changes are JSON-stringified to localStorage from an effect. Same-document instances synchronize through a custom event; other tabs synchronize through the browser `storage` event. Both listeners are removed on cleanup. Deletion removes the key and resets state with `initializer(null)`.
+
+## Compatibility and accessibility
+
+When localStorage is unavailable or a read/write/delete is blocked, the hook logs the storage error and continues with in-memory state. An initializer error is thrown to the nearest error boundary. SSR initializes from `null`, so choose a deterministic fallback and expect the browser's stored value to be client-only. Storage is synchronous, quota-limited, visible to same-origin scripts, and unsuitable for secrets.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

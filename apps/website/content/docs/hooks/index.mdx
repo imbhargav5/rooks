@@ -1,0 +1,42 @@
+---
+title: Hooks reference
+description: Browse every public Rooks hook by category, entrypoint, status, and supported alias.
+---
+
+This reference is built from the same public API manifest as the package barrels and README. Canonical implementations and supported aliases are counted and rendered from that manifest.
+
+Use global search for a hook name or alias. Each canonical page shows its exact TypeScript signature, import path, status, aliases, category, and related hooks from the shared manifest.
+
+<HookIndex />
+
+## Stable categories
+
+- State Management
+- State History & Time Travel
+- Lifecycle & Effects
+- Event Handling
+- Keyboard & Input
+- Mouse & Touch
+- Window & Viewport
+- UI & Layout
+- Browser APIs
+- Form & File Handling
+- Animation & Timing
+- Performance & Optimization
+- Utilities & Refs
+- Development & Debugging
+
+## Separate entrypoints
+
+- **Temporal:** four stable hooks imported from `rooks/temporal`; read the [Temporal guide](/docs/guides/temporal-hooks) first.
+- **Experimental:** hooks imported from `rooks/experimental`; read the [experimental stability guide](/docs/guides/experimental-hooks) before production use.
+
+## Supported aliases
+
+| Alias               | Canonical documentation                        |
+| ------------------- | ---------------------------------------------- |
+| `useObjectState`    | [`useMapState`](/docs/hooks/useMapState)       |
+| `useOnLongHoverRef` | [`useOnLongHover`](/docs/hooks/useOnLongHover) |
+| `useOnLongPressRef` | [`useOnLongPress`](/docs/hooks/useOnLongPress) |
+
+The alias names refer to the same implementations; they do not have duplicate reference pages. Internal source helpers are excluded from this index.

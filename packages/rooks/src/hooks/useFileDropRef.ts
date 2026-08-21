@@ -38,15 +38,11 @@ function useFileDropRef(
 
   const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
 
-  const freshOnDrop = useFreshCallback(onDrop as any);
-  const freshOnFileAccepted = useFreshCallback(onFileAccepted as any);
-  const freshOnFileRejected = useFreshCallback(onFileRejected as any);
-  const freshOnDragEnter = useFreshCallback(onDragEnter as any);
-  const freshOnDragLeave = useFreshCallback(onDragLeave as any);
-
-  useCallback((node: HTMLElement | null) => {
-    setTargetNode(node);
-  }, []);
+  const freshOnDrop = useFreshCallback(onDrop);
+  const freshOnFileAccepted = useFreshCallback(onFileAccepted);
+  const freshOnFileRejected = useFreshCallback(onFileRejected);
+  const freshOnDragEnter = useFreshCallback(onDragEnter);
+  const freshOnDragLeave = useFreshCallback(onDragLeave);
 
   const fileIsValid = useCallback(
     (file: File): { valid: boolean; reason?: string } => {
@@ -54,7 +50,7 @@ function useFileDropRef(
         return { valid: false, reason: "File type not allowed" };
       }
 
-      if (maxFileSize && file.size > maxFileSize) {
+      if (maxFileSize !== undefined && file.size > maxFileSize) {
         return { valid: false, reason: "File size exceeds the limit" };
       }
 
@@ -70,8 +66,9 @@ function useFileDropRef(
       const acceptedFiles: File[] = [];
       const rejectedFiles: File[] = [];
 
-      if (maxFiles && files.length > maxFiles) {
+      if (maxFiles !== undefined && files.length > maxFiles) {
         for (const file of files) {
+          rejectedFiles.push(file);
           freshOnFileRejected(file, "Exceeded maximum number of files");
         }
       } else {

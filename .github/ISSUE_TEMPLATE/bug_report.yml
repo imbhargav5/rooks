@@ -1,0 +1,151 @@
+name: Bug report
+description: Report reproducible incorrect behavior in Rooks or its documentation
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. For a suspected vulnerability, stop here and use [private vulnerability reporting](https://github.com/imbhargav5/rooks/security/advisories/new).
+
+        Filing a bug does not approve an external pull request. If you want to implement the fix, a maintainer must explicitly approve that scope on this issue first.
+
+  - type: dropdown
+    id: entrypoint
+    attributes:
+      label: Affected entrypoint
+      description: Select the import path or surface where the problem occurs.
+      options:
+        - rooks
+        - rooks/experimental
+        - rooks/temporal
+        - Website or documentation
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: rooks_version
+    attributes:
+      label: Rooks version
+      description: Use the exact installed version. Enter N/A only for website-only reports.
+      placeholder: 9.8.0
+    validations:
+      required: true
+
+  - type: input
+    id: react_version
+    attributes:
+      label: React version
+      description: Include react-dom when its version differs. Enter N/A when not applicable.
+      placeholder: react 19.2.4, react-dom 19.2.4
+    validations:
+      required: true
+
+  - type: input
+    id: typescript_version
+    attributes:
+      label: TypeScript version
+      description: Enter N/A for JavaScript projects or website-only reports.
+      placeholder: 5.9.3
+    validations:
+      required: true
+
+  - type: input
+    id: regression_version
+    attributes:
+      label: Last version that worked
+      description: If this is a regression, provide the newest version where the behavior was correct.
+      placeholder: 9.7.0 or Not known
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Link a small repository or paste the smallest component and steps that reproduce the problem.
+      placeholder: |
+        Reproduction URL or code:
+        1. Render ...
+        2. Trigger ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Actual behavior
+      description: Include the full error, stack trace, warning, or visible result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behavior
+      description: Explain what should happen and why.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: rendering_context
+    attributes:
+      label: Rendering context
+      description: Tell us whether server rendering or hydration is involved.
+      options:
+        - Browser-only client rendering
+        - Server rendering or hydration
+        - Both client and server rendering
+        - Not sure or not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser and framework context
+      description: Include operating system, browser/version, framework/version, runtime, and relevant permissions or unsupported APIs. Enter N/A when not applicable.
+      placeholder: macOS 15, Safari 18, Next.js 16 App Router, geolocation permission denied
+    validations:
+      required: true
+
+  - type: dropdown
+    id: approval_state
+    attributes:
+      label: Contribution approval state
+      description: This records intent; only an explicit maintainer comment grants approval.
+      options:
+        - Reporting only; I am not proposing an implementation
+        - I would like to contribute; approval has not been requested
+        - I requested approval and am waiting for a maintainer
+        - A maintainer explicitly approved this exact implementation scope
+    validations:
+      required: true
+
+  - type: input
+    id: approval_link
+    attributes:
+      label: Approval comment link
+      description: If approved, link the maintainer comment that explicitly approves the scope.
+      placeholder: https://github.com/imbhargav5/rooks/issues/123#issuecomment-...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add screenshots, recordings, or related issues when useful.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I searched existing issues and discussions for this problem.
+          required: true
+        - label: This report does not disclose a security vulnerability publicly.
+          required: true

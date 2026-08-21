@@ -1,43 +1,55 @@
 ---
-id: useMouse
 title: useMouse
-sidebar_label: useMouse
-description: "Tracks the mouse cursor position relative to a given element."
+description: Returns document-level mouse coordinates from the latest mousemove event.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMouseMoveDelta]
 ---
 
 ## About
 
-### Description
+`useMouse` subscribes to document `mousemove` events and returns coordinate fields from the latest native event. It is global document tracking, not tracking relative to a supplied element.
 
-Mouse position hook for React.
-<br/>
+## Example
 
-### Return value
-
-useMouse returns a single object containing the mouse position.
-
-| Returned object attributes | Type | Description         |
-| -------------------------- | ---- | ------------------- |
-| x                          | int  | X position of mouse |
-| y                          | int  | Y position of mouse |
-
-<br/>
-## Examples
-### Basic Usage
-
-```jsx
+```tsx
 import { useMouse } from "rooks";
 
-export default function App() {
-  const { x, y } = useMouse();
+export default function PointerPosition() {
+  const { clientX, clientY, pageX, pageY } = useMouse();
+
   return (
-    <>
-      <p> Move mouse here to see changes to position </p>
-      <p>X position is {x || "null"}</p>
-      <p>X position is {y || "null"}</p>
-    </>
+    <dl>
+      <dt>Viewport</dt>
+      <dd>
+        {clientX ?? "unknown"}, {clientY ?? "unknown"}
+      </dd>
+      <dt>Page</dt>
+      <dd>
+        {pageX ?? "unknown"}, {pageY ?? "unknown"}
+      </dd>
+    </dl>
   );
 }
 ```
 
-<br/>
+## Parameters
+
+This hook has no parameters.
+
+## Return value
+
+The returned object contains nullable `clientX`, `clientY`, `movementX`, `movementY`, `offsetX`, `offsetY`, `pageX`, `pageY`, `screenX`, `screenY`, `x`, and `y`. The `x` and `y` fields are aliases of `screenX` and `screenY` in this implementation. `offsetX` and `offsetY` remain relative to the native event target.
+
+## Behavior and lifecycle
+
+Before the first event, every field is `null`. Each document `mousemove` replaces the snapshot and causes subscribed components to render. There is no throttling. The native listener is removed on unmount, and separate hook instances keep separate snapshots.
+
+## Compatibility and accessibility
+
+The server snapshot contains only null values; the browser fills it after a mouse event. Touch, pen, and keyboard input do not update this hook. Do not make an action or essential status depend only on mouse location.
+
+## Related
+
+- [useMouseMoveDelta](/docs/hooks/useMouseMoveDelta) returns per-event movement and velocity.

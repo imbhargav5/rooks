@@ -3,7 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useSpring } from "../hooks/useSpring";
 
 vi.mock("raf", () => {
-  const raf = (cb: any) => {
+  const raf = (cb: (timestamp: number) => void) => {
     setTimeout(() => cb(performance.now()), 16);
     return 1;
   };
@@ -43,9 +43,7 @@ describe("useSpring", () => {
       vi.advanceTimersByTime(100);
     });
 
-    // Should have moved from 0 towards 100
-    expect(result.current).not.toBe(0);
-    // expect(result.current).toBeGreaterThan(0); // This might be flaky if 100ms isn't enough for spring to move significantly with default config, but it should move.
+    expect(result.current).toBeGreaterThan(0);
   });
 
   it("should move toward the target with a custom spring config", () => {

@@ -1,17 +1,47 @@
 ---
-id: useSelectableList
 title: useSelectableList
-sidebar_label: useSelectableList
 description: "Manages a single-selection list state with toggle and clear helpers."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMultiSelectableList, useSelect]
 ---
 
 ## About
 
 Easily select a single value from a list of values. very useful for radio buttons, select inputs etc.
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useSelectableList } from "rooks";
+
+const colors = ["Red", "Green", "Blue"];
+
+export default function ColorPicker() {
+  const [[, selected], { matchSelection, updateSelection }] = useSelectableList(
+    colors,
+    0
+  );
+
+  return (
+    <fieldset>
+      <legend>Selected: {selected}</legend>
+      {colors.map((color) => (
+        <label key={color}>
+          <input
+            type="radio"
+            name="color"
+            checked={matchSelection({ value: color })}
+            onChange={updateSelection({ value: color })}
+          />
+          {color}
+        </label>
+      ))}
+    </fieldset>
+  );
+}
+```
 
 ### Pizza topping selector
 
@@ -184,7 +214,7 @@ export default function StatusPicker() {
 }
 ```
 
-### Arguments
+## Parameters
 
 | Argument value  | Type      | Description                                     | Default value |
 | --------------- | --------- | ----------------------------------------------- | ------------- |
@@ -192,7 +222,7 @@ export default function StatusPicker() {
 | initialIndex    | `number`  | Index of the initially selected item            | `0`           |
 | allowUnselected | `boolean` | Whether to allow unselect when update selection | `false`       |
 
-### Returns
+## Return value
 
 Returns an array of following items:
 
@@ -209,4 +239,15 @@ Methods:
 | toggleSelection | `({ index?: number, value?: T }) => () => void` | returns a function to toggle an item by index or value |
 | updateSelection | `({ index?: number, value?: T }) => () => void` | returns a function to update specified item            |
 
----
+## Behavior and lifecycle
+
+The hook stores an index and derives the selected value from the current list. Control factories return event handlers. Values are matched with `indexOf`/strict equality; missing values cause a warning and no update. Passing both `index` and `value`, or neither, also warns. Selecting the active item clears the selection to index `-1` only when `allowUnselected` is `true`; otherwise it warns and retains the selection.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe. Use native radio/select semantics or expose `aria-selected`, keyboard navigation, and a visible focus indicator when building a custom single-selection widget.
+
+## Related
+
+- [useMultiSelectableList](/docs/hooks/useMultiSelectableList)
+- [useSelect](/docs/hooks/useSelect)

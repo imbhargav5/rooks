@@ -1,21 +1,21 @@
 ---
-id: useSafeSetState
 title: useSafeSetState
-sidebar_label: useSafeSetState
 description: "Calls setState only if the component is still mounted, preventing memory leaks."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useGetIsMounted]
 ---
 
 ## About
 
 A hook that provides a safe version of `useState` that prevents state updates after the component has unmounted. This is particularly useful for async operations to avoid memory leaks and React warnings.
 
-[//]: # "Main"
-
 ## Examples
 
 #### Basic example
 
-```jsx
+```tsx
 import { useSafeSetState } from "rooks";
 
 export default function App() {
@@ -23,21 +23,17 @@ export default function App() {
 
   const handleAsyncIncrement = async () => {
     // Simulate an async operation
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     // This will only update state if the component is still mounted
-    setSafeCount(prev => prev + 1);
+    setSafeCount((prev) => prev + 1);
   };
 
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={handleAsyncIncrement}>
-        Async Increment (2s delay)
-      </button>
-      <button onClick={() => setSafeCount(0)}>
-        Reset
-      </button>
+      <button onClick={handleAsyncIncrement}>Async Increment (2s delay)</button>
+      <button onClick={() => setSafeCount(0)}>Reset</button>
     </div>
   );
 }
@@ -59,12 +55,12 @@ export default function UserProfile({ userId }) {
         setSafeLoading(true);
         const response = await fetch(`/api/users/${userId}`);
         const userData = await response.json();
-        
+
         // Safe to call even if component unmounts during fetch
         setSafeUser(userData);
         setSafeLoading(false);
       } catch (error) {
-        console.error('Failed to fetch user:', error);
+        console.error("Failed to fetch user:", error);
         setSafeLoading(false);
       }
     };
@@ -92,22 +88,22 @@ import { useSafeSetState } from "rooks";
 export default function Counter() {
   const [state, setSafeState] = useSafeSetState({
     count: 0,
-    lastUpdated: Date.now()
+    lastUpdated: Date.now(),
   });
 
   const increment = () => {
-    setSafeState(prevState => ({
+    setSafeState((prevState) => ({
       count: prevState.count + 1,
-      lastUpdated: Date.now()
+      lastUpdated: Date.now(),
     }));
   };
 
   const delayedIncrement = () => {
     setTimeout(() => {
       // This update will be ignored if component unmounts
-      setSafeState(prevState => ({
+      setSafeState((prevState) => ({
         ...prevState,
-        count: prevState.count + 1
+        count: prevState.count + 1,
       }));
     }, 3000);
   };
@@ -123,31 +119,26 @@ export default function Counter() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type | Description                    | Default   |
-| -------------- | ---- | ------------------------------ | --------- |
-| initialState   | T    | The initial state value        | undefined |
+| Argument value | Type | Description                  | Default |
+| -------------- | ---- | ---------------------------- | ------- |
+| initialState   | `T`  | Required initial state value | —       |
 
-### Returns
+## Return value
 
 Returns an array with two elements:
 
-| Return value  | Type                              | Description                                                           | Default   |
-| ------------- | --------------------------------- | --------------------------------------------------------------------- | --------- |
-| state         | T                                 | The current state value                                               | undefined |
-| safeSetState  | `Dispatch<SetStateAction<T>>`     | Function to update state, but only if component is still mounted     | undefined |
+| Return value | Type                          | Description                                       | Default |
+| ------------ | ----------------------------- | ------------------------------------------------- | ------- |
+| state        | `T`                           | The current state value                           | —       |
+| safeSetState | `Dispatch<SetStateAction<T>>` | Updates state only while the component is mounted | —       |
 
-### Behavior
+## Behavior and lifecycle
 
-The `useSafeSetState` hook behaves identically to React's built-in `useState` hook with one important difference: the setter function (`safeSetState`) will only update the state if the component is still mounted.
+The setter first calls the stable mounted-state reader from `useGetIsMounted`. It forwards the value or functional updater to React only while mounted; after the layout-effect cleanup marks the component unmounted, calls are ignored.
 
-This prevents:
-- Memory leaks from async operations
-- React warnings about setting state on unmounted components
-- Unnecessary state updates that won't affect the UI
-
-The hook internally uses `useGetIsMounted` to check if the component is still mounted before allowing state updates.
+It does not cancel a request, timer, subscription, or other asynchronous work. Clean those resources up independently when possible; this hook only prevents their late completion callbacks from changing state.
 
 ### Use Cases
 
@@ -155,3 +146,11 @@ The hook internally uses `useGetIsMounted` to check if the component is still mo
 - **Timers and intervals**: Avoid state updates from delayed operations
 - **Event handlers**: Safe state updates in long-running event callbacks
 - **Cleanup-sensitive operations**: Any operation that might complete after component unmount
+
+## Compatibility and accessibility
+
+The state logic itself is platform-independent and SSR-safe. As with `useState`, accessibility depends on the controls and status UI built from the value.
+
+## Related
+
+- [useGetIsMounted](/docs/hooks/useGetIsMounted) exposes the mounted-state reader directly.

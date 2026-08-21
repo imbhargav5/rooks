@@ -1,8 +1,10 @@
 ---
-id: useWebLocksApi
 title: useWebLocksApi
-sidebar_label: useWebLocksApi
 description: "Coordinates asynchronous resource access using the Web Locks API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -17,7 +19,35 @@ The Web Locks API provides a way to coordinate work across multiple tabs or work
 npm install rooks
 ```
 
-## Basic Usage
+## Examples
+
+```tsx
+import { useState } from "react";
+import { useWebLocksApi } from "rooks";
+
+export default function SaveWithLock() {
+  const [message, setMessage] = useState("Ready");
+  const { acquire, isLocked, isSupported } = useWebLocksApi("save-profile");
+
+  async function save() {
+    try {
+      await acquire(async () => setMessage("Saved"));
+    } catch (error: unknown) {
+      setMessage(error instanceof Error ? error.message : "Save failed");
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      disabled={!isSupported || isLocked}
+      onClick={() => void save()}
+    >
+      {message}
+    </button>
+  );
+}
+```
 
 ```jsx
 import React, { useState } from "react";
@@ -25,14 +55,14 @@ import { useWebLocksApi } from "rooks";
 
 function DataSyncComponent() {
   const [status, setStatus] = useState("idle");
-  const { 
-    isSupported, 
-    isLocked, 
-    waitingCount, 
-    error, 
-    acquire, 
-    release, 
-    query 
+  const {
+    isSupported,
+    isLocked,
+    waitingCount,
+    error,
+    acquire,
+    release,
+    query,
   } = useWebLocksApi("data-sync");
 
   const handleSync = async () => {
@@ -46,7 +76,7 @@ function DataSyncComponent() {
       await acquire(async () => {
         setStatus("syncing data...");
         // Simulate data sync operation
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         setStatus("sync complete");
       });
     } catch (err) {
@@ -77,21 +107,18 @@ import { useWebLocksApi } from "rooks";
 
 function CriticalOperationComponent() {
   const [logs, setLogs] = useState([]);
-  const { 
-    isSupported, 
-    isLocked, 
-    waitingCount, 
-    error, 
-    acquire, 
-    query 
-  } = useWebLocksApi("critical-operation", {
-    // Enable periodic checking every 2 seconds
-    periodicCheck: true,
-    checkInterval: 2000
-  });
+  const { isSupported, isLocked, waitingCount, error, acquire, query } =
+    useWebLocksApi("critical-operation", {
+      // Enable periodic checking every 2 seconds
+      periodicCheck: true,
+      checkInterval: 2000,
+    });
 
   const addLog = (message) => {
-    setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+    setLogs((prev) => [
+      ...prev,
+      `${new Date().toLocaleTimeString()}: ${message}`,
+    ]);
   };
 
   const performCriticalOperation = async () => {
@@ -102,20 +129,23 @@ function CriticalOperationComponent() {
 
     try {
       // Try to acquire lock immediately, don't wait
-      await acquire(async () => {
-        addLog("Lock acquired - performing critical operation");
-        
-        // Simulate critical operation
-        for (let i = 1; i <= 5; i++) {
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          addLog(`Operation step ${i}/5 completed`);
+      await acquire(
+        async () => {
+          addLog("Lock acquired - performing critical operation");
+
+          // Simulate critical operation
+          for (let i = 1; i <= 5; i++) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            addLog(`Operation step ${i}/5 completed`);
+          }
+
+          addLog("Critical operation completed successfully");
+        },
+        {
+          mode: "exclusive",
+          ifAvailable: true, // Don't wait if lock is not available
         }
-        
-        addLog("Critical operation completed successfully");
-      }, {
-        mode: "exclusive",
-        ifAvailable: true // Don't wait if lock is not available
-      });
+      );
     } catch (err) {
       addLog(`Operation failed: ${err.message}`);
     }
@@ -124,7 +154,9 @@ function CriticalOperationComponent() {
   const checkLockStatus = async () => {
     try {
       const status = await query();
-      addLog(`Lock status - Held: ${status.held.length}, Pending: ${status.pending.length}`);
+      addLog(
+        `Lock status - Held: ${status.held.length}, Pending: ${status.pending.length}`
+      );
     } catch (err) {
       addLog(`Query failed: ${err.message}`);
     }
@@ -138,15 +170,23 @@ function CriticalOperationComponent() {
         <p>Waiting Count: {waitingCount}</p>
         {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
       </div>
-      
+
       <div>
         <button onClick={performCriticalOperation} disabled={isLocked}>
           Perform Critical Operation
         </button>
         <button onClick={checkLockStatus}>Check Lock Status</button>
       </div>
-      
-      <div style={{ marginTop: "20px", height: "200px", overflow: "auto", border: "1px solid #ccc", padding: "10px" }}>
+
+      <div
+        style={{
+          marginTop: "20px",
+          height: "200px",
+          overflow: "auto",
+          border: "1px solid #ccc",
+          padding: "10px",
+        }}
+      >
         <h4>Operation Log:</h4>
         {logs.map((log, index) => (
           <div key={index}>{log}</div>
@@ -166,14 +206,8 @@ import { useWebLocksApi } from "rooks";
 function SharedResourceComponent() {
   const [data, setData] = useState(null);
   const [isReading, setIsReading] = useState(false);
-  const { 
-    isSupported, 
-    isLocked, 
-    waitingCount, 
-    error, 
-    acquire, 
-    resourceName 
-  } = useWebLocksApi("shared-resource");
+  const { isSupported, isLocked, waitingCount, error, acquire, resourceName } =
+    useWebLocksApi("shared-resource");
 
   const readData = async () => {
     if (!isSupported) {
@@ -183,17 +217,20 @@ function SharedResourceComponent() {
 
     setIsReading(true);
     try {
-      await acquire(async () => {
-        console.log(`Reading data from ${resourceName}...`);
-        
-        // Simulate reading data (multiple readers can do this simultaneously)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        setData(`Data read at ${new Date().toLocaleTimeString()}`);
-        console.log("Data read successfully");
-      }, {
-        mode: "shared" // Allow multiple readers
-      });
+      await acquire(
+        async () => {
+          console.log(`Reading data from ${resourceName}...`);
+
+          // Simulate reading data (multiple readers can do this simultaneously)
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          setData(`Data read at ${new Date().toLocaleTimeString()}`);
+          console.log("Data read successfully");
+        },
+        {
+          mode: "shared", // Allow multiple readers
+        }
+      );
     } catch (err) {
       console.error(`Read failed: ${err.message}`);
     } finally {
@@ -208,17 +245,20 @@ function SharedResourceComponent() {
     }
 
     try {
-      await acquire(async () => {
-        console.log(`Writing data to ${resourceName}...`);
-        
-        // Simulate writing data (exclusive access needed)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        setData(`Data written at ${new Date().toLocaleTimeString()}`);
-        console.log("Data written successfully");
-      }, {
-        mode: "exclusive" // Exclusive access for writing
-      });
+      await acquire(
+        async () => {
+          console.log(`Writing data to ${resourceName}...`);
+
+          // Simulate writing data (exclusive access needed)
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          setData(`Data written at ${new Date().toLocaleTimeString()}`);
+          console.log("Data written successfully");
+        },
+        {
+          mode: "exclusive", // Exclusive access for writing
+        }
+      );
     } catch (err) {
       console.error(`Write failed: ${err.message}`);
     }
@@ -231,7 +271,7 @@ function SharedResourceComponent() {
       <p>Status: {isLocked ? "🔒 In Use" : "🔓 Available"}</p>
       <p>Waiting: {waitingCount}</p>
       {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
-      
+
       <div>
         <button onClick={readData} disabled={isReading}>
           {isReading ? "Reading..." : "Read Data (Shared)"}
@@ -240,8 +280,10 @@ function SharedResourceComponent() {
           Write Data (Exclusive)
         </button>
       </div>
-      
-      <div style={{ marginTop: "20px", padding: "10px", border: "1px solid #ddd" }}>
+
+      <div
+        style={{ marginTop: "20px", padding: "10px", border: "1px solid #ddd" }}
+      >
         <strong>Current Data:</strong> {data || "No data"}
       </div>
     </div>
@@ -251,17 +293,19 @@ function SharedResourceComponent() {
 
 ## API Reference
 
-### Parameters
+## Parameters
 
 The hook accepts two parameters:
 
 #### `resourceName` (required)
+
 - **Type:** `string`
 - **Description:** The name of the resource to acquire locks on. Must be a string.
 
 #### `options` (optional)
-- **Type:** `UseWebLocksApiOptions`
-- **Description:** Configuration options for the hook.
+
+- **Type:** `{ periodicCheck?: boolean; checkInterval?: number }`
+- **Description:** Periodic lock-snapshot configuration.
 
 ```typescript
 type UseWebLocksApiOptions = {
@@ -269,7 +313,7 @@ type UseWebLocksApiOptions = {
    * Enable periodic checking of lock state (disabled by default)
    */
   periodicCheck?: boolean;
-  
+
   /**
    * Interval in milliseconds for periodic checks (default: 1000ms)
    */
@@ -277,7 +321,7 @@ type UseWebLocksApiOptions = {
 };
 ```
 
-### Return Value
+## Return value
 
 The hook returns an object with the following properties:
 
@@ -287,37 +331,33 @@ The hook returns an object with the following properties:
    * Whether Web Locks API is supported in the current environment
    */
   isSupported: boolean;
-  
-  /**
-   * Whether the resource is currently locked
-   */
+
+  /** Whether this hook has an acquire request waiting or running. */
   isLocked: boolean;
-  
+
   /**
    * Number of pending lock requests for this resource
    */
   waitingCount: number;
-  
+
   /**
    * Current error state (null if no error)
    */
   error: Error | null;
-  
+
   /**
    * The resource name being managed
    */
   resourceName: string;
-  
+
   /**
    * Acquire a lock on the resource
    */
   acquire: <T>(callback: () => Promise<T> | T, options?: LockOptions) => Promise<T>;
-  
-  /**
-   * Release the current lock
-   */
+
+  /** Abort the hook-created signal while its request is still pending. */
   release: () => void;
-  
+
   /**
    * Query the current lock state
    */
@@ -327,7 +367,7 @@ The hook returns an object with the following properties:
 
 ### Lock Options
 
-The `acquire` function accepts an optional `LockOptions` parameter:
+The `acquire` function accepts this inline options shape (it is not a separate public export):
 
 ```typescript
 type LockOptions = {
@@ -335,18 +375,18 @@ type LockOptions = {
    * The lock mode - "exclusive" (default) or "shared"
    */
   mode?: "exclusive" | "shared";
-  
+
   /**
    * If true, the lock request will only succeed if available immediately
    * Note: Cannot be used together with the 'signal' option
    */
   ifAvailable?: boolean;
-  
+
   /**
    * If true, any held locks with the same name will be released first
    */
   steal?: boolean;
-  
+
   /**
    * AbortSignal to cancel the lock request
    * Note: Cannot be used together with the 'ifAvailable' option
@@ -358,6 +398,7 @@ type LockOptions = {
 ## Browser Support
 
 The Web Locks API is supported in:
+
 - Chrome 69+
 - Firefox 96+
 - Safari 15.4+
@@ -386,7 +427,19 @@ The hook will detect support automatically and set `isSupported` accordingly.
 
 ## Notes
 
-- The hook automatically cleans up locks and timers on component unmount
+- The hook clears its periodic timer and aborts a pending internally-signaled request on unmount
 - Periodic checking is disabled by default for better performance
 - Resource names are validated to ensure they are strings
 - The hook is fully TypeScript typed for better developer experience
+
+## Behavior and lifecycle
+
+The hook queries once after mount and, when enabled, schedules the next query `checkInterval` milliseconds after each prior query settles. `acquire` sets `isLocked` while its request is waiting or its callback is running; it is not proof that the lock has already been granted. The lock is held until the callback settles. `release` only aborts a pending request that uses the hook-created signal—it cannot stop a running callback or release its granted lock. Cleanup clears periodic checks and aborts that pending internal request.
+
+## Compatibility and accessibility
+
+SSR and unsupported browsers set `isSupported: false`; `query` and `acquire` then store and throw an error. API, query, acquisition, and callback failures are likewise stored and rethrown. Do not combine `signal` with `ifAvailable`. The hook does not expose the nullable `Lock` passed by the platform, so its callback still runs when an `ifAvailable` request is delivered without a lock; do not use that mode for work that must be mutually exclusive.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

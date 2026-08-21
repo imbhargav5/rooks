@@ -10,6 +10,25 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const pkg = require("./package.json");
 
+function addJsExtensionsToDeclarations(directory) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      addJsExtensionsToDeclarations(entryPath);
+    } else if (entry.name.endsWith(".d.ts")) {
+      const declaration = fs.readFileSync(entryPath, "utf8");
+      const withJsExtensions = declaration.replace(
+        /(from\s+["']|import\s*\(\s*["'])(\.{1,2}\/[^"']+)(["'])/g,
+        (match, prefix, specifier, suffix) =>
+          path.extname(specifier) ? match : `${prefix}${specifier}.js${suffix}`
+      );
+
+      fs.writeFileSync(entryPath, withJsExtensions);
+    }
+  }
+}
+
 // External packages that should not be bundled
 const external = [
   ...Object.keys(pkg.dependencies || {}),
@@ -32,6 +51,7 @@ async function build() {
       splitting: true,
       format: "esm",
       platform: "neutral",
+      target: "es2020",
       external,
       sourcemap: false,
       minify: false,
@@ -51,6 +71,7 @@ async function build() {
       configFile: path.resolve("./tsconfig.build.json"),
       outDir: path.resolve("./dist/esm"),
     });
+    addJsExtensionsToDeclarations(path.resolve("./dist/esm"));
 
     console.log("Build completed successfully!");
   } catch (error) {

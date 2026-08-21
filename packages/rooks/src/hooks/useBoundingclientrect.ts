@@ -4,7 +4,7 @@ import { useDidMount } from "./useDidMount";
 import { useMutationObserver } from "./useMutationObserver";
 
 /**
- * @param element HTML element whose boundingclientrect is needed
+ * @param element HTML element whose bounding client rect is needed
  * @returns DOMRect
  */
 function getBoundingClientRect(element: HTMLElement): DOMRect | null {
@@ -12,11 +12,11 @@ function getBoundingClientRect(element: HTMLElement): DOMRect | null {
 }
 
 /**
- * useBoundingclientRect hook
+ * useBoundingclientrect hook
  *
- * @param ref The React ref whose ClientRect is needed
+ * @param ref The React ref whose DOMRect is needed
  * @returns DOMRect | null
- * @see https://rooks.vercel.app/docs/hooks/useBoundingclientRect
+ * @see https://rooks.vercel.app/docs/hooks/useBoundingclientrect
  */
 function useBoundingclientrect(
   ref: MutableRefObject<HTMLElement | null>

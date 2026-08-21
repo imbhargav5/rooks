@@ -1,0 +1,60 @@
+---
+title: useTemporalCountdown
+description: Counts down to a Temporal instant and stops when the target is reached.
+entrypoint: rooks/temporal
+status: stable
+aliases: []
+related: [useTemporalElapsed, useTemporalNow]
+---
+
+## About
+
+`useTemporalCountdown` reports the exact remaining duration to a target instant and whether that instant has been reached. Use it for deadlines expressed as an instant rather than a date-only calendar value.
+
+## Example
+
+```tsx
+import { useMemo } from "react";
+import { useTemporalCountdown } from "rooks/temporal";
+
+export default function OneMinuteCountdown() {
+  const target = useMemo(() => Date.now() + 60_000, []);
+  const countdown = useTemporalCountdown({ target });
+
+  if (!countdown) return <p>Loading countdown…</p>;
+
+  return (
+    <p aria-live="polite">
+      {countdown.done
+        ? "Time is up"
+        : `${Math.ceil(countdown.remaining.total("seconds"))} seconds left`}
+    </p>
+  );
+}
+```
+
+## Parameters
+
+| Option      | Type                                   | Default    | Description                                                                                                                         |
+| ----------- | -------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `target`    | `Temporal.Instant \| string \| number` | Required   | Target as an instant, ISO 8601 instant string, or epoch milliseconds. Strings must identify an instant, including an offset or `Z`. |
+| `precision` | `"second" \| "minute"`                 | `"second"` | Aligns updates to second or minute boundaries.                                                                                      |
+
+## Return value
+
+Returns `{ remaining, done }`, where `remaining` is a non-negative `Temporal.Duration`, or `null` during SSR and while Temporal is loading.
+
+## Behavior and lifecycle
+
+The countdown stops scheduling updates when the target is reached or passed and returns a zero duration with `done: true`. Changing the target or precision creates a new store. All timers are cleared during cleanup.
+
+## Compatibility and accessibility
+
+Install `@js-temporal/polyfill`, target a runtime with `BigInt`, and render a deterministic `null` fallback. Avoid announcing every second to screen-reader users unless that frequency is genuinely useful; choose minute precision or a less frequent live-region update when possible.
+
+See [Temporal hooks](/docs/guides/temporal-hooks) for setup and SSR guidance.
+
+## Related
+
+- [useTemporalElapsed](/docs/hooks/useTemporalElapsed)
+- [useTemporalNow](/docs/hooks/useTemporalNow)

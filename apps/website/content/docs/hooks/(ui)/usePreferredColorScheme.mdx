@@ -1,173 +1,70 @@
 ---
-id: usePreferredColorScheme
 title: usePreferredColorScheme
-sidebar_label: usePreferredColorScheme
-description: "Detects the user's preferred color scheme (light or dark)."
+description: Tracks the user's light, dark, or no-preference color-scheme media setting.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMediaMatch, usePrefersReducedMotion]
 ---
 
 ## About
 
-React hook to detect and track the user's preferred color scheme (dark mode or light mode). Automatically updates when the user changes their system preference.
+`usePreferredColorScheme` subscribes to the light and dark `prefers-color-scheme` media queries. It returns a normalized scheme plus convenient light/dark booleans and updates when the operating-system preference changes.
 
-## Installation
+## Example
 
-```bash
-npm install rooks
-```
-
-## Usage
-
-```jsx
+```tsx
 import { usePreferredColorScheme } from "rooks";
 
-function ThemeAwareComponent() {
-  const { colorScheme, isDark, isLight } = usePreferredColorScheme();
-
-  const styles = {
-    backgroundColor: isDark ? "#1a1a1a" : "#ffffff",
-    color: isDark ? "#ffffff" : "#000000",
-    padding: "20px",
-    borderRadius: "8px",
-  };
+export default function ThemePreview() {
+  const preference = usePreferredColorScheme();
+  const dark = preference.isDark;
 
   return (
-    <div style={styles}>
-      <h1>Theme-Aware Component</h1>
-      <p>Current color scheme: <strong>{colorScheme}</strong></p>
-      <p>Dark mode: {isDark ? "✓ Enabled" : "✗ Disabled"}</p>
-      <p>Light mode: {isLight ? "✓ Enabled" : "✗ Disabled"}</p>
-    </div>
+    <section
+      style={{
+        padding: 16,
+        background: dark ? "#171717" : "#ffffff",
+        color: dark ? "#ffffff" : "#171717",
+        border: "1px solid currentColor",
+      }}
+    >
+      Preferred scheme:{" "}
+      {preference.colorScheme ?? "unknown during server rendering"}
+    </section>
   );
 }
 ```
 
-## Return Value
+## Parameters
 
-Returns an object with the following properties:
+This hook accepts no parameters.
 
-| Property     | Type                                      | Description                                    |
-| ------------ | ----------------------------------------- | ---------------------------------------------- |
-| colorScheme  | `"light" \| "dark" \| "no-preference" \| null` | The preferred color scheme              |
-| isDark       | `boolean`                                 | Whether the preferred scheme is dark           |
-| isLight      | `boolean`                                 | Whether the preferred scheme is light          |
+## Return value
 
-## Examples
+Returns an object with this inline shape:
 
-### Theme Toggler with System Preference
+| Field         | Type                                           | Meaning                                               |
+| ------------- | ---------------------------------------------- | ----------------------------------------------------- |
+| `colorScheme` | `"light" \| "dark" \| "no-preference" \| null` | Normalized preference; `null` is the server snapshot. |
+| `isDark`      | `boolean`                                      | `true` only when `colorScheme` is `"dark"`.           |
+| `isLight`     | `boolean`                                      | `true` only when `colorScheme` is `"light"`.          |
 
-```jsx
-function App() {
-  const { colorScheme, isDark } = usePreferredColorScheme();
-  const [theme, setTheme] = useState(colorScheme || "light");
+The source module declares names for these shapes, but they are not type exports of the `rooks` package entrypoint.
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+## Behavior and lifecycle
 
-  return (
-    <div className={theme === "dark" ? "dark-theme" : "light-theme"}>
-      <h1>My App</h1>
-      <p>System preference: {colorScheme}</p>
-      <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-      {theme === colorScheme ? (
-        <p>✓ Matching system preference</p>
-      ) : (
-        <button onClick={() => setTheme(colorScheme)}>
-          Reset to system preference
-        </button>
-      )}
-    </div>
-  );
-}
-```
+On the client, dark is checked first, then light; if neither query matches, the scheme is `"no-preference"`. The hook subscribes to both query lists and removes both listeners on unmount. It uses modern `change` events when available and falls back to legacy `addListener`/`removeListener` methods.
 
-### Automatic Theme Application
+The server snapshot is always `null`, with both booleans false. Hydration then reconciles to the browser preference, so avoid producing fundamentally different document structure from the initial value.
 
-```jsx
-function AutoThemeApp() {
-  const { isDark } = usePreferredColorScheme();
+## Compatibility and accessibility
 
-  useEffect(() => {
-    document.body.className = isDark ? "dark" : "light";
-  }, [isDark]);
+Server rendering does not access `window`. The client requires `window.matchMedia`; unlike the listener method, that function itself has no fallback. The hook does not persist a user override, change the document theme, or edit CSS.
 
-  return <div>Theme automatically matches your system preferences</div>;
-}
-```
+Treat the system preference as a default and, when appropriate, let users choose a persistent override. Ensure either color scheme retains sufficient contrast and does not communicate status through color alone. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
 
-### Theme-Aware Image Loading
+## Related
 
-```jsx
-function LogoImage() {
-  const { isDark } = usePreferredColorScheme();
-
-  return (
-    <img
-      src={isDark ? "/logo-dark.svg" : "/logo-light.svg"}
-      alt="Logo"
-    />
-  );
-}
-```
-
-### CSS Variables with Color Scheme
-
-```jsx
-function ThemedApp() {
-  const { isDark } = usePreferredColorScheme();
-
-  const cssVariables = {
-    "--bg-primary": isDark ? "#1a1a1a" : "#ffffff",
-    "--bg-secondary": isDark ? "#2d2d2d" : "#f5f5f5",
-    "--text-primary": isDark ? "#ffffff" : "#000000",
-    "--text-secondary": isDark ? "#b3b3b3" : "#666666",
-    "--accent": isDark ? "#4a9eff" : "#0066cc",
-  };
-
-  return (
-    <div style={cssVariables}>
-      <header style={{
-        background: "var(--bg-secondary)",
-        color: "var(--text-primary)",
-        padding: "20px",
-      }}>
-        <h1>Themed Application</h1>
-      </header>
-      <main style={{
-        background: "var(--bg-primary)",
-        color: "var(--text-primary)",
-        padding: "20px",
-      }}>
-        <p>Content automatically adapts to your system theme preference</p>
-      </main>
-    </div>
-  );
-}
-```
-
-## Features
-
-- **Automatic detection** - Reads system color scheme preference
-- **Real-time updates** - Updates when user changes system settings
-- **Helper booleans** - Convenient `isDark` and `isLight` flags
-- **SSR compatible** - Returns `null` on server-side rendering
-- **TypeScript support** - Full type definitions included
-
-## Browser Support
-
-The `prefers-color-scheme` media query is supported in:
-- Chrome 76+
-- Firefox 67+
-- Safari 12.1+
-- Edge 79+
-- Opera 62+
-
-## Notes
-
-- The hook automatically subscribes to system theme changes
-- Returns `null` during server-side rendering
-- `colorScheme` can be `"light"`, `"dark"`, or `"no-preference"`
-- Updates happen in real-time when user changes system settings
-- Use this to provide automatic dark mode support
-- Consider allowing users to override system preference
+- [useMediaMatch](/docs/hooks/useMediaMatch) accepts an arbitrary media query and a configurable server value.
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion) tracks the motion accessibility preference.

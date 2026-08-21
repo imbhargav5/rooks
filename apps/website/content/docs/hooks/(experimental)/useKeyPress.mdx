@@ -1,0 +1,49 @@
+---
+title: useKeyPress
+description: "Track whether one or more keyboard keys are currently pressed."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Return `true` while any tracked key is pressed, and reset when the key is released or the target loses focus.
+
+## Example
+
+```tsx
+import { useKeyPress } from "rooks/experimental";
+
+function Example() {
+  const isArrowPressed = useKeyPress(["ArrowUp", "ArrowDown"]);
+
+  return <div>{isArrowPressed ? "Arrow key held" : "Hold ↑ or ↓"}</div>;
+}
+```
+
+## Parameters
+
+| Argument  | Type                                          | Default  | Description                                                                   |
+| --------- | --------------------------------------------- | -------- | ----------------------------------------------------------------------------- |
+| `keys`    | `string \| number \| Array<string \| number>` | required | One key or an any-of list. Strings match `event.key`; numbers match key code. |
+| `options` | object                                        | `{}`     | `target` defaults to `window` in the browser and `when` defaults to `true`.   |
+
+`target` may be `window`, `document`, a DOM element, a ref, or `null`. An array is an **any-of** match; it does not represent a chord. Use [`useKeys`](/docs/hooks/useKeys) when every key in a shortcut must be held together.
+
+## Return value
+
+Returns `boolean`.
+
+## Behavior and lifecycle
+
+The hook sets the result on `keydown`, clears it on the matching `keyup`, and also clears it when the window blurs, tracking is disabled, or the key list changes. Listeners rebind when the resolved target changes and are removed on unmount.
+
+## Compatibility and accessibility
+
+Server rendering and a `null` target return `false` without attaching listeners. Keyboard behavior varies by layout and assistive technology; use semantic controls, do not trap standard browser shortcuts, and provide a non-keyboard way to perform the action.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

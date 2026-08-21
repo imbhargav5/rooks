@@ -81,8 +81,6 @@ describe.skip("useVibrate", () => {
       writable: true,
     });
 
-    console.log("vibrate", navigator.vibrate);
-
     renderHook(({ isEnabled, pattern }) => useVibrate({ isEnabled, pattern }), {
       initialProps: { isEnabled: true, pattern: [200, 100, 200] },
     });

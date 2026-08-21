@@ -1,45 +1,48 @@
 ---
-id: useDocumentVisibilityState
 title: useDocumentVisibilityState
-sidebar_label: useDocumentVisibilityState
-description: "Returns the current visibility state of the document (visible/hidden)."
+description: Returns the document visibility state and updates when it changes.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [usePageLeave, useDocumentEventListener]
 ---
 
 ## About
 
-Returns the visibility state of the document. Returns `null` on the server.
+`useDocumentVisibilityState` reports whether the current document is visible or hidden. It is useful for pausing nonessential work while a tab is in the background.
 
-## Examples
-
-### Read the current visibility state
+## Example
 
 ```tsx
-import { useEffect } from "react";
 import { useDocumentVisibilityState } from "rooks";
 
-export default function App() {
-  const isDocumentVisible = useDocumentVisibilityState();
-  useEffect(() => {
-    console.log(isDocumentVisible);
-  }, [isDocumentVisible]);
-  return <p>Try switching to a different tab and check console </p>;
+export default function VisibilityStatus() {
+  const visibility = useDocumentVisibilityState();
+
+  return (
+    <p>Document status: {visibility === null ? "not available" : visibility}</p>
+  );
 }
 ```
 
-### Pause work when the tab becomes hidden
+## Parameters
 
-```tsx
-import { useEffect, useState } from "react";
-import { useDocumentVisibilityState } from "rooks";
+This hook has no parameters.
 
-export default function PollingStatus() {
-  const visibilityState = useDocumentVisibilityState();
-  const [status, setStatus] = useState("active");
+## Return value
 
-  useEffect(() => {
-    setStatus(visibilityState === "hidden" ? "paused" : "active");
-  }, [visibilityState]);
+It returns `Document["visibilityState"] | null`. The value is `null` during server rendering and otherwise mirrors `document.visibilityState`.
 
-  return <p>Polling is currently {status}</p>;
-}
-```
+## Behavior and lifecycle
+
+The hook uses React's external-store subscription contract. It reads the current snapshot from `document.visibilityState`, subscribes to `visibilitychange`, and removes that listener on unmount. Multiple transitions are reported as the browser emits them.
+
+## Compatibility and accessibility
+
+The server snapshot is `null`; React replaces it with the browser snapshot after hydration. Do not treat a hidden document as proof that the user left the page. If visibility changes affect the interface, announce meaningful changes without repeatedly interrupting assistive-technology users.
+
+## Related
+
+- [usePageLeave](/docs/hooks/usePageLeave) observes unload, page-hide, and hidden-document signals.
+- [useDocumentEventListener](/docs/hooks/useDocumentEventListener) listens for arbitrary document events.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) explains hydration-safe browser state.

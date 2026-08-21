@@ -34,8 +34,7 @@ describe("useShare", () => {
   it("should detect when Web Share API is not supported", () => {
     expect.hasAssertions();
     const originalShare = navigator.share;
-    // @ts-ignore
-    delete navigator.share;
+    Reflect.deleteProperty(navigator, "share");
 
     const { result } = renderHook(() => useShare());
 
@@ -170,8 +169,7 @@ describe("useShare", () => {
   it("should throw error when sharing without support", async () => {
     expect.hasAssertions();
     const originalShare = navigator.share;
-    // @ts-ignore
-    delete navigator.share;
+    Reflect.deleteProperty(navigator, "share");
 
     const { result } = renderHook(() => useShare());
 

@@ -396,11 +396,10 @@ describe("useMeasure", () => {
   describe("SSR compatibility", () => {
     test("should handle missing ResizeObserver gracefully", () => {
       expect.hasAssertions();
-      
+
       // Temporarily remove ResizeObserver
       const originalResizeObserver = global.ResizeObserver;
-      // @ts-expect-error - Intentionally testing undefined case
-      delete global.ResizeObserver;
+      global.ResizeObserver = undefined as unknown as typeof ResizeObserver;
 
       function TestComponent() {
         const [ref, { innerWidth, innerHeight }] = useMeasure();

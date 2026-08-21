@@ -1,21 +1,21 @@
 ---
-id: useCounter
 title: useCounter
-sidebar_label: useCounter
 description: "Manages a numeric counter with increment, decrement, and reset operations."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useCountdown, useToggle]
 ---
 
 ## About
 
-Counter hook for React.
-
-<br />
+`useCounter` keeps a numeric value and exposes stable helpers for adding or subtracting one or an arbitrary amount. `reset` returns to the latest `initialValue` supplied by the component.
 
 ## Examples
 
 ### Basic counter controls
 
-```jsx
+```tsx
 import { useCounter } from "rooks";
 
 export default function App() {
@@ -33,12 +33,22 @@ export default function App() {
     <>
       Current value is {value}
       <hr />
-      <button onClick={increment}>increment</button>
-      <button onClick={decrement}>decrement</button>
-      <button onClick={incrementBy5}>incrementBy5</button>
-      <button onClick={decrementBy7}>decrementBy7</button>
+      <button type="button" onClick={increment}>
+        Increment
+      </button>
+      <button type="button" onClick={decrement}>
+        Decrement
+      </button>
+      <button type="button" onClick={incrementBy5}>
+        Add 5
+      </button>
+      <button type="button" onClick={decrementBy7}>
+        Subtract 7
+      </button>
       <hr />
-      <button onClick={reset}>reset</button>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
     </>
   );
 }
@@ -63,16 +73,25 @@ export default function CounterWithReset() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument     | Type   | Description                  |
-| ------------ | ------ | ---------------------------- |
-| initialValue | number | Initial value of the counter |
+| Parameter      | Type     | Default  | Description                                                |
+| -------------- | -------- | -------- | ---------------------------------------------------------- |
+| `initialValue` | `number` | Required | Initial counter value and the value restored by `reset()`. |
 
-### Return
+## Return value
 
-| Return value | Type   | Description                                                                   |
-| ------------ | ------ | ----------------------------------------------------------------------------- |
-| counter      | Object | Object containing \{value,increment,decrement,incrementBy,decrementBy,reset\} |
+Returns `{ value, increment, decrement, incrementBy, decrementBy, reset }`. The four update helpers and `reset` return `void`; `incrementBy` and `decrementBy` accept any number, including negative or fractional values.
 
----
+## Behavior and lifecycle
+
+Updates use functional React state setters, so multiple increments or decrements in one batch compose against the latest queued value. The update helpers have stable identities. `reset` is recreated when `initialValue` changes and restores that latest value. The hook creates no effects or external resources.
+
+## Compatibility and accessibility
+
+The hook uses only React state and is safe during SSR. Give counter controls accessible names and expose the current value in visible text or an appropriate live region when changes must be announced.
+
+## Related
+
+- [useCountdown](/docs/hooks/useCountdown)
+- [useToggle](/docs/hooks/useToggle)

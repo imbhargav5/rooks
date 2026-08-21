@@ -1,64 +1,80 @@
 ---
-id: useIntersectionObserverRef
 title: useIntersectionObserverRef
-sidebar_label: useIntersectionObserverRef
-description: "Returns a ref that fires a callback via IntersectionObserver."
+description: Returns a callback ref that forwards IntersectionObserver notifications to the latest callback.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useInViewRef, useMeasure]
 ---
 
 ## About
 
-A hook to register an intersection observer listener.
+`useIntersectionObserverRef` observes one attached element and forwards raw `IntersectionObserverEntry` records. Choose it when the callback needs ratios, root bounds, or other entry data and React does not need a separate `inView` state value.
 
-## Examples
+## Example
 
-### Basic usage
-
-```jsx
-import React, { useState } from "react";
+```tsx
+import { useCallback, useState } from "react";
 import { useIntersectionObserverRef } from "rooks";
-import "./styles.css";
 
-function App() {
-  const [isThingIntersecting, setThingIntersecting] = useState(false);
-  const callback = entries => {
-    if (entries && entries[0]) {
-      setThingIntersecting(entries[0].isIntersecting);
-    }
-  };
-  const [myRef] = useIntersectionObserverRef(callback);
+const thresholds = [0, 0.5, 1];
+
+export default function IntersectionRatio() {
+  const [ratio, setRatio] = useState(0);
+  const onIntersection = useCallback<IntersectionObserverCallback>(
+    (entries) => {
+      setRatio(entries[0]?.intersectionRatio ?? 0);
+    },
+    []
+  );
+  const [targetRef] = useIntersectionObserverRef(onIntersection, {
+    threshold: thresholds,
+  });
 
   return (
-    <div className="App">
-      <h1>Rooks : useIntersectionObserverRef example</h1>
-      <h3>Scroll down</h3>
+    <section>
+      <p aria-live="polite">Visible: {Math.round(ratio * 100)}%</p>
       <div
-        style={{
-          position: "fixed",
-          left: "250px",
-        }}
+        ref={targetRef}
+        style={{ minHeight: 160, border: "1px solid", padding: 16 }}
       >
-        <h1>Is rectangle visible - {String(isThingIntersecting)}</h1>
+        Scroll this element through the viewport.
       </div>
-      <div style={{ height: 1500 }}></div>
-      <div ref={myRef} style={{ height: 300, background: "teal" }}></div>
-    </div>
+    </section>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+For frequently rerendering components, define a threshold array outside the component or memoize it so the array identity remains stable.
 
-| Argument | Type                         | Description                                                                                                                  | Default Value                                                    |
-| -------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| callback | IntersectionObserverCallback | Callback that will be fired when the intersection occurs                                                                     | undefined                                                        |
-| options  | IntersectionObserverInit     | Intersection Observer config ([read more](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver#properties)) | `{ root: null,rootMargin: "0px 0px 0px 0px", threshold: [0, 1]}` |
+## Parameters
 
-### Return
+| Parameter  | Type                                        | Default           | Description                                                                              |
+| ---------- | ------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------- |
+| `callback` | `IntersectionObserverCallback \| undefined` | required argument | Receives the observer entries. `undefined` is allowed and simply discards notifications. |
+| `options`  | `IntersectionObserverInit`                  | see below         | Configures the observer root, margin, and thresholds.                                    |
 
-Returns an array with the first element in the array being the callback ref for the React component/element that needs to be observed.
+Default options are `root: null`, `rootMargin: "0px 0px 0px 0px"`, and `threshold: [0, 1]`.
 
-| Return value | Type        | Description                                                    | Default value |
-| ------------ | ----------- | -------------------------------------------------------------- | ------------- |
-| ref          | CallbackRef | ref for the React component/element that needs to be observed. | null          |
+## Return value
+
+Returns a one-item tuple, `[ref]`, containing a stable callback ref for an `HTMLElement`.
+
+## Behavior and lifecycle
+
+The observer is created once a node attaches, even when `callback` is `undefined`. The latest callback is held in a ref, so changing only the callback does not recreate the observer. Changing the node, root, root margin, or threshold does recreate it. Cleanup calls `disconnect()` when the node changes or clears and when the component unmounts.
+
+An inline threshold array has a new identity on each render and therefore recreates the observer; keep it stable when possible. Exceptions thrown by the supplied callback are not intercepted by the hook.
+
+Constructor errors from invalid observer options are also allowed to propagate.
+
+## Compatibility and accessibility
+
+No observer is created during server rendering. A client without `IntersectionObserver` needs a polyfill before the ref receives a node; the hook does not supply a fallback.
+
+Intersection is visual information, not an accessibility state. Avoid removing essential or keyboard-focusable content solely because it is outside the viewport, and keep a usable path when observation is unavailable. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useInViewRef](/docs/hooks/useInViewRef) converts notifications into a boolean state value.
+- [useMeasure](/docs/hooks/useMeasure) observes element dimensions with `ResizeObserver`.

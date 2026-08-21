@@ -78,12 +78,13 @@ function useDebouncedAsyncEffect<T>(
         const currentCleanup = cleanupRef.current;
 
         return () => {
-            // Cancel any pending debounced calls
+            // Invalidate running work as soon as this generation ends.
+            lastCallId.current += 1;
             debouncedAsyncCallback.cancel();
-            // Call cleanup with the result
-            if (currentCleanup) {
-                currentCleanup(resultRef.current);
-            }
+
+            const result = resultRef.current;
+            resultRef.current = undefined;
+            currentCleanup?.(result);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps);

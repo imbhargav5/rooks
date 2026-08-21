@@ -1,0 +1,37 @@
+---
+title: Experimental hooks
+description: Adopt Rooks experimental hooks deliberately and plan for API changes.
+---
+
+Experimental hooks are isolated in a separate entrypoint so applications do not adopt unstable APIs accidentally.
+
+## Import from the experimental entrypoint
+
+```tsx
+import { useIsClient } from "rooks/experimental";
+
+export function ClientReadyMessage() {
+  const isClient = useIsClient();
+  return <p>{isClient ? "Client APIs are ready" : "Rendering initial UI"}</p>;
+}
+```
+
+Importing an experimental hook from `rooks` is an error: the stable barrel does not export it.
+
+## Stability policy
+
+Experimental hooks may change substantially or be removed in a release without the compatibility expectations of stable hooks. Their presence is not a promise that the current name, parameters, return shape, or behavior will graduate unchanged.
+
+Before production adoption:
+
+- pin and review dependency updates rather than accepting them without inspection;
+- isolate the hook behind a small application-owned adapter;
+- add tests for the behavior your product relies on;
+- verify browser, SSR, permission, cleanup, and error paths for your supported environments;
+- read release notes before upgrading Rooks.
+
+## Migration expectations
+
+An experimental hook may graduate to `rooks`, be replaced by another design, or be removed. When the package provides a migration path, follow the release notes and update the import and adapter together. Do not create a second compatibility layer inside Rooks documentation by importing the same hook from an undocumented path.
+
+If you need a stronger stability guarantee, choose a stable alternative from the [Hooks reference](/docs/hooks) or keep a small product-specific hook until the experimental API settles.

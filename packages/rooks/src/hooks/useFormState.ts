@@ -55,7 +55,9 @@ interface UseFormStateReturnValue<T> {
    * Handle input change events
    */
   handleChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => void;
   /**
    * Handle form submit events
@@ -194,15 +196,17 @@ function useFormState<T extends Record<string, any>>({
 
   const handleChange = useCallback(
     (
-      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      event: ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
     ): void => {
       const { name, value, type } = event.target;
       const fieldName = name as keyof T;
 
       // Handle checkbox inputs
       const fieldValue =
-        type === "checkbox"
-          ? (event.target as HTMLInputElement).checked
+        type === "checkbox" && "checked" in event.target
+          ? event.target.checked
           : value;
 
       setValues((prev) => ({ ...prev, [fieldName]: fieldValue }));
@@ -285,8 +289,4 @@ function useFormState<T extends Record<string, any>>({
 }
 
 export { useFormState };
-export type {
-  UseFormStateOptions,
-  UseFormStateReturnValue,
-  ValidatorFunction,
-};
+export type { UseFormStateOptions, UseFormStateReturnValue, ValidatorFunction };

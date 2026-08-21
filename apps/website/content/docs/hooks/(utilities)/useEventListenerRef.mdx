@@ -1,75 +1,56 @@
 ---
-id: useEventListenerRef
 title: useEventListenerRef
-sidebar_label: useEventListenerRef
-description: "Returns a ref that attaches an event listener to the underlying DOM element."
+description: Returns a callback ref that manages an event listener on its current HTML element.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useEventListener, useRefElement]
 ---
 
 ## About
 
-A react hook to add an event listener to a ref
+`useEventListenerRef` combines a callback ref with an element event listener. Use it when the hook should own both discovering the DOM element and subscribing to one of its events.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Basic usage
-
-```jsx
-import { useState } from "react";
-import { useEventListenerRef } from "rooks";
-import "./styles.css";
-
-export default function App() {
-  const [value, setValue] = useState(0);
-  const ref = useEventListenerRef("click", function () {
-    setValue(value + 1);
-  });
-  return (
-    <div
-      ref={ref}
-      className="App"
-      style={{
-        padding: "20px",
-        border: "5px solid dodgerblue",
-      }}
-    >
-      <h2>Click in this box</h2>
-      <p> Value is {value}</p>
-    </div>
-  );
-}
-```
-
-### Attach a listener to a specific interactive element
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useEventListenerRef } from "rooks";
 
 export default function ClickTracker() {
   const [clicks, setClicks] = useState(0);
-  const ref = useEventListenerRef("click", () => {
+  const buttonRef = useEventListenerRef("click", () => {
     setClicks((current) => current + 1);
   });
 
-  return <button ref={ref}>Button clicks tracked by the hook: {clicks}</button>;
+  return (
+    <button type="button" ref={buttonRef}>
+      Recorded {clicks} clicks
+    </button>
+  );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Arguments      | Type     | Description                                    | Default value |
-| -------------- | -------- | ---------------------------------------------- | ------------- |
-| eventName      | string   | The event to track                             | undefined     |
-| callback       | Function | The callback to be called on event             | () => void    |
-| conditions     | object   | The options to be passed to the event listener | {}            |
-| isLayoutEffect | boolean  | Should it use layout effect. Defaults to false | false         |
+- `eventName: string` — required event type passed to `addEventListener`.
+- `callback: (...args: unknown[]) => void` — required listener. The attached listener calls the latest callback without resubscribing solely because the callback changed.
+- `listenerOptions?: AddEventListenerOptions | EventListenerOptions | boolean` — add/remove options; defaults to `{}`.
+- `isLayoutEffect?: boolean` — attaches in an isomorphic layout effect when `true`, otherwise a passive effect. It defaults to `false` and should remain constant for the component's lifetime.
 
-### Return
+## Return value
 
-| Return value | Type     | Description                                 |
-| ------------ | -------- | ------------------------------------------- |
-| ref          | Function | A callback ref that can be used as ref prop |
+Returns a stable callback ref `(element: HTMLElement | null) => void`. Pass it to one HTML element's `ref` prop.
 
----
+## Behavior and lifecycle
+
+When React supplies an element, the hook attaches the listener after the selected effect runs. Moving the ref, changing the event/options, or unmounting removes the listener from the previous element with matching options. The callback is kept fresh through a ref, so state and props do not become stale.
+
+## Compatibility and accessibility
+
+No DOM work occurs during SSR because the ref has no element and effects do not run. Prefer the element's native React event prop when no reusable listener abstraction is needed. The ref does not add keyboard behavior or semantics to a non-interactive element; use a button or implement the corresponding accessible interaction. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useEventListener](/docs/hooks/useEventListener) supports explicit DOM and browser event targets through the experimental entrypoint.
+- [useRefElement](/docs/hooks/useRefElement) exposes both a callback ref and its current element.

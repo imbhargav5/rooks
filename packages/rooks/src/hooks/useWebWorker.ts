@@ -97,7 +97,7 @@ function useWebWorker<T = any>(
       const worker = new Worker(workerUrl);
       workerRef.current = worker;
 
-      worker.onmessage = (event: MessageEvent) => {
+      worker.onmessage = (event: MessageEvent<T>) => {
         setData(event.data);
         setStatus("success");
         setError(null);

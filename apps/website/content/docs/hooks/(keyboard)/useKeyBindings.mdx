@@ -1,73 +1,60 @@
 ---
-id: useKeyBindings
 title: useKeyBindings
-sidebar_label: useKeyBindings
-description: "Binds multiple keyboard shortcuts to their respective callback functions."
+description: Maps independent keyboard identifiers to their callbacks.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useKey, useKeys]
 ---
 
 ## About
 
-Bind keys to callbacks on the document or a specific target element.
+`useKeyBindings` creates one `useKey` subscription per property in a key-to-callback object. Each property is an independent binding, not part of a chord.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Bind shortcuts on the document
-
-```jsx
-import { useKeyBindings, useCounter } from "rooks";
-
-export default function App() {
-  const { value, increment, decrementBy, incrementBy, reset } = useCounter(0);
-
-  useKeyBindings({
-    a: increment,
-    b: () => decrementBy(3),
-    Enter: () => incrementBy(5),
-    Escape: reset,
-  });
-
-  return (
-    <div>
-      <p>
-        Counter value is: <strong>{value}</strong>
-      </p>
-    </div>
-  );
-}
-```
-
-### Scope key bindings to a specific input
-
-```jsx
-import { useRef, useState } from "react";
+```tsx
+import { useMemo, useState } from "react";
 import { useKeyBindings } from "rooks";
 
-export default function App() {
-  const inputRef = useRef(null);
+export default function ArrowStepper() {
   const [value, setValue] = useState(0);
-
-  useKeyBindings(
-    {
-      r: () => setValue((current) => current + 1),
-      v: () => setValue((current) => current + 1),
-    },
-    { target: inputRef }
+  const bindings = useMemo(
+    () => ({
+      ArrowUp: () => setValue((current) => current + 1),
+      ArrowDown: () => setValue((current) => current - 1),
+    }),
+    []
   );
 
-  return (
-    <div>
-      <input ref={inputRef} placeholder="Focus me and press R or V" />
-      <p>Scoped key presses handled: {value}</p>
-    </div>
-  );
+  useKeyBindings(bindings);
+
+  return <p>Use Arrow Up or Arrow Down: {value}</p>;
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument      | Type      | Description                            | Default value |
-| ------------- | --------- | -------------------------------------- | ------------- |
-| `keyBindings` | `Object`  | Pairs of keyboard events and handlers  | `{}`          |
-| `options`     | `Options` | Listener options forwarded to `useKey` | `{}`          |
+- `keyBindings`: a string-keyed object whose values are `(event: KeyboardEvent) => void`.
+- `options.eventTypes`: an array of `"keydown" | "keypress" | "keyup"`; defaults to `["keydown"]`.
+- `options.target`: optional object ref to an `HTMLElement`; defaults to `window`.
+- `options.when`: enables all bindings; defaults to `true`.
+
+The binding and options types are private and are shown inline.
+
+## Return value
+
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+Each enumerable binding calls `useKey`, so its identifier matches `key`, `code`, or legacy numeric event fields. Because hooks are created inside the property loop, the number and order of keys must stay constant across renders. Build a stable binding object rather than conditionally adding or removing properties. Each underlying listener is cleaned up when disabled, reconfigured, or unmounted.
+
+## Compatibility and accessibility
+
+The hook is browser-only. Do not replace standard typing, navigation, or assistive-technology shortcuts. Show discoverable controls for every shortcut and scope bindings to the smallest practical target.
+
+## Related
+
+- [useKey](/docs/hooks/useKey) handles one independent binding.
+- [useKeys](/docs/hooks/useKeys) detects a true multi-key chord.

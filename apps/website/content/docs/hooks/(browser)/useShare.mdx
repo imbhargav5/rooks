@@ -1,8 +1,10 @@
 ---
-id: useShare
 title: useShare
-sidebar_label: useShare
 description: "Triggers the native Web Share dialog to share content from the browser."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -56,29 +58,52 @@ function ShareButton() {
 }
 ```
 
-## Return Value
+## Return value
 
 Returns an object with the following properties:
 
-| Property   | Type                                      | Description                                  |
-| ---------- | ----------------------------------------- | -------------------------------------------- |
-| share      | `(data: ShareData) => Promise<void>`      | Share content using the Web Share API       |
-| isSupported| `boolean`                                 | Whether the Web Share API is supported       |
-| error      | `Error \| null`                           | Any error that occurred during sharing       |
-| isSharing  | `boolean`                                 | Whether sharing is currently in progress     |
+| Property    | Type                                 | Description                              |
+| ----------- | ------------------------------------ | ---------------------------------------- |
+| share       | `(data: ShareData) => Promise<void>` | Share content using the Web Share API    |
+| isSupported | `boolean`                            | Whether the Web Share API is supported   |
+| error       | `Error \| null`                      | Any error that occurred during sharing   |
+| isSharing   | `boolean`                            | Whether sharing is currently in progress |
 
 ## Share Data
 
 The `share` function accepts an object with the following properties:
 
-| Property | Type       | Description                    |
-| -------- | ---------- | ------------------------------ |
-| title    | `string`   | Title to share                 |
-| text     | `string`   | Text content to share          |
-| url      | `string`   | URL to share                   |
-| files    | `File[]`   | Files to share (if supported)  |
+| Property | Type     | Description                   |
+| -------- | -------- | ----------------------------- |
+| title    | `string` | Title to share                |
+| text     | `string` | Text content to share         |
+| url      | `string` | URL to share                  |
+| files    | `File[]` | Files to share (if supported) |
 
 ## Examples
+
+```tsx
+import { useShare } from "rooks";
+
+export default function ShareArticle() {
+  const { error, isSharing, isSupported, share } = useShare();
+
+  return (
+    <section>
+      <button
+        type="button"
+        disabled={!isSupported || isSharing}
+        onClick={() =>
+          void share({ title: "Rooks", text: "Typed React hooks" })
+        }
+      >
+        {isSharing ? "Sharing…" : "Share"}
+      </button>
+      {error ? <p role="alert">{error.message}</p> : null}
+    </section>
+  );
+}
+```
 
 ### Share with Files
 
@@ -126,6 +151,7 @@ function ShareCurrentPage() {
 ## Browser Support
 
 The Web Share API is supported in:
+
 - Chrome 61+ (Android), 89+ (Desktop)
 - Safari 12.1+ (iOS), 14+ (macOS)
 - Edge 79+
@@ -140,3 +166,19 @@ The Web Share API is supported in:
 - User cancelling the share dialog is not treated as an error
 - Not all browsers support file sharing - check `navigator.canShare()` for file support
 - Share data must include at least one of: title, text, url, or files
+
+## Parameters
+
+This hook takes no parameters. `share(data)` accepts `{ title?: string; text?: string; url?: string; files?: File[] }` and returns `Promise<void>`.
+
+## Behavior and lifecycle
+
+`share` clears the old error, sets `isSharing`, and delegates to `navigator.share`. User cancellation (`AbortError`) clears the error and resolves normally. Unsupported use and other failures store an `Error` and reject; `isSharing` resets in all cases. The hook creates no persistent resource and has no cleanup.
+
+## Compatibility and accessibility
+
+SSR reports unsupported. Sharing generally requires HTTPS and a direct user gesture. File support is separate; check `navigator.canShare({ files })` before calling with files. Keep a copy-link or equivalent fallback, label the share control, and do not report cancellation as a failure.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

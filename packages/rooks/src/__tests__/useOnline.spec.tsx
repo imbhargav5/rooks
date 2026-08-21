@@ -1,5 +1,7 @@
 import { vi } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { renderHook, act, waitFor } from "@testing-library/react";
+import { hydrateRoot } from "react-dom/client";
+import { renderToString } from "react-dom/server";
 import { useOnline } from "@/hooks/useOnline";
 
 describe("useOnline", () => {
@@ -145,5 +147,35 @@ describe("useOnline", () => {
 
     expect(result1.current).toBe(false);
     expect(result2.current).toBe(false);
+  });
+
+  it("hydrates the server snapshot before reporting navigator state", async () => {
+    expect.hasAssertions();
+    onlineGetter.mockReturnValue(true);
+    const onRecoverableError = vi.fn();
+
+    function OnlineStatus() {
+      const online = useOnline();
+      return <span>{online === null ? "unknown" : String(online)}</span>;
+    }
+
+    const container = document.createElement("div");
+    container.innerHTML = renderToString(<OnlineStatus />);
+    expect(container).toHaveTextContent("unknown");
+
+    const root = hydrateRoot(container, <OnlineStatus />, {
+      onRecoverableError,
+    });
+
+    try {
+      await waitFor(() => {
+        expect(container).toHaveTextContent("true");
+      });
+      expect(onRecoverableError).not.toHaveBeenCalled();
+    } finally {
+      act(() => {
+        root.unmount();
+      });
+    }
   });
 });

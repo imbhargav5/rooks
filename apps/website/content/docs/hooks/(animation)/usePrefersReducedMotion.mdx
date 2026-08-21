@@ -1,43 +1,49 @@
 ---
 title: usePrefersReducedMotion
-sidebar_label: usePrefersReducedMotion
-description: "Detects whether the user has requested reduced motion via OS accessibility settings."
+description: Tracks the user's prefers-reduced-motion media setting.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMediaMatch, useEasing, useSpring]
 ---
 
-# usePrefersReducedMotion
+## About
 
-A React hook that returns true if the user has enabled the "prefers-reduced-motion" setting in their system.
+`usePrefersReducedMotion` subscribes to `(prefers-reduced-motion: reduce)` and returns whether the user has requested less non-essential motion.
 
-## Usage
+## Examples
 
-```jsx
+```tsx
 import { usePrefersReducedMotion } from "rooks";
 
-function App() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
+export default function MotionAwareNotice() {
+  const reduceMotion = usePrefersReducedMotion();
   return (
-    <div>
-      <p>Prefers Reduced Motion: {prefersReducedMotion ? "Yes" : "No"}</p>
-      <div
-        style={{
-          transition: prefersReducedMotion ? "none" : "all 0.3s ease",
-          opacity: 1,
-        }}
-      >
-        Animated Content
-      </div>
-    </div>
+    <p style={{ transition: reduceMotion ? "none" : "opacity 300ms" }}>
+      Motion preference: {reduceMotion ? "reduced" : "no preference"}
+    </p>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-This hook takes no arguments.
+This hook accepts no parameters.
 
-## Return Value
+## Return value
 
-| Type    | Description                                                                 |
-| ------- | --------------------------------------------------------------------------- |
-| boolean | True if the user prefers reduced motion, false otherwise. |
+A `boolean`: `true` when the media query matches, otherwise `false`.
+
+## Behavior and lifecycle
+
+The hook uses `useSyncExternalStore` through `useMediaMatch`. It reads `window.matchMedia`, subscribes to its `change` event, and removes that listener on unmount. The server snapshot is `false`; after hydration the client snapshot may update to the real preference.
+
+## Compatibility and accessibility
+
+Browsers without `matchMedia` are not given a fallback and can throw on the client. Treat `true` as a request to remove or shorten non-essential animation, parallax, and auto-motion. Do not disable essential progress or state information; present it without motion instead.
+
+## Related
+
+- [useMediaMatch](/docs/hooks/useMediaMatch)
+- [useEasing](/docs/hooks/useEasing)
+- [useSpring](/docs/hooks/useSpring)

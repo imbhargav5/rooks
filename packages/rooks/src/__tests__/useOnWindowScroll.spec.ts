@@ -11,7 +11,7 @@ describe("useOnWindowScroll", () => {
 
   describe("basic", () => {
     const mockCallback = vi.fn(() => {});
-    it("should call callback after resize", () => {
+    it("should call callback after scroll", () => {
       expect.hasAssertions();
       renderHook(() => useOnWindowScroll(mockCallback));
       fireEvent(window, new Event("scroll"));

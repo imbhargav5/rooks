@@ -8,7 +8,7 @@ import { noop } from "@/utils/noop";
  *
  * @param ref Ref whose outside click needs to be listened to
  * @param handler Callback to fire on outside click
- * @param when A boolean which which activates the hook only when it is true. Useful for conditionally enable the outside click
+ * @param when A boolean which activates the hook only when it is true. Useful for conditionally enabling the outside click
  * @see https://rooks.vercel.app/docs/hooks/useOutsideClick
  * @example
  * ```tsx
@@ -37,11 +37,16 @@ function useOutsideClick(
   handler: (event: MouseEvent | TouchEvent) => void,
   when = true
 ): void {
-  const savedHandler = useRef<(event: MouseEvent | TouchEvent) => void>(handler);
+  const savedHandler =
+    useRef<(event: MouseEvent | TouchEvent) => void>(handler);
 
   const memoizedCallback = useCallback(
     (event: MouseEvent | TouchEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Element)) {
+      if (
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+      ) {
         savedHandler.current(event);
       }
     },

@@ -1,17 +1,15 @@
 ---
-id: useSuspenseIndexedDBState
 title: useSuspenseIndexedDBState
-sidebar_label: useSuspenseIndexedDBState
 description: "Reads and writes IndexedDB state with Suspense support."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
-
 A Suspense-enabled hook for IndexedDB state management with cross-tab synchronization. This hook suspends during initialization and must be wrapped in a Suspense boundary. It provides full TypeScript generic support, structured data storage without JSON serialization limits, error handling, and automatic synchronization across browser tabs using BroadcastChannel API.
-
-[//]: # "Main"
 
 ## Examples
 
@@ -23,10 +21,10 @@ import { useSuspenseIndexedDBState } from "rooks/experimental";
 
 function Counter() {
   const [count, { setItem, deleteItem }] = useSuspenseIndexedDBState(
-    'my-counter',
-    (currentValue) => typeof currentValue === 'number' ? currentValue : 0
+    "my-counter",
+    (currentValue) => (typeof currentValue === "number" ? currentValue : 0)
   );
-  
+
   return (
     <div>
       <p>Count: {count}</p>
@@ -56,7 +54,7 @@ interface UserProfile {
   name: string;
   email: string;
   preferences: {
-    theme: 'light' | 'dark';
+    theme: "light" | "dark";
     notifications: boolean;
   };
   createdAt: Date;
@@ -64,18 +62,22 @@ interface UserProfile {
 
 function UserProfileManager() {
   const [profile, { setItem, getItem, deleteItem }] = useSuspenseIndexedDBState(
-    'user-profile',
+    "user-profile",
     (currentValue): UserProfile => {
-      if (currentValue && typeof currentValue === 'object' && 'id' in currentValue) {
+      if (
+        currentValue &&
+        typeof currentValue === "object" &&
+        "id" in currentValue
+      ) {
         // IndexedDB can store Date objects directly, no JSON parsing needed
         return currentValue as UserProfile;
       }
       return {
         id: 0,
-        name: 'Guest',
-        email: '',
-        preferences: { theme: 'light', notifications: true },
-        createdAt: new Date()
+        name: "Guest",
+        email: "",
+        preferences: { theme: "light", notifications: true },
+        createdAt: new Date(),
       };
     }
   );
@@ -83,16 +85,16 @@ function UserProfileManager() {
   const updateProfile = () => {
     setItem({
       id: 123,
-      name: 'John Doe',
-      email: 'john@example.com',
-      preferences: { theme: 'dark', notifications: false },
-      createdAt: new Date() // Date objects work directly with IndexedDB
+      name: "John Doe",
+      email: "john@example.com",
+      preferences: { theme: "dark", notifications: false },
+      createdAt: new Date(), // Date objects work directly with IndexedDB
     });
   };
 
   const getCurrentProfile = () => {
     const current = getItem();
-    console.log('Current profile:', current);
+    console.log("Current profile:", current);
   };
 
   return (
@@ -102,7 +104,7 @@ function UserProfileManager() {
       <p>Email: {profile.email}</p>
       <p>Theme: {profile.preferences.theme}</p>
       <p>Created: {profile.createdAt.toLocaleDateString()}</p>
-      
+
       <button onClick={updateProfile}>Update Profile</button>
       <button onClick={getCurrentProfile}>Log Current Profile</button>
       <button onClick={deleteItem}>Reset Profile</button>
@@ -117,23 +119,34 @@ function UserProfileManager() {
 import React, { Suspense } from "react";
 import { useSuspenseIndexedDBState } from "rooks/experimental";
 
+type ItemData = { items: string[] };
+
 function CustomDBExample() {
-  const [data, { setItem }] = useSuspenseIndexedDBState(
-    'my-data',
-    (currentValue) => currentValue || { items: [] },
+  const [data, { setItem }] = useSuspenseIndexedDBState<ItemData>(
+    "my-data",
+    (currentValue) =>
+      currentValue &&
+      typeof currentValue === "object" &&
+      "items" in currentValue
+        ? (currentValue as ItemData)
+        : { items: [] },
     {
-      dbName: 'my-app-db',
-      storeName: 'app-data',
-      version: 2
+      dbName: "my-app-db",
+      storeName: "app-data",
+      version: 2,
     }
   );
 
   return (
     <div>
       <p>Items: {data.items.length}</p>
-      <button onClick={() => setItem({
-        items: [...data.items, `Item ${data.items.length + 1}`]
-      })}>
+      <button
+        onClick={() =>
+          setItem({
+            items: [...data.items, `Item ${data.items.length + 1}`],
+          })
+        }
+      >
         Add Item
       </button>
     </div>
@@ -159,24 +172,24 @@ interface AppData {
 
 function ComplexDataExample() {
   const [appData, { setItem }] = useSuspenseIndexedDBState(
-    'complex-app-data',
+    "complex-app-data",
     (currentValue): AppData => {
       if (currentValue) {
         return currentValue as AppData;
       }
-      
+
       const settings = new Map();
-      settings.set('theme', 'light');
-      settings.set('autoSave', true);
-      
+      settings.set("theme", "light");
+      settings.set("autoSave", true);
+
       return {
         settings,
         files: [],
         metadata: {
-          version: '1.0.0',
+          version: "1.0.0",
           lastSync: new Date(),
-          tags: new Set(['important', 'project'])
-        }
+          tags: new Set(["important", "project"]),
+        },
       };
     }
   );
@@ -187,8 +200,8 @@ function ComplexDataExample() {
       files: [...appData.files, file],
       metadata: {
         ...appData.metadata,
-        lastSync: new Date()
-      }
+        lastSync: new Date(),
+      },
     });
   };
 
@@ -197,9 +210,9 @@ function ComplexDataExample() {
       <h2>Complex Data Storage</h2>
       <p>Settings: {appData.settings.size} items</p>
       <p>Files: {appData.files.length}</p>
-      <p>Tags: {Array.from(appData.metadata.tags).join(', ')}</p>
+      <p>Tags: {Array.from(appData.metadata.tags).join(", ")}</p>
       <p>Last Sync: {appData.metadata.lastSync.toLocaleString()}</p>
-      
+
       <input
         type="file"
         onChange={(e) => {
@@ -221,15 +234,16 @@ import React, { Suspense } from "react";
 import { useSuspenseIndexedDBState } from "rooks/experimental";
 
 function SyncDemo() {
-  const [message, { setItem, deleteItem }] = useSuspenseIndexedDBState(
-    'sync-message',
-    (currentValue) => currentValue || 'Hello World'
+  const [message, { setItem, deleteItem }] = useSuspenseIndexedDBState<string>(
+    "sync-message",
+    (currentValue) =>
+      typeof currentValue === "string" ? currentValue : "Hello World"
   );
-  
-  const [lastUpdated, { setItem: setLastUpdated }] = useSuspenseIndexedDBState(
-    'last-updated',
-    (currentValue) => currentValue || new Date()
-  );
+
+  const [lastUpdated, { setItem: setLastUpdated }] =
+    useSuspenseIndexedDBState<Date>("last-updated", (currentValue) =>
+      currentValue instanceof Date ? currentValue : new Date()
+    );
 
   const updateMessage = (newMessage: string) => {
     setItem(newMessage);
@@ -245,52 +259,52 @@ function SyncDemo() {
     <div>
       <h2>Cross-Tab Sync Demo</h2>
       <p>Open this page in multiple tabs to see real-time synchronization!</p>
-      
+
       <div>
         <strong>Current Message:</strong> {message}
       </div>
       <div>
         <strong>Last Updated:</strong> {lastUpdated.toLocaleTimeString()}
       </div>
-      
+
       <input
         value={message}
         onChange={(e) => updateMessage(e.target.value)}
         placeholder="Type a message..."
       />
-      
+
       <button onClick={() => updateMessage("Updated from tab!")}>
         Update Message
       </button>
-      <button onClick={clearAll}>
-        Clear Message
-      </button>
-      
+      <button onClick={clearAll}>Clear Message</button>
+
       <p>
-        <em>Try changing the message in one tab and watch it update in others!</em>
+        <em>
+          Try changing the message in one tab and watch it update in others!
+        </em>
       </p>
     </div>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument     | Type                              | Description                                                          | Required |
-|-------------|-----------------------------------|----------------------------------------------------------------------|----------|
-| key         | `string`                          | The key to use within the IndexedDB object store                   | Yes      |
-| initializer | `(currentValue: unknown) => T`        | Function that transforms the raw IndexedDB value into typed state  | Yes      |
-| config      | `IndexedDBConfig`                 | Optional configuration object                                        | No       |
+| Argument    | Type                                                        | Description                                                       | Required |
+| ----------- | ----------------------------------------------------------- | ----------------------------------------------------------------- | -------- |
+| key         | `string`                                                    | The key to use within the IndexedDB object store                  | Yes      |
+| initializer | `(currentValue: unknown) => T`                              | Function that transforms the raw IndexedDB value into typed state | Yes      |
+| config      | `{ dbName?: string; storeName?: string; version?: number }` | Database configuration                                            | No       |
 
-### IndexedDBConfig
+### Configuration fields
 
-| Property   | Type     | Default     | Description                           |
-|-----------|----------|-------------|---------------------------------------|
-| dbName    | `string` | "rooks-db"  | The IndexedDB database name          |
-| storeName | `string` | "state"     | The object store name within the DB  |
-| version   | `number` | 1           | The database version                  |
+| Property  | Type     | Default    | Description                         |
+| --------- | -------- | ---------- | ----------------------------------- |
+| dbName    | `string` | "rooks-db" | The IndexedDB database name         |
+| storeName | `string` | "state"    | The object store name within the DB |
+| version   | `number` | 1          | The database version                |
 
-## Return Value
+## Return value
 
 Returns a tuple containing:
 
@@ -304,7 +318,7 @@ Returns a tuple containing:
 
 The hook is fully type-safe and supports TypeScript generics:
 
-```tsx
+```text
 // The hook infers the type from your initializer function
 const [user, controls] = useSuspenseIndexedDBState(
   'user',
@@ -337,9 +351,7 @@ import { useSuspenseIndexedDBState } from "rooks/experimental";
 function ErrorBoundary({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<div>Loading...</div>}>
-        {children}
-      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
     </ErrorBoundary>
   );
 }
@@ -347,15 +359,15 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 
 ## IndexedDB vs localStorage Comparison
 
-| Feature                    | useSuspenseIndexedDBState | useSuspenseLocalStorageState |
-|---------------------------|---------------------------|------------------------------|
-| Data Types                | Native objects, binary data | JSON serializable only      |
-| Storage Limit             | ~1GB+ (browser dependent) | ~5-10MB                     |
-| Performance               | Better for large data     | Better for small data       |
-| Cross-tab Sync            | BroadcastChannel API       | Storage events              |
-| Browser Support           | Modern browsers            | All browsers                |
-| Async Operations          | Yes (Promises)             | No (synchronous)            |
-| Complex Objects           | Native support             | JSON serialization required |
+| Feature          | useSuspenseIndexedDBState   | useSuspenseLocalStorageState |
+| ---------------- | --------------------------- | ---------------------------- |
+| Data Types       | Native objects, binary data | JSON serializable only       |
+| Storage Limit    | ~1GB+ (browser dependent)   | ~5-10MB                      |
+| Performance      | Better for large data       | Better for small data        |
+| Cross-tab Sync   | BroadcastChannel API        | Storage events               |
+| Browser Support  | Modern browsers             | All browsers                 |
+| Async Operations | Yes (Promises)              | No (synchronous)             |
+| Complex Objects  | Native support              | JSON serialization required  |
 
 ## Browser Support
 
@@ -368,3 +380,15 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 ```tsx
 import { useSuspenseIndexedDBState } from "rooks/experimental";
 ```
+
+## Behavior and lifecycle
+
+Initialization is cached by database, store, key, and version and suspends until the database read and `initializer` finish. Each read/write/delete opens a database connection and closes it when the transaction completes. `setItem` and `deleteItem` update local state only after the transaction succeeds, then broadcast to other browsing contexts; the shared BroadcastChannel listener is closed on cleanup.
+
+## Compatibility and accessibility
+
+When IndexedDB is missing or the initial read fails, the implementation logs the failure and calls `initializer(null)` rather than surfacing a storage error. Initializer failures suspend into the nearest error boundary; write and delete failures reject their returned promises. Cross-tab updates require BroadcastChannel support. Treat stored values as untrusted after deployment migrations and do not store secrets merely because the API is origin-scoped.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

@@ -1,85 +1,54 @@
 ---
-id: useRefElement
 title: useRefElement
-sidebar_label: useRefElement
-description: "Returns a ref and a state variable that is updated when the ref is attached."
+description: Exposes a callback ref together with the element currently attached to it.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useEventListenerRef]
 ---
 
 ## About
 
-Helps bridge gap between callback ref and state. Manages the element called with callback ref api using state variable.
+`useRefElement` bridges React's callback-ref API and state. It is useful when an effect or another hook needs the actual element as a reactive value.
 
-## Examples
+## Example
 
-### Attach an event listener to the current element
-
-```jsx
-import { useEffect, useState } from "react";
+```tsx
 import { useRefElement } from "rooks";
 
-function useEventListenerRef(eventName, callback) {
-  const [ref, element] = useRefElement();
-
-  useEffect(() => {
-    if (!(element && element.addEventListener)) {
-      return;
-    }
-    element.addEventListener(eventName, callback);
-    return () => {
-      element.removeEventListener(eventName, callback);
-    };
-  }, [element, eventName, callback]);
-
-  return ref;
-}
-
-export default function App() {
-  const [value, setValue] = useState(0);
-  const ref = useEventListenerRef("click", function () {
-    setValue(value + 1);
-  });
-
-  return (
-    <div
-      ref={ref}
-      className="App"
-      style={{
-        padding: "20px",
-        border: "5px solid dodgerblue",
-      }}
-    >
-      <h1>useRefElement Example</h1>
-      <h2>Click in this box</h2>
-      <p> Value is {value}</p>
-    </div>
-  );
-}
-```
-
-### Read the current element from the callback ref
-
-```jsx
-import { useRefElement } from "rooks";
-
-export default function CurrentElementPreview() {
-  const [ref, element] = useRefElement();
+export default function ElementStatus() {
+  const [buttonRef, button] = useRefElement<HTMLButtonElement>();
 
   return (
     <div>
-      <button ref={ref}>Focusable trigger</button>
-      <p>Current tag: {element?.tagName ?? "none"}</p>
+      <button type="button" ref={buttonRef}>
+        Focusable trigger
+      </button>
+      <p>Current tag: {button?.tagName ?? "not attached"}</p>
     </div>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-No arguments.
+No parameters.
 
-### Returns an array of two items
+## Return value
 
-| Returned items | Type                                        | Description                   |
-| -------------- | ------------------------------------------- | ----------------------------- |
-| ref            | `(refElement: RefElementOrNull<T>) => void` | The callback ref              |
-| element        | `RefElementOrNull&lt;T&gt;`                 | The element linked to the ref |
+Returns `[ref, element]`:
+
+- `ref: (element: T | null) => void` — stable callback to pass to a React `ref` prop.
+- `element: T | null` — current value last supplied by React; initially `null`.
+
+## Behavior and lifecycle
+
+Attaching the ref stores the element in state and schedules a render. Detaching it stores `null`. If the ref moves between elements, consumers see the new node after React invokes the callback. The ref function itself is stable and owns no separate cleanup resource.
+
+## Compatibility and accessibility
+
+During SSR no DOM element is attached, so `element` remains `null`. Guard every DOM operation for that state. The hook does not alter the attached element's semantics or accessible behavior.
+
+## Related
+
+- [useEventListenerRef](/docs/hooks/useEventListenerRef) uses this pattern to subscribe to an element event.

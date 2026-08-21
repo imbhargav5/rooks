@@ -1,0 +1,51 @@
+---
+title: useResponsive
+description: "Track a named set of media queries and compute the current breakpoint."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Provide a record of media queries and receive both the full match map and the current active breakpoint based on insertion order.
+
+## Example
+
+```tsx
+import { useResponsive } from "rooks/experimental";
+
+function Example() {
+  const responsive = useResponsive({
+    mobile: "(max-width: 639px)",
+    tablet: "(min-width: 640px)",
+    desktop: "(min-width: 1024px)",
+  });
+
+  return <div>Current breakpoint: {responsive.current ?? "none"}</div>;
+}
+```
+
+## Return value
+
+Returns `{ current, matches, isSupported }`. `matches` has one boolean for every key in `queries`; `current` is the last matching key in object insertion order, or `defaultValue`; `isSupported` reports `matchMedia` support.
+
+## Parameters
+
+| Argument  | Type                                | Default  | Description                                                               |
+| --------- | ----------------------------------- | -------- | ------------------------------------------------------------------------- |
+| `queries` | `Record<string, string>`            | required | Named CSS media queries.                                                  |
+| `options` | `{ defaultValue?: string \| null }` | `{}`     | Server/unsupported fallback and initial reduction value; defaults `null`. |
+
+## Behavior and lifecycle
+
+The hook subscribes to every `MediaQueryList.change` event and removes all listeners when `queries` changes or the component unmounts. Multiple queries can match; `current` is deliberately resolved by insertion order, while `matches` preserves the full result. Keep the `queries` object referentially stable to avoid needless resubscriptions.
+
+## Compatibility and accessibility
+
+SSR and unsupported browsers return `defaultValue` with every match set to `false`. Choose a fallback that produces compatible initial markup, and prefer CSS media queries for visual layout so zoom, text size, and hydration do not hide content or controls.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

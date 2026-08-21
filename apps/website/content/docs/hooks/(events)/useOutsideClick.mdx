@@ -1,61 +1,60 @@
 ---
-id: useOutsideClick
 title: useOutsideClick
-sidebar_label: useOutsideClick
-description: "Fires a callback when a click event occurs outside a specified element."
+description: Calls a handler for click or touch-start events outside an object ref.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useOutsideClickRef]
 ---
 
 ## About
 
-Outside click event (for a ref) as a React hook.
+`useOutsideClick` observes document-level clicks and touch starts, then calls a handler when the event target is outside an element held by an object ref. It is commonly used to dismiss popovers and menus.
 
-## Examples
+## Example
 
-```jsx
+```tsx
+import { useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
-import { useRef } from "react";
 
-function App() {
-  const ref = useRef();
-  function myComponent() {
-    alert("Clicked outside");
-  }
-  useOutsideClick(ref, myComponent);
+export default function DismissiblePanel() {
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const [open, setOpen] = useState(true);
+
+  useOutsideClick(panelRef, () => setOpen(false), open);
 
   return (
-    <div
-      className="App"
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <h1>Rooks : useOutsideClick Example</h1>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "100%",
-          backgroundColor: "lightblue",
-        }}
-        ref={ref}
-      >
-        <h2 className="inside">This is inside</h2>
-      </div>
+    <div>
+      <button onClick={() => setOpen(true)}>Open panel</button>
+      {open && (
+        <div ref={panelRef} role="dialog" aria-label="Example panel">
+          Click outside this panel to close it.
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Arguments | Type                   | Description                                                                                                | Default value |
-| --------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
-| ref       | React.MutableRefObject | Ref whose outside click needs to be listened to                                                            |               |
-| handler   | function               | Callback to fire on outside click                                                                          |               |
-| when      | boolean                | A boolean which activates the hook only when it is true. Useful for conditionally enable the outside click | true          |
+- `ref`: a mutable object ref whose `current` value is an `HTMLElement | null`.
+- `handler(event)`: receives the native `MouseEvent | TouchEvent`.
+- `when`: enables the listeners; defaults to `true`.
 
-### Returns
+## Return value
 
-No return value.
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+The hook registers capturing `click` and `touchstart` listeners on `document`. It calls the handler only when `ref.current` exists and does not contain the event target. The current handler is retained through a ref. Disabling the hook or unmounting removes both listeners.
+
+## Compatibility and accessibility
+
+No listeners are installed during server rendering. Outside-click dismissal must not be the only close path: provide a visible close button, Escape-key handling, sensible focus placement, and focus restoration for dialogs and menus.
+
+## Related
+
+- [useOutsideClickRef](/docs/hooks/useOutsideClickRef) creates the callback ref for you.
+- [useKey](/docs/hooks/useKey) can add Escape-key dismissal.

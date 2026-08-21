@@ -1,170 +1,57 @@
 ---
-id: useOnClickRef
 title: useOnClickRef
-sidebar_label: useOnClickRef
-description: "Attaches an onClick handler to a ref and automatically cleans up on unmount."
+description: Returns a ref that handles native click and touch-end events.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useOnLongPress, useEventListenerRef]
 ---
 
 ## About
 
-A hook that creates a callback ref for handling both click and touch events on DOM elements. It automatically prevents default behavior and provides a unified interface for mouse clicks and touch interactions.
+`useOnClickRef` attaches native `click` and `touchend` listeners to an element and calls one no-argument callback for either event.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-#### Basic example
-
-```jsx
-import { useOnClickRef } from "rooks";
-
-export default function App() {
-  const handleClick = () => {
-    console.log("Element was clicked or tapped!");
-  };
-
-  const ref = useOnClickRef(handleClick);
-
-  return (
-    <div>
-      <button ref={ref}>Click me!</button>
-    </div>
-  );
-}
-```
-
-#### Touch-friendly button example
-
-```jsx
-import { useOnClickRef } from "rooks";
+```tsx
 import { useState } from "react";
+import { useOnClickRef } from "rooks";
 
-export default function TouchButton() {
+export default function ClickCounter() {
   const [count, setCount] = useState(0);
-  
-  const handleIncrement = () => {
-    setCount(prev => prev + 1);
-  };
-
-  const incrementRef = useOnClickRef(handleIncrement);
+  const clickRef = useOnClickRef(() => {
+    setCount((value) => value + 1);
+  });
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      <h2>Count: {count}</h2>
-      <button 
-        ref={incrementRef}
-        style={{
-          padding: "15px 30px",
-          fontSize: "18px",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer"
-        }}
-      >
-        Tap to Increment
-      </button>
-    </div>
+    <button
+      ref={(node) => {
+        if (node) clickRef(node);
+      }}
+    >
+      Activations: {count}
+    </button>
   );
 }
 ```
 
-#### Multiple elements example
+## Parameters
 
-```jsx
-import { useOnClickRef } from "rooks";
-import { useState } from "react";
+- `onClick`: a no-argument callback. The active native listeners call the latest version supplied during render.
 
-export default function MultipleElements() {
-  const [message, setMessage] = useState("Click any element");
+## Return value
 
-  const handleHeaderClick = () => {
-    setMessage("Header was clicked!");
-  };
+The hook returns a callback ref for an `HTMLElement`.
 
-  const handleCardClick = () => {
-    setMessage("Card was clicked!");
-  };
+## Behavior and lifecycle
 
-  const handleFooterClick = () => {
-    setMessage("Footer was clicked!");
-  };
+Both native handlers call `preventDefault()` before invoking the callback. The listeners are removed when the subscribed target is replaced or the component unmounts. The current implementation ignores the `null` value React sends when a ref is detached, so removing only the element while keeping the hook mounted can leave the old element subscribed until another target is assigned or the component unmounts. Some touch browsers may emit both `touchend` and a later `click`, which can produce two calls.
 
-  const headerRef = useOnClickRef(handleHeaderClick);
-  const cardRef = useOnClickRef(handleCardClick);
-  const footerRef = useOnClickRef(handleFooterClick);
+## Compatibility and accessibility
 
-  return (
-    <div style={{ padding: "20px" }}>
-      <header 
-        ref={headerRef}
-        style={{
-          backgroundColor: "#f8f9fa",
-          padding: "20px",
-          marginBottom: "10px",
-          cursor: "pointer",
-          borderRadius: "5px"
-        }}
-      >
-        Clickable Header
-      </header>
-      
-      <div 
-        ref={cardRef}
-        style={{
-          backgroundColor: "#e9ecef",
-          padding: "20px",
-          marginBottom: "10px",
-          cursor: "pointer",
-          borderRadius: "5px"
-        }}
-      >
-        Clickable Card
-      </div>
-      
-      <footer 
-        ref={footerRef}
-        style={{
-          backgroundColor: "#dee2e6",
-          padding: "20px",
-          cursor: "pointer",
-          borderRadius: "5px"
-        }}
-      >
-        Clickable Footer
-      </footer>
-      
-      <p style={{ marginTop: "20px", fontWeight: "bold" }}>
-        Status: {message}
-      </p>
-    </div>
-  );
-}
-```
+Because default activation is prevented, check form submission and link navigation before using this hook on semantic controls. Prefer React's `onClick` when it is sufficient: it already covers keyboard activation for native buttons. This hook subscribes only in the browser.
 
-### Arguments
+## Related
 
-| Argument | Type     | Description                                              | Default |
-| -------- | -------- | -------------------------------------------------------- | ------- |
-| onClick  | Function | Callback function to execute when element is clicked/tapped | -       |
-
-### Returns
-
-| Return value | Type         | Description                                                    | Default   |
-| ------------ | ------------ | -------------------------------------------------------------- | --------- |
-| ref          | Callback Ref | A callback ref that should be attached to the target element  | undefined |
-
-### Behavior
-
-- **Event Handling**: Listens for both `click` and `touchend` events
-- **Default Prevention**: Automatically calls `preventDefault()` on triggered events
-- **Cleanup**: Automatically removes event listeners when the component unmounts or when the ref is detached
-- **Fresh Callbacks**: Uses internal optimization to ensure the latest onClick callback is always used
-
-### Use Cases
-
-- Creating touch-friendly interactive elements
-- Building custom clickable components that work on both desktop and mobile
-- Handling click events with automatic preventDefault behavior
-- Unifying mouse and touch interactions in a single handler
+- [useOnLongPress](/docs/hooks/useOnLongPress) distinguishes a timed hold from release.
+- [useEventListenerRef](/docs/hooks/useEventListenerRef) attaches a chosen native event to an element.

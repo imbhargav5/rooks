@@ -17,9 +17,7 @@ describe("useDocumentEventListener", () => {
   it("should return a undefined", () => {
     expect.hasAssertions();
     const { result } = renderHook(() =>
-      useDocumentEventListener("click", () => {
-        console.log("clicked");
-      })
+      useDocumentEventListener("click", () => {})
     );
 
     expect(typeof result.current).toBe("undefined");

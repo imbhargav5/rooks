@@ -1,94 +1,67 @@
 ---
-title: "useSpring"
-description: "A hook that animates a value using spring physics."
+title: useSpring
+description: Animates a number toward a target with a basic damped spring simulation.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useEasing, useTween, usePrefersReducedMotion]
 ---
 
-# useSpring
+## About
 
-`useSpring` is a hook that animates a value using spring physics. It simulates a spring force to move a value towards a target.
+`useSpring` returns a number that moves toward a target using stiffness, damping, mass, and precision settings. Unlike duration-based easing, a spring can overshoot before settling.
 
-## Usage
+## Examples
 
-```jsx
+```tsx
 import { useState } from "react";
-import { useSpring } from "rooks";
+import { usePrefersReducedMotion, useSpring } from "rooks";
 
-function App() {
+export default function SpringValue() {
   const [target, setTarget] = useState(0);
-  const value = useSpring(target, {
-    stiffness: 170,
-    damping: 26,
-    mass: 1,
-  });
+  const reduceMotion = usePrefersReducedMotion();
+  const animated = useSpring(target, reduceMotion ? { precision: 1000 } : {});
 
   return (
-    <div>
-      <button onClick={() => setTarget(target === 0 ? 100 : 0)}>Toggle</button>
-      <div style={{ transform: `translateX(${value}px)` }}>Moving Box</div>
-    </div>
-  );
-}
-```
-
-## Another Example
-
-```jsx
-import { useState } from "react";
-import { useSpring } from "rooks";
-
-function SpringProgress() {
-  const [target, setTarget] = useState(25);
-  const animated = useSpring(target, {
-    stiffness: 120,
-    damping: 18,
-    mass: 1.2,
-  });
-
-  return (
-    <div>
-      <button onClick={() => setTarget(25)}>Quarter</button>
-      <button onClick={() => setTarget(75)}>Three quarters</button>
-
-      <div
-        style={{
-          marginTop: 12,
-          width: 240,
-          height: 10,
-          background: "#e5e7eb",
-          borderRadius: 999,
-          overflow: "hidden",
-        }}
+    <section>
+      <p>Current value: {animated.toFixed(1)}</p>
+      <button
+        type="button"
+        onClick={() => setTarget((value) => (value ? 0 : 100))}
       >
-        <div
-          style={{
-            width: `${animated}%`,
-            height: "100%",
-            background: "#0f766e",
-          }}
-        />
-      </div>
-      <p>Animated value: {animated.toFixed(1)}</p>
-    </div>
+        Change target
+      </button>
+    </section>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument    | Type         | Default | Description                          |
-| ----------- | ------------ | ------- | ------------------------------------ |
-| targetValue | number       | -       | The value to animate towards.        |
-| config      | SpringConfig | {}      | Configuration object for the spring. |
+| Argument           | Type     | Default  | Meaning                                                 |
+| ------------------ | -------- | -------- | ------------------------------------------------------- |
+| `targetValue`      | `number` | required | Value the simulation approaches.                        |
+| `config.stiffness` | `number` | `170`    | Strength pulling toward the target.                     |
+| `config.damping`   | `number` | `26`     | Opposes current velocity.                               |
+| `config.mass`      | `number` | `1`      | Divides acceleration; use a positive nonzero value.     |
+| `config.precision` | `number` | `0.01`   | Distance and velocity threshold used to snap to target. |
 
-### SpringConfig
+The configuration shape is shown inline because it is not a public type export.
 
-| Property  | Type   | Default | Description                                               |
-| --------- | ------ | ------- | --------------------------------------------------------- |
-| stiffness | number | 170     | Spring stiffness. Higher values create a snappier spring. |
-| damping   | number | 26      | Spring damping. Higher values reduce oscillation.         |
-| mass      | number | 1       | Mass of the object attached to the spring.                |
-| precision | number | 0.01    | Precision threshold to stop the animation.                |
+## Return value
 
-## Return Value
+A `number`, initialized to the first target value and updated on animation frames.
 
-Returns the current animated value.
+## Behavior and lifecycle
+
+The simulation uses a fixed `1 / 60` time step rather than the actual frame interval. Target changes preserve velocity. Configuration changes affect later frames but do not restart the spring. When distance and velocity are below precision, the value snaps to the target; the underlying frame loop nevertheless remains active until unmount because callback return values do not stop `useRaf`.
+
+## Compatibility and accessibility
+
+Server output is the initial target. The hook does not automatically honor reduced motion; choose an immediate/static presentation when requested. Do not convey state only through position or movement, and avoid spring settings that flash or oscillate excessively.
+
+## Related
+
+- [useEasing](/docs/hooks/useEasing)
+- [useTween](/docs/hooks/useTween)
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion)

@@ -1,0 +1,59 @@
+---
+title: useTemporalAge
+description: Calculates calendar age from a date and updates at each local day boundary.
+entrypoint: rooks/temporal
+status: stable
+aliases: []
+related: [useTemporalNow]
+---
+
+## About
+
+`useTemporalAge` calculates completed years plus the remaining months and days from a calendar date to "today" in a chosen time zone. It is intended for calendar age, not elapsed wall-clock duration.
+
+## Example
+
+```tsx
+import { useTemporalAge } from "rooks/temporal";
+
+export default function AccountAge() {
+  const age = useTemporalAge({
+    date: "2020-03-25",
+    timeZone: "UTC",
+  });
+
+  return (
+    <p>
+      Account age:{" "}
+      {age ? `${age.years}y ${age.months}m ${age.days}d` : "Loading…"}
+    </p>
+  );
+}
+```
+
+## Parameters
+
+| Option     | Type                           | Default          | Description                                                                                    |
+| ---------- | ------------------------------ | ---------------- | ---------------------------------------------------------------------------------------------- |
+| `date`     | `Temporal.PlainDate \| string` | Required         | Start date as a `PlainDate` or ISO 8601 date string such as `"2020-03-25"`.                    |
+| `calendar` | `string`                       | Not applied      | Accepted by the public option shape, but the current implementation does not read this option. |
+| `timeZone` | `string`                       | System time zone | Determines which calendar date counts as today and when the result updates.                    |
+
+## Return value
+
+Returns `{ duration, years, months, days }`, where `duration` is a `Temporal.Duration`, or `null` during SSR and while Temporal is loading.
+
+## Behavior and lifecycle
+
+The result updates at the next start-of-day boundary in `timeZone`. The hook recreates its store when the resolved time zone changes and clears its scheduled timer during cleanup. Invalid dates or time-zone identifiers are rejected by Temporal.
+
+## Compatibility and accessibility
+
+Install `@js-temporal/polyfill`, target a runtime with `BigInt`, and render a stable `null` fallback for SSR. State the chosen time zone in user-facing copy whenever a date could differ across regions.
+
+See [Temporal hooks](/docs/guides/temporal-hooks) for setup and SSR guidance.
+
+## Related
+
+- [useTemporalNow](/docs/hooks/useTemporalNow)
+- [Temporal hooks guide](/docs/guides/temporal-hooks)

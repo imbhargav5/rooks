@@ -1,91 +1,101 @@
 ---
-id: useFullscreen
 title: useFullscreen
-sidebar_label: useFullscreen
-description: "Manages fullscreen mode for a DOM element, with enter/exit controls."
+description: Enters, exits, and tracks Fullscreen API state for the document or a target element.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [usePictureInPictureApi, useVideo]
 ---
 
 ## About
 
-Use the [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) to present content using the entire screen.
+`useFullscreen` wraps the standard Fullscreen API and its older prefixed variants. It reports support and active state, and exposes promise-returning controls for the whole document or a supplied element ref.
 
-## Examples
-
-### Toggle fullscreen for the document
+## Example
 
 ```tsx
+import { useRef, useState, type RefObject } from "react";
 import { useFullscreen } from "rooks";
 
-export default function App() {
-  const { isFullscreenAvailable, isFullscreenEnabled, toggleFullscreen } =
-    useFullscreen();
+export default function FullscreenCard() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState("");
+  const fullscreen = useFullscreen({
+    target: cardRef as RefObject<Element>,
+    onError: () => setMessage("The browser reported a fullscreen error."),
+  });
 
-  if (!isFullscreenAvailable) {
-    return <p>Fullscreen API is not available.</p>;
+  async function toggle() {
+    try {
+      setMessage("");
+      await fullscreen.toggleFullscreen();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Fullscreen failed");
+    }
   }
 
   return (
-    <button onClick={() => void toggleFullscreen()}>
-      {isFullscreenEnabled ? "Exit fullscreen" : "Enter fullscreen"}
-    </button>
-  );
-}
-```
-
-### Toggle fullscreen for a specific panel and react to changes
-
-```tsx
-import { useRef, useState } from "react";
-import { useFullscreen } from "rooks";
-
-export default function App() {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState("Windowed");
-  const { enableFullscreen, disableFullscreen, isFullscreenEnabled } =
-    useFullscreen({
-      target: panelRef,
-      onChange: () => {
-        setStatus(document.fullscreenElement ? "Fullscreen" : "Windowed");
-      },
-    });
-
-  return (
-    <div>
-      <div ref={panelRef} style={{ padding: 24, border: "1px solid #999" }}>
-        <p>Status: {status}</p>
-        <button onClick={() => void enableFullscreen()}>Open panel</button>
+    <section>
+      <div
+        ref={cardRef}
+        style={{ padding: 24, background: "white", color: "black" }}
+      >
+        <p>
+          {fullscreen.isFullscreenEnabled
+            ? "Fullscreen is active"
+            : "Inline view"}
+        </p>
         <button
-          onClick={() => void disableFullscreen()}
-          disabled={!isFullscreenEnabled}
+          type="button"
+          onClick={() => void toggle()}
+          disabled={!fullscreen.isFullscreenAvailable}
         >
-          Close panel
+          {fullscreen.isFullscreenEnabled
+            ? "Exit fullscreen"
+            : "Enter fullscreen"}
         </button>
       </div>
-    </div>
+      {message && <p role="alert">{message}</p>}
+    </section>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-An object with the following optional properties:
+The optional props object contains:
 
-| Argument value                     | Type                       | Description                           |
-| ---------------------------------- | -------------------------- | ------------------------------------- |
-| `options.target`                   | `React.RefObject<Element>` | DOM node that should enter fullscreen |
-| `options.onChange`                 | `(event: Event) => void`   | Called after fullscreen state changes |
-| `options.onError`                  | `(event: Event) => void`   | Called after a fullscreen error       |
-| `options.requestFullscreenOptions` | `FullscreenOptions`        | Options passed to `requestFullscreen` |
+| Property                   | Type                     | Default       | Description                             |
+| -------------------------- | ------------------------ | ------------- | --------------------------------------- |
+| `target`                   | `RefObject<Element>`     | document root | Element to request fullscreen for.      |
+| `onChange`                 | `(event: Event) => void` | none          | Called after a fullscreen-change event. |
+| `onError`                  | `(event: Event) => void` | none          | Called after a fullscreen-error event.  |
+| `requestFullScreenOptions` | `FullscreenOptions`      | none          | Passed to `requestFullscreen()`.        |
 
-If `target` is omitted, the document element is used.
+The published target type is `RefObject<Element>`. Current React typings infer a nullable element ref before commit, which is why the example narrows the ref with a type assertion at the hook boundary.
 
-## Returns
+## Return value
 
-| Property Name           | Type                  | Description                             |
-| ----------------------- | --------------------- | --------------------------------------- |
-| `isFullscreenAvailable` | `boolean`             | Whether the Fullscreen API is available |
-| `isFullscreenEnabled`   | `boolean`             | Whether fullscreen is currently active  |
-| `fullscreenElement`     | `Element \| null`     | The current fullscreen element          |
-| `enableFullscreen`      | `() => Promise<void>` | Enters fullscreen                       |
-| `disableFullscreen`     | `() => Promise<void>` | Exits fullscreen                        |
-| `toggleFullscreen`      | `() => Promise<void>` | Toggles fullscreen on or off            |
+Returns an object with:
+
+- `isFullscreenAvailable`: support detected after the first client effect.
+- `fullscreenElement`: the browser's active fullscreen element, initially `null`.
+- `isFullscreenEnabled`: whether an element is currently fullscreen.
+- `enableFullscreen()`, `disableFullscreen()`, and `toggleFullscreen()`: operations returning `Promise<void>`.
+
+## Behavior and lifecycle
+
+Availability starts as `false` and is populated after mount. State updates in response to the detected standard or vendor-prefixed change/error events, not merely when a control is called. Event listeners are replaced when callbacks change and removed on unmount.
+
+Control promises reject when the DOM is unavailable, the API is unsupported, or the browser rejects the request. `enableFullscreen()` uses `document.documentElement` when no target exists. `toggleFullscreen()` exits whichever element the document currently reports as fullscreen.
+
+## Compatibility and accessibility
+
+Rendering is server-safe, but calling a control on the server throws a DOM-unavailable error. Browsers normally require `enableFullscreen()` to run directly from a trusted user action, and permissions policy or user settings can deny it. Users can usually exit with Escape even when application state has not yet updated.
+
+Keep the trigger keyboard accessible, retain visible focus inside fullscreen content, and do not trap users in the mode. Handle promise rejections as well as `onError`. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [usePictureInPictureApi](/docs/hooks/usePictureInPictureApi) manages a floating video window.
+- [useVideo](/docs/hooks/useVideo) includes a minimal fullscreen toggle for its video ref.

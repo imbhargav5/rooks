@@ -1,19 +1,23 @@
-import { withContentCollections } from '@content-collections/next';
-import { NextConfig } from 'next';
+import { withContentCollections } from "@content-collections/next";
+import type { NextConfig } from "next";
+import redirects from "./redirects.json";
 
 const config: NextConfig = {
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+    ],
     unoptimized: true,
   },
   async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/docs',
-        permanent: false,
-      },
-    ];
+    return redirects;
   },
 };
 

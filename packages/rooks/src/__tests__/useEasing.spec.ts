@@ -6,7 +6,7 @@ vi.mock("raf", () => {
     let nextId = 1;
     const pendingTimeouts = new Map<number, ReturnType<typeof setTimeout>>();
 
-    const raf = (cb: any) => {
+    const raf = (cb: FrameRequestCallback) => {
         const id = nextId++;
         const timeoutId = setTimeout(() => {
             pendingTimeouts.delete(id);

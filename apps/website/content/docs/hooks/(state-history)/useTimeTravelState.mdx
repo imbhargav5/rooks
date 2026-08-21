@@ -1,36 +1,87 @@
 ---
-id: useTimeTravelState
 title: useTimeTravelState
-sidebar_label: useTimeTravelState
-description: "Manages state with full time-travel: undo, redo, and jump-to-any-past-state."
+description: Manages state with undo, redo, and navigation across its complete history.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useUndoRedoState, useUndoState]
 ---
 
 ## About
 
-A hook that manages state which can undo and redo. A more powerful version of useUndoState hook.
+`useTimeTravelState` stores the current value together with past and future values. Use it when undo and redo are not enough and the UI also needs history lengths, multi-step navigation, or a way to replace the current history entry.
 
-## Examples
-
-### Basic example
+## Example
 
 ```tsx
 import { useTimeTravelState } from "rooks";
-export default function App() {
+
+export default function HistoryCounter() {
   const [value, setValue, controls] = useTimeTravelState(0);
 
   return (
-    <div>
-      <span>Current value: {value}</span>
-      <br />
+    <section>
+      <p>Value: {value}</p>
       <p>
-        <span>Can undo: {String(controls.canUndo)}</span>
-        <span>Can redo: {String(controls.canRedo)}</span>
+        {controls.backLength} past, {controls.forwardLength} future
       </p>
-      <br />
-      <button onClick={() => setValue(value + 1)}>Increment</button>
-      <button onClick={controls.undo}>Undo</button>
-      <button onClick={controls.redo}>Redo</button>
-    </div>
+      <button type="button" onClick={() => setValue((current) => current + 1)}>
+        Increment
+      </button>
+      <button
+        type="button"
+        disabled={!controls.canUndo}
+        onClick={() => controls.undo()}
+      >
+        Undo
+      </button>
+      <button
+        type="button"
+        disabled={!controls.canRedo}
+        onClick={() => controls.redo()}
+      >
+        Redo
+      </button>
+      <button type="button" onClick={() => controls.go(-2)}>
+        Go back two entries
+      </button>
+    </section>
   );
 }
 ```
+
+## Parameters
+
+- `initialValue: T` — required starting value. `reset()` returns to this value unless a new value is supplied to `reset`.
+
+The setter accepts either a value or `(previousValue: T) => T`. Its optional second argument is `{ overwriteLastEntry?: boolean }`; the flag defaults to `false`.
+
+## Return value
+
+The hook returns `[value, setValue, controls]`:
+
+- `value: T` — the current value.
+- `setValue(value, options?)` — updates the current value. By default it records the previous value and clears redo history. With `overwriteLastEntry: true`, it keeps the existing past unchanged and still clears redo history.
+- `controls.backLength` and `controls.forwardLength` — the number of stored values in each direction.
+- `controls.go(step)` — moves backward for a negative step and forward for a positive step; `0` does nothing. Steps beyond the available history stop at the oldest or newest stored value.
+- `controls.back()`, `controls.undo()` — move back one entry.
+- `controls.forward()`, `controls.redo()` — move forward one entry.
+- `controls.reset(newInitialValue?)` — clears both history directions and optionally establishes a new reset value.
+- `controls.canUndo` and `controls.canRedo` — booleans for enabling navigation controls.
+
+Although the current declaration permits an optional argument on `back`, `forward`, `undo`, and `redo`, those functions move exactly one entry. Use `go(step)` for multi-step navigation.
+
+## Behavior and lifecycle
+
+Updates use React functional state updates, so several setter calls are applied in order. A new value after an undo clears the future branch. The hook creates no subscriptions or external resources, and all history is discarded when the component unmounts.
+
+Changing `initialValue` after the first render does not reset the state. Call `controls.reset(newValue)` when that behavior is needed.
+
+## Compatibility and accessibility
+
+The hook does not access browser-only APIs and can render during SSR. Disable undo and redo controls using `canUndo` and `canRedo`, and give history controls labels that describe their effect.
+
+## Related
+
+- [useUndoRedoState](/docs/hooks/useUndoRedoState) provides a smaller undo/redo control set with a configurable history limit.
+- [useUndoState](/docs/hooks/useUndoState) provides one-directional undo history.

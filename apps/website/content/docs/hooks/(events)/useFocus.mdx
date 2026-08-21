@@ -1,67 +1,60 @@
 ---
-id: useFocus
 title: useFocus
-sidebar_label: useFocus
-description: "Returns whether a given element has focus and provides focus/blur methods."
+description: Provides focus and blur props for an element's own focus boundary.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useFocusWithin]
 ---
 
 ## About
 
-Handles focus events for the immediate target element.
+`useFocus` returns React focus handlers for one element. Its callbacks run only when that element itself gains or loses focus; focus events bubbling from descendants are ignored.
 
-## Examples
-
-### Track focus on a single input
+## Example
 
 ```tsx
 import { useState } from "react";
 import { useFocus } from "rooks";
 
-export default function App() {
-  const [isFocused, setIsFocused] = useState(false);
+export default function FocusStatus() {
+  const [focused, setFocused] = useState(false);
   const { focusProps } = useFocus<HTMLInputElement>({
-    onFocusChange: setIsFocused,
+    onFocusChange: setFocused,
   });
 
   return (
-    <label style={{ display: "block" }}>
-      Name:
-      <input
-        {...focusProps}
-        style={{
-          border: isFocused ? "3px solid orange" : "1px solid gray",
-        }}
-      />
+    <label>
+      Project name
+      <input {...focusProps} />
+      <span>{focused ? "Editing" : "Not editing"}</span>
     </label>
   );
 }
 ```
 
-### Ignore focus from nested children
+## Parameters
 
-```tsx
-import { useState } from "react";
-import { useFocus } from "rooks";
+Pass an object with any of these optional callbacks:
 
-export default function App() {
-  const [message, setMessage] = useState("Container is idle");
-  const { focusProps } = useFocus<HTMLDivElement>({
-    onFocus: () => setMessage("Container focused directly"),
-    onBlur: () => setMessage("Container blurred"),
-  });
+- `onFocus(event)`: runs when the immediate target receives focus.
+- `onBlur(event)`: runs when the immediate target loses focus.
+- `onFocusChange(isFocused)`: receives `true` after focus and `false` after blur.
 
-  return (
-    <div>
-      <div
-        {...focusProps}
-        tabIndex={0}
-        style={{ padding: 12, border: "1px solid #999" }}
-      >
-        Focus this container directly
-        <button type="button">Nested button</button>
-      </div>
-      <p>{message}</p>
-    </div>
-  );
-}
-```
+These private option shapes are shown for reference and are not importable package types.
+
+## Return value
+
+The hook returns `{ focusProps }`. Spread `focusProps`, which contains `onFocus` and `onBlur`, onto the intended element. The hook does not return focus state or imperative `focus()` and `blur()` methods.
+
+## Behavior and lifecycle
+
+The handlers compare `event.target` with `event.currentTarget` to exclude descendant focus events. They are memoized against the supplied callbacks and create no native subscription or cleanup resource.
+
+## Compatibility and accessibility
+
+This hook uses React focus events and is safe during server rendering. Attach the props to a naturally focusable control, or supply correct keyboard behavior and `tabIndex` when using a custom widget. Do not remove the visible focus indicator.
+
+## Related
+
+- [useFocusWithin](/docs/hooks/useFocusWithin) treats focus anywhere in a subtree as active.

@@ -1,19 +1,21 @@
 ---
-id: useOrientation
 title: useOrientation
-sidebar_label: useOrientation
 description: "Returns the current screen orientation and listens for orientation changes."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
 
-Hook to detect and track device orientation changes in React applications.
+Track the Screen Orientation API's viewport angle and orientation type.
 
 <br />
 
 ## Examples
 
-```jsx
+```tsx
 import React from "react";
 import { useOrientation } from "rooks";
 
@@ -21,7 +23,7 @@ export default function App() {
   const orientation = useOrientation();
 
   if (!orientation) {
-    return <div>Orientation API not supported</div>;
+    return <div>Reading screen orientation…</div>;
   }
 
   return (
@@ -82,15 +84,15 @@ function OrientationCard() {
 }
 ```
 
-### Arguments
+## Parameters
 
 This hook takes no arguments.
 
-### Return value
+## Return value
 
-| Return value | Type                      | Description                                                                             |
-| ------------ | ------------------------- | --------------------------------------------------------------------------------------- |
-| orientation  | ScreenOrientation \| null | Current orientation object with `angle` and `type` properties, or null if not supported |
+| Return value | Type                      | Description                                                                           |
+| ------------ | ------------------------- | ------------------------------------------------------------------------------------- |
+| orientation  | ScreenOrientation \| null | Current `window.screen.orientation`, or `null` during server rendering and hydration. |
 
 ### ScreenOrientation Properties
 
@@ -100,3 +102,15 @@ This hook takes no arguments.
 | type     | string | The orientation type (e.g., "portrait-primary", "landscape-primary", "portrait-secondary", etc.) |
 
 ---
+
+## Behavior and lifecycle
+
+The hook reads `window.screen.orientation` through `useSyncExternalStore`, subscribes to its `change` event, and removes the listener on cleanup. It returns the platform object itself, whose `angle` and `type` fields change over time.
+
+## Compatibility and accessibility
+
+The implementation does not feature-detect `screen.orientation`: on an unsupported client, reading or subscribing can throw rather than returning `null`. The server snapshot is `null`, so keep the initial fallback hydration-safe. Screen orientation describes the display viewport, not a person's physical posture; never make content or controls available in only one orientation.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

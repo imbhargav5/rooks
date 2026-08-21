@@ -1,39 +1,35 @@
 ---
-id: usePromise
 title: usePromise
-sidebar_label: usePromise
 description: "Tracks the status and result of a Promise (pending, resolved, or rejected)."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useAsyncEffect, useRequest]
 ---
 
 ## About
 
 Promise management hook for React that handles async operations with automatic loading, error, and data states.
-<br/>
+
+<br />
 
 ## Examples
 
 ### Basic usage
 
-```jsx
-import React from "react";
+```tsx
 import { usePromise } from "rooks";
 
-function fetchUserData() {
-  return fetch('/api/user').then(res => res.json());
+async function loadGreeting() {
+  return Promise.resolve("Hello from the promise");
 }
 
 export default function App() {
-  const { data, loading, error } = usePromise(fetchUserData);
+  const { data, loading, error } = usePromise(loadGreeting);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  
-  return (
-    <div>
-      <h1>User Profile</h1>
-      {data && <p>Welcome, {data.name}!</p>}
-    </div>
-  );
+  if (loading) return <p role="status">Loading…</p>;
+  if (error) return <p role="alert">Error: {error.message}</p>;
+  return <p>{data}</p>;
 }
 ```
 
@@ -44,13 +40,17 @@ import React, { useState } from "react";
 import { usePromise } from "rooks";
 
 function fetchUserPosts(userId) {
-  return fetch(`/api/users/${userId}/posts`).then(res => res.json());
+  return fetch(`/api/users/${userId}/posts`).then((res) => res.json());
 }
 
 export default function App() {
   const [userId, setUserId] = useState(1);
-  
-  const { data: posts, loading, error } = usePromise(
+
+  const {
+    data: posts,
+    loading,
+    error,
+  } = usePromise(
     () => fetchUserPosts(userId),
     [userId] // Re-fetch when userId changes
   );
@@ -60,13 +60,13 @@ export default function App() {
       <button onClick={() => setUserId(userId + 1)}>
         Load User {userId + 1} Posts
       </button>
-      
+
       {loading && <div>Loading posts...</div>}
       {error && <div>Error: {error.message}</div>}
-      
+
       {posts && (
         <ul>
-          {posts.map(post => (
+          {posts.map((post) => (
             <li key={post.id}>{post.title}</li>
           ))}
         </ul>
@@ -96,7 +96,7 @@ function fetchData(shouldFail = false) {
 
 export default function App() {
   const [shouldFail, setShouldFail] = useState(false);
-  
+
   const { data, loading, error } = usePromise(
     () => fetchData(shouldFail),
     [shouldFail]
@@ -107,34 +107,41 @@ export default function App() {
       <button onClick={() => setShouldFail(!shouldFail)}>
         Toggle Error: {shouldFail ? "Will Fail" : "Will Succeed"}
       </button>
-      
+
       {loading && <div>Loading...</div>}
       {error && (
-        <div style={{ color: "red" }}>
-          Error occurred: {error.message}
-        </div>
+        <div style={{ color: "red" }}>Error occurred: {error.message}</div>
       )}
-      {data && (
-        <div style={{ color: "green" }}>
-          {data.message}
-        </div>
-      )}
+      {data && <div style={{ color: "green" }}>{data.message}</div>}
     </div>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument      | Type           | Description                                    | Default value |
-| ------------- | -------------- | ---------------------------------------------- | ------------- |
-| asyncFunction | function       | Async function that returns a Promise         | -             |
-| deps          | array          | Dependency array for re-running the promise   | []            |
+| Argument      | Type     | Description                                 | Default value |
+| ------------- | -------- | ------------------------------------------- | ------------- |
+| asyncFunction | function | Async function that returns a Promise       | -             |
+| deps          | array    | Dependency array for re-running the promise | []            |
 
-### Return value
+## Return value
 
-| Return value | Type   | Description                                                                                        |
-| ------------ | ------ | -------------------------------------------------------------------------------------------------- |
-| state        | Object | Object containing `{data: T \| null, loading: boolean, error: Error \| null}`                     |
+| Return value | Type   | Description                                                                   |
+| ------------ | ------ | ----------------------------------------------------------------------------- |
+| state        | Object | Object containing `{data: T \| null, loading: boolean, error: Error \| null}` |
 
 ---
+
+## Behavior and lifecycle
+
+The async function runs after commit and runs again when its stable wrapper or a listed dependency changes. Fulfillment sets `{ data, loading: false, error: null }`; rejection is normalized to an `Error` and clears `data`. Cleanup prevents a settled promise from updating state after that effect is replaced or unmounted, but it does not cancel the underlying work. The current implementation does not reset `loading` to `true` when dependencies trigger a later run.
+
+## Compatibility and accessibility
+
+The hook starts work only in an effect, so server output contains the initial `{ data: null, loading: true, error: null }` state. Use `role="status"` for loading feedback and `role="alert"` for errors when those updates should be announced.
+
+## Related
+
+- [useAsyncEffect](/docs/hooks/useAsyncEffect)
+- [useRequest](/docs/hooks/useRequest)

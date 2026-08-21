@@ -66,7 +66,6 @@ describe("useGeolocation", () => {
       fireEvent.click(getGeolocationButton);
     });
     const geoInfoPElement = await screen.findByTestId("geo-info");
-    screen.debug(screen.getByTestId("geo-info"));
     const geoObject = JSON.parse(geoInfoPElement.innerHTML);
     expect(`${geoObject.lat}`).toBe("51.1");
     expect(`${geoObject.lng}`).toBe("45.3");

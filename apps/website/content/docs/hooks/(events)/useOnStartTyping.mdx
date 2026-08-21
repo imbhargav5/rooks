@@ -1,45 +1,61 @@
 ---
-id: useOnStartTyping
 title: useOnStartTyping
-sidebar_label: useOnStartTyping
-description: "Fires a callback when the user starts typing anywhere on the page."
+description: Calls a callback for allowed typing keys outside editable elements.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useKey]
 ---
 
 ## About
 
-`useOnStartTyping` fires a callback when the user starts typing (keydown) outside editable fields (input, textarea, or contenteditable). It supports filtering for a-z and 0-9 keys via options.
+`useOnStartTyping` listens for document-level `keydown` events and detects the start of ordinary typing outside inputs, textareas, and contenteditable elements. It is useful for focusing a search box when a user begins typing.
 
-Use this hook to detect when a user begins typing anywhere on the page, except when focused in an editable field. This is useful for global keyboard shortcuts, onboarding overlays, or search triggers.
+## Example
 
-## Options
-
-- `includeAZ` (boolean, default: `true`): Trigger for a-z/A-Z keys.
-- `includeNumbers` (boolean, default: `false`): Trigger for 0-9 keys.
-
-## Examples
-
-```jsx
+```tsx
+import { useRef, useState } from "react";
 import { useOnStartTyping } from "rooks";
 
-export default function App() {
+export default function TypeToSearch() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [startedWith, setStartedWith] = useState("");
+
   useOnStartTyping((event) => {
-    alert(`You started typing: ${event.key}`);
+    setStartedWith(event.key);
+    inputRef.current?.focus();
   });
-  return <div>Start typing anywhere (except in an input/textarea)!</div>;
-}
-```
 
-```jsx
-// Example with options
-import { useOnStartTyping } from "rooks";
-
-export default function NumbersOnly() {
-  useOnStartTyping(
-    (event) => {
-      alert(`Number key: ${event.key}`);
-    },
-    { includeAZ: false, includeNumbers: true }
+  return (
+    <label>
+      Search
+      <input ref={inputRef} />
+      <span>Started with: {startedWith || "nothing yet"}</span>
+    </label>
   );
-  return <div>Type a number key (0-9) outside inputs!</div>;
 }
 ```
+
+## Parameters
+
+- `callback(event)`: receives the matching native `KeyboardEvent`.
+- `options.includeAZ`: permits one-character ASCII letters; defaults to `true`.
+- `options.includeNumbers`: permits one-character ASCII digits; defaults to `false`.
+
+The source module declares `UseOnStartTypingOptions`, but the `rooks` entrypoint does not re-export that type. Use inline object inference.
+
+## Return value
+
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+Events with Meta, Control, or Alt held are ignored. The hook also ignores events while an `INPUT`, `TEXTAREA`, or element with a `contenteditable` attribute is focused. Other controls, including `SELECT`, are not classified as editable by this implementation. It installs one document `keydown` listener, calls the latest callback, and removes the listener on unmount or option changes.
+
+## Compatibility and accessibility
+
+The listener is browser-only and does nothing during server rendering. Automatically moving focus can surprise keyboard and assistive-technology users; keep the destination labeled and avoid stealing focus during modified shortcuts or active editing.
+
+## Related
+
+- [useKey](/docs/hooks/useKey) listens for named keys and event types.

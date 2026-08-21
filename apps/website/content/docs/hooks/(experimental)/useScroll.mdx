@@ -1,0 +1,55 @@
+---
+title: useScroll
+description: "Track an element's scroll offsets and scrollable bounds."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Track scroll position, viewport size, and total scrollable size for a single element using a callback ref.
+
+## Example
+
+```tsx
+import { useScroll } from "rooks/experimental";
+
+function Example() {
+  const [ref, scroll] = useScroll();
+
+  return (
+    <div>
+      <div ref={ref} style={{ height: 120, overflow: "auto" }}>
+        <div style={{ height: 400 }}>Scrollable content</div>
+      </div>
+      <p>Top: {scroll.scrollTop}</p>
+    </div>
+  );
+}
+```
+
+## Parameters
+
+| Option       | Type                           | Default     | Description                                                                |
+| ------------ | ------------------------------ | ----------- | -------------------------------------------------------------------------- |
+| `throttleMs` | `number`                       | `0`         | Minimum time between measurements; non-positive values disable throttling. |
+| `disabled`   | `boolean`                      | `false`     | Detach observers/listeners and reset all measurements to zero.             |
+| `onScroll`   | `(state: ScrollState) => void` | `undefined` | Runs after a changed measurement is committed.                             |
+
+## Return value
+
+Returns `[ref, scrollState]`. Attach the callback `ref` to one `HTMLElement`. `scrollState` contains `scrollLeft`, `scrollTop`, `clientWidth`, `clientHeight`, `scrollWidth`, and `scrollHeight`, all initially `0`.
+
+## Behavior and lifecycle
+
+The hook measures immediately, after passive `scroll` events, and after container or descendant resize, subtree mutation, captured resource loads, or font loading completes. Throttling performs a leading measurement and at most one trailing measurement. Changing the element or options removes the listeners, disconnects observers, and clears a pending timer; unmount does the same.
+
+## Compatibility and accessibility
+
+SSR and a missing element return zeroes. Without `ResizeObserver` or `MutationObserver`, scrolling still updates the state, but non-scroll size/content changes may not. Give custom scroll regions an accessible name and keyboard focus only when that improves navigation; do not hide essential content solely because it is outside the current measurements.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

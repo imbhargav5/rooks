@@ -1,53 +1,53 @@
 ---
-id: useIsDroppingFiles
 title: useIsDroppingFiles
-sidebar_label: useIsDroppingFiles
-description: "Detects when files are being dragged over the document for a drop operation."
+description: Reports whether files are being dragged over an element or the window.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useFileDropRef]
 ---
 
 ## About
 
-Check if files are currently being dragged over an element or the window.
+`useIsDroppingFiles` detects file drags by looking for `"Files"` in `dataTransfer.types`. Use local mode to highlight one drop zone or window mode to display a page-wide target.
 
-## Examples
-
-### Highlight a local drop zone
+## Example
 
 ```tsx
 import { useIsDroppingFiles } from "rooks";
 
-export default function App() {
-  const [ref, isDropping] = useIsDroppingFiles();
+export default function DropIndicator() {
+  const [dropRef, isDroppingFiles] = useIsDroppingFiles();
 
   return (
-    <div
-      ref={ref}
-      style={{
-        padding: 24,
-        border: "2px dashed #999",
-        background: isDropping ? "#fee2e2" : "#fff",
-      }}
+    <section
+      ref={dropRef}
+      style={{ border: "2px dashed currentColor", padding: 24 }}
     >
-      {isDropping ? "Release files to upload" : "Drag files here"}
-    </div>
+      {isDroppingFiles ? "Release files here" : "Drag files over this area"}
+    </section>
   );
 }
 ```
 
-### Track file drags anywhere in the window
+## Parameters
 
-```tsx
-import { useIsDroppingFiles } from "rooks";
+- Omit the parameter or pass `false` to target an element through the returned callback ref.
+- Pass the literal `true` to target `window`.
 
-export default function App() {
-  const isDroppingOnWindow = useIsDroppingFiles(true);
+## Return value
 
-  return (
-    <p>
-      {isDroppingOnWindow
-        ? "Files are hovering over the window"
-        : "No files are being dragged right now"}
-    </p>
-  );
-}
-```
+Local mode returns `[ref, isDroppingFiles]`, where `ref` accepts an `HTMLElement | null`. Window mode returns only the boolean `isDroppingFiles`.
+
+## Behavior and lifecycle
+
+The hook prevents the default action for `dragenter`, `dragover`, `dragleave`, and `drop`. File enter/over events set the value to `true`; non-file drags, leave, and drop set it to `false`. It adds all four native listeners to the current target and removes them when the target changes or the component unmounts.
+
+## Compatibility and accessibility
+
+Subscriptions start in an effect, so server rendering does not attach listeners. Drag and drop is pointer-dependent and may be unavailable on touch devices. Pair the drop zone with a labeled `<input type="file">` so keyboard and assistive-technology users can choose the same files.
+
+## Related
+
+- [useFileDropRef](/docs/hooks/useFileDropRef) validates and delivers dropped files.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) covers client-only interactions.

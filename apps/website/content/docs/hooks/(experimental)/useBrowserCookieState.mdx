@@ -1,0 +1,71 @@
+---
+title: useBrowserCookieState
+description: "Persist React state in browser cookies with same-document synchronization."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Store state in a browser cookie, sync same-document writes through a custom event, and re-read external changes on focus or visibility changes.
+
+This hook is browser-only and throws when `document` is not defined.
+
+## Example
+
+```tsx
+import { useBrowserCookieState } from "rooks/experimental";
+
+function Example() {
+  const [theme, setTheme, clearTheme] = useBrowserCookieState<"light" | "dark">(
+    "theme",
+    "light",
+    {
+      path: "/",
+      sameSite: "lax",
+    }
+  );
+
+  return (
+    <div>
+      <button onClick={() => setTheme("dark")}>Dark</button>
+      <button onClick={clearTheme}>Reset</button>
+      <p>Theme: {theme}</p>
+    </div>
+  );
+}
+```
+
+## Return value
+
+Returns `[value, setValue, remove]`:
+
+| Item       | Type                                 | Description                                                           |
+| ---------- | ------------------------------------ | --------------------------------------------------------------------- |
+| `value`    | `T`                                  | Decoded cookie value, or the initial value when the cookie is absent. |
+| `setValue` | `(value: SetStateAction<T>) => void` | Updates React state, writes the cookie, and notifies same-page users. |
+| `remove`   | `() => void`                         | Expires the cookie with the same scope and resets the initial value.  |
+
+## Parameters
+
+| Argument       | Type             | Default  | Description                                                 |
+| -------------- | ---------------- | -------- | ----------------------------------------------------------- |
+| `key`          | `string`         | required | Cookie name.                                                |
+| `initialValue` | `T \| (() => T)` | required | Value used when the cookie is absent or removed.            |
+| `options`      | object           | `{}`     | Cookie scope plus optional `encode` and `decode` functions. |
+
+`options` accepts `path`, `domain`, `expires`, `maxAge`, `sameSite`, `secure`, and `partitioned`; none has a hook-level default. JSON-compatible values use `JSON.stringify` and `JSON.parse` by default. A malformed cookie falls back to the typed initial value. Non-JSON values require matching `encode` and `decode` functions.
+
+## Behavior and lifecycle
+
+The hook reads the cookie initially and again when `key` changes, the window regains focus, or the document becomes visible. Every write is re-read so a silently rejected browser write cannot diverge from React state. Writes dispatch a same-document invalidation event, allowing each peer to re-read with its own codec. Functional updates are serialized against the latest persisted value. All custom, focus, and visibility listeners are removed on cleanup.
+
+## Compatibility and accessibility
+
+This hook throws during render when `document` is unavailable, so render it only inside a client boundary. Cookie size, domain, path, SameSite, Secure, Partitioned, privacy, and consent rules still apply. A cookie write can be rejected silently by the browser, and cookies marked `HttpOnly` are never visible to JavaScript. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

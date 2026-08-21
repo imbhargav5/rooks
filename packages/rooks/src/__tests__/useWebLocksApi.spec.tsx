@@ -240,6 +240,7 @@ describe("useWebLocksApi", () => {
       const mockQueryResult = {
         held: [{ name: "test-resource", mode: "exclusive" }],
         pending: [{ name: "other-resource", mode: "exclusive" }],
+        metadata: { source: "legacy-consumer" },
       };
       
       mockNavigatorLocks.query.mockResolvedValue(mockQueryResult);
@@ -253,6 +254,7 @@ describe("useWebLocksApi", () => {
 
       expect(mockNavigatorLocks.query).toHaveBeenCalled();
       expect(queryResult).toEqual(mockQueryResult);
+      expect(queryResult.metadata.source).toBe("legacy-consumer");
     });
 
     it("should update waiting count based on query results", async () => {

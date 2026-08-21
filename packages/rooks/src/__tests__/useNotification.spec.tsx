@@ -50,8 +50,7 @@ describe("useNotification", () => {
   it("should detect when Notification API is not supported", () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
@@ -123,8 +122,7 @@ describe("useNotification", () => {
   it("should return denied when requesting permission without support", async () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
@@ -206,8 +204,7 @@ describe("useNotification", () => {
   it("should return null when showing notification without support", async () => {
     expect.hasAssertions();
     const originalNotification = window.Notification;
-    // @ts-ignore
-    delete window.Notification;
+    Reflect.deleteProperty(window, "Notification");
 
     const { result } = renderHook(() => useNotification());
 
@@ -271,6 +268,25 @@ describe("useNotification", () => {
     });
 
     expect(mockNotification).toHaveBeenCalledWith("Test Title", options);
+  });
+
+  it("keeps legacy numeric vibration options compatible", async () => {
+    expect.hasAssertions();
+    (mockNotification as any).permission = "granted";
+    const mockNotificationInstance = { close: vi.fn() };
+    mockNotification.mockImplementation(function () {
+      return mockNotificationInstance;
+    });
+
+    const { result } = renderHook(() => useNotification());
+
+    await act(async () => {
+      await result.current.show("Test Title", { vibrate: 200 });
+    });
+
+    expect(mockNotification).toHaveBeenCalledWith("Test Title", {
+      vibrate: 200,
+    });
   });
 
   it("should update permission state after requesting permission", async () => {

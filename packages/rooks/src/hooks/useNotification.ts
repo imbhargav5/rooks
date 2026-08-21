@@ -5,9 +5,6 @@ import { useState, useCallback, useEffect } from "react";
  */
 type NotificationPermission = "default" | "granted" | "denied";
 
-/**
- * Options for showing a notification
- */
 interface NotificationOptions {
   body?: string;
   icon?: string;
@@ -105,12 +102,12 @@ function useNotification(): UseNotificationReturnValue {
     typeof window !== "undefined" && "Notification" in window;
 
   const [permission, setPermission] = useState<NotificationPermission>(
-    isSupported ? (Notification.permission as NotificationPermission) : "default"
+    isSupported ? Notification.permission : "default"
   );
 
   useEffect(() => {
     if (isSupported) {
-      setPermission(Notification.permission as NotificationPermission);
+      setPermission(Notification.permission);
     }
   }, [isSupported]);
 
@@ -124,7 +121,7 @@ function useNotification(): UseNotificationReturnValue {
 
     try {
       const result = await Notification.requestPermission();
-      const permissionState = result as NotificationPermission;
+      const permissionState = result;
       setPermission(permissionState);
       return permissionState;
     } catch (error) {

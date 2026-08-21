@@ -1,156 +1,81 @@
 ---
-title: "useEasing"
-description: "A hook for creating controlled easing animations with start/stop/reset capabilities."
+title: useEasing
+description: Creates a controllable eased animation progress value.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useTween, useSpring, usePrefersReducedMotion]
 ---
 
-# useEasing
+## About
 
-`useEasing` is a hook for creating controlled easing animations with start/stop/reset capabilities. It returns a progress value (0 to 1) along with controls for managing the animation state.
+`useEasing` animates a value between `0` and `1` and exposes controls for pausing, resuming, resetting, restarting, looping, and alternating direction. The exported `Easing` object provides linear, quadratic, and cubic presets.
 
-## Usage
+## Examples
 
-### Basic Usage
+```tsx
+import { Easing, useEasing, usePrefersReducedMotion } from "rooks";
 
-```jsx
-import { useEasing } from "rooks";
-
-function App() {
-  const [progress] = useEasing(1000);
-
-  return (
-    <div style={{ opacity: progress }}>
-      Fading In...
-    </div>
-  );
-}
-```
-
-### With Controls
-
-```jsx
-import { useEasing, Easing } from "rooks";
-
-function App() {
-  const [progress, { start, stop, reset, state }] = useEasing(1000, {
-    easing: Easing.easeInOutQuad,
+export default function EasedMeter() {
+  const reduceMotion = usePrefersReducedMotion();
+  const [progress, controls] = useEasing(reduceMotion ? 1 : 1000, {
     autoStart: false,
-  });
-
-  return (
-    <div>
-      <div style={{
-        width: 100,
-        height: 100,
-        background: 'blue',
-        transform: `translateX(${progress * 200}px)`
-      }} />
-      <button onClick={start} disabled={state === "running"}>Start</button>
-      <button onClick={stop} disabled={state === "idle"}>Stop</button>
-      <button onClick={reset}>Reset</button>
-    </div>
-  );
-}
-```
-
-### Looping Animation
-
-```jsx
-import { useEasing, Easing } from "rooks";
-
-function App() {
-  const [progress] = useEasing(1000, {
-    loop: true,
-    alternate: true,
     easing: Easing.easeInOutQuad,
   });
 
   return (
-    <div style={{
-      width: 50,
-      height: 50,
-      background: 'red',
-      opacity: 0.3 + progress * 0.7
-    }} />
+    <section>
+      <progress max={1} value={progress}>
+        Progress: {progress}
+      </progress>
+      <p>
+        {controls.state}; completed {controls.endCount} time(s)
+      </p>
+      <button type="button" onClick={controls.start}>
+        Start
+      </button>
+      <button type="button" onClick={controls.stop}>
+        Pause
+      </button>
+      <button type="button" onClick={controls.restart}>
+        Restart
+      </button>
+    </section>
   );
 }
 ```
 
-### Tracking Iterations
+## Parameters
 
-```jsx
-import { useEasing } from "rooks";
+`duration: number` is required and should be positive. The optional settings are:
 
-function App() {
-  const [progress, { endCount, restart }] = useEasing(2000, {
-    onEnd: () => console.log('Animation ended'),
-  });
+| Property    | Type                           | Default         | Meaning                                             |
+| ----------- | ------------------------------ | --------------- | --------------------------------------------------- |
+| `easing`    | `(progress: number) => number` | `Easing.linear` | Maps directional progress.                          |
+| `autoStart` | `boolean`                      | `true`          | Starts in the running state on mount.               |
+| `loop`      | `boolean`                      | `false`         | Begins another pass at each end.                    |
+| `alternate` | `boolean`                      | `false`         | Flips direction between loop passes.                |
+| `delay`     | `number`                       | `0`             | Delay before the first pass only.                   |
+| `onEnd`     | `() => void`                   | `undefined`     | Latest callback, invoked after each completed pass. |
 
-  return (
-    <div>
-      <div>Progress: {(progress * 100).toFixed(0)}%</div>
-      <div>Completed: {endCount} times</div>
-      <button onClick={restart}>Restart</button>
-    </div>
-  );
-}
-```
+These option and control types, plus the easing function, state, and direction types, are public type exports from `rooks`.
 
-## Arguments
+## Return value
 
-| Argument | Type | Default | Description |
-| --- | --- | --- | --- |
-| duration | number | - | Duration of the animation in milliseconds. |
-| options | UseEasingOptions | {} | Configuration options. |
+The hook returns `[progress, controls]`. `progress` is the easing output. Controls contain `start`, `stop`, `reset`, `restart`, `state` (`"idle" | "running"`), `direction` (`"forward" | "backward"`), and `endCount`.
 
-### UseEasingOptions
+## Behavior and lifecycle
 
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| easing | (t: number) => number | Easing.linear | Easing function to use. |
-| autoStart | boolean | true | Whether to start animation on mount. |
-| loop | boolean | false | Whether to loop the animation. |
-| alternate | boolean | false | Whether to alternate direction on each loop (ping-pong). |
-| delay | number | 0 | Delay before starting animation in milliseconds. |
-| onEnd | () => void | undefined | Callback fired each time animation reaches the end. |
+`stop` stores raw progress and `start` resumes from it. `reset` returns to progress `0`, forward direction, and zero completions. `restart` resets, then starts through a zero-delay timer. A backward alternating pass ends at progress `0`. Delay applies only to the first run after reset.
 
-## Return Value
+The latest easing options and `onEnd` callback are used by the frame callback, but changing most options does not reset an in-flight clock. `autoStart` is mount-only. Frames stop when state becomes idle and are cancelled on unmount. The zero-delay timer created by `restart` is not explicitly cancelled, so do not call it during teardown. A custom easing output is not clamped, and errors from easing or `onEnd` propagate from the frame callback.
 
-Returns a tuple `[progress, controls]`:
+## Compatibility and accessibility
 
-### progress
+Server output uses the initial progress and state; motion begins after hydration. Honor reduced-motion preferences, avoid rapid flashing, and provide text or native semantics for information otherwise conveyed only by animation.
 
-A number between 0 and 1 representing the current eased progress of the animation.
+## Related
 
-### controls
-
-| Property | Type | Description |
-| --- | --- | --- |
-| start | () => void | Start or resume the animation. |
-| stop | () => void | Stop/pause the animation at current position. |
-| reset | () => void | Reset to initial state (progress=0, direction=forward, endCount=0). |
-| restart | () => void | Reset and start (convenience method). |
-| state | "idle" \| "running" | Current animation state. |
-| direction | "forward" \| "backward" | Current animation direction. |
-| endCount | number | Number of times animation has reached the end. |
-
-## Easing Presets
-
-The `Easing` object provides common easing functions:
-
-| Function | Description |
-| --- | --- |
-| Easing.linear | Linear interpolation (no easing). |
-| Easing.easeInQuad | Quadratic ease-in (accelerating). |
-| Easing.easeOutQuad | Quadratic ease-out (decelerating). |
-| Easing.easeInOutQuad | Quadratic ease-in-out. |
-| Easing.easeInCubic | Cubic ease-in. |
-| Easing.easeOutCubic | Cubic ease-out. |
-| Easing.easeInOutCubic | Cubic ease-in-out. |
-
-You can also provide your own easing function:
-
-```jsx
-const customEasing = (t) => 1 - Math.pow(1 - t, 3);
-
-const [progress] = useEasing(1000, { easing: customEasing });
-```
+- [useTween](/docs/hooks/useTween)
+- [useSpring](/docs/hooks/useSpring)
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion)

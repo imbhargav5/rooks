@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useFreshTick } from "./useFreshTick";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
-import { warning } from "./warning";
 import type { ListenerOptions } from "@/types/utils";
+import { useEventListener } from "./useEventListener";
+import { warning } from "./warning";
 
 function useGlobalObjectEventListener(
   globalObject: Document | undefined,
@@ -35,7 +34,9 @@ function useGlobalObjectEventListener(
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://rooks.vercel.app/docs/hooks/useGlobalObjectEventListener
  */
-function useGlobalObjectEventListener<GlobalObject extends Window | Document | undefined>(
+function useGlobalObjectEventListener<
+  GlobalObject extends Window | Document | undefined,
+>(
   globalObject: GlobalObject,
   eventName: keyof DocumentEventMap | keyof WindowEventMap,
   callback: EventListener,
@@ -43,28 +44,19 @@ function useGlobalObjectEventListener<GlobalObject extends Window | Document | u
   when = true,
   isLayoutEffect = false
 ): void {
-  const freshCallback = useFreshTick(callback);
-  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
-
-  useEffectToRun(() => {
+  useEffect(() => {
     warning(
-      typeof globalObject !== "undefined",
+      typeof window === "undefined" || typeof globalObject !== "undefined",
       "[useGlobalObjectEventListener]: Cannot attach event handlers to undefined."
     );
-    if (typeof globalObject !== "undefined" && when) {
-      globalObject.addEventListener(eventName, freshCallback, listenerOptions);
+  }, [globalObject]);
 
-      return () => {
-        globalObject.removeEventListener(
-          eventName,
-          freshCallback,
-          listenerOptions
-        );
-      };
-    }
-
-    return () => {};
-  }, [eventName, listenerOptions]);
+  useEventListener<EventTarget, string>(eventName, callback, {
+    target: globalObject as EventTarget | undefined,
+    listenerOptions,
+    when,
+    isLayoutEffect,
+  });
 }
 
 export { useGlobalObjectEventListener };

@@ -1,19 +1,19 @@
 ---
-id: usePreviousImmediate
 title: usePreviousImmediate
-sidebar_label: usePreviousImmediate
 description: "Returns the previous value of a variable immediately after it changes."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [usePreviousDifferent]
 ---
 
 ## About
 
-usePreviousImmediate returns the previous value of a variable even if it was the same or different
-
-[//]: # "Main"
+`usePreviousImmediate` returns the value from the previous committed render, whether it is equal to the current value or not.
 
 ## Examples
 
-```jsx
+```tsx
 import { usePreviousImmediate, useCounter } from "rooks";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <h1>Rooks : usePreviousImmediate example </h1>
+      <h2>Previous render values</h2>
       <p>
         This simply gives the value of a state variable in the previous render.
       </p>
@@ -45,8 +45,24 @@ function App() {
 export default App;
 ```
 
----
+## Parameters
 
-## Codesandbox Examples
+| Parameter      | Type | Default  | Description                     |
+| -------------- | ---- | -------- | ------------------------------- |
+| `currentValue` | `T`  | Required | Value whose history is tracked. |
 
-### Basic Usage
+## Return value
+
+Returns `T | null`. The first render returns `null`; later renders receive the value from the preceding committed render.
+
+## Behavior and lifecycle
+
+An effect without a dependency list writes the current value after every commit. The render in progress therefore sees the value from the previous commit. Object values retain their original references, and the stored value is discarded when the component unmounts.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and uses no browser APIs. If previous and current values are displayed together, label both states explicitly.
+
+## Related
+
+- [usePreviousDifferent](/docs/hooks/usePreviousDifferent)

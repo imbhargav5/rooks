@@ -1,8 +1,10 @@
 ---
-id: useNativeMapState
 title: useNativeMapState
-sidebar_label: useNativeMapState
 description: "Manages a native Map object in React state with reactive update helpers."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMapState, useSetState]
 ---
 
 ## About
@@ -12,6 +14,28 @@ Hook to manage native JavaScript Map() object state in React with a comprehensiv
 <br />
 
 ## Examples
+
+```tsx
+import { useNativeMapState } from "rooks";
+
+export default function Scores() {
+  const [scores, { set }] = useNativeMapState(
+    new Map<string, number>([["Ada", 1]])
+  );
+
+  return (
+    <section>
+      <p>Ada: {scores.get("Ada") ?? 0}</p>
+      <button
+        type="button"
+        onClick={() => set("Ada", (scores.get("Ada") ?? 0) + 1)}
+      >
+        Add point
+      </button>
+    </section>
+  );
+}
+```
 
 ### Basic usage
 
@@ -216,18 +240,18 @@ export default function App() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument        | Type        | Description       | Default value |
-| --------------- | ----------- | ----------------- | ------------- |
+| Argument        | Type              | Description       | Default value |
+| --------------- | ----------------- | ----------------- | ------------- |
 | initialMapState | `Map&lt;K, V&gt;` | Initial map state | new Map()     |
 
-### Return value
+## Return value
 
 Returns an array with the following items:
 
-| Return value | Type                | Description                               |
-| ------------ | ------------------- | ----------------------------------------- |
+| Return value | Type                      | Description                               |
+| ------------ | ------------------------- | ----------------------------------------- |
 | map          | `ReadonlyMap&lt;K, V&gt;` | Current map state (read-only)             |
 | controls     | `MapControls&lt;K, V&gt;` | Object with methods to manipulate the map |
 
@@ -246,4 +270,15 @@ Returns an array with the following items:
 | hasSome        | `(keys: K[]) => boolean`      | Check if at least one key exists |
 | hasEvery       | `(keys: K[]) => boolean`      | Check if all keys exist          |
 
----
+## Behavior and lifecycle
+
+Most mutation helpers clone the current `Map` before changing it and then commit the clone. `set` currently calls `Map#set` on the current internal map before cloning, so consumers must treat every returned `ReadonlyMap` as read-only and must not rely on an older snapshot remaining unchanged after `set`. Query helpers (`get`, `has`, `hasSome`, `hasEvery`, and `size`) are recreated when the map changes. The hook creates no effects or external resources.
+
+## Compatibility and accessibility
+
+The hook uses only React state and the built-in `Map` type, so it is SSR-safe and needs no permission. Convert entries to semantic list, table, or form controls when rendering them; `Map` state itself has no accessibility semantics.
+
+## Related
+
+- [useMapState](/docs/hooks/useMapState)
+- [useSetState](/docs/hooks/useSetState)

@@ -1,117 +1,64 @@
 ---
-id: useTextSelection
 title: useTextSelection
-sidebar_label: useTextSelection
-description: "Tracks the currently selected text on the page."
+description: Returns the current text selection for the document or a target element.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDocumentEventListener, useOutsideClick]
 ---
 
 ## About
 
-Tracks the currently selected text on the page or within a scoped element. Listens to the native `selectionchange` event and clears the selection state when the user clicks outside a scoped target. Returns empty state during SSR.
+`useTextSelection` tracks the browser selection and exposes its text, endpoints, and first-range rectangle. An optional ref restricts accepted selections to one element.
 
-## Examples
-
-### Track selection anywhere on the page
-
-```tsx
-import { useTextSelection } from "rooks";
-
-export default function App() {
-  const [{ text, rect }] = useTextSelection();
-
-  return (
-    <div>
-      <p>Select any text on this page.</p>
-      {text && (
-        <p>
-          You selected: <strong>{text}</strong>
-        </p>
-      )}
-    </div>
-  );
-}
-```
-
-### Scope tracking to a specific element
+## Example
 
 ```tsx
 import { useRef } from "react";
 import { useTextSelection } from "rooks";
 
-export default function Article() {
-  const articleRef = useRef<HTMLDivElement>(null);
+export default function SelectionReader() {
+  const articleRef = useRef<HTMLDivElement>(null!);
   const [{ text, startOffset, endOffset }] = useTextSelection(articleRef);
 
   return (
-    <>
-      <div ref={articleRef}>
-        <p>
-          Only selections within this article are tracked. Try selecting
-          some of this text, or the paragraph below.
-        </p>
-        <p>Another paragraph inside the article.</p>
-      </div>
-      <p>Selection outside is ignored.</p>
-      {text && (
-        <pre>
-          {JSON.stringify({ text, startOffset, endOffset }, null, 2)}
-        </pre>
-      )}
-    </>
-  );
-}
-```
-
-### Show a floating tooltip at the selection position
-
-```tsx
-import { useRef } from "react";
-import { useTextSelection } from "rooks";
-
-export default function FloatingTooltip() {
-  const [{ text, rect }] = useTextSelection();
-
-  return (
-    <div style={{ position: "relative" }}>
-      <p>Select any text to see a tooltip appear.</p>
-      {text && rect && (
-        <div
-          style={{
-            position: "fixed",
-            top: rect.top - 40,
-            left: rect.left + rect.width / 2,
-            transform: "translateX(-50%)",
-            background: "#333",
-            color: "#fff",
-            padding: "4px 8px",
-            borderRadius: 4,
-            pointerEvents: "none",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {text.length} character{text.length !== 1 ? "s" : ""} selected
-        </div>
-      )}
+    <div>
+      <div ref={articleRef}>Select any part of this sentence.</div>
+      <p>Selected: {text || "nothing"}</p>
+      <p>
+        Anchor: {startOffset}; focus: {endOffset}
+      </p>
     </div>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument | Type                    | Description                                                              | Default     |
-| -------- | ----------------------- | ------------------------------------------------------------------------ | ----------- |
-| target   | `RefObject<HTMLElement>` | Optional ref to scope selection tracking to a specific element.         | `undefined` |
+- `target`: optional `RefObject<HTMLElement>`. When provided, both the selection's anchor and focus nodes must be contained by the current element. With React typings that infer `RefObject<T | null>` from `useRef(null)`, the current hook signature requires a non-null initializer or equivalent type assertion.
 
 ## Return value
 
-Returns a tuple `[selectionState]`.
+The hook returns a one-item tuple containing `TextSelectionState`:
 
-| Attribute     | Type            | Description                                                      |
-| ------------- | --------------- | ---------------------------------------------------------------- |
-| text          | `string`        | The selected text. Empty string when nothing is selected.        |
-| rect          | `DOMRect \| null` | Bounding rect of the selection range, or `null`.               |
-| startOffset   | `number`        | Character offset within `anchorNode` where the selection starts. |
-| endOffset     | `number`        | Character offset within `focusNode` where the selection ends.    |
-| anchorNode    | `Node \| null`  | The node at which the selection begins.                          |
-| focusNode     | `Node \| null`  | The node at which the selection ends (the drag point).           |
+- `text: string`
+- `rect: DOMRect | null`, from the first selection range
+- `startOffset: number`, the selection's anchor offset
+- `endOffset: number`, the selection's focus offset
+- `anchorNode: Node | null`
+- `focusNode: Node | null`
+
+`startOffset` and `endOffset` preserve anchor/focus direction; they are not sorted document boundaries. `TextSelectionState` is a public type export from `rooks`.
+
+## Behavior and lifecycle
+
+The hook subscribes to document `selectionchange` and `mousedown`. Collapsed, empty, unavailable, or out-of-scope selections produce the shared empty state. In scoped mode, a mouse down outside the target clears a previously recorded selection. Reading a detached range rectangle is guarded; if it throws, `rect` remains `null`. Both listeners are removed on unmount.
+
+## Compatibility and accessibility
+
+The server snapshot contains empty text, zero offsets, null nodes, and a null rectangle. Selection APIs and rectangle values are browser-defined. Treat selected text as supplemental state and do not replace the browser's standard selection or copy behavior.
+
+## Related
+
+- [useDocumentEventListener](/docs/hooks/useDocumentEventListener) listens to `selectionchange` directly.
+- [useOutsideClick](/docs/hooks/useOutsideClick) detects interactions beyond an element boundary.

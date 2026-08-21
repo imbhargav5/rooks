@@ -12,7 +12,7 @@ You are an autonomous coding agent working on the **rooks** monorepo (a React ho
 - **Lint**: `pnpm lint`
 - **All checks**: `pnpm all-checks` (runs coverage, typecheck, lint, sanity-check)
 - **Docs build**: `cd apps/website && pnpm build` (content-collections + Next.js)
-- **Node version**: 22.14.0
+- **Node version**: 24
 - **Package manager**: pnpm 10.6.4
 
 ## Your Task
@@ -65,6 +65,7 @@ Only add learnings that are **general and reusable**, not story-specific details
 After completing a story, check if ALL stories have `passes: true`.
 
 **If ALL stories are complete:**
+
 ```
 <promise>COMPLETE</promise>
 ```

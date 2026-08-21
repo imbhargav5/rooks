@@ -1,0 +1,46 @@
+---
+title: useLocationSearchParam
+description: "Read the first value for a specific search parameter."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Read a single query-string value from the current URL and update when the URL changes.
+
+## Example
+
+```tsx
+import { useLocationSearchParam } from "rooks/experimental";
+
+function Example() {
+  const tab = useLocationSearchParam("tab");
+
+  return <div>Active tab: {tab ?? "overview"}</div>;
+}
+```
+
+## Parameters
+
+| Argument | Type     | Default  | Description               |
+| -------- | -------- | -------- | ------------------------- |
+| `name`   | `string` | required | Search parameter to read. |
+
+## Return value
+
+Returns the first decoded value for `name`, or `null` when the parameter is missing or during server rendering. Repeated parameters are not returned as an array.
+
+## Behavior and lifecycle
+
+The hook derives its value from the shared location store. It updates after `popstate`, `hashchange`, `history.pushState`, or `history.replaceState`; the store restores patched history methods and removes listeners after the last subscriber unmounts.
+
+## Compatibility and accessibility
+
+The server snapshot is `null`, so use the same initial fallback during hydration. Query parameters are application-controlled input: validate values before using them for authorization, redirects, or HTML. Keep navigation and focus feedback accessible when a parameter changes visible content.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

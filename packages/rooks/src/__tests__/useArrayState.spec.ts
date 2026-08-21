@@ -183,4 +183,44 @@ describe("useArrayState", () => {
 
     expect(result.current[0]).toEqual([1, 2, 3]);
   });
+
+  it("preserves multiple operations in the same batch", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1]));
+
+    act(() => {
+      result.current[1].push(2);
+      result.current[1].push(3);
+      result.current[1].reverse();
+    });
+
+    expect(result.current[0]).toEqual([3, 2, 1]);
+  });
+
+  it("supports variadic push and unshift as declared", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([3]));
+
+    act(() => {
+      result.current[1].push(4, 5);
+      result.current[1].unshift(1, 2);
+    });
+
+    expect(result.current[0]).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it("keeps collection controls stable after updates", () => {
+    expect.hasAssertions();
+    const { result } = renderHook(() => useArrayState([1]));
+    const controls = result.current[1];
+
+    act(() => {
+      controls.push(2);
+    });
+
+    expect(result.current[1].push).toBe(controls.push);
+    expect(result.current[1].pop).toBe(controls.pop);
+    expect(result.current[1].reverse).toBe(controls.reverse);
+  });
+
 });

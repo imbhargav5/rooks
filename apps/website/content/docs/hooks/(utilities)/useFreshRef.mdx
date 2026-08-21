@@ -1,61 +1,59 @@
 ---
-id: useFreshRef
 title: useFreshRef
-sidebar_label: useFreshRef
-description: "Returns a ref whose .current value is always up-to-date with the latest value."
+description: Keeps the latest committed value in a stable mutable ref.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useFreshCallback, useFreshTick]
 ---
 
 ## About
 
-Avoid stale state in callbacks with this hook. Auto updates values using a ref.
+`useFreshRef` gives long-lived callbacks access to changing data without reinstalling the resource that owns those callbacks.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-```jsx
-import "./styles.css";
+```tsx
+import { useEffect, useState } from "react";
 import { useFreshRef } from "rooks";
-import { useState, useEffect } from "react";
 
-export default function App() {
+export default function LatestValueTimer() {
   const [value, setValue] = useState(0);
-  function increment() {
-    setValue(value + 1);
-    console.log("here");
-  }
-  const freshIncrementRef = useFreshRef(increment);
+  const latestValue = useFreshRef(value);
 
   useEffect(() => {
-    function tick() {
-      freshIncrementRef.current();
-    }
-    const intervalId = setInterval(tick, 1000);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+    const timer = window.setInterval(() => {
+      console.log(`Latest value: ${latestValue.current}`);
+    }, 1_000);
+    return () => window.clearInterval(timer);
+  }, [latestValue]);
 
   return (
-    <div className="App">
-      <h1>useFreshRef example</h1>
-      <h2>value: {value}</h2>
-    </div>
+    <button type="button" onClick={() => setValue((current) => current + 1)}>
+      Value: {value}
+    </button>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value     | Type    | Description                                                                               |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------- |
-| value              | T       | The value which needs to be fresh at all times. Probably best used with functions         |
-| preferLayoutEffect | boolean | Should the value be updated using a layout effect or a passive effect. Defaults to false. |
+- `value: T` — required value copied into the ref after each render.
+- `preferLayoutEffect?: boolean` — uses an isomorphic layout effect when `true`; otherwise a passive effect. Defaults to `false` and should remain constant across renders.
 
-### Returns
+## Return value
 
-| Return value | Type      | Description                      | Default value |
-| ------------ | --------- | -------------------------------- | ------------- |
-| ref          | RefObject | A ref containing the fresh value | () => null    |
+Returns a stable `MutableRefObject<T>`. Its initial `.current` is the first value.
 
----
+## Behavior and lifecycle
+
+With the default passive effect, `.current` changes after the commit is painted; immediately before that effect, it can still hold the prior committed value. The layout-effect mode updates before browser paint and falls back to a passive effect on the server. The hook never schedules a render when `.current` changes.
+
+## Compatibility and accessibility
+
+The ref logic is SSR-safe and has no browser dependency. Because ref changes do not render UI, do not use `.current` alone for user-visible state or accessible status messages.
+
+## Related
+
+- [useFreshCallback](/docs/hooks/useFreshCallback) wraps a callback with stable identity and preserves its return value.
+- [useFreshTick](/docs/hooks/useFreshTick) offers a void-callback convenience wrapper.

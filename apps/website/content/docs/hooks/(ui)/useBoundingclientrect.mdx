@@ -1,120 +1,68 @@
 ---
-id: useBoundingclientrect
 title: useBoundingclientrect
-sidebar_label: useBoundingclientrect
-description: "Returns the bounding client rect of a DOM element, updated on resize."
+description: Reads an element's DOMRect after mount and whenever the observed DOM subtree mutates.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useBoundingclientrectRef, useDimensionsRef, useMeasure]
 ---
 
 ## About
 
-getBoundingClientRect hook for React.
+`useBoundingclientrect` calls `getBoundingClientRect()` for an element held in an existing object ref. It measures once after mount and again when `MutationObserver` reports attribute, text, or child-list changes in that element's subtree.
 
-<br />
+## Example
 
-## Examples
-
-### Basic example
-
-```jsx
-import { useBoundingclientrect } from "rooks";
+```tsx
 import { useRef, useState } from "react";
-
-function App() {
-  const myRef = useRef();
-  const getBoundingClientRect = useBoundingclientrect(myRef);
-  const [XOffset, setXOffset] = useState(0);
-  const [YOffset, setYOffset] = useState(100);
-  const displayString = JSON.stringify(getBoundingClientRect, null, 2);
-  return (
-    <>
-      <div
-        style={{
-          width: 300,
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
-          left: XOffset,
-          top: YOffset,
-        }}
-        ref={myRef}
-      >
-        <div
-          style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%",
-          }}
-        >
-          <p>
-            Resize this div as you see fit. To demonstrate that it also updates
-            on child dom nodes resize
-          </p>
-        </div>
-        <h2>Bounds</h2>
-        <p>
-          <button onClick={() => setXOffset(XOffset - 5)}> Move Left </button>
-          <button onClick={() => setXOffset(XOffset + 5)}> Move Right </button>
-        </p>
-        <p>
-          <button onClick={() => setYOffset(YOffset - 5)}> Move Up </button>
-          <button onClick={() => setYOffset(YOffset + 5)}> Move Down </button>
-        </p>
-      </div>
-      <div style={{ height: 500 }}>
-        <pre>{displayString}</pre>
-      </div>
-    </>
-  );
-}
-
-export default App;
-```
-
-### Read position and size together
-
-```jsx
-import { useRef } from "react";
 import { useBoundingclientrect } from "rooks";
 
-function PositionedCard() {
-  const cardRef = useRef(null);
-  const rect = useBoundingclientrect(cardRef);
+export default function MeasuredCard() {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const [wide, setWide] = useState(false);
+  const rect = useBoundingclientrect(targetRef);
 
   return (
-    <div>
+    <section>
       <div
-        ref={cardRef}
-        style={{
-          position: "absolute",
-          top: 24,
-          left: 32,
-          width: 260,
-          padding: 16,
-          border: "1px solid #d1d5db",
-        }}
+        ref={targetRef}
+        style={{ width: wide ? 320 : 180, padding: 12, border: "1px solid" }}
       >
-        Measure my size and position.
+        This element is{" "}
+        {rect ? `${Math.round(rect.width)}px wide` : "being measured"}.
       </div>
-
-      <p>Width: {rect?.width ?? 0}px</p>
-      <p>Height: {rect?.height ?? 0}px</p>
-      <p>Top: {rect?.top ?? 0}px</p>
-      <p>Left: {rect?.left ?? 0}px</p>
-    </div>
+      <button type="button" onClick={() => setWide((value) => !value)}>
+        Change width
+      </button>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument | Type      | Description                                       |
-| -------- | --------- | ------------------------------------------------- |
-| ref      | React ref | React ref whose boundingClientRect is to be found |
+| Parameter | Type                                    | Description                                   |
+| --------- | --------------------------------------- | --------------------------------------------- |
+| `ref`     | `MutableRefObject<HTMLElement \| null>` | Object ref containing the element to measure. |
 
-### Return value
+## Return value
 
-| Return value | Type    | Description                                                                  | Default value |
-| ------------ | ------- | ---------------------------------------------------------------------------- | ------------- |
-| value        | DOMRect | DOMRect Object containing x,y, width, height, left,right,top and bottom keys | null          |
+Returns the element's `DOMRect`, including its viewport-relative position and dimensions, or `null` before measurement and whenever the ref has no current element.
+
+## Behavior and lifecycle
+
+The initial measurement runs after mount. The hook then creates a `MutationObserver` with `attributes`, `characterData`, `childList`, and `subtree` all enabled. Each mutation rereads the full bounding rect. The observer disconnects when its effect is replaced or the component unmounts.
+
+Resize and scroll events do not themselves trigger this hook. A layout shift without a DOM mutation can therefore leave the returned rect stale; use `useDimensionsRef`, `useMeasure`, or an explicit resize observer when that distinction matters.
+
+## Compatibility and accessibility
+
+Server rendering returns `null` when the ref is empty; DOM measurement and observer creation happen in client effects. A browser without `MutationObserver` needs a polyfill before an element is observed. Measuring layout can force browser layout work, so avoid mutation-heavy targets.
+
+The hook does not change semantics or focus. Use the measurement to enhance layout without removing essential content or controls at zoomed or reflowed sizes. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useBoundingclientrectRef](/docs/hooks/useBoundingclientrectRef) supplies its own callback ref and a manual update function.
+- [useDimensionsRef](/docs/hooks/useDimensionsRef) can remeasure on window resize and scroll.
+- [useMeasure](/docs/hooks/useMeasure) uses `ResizeObserver` for element-size changes.

@@ -1,95 +1,75 @@
 ---
-id: useMutationObserver
 title: useMutationObserver
-sidebar_label: useMutationObserver
-description: "Observes DOM mutations on a node using MutationObserver."
+description: Observes mutations on the element in an existing object ref and cleans up automatically.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useMutationObserverRef, useBoundingclientrect]
 ---
 
 ## About
 
-Mutation Observer hook for React.
+`useMutationObserver` connects the browser's `MutationObserver` to an element already held in a mutable object ref. Use it when the ref's target is stable and raw mutation records are needed.
 
-## Examples
+## Example
 
-```jsx
-import React, { useState, useRef } from "react";
+```tsx
+import { useCallback, useRef, useState } from "react";
 import { useMutationObserver } from "rooks";
 
-function Demo() {
-  const myRef = useRef();
+export default function MutationCount() {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const [mutationCount, setMutationCount] = useState(0);
-  const incrementMutationCount = () => {
-    return setMutationCount(mutationCount + 1);
-  };
-  useMutationObserver(myRef, incrementMutationCount);
-  const [XOffset, setXOffset] = useState(0);
-  const [YOffset, setYOffset] = useState(300);
+  const onMutation = useCallback<MutationCallback>((records) => {
+    setMutationCount((count) => count + records.length);
+  }, []);
+
+  useMutationObserver(targetRef, onMutation);
+
   return (
-    <>
-      <div
-        style={{
-          width: "auto",
-          background: "lightblue",
-          padding: "10px",
-          position: "absolute",
-          left: XOffset,
-          top: YOffset,
-        }}
-        ref={myRef}
-      >
-        <div
-          style={{
-            resize: "both",
-            overflow: "auto",
-            background: "white",
-            color: "blue",
-            maxWidth: "100%",
-          }}
-        >
-          <p>
-            Resize this div as you see fit. To demonstrate that it also updates
-            on child dom nodes resize
-          </p>
-        </div>
-        <h2>Bounds</h2>
-        <p>
-          <button onClick={() => setXOffset(XOffset - 5)}> Move Left </button>
-          <button onClick={() => setXOffset(XOffset + 5)}> Move Right </button>
-        </p>
-        <p>
-          <button onClick={() => setYOffset(YOffset - 5)}> Move Up </button>
-          <button onClick={() => setYOffset(YOffset + 5)}> Move Down </button>
-        </p>
+    <section>
+      <div ref={targetRef}>
+        {expanded ? <strong>Expanded content</strong> : "Compact content"}
       </div>
-      <div style={{ height: 500 }} onClick={incrementMutationCount}>
-        <pre>Mutation count {mutationCount}</pre>
-      </div>
-    </>
+      <button type="button" onClick={() => setExpanded((value) => !value)}>
+        Change observed content
+      </button>
+      <p aria-live="polite">Observed mutation records: {mutationCount}</p>
+    </section>
   );
 }
-
-const App = () => {
-  // useMutationObserver =>
-  // which runs a callback whenever a target element changes, passed in as a react ref.
-
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <h1>Rooks : useMutationObserver example</h1>
-      <br></br>
-      <Demo />
-    </div>
-  );
-};
-
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument | Type      | Description                                                                                       | Default value                                                             |
-| -------- | --------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| ref      | React ref | Ref which should be observed for Mutations                                                        | undefined                                                                 |
-| callback | function  | Function which should be invoked on mutation. It is called with the `mutationList` and `observer` | undefined                                                                 |
-| config   | object    | Mutation Observer configuration                                                                   | \{attributes: true,,characterData: true,,subtree: true,,childList: true\} |
+| Parameter  | Type                                    | Default                   | Description                                                 |
+| ---------- | --------------------------------------- | ------------------------- | ----------------------------------------------------------- |
+| `ref`      | `MutableRefObject<HTMLElement \| null>` | required                  | Ref whose current element is observed when the effect runs. |
+| `callback` | `MutationCallback`                      | required                  | Receives mutation records and the observer.                 |
+| `options`  | `MutationObserverInit`                  | all common mutation kinds | Passed to `observer.observe()`.                             |
+
+The default options set `attributes`, `characterData`, `childList`, and `subtree` to `true`.
+
+## Return value
+
+Returns `void`.
+
+## Behavior and lifecycle
+
+When the effect sees `ref.current`, it creates one observer and observes that node. It disconnects when the ref object, callback, or options identity changes and on unmount. Keep inline callbacks and options stable with `useCallback` or `useMemo` when repeated observer creation is undesirable.
+
+The effect depends on the ref object, not changes to `.current`. For a conditionally mounted or replaceable node, prefer `useMutationObserverRef`, whose callback ref makes node changes observable to React. Exceptions from the callback are not caught.
+
+The browser also throws when an options object requests no mutation kind; that observation error is not caught.
+
+## Compatibility and accessibility
+
+The hook is server-safe while the ref is empty because observer creation happens in an effect. A browser without `MutationObserver` needs a polyfill before the ref resolves to an element.
+
+Mutation records describe DOM changes, not user intent. Avoid using them as the only signal for status announcements, validation, or focus management; update accessible state explicitly when the application performs the change. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [useMutationObserverRef](/docs/hooks/useMutationObserverRef) supplies a callback ref for replaceable nodes.
+- [useBoundingclientrect](/docs/hooks/useBoundingclientrect) uses this hook internally to remeasure after mutations.

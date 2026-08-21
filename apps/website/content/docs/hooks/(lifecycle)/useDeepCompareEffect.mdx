@@ -1,181 +1,64 @@
 ---
-id: useDeepCompareEffect
 title: useDeepCompareEffect
-sidebar_label: useDeepCompareEffect
-description: "Runs an effect only when dependencies change via deep equality comparison."
+description: Runs an effect when a dependency array changes by deep equality.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDebouncedEffect, useDidUpdate]
 ---
 
 ## About
 
-A React hook that works like `useEffect` but performs deep comparison on dependencies instead of shallow comparison. This is useful when you have object or array dependencies that may have the same content but different references, preventing unnecessary re-renders and effect executions.
-
-[//]: # "Main"
+`useDeepCompareEffect` has the cleanup semantics of `useEffect`, but retains the previous dependency array while `fast-deep-equal` considers the next array equal. Use it for structural object dependencies that cannot be stabilized at their source.
 
 ## Examples
 
-#### Basic example with object dependencies
-
-```jsx
-import { useDeepCompareEffect } from "rooks";
+```tsx
 import { useState } from "react";
-
-export default function App() {
-  const [count, setCount] = useState(0);
-  const [user, setUser] = useState({ name: "John", age: 30 });
-
-  // This effect will only run when the user object's content actually changes
-  useDeepCompareEffect(() => {
-    console.log("User data changed:", user);
-    // Perform some side effect based on user data
-  }, [user]);
-
-  const updateUserName = () => {
-    // Even though this creates a new object reference, 
-    // the effect won't run if the content is the same
-    setUser({ name: "John", age: 30 });
-  };
-
-  const actuallyChangeUser = () => {
-    setUser({ name: "Jane", age: 25 });
-  };
-
-  return (
-    <div>
-      <p>User: {user.name}, Age: {user.age}</p>
-      <button onClick={updateUserName}>Update with same data</button>
-      <button onClick={actuallyChangeUser}>Actually change user</button>
-    </div>
-  );
-}
-```
-
-#### Example with array dependencies
-
-```jsx
 import { useDeepCompareEffect } from "rooks";
-import { useState } from "react";
 
-export default function TodoApp() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build an app", completed: false }
-  ]);
-
-  // Effect runs only when todo array content actually changes
-  useDeepCompareEffect(() => {
-    console.log("Todos updated, saving to localStorage");
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  return (
-    <div>
-      {todos.map(todo => (
-        <div key={todo.id}>
-          <input 
-            type="checkbox" 
-            checked={todo.completed}
-            onChange={() => toggleTodo(todo.id)}
-          />
-          {todo.text}
-        </div>
-      ))}
-    </div>
-  );
-}
-```
-
-#### Example with cleanup function
-
-```jsx
-import { useDeepCompareEffect } from "rooks";
-import { useState } from "react";
-
-export default function DataFetcher() {
-  const [filters, setFilters] = useState({
-    category: "electronics",
-    minPrice: 100,
-    maxPrice: 500
-  });
-  const [data, setData] = useState(null);
+export default function FilterSummary() {
+  const [page, setPage] = useState(1);
+  const filters = { page, sort: "name" };
+  const [summary, setSummary] = useState("");
 
   useDeepCompareEffect(() => {
-    const controller = new AbortController();
-    
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `/api/products?${new URLSearchParams(filters)}`,
-          { signal: controller.signal }
-        );
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        // Ignore fetch abort errors, as they are expected on cleanup
-        if (error.name !== "AbortError") {
-
-          console.error("Fetch failed:", error);
-        }
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function to abort the fetch request if dependencies change
-    return () => {
-      controller.abort();
-
-    };
+    setSummary(`Page ${filters.page}, sorted by ${filters.sort}`);
   }, [filters]);
 
-  const updateFilters = () => {
-    setFilters({
-      category: "electronics",
-      minPrice: 100,
-      maxPrice: 500
-    });
-  };
-
   return (
-    <div>
-      <button onClick={updateFilters}>Update filters (same values)</button>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <section>
+      <p>{summary}</p>
+      <button type="button" onClick={() => setPage((value) => value + 1)}>
+        Next page
+      </button>
+    </section>
   );
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type             | Description                                                    | Default |
-| -------------- | ---------------- | -------------------------------------------------------------- | ------- |
-| callback       | EffectCallback   | The effect function to run when dependencies change           | -       |
-| dependencies   | DependencyList   | An array of dependencies to deep compare                      | -       |
+| Argument       | Type             | Default  | Meaning                                       |
+| -------------- | ---------------- | -------- | --------------------------------------------- |
+| `callback`     | `EffectCallback` | required | React effect callback; it may return cleanup. |
+| `dependencies` | `DependencyList` | required | Array compared structurally between renders.  |
 
-### Returns
+Passing a non-array value throws. An array containing only primitive values emits a development warning because ordinary `useEffect` is cheaper for that case.
 
-This hook returns `void`. It doesn't return any value, but executes the provided callback when dependencies change based on deep comparison.
+## Return value
 
-### Important Notes
+The hook returns `void`.
 
-- **Performance**: Deep comparison is more expensive than shallow comparison. Use this hook only when you actually need deep comparison of object/array dependencies.
-- **Primitive Values Warning**: The hook will warn you in development mode if you use it with only primitive values (string, number, boolean, etc.), since regular `useEffect` would be more efficient.
-- **Array Required**: Dependencies must be provided as an array. The hook will throw an error if dependencies are not an array.
-- **Cleanup Support**: Like `useEffect`, you can return a cleanup function from your effect callback that will be called before the effect runs again or when the component unmounts.
+## Behavior and lifecycle
 
-### When to Use
+The effect runs after commit on mount and whenever the dependency array is not deeply equal to the previous retained array. React runs the prior cleanup before a changed effect and on unmount. Deep comparison happens during render and can be expensive for large or cyclic structures; `fast-deep-equal` does not make arbitrary cyclic graphs safe.
 
-Use `useDeepCompareEffect` when:
-- You have object or array dependencies that may have the same content but different references
-- You want to prevent unnecessary effect executions due to reference changes
-- You're dealing with complex data structures in your dependencies
+## Compatibility and accessibility
 
-Avoid using it when:
-- All your dependencies are primitive values (use regular `useEffect` instead)
-- Performance is critical and you can restructure your code to avoid deep comparison
-- You can use `useCallback` or `useMemo` to stabilize object references instead
+No browser API is required, so the hook is safe to render on the server. Effects still do not run until the client commits. Accessibility depends on the side effect; avoid silently moving focus or changing visible state without an appropriate announcement.
+
+## Related
+
+- [useDebouncedEffect](/docs/hooks/useDebouncedEffect)
+- [useDidUpdate](/docs/hooks/useDidUpdate)

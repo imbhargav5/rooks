@@ -1,21 +1,47 @@
 ---
-id: useMultiSelectableList
 title: useMultiSelectableList
-sidebar_label: useMultiSelectableList
 description: "Manages multiple-selection list state with toggle and select-all helpers."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useSelectableList, useSelect]
 ---
 
 ## About
 
 A custom hook to easily select multiple values from a list
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useMultiSelectableList } from "rooks";
+
+const toppings = ["Mushroom", "Olive", "Pepper"];
+
+export default function ToppingPicker() {
+  const [[, selected], { matchSelection, toggleSelection }] =
+    useMultiSelectableList(toppings, [0], true);
+
+  return (
+    <fieldset>
+      <legend>Toppings: {selected?.join(", ") || "none"}</legend>
+      {toppings.map((topping) => (
+        <label key={topping}>
+          <input
+            type="checkbox"
+            checked={matchSelection({ value: topping })}
+            onChange={toggleSelection({ value: topping })}
+          />
+          {topping}
+        </label>
+      ))}
+    </fieldset>
+  );
+}
+```
 
 ```jsx
 import { useEffect, useState } from "react";
-import "./styles.css";
 import { useMultiSelectableList } from "rooks";
 import { createGlobalStyle } from "styled-components";
 
@@ -107,10 +133,8 @@ export const toppings = [
 
 export default function App() {
   const [total, setTotal] = useState(0);
-  const [
-    selection,
-    { matchSelection, toggleSelection, updateSelections },
-  ] = useMultiSelectableList(toppings, [0, 1]);
+  const [selection, { matchSelection, toggleSelection, updateSelections }] =
+    useMultiSelectableList(toppings, [0, 1]);
 
   useEffect(() => {
     setTotal(selection[1].reduce((acc, cur) => acc + cur.price, 0));
@@ -152,15 +176,15 @@ export default function App() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument value       | Type            | Description                                      | Default value |
-| -------------------- | --------------- | ------------------------------------------------ | ------------- |
-| list                 | Array           | A list of items of any type                      | `[]`          |
+| Argument value       | Type                  | Description                                      | Default value |
+| -------------------- | --------------------- | ------------------------------------------------ | ------------- |
+| list                 | Array                 | A list of items of any type                      | `[]`          |
 | initialSelectIndices | `Array&lt;number&gt;` | An array of indices that are selected initially  | `[0]`         |
-| allowUnselected      | Boolean         | Whether to allow unselect when update selections | `false`       |
+| allowUnselected      | Boolean               | Whether to allow unselect when update selections | `false`       |
 
-### Returns
+## Return value
 
 Returns an array of following items:
 
@@ -176,3 +200,16 @@ Methods:
 | matchSelection   | `({ index?: number, value?: T }) => boolean`           | returns true if the item is selected                   |
 | toggleSelection  | `({ index?: number, value?: T }) => () => void`        | returns a function to toggle an item by index or value |
 | updateSelections | `({ indices?: number[], values?: T[] }) => () => void` | returns a function to update specified items           |
+
+## Behavior and lifecycle
+
+Selection is stored as indices; selected values are derived from the current `list` on every render, and missing indices are filtered out. Control factories return event-handler functions rather than updating immediately. Passing both index and value, neither field, an empty selection while `allowUnselected` is false, or values absent from the list produces a console warning and may leave state unchanged. Matching uses `Array.includes` reference equality.
+
+## Compatibility and accessibility
+
+The hook uses only React state and is SSR-safe. For multi-select UI, use native checkboxes or expose equivalent `aria-checked`/`aria-selected` state, keep every control keyboard accessible, and label the group.
+
+## Related
+
+- [useSelectableList](/docs/hooks/useSelectableList)
+- [useSelect](/docs/hooks/useSelect)

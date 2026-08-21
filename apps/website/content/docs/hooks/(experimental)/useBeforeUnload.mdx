@@ -1,0 +1,53 @@
+---
+title: useBeforeUnload
+description: "Prompt before the page unloads when a guard passes."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
+---
+
+## About
+
+Register a `beforeunload` guard for unsaved changes or other pending work.
+
+## Example
+
+```tsx
+import { useBeforeUnload } from "rooks/experimental";
+
+function Editor({ hasUnsavedChanges }: { hasUnsavedChanges: boolean }) {
+  useBeforeUnload({
+    when: hasUnsavedChanges,
+    message: "You have unsaved changes.",
+  });
+
+  return <div>Editor</div>;
+}
+```
+
+## Parameters
+
+All fields are optional:
+
+| Field            | Type                                                      | Default     | Description                                                                                     |
+| ---------------- | --------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------- |
+| `when`           | `boolean \| (() => boolean)`                              | `true`      | Enables the guard. A function is evaluated when the event fires.                                |
+| `message`        | `string`                                                  | `undefined` | Preferred text assigned to `event.returnValue`; browsers may replace it with their own wording. |
+| `onBeforeUnload` | `(event: BeforeUnloadEvent) => boolean \| string \| void` | `undefined` | Runs for every `beforeunload` event. Returning `true` or a string also requests a confirmation. |
+
+## Return value
+
+Returns `void`.
+
+## Behavior and lifecycle
+
+The hook installs one `window.beforeunload` listener and removes it when the inputs change or the component unmounts. A static `when: false` with no callback attaches nothing, preserving normal page lifecycle behavior. It calls `preventDefault()` and assigns `event.returnValue` only when `when` passes, the callback returns `true`, or the callback returns a string. A supplied callback still runs when `when` is `false`.
+
+## Compatibility and accessibility
+
+Server rendering is safe because no `window` listener is attached there. Modern browsers require prior user interaction, ignore custom dialog text, and may skip `beforeunload` entirely on mobile or process termination. Persist important drafts continuously; do not rely on this prompt as the only safeguard. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

@@ -1,0 +1,46 @@
+---
+title: Entrypoints and compatibility
+description: Package format, React peer versions, public entrypoints, Temporal requirements, and importable public types.
+---
+
+## Package format
+
+Rooks is an ESM-only package with TypeScript declarations. Use `import` syntax and an ESM-aware bundler or runtime; no CommonJS or UMD build is published.
+
+The package declares these React peer ranges:
+
+- `react`: `^18.0.0 || ^19.0.0`
+- `react-dom`: `^18.0.0 || ^19.0.0`
+
+## Public entrypoints
+
+| Entrypoint           | Contents                                              | Stability                                                                              |
+| -------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `rooks`              | Stable hooks, `Easing`, and explicitly exported types | Stable public API.                                                                     |
+| `rooks/experimental` | Experimental hooks                                    | APIs can change or be removed without stable-surface guarantees.                       |
+| `rooks/temporal`     | Temporal hooks and their explicitly exported types    | Hook API is stable; the optional polyfill and `BigInt` requirements are isolated here. |
+| `rooks/package.json` | Package metadata                                      | Exported for tooling; it is not a hook entrypoint.                                     |
+
+Only symbols exported by these entrypoints are public. Source-file paths and internal helper names are not supported imports.
+
+## Optional Temporal dependency
+
+Install `@js-temporal/polyfill` when using `rooks/temporal`:
+
+```bash
+pnpm add @js-temporal/polyfill
+```
+
+Temporal hooks prefer a native `globalThis.Temporal`, otherwise load the polyfill on the client. The runtime must support `BigInt`. See the [Temporal guide](/docs/guides/temporal-hooks).
+
+## Explicitly importable public types
+
+<PublicTypeReference />
+
+Option and result shapes shown on hook pages are not importable unless the manifest-backed list above includes them.
+
+`rooks/experimental` currently exports values only; types used internally by its hook signatures are not separate named exports.
+
+## Browser and server compatibility
+
+Rooks does not make every browser API universally available. Browser-dependent hooks should expose or document their unsupported state, and applications must provide a fallback. Use client components in React Server Components frameworks and keep initial SSR output deterministic. See [SSR and browser APIs](/docs/guides/ssr-and-browser-apis).

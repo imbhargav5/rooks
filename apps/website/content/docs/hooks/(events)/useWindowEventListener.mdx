@@ -1,42 +1,54 @@
 ---
-id: useWindowEventListener
 title: useWindowEventListener
-sidebar_label: useWindowEventListener
-description: "Attaches and automatically cleans up an event listener on the window."
+description: Attaches a window event listener and removes it when the component unmounts.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useDocumentEventListener, useOnWindowResize, useOnWindowScroll]
 ---
 
 ## About
 
-Adds an event listener to window
+`useWindowEventListener` listens for a named event on the browser `window`. Prefer focused wrappers such as `useOnWindowResize` when their fixed options match the task.
 
-[//]: # "Main"
+## Example
 
-## Examples
-
-### Basic usage
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useWindowEventListener } from "rooks";
-import "./styles.css";
 
-export default function App() {
-  const [value, setValue] = useState(0);
-  useWindowEventListener("click", function() {
-    setValue(value + 1);
+export default function OnlineEventCounter() {
+  const [events, setEvents] = useState(0);
+
+  useWindowEventListener("online", () => {
+    setEvents((count) => count + 1);
   });
-  return (
-    <div
-      className="App"
-      style={{
-        padding: "20px",
-      }}
-    >
-      <h2>Click anywhere</h2>
-      <p> Value is {value}</p>
-    </div>
-  );
+
+  return <p>Online events observed: {events}</p>;
 }
 ```
 
----
+## Parameters
+
+- `eventName`: a key from `WindowEventMap`.
+- `callback`: called with the native window event. The hook always invokes the latest callback.
+- `listenerOptions`: optional `boolean | AddEventListenerOptions`; defaults to `{}`.
+- `isLayoutEffect`: optional boolean; defaults to `false`. Set it to `true` only when subscription must happen during the layout-effect phase.
+
+## Return value
+
+The hook returns `void`.
+
+## Behavior and lifecycle
+
+The listener is attached after commit, or during the layout-effect phase when requested. Changes to the event name or listener options replace the native subscription; callback changes update a ref. Cleanup removes the active listener when configuration changes or the component unmounts.
+
+## Compatibility and accessibility
+
+During server rendering there is no window target, so the hook performs no subscription. Event availability depends on the browser. If an event changes visible state, preserve keyboard behavior and announce only changes that are meaningful to assistive-technology users.
+
+## Related
+
+- [useDocumentEventListener](/docs/hooks/useDocumentEventListener) targets `document`.
+- [useOnWindowResize](/docs/hooks/useOnWindowResize) and [useOnWindowScroll](/docs/hooks/useOnWindowScroll) use passive listeners.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) covers browser-only subscriptions.

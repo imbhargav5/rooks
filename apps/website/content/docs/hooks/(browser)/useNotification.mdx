@@ -1,8 +1,10 @@
 ---
-id: useNotification
 title: useNotification
-sidebar_label: useNotification
 description: "Requests permission and sends desktop notifications via the Notifications API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -15,9 +17,9 @@ React hook for sending browser notifications with permission handling using the 
 npm install rooks
 ```
 
-## Usage
+## Examples
 
-```jsx
+```tsx
 import { useState } from "react";
 import { useNotification } from "rooks";
 
@@ -123,7 +125,7 @@ function PresetNotification() {
 }
 ```
 
-## Return Value
+## Return value
 
 Returns an object with the following properties:
 
@@ -175,3 +177,19 @@ The Notifications API is supported in:
 - Notifications may not work in cross-origin iframes
 - Users can revoke permission at any time through browser settings
 - On mobile devices, notifications behavior varies by browser and OS
+
+## Parameters
+
+This hook takes no parameters. `show(title, options?)` accepts the platform `NotificationOptions` shape shown above.
+
+## Behavior and lifecycle
+
+The initial permission is read from `Notification.permission`. `requestPermission` updates hook state with the returned value. `show` creates and returns a `Notification` only while permission is `"granted"`; otherwise it returns `null`. The hook does not watch browser-settings changes or close notifications on unmount, so callers may close a returned instance when appropriate.
+
+## Compatibility and accessibility
+
+SSR and unsupported browsers report `isSupported: false`; `requestPermission` resolves to `"denied"` and `show` resolves to `null` in that case. API/construction failures are logged rather than returned as hook error state. Request permission only from a clear user action, provide equivalent in-page information, and do not require notifications for essential workflows.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

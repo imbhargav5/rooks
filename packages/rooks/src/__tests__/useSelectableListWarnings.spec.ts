@@ -1,0 +1,208 @@
+import { vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import { useSelectableList } from "@/hooks/useSelectableList";
+
+vi.spyOn(console, "warn").mockImplementation(vi.fn());
+
+describe("useSelectableList", () => {
+  afterEach(() => {
+    (console.warn as vi.Mock).mockReset();
+  });
+  const { result } = renderHook(() => useSelectableList([1, 2, 3]));
+
+  describe("matchSelection", () => {
+    it("console.warn", () => {
+      expect.hasAssertions();
+      act(() => {
+        result.current[1].matchSelection({ index: 1, value: 2 });
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "matchSelection. Expected either index or value to be provided. However all were provided"
+      );
+      act(() => {
+        result.current[1].matchSelection({});
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        2,
+        "matchSelection. index , value are all undefined."
+      );
+    });
+
+    it("match index", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+      expect(internalResult.current[1].matchSelection({ index: 0 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ index: 1 })).toBe(
+        false
+      );
+    });
+
+    it("match value", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+      expect(internalResult.current[1].matchSelection({ value: 1 })).toBe(true);
+      expect(internalResult.current[1].matchSelection({ value: 2 })).toBe(
+        false
+      );
+    });
+  });
+
+  describe("updateSelection", () => {
+    it("set by index", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+
+      act(() => {
+        internalResult.current[1].updateSelection({ index: 1 })();
+      });
+      const [currentIndex, currentValue] = internalResult.current[0];
+      expect(currentIndex).toBe(1);
+      expect(currentValue).toBe(2);
+    });
+    it("set by value", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+
+      act(() => {
+        internalResult.current[1].updateSelection({ value: 2 })();
+      });
+      const [currentIndex, currentValue] = internalResult.current[0];
+      expect(currentIndex).toBe(1);
+      expect(currentValue).toBe(2);
+    });
+
+    it("set by value fail", () => {
+      expect.hasAssertions();
+      const [beforeIndex, beforeValue] = result.current[0];
+      act(() => {
+        result.current[1].updateSelection({ value: 22 })();
+      });
+      const [afterIndex, afterValue] = result.current[0];
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "updateSelection failed. Does the value 22 exist in the list?"
+      );
+      (console.warn as vi.Mock).mockReset();
+
+      // default
+      expect(beforeIndex).toBe(afterIndex);
+      expect(beforeValue).toBe(afterValue);
+    });
+
+    it("console.warn", () => {
+      expect.hasAssertions();
+      act(() => {
+        result.current[1].updateSelection({ index: 1, value: 2 })();
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "updateSelection. Expected either index or value to be provided. However all were provided"
+      );
+      act(() => {
+        result.current[1].updateSelection({})();
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        2,
+        "updateSelection. index , value are all undefined."
+      );
+    });
+  });
+
+  describe("toggleSelection", () => {
+    it("should toggle selected index", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+      act(() => {
+        internalResult.current[1].toggleSelection({ index: 0 })();
+      });
+      const [currentIndex, currentValue] = internalResult.current[0];
+      expect(currentIndex).toBe(-1);
+      expect(currentValue).toBeUndefined();
+    });
+
+    it("shouldn't toggle selected index when allowUnselected = false", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, false)
+      );
+      const [beforeIndex, beforeValue] = internalResult.current[0];
+      act(() => {
+        internalResult.current[1].toggleSelection({ index: 0 })();
+      });
+      const [afterIndex, afterValue] = internalResult.current[0];
+
+      // default
+      expect(beforeIndex).toBe(afterIndex);
+      expect(beforeValue).toBe(afterValue);
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "allowUnselected is false. Cannot unselect item"
+      );
+      (console.warn as vi.Mock).mockReset();
+    });
+    it("should toggle selected value", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, true)
+      );
+      act(() => {
+        internalResult.current[1].toggleSelection({ value: 1 })();
+      });
+
+      const [currentIndex, currentValue] = internalResult.current[0];
+
+      expect(currentIndex).toBe(-1);
+      expect(currentValue).toBeUndefined();
+    });
+
+    it("shouldn't toggle selected value when allowUnselected", () => {
+      expect.hasAssertions();
+      const { result: internalResult } = renderHook(() =>
+        useSelectableList([1, 2, 3], 0, false)
+      );
+      const [beforeIndex, beforeValue] = internalResult.current[0];
+      act(() => {
+        internalResult.current[1].toggleSelection({ value: 1 })();
+      });
+      const [afterIndex, afterValue] = internalResult.current[0];
+
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "allowUnselected is false. Cannot unselect item"
+      );
+      // default
+      expect(beforeIndex).toBe(afterIndex);
+      expect(beforeValue).toBe(afterValue);
+      (console.warn as vi.Mock).mockReset();
+    });
+
+    it("console.warn", () => {
+      expect.hasAssertions();
+      act(() => {
+        result.current[1].toggleSelection({ index: 1, value: 2 })();
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        1,
+        "toggleSelection. Expected either index or value to be provided. However all were provided"
+      );
+      act(() => {
+        result.current[1].toggleSelection({})();
+      });
+      expect(console.warn).toHaveBeenNthCalledWith(
+        2,
+        "toggleSelection. index , value are all undefined."
+      );
+    });
+  });
+});

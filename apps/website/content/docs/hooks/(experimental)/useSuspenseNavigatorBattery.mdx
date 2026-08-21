@@ -1,23 +1,21 @@
 ---
-id: useSuspenseNavigatorBattery
 title: useSuspenseNavigatorBattery
-sidebar_label: useSuspenseNavigatorBattery
 description: "Reads battery status from the Battery API with Suspense support."
+entrypoint: rooks/experimental
+status: experimental
+aliases: []
+related: []
 ---
 
 ## About
 
-⚠️ **Experimental Hook**: This hook may be removed or significantly changed in any release without notice.
-
 A Suspense-enabled hook for getting battery status information from the Navigator Battery API with real-time updates. This hook suspends while the API is fetching data and must be wrapped in a Suspense boundary. It automatically listens for battery status changes and updates the component accordingly.
-
-[//]: # "Main"
 
 ## Examples
 
 #### Basic Usage
 
-```jsx
+```tsx
 import React, { Suspense } from "react";
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 
@@ -204,11 +202,11 @@ The hook automatically listens for battery status changes using the `BatteryMana
 
 Your components will automatically re-render when any of these events occur, providing live updates without any additional setup.
 
-## Arguments
+## Parameters
 
 None. This hook takes no parameters.
 
-## Return Value
+## Return value
 
 Returns a `BatteryManager` object with the following properties:
 
@@ -238,3 +236,15 @@ Returns a `BatteryManager` object with the following properties:
 ```javascript
 import { useSuspenseNavigatorBattery } from "rooks/experimental";
 ```
+
+## Behavior and lifecycle
+
+The first call caches `navigator.getBattery()` and suspends until it settles. After resolution, the hook listens for charging, charging-time, discharging-time, and level changes and removes all four listeners on unmount. Every instance uses the same module-level battery promise, while each mounted instance maintains its own current snapshot.
+
+## Compatibility and accessibility
+
+The hook throws when `navigator.getBattery` is absent, including during SSR, and rethrows a rejected API promise to the nearest error boundary. The Battery Status API has limited browser availability and may be restricted for privacy; never gate essential functionality on it. Announce low-battery advice in text rather than relying only on color or an icon.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

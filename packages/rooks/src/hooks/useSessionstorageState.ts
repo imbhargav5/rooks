@@ -1,43 +1,66 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import {
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+  useInsertionEffect,
+  useRef,
+} from "react";
 
 function getValueFromSessionStorage(key: string) {
-  if (typeof sessionStorage === "undefined") {
-    return null;
-  }
-
-  const storedValue = sessionStorage.getItem(key) ?? "null";
   try {
-    return JSON.parse(storedValue);
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
+
+    const storedValue = sessionStorage.getItem(key) ?? "null";
+
+    try {
+      return JSON.parse(storedValue);
+    } catch (error) {
+      console.error(error);
+      return storedValue;
+    }
   } catch (error) {
     console.error(error);
+    return null;
   }
-
-  return storedValue;
 }
 
 function saveValueToSessionStorage<S>(key: string, value: S) {
-  if (typeof sessionStorage === "undefined") {
+  try {
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
+
+    if (value === undefined) {
+      return sessionStorage.removeItem(key);
+    }
+
+    return sessionStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(error);
     return null;
   }
-
-  return sessionStorage.setItem(key, JSON.stringify(value));
 }
 
 /**
  * @param key Key of the sessionStorage object
  * @param initialState Default initial value
  */
-function initialize<S>(key: string, initialState: S) {
+function initialize<S>(key: string, initialState: S | (() => S)) {
   const valueLoadedFromSessionStorage = getValueFromSessionStorage(key);
   if (valueLoadedFromSessionStorage === null) {
-    return initialState;
+    return typeof initialState === "function"
+      ? (initialState as () => S)()
+      : initialState;
   } else {
     return valueLoadedFromSessionStorage;
   }
 }
 
-type UseSessionstorateStateReturnValue<S> = [
+type UseSessionstorageStateReturnValue<S> = [
   S,
   Dispatch<SetStateAction<S>>,
   () => void
@@ -49,17 +72,31 @@ type BroadcastCustomEvent<S> = CustomEvent<{ newValue: S }>;
  * Tracks a value within sessionStorage and updates it
  *
  * @param {string} key - Key of the sessionStorage object
- * @param {any} initialState - Default initial value
- * @returns {[any, Dispatch<SetStateAction<any>>, () => void]}
+ * @param initialState - Default initial value
+ * @returns Tuple containing the stored value, setter, and remove callback
  * @see https://rooks.vercel.app/docs/hooks/useSessionstorageState
  */
 function useSessionstorageState<S>(
   key: string,
   initialState?: S | (() => S)
-): UseSessionstorateStateReturnValue<S> {
+): UseSessionstorageStateReturnValue<S> {
   const [value, setValue] = useState(() => initialize(key, initialState));
+  const [stateKey, setStateKey] = useState(key);
+  const currentValueRef = useRef(value);
+  const currentKeyRef = useRef(key);
+
+  useInsertionEffect(() => {
+    currentValueRef.current = value;
+    currentKeyRef.current = key;
+  }, [key, value]);
+
+  if (stateKey !== key) {
+    setStateKey(key);
+    setValue(initialize(key, initialState));
+  }
   const isUpdateFromCrossDocumentListener = useRef(false);
   const isUpdateFromWithinDocumentListener = useRef(false);
+  const updateSourceKeyRef = useRef<string | null>(null);
   const customEventTypeName = useMemo(() => {
     return `rooks-${key}-sessionstorage-update`;
   }, [key]);
@@ -70,26 +107,39 @@ function useSessionstorageState<S>(
      * to keep track of whether setValue is from another
      * storage event
      */
-    if (!isUpdateFromCrossDocumentListener.current) {
+    const cameFromSynchronizedUpdate =
+      (isUpdateFromCrossDocumentListener.current ||
+        isUpdateFromWithinDocumentListener.current) &&
+      updateSourceKeyRef.current === key;
+
+    if (!cameFromSynchronizedUpdate) {
       saveValueToSessionStorage(key, value);
     }
+
+    isUpdateFromCrossDocumentListener.current = false;
+    isUpdateFromWithinDocumentListener.current = false;
+    updateSourceKeyRef.current = null;
   }, [key, value]);
 
   const listenToCrossDocumentStorageEvents = useCallback(
     (event: StorageEvent) => {
-      if (event.storageArea === sessionStorage && event.key === key) {
-        try {
-          isUpdateFromCrossDocumentListener.current = true;
+      try {
+        if (event.storageArea === sessionStorage && event.key === key) {
           const newValue = JSON.parse(event.newValue ?? "null");
-          if (value !== newValue) {
-            setValue(newValue);
-          }
-        } catch (error) {
-          console.log(error);
+          isUpdateFromCrossDocumentListener.current = true;
+          updateSourceKeyRef.current = key;
+          currentValueRef.current = newValue;
+          setValue((currentValue: S) =>
+            Object.is(currentValue, newValue) ? currentValue : newValue
+          );
         }
+      } catch (error) {
+        isUpdateFromCrossDocumentListener.current = false;
+        updateSourceKeyRef.current = null;
+        console.log(error);
       }
     },
-    [key, value]
+    [currentValueRef, key]
   );
 
   // check for changes across windows
@@ -114,16 +164,20 @@ function useSessionstorageState<S>(
   const listenToCustomEventWithinDocument = useCallback(
     (event: BroadcastCustomEvent<S>) => {
       try {
-        isUpdateFromWithinDocumentListener.current = true;
         const { newValue } = event.detail;
-        if (value !== newValue) {
-          setValue(newValue);
-        }
+        isUpdateFromWithinDocumentListener.current = true;
+        updateSourceKeyRef.current = key;
+        currentValueRef.current = newValue;
+        setValue((currentValue: S) =>
+          Object.is(currentValue, newValue) ? currentValue : newValue
+        );
       } catch (error) {
+        isUpdateFromWithinDocumentListener.current = false;
+        updateSourceKeyRef.current = null;
         console.log(error);
       }
     },
-    [value]
+    [currentValueRef, key]
   );
 
   // check for changes within document
@@ -149,11 +203,11 @@ function useSessionstorageState<S>(
   }, [customEventTypeName, listenToCustomEventWithinDocument]);
 
   const broadcastValueWithinDocument = useCallback(
-    (newValue: S) => {
+    (storageKey: string, newValue: S) => {
 
       if (typeof document !== "undefined") {
         const event: BroadcastCustomEvent<S> = new CustomEvent(
-          customEventTypeName,
+          `rooks-${storageKey}-sessionstorage-update`,
           { detail: { newValue } }
         );
         document.dispatchEvent(event);
@@ -161,24 +215,32 @@ function useSessionstorageState<S>(
         console.warn("[useSessionstorageState] document is undefined.");
       }
     },
-    [customEventTypeName]
+    []
   );
 
   const set = useCallback(
     (newValue: SetStateAction<S>) => {
       const resolvedNewValue = typeof newValue === "function"
-        ? (newValue as (prevState: S) => S)(value)
+        ? (newValue as (prevState: S) => S)(currentValueRef.current)
         : newValue;
+      const storageKey = currentKeyRef.current;
       isUpdateFromCrossDocumentListener.current = false;
-      isUpdateFromWithinDocumentListener.current = false;
+      isUpdateFromWithinDocumentListener.current = true;
+      updateSourceKeyRef.current = storageKey;
+      currentValueRef.current = resolvedNewValue;
+      saveValueToSessionStorage<S>(storageKey, resolvedNewValue);
       setValue(resolvedNewValue);
-      broadcastValueWithinDocument(resolvedNewValue);
+      broadcastValueWithinDocument(storageKey, resolvedNewValue);
     },
-    [broadcastValueWithinDocument, value]
+    [broadcastValueWithinDocument, currentKeyRef, currentValueRef]
   );
 
   const remove = useCallback(() => {
-    sessionStorage.removeItem(key);
+    try {
+      sessionStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
   }, [key]);
 
   return [value, set, remove];

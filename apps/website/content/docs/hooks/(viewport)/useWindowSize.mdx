@@ -1,68 +1,57 @@
 ---
-id: useWindowSize
 title: useWindowSize
-sidebar_label: useWindowSize
-description: "Returns the current width and height of the browser window."
+description: Returns reactive inner and outer browser window dimensions.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useOnWindowResize, useWindowScrollPosition]
 ---
 
 ## About
 
-Window size hook for React.
-<br/>
+`useWindowSize` subscribes to window resize events and returns both viewport and outer browser-window dimensions.
 
-## Examples
+## Example
 
-### Basic usage
-
-```jsx
-import "./styles.css";
+```tsx
 import { useWindowSize } from "rooks";
 
-function App() {
-  const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
+export default function WindowDimensions() {
+  const { innerWidth, innerHeight, outerWidth, outerHeight } = useWindowSize();
 
   return (
-    <div>
-      <h1>Rooks: useWindowSize Example</h1>
-      <hr></hr>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor: "skyBlue",
-        }}
-      >
-        <p>
-          <span>innerHeight - </span>
-          <span>{innerHeight}</span>
-        </p>
-        <p>
-          <span>innerWidth - </span>
-          <span>{innerWidth}</span>
-        </p>
-        <p>
-          <span>outerHeight - </span>
-          <span>{outerHeight}</span>
-        </p>
-        <p>
-          <span>outerWidth - </span>
-          <span>{outerWidth}</span>
-        </p>
-      </div>
-    </div>
+    <dl>
+      <dt>Viewport</dt>
+      <dd>
+        {innerWidth ?? "unknown"} × {innerHeight ?? "unknown"}
+      </dd>
+      <dt>Outer window</dt>
+      <dd>
+        {outerWidth ?? "unknown"} × {outerHeight ?? "unknown"}
+      </dd>
+    </dl>
   );
 }
-
-export default App;
 ```
 
-### Returned Object keys
+## Parameters
 
-| Returned object attributes | Type | Description            |
-| -------------------------- | ---- | ---------------------- |
-| width                      | int  | inner width of window  |
-| height                     | int  | inner height of window |
-| outerWidth                 | int  | outer height of window |
-| outerHeight                | int  | outer width of window  |
+This hook has no parameters.
+
+## Return value
+
+It returns an object with `innerHeight`, `innerWidth`, `outerHeight`, and `outerWidth`. Every field is `number | null`; all four are `null` in the server snapshot.
+
+## Behavior and lifecycle
+
+The hook uses React's external-store subscription contract and listens for window `resize`. It reads all four dimensions for each snapshot but preserves object identity when none changed. The listener is removed on unmount.
+
+## Compatibility and accessibility
+
+Server rendering uses null dimensions, then React reads browser dimensions after hydration. Render a neutral fallback for null instead of guessing a device width. JavaScript viewport branching should not replace responsive CSS, and resizing must not hide focused or essential content.
+
+## Related
+
+- [useOnWindowResize](/docs/hooks/useOnWindowResize) runs a callback for resize events.
+- [useWindowScrollPosition](/docs/hooks/useWindowScrollPosition) returns scroll coordinates.
+- [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) covers server snapshots.

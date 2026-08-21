@@ -63,6 +63,31 @@ describe("useEventListenerRef jsx", () => {
     });
     expect(mockCallback).toHaveBeenCalledTimes(4);
   });
+
+  it("uses the latest callback and removes the listener on unmount", () => {
+    expect.hasAssertions();
+    const firstCallback = vi.fn();
+    const secondCallback = vi.fn();
+
+    function App({ callback }: { callback: () => void }) {
+      const ref = useEventListenerRef("click", callback);
+      return <div data-testid="element" ref={ref} />;
+    }
+
+    const { getByTestId, rerender, unmount } = render(
+      <App callback={firstCallback} />
+    );
+    const element = getByTestId("element");
+
+    fireEvent.click(element);
+    rerender(<App callback={secondCallback} />);
+    fireEvent.click(element);
+    unmount();
+    fireEvent.click(element);
+
+    expect(firstCallback).toHaveBeenCalledTimes(1);
+    expect(secondCallback).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("useEventListenerRef state variables", () => {

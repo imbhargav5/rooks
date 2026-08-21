@@ -1,8 +1,10 @@
 ---
-id: useMediaRecorder
 title: useMediaRecorder
-sidebar_label: useMediaRecorder
 description: "Records audio/video streams using the MediaRecorder API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -17,24 +19,22 @@ npm install rooks
 
 ## Usage
 
-```jsx
+```tsx
 import { useMediaRecorder } from "rooks";
 import { useEffect, useState } from "react";
 
 function AudioRecorder() {
   const [stream, setStream] = useState<MediaStream | null>(null);
 
-  // Get audio stream
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then(setStream)
-      .catch((err) => console.error("Error accessing microphone:", err));
+    let activeStream: MediaStream | null = null;
+    void navigator.mediaDevices.getUserMedia({ audio: true }).then((next) => {
+      activeStream = next;
+      setStream(next);
+    });
 
     return () => {
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
+      activeStream?.getTracks().forEach((track) => track.stop());
     };
   }, []);
 
@@ -56,7 +56,9 @@ function AudioRecorder() {
   return (
     <div>
       <h2>Audio Recorder</h2>
-      <p>Status: <strong>{recordingState}</strong></p>
+      <p>
+        Status: <strong>{recordingState}</strong>
+      </p>
 
       <div>
         <button
@@ -101,21 +103,21 @@ function AudioRecorder() {
 }
 ```
 
-## Return Value
+## Return value
 
 Returns an object with the following properties:
 
-| Property        | Type                         | Description                                |
-| --------------- | ---------------------------- | ------------------------------------------ |
-| startRecording  | `() => void`                 | Start recording                            |
-| stopRecording   | `() => void`                 | Stop recording                             |
-| pauseRecording  | `() => void`                 | Pause recording                            |
-| resumeRecording | `() => void`                 | Resume recording                           |
-| recordingState  | `RecordingState`             | Current recording state                    |
-| data            | `Blob \| null`               | Recorded data as a Blob                    |
-| dataUrl         | `string \| null`             | URL to the recorded data                   |
-| error           | `Error \| null`              | Any error that occurred                    |
-| isSupported     | `boolean`                    | Whether MediaRecorder API is supported     |
+| Property        | Type                                             | Description                            |
+| --------------- | ------------------------------------------------ | -------------------------------------- |
+| startRecording  | `() => void`                                     | Start recording                        |
+| stopRecording   | `() => void`                                     | Stop recording                         |
+| pauseRecording  | `() => void`                                     | Pause recording                        |
+| resumeRecording | `() => void`                                     | Resume recording                       |
+| recordingState  | `"idle" \| "recording" \| "paused" \| "stopped"` | Current recording state                |
+| data            | `Blob \| null`                                   | Recorded data as a Blob                |
+| dataUrl         | `string \| null`                                 | URL to the recorded data               |
+| error           | `Error \| null`                                  | Any error that occurred                |
+| isSupported     | `boolean`                                        | Whether MediaRecorder API is supported |
 
 ## Recording States
 
@@ -128,20 +130,53 @@ Returns an object with the following properties:
 
 The hook accepts an optional options parameter:
 
-| Option              | Type     | Description                        |
-| ------------------- | -------- | ---------------------------------- |
-| mimeType            | `string` | MIME type for the recording        |
-| audioBitsPerSecond  | `number` | Audio bits per second              |
-| videoBitsPerSecond  | `number` | Video bits per second              |
-| bitsPerSecond       | `number` | Overall bits per second            |
+| Option             | Type     | Description                 |
+| ------------------ | -------- | --------------------------- |
+| mimeType           | `string` | MIME type for the recording |
+| audioBitsPerSecond | `number` | Audio bits per second       |
+| videoBitsPerSecond | `number` | Video bits per second       |
+| bitsPerSecond      | `number` | Overall bits per second     |
 
 ## Examples
+
+```tsx
+import { useState } from "react";
+import { useMediaRecorder } from "rooks";
+
+export default function AudioRecorder() {
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const recorder = useMediaRecorder(stream, { mimeType: "audio/webm" });
+
+  async function requestMicrophone() {
+    setStream(await navigator.mediaDevices.getUserMedia({ audio: true }));
+  }
+
+  return (
+    <section>
+      <p>Recorder state: {recorder.recordingState}</p>
+      <button type="button" onClick={requestMicrophone}>
+        Enable microphone
+      </button>
+      <button
+        type="button"
+        onClick={recorder.startRecording}
+        disabled={!stream}
+      >
+        Record
+      </button>
+      <button type="button" onClick={recorder.stopRecording}>
+        Stop
+      </button>
+    </section>
+  );
+}
+```
 
 ### Video Recording
 
 ```jsx
 function VideoRecorder() {
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [stream, setStream] = useState(null);
 
   const startCamera = async () => {
     const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -151,12 +186,8 @@ function VideoRecorder() {
     setStream(mediaStream);
   };
 
-  const {
-    startRecording,
-    stopRecording,
-    recordingState,
-    dataUrl,
-  } = useMediaRecorder(stream, { mimeType: "video/webm" });
+  const { startRecording, stopRecording, recordingState, dataUrl } =
+    useMediaRecorder(stream, { mimeType: "video/webm" });
 
   return (
     <div>
@@ -184,7 +215,7 @@ function VideoRecorder() {
 
 ```jsx
 function ScreenRecorder() {
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [stream, setStream] = useState(null);
 
   const startScreenCapture = async () => {
     const mediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -230,6 +261,7 @@ function ScreenRecorder() {
 ## Browser Support
 
 The MediaRecorder API is supported in:
+
 - Chrome 47+
 - Firefox 25+
 - Safari 14.1+
@@ -244,3 +276,22 @@ The MediaRecorder API is supported in:
 - Data URL is automatically revoked on unmount to prevent memory leaks
 - Supported MIME types vary by browser - check `MediaRecorder.isTypeSupported()`
 - The MediaRecorder is automatically stopped on component unmount
+
+## Parameters
+
+| Argument  | Type                  | Default  | Description                                                                                             |
+| --------- | --------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `stream`  | `MediaStream \| null` | required | Stream from `getUserMedia`, `getDisplayMedia`, or another source.                                       |
+| `options` | object                | `{}`     | `mimeType`, `audioBitsPerSecond`, `videoBitsPerSecond`, and `bitsPerSecond`, passed to `MediaRecorder`. |
+
+## Behavior and lifecycle
+
+When a supported, non-null stream is supplied, the effect constructs a `MediaRecorder`. Changing the stream/options or unmounting stops an active recorder. Each start clears prior chunks, blob, URL, and error. The `stop` event joins chunks into a Blob, creates an object URL, and sets state to `"stopped"`; replaced URLs are revoked. The hook stops the recorder, but it does **not** stop source media tracks—call `track.stop()` when capture is no longer needed.
+
+## Compatibility and accessibility
+
+SSR reports `isSupported: false`. Creating the recorder and every control operation can set `error`; controls that do not match the current state are otherwise no-ops. Media capture requires HTTPS, permission, and a user gesture, and supported MIME types differ by browser—check `MediaRecorder.isTypeSupported()` before selecting one. Keep visible recording indicators and accessible start/stop controls, and honor revoked permission or ended tracks.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

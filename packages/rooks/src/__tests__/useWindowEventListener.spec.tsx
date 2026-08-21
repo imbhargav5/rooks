@@ -44,7 +44,7 @@ describe("useWindowEventListener jsx", () => {
     expect(mockCallback).toHaveBeenCalledTimes(0);
   });
 
-  it("should not call callback when event fires", () => {
+  it("should call callback when event fires", () => {
     expect.hasAssertions();
     render(<TestJSX />);
     act(() => {
@@ -78,7 +78,7 @@ describe("useWindowEventListener state variables", () => {
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
-  it("should not call callback when event fires", () => {
+  it("should call callback when event fires", () => {
     expect.hasAssertions();
     const { container } = render(<TestJSX />);
     const valueElement = getByTestId(container as HTMLElement, "value");

@@ -340,5 +340,64 @@ describe("useDebouncedAsyncEffect", () => {
         expect(result.current.error).toBeTruthy();
         expect((result.current.error as Error).message).toBe(ERROR_MESSAGE);
     });
+
+    it("invalidates a running generation as soon as dependencies change", async () => {
+        expect.hasAssertions();
+        let shouldContinue: (() => boolean) | undefined;
+        let resolveEffect!: (value: string) => void;
+        const asyncEffect = vi.fn(
+            async (isCurrent: () => boolean) => {
+                shouldContinue = isCurrent;
+                return await new Promise<string>((resolve) => {
+                    resolveEffect = resolve;
+                });
+            }
+        );
+
+        const { rerender, unmount } = renderHook(
+            ({ value }) =>
+                useDebouncedAsyncEffect(asyncEffect, [value], 100),
+            { initialProps: { value: 0 } }
+        );
+
+        await act(async () => {
+            await vi.advanceTimersByTimeAsync(100);
+        });
+        expect(asyncEffect).toHaveBeenCalledTimes(1);
+        expect(shouldContinue?.()).toBe(true);
+
+        rerender({ value: 1 });
+
+        expect(shouldContinue?.()).toBe(false);
+        expect(asyncEffect).toHaveBeenCalledTimes(1);
+
+        await act(async () => {
+            resolveEffect("stale");
+            await Promise.resolve();
+        });
+        unmount();
+    });
+
+    it("passes each resolved result to cleanup at most once", async () => {
+        expect.hasAssertions();
+        const cleanup = vi.fn();
+        const asyncEffect = vi.fn(async () => "result-a");
+        const { rerender } = renderHook(
+            ({ value }) =>
+                useDebouncedAsyncEffect(asyncEffect, [value], 100, cleanup),
+            { initialProps: { value: 0 } }
+        );
+
+        await act(async () => {
+            await vi.advanceTimersByTimeAsync(100);
+        });
+
+        rerender({ value: 1 });
+        rerender({ value: 2 });
+
+        expect(cleanup).toHaveBeenNthCalledWith(1, "result-a");
+        expect(cleanup).toHaveBeenNthCalledWith(2, undefined);
+    });
+
 });
 

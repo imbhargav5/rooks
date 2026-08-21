@@ -1,9 +1,6 @@
-import { useEffect } from "react";
 import type { RefElementOrNull } from "../utils/utils";
-import { useFreshTick } from "./useFreshTick";
-import { useIsomorphicEffect } from "./useIsomorphicEffect";
 import { useRefElement } from "./useRefElement";
-import { noop } from "@/utils/noop";
+import { useEventListener } from "./useEventListener";
 
 /**
  *  useEventListenerRef hook
@@ -28,20 +25,16 @@ function useEventListenerRef(
   isLayoutEffect = false
 ): (refElement: RefElementOrNull<HTMLElement>) => void {
   const [ref, element] = useRefElement<HTMLElement>();
-  const freshCallback = useFreshTick(callback);
-  const useEffectToRun = isLayoutEffect ? useIsomorphicEffect : useEffect;
 
-  useEffectToRun(() => {
-    if (!element?.addEventListener) {
-      return noop;
+  useEventListener<EventTarget, string>(
+    eventName,
+    callback as (event: Event) => void,
+    {
+      target: element as EventTarget | null,
+      listenerOptions,
+      isLayoutEffect,
     }
-
-    element.addEventListener(eventName, freshCallback, listenerOptions);
-
-    return () => {
-      element.removeEventListener(eventName, freshCallback, listenerOptions);
-    };
-  }, [element, eventName, listenerOptions]);
+  );
 
   return ref;
 }

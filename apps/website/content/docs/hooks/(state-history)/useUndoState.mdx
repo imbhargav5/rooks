@@ -1,131 +1,69 @@
 ---
-id: useUndoState
 title: useUndoState
-sidebar_label: useUndoState
-description: "Manages state with undo history to revert to previous values."
+description: Manages state with a bounded, one-directional undo history.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useUndoRedoState, useTimeTravelState]
 ---
 
 ## About
 
-Drop in replacement for useState hook but with undo functionality.
+`useUndoState` resembles `useState` but keeps prior values and exposes an undo function. Choose it for simple one-way rollback where redoing or jumping within history is unnecessary.
 
-## Examples
+## Example
 
-### Basic usage
-
-```jsx
-import "./styles.css";
+```tsx
 import { useUndoState } from "rooks";
 
-const App = () => {
-  const [value, setValue, undo] = useUndoState(0);
+export default function UndoableCounter() {
+  const [value, push, undo] = useUndoState(0, { maxSize: 30 });
 
   return (
-    <div>
-      <span>Current value: {value}</span>
-      <br />
-      <button onClick={() => setValue(value + 1)}>Increment</button>
-      <button onClick={undo}>Undo</button>
-    </div>
-  );
-};
-
-export default App;
-```
-
-### Any kind of value
-
-You can pass any kind of value to hook just like React's own useState.
-
-```jsx
-import "./styles.css";
-import { useUndoState } from "rooks";
-
-const App = () => {
-  const [value, setValue, undo] = useUndoState({ data: 42 });
-
-  return (
-    <div>
-      <span>Current value: {JSON.stringify(value)}</span>
-      <br />
-      <button onClick={() => setValue({ data: value.data + 1 })}>
-        Increment object data
-      </button>
-      <button onClick={undo}>Undo</button>
-    </div>
-  );
-};
-
-export default App;
-```
-
-### Setter function is still the same
-
-Setter function can also be used with callback just like React's own useState.
-
-```jsx
-import "./styles.css";
-import { useUndoState } from "rooks";
-
-const App = () => {
-  const [value, setValue, undo] = useUndoState(0);
-
-  return (
-    <div>
-      <span>Current value: {value}</span>
-      <br />
-      <button onClick={() => setValue(current => current + 1)}>
+    <section>
+      <p>Current value: {value}</p>
+      <button
+        type="button"
+        onClick={() => push((current: number) => current + 1)}
+      >
         Increment
       </button>
-      <button onClick={undo}>Undo</button>
-    </div>
-  );
-};
-
-export default App;
-```
-
-### Max undo stack size
-
-To preserve memory you can limit number of steps that will be preserved in undo history.
-
-```javascript
-import "./styles.css";
-import { useUndoState } from "rooks";
-
-const App = () => {
-  const [value, setValue, undo] = useUndoState(0, { maxSize: 30 });
-
-  return (
-    <div>
-      <span>Current value: {value}</span>
-      <br />
-      <button onClick={() => setValue(current => current + 1)}>
-        Increment
+      <button type="button" onClick={undo}>
+        Undo
       </button>
-      <button onClick={undo}>Undo</button>
-    </div>
+    </section>
   );
-};
-
-export default App;
-
-// now when calling undo only last 30 changes to the value will be preserved
+}
 ```
 
-## Arguments
+## Parameters
 
-| Arguments    | Type    | Description                    | Default value    |
-| ------------ | ------- | ------------------------------ | ---------------- |
-| initialValue | boolean | Initial value of the state     | false            |
-| Options      | Object  | An options object for the hook | \{maxSize: 100\} |
+- `defaultValue: T` — required initial value. A function cannot be used as the state value because functions are interpreted as updater callbacks by `push`.
+- `options?: { maxSize?: number }` — sets the maximum number of earlier values retained for undo. `maxSize` defaults to `100`.
 
-Note: The second argument is an options object which currently accepts a maxSize which governs the maximum number of previous states to keep track of.
+The option object is merged with its defaults, so passing a new object each render is harmless but unnecessary.
 
-### Returned array items
+## Return value
 
-| Returned Array items | Type     | Description                     |
-| -------------------- | -------- | ------------------------------- |
-| value                | Any      | Current value                   |
-| setValue             | function | Setter function to update value |
-| undo                 | function | Undo state value                |
+The result is `[value, push, undo]`:
+
+- `value: T` — the newest stored value.
+- `push(next)` — adds a direct value or the result of `(currentValue: T) => T` to the front of the history.
+- `undo()` — removes the current entry and reveals the previous one. It does nothing when only the initial entry remains.
+
+There is no redo function and no `canUndo` flag.
+
+## Behavior and lifecycle
+
+History is stored newest-first in React state. At its limit, pushing a value discards the oldest retained entry. Pushing an equal value still adds a history step. The hook creates no subscriptions or external resources, and its history is discarded on unmount.
+
+Changing `defaultValue` or `maxSize` does not reset existing history; a new `maxSize` affects subsequent pushes.
+
+## Compatibility and accessibility
+
+The hook has no browser dependency and can render during SSR. Because it does not report whether undo is available, applications that must disable an unavailable undo control should track that condition separately or use [useUndoRedoState](/docs/hooks/useUndoRedoState).
+
+## Related
+
+- [useUndoRedoState](/docs/hooks/useUndoRedoState) adds redo and availability flags.
+- [useTimeTravelState](/docs/hooks/useTimeTravelState) adds arbitrary history navigation and reset controls.

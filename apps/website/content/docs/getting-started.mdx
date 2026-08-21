@@ -1,0 +1,51 @@
+---
+title: Getting started
+description: Install Rooks and render a working, typed counter in three steps.
+---
+
+This tutorial starts with an existing React 18 or 19 application and ends with a visible interactive component.
+
+## 1. Install Rooks
+
+Use the package manager already used by your project:
+
+```bash
+pnpm add rooks
+```
+
+With npm, run `npm install rooks`; with Yarn, run `yarn add rooks`.
+
+## 2. Create a counter component
+
+Create `Counter.tsx`:
+
+```tsx
+import { useCounter } from "rooks";
+
+export function Counter() {
+  const { value, increment, decrement, reset } = useCounter(0);
+
+  return (
+    <section aria-labelledby="counter-heading">
+      <h2 id="counter-heading">Count: {value}</h2>
+      <button type="button" onClick={decrement}>
+        Decrease
+      </button>
+      <button type="button" onClick={increment}>
+        Increase
+      </button>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
+    </section>
+  );
+}
+```
+
+If the component lives in a React Server Components framework such as Next.js App Router, add `"use client";` as the first line because React hooks run in client components.
+
+## 3. Render and try it
+
+Render `<Counter />` from your application, start its development server, and select the buttons. The count should update immediately.
+
+You now have a working Rooks hook. Continue with the [`useCounter` reference](/docs/hooks/useCounter), [browse other hooks](/docs/hooks), or review [SSR and browser APIs](/docs/guides/ssr-and-browser-apis) before choosing a browser-dependent hook.

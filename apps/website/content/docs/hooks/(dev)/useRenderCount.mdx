@@ -1,132 +1,53 @@
 ---
-id: useRenderCount
 title: useRenderCount
-sidebar_label: useRenderCount
-description: "Tracks and returns how many times a component has re-rendered."
+description: Counts how many times the current hook instance has rendered.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useWhyDidYouUpdate]
 ---
 
 ## About
 
-A simple debugging hook that tracks how many times a component has rendered. Useful for identifying unnecessary re-renders and optimizing component performance.
-
-[//]: # "Main"
+`useRenderCount` is a debugging probe that increments a ref during render and returns the new count. The first render returns `1`.
 
 ## Examples
 
-#### Basic example
-
-```jsx
-import { useRenderCount } from "rooks";
-
-export default function App() {
-  const renderCount = useRenderCount();
-
-  return (
-    <div>
-      <h1>Component Render Count</h1>
-      <p>This component has rendered {renderCount} times</p>
-    </div>
-  );
-}
-```
-
-#### Debugging unnecessary re-renders
-
-```jsx
+```tsx
 import { useState } from "react";
 import { useRenderCount } from "rooks";
 
-export default function App() {
+export default function RenderCounter() {
   const [count, setCount] = useState(0);
-  const [name, setName] = useState("");
-  const renderCount = useRenderCount();
+  const renders = useRenderCount();
 
   return (
-    <div>
-      <h1>Debugging Re-renders</h1>
-      <p>Render count: {renderCount}</p>
-      
-      <div>
-        <label>Counter: {count}</label>
-        <button onClick={() => setCount(c => c + 1)}>Increment</button>
-      </div>
-      
-      <div>
-        <label>Name:</label>
-        <input 
-          value={name} 
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Type your name"
-        />
-      </div>
-      
-      {renderCount > 10 && (
-        <div style={{color: 'red'}}>
-          Warning: This component has re-rendered {renderCount} times!
-        </div>
-      )}
-    </div>
+    <section>
+      <p>Render attempts: {renders}</p>
+      <button type="button" onClick={() => setCount((value) => value + 1)}>
+        State: {count}
+      </button>
+    </section>
   );
 }
 ```
 
-#### Conditional behavior based on render count
+## Parameters
 
-```jsx
-import { useState, useEffect } from "react";
-import { useRenderCount } from "rooks";
+This hook accepts no parameters.
 
-export default function App() {
-  const [data, setData] = useState(null);
-  const renderCount = useRenderCount();
+## Return value
 
-  // Only show loading indicator after first render
-  const showLoading = renderCount === 1 && !data;
+A `number` starting at `1` and incrementing for each render of that mounted hook instance.
 
-  useEffect(() => {
-    // Simulate data loading
-    const timer = setTimeout(() => {
-      setData("Data loaded successfully!");
-    }, 2000);
+## Behavior and lifecycle
 
-    return () => clearTimeout(timer);
-  }, []);
+The counter mutates a ref during render and creates no effect or cleanup. It resets after a real unmount and remount. Concurrent React can start and abandon renders, and Strict Mode can render extra times in development, so the number represents render attempts observed by this hook rather than a guaranteed count of committed paints.
 
-  return (
-    <div>
-      <h1>Conditional Rendering Example</h1>
-      <p>Render #{renderCount}</p>
-      
-      {showLoading && <p>Loading...</p>}
-      {data && <p>{data}</p>}
-      
-      <button onClick={() => setData(null)}>Reset Data</button>
-    </div>
-  );
-}
-```
+## Compatibility and accessibility
 
-### Arguments
+No browser API is required, and server rendering returns `1` for that server hook instance. Use the count for diagnostics, not product logic. If displayed in development UI, avoid announcing every render through a live region.
 
-This hook does not accept any arguments.
+## Related
 
-### Returns
-
-| Return value | Type   | Description                                                    |
-| ------------ | ------ | -------------------------------------------------------------- |
-| renderCount  | Number | The number of times the component has rendered (starts from 1) |
-
-## Use Cases
-
-- **Performance Debugging**: Identify components that re-render too frequently
-- **Development Tools**: Build custom debugging components that show render information
-- **Conditional Logic**: Execute code only after a certain number of renders
-- **Testing**: Verify that optimizations are working correctly
-- **Component Analysis**: Understand how state changes affect component rendering
-
-## Notes
-
-- The render count starts from 1 (not 0) on the first render
-- Each call to the hook maintains its own independent render count
-- The count persists for the lifetime of the component
-- This hook is primarily intended for development and debugging purposes
+- [useWhyDidYouUpdate](/docs/hooks/useWhyDidYouUpdate)

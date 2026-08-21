@@ -1,59 +1,56 @@
 ---
-id: useMergeRefs
 title: useMergeRefs
-sidebar_label: useMergeRefs
-description: "Merges multiple refs into a single callback ref."
+description: Sends one ref value to any number of mutable or callback refs.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useForkRef]
 ---
 
 ## About
 
-Merges any number of refs into a single ref
+`useMergeRefs` combines several refs when one element must be observed by multiple hooks or consumers.
 
-[//]: # "Main"
+## Example
 
-## Examples
+```tsx
+import { useRef } from "react";
+import { useEventListenerRef, useMergeRefs } from "rooks";
 
-```jsx
-import "./styles.css";
-import { useMergeRefs, useEventListenerRef } from "rooks";
-
-function App() {
-  const mousedownRef = useEventListenerRef("mousedown", () => {
-    console.log("mouse down");
+export default function FocusableClickTarget() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const clickRef = useEventListenerRef("click", () => {
+    console.log("Input clicked");
   });
-  const mouseupRef = useEventListenerRef("mouseup", () => {
-    console.log("mouse up");
-  });
-  const refs = useMergeRefs(mousedownRef, mouseupRef);
+  const mergedRef = useMergeRefs(inputRef, clickRef);
 
   return (
     <div>
-      <h1>Rooks : useMergeRefs Example</h1>
-      <hr></hr>
-      <div
-        ref={refs}
-        style={{
-          width: 250,
-          height: 200,
-          border: "blue 1px solid",
-        }}
-      >
-        A div with multiple refs. Click me!!
-      </div>
+      <input ref={mergedRef} aria-label="Tracked input" />
+      <button type="button" onClick={() => inputRef.current?.focus()}>
+        Focus input
+      </button>
     </div>
   );
 }
-export default App;
 ```
 
-### Arguments
+## Parameters
 
-| Argument value | Type  | Description                                                          |
-| -------------- | ----- | -------------------------------------------------------------------- |
-| refs           | Array | Takes any number of refs. Refs can be mutable refs or function refs. |
+- `...refs: Array<PossibleRef<T>>` — any number of mutable refs, callback refs, `null`, or `undefined` values.
 
-### Returns
+## Return value
 
-| Return value | Type        | Description |
-| ------------ | ----------- | ----------- |
-| ref          | CallbackRef | Merged ref  |
+Returns a callback ref that assigns the same element or `null` to each input ref in order. It returns `null` only when every supplied value is exactly `null`; an empty list also returns `null`.
+
+## Behavior and lifecycle
+
+Because the rest-parameter array is new on every render, the current implementation also creates a new merged callback each render. React consequently detaches the old callback with `null` and attaches the new callback with the element. Callback errors are not caught; an exception stops later refs from being assigned.
+
+## Compatibility and accessibility
+
+The hook is SSR-safe and runs assignments only during React ref attachment. Merging refs does not add focusability, keyboard support, or an accessible name to the element.
+
+## Related
+
+- [useForkRef](/docs/hooks/useForkRef) memoizes a pair of refs and avoids callback churn while those refs remain stable.

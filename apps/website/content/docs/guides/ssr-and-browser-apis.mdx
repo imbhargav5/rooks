@@ -1,0 +1,63 @@
+---
+title: SSR and browser APIs
+description: Use DOM, event, permission, and device hooks safely across server rendering and hydration.
+---
+
+Browser APIs such as `window`, `document`, media devices, permissions, storage, and vibration are not available during server rendering. Rooks hooks are designed to avoid attaching browser listeners on the server, but your component must still render a deterministic initial state and account for API availability.
+
+## Put hooks behind a client boundary
+
+React hooks must run in a client component when using React Server Components:
+
+```tsx
+"use client";
+
+import { useOnline } from "rooks";
+
+export function ConnectionStatus() {
+  const online = useOnline();
+  return <p role="status">{online ? "Online" : "Offline"}</p>;
+}
+```
+
+A client boundary does not disable SSR. The framework may still render that component's initial HTML on the server, so do not read `window` or `document` directly during render.
+
+## Keep hydration deterministic
+
+- Render a stable fallback for values that are unknown on the server. Temporal hooks, for example, return `null` until the client Temporal API is ready.
+- Delay browser-only derived UI until after mount when the hook exposes a loading or support state.
+- Do not branch on `typeof window` in a way that changes the initial element tree. A text fallback inside the same element is safer.
+- Expect React Strict Mode to set up and clean up effects more than once in development. Cleanup must be idempotent.
+
+## Choose the supported event-listener hook
+
+`useGlobalObjectEventListener` is an internal implementation detail and is not importable from the package. Choose a public hook by target:
+
+| Target                      | Public hook                                                        | Entrypoint           | Notes                                                                                                      |
+| --------------------------- | ------------------------------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `window`                    | [`useWindowEventListener`](/docs/hooks/useWindowEventListener)     | `rooks`              | Typed window events; subscribes when the client window exists.                                             |
+| `document`                  | [`useDocumentEventListener`](/docs/hooks/useDocumentEventListener) | `rooks`              | Typed document events; subscribes when the client document exists.                                         |
+| An element you own          | [`useEventListenerRef`](/docs/hooks/useEventListenerRef)           | `rooks`              | Returns a callback ref for an HTML element.                                                                |
+| Any supported `EventTarget` | [`useEventListener`](/docs/hooks/useEventListener)                 | `rooks/experimental` | Generic target/ref support, conditional subscription, and typed overloads; experimental stability applies. |
+
+All four public choices remove their listeners during effect cleanup. Prefer passive listeners for scroll-like events when you never call `preventDefault`, and do not use layout-effect mode unless work must happen before paint.
+
+## Handle permissions and unsupported browsers
+
+Permission-dependent APIs should be triggered by a user action and used only in secure contexts where the platform requires one. Before making the action available:
+
+1. Check the hook's support/loading state when it provides one.
+2. Explain why access is needed before prompting.
+3. Handle denied and dismissed permission states without repeatedly prompting.
+4. Provide a usable fallback when the API is absent.
+
+For vibration, clipboard, notifications, media devices, screen details, and similar APIs, browser support and policy differ. Do not treat a successful typecheck as a guarantee that the runtime API exists.
+
+## Avoid common hydration traps
+
+- Do not use browser-derived values as unstable React keys.
+- Do not assume a media query, viewport size, or storage value is final until the client has subscribed.
+- If the UI must avoid a visual jump, use CSS for initial responsive layout and let the hook enhance behavior after hydration.
+- Keep permission failures and unavailable APIs visible to users instead of swallowing them.
+
+Browse [browser hooks](/docs/hooks) and consult each hook's compatibility notes for hook-specific behavior.

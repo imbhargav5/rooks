@@ -29,25 +29,25 @@ export type UseSetStateReturnValue<T> = [Set<T>, UseSetStateControls<T>];
 function useSetState<T>(initialSetValue: Set<T>): UseSetStateReturnValue<T> {
   const [setValue, setSetValue] = useState<Set<T>>(new Set(initialSetValue));
 
-  const add = useCallback<Add<T>>(
-    (...args): void => {
-      setSetValue(new Set(setValue.add(...args)));
-    },
-    [setValue, setSetValue]
-  );
+  const add = useCallback<Add<T>>((...args): void => {
+    setSetValue((currentSet) => {
+      const nextSet = new Set(currentSet);
+      nextSet.add(...args);
+      return nextSet;
+    });
+  }, []);
 
-  const deleteValue = useCallback<Delete<T>>(
-    (...args): void => {
-      const newSetValue = new Set(setValue);
-      newSetValue.delete(...args);
-      setSetValue(newSetValue);
-    },
-    [setValue, setSetValue]
-  );
+  const deleteValue = useCallback<Delete<T>>((...args): void => {
+    setSetValue((currentSet) => {
+      const nextSet = new Set(currentSet);
+      nextSet.delete(...args);
+      return nextSet;
+    });
+  }, []);
 
   const clear = useCallback((): void => {
     setSetValue(new Set());
-  }, [setSetValue]);
+  }, []);
 
   const controls = useMemo<UseSetStateControls<T>>(() => {
     return { add, delete: deleteValue, clear };

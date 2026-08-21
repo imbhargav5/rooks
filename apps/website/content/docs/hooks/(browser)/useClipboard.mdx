@@ -1,8 +1,10 @@
 ---
-id: useClipboard
 title: useClipboard
-sidebar_label: useClipboard
 description: "Reads from and writes to the clipboard using the Clipboard API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -15,9 +17,9 @@ React hook for reading from and writing to the system clipboard using the Clipbo
 npm install rooks
 ```
 
-## Usage
+## Examples
 
-```jsx
+```tsx
 import { useState } from "react";
 import { useClipboard } from "rooks";
 
@@ -100,7 +102,7 @@ function ClipboardStatus() {
 }
 ```
 
-## Return Value
+## Return value
 
 Returns an object with the following properties:
 
@@ -134,3 +136,19 @@ The Clipboard API requires:
 - Some browsers may show a permission prompt when accessing the clipboard
 - The hook automatically handles errors and permission denials
 - Works only in secure contexts (HTTPS or localhost)
+
+## Parameters
+
+This hook takes no parameters. `copy` requires a string argument; `paste` takes no arguments.
+
+## Behavior and lifecycle
+
+`copy` writes text, then stores that same value in `text`. `paste` reads text, then stores the result. Each successful operation clears the prior error; unsupported or failed operations store an `Error` and reject their promise. The hook owns no persistent browser resource and requires no unmount cleanup.
+
+## Compatibility and accessibility
+
+SSR reports `isSupported: false`. Clipboard access generally requires HTTPS, a focused document, permission, and a user gesture; reading is more restricted than writing. Always keep normal input/select/copy behavior available, label action buttons, and show success or failure without exposing sensitive clipboard contents unnecessarily.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

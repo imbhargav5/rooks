@@ -1,35 +1,54 @@
 ---
-title: "useTween"
-description: "A hook that returns a tweened value from 0 to 1 over a specified duration."
+title: useTween
+description: Animates an eased progress value from zero to one.
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useEasing, useSpring, usePrefersReducedMotion]
 ---
 
-# useTween
+## About
 
-`useTween` is a hook that returns a tweened value from 0 to 1 over a specified duration. It uses `requestAnimationFrame` for smooth animations.
+`useTween` is a compact, auto-starting progress animation. It is useful when a component only needs a value moving from `0` to `1`; choose `useEasing` when controls or looping are required.
 
-## Usage
+## Examples
 
-```jsx
-import { useTween, Easing } from "rooks";
+```tsx
+import { useTween } from "rooks";
 
-function App() {
-  const value = useTween(1000, Easing.easeInOutQuad);
-
+export default function TweenedProgress() {
+  const progress = useTween(800, (value) => value * value);
   return (
-    <div style={{ opacity: value }}>
-      Fading In...
-    </div>
+    <progress max={1} value={progress}>
+      Progress: {progress}
+    </progress>
   );
 }
 ```
 
-## Arguments
+## Parameters
 
-| Argument | Type | Default | Description |
-| --- | --- | --- | --- |
-| duration | number | 200 | Duration of the tween in milliseconds. |
-| easing | (t: number) => number | Easing.linear | Easing function to use. |
+| Argument   | Type                           | Default | Meaning                                         |
+| ---------- | ------------------------------ | ------- | ----------------------------------------------- |
+| `duration` | `number`                       | `200`   | Duration in milliseconds; use a positive value. |
+| `easing`   | `(progress: number) => number` | linear  | Maps clamped raw progress.                      |
 
-## Return Value
+The easing function type is not exported from this module. Common easing presets exist internally, but only `useTween` is exported from the package root; use the public `Easing` value documented by [useEasing](/docs/hooks/useEasing) when you want presets.
 
-Returns a number between 0 and 1.
+## Return value
+
+A `number` initialized to `0`. Raw progress is clamped at `1`, but a custom easing output is not clamped.
+
+## Behavior and lifecycle
+
+The first frame establishes the clock. Changing duration or easing identity resets the clock; the old value remains for the current render, then the next frame begins again at the easing function's value for progress `0`. The hook reaches final progress but its underlying frame loop stays active until unmount because callback return values do not stop `useRaf`.
+
+## Compatibility and accessibility
+
+Server output is `0`, and the animation begins after client effects run. Honor reduced-motion preferences and provide a static or immediate equivalent. Native progress semantics or visible text should communicate completion independently of motion.
+
+## Related
+
+- [useEasing](/docs/hooks/useEasing)
+- [useSpring](/docs/hooks/useSpring)
+- [usePrefersReducedMotion](/docs/hooks/usePrefersReducedMotion)

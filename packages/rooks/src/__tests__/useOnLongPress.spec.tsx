@@ -5,8 +5,6 @@ import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import { useOnLongPress } from "@/hooks/useOnLongPress";
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 describe("useOnLongPress", () => {
   it("should be defined", () => {
     expect.hasAssertions();
@@ -20,11 +18,16 @@ describe("useOnLongPress behavior", () => {
   let onClick: vi.Mock;
 
   beforeEach(() => {
+    vi.useFakeTimers();
     callback = vi.fn();
     onClick = vi.fn();
   });
 
-  it("triggers long press callback when the button is pressed for the specified duration", async () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("triggers long press callback when the button is pressed for the specified duration", () => {
     expect.assertions(1);
 
     const TestComponent = () => {
@@ -41,8 +44,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.mouseDown(button);
     });
-    await act(async () => {
-      await wait(LONG_PRESS_DURATION + 50);
+    act(() => {
+      vi.advanceTimersByTime(LONG_PRESS_DURATION + 50);
     });
     act(() => {
       fireEvent.mouseUp(button);
@@ -51,7 +54,7 @@ describe("useOnLongPress behavior", () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it("does not trigger long press callback when the button is released before the specified duration", async () => {
+  it("does not trigger long press callback when the button is released before the specified duration", () => {
     expect.assertions(1);
 
     const TestComponent = () => {
@@ -75,8 +78,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.mouseDown(button);
     });
-    await act(async () => {
-      await wait(LONG_PRESS_DURATION - 50);
+    act(() => {
+      vi.advanceTimersByTime(LONG_PRESS_DURATION - 50);
     });
     act(() => {
       fireEvent.mouseUp(button);
@@ -85,7 +88,7 @@ describe("useOnLongPress behavior", () => {
     expect(callback).toHaveBeenCalledTimes(0);
   });
 
-  it("triggers onClick callback when the button is clicked without long pressing", async () => {
+  it("triggers onClick callback when the button is clicked without long pressing", () => {
     expect.assertions(2);
 
     const TestComponent = () => {
@@ -109,8 +112,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.mouseDown(button);
     });
-    await act(async () => {
-      await wait(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
     });
     act(() => {
       fireEvent.mouseUp(button);
@@ -119,7 +122,7 @@ describe("useOnLongPress behavior", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it("should work with touch events", async () => {
+  it("should work with touch events", () => {
     expect.assertions(1);
 
     const TestComponent = () => {
@@ -143,8 +146,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.touchStart(button);
     });
-    await act(async () => {
-      await wait(LONG_PRESS_DURATION + 50);
+    act(() => {
+      vi.advanceTimersByTime(LONG_PRESS_DURATION + 50);
     });
     act(() => {
       fireEvent.touchEnd(button);
@@ -152,7 +155,7 @@ describe("useOnLongPress behavior", () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it("should work with touch events and onClick", async () => {
+  it("should work with touch events and onClick", () => {
     expect.assertions(2);
 
     const TestComponent = () => {
@@ -176,8 +179,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.touchStart(button);
     });
-    await act(async () => {
-      await wait(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
     });
     act(() => {
       fireEvent.touchEnd(button);
@@ -186,7 +189,7 @@ describe("useOnLongPress behavior", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it("should not have stale state", async () => {
+  it("should not have stale state", () => {
     expect.assertions(6);
 
     const TestComponent = () => {
@@ -217,8 +220,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.touchStart(button);
     });
-    await act(async () => {
-      await wait(LONG_PRESS_DURATION + 50);
+    act(() => {
+      vi.advanceTimersByTime(LONG_PRESS_DURATION + 50);
     });
     act(() => {
       fireEvent.touchEnd(button);
@@ -231,8 +234,8 @@ describe("useOnLongPress behavior", () => {
     act(() => {
       fireEvent.touchStart(button);
     });
-    await act(async () => {
-      await wait(LONG_PRESS_DURATION + 50);
+    act(() => {
+      vi.advanceTimersByTime(LONG_PRESS_DURATION + 50);
     });
     act(() => {
       fireEvent.touchEnd(button);

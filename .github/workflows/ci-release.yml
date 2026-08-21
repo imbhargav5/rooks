@@ -1,4 +1,4 @@
-name: CI and Semantic Release
+name: CI and Version Packages
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -6,13 +6,11 @@ on:
   push:
     branches:
       - main
-      - alpha
-      - next
 jobs:
   test:
     name: Build (production)
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'imbhargav5/rooks' && contains('refs/heads/main,refs/heads/alpha,refs/heads/next',github.ref)}}
+    if: ${{ github.repository == 'imbhargav5/rooks' && github.ref == 'refs/heads/main' }}
     steps:
       - name: "Check if user has write access"
         uses: "lannonbr/repo-permission-check-action@2.0.0"
@@ -43,7 +41,7 @@ jobs:
       contents: write
       pull-requests: write
     if: ${{ github.repository == 'imbhargav5/rooks' &&
-      contains('refs/heads/main,refs/heads/alpha,refs/heads/next',github.ref) && github.event_name == 'push' }}
+      github.ref == 'refs/heads/main' && github.event_name == 'push' }}
     outputs:
       hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
     steps:

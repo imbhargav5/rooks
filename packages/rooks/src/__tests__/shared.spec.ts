@@ -6,6 +6,7 @@ import { useInput } from "@/hooks/useInput";
 import { useIntersectionObserverRef } from "@/hooks/useIntersectionObserverRef";
 import { useIsomorphicEffect } from "@/hooks/useIsomorphicEffect";
 import { useKey } from "@/hooks/useKey";
+import { useKeys } from "@/hooks/useKeys";
 import { useMouse } from "@/hooks/useMouse";
 import { useMutationObserver } from "@/hooks/useMutationObserver";
 import { useMutationObserverRef } from "@/hooks/useMutationObserverRef";
@@ -83,7 +84,7 @@ describe("useKey", () => {
 describe("useKeys", () => {
   it("is defined", () => {
     expect.hasAssertions();
-    expect(useKey).toBeDefined();
+    expect(useKeys).toBeDefined();
   });
 });
 

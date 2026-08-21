@@ -1,8 +1,10 @@
 ---
-id: useNavigatorLanguage
 title: useNavigatorLanguage
-sidebar_label: useNavigatorLanguage
 description: "Returns the user's preferred language from the Navigator API."
+entrypoint: rooks
+status: stable
+aliases: []
+related: []
 ---
 
 ## About
@@ -11,8 +13,7 @@ Navigator Language hook for React.
 
 ## Examples
 
-```jsx
-import "./styles.css";
+```tsx
 import { useNavigatorLanguage } from "rooks";
 
 function App() {
@@ -33,6 +34,22 @@ function App() {
 export default App;
 ```
 
-### Return value
+## Return value
 
-A language (String) is returned.
+Returns the browser's preferred BCP 47 language tag as `string`, or `null` during server rendering.
+
+## Parameters
+
+This hook takes no parameters.
+
+## Behavior and lifecycle
+
+The hook reads `navigator.language`, updates after `window.languagechange`, and removes that listener on cleanup. It does not expose the full `navigator.languages` preference list.
+
+## Compatibility and accessibility
+
+SSR returns `null`; use a deterministic default so translated text does not cause a hydration mismatch. Language preference is a hint, not a guarantee of literacy or locale, and should not silently override an explicit user choice.
+
+## Related
+
+- [Browse all hooks](/docs/hooks)

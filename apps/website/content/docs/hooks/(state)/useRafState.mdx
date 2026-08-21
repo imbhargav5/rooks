@@ -1,17 +1,30 @@
 ---
-id: useRafState
 title: useRafState
-sidebar_label: useRafState
 description: "Updates React state on each requestAnimationFrame tick."
+entrypoint: rooks
+status: stable
+aliases: []
+related: [useRaf]
 ---
 
 ## About
 
 A drop-in replacement for `useState` that batches updates through `requestAnimationFrame`. Ideal for high-frequency event handlers (mouse move, scroll, resize) where calling `setState` on every event would cause layout thrashing. If `setState` is called multiple times before the browser paints the next frame, only the last value is applied. Pending frames are cancelled on unmount. SSR-safe: falls back to synchronous state updates when `requestAnimationFrame` is unavailable.
 
-[//]: # "Main"
-
 ## Examples
+
+```tsx
+import { useRafState } from "rooks";
+
+export default function FrameScheduledCounter() {
+  const [count, setCount] = useRafState(0);
+  return (
+    <button type="button" onClick={() => setCount((value) => value + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
 
 #### Basic usage — tracking mouse position
 
@@ -61,7 +74,8 @@ export default function ScrollProgress() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
       const total = scrollHeight - clientHeight;
       setProgress(total > 0 ? (scrollTop / total) * 100 : 0);
     };
@@ -75,17 +89,29 @@ export default function ScrollProgress() {
 }
 ```
 
-### Arguments
+## Parameters
 
-| Argument     | Type             | Description                                    | Default   |
-| ------------ | ---------------- | ---------------------------------------------- | --------- |
+| Argument     | Type             | Description                                      | Default   |
+| ------------ | ---------------- | ------------------------------------------------ | --------- |
 | initialState | `T \| (() => T)` | Initial state value or lazy initializer function | undefined |
 
-### Returns
+## Return value
 
 Returns a tuple identical in shape to `React.useState`:
 
-| Index | Type                        | Description                                                                      |
-| ----- | --------------------------- | -------------------------------------------------------------------------------- |
-| 0     | `T`                         | Current state value                                                              |
+| Index | Type                          | Description                                                                                                               |
+| ----- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 0     | `T`                           | Current state value                                                                                                       |
 | 1     | `Dispatch<SetStateAction<T>>` | Setter that queues the update via `requestAnimationFrame`; multiple calls before the next frame apply only the last value |
+
+## Behavior and lifecycle
+
+The setter keeps only the latest pending action before the next animation frame; earlier queued values or updater functions are replaced rather than composed. One frame is scheduled at a time. The pending frame is cancelled on unmount. When `requestAnimationFrame` is unavailable, including during SSR, the setter delegates synchronously to React's state setter.
+
+## Compatibility and accessibility
+
+The initial value is SSR-safe. Frame batching requires `requestAnimationFrame`; the synchronous fallback preserves functionality in non-browser runtimes. Do not use frame-delayed state for controls that require every intermediate value or immediate assistive-technology feedback.
+
+## Related
+
+- [useRaf](/docs/hooks/useRaf)

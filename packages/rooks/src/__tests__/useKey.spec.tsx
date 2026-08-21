@@ -199,7 +199,6 @@ describe("when", () => {
   it("should not trigger whenever 'when ' value is false and trigger when 'when' is true", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    console.log("container.innerHTML before", container.innerHTML);
     const valueElement = getByTestId(container as HTMLElement, "value");
     const inputElement = getByTestId(container as HTMLElement, "input");
     const toggleWhenElement = getByTestId(
