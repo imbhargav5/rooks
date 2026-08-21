@@ -199,9 +199,8 @@ describe("useFormState", () => {
 
   it("should handle async onSubmit", async () => {
     expect.hasAssertions();
-    const onSubmit = vi.fn(
-      () => new Promise<void>((resolve) => setTimeout(resolve, 100))
-    );
+    const submission = Promise.withResolvers<void>();
+    const onSubmit = vi.fn(() => submission.promise);
 
     const { result } = renderHook(() =>
       useFormState({ initialValues, onSubmit })
@@ -218,7 +217,8 @@ describe("useFormState", () => {
     expect(result.current.isSubmitting).toBe(true);
 
     await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 150));
+      submission.resolve();
+      await submission.promise;
     });
 
     expect(result.current.isSubmitting).toBe(false);

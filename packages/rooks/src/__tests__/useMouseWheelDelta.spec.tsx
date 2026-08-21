@@ -1,13 +1,18 @@
 import React from "react";
+import { vi } from "vitest";
 import { render, fireEvent, act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react";
 import { useMouseWheelDelta } from "@/hooks/useMouseWheelDelta";
 
-async function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 describe("useMouseWheelDelta", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("should be defined", () => {
     expect.hasAssertions();
     expect(useMouseWheelDelta).toBeDefined();
@@ -21,7 +26,7 @@ describe("useMouseWheelDelta", () => {
     expect(result.current.velocity).toBe(0);
   });
 
-  it("updates deltaY and velocity when wheel event is triggered", async () => {
+  it("updates deltaY and velocity when wheel event is triggered", () => {
     expect.hasAssertions();
     const TestComponent = () => {
       const { delta, velocity } = useMouseWheelDelta();
@@ -36,7 +41,7 @@ describe("useMouseWheelDelta", () => {
     const { getByTestId } = render(<TestComponent />);
     const outputElement = getByTestId("output");
     act(() => {
-      fireEvent.wheel(document, { deltaY: 50, timeStamp: Date.now() });
+      fireEvent.wheel(document, { deltaY: 50 });
     });
     expect(outputElement.textContent).not.toBe("0,0");
     if (!outputElement.textContent) {
@@ -48,9 +53,9 @@ describe("useMouseWheelDelta", () => {
 
     expect(newDelta).toBe(50);
     expect(newVelocity).toBe(0);
-    await wait(64);
+    vi.advanceTimersByTime(64);
     act(() => {
-      fireEvent.wheel(document, { deltaY: 60, timeStamp: Date.now() });
+      fireEvent.wheel(document, { deltaY: 60 });
     });
 
     expect(outputElement.textContent).not.toBe("0,0");
@@ -62,10 +67,10 @@ describe("useMouseWheelDelta", () => {
       .map((value) => parseFloat(value));
 
     expect(newDelta2).toBe(60);
-    expect(newVelocity2).toBeGreaterThan(0);
+    expect(newVelocity2).toBe(0.9375);
   });
 
-  it("calculates velocity correctly based on deltaY and time difference", async () => {
+  it("calculates velocity correctly based on deltaY and time difference", () => {
     expect.hasAssertions();
     const TestComponent = () => {
       const { delta: deltaY, velocity } = useMouseWheelDelta();
@@ -84,8 +89,7 @@ describe("useMouseWheelDelta", () => {
       fireEvent.wheel(document, { deltaY: 100 });
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
-
+    vi.advanceTimersByTime(100);
     act(() => {
       fireEvent.wheel(document, { deltaY: 150 });
     });
@@ -97,6 +101,6 @@ describe("useMouseWheelDelta", () => {
       .map((value) => parseFloat(value));
 
     expect(newDelta).toBe(150);
-    expect(newVelocity).toBeGreaterThanOrEqual(0);
+    expect(newVelocity).toBe(1.5);
   });
 });
