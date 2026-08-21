@@ -16,11 +16,16 @@ function useOutsideClickRef(
   when = true
 ): [CallbackRef] {
   const [node, setNode] = useState<HTMLElementOrNull>(null);
-  const savedHandler = useRef<(event: MouseEvent | TouchEvent) => void>(handler);
+  const savedHandler =
+    useRef<(event: MouseEvent | TouchEvent) => void>(handler);
 
   const memoizedCallback = useCallback(
     (event: MouseEvent | TouchEvent) => {
-      if (node && !node.contains(event.target as Element)) {
+      if (
+        node &&
+        event.target instanceof Node &&
+        !node.contains(event.target)
+      ) {
         savedHandler.current(event);
       }
     },
