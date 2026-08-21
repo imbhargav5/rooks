@@ -582,6 +582,27 @@ export const contributorsListData = {
       profile: "https://github.com/JulianWielga",
       contributions: ["code"],
     },
+    {
+      login: "uno",
+      name: "uno",
+      avatar_url: "https://avatars.githubusercontent.com/u/77240?v=4",
+      profile: "https://github.com/uno",
+      contributions: ["code"],
+    },
+    {
+      login: "aminya",
+      name: "Amin Ya",
+      avatar_url: "https://avatars.githubusercontent.com/u/16418197?v=4",
+      profile: "https://aminya.github.io/",
+      contributions: ["code"],
+    },
+    {
+      login: "chaitanyaj2222",
+      name: "Chaitanya Jujjavarapu",
+      avatar_url: "https://avatars.githubusercontent.com/u/56331036?v=4",
+      profile: "https://www.chaitanya.vip/",
+      contributions: ["code"],
+    },
   ],
   contributorsPerLine: 7,
 };
