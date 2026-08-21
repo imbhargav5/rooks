@@ -138,9 +138,7 @@ function useTextSelection(
     }
 
     const handleSelectionChange = () => {
-      cacheRef.current = readSelectionState(
-        targetRef.current?.current ?? null
-      );
+      cacheRef.current = readSelectionState(targetRef.current?.current ?? null);
       onStoreChange();
     };
 
@@ -149,7 +147,8 @@ function useTextSelection(
       const targetElement = targetRef.current?.current;
       if (
         targetElement &&
-        !targetElement.contains(event.target as Node) &&
+        (!(event.target instanceof Node) ||
+          !targetElement.contains(event.target)) &&
         cacheRef.current.text !== ""
       ) {
         cacheRef.current = initialSelectionState;
