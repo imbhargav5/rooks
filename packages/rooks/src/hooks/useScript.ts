@@ -117,8 +117,10 @@ function getExistingStatus(script: HTMLScriptElement | null): UseScriptStatus {
     return attribute;
   }
 
-  const readyState = (script as HTMLScriptElement & { readyState?: string })
-    .readyState;
+  const readyState =
+    "readyState" in script && typeof script.readyState === "string"
+      ? script.readyState
+      : undefined;
   if (readyState === "loaded" || readyState === "complete") {
     return "ready";
   }

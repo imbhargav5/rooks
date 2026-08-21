@@ -37,11 +37,16 @@ function useOutsideClick(
   handler: (event: MouseEvent | TouchEvent) => void,
   when = true
 ): void {
-  const savedHandler = useRef<(event: MouseEvent | TouchEvent) => void>(handler);
+  const savedHandler =
+    useRef<(event: MouseEvent | TouchEvent) => void>(handler);
 
   const memoizedCallback = useCallback(
     (event: MouseEvent | TouchEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Element)) {
+      if (
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+      ) {
         savedHandler.current(event);
       }
     },
