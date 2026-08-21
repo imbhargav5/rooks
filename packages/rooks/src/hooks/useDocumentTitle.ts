@@ -5,7 +5,7 @@
 import { noop } from "@/utils/noop";
 import { useEffect, useRef } from "react";
 
-type UseDocumentTitleOptions = {
+export type UseDocumentTitleOptions = {
   resetOnUnmount?: boolean;
 };
 
