@@ -34,7 +34,7 @@ type UseSelectableListReturnType<T> = [
 
 /**
  * useSelectableList
- * Easily select a single value from a list of values. very useful for radio buttons, select inputs  etc.
+ * Easily select a single value from a list of values. This hook is useful for radio buttons and select inputs.
  *
  * @param list - The list of values to select from
  * @param initialIndex  - The index of the initial selection
