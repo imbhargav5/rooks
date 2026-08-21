@@ -4,11 +4,9 @@ queue_rules:
   - name: default
     batch_size: 1
     queue_conditions:
-      - check-success=Build (test)
-      - check-success=Test (pnpm test)
+      - check-success=build
     merge_conditions:
-      - check-success=Build (test)
-      - check-success=Test (pnpm test)
+      - check-success=build
 pull_request_rules:
   - name: update out-of-sync PR
     conditions:
