@@ -8,6 +8,12 @@ import type { ExcludeFunction } from "@/types/utils";
 
 const defaultOptions: UseUndoStateOptions = { maxSize: 100 };
 
+const isUndoStateUpdater = <T>(
+  argument: T | ((currentValue: T) => T)
+): argument is (currentValue: T) => T => {
+  return typeof argument === "function";
+};
+
 /**
  * useUndoState hook
  * Drop in replacement for useState hook but with undo functionality.
@@ -33,14 +39,15 @@ const useUndoState = <T>(
   const push: UseUndoStatePushFunction<ExcludeFunction<T>> = useCallback(
     (argument) => {
       return setValue((current) => {
+        if (!(0 in current)) {
+          return current;
+        }
+
         const restValues =
           current.length >= maxSize ? current.slice(0, maxSize) : current;
 
-        if (typeof argument === "function") {
-          // I dislike this type assertion, but it's the only way to get the type to match
-          // as the type guard doesn't seem to be working here.
-          // eslint-disable-next-line @typescript-eslint/ban-types
-          return [(argument as Function)(current[0]), ...restValues];
+        if (isUndoStateUpdater(argument)) {
+          return [argument(current[0]), ...restValues];
         } else {
           return [argument, ...restValues];
         }
