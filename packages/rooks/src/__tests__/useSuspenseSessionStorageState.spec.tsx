@@ -5,11 +5,11 @@ import React, { Suspense } from "react";
 import {
     render,
     screen,
-    waitFor,
     act,
     fireEvent,
     cleanup
 } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { useSuspenseSessionStorageState, clearCache } from "@/hooks/useSuspenseSessionStorageState";
 
 // Mock console methods to reduce test noise
@@ -207,7 +207,7 @@ describe("useSuspenseSessionStorageState", () => {
         expect(screen.getByTestId("loading")).toBeInTheDocument();
 
         // Wait for the hook to resolve
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -226,7 +226,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -248,7 +248,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -264,7 +264,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -292,7 +292,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("user-id")).toBeInTheDocument();
         });
 
@@ -326,7 +326,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -351,7 +351,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -374,7 +374,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -407,7 +407,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -424,7 +424,7 @@ describe("useSuspenseSessionStorageState", () => {
             window.dispatchEvent(storageEvent);
         });
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count").textContent).toBe("42");
         });
     });
@@ -438,7 +438,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -460,7 +460,7 @@ describe("useSuspenseSessionStorageState", () => {
             window.dispatchEvent(storageEvent);
         });
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count").textContent).toBe("0");
         });
     });
@@ -486,7 +486,7 @@ describe("useSuspenseSessionStorageState", () => {
             </div>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
             expect(screen.getByTestId("second-value")).toBeInTheDocument();
         });
@@ -501,7 +501,7 @@ describe("useSuspenseSessionStorageState", () => {
         });
 
         // Both should be updated
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count").textContent).toBe("1");
             expect(screen.getByTestId("second-value").textContent).toBe("1");
         });
@@ -522,7 +522,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -555,7 +555,7 @@ describe("useSuspenseSessionStorageState", () => {
             </ErrorBoundary>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
 
@@ -574,7 +574,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("user-id")).toBeInTheDocument();
         });
 
@@ -603,7 +603,7 @@ describe("useSuspenseSessionStorageState", () => {
             </div>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
             expect(screen.getByTestId("second-value")).toBeInTheDocument();
         });
@@ -634,7 +634,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -653,7 +653,7 @@ describe("useSuspenseSessionStorageState", () => {
         );
 
         // Should resolve immediately from cache (no loading state)
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -680,7 +680,7 @@ describe("useSuspenseSessionStorageState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 

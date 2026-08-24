@@ -1,6 +1,7 @@
 import { vi } from "vitest";
 import React, { Suspense } from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { useSuspenseNavigatorUserAgentData } from "@/hooks/useSuspenseNavigatorUserAgentData";
 import { clearCache } from "@/hooks/useSuspenseNavigatorUserAgentData";
 
@@ -111,7 +112,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
     // Resolve the promise
     resolvePromise!(mockData);
     
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -154,7 +155,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -184,7 +185,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -242,7 +243,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </ErrorBoundary>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("error")).toBeInTheDocument();
     });
   });
@@ -282,7 +283,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </ErrorBoundary>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("error")).toBeInTheDocument();
     });
   });
@@ -302,7 +303,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -315,7 +316,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -342,7 +343,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -357,7 +358,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 
@@ -377,7 +378,7 @@ describe("useSuspenseNavigatorUserAgentData", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("data")).toBeInTheDocument();
     });
 

@@ -1,4 +1,5 @@
-import { act, renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { vi } from "vitest";
 import { useRequest } from "@/hooks/useRequest";
 
@@ -68,7 +69,7 @@ describe("useRequest matrix", () => {
         })
       );
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.data).toBe(`${value}:auto`);
       });
 
@@ -446,7 +447,7 @@ describe("useRequest matrix", () => {
         rerender({ ready: true, dep: refreshDeps[0] });
       }
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.data).toBe(`${callbackValue}:handled`);
       });
 
@@ -457,7 +458,7 @@ describe("useRequest matrix", () => {
 
       rerender({ ready: true, dep: refreshDeps[0] + 1 });
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(service).toHaveBeenCalled();
       });
 

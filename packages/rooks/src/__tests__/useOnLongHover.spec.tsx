@@ -5,8 +5,6 @@ import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import { useOnLongHover } from "@/hooks/useOnLongHover";
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 describe("useOnLongHover", () => {
   it("should be defined", () => {
     expect.hasAssertions();
@@ -20,6 +18,11 @@ describe("useOnLongHover behavior", () => {
 
   beforeEach(() => {
     callback = vi.fn();
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("triggers long hover callback when the element is hovered for the specified duration", async () => {
@@ -38,7 +41,9 @@ describe("useOnLongHover behavior", () => {
     act(() => {
       fireEvent.mouseEnter(div);
     });
-    await wait(LONG_HOVER_DURATION + 50);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(LONG_HOVER_DURATION + 50);
+    });
     act(() => {
       fireEvent.mouseLeave(div);
     });
@@ -63,7 +68,7 @@ describe("useOnLongHover behavior", () => {
       fireEvent.mouseEnter(div);
     });
     await act(async () => {
-      await wait(LONG_HOVER_DURATION - 50);
+      await vi.advanceTimersByTimeAsync(LONG_HOVER_DURATION - 50);
     });
     act(() => {
       fireEvent.mouseLeave(div);
@@ -100,7 +105,7 @@ describe("useOnLongHover behavior", () => {
       fireEvent.mouseEnter(div);
     });
     await act(async () => {
-      await wait(LONG_HOVER_DURATION + 50);
+      await vi.advanceTimersByTimeAsync(LONG_HOVER_DURATION + 50);
     });
     act(() => {
       fireEvent.mouseLeave(div);
@@ -114,7 +119,7 @@ describe("useOnLongHover behavior", () => {
       fireEvent.mouseEnter(div);
     });
     await act(async () => {
-      await wait(LONG_HOVER_DURATION + 50);
+      await vi.advanceTimersByTimeAsync(LONG_HOVER_DURATION + 50);
     });
     act(() => {
       fireEvent.mouseLeave(div);
