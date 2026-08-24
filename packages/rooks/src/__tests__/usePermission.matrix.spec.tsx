@@ -1,4 +1,5 @@
-import { act, renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { vi } from "vitest";
 import { usePermission } from "@/hooks/usePermission";
 
@@ -74,7 +75,7 @@ describe("usePermission matrix", () => {
 
     const { result } = renderHook(() => usePermission(descriptorFor(name)));
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(result.current.state).toBe(state);
     });
     expect(result.current.isSupported).toBe(true);
@@ -97,7 +98,7 @@ describe("usePermission matrix", () => {
 
       const { result } = renderHook(() => usePermission(descriptorFor(name)));
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe(from);
       });
 
@@ -105,7 +106,7 @@ describe("usePermission matrix", () => {
         permissionStatus.setState(to);
       });
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe(to);
       });
     }
@@ -129,7 +130,7 @@ describe("usePermission matrix", () => {
         usePermission(descriptorFor(name), { watch: false })
       );
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe(from);
       });
 
@@ -160,7 +161,7 @@ describe("usePermission matrix", () => {
         usePermission(descriptorFor(name), { enabled: false, watch })
       );
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe("unsupported");
       });
       expect(query).not.toHaveBeenCalled();
@@ -179,7 +180,7 @@ describe("usePermission matrix", () => {
 
       const { result } = renderHook(() => usePermission(descriptorFor(name)));
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe("unsupported");
       });
       expect(result.current.isSupported).toBe(false);
@@ -203,7 +204,7 @@ describe("usePermission matrix", () => {
 
       const { result } = renderHook(() => usePermission(descriptorFor(name)));
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.error).toBeInstanceOf(Error);
         expect(result.current.state).toBe("unsupported");
       });
@@ -250,7 +251,7 @@ describe("usePermission matrix", () => {
 
       rerender({ descriptor: descriptorFor(second) });
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(query).toHaveBeenCalledTimes(2);
         expect(result.current.state).toBe("granted");
         expect(result.current.isLoading).toBe(false);
@@ -290,13 +291,13 @@ describe("usePermission matrix", () => {
         }
       );
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe("granted");
       });
 
       rerender({ descriptor: descriptorFor(second) });
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(query).toHaveBeenCalledTimes(2);
         expect(result.current.state).toBe("granted");
         expect(result.current.isLoading).toBe(false);
@@ -324,7 +325,7 @@ describe("usePermission matrix", () => {
 
       const { result } = renderHook(() => usePermission(null));
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe("unsupported");
       });
       expect(query).not.toHaveBeenCalled();
@@ -350,7 +351,7 @@ describe("usePermission matrix", () => {
         usePermission(descriptorFor(name), { watch: false })
       );
 
-      await waitFor(() => {
+      await flushUntil(() => {
         expect(result.current.state).toBe("prompt");
       });
 

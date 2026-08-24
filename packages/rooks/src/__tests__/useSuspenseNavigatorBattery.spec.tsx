@@ -1,6 +1,7 @@
 import { vi } from "vitest";
 import React, { Suspense } from "react";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { useSuspenseNavigatorBattery } from "@/hooks/useSuspenseNavigatorBattery";
 import { clearCache } from "@/hooks/useSuspenseNavigatorBattery";
 
@@ -136,7 +137,7 @@ describe("useSuspenseNavigatorBattery", () => {
             resolvePromise!(mockBattery);
         });
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -165,7 +166,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -187,7 +188,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -211,7 +212,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -225,7 +226,7 @@ describe("useSuspenseNavigatorBattery", () => {
         });
 
         // Should update the display
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging").textContent).toBe("false");
         });
     });
@@ -242,7 +243,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("level")).toBeInTheDocument();
         });
 
@@ -256,7 +257,7 @@ describe("useSuspenseNavigatorBattery", () => {
         });
 
         // Should update the display
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("level").textContent).toBe("0.25");
         });
     });
@@ -273,7 +274,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging-time")).toBeInTheDocument();
         });
 
@@ -287,7 +288,7 @@ describe("useSuspenseNavigatorBattery", () => {
         });
 
         // Should update the display
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging-time").textContent).toBe("3600");
         });
     });
@@ -304,7 +305,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("discharging-time")).toBeInTheDocument();
         });
 
@@ -318,7 +319,7 @@ describe("useSuspenseNavigatorBattery", () => {
         });
 
         // Should update the display
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("discharging-time").textContent).toBe("1800");
         });
     });
@@ -335,7 +336,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -394,7 +395,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </ErrorBoundary>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
     });
@@ -434,7 +435,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </ErrorBoundary>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
     });
@@ -474,7 +475,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </ErrorBoundary>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
     });
@@ -492,7 +493,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -505,7 +506,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -532,7 +533,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -561,7 +562,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("charging")).toBeInTheDocument();
         });
 
@@ -609,7 +610,7 @@ describe("useSuspenseNavigatorBattery", () => {
             </ErrorBoundary>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
     });

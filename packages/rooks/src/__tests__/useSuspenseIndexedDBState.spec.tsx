@@ -5,11 +5,11 @@ import React, { Suspense } from "react";
 import {
     render,
     screen,
-    waitFor,
     act,
     fireEvent,
     cleanup
 } from "@testing-library/react";
+import { flushUntil } from "./testUtils/flushUntil";
 import { useSuspenseIndexedDBState, clearCache } from "@/hooks/useSuspenseIndexedDBState";
 
 // Mock IndexedDB for testing
@@ -266,7 +266,7 @@ describe("useSuspenseIndexedDBState", () => {
         expect(screen.getByTestId("loading")).toBeInTheDocument();
 
         // Wait for component to load
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -285,7 +285,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -305,17 +305,18 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
         // Set a value
         await act(async () => {
             fireEvent.click(screen.getByTestId("test-set"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        await flushUntil(() => {
+            expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        });
 
         // Unmount and remount to test persistence
         unmount();
@@ -330,7 +331,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -347,7 +348,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
         });
 
@@ -356,11 +357,11 @@ describe("useSuspenseIndexedDBState", () => {
         // Increment the counter
         await act(async () => {
             fireEvent.click(screen.getByTestId("increment"));
-            // Wait for async operation to complete
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("count").textContent).toBe("1");
+        await flushUntil(() => {
+            expect(screen.getByTestId("count").textContent).toBe("1");
+        });
     });
 
     it("should work with object types", async () => {
@@ -372,7 +373,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("user-name")).toBeInTheDocument();
         });
 
@@ -382,12 +383,12 @@ describe("useSuspenseIndexedDBState", () => {
         // Update the user
         await act(async () => {
             fireEvent.click(screen.getByTestId("update-user"));
-            // Wait for async operation to complete
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("user-name").textContent).toBe("John Doe");
-        expect(screen.getByTestId("user-email").textContent).toBe("john@example.com");
+        await flushUntil(() => {
+            expect(screen.getByTestId("user-name").textContent).toBe("John Doe");
+            expect(screen.getByTestId("user-email").textContent).toBe("john@example.com");
+        });
     });
 
     it("should provide working getItem method", async () => {
@@ -402,7 +403,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -427,7 +428,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -436,11 +437,11 @@ describe("useSuspenseIndexedDBState", () => {
         // Set new value
         await act(async () => {
             fireEvent.click(screen.getByTestId("test-set"));
-            // Wait for async operation to complete
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        await flushUntil(() => {
+            expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        });
     });
 
     it("should reset to initial value when deleteItem is called", async () => {
@@ -455,25 +456,27 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
         // Set a value first
         await act(async () => {
             fireEvent.click(screen.getByTestId("test-set"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        await flushUntil(() => {
+            expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        });
 
         // Delete the value
         await act(async () => {
             fireEvent.click(screen.getByTestId("test-delete"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("test-value").textContent).toBe('"default"');
+        await flushUntil(() => {
+            expect(screen.getByTestId("test-value").textContent).toBe('"default"');
+        });
     });
 
     it("should handle initializer errors and show error boundary", async () => {
@@ -492,7 +495,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("error")).toBeInTheDocument();
         });
 
@@ -516,7 +519,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("count")).toBeInTheDocument();
             expect(screen.getByTestId("second-value")).toBeInTheDocument();
         });
@@ -527,12 +530,13 @@ describe("useSuspenseIndexedDBState", () => {
         // Increment the first component
         await act(async () => {
             fireEvent.click(screen.getByTestId("increment"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        // Only the first should change
-        expect(screen.getByTestId("count").textContent).toBe("1");
-        expect(screen.getByTestId("second-value").textContent).toBe("100");
+        await flushUntil(() => {
+            // Only the first should change
+            expect(screen.getByTestId("count").textContent).toBe("1");
+            expect(screen.getByTestId("second-value").textContent).toBe("100");
+        });
     });
 
     it("should use cached result on subsequent renders with same key", async () => {
@@ -547,7 +551,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -565,7 +569,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -592,7 +596,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("test-value")).toBeInTheDocument();
         });
 
@@ -601,10 +605,11 @@ describe("useSuspenseIndexedDBState", () => {
         // Test that it actually uses the custom database
         await act(async () => {
             fireEvent.click(screen.getByTestId("test-set"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        await flushUntil(() => {
+            expect(screen.getByTestId("test-value").textContent).toBe('"new-value"');
+        });
     });
 
     it("should handle complex objects with nested data", async () => {
@@ -659,7 +664,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("user-id")).toBeInTheDocument();
         });
 
@@ -671,11 +676,12 @@ describe("useSuspenseIndexedDBState", () => {
         // Update complex data
         await act(async () => {
             fireEvent.click(screen.getByTestId("update-complex"));
-            await new Promise(resolve => setTimeout(resolve, 100));
         });
 
-        expect(screen.getByTestId("user-name").textContent).toBe("Updated User");
-        expect(screen.getByTestId("items-count").textContent).toBe("3");
+        await flushUntil(() => {
+            expect(screen.getByTestId("user-name").textContent).toBe("Updated User");
+            expect(screen.getByTestId("items-count").textContent).toBe("3");
+        });
     });
 
     it("should handle broadcast channel messages correctly", async () => {
@@ -779,7 +785,7 @@ describe("useSuspenseIndexedDBState", () => {
         );
 
         // Wait for component to load
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("broadcast-value")).toBeInTheDocument();
         });
 
@@ -795,11 +801,12 @@ describe("useSuspenseIndexedDBState", () => {
                     dbName: 'rooks-db',
                     storeName: 'state'
                 });
-                await new Promise(resolve => setTimeout(resolve, 100));
             });
 
             // Value should be updated from broadcast message
-            expect(screen.getByTestId("broadcast-value").textContent).toBe('"broadcast-update"');
+            await flushUntil(() => {
+                expect(screen.getByTestId("broadcast-value").textContent).toBe('"broadcast-update"');
+            });
 
             // Test DELETE broadcast message
             await act(async () => {
@@ -809,11 +816,12 @@ describe("useSuspenseIndexedDBState", () => {
                     dbName: 'rooks-db',
                     storeName: 'state'
                 });
-                await new Promise(resolve => setTimeout(resolve, 100));
             });
 
             // Value should be reset to initial value
-            expect(screen.getByTestId("broadcast-value").textContent).toBe('"initial"');
+            await flushUntil(() => {
+                expect(screen.getByTestId("broadcast-value").textContent).toBe('"initial"');
+            });
 
             testChannel.close();
         }
@@ -911,7 +919,7 @@ describe("useSuspenseIndexedDBState", () => {
             </SuspenseWrapper>
         );
 
-        await waitFor(() => {
+        await flushUntil(() => {
             expect(screen.getByTestId("specific-value")).toBeInTheDocument();
         });
 
@@ -927,7 +935,7 @@ describe("useSuspenseIndexedDBState", () => {
                     dbName: 'rooks-db',
                     storeName: 'state'
                 });
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 0));
             });
 
             // Value should remain unchanged
@@ -942,7 +950,7 @@ describe("useSuspenseIndexedDBState", () => {
                     dbName: 'different-db',
                     storeName: 'state'
                 });
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 0));
             });
 
             // Value should remain unchanged

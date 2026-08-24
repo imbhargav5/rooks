@@ -5,9 +5,9 @@ import {
   fireEvent,
   render,
   screen,
-  waitFor,
 } from "@testing-library/react";
 import { clearCache, useSuspenseFavicon } from "@/hooks/useSuspenseFavicon";
+import { flushUntil } from "./testUtils/flushUntil";
 
 function getFaviconLinks(): HTMLLinkElement[] {
   return Array.from(document.head.querySelectorAll('link[rel][href]')).filter(
@@ -123,7 +123,7 @@ describe("useSuspenseFavicon", () => {
 
     expect(screen.getByTestId("loading")).toBeInTheDocument();
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -139,7 +139,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value").textContent).toBe("null");
     });
   });
@@ -155,7 +155,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -181,7 +181,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -208,7 +208,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -232,7 +232,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -265,7 +265,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -309,7 +309,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -348,7 +348,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -378,7 +378,7 @@ describe("useSuspenseFavicon", () => {
       </div>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("first-value")).toBeInTheDocument();
       expect(screen.getByTestId("second-value")).toBeInTheDocument();
     });
@@ -414,7 +414,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
@@ -451,7 +451,7 @@ describe("useSuspenseFavicon", () => {
       </SuspenseWrapper>
     );
 
-    await waitFor(() => {
+    await flushUntil(() => {
       expect(screen.getByTestId("favicon-value")).toBeInTheDocument();
     });
 
