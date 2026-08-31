@@ -273,10 +273,11 @@ describe("useAsyncEffect", () => {
       await vi.advanceTimersByTimeAsync(3000);
     });
 
-    expect(result.current.error).toBeTruthy();
-    expect((result.current.error as unknown as Error).message).toBe(
-      ERROR_MESSAGE
-    );
+    expect(result.current.error).toBeInstanceOf(Error);
+    if (!(result.current.error instanceof Error)) {
+      throw new TypeError("Expected the async effect to forward an Error");
+    }
+    expect(result.current.error.message).toBe(ERROR_MESSAGE);
     vi.useRealTimers();
     vi.clearAllMocks();
   });
