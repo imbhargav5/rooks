@@ -43,7 +43,7 @@ function useCounter(initialValue: number): CounterHandler {
    *
    * Decrement counter by an amount
    *
-   * @param {*} decrAmount
+   * @param {number} decrAmount
    */
   const decrementBy = useCallback(
     (decrAmount: number) => {
