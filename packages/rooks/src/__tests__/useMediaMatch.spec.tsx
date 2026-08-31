@@ -1,6 +1,8 @@
 import { vi } from "vitest";
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 import TestRenderer from "react-test-renderer";
+import { hydrateRoot } from "react-dom/client";
+import { renderToString } from "react-dom/server";
 import { useMediaMatch } from "@/hooks/useMediaMatch";
 
 const { act } = TestRenderer;
@@ -97,6 +99,48 @@ describe("useMediaMatch", () => {
 
     expect(result.current).toBe(true);
     expect(matchMedia).toHaveBeenCalledWith("(max-width: 600px)");
+  });
+
+  it("hydrates the server snapshot before reporting the client match", async () => {
+    expect.hasAssertions();
+    const addEventListener = vi.fn();
+    const removeEventListener = vi.fn();
+    const onRecoverableError = vi.fn();
+
+    window.matchMedia = vi
+      .fn<(query: string) => MediaQueryList>()
+      .mockReturnValue({
+        addEventListener,
+        matches: true,
+        removeEventListener,
+      } as unknown as MediaQueryList);
+
+    function MediaMatchStatus() {
+      return <span>{String(useMediaMatch("(max-width: 600px)"))}</span>;
+    }
+
+    const container = document.createElement("div");
+    container.innerHTML = renderToString(<MediaMatchStatus />);
+    expect(container).toHaveTextContent("false");
+
+    const root = hydrateRoot(container, <MediaMatchStatus />, {
+      onRecoverableError,
+    });
+
+    try {
+      await waitFor(() => {
+        expect(container).toHaveTextContent("true");
+      });
+      expect(onRecoverableError).not.toHaveBeenCalled();
+      expect(addEventListener).toHaveBeenCalledWith(
+        "change",
+        expect.any(Function)
+      );
+    } finally {
+      act(() => {
+        root.unmount();
+      });
+    }
   });
 });
 
