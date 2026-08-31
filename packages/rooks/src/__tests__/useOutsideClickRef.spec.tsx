@@ -1,12 +1,6 @@
 /**
  */
-import {
-  render,
-  cleanup,
-  fireEvent,
-  act,
-  getByTestId,
-} from "@testing-library/react";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 import React, { useState } from "react";
 import { useOutsideClickRef } from "@/hooks/useOutsideClickRef";
 
@@ -117,9 +111,9 @@ describe("useOutsideClickRef", () => {
 
   it("should trigger the calback when click on outide", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const app = getByTestId(container as HTMLElement, "app");
-    const message = getByTestId(container as HTMLElement, "message");
+    const { getByTestId } = render(<App />);
+    const app = getByTestId("app");
+    const message = getByTestId("message");
     act(() => {
       fireEvent.click(app);
     });
@@ -128,9 +122,9 @@ describe("useOutsideClickRef", () => {
 
   it("should not trigger the calback when click the volume button (inside)", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const button = getByTestId(container as HTMLElement, "button");
-    const message = getByTestId(container as HTMLElement, "message");
+    const { getByTestId } = render(<App />);
+    const button = getByTestId("button");
+    const message = getByTestId("message");
 
     act(() => {
       fireEvent.click(button);
