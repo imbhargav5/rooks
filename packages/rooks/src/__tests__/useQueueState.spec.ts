@@ -1,8 +1,5 @@
-import { renderHook } from "@testing-library/react";
-import TestRenderer from "react-test-renderer";
+import { act, renderHook } from "@testing-library/react";
 import { useQueueState } from "@/hooks/useQueueState";
-
-const { act } = TestRenderer;
 
 describe("useQueueState", () => {
   it("should be defined", () => {
