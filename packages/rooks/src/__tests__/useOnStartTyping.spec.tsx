@@ -23,7 +23,10 @@ describe("useOnStartTyping", () => {
     beforeEach(() => {
         vi.clearAllMocks();
         // Remove focus from any element
-        (document.activeElement as HTMLElement)?.blur?.();
+        const activeElement = document.activeElement;
+        if (activeElement instanceof HTMLElement) {
+            activeElement.blur();
+        }
     });
 
     it("should trigger callback for a-z/A-Z when includeAZ is true (default)", () => {
