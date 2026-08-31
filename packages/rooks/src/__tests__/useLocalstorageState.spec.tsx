@@ -5,7 +5,6 @@ import React from "react";
 import {
   render,
   cleanup,
-  getByTestId,
   fireEvent,
   act,
   waitFor,
@@ -86,8 +85,8 @@ describe("useLocalstorageState basic", () => {
 
   it("initializes correctly", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const { getByTestId } = render(<App />);
+    const valueElement = getByTestId("value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
@@ -110,15 +109,12 @@ describe("useLocalstorageState basic", () => {
 
   it("setting the new value", async () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const setToNewValueButton = getByTestId(
-      container as HTMLElement,
-      "new-value"
-    );
+    const { getByTestId } = render(<App />);
+    const setToNewValueButton = getByTestId("new-value");
     act(() => {
       fireEvent.click(setToNewValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const valueElement = getByTestId("value");
     await waitFor(() => expect(valueElement.innerHTML).toBe("new value"));
   });
 
