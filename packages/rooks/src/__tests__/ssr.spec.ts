@@ -1,33 +1,71 @@
 /**
  * @vitest-environment node
  */
+import { PassThrough } from "node:stream";
+import { createElement, Suspense } from "react";
+import { renderToPipeableStream, renderToString } from "react-dom/server";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 
-// Mock React hooks for SSR testing. These mocks must be declared at module
-// scope because Vitest hoists vi.mock calls before test setup.
-vi.mock("react", () => ({
-  useState: vi.fn((init) => [
-    typeof init === "function" ? init() : init,
-    vi.fn(),
-  ]),
-  useEffect: vi.fn(),
-  useInsertionEffect: vi.fn(),
-  useLayoutEffect: vi.fn(),
-  useMemo: vi.fn((fn) => fn()),
-  useCallback: vi.fn((fn) => fn),
-  useRef: vi.fn((init) => ({ current: init })),
-  useReducer: vi.fn((reducer, init) => [init, vi.fn()]),
-  useSyncExternalStore: vi.fn((subscribe, getSnapshot, getServerSnapshot) =>
-    getServerSnapshot ? getServerSnapshot() : null
-  ),
-}));
+function renderHookOnServer<T>(useHook: () => T): T {
+  let result!: T;
+
+  function ServerHookHarness() {
+    // The server renderer is synchronous; capture the hook's server snapshot
+    // so each test can assert it after React completes the render.
+    // eslint-disable-next-line react-hooks/globals
+    result = useHook();
+    return null;
+  }
+
+  renderToString(createElement(ServerHookHarness));
+
+  return result;
+}
+
+function renderSuspendingHookOnServer(useHook: () => unknown): Promise<string> {
+  function ServerHookHarness() {
+    useHook();
+    return null;
+  }
+
+  return new Promise((resolve, reject) => {
+    const output = new PassThrough();
+    let html = "";
+
+    output.setEncoding("utf8");
+    output.on("data", (chunk: string) => {
+      html += chunk;
+    });
+    output.on("end", () => resolve(html));
+    output.on("error", reject);
+
+    const stream = renderToPipeableStream(
+      createElement(
+        "div",
+        null,
+        createElement("span", { hidden: true }, "SSR shell"),
+        createElement(
+          Suspense,
+          { fallback: createElement("span", null, "Loading") },
+          createElement(ServerHookHarness)
+        )
+      ),
+      {
+        onError: reject,
+        onShellError: reject,
+        onShellReady() {
+          stream.pipe(output);
+        },
+      }
+    );
+  });
+}
 
 /**
  * SSR Environment Tests
  *
- * These tests run in a Node.js environment (no window/document) to verify
- * that hooks handle SSR gracefully. We mock React's hooks since they can't
- * run outside of a React component context.
+ * These tests run in a Node.js environment (no window/document) and render
+ * hooks through React's server renderer to verify their real SSR behavior.
  */
 
 describe("SSR Environment Detection", () => {
@@ -59,11 +97,15 @@ describe("SSR Environment Detection", () => {
       const { useMediaMatch } = await import("@/hooks/useMediaMatch");
 
       // Default value is false (via getServerSnapshot)
-      const result1 = useMediaMatch("(max-width: 600px)");
+      const result1 = renderHookOnServer(() =>
+        useMediaMatch("(max-width: 600px)")
+      );
       expect(result1).toBe(false);
 
       // Custom default value
-      const result2 = useMediaMatch("(max-width: 600px)", true);
+      const result2 = renderHookOnServer(() =>
+        useMediaMatch("(max-width: 600px)", true)
+      );
       expect(result2).toBe(true);
 
       // No console warning with useSyncExternalStore approach
@@ -78,7 +120,9 @@ describe("SSR Environment Detection", () => {
       const { useBroadcastChannel } =
         await import("@/hooks/useBroadcastChannel");
 
-      const result = useBroadcastChannel("test-channel");
+      const result = renderHookOnServer(() =>
+        useBroadcastChannel("test-channel")
+      );
       expect(result.isSupported).toBe(false);
     });
   });
@@ -89,8 +133,8 @@ describe("SSR Environment Detection", () => {
 
       const { useTemporalNow } = await import("@/hooks/useTemporalNow");
 
-      expect(() => useTemporalNow()).not.toThrow();
-      expect(useTemporalNow()).toBe(null);
+      expect(() => renderHookOnServer(() => useTemporalNow())).not.toThrow();
+      expect(renderHookOnServer(() => useTemporalNow())).toBe(null);
     });
   });
 
@@ -98,13 +142,14 @@ describe("SSR Environment Detection", () => {
     it("should return null when rendered on the server", async () => {
       expect.hasAssertions();
 
-      const { useTemporalCountdown } = await import(
-        "@/hooks/useTemporalCountdown"
-      );
+      const { useTemporalCountdown } =
+        await import("@/hooks/useTemporalCountdown");
 
-      const result = useTemporalCountdown({
-        target: "2099-01-01T00:00:00Z",
-      });
+      const result = renderHookOnServer(() =>
+        useTemporalCountdown({
+          target: "2099-01-01T00:00:00Z",
+        })
+      );
       expect(result).toBe(null);
     });
   });
@@ -113,12 +158,12 @@ describe("SSR Environment Detection", () => {
     it("should return null when rendered on the server", async () => {
       expect.hasAssertions();
 
-      const { useTemporalElapsed } = await import(
-        "@/hooks/useTemporalElapsed"
-      );
+      const { useTemporalElapsed } = await import("@/hooks/useTemporalElapsed");
 
-      expect(() => useTemporalElapsed()).not.toThrow();
-      expect(useTemporalElapsed()).toBe(null);
+      expect(() =>
+        renderHookOnServer(() => useTemporalElapsed())
+      ).not.toThrow();
+      expect(renderHookOnServer(() => useTemporalElapsed())).toBe(null);
     });
   });
 
@@ -128,10 +173,12 @@ describe("SSR Environment Detection", () => {
 
       const { useTemporalAge } = await import("@/hooks/useTemporalAge");
 
-      const result = useTemporalAge({
-        date: "1990-01-01",
-        timeZone: "UTC",
-      });
+      const result = renderHookOnServer(() =>
+        useTemporalAge({
+          date: "1990-01-01",
+          timeZone: "UTC",
+        })
+      );
       expect(result).toBe(null);
     });
   });
@@ -143,7 +190,7 @@ describe("SSR Environment Detection", () => {
       const { useMeasure } = await import("@/hooks/useMeasure");
 
       // The hook should not throw in SSR
-      expect(() => useMeasure()).not.toThrow();
+      expect(() => renderHookOnServer(() => useMeasure())).not.toThrow();
     });
   });
 
@@ -152,7 +199,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useWindowEventListener } =
         await import("@/hooks/useWindowEventListener");
-      expect(() => useWindowEventListener("click", vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useWindowEventListener("click", vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -161,7 +210,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useDocumentEventListener } =
         await import("@/hooks/useDocumentEventListener");
-      expect(() => useDocumentEventListener("click", vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDocumentEventListener("click", vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -170,7 +221,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useEventListener } = await import("@/hooks/useEventListener");
       expect(() =>
-        useEventListener("click", vi.fn(), { target: null })
+        renderHookOnServer(() =>
+          useEventListener("click", vi.fn(), { target: null })
+        )
       ).not.toThrow();
     });
   });
@@ -178,13 +231,13 @@ describe("SSR Environment Detection", () => {
   describe("useBrowserCookieState SSR", () => {
     it("should throw when document is undefined", async () => {
       expect.hasAssertions();
-      const {
-        BROWSER_COOKIE_STATE_ERROR_MESSAGE,
-        useBrowserCookieState,
-      } = await import("@/hooks/useBrowserCookieState");
+      const { BROWSER_COOKIE_STATE_ERROR_MESSAGE, useBrowserCookieState } =
+        await import("@/hooks/useBrowserCookieState");
 
       expect(() =>
-        useBrowserCookieState("theme", "light", { path: "/" })
+        renderHookOnServer(() =>
+          useBrowserCookieState("theme", "light", { path: "/" })
+        )
       ).toThrow(BROWSER_COOKIE_STATE_ERROR_MESSAGE);
     });
   });
@@ -193,7 +246,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw when window is undefined", async () => {
       expect.hasAssertions();
       const { useOnWindowScroll } = await import("@/hooks/useOnWindowScroll");
-      expect(() => useOnWindowScroll(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnWindowScroll(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -201,7 +256,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw when window is undefined", async () => {
       expect.hasAssertions();
       const { useOnWindowResize } = await import("@/hooks/useOnWindowResize");
-      expect(() => useOnWindowResize(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnWindowResize(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -211,7 +268,16 @@ describe("SSR Environment Detection", () => {
       const { useGlobalObjectEventListener } =
         await import("@/hooks/useGlobalObjectEventListener");
       expect(() =>
-        useGlobalObjectEventListener(undefined, "click", vi.fn())
+        renderHookOnServer(() =>
+          useGlobalObjectEventListener(
+            undefined,
+            "click",
+            vi.fn(),
+            {},
+            true,
+            false
+          )
+        )
       ).not.toThrow();
     });
   });
@@ -225,7 +291,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useOutsideClick } = await import("@/hooks/useOutsideClick");
       const ref = { current: null };
-      expect(() => useOutsideClick(ref, vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOutsideClick(ref, vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -233,7 +301,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw when document is undefined", async () => {
       expect.hasAssertions();
       const { useOutsideClickRef } = await import("@/hooks/useOutsideClickRef");
-      expect(() => useOutsideClickRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOutsideClickRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -241,7 +311,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useOnClickRef } = await import("@/hooks/useOnClickRef");
-      expect(() => useOnClickRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnClickRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -249,7 +321,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useOnHoverRef } = await import("@/hooks/useOnHoverRef");
-      expect(() => useOnHoverRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnHoverRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -257,7 +331,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useOnLongPress } = await import("@/hooks/useOnLongPress");
-      expect(() => useOnLongPress(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnLongPress(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -265,7 +341,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useOnLongHover } = await import("@/hooks/useOnLongHover");
-      expect(() => useOnLongHover(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnLongHover(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -277,7 +355,7 @@ describe("SSR Environment Detection", () => {
     it("should return null dimensions when window is undefined", async () => {
       expect.hasAssertions();
       const { useWindowSize } = await import("@/hooks/useWindowSize");
-      const result = useWindowSize();
+      const result = renderHookOnServer(() => useWindowSize());
       expect(result.innerHeight).toBe(null);
       expect(result.innerWidth).toBe(null);
       expect(result.outerHeight).toBe(null);
@@ -290,7 +368,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useWindowScrollPosition } =
         await import("@/hooks/useWindowScrollPosition");
-      expect(() => useWindowScrollPosition()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useWindowScrollPosition())
+      ).not.toThrow();
     });
   });
 
@@ -298,7 +378,7 @@ describe("SSR Environment Detection", () => {
     it("should return null when window is undefined", async () => {
       expect.hasAssertions();
       const { useOrientation } = await import("@/hooks/useOrientation");
-      const result = useOrientation();
+      const result = renderHookOnServer(() => useOrientation());
       expect(result).toBe(null);
     });
   });
@@ -307,7 +387,7 @@ describe("SSR Environment Detection", () => {
     it("should handle SSR gracefully", async () => {
       expect.hasAssertions();
       const { useDimensionsRef } = await import("@/hooks/useDimensionsRef");
-      expect(() => useDimensionsRef()).not.toThrow();
+      expect(() => renderHookOnServer(() => useDimensionsRef())).not.toThrow();
     });
   });
 
@@ -320,7 +400,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useLocalstorageState } =
         await import("@/hooks/useLocalstorageState");
-      const [value] = useLocalstorageState("test-key", "initial");
+      const [value] = renderHookOnServer(() =>
+        useLocalstorageState("test-key", "initial")
+      );
       expect(value).toBe("initial");
     });
   });
@@ -330,59 +412,59 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useSessionstorageState } =
         await import("@/hooks/useSessionstorageState");
-      const [value] = useSessionstorageState("test-key", "initial");
+      const [value] = renderHookOnServer(() =>
+        useSessionstorageState("test-key", "initial")
+      );
       expect(value).toBe("initial");
     });
   });
 
   // ============================================
-  // Suspense Hooks (throw Promise)
+  // Suspense Hooks
   // ============================================
 
   describe("useSuspenseLocalStorageState SSR", () => {
-    it("should throw a Promise for Suspense", async () => {
+    it("should render its Suspense fallback", async () => {
       expect.hasAssertions();
       const { useSuspenseLocalStorageState } =
         await import("@/hooks/useSuspenseLocalStorageState");
-      try {
-        useSuspenseLocalStorageState("test-key", (val) => val ?? "default");
-        expect.fail("Should have thrown");
-      } catch (thrown) {
-        expect(thrown).toBeInstanceOf(Promise);
-      }
+
+      const html = await renderSuspendingHookOnServer(() =>
+        useSuspenseLocalStorageState("test-key", (val) => val ?? "default")
+      );
+
+      expect(html).toContain("Loading");
     });
   });
 
   describe("useSuspenseSessionStorageState SSR", () => {
-    it("should throw a Promise for Suspense", async () => {
+    it("should render its Suspense fallback", async () => {
       expect.hasAssertions();
       const { useSuspenseSessionStorageState } =
         await import("@/hooks/useSuspenseSessionStorageState");
-      try {
-        useSuspenseSessionStorageState("test-key", (val) => val ?? "default");
-        expect.fail("Should have thrown");
-      } catch (thrown) {
-        expect(thrown).toBeInstanceOf(Promise);
-      }
+
+      const html = await renderSuspendingHookOnServer(() =>
+        useSuspenseSessionStorageState("test-key", (val) => val ?? "default")
+      );
+
+      expect(html).toContain("Loading");
     });
   });
 
   describe("useSuspenseIndexedDBState SSR", () => {
-    it("should throw a Promise for Suspense", async () => {
+    it("should render its Suspense fallback", async () => {
       expect.hasAssertions();
       const { useSuspenseIndexedDBState } =
         await import("@/hooks/useSuspenseIndexedDBState");
-      try {
-        useSuspenseIndexedDBState({
-          databaseName: "test-db",
+
+      const html = await renderSuspendingHookOnServer(() =>
+        useSuspenseIndexedDBState("test-key", (val) => val ?? "default", {
+          dbName: "test-db",
           storeName: "test-store",
-          key: "test-key",
-          initializer: (val) => val ?? "default",
-        });
-        expect.fail("Should have thrown");
-      } catch (thrown) {
-        expect(thrown).toBeInstanceOf(Promise);
-      }
+        })
+      );
+
+      expect(html).toContain("Loading");
     });
   });
 
@@ -391,7 +473,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useSuspenseNavigatorBattery } =
         await import("@/hooks/useSuspenseNavigatorBattery");
-      expect(() => useSuspenseNavigatorBattery()).toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSuspenseNavigatorBattery())
+      ).toThrow();
     });
   });
 
@@ -399,7 +483,7 @@ describe("SSR Environment Detection", () => {
     it("should throw a browser-only error in SSR", async () => {
       expect.hasAssertions();
       const { useSuspenseFavicon } = await import("@/hooks/useSuspenseFavicon");
-      expect(() => useSuspenseFavicon()).toThrow(
+      expect(() => renderHookOnServer(() => useSuspenseFavicon())).toThrow(
         "useSuspenseFavicon can only be used in a browser environment."
       );
     });
@@ -410,7 +494,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useSuspenseNavigatorUserAgentData } =
         await import("@/hooks/useSuspenseNavigatorUserAgentData");
-      expect(() => useSuspenseNavigatorUserAgentData()).toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSuspenseNavigatorUserAgentData())
+      ).toThrow();
     });
   });
 
@@ -422,7 +508,7 @@ describe("SSR Environment Detection", () => {
     it("should return isSupported=false when navigator is undefined", async () => {
       expect.hasAssertions();
       const { useClipboard } = await import("@/hooks/useClipboard");
-      const result = useClipboard();
+      const result = renderHookOnServer(() => useClipboard());
       expect(result.isSupported).toBe(false);
     });
   });
@@ -431,7 +517,7 @@ describe("SSR Environment Detection", () => {
     it("should return isSupported=false when navigator is undefined", async () => {
       expect.hasAssertions();
       const { useShare } = await import("@/hooks/useShare");
-      const result = useShare();
+      const result = renderHookOnServer(() => useShare());
       expect(result.isSupported).toBe(false);
     });
   });
@@ -444,7 +530,7 @@ describe("SSR Environment Detection", () => {
     it("should return null when window is undefined", async () => {
       expect.hasAssertions();
       const { useOnline } = await import("@/hooks/useOnline");
-      const result = useOnline();
+      const result = renderHookOnServer(() => useOnline());
       expect(result).toBe(null);
     });
   });
@@ -454,7 +540,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useNetworkInformation } =
         await import("@/hooks/useNetworkInformation");
-      expect(() => useNetworkInformation()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useNetworkInformation())
+      ).not.toThrow();
     });
   });
 
@@ -466,7 +554,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useKey } = await import("@/hooks/useKey");
-      expect(() => useKey(["Enter"], vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useKey(["Enter"], vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -474,7 +564,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useKeys } = await import("@/hooks/useKeys");
-      expect(() => useKeys(["Enter", "Escape"], vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useKeys(["Enter", "Escape"], vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -482,7 +574,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useKeyBindings } = await import("@/hooks/useKeyBindings");
-      expect(() => useKeyBindings({ Enter: vi.fn() })).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useKeyBindings({ Enter: vi.fn() }))
+      ).not.toThrow();
     });
   });
 
@@ -490,7 +584,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useKeyRef } = await import("@/hooks/useKeyRef");
-      expect(() => useKeyRef(["Enter"], vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useKeyRef(["Enter"], vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -498,7 +594,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useOnStartTyping } = await import("@/hooks/useOnStartTyping");
-      expect(() => useOnStartTyping(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useOnStartTyping(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -510,7 +608,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMouse } = await import("@/hooks/useMouse");
-      expect(() => useMouse()).not.toThrow();
+      expect(() => renderHookOnServer(() => useMouse())).not.toThrow();
     });
   });
 
@@ -518,7 +616,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMouseMoveDelta } = await import("@/hooks/useMouseMoveDelta");
-      expect(() => useMouseMoveDelta()).not.toThrow();
+      expect(() => renderHookOnServer(() => useMouseMoveDelta())).not.toThrow();
     });
   });
 
@@ -526,7 +624,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMouseWheelDelta } = await import("@/hooks/useMouseWheelDelta");
-      expect(() => useMouseWheelDelta()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMouseWheelDelta())
+      ).not.toThrow();
     });
   });
 
@@ -538,7 +638,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDocumentTitle } = await import("@/hooks/useDocumentTitle");
-      expect(() => useDocumentTitle("Test Title")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDocumentTitle("Test Title"))
+      ).not.toThrow();
     });
   });
 
@@ -547,7 +649,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useDocumentVisibilityState } =
         await import("@/hooks/useDocumentVisibilityState");
-      expect(() => useDocumentVisibilityState()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDocumentVisibilityState())
+      ).not.toThrow();
     });
   });
 
@@ -555,7 +659,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useLockBodyScroll } = await import("@/hooks/useLockBodyScroll");
-      expect(() => useLockBodyScroll()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useLockBodyScroll(true))
+      ).not.toThrow();
     });
   });
 
@@ -563,7 +669,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { usePageLeave } = await import("@/hooks/usePageLeave");
-      expect(() => usePageLeave(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePageLeave(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -571,7 +679,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useBeforeUnload } = await import("@/hooks/useBeforeUnload");
-      expect(() => useBeforeUnload()).not.toThrow();
+      expect(() => renderHookOnServer(() => useBeforeUnload())).not.toThrow();
     });
   });
 
@@ -583,7 +691,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useInViewRef } = await import("@/hooks/useInViewRef");
-      expect(() => useInViewRef()).not.toThrow();
+      expect(() => renderHookOnServer(() => useInViewRef())).not.toThrow();
     });
   });
 
@@ -592,7 +700,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useIntersectionObserverRef } =
         await import("@/hooks/useIntersectionObserverRef");
-      expect(() => useIntersectionObserverRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useIntersectionObserverRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -602,7 +712,9 @@ describe("SSR Environment Detection", () => {
       const { useMutationObserver } =
         await import("@/hooks/useMutationObserver");
       const ref = { current: null };
-      expect(() => useMutationObserver(ref, vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMutationObserver(ref, vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -611,7 +723,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useMutationObserverRef } =
         await import("@/hooks/useMutationObserverRef");
-      expect(() => useMutationObserverRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMutationObserverRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -620,7 +734,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useResizeObserverRef } =
         await import("@/hooks/useResizeObserverRef");
-      expect(() => useResizeObserverRef(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useResizeObserverRef(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -630,7 +746,9 @@ describe("SSR Environment Detection", () => {
       const { useBoundingclientrect } =
         await import("@/hooks/useBoundingclientrect");
       const ref = { current: null };
-      expect(() => useBoundingclientrect(ref)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useBoundingclientrect(ref))
+      ).not.toThrow();
     });
   });
 
@@ -639,7 +757,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useBoundingclientrectRef } =
         await import("@/hooks/useBoundingclientrectRef");
-      expect(() => useBoundingclientrectRef()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useBoundingclientrectRef())
+      ).not.toThrow();
     });
   });
 
@@ -651,7 +771,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useGeolocation } = await import("@/hooks/useGeolocation");
-      expect(() => useGeolocation()).not.toThrow();
+      expect(() => renderHookOnServer(() => useGeolocation())).not.toThrow();
     });
   });
 
@@ -660,7 +780,7 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useNavigatorLanguage } =
         await import("@/hooks/useNavigatorLanguage");
-      const result = useNavigatorLanguage();
+      const result = renderHookOnServer(() => useNavigatorLanguage());
       expect(result).toBe(null);
     });
   });
@@ -674,7 +794,7 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { usePreferredColorScheme } =
         await import("@/hooks/usePreferredColorScheme");
-      const result = usePreferredColorScheme();
+      const result = renderHookOnServer(() => usePreferredColorScheme());
       expect(result.colorScheme).toBe(null);
     });
   });
@@ -684,7 +804,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { usePrefersReducedMotion } =
         await import("@/hooks/usePrefersReducedMotion");
-      expect(() => usePrefersReducedMotion()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePrefersReducedMotion())
+      ).not.toThrow();
     });
   });
 
@@ -696,7 +818,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useAudio } = await import("@/hooks/useAudio");
-      expect(() => useAudio({ src: "test.mp3" })).not.toThrow();
+      expect(() => renderHookOnServer(() => useAudio())).not.toThrow();
     });
   });
 
@@ -704,7 +826,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useVideo } = await import("@/hooks/useVideo");
-      expect(() => useVideo({ src: "test.mp4" })).not.toThrow();
+      expect(() => renderHookOnServer(() => useVideo())).not.toThrow();
     });
   });
 
@@ -712,7 +834,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMediaRecorder } = await import("@/hooks/useMediaRecorder");
-      expect(() => useMediaRecorder({})).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMediaRecorder(null))
+      ).not.toThrow();
     });
   });
 
@@ -720,7 +844,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSpeech } = await import("@/hooks/useSpeech");
-      expect(() => useSpeech("Hello")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSpeech({ text: "Hello" }))
+      ).not.toThrow();
     });
   });
 
@@ -728,7 +854,11 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useVibrate } = await import("@/hooks/useVibrate");
-      expect(() => useVibrate([100, 200, 100])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() =>
+          useVibrate({ isEnabled: true, pattern: [100, 200, 100] })
+        )
+      ).not.toThrow();
     });
   });
 
@@ -740,7 +870,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFullscreen } = await import("@/hooks/useFullscreen");
-      expect(() => useFullscreen()).not.toThrow();
+      expect(() => renderHookOnServer(() => useFullscreen())).not.toThrow();
     });
   });
 
@@ -750,7 +880,9 @@ describe("SSR Environment Detection", () => {
       const { usePictureInPictureApi } =
         await import("@/hooks/usePictureInPictureApi");
       const ref = { current: null };
-      expect(() => usePictureInPictureApi(ref)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePictureInPictureApi(ref))
+      ).not.toThrow();
     });
   });
 
@@ -762,7 +894,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useNotification } = await import("@/hooks/useNotification");
-      expect(() => useNotification()).not.toThrow();
+      expect(() => renderHookOnServer(() => useNotification())).not.toThrow();
     });
   });
 
@@ -771,7 +903,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useIdleDetectionApi } =
         await import("@/hooks/useIdleDetectionApi");
-      expect(() => useIdleDetectionApi()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useIdleDetectionApi())
+      ).not.toThrow();
     });
   });
 
@@ -780,7 +914,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useScreenDetailsApi } =
         await import("@/hooks/useScreenDetailsApi");
-      expect(() => useScreenDetailsApi()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useScreenDetailsApi())
+      ).not.toThrow();
     });
   });
 
@@ -788,7 +924,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR with valid resource name", async () => {
       expect.hasAssertions();
       const { useWebLocksApi } = await import("@/hooks/useWebLocksApi");
-      expect(() => useWebLocksApi("test-resource")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useWebLocksApi("test-resource"))
+      ).not.toThrow();
     });
   });
 
@@ -796,7 +934,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useWebWorker } = await import("@/hooks/useWebWorker");
-      expect(() => useWebWorker("worker.js")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useWebWorker("worker.js"))
+      ).not.toThrow();
     });
   });
 
@@ -808,7 +948,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFocus } = await import("@/hooks/useFocus");
-      expect(() => useFocus({})).not.toThrow();
+      expect(() => renderHookOnServer(() => useFocus({}))).not.toThrow();
     });
   });
 
@@ -816,7 +956,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFocusWithin } = await import("@/hooks/useFocusWithin");
-      expect(() => useFocusWithin({})).not.toThrow();
+      expect(() => renderHookOnServer(() => useFocusWithin({}))).not.toThrow();
     });
   });
 
@@ -828,7 +968,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFileDropRef } = await import("@/hooks/useFileDropRef");
-      expect(() => useFileDropRef({ onDrop: vi.fn() })).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useFileDropRef({}, { onDrop: vi.fn() }))
+      ).not.toThrow();
     });
   });
 
@@ -836,7 +978,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useIsDroppingFiles } = await import("@/hooks/useIsDroppingFiles");
-      expect(() => useIsDroppingFiles()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useIsDroppingFiles())
+      ).not.toThrow();
     });
   });
 
@@ -848,7 +992,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFetch } = await import("@/hooks/useFetch");
-      expect(() => useFetch("https://example.com/api")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useFetch("https://example.com/api"))
+      ).not.toThrow();
     });
   });
 
@@ -860,7 +1006,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given value", async () => {
       expect.hasAssertions();
       const { useCounter } = await import("@/hooks/useCounter");
-      const result = useCounter(5);
+      const result = renderHookOnServer(() => useCounter(5));
       expect(result.value).toBe(5);
     });
   });
@@ -869,7 +1015,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given value", async () => {
       expect.hasAssertions();
       const { useToggle } = await import("@/hooks/useToggle");
-      const [value] = useToggle(true);
+      const [value] = renderHookOnServer(() => useToggle(true));
       expect(value).toBe(true);
     });
   });
@@ -878,7 +1024,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given array", async () => {
       expect.hasAssertions();
       const { useArrayState } = await import("@/hooks/useArrayState");
-      const [value] = useArrayState([1, 2, 3]);
+      const [value] = renderHookOnServer(() => useArrayState([1, 2, 3]));
       expect(value).toEqual([1, 2, 3]);
     });
   });
@@ -887,7 +1033,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMapState } = await import("@/hooks/useMapState");
-      expect(() => useMapState({ key: "value" })).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMapState({ key: "value" }))
+      ).not.toThrow();
     });
   });
 
@@ -895,7 +1043,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useNativeMapState } = await import("@/hooks/useNativeMapState");
-      expect(() => useNativeMapState()).not.toThrow();
+      expect(() => renderHookOnServer(() => useNativeMapState())).not.toThrow();
     });
   });
 
@@ -903,7 +1051,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given array", async () => {
       expect.hasAssertions();
       const { useQueueState } = await import("@/hooks/useQueueState");
-      const [value] = useQueueState([1, 2, 3]);
+      const [value] = renderHookOnServer(() => useQueueState([1, 2, 3]));
       expect(value).toEqual([1, 2, 3]);
     });
   });
@@ -912,7 +1060,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given array", async () => {
       expect.hasAssertions();
       const { useStackState } = await import("@/hooks/useStackState");
-      const [value] = useStackState([1, 2, 3]);
+      const [value] = renderHookOnServer(() => useStackState([1, 2, 3]));
       expect(value).toEqual([1, 2, 3]);
     });
   });
@@ -921,7 +1069,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSetState } = await import("@/hooks/useSetState");
-      expect(() => useSetState(new Set(["value"]))).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSetState(new Set(["value"])))
+      ).not.toThrow();
     });
   });
 
@@ -930,7 +1080,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useFormState } = await import("@/hooks/useFormState");
       expect(() =>
-        useFormState({ initialValues: { name: "test" } })
+        renderHookOnServer(() =>
+          useFormState({ initialValues: { name: "test" } })
+        )
       ).not.toThrow();
     });
   });
@@ -939,7 +1091,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given value", async () => {
       expect.hasAssertions();
       const { useInput } = await import("@/hooks/useInput");
-      const result = useInput("initial");
+      const result = renderHookOnServer(() => useInput("initial"));
       expect(result.value).toBe("initial");
     });
   });
@@ -948,15 +1100,16 @@ describe("SSR Environment Detection", () => {
     it("should return false when rendered on the server", async () => {
       expect.hasAssertions();
       const { useIsClient } = await import("@/hooks/useIsClient");
-      expect(useIsClient()).toBe(false);
+      expect(renderHookOnServer(() => useIsClient())).toBe(false);
     });
   });
 
   describe("useLocationSnapshot SSR", () => {
     it("should return null when window is undefined", async () => {
       expect.hasAssertions();
-      const { useLocationSnapshot } = await import("@/hooks/useLocationSnapshot");
-      expect(useLocationSnapshot()).toBe(null);
+      const { useLocationSnapshot } =
+        await import("@/hooks/useLocationSnapshot");
+      expect(renderHookOnServer(() => useLocationSnapshot())).toBe(null);
     });
   });
 
@@ -964,7 +1117,7 @@ describe("SSR Environment Detection", () => {
     it("should return null when window is undefined", async () => {
       expect.hasAssertions();
       const { useLocationHash } = await import("@/hooks/useLocationHash");
-      expect(useLocationHash()).toBe(null);
+      expect(renderHookOnServer(() => useLocationHash())).toBe(null);
     });
   });
 
@@ -973,7 +1126,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useLocationSearchParam } =
         await import("@/hooks/useLocationSearchParam");
-      expect(useLocationSearchParam("test")).toBe(null);
+      expect(renderHookOnServer(() => useLocationSearchParam("test"))).toBe(
+        null
+      );
     });
   });
 
@@ -982,7 +1137,7 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useCheckboxInputState } =
         await import("@/hooks/useCheckboxInputState");
-      const result = useCheckboxInputState(true);
+      const result = renderHookOnServer(() => useCheckboxInputState(true));
       expect(result.checked).toBe(true);
     });
   });
@@ -991,7 +1146,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSelect } = await import("@/hooks/useSelect");
-      expect(() => useSelect([{ value: "a", label: "A" }], 0)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSelect([{ value: "a", label: "A" }], 0))
+      ).not.toThrow();
     });
   });
 
@@ -999,7 +1156,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSelectableList } = await import("@/hooks/useSelectableList");
-      expect(() => useSelectableList([1, 2, 3])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSelectableList([1, 2, 3]))
+      ).not.toThrow();
     });
   });
 
@@ -1008,7 +1167,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useMultiSelectableList } =
         await import("@/hooks/useMultiSelectableList");
-      expect(() => useMultiSelectableList([1, 2, 3])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMultiSelectableList([1, 2, 3]))
+      ).not.toThrow();
     });
   });
 
@@ -1016,7 +1177,7 @@ describe("SSR Environment Detection", () => {
     it("should initialize with given value", async () => {
       expect.hasAssertions();
       const { useUndoState } = await import("@/hooks/useUndoState");
-      const [value] = useUndoState("initial");
+      const [value] = renderHookOnServer(() => useUndoState("initial"));
       expect(value).toBe("initial");
     });
   });
@@ -1025,7 +1186,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useUndoRedoState } = await import("@/hooks/useUndoRedoState");
-      expect(() => useUndoRedoState("initial")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useUndoRedoState("initial"))
+      ).not.toThrow();
     });
   });
 
@@ -1033,7 +1196,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useTimeTravelState } = await import("@/hooks/useTimeTravelState");
-      expect(() => useTimeTravelState("initial")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useTimeTravelState("initial"))
+      ).not.toThrow();
     });
   });
 
@@ -1042,7 +1207,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { usePreviousImmediate } =
         await import("@/hooks/usePreviousImmediate");
-      expect(() => usePreviousImmediate("value")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePreviousImmediate("value"))
+      ).not.toThrow();
     });
   });
 
@@ -1051,7 +1218,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { usePreviousDifferent } =
         await import("@/hooks/usePreviousDifferent");
-      expect(() => usePreviousDifferent("value")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePreviousDifferent("value"))
+      ).not.toThrow();
     });
   });
 
@@ -1063,7 +1232,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useCountdown } = await import("@/hooks/useCountdown");
-      expect(() => useCountdown(new Date(Date.now() + 10000))).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useCountdown(new Date(Date.now() + 10000)))
+      ).not.toThrow();
     });
   });
 
@@ -1071,7 +1242,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDebounce } = await import("@/hooks/useDebounce");
-      expect(() => useDebounce(vi.fn(), 500)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDebounce(vi.fn(), 500))
+      ).not.toThrow();
     });
   });
 
@@ -1079,7 +1252,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDebounceFn } = await import("@/hooks/useDebounceFn");
-      expect(() => useDebounceFn(vi.fn(), 500)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDebounceFn(vi.fn(), 500))
+      ).not.toThrow();
     });
   });
 
@@ -1087,7 +1262,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDebouncedValue } = await import("@/hooks/useDebouncedValue");
-      expect(() => useDebouncedValue("value", 500)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDebouncedValue("value", 500))
+      ).not.toThrow();
     });
   });
 
@@ -1095,7 +1272,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useThrottle } = await import("@/hooks/useThrottle");
-      expect(() => useThrottle(vi.fn(), 500)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useThrottle(vi.fn(), 500))
+      ).not.toThrow();
     });
   });
 
@@ -1103,7 +1282,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useIntervalWhen } = await import("@/hooks/useIntervalWhen");
-      expect(() => useIntervalWhen(vi.fn(), 1000)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useIntervalWhen(vi.fn(), 1000))
+      ).not.toThrow();
     });
   });
 
@@ -1111,7 +1292,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useTimeoutWhen } = await import("@/hooks/useTimeoutWhen");
-      expect(() => useTimeoutWhen(vi.fn(), 1000)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useTimeoutWhen(vi.fn(), 1000))
+      ).not.toThrow();
     });
   });
 
@@ -1123,7 +1306,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useAnimation } = await import("@/hooks/useAnimation");
-      expect(() => useAnimation(vi.fn(), 1000)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useAnimation({ duration: 1000 }))
+      ).not.toThrow();
     });
   });
 
@@ -1131,7 +1316,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSpring } = await import("@/hooks/useSpring");
-      expect(() => useSpring(0)).not.toThrow();
+      expect(() => renderHookOnServer(() => useSpring(0))).not.toThrow();
     });
   });
 
@@ -1139,7 +1324,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useTween } = await import("@/hooks/useTween");
-      expect(() => useTween()).not.toThrow();
+      expect(() => renderHookOnServer(() => useTween())).not.toThrow();
     });
   });
 
@@ -1147,7 +1332,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useRaf } = await import("@/hooks/useRaf");
-      expect(() => useRaf(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useRaf(vi.fn(), true))
+      ).not.toThrow();
     });
   });
 
@@ -1159,7 +1346,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDidMount } = await import("@/hooks/useDidMount");
-      expect(() => useDidMount(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDidMount(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -1167,7 +1356,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDidUpdate } = await import("@/hooks/useDidUpdate");
-      expect(() => useDidUpdate(vi.fn(), [])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDidUpdate(vi.fn(), []))
+      ).not.toThrow();
     });
   });
 
@@ -1175,7 +1366,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useWillUnmount } = await import("@/hooks/useWillUnmount");
-      expect(() => useWillUnmount(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useWillUnmount(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -1183,7 +1376,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useEffectOnceWhen } = await import("@/hooks/useEffectOnceWhen");
-      expect(() => useEffectOnceWhen(vi.fn(), true)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useEffectOnceWhen(vi.fn(), true))
+      ).not.toThrow();
     });
   });
 
@@ -1191,7 +1386,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useAsyncEffect } = await import("@/hooks/useAsyncEffect");
-      expect(() => useAsyncEffect(async () => {}, [])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useAsyncEffect(async () => {}, []))
+      ).not.toThrow();
     });
   });
 
@@ -1199,7 +1396,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useDebouncedEffect } = await import("@/hooks/useDebouncedEffect");
-      expect(() => useDebouncedEffect(vi.fn(), [], 500)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDebouncedEffect(vi.fn(), [], 500))
+      ).not.toThrow();
     });
   });
 
@@ -1209,7 +1408,9 @@ describe("SSR Environment Detection", () => {
       const { useDebouncedAsyncEffect } =
         await import("@/hooks/useDebouncedAsyncEffect");
       expect(() =>
-        useDebouncedAsyncEffect(async () => {}, [], 500)
+        renderHookOnServer(() =>
+          useDebouncedAsyncEffect(async () => {}, [], 500)
+        )
       ).not.toThrow();
     });
   });
@@ -1219,7 +1420,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useDeepCompareEffect } =
         await import("@/hooks/useDeepCompareEffect");
-      expect(() => useDeepCompareEffect(vi.fn(), [{ a: 1 }])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useDeepCompareEffect(vi.fn(), [{ a: 1 }]))
+      ).not.toThrow();
     });
   });
 
@@ -1228,7 +1431,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useIsomorphicEffect } =
         await import("@/hooks/useIsomorphicEffect");
-      expect(() => useIsomorphicEffect(vi.fn(), [])).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useIsomorphicEffect(vi.fn(), []))
+      ).not.toThrow();
     });
   });
 
@@ -1240,7 +1445,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFreshRef } = await import("@/hooks/useFreshRef");
-      expect(() => useFreshRef("value")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useFreshRef("value"))
+      ).not.toThrow();
     });
   });
 
@@ -1248,7 +1455,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFreshCallback } = await import("@/hooks/useFreshCallback");
-      expect(() => useFreshCallback(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useFreshCallback(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -1256,7 +1465,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useFreshTick } = await import("@/hooks/useFreshTick");
-      expect(() => useFreshTick(vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useFreshTick(vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -1264,7 +1475,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useForkRef } = await import("@/hooks/useForkRef");
-      expect(() => useForkRef(null, null)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useForkRef(null, null))
+      ).not.toThrow();
     });
   });
 
@@ -1272,7 +1485,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useMergeRefs } = await import("@/hooks/useMergeRefs");
-      expect(() => useMergeRefs(null, null)).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useMergeRefs(null, null))
+      ).not.toThrow();
     });
   });
 
@@ -1280,7 +1495,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useRefElement } = await import("@/hooks/useRefElement");
-      expect(() => useRefElement()).not.toThrow();
+      expect(() => renderHookOnServer(() => useRefElement())).not.toThrow();
     });
   });
 
@@ -1289,7 +1504,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useEventListenerRef } =
         await import("@/hooks/useEventListenerRef");
-      expect(() => useEventListenerRef("click", vi.fn())).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useEventListenerRef("click", vi.fn()))
+      ).not.toThrow();
     });
   });
 
@@ -1301,7 +1518,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useGetIsMounted } = await import("@/hooks/useGetIsMounted");
-      expect(() => useGetIsMounted()).not.toThrow();
+      expect(() => renderHookOnServer(() => useGetIsMounted())).not.toThrow();
     });
   });
 
@@ -1309,7 +1526,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useSafeSetState } = await import("@/hooks/useSafeSetState");
-      expect(() => useSafeSetState("initial")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useSafeSetState("initial"))
+      ).not.toThrow();
     });
   });
 
@@ -1317,7 +1536,7 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useRenderCount } = await import("@/hooks/useRenderCount");
-      expect(() => useRenderCount()).not.toThrow();
+      expect(() => renderHookOnServer(() => useRenderCount())).not.toThrow();
     });
   });
 
@@ -1326,7 +1545,9 @@ describe("SSR Environment Detection", () => {
       expect.hasAssertions();
       const { useWhyDidYouUpdate } = await import("@/hooks/useWhyDidYouUpdate");
       expect(() =>
-        useWhyDidYouUpdate("TestComponent", { prop: "value" })
+        renderHookOnServer(() =>
+          useWhyDidYouUpdate("TestComponent", { prop: "value" })
+        )
       ).not.toThrow();
     });
   });
@@ -1335,7 +1556,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { useLifecycleLogger } = await import("@/hooks/useLifecycleLogger");
-      expect(() => useLifecycleLogger("TestComponent")).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => useLifecycleLogger("TestComponent"))
+      ).not.toThrow();
     });
   });
 
@@ -1345,7 +1568,7 @@ describe("SSR Environment Detection", () => {
       const { useWarningOnMountInDevelopment } =
         await import("@/hooks/useWarningOnMountInDevelopment");
       expect(() =>
-        useWarningOnMountInDevelopment("Test warning")
+        renderHookOnServer(() => useWarningOnMountInDevelopment("Test warning"))
       ).not.toThrow();
     });
   });
@@ -1354,7 +1577,9 @@ describe("SSR Environment Detection", () => {
     it("should not throw in SSR", async () => {
       expect.hasAssertions();
       const { usePromise } = await import("@/hooks/usePromise");
-      expect(() => usePromise()).not.toThrow();
+      expect(() =>
+        renderHookOnServer(() => usePromise(async () => "value"))
+      ).not.toThrow();
     });
   });
 });
