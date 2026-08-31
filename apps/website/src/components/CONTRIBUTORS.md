@@ -1,7 +1,7 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-82-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-87-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -116,6 +116,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/som-sm"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt="Som Shekhar Mukherjee"/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=som-sm" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/cursor"><img src="https://avatars.githubusercontent.com/in/1210556?v=4?s=100" width="100px;" alt="cursor[bot]"/><br /><sub><b>cursor[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=cursor[bot]" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/JulianWielga"><img src="https://avatars.githubusercontent.com/u/965924?v=4?s=100" width="100px;" alt="JulianWielga"/><br /><sub><b>JulianWielga</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=JulianWielga" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/uno-prod-internal-app"><img src="https://avatars.githubusercontent.com/u/2936644?v=4?s=100" width="100px;" alt="uno-prod-internal-app[bot]"/><br /><sub><b>uno-prod-internal-app[bot]</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=uno-prod-internal-app[bot]" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/uno"><img src="https://avatars.githubusercontent.com/u/77240?v=4?s=100" width="100px;" alt="uno"/><br /><sub><b>uno</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=uno" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://aminya.github.io/"><img src="https://avatars.githubusercontent.com/u/16418197?v=4?s=100" width="100px;" alt="Amin Ya"/><br /><sub><b>Amin Ya</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=aminya" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.chaitanya.vip/"><img src="https://avatars.githubusercontent.com/u/56331036?v=4?s=100" width="100px;" alt="Chaitanya Jujjavarapu"/><br /><sub><b>Chaitanya Jujjavarapu</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=chaitanyaj2222" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://openai.com/codex"><img src="https://avatars.githubusercontent.com/u/267193182?v=4?s=100" width="100px;" alt="Codex"/><br /><sub><b>Codex</b></sub></a><br /><a href="https://github.com/imbhargav5/rooks/commits?author=codex" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
