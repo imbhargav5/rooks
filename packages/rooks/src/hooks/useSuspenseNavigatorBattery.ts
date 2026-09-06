@@ -95,20 +95,21 @@ function useSuspenseNavigatorBattery(): BatteryManager {
         // Create new cache entry with promise
         const promise = navigator.getBattery();
 
-        cacheEntry = {
+        const newEntry: CacheEntry = {
             promise,
             status: 'pending'
         };
+        cacheEntry = newEntry;
 
         // Handle promise resolution/rejection
         promise
             .then((result) => {
-                cacheEntry!.status = 'resolved';
-                cacheEntry!.result = result;
+                newEntry.status = 'resolved';
+                newEntry.result = result;
             })
             .catch((error) => {
-                cacheEntry!.status = 'rejected';
-                cacheEntry!.error = error instanceof Error ? error : new Error(String(error));
+                newEntry.status = 'rejected';
+                newEntry.error = error instanceof Error ? error : new Error(String(error));
             });
     }
 
