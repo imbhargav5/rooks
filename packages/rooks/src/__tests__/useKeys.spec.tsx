@@ -78,7 +78,7 @@ describe("useKeys", () => {
     expect(useKeys).toBeDefined();
   });
 
-  it("should trigger the calback when pressed m + r", () => {
+  it("should trigger the callback when pressed m + r", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
     const firstcallbackP = getByTestId(
