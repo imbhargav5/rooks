@@ -173,7 +173,10 @@ describe("useOnStartTyping", () => {
         }
 
         const { getByTestId } = render(<TestComponent />);
-        const input = getByTestId("test-input") as HTMLInputElement;
+        const input = getByTestId("test-input");
+        if (!(input instanceof HTMLInputElement)) {
+            throw new TypeError("Expected test input to be an HTMLInputElement");
+        }
 
         // First keystroke should trigger callback and focus input
         act(() => {
