@@ -81,11 +81,8 @@ describe("useKeys", () => {
   it("should trigger the calback when pressed m + r", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const firstcallbackP = getByTestId(
-      container as HTMLElement,
-      "first-callback"
-    );
-    const InputDom = getByTestId(container as HTMLElement, "input-dom");
+    const firstcallbackP = getByTestId(container, "first-callback");
+    const InputDom = getByTestId(container, "input-dom");
     act(() => {
       fireEvent.keyDown(InputDom, { charCode: 77, code: "keyM", key: "m" });
     });
@@ -100,10 +97,7 @@ describe("useKeys", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
 
-    const firstcallbackP = getByTestId(
-      container as HTMLElement,
-      "first-callback"
-    );
+    const firstcallbackP = getByTestId(container, "first-callback");
     // let InputDom = getByTestId(container, "input-dom");
     fireEvent.keyDown(document, {
       charCode: 17,
@@ -119,11 +113,8 @@ describe("useKeys", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
 
-    const firstcallbackP = getByTestId(
-      container as HTMLElement,
-      "first-callback"
-    );
-    const ToggleButton = getByTestId(container as HTMLElement, "toggle");
+    const firstcallbackP = getByTestId(container, "first-callback");
+    const ToggleButton = getByTestId(container, "toggle");
     fireEvent.click(ToggleButton);
 
     fireEvent.keyDown(document, {
@@ -184,7 +175,7 @@ describe("useKeys: continuous mode", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
 
-    const testValueElement = getByTestId(container as HTMLElement, "value");
+    const testValueElement = getByTestId(container, "value");
 
     fireEvent.keyDown(document, {
       charCode: 17,
