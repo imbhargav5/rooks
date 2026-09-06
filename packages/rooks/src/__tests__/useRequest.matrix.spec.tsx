@@ -100,13 +100,21 @@ describe("useRequest matrix", () => {
       );
 
       await act(async () => {
-        deferredMap.get(first)!.resolve(`${first}:done`);
+        const firstDeferred = deferredMap.get(first);
+        if (!firstDeferred) {
+          throw new Error(`Missing deferred request for ${first}`);
+        }
+        firstDeferred.resolve(`${first}:done`);
         await Promise.resolve();
       });
       await firstExpectation;
 
       await act(async () => {
-        deferredMap.get(second)!.resolve(`${second}:done`);
+        const secondDeferred = deferredMap.get(second);
+        if (!secondDeferred) {
+          throw new Error(`Missing deferred request for ${second}`);
+        }
+        secondDeferred.resolve(`${second}:done`);
         await Promise.resolve();
       });
       await secondExpectation;
