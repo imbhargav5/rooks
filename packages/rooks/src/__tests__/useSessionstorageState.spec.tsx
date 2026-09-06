@@ -61,7 +61,7 @@ describe("useSessionstorageState basic", () => {
   it("initializes correctly", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const valueElement = getByTestId(container, "value");
     expect(valueElement.innerHTML).toBe("hello");
   });
 
@@ -85,14 +85,11 @@ describe("useSessionstorageState basic", () => {
   it("setting the new value", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const setToNewValueButton = getByTestId(
-      container as HTMLElement,
-      "new-value"
-    );
+    const setToNewValueButton = getByTestId(container, "new-value");
     act(() => {
       fireEvent.click(setToNewValueButton);
     });
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const valueElement = getByTestId(container, "value");
     expect(valueElement.innerHTML).toBe("new value");
   });
 
