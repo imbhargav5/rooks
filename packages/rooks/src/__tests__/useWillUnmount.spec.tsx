@@ -2,13 +2,7 @@ import { vi } from "vitest";
 /**
  */
 import React from "react";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  act,
-  getByTestId,
-} from "@testing-library/react";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 import { useWillUnmount } from "@/hooks/useWillUnmount";
 
@@ -59,12 +53,9 @@ describe("useWillUnmount", () => {
 
   it("should only call the unmount function only when unmount", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
-    const toggleChildElement = getByTestId(
-      container as HTMLElement,
-      "toggle-child"
-    );
+    const { getByTestId } = render(<App />);
+    const valueElement = getByTestId("value");
+    const toggleChildElement = getByTestId("toggle-child");
     expect(mockCallback.mock.calls).toHaveLength(0);
     act(() => {
       fireEvent.click(valueElement);
