@@ -119,8 +119,8 @@ describe("useOutsideClick", () => {
   it("should trigger the calback when click on outide", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const app = getByTestId(container as HTMLElement, "app");
-    const message = getByTestId(container as HTMLElement, "message");
+    const app = getByTestId(container, "app");
+    const message = getByTestId(container, "message");
     act(() => {
       fireEvent.click(app);
     });
@@ -130,8 +130,8 @@ describe("useOutsideClick", () => {
   it("should not trigger the calback when click the volumn button (inside)", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const button = getByTestId(container as HTMLElement, "button");
-    const message = getByTestId(container as HTMLElement, "message");
+    const button = getByTestId(container, "button");
+    const message = getByTestId(container, "message");
 
     act(() => {
       fireEvent.click(button);
