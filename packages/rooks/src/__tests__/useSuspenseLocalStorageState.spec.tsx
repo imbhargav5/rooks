@@ -310,7 +310,10 @@ describe("useSuspenseLocalStorageState", () => {
 
         // Check localStorage
         const storedValue = localStorage.getItem("test-object");
-        const parsedValue = JSON.parse(storedValue!);
+        if (storedValue === null) {
+            throw new Error("Expected test object to be stored");
+        }
+        const parsedValue = JSON.parse(storedValue);
         expect(parsedValue).toEqual({ id: 123, name: "John Doe" });
     });
 
