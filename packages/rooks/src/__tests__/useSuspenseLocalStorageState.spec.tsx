@@ -46,8 +46,8 @@ function TestComponent<T>({
                 onClick={() => {
                     const currentValue = getItem();
                     // Show current value in a separate element for testing
-                    const display = document.querySelector(`[data-testid="${testId}-get-result"]`) as HTMLElement;
-                    if (display) {
+                    const display = document.querySelector(`[data-testid="${testId}-get-result"]`);
+                    if (display instanceof HTMLElement) {
                         display.textContent = JSON.stringify(currentValue);
                     }
                 }}
