@@ -3,13 +3,7 @@ import { vi } from "vitest";
  */
 import React from "react";
 
-import {
-  render,
-  cleanup,
-  fireEvent,
-  act,
-  getByTestId,
-} from "@testing-library/react";
+import { render, cleanup, fireEvent, act } from "@testing-library/react";
 
 import { useKeyRef } from "@/hooks/useKeyRef";
 
@@ -50,9 +44,9 @@ describe("useKeyRef", () => {
 
   it("should trigger the calback when pressed on document or target", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
-    const inputElement = getByTestId(container as HTMLElement, "input");
+    const { getByTestId } = render(<App />);
+    const valueElement = getByTestId("value");
+    const inputElement = getByTestId("input");
     act(() => {
       fireEvent.keyDown(window, { charCode: 83, code: "keyS", key: "s" });
     });
@@ -101,9 +95,9 @@ describe("non array input", () => {
 
   it("should trigger the calback when pressed on document or target", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
-    const inputElement = getByTestId(container as HTMLElement, "input");
+    const { getByTestId } = render(<App />);
+    const valueElement = getByTestId("value");
+    const inputElement = getByTestId("input");
     act(() => {
       fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
@@ -164,13 +158,10 @@ describe("when", () => {
 
   it("should not trigger whenever 'when ' value is false and trigger when 'when' is true", () => {
     expect.hasAssertions();
-    const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
-    const inputElement = getByTestId(container as HTMLElement, "input");
-    const toggleWhenElement = getByTestId(
-      container as HTMLElement,
-      "toggle-when"
-    );
+    const { getByTestId } = render(<App />);
+    const valueElement = getByTestId("value");
+    const inputElement = getByTestId("input");
+    const toggleWhenElement = getByTestId("toggle-when");
     act(() => {
       fireEvent.keyDown(inputElement, { charCode: 82, code: "keyR", key: "r" });
     });
