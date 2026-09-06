@@ -1,5 +1,4 @@
 import { vi } from "vitest";
-import type { RenderResult } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 
@@ -50,24 +49,14 @@ describe("useDebouncedValue", () => {
   it("should returns updated value if the timeout has been reached and initializeWithNull is true", () => {
     expect.hasAssertions();
     const mockValue = "mock_value";
-    let result;
-    act(() => {
-      const { result: resultFromHook } = renderHook(() =>
-        useDebouncedValue(mockValue, 200, { initializeWithNull: true })
-      );
-      result = resultFromHook;
-    });
-    expect(
-      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
-        .current[0]
-    ).toBeNull();
+    const { result } = renderHook(() =>
+      useDebouncedValue(mockValue, 200, { initializeWithNull: true })
+    );
+    expect(result.current[0]).toBeNull();
     act(() => {
       vi.runAllTimers();
     });
-    expect(
-      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
-        .current[0]
-    ).toBe(mockValue);
+    expect(result.current[0]).toBe(mockValue);
   });
 
   it("should respect the timeout value if initializedWithNull is true", () => {
@@ -82,10 +71,7 @@ describe("useDebouncedValue", () => {
     act(() => {
       vi.advanceTimersByTime(mockTimeout - 5);
     });
-    expect(
-      (result as unknown as RenderResult<ReturnType<typeof useDebouncedValue>>)
-        .current[0]
-    ).toBeNull();
+    expect(result.current[0]).toBeNull();
 
     act(() => {
       // accounting for timing issues as it's not exactly accurate
