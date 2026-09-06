@@ -28,6 +28,8 @@
 
 ```bash
 pnpm add rooks
+# or: npm install rooks
+# or: yarn add rooks
 ```
 
 Rooks supports React and React DOM 18 or 19. The package is ESM-only.
