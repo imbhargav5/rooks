@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write # Required for OIDC
   contents: write
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: 📦 Setup Node.js with npm registry
         uses: actions/setup-node@v4
         with:
-          node-version: 24.x
+          node-version: 24.22.3
           registry-url: "https://registry.npmjs.org"
 
       - name: Install latest npm (>=11.5.1 for OIDC)
