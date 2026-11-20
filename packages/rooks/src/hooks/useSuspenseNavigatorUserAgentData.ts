@@ -134,22 +134,23 @@ function useSuspenseNavigatorUserAgentData(
     // Create new cache entry with promise
     const promise = navigator.userAgentData.getHighEntropyValues(hints);
     
-    entry = {
+    const cacheEntry: CacheEntry = {
       promise,
       status: 'pending'
     };
     
-    cache.set(cacheKey, entry);
+    cache.set(cacheKey, cacheEntry);
+    entry = cacheEntry;
     
     // Handle promise resolution/rejection
     promise
       .then((result) => {
-        entry!.status = 'resolved';
-        entry!.result = result;
+        cacheEntry.status = 'resolved';
+        cacheEntry.result = result;
       })
       .catch((error) => {
-        entry!.status = 'rejected';
-        entry!.error = error instanceof Error ? error : new Error(String(error));
+        cacheEntry.status = 'rejected';
+        cacheEntry.error = error instanceof Error ? error : new Error(String(error));
       });
   }
   
