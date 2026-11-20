@@ -6,6 +6,20 @@ on:
       - main
 
   workflow_dispatch:
+    inputs:
+      release_type:
+        description: "patch: bump rooks by a patch version, commit to main, then publish. current: publish the version already on main."
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - current
+      summary:
+        description: "Changelog entry for the patch release (patch only)"
+        required: false
+        default: "Patch release"
+        type: string
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -35,6 +49,51 @@ jobs:
 
       - name: Install latest npm (>=11.5.1 for OIDC)
         run: npm install -g npm@latest
+
+      - name: 🔢 Bump patch version and commit to main
+        id: bump
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_type == 'patch' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ inputs.summary }}
+        run: |
+          if [[ -f .changeset/pre.json ]]; then
+            echo "::error::Changesets pre-release mode is active (.changeset/pre.json). Exit pre mode before cutting a patch release."
+            exit 1
+          fi
+
+          if [[ -z "${SUMMARY//[[:space:]]/}" ]]; then
+            SUMMARY="Patch release"
+          fi
+
+          {
+            echo '---'
+            echo '"rooks": patch'
+            echo '---'
+            echo
+            printf '%s\n' "$SUMMARY"
+          } > ".changeset/manual-patch-${GITHUB_RUN_ID}.md"
+
+          previous_version=$(node -p "require('./packages/rooks/package.json').version")
+          pnpm run version
+          next_version=$(node -p "require('./packages/rooks/package.json').version")
+
+          IFS=. read -r prev_major prev_minor _ <<< "$previous_version"
+          IFS=. read -r next_major next_minor _ <<< "$next_version"
+          if [[ "$prev_major" != "$next_major" || "$prev_minor" != "$next_minor" ]]; then
+            echo "::error::Pending changesets on main bump rooks from $previous_version to $next_version, which is not a patch release. Merge the Version Packages PR instead."
+            exit 1
+          fi
+
+          echo "Bumping rooks $previous_version -> $next_version"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Version Packages (patch v${next_version})"
+          git push origin HEAD:main
+
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: 🏗 Run build script
         run: pnpm turbo prepare-publish
@@ -76,6 +135,7 @@ jobs:
           PACKAGE_DIR: packages/rooks
           PACKAGE_VERSION: ${{ steps.package.outputs.version }}
           TAG_NAME: ${{ steps.package.outputs.tag }}
+          TARGET_SHA: ${{ steps.bump.outputs.sha || github.sha }}
           IS_PRERELEASE: ${{ steps.package.outputs.is_prerelease }}
         run: |
           release_notes_file="$(mktemp)"
@@ -99,5 +159,5 @@ jobs:
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
             gh release edit "$TAG_NAME" "${release_args[@]}"
           else
-            gh release create "$TAG_NAME" --target "$GITHUB_SHA" "${release_args[@]}"
+            gh release create "$TAG_NAME" --target "$TARGET_SHA" "${release_args[@]}"
           fi
