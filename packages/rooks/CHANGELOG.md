@@ -1,5 +1,11 @@
 # rooks
 
+## 9.9.1
+
+### Patch Changes
+
+- [`4005507`](https://github.com/imbhargav5/rooks/commit/4005507fe7c78a12d5f60065a285b738e79295f6) Thanks [@claude](https://github.com/claude)! - Patch release
+
 ## 9.9.0
 
 ### Minor Changes
