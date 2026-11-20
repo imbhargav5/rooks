@@ -8,8 +8,9 @@ name: Release patch
 #      consumes any changesets already pending on main.
 #   3. Opens a "Version Packages (patch)" pull request from a release branch.
 #
-# Squash-merging that PR puts a commit starting with "Version Packages" on main,
-# which triggers publish.yml to publish to npm and create the GitHub release.
+# Merging that PR (squash, or a merge commit from the release/patch-v* branch,
+# e.g. via Mergify) triggers publish.yml to publish to npm and create the
+# GitHub release.
 # Once the pending changesets are consumed, ci-release.yml closes out any
 # stale "Version Packages" PR on its next run.
 
@@ -118,7 +119,7 @@ jobs:
             echo
             echo "Opened by the **Release patch** workflow ([run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
             echo
-            echo "**Squash-merge** this PR so the commit on main starts with \`Version Packages\`; that triggers the *Publish to NPM* workflow."
+            echo "Merging this PR (squash or merge commit) triggers the *Publish to NPM* workflow."
             echo
             echo "## Changelog"
             echo
