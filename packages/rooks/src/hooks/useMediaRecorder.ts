@@ -178,9 +178,16 @@ function useMediaRecorder(
       };
 
       mediaRecorder.onerror = (event: Event) => {
-        const err = new Error(
-          `MediaRecorder error: ${(event as any).error?.message || "Unknown error"}`
-        );
+        const error = "error" in event ? event.error : undefined;
+        const message =
+          typeof error === "object" &&
+          error !== null &&
+          "message" in error &&
+          typeof error.message === "string" &&
+          error.message
+            ? error.message
+            : "Unknown error";
+        const err = new Error(`MediaRecorder error: ${message}`);
         setError(err);
         setRecordingState("idle");
       };
