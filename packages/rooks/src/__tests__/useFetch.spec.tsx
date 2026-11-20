@@ -105,7 +105,7 @@ describe("useFetch", () => {
 
         expect(result.current.error).toBeInstanceOf(Error);
         expect(result.current.error?.message).toBe("HTTP 404: Not Found");
-        expect((result.current.error as any).status).toBe(404);
+        expect(result.current.error).toHaveProperty("status", 404);
         expect(result.current.data).toBe(null);
         expect(result.current.loading).toBe(false);
     });
