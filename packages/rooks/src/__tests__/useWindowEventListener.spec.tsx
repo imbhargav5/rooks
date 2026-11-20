@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import React from "react";
-import { render, getByTestId, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import { renderHook } from "@testing-library/react";
 
 import TestRenderer from "react-test-renderer";
@@ -73,15 +73,15 @@ describe("useWindowEventListener state variables", () => {
 
   it("should not call callback by default", () => {
     expect.hasAssertions();
-    const { container } = render(<TestJSX />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const { getByTestId } = render(<TestJSX />);
+    const valueElement = getByTestId("value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
   });
 
   it("should call callback when event fires", () => {
     expect.hasAssertions();
-    const { container } = render(<TestJSX />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const { getByTestId } = render(<TestJSX />);
+    const valueElement = getByTestId("value");
     expect(Number.parseInt(valueElement.innerHTML)).toBe(0);
     act(() => {
       fireEvent.click(window);
