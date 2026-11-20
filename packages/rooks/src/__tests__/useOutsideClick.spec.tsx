@@ -116,7 +116,7 @@ describe("useOutsideClick", () => {
     expect(useOutsideClick).toBeDefined();
   });
 
-  it("should trigger the calback when click on outide", () => {
+  it("should trigger the callback when clicking outside", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
     const app = getByTestId(container as HTMLElement, "app");
@@ -127,7 +127,7 @@ describe("useOutsideClick", () => {
     expect(message.innerHTML).toBe("clicked outside");
   });
 
-  it("should not trigger the calback when click the volumn button (inside)", () => {
+  it("should not trigger the callback when clicking the volume button (inside)", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
     const button = getByTestId(container as HTMLElement, "button");
