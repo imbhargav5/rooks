@@ -34,7 +34,7 @@ describe("useForkRef", () => {
   it("should be called on mouse events", () => {
     expect.hasAssertions();
     const { container } = render(<TestJSX />);
-    const displayElement = getByTestId(container as HTMLElement, "element");
+    const displayElement = getByTestId(container, "element");
     act(() => {
       fireEvent.mouseUp(displayElement);
       fireEvent.mouseDown(displayElement);
