@@ -60,9 +60,9 @@ describe("useWillUnmount", () => {
   it("should only call the unmount function only when unmount", () => {
     expect.hasAssertions();
     const { container } = render(<App />);
-    const valueElement = getByTestId(container as HTMLElement, "value");
+    const valueElement = getByTestId(container, "value");
     const toggleChildElement = getByTestId(
-      container as HTMLElement,
+      container,
       "toggle-child"
     );
     expect(mockCallback.mock.calls).toHaveLength(0);
