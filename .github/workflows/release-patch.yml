@@ -1,0 +1,136 @@
+name: Release patch
+
+# Manually cut a patch release of `rooks`.
+#
+# This fits into the existing changesets flow instead of bypassing it:
+#   1. Adds a `"rooks": patch` changeset with the summary you provide.
+#   2. Runs `pnpm run version` (changeset version + peer range bump), which also
+#      consumes any changesets already pending on main.
+#   3. Opens a "Version Packages (patch)" pull request from a release branch.
+#
+# Squash-merging that PR puts a commit starting with "Version Packages" on main,
+# which triggers publish.yml to publish to npm and create the GitHub release.
+# Once the pending changesets are consumed, ci-release.yml closes out any
+# stale "Version Packages" PR on its next run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      summary:
+        description: "Changelog entry for this patch release"
+        required: true
+        type: string
+
+concurrency:
+  group: release-patch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-patch:
+    name: Open patch release PR
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'imbhargav5/rooks' && github.ref == 'refs/heads/main' }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⎔ CI Setup
+        uses: ./.github/actions/ci-setup
+
+      - name: 🚫 Refuse while changesets pre-release mode is active
+        run: |
+          if [[ -f .changeset/pre.json ]]; then
+            echo "::error::Changesets pre-release mode is active (.changeset/pre.json). Exit pre mode before cutting a patch release."
+            exit 1
+          fi
+
+      - name: 📝 Add patch changeset
+        env:
+          SUMMARY: ${{ inputs.summary }}
+        run: |
+          if [[ -z "${SUMMARY//[[:space:]]/}" ]]; then
+            echo "::error::A non-empty summary is required."
+            exit 1
+          fi
+
+          changeset_file=".changeset/manual-patch-${GITHUB_RUN_ID}.md"
+          {
+            echo '---'
+            echo '"rooks": patch'
+            echo '---'
+            echo
+            printf '%s\n' "$SUMMARY"
+          } > "$changeset_file"
+          cat "$changeset_file"
+
+      - name: 🔢 Version packages
+        id: version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          previous_version=$(node -p "require('./packages/rooks/package.json').version")
+
+          pnpm run version
+
+          next_version=$(node -p "require('./packages/rooks/package.json').version")
+
+          IFS=. read -r prev_major prev_minor _ <<< "$previous_version"
+          IFS=. read -r next_major next_minor _ <<< "$next_version"
+          if [[ "$prev_major" != "$next_major" || "$prev_minor" != "$next_minor" ]]; then
+            echo "::error::Pending changesets on main bump rooks from $previous_version to $next_version, which is not a patch release. Merge the existing Version Packages PR instead."
+            exit 1
+          fi
+
+          echo "Bumping rooks $previous_version -> $next_version"
+          echo "previous=$previous_version" >> "$GITHUB_OUTPUT"
+          echo "next=$next_version" >> "$GITHUB_OUTPUT"
+
+      - name: 🔀 Open release PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREVIOUS_VERSION: ${{ steps.version.outputs.previous }}
+          NEXT_VERSION: ${{ steps.version.outputs.next }}
+        run: |
+          branch="release/patch-v${NEXT_VERSION}"
+          title="Version Packages (patch v${NEXT_VERSION})"
+
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "::error::Branch $branch already exists. Merge or delete it before cutting another patch release."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "$title"
+          git push origin "$branch"
+
+          body_file="$(mktemp)"
+          {
+            echo "Patch release of \`rooks\`: ${PREVIOUS_VERSION} → ${NEXT_VERSION}."
+            echo
+            echo "Opened by the **Release patch** workflow ([run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
+            echo
+            echo "**Squash-merge** this PR so the commit on main starts with \`Version Packages\`; that triggers the *Publish to NPM* workflow."
+            echo
+            echo "## Changelog"
+            echo
+            awk -v version="$NEXT_VERSION" '
+              $0 == "## " version { printing=1; next }
+              printing && /^## / { exit }
+              printing { print }
+            ' packages/rooks/CHANGELOG.md
+          } > "$body_file"
+
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "$title" \
+            --body-file "$body_file"
