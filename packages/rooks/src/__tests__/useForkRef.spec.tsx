@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import React from "react";
-import { render, getByTestId, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 import TestRenderer from "react-test-renderer";
 import { useEventListenerRef } from "@/hooks/useEventListenerRef";
@@ -33,8 +33,8 @@ describe("useForkRef", () => {
 
   it("should be called on mouse events", () => {
     expect.hasAssertions();
-    const { container } = render(<TestJSX />);
-    const displayElement = getByTestId(container as HTMLElement, "element");
+    const { getByTestId } = render(<TestJSX />);
+    const displayElement = getByTestId("element");
     act(() => {
       fireEvent.mouseUp(displayElement);
       fireEvent.mouseDown(displayElement);
