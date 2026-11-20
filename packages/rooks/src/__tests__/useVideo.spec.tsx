@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 /**
  */
-import { renderHook, act } from "@testing-library/react";
+import { render, renderHook, act } from "@testing-library/react";
 import { useVideo } from "@/hooks/useVideo";
 
 describe("useVideo", () => {
@@ -275,47 +275,48 @@ describe("useVideo", () => {
   });
 
   it("should update state on timeupdate event", () => {
-    const { result } = renderHook(() => useVideo());
-    const [videoRef] = result.current;
-
-    Object.defineProperty(videoRef, "current", {
-      value: mockVideoElement,
-      writable: true,
-    });
-
-    // Re-render to trigger useEffect
-    const { rerender } = renderHook(() => useVideo());
-    rerender();
-
-    // Simulate timeupdate event
-    act(() => {
-      mockVideoElement.currentTime = 25;
-      mockVideoElement.dispatchEvent(new Event("timeupdate"));
-    });
-
-    // Note: Due to how useEffect works with refs, we need to test with a component
-    // that actually attaches the video element to the ref during render
-  });
-
-  it("should handle event listeners correctly", () => {
-    // Create a mock video element with event listener tracking
-    const addEventListenerSpy = vi.spyOn(mockVideoElement, "addEventListener");
-    const removeEventListenerSpy = vi.spyOn(mockVideoElement, "removeEventListener");
-
-    const { unmount } = renderHook(() => {
-      const [videoRef] = useVideo();
-      // Simulate the video element being set on ref
+    const TestComponent = () => {
+      const [videoRef, state] = useVideo();
       Object.defineProperty(videoRef, "current", {
         value: mockVideoElement,
         writable: true,
         configurable: true,
       });
-      return videoRef;
+      return <span data-testid="current-time">{state.currentTime}</span>;
+    };
+
+    const { getByTestId } = render(<TestComponent />);
+
+    act(() => {
+      mockVideoElement.currentTime = 25;
+      mockVideoElement.dispatchEvent(new Event("timeupdate"));
     });
 
-    // Event listeners should be added (but due to ref timing, this is tricky to test)
-    // At least verify cleanup doesn't throw
+    expect(getByTestId("current-time")).toHaveTextContent("25");
+  });
+
+  it("should handle event listeners correctly", () => {
+    const addEventListenerSpy = vi.spyOn(mockVideoElement, "addEventListener");
+    const removeEventListenerSpy = vi.spyOn(
+      mockVideoElement,
+      "removeEventListener"
+    );
+
+    const TestComponent = () => {
+      const result = useVideo();
+      Object.defineProperty(result[0], "current", {
+        value: mockVideoElement,
+        writable: true,
+        configurable: true,
+      });
+      return null;
+    };
+
+    const { unmount } = render(<TestComponent />);
+
+    expect(addEventListenerSpy).toHaveBeenCalledTimes(4);
     unmount();
+    expect(removeEventListenerSpy).toHaveBeenCalledTimes(4);
   });
 
   it("should update state on durationchange event", () => {
