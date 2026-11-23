@@ -11,6 +11,15 @@
   <a href="https://github.com/imbhargav5/rooks/blob/main/LICENSE"><img src="https://img.shields.io/github/license/imbhargav5/rooks?style=for-the-badge" alt="license" /></a>
 </p>
 
+<p align="center">
+  <a href="https://run.uno/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=rooks">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://run.uno/badges/made-with-uno-card-dark.svg">
+      <img alt="Made with Uno" src="https://run.uno/badges/made-with-uno-card-light.svg" width="340">
+    </picture>
+  </a>
+</p>
+
 <h1 align="center">Rooks</h1>
 
 <p align="center">
