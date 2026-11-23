@@ -22,11 +22,11 @@ function useFreshCallback<Args extends unknown[], R = void>(
   callback: CallbackType<Args, R>
 ): CallbackType<Args, R>;
 function useFreshCallback(
-  callback: (...args: any[]) => any
-): (...args: any[]) => any {
+  callback: (...args: never[]) => unknown
+): (...args: never[]) => unknown {
   const freshRef = useFreshRef(callback);
   const tick = useCallback(
-    (...args: any[]) => {
+    (...args: never[]) => {
       return freshRef.current(...args);
     },
     [freshRef]

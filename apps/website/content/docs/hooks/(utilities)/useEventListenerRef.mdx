@@ -34,7 +34,7 @@ export default function ClickTracker() {
 ## Parameters
 
 - `eventName: string` — required event type passed to `addEventListener`.
-- `callback: (...args: unknown[]) => void` — required listener. The attached listener calls the latest callback without resubscribing solely because the callback changed.
+- `callback: (event) => void` — required listener. The event is typed from `HTMLElementEventMap` for known event names (for example `PointerEvent` for `"pointerdown"`) and as `Event` otherwise. The attached listener calls the latest callback without resubscribing solely because the callback changed.
 - `listenerOptions?: AddEventListenerOptions | EventListenerOptions | boolean` — add/remove options; defaults to `{}`.
 - `isLayoutEffect?: boolean` — attaches in an isomorphic layout effect when `true`, otherwise a passive effect. It defaults to `false` and should remain constant for the component's lifetime.
 

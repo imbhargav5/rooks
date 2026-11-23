@@ -12,9 +12,9 @@ import type { ListenerOptions } from "@/types/utils";
  * @param {boolean} isLayoutEffect Should it use layout effect. Defaults to false
  * @see https://rooks.vercel.app/docs/hooks/useDocumentEventListener
  */
-function useDocumentEventListener(
-  eventName: keyof DocumentEventMap,
-  callback: (...args: unknown[]) => void,
+function useDocumentEventListener<K extends keyof DocumentEventMap>(
+  eventName: K,
+  callback: (event: DocumentEventMap[K]) => void,
   listenerOptions: ListenerOptions = {},
   isLayoutEffect = false
 ): void {

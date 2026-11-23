@@ -179,7 +179,7 @@ function useMediaRecorder(
 
       mediaRecorder.onerror = (event: Event) => {
         const err = new Error(
-          `MediaRecorder error: ${(event as any).error?.message || "Unknown error"}`
+          `MediaRecorder error: ${(event as Event & { error?: DOMException }).error?.message || "Unknown error"}`
         );
         setError(err);
         setRecordingState("idle");
@@ -192,7 +192,9 @@ function useMediaRecorder(
       };
     } catch (err) {
       const error =
-        err instanceof Error ? err : new Error("Failed to create MediaRecorder");
+        err instanceof Error
+          ? err
+          : new Error("Failed to create MediaRecorder");
       setError(error);
     }
   }, [stream, stableOptions, isSupported]);

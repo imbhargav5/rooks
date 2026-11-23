@@ -15,22 +15,27 @@ import { useEventListener } from "./useEventListener";
  * @returns {Function} A callback ref that can be used as ref prop
  * @see https://rooks.vercel.app/docs/hooks/useEventListenerRef
  */
-function useEventListenerRef(
-  eventName: string,
-  callback: (...args: unknown[]) => void,
+function useEventListenerRef<K extends string>(
+  eventName: K,
+  callback: (
+    event: K extends keyof HTMLElementEventMap ? HTMLElementEventMap[K] : Event
+  ) => void,
   listenerOptions:
-    | AddEventListenerOptions
-    | EventListenerOptions
-    | boolean = {},
+    AddEventListenerOptions | EventListenerOptions | boolean = {},
   isLayoutEffect = false
 ): (refElement: RefElementOrNull<HTMLElement>) => void {
   const [ref, element] = useRefElement<HTMLElement>();
 
-  useEventListener<EventTarget, string>(eventName, callback, {
-    target: element,
-    listenerOptions,
-    isLayoutEffect,
-  });
+  // The DOM dispatches the event type matching `eventName`, so narrowing is safe.
+  useEventListener<EventTarget, string>(
+    eventName,
+    callback as (event: Event) => void,
+    {
+      target: element,
+      listenerOptions,
+      isLayoutEffect,
+    }
+  );
 
   return ref;
 }

@@ -3,19 +3,19 @@ import type { ListenerOptions } from "@/types/utils";
 import { useEventListener } from "./useEventListener";
 import { warning } from "./warning";
 
-function useGlobalObjectEventListener(
+function useGlobalObjectEventListener<K extends keyof DocumentEventMap>(
   globalObject: Document | undefined,
-  eventName: keyof DocumentEventMap,
-  callback: EventListener,
+  eventName: K,
+  callback: (event: DocumentEventMap[K]) => void,
   listenerOptions: ListenerOptions,
   when: boolean,
   isLayoutEffect: boolean
 ): void;
 
-function useGlobalObjectEventListener(
+function useGlobalObjectEventListener<K extends keyof WindowEventMap>(
   globalObject: Window | undefined,
-  eventName: keyof WindowEventMap,
-  callback: EventListener,
+  eventName: K,
+  callback: (event: WindowEventMap[K]) => void,
   listenerOptions: ListenerOptions,
   when: boolean,
   isLayoutEffect: boolean

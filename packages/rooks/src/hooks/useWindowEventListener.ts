@@ -13,9 +13,9 @@ import type { ListenerOptions } from "@/types/utils";
  * @returns {undefined}
  * @see https://rooks.vercel.app/docs/hooks/useWindowEventListener
  */
-function useWindowEventListener(
-  eventName: keyof WindowEventMap,
-  callback: (...args: unknown[]) => void,
+function useWindowEventListener<K extends keyof WindowEventMap>(
+  eventName: K,
+  callback: (event: WindowEventMap[K]) => void,
   listenerOptions: ListenerOptions = {},
   isLayoutEffect = false
 ): void {
