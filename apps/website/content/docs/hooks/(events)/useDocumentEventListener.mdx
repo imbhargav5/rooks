@@ -31,7 +31,7 @@ export default function SelectionCounter() {
 ## Parameters
 
 - `eventName`: a key from `DocumentEventMap`.
-- `callback`: called with the native document event. The hook always invokes the latest callback.
+- `callback`: called with the native document event, typed from the event name (for example `KeyboardEvent` for `"keydown"`). The hook always invokes the latest callback.
 - `listenerOptions`: optional `boolean | AddEventListenerOptions`; defaults to `{}`. It supports `capture`, `once`, `passive`, `signal`, or the capture boolean shorthand.
 - `isLayoutEffect`: optional boolean; defaults to `false`. Set it to `true` only when the listener must be synchronized during the layout-effect phase.
 

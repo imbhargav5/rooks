@@ -8,12 +8,12 @@ type WorkerStatus = "idle" | "running" | "success" | "error" | "terminated";
 /**
  * Return value for the useWebWorker hook
  */
-interface UseWebWorkerReturnValue<T = any> {
+interface UseWebWorkerReturnValue<T = any, TMessage = any> {
   /**
    * Post a message to the web worker
    * @param message - The message to send to the worker
    */
-  postMessage: (message: any) => void;
+  postMessage: (message: TMessage) => void;
   /**
    * Terminate the web worker
    */
@@ -78,9 +78,9 @@ interface UseWebWorkerReturnValue<T = any> {
  *
  * @see https://rooks.vercel.app/docs/hooks/useWebWorker
  */
-function useWebWorker<T = any>(
+function useWebWorker<T = any, TMessage = any>(
   workerUrl: string
-): UseWebWorkerReturnValue<T> {
+): UseWebWorkerReturnValue<T, TMessage> {
   const [status, setStatus] = useState<WorkerStatus>("idle");
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -122,7 +122,7 @@ function useWebWorker<T = any>(
   }, [workerUrl, isSupported]);
 
   const postMessage = useCallback(
-    (message: any): void => {
+    (message: TMessage): void => {
       if (!isSupported) {
         console.warn("Web Workers are not supported");
         return;

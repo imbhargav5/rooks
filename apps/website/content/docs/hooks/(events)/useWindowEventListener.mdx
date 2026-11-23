@@ -31,7 +31,7 @@ export default function OnlineEventCounter() {
 ## Parameters
 
 - `eventName`: a key from `WindowEventMap`.
-- `callback`: called with the native window event. The hook always invokes the latest callback.
+- `callback`: called with the native window event, typed from the event name (for example `KeyboardEvent` for `"keydown"`). The hook always invokes the latest callback.
 - `listenerOptions`: optional `boolean | AddEventListenerOptions`; defaults to `{}`.
 - `isLayoutEffect`: optional boolean; defaults to `false`. Set it to `true` only when subscription must happen during the layout-effect phase.
 

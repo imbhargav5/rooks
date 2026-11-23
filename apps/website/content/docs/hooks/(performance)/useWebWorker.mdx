@@ -57,6 +57,8 @@ export default function WorkerDemo() {
 
 `workerUrl: string` is required. An empty string leaves the hook idle. The hook calls `new Worker(workerUrl)` without module-worker options.
 
+Type parameters: `T` (default `any`) types the data received from the worker; `TMessage` (default `any`) types the argument of `postMessage`, for example `useWebWorker<number, { n: number }>(url)`.
+
 ## Return value
 
 The returned object has this inline shape:

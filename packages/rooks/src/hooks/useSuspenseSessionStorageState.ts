@@ -17,7 +17,7 @@ interface CacheEntry<T> {
 }
 
 // Cache for storing promises and results indexed by key
-const cache: Map<string, CacheEntry<any>> = new Map();
+const cache: Map<string, CacheEntry<unknown>> = new Map();
 
 /**
  * Clear cached entry for a specific key - useful for testing
