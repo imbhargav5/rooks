@@ -1,5 +1,11 @@
 # rooks
 
+## 9.9.2
+
+### Patch Changes
+
+- [#2172](https://github.com/imbhargav5/rooks/pull/2172) [`232e259`](https://github.com/imbhargav5/rooks/commit/232e259f3d55bf66333ec205bc767409cd04ed26) Thanks [@usehoplite](https://github.com/apps/usehoplite)! - Improve hook types without changing runtime behavior: `useWindowEventListener`, `useDocumentEventListener`, and `useEventListenerRef` now infer the callback's event type from the event name, `useWebWorker` accepts an optional `TMessage` type parameter for `postMessage`, and `useNotification` types `data` as `unknown`. Existing callbacks and type arguments remain valid.
+
 ## 9.9.1
 
 ### Patch Changes
