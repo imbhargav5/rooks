@@ -105,7 +105,14 @@ describe("useFetch", () => {
 
         expect(result.current.error).toBeInstanceOf(Error);
         expect(result.current.error?.message).toBe("HTTP 404: Not Found");
-        expect((result.current.error as any).status).toBe(404);
+        if (
+            !result.current.error ||
+            !("status" in result.current.error) ||
+            typeof result.current.error.status !== "number"
+        ) {
+            throw new TypeError("Expected an HTTP error with a numeric status");
+        }
+        expect(result.current.error.status).toBe(404);
         expect(result.current.data).toBe(null);
         expect(result.current.loading).toBe(false);
     });
