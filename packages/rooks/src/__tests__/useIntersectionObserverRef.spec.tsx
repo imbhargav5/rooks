@@ -398,7 +398,7 @@ describe("useIntersectionObserverRef", () => {
   });
 
   describe("Edge Cases", () => {
-    it.skip("should handle rapid element changes", () => {
+    it("should handle rapid element changes", () => {
       expect.hasAssertions();
       const callback = vi.fn();
       const { result } = renderHook(() => useIntersectionObserverRef(callback));
@@ -407,7 +407,7 @@ describe("useIntersectionObserverRef", () => {
       const element1 = document.createElement('div');
       const element2 = document.createElement('div');
       
-      // Rapid changes
+      // Rapid changes within one batch: only the final element is observed
       act(() => {
         ref(element1);
         ref(null);
@@ -416,9 +416,19 @@ describe("useIntersectionObserverRef", () => {
         ref(element1);
       });
       
-      // Should handle without errors
-      expect(mockIntersectionObserver.observe).toHaveBeenCalledWith(element1);
-      expect(mockIntersectionObserver.disconnect).toHaveBeenCalled();
+      // Use identity checks: both elements are empty divs and compare as equal
+      expect(mockIntersectionObserverConstructor).toHaveBeenCalledTimes(1);
+      expect(mockIntersectionObserver.observe).toHaveBeenCalledTimes(1);
+      expect(mockIntersectionObserver.observe.mock.calls[0]?.[0]).toBe(element1);
+      
+      // Switching elements across renders disconnects the previous observer
+      act(() => {
+        ref(element2);
+      });
+      
+      expect(mockIntersectionObserver.disconnect).toHaveBeenCalledTimes(1);
+      expect(mockIntersectionObserver.observe).toHaveBeenCalledTimes(2);
+      expect(mockIntersectionObserver.observe.mock.calls[1]?.[0]).toBe(element2);
     });
 
     it("should maintain stable ref function identity", () => {
@@ -437,7 +447,7 @@ describe("useIntersectionObserverRef", () => {
       expect(initialRef).toBe(rerenderRef);
     });
 
-    it.skip("should handle IntersectionObserver constructor throwing", () => {
+    it("should handle IntersectionObserver constructor throwing", () => {
       expect.hasAssertions();
       mockIntersectionObserverConstructor.mockImplementation(() => {
         throw new Error("IntersectionObserver not supported");

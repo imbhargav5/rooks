@@ -1,18 +1,29 @@
 import { vi } from "vitest";
 import { useVibrate } from "@/hooks/useVibrate";
-import { waitFor } from "@testing-library/react";
-import { renderHook } from "@testing-library/react";
+import { cleanup, renderHook, waitFor } from "@testing-library/react";
 
-describe.skip("useVibrate", () => {
-  let originalVibrate: typeof navigator.vibrate;
+describe("useVibrate", () => {
+  const originalDescriptor = Object.getOwnPropertyDescriptor(
+    navigator,
+    "vibrate"
+  );
 
   beforeEach(() => {
-    originalVibrate = navigator.vibrate;
-    navigator.vibrate = vi.fn();
+    Object.defineProperty(navigator, "vibrate", {
+      value: vi.fn(),
+      writable: true,
+      configurable: true,
+    });
   });
 
   afterEach(() => {
-    navigator.vibrate = originalVibrate;
+    // Unmount before restoring so effect cleanups still see the mock
+    cleanup();
+    if (originalDescriptor) {
+      Object.defineProperty(navigator, "vibrate", originalDescriptor);
+    } else {
+      delete (navigator as { vibrate?: unknown }).vibrate;
+    }
   });
 
   it("should start vibration when isEnabled is true", async () => {
@@ -72,13 +83,13 @@ describe.skip("useVibrate", () => {
 
   it("should warn when the Vibration API is not supported", async () => {
     expect.hasAssertions();
-    const oldVibrate = navigator.vibrate;
-    const warnSpy = vi.spyOn(console, "warn").mockImplementation();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     // Temporarily remove the vibrate function to simulate unsupported API
     Object.defineProperty(navigator, "vibrate", {
       value: undefined,
       writable: true,
+      configurable: true,
     });
 
     renderHook(({ isEnabled, pattern }) => useVibrate({ isEnabled, pattern }), {
@@ -91,7 +102,6 @@ describe.skip("useVibrate", () => {
         "Vibration API not supported by the current browser"
       )
     );
-    navigator.vibrate = oldVibrate;
     warnSpy.mockRestore();
   });
 });

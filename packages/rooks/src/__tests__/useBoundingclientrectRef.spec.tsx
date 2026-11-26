@@ -127,16 +127,19 @@ describe("useBoundingclientrectRef", () => {
   });
 
   describe("Update Function", () => {
-    it.skip("should manually update domRect when update function is called", () => {
+    it("should manually update domRect when update function is called", () => {
       expect.hasAssertions();
       const { result } = renderHook(() => useBoundingclientrectRef());
       
-      const [ref, , update] = result.current;
+      const [ref] = result.current;
       const mockElement = document.createElement('div');
       
       act(() => {
         ref?.(mockElement);
       });
+      
+      // `update` is bound to the current node, so read it after the ref is set
+      const [, , update] = result.current;
       
       // Clear mock calls from initial setup
       mockGetBoundingClientRect.mockClear();

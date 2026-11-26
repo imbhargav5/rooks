@@ -227,7 +227,7 @@ describe("useFullscreen", () => {
       );
     });
 
-    it.skip("should throw error when fullscreen is not supported", async () => {
+    it("should throw error when fullscreen is not supported", () => {
       expect.hasAssertions();
       
       // Create a mock element without fullscreen methods
@@ -242,7 +242,8 @@ describe("useFullscreen", () => {
       
       const { result } = renderHook(() => useFullscreen());
       
-      await expect(result.current.enableFullscreen()).rejects.toThrow(
+      // The API throws synchronously before any promise is created
+      expect(() => result.current.enableFullscreen()).toThrow(
         "Your browser does not support Fullscreen API."
       );
     });

@@ -52,8 +52,7 @@ describe("useUndoState", () => {
     expect(result.current.value).toBe(43);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip("should show previous value after undo", () => {
+  it("should show previous value after undo", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useHook(42));
 
@@ -83,8 +82,7 @@ describe("useUndoState", () => {
     expect(result.current.value).toBe(42);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip("should respect maxSize option", () => {
+  it("should respect maxSize option", () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useHook(42, { maxSize: 2 }));
 
@@ -103,5 +101,3 @@ describe("useUndoState", () => {
     expect(result.current.value).toBe(44);
   });
 });
-
-// figure out tests

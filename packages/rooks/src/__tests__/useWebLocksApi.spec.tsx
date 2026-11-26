@@ -73,7 +73,7 @@ describe("useWebLocksApi", () => {
   });
 
   describe("Resource Name Validation", () => {
-    it.skip("should validate resource name as string", () => {
+    it("should validate resource name as string", () => {
       expect.hasAssertions();
       
       // Valid string resource name should not throw

@@ -122,17 +122,21 @@ describe("useLocalstorageState basic", () => {
     await waitFor(() => expect(valueElement.innerHTML).toBe("new value"));
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip("unsetting the value", async () => {
+  it("unsetting the value", async () => {
     expect.hasAssertions();
     render(<App />);
     const unsetValueButton = screen.getByTestId("unset-value");
     const valueElement = screen.getByTestId("value");
     expect(valueElement.innerHTML).toBe("hello");
+    await waitFor(() =>
+      expect(localStorage.getItem("test-value")).toBe(JSON.stringify("hello"))
+    );
     act(() => {
       fireEvent.click(unsetValueButton);
     });
-    await waitFor(() => expect(valueElement.innerHTML).toBe(""));
+    // remove() only deletes the storage entry; the in-memory value stays
+    await waitFor(() => expect(localStorage.getItem("test-value")).toBeNull());
+    expect(valueElement.innerHTML).toBe("hello");
   });
 });
 

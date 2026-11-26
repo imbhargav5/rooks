@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 /**
  */
-import { renderHook, act } from "@testing-library/react";
+import { renderHook, act, render, fireEvent } from "@testing-library/react";
 import React, { useLayoutEffect, useEffect } from "react";
 import { useIsomorphicEffect } from "@/hooks/useIsomorphicEffect";
 
@@ -116,34 +116,30 @@ describe("useIsomorphicEffect", () => {
   });
 
   describe("Server Environment Simulation", () => {
-    let originalWindow: typeof window;
-    
-    beforeEach(() => {
-      // Save original window
-      originalWindow = global.window;
-    });
-    
     afterEach(() => {
-      // Restore original window
-      global.window = originalWindow;
+      vi.unstubAllGlobals();
+      vi.resetModules();
     });
 
-    it.skip("should use useEffect in server environment", () => {
+    it("should use useEffect in server environment", async () => {
       expect.hasAssertions();
-      
-      // Delete window to simulate server environment
-      delete (global as any).window;
-      
-      // Re-import the hook to get the server version
+
+      // Remove window to simulate a server environment
+      vi.stubGlobal("window", undefined);
+
+      // Re-import the hook so the module-level check runs without window
       vi.resetModules();
-      const { useIsomorphicEffect: serverUseIsomorphicEffect } = require("@/hooks/useIsomorphicEffect");
-      
+      const { useIsomorphicEffect: serverUseIsomorphicEffect } = await import(
+        "@/hooks/useIsomorphicEffect"
+      );
+
       expect(serverUseIsomorphicEffect).toBe(useEffect);
+      expect(serverUseIsomorphicEffect).not.toBe(useLayoutEffect);
     });
   });
 
   describe("Integration Test", () => {
-    it.skip("should work in a complete component scenario", () => {
+    it("should work in a complete component scenario", () => {
       expect.hasAssertions();
       
       const TestComponent = () => {
@@ -170,14 +166,14 @@ describe("useIsomorphicEffect", () => {
         );
       };
       
-      const { getByTestId } = require("@testing-library/react").render(<TestComponent />);
+      const { getByTestId } = render(<TestComponent />);
       
       expect(getByTestId("count")).toHaveTextContent("0");
       expect(getByTestId("effect-ran")).toHaveTextContent("Yes");
       expect(document.title).toBe("Count: 0");
       
       // Click increment button
-      require("@testing-library/react").fireEvent.click(getByTestId("increment"));
+      fireEvent.click(getByTestId("increment"));
       
       expect(getByTestId("count")).toHaveTextContent("1");
       expect(document.title).toBe("Count: 1");
@@ -185,7 +181,7 @@ describe("useIsomorphicEffect", () => {
   });
 
   describe("Edge Cases", () => {
-    it.skip("should handle effect that throws an error", () => {
+    it("should handle effect that throws an error", () => {
       expect.hasAssertions();
       
       const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
