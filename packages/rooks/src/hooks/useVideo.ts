@@ -27,7 +27,7 @@ type VideoControls = {
 const useVideo = (): [
   RefObject<HTMLVideoElement | null>,
   VideoState,
-  VideoControls
+  VideoControls,
 ] => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [state, setState] = useState<VideoState>({
@@ -93,19 +93,25 @@ const useVideo = (): [
   };
 
   useEffect(() => {
+    // Keep handlers and cleanup tied to the same element if the ref changes.
     const video = videoRef.current;
+
+    // The ref may still be unattached during the hook's initial effect.
+    if (!video) {
+      return;
+    }
 
     const handleTimeUpdate = () => {
       setState((prevState) => ({
         ...prevState,
-        currentTime: video!.currentTime,
+        currentTime: video.currentTime,
       }));
     };
 
     const handleDurationChange = () => {
       setState((prevState) => ({
         ...prevState,
-        duration: video!.duration,
+        duration: video.duration,
       }));
     };
 
@@ -123,20 +129,16 @@ const useVideo = (): [
       }));
     };
 
-    if (video) {
-      video.addEventListener("timeupdate", handleTimeUpdate);
-      video.addEventListener("durationchange", handleDurationChange);
-      video.addEventListener("pause", handlePause);
-      video.addEventListener("play", handlePlay);
-    }
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("durationchange", handleDurationChange);
+    video.addEventListener("pause", handlePause);
+    video.addEventListener("play", handlePlay);
 
     return () => {
-      if (video) {
-        video.removeEventListener("timeupdate", handleTimeUpdate);
-        video.removeEventListener("durationchange", handleDurationChange);
-        video.removeEventListener("pause", handlePause);
-        video.removeEventListener("play", handlePlay);
-      }
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("durationchange", handleDurationChange);
+      video.removeEventListener("pause", handlePause);
+      video.removeEventListener("play", handlePlay);
     };
   }, [videoRef]);
 
